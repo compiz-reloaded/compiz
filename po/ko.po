@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:23+0530\n"
+"POT-Creation-Date: 2008-05-29 14:02+0200\n"
 "PO-Revision-Date: 2008-05-05 05:46+0200\n"
 "Last-Translator: Lee June Hee <bugbear5@gmail.com>\n"
 "Language-Team: Korean <i18n@suse.de>\n"
@@ -19,2650 +19,1990 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.1.0\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "데스크탑"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-msgid "Window Management"
-msgstr "창 관리"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
-msgid "Compiz"
-msgstr "컴피즈"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:1
-msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "창 제목 표시줄에서 마우스 휠 스크롤시 취할 행동"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:2
-msgid "Blur type"
-msgstr "흐림 형태"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:3
-msgid "Metacity theme active window opacity"
-msgstr "활성화된 창의 메타시티 테마 투명도"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:4
-msgid "Metacity theme active window opacity shade"
-msgstr "활성화된 창의 메타시티 테마 그림자 투명도"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:5
-msgid "Metacity theme opacity"
-msgstr "메타시티 테마 투명도"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:6
-msgid "Metacity theme opacity shade"
-msgstr "메타시티 테마 그림자 투명도"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:7
-msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "메타시티 테마를 가진 활성화된 창에서 사용할 투명도"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:8
-msgid "Opacity to use for metacity theme decorations"
-msgstr "메타시티 테마에 사용할 투명도"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid ""
-"Shade active windows with metacity theme decorations from opaque to "
-"translucent"
-msgstr "메타시티 테마를 사용하는 활성화된 창의 그림자 투명도를설정합니다."
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid ""
-"Shade windows with metacity theme decorations from opaque to translucent"
-msgstr "메타시티 테마를 사용하는 창의 그림자 투명도를 설정합니다."
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:11
-msgid "Title bar mouse wheel action"
-msgstr "제목 표시줄에서 마우스 휠 사용시 할 행동"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:12
-msgid "Type of blur used for window decorations"
-msgstr "창 장식에서 사용할 흐림 효과의 형태"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:13
-msgid "Use metacity theme"
-msgstr "메타시티 테마를 사용합니다."
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:14
-msgid "Use metacity theme when drawing window decorations"
-msgstr "창 장식을 그릴 때 메타시티 테마를 사용합니다."
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
-#: ../metadata/core.xml.in.h:24
+#: gtk/window-decorator/gtk-window-decorator.c:4417
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
-#: ../metadata/core.xml.in.h:154
+#: gtk/window-decorator/gtk-window-decorator.c:4439
 msgid "Unmaximize Window"
 msgstr "창 최대화 취소"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
-#: ../metadata/core.xml.in.h:85
+#: gtk/window-decorator/gtk-window-decorator.c:4442
 msgid "Maximize Window"
 msgstr "창 최대화"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
-#: ../metadata/core.xml.in.h:91
+#: gtk/window-decorator/gtk-window-decorator.c:4484
 msgid "Minimize Window"
 msgstr "창 최소화"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
-#: ../metadata/core.xml.in.h:161
+#: gtk/window-decorator/gtk-window-decorator.c:4601
 msgid "Window Menu"
 msgstr "창 메뉴"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: gtk/window-decorator/gtk-window-decorator.c:4620
 msgid "Shade"
 msgstr "말아올리기"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
+#: gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
 msgstr "항상 위에"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
 msgstr "끈적이 창 설정"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
 msgstr "말아올리기 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
 msgstr "항상 위에 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
 msgstr "끈적이 창 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "창 \"%s\"가 응답하지 않습니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "이 응용프로그램을 강제로 종료하면 저장하지 않은 데이터는 손실됩니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
 msgstr "_강제 종료"
 
-#: ../metadata/annotate.xml.in.h:1
-msgid "Annotate"
-msgstr "주석"
-
-#: ../metadata/annotate.xml.in.h:2
-msgid "Annotate Fill Color"
-msgstr "주석의 채우기 색"
-
-#: ../metadata/annotate.xml.in.h:3
-msgid "Annotate Stroke Color"
-msgstr "주석의 외곽선 색"
-
-#: ../metadata/annotate.xml.in.h:4
-msgid "Annotate plugin"
-msgstr "주석 플러그인"
-
-#: ../metadata/annotate.xml.in.h:5
-msgid "Clear"
-msgstr "지우기"
-
-#: ../metadata/annotate.xml.in.h:6
-msgid "Draw"
-msgstr "그리기"
-
-#: ../metadata/annotate.xml.in.h:7
-msgid "Draw using tool"
-msgstr "도구를 사용하여 그림을 그림"
-
-#: ../metadata/annotate.xml.in.h:8
-msgid "Fill color for annotations"
-msgstr "주석의 채우기 색"
-
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
-msgid "Initiate"
-msgstr "시작"
-
-#: ../metadata/annotate.xml.in.h:10
-msgid "Initiate annotate drawing"
-msgstr "주석 그리기를 시작"
-
-#: ../metadata/annotate.xml.in.h:11
-msgid "Initiate annotate erasing"
-msgstr "주석 지우기를 시작"
-
-#: ../metadata/annotate.xml.in.h:12
-msgid "Initiate erase"
-msgstr "지우기 시작"
-
-#: ../metadata/annotate.xml.in.h:13
-msgid "Line width"
-msgstr "선 너비"
-
-#: ../metadata/annotate.xml.in.h:14
-msgid "Line width for annotations"
-msgstr "주석의 선 너비"
-
-#: ../metadata/annotate.xml.in.h:15
-msgid "Stroke color for annotations"
-msgstr "주석의 외곽선 색"
-
-#: ../metadata/annotate.xml.in.h:16
-msgid "Stroke width"
-msgstr "테두리 너비"
-
-#: ../metadata/annotate.xml.in.h:17
-msgid "Stroke width for annotations"
-msgstr "주석의 테두리 너비"
-
-#: ../metadata/blur.xml.in.h:1
-msgid "4xBilinear"
-msgstr "4x 양선형"
-
-#: ../metadata/blur.xml.in.h:2
-msgid "Alpha Blur"
-msgstr "투명 흐림 효과"
-
-#: ../metadata/blur.xml.in.h:3
-msgid "Alpha blur windows"
-msgstr "투명 창 흐림 효과"
-
-#: ../metadata/blur.xml.in.h:4
-msgid "Blur Filter"
-msgstr "흐림 효과 필터"
-
-#: ../metadata/blur.xml.in.h:5
-msgid "Blur Occlusion"
-msgstr "흐림 효과 폐색"
-
-#: ../metadata/blur.xml.in.h:6
-msgid "Blur Saturation"
-msgstr "흐림 효과 채도"
-
-#: ../metadata/blur.xml.in.h:7
-msgid "Blur Speed"
-msgstr "흐림 효과 속도"
-
-#: ../metadata/blur.xml.in.h:8
-msgid "Blur Windows"
-msgstr "창 흐림 효과"
-
-#: ../metadata/blur.xml.in.h:9
-msgid "Blur behind translucent parts of windows"
-msgstr "창의 투명한 부분 뒷면을 흐리게 합니다."
-
-#: ../metadata/blur.xml.in.h:10
-msgid "Blur saturation"
-msgstr "흐림 효과 채도"
-
-#: ../metadata/blur.xml.in.h:11
-msgid "Blur windows"
-msgstr "창 흐림 효과"
-
-#: ../metadata/blur.xml.in.h:12
-msgid "Blur windows that doesn't have focus"
-msgstr "초점을 잃은 창을 흐리게 합니다."
-
-#: ../metadata/blur.xml.in.h:13
-msgid "Disable blurring of screen regions obscured by other windows."
-msgstr "다른 창에 가려 보이지 않는 영역의 흐림 효과를 비활성화 합니다."
-
-#: ../metadata/blur.xml.in.h:14
-msgid "Filter method used for blurring"
-msgstr "흐림 효과에 사용할 필터"
-
-#: ../metadata/blur.xml.in.h:15
-msgid "Focus Blur"
-msgstr "초점 흐림 효과"
-
-#: ../metadata/blur.xml.in.h:16
-msgid "Focus blur windows"
-msgstr "초점을 가진 창을 흐리게 합니다."
-
-#: ../metadata/blur.xml.in.h:17
-msgid "Gaussian"
-msgstr "가우시안"
-
-#: ../metadata/blur.xml.in.h:18
-msgid "Gaussian Radius"
-msgstr "가우시안 반경"
-
-#: ../metadata/blur.xml.in.h:19
-msgid "Gaussian Strength"
-msgstr "가우시안 강도"
-
-#: ../metadata/blur.xml.in.h:20
-msgid "Gaussian radius"
-msgstr "가우시안 반경"
-
-#: ../metadata/blur.xml.in.h:21
-msgid "Gaussian strength"
-msgstr "가우시안 강도"
-
-#: ../metadata/blur.xml.in.h:22
-msgid "Independent texture fetch"
-msgstr "독립적인 텍스쳐 호출"
-
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
-msgid "Mipmap"
-msgstr "Mipmap"
-
-#: ../metadata/blur.xml.in.h:24
-msgid "Mipmap LOD"
-msgstr "Mipmap의 상세도"
-
-#: ../metadata/blur.xml.in.h:25
-msgid "Mipmap level-of-detail"
-msgstr "Mipmap의 상세도"
-
-#: ../metadata/blur.xml.in.h:26
-msgid "Pulse"
-msgstr "진동"
-
-#: ../metadata/blur.xml.in.h:27
-msgid "Pulse effect"
-msgstr "진동 효과"
-
-#: ../metadata/blur.xml.in.h:28
-msgid ""
-"Use the available texture units to do as many as possible independent "
-"texture fetches."
-msgstr ""
-"최대한 독립 텍스쳐 호출을 할 수 있도록 가능한 텍스쳐 단위를 사용합니다."
-
-#: ../metadata/blur.xml.in.h:29
-msgid "Window blur speed"
-msgstr "창 흐림 속도"
-
-#: ../metadata/blur.xml.in.h:30
-msgid "Windows that should be affected by focus blur"
-msgstr "초점 흐림 효과를 적용할 창"
-
-#: ../metadata/blur.xml.in.h:31
-msgid "Windows that should be use alpha blur by default"
-msgstr "투명 흐림 효과를 기본적으로 사용할 창"
-
-#: ../metadata/clone.xml.in.h:1
-msgid "Clone Output"
-msgstr "화면 복제"
-
-#: ../metadata/clone.xml.in.h:3
-msgid "Initiate clone selection"
-msgstr "화면 복제 시작"
-
-#: ../metadata/clone.xml.in.h:4
-msgid "Output clone handler"
-msgstr "출력 복제 처리기"
-
-#: ../metadata/core.xml.in.h:1
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
-msgstr "명령 0을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:2
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr "명령 1을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:3
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr "명령 10을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:4
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr "명령 11을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:5
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr "명령 2를 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:6
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr "명령 3을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:7
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr "명령 4를 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:8
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr "명령 5를 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:9
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr "명령 6을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:10
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr "명령 7을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:11
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr "명령 8을 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:12
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr "명령 9를 실행하는키 바인딩"
-
-#: ../metadata/core.xml.in.h:13
-msgid "Active Plugins"
-msgstr "사용 중인 플러그인 목록"
-
-#: ../metadata/core.xml.in.h:14
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-"전체 화면 창을 그릴 때, 화면 밖의 픽스맵으로 초점이 변경되지 않도록 허용함"
-
-#: ../metadata/core.xml.in.h:15
-msgid "Audible Bell"
-msgstr "들리는 삑소리"
-
-#: ../metadata/core.xml.in.h:16
-msgid "Audible system beep"
-msgstr "들을 수 있는 시스템 삑소리"
-
-#: ../metadata/core.xml.in.h:17
-msgid "Auto-Raise"
-msgstr "자동으로 떠오름"
-
-#: ../metadata/core.xml.in.h:18
-msgid "Auto-Raise Delay"
-msgstr "자동으로 떠오르게 하는 지연 시간"
-
-#: ../metadata/core.xml.in.h:19
-msgid "Automatic detection of output devices"
-msgstr "출력 장치를 자동으로 감지"
-
-#: ../metadata/core.xml.in.h:20
-msgid "Automatic detection of refresh rate"
-msgstr "갱신 주기를 자동으로 감지"
-
-#: ../metadata/core.xml.in.h:21
-msgid "Best"
-msgstr "최고"
-
-#: ../metadata/core.xml.in.h:22
-msgid "Click To Focus"
-msgstr "클릭하면 초점을 이동"
-
-#: ../metadata/core.xml.in.h:23
-msgid "Click on window moves input focus to it"
-msgstr "창을 클릭하면 초점을 변경함"
-
-#: ../metadata/core.xml.in.h:25
-msgid "Close active window"
-msgstr "활성화된 창을 닫습니다."
-
-#: ../metadata/core.xml.in.h:26
-msgid "Command line 0"
-msgstr "명령 0"
-
-#: ../metadata/core.xml.in.h:27
-msgid "Command line 1"
-msgstr "명령 1"
-
-#: ../metadata/core.xml.in.h:28
-msgid "Command line 10"
-msgstr "명령 10"
-
-#: ../metadata/core.xml.in.h:29
-msgid "Command line 11"
-msgstr "명령 11"
-
-#: ../metadata/core.xml.in.h:30
-msgid "Command line 2"
-msgstr "명령 2"
-
-#: ../metadata/core.xml.in.h:31
-msgid "Command line 3"
-msgstr "명령 3"
-
-#: ../metadata/core.xml.in.h:32
-msgid "Command line 4"
-msgstr "명령 4"
-
-#: ../metadata/core.xml.in.h:33
-msgid "Command line 5"
-msgstr "명령 5"
-
-#: ../metadata/core.xml.in.h:34
-msgid "Command line 6"
-msgstr "명령 6"
-
-#: ../metadata/core.xml.in.h:35
-msgid "Command line 7"
-msgstr "명령 7"
-
-#: ../metadata/core.xml.in.h:36
-msgid "Command line 8"
-msgstr "명령 8"
-
-#: ../metadata/core.xml.in.h:37
-msgid "Command line 9"
-msgstr "명령 9"
-
-#: ../metadata/core.xml.in.h:38
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "명령 0을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:39
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "명령 1을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:40
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "명령 10을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:41
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "명령 11을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:42
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "명령 2를 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:43
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "명령 3을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:44
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "명령 4를 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:45
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "명령 5를 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:46
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "명령 6을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:47
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "명령 7을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:48
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "명령 8을 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:49
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "명령 9를 선택했을 때 실행될 쉘 명령행"
-
-#: ../metadata/core.xml.in.h:50
-msgid "Decrease Opacity"
-msgstr "투명도 줄이기"
-
-#: ../metadata/core.xml.in.h:51
-msgid "Decrease window opacity"
-msgstr "창 투명도 줄이기"
-
-#: ../metadata/core.xml.in.h:52
-msgid "Default Icon"
-msgstr "기본 아이콘"
-
-#: ../metadata/core.xml.in.h:53
-msgid "Default window icon image"
-msgstr "기본 창 아이콘 그림"
-
-#: ../metadata/core.xml.in.h:54
-msgid "Detect Outputs"
-msgstr "출력 감지"
-
-#: ../metadata/core.xml.in.h:55
-msgid "Detect Refresh Rate"
-msgstr "갱신 주기 감지"
-
-#: ../metadata/core.xml.in.h:56
-msgid ""
-"Duration the pointer must rest in a screen edge before an edge action is "
-"taken."
-msgstr "모서리 명령을 실행하기 전에 포인터가 모서리에 머물러 있어야 하는 시간"
-
-#: ../metadata/core.xml.in.h:57
-msgid "Edge Trigger Delay"
-msgstr "모서리 실행 지연 시간"
-
-#: ../metadata/core.xml.in.h:58
-msgid "Fast"
-msgstr "빠름"
-
-#: ../metadata/core.xml.in.h:59
-msgid "Focus Prevention Level"
-msgstr "초점 막기 정도"
-
-#: ../metadata/core.xml.in.h:60
-msgid "Focus Prevention Windows"
-msgstr "초점을 막을 창"
-
-#: ../metadata/core.xml.in.h:61
-msgid "Focus prevention windows"
-msgstr "초점을 막을 창"
-
-#: ../metadata/core.xml.in.h:62
-msgid "Force independent output painting."
-msgstr ""
-
-#: ../metadata/core.xml.in.h:63
-msgid "General Options"
-msgstr "일반 설정"
-
-#: ../metadata/core.xml.in.h:64
-msgid "General compiz options"
-msgstr "일반적인 컴피즈 설정"
-
-#: ../metadata/core.xml.in.h:65
-msgid "Good"
-msgstr "좋음"
-
-#: ../metadata/core.xml.in.h:66
-msgid "Hide Skip Taskbar Windows"
-msgstr "작업 표시줄에 나타나지 않는 창을 숨김"
-
-#: ../metadata/core.xml.in.h:67
-msgid "Hide all windows and focus desktop"
-msgstr "모든 창을 최소화하고 초점을 바탕 화면에 맞춤"
-
-#: ../metadata/core.xml.in.h:68
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "바탕 화면 보기 상태일 때 작업 표시줄에 없는 창을 숨기기"
-
-#: ../metadata/core.xml.in.h:69
-msgid "High"
-msgstr "높음"
-
-#: ../metadata/core.xml.in.h:70
-msgid "Horizontal Virtual Size"
-msgstr "가로 가상 크기"
-
-#: ../metadata/core.xml.in.h:71
-msgid "If available use compression for textures converted from images"
-msgstr "가능하다면 이미지로부터 변형된 텍스쳐를 압축합니다."
-
-#: ../metadata/core.xml.in.h:72
-msgid "Ignore Hints When Maximized"
-msgstr "최대화시 힌트 무시"
-
-#: ../metadata/core.xml.in.h:73
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr "최대화시 크기 증분과 방향 힌트 무시"
-
-#: ../metadata/core.xml.in.h:74
-msgid "Increase Opacity"
-msgstr "투명도 증가"
-
-#: ../metadata/core.xml.in.h:75
-msgid "Increase window opacity"
-msgstr "창 투명도 증가"
-
-#: ../metadata/core.xml.in.h:76
-msgid "Interval before raising selected windows"
-msgstr "선택된 창을 띄우는 시간 간격"
-
-#: ../metadata/core.xml.in.h:77
-msgid "Interval between ping messages"
-msgstr "Ping 메시지들 사이의 간격"
-
-#: ../metadata/core.xml.in.h:78
-msgid "Level of focus stealing prevention"
-msgstr "초점 뺏기를 막는 정도"
-
-#: ../metadata/core.xml.in.h:79
-msgid "Lighting"
-msgstr "조명 효과"
-
-#: ../metadata/core.xml.in.h:80
-msgid "List of currently active plugins"
-msgstr "현재 활성화된 플러그인의 목록"
-
-#: ../metadata/core.xml.in.h:81
-msgid "List of strings describing output devices"
-msgstr "출력 장치를 표현하는 문자열 목록"
-
-#: ../metadata/core.xml.in.h:82
-msgid "Low"
-msgstr "낮음"
-
-#: ../metadata/core.xml.in.h:83
-msgid "Lower Window"
-msgstr "창을 내리기"
-
-#: ../metadata/core.xml.in.h:84
-msgid "Lower window beneath other windows"
-msgstr "다른 창들 밑으로 창을 내림"
-
-#: ../metadata/core.xml.in.h:86
-msgid "Maximize Window Horizontally"
-msgstr "가로로 창 최대화"
-
-#: ../metadata/core.xml.in.h:87
-msgid "Maximize Window Vertically"
-msgstr "세로로 창 최대화"
-
-#: ../metadata/core.xml.in.h:88
-msgid "Maximize active window"
-msgstr "활성화된 창 최대화"
-
-#: ../metadata/core.xml.in.h:89
-msgid "Maximize active window horizontally"
-msgstr "활성화된 창 가로로 최대화"
-
-#: ../metadata/core.xml.in.h:90
-msgid "Maximize active window vertically"
-msgstr "활성화된 창 세로로 최대화"
-
-#: ../metadata/core.xml.in.h:92
-msgid "Minimize active window"
-msgstr "활성화된 창 최소화"
-
-#: ../metadata/core.xml.in.h:93
-msgid "Number of Desktops"
-msgstr "작업 공간의 숫자"
-
-#: ../metadata/core.xml.in.h:94
-msgid "Number of virtual desktops"
-msgstr "가상 데스크탑의 숫자"
-
-#: ../metadata/core.xml.in.h:95
-msgid "Off"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:96
-msgid "Only perform screen updates during vertical blanking period"
-msgstr "수직 공백 기간에만 화면을 업데이트함"
-
-#: ../metadata/core.xml.in.h:97
-msgid "Opacity Step"
-msgstr "투명도 단계"
-
-#: ../metadata/core.xml.in.h:98
-msgid "Opacity change step"
-msgstr "투명도 변화 단계"
-
-#: ../metadata/core.xml.in.h:99
-msgid "Opacity values for windows that should be translucent by default"
-msgstr "기본적으로 투명한 창들의 투명도 값"
-
-#: ../metadata/core.xml.in.h:100
-msgid "Opacity window values"
-msgstr "창 투명도 값"
-
-#: ../metadata/core.xml.in.h:101
-msgid "Opacity windows"
-msgstr "창 투명도"
-
-#: ../metadata/core.xml.in.h:102
-msgid "Open a terminal"
-msgstr "터미널 열기"
-
-#: ../metadata/core.xml.in.h:103
-msgid "Outputs"
-msgstr "출력"
-
-#: ../metadata/core.xml.in.h:104
-msgid "Overlapping Output Handling"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:105
-msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:106
-msgid "Ping Delay"
-msgstr "Ping 지연"
-
-#: ../metadata/core.xml.in.h:107
-msgid "Prefer larger output"
-msgstr "더 큰 출력을 선호함"
-
-#: ../metadata/core.xml.in.h:108
-msgid "Prefer smaller output"
-msgstr "더 작은 출력을 선호함"
-
-#: ../metadata/core.xml.in.h:109
-msgid "Raise On Click"
-msgstr "클릭으로 띄우기"
-
-#: ../metadata/core.xml.in.h:110
-msgid "Raise Window"
-msgstr "창 띄우기"
-
-#: ../metadata/core.xml.in.h:111
-msgid "Raise selected windows after interval"
-msgstr "선택된 창을 일정 시간 후에 띄우기"
-
-#: ../metadata/core.xml.in.h:112
-msgid "Raise window above other windows"
-msgstr "다른 창 위에 창을 띄우기"
-
-#: ../metadata/core.xml.in.h:113
-msgid "Raise windows when clicked"
-msgstr "클릭했을때 창 띄우기"
-
-#: ../metadata/core.xml.in.h:114
-msgid "Refresh Rate"
-msgstr "갱신 주기"
-
-#: ../metadata/core.xml.in.h:115
-msgid "Run Dialog"
-msgstr "프로그램 실행창"
-
-#: ../metadata/core.xml.in.h:116
-msgid "Run command 0"
-msgstr "명령 0 실행"
-
-#: ../metadata/core.xml.in.h:117
-msgid "Run command 1"
-msgstr "명령 1 실행"
-
-#: ../metadata/core.xml.in.h:118
-msgid "Run command 10"
-msgstr "명령 10 실행"
-
-#: ../metadata/core.xml.in.h:119
-msgid "Run command 11"
-msgstr "명령 11 실행"
-
-#: ../metadata/core.xml.in.h:120
-msgid "Run command 2"
-msgstr "명령 2 실행"
-
-#: ../metadata/core.xml.in.h:121
-msgid "Run command 3"
-msgstr "명령 3 실행"
-
-#: ../metadata/core.xml.in.h:122
-msgid "Run command 4"
-msgstr "명령 4 실행"
-
-#: ../metadata/core.xml.in.h:123
-msgid "Run command 5"
-msgstr "명령 5 실행"
-
-#: ../metadata/core.xml.in.h:124
-msgid "Run command 6"
-msgstr "명령 6 실행"
-
-#: ../metadata/core.xml.in.h:125
-msgid "Run command 7"
-msgstr "명령 7 실행"
-
-#: ../metadata/core.xml.in.h:126
-msgid "Run command 8"
-msgstr "명령 8 실행"
-
-#: ../metadata/core.xml.in.h:127
-msgid "Run command 9"
-msgstr "명령 9 실행"
-
-#: ../metadata/core.xml.in.h:128
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr "가로 화면 크기 배수"
-
-#: ../metadata/core.xml.in.h:129
-msgid "Screen size multiplier for vertical virtual size"
-msgstr "세로 화면 크기 배수"
-
-#: ../metadata/core.xml.in.h:130
-msgid "Screenshot command line"
-msgstr "스크린샷 명령행"
-
-#: ../metadata/core.xml.in.h:131
-msgid "Show Desktop"
-msgstr "바탕 화면 보기"
-
-#: ../metadata/core.xml.in.h:132
-msgid "Show Main Menu"
-msgstr "주 메뉴 보기"
-
-#: ../metadata/core.xml.in.h:133
-msgid "Show Run Application dialog"
-msgstr "프로그램 실행창을 보임"
-
-#: ../metadata/core.xml.in.h:134
-msgid "Show the main menu"
-msgstr "주 메뉴 보기"
-
-#: ../metadata/core.xml.in.h:135
-msgid "Slow Animations"
-msgstr "느린 애니메이션"
-
-#: ../metadata/core.xml.in.h:136
-msgid "Smart mode"
-msgstr "스마트 모드"
-
-#: ../metadata/core.xml.in.h:137
-msgid "Sync To VBlank"
-msgstr "VBlank에 동기화"
-
-#: ../metadata/core.xml.in.h:138
-msgid "Take a screenshot"
-msgstr "스크린샷 찍기"
-
-#: ../metadata/core.xml.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "창 스크린샷 찍기"
-
-#: ../metadata/core.xml.in.h:140
-msgid "Terminal command line"
-msgstr "터미널 명령행"
-
-#: ../metadata/core.xml.in.h:141
-msgid "Texture Compression"
-msgstr "텍스쳐 압축"
-
-#: ../metadata/core.xml.in.h:142
-msgid "Texture Filter"
-msgstr "텍스쳐 필터"
-
-#: ../metadata/core.xml.in.h:143
-msgid "Texture filtering"
-msgstr "텍스쳐 필터링"
-
-#: ../metadata/core.xml.in.h:144
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "화면이 다시 그려지는 비율(횟수/초)"
-
-#: ../metadata/core.xml.in.h:145
-msgid "Toggle Window Maximized"
-msgstr "창 최대화"
-
-#: ../metadata/core.xml.in.h:146
-msgid "Toggle Window Maximized Horizontally"
-msgstr "가로로 창 최대화"
-
-#: ../metadata/core.xml.in.h:147
-msgid "Toggle Window Maximized Vertically"
-msgstr "세로로 창 최대화"
-
-#: ../metadata/core.xml.in.h:148
-msgid "Toggle Window Shaded"
-msgstr "창 말아올리기"
-
-#: ../metadata/core.xml.in.h:149
-msgid "Toggle active window maximized"
-msgstr "활성 창을 최대화 하기"
-
-#: ../metadata/core.xml.in.h:150
-msgid "Toggle active window maximized horizontally"
-msgstr "가로로 활성 창 최대화"
-
-#: ../metadata/core.xml.in.h:151
-msgid "Toggle active window maximized vertically"
-msgstr "세로로 활성 창 최대화"
-
-#: ../metadata/core.xml.in.h:152
-msgid "Toggle active window shaded"
-msgstr "활성 창 말아올리기"
-
-#: ../metadata/core.xml.in.h:153
-msgid "Toggle use of slow animations"
-msgstr "느린 애니메이션 사용"
-
-#: ../metadata/core.xml.in.h:155
-msgid "Unmaximize active window"
-msgstr "활성 창 최대화 취소"
-
-#: ../metadata/core.xml.in.h:156
-msgid "Unredirect Fullscreen Windows"
-msgstr "전체 화면 창의 초점 변경 방지"
-
-#: ../metadata/core.xml.in.h:157
-msgid "Use diffuse light when screen is transformed"
-msgstr "화면이 전환될 때 빛이 퍼지는 사용"
-
-#: ../metadata/core.xml.in.h:158
-msgid "Vertical Virtual Size"
-msgstr "세로 가상 크기"
-
-#: ../metadata/core.xml.in.h:159
-msgid "Very High"
-msgstr "매우 높음"
-
-#: ../metadata/core.xml.in.h:160
-msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:162
-msgid "Window menu button binding"
-msgstr "창 메뉴 마우스 버튼"
-
-#: ../metadata/core.xml.in.h:163
-msgid "Window menu key binding"
-msgstr "창 메뉴 단축키"
-
-#: ../metadata/core.xml.in.h:164
-msgid "Window screenshot command line"
-msgstr "창 스크린샷 명령행"
-
-#: ../metadata/core.xml.in.h:165
-msgid "Windows that should be translucent by default"
-msgstr "기본적으로 투명한 창들"
-
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
-msgid "Acceleration"
-msgstr "가속"
-
-#: ../metadata/cube.xml.in.h:2
-msgid "Adjust Image"
-msgstr "이미지 조정"
-
-#: ../metadata/cube.xml.in.h:3
-msgid "Adjust top face image to rotation"
-msgstr "회전시 윗면 그림 조정"
-
-#: ../metadata/cube.xml.in.h:4
-msgid "Advance to next slide"
-msgstr "다음 슬라이드로 넘어가기"
-
-#: ../metadata/cube.xml.in.h:5
-msgid "Animate Skydome"
-msgstr "스카이 돔 움직이기"
-
-#: ../metadata/cube.xml.in.h:6
-msgid "Animate skydome when rotating cube"
-msgstr "큐브 회전시 스카이 돔 움직이기"
-
-#: ../metadata/cube.xml.in.h:7
-msgid "Automatic"
-msgstr "자동"
-
-#: ../metadata/cube.xml.in.h:8
-msgid "Color of top and bottom sides of the cube"
-msgstr "큐브 윗면과 밑면의 색상"
-
-#: ../metadata/cube.xml.in.h:9
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "스카이 돔 그래디언트의 밑면 최종 색상"
-
-#: ../metadata/cube.xml.in.h:10
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr "스카이 돔 그래디언트의 윗면 최종 색상"
-
-#: ../metadata/cube.xml.in.h:11
-msgid "Cube Color"
-msgstr "큐브 색상"
-
-#: ../metadata/cube.xml.in.h:12
-msgid "Desktop Cube"
-msgstr "데스크탑 큐브"
-
-#: ../metadata/cube.xml.in.h:13
-msgid "Fold Acceleration"
-msgstr "접기 가속"
-
-#: ../metadata/cube.xml.in.h:14
-msgid "Fold Speed"
-msgstr "접는 속도"
-
-#: ../metadata/cube.xml.in.h:15
-msgid "Fold Timestep"
-msgstr "접는 시간 간격"
-
-#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr "높은 품질을 얻기 위해 가능한 경우 mipmap을 생성"
-
-#: ../metadata/cube.xml.in.h:17
-msgid "Go back to previous slide"
-msgstr "이전 슬라이드로 가기"
-
-#: ../metadata/cube.xml.in.h:18
-msgid "Image files"
-msgstr "그림 파일"
-
-#: ../metadata/cube.xml.in.h:19
-msgid "Image to use as texture for the skydome"
-msgstr "스카이 돔에 사용할 그림"
-
-#: ../metadata/cube.xml.in.h:20
-msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr "마우스로 큐브를 회전할 때만 큐브를 투명하게 함"
-
-#: ../metadata/cube.xml.in.h:21
-msgid "Inside Cube"
-msgstr "큐브 내부"
-
-#: ../metadata/cube.xml.in.h:22
-msgid "Inside cube"
-msgstr "큐브 내부"
-
-#: ../metadata/cube.xml.in.h:23
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "큐브의 윗면에 그려질 PNG와 SVG 파일 목록"
-
-#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
-#: ../metadata/scale.xml.in.h:17
-msgid "Multi Output Mode"
-msgstr "다중 출력 모드"
-
-#: ../metadata/cube.xml.in.h:26
-msgid "Multiple cubes"
-msgstr "복수 큐브"
-
-#: ../metadata/cube.xml.in.h:27
-msgid "Next Slide"
-msgstr "다음 슬라이드"
-
-#: ../metadata/cube.xml.in.h:28
+#~ msgid "Desktop"
+#~ msgstr "데스크탑"
+
+#~ msgid "Window Management"
+#~ msgstr "창 관리"
+
+#~ msgid "Compiz"
+#~ msgstr "컴피즈"
+
+#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
+#~ msgstr "창 제목 표시줄에서 마우스 휠 스크롤시 취할 행동"
+
+#~ msgid "Blur type"
+#~ msgstr "흐림 형태"
+
+#~ msgid "Metacity theme active window opacity"
+#~ msgstr "활성화된 창의 메타시티 테마 투명도"
+
+#~ msgid "Metacity theme active window opacity shade"
+#~ msgstr "활성화된 창의 메타시티 테마 그림자 투명도"
+
+#~ msgid "Metacity theme opacity"
+#~ msgstr "메타시티 테마 투명도"
+
+#~ msgid "Metacity theme opacity shade"
+#~ msgstr "메타시티 테마 그림자 투명도"
+
+#~ msgid "Opacity to use for active windows with metacity theme decorations"
+#~ msgstr "메타시티 테마를 가진 활성화된 창에서 사용할 투명도"
+
+#~ msgid "Opacity to use for metacity theme decorations"
+#~ msgstr "메타시티 테마에 사용할 투명도"
+
+#~ msgid ""
+#~ "Shade active windows with metacity theme decorations from opaque to "
+#~ "translucent"
+#~ msgstr "메타시티 테마를 사용하는 활성화된 창의 그림자 투명도를설정합니다."
+
+#~ msgid ""
+#~ "Shade windows with metacity theme decorations from opaque to translucent"
+#~ msgstr "메타시티 테마를 사용하는 창의 그림자 투명도를 설정합니다."
+
+#~ msgid "Title bar mouse wheel action"
+#~ msgstr "제목 표시줄에서 마우스 휠 사용시 할 행동"
+
+#~ msgid "Type of blur used for window decorations"
+#~ msgstr "창 장식에서 사용할 흐림 효과의 형태"
+
+#~ msgid "Use metacity theme"
+#~ msgstr "메타시티 테마를 사용합니다."
+
+#~ msgid "Use metacity theme when drawing window decorations"
+#~ msgstr "창 장식을 그릴 때 메타시티 테마를 사용합니다."
+
+#~ msgid "Annotate"
+#~ msgstr "주석"
+
+#~ msgid "Annotate Fill Color"
+#~ msgstr "주석의 채우기 색"
+
+#~ msgid "Annotate Stroke Color"
+#~ msgstr "주석의 외곽선 색"
+
+#~ msgid "Annotate plugin"
+#~ msgstr "주석 플러그인"
+
+#~ msgid "Clear"
+#~ msgstr "지우기"
+
+#~ msgid "Draw"
+#~ msgstr "그리기"
+
+#~ msgid "Draw using tool"
+#~ msgstr "도구를 사용하여 그림을 그림"
+
+#~ msgid "Fill color for annotations"
+#~ msgstr "주석의 채우기 색"
+
+#~ msgid "Initiate"
+#~ msgstr "시작"
+
+#~ msgid "Initiate annotate drawing"
+#~ msgstr "주석 그리기를 시작"
+
+#~ msgid "Initiate annotate erasing"
+#~ msgstr "주석 지우기를 시작"
+
+#~ msgid "Initiate erase"
+#~ msgstr "지우기 시작"
+
+#~ msgid "Line width"
+#~ msgstr "선 너비"
+
+#~ msgid "Line width for annotations"
+#~ msgstr "주석의 선 너비"
+
+#~ msgid "Stroke color for annotations"
+#~ msgstr "주석의 외곽선 색"
+
+#~ msgid "Stroke width"
+#~ msgstr "테두리 너비"
+
+#~ msgid "Stroke width for annotations"
+#~ msgstr "주석의 테두리 너비"
+
+#~ msgid "4xBilinear"
+#~ msgstr "4x 양선형"
+
+#~ msgid "Alpha Blur"
+#~ msgstr "투명 흐림 효과"
+
+#~ msgid "Alpha blur windows"
+#~ msgstr "투명 창 흐림 효과"
+
+#~ msgid "Blur Filter"
+#~ msgstr "흐림 효과 필터"
+
+#~ msgid "Blur Occlusion"
+#~ msgstr "흐림 효과 폐색"
+
+#~ msgid "Blur Saturation"
+#~ msgstr "흐림 효과 채도"
+
+#~ msgid "Blur Speed"
+#~ msgstr "흐림 효과 속도"
+
+#~ msgid "Blur Windows"
+#~ msgstr "창 흐림 효과"
+
+#~ msgid "Blur behind translucent parts of windows"
+#~ msgstr "창의 투명한 부분 뒷면을 흐리게 합니다."
+
+#~ msgid "Blur saturation"
+#~ msgstr "흐림 효과 채도"
+
+#~ msgid "Blur windows"
+#~ msgstr "창 흐림 효과"
+
+#~ msgid "Blur windows that doesn't have focus"
+#~ msgstr "초점을 잃은 창을 흐리게 합니다."
+
+#~ msgid "Disable blurring of screen regions obscured by other windows."
+#~ msgstr "다른 창에 가려 보이지 않는 영역의 흐림 효과를 비활성화 합니다."
+
+#~ msgid "Filter method used for blurring"
+#~ msgstr "흐림 효과에 사용할 필터"
+
+#~ msgid "Focus Blur"
+#~ msgstr "초점 흐림 효과"
+
+#~ msgid "Focus blur windows"
+#~ msgstr "초점을 가진 창을 흐리게 합니다."
+
+#~ msgid "Gaussian"
+#~ msgstr "가우시안"
+
+#~ msgid "Gaussian Radius"
+#~ msgstr "가우시안 반경"
+
+#~ msgid "Gaussian Strength"
+#~ msgstr "가우시안 강도"
+
+#~ msgid "Gaussian radius"
+#~ msgstr "가우시안 반경"
+
+#~ msgid "Gaussian strength"
+#~ msgstr "가우시안 강도"
+
+#~ msgid "Independent texture fetch"
+#~ msgstr "독립적인 텍스쳐 호출"
+
+#~ msgid "Mipmap"
+#~ msgstr "Mipmap"
+
+#~ msgid "Mipmap LOD"
+#~ msgstr "Mipmap의 상세도"
+
+#~ msgid "Mipmap level-of-detail"
+#~ msgstr "Mipmap의 상세도"
+
+#~ msgid "Pulse"
+#~ msgstr "진동"
+
+#~ msgid "Pulse effect"
+#~ msgstr "진동 효과"
+
+#~ msgid ""
+#~ "Use the available texture units to do as many as possible independent "
+#~ "texture fetches."
+#~ msgstr ""
+#~ "최대한 독립 텍스쳐 호출을 할 수 있도록 가능한 텍스쳐 단위를 사용합니다."
+
+#~ msgid "Window blur speed"
+#~ msgstr "창 흐림 속도"
+
+#~ msgid "Windows that should be affected by focus blur"
+#~ msgstr "초점 흐림 효과를 적용할 창"
+
+#~ msgid "Windows that should be use alpha blur by default"
+#~ msgstr "투명 흐림 효과를 기본적으로 사용할 창"
+
+#~ msgid "Clone Output"
+#~ msgstr "화면 복제"
+
+#~ msgid "Initiate clone selection"
+#~ msgstr "화면 복제 시작"
+
+#~ msgid "Output clone handler"
+#~ msgstr "출력 복제 처리기"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command0"
+#~ msgstr "명령 0을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command1"
+#~ msgstr "명령 1을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command10"
+#~ msgstr "명령 10을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command11"
+#~ msgstr "명령 11을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command2"
+#~ msgstr "명령 2를 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command3"
+#~ msgstr "명령 3을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command4"
+#~ msgstr "명령 4를 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command5"
+#~ msgstr "명령 5를 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command6"
+#~ msgstr "명령 6을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command7"
+#~ msgstr "명령 7을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command8"
+#~ msgstr "명령 8을 실행하는키 바인딩"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command9"
+#~ msgstr "명령 9를 실행하는키 바인딩"
+
+#~ msgid "Active Plugins"
+#~ msgstr "사용 중인 플러그인 목록"
+
+#~ msgid ""
+#~ "Allow drawing of fullscreen windows to not be redirected to offscreen "
+#~ "pixmaps"
+#~ msgstr ""
+#~ "전체 화면 창을 그릴 때, 화면 밖의 픽스맵으로 초점이 변경되지 않도록 허용함"
+
+#~ msgid "Audible Bell"
+#~ msgstr "들리는 삑소리"
+
+#~ msgid "Audible system beep"
+#~ msgstr "들을 수 있는 시스템 삑소리"
+
+#~ msgid "Auto-Raise"
+#~ msgstr "자동으로 떠오름"
+
+#~ msgid "Auto-Raise Delay"
+#~ msgstr "자동으로 떠오르게 하는 지연 시간"
+
+#~ msgid "Automatic detection of output devices"
+#~ msgstr "출력 장치를 자동으로 감지"
+
+#~ msgid "Automatic detection of refresh rate"
+#~ msgstr "갱신 주기를 자동으로 감지"
+
+#~ msgid "Best"
+#~ msgstr "최고"
+
+#~ msgid "Click To Focus"
+#~ msgstr "클릭하면 초점을 이동"
+
+#~ msgid "Click on window moves input focus to it"
+#~ msgstr "창을 클릭하면 초점을 변경함"
+
+#~ msgid "Close active window"
+#~ msgstr "활성화된 창을 닫습니다."
+
+#~ msgid "Command line 0"
+#~ msgstr "명령 0"
+
+#~ msgid "Command line 1"
+#~ msgstr "명령 1"
+
+#~ msgid "Command line 10"
+#~ msgstr "명령 10"
+
+#~ msgid "Command line 11"
+#~ msgstr "명령 11"
+
+#~ msgid "Command line 2"
+#~ msgstr "명령 2"
+
+#~ msgid "Command line 3"
+#~ msgstr "명령 3"
+
+#~ msgid "Command line 4"
+#~ msgstr "명령 4"
+
+#~ msgid "Command line 5"
+#~ msgstr "명령 5"
+
+#~ msgid "Command line 6"
+#~ msgstr "명령 6"
+
+#~ msgid "Command line 7"
+#~ msgstr "명령 7"
+
+#~ msgid "Command line 8"
+#~ msgstr "명령 8"
+
+#~ msgid "Command line 9"
+#~ msgstr "명령 9"
+
+#~ msgid "Command line to be executed in shell when run_command0 is invoked"
+#~ msgstr "명령 0을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command1 is invoked"
+#~ msgstr "명령 1을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command10 is invoked"
+#~ msgstr "명령 10을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command11 is invoked"
+#~ msgstr "명령 11을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command2 is invoked"
+#~ msgstr "명령 2를 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command3 is invoked"
+#~ msgstr "명령 3을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command4 is invoked"
+#~ msgstr "명령 4를 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command5 is invoked"
+#~ msgstr "명령 5를 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command6 is invoked"
+#~ msgstr "명령 6을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command7 is invoked"
+#~ msgstr "명령 7을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command8 is invoked"
+#~ msgstr "명령 8을 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Command line to be executed in shell when run_command9 is invoked"
+#~ msgstr "명령 9를 선택했을 때 실행될 쉘 명령행"
+
+#~ msgid "Decrease Opacity"
+#~ msgstr "투명도 줄이기"
+
+#~ msgid "Decrease window opacity"
+#~ msgstr "창 투명도 줄이기"
+
+#~ msgid "Default Icon"
+#~ msgstr "기본 아이콘"
+
+#~ msgid "Default window icon image"
+#~ msgstr "기본 창 아이콘 그림"
+
+#~ msgid "Detect Outputs"
+#~ msgstr "출력 감지"
+
+#~ msgid "Detect Refresh Rate"
+#~ msgstr "갱신 주기 감지"
+
+#~ msgid ""
+#~ "Duration the pointer must rest in a screen edge before an edge action is "
+#~ "taken."
+#~ msgstr ""
+#~ "모서리 명령을 실행하기 전에 포인터가 모서리에 머물러 있어야 하는 시간"
+
+#~ msgid "Edge Trigger Delay"
+#~ msgstr "모서리 실행 지연 시간"
+
+#~ msgid "Fast"
+#~ msgstr "빠름"
+
+#~ msgid "Focus Prevention Level"
+#~ msgstr "초점 막기 정도"
+
+#~ msgid "Focus Prevention Windows"
+#~ msgstr "초점을 막을 창"
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "초점을 막을 창"
+
+#~ msgid "General Options"
+#~ msgstr "일반 설정"
+
+#~ msgid "General compiz options"
+#~ msgstr "일반적인 컴피즈 설정"
+
+#~ msgid "Good"
+#~ msgstr "좋음"
+
+#~ msgid "Hide Skip Taskbar Windows"
+#~ msgstr "작업 표시줄에 나타나지 않는 창을 숨김"
+
+#~ msgid "Hide all windows and focus desktop"
+#~ msgstr "모든 창을 최소화하고 초점을 바탕 화면에 맞춤"
+
+#~ msgid "Hide windows not in taskbar when entering show desktop mode"
+#~ msgstr "바탕 화면 보기 상태일 때 작업 표시줄에 없는 창을 숨기기"
+
+#~ msgid "High"
+#~ msgstr "높음"
+
+#~ msgid "Horizontal Virtual Size"
+#~ msgstr "가로 가상 크기"
+
+#~ msgid "If available use compression for textures converted from images"
+#~ msgstr "가능하다면 이미지로부터 변형된 텍스쳐를 압축합니다."
+
+#~ msgid "Ignore Hints When Maximized"
+#~ msgstr "최대화시 힌트 무시"
+
+#~ msgid "Ignore size increment and aspect hints when window is maximized"
+#~ msgstr "최대화시 크기 증분과 방향 힌트 무시"
+
+#~ msgid "Increase Opacity"
+#~ msgstr "투명도 증가"
+
+#~ msgid "Increase window opacity"
+#~ msgstr "창 투명도 증가"
+
+#~ msgid "Interval before raising selected windows"
+#~ msgstr "선택된 창을 띄우는 시간 간격"
+
+#~ msgid "Interval between ping messages"
+#~ msgstr "Ping 메시지들 사이의 간격"
+
+#~ msgid "Level of focus stealing prevention"
+#~ msgstr "초점 뺏기를 막는 정도"
+
+#~ msgid "Lighting"
+#~ msgstr "조명 효과"
+
+#~ msgid "List of currently active plugins"
+#~ msgstr "현재 활성화된 플러그인의 목록"
+
+#~ msgid "List of strings describing output devices"
+#~ msgstr "출력 장치를 표현하는 문자열 목록"
+
+#~ msgid "Low"
+#~ msgstr "낮음"
+
+#~ msgid "Lower Window"
+#~ msgstr "창을 내리기"
+
+#~ msgid "Lower window beneath other windows"
+#~ msgstr "다른 창들 밑으로 창을 내림"
+
+#~ msgid "Maximize Window Horizontally"
+#~ msgstr "가로로 창 최대화"
+
+#~ msgid "Maximize Window Vertically"
+#~ msgstr "세로로 창 최대화"
+
+#~ msgid "Maximize active window"
+#~ msgstr "활성화된 창 최대화"
+
+#~ msgid "Maximize active window horizontally"
+#~ msgstr "활성화된 창 가로로 최대화"
+
+#~ msgid "Maximize active window vertically"
+#~ msgstr "활성화된 창 세로로 최대화"
+
+#~ msgid "Minimize active window"
+#~ msgstr "활성화된 창 최소화"
+
+#~ msgid "Number of Desktops"
+#~ msgstr "작업 공간의 숫자"
+
+#~ msgid "Number of virtual desktops"
+#~ msgstr "가상 데스크탑의 숫자"
+
+#~ msgid "Only perform screen updates during vertical blanking period"
+#~ msgstr "수직 공백 기간에만 화면을 업데이트함"
+
+#~ msgid "Opacity Step"
+#~ msgstr "투명도 단계"
+
+#~ msgid "Opacity change step"
+#~ msgstr "투명도 변화 단계"
+
+#~ msgid "Opacity values for windows that should be translucent by default"
+#~ msgstr "기본적으로 투명한 창들의 투명도 값"
+
+#~ msgid "Opacity window values"
+#~ msgstr "창 투명도 값"
+
+#~ msgid "Opacity windows"
+#~ msgstr "창 투명도"
+
+#~ msgid "Open a terminal"
+#~ msgstr "터미널 열기"
+
+#~ msgid "Outputs"
+#~ msgstr "출력"
+
+#~ msgid "Ping Delay"
+#~ msgstr "Ping 지연"
+
+#~ msgid "Prefer larger output"
+#~ msgstr "더 큰 출력을 선호함"
+
+#~ msgid "Prefer smaller output"
+#~ msgstr "더 작은 출력을 선호함"
+
+#~ msgid "Raise On Click"
+#~ msgstr "클릭으로 띄우기"
+
+#~ msgid "Raise Window"
+#~ msgstr "창 띄우기"
+
+#~ msgid "Raise selected windows after interval"
+#~ msgstr "선택된 창을 일정 시간 후에 띄우기"
+
+#~ msgid "Raise window above other windows"
+#~ msgstr "다른 창 위에 창을 띄우기"
+
+#~ msgid "Raise windows when clicked"
+#~ msgstr "클릭했을때 창 띄우기"
+
+#~ msgid "Refresh Rate"
+#~ msgstr "갱신 주기"
+
+#~ msgid "Run Dialog"
+#~ msgstr "프로그램 실행창"
+
+#~ msgid "Run command 0"
+#~ msgstr "명령 0 실행"
+
+#~ msgid "Run command 1"
+#~ msgstr "명령 1 실행"
+
+#~ msgid "Run command 10"
+#~ msgstr "명령 10 실행"
+
+#~ msgid "Run command 11"
+#~ msgstr "명령 11 실행"
+
+#~ msgid "Run command 2"
+#~ msgstr "명령 2 실행"
+
+#~ msgid "Run command 3"
+#~ msgstr "명령 3 실행"
+
+#~ msgid "Run command 4"
+#~ msgstr "명령 4 실행"
+
+#~ msgid "Run command 5"
+#~ msgstr "명령 5 실행"
+
+#~ msgid "Run command 6"
+#~ msgstr "명령 6 실행"
+
+#~ msgid "Run command 7"
+#~ msgstr "명령 7 실행"
+
+#~ msgid "Run command 8"
+#~ msgstr "명령 8 실행"
+
+#~ msgid "Run command 9"
+#~ msgstr "명령 9 실행"
+
+#~ msgid "Screen size multiplier for horizontal virtual size"
+#~ msgstr "가로 화면 크기 배수"
+
+#~ msgid "Screen size multiplier for vertical virtual size"
+#~ msgstr "세로 화면 크기 배수"
+
+#~ msgid "Screenshot command line"
+#~ msgstr "스크린샷 명령행"
+
+#~ msgid "Show Desktop"
+#~ msgstr "바탕 화면 보기"
+
+#~ msgid "Show Main Menu"
+#~ msgstr "주 메뉴 보기"
+
+#~ msgid "Show Run Application dialog"
+#~ msgstr "프로그램 실행창을 보임"
+
+#~ msgid "Show the main menu"
+#~ msgstr "주 메뉴 보기"
+
+#~ msgid "Slow Animations"
+#~ msgstr "느린 애니메이션"
+
+#~ msgid "Smart mode"
+#~ msgstr "스마트 모드"
+
+#~ msgid "Sync To VBlank"
+#~ msgstr "VBlank에 동기화"
+
+#~ msgid "Take a screenshot"
+#~ msgstr "스크린샷 찍기"
+
+#~ msgid "Take a screenshot of a window"
+#~ msgstr "창 스크린샷 찍기"
+
+#~ msgid "Terminal command line"
+#~ msgstr "터미널 명령행"
+
+#~ msgid "Texture Compression"
+#~ msgstr "텍스쳐 압축"
+
+#~ msgid "Texture Filter"
+#~ msgstr "텍스쳐 필터"
+
+#~ msgid "Texture filtering"
+#~ msgstr "텍스쳐 필터링"
+
+#~ msgid "The rate at which the screen is redrawn (times/second)"
+#~ msgstr "화면이 다시 그려지는 비율(횟수/초)"
+
+#~ msgid "Toggle Window Maximized"
+#~ msgstr "창 최대화"
+
+#~ msgid "Toggle Window Maximized Horizontally"
+#~ msgstr "가로로 창 최대화"
+
+#~ msgid "Toggle Window Maximized Vertically"
+#~ msgstr "세로로 창 최대화"
+
+#~ msgid "Toggle Window Shaded"
+#~ msgstr "창 말아올리기"
+
+#~ msgid "Toggle active window maximized"
+#~ msgstr "활성 창을 최대화 하기"
+
+#~ msgid "Toggle active window maximized horizontally"
+#~ msgstr "가로로 활성 창 최대화"
+
+#~ msgid "Toggle active window maximized vertically"
+#~ msgstr "세로로 활성 창 최대화"
+
+#~ msgid "Toggle active window shaded"
+#~ msgstr "활성 창 말아올리기"
+
+#~ msgid "Toggle use of slow animations"
+#~ msgstr "느린 애니메이션 사용"
+
+#~ msgid "Unmaximize active window"
+#~ msgstr "활성 창 최대화 취소"
+
+#~ msgid "Unredirect Fullscreen Windows"
+#~ msgstr "전체 화면 창의 초점 변경 방지"
+
+#~ msgid "Use diffuse light when screen is transformed"
+#~ msgstr "화면이 전환될 때 빛이 퍼지는 사용"
+
+#~ msgid "Vertical Virtual Size"
+#~ msgstr "세로 가상 크기"
+
+#~ msgid "Very High"
+#~ msgstr "매우 높음"
+
+#~ msgid "Window menu button binding"
+#~ msgstr "창 메뉴 마우스 버튼"
+
+#~ msgid "Window menu key binding"
+#~ msgstr "창 메뉴 단축키"
+
+#~ msgid "Window screenshot command line"
+#~ msgstr "창 스크린샷 명령행"
+
+#~ msgid "Windows that should be translucent by default"
+#~ msgstr "기본적으로 투명한 창들"
+
+#~ msgid "Acceleration"
+#~ msgstr "가속"
+
+#~ msgid "Adjust Image"
+#~ msgstr "이미지 조정"
+
+#~ msgid "Adjust top face image to rotation"
+#~ msgstr "회전시 윗면 그림 조정"
+
+#~ msgid "Advance to next slide"
+#~ msgstr "다음 슬라이드로 넘어가기"
+
+#~ msgid "Animate Skydome"
+#~ msgstr "스카이 돔 움직이기"
+
+#~ msgid "Animate skydome when rotating cube"
+#~ msgstr "큐브 회전시 스카이 돔 움직이기"
+
+#~ msgid "Automatic"
+#~ msgstr "자동"
+
+#~ msgid "Color of top and bottom sides of the cube"
+#~ msgstr "큐브 윗면과 밑면의 색상"
+
+#~ msgid ""
+#~ "Color to use for the bottom color-stop of the skydome-fallback gradient"
+#~ msgstr "스카이 돔 그래디언트의 밑면 최종 색상"
+
+#~ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+#~ msgstr "스카이 돔 그래디언트의 윗면 최종 색상"
+
+#~ msgid "Cube Color"
+#~ msgstr "큐브 색상"
+
+#~ msgid "Desktop Cube"
+#~ msgstr "데스크탑 큐브"
+
+#~ msgid "Fold Acceleration"
+#~ msgstr "접기 가속"
+
+#~ msgid "Fold Speed"
+#~ msgstr "접는 속도"
+
+#~ msgid "Fold Timestep"
+#~ msgstr "접는 시간 간격"
+
+#~ msgid "Generate mipmaps when possible for higher quality scaling"
+#~ msgstr "높은 품질을 얻기 위해 가능한 경우 mipmap을 생성"
+
+#~ msgid "Go back to previous slide"
+#~ msgstr "이전 슬라이드로 가기"
+
+#~ msgid "Image files"
+#~ msgstr "그림 파일"
+
+#~ msgid "Image to use as texture for the skydome"
+#~ msgstr "스카이 돔에 사용할 그림"
+
+#~ msgid "Initiates Cube transparency only if rotation is mouse driven."
+#~ msgstr "마우스로 큐브를 회전할 때만 큐브를 투명하게 함"
+
+#~ msgid "Inside Cube"
+#~ msgstr "큐브 내부"
+
+#~ msgid "Inside cube"
+#~ msgstr "큐브 내부"
+
+#~ msgid ""
+#~ "List of PNG and SVG files that should be rendered on top face of cube"
+#~ msgstr "큐브의 윗면에 그려질 PNG와 SVG 파일 목록"
+
+#~ msgid "Multi Output Mode"
+#~ msgstr "다중 출력 모드"
+
+#~ msgid "Multiple cubes"
+#~ msgstr "복수 큐브"
+
+#~ msgid "Next Slide"
+#~ msgstr "다음 슬라이드"
+
 #, fuzzy
-msgid "One big cube"
-msgstr "커다란 단일 큐브"
-
-#: ../metadata/cube.xml.in.h:29
-msgid "Opacity During Rotation"
-msgstr "회전할 때의 투명도"
-
-#: ../metadata/cube.xml.in.h:30
-msgid "Opacity When Not Rotating"
-msgstr "회전 안할 때의 투명도"
-
-#: ../metadata/cube.xml.in.h:31
-msgid "Opacity of desktop window during rotation."
-msgstr "회전할 때 바탕 화면의 투명도"
-
-#: ../metadata/cube.xml.in.h:32
-msgid "Opacity of desktop window when not rotating."
-msgstr "회전 안할 때 바탕 화면의 투명도"
-
-#: ../metadata/cube.xml.in.h:33
-msgid "Place windows on cube"
-msgstr "창을 큐브 위에 배치"
-
-#: ../metadata/cube.xml.in.h:34
-msgid "Prev Slide"
-msgstr "이전 슬라이드"
-
-#: ../metadata/cube.xml.in.h:35
-msgid "Render skydome"
-msgstr "스카이 돔 그리기"
-
-#: ../metadata/cube.xml.in.h:36
-msgid "Scale image"
-msgstr "그림 크기 조정"
-
-#: ../metadata/cube.xml.in.h:37
-msgid "Scale images to cover top face of cube"
-msgstr "큐브 윗면의 그림 크기 조정"
-
-#: ../metadata/cube.xml.in.h:38
-msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr "다중 출력 장치를 사용할 때 큐브가 표시되는 방법을 선택하세요."
-
-#: ../metadata/cube.xml.in.h:39
-msgid "Skydome"
-msgstr "스카이 돔"
-
-#: ../metadata/cube.xml.in.h:40
-msgid "Skydome Gradient End Color"
-msgstr "스카이 돔 그라디언트 최종 색상"
-
-#: ../metadata/cube.xml.in.h:41
-msgid "Skydome Gradient Start Color"
-msgstr "스카이 돔 그라디언트 시작 색상"
-
-#: ../metadata/cube.xml.in.h:42
-msgid "Skydome Image"
-msgstr "스카이 돔 그림"
-
-#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
-#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
-msgid "Speed"
-msgstr "속도"
-
-#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
-#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
-msgid "Timestep"
-msgstr "시간 간격"
-
-#: ../metadata/cube.xml.in.h:45
-msgid "Transparency Only on Mouse Rotate"
-msgstr "마우스 회전시에만 투명하게 함"
-
-#: ../metadata/cube.xml.in.h:46
-msgid "Unfold"
-msgstr "펼치기"
-
-#: ../metadata/cube.xml.in.h:47
-msgid "Unfold cube"
-msgstr "큐브 펼치기"
-
-#: ../metadata/dbus.xml.in.h:1
-msgid "Dbus"
-msgstr "Dbus"
-
-#: ../metadata/dbus.xml.in.h:2
-msgid "Dbus Control Backend"
-msgstr "Dbus 컨트롤 백엔드"
-
-#: ../metadata/decoration.xml.in.h:1
-msgid "Allow mipmaps to be generated for decoration textures"
-msgstr "창 장식 텍스쳐에 mipmap 생성 허용"
-
-#: ../metadata/decoration.xml.in.h:2
-msgid "Command"
-msgstr "명령"
-
-#: ../metadata/decoration.xml.in.h:3
-msgid "Decoration windows"
-msgstr "창 장식"
-
-#: ../metadata/decoration.xml.in.h:4
-msgid ""
-"Decorator command line that is executed if no decorator is already running"
-msgstr ""
-"사용하고 있는 창 장식 프로그램이 없을 때 실행될 창 장식 프로그램 명령행"
-
-#: ../metadata/decoration.xml.in.h:5
-msgid "Drop shadow X offset"
-msgstr "그림자 가로축 여백"
-
-#: ../metadata/decoration.xml.in.h:6
-msgid "Drop shadow Y offset"
-msgstr "그림자 세로축 여백"
-
-#: ../metadata/decoration.xml.in.h:7
-msgid "Drop shadow color"
-msgstr "그림자 색"
-
-#: ../metadata/decoration.xml.in.h:8
-msgid "Drop shadow opacity"
-msgstr "그림자 투명도"
-
-#: ../metadata/decoration.xml.in.h:9
-msgid "Drop shadow radius"
-msgstr "그림자 반경"
-
-#: ../metadata/decoration.xml.in.h:11
-msgid "Shadow Color"
-msgstr "그림자 색"
-
-#: ../metadata/decoration.xml.in.h:12
-msgid "Shadow Offset X"
-msgstr "그림자 가로축 여백"
-
-#: ../metadata/decoration.xml.in.h:13
-msgid "Shadow Offset Y"
-msgstr "그림자 세로축 여백"
-
-#: ../metadata/decoration.xml.in.h:14
-msgid "Shadow Opacity"
-msgstr "그림자 투명도"
-
-#: ../metadata/decoration.xml.in.h:15
-msgid "Shadow Radius"
-msgstr "그림자 반경"
-
-#: ../metadata/decoration.xml.in.h:16
-msgid "Shadow windows"
-msgstr "창 그림자"
-
-#: ../metadata/decoration.xml.in.h:17
-msgid "Window Decoration"
-msgstr "창 장식"
-
-#: ../metadata/decoration.xml.in.h:18
-msgid "Window decorations"
-msgstr "창 장식"
-
-#: ../metadata/decoration.xml.in.h:19
-msgid "Windows that should be decorated"
-msgstr "창 장식을 사용할 창"
-
-#: ../metadata/decoration.xml.in.h:20
-msgid "Windows that should have a shadow"
-msgstr "그림자가 있어야 하는 창"
-
-#: ../metadata/fade.xml.in.h:1
-msgid "Fade On Minimize/Open/Close"
-msgstr "최소화/열기/닫기 시 페이드 효과"
-
-#: ../metadata/fade.xml.in.h:2
-msgid "Fade Speed"
-msgstr "페이드 속도"
-
-#: ../metadata/fade.xml.in.h:3
-msgid "Fade effect on minimize/open/close window events"
-msgstr "최소화/열기/닫기 창 이벤트 발생시 페이드 효과"
-
-#: ../metadata/fade.xml.in.h:4
-msgid "Fade effect on system beep"
-msgstr "시스템 삑소리에 대하여 페이드 효과"
-
-#: ../metadata/fade.xml.in.h:5
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "창이 생성될 때는 페이드 인, 종료될 때는 페이드 아웃"
-
-#: ../metadata/fade.xml.in.h:6
-msgid "Fade windows"
-msgstr "창 페이드 효과"
-
-#: ../metadata/fade.xml.in.h:7
-msgid "Fading Windows"
-msgstr "창 페이드 효과"
-
-#: ../metadata/fade.xml.in.h:8
-msgid "Fullscreen Visual Bell"
-msgstr "전체 화면 페이드 효과(눈에 보이는 삑소리)"
-
-#: ../metadata/fade.xml.in.h:9
-msgid "Fullscreen fade effect on system beep"
-msgstr "시스템 삑소리에 대한 전체 화면 페이드 효과"
-
-#: ../metadata/fade.xml.in.h:10
-msgid "Visual Bell"
-msgstr "눈에 보이는 삑소리"
-
-#: ../metadata/fade.xml.in.h:11
-msgid "Window fade speed"
-msgstr "창 페이드 속도"
-
-#: ../metadata/fade.xml.in.h:12
-msgid "Windows that should be fading"
-msgstr "페이드 효과가 적용되는 창"
-
-#: ../metadata/fs.xml.in.h:1
-msgid "Mount Point"
-msgstr "마운트 포인트"
-
-#: ../metadata/fs.xml.in.h:2
-msgid "Mount point"
-msgstr "마운트 포인트"
-
-#: ../metadata/fs.xml.in.h:3
-msgid "Userspace File System"
-msgstr "사용자 공간 파일 시스템"
-
-#: ../metadata/fs.xml.in.h:4
-msgid "Userspace file system"
-msgstr "사용자 공간 파일 시스템"
-
-#: ../metadata/gconf.xml.in.h:1
-msgid "GConf"
-msgstr "GConf"
-
-#: ../metadata/gconf.xml.in.h:2
-msgid "GConf Control Backend"
-msgstr "GConf 컨트롤 백엔드"
-
-#: ../metadata/glib.xml.in.h:1
-msgid "GLib"
-msgstr "GLib"
-
-#: ../metadata/glib.xml.in.h:2
-msgid "GLib main loop support"
-msgstr "GLib 메인 루프 지원"
-
-#: ../metadata/ini.xml.in.h:1
-msgid "Ini"
-msgstr "Ini"
-
-#: ../metadata/ini.xml.in.h:2
-msgid "Ini Flat File Backend"
-msgstr "평범한 ini 파일 백엔드"
-
-#: ../metadata/inotify.xml.in.h:1
-msgid "File change notification plugin"
-msgstr "파일 변화 알림 플러그인"
-
-#: ../metadata/inotify.xml.in.h:2
-msgid "Inotify"
-msgstr "주석"
-
-#: ../metadata/kconfig.xml.in.h:1
-msgid "Kconfig"
-msgstr "Kconfig"
-
-#: ../metadata/kconfig.xml.in.h:2
-msgid "Kconfig Control Backend"
-msgstr "Kconfig 컨트롤 백엔드"
-
-#: ../metadata/minimize.xml.in.h:1
-msgid "Minimize Effect"
-msgstr "최소화 효과"
-
-#: ../metadata/minimize.xml.in.h:2
-msgid "Minimize Windows"
-msgstr "창 최소화"
-
-#: ../metadata/minimize.xml.in.h:3
-msgid "Minimize speed"
-msgstr "최소화 속도"
-
-#: ../metadata/minimize.xml.in.h:4
-msgid "Minimize timestep"
-msgstr "최소화 시간 간격"
-
-#: ../metadata/minimize.xml.in.h:5
-msgid "Shade Resistance"
-msgstr "말아올리기 저항"
-
-#: ../metadata/minimize.xml.in.h:6
-msgid "Shade resistance"
-msgstr "말아올리기 저항"
-
-#: ../metadata/minimize.xml.in.h:9
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "최소화하거나 해제할 때 창 변형하기"
-
-#: ../metadata/minimize.xml.in.h:10
-msgid "Windows that should be transformed when minimized"
-msgstr "최소화시 변형되는 창"
-
-#: ../metadata/move.xml.in.h:1
-msgid "Constrain Y"
-msgstr "세로축 움직임 제한"
-
-#: ../metadata/move.xml.in.h:2
-msgid "Constrain Y coordinate to workspace area"
-msgstr "작업 공간 영역으로 세로축 움직임을 제한"
-
-#: ../metadata/move.xml.in.h:3
-msgid "Do not update the server-side position of windows until finished moving"
-msgstr "창의 이동이 끝나지 않았을 때, 창의 서버 측면 위치를 반영하지 않음"
-
-#: ../metadata/move.xml.in.h:4
-msgid "Initiate Window Move"
-msgstr "창 이동 시작"
-
-#: ../metadata/move.xml.in.h:5
-msgid "Lazy Positioning"
-msgstr "늦은 위치 반영"
-
-#: ../metadata/move.xml.in.h:6
-msgid "Move Window"
-msgstr "창 이동"
-
-#: ../metadata/move.xml.in.h:7
-msgid "Move window"
-msgstr "창 이동"
-
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
-#: ../metadata/switcher.xml.in.h:18
-msgid "Opacity"
-msgstr "투명"
-
-#: ../metadata/move.xml.in.h:9
-msgid "Opacity level of moving windows"
-msgstr "움직이는 창의 투명 정도"
-
-#: ../metadata/move.xml.in.h:10
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr "드래그시 자동으로 창 최대화를 해제함"
-
-#: ../metadata/move.xml.in.h:11
-msgid "Snapoff maximized windows"
-msgstr "창 최대화 해제"
-
-#: ../metadata/move.xml.in.h:12
-msgid "Start moving window"
-msgstr "창 이동 시작"
-
-#: ../metadata/place.xml.in.h:1
-msgid "Algorithm to use for window placement"
-msgstr "창 배치에 사용할 알고리즘"
-
-#: ../metadata/place.xml.in.h:2
-msgid "Cascade"
-msgstr "계단"
-
-#: ../metadata/place.xml.in.h:3
-msgid "Centered"
-msgstr "중앙"
-
-#: ../metadata/place.xml.in.h:4
-msgid "Force Placement Windows"
-msgstr "강제로 창을 위치"
-
-#: ../metadata/place.xml.in.h:5
-msgid "Horizontal viewport positions"
-msgstr "가로 작업 공간 위치"
-
-#: ../metadata/place.xml.in.h:6
-msgid "Maximize"
-msgstr "최대화"
-
-#: ../metadata/place.xml.in.h:8
-msgid "Place Windows"
-msgstr "창 배치"
-
-#: ../metadata/place.xml.in.h:9
+#~ msgid "One big cube"
+#~ msgstr "커다란 단일 큐브"
+
+#~ msgid "Opacity During Rotation"
+#~ msgstr "회전할 때의 투명도"
+
+#~ msgid "Opacity When Not Rotating"
+#~ msgstr "회전 안할 때의 투명도"
+
+#~ msgid "Opacity of desktop window during rotation."
+#~ msgstr "회전할 때 바탕 화면의 투명도"
+
+#~ msgid "Opacity of desktop window when not rotating."
+#~ msgstr "회전 안할 때 바탕 화면의 투명도"
+
+#~ msgid "Place windows on cube"
+#~ msgstr "창을 큐브 위에 배치"
+
+#~ msgid "Prev Slide"
+#~ msgstr "이전 슬라이드"
+
+#~ msgid "Render skydome"
+#~ msgstr "스카이 돔 그리기"
+
+#~ msgid "Scale image"
+#~ msgstr "그림 크기 조정"
+
+#~ msgid "Scale images to cover top face of cube"
+#~ msgstr "큐브 윗면의 그림 크기 조정"
+
+#~ msgid ""
+#~ "Selects how the cube is displayed if multiple output devices are used."
+#~ msgstr "다중 출력 장치를 사용할 때 큐브가 표시되는 방법을 선택하세요."
+
+#~ msgid "Skydome"
+#~ msgstr "스카이 돔"
+
+#~ msgid "Skydome Gradient End Color"
+#~ msgstr "스카이 돔 그라디언트 최종 색상"
+
+#~ msgid "Skydome Gradient Start Color"
+#~ msgstr "스카이 돔 그라디언트 시작 색상"
+
+#~ msgid "Skydome Image"
+#~ msgstr "스카이 돔 그림"
+
+#~ msgid "Speed"
+#~ msgstr "속도"
+
+#~ msgid "Timestep"
+#~ msgstr "시간 간격"
+
+#~ msgid "Transparency Only on Mouse Rotate"
+#~ msgstr "마우스 회전시에만 투명하게 함"
+
+#~ msgid "Unfold"
+#~ msgstr "펼치기"
+
+#~ msgid "Unfold cube"
+#~ msgstr "큐브 펼치기"
+
+#~ msgid "Dbus"
+#~ msgstr "Dbus"
+
+#~ msgid "Dbus Control Backend"
+#~ msgstr "Dbus 컨트롤 백엔드"
+
+#~ msgid "Allow mipmaps to be generated for decoration textures"
+#~ msgstr "창 장식 텍스쳐에 mipmap 생성 허용"
+
+#~ msgid "Command"
+#~ msgstr "명령"
+
+#~ msgid "Decoration windows"
+#~ msgstr "창 장식"
+
+#~ msgid ""
+#~ "Decorator command line that is executed if no decorator is already running"
+#~ msgstr ""
+#~ "사용하고 있는 창 장식 프로그램이 없을 때 실행될 창 장식 프로그램 명령행"
+
+#~ msgid "Drop shadow X offset"
+#~ msgstr "그림자 가로축 여백"
+
+#~ msgid "Drop shadow Y offset"
+#~ msgstr "그림자 세로축 여백"
+
+#~ msgid "Drop shadow color"
+#~ msgstr "그림자 색"
+
+#~ msgid "Drop shadow opacity"
+#~ msgstr "그림자 투명도"
+
+#~ msgid "Drop shadow radius"
+#~ msgstr "그림자 반경"
+
+#~ msgid "Shadow Color"
+#~ msgstr "그림자 색"
+
+#~ msgid "Shadow Offset X"
+#~ msgstr "그림자 가로축 여백"
+
+#~ msgid "Shadow Offset Y"
+#~ msgstr "그림자 세로축 여백"
+
+#~ msgid "Shadow Opacity"
+#~ msgstr "그림자 투명도"
+
+#~ msgid "Shadow Radius"
+#~ msgstr "그림자 반경"
+
+#~ msgid "Shadow windows"
+#~ msgstr "창 그림자"
+
+#~ msgid "Window Decoration"
+#~ msgstr "창 장식"
+
+#~ msgid "Window decorations"
+#~ msgstr "창 장식"
+
+#~ msgid "Windows that should be decorated"
+#~ msgstr "창 장식을 사용할 창"
+
+#~ msgid "Windows that should have a shadow"
+#~ msgstr "그림자가 있어야 하는 창"
+
+#~ msgid "Fade On Minimize/Open/Close"
+#~ msgstr "최소화/열기/닫기 시 페이드 효과"
+
+#~ msgid "Fade Speed"
+#~ msgstr "페이드 속도"
+
+#~ msgid "Fade effect on minimize/open/close window events"
+#~ msgstr "최소화/열기/닫기 창 이벤트 발생시 페이드 효과"
+
+#~ msgid "Fade effect on system beep"
+#~ msgstr "시스템 삑소리에 대하여 페이드 효과"
+
+#~ msgid "Fade in windows when mapped and fade out windows when unmapped"
+#~ msgstr "창이 생성될 때는 페이드 인, 종료될 때는 페이드 아웃"
+
+#~ msgid "Fade windows"
+#~ msgstr "창 페이드 효과"
+
+#~ msgid "Fading Windows"
+#~ msgstr "창 페이드 효과"
+
+#~ msgid "Fullscreen Visual Bell"
+#~ msgstr "전체 화면 페이드 효과(눈에 보이는 삑소리)"
+
+#~ msgid "Fullscreen fade effect on system beep"
+#~ msgstr "시스템 삑소리에 대한 전체 화면 페이드 효과"
+
+#~ msgid "Visual Bell"
+#~ msgstr "눈에 보이는 삑소리"
+
+#~ msgid "Window fade speed"
+#~ msgstr "창 페이드 속도"
+
+#~ msgid "Windows that should be fading"
+#~ msgstr "페이드 효과가 적용되는 창"
+
+#~ msgid "Mount Point"
+#~ msgstr "마운트 포인트"
+
+#~ msgid "Mount point"
+#~ msgstr "마운트 포인트"
+
+#~ msgid "Userspace File System"
+#~ msgstr "사용자 공간 파일 시스템"
+
+#~ msgid "Userspace file system"
+#~ msgstr "사용자 공간 파일 시스템"
+
+#~ msgid "GConf"
+#~ msgstr "GConf"
+
+#~ msgid "GConf Control Backend"
+#~ msgstr "GConf 컨트롤 백엔드"
+
+#~ msgid "GLib"
+#~ msgstr "GLib"
+
+#~ msgid "GLib main loop support"
+#~ msgstr "GLib 메인 루프 지원"
+
+#~ msgid "Ini"
+#~ msgstr "Ini"
+
+#~ msgid "Ini Flat File Backend"
+#~ msgstr "평범한 ini 파일 백엔드"
+
+#~ msgid "File change notification plugin"
+#~ msgstr "파일 변화 알림 플러그인"
+
+#~ msgid "Inotify"
+#~ msgstr "주석"
+
+#~ msgid "Kconfig"
+#~ msgstr "Kconfig"
+
+#~ msgid "Kconfig Control Backend"
+#~ msgstr "Kconfig 컨트롤 백엔드"
+
+#~ msgid "Minimize Effect"
+#~ msgstr "최소화 효과"
+
+#~ msgid "Minimize Windows"
+#~ msgstr "창 최소화"
+
+#~ msgid "Minimize speed"
+#~ msgstr "최소화 속도"
+
+#~ msgid "Minimize timestep"
+#~ msgstr "최소화 시간 간격"
+
+#~ msgid "Shade Resistance"
+#~ msgstr "말아올리기 저항"
+
+#~ msgid "Shade resistance"
+#~ msgstr "말아올리기 저항"
+
+#~ msgid "Transform windows when they are minimized and unminimized"
+#~ msgstr "최소화하거나 해제할 때 창 변형하기"
+
+#~ msgid "Windows that should be transformed when minimized"
+#~ msgstr "최소화시 변형되는 창"
+
+#~ msgid "Constrain Y"
+#~ msgstr "세로축 움직임 제한"
+
+#~ msgid "Constrain Y coordinate to workspace area"
+#~ msgstr "작업 공간 영역으로 세로축 움직임을 제한"
+
+#~ msgid ""
+#~ "Do not update the server-side position of windows until finished moving"
+#~ msgstr "창의 이동이 끝나지 않았을 때, 창의 서버 측면 위치를 반영하지 않음"
+
+#~ msgid "Initiate Window Move"
+#~ msgstr "창 이동 시작"
+
+#~ msgid "Lazy Positioning"
+#~ msgstr "늦은 위치 반영"
+
+#~ msgid "Move Window"
+#~ msgstr "창 이동"
+
+#~ msgid "Move window"
+#~ msgstr "창 이동"
+
+#~ msgid "Opacity"
+#~ msgstr "투명"
+
+#~ msgid "Opacity level of moving windows"
+#~ msgstr "움직이는 창의 투명 정도"
+
+#~ msgid "Snapoff and auto unmaximized maximized windows when dragging"
+#~ msgstr "드래그시 자동으로 창 최대화를 해제함"
+
+#~ msgid "Snapoff maximized windows"
+#~ msgstr "창 최대화 해제"
+
+#~ msgid "Start moving window"
+#~ msgstr "창 이동 시작"
+
+#~ msgid "Algorithm to use for window placement"
+#~ msgstr "창 배치에 사용할 알고리즘"
+
+#~ msgid "Cascade"
+#~ msgstr "계단"
+
+#~ msgid "Centered"
+#~ msgstr "중앙"
+
+#~ msgid "Force Placement Windows"
+#~ msgstr "강제로 창을 위치"
+
+#~ msgid "Horizontal viewport positions"
+#~ msgstr "가로 작업 공간 위치"
+
+#~ msgid "Maximize"
+#~ msgstr "최대화"
+
+#~ msgid "Place Windows"
+#~ msgstr "창 배치"
+
 #, fuzzy
-msgid "Place across all outputs"
-msgstr "더 작은 출력을 선호함"
+#~ msgid "Place across all outputs"
+#~ msgstr "더 작은 출력을 선호함"
 
-#: ../metadata/place.xml.in.h:10
-msgid "Place windows at appropriate positions when mapped"
-msgstr "창을 생성할 때 적절한 위치에 배치"
+#~ msgid "Place windows at appropriate positions when mapped"
+#~ msgstr "창을 생성할 때 적절한 위치에 배치"
 
-#: ../metadata/place.xml.in.h:11
-msgid "Placement Mode"
-msgstr "배치 모드"
+#~ msgid "Placement Mode"
+#~ msgstr "배치 모드"
 
-#: ../metadata/place.xml.in.h:12
-msgid "Positioned windows"
-msgstr "배치된 창"
+#~ msgid "Positioned windows"
+#~ msgstr "배치된 창"
 
-#: ../metadata/place.xml.in.h:13
-msgid "Random"
-msgstr "무작위로"
+#~ msgid "Random"
+#~ msgstr "무작위로"
 
-#: ../metadata/place.xml.in.h:14
 #, fuzzy
-msgid ""
-"Selects how window placement should behave if multiple outputs are selected"
-msgstr "다중 출력 장치를 사용할 때 창들이 어디에 스케일될지 선택하세요."
+#~ msgid ""
+#~ "Selects how window placement should behave if multiple outputs are "
+#~ "selected"
+#~ msgstr "다중 출력 장치를 사용할 때 창들이 어디에 스케일될지 선택하세요."
 
-#: ../metadata/place.xml.in.h:15
-msgid "Smart"
-msgstr "똑똑하게"
+#~ msgid "Smart"
+#~ msgstr "똑똑하게"
 
-#: ../metadata/place.xml.in.h:16
 #, fuzzy
-msgid "Use active output device"
-msgstr "모든 출력 장치에 대하여"
-
-#: ../metadata/place.xml.in.h:17
-msgid "Use output device of focussed window"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:18
-msgid "Use output device with pointer"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:19
-msgid "Vertical viewport positions"
-msgstr "세로 작업 공간 위치"
-
-#: ../metadata/place.xml.in.h:20
-msgid "Viewport positioned windows"
-msgstr "작업 공간에 배치된 창"
-
-#: ../metadata/place.xml.in.h:21
-msgid "Window placement workarounds"
-msgstr "창 배치 문제의 회피 방법"
-
-#: ../metadata/place.xml.in.h:22
-msgid "Windows that should be positioned by default"
-msgstr "기본적으로 배치되어야하는 창"
-
-#: ../metadata/place.xml.in.h:23
-msgid "Windows that should be positioned in specific viewports by default"
-msgstr "기본적으로 특정 작업 공간에 배치되어야하는 창"
-
-#: ../metadata/place.xml.in.h:24
-msgid ""
-"Windows that should forcedly be placed, even if they indicate the window "
-"manager should avoid placing them."
-msgstr ""
-
-#: ../metadata/place.xml.in.h:25
-msgid "Workarounds"
-msgstr "예비 수단"
-
-#: ../metadata/place.xml.in.h:26
-msgid "X Positions"
-msgstr "가로축 위치"
-
-#: ../metadata/place.xml.in.h:27
-msgid "X Viewport Positions"
-msgstr "작업 공간 가로축 위치"
-
-#: ../metadata/place.xml.in.h:28
-msgid "X position values"
-msgstr "가로축 위치값"
-
-#: ../metadata/place.xml.in.h:29
-msgid "Y Positions"
-msgstr "세로축 위치"
-
-#: ../metadata/place.xml.in.h:30
-msgid "Y Viewport Positions"
-msgstr "작업 공간 세로축 위치"
-
-#: ../metadata/place.xml.in.h:31
-msgid "Y position values"
-msgstr "세로축 위치값"
-
-#: ../metadata/png.xml.in.h:1
-msgid "Png"
-msgstr "Png"
-
-#: ../metadata/png.xml.in.h:2
-msgid "Png image loader"
-msgstr "Png 이미지 불러오기"
-
-#: ../metadata/regex.xml.in.h:1
-msgid "Regex Matching"
-msgstr "정규표현식 사용"
-
-#: ../metadata/regex.xml.in.h:2
-msgid "Regex window matching"
-msgstr "정규표현식 창 매칭"
-
-#: ../metadata/resize.xml.in.h:1
-msgid "Border Color"
-msgstr "테두리 색"
-
-#: ../metadata/resize.xml.in.h:2
-msgid "Border color used for outline and rectangle resize modes"
-msgstr ""
-"외곽선 창 크기 조절 모드와 사각형 창 크기 조절 모드에서 사용할 테두리 색"
-
-#: ../metadata/resize.xml.in.h:3
-msgid "Default Resize Mode"
-msgstr "기본 창 크기 조절 모드"
-
-#: ../metadata/resize.xml.in.h:4
-msgid "Default mode used for window resizing"
-msgstr "창 크기 조절할 때의 기본 모드"
-
-#: ../metadata/resize.xml.in.h:5
-msgid "Fill Color"
-msgstr "채우기 색"
-
-#: ../metadata/resize.xml.in.h:6
-msgid "Fill color used for rectangle resize mode"
-msgstr "사각형 창 크기 조절 모드에서의 채우기 색"
-
-#: ../metadata/resize.xml.in.h:7
-msgid "Initiate Normal Window Resize"
-msgstr "기본 창 크기 조절 모드 시작"
-
-#: ../metadata/resize.xml.in.h:8
-msgid "Initiate Outline Window Resize"
-msgstr "외곽선 창 크기 조절 모드 시작"
-
-#: ../metadata/resize.xml.in.h:9
-msgid "Initiate Rectangle Window Resize"
-msgstr "사각형 창 크기 조절 모드 시작"
-
-#: ../metadata/resize.xml.in.h:10
-msgid "Initiate Stretch Window Resize"
-msgstr "잡아당기기 창 크기 조절 모드 시작"
-
-#: ../metadata/resize.xml.in.h:11
-msgid "Initiate Window Resize"
-msgstr "창 크기 조절 시작"
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "기본"
-
-#: ../metadata/resize.xml.in.h:13
-msgid "Normal Resize Windows"
-msgstr "기본 창 크기 조절 모드"
-
-#: ../metadata/resize.xml.in.h:14
-msgid "Outline"
-msgstr "외곽선"
-
-#: ../metadata/resize.xml.in.h:15
-msgid "Outline Resize Windows"
-msgstr "외곽선 창 크기 조절 모드"
-
-#: ../metadata/resize.xml.in.h:16
-msgid "Rectangle"
-msgstr "사각형"
-
-#: ../metadata/resize.xml.in.h:17
-msgid "Rectangle Resize Windows"
-msgstr "사각형 창 크기 조절 모드"
-
-#: ../metadata/resize.xml.in.h:18
-msgid "Resize Window"
-msgstr "창 크기 조절"
-
-#: ../metadata/resize.xml.in.h:19
-msgid "Resize window"
-msgstr "창 크기 조절"
-
-#: ../metadata/resize.xml.in.h:20
-msgid "Start resizing window"
-msgstr "창 크기 조절 시작"
-
-#: ../metadata/resize.xml.in.h:21
-msgid "Start resizing window by stretching it"
-msgstr "창을 잡아당겨서 크기를 조절함"
-
-#: ../metadata/resize.xml.in.h:22
-msgid "Start resizing window normally"
-msgstr "평범하게 창 크기를 조절함"
-
-#: ../metadata/resize.xml.in.h:23
-msgid "Start resizing window with outline"
-msgstr "와곽선을 이용하여 창 크기를 조절함"
-
-#: ../metadata/resize.xml.in.h:24
-msgid "Start resizing window with rectangle"
-msgstr "사각형을 이용하여 창 크기를 조절함"
-
-#: ../metadata/resize.xml.in.h:25
-msgid "Stretch"
-msgstr "잡아당기기"
-
-#: ../metadata/resize.xml.in.h:26
-msgid "Stretch Resize Windows"
-msgstr "잡아당기기 창 크기 조절 모드"
-
-#: ../metadata/resize.xml.in.h:27
-msgid "Windows that normal resize should be used for"
-msgstr "기본 창 크기 조절 모드를 사용할 창"
-
-#: ../metadata/resize.xml.in.h:28
-msgid "Windows that outline resize should be used for"
-msgstr "외곽선 창 조절 모드를 사용할 창"
-
-#: ../metadata/resize.xml.in.h:29
-msgid "Windows that rectangle resize should be used for"
-msgstr "사각형 창 크기 조절 모드를 사용할 창"
-
-#: ../metadata/resize.xml.in.h:30
-msgid "Windows that stretch resize should be used for"
-msgstr "잡아당기기 창 크기 조절 모드를 사용할 창"
-
-#: ../metadata/rotate.xml.in.h:2
-msgid "Edge Flip DnD"
-msgstr "드래그하여 가장자리에서 작업 공간 전환"
-
-#: ../metadata/rotate.xml.in.h:3
-msgid "Edge Flip Move"
-msgstr "가장자리에서 작업 공간 전환"
-
-#: ../metadata/rotate.xml.in.h:4
-msgid "Edge Flip Pointer"
-msgstr "마우스 포인터로 가장자리에서 작업 공간 전환"
-
-#: ../metadata/rotate.xml.in.h:5
-msgid "Flip Time"
-msgstr "전환 시간"
-
-#: ../metadata/rotate.xml.in.h:6
-msgid "Flip to left viewport and warp pointer"
-msgstr "왼쪽 작업 공간으로 전환한 후, 포인터 이동"
-
-#: ../metadata/rotate.xml.in.h:7
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr "대상을 화면 가장자리로 드래그 하면 다음 작업 공간으로 전환"
-
-#: ../metadata/rotate.xml.in.h:8
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr "마우스 포인터를 화면 가장자리로 가져가면 다음 작업 공간으로 전환"
-
-#: ../metadata/rotate.xml.in.h:9
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr "창을 화면 가장자리로 드래그하면 다음 작업 공간으로 전환"
-
-#: ../metadata/rotate.xml.in.h:10
-msgid "Flip to right viewport and warp pointer"
-msgstr "오른쪽 작업 공간으로 전환한 후, 포인터 이동"
-
-#: ../metadata/rotate.xml.in.h:12
-msgid "Invert Y axis for pointer movement"
-msgstr "포인터의 이동을 가로축으로 반전"
-
-#: ../metadata/rotate.xml.in.h:13
-msgid "Pointer Invert Y"
-msgstr "세로축 반전"
-
-#: ../metadata/rotate.xml.in.h:14
-msgid "Pointer Sensitivity"
-msgstr "마우스 포인터 감도"
-
-#: ../metadata/rotate.xml.in.h:15
-msgid "Raise on rotate"
-msgstr "작업 공간을 전환할 때 창을 올림"
-
-#: ../metadata/rotate.xml.in.h:16
-msgid "Raise window when rotating"
-msgstr "작업 공간을 전환할 때 창을 올림"
-
-#: ../metadata/rotate.xml.in.h:17
-msgid "Rotate Cube"
-msgstr "큐브 회전"
-
-#: ../metadata/rotate.xml.in.h:18
-msgid "Rotate Flip Left"
-msgstr "왼쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:19
-msgid "Rotate Flip Right"
-msgstr "오른쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:20
-msgid "Rotate Left"
-msgstr "왼쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:21
-msgid "Rotate Left with Window"
-msgstr "모든 창과 함께 왼쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:22
-msgid "Rotate Right"
-msgstr "오른쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:23
-msgid "Rotate Right with Window"
-msgstr "모든 창과 함께 오른쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:24
-msgid "Rotate To"
-msgstr "회전"
-
-#: ../metadata/rotate.xml.in.h:25
-msgid "Rotate To Face 1"
-msgstr "1번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:26
-msgid "Rotate To Face 1 with Window"
-msgstr "모든 창과 함께 1번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:27
-msgid "Rotate To Face 10"
-msgstr "10번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:28
-msgid "Rotate To Face 10 with Window"
-msgstr "모든 창과 함께 10번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:29
-msgid "Rotate To Face 11"
-msgstr "11번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:30
-msgid "Rotate To Face 11 with Window"
-msgstr "모든 창과 함께 11번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:31
-msgid "Rotate To Face 12"
-msgstr "12번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:32
-msgid "Rotate To Face 12 with Window"
-msgstr "모든 창과 함께 12번 작업공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:33
-msgid "Rotate To Face 2"
-msgstr "12번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:34
-msgid "Rotate To Face 2 with Window"
-msgstr "모든 창과 함께 2번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:35
-msgid "Rotate To Face 3"
-msgstr "3번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:36
-msgid "Rotate To Face 3 with Window"
-msgstr "모든 창과 함께 3번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:37
-msgid "Rotate To Face 4"
-msgstr "4번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:38
-msgid "Rotate To Face 4 with Window"
-msgstr "모든 창과 함께 4번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:39
-msgid "Rotate To Face 5"
-msgstr "5번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:40
-msgid "Rotate To Face 5 with Window"
-msgstr "모든 창과 함께 5번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:41
-msgid "Rotate To Face 6"
-msgstr "6번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:42
-msgid "Rotate To Face 6 with Window"
-msgstr "모든 창과 함께 6번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:43
-msgid "Rotate To Face 7"
-msgstr "7번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:44
-msgid "Rotate To Face 7 with Window"
-msgstr "모든 창과 함께 7번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:45
-msgid "Rotate To Face 8"
-msgstr "8번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:46
-msgid "Rotate To Face 8 with Window"
-msgstr "모든 창과 함께 8번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:47
-msgid "Rotate To Face 9"
-msgstr "9번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:48
-msgid "Rotate To Face 9 with Window"
-msgstr "모든 창과 함께 9번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:49
-msgid "Rotate desktop cube"
-msgstr "데스크탑 큐브 회전"
-
-#: ../metadata/rotate.xml.in.h:50
-msgid "Rotate left"
-msgstr "왼쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:51
-msgid "Rotate left and bring active window along"
-msgstr "활성창과 함께 왼쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:52
-msgid "Rotate right"
-msgstr "오른쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:53
-msgid "Rotate right and bring active window along"
-msgstr "활성창과 함께 오른쪽으로 회전"
-
-#: ../metadata/rotate.xml.in.h:54
-msgid "Rotate to face 1"
-msgstr "1번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:55
-msgid "Rotate to face 1 and bring active window along"
-msgstr "활성창과 함께 1번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:56
-msgid "Rotate to face 10"
-msgstr "10번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:57
-msgid "Rotate to face 10 and bring active window along"
-msgstr "활성창과 함께 10번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:58
-msgid "Rotate to face 11"
-msgstr "11번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:59
-msgid "Rotate to face 11 and bring active window along"
-msgstr "활성창과 함께 11번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:60
-msgid "Rotate to face 12"
-msgstr "12번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:61
-msgid "Rotate to face 12 and bring active window along"
-msgstr "활성창과 함께 12번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:62
-msgid "Rotate to face 2"
-msgstr "2번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:63
-msgid "Rotate to face 2 and bring active window along"
-msgstr "활성창과 함께 2번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:64
-msgid "Rotate to face 3"
-msgstr "3번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:65
-msgid "Rotate to face 3 and bring active window along"
-msgstr "활성창과 함께 3번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:66
-msgid "Rotate to face 4"
-msgstr "4번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:67
-msgid "Rotate to face 4 and bring active window along"
-msgstr "활성창과 함께 4번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:68
-msgid "Rotate to face 5"
-msgstr "5번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:69
-msgid "Rotate to face 5 and bring active window along"
-msgstr "활성창과 함께 5번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:70
-msgid "Rotate to face 6"
-msgstr "6번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:71
-msgid "Rotate to face 6 and bring active window along"
-msgstr "활성창과 함께 6번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:72
-msgid "Rotate to face 7"
-msgstr "7번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:73
-msgid "Rotate to face 7 and bring active window along"
-msgstr "활성창과 함께 7번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:74
-msgid "Rotate to face 8"
-msgstr "8번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:75
-msgid "Rotate to face 8 and bring active window along"
-msgstr "활성창과 함께 8번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:76
-msgid "Rotate to face 9"
-msgstr "9번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:77
-msgid "Rotate to face 9 and bring active window along"
-msgstr "활성창과 함께 9번 작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:78
-msgid "Rotate to viewport"
-msgstr "작업 공간으로 회전"
-
-#: ../metadata/rotate.xml.in.h:79
-msgid "Rotate window"
-msgstr "창 회전"
-
-#: ../metadata/rotate.xml.in.h:80
-msgid "Rotate with window"
-msgstr "창과 함께 회전"
-
-#: ../metadata/rotate.xml.in.h:81
-msgid "Rotation Acceleration"
-msgstr "회전 가속"
-
-#: ../metadata/rotate.xml.in.h:82
-msgid "Rotation Speed"
-msgstr "회전 속도"
-
-#: ../metadata/rotate.xml.in.h:83
-msgid "Rotation Timestep"
-msgstr "회전 시간 간격"
-
-#: ../metadata/rotate.xml.in.h:84
-msgid "Rotation Zoom"
-msgstr "회전시 확대"
-
-#: ../metadata/rotate.xml.in.h:85
-msgid "Sensitivity of pointer movement"
-msgstr "마우스 포인터 감도"
-
-#: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Bottom Face"
-msgstr "큐브 회전시 아랫면으로 잡아당김"
-
-#: ../metadata/rotate.xml.in.h:87
-msgid "Snap Cube Rotation to Top Face"
-msgstr "큐브 회전시 윗면으로 잡아당김"
-
-#: ../metadata/rotate.xml.in.h:88
-msgid "Snap To Bottom Face"
-msgstr "아랫면으로 잡아당김"
-
-#: ../metadata/rotate.xml.in.h:89
-msgid "Snap To Top Face"
-msgstr "윗면으로 잡아당김"
-
-#: ../metadata/rotate.xml.in.h:91
-msgid "Start Rotation"
-msgstr "회전 시작"
-
-#: ../metadata/rotate.xml.in.h:92
-msgid "Timeout before flipping viewport"
-msgstr "작업 공간을 전환할 때의 시간 간격"
-
-#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
-msgid "Zoom"
-msgstr "확대"
-
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
-msgid "Amount of opacity in percent"
-msgstr "투명도(퍼센트)"
-
-#: ../metadata/scale.xml.in.h:2
-msgid "Big"
-msgstr "크게"
-
-#: ../metadata/scale.xml.in.h:3
-msgid "Click Desktop to Show Desktop"
-msgstr "바탕 화면을 클릭하면 바탕 화면 보기로 전환"
-
-#: ../metadata/scale.xml.in.h:4
-msgid "Darken Background"
-msgstr "바탕 화면을 어둡게"
-
-#: ../metadata/scale.xml.in.h:5
-msgid "Darken background when scaling windows"
-msgstr "스케일 모드일 때, 바탕 화면을 어둡게함"
-
-#: ../metadata/scale.xml.in.h:6
-msgid "Emblem"
-msgstr "아이콘"
-
-#: ../metadata/scale.xml.in.h:7
-msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "스케일 모드일 때, 바탕 화면을 클릭하면 바탕 화면 보기 상태로 들어가기"
-
-#: ../metadata/scale.xml.in.h:8
-msgid "Hover Time"
-msgstr "떠오르는 시간"
-
-#: ../metadata/scale.xml.in.h:9
-msgid "Initiate Window Picker"
-msgstr "창 고르기를 시작"
-
-#: ../metadata/scale.xml.in.h:10
-msgid "Initiate Window Picker For All Windows"
-msgstr "모든 창에 대해서 창 고르기를 시작"
-
-#: ../metadata/scale.xml.in.h:11
-msgid "Initiate Window Picker For Window Group"
-msgstr "창 그룹에 대하여 창 고르기를 시작"
-
-#: ../metadata/scale.xml.in.h:12
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "현재 작업 공간상의 창들에 대하여 창 고르기를 시작"
-
-#: ../metadata/scale.xml.in.h:13
-msgid "Layout and start transforming all windows"
-msgstr "모든 창을 배치하고 변형함"
-
-#: ../metadata/scale.xml.in.h:14
-msgid "Layout and start transforming window group"
-msgstr "창 그룹을 배치하고 변형함"
-
-#: ../metadata/scale.xml.in.h:15
-msgid "Layout and start transforming windows"
-msgstr "창을 배치하고 변형함"
-
-#: ../metadata/scale.xml.in.h:16
-msgid "Layout and start transforming windows on current output"
-msgstr "현재 작업 공간상의 창들을 배치하고 변형함"
-
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "없음"
-
-#: ../metadata/scale.xml.in.h:19
-msgid "On all output devices"
-msgstr "모든 출력 장치에 대하여"
-
-#: ../metadata/scale.xml.in.h:20
-msgid "On current output device"
-msgstr "현재 출력 장치에 대하여"
-
-#: ../metadata/scale.xml.in.h:22
-msgid "Overlay Icon"
-msgstr "아이콘 덧붙이기"
-
-#: ../metadata/scale.xml.in.h:23
-msgid "Overlay an icon on windows once they are scaled"
-msgstr "창이 스케일될 때 아이콘을 덧붙임"
-
-#: ../metadata/scale.xml.in.h:24
-msgid "Scale"
-msgstr "스케일"
-
-#: ../metadata/scale.xml.in.h:25
-msgid "Scale Windows"
-msgstr "스케일"
-
-#: ../metadata/scale.xml.in.h:26
-msgid "Scale speed"
-msgstr "스케일 속도"
-
-#: ../metadata/scale.xml.in.h:27
-msgid "Scale timestep"
-msgstr "스케일 시간"
-
-#: ../metadata/scale.xml.in.h:28
-msgid "Scale windows"
-msgstr "스케일"
+#~ msgid "Use active output device"
+#~ msgstr "모든 출력 장치에 대하여"
 
-#: ../metadata/scale.xml.in.h:29
-msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr "다중 출력 장치를 사용할 때 창들이 어디에 스케일될지 선택하세요."
+#~ msgid "Vertical viewport positions"
+#~ msgstr "세로 작업 공간 위치"
 
-#: ../metadata/scale.xml.in.h:30
-msgid "Space between windows"
-msgstr "창 사이의 간격"
+#~ msgid "Viewport positioned windows"
+#~ msgstr "작업 공간에 배치된 창"
 
-#: ../metadata/scale.xml.in.h:31
-msgid "Spacing"
-msgstr "간격"
+#~ msgid "Window placement workarounds"
+#~ msgstr "창 배치 문제의 회피 방법"
 
-#: ../metadata/scale.xml.in.h:33
-msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr "마우스가 위에 있을 때, 스케일 모드가 종료되는 시간 (ms 단위)"
+#~ msgid "Windows that should be positioned by default"
+#~ msgstr "기본적으로 배치되어야하는 창"
 
-#: ../metadata/scale.xml.in.h:35
-msgid "Windows that should be scaled in scale mode"
-msgstr "스케일 모드일 때 스케일되어야 하는 창"
+#~ msgid "Windows that should be positioned in specific viewports by default"
+#~ msgstr "기본적으로 특정 작업 공간에 배치되어야하는 창"
 
-#: ../metadata/screenshot.xml.in.h:1
-msgid "Automatically open screenshot in this application"
-msgstr "이 프로그램을 사용하여 스크린샷을 자동으로 열기"
+#~ msgid "Workarounds"
+#~ msgstr "예비 수단"
 
-#: ../metadata/screenshot.xml.in.h:2
-msgid "Directory"
-msgstr "디렉토리"
+#~ msgid "X Positions"
+#~ msgstr "가로축 위치"
 
-#: ../metadata/screenshot.xml.in.h:4
-msgid "Initiate rectangle screenshot"
-msgstr "사각형 형태의 스크린샷을 찍음"
+#~ msgid "X Viewport Positions"
+#~ msgstr "작업 공간 가로축 위치"
 
-#: ../metadata/screenshot.xml.in.h:5
-msgid "Launch Application"
-msgstr "프로그램 실행"
+#~ msgid "X position values"
+#~ msgstr "가로축 위치값"
 
-#: ../metadata/screenshot.xml.in.h:6
-msgid "Put screenshot images in this directory"
-msgstr "이 디렉토리에 스크린샷을 저장함"
+#~ msgid "Y Positions"
+#~ msgstr "세로축 위치"
 
-#: ../metadata/screenshot.xml.in.h:7
-msgid "Screenshot"
-msgstr "스크린샷"
+#~ msgid "Y Viewport Positions"
+#~ msgstr "작업 공간 세로축 위치"
 
-#: ../metadata/screenshot.xml.in.h:8
-msgid "Screenshot plugin"
-msgstr "스크린샷 플러그인"
+#~ msgid "Y position values"
+#~ msgstr "세로축 위치값"
 
-#: ../metadata/svg.xml.in.h:1
-msgid "Svg"
-msgstr "Svg"
+#~ msgid "Png"
+#~ msgstr "Png"
 
-#: ../metadata/svg.xml.in.h:2
-msgid "Svg image loader"
-msgstr "Svg 이미지 불러오기"
+#~ msgid "Png image loader"
+#~ msgstr "Png 이미지 불러오기"
 
-#: ../metadata/switcher.xml.in.h:1
-msgid "Amount of brightness in percent"
-msgstr "밝기(퍼센트)"
+#~ msgid "Regex Matching"
+#~ msgstr "정규표현식 사용"
 
-#: ../metadata/switcher.xml.in.h:3
-msgid "Amount of saturation in percent"
-msgstr "대조(퍼센트)"
+#~ msgid "Regex window matching"
+#~ msgstr "정규표현식 창 매칭"
 
-#: ../metadata/switcher.xml.in.h:4
-msgid "Application Switcher"
-msgstr "프로그램 전환"
+#~ msgid "Border Color"
+#~ msgstr "테두리 색"
 
-#: ../metadata/switcher.xml.in.h:5
-msgid "Auto Rotate"
-msgstr "자동으로 회전"
+#~ msgid "Border color used for outline and rectangle resize modes"
+#~ msgstr ""
+#~ "외곽선 창 크기 조절 모드와 사각형 창 크기 조절 모드에서 사용할 테두리 색"
 
-#: ../metadata/switcher.xml.in.h:6
-msgid "Brightness"
-msgstr "밝기"
+#~ msgid "Default Resize Mode"
+#~ msgstr "기본 창 크기 조절 모드"
 
-#: ../metadata/switcher.xml.in.h:7
-msgid "Bring To Front"
-msgstr "앞으로 띄우기"
+#~ msgid "Default mode used for window resizing"
+#~ msgstr "창 크기 조절할 때의 기본 모드"
 
-#: ../metadata/switcher.xml.in.h:8
-msgid "Bring selected window to front"
-msgstr "선택한 창을 앞으로 띄우기"
+#~ msgid "Fill Color"
+#~ msgstr "채우기 색"
 
-#: ../metadata/switcher.xml.in.h:9
-msgid "Distance desktop should be zoom out while switching windows"
-msgstr "창을 전환하는 동안 바탕 화면이 뒤로 물러나는 거리"
+#~ msgid "Fill color used for rectangle resize mode"
+#~ msgstr "사각형 창 크기 조절 모드에서의 채우기 색"
 
-#: ../metadata/switcher.xml.in.h:11
-msgid "Icon"
-msgstr "아이콘"
+#~ msgid "Initiate Normal Window Resize"
+#~ msgstr "기본 창 크기 조절 모드 시작"
 
-#: ../metadata/switcher.xml.in.h:12
-msgid "Minimized"
-msgstr "최소화"
+#~ msgid "Initiate Outline Window Resize"
+#~ msgstr "외곽선 창 크기 조절 모드 시작"
 
-#: ../metadata/switcher.xml.in.h:14
+#~ msgid "Initiate Rectangle Window Resize"
+#~ msgstr "사각형 창 크기 조절 모드 시작"
+
+#~ msgid "Initiate Stretch Window Resize"
+#~ msgstr "잡아당기기 창 크기 조절 모드 시작"
+
+#~ msgid "Initiate Window Resize"
+#~ msgstr "창 크기 조절 시작"
+
+#~ msgid "Normal"
+#~ msgstr "기본"
+
+#~ msgid "Normal Resize Windows"
+#~ msgstr "기본 창 크기 조절 모드"
+
+#~ msgid "Outline"
+#~ msgstr "외곽선"
+
+#~ msgid "Outline Resize Windows"
+#~ msgstr "외곽선 창 크기 조절 모드"
+
+#~ msgid "Rectangle"
+#~ msgstr "사각형"
+
+#~ msgid "Rectangle Resize Windows"
+#~ msgstr "사각형 창 크기 조절 모드"
+
+#~ msgid "Resize Window"
+#~ msgstr "창 크기 조절"
+
+#~ msgid "Resize window"
+#~ msgstr "창 크기 조절"
+
+#~ msgid "Start resizing window"
+#~ msgstr "창 크기 조절 시작"
+
+#~ msgid "Start resizing window by stretching it"
+#~ msgstr "창을 잡아당겨서 크기를 조절함"
+
+#~ msgid "Start resizing window normally"
+#~ msgstr "평범하게 창 크기를 조절함"
+
+#~ msgid "Start resizing window with outline"
+#~ msgstr "와곽선을 이용하여 창 크기를 조절함"
+
+#~ msgid "Start resizing window with rectangle"
+#~ msgstr "사각형을 이용하여 창 크기를 조절함"
+
+#~ msgid "Stretch"
+#~ msgstr "잡아당기기"
+
+#~ msgid "Stretch Resize Windows"
+#~ msgstr "잡아당기기 창 크기 조절 모드"
+
+#~ msgid "Windows that normal resize should be used for"
+#~ msgstr "기본 창 크기 조절 모드를 사용할 창"
+
+#~ msgid "Windows that outline resize should be used for"
+#~ msgstr "외곽선 창 조절 모드를 사용할 창"
+
+#~ msgid "Windows that rectangle resize should be used for"
+#~ msgstr "사각형 창 크기 조절 모드를 사용할 창"
+
+#~ msgid "Windows that stretch resize should be used for"
+#~ msgstr "잡아당기기 창 크기 조절 모드를 사용할 창"
+
+#~ msgid "Edge Flip DnD"
+#~ msgstr "드래그하여 가장자리에서 작업 공간 전환"
+
+#~ msgid "Edge Flip Move"
+#~ msgstr "가장자리에서 작업 공간 전환"
+
+#~ msgid "Edge Flip Pointer"
+#~ msgstr "마우스 포인터로 가장자리에서 작업 공간 전환"
+
+#~ msgid "Flip Time"
+#~ msgstr "전환 시간"
+
+#~ msgid "Flip to left viewport and warp pointer"
+#~ msgstr "왼쪽 작업 공간으로 전환한 후, 포인터 이동"
+
+#~ msgid "Flip to next viewport when dragging object to screen edge"
+#~ msgstr "대상을 화면 가장자리로 드래그 하면 다음 작업 공간으로 전환"
+
+#~ msgid "Flip to next viewport when moving pointer to screen edge"
+#~ msgstr "마우스 포인터를 화면 가장자리로 가져가면 다음 작업 공간으로 전환"
+
+#~ msgid "Flip to next viewport when moving window to screen edge"
+#~ msgstr "창을 화면 가장자리로 드래그하면 다음 작업 공간으로 전환"
+
+#~ msgid "Flip to right viewport and warp pointer"
+#~ msgstr "오른쪽 작업 공간으로 전환한 후, 포인터 이동"
+
+#~ msgid "Invert Y axis for pointer movement"
+#~ msgstr "포인터의 이동을 가로축으로 반전"
+
+#~ msgid "Pointer Invert Y"
+#~ msgstr "세로축 반전"
+
+#~ msgid "Pointer Sensitivity"
+#~ msgstr "마우스 포인터 감도"
+
+#~ msgid "Raise on rotate"
+#~ msgstr "작업 공간을 전환할 때 창을 올림"
+
+#~ msgid "Raise window when rotating"
+#~ msgstr "작업 공간을 전환할 때 창을 올림"
+
+#~ msgid "Rotate Cube"
+#~ msgstr "큐브 회전"
+
+#~ msgid "Rotate Flip Left"
+#~ msgstr "왼쪽으로 회전"
+
+#~ msgid "Rotate Flip Right"
+#~ msgstr "오른쪽으로 회전"
+
+#~ msgid "Rotate Left"
+#~ msgstr "왼쪽으로 회전"
+
+#~ msgid "Rotate Left with Window"
+#~ msgstr "모든 창과 함께 왼쪽으로 회전"
+
+#~ msgid "Rotate Right"
+#~ msgstr "오른쪽으로 회전"
+
+#~ msgid "Rotate Right with Window"
+#~ msgstr "모든 창과 함께 오른쪽으로 회전"
+
+#~ msgid "Rotate To"
+#~ msgstr "회전"
+
+#~ msgid "Rotate To Face 1"
+#~ msgstr "1번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 1 with Window"
+#~ msgstr "모든 창과 함께 1번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 10"
+#~ msgstr "10번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 10 with Window"
+#~ msgstr "모든 창과 함께 10번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 11"
+#~ msgstr "11번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 11 with Window"
+#~ msgstr "모든 창과 함께 11번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 12"
+#~ msgstr "12번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 12 with Window"
+#~ msgstr "모든 창과 함께 12번 작업공간으로 회전"
+
+#~ msgid "Rotate To Face 2"
+#~ msgstr "12번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 2 with Window"
+#~ msgstr "모든 창과 함께 2번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 3"
+#~ msgstr "3번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 3 with Window"
+#~ msgstr "모든 창과 함께 3번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 4"
+#~ msgstr "4번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 4 with Window"
+#~ msgstr "모든 창과 함께 4번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 5"
+#~ msgstr "5번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 5 with Window"
+#~ msgstr "모든 창과 함께 5번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 6"
+#~ msgstr "6번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 6 with Window"
+#~ msgstr "모든 창과 함께 6번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 7"
+#~ msgstr "7번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 7 with Window"
+#~ msgstr "모든 창과 함께 7번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 8"
+#~ msgstr "8번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 8 with Window"
+#~ msgstr "모든 창과 함께 8번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 9"
+#~ msgstr "9번 작업 공간으로 회전"
+
+#~ msgid "Rotate To Face 9 with Window"
+#~ msgstr "모든 창과 함께 9번 작업 공간으로 회전"
+
+#~ msgid "Rotate desktop cube"
+#~ msgstr "데스크탑 큐브 회전"
+
+#~ msgid "Rotate left"
+#~ msgstr "왼쪽으로 회전"
+
+#~ msgid "Rotate left and bring active window along"
+#~ msgstr "활성창과 함께 왼쪽으로 회전"
+
+#~ msgid "Rotate right"
+#~ msgstr "오른쪽으로 회전"
+
+#~ msgid "Rotate right and bring active window along"
+#~ msgstr "활성창과 함께 오른쪽으로 회전"
+
+#~ msgid "Rotate to face 1"
+#~ msgstr "1번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 1 and bring active window along"
+#~ msgstr "활성창과 함께 1번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 10"
+#~ msgstr "10번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 10 and bring active window along"
+#~ msgstr "활성창과 함께 10번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 11"
+#~ msgstr "11번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 11 and bring active window along"
+#~ msgstr "활성창과 함께 11번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 12"
+#~ msgstr "12번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 12 and bring active window along"
+#~ msgstr "활성창과 함께 12번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 2"
+#~ msgstr "2번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 2 and bring active window along"
+#~ msgstr "활성창과 함께 2번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 3"
+#~ msgstr "3번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 3 and bring active window along"
+#~ msgstr "활성창과 함께 3번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 4"
+#~ msgstr "4번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 4 and bring active window along"
+#~ msgstr "활성창과 함께 4번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 5"
+#~ msgstr "5번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 5 and bring active window along"
+#~ msgstr "활성창과 함께 5번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 6"
+#~ msgstr "6번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 6 and bring active window along"
+#~ msgstr "활성창과 함께 6번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 7"
+#~ msgstr "7번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 7 and bring active window along"
+#~ msgstr "활성창과 함께 7번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 8"
+#~ msgstr "8번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 8 and bring active window along"
+#~ msgstr "활성창과 함께 8번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 9"
+#~ msgstr "9번 작업 공간으로 회전"
+
+#~ msgid "Rotate to face 9 and bring active window along"
+#~ msgstr "활성창과 함께 9번 작업 공간으로 회전"
+
+#~ msgid "Rotate to viewport"
+#~ msgstr "작업 공간으로 회전"
+
+#~ msgid "Rotate window"
+#~ msgstr "창 회전"
+
+#~ msgid "Rotate with window"
+#~ msgstr "창과 함께 회전"
+
+#~ msgid "Rotation Acceleration"
+#~ msgstr "회전 가속"
+
+#~ msgid "Rotation Speed"
+#~ msgstr "회전 속도"
+
+#~ msgid "Rotation Timestep"
+#~ msgstr "회전 시간 간격"
+
+#~ msgid "Rotation Zoom"
+#~ msgstr "회전시 확대"
+
+#~ msgid "Sensitivity of pointer movement"
+#~ msgstr "마우스 포인터 감도"
+
+#~ msgid "Snap Cube Rotation to Bottom Face"
+#~ msgstr "큐브 회전시 아랫면으로 잡아당김"
+
+#~ msgid "Snap Cube Rotation to Top Face"
+#~ msgstr "큐브 회전시 윗면으로 잡아당김"
+
+#~ msgid "Snap To Bottom Face"
+#~ msgstr "아랫면으로 잡아당김"
+
+#~ msgid "Snap To Top Face"
+#~ msgstr "윗면으로 잡아당김"
+
+#~ msgid "Start Rotation"
+#~ msgstr "회전 시작"
+
+#~ msgid "Timeout before flipping viewport"
+#~ msgstr "작업 공간을 전환할 때의 시간 간격"
+
+#~ msgid "Zoom"
+#~ msgstr "확대"
+
+#~ msgid "Amount of opacity in percent"
+#~ msgstr "투명도(퍼센트)"
+
+#~ msgid "Big"
+#~ msgstr "크게"
+
+#~ msgid "Click Desktop to Show Desktop"
+#~ msgstr "바탕 화면을 클릭하면 바탕 화면 보기로 전환"
+
+#~ msgid "Darken Background"
+#~ msgstr "바탕 화면을 어둡게"
+
+#~ msgid "Darken background when scaling windows"
+#~ msgstr "스케일 모드일 때, 바탕 화면을 어둡게함"
+
+#~ msgid "Emblem"
+#~ msgstr "아이콘"
+
+#~ msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+#~ msgstr ""
+#~ "스케일 모드일 때, 바탕 화면을 클릭하면 바탕 화면 보기 상태로 들어가기"
+
+#~ msgid "Hover Time"
+#~ msgstr "떠오르는 시간"
+
+#~ msgid "Initiate Window Picker"
+#~ msgstr "창 고르기를 시작"
+
+#~ msgid "Initiate Window Picker For All Windows"
+#~ msgstr "모든 창에 대해서 창 고르기를 시작"
+
+#~ msgid "Initiate Window Picker For Window Group"
+#~ msgstr "창 그룹에 대하여 창 고르기를 시작"
+
+#~ msgid "Initiate Window Picker For Windows on Current Output"
+#~ msgstr "현재 작업 공간상의 창들에 대하여 창 고르기를 시작"
+
+#~ msgid "Layout and start transforming all windows"
+#~ msgstr "모든 창을 배치하고 변형함"
+
+#~ msgid "Layout and start transforming window group"
+#~ msgstr "창 그룹을 배치하고 변형함"
+
+#~ msgid "Layout and start transforming windows"
+#~ msgstr "창을 배치하고 변형함"
+
+#~ msgid "Layout and start transforming windows on current output"
+#~ msgstr "현재 작업 공간상의 창들을 배치하고 변형함"
+
+#~ msgid "None"
+#~ msgstr "없음"
+
+#~ msgid "On all output devices"
+#~ msgstr "모든 출력 장치에 대하여"
+
+#~ msgid "On current output device"
+#~ msgstr "현재 출력 장치에 대하여"
+
+#~ msgid "Overlay Icon"
+#~ msgstr "아이콘 덧붙이기"
+
+#~ msgid "Overlay an icon on windows once they are scaled"
+#~ msgstr "창이 스케일될 때 아이콘을 덧붙임"
+
+#~ msgid "Scale"
+#~ msgstr "스케일"
+
+#~ msgid "Scale Windows"
+#~ msgstr "스케일"
+
+#~ msgid "Scale speed"
+#~ msgstr "스케일 속도"
+
+#~ msgid "Scale timestep"
+#~ msgstr "스케일 시간"
+
+#~ msgid "Scale windows"
+#~ msgstr "스케일"
+
+#~ msgid ""
+#~ "Selects where windows are scaled if multiple output devices are used."
+#~ msgstr "다중 출력 장치를 사용할 때 창들이 어디에 스케일될지 선택하세요."
+
+#~ msgid "Space between windows"
+#~ msgstr "창 사이의 간격"
+
+#~ msgid "Spacing"
+#~ msgstr "간격"
+
+#~ msgid ""
+#~ "Time (in ms) before scale mode is terminated when hovering over a window"
+#~ msgstr "마우스가 위에 있을 때, 스케일 모드가 종료되는 시간 (ms 단위)"
+
+#~ msgid "Windows that should be scaled in scale mode"
+#~ msgstr "스케일 모드일 때 스케일되어야 하는 창"
+
+#~ msgid "Automatically open screenshot in this application"
+#~ msgstr "이 프로그램을 사용하여 스크린샷을 자동으로 열기"
+
+#~ msgid "Directory"
+#~ msgstr "디렉토리"
+
+#~ msgid "Initiate rectangle screenshot"
+#~ msgstr "사각형 형태의 스크린샷을 찍음"
+
+#~ msgid "Launch Application"
+#~ msgstr "프로그램 실행"
+
+#~ msgid "Put screenshot images in this directory"
+#~ msgstr "이 디렉토리에 스크린샷을 저장함"
+
+#~ msgid "Screenshot"
+#~ msgstr "스크린샷"
+
+#~ msgid "Screenshot plugin"
+#~ msgstr "스크린샷 플러그인"
+
+#~ msgid "Svg"
+#~ msgstr "Svg"
+
+#~ msgid "Svg image loader"
+#~ msgstr "Svg 이미지 불러오기"
+
+#~ msgid "Amount of brightness in percent"
+#~ msgstr "밝기(퍼센트)"
+
+#~ msgid "Amount of saturation in percent"
+#~ msgstr "대조(퍼센트)"
+
+#~ msgid "Application Switcher"
+#~ msgstr "프로그램 전환"
+
+#~ msgid "Auto Rotate"
+#~ msgstr "자동으로 회전"
+
+#~ msgid "Brightness"
+#~ msgstr "밝기"
+
+#~ msgid "Bring To Front"
+#~ msgstr "앞으로 띄우기"
+
+#~ msgid "Bring selected window to front"
+#~ msgstr "선택한 창을 앞으로 띄우기"
+
+#~ msgid "Distance desktop should be zoom out while switching windows"
+#~ msgstr "창을 전환하는 동안 바탕 화면이 뒤로 물러나는 거리"
+
+#~ msgid "Icon"
+#~ msgstr "아이콘"
+
+#~ msgid "Minimized"
+#~ msgstr "최소화"
+
 #, fuzzy
-msgid "Next Panel"
-msgstr "데스크탑 평면"
+#~ msgid "Next Panel"
+#~ msgstr "데스크탑 평면"
 
-#: ../metadata/switcher.xml.in.h:15
-msgid "Next window"
-msgstr "다음 창"
+#~ msgid "Next window"
+#~ msgstr "다음 창"
 
-#: ../metadata/switcher.xml.in.h:16
-msgid "Next window (All windows)"
-msgstr "다음 창(모든 창)"
+#~ msgid "Next window (All windows)"
+#~ msgstr "다음 창(모든 창)"
 
-#: ../metadata/switcher.xml.in.h:17
-msgid "Next window (No popup)"
-msgstr "다음 창(전환 창 없이)"
+#~ msgid "Next window (No popup)"
+#~ msgstr "다음 창(전환 창 없이)"
 
-#: ../metadata/switcher.xml.in.h:19
-msgid "Popup switcher if not visible and select next window"
-msgstr "전환 창이 없을 때는 전환 창을 보이고, 다음 창으로 전환"
+#~ msgid "Popup switcher if not visible and select next window"
+#~ msgstr "전환 창이 없을 때는 전환 창을 보이고, 다음 창으로 전환"
 
-#: ../metadata/switcher.xml.in.h:20
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr "전환 창이 없을 때는 전환 창을 보이고, 모든 창 중에서 다음 창으로 전환"
+#~ msgid ""
+#~ "Popup switcher if not visible and select next window out of all windows"
+#~ msgstr ""
+#~ "전환 창이 없을 때는 전환 창을 보이고, 모든 창 중에서 다음 창으로 전환"
 
-#: ../metadata/switcher.xml.in.h:21
-msgid "Popup switcher if not visible and select previous window"
-msgstr "전환 창이 없을 때는 전환 창을 보이고, 모든 창 중에서 이전 창으로 전환"
+#~ msgid "Popup switcher if not visible and select previous window"
+#~ msgstr ""
+#~ "전환 창이 없을 때는 전환 창을 보이고, 모든 창 중에서 이전 창으로 전환"
 
-#: ../metadata/switcher.xml.in.h:22
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr "전환 창이 없을 때는 전환 창을 보이고, 모든 창 중에서 이전 창으로 전환"
+#~ msgid ""
+#~ "Popup switcher if not visible and select previous window out of all "
+#~ "windows"
+#~ msgstr ""
+#~ "전환 창이 없을 때는 전환 창을 보이고, 모든 창 중에서 이전 창으로 전환"
 
-#: ../metadata/switcher.xml.in.h:23
 #, fuzzy
-msgid "Prev Panel"
-msgstr "이전 슬라이드"
+#~ msgid "Prev Panel"
+#~ msgstr "이전 슬라이드"
 
-#: ../metadata/switcher.xml.in.h:24
-msgid "Prev window"
-msgstr "이전 창"
+#~ msgid "Prev window"
+#~ msgstr "이전 창"
 
-#: ../metadata/switcher.xml.in.h:25
-msgid "Prev window (All windows)"
-msgstr "이전 창(모든 창)"
+#~ msgid "Prev window (All windows)"
+#~ msgstr "이전 창(모든 창)"
 
-#: ../metadata/switcher.xml.in.h:26
-msgid "Prev window (No popup)"
-msgstr "이전 창(전환 창 없이)"
+#~ msgid "Prev window (No popup)"
+#~ msgstr "이전 창(전환 창 없이)"
 
-#: ../metadata/switcher.xml.in.h:27
-msgid "Rotate to the selected window while switching"
-msgstr "전환하는 동안 선택된 창으로 회전"
+#~ msgid "Rotate to the selected window while switching"
+#~ msgstr "전환하는 동안 선택된 창으로 회전"
 
-#: ../metadata/switcher.xml.in.h:28
-msgid "Saturation"
-msgstr "채도"
+#~ msgid "Saturation"
+#~ msgstr "채도"
 
-#: ../metadata/switcher.xml.in.h:29
-msgid "Select next panel type window."
-msgstr ""
+#~ msgid "Select next window without showing the popup window."
+#~ msgstr "전환 창을 보여주지 않고 다음 창으로 전환"
 
-#: ../metadata/switcher.xml.in.h:30
-msgid "Select next window without showing the popup window."
-msgstr "전환 창을 보여주지 않고 다음 창으로 전환"
-
-#: ../metadata/switcher.xml.in.h:31
 #, fuzzy
-msgid "Select previous panel type window."
-msgstr "전환 창을 보여주지 않고 다음 창으로 전환"
-
-#: ../metadata/switcher.xml.in.h:32
-msgid "Select previous window without showing the popup window."
-msgstr "전환 창을 보여주지 않고 다음 창으로 전환"
-
-#: ../metadata/switcher.xml.in.h:33
-msgid "Show icon next to thumbnail"
-msgstr "미리 보기 옆에 아이콘 표시"
-
-#: ../metadata/switcher.xml.in.h:34
-msgid "Show minimized windows"
-msgstr "최소화된 창 표시"
-
-#: ../metadata/switcher.xml.in.h:36
-msgid "Switcher speed"
-msgstr "전환 속도"
-
-#: ../metadata/switcher.xml.in.h:37
-msgid "Switcher timestep"
-msgstr "전환 간격"
-
-#: ../metadata/switcher.xml.in.h:38
-msgid "Switcher windows"
-msgstr "창 전환"
-
-#: ../metadata/switcher.xml.in.h:40
-msgid "Windows that should be shown in switcher"
-msgstr "전환 창 안에 포함될 창들"
-
-#: ../metadata/video.xml.in.h:1
-msgid "Provide YV12 colorspace support"
-msgstr "YV12 색 공간 지원 제공"
-
-#: ../metadata/video.xml.in.h:2
-msgid "Video Playback"
-msgstr "비디오 재생"
-
-#: ../metadata/video.xml.in.h:3
-msgid "Video playback"
-msgstr "비디오 재생"
-
-#: ../metadata/video.xml.in.h:4
-msgid "YV12 colorspace"
-msgstr "YV12 색 공간"
-
-#: ../metadata/water.xml.in.h:1
-msgid "Add line"
-msgstr "줄 추가"
-
-#: ../metadata/water.xml.in.h:2
-msgid "Add point"
-msgstr "점 추가"
-
-#: ../metadata/water.xml.in.h:3
-msgid "Adds water effects to different desktop actions"
-msgstr "다양한 데스크탑 동작에 물결 효과를 추가함"
-
-#: ../metadata/water.xml.in.h:4
-msgid "Delay (in ms) between each rain-drop"
-msgstr "빗 방울들 사이의 시간 간격(초 단위)"
-
-#: ../metadata/water.xml.in.h:5
-msgid "Enable pointer water effects"
-msgstr "마우스 포인터 물결 효과 활성화"
-
-#: ../metadata/water.xml.in.h:7
-msgid "Line"
-msgstr "줄"
-
-#: ../metadata/water.xml.in.h:8
-msgid "Offset Scale"
-msgstr "여백 크기"
-
-#: ../metadata/water.xml.in.h:9
-msgid "Point"
-msgstr "점"
-
-#: ../metadata/water.xml.in.h:10
-msgid "Rain Delay"
-msgstr "비 지연 시간"
-
-#: ../metadata/water.xml.in.h:11
-msgid "Title wave"
-msgstr "제목 출렁임"
-
-#: ../metadata/water.xml.in.h:12
-msgid "Toggle rain"
-msgstr "비 내리기"
-
-#: ../metadata/water.xml.in.h:13
-msgid "Toggle rain effect"
-msgstr "비 내리는 효과 켜기"
-
-#: ../metadata/water.xml.in.h:14
-msgid "Toggle wiper"
-msgstr "와이퍼 켜기"
-
-#: ../metadata/water.xml.in.h:15
-msgid "Toggle wiper effect"
-msgstr "와이퍼 효과 켜기"
-
-#: ../metadata/water.xml.in.h:16
-msgid "Water Effect"
-msgstr "물결 효과"
-
-#: ../metadata/water.xml.in.h:17
-msgid "Water offset scale"
-msgstr "물결의 여백 크기"
-
-#: ../metadata/water.xml.in.h:18
-msgid "Wave effect from window title"
-msgstr "창 제목 표시줄에 대한 물결효과"
-
-#: ../metadata/wobbly.xml.in.h:1
-msgid "Focus Effect"
-msgstr "초점 효과"
-
-#: ../metadata/wobbly.xml.in.h:2
-msgid "Focus Window Effect"
-msgstr "창 초점 효과"
-
-#: ../metadata/wobbly.xml.in.h:3
-msgid "Focus Windows"
-msgstr "창 초점"
-
-#: ../metadata/wobbly.xml.in.h:4
-msgid "Friction"
-msgstr "충돌"
-
-#: ../metadata/wobbly.xml.in.h:5
-msgid "Grab Windows"
-msgstr "창 잡기"
-
-#: ../metadata/wobbly.xml.in.h:6
-msgid "Grid Resolution"
-msgstr "격자 해상도"
-
-#: ../metadata/wobbly.xml.in.h:7
-msgid "Inverted window snapping"
-msgstr "창 반대로 잡아당기기"
-
-#: ../metadata/wobbly.xml.in.h:8
-msgid "Make window shiver"
-msgstr "창 떨리게 하기"
-
-#: ../metadata/wobbly.xml.in.h:9
-msgid "Map Effect"
-msgstr "선택 효과"
-
-#: ../metadata/wobbly.xml.in.h:10
-msgid "Map Window Effect"
-msgstr "창 선택 효과"
-
-#: ../metadata/wobbly.xml.in.h:11
-msgid "Map Windows"
-msgstr "적용되는 창"
-
-#: ../metadata/wobbly.xml.in.h:12
-msgid "Maximize Effect"
-msgstr "최대화 효과"
-
-#: ../metadata/wobbly.xml.in.h:13
-msgid "Minimum Grid Size"
-msgstr "격자의 최소 크기"
-
-#: ../metadata/wobbly.xml.in.h:14
-msgid "Minimum Vertex Grid Size"
-msgstr "최소 격자 크기"
-
-#: ../metadata/wobbly.xml.in.h:15
-msgid "Move Windows"
-msgstr "창 이동"
-
-#: ../metadata/wobbly.xml.in.h:17
-msgid "Shiver"
-msgstr "떨림"
-
-#: ../metadata/wobbly.xml.in.h:18
-msgid "Snap Inverted"
-msgstr "반대로 잡아당기기"
-
-#: ../metadata/wobbly.xml.in.h:19
-msgid "Snap windows"
-msgstr "창 잡아당기기"
-
-#: ../metadata/wobbly.xml.in.h:20
-msgid "Spring Friction"
-msgstr "용수철 마찰"
-
-#: ../metadata/wobbly.xml.in.h:21
-msgid "Spring K"
-msgstr "용수철 K"
-
-#: ../metadata/wobbly.xml.in.h:22
-msgid "Spring Konstant"
-msgstr "용수철 상수"
-
-#: ../metadata/wobbly.xml.in.h:23
-msgid "Toggle window snapping"
-msgstr "창 잡아당기기"
-
-#: ../metadata/wobbly.xml.in.h:24
-msgid "Use spring model for wobbly window effect"
-msgstr "출렁거리는 효과를 위해 용수철 모델 사용"
-
-#: ../metadata/wobbly.xml.in.h:25
-msgid "Vertex Grid Resolution"
-msgstr "격자 해상도"
-
-#: ../metadata/wobbly.xml.in.h:26
-msgid "Windows that should wobble when focused"
-msgstr "창 활성화시 출렁거리는 효과"
-
-#: ../metadata/wobbly.xml.in.h:27
-msgid "Windows that should wobble when grabbed"
-msgstr "창 선택시 출렁거리는 효과"
-
-#: ../metadata/wobbly.xml.in.h:28
-msgid "Windows that should wobble when mapped"
-msgstr "창을 선택할 때 출렁거리는 효과"
-
-#: ../metadata/wobbly.xml.in.h:29
-msgid "Windows that should wobble when moved"
-msgstr "창 이동시 출렁거리는 효과"
-
-#: ../metadata/wobbly.xml.in.h:30
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "창을 최대화하거나 해제할 때 출렁거리는 효과"
-
-#: ../metadata/wobbly.xml.in.h:31
-msgid "Wobbly Windows"
-msgstr "창 출렁거림"
-
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "선형 필터"
-
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "확대할 때 선형 필터 적용"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "데스크탑 확대"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "확대"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "축소"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "확대 이동"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "확대 속도"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "확대 시간 간격"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "데스크탑 큐브 확대 이동"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "확대율"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "확대 이동"
+#~ msgid "Select previous panel type window."
+#~ msgstr "전환 창을 보여주지 않고 다음 창으로 전환"
+
+#~ msgid "Select previous window without showing the popup window."
+#~ msgstr "전환 창을 보여주지 않고 다음 창으로 전환"
+
+#~ msgid "Show icon next to thumbnail"
+#~ msgstr "미리 보기 옆에 아이콘 표시"
+
+#~ msgid "Show minimized windows"
+#~ msgstr "최소화된 창 표시"
+
+#~ msgid "Switcher speed"
+#~ msgstr "전환 속도"
+
+#~ msgid "Switcher timestep"
+#~ msgstr "전환 간격"
+
+#~ msgid "Switcher windows"
+#~ msgstr "창 전환"
+
+#~ msgid "Windows that should be shown in switcher"
+#~ msgstr "전환 창 안에 포함될 창들"
+
+#~ msgid "Provide YV12 colorspace support"
+#~ msgstr "YV12 색 공간 지원 제공"
+
+#~ msgid "Video Playback"
+#~ msgstr "비디오 재생"
+
+#~ msgid "Video playback"
+#~ msgstr "비디오 재생"
+
+#~ msgid "YV12 colorspace"
+#~ msgstr "YV12 색 공간"
+
+#~ msgid "Add line"
+#~ msgstr "줄 추가"
+
+#~ msgid "Add point"
+#~ msgstr "점 추가"
+
+#~ msgid "Adds water effects to different desktop actions"
+#~ msgstr "다양한 데스크탑 동작에 물결 효과를 추가함"
+
+#~ msgid "Delay (in ms) between each rain-drop"
+#~ msgstr "빗 방울들 사이의 시간 간격(초 단위)"
+
+#~ msgid "Enable pointer water effects"
+#~ msgstr "마우스 포인터 물결 효과 활성화"
+
+#~ msgid "Line"
+#~ msgstr "줄"
+
+#~ msgid "Offset Scale"
+#~ msgstr "여백 크기"
+
+#~ msgid "Point"
+#~ msgstr "점"
+
+#~ msgid "Rain Delay"
+#~ msgstr "비 지연 시간"
+
+#~ msgid "Title wave"
+#~ msgstr "제목 출렁임"
+
+#~ msgid "Toggle rain"
+#~ msgstr "비 내리기"
+
+#~ msgid "Toggle rain effect"
+#~ msgstr "비 내리는 효과 켜기"
+
+#~ msgid "Toggle wiper"
+#~ msgstr "와이퍼 켜기"
+
+#~ msgid "Toggle wiper effect"
+#~ msgstr "와이퍼 효과 켜기"
+
+#~ msgid "Water Effect"
+#~ msgstr "물결 효과"
+
+#~ msgid "Water offset scale"
+#~ msgstr "물결의 여백 크기"
+
+#~ msgid "Wave effect from window title"
+#~ msgstr "창 제목 표시줄에 대한 물결효과"
+
+#~ msgid "Focus Effect"
+#~ msgstr "초점 효과"
+
+#~ msgid "Focus Window Effect"
+#~ msgstr "창 초점 효과"
+
+#~ msgid "Focus Windows"
+#~ msgstr "창 초점"
+
+#~ msgid "Friction"
+#~ msgstr "충돌"
+
+#~ msgid "Grab Windows"
+#~ msgstr "창 잡기"
+
+#~ msgid "Grid Resolution"
+#~ msgstr "격자 해상도"
+
+#~ msgid "Inverted window snapping"
+#~ msgstr "창 반대로 잡아당기기"
+
+#~ msgid "Make window shiver"
+#~ msgstr "창 떨리게 하기"
+
+#~ msgid "Map Effect"
+#~ msgstr "선택 효과"
+
+#~ msgid "Map Window Effect"
+#~ msgstr "창 선택 효과"
+
+#~ msgid "Map Windows"
+#~ msgstr "적용되는 창"
+
+#~ msgid "Maximize Effect"
+#~ msgstr "최대화 효과"
+
+#~ msgid "Minimum Grid Size"
+#~ msgstr "격자의 최소 크기"
+
+#~ msgid "Minimum Vertex Grid Size"
+#~ msgstr "최소 격자 크기"
+
+#~ msgid "Move Windows"
+#~ msgstr "창 이동"
+
+#~ msgid "Shiver"
+#~ msgstr "떨림"
+
+#~ msgid "Snap Inverted"
+#~ msgstr "반대로 잡아당기기"
+
+#~ msgid "Snap windows"
+#~ msgstr "창 잡아당기기"
+
+#~ msgid "Spring Friction"
+#~ msgstr "용수철 마찰"
+
+#~ msgid "Spring K"
+#~ msgstr "용수철 K"
+
+#~ msgid "Spring Konstant"
+#~ msgstr "용수철 상수"
+
+#~ msgid "Toggle window snapping"
+#~ msgstr "창 잡아당기기"
+
+#~ msgid "Use spring model for wobbly window effect"
+#~ msgstr "출렁거리는 효과를 위해 용수철 모델 사용"
+
+#~ msgid "Vertex Grid Resolution"
+#~ msgstr "격자 해상도"
+
+#~ msgid "Windows that should wobble when focused"
+#~ msgstr "창 활성화시 출렁거리는 효과"
+
+#~ msgid "Windows that should wobble when grabbed"
+#~ msgstr "창 선택시 출렁거리는 효과"
+
+#~ msgid "Windows that should wobble when mapped"
+#~ msgstr "창을 선택할 때 출렁거리는 효과"
+
+#~ msgid "Windows that should wobble when moved"
+#~ msgstr "창 이동시 출렁거리는 효과"
+
+#~ msgid "Wobble effect when maximizing and unmaximizing windows"
+#~ msgstr "창을 최대화하거나 해제할 때 출렁거리는 효과"
+
+#~ msgid "Wobbly Windows"
+#~ msgstr "창 출렁거림"
+
+#~ msgid "Filter Linear"
+#~ msgstr "선형 필터"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "확대할 때 선형 필터 적용"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "데스크탑 확대"
+
+#~ msgid "Zoom In"
+#~ msgstr "확대"
+
+#~ msgid "Zoom Out"
+#~ msgstr "축소"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "확대 이동"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "확대 속도"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "확대 시간 간격"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "데스크탑 큐브 확대 이동"
+
+#~ msgid "Zoom factor"
+#~ msgstr "확대율"
+
+#~ msgid "Zoom pan"
+#~ msgstr "확대 이동"
 
 #~ msgid "Background Images"
 #~ msgstr "배경 그림"

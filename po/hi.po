@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:22+0530\n"
+"POT-Creation-Date: 2008-05-29 14:02+0200\n"
 "PO-Revision-Date: 2007-12-16 17:03+0530\n"
 "Last-Translator: Sangeeta Kumari\n"
 "Language-Team: <en@li.org>\n"
@@ -17,2973 +17,2272 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-#, fuzzy
-msgid "Desktop"
-msgstr "डेसक्टाप"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
-msgid "Window Management"
-msgstr "विन्डो मैनेजर"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
-msgid "Compiz"
-msgstr "Compiz"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:1
-msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "विंडो शीर्षक बार में माउस स्क्रॉल के दौरान ली जाने वाली क्रिया"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:2
-#, fuzzy
-msgid "Blur type"
-msgstr "छोडं दिया \n"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:3
-msgid "Metacity theme active window opacity"
-msgstr "मेटासिटी थीम सक्रिय विंडो अपारदर्शिता"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:4
-msgid "Metacity theme active window opacity shade"
-msgstr "मेटासिटी थीम सक्रिय विंडो अपारदर्शिता छाया"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:5
-msgid "Metacity theme opacity"
-msgstr "मेटासिटी थीम अपारदर्शिता"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:6
-msgid "Metacity theme opacity shade"
-msgstr "मेटासिटी थीम अपारदर्शिता छाया"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:7
-msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "मेटासिटी थीम सजावट के साथ सक्रिय विंडो के लिए प्रयोग करने के लिए अपारदर्शिता"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:8
-msgid "Opacity to use for metacity theme decorations"
-msgstr "मेटासिटी थीम सजावट के लिए प्रयोग के लिए अपारदर्शिता"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid ""
-"Shade active windows with metacity theme decorations from opaque to "
-"translucent"
-msgstr "अपारदर्शी से पारभासी में मेटासिटी थीम सजावट के साथ छाया सक्रिय विंडो"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid ""
-"Shade windows with metacity theme decorations from opaque to translucent"
-msgstr "अपारदर्शी से पारभासी में मेटासिटी थीम सजावट के साथ छाया विंडो"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:11
-msgid "Title bar mouse wheel action"
-msgstr "शीर्षक बार माउस ह्वील क्रिया"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:12
-msgid "Type of blur used for window decorations"
-msgstr "विंडो सजावट के लिए प्रयुक्त ब्लर का प्रकार"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:13
-msgid "Use metacity theme"
-msgstr "मेटासिटी थीम का उपयोग करें"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:14
-msgid "Use metacity theme when drawing window decorations"
-msgstr "विंडो सजवाट खींचने के दौरान मेटासिटी थीम का उपयोग करें"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
-#: ../metadata/core.xml.in.h:24
+#: gtk/window-decorator/gtk-window-decorator.c:4417
 #, fuzzy
 msgid "Close Window"
 msgstr "windows"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
-#: ../metadata/core.xml.in.h:154
+#: gtk/window-decorator/gtk-window-decorator.c:4439
 msgid "Unmaximize Window"
 msgstr "विंडो अधिकतम खत्म करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
-#: ../metadata/core.xml.in.h:85
+#: gtk/window-decorator/gtk-window-decorator.c:4442
 msgid "Maximize Window"
 msgstr "विंडो अधिकतम करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
-#: ../metadata/core.xml.in.h:91
+#: gtk/window-decorator/gtk-window-decorator.c:4484
 msgid "Minimize Window"
 msgstr "विंडो न्यूनतम करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
-#: ../metadata/core.xml.in.h:161
+#: gtk/window-decorator/gtk-window-decorator.c:4601
 #, fuzzy
 msgid "Window Menu"
 msgstr "विन्डो मैनेजर"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: gtk/window-decorator/gtk-window-decorator.c:4620
 #, fuzzy
 msgid "Shade"
 msgstr "स्कैनर"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
+#: gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
 msgstr ""
 
-#: ../metadata/annotate.xml.in.h:1
 #, fuzzy
-msgid "Annotate"
-msgstr "भारत"
+#~ msgid "Desktop"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/annotate.xml.in.h:2
 #, fuzzy
-msgid "Annotate Fill Color"
-msgstr "रंग"
+#~ msgid "Window Management"
+#~ msgstr "विन्डो मैनेजर"
 
-#: ../metadata/annotate.xml.in.h:3
-msgid "Annotate Stroke Color"
-msgstr "स्ट्रोक रंग की व्याख्या करें"
+#~ msgid "Compiz"
+#~ msgstr "Compiz"
 
-#: ../metadata/annotate.xml.in.h:4
+#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
+#~ msgstr "विंडो शीर्षक बार में माउस स्क्रॉल के दौरान ली जाने वाली क्रिया"
+
+#, fuzzy
+#~ msgid "Blur type"
+#~ msgstr "छोडं दिया \n"
+
+#~ msgid "Metacity theme active window opacity"
+#~ msgstr "मेटासिटी थीम सक्रिय विंडो अपारदर्शिता"
+
+#~ msgid "Metacity theme active window opacity shade"
+#~ msgstr "मेटासिटी थीम सक्रिय विंडो अपारदर्शिता छाया"
+
+#~ msgid "Metacity theme opacity"
+#~ msgstr "मेटासिटी थीम अपारदर्शिता"
+
+#~ msgid "Metacity theme opacity shade"
+#~ msgstr "मेटासिटी थीम अपारदर्शिता छाया"
+
+#~ msgid "Opacity to use for active windows with metacity theme decorations"
+#~ msgstr "मेटासिटी थीम सजावट के साथ सक्रिय विंडो के लिए प्रयोग करने के लिए अपारदर्शिता"
+
+#~ msgid "Opacity to use for metacity theme decorations"
+#~ msgstr "मेटासिटी थीम सजावट के लिए प्रयोग के लिए अपारदर्शिता"
+
+#~ msgid ""
+#~ "Shade active windows with metacity theme decorations from opaque to "
+#~ "translucent"
+#~ msgstr "अपारदर्शी से पारभासी में मेटासिटी थीम सजावट के साथ छाया सक्रिय विंडो"
+
+#~ msgid ""
+#~ "Shade windows with metacity theme decorations from opaque to translucent"
+#~ msgstr "अपारदर्शी से पारभासी में मेटासिटी थीम सजावट के साथ छाया विंडो"
+
+#~ msgid "Title bar mouse wheel action"
+#~ msgstr "शीर्षक बार माउस ह्वील क्रिया"
+
+#~ msgid "Type of blur used for window decorations"
+#~ msgstr "विंडो सजावट के लिए प्रयुक्त ब्लर का प्रकार"
+
+#~ msgid "Use metacity theme"
+#~ msgstr "मेटासिटी थीम का उपयोग करें"
+
+#~ msgid "Use metacity theme when drawing window decorations"
+#~ msgstr "विंडो सजवाट खींचने के दौरान मेटासिटी थीम का उपयोग करें"
+
+#, fuzzy
+#~ msgid "Annotate"
+#~ msgstr "भारत"
+
+#, fuzzy
+#~ msgid "Annotate Fill Color"
+#~ msgstr "रंग"
+
+#~ msgid "Annotate Stroke Color"
+#~ msgstr "स्ट्रोक रंग की व्याख्या करें"
+
 #, fuzzy
-msgid "Annotate plugin"
-msgstr "सक्रिय"
+#~ msgid "Annotate plugin"
+#~ msgstr "सक्रिय"
 
-#: ../metadata/annotate.xml.in.h:5
-msgid "Clear"
-msgstr "साफ करें"
+#~ msgid "Clear"
+#~ msgstr "साफ करें"
 
-#: ../metadata/annotate.xml.in.h:6
-msgid "Draw"
-msgstr "खीचें"
+#~ msgid "Draw"
+#~ msgstr "खीचें"
 
-#: ../metadata/annotate.xml.in.h:7
-msgid "Draw using tool"
-msgstr "औजार के प्रयोग से खीचें"
+#~ msgid "Draw using tool"
+#~ msgstr "औजार के प्रयोग से खीचें"
 
-#: ../metadata/annotate.xml.in.h:8
-msgid "Fill color for annotations"
-msgstr "व्याख्या के लिए रंग भरें"
+#~ msgid "Fill color for annotations"
+#~ msgstr "व्याख्या के लिए रंग भरें"
 
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 #, fuzzy
-msgid "Initiate"
-msgstr "भारत"
+#~ msgid "Initiate"
+#~ msgstr "भारत"
 
-#: ../metadata/annotate.xml.in.h:10
 #, fuzzy
-msgid "Initiate annotate drawing"
-msgstr "भारत"
+#~ msgid "Initiate annotate drawing"
+#~ msgstr "भारत"
 
-#: ../metadata/annotate.xml.in.h:11
 #, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "भारत"
+#~ msgid "Initiate annotate erasing"
+#~ msgstr "भारत"
 
-#: ../metadata/annotate.xml.in.h:12
 #, fuzzy
-msgid "Initiate erase"
-msgstr "भारत"
+#~ msgid "Initiate erase"
+#~ msgstr "भारत"
 
-#: ../metadata/annotate.xml.in.h:13
-msgid "Line width"
-msgstr "रेखा चौड़ाई"
+#~ msgid "Line width"
+#~ msgstr "रेखा चौड़ाई"
 
-#: ../metadata/annotate.xml.in.h:14
-msgid "Line width for annotations"
-msgstr "व्याख्या के लिए रेखा चौड़ाई"
+#~ msgid "Line width for annotations"
+#~ msgstr "व्याख्या के लिए रेखा चौड़ाई"
 
-#: ../metadata/annotate.xml.in.h:15
-msgid "Stroke color for annotations"
-msgstr "व्याख्या के लिए स्ट्रोक रंग"
+#~ msgid "Stroke color for annotations"
+#~ msgstr "व्याख्या के लिए स्ट्रोक रंग"
 
-#: ../metadata/annotate.xml.in.h:16
-msgid "Stroke width"
-msgstr "स्ट्रोक चौड़ाई"
+#~ msgid "Stroke width"
+#~ msgstr "स्ट्रोक चौड़ाई"
 
-#: ../metadata/annotate.xml.in.h:17
-msgid "Stroke width for annotations"
-msgstr "व्याख्या के लिए स्ट्रोक चौड़ाई"
+#~ msgid "Stroke width for annotations"
+#~ msgstr "व्याख्या के लिए स्ट्रोक चौड़ाई"
 
-#: ../metadata/blur.xml.in.h:1
 #, fuzzy
-msgid "4xBilinear"
-msgstr "फिल्टर:"
+#~ msgid "4xBilinear"
+#~ msgstr "फिल्टर:"
 
-#: ../metadata/blur.xml.in.h:2
 #, fuzzy
-msgid "Alpha Blur"
-msgstr "windows"
+#~ msgid "Alpha Blur"
+#~ msgstr "windows"
 
-#: ../metadata/blur.xml.in.h:3
 #, fuzzy
-msgid "Alpha blur windows"
-msgstr "windows"
+#~ msgid "Alpha blur windows"
+#~ msgstr "windows"
 
-#: ../metadata/blur.xml.in.h:4
 #, fuzzy
-msgid "Blur Filter"
-msgstr "फिल्टर सैट करें"
+#~ msgid "Blur Filter"
+#~ msgstr "फिल्टर सैट करें"
 
-#: ../metadata/blur.xml.in.h:5
 #, fuzzy
-msgid "Blur Occlusion"
-msgstr "अवधि"
+#~ msgid "Blur Occlusion"
+#~ msgstr "अवधि"
 
-#: ../metadata/blur.xml.in.h:6
 #, fuzzy
-msgid "Blur Saturation"
-msgstr "अवधि"
+#~ msgid "Blur Saturation"
+#~ msgstr "अवधि"
 
-#: ../metadata/blur.xml.in.h:7
 #, fuzzy
-msgid "Blur Speed"
-msgstr "छोडं दिया \n"
+#~ msgid "Blur Speed"
+#~ msgstr "छोडं दिया \n"
 
-#: ../metadata/blur.xml.in.h:8
 #, fuzzy
-msgid "Blur Windows"
-msgstr "windows"
+#~ msgid "Blur Windows"
+#~ msgstr "windows"
 
-#: ../metadata/blur.xml.in.h:9
-msgid "Blur behind translucent parts of windows"
-msgstr "विंडो के पारदर्शी हिस्से को ब्लर करें"
+#~ msgid "Blur behind translucent parts of windows"
+#~ msgstr "विंडो के पारदर्शी हिस्से को ब्लर करें"
 
-#: ../metadata/blur.xml.in.h:10
 #, fuzzy
-msgid "Blur saturation"
-msgstr "अवधि"
+#~ msgid "Blur saturation"
+#~ msgstr "अवधि"
 
-#: ../metadata/blur.xml.in.h:11
 #, fuzzy
-msgid "Blur windows"
-msgstr "windows"
+#~ msgid "Blur windows"
+#~ msgstr "windows"
 
-#: ../metadata/blur.xml.in.h:12
-msgid "Blur windows that doesn't have focus"
-msgstr "विंडोज को धुंधला करें जो फोकस नहीं रखता है"
+#~ msgid "Blur windows that doesn't have focus"
+#~ msgstr "विंडोज को धुंधला करें जो फोकस नहीं रखता है"
 
-#: ../metadata/blur.xml.in.h:13
-msgid "Disable blurring of screen regions obscured by other windows."
-msgstr "दूसरे विंडो के द्वारा धुंधला बनाये गये स्क्रीन क्षेत्र के धुंधलेपन को निष्क्रिय करें."
+#~ msgid "Disable blurring of screen regions obscured by other windows."
+#~ msgstr "दूसरे विंडो के द्वारा धुंधला बनाये गये स्क्रीन क्षेत्र के धुंधलेपन को निष्क्रिय करें."
 
-#: ../metadata/blur.xml.in.h:14
-msgid "Filter method used for blurring"
-msgstr "धुंधलेपन के लिए प्रयुक्त फिल्टर विधि"
+#~ msgid "Filter method used for blurring"
+#~ msgstr "धुंधलेपन के लिए प्रयुक्त फिल्टर विधि"
 
-#: ../metadata/blur.xml.in.h:15
 #, fuzzy
-msgid "Focus Blur"
-msgstr "windows"
+#~ msgid "Focus Blur"
+#~ msgstr "windows"
 
-#: ../metadata/blur.xml.in.h:16
 #, fuzzy
-msgid "Focus blur windows"
-msgstr "windows"
+#~ msgid "Focus blur windows"
+#~ msgstr "windows"
 
-#: ../metadata/blur.xml.in.h:17
-msgid "Gaussian"
-msgstr "गॉसियन"
+#~ msgid "Gaussian"
+#~ msgstr "गॉसियन"
 
-#: ../metadata/blur.xml.in.h:18
-msgid "Gaussian Radius"
-msgstr "गॉसियन त्रिज्या"
+#~ msgid "Gaussian Radius"
+#~ msgstr "गॉसियन त्रिज्या"
 
-#: ../metadata/blur.xml.in.h:19
-msgid "Gaussian Strength"
-msgstr "गॉसियन शक्ति"
+#~ msgid "Gaussian Strength"
+#~ msgstr "गॉसियन शक्ति"
 
-#: ../metadata/blur.xml.in.h:20
-msgid "Gaussian radius"
-msgstr "गॉसियन त्रिज्या"
+#~ msgid "Gaussian radius"
+#~ msgstr "गॉसियन त्रिज्या"
 
-#: ../metadata/blur.xml.in.h:21
-msgid "Gaussian strength"
-msgstr "गॉसियन शक्ति"
+#~ msgid "Gaussian strength"
+#~ msgstr "गॉसियन शक्ति"
 
-#: ../metadata/blur.xml.in.h:22
-msgid "Independent texture fetch"
-msgstr ""
+#, fuzzy
+#~ msgid "Mipmap"
+#~ msgstr "लीमा"
+
+#, fuzzy
+#~ msgid "Mipmap LOD"
+#~ msgstr "लीमा"
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
+#~ msgid "Mipmap level-of-detail"
+#~ msgstr "विस्तार का मिपमैप स्तर"
+
+#~ msgid "Pulse"
+#~ msgstr "पल्स"
+
+#~ msgid "Pulse effect"
+#~ msgstr "पल्स प्रभाव"
+
 #, fuzzy
-msgid "Mipmap"
-msgstr "लीमा"
+#~ msgid "Window blur speed"
+#~ msgstr "windows"
+
+#~ msgid "Windows that should be affected by focus blur"
+#~ msgstr "विंडोज़ को फोसक ब्लर के द्वारा प्रभावित किया जाना चाहिए"
 
-#: ../metadata/blur.xml.in.h:24
+#~ msgid "Windows that should be use alpha blur by default"
+#~ msgstr "विंडोज़ जिसे मूलभूत रूप से अल्फा धुंधला का प्रयोग करना चाहिए"
+
+#~ msgid "Clone Output"
+#~ msgstr "क्लोन आउटपुट"
+
 #, fuzzy
-msgid "Mipmap LOD"
-msgstr "लीमा"
+#~ msgid "Initiate clone selection"
+#~ msgstr "भारत"
+
+#~ msgid "Output clone handler"
+#~ msgstr "आउटपुट क्लोन नियंत्रक"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command0"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand0 "
+#~ "के द्वारा"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command1"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand1 "
+#~ "के द्वारा"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command10"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता "
+#~ "हैcommand10 के द्वारा"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command11"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता "
+#~ "हैcommand11 के द्वारा"
 
-#: ../metadata/blur.xml.in.h:25
-msgid "Mipmap level-of-detail"
-msgstr "विस्तार का मिपमैप स्तर"
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command2"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand2 "
+#~ "के द्वारा"
 
-#: ../metadata/blur.xml.in.h:26
-msgid "Pulse"
-msgstr "पल्स"
-
-#: ../metadata/blur.xml.in.h:27
-msgid "Pulse effect"
-msgstr "पल्स प्रभाव"
-
-#: ../metadata/blur.xml.in.h:28
-msgid ""
-"Use the available texture units to do as many as possible independent "
-"texture fetches."
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:29
-#, fuzzy
-msgid "Window blur speed"
-msgstr "windows"
-
-#: ../metadata/blur.xml.in.h:30
-msgid "Windows that should be affected by focus blur"
-msgstr "विंडोज़ को फोसक ब्लर के द्वारा प्रभावित किया जाना चाहिए"
-
-#: ../metadata/blur.xml.in.h:31
-msgid "Windows that should be use alpha blur by default"
-msgstr "विंडोज़ जिसे मूलभूत रूप से अल्फा धुंधला का प्रयोग करना चाहिए"
-
-#: ../metadata/clone.xml.in.h:1
-msgid "Clone Output"
-msgstr "क्लोन आउटपुट"
-
-#: ../metadata/clone.xml.in.h:3
-#, fuzzy
-msgid "Initiate clone selection"
-msgstr "भारत"
-
-#: ../metadata/clone.xml.in.h:4
-msgid "Output clone handler"
-msgstr "आउटपुट क्लोन नियंत्रक"
-
-#: ../metadata/core.xml.in.h:1
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand0 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:2
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand1 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:3
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand10 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:4
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand11 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:5
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand2 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:6
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand3 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:7
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand4 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:8
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand5 के "
-"द्वारा"
-
-#: ../metadata/core.xml.in.h:9
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand6 के "
-"द्वारा"
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command3"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand3 "
+#~ "के द्वारा"
 
-#: ../metadata/core.xml.in.h:10
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand7 के "
-"द्वारा"
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command4"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand4 "
+#~ "के द्वारा"
 
-#: ../metadata/core.xml.in.h:11
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand8 के "
-"द्वारा"
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command5"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand5 "
+#~ "के द्वारा"
 
-#: ../metadata/core.xml.in.h:12
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
-"एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand9 के "
-"द्वारा"
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command6"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand6 "
+#~ "के द्वारा"
 
-#: ../metadata/core.xml.in.h:13
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command7"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand7 "
+#~ "के द्वारा"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command8"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand8 "
+#~ "के द्वारा"
+
+#~ msgid ""
+#~ "A keybinding that when invoked, will run the shell command identified by "
+#~ "command9"
+#~ msgstr ""
+#~ "एक कीबाइंडिंग को जब बुलाया जाता है शेल कमांड को चलायेगा जो पहचाना जाता हैcommand9 "
+#~ "के द्वारा"
+
 #, fuzzy
-msgid "Active Plugins"
-msgstr "सक्रिय"
+#~ msgid "Active Plugins"
+#~ msgstr "सक्रिय"
 
-#: ../metadata/core.xml.in.h:14
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-"ऑफस्क्रीन पिक्समैप में फिर नहीं निर्देशित किए जाने के लिए पूर्णस्क्रीण विंडो के आरेख को स्वीकृति "
-"दें"
+#~ msgid ""
+#~ "Allow drawing of fullscreen windows to not be redirected to offscreen "
+#~ "pixmaps"
+#~ msgstr ""
+#~ "ऑफस्क्रीन पिक्समैप में फिर नहीं निर्देशित किए जाने के लिए पूर्णस्क्रीण विंडो के आरेख को "
+#~ "स्वीकृति दें"
 
-#: ../metadata/core.xml.in.h:15
-msgid "Audible Bell"
-msgstr "सुनने योग्य घंटी"
+#~ msgid "Audible Bell"
+#~ msgstr "सुनने योग्य घंटी"
 
-#: ../metadata/core.xml.in.h:16
 #, fuzzy
-msgid "Audible system beep"
-msgstr "फाइल सिस्टम"
+#~ msgid "Audible system beep"
+#~ msgstr "फाइल सिस्टम"
 
-#: ../metadata/core.xml.in.h:17
 #, fuzzy
-msgid "Auto-Raise"
-msgstr "स्वचालित"
+#~ msgid "Auto-Raise"
+#~ msgstr "स्वचालित"
 
-#: ../metadata/core.xml.in.h:18
-msgid "Auto-Raise Delay"
-msgstr "स्वचालित उठान विलंब"
+#~ msgid "Auto-Raise Delay"
+#~ msgstr "स्वचालित उठान विलंब"
 
-#: ../metadata/core.xml.in.h:19
-msgid "Automatic detection of output devices"
-msgstr "आउटपुट डिवायस की स्वचालित जांच"
+#~ msgid "Automatic detection of output devices"
+#~ msgstr "आउटपुट डिवायस की स्वचालित जांच"
 
-#: ../metadata/core.xml.in.h:20
-msgid "Automatic detection of refresh rate"
-msgstr "ताज़ा दर की स्वचालित जांच"
+#~ msgid "Automatic detection of refresh rate"
+#~ msgstr "ताज़ा दर की स्वचालित जांच"
 
-#: ../metadata/core.xml.in.h:21
-msgid "Best"
-msgstr "सर्वोत्तम"
+#~ msgid "Best"
+#~ msgstr "सर्वोत्तम"
 
-#: ../metadata/core.xml.in.h:22
-msgid "Click To Focus"
-msgstr "फोकस में क्लिक करें"
+#~ msgid "Click To Focus"
+#~ msgstr "फोकस में क्लिक करें"
 
-#: ../metadata/core.xml.in.h:23
-msgid "Click on window moves input focus to it"
-msgstr "विंडो पर क्लिक करना इनपुट फोकस को इसपर खिसकाता है"
+#~ msgid "Click on window moves input focus to it"
+#~ msgstr "विंडो पर क्लिक करना इनपुट फोकस को इसपर खिसकाता है"
 
-#: ../metadata/core.xml.in.h:25
-msgid "Close active window"
-msgstr "सक्रिय विंडो बन्द करें"
+#~ msgid "Close active window"
+#~ msgstr "सक्रिय विंडो बन्द करें"
 
-#: ../metadata/core.xml.in.h:26
 #, fuzzy
-msgid "Command line 0"
-msgstr "कमांड:"
+#~ msgid "Command line 0"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:27
 #, fuzzy
-msgid "Command line 1"
-msgstr "कमांड:"
+#~ msgid "Command line 1"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:28
 #, fuzzy
-msgid "Command line 10"
-msgstr "कमांड:"
+#~ msgid "Command line 10"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:29
 #, fuzzy
-msgid "Command line 11"
-msgstr "कमांड:"
+#~ msgid "Command line 11"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:30
 #, fuzzy
-msgid "Command line 2"
-msgstr "कमांड:"
+#~ msgid "Command line 2"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:31
 #, fuzzy
-msgid "Command line 3"
-msgstr "कमांड:"
+#~ msgid "Command line 3"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:32
 #, fuzzy
-msgid "Command line 4"
-msgstr "कमांड:"
+#~ msgid "Command line 4"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:33
 #, fuzzy
-msgid "Command line 5"
-msgstr "कमांड:"
+#~ msgid "Command line 5"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:34
 #, fuzzy
-msgid "Command line 6"
-msgstr "कमांड:"
+#~ msgid "Command line 6"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:35
 #, fuzzy
-msgid "Command line 7"
-msgstr "कमांड:"
+#~ msgid "Command line 7"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:36
 #, fuzzy
-msgid "Command line 8"
-msgstr "कमांड:"
+#~ msgid "Command line 8"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:37
 #, fuzzy
-msgid "Command line 9"
-msgstr "कमांड:"
+#~ msgid "Command line 9"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:38
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command0 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command0 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command0 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:39
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command1 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command1 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command1 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:40
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command10 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command10 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command10 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:41
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command11 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command11 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command11 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:42
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command2 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command2 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command2 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:43
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command3 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command3 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command3 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:44
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command4 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command4 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command4 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:45
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command5 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command5 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command5 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:46
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command6 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command6 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command6 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:47
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command7 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command7 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command7 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:48
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command8 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command8 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command8 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:49
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command9 को बुलाया जाता है"
+#~ msgid "Command line to be executed in shell when run_command9 is invoked"
+#~ msgstr "कमांड लाइन जिसे शेल में चलाया जाना है जब run_command9 को बुलाया जाता है"
 
-#: ../metadata/core.xml.in.h:50
-msgid "Decrease Opacity"
-msgstr "अपारदर्शिता घटायें"
+#~ msgid "Decrease Opacity"
+#~ msgstr "अपारदर्शिता घटायें"
 
-#: ../metadata/core.xml.in.h:51
-msgid "Decrease window opacity"
-msgstr "विंडो अपारदर्शिता घटायें"
+#~ msgid "Decrease window opacity"
+#~ msgstr "विंडो अपारदर्शिता घटायें"
 
-#: ../metadata/core.xml.in.h:52
 #, fuzzy
-msgid "Default Icon"
-msgstr "अकरण डोमैन"
+#~ msgid "Default Icon"
+#~ msgstr "अकरण डोमैन"
 
-#: ../metadata/core.xml.in.h:53
 #, fuzzy
-msgid "Default window icon image"
-msgstr "अकरण डोमैन"
+#~ msgid "Default window icon image"
+#~ msgstr "अकरण डोमैन"
 
-#: ../metadata/core.xml.in.h:54
-msgid "Detect Outputs"
-msgstr "आउटपुट जांचें"
+#~ msgid "Detect Outputs"
+#~ msgstr "आउटपुट जांचें"
 
-#: ../metadata/core.xml.in.h:55
 #, fuzzy
-msgid "Detect Refresh Rate"
-msgstr "अपडेट के लिए चुनें"
+#~ msgid "Detect Refresh Rate"
+#~ msgstr "अपडेट के लिए चुनें"
 
-#: ../metadata/core.xml.in.h:56
-msgid ""
-"Duration the pointer must rest in a screen edge before an edge action is "
-"taken."
-msgstr ""
+#~ msgid "Fast"
+#~ msgstr "तेज"
 
-#: ../metadata/core.xml.in.h:57
-msgid "Edge Trigger Delay"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:58
-msgid "Fast"
-msgstr "तेज"
-
-#: ../metadata/core.xml.in.h:59
 #, fuzzy
-msgid "Focus Prevention Level"
-msgstr "फोकस बचाव विंडोज़"
+#~ msgid "Focus Prevention Level"
+#~ msgstr "फोकस बचाव विंडोज़"
 
-#: ../metadata/core.xml.in.h:60
-msgid "Focus Prevention Windows"
-msgstr "फोकस बचाव विंडोज़"
+#~ msgid "Focus Prevention Windows"
+#~ msgstr "फोकस बचाव विंडोज़"
 
-#: ../metadata/core.xml.in.h:61
 #, fuzzy
-msgid "Focus prevention windows"
-msgstr "डेइमण शुरू कर रहा हैं।"
-
-#: ../metadata/core.xml.in.h:62
-msgid "Force independent output painting."
-msgstr ""
-
-#: ../metadata/core.xml.in.h:63
-msgid "General Options"
-msgstr "सामान्य विकल्प"
+#~ msgid "Focus prevention windows"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/core.xml.in.h:64
-msgid "General compiz options"
-msgstr "सामान्य कोंपिज विकल्प"
+#~ msgid "General Options"
+#~ msgstr "सामान्य विकल्प"
 
-#: ../metadata/core.xml.in.h:65
-msgid "Good"
-msgstr "अच्छा"
+#~ msgid "General compiz options"
+#~ msgstr "सामान्य कोंपिज विकल्प"
 
-#: ../metadata/core.xml.in.h:66
-msgid "Hide Skip Taskbar Windows"
-msgstr "स्किप टास्कबार विंडोज़ छिपायें"
+#~ msgid "Good"
+#~ msgstr "अच्छा"
 
-#: ../metadata/core.xml.in.h:67
-msgid "Hide all windows and focus desktop"
-msgstr "सभी विंडो छुपाएँ और डेस्कटॉप पर फ़ोकस करें"
+#~ msgid "Hide Skip Taskbar Windows"
+#~ msgstr "स्किप टास्कबार विंडोज़ छिपायें"
 
-#: ../metadata/core.xml.in.h:68
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "जब दाखिल होने पर डेस्कटॉप मोड दिखाता है टास्कबार में विंडो छिपाएं"
+#~ msgid "Hide all windows and focus desktop"
+#~ msgstr "सभी विंडो छुपाएँ और डेस्कटॉप पर फ़ोकस करें"
 
-#: ../metadata/core.xml.in.h:69
-msgid "High"
-msgstr ""
+#~ msgid "Hide windows not in taskbar when entering show desktop mode"
+#~ msgstr "जब दाखिल होने पर डेस्कटॉप मोड दिखाता है टास्कबार में विंडो छिपाएं"
 
-#: ../metadata/core.xml.in.h:70
 #, fuzzy
-msgid "Horizontal Virtual Size"
-msgstr "विरचयुल उपकरण"
+#~ msgid "Horizontal Virtual Size"
+#~ msgstr "विरचयुल उपकरण"
 
-#: ../metadata/core.xml.in.h:71
-msgid "If available use compression for textures converted from images"
-msgstr ""
+#~ msgid "Ignore Hints When Maximized"
+#~ msgstr "अधिकतम करने पर संकेत नजरअंदाज करें"
 
-#: ../metadata/core.xml.in.h:72
-msgid "Ignore Hints When Maximized"
-msgstr "अधिकतम करने पर संकेत नजरअंदाज करें"
+#~ msgid "Ignore size increment and aspect hints when window is maximized"
+#~ msgstr "विंडो के अधिकतम किए जाने पर आकार बढ़त और पहलू संकेत नजरअंदाज करें"
 
-#: ../metadata/core.xml.in.h:73
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr "विंडो के अधिकतम किए जाने पर आकार बढ़त और पहलू संकेत नजरअंदाज करें"
+#~ msgid "Increase Opacity"
+#~ msgstr "अपारदर्शिता बढायें"
 
-#: ../metadata/core.xml.in.h:74
-msgid "Increase Opacity"
-msgstr "अपारदर्शिता बढायें"
+#~ msgid "Increase window opacity"
+#~ msgstr "विंडो अपारदर्शिता बढायें"
 
-#: ../metadata/core.xml.in.h:75
-msgid "Increase window opacity"
-msgstr "विंडो अपारदर्शिता बढायें"
+#~ msgid "Interval before raising selected windows"
+#~ msgstr "चयनित विंडो को बढ़ाने के पहले अंतराल"
 
-#: ../metadata/core.xml.in.h:76
-msgid "Interval before raising selected windows"
-msgstr "चयनित विंडो को बढ़ाने के पहले अंतराल"
+#~ msgid "Interval between ping messages"
+#~ msgstr "पिंग संदेश के बीच का अंतराल"
 
-#: ../metadata/core.xml.in.h:77
-msgid "Interval between ping messages"
-msgstr "पिंग संदेश के बीच का अंतराल"
-
-#: ../metadata/core.xml.in.h:78
-msgid "Level of focus stealing prevention"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:79
 #, fuzzy
-msgid "Lighting"
-msgstr "लोगिगं"
+#~ msgid "Lighting"
+#~ msgstr "लोगिगं"
 
-#: ../metadata/core.xml.in.h:80
 #, fuzzy
-msgid "List of currently active plugins"
-msgstr "सिर्फ मिटाए गए प्रिंटर  क्यू सूचीबद्ध करेंद्ध करें"
-
-#: ../metadata/core.xml.in.h:81
-msgid "List of strings describing output devices"
-msgstr "आउटपुट डिवायस को वर्णन करते स्ट्रिंग की सूची"
+#~ msgid "List of currently active plugins"
+#~ msgstr "सिर्फ मिटाए गए प्रिंटर  क्यू सूचीबद्ध करेंद्ध करें"
 
-#: ../metadata/core.xml.in.h:82
-msgid "Low"
-msgstr ""
+#~ msgid "List of strings describing output devices"
+#~ msgstr "आउटपुट डिवायस को वर्णन करते स्ट्रिंग की सूची"
 
-#: ../metadata/core.xml.in.h:83
 #, fuzzy
-msgid "Lower Window"
-msgstr "लोवर सोर्बियन"
+#~ msgid "Lower Window"
+#~ msgstr "लोवर सोर्बियन"
 
-#: ../metadata/core.xml.in.h:84
-msgid "Lower window beneath other windows"
-msgstr "अन्य विंडो के नीचे निचला विंडो"
+#~ msgid "Lower window beneath other windows"
+#~ msgstr "अन्य विंडो के नीचे निचला विंडो"
 
-#: ../metadata/core.xml.in.h:86
-msgid "Maximize Window Horizontally"
-msgstr "विंडो क्षैतिज रूप से अधिकतम करें"
+#~ msgid "Maximize Window Horizontally"
+#~ msgstr "विंडो क्षैतिज रूप से अधिकतम करें"
 
-#: ../metadata/core.xml.in.h:87
-msgid "Maximize Window Vertically"
-msgstr "विंडो लंबवत रूप से अधिकतम करें"
+#~ msgid "Maximize Window Vertically"
+#~ msgstr "विंडो लंबवत रूप से अधिकतम करें"
 
-#: ../metadata/core.xml.in.h:88
-msgid "Maximize active window"
-msgstr "सक्रिय विंडो अधिकतम करें"
+#~ msgid "Maximize active window"
+#~ msgstr "सक्रिय विंडो अधिकतम करें"
 
-#: ../metadata/core.xml.in.h:89
-msgid "Maximize active window horizontally"
-msgstr "सक्रिय विंडो क्षैतिज रूप से अधिकतम करें"
+#~ msgid "Maximize active window horizontally"
+#~ msgstr "सक्रिय विंडो क्षैतिज रूप से अधिकतम करें"
 
-#: ../metadata/core.xml.in.h:90
-msgid "Maximize active window vertically"
-msgstr "सक्रिय विंडो लंबवत रूप से अधिकतम करें"
+#~ msgid "Maximize active window vertically"
+#~ msgstr "सक्रिय विंडो लंबवत रूप से अधिकतम करें"
 
-#: ../metadata/core.xml.in.h:92
-msgid "Minimize active window"
-msgstr "सक्रिय विंडो न्यूनतम करें"
+#~ msgid "Minimize active window"
+#~ msgstr "सक्रिय विंडो न्यूनतम करें"
 
-#: ../metadata/core.xml.in.h:93
 #, fuzzy
-msgid "Number of Desktops"
-msgstr "डेसक्टाप"
+#~ msgid "Number of Desktops"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/core.xml.in.h:94
 #, fuzzy
-msgid "Number of virtual desktops"
-msgstr "डेसक्टाप"
+#~ msgid "Number of virtual desktops"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/core.xml.in.h:95
-msgid "Off"
-msgstr ""
+#~ msgid "Only perform screen updates during vertical blanking period"
+#~ msgstr "लंबवत रिक्ति अवधि के दौरान सिर्फ स्क्रीन अद्यतन निष्पादित करें"
 
-#: ../metadata/core.xml.in.h:96
-msgid "Only perform screen updates during vertical blanking period"
-msgstr "लंबवत रिक्ति अवधि के दौरान सिर्फ स्क्रीन अद्यतन निष्पादित करें"
+#~ msgid "Opacity Step"
+#~ msgstr "अपारदर्शिता चरण"
 
-#: ../metadata/core.xml.in.h:97
-msgid "Opacity Step"
-msgstr "अपारदर्शिता चरण"
+#~ msgid "Opacity change step"
+#~ msgstr "अपारदर्शिता बदलाव चरण"
 
-#: ../metadata/core.xml.in.h:98
-msgid "Opacity change step"
-msgstr "अपारदर्शिता बदलाव चरण"
+#~ msgid "Opacity values for windows that should be translucent by default"
+#~ msgstr "विंडो के अपारदर्शिता मानजो कि मूलभूत रूप से पारभासी होना चाहिए"
 
-#: ../metadata/core.xml.in.h:99
-msgid "Opacity values for windows that should be translucent by default"
-msgstr "विंडो के अपारदर्शिता मानजो कि मूलभूत रूप से पारभासी होना चाहिए"
+#~ msgid "Opacity window values"
+#~ msgstr "अपारदर्शिता विंडो मान"
 
-#: ../metadata/core.xml.in.h:100
-msgid "Opacity window values"
-msgstr "अपारदर्शिता विंडो मान"
-
-#: ../metadata/core.xml.in.h:101
 #, fuzzy
-msgid "Opacity windows"
-msgstr "windows"
-
-#: ../metadata/core.xml.in.h:102
-msgid "Open a terminal"
-msgstr "टर्मिनल खोलें"
+#~ msgid "Opacity windows"
+#~ msgstr "windows"
 
-#: ../metadata/core.xml.in.h:103
-msgid "Outputs"
-msgstr "आउटपुट"
+#~ msgid "Open a terminal"
+#~ msgstr "टर्मिनल खोलें"
 
-#: ../metadata/core.xml.in.h:104
-msgid "Overlapping Output Handling"
-msgstr ""
+#~ msgid "Outputs"
+#~ msgstr "आउटपुट"
 
-#: ../metadata/core.xml.in.h:105
-msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:106
 #, fuzzy
-msgid "Ping Delay"
-msgstr "डिले"
-
-#: ../metadata/core.xml.in.h:107
-msgid "Prefer larger output"
-msgstr ""
+#~ msgid "Ping Delay"
+#~ msgstr "डिले"
 
-#: ../metadata/core.xml.in.h:108
-msgid "Prefer smaller output"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:109
 #, fuzzy
-msgid "Raise On Click"
-msgstr "रेडियो क्लोक (&R)"
+#~ msgid "Raise On Click"
+#~ msgstr "रेडियो क्लोक (&R)"
 
-#: ../metadata/core.xml.in.h:110
 #, fuzzy
-msgid "Raise Window"
-msgstr "windows"
+#~ msgid "Raise Window"
+#~ msgstr "windows"
 
-#: ../metadata/core.xml.in.h:111
-msgid "Raise selected windows after interval"
-msgstr "चयनित विंडो अंतराल के बाद उठाएं"
+#~ msgid "Raise selected windows after interval"
+#~ msgstr "चयनित विंडो अंतराल के बाद उठाएं"
 
-#: ../metadata/core.xml.in.h:112
-msgid "Raise window above other windows"
-msgstr "विंडो को अन्य विंडो के ऊपर रखें"
+#~ msgid "Raise window above other windows"
+#~ msgstr "विंडो को अन्य विंडो के ऊपर रखें"
 
-#: ../metadata/core.xml.in.h:113
-msgid "Raise windows when clicked"
-msgstr "क्लिक किये जाने पर विंडो उठाएं"
+#~ msgid "Raise windows when clicked"
+#~ msgstr "क्लिक किये जाने पर विंडो उठाएं"
 
-#: ../metadata/core.xml.in.h:114
 #, fuzzy
-msgid "Refresh Rate"
-msgstr "ताजा करो"
+#~ msgid "Refresh Rate"
+#~ msgstr "ताजा करो"
 
-#: ../metadata/core.xml.in.h:115
 #, fuzzy
-msgid "Run Dialog"
-msgstr "टोण डायलिन्क (&T)"
+#~ msgid "Run Dialog"
+#~ msgstr "टोण डायलिन्क (&T)"
 
-#: ../metadata/core.xml.in.h:116
 #, fuzzy
-msgid "Run command 0"
-msgstr "कमान्ड '%1'"
+#~ msgid "Run command 0"
+#~ msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:117
 #, fuzzy
-msgid "Run command 1"
-msgstr "कमान्ड '%1'"
+#~ msgid "Run command 1"
+#~ msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:118
 #, fuzzy
-msgid "Run command 10"
-msgstr "कमान्ड '%1'"
+#~ msgid "Run command 10"
+#~ msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:119
 #, fuzzy
-msgid "Run command 11"
-msgstr "कमान्ड '%1'"
+#~ msgid "Run command 11"
+#~ msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:120
 #, fuzzy
-msgid "Run command 2"
-msgstr "कमांड:"
+#~ msgid "Run command 2"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:121
 #, fuzzy
-msgid "Run command 3"
-msgstr "कमांड:"
+#~ msgid "Run command 3"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:122
 #, fuzzy
-msgid "Run command 4"
-msgstr "कमांड:"
+#~ msgid "Run command 4"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:123
 #, fuzzy
-msgid "Run command 5"
-msgstr "कमांड:"
+#~ msgid "Run command 5"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:124
 #, fuzzy
-msgid "Run command 6"
-msgstr "कमांड:"
+#~ msgid "Run command 6"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:125
 #, fuzzy
-msgid "Run command 7"
-msgstr "कमांड:"
+#~ msgid "Run command 7"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:126
 #, fuzzy
-msgid "Run command 8"
-msgstr "कमांड:"
+#~ msgid "Run command 8"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:127
 #, fuzzy
-msgid "Run command 9"
-msgstr "कमांड:"
+#~ msgid "Run command 9"
+#~ msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:128
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr "क्षैतिज वर्चुअल आकार के लिए स्क्रीन आकार गुणक"
+#~ msgid "Screen size multiplier for horizontal virtual size"
+#~ msgstr "क्षैतिज वर्चुअल आकार के लिए स्क्रीन आकार गुणक"
 
-#: ../metadata/core.xml.in.h:129
-msgid "Screen size multiplier for vertical virtual size"
-msgstr "लंबवत वर्चुअल आकार के लिए स्क्रीन आकार गुणक"
+#~ msgid "Screen size multiplier for vertical virtual size"
+#~ msgstr "लंबवत वर्चुअल आकार के लिए स्क्रीन आकार गुणक"
 
-#: ../metadata/core.xml.in.h:130
 #, fuzzy
-msgid "Screenshot command line"
-msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
+#~ msgid "Screenshot command line"
+#~ msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
 
-#: ../metadata/core.xml.in.h:131
 #, fuzzy
-msgid "Show Desktop"
-msgstr "डेसक्टाप"
+#~ msgid "Show Desktop"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/core.xml.in.h:132
-msgid "Show Main Menu"
-msgstr "दिखाएँ मुख्य मेनू"
+#~ msgid "Show Main Menu"
+#~ msgstr "दिखाएँ मुख्य मेनू"
 
-#: ../metadata/core.xml.in.h:133
-msgid "Show Run Application dialog"
-msgstr "रन अनुप्रयोग संवाद दिखाएँ"
+#~ msgid "Show Run Application dialog"
+#~ msgstr "रन अनुप्रयोग संवाद दिखाएँ"
 
-#: ../metadata/core.xml.in.h:134
-msgid "Show the main menu"
-msgstr "मुख्य मेनू दिखाएँ"
+#~ msgid "Show the main menu"
+#~ msgstr "मुख्य मेनू दिखाएँ"
 
-#: ../metadata/core.xml.in.h:135
 #, fuzzy
-msgid "Slow Animations"
-msgstr "सिमुलेशन"
+#~ msgid "Slow Animations"
+#~ msgstr "सिमुलेशन"
 
-#: ../metadata/core.xml.in.h:136
 #, fuzzy
-msgid "Smart mode"
-msgstr "स्मार्ट"
+#~ msgid "Smart mode"
+#~ msgstr "स्मार्ट"
 
-#: ../metadata/core.xml.in.h:137
-msgid "Sync To VBlank"
-msgstr "VBlank में तुल्यकालित करें"
+#~ msgid "Sync To VBlank"
+#~ msgstr "VBlank में तुल्यकालित करें"
 
-#: ../metadata/core.xml.in.h:138
-msgid "Take a screenshot"
-msgstr "स्क्रीनशॉट का चित्र लें"
+#~ msgid "Take a screenshot"
+#~ msgstr "स्क्रीनशॉट का चित्र लें"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "विंडो का स्क्रीनशॉट लें"
+#~ msgid "Take a screenshot of a window"
+#~ msgstr "विंडो का स्क्रीनशॉट लें"
 
-#: ../metadata/core.xml.in.h:140
 #, fuzzy
-msgid "Terminal command line"
-msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
+#~ msgid "Terminal command line"
+#~ msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
 
-#: ../metadata/core.xml.in.h:141
 #, fuzzy
-msgid "Texture Compression"
-msgstr "फिल्टर सैट करें"
+#~ msgid "Texture Compression"
+#~ msgstr "फिल्टर सैट करें"
 
-#: ../metadata/core.xml.in.h:142
 #, fuzzy
-msgid "Texture Filter"
-msgstr "फिल्टर सैट करें"
+#~ msgid "Texture Filter"
+#~ msgstr "फिल्टर सैट करें"
 
-#: ../metadata/core.xml.in.h:143
 #, fuzzy
-msgid "Texture filtering"
-msgstr "फिल्टर सैट करें"
+#~ msgid "Texture filtering"
+#~ msgstr "फिल्टर सैट करें"
 
-#: ../metadata/core.xml.in.h:144
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "दर जिसपर स्क्रीन फिर खीचा जाता है (समय/सेकेंड)"
+#~ msgid "The rate at which the screen is redrawn (times/second)"
+#~ msgstr "दर जिसपर स्क्रीन फिर खीचा जाता है (समय/सेकेंड)"
 
-#: ../metadata/core.xml.in.h:145
-msgid "Toggle Window Maximized"
-msgstr "विंडो अधिकतम पर टॉगल करें"
+#~ msgid "Toggle Window Maximized"
+#~ msgstr "विंडो अधिकतम पर टॉगल करें"
 
-#: ../metadata/core.xml.in.h:146
-msgid "Toggle Window Maximized Horizontally"
-msgstr "विंडो अधिकतम पर क्षैतिज रूप से टॉगल करें"
+#~ msgid "Toggle Window Maximized Horizontally"
+#~ msgstr "विंडो अधिकतम पर क्षैतिज रूप से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:147
-msgid "Toggle Window Maximized Vertically"
-msgstr "विंडो अधिकतम पर लंबवत रूप से टॉगल करें"
+#~ msgid "Toggle Window Maximized Vertically"
+#~ msgstr "विंडो अधिकतम पर लंबवत रूप से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:148
-msgid "Toggle Window Shaded"
-msgstr "विंडो छायांकित रूप में टॉगल करें"
+#~ msgid "Toggle Window Shaded"
+#~ msgstr "विंडो छायांकित रूप में टॉगल करें"
 
-#: ../metadata/core.xml.in.h:149
-msgid "Toggle active window maximized"
-msgstr "सक्रिय विंडो अधिकतम रूप में टॉगल करें"
+#~ msgid "Toggle active window maximized"
+#~ msgstr "सक्रिय विंडो अधिकतम रूप में टॉगल करें"
 
-#: ../metadata/core.xml.in.h:150
-msgid "Toggle active window maximized horizontally"
-msgstr "सक्रिय विंडो अधिकतम रूप में क्षैतिज प्रकार से टॉगल करें"
+#~ msgid "Toggle active window maximized horizontally"
+#~ msgstr "सक्रिय विंडो अधिकतम रूप में क्षैतिज प्रकार से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:151
-msgid "Toggle active window maximized vertically"
-msgstr "सक्रिय विंडो अधिकतम रूप में लंवबत प्रकार से टॉगल करें"
+#~ msgid "Toggle active window maximized vertically"
+#~ msgstr "सक्रिय विंडो अधिकतम रूप में लंवबत प्रकार से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:152
-msgid "Toggle active window shaded"
-msgstr "सक्रिय विंडो छायांकित रूप में टॉगल करें"
+#~ msgid "Toggle active window shaded"
+#~ msgstr "सक्रिय विंडो छायांकित रूप में टॉगल करें"
 
-#: ../metadata/core.xml.in.h:153
-msgid "Toggle use of slow animations"
-msgstr "धीमा संजीवन के प्रयोग को टॉगल करें"
+#~ msgid "Toggle use of slow animations"
+#~ msgstr "धीमा संजीवन के प्रयोग को टॉगल करें"
 
-#: ../metadata/core.xml.in.h:155
-msgid "Unmaximize active window"
-msgstr "सक्रिय विंडो अधिकतम खत्म करें"
+#~ msgid "Unmaximize active window"
+#~ msgstr "सक्रिय विंडो अधिकतम खत्म करें"
 
-#: ../metadata/core.xml.in.h:156
-msgid "Unredirect Fullscreen Windows"
-msgstr "पूर्ण स्क्रीन विंडोज़ को पुनर्निर्देशित मत करें"
+#~ msgid "Unredirect Fullscreen Windows"
+#~ msgstr "पूर्ण स्क्रीन विंडोज़ को पुनर्निर्देशित मत करें"
 
-#: ../metadata/core.xml.in.h:157
-msgid "Use diffuse light when screen is transformed"
-msgstr "स्क्रीन के बदले जाने पर विसरित प्रकाश का प्रयोग करें"
+#~ msgid "Use diffuse light when screen is transformed"
+#~ msgstr "स्क्रीन के बदले जाने पर विसरित प्रकाश का प्रयोग करें"
 
-#: ../metadata/core.xml.in.h:158
 #, fuzzy
-msgid "Vertical Virtual Size"
-msgstr "विरचयुल उपकरण"
-
-#: ../metadata/core.xml.in.h:159
-msgid "Very High"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:160
-msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+#~ msgid "Vertical Virtual Size"
+#~ msgstr "विरचयुल उपकरण"
 
-#: ../metadata/core.xml.in.h:162
-msgid "Window menu button binding"
-msgstr "विंडो मेनू बटन बाइंडिंग"
+#~ msgid "Window menu button binding"
+#~ msgstr "विंडो मेनू बटन बाइंडिंग"
 
-#: ../metadata/core.xml.in.h:163
-msgid "Window menu key binding"
-msgstr "विंडो मेनू की बाइंडिंग"
+#~ msgid "Window menu key binding"
+#~ msgstr "विंडो मेनू की बाइंडिंग"
 
-#: ../metadata/core.xml.in.h:164
-msgid "Window screenshot command line"
-msgstr "विंडो स्क्रीनशॉट कमांड लाइन"
+#~ msgid "Window screenshot command line"
+#~ msgstr "विंडो स्क्रीनशॉट कमांड लाइन"
 
-#: ../metadata/core.xml.in.h:165
-msgid "Windows that should be translucent by default"
-msgstr "विंडोज़ जिसे मूलभूत रूप से पारभासी होना चाहिए"
+#~ msgid "Windows that should be translucent by default"
+#~ msgstr "विंडोज़ जिसे मूलभूत रूप से पारभासी होना चाहिए"
 
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 #, fuzzy
-msgid "Acceleration"
-msgstr "3D "
+#~ msgid "Acceleration"
+#~ msgstr "3D "
 
-#: ../metadata/cube.xml.in.h:2
-msgid "Adjust Image"
-msgstr "चित्र समायोजित करें"
+#~ msgid "Adjust Image"
+#~ msgstr "चित्र समायोजित करें"
 
-#: ../metadata/cube.xml.in.h:3
-msgid "Adjust top face image to rotation"
-msgstr "शीर्ष फेस चित्र को घुमाने के लिए समायोजित करें"
+#~ msgid "Adjust top face image to rotation"
+#~ msgstr "शीर्ष फेस चित्र को घुमाने के लिए समायोजित करें"
 
-#: ../metadata/cube.xml.in.h:4
 #, fuzzy
-msgid "Advance to next slide"
-msgstr "एडवांस विकल्प"
+#~ msgid "Advance to next slide"
+#~ msgstr "एडवांस विकल्प"
 
-#: ../metadata/cube.xml.in.h:5
-msgid "Animate Skydome"
-msgstr "स्काइडोम एनिमेट करें"
+#~ msgid "Animate Skydome"
+#~ msgstr "स्काइडोम एनिमेट करें"
 
-#: ../metadata/cube.xml.in.h:6
-msgid "Animate skydome when rotating cube"
-msgstr "स्काइडोम एनीमेट करें जब घन को घुमाया जा रहा है"
+#~ msgid "Animate skydome when rotating cube"
+#~ msgstr "स्काइडोम एनीमेट करें जब घन को घुमाया जा रहा है"
 
-#: ../metadata/cube.xml.in.h:7
 #, fuzzy
-msgid "Automatic"
-msgstr "स्वचालित"
+#~ msgid "Automatic"
+#~ msgstr "स्वचालित"
 
-#: ../metadata/cube.xml.in.h:8
-msgid "Color of top and bottom sides of the cube"
-msgstr "घन के ऊपर और नीचे के हिस्से का रंग"
+#~ msgid "Color of top and bottom sides of the cube"
+#~ msgstr "घन के ऊपर और नीचे के हिस्से का रंग"
 
-#: ../metadata/cube.xml.in.h:9
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "स्काइडोम फालबैक ढ़ाल के तलवर्ती रंग स्टॉप के लिए प्रयोग का रंग"
+#~ msgid ""
+#~ "Color to use for the bottom color-stop of the skydome-fallback gradient"
+#~ msgstr "स्काइडोम फालबैक ढ़ाल के तलवर्ती रंग स्टॉप के लिए प्रयोग का रंग"
 
-#: ../metadata/cube.xml.in.h:10
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr "स्काइडोम फालबैक ढ़ाल के शीर्ष रंग स्टॉप के लिए प्रयोग का रंग"
+#~ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+#~ msgstr "स्काइडोम फालबैक ढ़ाल के शीर्ष रंग स्टॉप के लिए प्रयोग का रंग"
 
-#: ../metadata/cube.xml.in.h:11
 #, fuzzy
-msgid "Cube Color"
-msgstr "रंग"
+#~ msgid "Cube Color"
+#~ msgstr "रंग"
 
-#: ../metadata/cube.xml.in.h:12
 #, fuzzy
-msgid "Desktop Cube"
-msgstr "डेसक्टाप"
+#~ msgid "Desktop Cube"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/cube.xml.in.h:13
 #, fuzzy
-msgid "Fold Acceleration"
-msgstr "3D "
+#~ msgid "Fold Acceleration"
+#~ msgstr "3D "
 
-#: ../metadata/cube.xml.in.h:14
 #, fuzzy
-msgid "Fold Speed"
-msgstr "छोडं दिया \n"
+#~ msgid "Fold Speed"
+#~ msgstr "छोडं दिया \n"
 
-#: ../metadata/cube.xml.in.h:15
 #, fuzzy
-msgid "Fold Timestep"
-msgstr "टाइम"
+#~ msgid "Fold Timestep"
+#~ msgstr "टाइम"
 
-#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr "उच्चतर गुणवत्ता के स्केलिंग के लिए मिपमैप बनाएं जब संभव हो"
+#~ msgid "Generate mipmaps when possible for higher quality scaling"
+#~ msgstr "उच्चतर गुणवत्ता के स्केलिंग के लिए मिपमैप बनाएं जब संभव हो"
 
-#: ../metadata/cube.xml.in.h:17
 #, fuzzy
-msgid "Go back to previous slide"
-msgstr "पीछे का"
+#~ msgid "Go back to previous slide"
+#~ msgstr "पीछे का"
 
-#: ../metadata/cube.xml.in.h:18
 #, fuzzy
-msgid "Image files"
-msgstr "डिस्क इमेज फाइल"
+#~ msgid "Image files"
+#~ msgstr "डिस्क इमेज फाइल"
 
-#: ../metadata/cube.xml.in.h:19
-msgid "Image to use as texture for the skydome"
-msgstr "स्काइडोम के लिए एक बनावट के रूप में प्रयोग के लिए चित्र"
+#~ msgid "Image to use as texture for the skydome"
+#~ msgstr "स्काइडोम के लिए एक बनावट के रूप में प्रयोग के लिए चित्र"
 
-#: ../metadata/cube.xml.in.h:20
-msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr "घन पारदर्शिता आरंभ करता है सिर्फ तभी जब घुमाव माउस परिचालित है."
+#~ msgid "Initiates Cube transparency only if rotation is mouse driven."
+#~ msgstr "घन पारदर्शिता आरंभ करता है सिर्फ तभी जब घुमाव माउस परिचालित है."
 
-#: ../metadata/cube.xml.in.h:21
-msgid "Inside Cube"
-msgstr "भीतरी घन"
+#~ msgid "Inside Cube"
+#~ msgstr "भीतरी घन"
 
-#: ../metadata/cube.xml.in.h:22
-msgid "Inside cube"
-msgstr "भीतरी घन"
+#~ msgid "Inside cube"
+#~ msgstr "भीतरी घन"
 
-#: ../metadata/cube.xml.in.h:23
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "PNG और SVG फाइलों की सूची जिसे घन के शीर्ष फेस में रेंडर किया होना चाहिए"
+#~ msgid ""
+#~ "List of PNG and SVG files that should be rendered on top face of cube"
+#~ msgstr "PNG और SVG फाइलों की सूची जिसे घन के शीर्ष फेस में रेंडर किया होना चाहिए"
 
-#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
-#: ../metadata/scale.xml.in.h:17
-msgid "Multi Output Mode"
-msgstr "मल्टी आउटपुट प्रकार"
+#~ msgid "Multi Output Mode"
+#~ msgstr "मल्टी आउटपुट प्रकार"
 
-#: ../metadata/cube.xml.in.h:26
-msgid "Multiple cubes"
-msgstr "बहुमुखी घन"
+#~ msgid "Multiple cubes"
+#~ msgstr "बहुमुखी घन"
 
-#: ../metadata/cube.xml.in.h:27
 #, fuzzy
-msgid "Next Slide"
-msgstr "अगला अप्डेट "
+#~ msgid "Next Slide"
+#~ msgstr "अगला अप्डेट "
 
-#: ../metadata/cube.xml.in.h:28
 #, fuzzy
-msgid "One big cube"
-msgstr "बड़े घन पर शुरू"
+#~ msgid "One big cube"
+#~ msgstr "बड़े घन पर शुरू"
 
-#: ../metadata/cube.xml.in.h:29
-msgid "Opacity During Rotation"
-msgstr "घुमाव के दौरान अपारदर्शिता"
+#~ msgid "Opacity During Rotation"
+#~ msgstr "घुमाव के दौरान अपारदर्शिता"
 
-#: ../metadata/cube.xml.in.h:30
-msgid "Opacity When Not Rotating"
-msgstr "नहीं घुमाव के दौरान अपारदर्शिता"
+#~ msgid "Opacity When Not Rotating"
+#~ msgstr "नहीं घुमाव के दौरान अपारदर्शिता"
 
-#: ../metadata/cube.xml.in.h:31
-msgid "Opacity of desktop window during rotation."
-msgstr "घुमाव के दौरान डेस्कटॉप विंडो की अपारदर्शिता"
+#~ msgid "Opacity of desktop window during rotation."
+#~ msgstr "घुमाव के दौरान डेस्कटॉप विंडो की अपारदर्शिता"
 
-#: ../metadata/cube.xml.in.h:32
-msgid "Opacity of desktop window when not rotating."
-msgstr "नहीं घुमाव के दौरान डेस्कटॉप विंडो की अपारदर्शिता"
+#~ msgid "Opacity of desktop window when not rotating."
+#~ msgstr "नहीं घुमाव के दौरान डेस्कटॉप विंडो की अपारदर्शिता"
 
-#: ../metadata/cube.xml.in.h:33
 #, fuzzy
-msgid "Place windows on cube"
-msgstr "windows"
+#~ msgid "Place windows on cube"
+#~ msgstr "windows"
 
-#: ../metadata/cube.xml.in.h:34
 #, fuzzy
-msgid "Prev Slide"
-msgstr "पीछे का"
+#~ msgid "Prev Slide"
+#~ msgstr "पीछे का"
 
-#: ../metadata/cube.xml.in.h:35
-msgid "Render skydome"
-msgstr "स्काइडोम रेंडर करें"
+#~ msgid "Render skydome"
+#~ msgstr "स्काइडोम रेंडर करें"
 
-#: ../metadata/cube.xml.in.h:36
 #, fuzzy
-msgid "Scale image"
-msgstr "लोकल टाइम"
+#~ msgid "Scale image"
+#~ msgstr "लोकल टाइम"
 
-#: ../metadata/cube.xml.in.h:37
-msgid "Scale images to cover top face of cube"
-msgstr "घन के कवर शीर्ष फेस में चित्रों को मापें"
+#~ msgid "Scale images to cover top face of cube"
+#~ msgstr "घन के कवर शीर्ष फेस में चित्रों को मापें"
 
-#: ../metadata/cube.xml.in.h:38
-msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr "चुनता है कि कैसे घन प्रदर्शित होता है यदि बहुल आउटपुट डिवायस प्रयुक्त होता है."
+#~ msgid ""
+#~ "Selects how the cube is displayed if multiple output devices are used."
+#~ msgstr "चुनता है कि कैसे घन प्रदर्शित होता है यदि बहुल आउटपुट डिवायस प्रयुक्त होता है."
 
-#: ../metadata/cube.xml.in.h:39
 #, fuzzy
-msgid "Skydome"
-msgstr "डिस्क इमेज"
+#~ msgid "Skydome"
+#~ msgstr "डिस्क इमेज"
 
-#: ../metadata/cube.xml.in.h:40
-msgid "Skydome Gradient End Color"
-msgstr "झुकाव ढाल अंत रंग"
+#~ msgid "Skydome Gradient End Color"
+#~ msgstr "झुकाव ढाल अंत रंग"
 
-#: ../metadata/cube.xml.in.h:41
-msgid "Skydome Gradient Start Color"
-msgstr "स्काइडोम ढाल प्रारंभ रंग"
+#~ msgid "Skydome Gradient Start Color"
+#~ msgstr "स्काइडोम ढाल प्रारंभ रंग"
 
-#: ../metadata/cube.xml.in.h:42
 #, fuzzy
-msgid "Skydome Image"
-msgstr "डिस्क इमेज"
+#~ msgid "Skydome Image"
+#~ msgstr "डिस्क इमेज"
 
-#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
-#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 #, fuzzy
-msgid "Speed"
-msgstr "छोडं दिया \n"
+#~ msgid "Speed"
+#~ msgstr "छोडं दिया \n"
 
-#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
-#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 #, fuzzy
-msgid "Timestep"
-msgstr "टाइम"
+#~ msgid "Timestep"
+#~ msgstr "टाइम"
 
-#: ../metadata/cube.xml.in.h:45
-msgid "Transparency Only on Mouse Rotate"
-msgstr "पारदर्शिता सिर्फ माउस घुमाव पर"
+#~ msgid "Transparency Only on Mouse Rotate"
+#~ msgstr "पारदर्शिता सिर्फ माउस घुमाव पर"
 
-#: ../metadata/cube.xml.in.h:46
-msgid "Unfold"
-msgstr "खोलें"
+#~ msgid "Unfold"
+#~ msgstr "खोलें"
 
-#: ../metadata/cube.xml.in.h:47
-msgid "Unfold cube"
-msgstr "घन खोलें"
+#~ msgid "Unfold cube"
+#~ msgstr "घन खोलें"
 
-#: ../metadata/dbus.xml.in.h:1
-msgid "Dbus"
-msgstr "Dbus"
+#~ msgid "Dbus"
+#~ msgstr "Dbus"
 
-#: ../metadata/dbus.xml.in.h:2
-msgid "Dbus Control Backend"
-msgstr "Dbus नियंत्रण बैकेंड"
+#~ msgid "Dbus Control Backend"
+#~ msgstr "Dbus नियंत्रण बैकेंड"
 
-#: ../metadata/decoration.xml.in.h:1
-msgid "Allow mipmaps to be generated for decoration textures"
-msgstr "सजावटी बनावट के लिए उत्पन्न करने के लिए मिपमैप स्वीकारें"
+#~ msgid "Allow mipmaps to be generated for decoration textures"
+#~ msgstr "सजावटी बनावट के लिए उत्पन्न करने के लिए मिपमैप स्वीकारें"
 
-#: ../metadata/decoration.xml.in.h:2
 #, fuzzy
-msgid "Command"
-msgstr "कमांड:"
+#~ msgid "Command"
+#~ msgstr "कमांड:"
 
-#: ../metadata/decoration.xml.in.h:3
 #, fuzzy
-msgid "Decoration windows"
-msgstr "windows"
+#~ msgid "Decoration windows"
+#~ msgstr "windows"
 
-#: ../metadata/decoration.xml.in.h:4
-msgid ""
-"Decorator command line that is executed if no decorator is already running"
-msgstr "सजावटी कमांड लाइन जो चलाया जाता है यदि कोई सजावटकर्ता पहले से नहीं चल रहा है"
+#~ msgid ""
+#~ "Decorator command line that is executed if no decorator is already running"
+#~ msgstr ""
+#~ "सजावटी कमांड लाइन जो चलाया जाता है यदि कोई सजावटकर्ता पहले से नहीं चल रहा है"
 
-#: ../metadata/decoration.xml.in.h:5
 #, fuzzy
-msgid "Drop shadow X offset"
-msgstr "त्रिज्या"
+#~ msgid "Drop shadow X offset"
+#~ msgstr "त्रिज्या"
 
-#: ../metadata/decoration.xml.in.h:6
 #, fuzzy
-msgid "Drop shadow Y offset"
-msgstr "त्रिज्या"
+#~ msgid "Drop shadow Y offset"
+#~ msgstr "त्रिज्या"
 
-#: ../metadata/decoration.xml.in.h:7
 #, fuzzy
-msgid "Drop shadow color"
-msgstr "त्रिज्या"
+#~ msgid "Drop shadow color"
+#~ msgstr "त्रिज्या"
 
-#: ../metadata/decoration.xml.in.h:8
 #, fuzzy
-msgid "Drop shadow opacity"
-msgstr "त्रिज्या"
+#~ msgid "Drop shadow opacity"
+#~ msgstr "त्रिज्या"
 
-#: ../metadata/decoration.xml.in.h:9
 #, fuzzy
-msgid "Drop shadow radius"
-msgstr "त्रिज्या"
+#~ msgid "Drop shadow radius"
+#~ msgstr "त्रिज्या"
 
-#: ../metadata/decoration.xml.in.h:11
 #, fuzzy
-msgid "Shadow Color"
-msgstr "windows"
+#~ msgid "Shadow Color"
+#~ msgstr "windows"
 
-#: ../metadata/decoration.xml.in.h:12
-msgid "Shadow Offset X"
-msgstr "छाया ऑफसेट X"
+#~ msgid "Shadow Offset X"
+#~ msgstr "छाया ऑफसेट X"
 
-#: ../metadata/decoration.xml.in.h:13
-msgid "Shadow Offset Y"
-msgstr "छाया ऑफसेट Y"
+#~ msgid "Shadow Offset Y"
+#~ msgstr "छाया ऑफसेट Y"
 
-#: ../metadata/decoration.xml.in.h:14
 #, fuzzy
-msgid "Shadow Opacity"
-msgstr "त्रिज्या"
+#~ msgid "Shadow Opacity"
+#~ msgstr "त्रिज्या"
 
-#: ../metadata/decoration.xml.in.h:15
 #, fuzzy
-msgid "Shadow Radius"
-msgstr "त्रिज्या"
+#~ msgid "Shadow Radius"
+#~ msgstr "त्रिज्या"
 
-#: ../metadata/decoration.xml.in.h:16
 #, fuzzy
-msgid "Shadow windows"
-msgstr "windows"
+#~ msgid "Shadow windows"
+#~ msgstr "windows"
 
-#: ../metadata/decoration.xml.in.h:17
 #, fuzzy
-msgid "Window Decoration"
-msgstr "समनुरूपण"
+#~ msgid "Window Decoration"
+#~ msgstr "समनुरूपण"
 
-#: ../metadata/decoration.xml.in.h:18
 #, fuzzy
-msgid "Window decorations"
-msgstr "ypbind विकल्प"
+#~ msgid "Window decorations"
+#~ msgstr "ypbind विकल्प"
 
-#: ../metadata/decoration.xml.in.h:19
-msgid "Windows that should be decorated"
-msgstr "विंडोज़ जिसे सजाया जाना चाहिए"
+#~ msgid "Windows that should be decorated"
+#~ msgstr "विंडोज़ जिसे सजाया जाना चाहिए"
 
-#: ../metadata/decoration.xml.in.h:20
-msgid "Windows that should have a shadow"
-msgstr "विंडोज़ जिसे एक छाया रखना चाहिए"
+#~ msgid "Windows that should have a shadow"
+#~ msgstr "विंडोज़ जिसे एक छाया रखना चाहिए"
 
-#: ../metadata/fade.xml.in.h:1
-msgid "Fade On Minimize/Open/Close"
-msgstr "न्यूनतम/ खोलें/ बन्द करें पर फीका कीजिये"
+#~ msgid "Fade On Minimize/Open/Close"
+#~ msgstr "न्यूनतम/ खोलें/ बन्द करें पर फीका कीजिये"
 
-#: ../metadata/fade.xml.in.h:2
 #, fuzzy
-msgid "Fade Speed"
-msgstr "छोडं दिया \n"
+#~ msgid "Fade Speed"
+#~ msgstr "छोडं दिया \n"
 
-#: ../metadata/fade.xml.in.h:3
-msgid "Fade effect on minimize/open/close window events"
-msgstr "विंडो घटना न्यूनतम/ खोलें /बंद करें पर फीका प्रभाव"
+#~ msgid "Fade effect on minimize/open/close window events"
+#~ msgstr "विंडो घटना न्यूनतम/ खोलें /बंद करें पर फीका प्रभाव"
 
-#: ../metadata/fade.xml.in.h:4
 #, fuzzy
-msgid "Fade effect on system beep"
-msgstr "फाइल सिस्टम"
+#~ msgid "Fade effect on system beep"
+#~ msgstr "फाइल सिस्टम"
 
-#: ../metadata/fade.xml.in.h:5
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "मैप रहने पर फेड इन विंडोज और मैप नहीं रहने पर फीका बाहर विंडोज"
+#~ msgid "Fade in windows when mapped and fade out windows when unmapped"
+#~ msgstr "मैप रहने पर फेड इन विंडोज और मैप नहीं रहने पर फीका बाहर विंडोज"
 
-#: ../metadata/fade.xml.in.h:6
 #, fuzzy
-msgid "Fade windows"
-msgstr "windows"
+#~ msgid "Fade windows"
+#~ msgstr "windows"
 
-#: ../metadata/fade.xml.in.h:7
 #, fuzzy
-msgid "Fading Windows"
-msgstr "windows"
+#~ msgid "Fading Windows"
+#~ msgstr "windows"
 
-#: ../metadata/fade.xml.in.h:8
-msgid "Fullscreen Visual Bell"
-msgstr "पूर्ण स्क्रीन दृश्य बेल"
+#~ msgid "Fullscreen Visual Bell"
+#~ msgstr "पूर्ण स्क्रीन दृश्य बेल"
 
-#: ../metadata/fade.xml.in.h:9
-msgid "Fullscreen fade effect on system beep"
-msgstr "सिस्टम बीप पर पूर्ण स्क्रीन फेड प्रभाव"
+#~ msgid "Fullscreen fade effect on system beep"
+#~ msgstr "सिस्टम बीप पर पूर्ण स्क्रीन फेड प्रभाव"
 
-#: ../metadata/fade.xml.in.h:10
-msgid "Visual Bell"
-msgstr "दृश्य बेल"
+#~ msgid "Visual Bell"
+#~ msgstr "दृश्य बेल"
 
-#: ../metadata/fade.xml.in.h:11
 #, fuzzy
-msgid "Window fade speed"
-msgstr "windows"
+#~ msgid "Window fade speed"
+#~ msgstr "windows"
 
-#: ../metadata/fade.xml.in.h:12
-msgid "Windows that should be fading"
-msgstr "विंडोज़ जिसे फेड करना चाहिए"
+#~ msgid "Windows that should be fading"
+#~ msgstr "विंडोज़ जिसे फेड करना चाहिए"
 
-#: ../metadata/fs.xml.in.h:1
-msgid "Mount Point"
-msgstr "आरोह बिंदु"
+#~ msgid "Mount Point"
+#~ msgstr "आरोह बिंदु"
 
-#: ../metadata/fs.xml.in.h:2
-msgid "Mount point"
-msgstr "आरोह बिंदु"
+#~ msgid "Mount point"
+#~ msgstr "आरोह बिंदु"
 
-#: ../metadata/fs.xml.in.h:3
-msgid "Userspace File System"
-msgstr "यूजरस्पेस फाइल सिस्टम"
+#~ msgid "Userspace File System"
+#~ msgstr "यूजरस्पेस फाइल सिस्टम"
 
-#: ../metadata/fs.xml.in.h:4
-msgid "Userspace file system"
-msgstr "यूजरस्पेस फाइल सिस्टम"
+#~ msgid "Userspace file system"
+#~ msgstr "यूजरस्पेस फाइल सिस्टम"
 
-#: ../metadata/gconf.xml.in.h:1
-msgid "GConf"
-msgstr "GConf"
+#~ msgid "GConf"
+#~ msgstr "GConf"
 
-#: ../metadata/gconf.xml.in.h:2
-msgid "GConf Control Backend"
-msgstr "GConf नियंत्रण बैकेंड"
+#~ msgid "GConf Control Backend"
+#~ msgstr "GConf नियंत्रण बैकेंड"
 
-#: ../metadata/glib.xml.in.h:1
-msgid "GLib"
-msgstr "GLib"
+#~ msgid "GLib"
+#~ msgstr "GLib"
 
-#: ../metadata/glib.xml.in.h:2
-msgid "GLib main loop support"
-msgstr "GLib मुख्य लूप समर्थन"
+#~ msgid "GLib main loop support"
+#~ msgstr "GLib मुख्य लूप समर्थन"
 
-#: ../metadata/ini.xml.in.h:1
 #, fuzzy
-msgid "Ini"
-msgstr "किसी को लोग न करें"
+#~ msgid "Ini"
+#~ msgstr "किसी को लोग न करें"
 
-#: ../metadata/ini.xml.in.h:2
-msgid "Ini Flat File Backend"
-msgstr "Ini समतल फाइल बैकेंड"
+#~ msgid "Ini Flat File Backend"
+#~ msgstr "Ini समतल फाइल बैकेंड"
 
-#: ../metadata/inotify.xml.in.h:1
-msgid "File change notification plugin"
-msgstr "फाइल बदलाव अधिसूचना प्लगिन"
+#~ msgid "File change notification plugin"
+#~ msgstr "फाइल बदलाव अधिसूचना प्लगिन"
 
-#: ../metadata/inotify.xml.in.h:2
 #, fuzzy
-msgid "Inotify"
-msgstr "किसी को लोग न करें"
+#~ msgid "Inotify"
+#~ msgstr "किसी को लोग न करें"
 
-#: ../metadata/kconfig.xml.in.h:1
-msgid "Kconfig"
-msgstr "Kconfig"
+#~ msgid "Kconfig"
+#~ msgstr "Kconfig"
 
-#: ../metadata/kconfig.xml.in.h:2
-msgid "Kconfig Control Backend"
-msgstr "Kconfig नियंत्रण बैकेंड"
+#~ msgid "Kconfig Control Backend"
+#~ msgstr "Kconfig नियंत्रण बैकेंड"
 
-#: ../metadata/minimize.xml.in.h:1
 #, fuzzy
-msgid "Minimize Effect"
-msgstr "windows"
+#~ msgid "Minimize Effect"
+#~ msgstr "windows"
 
-#: ../metadata/minimize.xml.in.h:2
 #, fuzzy
-msgid "Minimize Windows"
-msgstr "windows"
+#~ msgid "Minimize Windows"
+#~ msgstr "windows"
 
-#: ../metadata/minimize.xml.in.h:3
 #, fuzzy
-msgid "Minimize speed"
-msgstr "windows"
+#~ msgid "Minimize speed"
+#~ msgstr "windows"
 
-#: ../metadata/minimize.xml.in.h:4
 #, fuzzy
-msgid "Minimize timestep"
-msgstr "windows"
+#~ msgid "Minimize timestep"
+#~ msgstr "windows"
 
-#: ../metadata/minimize.xml.in.h:5
-msgid "Shade Resistance"
-msgstr "छाया प्रतिरोध"
+#~ msgid "Shade Resistance"
+#~ msgstr "छाया प्रतिरोध"
 
-#: ../metadata/minimize.xml.in.h:6
-msgid "Shade resistance"
-msgstr "छाया प्रतिरोध"
+#~ msgid "Shade resistance"
+#~ msgstr "छाया प्रतिरोध"
 
-#: ../metadata/minimize.xml.in.h:9
-msgid "Transform windows when they are minimized and unminimized"
-msgstr "विंडो बदलें जब वे न्यूनतम और अधिकतम किए जाते हैं"
+#~ msgid "Transform windows when they are minimized and unminimized"
+#~ msgstr "विंडो बदलें जब वे न्यूनतम और अधिकतम किए जाते हैं"
 
-#: ../metadata/minimize.xml.in.h:10
-msgid "Windows that should be transformed when minimized"
-msgstr "विंडोज़ जो न्यूनतम करने पर रूपांतरित किए जाने चाहिए"
+#~ msgid "Windows that should be transformed when minimized"
+#~ msgstr "विंडोज़ जो न्यूनतम करने पर रूपांतरित किए जाने चाहिए"
 
-#: ../metadata/move.xml.in.h:1
 #, fuzzy
-msgid "Constrain Y"
-msgstr "रखता है"
+#~ msgid "Constrain Y"
+#~ msgstr "रखता है"
 
-#: ../metadata/move.xml.in.h:2
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Y कोआर्डिनेट को कार्यस्थान क्षेत्र में सीमित करें"
+#~ msgid "Constrain Y coordinate to workspace area"
+#~ msgstr "Y कोआर्डिनेट को कार्यस्थान क्षेत्र में सीमित करें"
 
-#: ../metadata/move.xml.in.h:3
-msgid "Do not update the server-side position of windows until finished moving"
-msgstr "विंडो के सर्वर साइड स्थिति को अद्यतन मत करें जबतक कि खिसकाना समाप्त न हो"
+#~ msgid ""
+#~ "Do not update the server-side position of windows until finished moving"
+#~ msgstr "विंडो के सर्वर साइड स्थिति को अद्यतन मत करें जबतक कि खिसकाना समाप्त न हो"
 
-#: ../metadata/move.xml.in.h:4
 #, fuzzy
-msgid "Initiate Window Move"
-msgstr "windows"
+#~ msgid "Initiate Window Move"
+#~ msgstr "windows"
 
-#: ../metadata/move.xml.in.h:5
 #, fuzzy
-msgid "Lazy Positioning"
-msgstr "windows"
+#~ msgid "Lazy Positioning"
+#~ msgstr "windows"
 
-#: ../metadata/move.xml.in.h:6
 #, fuzzy
-msgid "Move Window"
-msgstr "windows"
+#~ msgid "Move Window"
+#~ msgstr "windows"
 
-#: ../metadata/move.xml.in.h:7
 #, fuzzy
-msgid "Move window"
-msgstr "windows"
+#~ msgid "Move window"
+#~ msgstr "windows"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
-#: ../metadata/switcher.xml.in.h:18
 #, fuzzy
-msgid "Opacity"
-msgstr "windows"
+#~ msgid "Opacity"
+#~ msgstr "windows"
 
-#: ../metadata/move.xml.in.h:9
 #, fuzzy
-msgid "Opacity level of moving windows"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Opacity level of moving windows"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/move.xml.in.h:10
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr "खीचने पर स्नैपऑफ और स्वतः गैर अधिकतम अधिकतम विंडो"
+#~ msgid "Snapoff and auto unmaximized maximized windows when dragging"
+#~ msgstr "खीचने पर स्नैपऑफ और स्वतः गैर अधिकतम अधिकतम विंडो"
 
-#: ../metadata/move.xml.in.h:11
 #, fuzzy
-msgid "Snapoff maximized windows"
-msgstr "windows"
+#~ msgid "Snapoff maximized windows"
+#~ msgstr "windows"
 
-#: ../metadata/move.xml.in.h:12
 #, fuzzy
-msgid "Start moving window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Start moving window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/place.xml.in.h:1
-msgid "Algorithm to use for window placement"
-msgstr "विंडो स्थापन के लिए प्रयोग के लिए अलगोरिथम"
+#~ msgid "Algorithm to use for window placement"
+#~ msgstr "विंडो स्थापन के लिए प्रयोग के लिए अलगोरिथम"
 
-#: ../metadata/place.xml.in.h:2
-msgid "Cascade"
-msgstr "प्रपाती"
+#~ msgid "Cascade"
+#~ msgstr "प्रपाती"
 
-#: ../metadata/place.xml.in.h:3
-msgid "Centered"
-msgstr "केंद्रित"
+#~ msgid "Centered"
+#~ msgstr "केंद्रित"
 
-#: ../metadata/place.xml.in.h:4
 #, fuzzy
-msgid "Force Placement Windows"
-msgstr "फोकस बचाव विंडोज़"
+#~ msgid "Force Placement Windows"
+#~ msgstr "फोकस बचाव विंडोज़"
 
-#: ../metadata/place.xml.in.h:5
 #, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "विरचयुल उपकरण"
+#~ msgid "Horizontal viewport positions"
+#~ msgstr "विरचयुल उपकरण"
 
-#: ../metadata/place.xml.in.h:6
 #, fuzzy
-msgid "Maximize"
-msgstr "windows"
+#~ msgid "Maximize"
+#~ msgstr "windows"
 
-#: ../metadata/place.xml.in.h:8
 #, fuzzy
-msgid "Place Windows"
-msgstr "windows"
+#~ msgid "Place Windows"
+#~ msgstr "windows"
 
-#: ../metadata/place.xml.in.h:9
-msgid "Place across all outputs"
-msgstr ""
+#~ msgid "Place windows at appropriate positions when mapped"
+#~ msgstr "मैप किए जाने पर उचित स्थिति पर विंडो रखें"
 
-#: ../metadata/place.xml.in.h:10
-msgid "Place windows at appropriate positions when mapped"
-msgstr "मैप किए जाने पर उचित स्थिति पर विंडो रखें"
+#~ msgid "Placement Mode"
+#~ msgstr "नियोजन प्रकार"
 
-#: ../metadata/place.xml.in.h:11
-msgid "Placement Mode"
-msgstr "नियोजन प्रकार"
-
-#: ../metadata/place.xml.in.h:12
 #, fuzzy
-msgid "Positioned windows"
-msgstr "windows"
+#~ msgid "Positioned windows"
+#~ msgstr "windows"
 
-#: ../metadata/place.xml.in.h:13
-msgid "Random"
-msgstr "क्रमहीन"
+#~ msgid "Random"
+#~ msgstr "क्रमहीन"
 
-#: ../metadata/place.xml.in.h:14
 #, fuzzy
-msgid ""
-"Selects how window placement should behave if multiple outputs are selected"
-msgstr ""
-"चुनें कि कहां विंडो को स्केल किया जाता है यदि बहुल आउटपुट डिवायस प्रयोग किया जाता है."
+#~ msgid ""
+#~ "Selects how window placement should behave if multiple outputs are "
+#~ "selected"
+#~ msgstr ""
+#~ "चुनें कि कहां विंडो को स्केल किया जाता है यदि बहुल आउटपुट डिवायस प्रयोग किया जाता है."
 
-#: ../metadata/place.xml.in.h:15
-msgid "Smart"
-msgstr "स्मार्ट"
+#~ msgid "Smart"
+#~ msgstr "स्मार्ट"
 
-#: ../metadata/place.xml.in.h:16
 #, fuzzy
-msgid "Use active output device"
-msgstr "सभी आउटपुट डिवायस पर"
-
-#: ../metadata/place.xml.in.h:17
-msgid "Use output device of focussed window"
-msgstr ""
+#~ msgid "Use active output device"
+#~ msgstr "सभी आउटपुट डिवायस पर"
 
-#: ../metadata/place.xml.in.h:18
-msgid "Use output device with pointer"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:19
 #, fuzzy
-msgid "Vertical viewport positions"
-msgstr "विरचयुल उपकरण"
+#~ msgid "Vertical viewport positions"
+#~ msgstr "विरचयुल उपकरण"
 
-#: ../metadata/place.xml.in.h:20
 #, fuzzy
-msgid "Viewport positioned windows"
-msgstr "windows"
+#~ msgid "Viewport positioned windows"
+#~ msgstr "windows"
 
-#: ../metadata/place.xml.in.h:21
 #, fuzzy
-msgid "Window placement workarounds"
-msgstr "ypbind विकल्प"
-
-#: ../metadata/place.xml.in.h:22
-msgid "Windows that should be positioned by default"
-msgstr "विंडोज़ जिसे मूलभूत रूप से स्थिति पर रखा जाना चाहिए"
+#~ msgid "Window placement workarounds"
+#~ msgstr "ypbind विकल्प"
 
-#: ../metadata/place.xml.in.h:23
-msgid "Windows that should be positioned in specific viewports by default"
-msgstr "विंडोज़ जिसे मूलभूत रूप से विशेष व्यूपोर्ट में रखा जाना चाहिए"
+#~ msgid "Windows that should be positioned by default"
+#~ msgstr "विंडोज़ जिसे मूलभूत रूप से स्थिति पर रखा जाना चाहिए"
 
-#: ../metadata/place.xml.in.h:24
-msgid ""
-"Windows that should forcedly be placed, even if they indicate the window "
-"manager should avoid placing them."
-msgstr ""
+#~ msgid "Windows that should be positioned in specific viewports by default"
+#~ msgstr "विंडोज़ जिसे मूलभूत रूप से विशेष व्यूपोर्ट में रखा जाना चाहिए"
 
-#: ../metadata/place.xml.in.h:25
 #, fuzzy
-msgid "Workarounds"
-msgstr "वर्कग्रुप "
+#~ msgid "Workarounds"
+#~ msgstr "वर्कग्रुप "
 
-#: ../metadata/place.xml.in.h:26
 #, fuzzy
-msgid "X Positions"
-msgstr "windows"
+#~ msgid "X Positions"
+#~ msgstr "windows"
 
-#: ../metadata/place.xml.in.h:27
 #, fuzzy
-msgid "X Viewport Positions"
-msgstr "विरचयुल उपकरण"
+#~ msgid "X Viewport Positions"
+#~ msgstr "विरचयुल उपकरण"
 
-#: ../metadata/place.xml.in.h:28
-msgid "X position values"
-msgstr "X स्थिति मान"
+#~ msgid "X position values"
+#~ msgstr "X स्थिति मान"
 
-#: ../metadata/place.xml.in.h:29
 #, fuzzy
-msgid "Y Positions"
-msgstr "windows"
+#~ msgid "Y Positions"
+#~ msgstr "windows"
 
-#: ../metadata/place.xml.in.h:30
 #, fuzzy
-msgid "Y Viewport Positions"
-msgstr "विरचयुल उपकरण"
+#~ msgid "Y Viewport Positions"
+#~ msgstr "विरचयुल उपकरण"
 
-#: ../metadata/place.xml.in.h:31
-msgid "Y position values"
-msgstr "Y स्थिति मान"
+#~ msgid "Y position values"
+#~ msgstr "Y स्थिति मान"
 
-#: ../metadata/png.xml.in.h:1
-msgid "Png"
-msgstr "Png"
+#~ msgid "Png"
+#~ msgstr "Png"
 
-#: ../metadata/png.xml.in.h:2
-msgid "Png image loader"
-msgstr "Png चित्र लोडर"
+#~ msgid "Png image loader"
+#~ msgstr "Png चित्र लोडर"
 
-#: ../metadata/regex.xml.in.h:1
-msgid "Regex Matching"
-msgstr "रिजेक्स मिलान"
+#~ msgid "Regex Matching"
+#~ msgstr "रिजेक्स मिलान"
 
-#: ../metadata/regex.xml.in.h:2
-msgid "Regex window matching"
-msgstr "रिजेक्स विंडो मिलान"
+#~ msgid "Regex window matching"
+#~ msgstr "रिजेक्स विंडो मिलान"
 
-#: ../metadata/resize.xml.in.h:1
 #, fuzzy
-msgid "Border Color"
-msgstr "रंग"
+#~ msgid "Border Color"
+#~ msgstr "रंग"
 
-#: ../metadata/resize.xml.in.h:2
-msgid "Border color used for outline and rectangle resize modes"
-msgstr "खाके व आयताकार पुनः आकार मोड के लिए किनारा रंग"
+#~ msgid "Border color used for outline and rectangle resize modes"
+#~ msgstr "खाके व आयताकार पुनः आकार मोड के लिए किनारा रंग"
 
-#: ../metadata/resize.xml.in.h:3
-msgid "Default Resize Mode"
-msgstr "मूलभूत आकार बदलाव प्रकार"
+#~ msgid "Default Resize Mode"
+#~ msgstr "मूलभूत आकार बदलाव प्रकार"
 
-#: ../metadata/resize.xml.in.h:4
-msgid "Default mode used for window resizing"
-msgstr "विंडो पुनः आकार के लिए प्रयुक्त मूलभूत विधि"
+#~ msgid "Default mode used for window resizing"
+#~ msgstr "विंडो पुनः आकार के लिए प्रयुक्त मूलभूत विधि"
 
-#: ../metadata/resize.xml.in.h:5
 #, fuzzy
-msgid "Fill Color"
-msgstr "रंग"
+#~ msgid "Fill Color"
+#~ msgstr "रंग"
 
-#: ../metadata/resize.xml.in.h:6
-msgid "Fill color used for rectangle resize mode"
-msgstr "आयताकार पुनः आकार मोड के लिए प्रयुक्त रंग"
+#~ msgid "Fill color used for rectangle resize mode"
+#~ msgstr "आयताकार पुनः आकार मोड के लिए प्रयुक्त रंग"
 
-#: ../metadata/resize.xml.in.h:7
 #, fuzzy
-msgid "Initiate Normal Window Resize"
-msgstr "भारत"
+#~ msgid "Initiate Normal Window Resize"
+#~ msgstr "भारत"
 
-#: ../metadata/resize.xml.in.h:8
 #, fuzzy
-msgid "Initiate Outline Window Resize"
-msgstr "भारत"
+#~ msgid "Initiate Outline Window Resize"
+#~ msgstr "भारत"
 
-#: ../metadata/resize.xml.in.h:9
 #, fuzzy
-msgid "Initiate Rectangle Window Resize"
-msgstr "भारत"
+#~ msgid "Initiate Rectangle Window Resize"
+#~ msgstr "भारत"
 
-#: ../metadata/resize.xml.in.h:10
 #, fuzzy
-msgid "Initiate Stretch Window Resize"
-msgstr "भारत"
+#~ msgid "Initiate Stretch Window Resize"
+#~ msgstr "भारत"
 
-#: ../metadata/resize.xml.in.h:11
 #, fuzzy
-msgid "Initiate Window Resize"
-msgstr "भारत"
+#~ msgid "Initiate Window Resize"
+#~ msgstr "भारत"
 
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "सामान्य"
+#~ msgid "Normal"
+#~ msgstr "सामान्य"
 
-#: ../metadata/resize.xml.in.h:13
 #, fuzzy
-msgid "Normal Resize Windows"
-msgstr "windows"
+#~ msgid "Normal Resize Windows"
+#~ msgstr "windows"
 
-#: ../metadata/resize.xml.in.h:14
 #, fuzzy
-msgid "Outline"
-msgstr "रंग"
+#~ msgid "Outline"
+#~ msgstr "रंग"
 
-#: ../metadata/resize.xml.in.h:15
 #, fuzzy
-msgid "Outline Resize Windows"
-msgstr "windows"
+#~ msgid "Outline Resize Windows"
+#~ msgstr "windows"
 
-#: ../metadata/resize.xml.in.h:16
-msgid "Rectangle"
-msgstr "आयत"
+#~ msgid "Rectangle"
+#~ msgstr "आयत"
 
-#: ../metadata/resize.xml.in.h:17
 #, fuzzy
-msgid "Rectangle Resize Windows"
-msgstr "windows"
+#~ msgid "Rectangle Resize Windows"
+#~ msgstr "windows"
 
-#: ../metadata/resize.xml.in.h:18
 #, fuzzy
-msgid "Resize Window"
-msgstr "windows"
+#~ msgid "Resize Window"
+#~ msgstr "windows"
 
-#: ../metadata/resize.xml.in.h:19
 #, fuzzy
-msgid "Resize window"
-msgstr "windows"
+#~ msgid "Resize window"
+#~ msgstr "windows"
 
-#: ../metadata/resize.xml.in.h:20
 #, fuzzy
-msgid "Start resizing window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Start resizing window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/resize.xml.in.h:21
 #, fuzzy
-msgid "Start resizing window by stretching it"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Start resizing window by stretching it"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/resize.xml.in.h:22
 #, fuzzy
-msgid "Start resizing window normally"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Start resizing window normally"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/resize.xml.in.h:23
 #, fuzzy
-msgid "Start resizing window with outline"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Start resizing window with outline"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/resize.xml.in.h:24
 #, fuzzy
-msgid "Start resizing window with rectangle"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Start resizing window with rectangle"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/resize.xml.in.h:25
-msgid "Stretch"
-msgstr "विस्तार"
+#~ msgid "Stretch"
+#~ msgstr "विस्तार"
 
-#: ../metadata/resize.xml.in.h:26
 #, fuzzy
-msgid "Stretch Resize Windows"
-msgstr "windows"
+#~ msgid "Stretch Resize Windows"
+#~ msgstr "windows"
 
-#: ../metadata/resize.xml.in.h:27
-msgid "Windows that normal resize should be used for"
-msgstr "विंडोज़ जो सामान्य आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
+#~ msgid "Windows that normal resize should be used for"
+#~ msgstr "विंडोज़ जो सामान्य आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
 
-#: ../metadata/resize.xml.in.h:28
-msgid "Windows that outline resize should be used for"
-msgstr "विंडोज़ जो खाका आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
+#~ msgid "Windows that outline resize should be used for"
+#~ msgstr "विंडोज़ जो खाका आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
 
-#: ../metadata/resize.xml.in.h:29
-msgid "Windows that rectangle resize should be used for"
-msgstr "विंडोज़ जो आयत आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
+#~ msgid "Windows that rectangle resize should be used for"
+#~ msgstr "विंडोज़ जो आयत आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
 
-#: ../metadata/resize.xml.in.h:30
-msgid "Windows that stretch resize should be used for"
-msgstr "विंडोज़ जो विस्तार आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
+#~ msgid "Windows that stretch resize should be used for"
+#~ msgstr "विंडोज़ जो विस्तार आकार बदलाव के लिए प्रयोग किया जाना चाहिए"
 
-#: ../metadata/rotate.xml.in.h:2
-msgid "Edge Flip DnD"
-msgstr "किनारा झटका DnD"
+#~ msgid "Edge Flip DnD"
+#~ msgstr "किनारा झटका DnD"
 
-#: ../metadata/rotate.xml.in.h:3
-msgid "Edge Flip Move"
-msgstr "किनारा झटका हटाएं"
+#~ msgid "Edge Flip Move"
+#~ msgstr "किनारा झटका हटाएं"
 
-#: ../metadata/rotate.xml.in.h:4
-msgid "Edge Flip Pointer"
-msgstr "किनारा झटका सूचक"
+#~ msgid "Edge Flip Pointer"
+#~ msgstr "किनारा झटका सूचक"
 
-#: ../metadata/rotate.xml.in.h:5
 #, fuzzy
-msgid "Flip Time"
-msgstr "असली समय "
+#~ msgid "Flip Time"
+#~ msgstr "असली समय "
 
-#: ../metadata/rotate.xml.in.h:6
-msgid "Flip to left viewport and warp pointer"
-msgstr "बायें व्यूपोर्ट में जाएं और संकेतक लपेटें"
+#~ msgid "Flip to left viewport and warp pointer"
+#~ msgstr "बायें व्यूपोर्ट में जाएं और संकेतक लपेटें"
 
-#: ../metadata/rotate.xml.in.h:7
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr "अगला व्यूपोर्ट में झटकें जब स्क्रीन किनारा में वस्तु खींच रहा है"
+#~ msgid "Flip to next viewport when dragging object to screen edge"
+#~ msgstr "अगला व्यूपोर्ट में झटकें जब स्क्रीन किनारा में वस्तु खींच रहा है"
 
-#: ../metadata/rotate.xml.in.h:8
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr "अगला व्यूपोर्ट में झटकें जब संकेतक को स्क्रीन किनारा में खिसका रहा है"
+#~ msgid "Flip to next viewport when moving pointer to screen edge"
+#~ msgstr "अगला व्यूपोर्ट में झटकें जब संकेतक को स्क्रीन किनारा में खिसका रहा है"
 
-#: ../metadata/rotate.xml.in.h:9
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr "अगला व्यूपोर्ट में झटकें जब स्क्रीन किनारा में विंडो खिसका रहा है"
+#~ msgid "Flip to next viewport when moving window to screen edge"
+#~ msgstr "अगला व्यूपोर्ट में झटकें जब स्क्रीन किनारा में विंडो खिसका रहा है"
 
-#: ../metadata/rotate.xml.in.h:10
-msgid "Flip to right viewport and warp pointer"
-msgstr "दायाँ व्यूपोर्ट में झटकें और संकेतक लपेटें"
+#~ msgid "Flip to right viewport and warp pointer"
+#~ msgstr "दायाँ व्यूपोर्ट में झटकें और संकेतक लपेटें"
 
-#: ../metadata/rotate.xml.in.h:12
-msgid "Invert Y axis for pointer movement"
-msgstr "संकेतक गति के लिए Y अक्ष उलटें"
+#~ msgid "Invert Y axis for pointer movement"
+#~ msgstr "संकेतक गति के लिए Y अक्ष उलटें"
 
-#: ../metadata/rotate.xml.in.h:13
 #, fuzzy
-msgid "Pointer Invert Y"
-msgstr "प्रिंटर का विवरण"
+#~ msgid "Pointer Invert Y"
+#~ msgstr "प्रिंटर का विवरण"
 
-#: ../metadata/rotate.xml.in.h:14
 #, fuzzy
-msgid "Pointer Sensitivity"
-msgstr "प्रिंटर विवरण"
+#~ msgid "Pointer Sensitivity"
+#~ msgstr "प्रिंटर विवरण"
 
-#: ../metadata/rotate.xml.in.h:15
-msgid "Raise on rotate"
-msgstr "घुमाव पर उठाएं"
+#~ msgid "Raise on rotate"
+#~ msgstr "घुमाव पर उठाएं"
 
-#: ../metadata/rotate.xml.in.h:16
-msgid "Raise window when rotating"
-msgstr "विंडो को घुमाने के दौरान उठाएं"
+#~ msgid "Raise window when rotating"
+#~ msgstr "विंडो को घुमाने के दौरान उठाएं"
 
-#: ../metadata/rotate.xml.in.h:17
 #, fuzzy
-msgid "Rotate Cube"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate Cube"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:18
-msgid "Rotate Flip Left"
-msgstr "झटका बायाँ घुमाएँ"
+#~ msgid "Rotate Flip Left"
+#~ msgstr "झटका बायाँ घुमाएँ"
 
-#: ../metadata/rotate.xml.in.h:19
-msgid "Rotate Flip Right"
-msgstr "घुमाएँ झटकें दाहिना"
+#~ msgid "Rotate Flip Right"
+#~ msgstr "घुमाएँ झटकें दाहिना"
 
-#: ../metadata/rotate.xml.in.h:20
 #, fuzzy
-msgid "Rotate Left"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate Left"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:21
 #, fuzzy
-msgid "Rotate Left with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate Left with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:22
 #, fuzzy
-msgid "Rotate Right"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate Right"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:23
 #, fuzzy
-msgid "Rotate Right with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate Right with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:24
 #, fuzzy
-msgid "Rotate To"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:25
 #, fuzzy
-msgid "Rotate To Face 1"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 1"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:26
 #, fuzzy
-msgid "Rotate To Face 1 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 1 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:27
 #, fuzzy
-msgid "Rotate To Face 10"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 10"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:28
 #, fuzzy
-msgid "Rotate To Face 10 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 10 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:29
 #, fuzzy
-msgid "Rotate To Face 11"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 11"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:30
 #, fuzzy
-msgid "Rotate To Face 11 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 11 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:31
 #, fuzzy
-msgid "Rotate To Face 12"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 12"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:32
 #, fuzzy
-msgid "Rotate To Face 12 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 12 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:33
 #, fuzzy
-msgid "Rotate To Face 2"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 2"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:34
 #, fuzzy
-msgid "Rotate To Face 2 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 2 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:35
 #, fuzzy
-msgid "Rotate To Face 3"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 3"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:36
 #, fuzzy
-msgid "Rotate To Face 3 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 3 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:37
 #, fuzzy
-msgid "Rotate To Face 4"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 4"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:38
 #, fuzzy
-msgid "Rotate To Face 4 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 4 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:39
 #, fuzzy
-msgid "Rotate To Face 5"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 5"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:40
 #, fuzzy
-msgid "Rotate To Face 5 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 5 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:41
 #, fuzzy
-msgid "Rotate To Face 6"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 6"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:42
 #, fuzzy
-msgid "Rotate To Face 6 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 6 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:43
 #, fuzzy
-msgid "Rotate To Face 7"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 7"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:44
 #, fuzzy
-msgid "Rotate To Face 7 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 7 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:45
 #, fuzzy
-msgid "Rotate To Face 8"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 8"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:46
 #, fuzzy
-msgid "Rotate To Face 8 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 8 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:47
 #, fuzzy
-msgid "Rotate To Face 9"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate To Face 9"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:48
 #, fuzzy
-msgid "Rotate To Face 9 with Window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate To Face 9 with Window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:49
 #, fuzzy
-msgid "Rotate desktop cube"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate desktop cube"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:50
 #, fuzzy
-msgid "Rotate left"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate left"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:51
 #, fuzzy
-msgid "Rotate left and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate left and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:52
 #, fuzzy
-msgid "Rotate right"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate right"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:53
 #, fuzzy
-msgid "Rotate right and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate right and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:54
 #, fuzzy
-msgid "Rotate to face 1"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 1"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:55
 #, fuzzy
-msgid "Rotate to face 1 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 1 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:56
 #, fuzzy
-msgid "Rotate to face 10"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 10"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:57
 #, fuzzy
-msgid "Rotate to face 10 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 10 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:58
 #, fuzzy
-msgid "Rotate to face 11"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 11"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:59
 #, fuzzy
-msgid "Rotate to face 11 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 11 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:60
 #, fuzzy
-msgid "Rotate to face 12"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 12"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:61
 #, fuzzy
-msgid "Rotate to face 12 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 12 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:62
 #, fuzzy
-msgid "Rotate to face 2"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 2"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:63
 #, fuzzy
-msgid "Rotate to face 2 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 2 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:64
 #, fuzzy
-msgid "Rotate to face 3"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 3"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:65
 #, fuzzy
-msgid "Rotate to face 3 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 3 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:66
 #, fuzzy
-msgid "Rotate to face 4"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 4"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:67
 #, fuzzy
-msgid "Rotate to face 4 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 4 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:68
 #, fuzzy
-msgid "Rotate to face 5"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 5"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:69
 #, fuzzy
-msgid "Rotate to face 5 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 5 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:70
 #, fuzzy
-msgid "Rotate to face 6"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 6"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:71
 #, fuzzy
-msgid "Rotate to face 6 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 6 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:72
 #, fuzzy
-msgid "Rotate to face 7"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 7"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:73
 #, fuzzy
-msgid "Rotate to face 7 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 7 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:74
 #, fuzzy
-msgid "Rotate to face 8"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 8"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:75
 #, fuzzy
-msgid "Rotate to face 8 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 8 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:76
 #, fuzzy
-msgid "Rotate to face 9"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to face 9"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:77
 #, fuzzy
-msgid "Rotate to face 9 and bring active window along"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate to face 9 and bring active window along"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:78
 #, fuzzy
-msgid "Rotate to viewport"
-msgstr "रिमोट सबनेट:"
+#~ msgid "Rotate to viewport"
+#~ msgstr "रिमोट सबनेट:"
 
-#: ../metadata/rotate.xml.in.h:79
 #, fuzzy
-msgid "Rotate window"
-msgstr "windows"
+#~ msgid "Rotate window"
+#~ msgstr "windows"
 
-#: ../metadata/rotate.xml.in.h:80
 #, fuzzy
-msgid "Rotate with window"
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Rotate with window"
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/rotate.xml.in.h:81
 #, fuzzy
-msgid "Rotation Acceleration"
-msgstr "3D "
+#~ msgid "Rotation Acceleration"
+#~ msgstr "3D "
 
-#: ../metadata/rotate.xml.in.h:82
 #, fuzzy
-msgid "Rotation Speed"
-msgstr "टाइम"
+#~ msgid "Rotation Speed"
+#~ msgstr "टाइम"
 
-#: ../metadata/rotate.xml.in.h:83
 #, fuzzy
-msgid "Rotation Timestep"
-msgstr "टाइम"
+#~ msgid "Rotation Timestep"
+#~ msgstr "टाइम"
 
-#: ../metadata/rotate.xml.in.h:84
 #, fuzzy
-msgid "Rotation Zoom"
-msgstr "टाइम"
+#~ msgid "Rotation Zoom"
+#~ msgstr "टाइम"
 
-#: ../metadata/rotate.xml.in.h:85
-msgid "Sensitivity of pointer movement"
-msgstr "संकेतक गति की संवेदनशीलता"
+#~ msgid "Sensitivity of pointer movement"
+#~ msgstr "संकेतक गति की संवेदनशीलता"
 
-#: ../metadata/rotate.xml.in.h:86
 #, fuzzy
-msgid "Snap Cube Rotation to Bottom Face"
-msgstr "ऊपरी मुखरे में घन घुमाव स्नैप करें"
+#~ msgid "Snap Cube Rotation to Bottom Face"
+#~ msgstr "ऊपरी मुखरे में घन घुमाव स्नैप करें"
 
-#: ../metadata/rotate.xml.in.h:87
-msgid "Snap Cube Rotation to Top Face"
-msgstr "ऊपरी मुखरे में घन घुमाव स्नैप करें"
+#~ msgid "Snap Cube Rotation to Top Face"
+#~ msgstr "ऊपरी मुखरे में घन घुमाव स्नैप करें"
 
-#: ../metadata/rotate.xml.in.h:88
 #, fuzzy
-msgid "Snap To Bottom Face"
-msgstr "ऊपरी मुखरे में स्नैप लें"
+#~ msgid "Snap To Bottom Face"
+#~ msgstr "ऊपरी मुखरे में स्नैप लें"
 
-#: ../metadata/rotate.xml.in.h:89
-msgid "Snap To Top Face"
-msgstr "ऊपरी मुखरे में स्नैप लें"
+#~ msgid "Snap To Top Face"
+#~ msgstr "ऊपरी मुखरे में स्नैप लें"
 
-#: ../metadata/rotate.xml.in.h:91
 #, fuzzy
-msgid "Start Rotation"
-msgstr "इंसटालेशन शुरु करें"
+#~ msgid "Start Rotation"
+#~ msgstr "इंसटालेशन शुरु करें"
 
-#: ../metadata/rotate.xml.in.h:92
-msgid "Timeout before flipping viewport"
-msgstr "व्यूपोर्ट झटकने के पहले समय समाप्ति"
+#~ msgid "Timeout before flipping viewport"
+#~ msgstr "व्यूपोर्ट झटकने के पहले समय समाप्ति"
 
-#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
-msgid "Zoom"
-msgstr "ज़ूम"
+#~ msgid "Zoom"
+#~ msgstr "ज़ूम"
 
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
-msgid "Amount of opacity in percent"
-msgstr "प्रतिशत में अपारदर्शिता की मात्रा"
+#~ msgid "Amount of opacity in percent"
+#~ msgstr "प्रतिशत में अपारदर्शिता की मात्रा"
 
-#: ../metadata/scale.xml.in.h:2
-msgid "Big"
-msgstr "बड़ा"
+#~ msgid "Big"
+#~ msgstr "बड़ा"
 
-#: ../metadata/scale.xml.in.h:3
-msgid "Click Desktop to Show Desktop"
-msgstr "डेस्कटॉप दिखाने के लिए डेस्कटॉप क्लिक करें"
+#~ msgid "Click Desktop to Show Desktop"
+#~ msgstr "डेस्कटॉप दिखाने के लिए डेस्कटॉप क्लिक करें"
 
-#: ../metadata/scale.xml.in.h:4
 #, fuzzy
-msgid "Darken Background"
-msgstr "पृष्ठभूमि"
+#~ msgid "Darken Background"
+#~ msgstr "पृष्ठभूमि"
 
-#: ../metadata/scale.xml.in.h:5
-msgid "Darken background when scaling windows"
-msgstr "विंडो मापन के दौरान पृष्ठभूमि गहरा करें"
+#~ msgid "Darken background when scaling windows"
+#~ msgstr "विंडो मापन के दौरान पृष्ठभूमि गहरा करें"
 
-#: ../metadata/scale.xml.in.h:6
-msgid "Emblem"
-msgstr "प्रतीक"
+#~ msgid "Emblem"
+#~ msgstr "प्रतीक"
 
-#: ../metadata/scale.xml.in.h:7
-msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "डेस्कटॉप प्रदर्शन मोड दाखिल करें जब डेस्कटॉप मापक के दौरान क्लिक किया जाता है"
+#~ msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+#~ msgstr "डेस्कटॉप प्रदर्शन मोड दाखिल करें जब डेस्कटॉप मापक के दौरान क्लिक किया जाता है"
 
-#: ../metadata/scale.xml.in.h:8
-msgid "Hover Time"
-msgstr "समय आगे पीछे करें"
+#~ msgid "Hover Time"
+#~ msgstr "समय आगे पीछे करें"
 
-#: ../metadata/scale.xml.in.h:9
 #, fuzzy
-msgid "Initiate Window Picker"
-msgstr "windows"
+#~ msgid "Initiate Window Picker"
+#~ msgstr "windows"
 
-#: ../metadata/scale.xml.in.h:10
-msgid "Initiate Window Picker For All Windows"
-msgstr "सभी विंडोज़ के लिए विंडो चयनक आरंभ करें"
+#~ msgid "Initiate Window Picker For All Windows"
+#~ msgstr "सभी विंडोज़ के लिए विंडो चयनक आरंभ करें"
 
-#: ../metadata/scale.xml.in.h:11
-msgid "Initiate Window Picker For Window Group"
-msgstr "विंडो समूह के लिए विंडो चयनक आरंभ करें"
+#~ msgid "Initiate Window Picker For Window Group"
+#~ msgstr "विंडो समूह के लिए विंडो चयनक आरंभ करें"
 
-#: ../metadata/scale.xml.in.h:12
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "मौज़ूदा आउटपुट पर विंडो के लिए विंडो चयनक आरंभ करें"
+#~ msgid "Initiate Window Picker For Windows on Current Output"
+#~ msgstr "मौज़ूदा आउटपुट पर विंडो के लिए विंडो चयनक आरंभ करें"
 
-#: ../metadata/scale.xml.in.h:13
-msgid "Layout and start transforming all windows"
-msgstr "अभिन्यास और सभी विंडोज को बदलना आरंभ करें"
+#~ msgid "Layout and start transforming all windows"
+#~ msgstr "अभिन्यास और सभी विंडोज को बदलना आरंभ करें"
 
-#: ../metadata/scale.xml.in.h:14
-msgid "Layout and start transforming window group"
-msgstr "अभिन्यास और विंडो समूह को रूपांतरित करना आरंभ करें"
+#~ msgid "Layout and start transforming window group"
+#~ msgstr "अभिन्यास और विंडो समूह को रूपांतरित करना आरंभ करें"
 
-#: ../metadata/scale.xml.in.h:15
-msgid "Layout and start transforming windows"
-msgstr "अभिन्यास और विंडोज को बदलना आरंभ करें"
+#~ msgid "Layout and start transforming windows"
+#~ msgstr "अभिन्यास और विंडोज को बदलना आरंभ करें"
 
-#: ../metadata/scale.xml.in.h:16
-msgid "Layout and start transforming windows on current output"
-msgstr "अभिन्यास और मौजूदा आउटपुट पर विंडोज बदलना आरंभ करें"
+#~ msgid "Layout and start transforming windows on current output"
+#~ msgstr "अभिन्यास और मौजूदा आउटपुट पर विंडोज बदलना आरंभ करें"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "कुछ नहीं"
+#~ msgid "None"
+#~ msgstr "कुछ नहीं"
 
-#: ../metadata/scale.xml.in.h:19
-msgid "On all output devices"
-msgstr "सभी आउटपुट डिवायस पर"
+#~ msgid "On all output devices"
+#~ msgstr "सभी आउटपुट डिवायस पर"
 
-#: ../metadata/scale.xml.in.h:20
-msgid "On current output device"
-msgstr "मौजूदा आउटपुट डिवायस पर"
+#~ msgid "On current output device"
+#~ msgstr "मौजूदा आउटपुट डिवायस पर"
 
-#: ../metadata/scale.xml.in.h:22
-msgid "Overlay Icon"
-msgstr "प्रतीक ढ़कें"
+#~ msgid "Overlay Icon"
+#~ msgstr "प्रतीक ढ़कें"
 
-#: ../metadata/scale.xml.in.h:23
-msgid "Overlay an icon on windows once they are scaled"
-msgstr "विंडो पर प्रतीक को ढ़कें जब वे स्केल किये जाते हैं"
+#~ msgid "Overlay an icon on windows once they are scaled"
+#~ msgstr "विंडो पर प्रतीक को ढ़कें जब वे स्केल किये जाते हैं"
 
-#: ../metadata/scale.xml.in.h:24
 #, fuzzy
-msgid "Scale"
-msgstr "स्कैनर"
+#~ msgid "Scale"
+#~ msgstr "स्कैनर"
 
-#: ../metadata/scale.xml.in.h:25
 #, fuzzy
-msgid "Scale Windows"
-msgstr "windows"
+#~ msgid "Scale Windows"
+#~ msgstr "windows"
 
-#: ../metadata/scale.xml.in.h:26
 #, fuzzy
-msgid "Scale speed"
-msgstr "लोकल टाइम"
+#~ msgid "Scale speed"
+#~ msgstr "लोकल टाइम"
 
-#: ../metadata/scale.xml.in.h:27
 #, fuzzy
-msgid "Scale timestep"
-msgstr "लोकल टाइम"
+#~ msgid "Scale timestep"
+#~ msgstr "लोकल टाइम"
 
-#: ../metadata/scale.xml.in.h:28
 #, fuzzy
-msgid "Scale windows"
-msgstr "windows"
+#~ msgid "Scale windows"
+#~ msgstr "windows"
 
-#: ../metadata/scale.xml.in.h:29
-msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr ""
-"चुनें कि कहां विंडो को स्केल किया जाता है यदि बहुल आउटपुट डिवायस प्रयोग किया जाता है."
+#~ msgid ""
+#~ "Selects where windows are scaled if multiple output devices are used."
+#~ msgstr ""
+#~ "चुनें कि कहां विंडो को स्केल किया जाता है यदि बहुल आउटपुट डिवायस प्रयोग किया जाता है."
 
-#: ../metadata/scale.xml.in.h:30
 #, fuzzy
-msgid "Space between windows"
-msgstr "windows"
+#~ msgid "Space between windows"
+#~ msgstr "windows"
 
-#: ../metadata/scale.xml.in.h:31
 #, fuzzy
-msgid "Spacing"
-msgstr "स्पेन"
+#~ msgid "Spacing"
+#~ msgstr "स्पेन"
 
-#: ../metadata/scale.xml.in.h:33
-msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr "विंडो पर आच्छादित होने पर स्केल मोड के खत्म होने के पहले समय (ms में)"
+#~ msgid ""
+#~ "Time (in ms) before scale mode is terminated when hovering over a window"
+#~ msgstr "विंडो पर आच्छादित होने पर स्केल मोड के खत्म होने के पहले समय (ms में)"
 
-#: ../metadata/scale.xml.in.h:35
-msgid "Windows that should be scaled in scale mode"
-msgstr "विंडो जिसे स्केल मोड में स्केल किया जाना चाहिए"
+#~ msgid "Windows that should be scaled in scale mode"
+#~ msgstr "विंडो जिसे स्केल मोड में स्केल किया जाना चाहिए"
 
-#: ../metadata/screenshot.xml.in.h:1
-msgid "Automatically open screenshot in this application"
-msgstr "इस अनुप्रयोग में स्वतः स्क्रीनशॉट खोलें"
+#~ msgid "Automatically open screenshot in this application"
+#~ msgstr "इस अनुप्रयोग में स्वतः स्क्रीनशॉट खोलें"
 
-#: ../metadata/screenshot.xml.in.h:2
-msgid "Directory"
-msgstr "निर्देशिका"
+#~ msgid "Directory"
+#~ msgstr "निर्देशिका"
 
-#: ../metadata/screenshot.xml.in.h:4
 #, fuzzy
-msgid "Initiate rectangle screenshot"
-msgstr "भारत"
+#~ msgid "Initiate rectangle screenshot"
+#~ msgstr "भारत"
 
-#: ../metadata/screenshot.xml.in.h:5
-msgid "Launch Application"
-msgstr "अनुप्रयोग लांच करें"
+#~ msgid "Launch Application"
+#~ msgstr "अनुप्रयोग लांच करें"
 
-#: ../metadata/screenshot.xml.in.h:6
-msgid "Put screenshot images in this directory"
-msgstr "इस निर्देशिका में स्क्रीनशॉट चित्र रखें"
+#~ msgid "Put screenshot images in this directory"
+#~ msgstr "इस निर्देशिका में स्क्रीनशॉट चित्र रखें"
 
-#: ../metadata/screenshot.xml.in.h:7
 #, fuzzy
-msgid "Screenshot"
-msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
+#~ msgid "Screenshot"
+#~ msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
 
-#: ../metadata/screenshot.xml.in.h:8
 #, fuzzy
-msgid "Screenshot plugin"
-msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
+#~ msgid "Screenshot plugin"
+#~ msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
 
-#: ../metadata/svg.xml.in.h:1
-msgid "Svg"
-msgstr "Svg"
+#~ msgid "Svg"
+#~ msgstr "Svg"
 
-#: ../metadata/svg.xml.in.h:2
-msgid "Svg image loader"
-msgstr "Svg चित्र लोडर"
+#~ msgid "Svg image loader"
+#~ msgstr "Svg चित्र लोडर"
 
-#: ../metadata/switcher.xml.in.h:1
-msgid "Amount of brightness in percent"
-msgstr "प्रतिशत में चमकीलापन की मात्रा"
+#~ msgid "Amount of brightness in percent"
+#~ msgstr "प्रतिशत में चमकीलापन की मात्रा"
 
-#: ../metadata/switcher.xml.in.h:3
-msgid "Amount of saturation in percent"
-msgstr "प्रतिशत में संतृप्ति की मात्रा"
+#~ msgid "Amount of saturation in percent"
+#~ msgstr "प्रतिशत में संतृप्ति की मात्रा"
 
-#: ../metadata/switcher.xml.in.h:4
 #, fuzzy
-msgid "Application Switcher"
-msgstr "कम्प्यूटर प्रोग्राम आडिट  रिपोर्ट"
+#~ msgid "Application Switcher"
+#~ msgstr "कम्प्यूटर प्रोग्राम आडिट  रिपोर्ट"
 
-#: ../metadata/switcher.xml.in.h:5
 #, fuzzy
-msgid "Auto Rotate"
-msgstr "स्वचालित"
+#~ msgid "Auto Rotate"
+#~ msgstr "स्वचालित"
 
-#: ../metadata/switcher.xml.in.h:6
 #, fuzzy
-msgid "Brightness"
-msgstr "ब्रिज"
+#~ msgid "Brightness"
+#~ msgstr "ब्रिज"
 
-#: ../metadata/switcher.xml.in.h:7
 #, fuzzy
-msgid "Bring To Front"
-msgstr "बूट के दौरान"
+#~ msgid "Bring To Front"
+#~ msgstr "बूट के दौरान"
 
-#: ../metadata/switcher.xml.in.h:8
-msgid "Bring selected window to front"
-msgstr "चयनित विंडो को सामने लायें"
+#~ msgid "Bring selected window to front"
+#~ msgstr "चयनित विंडो को सामने लायें"
 
-#: ../metadata/switcher.xml.in.h:9
-msgid "Distance desktop should be zoom out while switching windows"
-msgstr "दूरी डेस्कटॉप को जूम आउट किया जाना चाहिए जब विंडो में स्विच कर रहे हों"
+#~ msgid "Distance desktop should be zoom out while switching windows"
+#~ msgstr "दूरी डेस्कटॉप को जूम आउट किया जाना चाहिए जब विंडो में स्विच कर रहे हों"
 
-#: ../metadata/switcher.xml.in.h:11
 #, fuzzy
-msgid "Icon"
-msgstr "आइकंश्श"
+#~ msgid "Icon"
+#~ msgstr "आइकंश्श"
 
-#: ../metadata/switcher.xml.in.h:12
 #, fuzzy
-msgid "Minimized"
-msgstr "windows"
+#~ msgid "Minimized"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:14
 #, fuzzy
-msgid "Next Panel"
-msgstr "डेसक्टाप"
+#~ msgid "Next Panel"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/switcher.xml.in.h:15
 #, fuzzy
-msgid "Next window"
-msgstr "windows"
+#~ msgid "Next window"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:16
 #, fuzzy
-msgid "Next window (All windows)"
-msgstr "windows"
+#~ msgid "Next window (All windows)"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:17
 #, fuzzy
-msgid "Next window (No popup)"
-msgstr "windows"
+#~ msgid "Next window (No popup)"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:19
-msgid "Popup switcher if not visible and select next window"
-msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और अगला विंडो चुनें"
+#~ msgid "Popup switcher if not visible and select next window"
+#~ msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और अगला विंडो चुनें"
 
-#: ../metadata/switcher.xml.in.h:20
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और अगला विंडो सभी विंडो में से चुनें"
+#~ msgid ""
+#~ "Popup switcher if not visible and select next window out of all windows"
+#~ msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और अगला विंडो सभी विंडो में से चुनें"
 
-#: ../metadata/switcher.xml.in.h:21
-msgid "Popup switcher if not visible and select previous window"
-msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और पिछला विंडो चुनें"
+#~ msgid "Popup switcher if not visible and select previous window"
+#~ msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और पिछला विंडो चुनें"
 
-#: ../metadata/switcher.xml.in.h:22
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और पिछला विंडो सभी विंडो में से चुनें"
+#~ msgid ""
+#~ "Popup switcher if not visible and select previous window out of all "
+#~ "windows"
+#~ msgstr "पॉप अप स्विचर यदि दृष्टिगोच़र नहीं है और पिछला विंडो सभी विंडो में से चुनें"
 
-#: ../metadata/switcher.xml.in.h:23
 #, fuzzy
-msgid "Prev Panel"
-msgstr "पीछे का"
+#~ msgid "Prev Panel"
+#~ msgstr "पीछे का"
 
-#: ../metadata/switcher.xml.in.h:24
 #, fuzzy
-msgid "Prev window"
-msgstr "windows"
+#~ msgid "Prev window"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:25
 #, fuzzy
-msgid "Prev window (All windows)"
-msgstr "windows"
+#~ msgid "Prev window (All windows)"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:26
 #, fuzzy
-msgid "Prev window (No popup)"
-msgstr "windows"
+#~ msgid "Prev window (No popup)"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:27
-msgid "Rotate to the selected window while switching"
-msgstr "स्विचिंग के दौरान चयनित विंडो में घुमाएं"
+#~ msgid "Rotate to the selected window while switching"
+#~ msgstr "स्विचिंग के दौरान चयनित विंडो में घुमाएं"
 
-#: ../metadata/switcher.xml.in.h:28
 #, fuzzy
-msgid "Saturation"
-msgstr "अवधि"
+#~ msgid "Saturation"
+#~ msgstr "अवधि"
 
-#: ../metadata/switcher.xml.in.h:29
 #, fuzzy
-msgid "Select next panel type window."
-msgstr "windows"
+#~ msgid "Select next panel type window."
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:30
-msgid "Select next window without showing the popup window."
-msgstr "पॉपअप विंडो को बिना दिखाए अगले विंडो को चुनें."
+#~ msgid "Select next window without showing the popup window."
+#~ msgstr "पॉपअप विंडो को बिना दिखाए अगले विंडो को चुनें."
 
-#: ../metadata/switcher.xml.in.h:31
 #, fuzzy
-msgid "Select previous panel type window."
-msgstr "डेइमण शुरू कर रहा हैं।"
+#~ msgid "Select previous panel type window."
+#~ msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/switcher.xml.in.h:32
-msgid "Select previous window without showing the popup window."
-msgstr "पॉपअप विंडो को बिना दिखाए पिछले विंडो को चुनें."
+#~ msgid "Select previous window without showing the popup window."
+#~ msgstr "पॉपअप विंडो को बिना दिखाए पिछले विंडो को चुनें."
 
-#: ../metadata/switcher.xml.in.h:33
-msgid "Show icon next to thumbnail"
-msgstr "थंबनेल के बगल के प्रतीक को दिखाएं"
+#~ msgid "Show icon next to thumbnail"
+#~ msgstr "थंबनेल के बगल के प्रतीक को दिखाएं"
 
-#: ../metadata/switcher.xml.in.h:34
 #, fuzzy
-msgid "Show minimized windows"
-msgstr "windows"
+#~ msgid "Show minimized windows"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:36
 #, fuzzy
-msgid "Switcher speed"
-msgstr "लोकल टाइम"
+#~ msgid "Switcher speed"
+#~ msgstr "लोकल टाइम"
 
-#: ../metadata/switcher.xml.in.h:37
 #, fuzzy
-msgid "Switcher timestep"
-msgstr "लोकल टाइम"
+#~ msgid "Switcher timestep"
+#~ msgstr "लोकल टाइम"
 
-#: ../metadata/switcher.xml.in.h:38
 #, fuzzy
-msgid "Switcher windows"
-msgstr "windows"
+#~ msgid "Switcher windows"
+#~ msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:40
-msgid "Windows that should be shown in switcher"
-msgstr "विंडोज जिसे स्विचर में दिखाया जाना चाहिए"
+#~ msgid "Windows that should be shown in switcher"
+#~ msgstr "विंडोज जिसे स्विचर में दिखाया जाना चाहिए"
 
-#: ../metadata/video.xml.in.h:1
-msgid "Provide YV12 colorspace support"
-msgstr "YV12 रंगस्पेस समर्थन दें"
+#~ msgid "Provide YV12 colorspace support"
+#~ msgstr "YV12 रंगस्पेस समर्थन दें"
 
-#: ../metadata/video.xml.in.h:2
-msgid "Video Playback"
-msgstr "वीडियो प्लेबैक"
+#~ msgid "Video Playback"
+#~ msgstr "वीडियो प्लेबैक"
 
-#: ../metadata/video.xml.in.h:3
-msgid "Video playback"
-msgstr "वीडियो प्लेबैक"
+#~ msgid "Video playback"
+#~ msgstr "वीडियो प्लेबैक"
 
-#: ../metadata/video.xml.in.h:4
-msgid "YV12 colorspace"
-msgstr "YV12 रंगस्पेस"
+#~ msgid "YV12 colorspace"
+#~ msgstr "YV12 रंगस्पेस"
 
-#: ../metadata/water.xml.in.h:1
-msgid "Add line"
-msgstr "पंक्ति जोड़ें"
+#~ msgid "Add line"
+#~ msgstr "पंक्ति जोड़ें"
 
-#: ../metadata/water.xml.in.h:2
-msgid "Add point"
-msgstr "बिंदु जोड़ें"
+#~ msgid "Add point"
+#~ msgstr "बिंदु जोड़ें"
 
-#: ../metadata/water.xml.in.h:3
-msgid "Adds water effects to different desktop actions"
-msgstr "विभिन्न डेस्कटॉप क्रिया में जल प्रभाव जोड़ें"
+#~ msgid "Adds water effects to different desktop actions"
+#~ msgstr "विभिन्न डेस्कटॉप क्रिया में जल प्रभाव जोड़ें"
 
-#: ../metadata/water.xml.in.h:4
-msgid "Delay (in ms) between each rain-drop"
-msgstr "हर वर्षा बूंद के बीच विलंब (ms में)"
+#~ msgid "Delay (in ms) between each rain-drop"
+#~ msgstr "हर वर्षा बूंद के बीच विलंब (ms में)"
 
-#: ../metadata/water.xml.in.h:5
-msgid "Enable pointer water effects"
-msgstr "संकेतक जल चिह्न सक्रिय करें"
+#~ msgid "Enable pointer water effects"
+#~ msgstr "संकेतक जल चिह्न सक्रिय करें"
 
-#: ../metadata/water.xml.in.h:7
-msgid "Line"
-msgstr "रेखा"
+#~ msgid "Line"
+#~ msgstr "रेखा"
 
-#: ../metadata/water.xml.in.h:8
-msgid "Offset Scale"
-msgstr "ऑफसेट मापक"
+#~ msgid "Offset Scale"
+#~ msgstr "ऑफसेट मापक"
 
-#: ../metadata/water.xml.in.h:9
-msgid "Point"
-msgstr "बिन्दु"
+#~ msgid "Point"
+#~ msgstr "बिन्दु"
 
-#: ../metadata/water.xml.in.h:10
 #, fuzzy
-msgid "Rain Delay"
-msgstr "डिले"
+#~ msgid "Rain Delay"
+#~ msgstr "डिले"
 
-#: ../metadata/water.xml.in.h:11
-msgid "Title wave"
-msgstr "शीर्षक तरंग"
+#~ msgid "Title wave"
+#~ msgstr "शीर्षक तरंग"
 
-#: ../metadata/water.xml.in.h:12
 #, fuzzy
-msgid "Toggle rain"
-msgstr "टोकन रिंग"
+#~ msgid "Toggle rain"
+#~ msgstr "टोकन रिंग"
 
-#: ../metadata/water.xml.in.h:13
 #, fuzzy
-msgid "Toggle rain effect"
-msgstr "टोकन रिंग"
+#~ msgid "Toggle rain effect"
+#~ msgstr "टोकन रिंग"
 
-#: ../metadata/water.xml.in.h:14
 #, fuzzy
-msgid "Toggle wiper"
-msgstr "टोकन रिंग"
+#~ msgid "Toggle wiper"
+#~ msgstr "टोकन रिंग"
 
-#: ../metadata/water.xml.in.h:15
 #, fuzzy
-msgid "Toggle wiper effect"
-msgstr "टोकन रिंग"
+#~ msgid "Toggle wiper effect"
+#~ msgstr "टोकन रिंग"
 
-#: ../metadata/water.xml.in.h:16
-msgid "Water Effect"
-msgstr "जल प्रभाव"
+#~ msgid "Water Effect"
+#~ msgstr "जल प्रभाव"
 
-#: ../metadata/water.xml.in.h:17
-msgid "Water offset scale"
-msgstr "जल ऑफसेट स्केल"
+#~ msgid "Water offset scale"
+#~ msgstr "जल ऑफसेट स्केल"
 
-#: ../metadata/water.xml.in.h:18
-msgid "Wave effect from window title"
-msgstr "विंडो शीर्षक से लहर प्रभाव"
+#~ msgid "Wave effect from window title"
+#~ msgstr "विंडो शीर्षक से लहर प्रभाव"
 
-#: ../metadata/wobbly.xml.in.h:1
-msgid "Focus Effect"
-msgstr "प्रभाव फोकस करें"
+#~ msgid "Focus Effect"
+#~ msgstr "प्रभाव फोकस करें"
 
-#: ../metadata/wobbly.xml.in.h:2
 #, fuzzy
-msgid "Focus Window Effect"
-msgstr "windows"
+#~ msgid "Focus Window Effect"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:3
 #, fuzzy
-msgid "Focus Windows"
-msgstr "windows"
+#~ msgid "Focus Windows"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:4
 #, fuzzy
-msgid "Friction"
-msgstr "क्रिया"
+#~ msgid "Friction"
+#~ msgstr "क्रिया"
 
-#: ../metadata/wobbly.xml.in.h:5
 #, fuzzy
-msgid "Grab Windows"
-msgstr "windows"
+#~ msgid "Grab Windows"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:6
 #, fuzzy
-msgid "Grid Resolution"
-msgstr "रिजोल्यूशन"
+#~ msgid "Grid Resolution"
+#~ msgstr "रिजोल्यूशन"
 
-#: ../metadata/wobbly.xml.in.h:7
-msgid "Inverted window snapping"
-msgstr "उलट विंडो स्नैपिंग"
+#~ msgid "Inverted window snapping"
+#~ msgstr "उलट विंडो स्नैपिंग"
 
-#: ../metadata/wobbly.xml.in.h:8
 #, fuzzy
-msgid "Make window shiver"
-msgstr "windows"
+#~ msgid "Make window shiver"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:9
 #, fuzzy
-msgid "Map Effect"
-msgstr "windows"
+#~ msgid "Map Effect"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:10
 #, fuzzy
-msgid "Map Window Effect"
-msgstr "windows"
+#~ msgid "Map Window Effect"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:11
 #, fuzzy
-msgid "Map Windows"
-msgstr "windows"
+#~ msgid "Map Windows"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:12
 #, fuzzy
-msgid "Maximize Effect"
-msgstr "windows"
+#~ msgid "Maximize Effect"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:13
 #, fuzzy
-msgid "Minimum Grid Size"
-msgstr "निम्नतम &GID"
+#~ msgid "Minimum Grid Size"
+#~ msgstr "निम्नतम &GID"
 
-#: ../metadata/wobbly.xml.in.h:14
 #, fuzzy
-msgid "Minimum Vertex Grid Size"
-msgstr "निम्नतम &GID"
+#~ msgid "Minimum Vertex Grid Size"
+#~ msgstr "निम्नतम &GID"
 
-#: ../metadata/wobbly.xml.in.h:15
 #, fuzzy
-msgid "Move Windows"
-msgstr "windows"
+#~ msgid "Move Windows"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:17
-msgid "Shiver"
-msgstr "भुरभुरा"
+#~ msgid "Shiver"
+#~ msgstr "भुरभुरा"
 
-#: ../metadata/wobbly.xml.in.h:18
-msgid "Snap Inverted"
-msgstr "स्नैप उलटें"
+#~ msgid "Snap Inverted"
+#~ msgstr "स्नैप उलटें"
 
-#: ../metadata/wobbly.xml.in.h:19
 #, fuzzy
-msgid "Snap windows"
-msgstr "windows"
+#~ msgid "Snap windows"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:20
 #, fuzzy
-msgid "Spring Friction"
-msgstr "क्रिया"
+#~ msgid "Spring Friction"
+#~ msgstr "क्रिया"
 
-#: ../metadata/wobbly.xml.in.h:21
 #, fuzzy
-msgid "Spring K"
-msgstr "स्टेपिगं"
+#~ msgid "Spring K"
+#~ msgstr "स्टेपिगं"
 
-#: ../metadata/wobbly.xml.in.h:22
 #, fuzzy
-msgid "Spring Konstant"
-msgstr "स्टेपिगं"
+#~ msgid "Spring Konstant"
+#~ msgstr "स्टेपिगं"
 
-#: ../metadata/wobbly.xml.in.h:23
 #, fuzzy
-msgid "Toggle window snapping"
-msgstr "windows"
+#~ msgid "Toggle window snapping"
+#~ msgstr "windows"
 
-#: ../metadata/wobbly.xml.in.h:24
-msgid "Use spring model for wobbly window effect"
-msgstr "वूबली विंडो प्रभाव के लिए स्प्रिंग मॉडल का प्रयोग करें"
+#~ msgid "Use spring model for wobbly window effect"
+#~ msgstr "वूबली विंडो प्रभाव के लिए स्प्रिंग मॉडल का प्रयोग करें"
 
-#: ../metadata/wobbly.xml.in.h:25
 #, fuzzy
-msgid "Vertex Grid Resolution"
-msgstr "सेर्वर सार"
+#~ msgid "Vertex Grid Resolution"
+#~ msgstr "सेर्वर सार"
 
-#: ../metadata/wobbly.xml.in.h:26
-msgid "Windows that should wobble when focused"
-msgstr "विंडोज़ जिसे बूबल करना चाहिए जब फोकस हो"
+#~ msgid "Windows that should wobble when focused"
+#~ msgstr "विंडोज़ जिसे बूबल करना चाहिए जब फोकस हो"
 
-#: ../metadata/wobbly.xml.in.h:27
-msgid "Windows that should wobble when grabbed"
-msgstr "विंडोज़ जिसे बूबल करना चाहिए जब पकड़ा जाए"
+#~ msgid "Windows that should wobble when grabbed"
+#~ msgstr "विंडोज़ जिसे बूबल करना चाहिए जब पकड़ा जाए"
 
-#: ../metadata/wobbly.xml.in.h:28
-msgid "Windows that should wobble when mapped"
-msgstr "विंडोज़ जिसे मैप करने वक्त बूबल करना चाहिए"
+#~ msgid "Windows that should wobble when mapped"
+#~ msgstr "विंडोज़ जिसे मैप करने वक्त बूबल करना चाहिए"
 
-#: ../metadata/wobbly.xml.in.h:29
-msgid "Windows that should wobble when moved"
-msgstr "विंडोज़ जिसे खिसकाने वक्त बूबल करना चाहिए"
+#~ msgid "Windows that should wobble when moved"
+#~ msgstr "विंडोज़ जिसे खिसकाने वक्त बूबल करना चाहिए"
 
-#: ../metadata/wobbly.xml.in.h:30
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "विंडो को अधिकतम व न्यूनतम करने के दौरान बूबल प्रभाव"
+#~ msgid "Wobble effect when maximizing and unmaximizing windows"
+#~ msgstr "विंडो को अधिकतम व न्यूनतम करने के दौरान बूबल प्रभाव"
 
-#: ../metadata/wobbly.xml.in.h:31
 #, fuzzy
-msgid "Wobbly Windows"
-msgstr "windows"
+#~ msgid "Wobbly Windows"
+#~ msgstr "windows"
 
-#: ../metadata/zoom.xml.in.h:1
 #, fuzzy
-msgid "Filter Linear"
-msgstr "फिल्टर:"
+#~ msgid "Filter Linear"
+#~ msgstr "फिल्टर:"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "जूम इन करने के दौरान रैखिक फिल्टर का प्रयोग करें"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "जूम इन करने के दौरान रैखिक फिल्टर का प्रयोग करें"
 
-#: ../metadata/zoom.xml.in.h:6
 #, fuzzy
-msgid "Zoom Desktop"
-msgstr "डेसक्टाप"
+#~ msgid "Zoom Desktop"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "ज़ूम इन"
+#~ msgid "Zoom In"
+#~ msgstr "ज़ूम इन"
 
-#: ../metadata/zoom.xml.in.h:8
 #, fuzzy
-msgid "Zoom Out"
-msgstr "डेसक्टाप"
+#~ msgid "Zoom Out"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/zoom.xml.in.h:9
 #, fuzzy
-msgid "Zoom Pan"
-msgstr "डेसक्टाप"
+#~ msgid "Zoom Pan"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/zoom.xml.in.h:10
 #, fuzzy
-msgid "Zoom Speed"
-msgstr "छोडं दिया \n"
+#~ msgid "Zoom Speed"
+#~ msgstr "छोडं दिया \n"
 
-#: ../metadata/zoom.xml.in.h:11
 #, fuzzy
-msgid "Zoom Timestep"
-msgstr "टाइम"
+#~ msgid "Zoom Timestep"
+#~ msgstr "टाइम"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "ज़ूम और पैन डेस्कटॉप घन"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "ज़ूम और पैन डेस्कटॉप घन"
 
-#: ../metadata/zoom.xml.in.h:13
 #, fuzzy
-msgid "Zoom factor"
-msgstr "डेसक्टाप"
+#~ msgid "Zoom factor"
+#~ msgstr "डेसक्टाप"
 
-#: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom pan"
-msgstr "छोडं दिया \n"
+#~ msgid "Zoom pan"
+#~ msgstr "छोडं दिया \n"
 
 #~ msgid "Background Images"
 #~ msgstr "पृष्ठभूमि चित्र"

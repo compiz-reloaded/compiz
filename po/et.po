@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: autoinst.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:22+0530\n"
+"POT-Creation-Date: 2008-05-29 14:02+0200\n"
 "PO-Revision-Date: 2003-09-22 13:26+0200\n"
 "Last-Translator: Ain Vagula <avagula@gmail.com>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -15,2959 +15,1349 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-#, fuzzy
-msgid "Desktop"
-msgstr "Töölauad"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
-msgid "Window Management"
-msgstr "Aken"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
-msgid "Compiz"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:1
-msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:2
-#, fuzzy
-msgid "Blur type"
-msgstr "Kiirus:"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:3
-#, fuzzy
-msgid "Metacity theme active window opacity"
-msgstr "Kas kasutada animeeritud aknaid?"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:4
-msgid "Metacity theme active window opacity shade"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:5
-msgid "Metacity theme opacity"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:6
-msgid "Metacity theme opacity shade"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:7
-msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:8
-msgid "Opacity to use for metacity theme decorations"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid ""
-"Shade active windows with metacity theme decorations from opaque to "
-"translucent"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid ""
-"Shade windows with metacity theme decorations from opaque to translucent"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:11
-msgid "Title bar mouse wheel action"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:12
-msgid "Type of blur used for window decorations"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:13
-msgid "Use metacity theme"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:14
-msgid "Use metacity theme when drawing window decorations"
-msgstr ""
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
-#: ../metadata/core.xml.in.h:24
+#: gtk/window-decorator/gtk-window-decorator.c:4417
 msgid "Close Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
-#: ../metadata/core.xml.in.h:154
+#: gtk/window-decorator/gtk-window-decorator.c:4439
 msgid "Unmaximize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
-#: ../metadata/core.xml.in.h:85
+#: gtk/window-decorator/gtk-window-decorator.c:4442
 msgid "Maximize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
-#: ../metadata/core.xml.in.h:91
+#: gtk/window-decorator/gtk-window-decorator.c:4484
 msgid "Minimize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
-#: ../metadata/core.xml.in.h:161
+#: gtk/window-decorator/gtk-window-decorator.c:4601
 #, fuzzy
 msgid "Window Menu"
 msgstr "Aken"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: gtk/window-decorator/gtk-window-decorator.c:4620
 #, fuzzy
 msgid "Shade"
 msgstr "Vali &pilt"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
+#: gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
 msgstr ""
 
-#: ../metadata/annotate.xml.in.h:1
 #, fuzzy
-msgid "Annotate"
-msgstr "Lähtestamine"
+#~ msgid "Desktop"
+#~ msgstr "Töölauad"
 
-#: ../metadata/annotate.xml.in.h:2
 #, fuzzy
-msgid "Annotate Fill Color"
-msgstr "Värvid"
+#~ msgid "Window Management"
+#~ msgstr "Aken"
 
-#: ../metadata/annotate.xml.in.h:3
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../metadata/annotate.xml.in.h:4
 #, fuzzy
-msgid "Annotate plugin"
-msgstr "Aktiivne vajutatud:"
+#~ msgid "Blur type"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/annotate.xml.in.h:5
 #, fuzzy
-msgid "Clear"
-msgstr "P_uhasta"
-
-#: ../metadata/annotate.xml.in.h:6
-msgid "Draw"
-msgstr ""
-
-#: ../metadata/annotate.xml.in.h:7
-msgid "Draw using tool"
-msgstr ""
-
-#: ../metadata/annotate.xml.in.h:8
-msgid "Fill color for annotations"
-msgstr ""
+#~ msgid "Metacity theme active window opacity"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 #, fuzzy
-msgid "Initiate"
-msgstr "Lähtestamine"
+#~ msgid "Annotate"
+#~ msgstr "Lähtestamine"
 
-#: ../metadata/annotate.xml.in.h:10
 #, fuzzy
-msgid "Initiate annotate drawing"
-msgstr "Käivita Windows"
+#~ msgid "Annotate Fill Color"
+#~ msgstr "Värvid"
 
-#: ../metadata/annotate.xml.in.h:11
 #, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "Käivita Windows"
+#~ msgid "Annotate plugin"
+#~ msgstr "Aktiivne vajutatud:"
 
-#: ../metadata/annotate.xml.in.h:12
 #, fuzzy
-msgid "Initiate erase"
-msgstr "Lähtestamine"
-
-#: ../metadata/annotate.xml.in.h:13
-msgid "Line width"
-msgstr ""
-
-#: ../metadata/annotate.xml.in.h:14
-msgid "Line width for annotations"
-msgstr ""
-
-#: ../metadata/annotate.xml.in.h:15
-msgid "Stroke color for annotations"
-msgstr ""
-
-#: ../metadata/annotate.xml.in.h:16
-msgid "Stroke width"
-msgstr ""
+#~ msgid "Clear"
+#~ msgstr "P_uhasta"
 
-#: ../metadata/annotate.xml.in.h:17
-msgid "Stroke width for annotations"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:1
 #, fuzzy
-msgid "4xBilinear"
-msgstr "Filtreeri seda kausta"
+#~ msgid "Initiate"
+#~ msgstr "Lähtestamine"
 
-#: ../metadata/blur.xml.in.h:2
 #, fuzzy
-msgid "Alpha Blur"
-msgstr "Käivita Windows"
+#~ msgid "Initiate annotate drawing"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:3
 #, fuzzy
-msgid "Alpha blur windows"
-msgstr "Käivita Windows"
+#~ msgid "Initiate annotate erasing"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:4
 #, fuzzy
-msgid "Blur Filter"
-msgstr "Määra filter"
+#~ msgid "Initiate erase"
+#~ msgstr "Lähtestamine"
 
-#: ../metadata/blur.xml.in.h:5
 #, fuzzy
-msgid "Blur Occlusion"
-msgstr "Häälestamine"
+#~ msgid "4xBilinear"
+#~ msgstr "Filtreeri seda kausta"
 
-#: ../metadata/blur.xml.in.h:6
 #, fuzzy
-msgid "Blur Saturation"
-msgstr "Häälestamine"
+#~ msgid "Alpha Blur"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:7
 #, fuzzy
-msgid "Blur Speed"
-msgstr "Kiirus:"
+#~ msgid "Alpha blur windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:8
 #, fuzzy
-msgid "Blur Windows"
-msgstr "Käivita Windows"
-
-#: ../metadata/blur.xml.in.h:9
-msgid "Blur behind translucent parts of windows"
-msgstr ""
+#~ msgid "Blur Filter"
+#~ msgstr "Määra filter"
 
-#: ../metadata/blur.xml.in.h:10
 #, fuzzy
-msgid "Blur saturation"
-msgstr "Häälestamine"
+#~ msgid "Blur Occlusion"
+#~ msgstr "Häälestamine"
 
-#: ../metadata/blur.xml.in.h:11
 #, fuzzy
-msgid "Blur windows"
-msgstr "Käivita Windows"
-
-#: ../metadata/blur.xml.in.h:12
-msgid "Blur windows that doesn't have focus"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:13
-msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+#~ msgid "Blur Saturation"
+#~ msgstr "Häälestamine"
 
-#: ../metadata/blur.xml.in.h:14
-msgid "Filter method used for blurring"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:15
 #, fuzzy
-msgid "Focus Blur"
-msgstr "Käivita Windows"
+#~ msgid "Blur Speed"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/blur.xml.in.h:16
 #, fuzzy
-msgid "Focus blur windows"
-msgstr "Käivita Windows"
+#~ msgid "Blur Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:17
 #, fuzzy
-msgid "Gaussian"
-msgstr "Vene"
+#~ msgid "Blur saturation"
+#~ msgstr "Häälestamine"
 
-#: ../metadata/blur.xml.in.h:18
 #, fuzzy
-msgid "Gaussian Radius"
-msgstr "Venemaa Föderatsioon"
+#~ msgid "Blur windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:19
 #, fuzzy
-msgid "Gaussian Strength"
-msgstr "Vene"
+#~ msgid "Focus Blur"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:20
 #, fuzzy
-msgid "Gaussian radius"
-msgstr "Venemaa Föderatsioon"
+#~ msgid "Focus blur windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/blur.xml.in.h:21
 #, fuzzy
-msgid "Gaussian strength"
-msgstr "Vene"
-
-#: ../metadata/blur.xml.in.h:22
-msgid "Independent texture fetch"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
-msgid "Mipmap"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:24
-msgid "Mipmap LOD"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:25
-msgid "Mipmap level-of-detail"
-msgstr ""
+#~ msgid "Gaussian"
+#~ msgstr "Vene"
 
-#: ../metadata/blur.xml.in.h:26
-msgid "Pulse"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:27
 #, fuzzy
-msgid "Pulse effect"
-msgstr "Sorimisjärjestuse muutmine"
-
-#: ../metadata/blur.xml.in.h:28
-msgid ""
-"Use the available texture units to do as many as possible independent "
-"texture fetches."
-msgstr ""
+#~ msgid "Gaussian Radius"
+#~ msgstr "Venemaa Föderatsioon"
 
-#: ../metadata/blur.xml.in.h:29
 #, fuzzy
-msgid "Window blur speed"
-msgstr "Windows NT"
-
-#: ../metadata/blur.xml.in.h:30
-msgid "Windows that should be affected by focus blur"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:31
-msgid "Windows that should be use alpha blur by default"
-msgstr ""
+#~ msgid "Gaussian Strength"
+#~ msgstr "Vene"
 
-#: ../metadata/clone.xml.in.h:1
-msgid "Clone Output"
-msgstr ""
-
-#: ../metadata/clone.xml.in.h:3
 #, fuzzy
-msgid "Initiate clone selection"
-msgstr "Videorežiimi valimine"
-
-#: ../metadata/clone.xml.in.h:4
-msgid "Output clone handler"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:1
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:2
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:3
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:4
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:5
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:6
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:7
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:8
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:9
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:10
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:11
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:12
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
+#~ msgid "Gaussian radius"
+#~ msgstr "Venemaa Föderatsioon"
 
-#: ../metadata/core.xml.in.h:13
 #, fuzzy
-msgid "Active Plugins"
-msgstr "Aktiivne vajutatud:"
+#~ msgid "Gaussian strength"
+#~ msgstr "Vene"
 
-#: ../metadata/core.xml.in.h:14
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:15
-msgid "Audible Bell"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:16
 #, fuzzy
-msgid "Audible system beep"
-msgstr "Failisüsteem"
-
-#: ../metadata/core.xml.in.h:17
-msgid "Auto-Raise"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:18
-msgid "Auto-Raise Delay"
-msgstr ""
+#~ msgid "Pulse effect"
+#~ msgstr "Sorimisjärjestuse muutmine"
 
-#: ../metadata/core.xml.in.h:19
 #, fuzzy
-msgid "Automatic detection of output devices"
-msgstr "Automaatne tuvastamine"
+#~ msgid "Window blur speed"
+#~ msgstr "Windows NT"
 
-#: ../metadata/core.xml.in.h:20
 #, fuzzy
-msgid "Automatic detection of refresh rate"
-msgstr "Automaatne tuvastamine"
+#~ msgid "Initiate clone selection"
+#~ msgstr "Videorežiimi valimine"
 
-#: ../metadata/core.xml.in.h:21
-msgid "Best"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:22
-msgid "Click To Focus"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:23
-msgid "Click on window moves input focus to it"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:25
 #, fuzzy
-msgid "Close active window"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Active Plugins"
+#~ msgstr "Aktiivne vajutatud:"
 
-#: ../metadata/core.xml.in.h:26
 #, fuzzy
-msgid "Command line 0"
-msgstr "Käsk tagastas '%1' : %2"
+#~ msgid "Audible system beep"
+#~ msgstr "Failisüsteem"
 
-#: ../metadata/core.xml.in.h:27
 #, fuzzy
-msgid "Command line 1"
-msgstr "Käsk tagastas '%1' : %2"
+#~ msgid "Automatic detection of output devices"
+#~ msgstr "Automaatne tuvastamine"
 
-#: ../metadata/core.xml.in.h:28
 #, fuzzy
-msgid "Command line 10"
-msgstr "Käsk tagastas '%1' : %2"
+#~ msgid "Automatic detection of refresh rate"
+#~ msgstr "Automaatne tuvastamine"
 
-#: ../metadata/core.xml.in.h:29
 #, fuzzy
-msgid "Command line 11"
-msgstr "Käsk tagastas '%1' : %2"
+#~ msgid "Close active window"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/core.xml.in.h:30
 #, fuzzy
-msgid "Command line 2"
-msgstr "Käsk tagastas '%1' : %2"
+#~ msgid "Command line 0"
+#~ msgstr "Käsk tagastas '%1' : %2"
 
-#: ../metadata/core.xml.in.h:31
 #, fuzzy
-msgid "Command line 3"
-msgstr "Käsku pole antud"
+#~ msgid "Command line 1"
+#~ msgstr "Käsk tagastas '%1' : %2"
 
-#: ../metadata/core.xml.in.h:32
 #, fuzzy
-msgid "Command line 4"
-msgstr "Käsku pole antud"
+#~ msgid "Command line 10"
+#~ msgstr "Käsk tagastas '%1' : %2"
 
-#: ../metadata/core.xml.in.h:33
 #, fuzzy
-msgid "Command line 5"
-msgstr "Käsku pole antud"
+#~ msgid "Command line 11"
+#~ msgstr "Käsk tagastas '%1' : %2"
 
-#: ../metadata/core.xml.in.h:34
 #, fuzzy
-msgid "Command line 6"
-msgstr "Käsku pole antud"
+#~ msgid "Command line 2"
+#~ msgstr "Käsk tagastas '%1' : %2"
 
-#: ../metadata/core.xml.in.h:35
 #, fuzzy
-msgid "Command line 7"
-msgstr "Käsku pole antud"
+#~ msgid "Command line 3"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:36
 #, fuzzy
-msgid "Command line 8"
-msgstr "Käsku pole antud"
+#~ msgid "Command line 4"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:37
 #, fuzzy
-msgid "Command line 9"
-msgstr "Käsku pole antud"
-
-#: ../metadata/core.xml.in.h:38
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:39
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:40
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:41
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:42
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:43
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:44
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:45
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:46
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:47
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:48
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
+#~ msgid "Command line 5"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:49
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:50
-msgid "Decrease Opacity"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:51
-msgid "Decrease window opacity"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:52
 #, fuzzy
-msgid "Default Icon"
-msgstr "Vaikeruuting"
-
-#: ../metadata/core.xml.in.h:53
-msgid "Default window icon image"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:54
-msgid "Detect Outputs"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:55
-msgid "Detect Refresh Rate"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:56
-msgid ""
-"Duration the pointer must rest in a screen edge before an edge action is "
-"taken."
-msgstr ""
-
-#: ../metadata/core.xml.in.h:57
-msgid "Edge Trigger Delay"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:58
-msgid "Fast"
-msgstr ""
+#~ msgid "Command line 6"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:59
 #, fuzzy
-msgid "Focus Prevention Level"
-msgstr "X Window süsteem"
+#~ msgid "Command line 7"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:60
 #, fuzzy
-msgid "Focus Prevention Windows"
-msgstr "X Window süsteem"
+#~ msgid "Command line 8"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:61
 #, fuzzy
-msgid "Focus prevention windows"
-msgstr "X Window süsteem"
+#~ msgid "Command line 9"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:62
-msgid "Force independent output painting."
-msgstr ""
-
-#: ../metadata/core.xml.in.h:63
-msgid "General Options"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:64
-msgid "General compiz options"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:65
-msgid "Good"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:66
-msgid "Hide Skip Taskbar Windows"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:67
-msgid "Hide all windows and focus desktop"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:68
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:69
-msgid "High"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:70
 #, fuzzy
-msgid "Horizontal Virtual Size"
-msgstr "Horisontaalne"
-
-#: ../metadata/core.xml.in.h:71
-msgid "If available use compression for textures converted from images"
-msgstr ""
+#~ msgid "Default Icon"
+#~ msgstr "Vaikeruuting"
 
-#: ../metadata/core.xml.in.h:72
-msgid "Ignore Hints When Maximized"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:73
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:74
-msgid "Increase Opacity"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:75
-msgid "Increase window opacity"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:76
-msgid "Interval before raising selected windows"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:77
-msgid "Interval between ping messages"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:78
 #, fuzzy
-msgid "Level of focus stealing prevention"
-msgstr "ZEN-partitsiooni lubamine"
-
-#: ../metadata/core.xml.in.h:79
-msgid "Lighting"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:80
-msgid "List of currently active plugins"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:81
-msgid "List of strings describing output devices"
-msgstr ""
+#~ msgid "Focus Prevention Level"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/core.xml.in.h:82
-msgid "Low"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:83
 #, fuzzy
-msgid "Lower Window"
-msgstr "Käivita Windows"
-
-#: ../metadata/core.xml.in.h:84
-msgid "Lower window beneath other windows"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:86
-msgid "Maximize Window Horizontally"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:87
-msgid "Maximize Window Vertically"
-msgstr ""
+#~ msgid "Focus Prevention Windows"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/core.xml.in.h:88
 #, fuzzy
-msgid "Maximize active window"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Focus prevention windows"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/core.xml.in.h:89
-msgid "Maximize active window horizontally"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:90
-msgid "Maximize active window vertically"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:92
 #, fuzzy
-msgid "Minimize active window"
-msgstr "Mitteaktiivne vajutatud:"
+#~ msgid "Horizontal Virtual Size"
+#~ msgstr "Horisontaalne"
 
-#: ../metadata/core.xml.in.h:93
 #, fuzzy
-msgid "Number of Desktops"
-msgstr "Kaugtöölaud"
+#~ msgid "Level of focus stealing prevention"
+#~ msgstr "ZEN-partitsiooni lubamine"
 
-#: ../metadata/core.xml.in.h:94
 #, fuzzy
-msgid "Number of virtual desktops"
-msgstr "Kaugtöölaud"
-
-#: ../metadata/core.xml.in.h:95
-msgid "Off"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:96
-msgid "Only perform screen updates during vertical blanking period"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:97
-msgid "Opacity Step"
-msgstr ""
+#~ msgid "Lower Window"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/core.xml.in.h:98
-msgid "Opacity change step"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:99
-msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:100
-msgid "Opacity window values"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:101
 #, fuzzy
-msgid "Opacity windows"
-msgstr "Käivita Windows"
+#~ msgid "Maximize active window"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/core.xml.in.h:102
 #, fuzzy
-msgid "Open a terminal"
-msgstr "Käivitatakse terminalis"
-
-#: ../metadata/core.xml.in.h:103
-msgid "Outputs"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:104
-msgid "Overlapping Output Handling"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:105
-msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:106
-msgid "Ping Delay"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:107
-msgid "Prefer larger output"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:108
-msgid "Prefer smaller output"
-msgstr ""
+#~ msgid "Minimize active window"
+#~ msgstr "Mitteaktiivne vajutatud:"
 
-#: ../metadata/core.xml.in.h:109
-msgid "Raise On Click"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:110
 #, fuzzy
-msgid "Raise Window"
-msgstr "Käivita Windows"
-
-#: ../metadata/core.xml.in.h:111
-msgid "Raise selected windows after interval"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:112
-msgid "Raise window above other windows"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:113
-msgid "Raise windows when clicked"
-msgstr ""
+#~ msgid "Number of Desktops"
+#~ msgstr "Kaugtöölaud"
 
-#: ../metadata/core.xml.in.h:114
 #, fuzzy
-msgid "Refresh Rate"
-msgstr "Värskenda"
+#~ msgid "Number of virtual desktops"
+#~ msgstr "Kaugtöölaud"
 
-#: ../metadata/core.xml.in.h:115
 #, fuzzy
-msgid "Run Dialog"
-msgstr "Häälestusdialoog"
+#~ msgid "Opacity windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/core.xml.in.h:116
 #, fuzzy
-msgid "Run command 0"
-msgstr "Tundmatu käsk "
+#~ msgid "Open a terminal"
+#~ msgstr "Käivitatakse terminalis"
 
-#: ../metadata/core.xml.in.h:117
 #, fuzzy
-msgid "Run command 1"
-msgstr "Tundmatu käsk "
+#~ msgid "Raise Window"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/core.xml.in.h:118
 #, fuzzy
-msgid "Run command 10"
-msgstr "Tundmatu käsk "
+#~ msgid "Refresh Rate"
+#~ msgstr "Värskenda"
 
-#: ../metadata/core.xml.in.h:119
 #, fuzzy
-msgid "Run command 11"
-msgstr "Tundmatu käsk "
+#~ msgid "Run Dialog"
+#~ msgstr "Häälestusdialoog"
 
-#: ../metadata/core.xml.in.h:120
 #, fuzzy
-msgid "Run command 2"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 0"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:121
 #, fuzzy
-msgid "Run command 3"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 1"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:122
 #, fuzzy
-msgid "Run command 4"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 10"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:123
 #, fuzzy
-msgid "Run command 5"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 11"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:124
 #, fuzzy
-msgid "Run command 6"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 2"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:125
 #, fuzzy
-msgid "Run command 7"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 3"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:126
 #, fuzzy
-msgid "Run command 8"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 4"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:127
 #, fuzzy
-msgid "Run command 9"
-msgstr "Tundmatu käsk "
+#~ msgid "Run command 5"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:128
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:129
-msgid "Screen size multiplier for vertical virtual size"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:130
 #, fuzzy
-msgid "Screenshot command line"
-msgstr "Käsku pole antud"
+#~ msgid "Run command 6"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:131
 #, fuzzy
-msgid "Show Desktop"
-msgstr "Töölauad"
+#~ msgid "Run command 7"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:132
 #, fuzzy
-msgid "Show Main Menu"
-msgstr "Peamenüü"
+#~ msgid "Run command 8"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:133
 #, fuzzy
-msgid "Show Run Application dialog"
-msgstr "Käivita rakendus"
+#~ msgid "Run command 9"
+#~ msgstr "Tundmatu käsk "
 
-#: ../metadata/core.xml.in.h:134
 #, fuzzy
-msgid "Show the main menu"
-msgstr "Teenuse URI näitamine"
+#~ msgid "Screenshot command line"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:135
 #, fuzzy
-msgid "Slow Animations"
-msgstr "Animatsioon"
-
-#: ../metadata/core.xml.in.h:136
-msgid "Smart mode"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:137
-msgid "Sync To VBlank"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:138
-msgid "Take a screenshot"
-msgstr ""
+#~ msgid "Show Desktop"
+#~ msgstr "Töölauad"
 
-#: ../metadata/core.xml.in.h:139
-msgid "Take a screenshot of a window"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:140
 #, fuzzy
-msgid "Terminal command line"
-msgstr "Käsku pole antud"
+#~ msgid "Show Main Menu"
+#~ msgstr "Peamenüü"
 
-#: ../metadata/core.xml.in.h:141
 #, fuzzy
-msgid "Texture Compression"
-msgstr "Määra filter"
+#~ msgid "Show Run Application dialog"
+#~ msgstr "Käivita rakendus"
 
-#: ../metadata/core.xml.in.h:142
 #, fuzzy
-msgid "Texture Filter"
-msgstr "Määra filter"
+#~ msgid "Show the main menu"
+#~ msgstr "Teenuse URI näitamine"
 
-#: ../metadata/core.xml.in.h:143
 #, fuzzy
-msgid "Texture filtering"
-msgstr "Määra filter"
-
-#: ../metadata/core.xml.in.h:144
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:145
-msgid "Toggle Window Maximized"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:146
-msgid "Toggle Window Maximized Horizontally"
-msgstr ""
+#~ msgid "Slow Animations"
+#~ msgstr "Animatsioon"
 
-#: ../metadata/core.xml.in.h:147
-msgid "Toggle Window Maximized Vertically"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:148
 #, fuzzy
-msgid "Toggle Window Shaded"
-msgstr "Sorimisjärjestuse muutmine"
-
-#: ../metadata/core.xml.in.h:149
-msgid "Toggle active window maximized"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:150
-msgid "Toggle active window maximized horizontally"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:151
-msgid "Toggle active window maximized vertically"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:152
-msgid "Toggle active window shaded"
-msgstr ""
+#~ msgid "Terminal command line"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/core.xml.in.h:153
-msgid "Toggle use of slow animations"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:155
 #, fuzzy
-msgid "Unmaximize active window"
-msgstr "Kas kasutada animeeritud aknaid?"
-
-#: ../metadata/core.xml.in.h:156
-msgid "Unredirect Fullscreen Windows"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:157
-msgid "Use diffuse light when screen is transformed"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:158
-msgid "Vertical Virtual Size"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:159
-msgid "Very High"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:160
-msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:162
-msgid "Window menu button binding"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:163
-msgid "Window menu key binding"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:164
-msgid "Window screenshot command line"
-msgstr ""
+#~ msgid "Texture Compression"
+#~ msgstr "Määra filter"
 
-#: ../metadata/core.xml.in.h:165
-msgid "Windows that should be translucent by default"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 #, fuzzy
-msgid "Acceleration"
-msgstr "3D kiirenduse aktiveerimine"
-
-#: ../metadata/cube.xml.in.h:2
-msgid "Adjust Image"
-msgstr ""
+#~ msgid "Texture Filter"
+#~ msgstr "Määra filter"
 
-#: ../metadata/cube.xml.in.h:3
-msgid "Adjust top face image to rotation"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:4
 #, fuzzy
-msgid "Advance to next slide"
-msgstr "Täiustatud jõudluse kontroll"
-
-#: ../metadata/cube.xml.in.h:5
-msgid "Animate Skydome"
-msgstr ""
+#~ msgid "Texture filtering"
+#~ msgstr "Määra filter"
 
-#: ../metadata/cube.xml.in.h:6
-msgid "Animate skydome when rotating cube"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:7
 #, fuzzy
-msgid "Automatic"
-msgstr "Lähtestamine"
-
-#: ../metadata/cube.xml.in.h:8
-msgid "Color of top and bottom sides of the cube"
-msgstr ""
+#~ msgid "Toggle Window Shaded"
+#~ msgstr "Sorimisjärjestuse muutmine"
 
-#: ../metadata/cube.xml.in.h:9
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:10
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:11
 #, fuzzy
-msgid "Cube Color"
-msgstr "Värvid"
+#~ msgid "Unmaximize active window"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/cube.xml.in.h:12
 #, fuzzy
-msgid "Desktop Cube"
-msgstr "Töölauad"
+#~ msgid "Acceleration"
+#~ msgstr "3D kiirenduse aktiveerimine"
 
-#: ../metadata/cube.xml.in.h:13
 #, fuzzy
-msgid "Fold Acceleration"
-msgstr "3D kiirenduse aktiveerimine"
+#~ msgid "Advance to next slide"
+#~ msgstr "Täiustatud jõudluse kontroll"
 
-#: ../metadata/cube.xml.in.h:14
 #, fuzzy
-msgid "Fold Speed"
-msgstr "Kiirus:"
+#~ msgid "Automatic"
+#~ msgstr "Lähtestamine"
 
-#: ../metadata/cube.xml.in.h:15
 #, fuzzy
-msgid "Fold Timestep"
-msgstr "Töölauad"
-
-#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr ""
+#~ msgid "Cube Color"
+#~ msgstr "Värvid"
 
-#: ../metadata/cube.xml.in.h:17
 #, fuzzy
-msgid "Go back to previous slide"
-msgstr "Eelmine"
+#~ msgid "Desktop Cube"
+#~ msgstr "Töölauad"
 
-#: ../metadata/cube.xml.in.h:18
-msgid "Image files"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:19
-msgid "Image to use as texture for the skydome"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:20
-msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:21
-msgid "Inside Cube"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:22
-msgid "Inside cube"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:23
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
-#: ../metadata/scale.xml.in.h:17
-msgid "Multi Output Mode"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:26
-msgid "Multiple cubes"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:27
 #, fuzzy
-msgid "Next Slide"
-msgstr "tekstirežiim"
-
-#: ../metadata/cube.xml.in.h:28
-msgid "One big cube"
-msgstr ""
+#~ msgid "Fold Acceleration"
+#~ msgstr "3D kiirenduse aktiveerimine"
 
-#: ../metadata/cube.xml.in.h:29
-msgid "Opacity During Rotation"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:30
-msgid "Opacity When Not Rotating"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:31
-msgid "Opacity of desktop window during rotation."
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:32
-msgid "Opacity of desktop window when not rotating."
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:33
 #, fuzzy
-msgid "Place windows on cube"
-msgstr "Käivita Windows"
+#~ msgid "Fold Speed"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/cube.xml.in.h:34
 #, fuzzy
-msgid "Prev Slide"
-msgstr "Eelmine"
+#~ msgid "Fold Timestep"
+#~ msgstr "Töölauad"
 
-#: ../metadata/cube.xml.in.h:35
-msgid "Render skydome"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:36
 #, fuzzy
-msgid "Scale image"
-msgstr "Vali &pilt"
-
-#: ../metadata/cube.xml.in.h:37
-msgid "Scale images to cover top face of cube"
-msgstr ""
+#~ msgid "Go back to previous slide"
+#~ msgstr "Eelmine"
 
-#: ../metadata/cube.xml.in.h:38
-msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:39
 #, fuzzy
-msgid "Skydome"
-msgstr "Vali &pilt"
-
-#: ../metadata/cube.xml.in.h:40
-msgid "Skydome Gradient End Color"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:41
-msgid "Skydome Gradient Start Color"
-msgstr ""
+#~ msgid "Next Slide"
+#~ msgstr "tekstirežiim"
 
-#: ../metadata/cube.xml.in.h:42
 #, fuzzy
-msgid "Skydome Image"
-msgstr "Vali &pilt"
+#~ msgid "Place windows on cube"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
-#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 #, fuzzy
-msgid "Speed"
-msgstr "Kiirus:"
+#~ msgid "Prev Slide"
+#~ msgstr "Eelmine"
 
-#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
-#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 #, fuzzy
-msgid "Timestep"
-msgstr "Töölauad"
+#~ msgid "Scale image"
+#~ msgstr "Vali &pilt"
 
-#: ../metadata/cube.xml.in.h:45
-msgid "Transparency Only on Mouse Rotate"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:46
-msgid "Unfold"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:47
-msgid "Unfold cube"
-msgstr ""
-
-#: ../metadata/dbus.xml.in.h:1
-msgid "Dbus"
-msgstr ""
-
-#: ../metadata/dbus.xml.in.h:2
-msgid "Dbus Control Backend"
-msgstr ""
-
-#: ../metadata/decoration.xml.in.h:1
-msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
-
-#: ../metadata/decoration.xml.in.h:2
 #, fuzzy
-msgid "Command"
-msgstr "Käsku pole antud"
+#~ msgid "Skydome"
+#~ msgstr "Vali &pilt"
 
-#: ../metadata/decoration.xml.in.h:3
 #, fuzzy
-msgid "Decoration windows"
-msgstr "Käivita Windows"
+#~ msgid "Skydome Image"
+#~ msgstr "Vali &pilt"
 
-#: ../metadata/decoration.xml.in.h:4
-msgid ""
-"Decorator command line that is executed if no decorator is already running"
-msgstr ""
-
-#: ../metadata/decoration.xml.in.h:5
 #, fuzzy
-msgid "Drop shadow X offset"
-msgstr "MShadow"
+#~ msgid "Speed"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/decoration.xml.in.h:6
 #, fuzzy
-msgid "Drop shadow Y offset"
-msgstr "MShadow"
+#~ msgid "Timestep"
+#~ msgstr "Töölauad"
 
-#: ../metadata/decoration.xml.in.h:7
 #, fuzzy
-msgid "Drop shadow color"
-msgstr "MShadow"
+#~ msgid "Command"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/decoration.xml.in.h:8
 #, fuzzy
-msgid "Drop shadow opacity"
-msgstr "MShadow"
+#~ msgid "Decoration windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/decoration.xml.in.h:9
 #, fuzzy
-msgid "Drop shadow radius"
-msgstr "MShadow"
+#~ msgid "Drop shadow X offset"
+#~ msgstr "MShadow"
 
-#: ../metadata/decoration.xml.in.h:11
 #, fuzzy
-msgid "Shadow Color"
-msgstr "Käivita Windows"
-
-#: ../metadata/decoration.xml.in.h:12
-msgid "Shadow Offset X"
-msgstr ""
-
-#: ../metadata/decoration.xml.in.h:13
-msgid "Shadow Offset Y"
-msgstr ""
+#~ msgid "Drop shadow Y offset"
+#~ msgstr "MShadow"
 
-#: ../metadata/decoration.xml.in.h:14
 #, fuzzy
-msgid "Shadow Opacity"
-msgstr "MShadow"
+#~ msgid "Drop shadow color"
+#~ msgstr "MShadow"
 
-#: ../metadata/decoration.xml.in.h:15
 #, fuzzy
-msgid "Shadow Radius"
-msgstr "MShadow"
+#~ msgid "Drop shadow opacity"
+#~ msgstr "MShadow"
 
-#: ../metadata/decoration.xml.in.h:16
 #, fuzzy
-msgid "Shadow windows"
-msgstr "Käivita Windows"
+#~ msgid "Drop shadow radius"
+#~ msgstr "MShadow"
 
-#: ../metadata/decoration.xml.in.h:17
 #, fuzzy
-msgid "Window Decoration"
-msgstr "Venemaa Föderatsioon"
+#~ msgid "Shadow Color"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/decoration.xml.in.h:18
 #, fuzzy
-msgid "Window decorations"
-msgstr "Venemaa Föderatsioon"
+#~ msgid "Shadow Opacity"
+#~ msgstr "MShadow"
 
-#: ../metadata/decoration.xml.in.h:19
-msgid "Windows that should be decorated"
-msgstr ""
-
-#: ../metadata/decoration.xml.in.h:20
-msgid "Windows that should have a shadow"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:1
-msgid "Fade On Minimize/Open/Close"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:2
 #, fuzzy
-msgid "Fade Speed"
-msgstr "Kiirus:"
-
-#: ../metadata/fade.xml.in.h:3
-msgid "Fade effect on minimize/open/close window events"
-msgstr ""
+#~ msgid "Shadow Radius"
+#~ msgstr "MShadow"
 
-#: ../metadata/fade.xml.in.h:4
 #, fuzzy
-msgid "Fade effect on system beep"
-msgstr "Failisüsteem"
+#~ msgid "Shadow windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/fade.xml.in.h:5
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:6
 #, fuzzy
-msgid "Fade windows"
-msgstr "Käivita Windows"
+#~ msgid "Window Decoration"
+#~ msgstr "Venemaa Föderatsioon"
 
-#: ../metadata/fade.xml.in.h:7
 #, fuzzy
-msgid "Fading Windows"
-msgstr "Käivita Windows"
+#~ msgid "Window decorations"
+#~ msgstr "Venemaa Föderatsioon"
 
-#: ../metadata/fade.xml.in.h:8
 #, fuzzy
-msgid "Fullscreen Visual Bell"
-msgstr "Ekraan"
-
-#: ../metadata/fade.xml.in.h:9
-msgid "Fullscreen fade effect on system beep"
-msgstr ""
+#~ msgid "Fade Speed"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/fade.xml.in.h:10
-msgid "Visual Bell"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:11
 #, fuzzy
-msgid "Window fade speed"
-msgstr "Windows NT"
+#~ msgid "Fade effect on system beep"
+#~ msgstr "Failisüsteem"
 
-#: ../metadata/fade.xml.in.h:12
-msgid "Windows that should be fading"
-msgstr ""
-
-#: ../metadata/fs.xml.in.h:1
 #, fuzzy
-msgid "Mount Point"
-msgstr "Lisa sündmus"
+#~ msgid "Fade windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/fs.xml.in.h:2
 #, fuzzy
-msgid "Mount point"
-msgstr "Lisa sündmus"
-
-#: ../metadata/fs.xml.in.h:3
-msgid "Userspace File System"
-msgstr ""
-
-#: ../metadata/fs.xml.in.h:4
-msgid "Userspace file system"
-msgstr ""
-
-#: ../metadata/gconf.xml.in.h:1
-msgid "GConf"
-msgstr ""
-
-#: ../metadata/gconf.xml.in.h:2
-msgid "GConf Control Backend"
-msgstr ""
-
-#: ../metadata/glib.xml.in.h:1
-msgid "GLib"
-msgstr ""
-
-#: ../metadata/glib.xml.in.h:2
-msgid "GLib main loop support"
-msgstr ""
-
-#: ../metadata/ini.xml.in.h:1
-msgid "Ini"
-msgstr ""
-
-#: ../metadata/ini.xml.in.h:2
-msgid "Ini Flat File Backend"
-msgstr ""
-
-#: ../metadata/inotify.xml.in.h:1
-msgid "File change notification plugin"
-msgstr ""
-
-#: ../metadata/inotify.xml.in.h:2
-msgid "Inotify"
-msgstr ""
+#~ msgid "Fading Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/kconfig.xml.in.h:1
-msgid "Kconfig"
-msgstr ""
-
-#: ../metadata/kconfig.xml.in.h:2
-msgid "Kconfig Control Backend"
-msgstr ""
-
-#: ../metadata/minimize.xml.in.h:1
 #, fuzzy
-msgid "Minimize Effect"
-msgstr "Mitteaktiivne vajutatud:"
+#~ msgid "Fullscreen Visual Bell"
+#~ msgstr "Ekraan"
 
-#: ../metadata/minimize.xml.in.h:2
 #, fuzzy
-msgid "Minimize Windows"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Window fade speed"
+#~ msgstr "Windows NT"
 
-#: ../metadata/minimize.xml.in.h:3
 #, fuzzy
-msgid "Minimize speed"
-msgstr "Mitteaktiivne vajutatud:"
+#~ msgid "Mount Point"
+#~ msgstr "Lisa sündmus"
 
-#: ../metadata/minimize.xml.in.h:4
 #, fuzzy
-msgid "Minimize timestep"
-msgstr "Mitteaktiivne vajutatud:"
-
-#: ../metadata/minimize.xml.in.h:5
-msgid "Shade Resistance"
-msgstr ""
-
-#: ../metadata/minimize.xml.in.h:6
-msgid "Shade resistance"
-msgstr ""
-
-#: ../metadata/minimize.xml.in.h:9
-msgid "Transform windows when they are minimized and unminimized"
-msgstr ""
-
-#: ../metadata/minimize.xml.in.h:10
-msgid "Windows that should be transformed when minimized"
-msgstr ""
-
-#: ../metadata/move.xml.in.h:1
-msgid "Constrain Y"
-msgstr ""
-
-#: ../metadata/move.xml.in.h:2
-msgid "Constrain Y coordinate to workspace area"
-msgstr ""
-
-#: ../metadata/move.xml.in.h:3
-msgid "Do not update the server-side position of windows until finished moving"
-msgstr ""
+#~ msgid "Mount point"
+#~ msgstr "Lisa sündmus"
 
-#: ../metadata/move.xml.in.h:4
 #, fuzzy
-msgid "Initiate Window Move"
-msgstr "Käivita Windows"
+#~ msgid "Minimize Effect"
+#~ msgstr "Mitteaktiivne vajutatud:"
 
-#: ../metadata/move.xml.in.h:5
 #, fuzzy
-msgid "Lazy Positioning"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Minimize Windows"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/move.xml.in.h:6
 #, fuzzy
-msgid "Move Window"
-msgstr "X Window süsteem"
+#~ msgid "Minimize speed"
+#~ msgstr "Mitteaktiivne vajutatud:"
 
-#: ../metadata/move.xml.in.h:7
 #, fuzzy
-msgid "Move window"
-msgstr "X Window süsteem"
+#~ msgid "Minimize timestep"
+#~ msgstr "Mitteaktiivne vajutatud:"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
-#: ../metadata/switcher.xml.in.h:18
 #, fuzzy
-msgid "Opacity"
-msgstr "Käivita Windows"
+#~ msgid "Initiate Window Move"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/move.xml.in.h:9
 #, fuzzy
-msgid "Opacity level of moving windows"
-msgstr "Käivita Windows"
+#~ msgid "Lazy Positioning"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/move.xml.in.h:10
-msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr ""
-
-#: ../metadata/move.xml.in.h:11
 #, fuzzy
-msgid "Snapoff maximized windows"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Move Window"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/move.xml.in.h:12
 #, fuzzy
-msgid "Start moving window"
-msgstr "Käivita Windows"
-
-#: ../metadata/place.xml.in.h:1
-msgid "Algorithm to use for window placement"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:2
-msgid "Cascade"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:3
-msgid "Centered"
-msgstr ""
+#~ msgid "Move window"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/place.xml.in.h:4
 #, fuzzy
-msgid "Force Placement Windows"
-msgstr "X Window süsteem"
+#~ msgid "Opacity"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/place.xml.in.h:5
 #, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Horisontaalne"
+#~ msgid "Opacity level of moving windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/place.xml.in.h:6
 #, fuzzy
-msgid "Maximize"
-msgstr "Mitteaktiivne vajutatud:"
+#~ msgid "Snapoff maximized windows"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/place.xml.in.h:8
 #, fuzzy
-msgid "Place Windows"
-msgstr "Käivita Windows"
+#~ msgid "Start moving window"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/place.xml.in.h:9
-msgid "Place across all outputs"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:10
-msgid "Place windows at appropriate positions when mapped"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:11
-msgid "Placement Mode"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:12
 #, fuzzy
-msgid "Positioned windows"
-msgstr "Kas kasutada animeeritud aknaid?"
-
-#: ../metadata/place.xml.in.h:13
-msgid "Random"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:14
-msgid ""
-"Selects how window placement should behave if multiple outputs are selected"
-msgstr ""
+#~ msgid "Force Placement Windows"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/place.xml.in.h:15
-msgid "Smart"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:16
-msgid "Use active output device"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:17
-msgid "Use output device of focussed window"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:18
-msgid "Use output device with pointer"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:19
 #, fuzzy
-msgid "Vertical viewport positions"
-msgstr "Horisontaalne"
+#~ msgid "Horizontal viewport positions"
+#~ msgstr "Horisontaalne"
 
-#: ../metadata/place.xml.in.h:20
 #, fuzzy
-msgid "Viewport positioned windows"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Maximize"
+#~ msgstr "Mitteaktiivne vajutatud:"
 
-#: ../metadata/place.xml.in.h:21
 #, fuzzy
-msgid "Window placement workarounds"
-msgstr "Venemaa Föderatsioon"
+#~ msgid "Place Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/place.xml.in.h:22
-msgid "Windows that should be positioned by default"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:23
-msgid "Windows that should be positioned in specific viewports by default"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:24
-msgid ""
-"Windows that should forcedly be placed, even if they indicate the window "
-"manager should avoid placing them."
-msgstr ""
-
-#: ../metadata/place.xml.in.h:25
-msgid "Workarounds"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:26
 #, fuzzy
-msgid "X Positions"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Positioned windows"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/place.xml.in.h:27
 #, fuzzy
-msgid "X Viewport Positions"
-msgstr "Horisontaalne"
-
-#: ../metadata/place.xml.in.h:28
-msgid "X position values"
-msgstr ""
+#~ msgid "Vertical viewport positions"
+#~ msgstr "Horisontaalne"
 
-#: ../metadata/place.xml.in.h:29
 #, fuzzy
-msgid "Y Positions"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Viewport positioned windows"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/place.xml.in.h:30
 #, fuzzy
-msgid "Y Viewport Positions"
-msgstr "Horisontaalne"
+#~ msgid "Window placement workarounds"
+#~ msgstr "Venemaa Föderatsioon"
 
-#: ../metadata/place.xml.in.h:31
-msgid "Y position values"
-msgstr ""
-
-#: ../metadata/png.xml.in.h:1
-msgid "Png"
-msgstr ""
-
-#: ../metadata/png.xml.in.h:2
-msgid "Png image loader"
-msgstr ""
-
-#: ../metadata/regex.xml.in.h:1
-msgid "Regex Matching"
-msgstr ""
-
-#: ../metadata/regex.xml.in.h:2
-msgid "Regex window matching"
-msgstr ""
-
-#: ../metadata/resize.xml.in.h:1
 #, fuzzy
-msgid "Border Color"
-msgstr "Värvid"
-
-#: ../metadata/resize.xml.in.h:2
-msgid "Border color used for outline and rectangle resize modes"
-msgstr ""
+#~ msgid "X Positions"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/resize.xml.in.h:3
-msgid "Default Resize Mode"
-msgstr ""
-
-#: ../metadata/resize.xml.in.h:4
-msgid "Default mode used for window resizing"
-msgstr ""
-
-#: ../metadata/resize.xml.in.h:5
 #, fuzzy
-msgid "Fill Color"
-msgstr "Värvid"
-
-#: ../metadata/resize.xml.in.h:6
-msgid "Fill color used for rectangle resize mode"
-msgstr ""
+#~ msgid "X Viewport Positions"
+#~ msgstr "Horisontaalne"
 
-#: ../metadata/resize.xml.in.h:7
 #, fuzzy
-msgid "Initiate Normal Window Resize"
-msgstr "Käivita Windows"
+#~ msgid "Y Positions"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/resize.xml.in.h:8
 #, fuzzy
-msgid "Initiate Outline Window Resize"
-msgstr "Käivita Windows"
+#~ msgid "Y Viewport Positions"
+#~ msgstr "Horisontaalne"
 
-#: ../metadata/resize.xml.in.h:9
 #, fuzzy
-msgid "Initiate Rectangle Window Resize"
-msgstr "Käivita Windows"
+#~ msgid "Border Color"
+#~ msgstr "Värvid"
 
-#: ../metadata/resize.xml.in.h:10
 #, fuzzy
-msgid "Initiate Stretch Window Resize"
-msgstr "Käivita Windows"
+#~ msgid "Fill Color"
+#~ msgstr "Värvid"
 
-#: ../metadata/resize.xml.in.h:11
 #, fuzzy
-msgid "Initiate Window Resize"
-msgstr "Käivita Windows"
+#~ msgid "Initiate Normal Window Resize"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "Normaalne"
+#, fuzzy
+#~ msgid "Initiate Outline Window Resize"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:13
 #, fuzzy
-msgid "Normal Resize Windows"
-msgstr "Käivita Windows"
+#~ msgid "Initiate Rectangle Window Resize"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:14
 #, fuzzy
-msgid "Outline"
-msgstr "Värvid"
+#~ msgid "Initiate Stretch Window Resize"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:15
 #, fuzzy
-msgid "Outline Resize Windows"
-msgstr "Käivita Windows"
+#~ msgid "Initiate Window Resize"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:16
-msgid "Rectangle"
-msgstr ""
+#~ msgid "Normal"
+#~ msgstr "Normaalne"
 
-#: ../metadata/resize.xml.in.h:17
 #, fuzzy
-msgid "Rectangle Resize Windows"
-msgstr "Käivita Windows"
+#~ msgid "Normal Resize Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:18
 #, fuzzy
-msgid "Resize Window"
-msgstr "Käivita Windows"
+#~ msgid "Outline"
+#~ msgstr "Värvid"
 
-#: ../metadata/resize.xml.in.h:19
 #, fuzzy
-msgid "Resize window"
-msgstr "Käivita Windows"
+#~ msgid "Outline Resize Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:20
 #, fuzzy
-msgid "Start resizing window"
-msgstr "Käivita Windows"
+#~ msgid "Rectangle Resize Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:21
 #, fuzzy
-msgid "Start resizing window by stretching it"
-msgstr "Käivita Windows"
+#~ msgid "Resize Window"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:22
 #, fuzzy
-msgid "Start resizing window normally"
-msgstr "Käivita Windows"
+#~ msgid "Resize window"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:23
 #, fuzzy
-msgid "Start resizing window with outline"
-msgstr "Käivita Windows"
+#~ msgid "Start resizing window"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:24
 #, fuzzy
-msgid "Start resizing window with rectangle"
-msgstr "Käivita Windows"
-
-#: ../metadata/resize.xml.in.h:25
-msgid "Stretch"
-msgstr ""
+#~ msgid "Start resizing window by stretching it"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/resize.xml.in.h:26
 #, fuzzy
-msgid "Stretch Resize Windows"
-msgstr "Käivita Windows"
-
-#: ../metadata/resize.xml.in.h:27
-msgid "Windows that normal resize should be used for"
-msgstr ""
-
-#: ../metadata/resize.xml.in.h:28
-msgid "Windows that outline resize should be used for"
-msgstr ""
-
-#: ../metadata/resize.xml.in.h:29
-msgid "Windows that rectangle resize should be used for"
-msgstr ""
-
-#: ../metadata/resize.xml.in.h:30
-msgid "Windows that stretch resize should be used for"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:2
-msgid "Edge Flip DnD"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:3
-msgid "Edge Flip Move"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:4
-msgid "Edge Flip Pointer"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:5
-msgid "Flip Time"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:6
-msgid "Flip to left viewport and warp pointer"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:7
-msgid "Flip to next viewport when dragging object to screen edge"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:8
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:9
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:10
-msgid "Flip to right viewport and warp pointer"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:12
-msgid "Invert Y axis for pointer movement"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:13
-msgid "Pointer Invert Y"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:14
-msgid "Pointer Sensitivity"
-msgstr ""
+#~ msgid "Start resizing window normally"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/rotate.xml.in.h:15
-msgid "Raise on rotate"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:16
-msgid "Raise window when rotating"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:17
 #, fuzzy
-msgid "Rotate Cube"
-msgstr "Ekraani pööramine"
+#~ msgid "Start resizing window with outline"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/rotate.xml.in.h:18
 #, fuzzy
-msgid "Rotate Flip Left"
-msgstr "Vasakule"
+#~ msgid "Start resizing window with rectangle"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/rotate.xml.in.h:19
 #, fuzzy
-msgid "Rotate Flip Right"
-msgstr "Paremale"
+#~ msgid "Stretch Resize Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/rotate.xml.in.h:20
 #, fuzzy
-msgid "Rotate Left"
-msgstr "Vasakule"
+#~ msgid "Rotate Cube"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:21
 #, fuzzy
-msgid "Rotate Left with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate Flip Left"
+#~ msgstr "Vasakule"
 
-#: ../metadata/rotate.xml.in.h:22
 #, fuzzy
-msgid "Rotate Right"
-msgstr "Paremale"
+#~ msgid "Rotate Flip Right"
+#~ msgstr "Paremale"
 
-#: ../metadata/rotate.xml.in.h:23
 #, fuzzy
-msgid "Rotate Right with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate Left"
+#~ msgstr "Vasakule"
 
-#: ../metadata/rotate.xml.in.h:24
 #, fuzzy
-msgid "Rotate To"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate Left with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:25
 #, fuzzy
-msgid "Rotate To Face 1"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate Right"
+#~ msgstr "Paremale"
 
-#: ../metadata/rotate.xml.in.h:26
 #, fuzzy
-msgid "Rotate To Face 1 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate Right with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:27
 #, fuzzy
-msgid "Rotate To Face 10"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:28
 #, fuzzy
-msgid "Rotate To Face 10 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 1"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:29
 #, fuzzy
-msgid "Rotate To Face 11"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 1 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:30
 #, fuzzy
-msgid "Rotate To Face 11 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 10"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:31
 #, fuzzy
-msgid "Rotate To Face 12"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 10 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:32
 #, fuzzy
-msgid "Rotate To Face 12 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 11"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:33
 #, fuzzy
-msgid "Rotate To Face 2"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 11 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:34
 #, fuzzy
-msgid "Rotate To Face 2 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 12"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:35
 #, fuzzy
-msgid "Rotate To Face 3"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 12 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:36
 #, fuzzy
-msgid "Rotate To Face 3 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 2"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:37
 #, fuzzy
-msgid "Rotate To Face 4"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 2 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:38
 #, fuzzy
-msgid "Rotate To Face 4 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 3"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:39
 #, fuzzy
-msgid "Rotate To Face 5"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 3 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:40
 #, fuzzy
-msgid "Rotate To Face 5 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 4"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:41
 #, fuzzy
-msgid "Rotate To Face 6"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 4 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:42
 #, fuzzy
-msgid "Rotate To Face 6 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 5"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:43
 #, fuzzy
-msgid "Rotate To Face 7"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 5 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:44
 #, fuzzy
-msgid "Rotate To Face 7 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 6"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:45
 #, fuzzy
-msgid "Rotate To Face 8"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 6 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:46
 #, fuzzy
-msgid "Rotate To Face 8 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 7"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:47
 #, fuzzy
-msgid "Rotate To Face 9"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 7 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:48
 #, fuzzy
-msgid "Rotate To Face 9 with Window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 8"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:49
 #, fuzzy
-msgid "Rotate desktop cube"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 8 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:50
 #, fuzzy
-msgid "Rotate left"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate To Face 9"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:51
 #, fuzzy
-msgid "Rotate left and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate To Face 9 with Window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:52
 #, fuzzy
-msgid "Rotate right"
-msgstr "Paremale"
+#~ msgid "Rotate desktop cube"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:53
 #, fuzzy
-msgid "Rotate right and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate left"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:54
 #, fuzzy
-msgid "Rotate to face 1"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate left and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:55
 #, fuzzy
-msgid "Rotate to face 1 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate right"
+#~ msgstr "Paremale"
 
-#: ../metadata/rotate.xml.in.h:56
 #, fuzzy
-msgid "Rotate to face 10"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate right and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:57
 #, fuzzy
-msgid "Rotate to face 10 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 1"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:58
 #, fuzzy
-msgid "Rotate to face 11"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 1 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:59
 #, fuzzy
-msgid "Rotate to face 11 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 10"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:60
 #, fuzzy
-msgid "Rotate to face 12"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 10 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:61
 #, fuzzy
-msgid "Rotate to face 12 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 11"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:62
 #, fuzzy
-msgid "Rotate to face 2"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 11 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:63
 #, fuzzy
-msgid "Rotate to face 2 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 12"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:64
 #, fuzzy
-msgid "Rotate to face 3"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 12 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:65
 #, fuzzy
-msgid "Rotate to face 3 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 2"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:66
 #, fuzzy
-msgid "Rotate to face 4"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 2 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:67
 #, fuzzy
-msgid "Rotate to face 4 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 3"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:68
 #, fuzzy
-msgid "Rotate to face 5"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 3 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:69
 #, fuzzy
-msgid "Rotate to face 5 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 4"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:70
 #, fuzzy
-msgid "Rotate to face 6"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 4 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:71
 #, fuzzy
-msgid "Rotate to face 6 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 5"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:72
 #, fuzzy
-msgid "Rotate to face 7"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 5 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:73
 #, fuzzy
-msgid "Rotate to face 7 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 6"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:74
 #, fuzzy
-msgid "Rotate to face 8"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 6 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:75
 #, fuzzy
-msgid "Rotate to face 8 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 7"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:76
 #, fuzzy
-msgid "Rotate to face 9"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 7 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:77
 #, fuzzy
-msgid "Rotate to face 9 and bring active window along"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 8"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:78
 #, fuzzy
-msgid "Rotate to viewport"
-msgstr "Ekraani pööramine"
+#~ msgid "Rotate to face 8 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:79
 #, fuzzy
-msgid "Rotate window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 9"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:80
 #, fuzzy
-msgid "Rotate with window"
-msgstr "XF86RotateWindows"
+#~ msgid "Rotate to face 9 and bring active window along"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:81
 #, fuzzy
-msgid "Rotation Acceleration"
-msgstr "3D kiirenduse aktiveerimine"
+#~ msgid "Rotate to viewport"
+#~ msgstr "Ekraani pööramine"
 
-#: ../metadata/rotate.xml.in.h:82
 #, fuzzy
-msgid "Rotation Speed"
-msgstr "Registreerimiskood"
+#~ msgid "Rotate window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:83
 #, fuzzy
-msgid "Rotation Timestep"
-msgstr "Töölauad"
+#~ msgid "Rotate with window"
+#~ msgstr "XF86RotateWindows"
 
-#: ../metadata/rotate.xml.in.h:84
 #, fuzzy
-msgid "Rotation Zoom"
-msgstr "Registreerimiskood"
-
-#: ../metadata/rotate.xml.in.h:85
-msgid "Sensitivity of pointer movement"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:86
-msgid "Snap Cube Rotation to Bottom Face"
-msgstr ""
+#~ msgid "Rotation Acceleration"
+#~ msgstr "3D kiirenduse aktiveerimine"
 
-#: ../metadata/rotate.xml.in.h:87
-msgid "Snap Cube Rotation to Top Face"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:88
-msgid "Snap To Bottom Face"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:89
-msgid "Snap To Top Face"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:91
 #, fuzzy
-msgid "Start Rotation"
-msgstr "Taaskäivituse kinnitus"
+#~ msgid "Rotation Speed"
+#~ msgstr "Registreerimiskood"
 
-#: ../metadata/rotate.xml.in.h:92
-msgid "Timeout before flipping viewport"
-msgstr ""
-
-#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
 #, fuzzy
-msgid "Zoom"
-msgstr "XF86ZoomIn"
-
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
-msgid "Amount of opacity in percent"
-msgstr ""
+#~ msgid "Rotation Timestep"
+#~ msgstr "Töölauad"
 
-#: ../metadata/scale.xml.in.h:2
-msgid "Big"
-msgstr "Suur"
-
-#: ../metadata/scale.xml.in.h:3
-msgid "Click Desktop to Show Desktop"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:4
 #, fuzzy
-msgid "Darken Background"
-msgstr "Värviline taust"
+#~ msgid "Rotation Zoom"
+#~ msgstr "Registreerimiskood"
 
-#: ../metadata/scale.xml.in.h:5
-msgid "Darken background when scaling windows"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:6
-msgid "Emblem"
-msgstr ""
+#, fuzzy
+#~ msgid "Start Rotation"
+#~ msgstr "Taaskäivituse kinnitus"
 
-#: ../metadata/scale.xml.in.h:7
-msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr ""
+#, fuzzy
+#~ msgid "Zoom"
+#~ msgstr "XF86ZoomIn"
 
-#: ../metadata/scale.xml.in.h:8
-msgid "Hover Time"
-msgstr ""
+#~ msgid "Big"
+#~ msgstr "Suur"
 
-#: ../metadata/scale.xml.in.h:9
 #, fuzzy
-msgid "Initiate Window Picker"
-msgstr "Käivita Windows"
+#~ msgid "Darken Background"
+#~ msgstr "Värviline taust"
 
-#: ../metadata/scale.xml.in.h:10
 #, fuzzy
-msgid "Initiate Window Picker For All Windows"
-msgstr "Käivita Windows"
+#~ msgid "Initiate Window Picker"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/scale.xml.in.h:11
 #, fuzzy
-msgid "Initiate Window Picker For Window Group"
-msgstr "Käivita Windows"
+#~ msgid "Initiate Window Picker For All Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/scale.xml.in.h:12
 #, fuzzy
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Käivita Windows"
-
-#: ../metadata/scale.xml.in.h:13
-msgid "Layout and start transforming all windows"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:14
-msgid "Layout and start transforming window group"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:15
-msgid "Layout and start transforming windows"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:16
-msgid "Layout and start transforming windows on current output"
-msgstr ""
+#~ msgid "Initiate Window Picker For Window Group"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Puudub"
-
-#: ../metadata/scale.xml.in.h:19
-msgid "On all output devices"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:20
-msgid "On current output device"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:22
-msgid "Overlay Icon"
-msgstr ""
+#, fuzzy
+#~ msgid "Initiate Window Picker For Windows on Current Output"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/scale.xml.in.h:23
-msgid "Overlay an icon on windows once they are scaled"
-msgstr ""
+#~ msgid "None"
+#~ msgstr "Puudub"
 
-#: ../metadata/scale.xml.in.h:24
 #, fuzzy
-msgid "Scale"
-msgstr "Vali &pilt"
+#~ msgid "Scale"
+#~ msgstr "Vali &pilt"
 
-#: ../metadata/scale.xml.in.h:25
 #, fuzzy
-msgid "Scale Windows"
-msgstr "Käivita Windows"
+#~ msgid "Scale Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/scale.xml.in.h:26
 #, fuzzy
-msgid "Scale speed"
-msgstr "Kiirus:"
+#~ msgid "Scale speed"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/scale.xml.in.h:27
 #, fuzzy
-msgid "Scale timestep"
-msgstr "Vali &pilt"
+#~ msgid "Scale timestep"
+#~ msgstr "Vali &pilt"
 
-#: ../metadata/scale.xml.in.h:28
 #, fuzzy
-msgid "Scale windows"
-msgstr "Käivita Windows"
+#~ msgid "Scale windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/scale.xml.in.h:29
-msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:30
 #, fuzzy
-msgid "Space between windows"
-msgstr "Käivita Windows"
+#~ msgid "Space between windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/scale.xml.in.h:31
 #, fuzzy
-msgid "Spacing"
-msgstr "Tühik"
-
-#: ../metadata/scale.xml.in.h:33
-msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr ""
+#~ msgid "Spacing"
+#~ msgstr "Tühik"
 
-#: ../metadata/scale.xml.in.h:35
-msgid "Windows that should be scaled in scale mode"
-msgstr ""
-
-#: ../metadata/screenshot.xml.in.h:1
 #, fuzzy
-msgid "Automatically open screenshot in this application"
-msgstr "Aplett käivitatakse sisselogimisel automaatselt"
+#~ msgid "Automatically open screenshot in this application"
+#~ msgstr "Aplett käivitatakse sisselogimisel automaatselt"
 
-#: ../metadata/screenshot.xml.in.h:2
 #, fuzzy
-msgid "Directory"
-msgstr "Kataloog\n"
+#~ msgid "Directory"
+#~ msgstr "Kataloog\n"
 
-#: ../metadata/screenshot.xml.in.h:4
 #, fuzzy
-msgid "Initiate rectangle screenshot"
-msgstr "Videorežiimi valimine"
+#~ msgid "Initiate rectangle screenshot"
+#~ msgstr "Videorežiimi valimine"
 
-#: ../metadata/screenshot.xml.in.h:5
 #, fuzzy
-msgid "Launch Application"
-msgstr "Käivita rakendus"
+#~ msgid "Launch Application"
+#~ msgstr "Käivita rakendus"
 
-#: ../metadata/screenshot.xml.in.h:6
-msgid "Put screenshot images in this directory"
-msgstr ""
-
-#: ../metadata/screenshot.xml.in.h:7
 #, fuzzy
-msgid "Screenshot"
-msgstr "Ekraan"
+#~ msgid "Screenshot"
+#~ msgstr "Ekraan"
 
-#: ../metadata/screenshot.xml.in.h:8
 #, fuzzy
-msgid "Screenshot plugin"
-msgstr "Käsku pole antud"
-
-#: ../metadata/svg.xml.in.h:1
-msgid "Svg"
-msgstr ""
+#~ msgid "Screenshot plugin"
+#~ msgstr "Käsku pole antud"
 
-#: ../metadata/svg.xml.in.h:2
-msgid "Svg image loader"
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:1
-msgid "Amount of brightness in percent"
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:3
-msgid "Amount of saturation in percent"
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:4
 #, fuzzy
-msgid "Application Switcher"
-msgstr "Rakenduste sirvija"
+#~ msgid "Application Switcher"
+#~ msgstr "Rakenduste sirvija"
 
-#: ../metadata/switcher.xml.in.h:5
 #, fuzzy
-msgid "Auto Rotate"
-msgstr "Lähtestamine"
+#~ msgid "Auto Rotate"
+#~ msgstr "Lähtestamine"
 
-#: ../metadata/switcher.xml.in.h:6
-msgid "Brightness"
-msgstr "Heledus"
+#~ msgid "Brightness"
+#~ msgstr "Heledus"
 
-#: ../metadata/switcher.xml.in.h:7
 #, fuzzy
-msgid "Bring To Front"
-msgstr "Toiming"
-
-#: ../metadata/switcher.xml.in.h:8
-msgid "Bring selected window to front"
-msgstr ""
+#~ msgid "Bring To Front"
+#~ msgstr "Toiming"
 
-#: ../metadata/switcher.xml.in.h:9
-msgid "Distance desktop should be zoom out while switching windows"
-msgstr ""
+#~ msgid "Icon"
+#~ msgstr "Ikoon"
 
-#: ../metadata/switcher.xml.in.h:11
-msgid "Icon"
-msgstr "Ikoon"
-
-#: ../metadata/switcher.xml.in.h:12
 #, fuzzy
-msgid "Minimized"
-msgstr "Mitteaktiivne vajutatud:"
+#~ msgid "Minimized"
+#~ msgstr "Mitteaktiivne vajutatud:"
 
-#: ../metadata/switcher.xml.in.h:14
 #, fuzzy
-msgid "Next Panel"
-msgstr "Töölauad"
+#~ msgid "Next Panel"
+#~ msgstr "Töölauad"
 
-#: ../metadata/switcher.xml.in.h:15
 #, fuzzy
-msgid "Next window"
-msgstr "tekstirežiim"
+#~ msgid "Next window"
+#~ msgstr "tekstirežiim"
 
-#: ../metadata/switcher.xml.in.h:16
 #, fuzzy
-msgid "Next window (All windows)"
-msgstr "tekstirežiim"
+#~ msgid "Next window (All windows)"
+#~ msgstr "tekstirežiim"
 
-#: ../metadata/switcher.xml.in.h:17
 #, fuzzy
-msgid "Next window (No popup)"
-msgstr "tekstirežiim"
-
-#: ../metadata/switcher.xml.in.h:19
-msgid "Popup switcher if not visible and select next window"
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:20
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:21
-msgid "Popup switcher if not visible and select previous window"
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:22
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr ""
+#~ msgid "Next window (No popup)"
+#~ msgstr "tekstirežiim"
 
-#: ../metadata/switcher.xml.in.h:23
 #, fuzzy
-msgid "Prev Panel"
-msgstr "Eelmine"
+#~ msgid "Prev Panel"
+#~ msgstr "Eelmine"
 
-#: ../metadata/switcher.xml.in.h:24
 #, fuzzy
-msgid "Prev window"
-msgstr "Käivita Windows"
+#~ msgid "Prev window"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/switcher.xml.in.h:25
 #, fuzzy
-msgid "Prev window (All windows)"
-msgstr "Käivita Windows"
+#~ msgid "Prev window (All windows)"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/switcher.xml.in.h:26
 #, fuzzy
-msgid "Prev window (No popup)"
-msgstr "Käivita Windows"
+#~ msgid "Prev window (No popup)"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/switcher.xml.in.h:27
-msgid "Rotate to the selected window while switching"
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:28
 #, fuzzy
-msgid "Saturation"
-msgstr "Häälestamine"
+#~ msgid "Saturation"
+#~ msgstr "Häälestamine"
 
-#: ../metadata/switcher.xml.in.h:29
 #, fuzzy
-msgid "Select next panel type window."
-msgstr "Kas kasutada animeeritud aknaid?"
-
-#: ../metadata/switcher.xml.in.h:30
-msgid "Select next window without showing the popup window."
-msgstr ""
+#~ msgid "Select next panel type window."
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/switcher.xml.in.h:31
 #, fuzzy
-msgid "Select previous panel type window."
-msgstr "Käivita Windows"
-
-#: ../metadata/switcher.xml.in.h:32
-msgid "Select previous window without showing the popup window."
-msgstr ""
-
-#: ../metadata/switcher.xml.in.h:33
-msgid "Show icon next to thumbnail"
-msgstr ""
+#~ msgid "Select previous panel type window."
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/switcher.xml.in.h:34
 #, fuzzy
-msgid "Show minimized windows"
-msgstr "Kas kasutada animeeritud aknaid?"
+#~ msgid "Show minimized windows"
+#~ msgstr "Kas kasutada animeeritud aknaid?"
 
-#: ../metadata/switcher.xml.in.h:36
 #, fuzzy
-msgid "Switcher speed"
-msgstr "Kiirus:"
+#~ msgid "Switcher speed"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/switcher.xml.in.h:37
 #, fuzzy
-msgid "Switcher timestep"
-msgstr "Vali &pilt"
+#~ msgid "Switcher timestep"
+#~ msgstr "Vali &pilt"
 
-#: ../metadata/switcher.xml.in.h:38
 #, fuzzy
-msgid "Switcher windows"
-msgstr "Käivita Windows"
-
-#: ../metadata/switcher.xml.in.h:40
-msgid "Windows that should be shown in switcher"
-msgstr ""
-
-#: ../metadata/video.xml.in.h:1
-msgid "Provide YV12 colorspace support"
-msgstr ""
-
-#: ../metadata/video.xml.in.h:2
-msgid "Video Playback"
-msgstr ""
-
-#: ../metadata/video.xml.in.h:3
-msgid "Video playback"
-msgstr ""
-
-#: ../metadata/video.xml.in.h:4
-msgid "YV12 colorspace"
-msgstr ""
+#~ msgid "Switcher windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/water.xml.in.h:1
 #, fuzzy
-msgid "Add line"
-msgstr "Lis&a link"
+#~ msgid "Add line"
+#~ msgstr "Lis&a link"
 
-#: ../metadata/water.xml.in.h:2
 #, fuzzy
-msgid "Add point"
-msgstr "Lisa sündmus"
+#~ msgid "Add point"
+#~ msgstr "Lisa sündmus"
 
-#: ../metadata/water.xml.in.h:3
-msgid "Adds water effects to different desktop actions"
-msgstr ""
-
-#: ../metadata/water.xml.in.h:4
-msgid "Delay (in ms) between each rain-drop"
-msgstr ""
-
-#: ../metadata/water.xml.in.h:5
-msgid "Enable pointer water effects"
-msgstr ""
-
-#: ../metadata/water.xml.in.h:7
-msgid "Line"
-msgstr ""
-
-#: ../metadata/water.xml.in.h:8
 #, fuzzy
-msgid "Offset Scale"
-msgstr "Kaugus tiitlist:"
+#~ msgid "Offset Scale"
+#~ msgstr "Kaugus tiitlist:"
 
-#: ../metadata/water.xml.in.h:9
-msgid "Point"
-msgstr ""
-
-#: ../metadata/water.xml.in.h:10
-msgid "Rain Delay"
-msgstr ""
-
-#: ../metadata/water.xml.in.h:11
 #, fuzzy
-msgid "Title wave"
-msgstr "Tiitel: %1"
+#~ msgid "Title wave"
+#~ msgstr "Tiitel: %1"
 
-#: ../metadata/water.xml.in.h:12
 #, fuzzy
-msgid "Toggle rain"
-msgstr "Sorimisjärjestuse muutmine"
+#~ msgid "Toggle rain"
+#~ msgstr "Sorimisjärjestuse muutmine"
 
-#: ../metadata/water.xml.in.h:13
 #, fuzzy
-msgid "Toggle rain effect"
-msgstr "Sorimisjärjestuse muutmine"
+#~ msgid "Toggle rain effect"
+#~ msgstr "Sorimisjärjestuse muutmine"
 
-#: ../metadata/water.xml.in.h:14
 #, fuzzy
-msgid "Toggle wiper"
-msgstr "Sorimisjärjestuse muutmine"
+#~ msgid "Toggle wiper"
+#~ msgstr "Sorimisjärjestuse muutmine"
 
-#: ../metadata/water.xml.in.h:15
 #, fuzzy
-msgid "Toggle wiper effect"
-msgstr "Sorimisjärjestuse muutmine"
+#~ msgid "Toggle wiper effect"
+#~ msgstr "Sorimisjärjestuse muutmine"
 
-#: ../metadata/water.xml.in.h:16
 #, fuzzy
-msgid "Water Effect"
-msgstr "Töölaua efektid"
+#~ msgid "Water Effect"
+#~ msgstr "Töölaua efektid"
 
-#: ../metadata/water.xml.in.h:17
 #, fuzzy
-msgid "Water offset scale"
-msgstr "Kaugus tiitlist:"
+#~ msgid "Water offset scale"
+#~ msgstr "Kaugus tiitlist:"
 
-#: ../metadata/water.xml.in.h:18
 #, fuzzy
-msgid "Wave effect from window title"
-msgstr "kaugus tiitlist"
+#~ msgid "Wave effect from window title"
+#~ msgstr "kaugus tiitlist"
 
-#: ../metadata/wobbly.xml.in.h:1
 #, fuzzy
-msgid "Focus Effect"
-msgstr "X Window süsteem"
+#~ msgid "Focus Effect"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/wobbly.xml.in.h:2
 #, fuzzy
-msgid "Focus Window Effect"
-msgstr "X Window süsteem"
+#~ msgid "Focus Window Effect"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/wobbly.xml.in.h:3
 #, fuzzy
-msgid "Focus Windows"
-msgstr "X Window süsteem"
+#~ msgid "Focus Windows"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/wobbly.xml.in.h:4
 #, fuzzy
-msgid "Friction"
-msgstr "Toiming"
+#~ msgid "Friction"
+#~ msgstr "Toiming"
 
-#: ../metadata/wobbly.xml.in.h:5
 #, fuzzy
-msgid "Grab Windows"
-msgstr "X Window süsteem"
+#~ msgid "Grab Windows"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/wobbly.xml.in.h:6
 #, fuzzy
-msgid "Grid Resolution"
-msgstr "Resolutsioon"
+#~ msgid "Grid Resolution"
+#~ msgstr "Resolutsioon"
 
-#: ../metadata/wobbly.xml.in.h:7
-msgid "Inverted window snapping"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:8
 #, fuzzy
-msgid "Make window shiver"
-msgstr "Käivita Windows"
+#~ msgid "Make window shiver"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/wobbly.xml.in.h:9
 #, fuzzy
-msgid "Map Effect"
-msgstr "Töölaua efektid"
+#~ msgid "Map Effect"
+#~ msgstr "Töölaua efektid"
 
-#: ../metadata/wobbly.xml.in.h:10
 #, fuzzy
-msgid "Map Window Effect"
-msgstr "Töölaua efektid"
+#~ msgid "Map Window Effect"
+#~ msgstr "Töölaua efektid"
 
-#: ../metadata/wobbly.xml.in.h:11
 #, fuzzy
-msgid "Map Windows"
-msgstr "X Window süsteem"
+#~ msgid "Map Windows"
+#~ msgstr "X Window süsteem"
 
-#: ../metadata/wobbly.xml.in.h:12
 #, fuzzy
-msgid "Maximize Effect"
-msgstr "Töölaua efektid"
-
-#: ../metadata/wobbly.xml.in.h:13
-msgid "Minimum Grid Size"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:14
-msgid "Minimum Vertex Grid Size"
-msgstr ""
+#~ msgid "Maximize Effect"
+#~ msgstr "Töölaua efektid"
 
-#: ../metadata/wobbly.xml.in.h:15
 #, fuzzy
-msgid "Move Windows"
-msgstr "X Window süsteem"
+#~ msgid "Move Windows"
+#~ msgstr "X Window süsteem"
 
 # 'driver' as in '(hardware) driver update'
-#: ../metadata/wobbly.xml.in.h:17
 #, fuzzy
-msgid "Shiver"
-msgstr "Draiver"
+#~ msgid "Shiver"
+#~ msgstr "Draiver"
 
-#: ../metadata/wobbly.xml.in.h:18
-msgid "Snap Inverted"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:19
 #, fuzzy
-msgid "Snap windows"
-msgstr "Käivita Windows"
+#~ msgid "Snap windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/wobbly.xml.in.h:20
 #, fuzzy
-msgid "Spring Friction"
-msgstr "Toiming"
+#~ msgid "Spring Friction"
+#~ msgstr "Toiming"
 
-#: ../metadata/wobbly.xml.in.h:21
 #, fuzzy
-msgid "Spring K"
-msgstr "Tühik"
+#~ msgid "Spring K"
+#~ msgstr "Tühik"
 
-#: ../metadata/wobbly.xml.in.h:22
 #, fuzzy
-msgid "Spring Konstant"
-msgstr "Toiming"
+#~ msgid "Spring Konstant"
+#~ msgstr "Toiming"
 
-#: ../metadata/wobbly.xml.in.h:23
 #, fuzzy
-msgid "Toggle window snapping"
-msgstr "Sorimisjärjestuse muutmine"
+#~ msgid "Toggle window snapping"
+#~ msgstr "Sorimisjärjestuse muutmine"
 
-#: ../metadata/wobbly.xml.in.h:24
-msgid "Use spring model for wobbly window effect"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:25
 #, fuzzy
-msgid "Vertex Grid Resolution"
-msgstr "Resolutsioon"
+#~ msgid "Vertex Grid Resolution"
+#~ msgstr "Resolutsioon"
 
-#: ../metadata/wobbly.xml.in.h:26
-msgid "Windows that should wobble when focused"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:27
-msgid "Windows that should wobble when grabbed"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:28
-msgid "Windows that should wobble when mapped"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:29
-msgid "Windows that should wobble when moved"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:30
-msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr ""
-
-#: ../metadata/wobbly.xml.in.h:31
 #, fuzzy
-msgid "Wobbly Windows"
-msgstr "Käivita Windows"
+#~ msgid "Wobbly Windows"
+#~ msgstr "Käivita Windows"
 
-#: ../metadata/zoom.xml.in.h:1
 #, fuzzy
-msgid "Filter Linear"
-msgstr "Filtreeri seda kausta"
+#~ msgid "Filter Linear"
+#~ msgstr "Filtreeri seda kausta"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:6
 #, fuzzy
-msgid "Zoom Desktop"
-msgstr "Töölauad"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Töölauad"
 
-#: ../metadata/zoom.xml.in.h:7
 #, fuzzy
-msgid "Zoom In"
-msgstr "XF86ZoomIn"
+#~ msgid "Zoom In"
+#~ msgstr "XF86ZoomIn"
 
-#: ../metadata/zoom.xml.in.h:8
 #, fuzzy
-msgid "Zoom Out"
-msgstr "XF86ZoomOut"
+#~ msgid "Zoom Out"
+#~ msgstr "XF86ZoomOut"
 
-#: ../metadata/zoom.xml.in.h:9
 #, fuzzy
-msgid "Zoom Pan"
-msgstr "XF86ZoomIn"
+#~ msgid "Zoom Pan"
+#~ msgstr "XF86ZoomIn"
 
-#: ../metadata/zoom.xml.in.h:10
 #, fuzzy
-msgid "Zoom Speed"
-msgstr "Kiirus:"
+#~ msgid "Zoom Speed"
+#~ msgstr "Kiirus:"
 
-#: ../metadata/zoom.xml.in.h:11
 #, fuzzy
-msgid "Zoom Timestep"
-msgstr "Töölauad"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Töölauad"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:13
 #, fuzzy
-msgid "Zoom factor"
-msgstr "XF86ZoomOut"
+#~ msgid "Zoom factor"
+#~ msgstr "XF86ZoomOut"
 
-#: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom pan"
-msgstr "XF86ZoomIn"
+#~ msgid "Zoom pan"
+#~ msgstr "XF86ZoomIn"
 
 #, fuzzy
 #~ msgid "Place windows on a plane"
