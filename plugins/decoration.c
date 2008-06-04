@@ -831,7 +831,7 @@ decorWindowUpdate (CompWindow *w,
 	moveDy = -oldShiftY;
     }
 
-    if (!w->attrib.override_redirect && (moveDx || moveDy))
+    if (w->placed && !w->attrib.override_redirect && (moveDx || moveDy))
     {
 	XWindowChanges xwc;
 	unsigned int   mask = CWX | CWY;
