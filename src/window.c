@@ -992,22 +992,15 @@ unsigned int
 getProtocols (CompDisplay *display,
 	      Window      id)
 {
-    Atom	  actual;
-    int		  result, format;
-    unsigned long n, left;
-    unsigned char *data;
-    unsigned int  protocols = 0;
+    Atom         *protocol;
+    int          count;
+    unsigned int protocols = 0;
 
-    result = XGetWindowProperty (display->display, id, display->wmProtocolsAtom,
-				 0L, 20L, FALSE, XA_ATOM,
-				 &actual, &format, &n, &left, &data);
-
-    if (result == Success && n && data)
+    if (XGetWMProtocols (display->display, id, &protocol, &count))
     {
-	Atom *protocol = (Atom *) data;
 	int  i;
 
-	for (i = 0; i < n; i++)
+	for (i = 0; i < count; i++)
 	{
 	    if (protocol[i] == display->wmDeleteWindowAtom)
 		protocols |= CompWindowProtocolDeleteMask;
@@ -1019,7 +1012,7 @@ getProtocols (CompDisplay *display,
 		protocols |= CompWindowProtocolSyncRequestMask;
 	}
 
-	XFree (data);
+	XFree (protocol);
     }
 
     return protocols;
