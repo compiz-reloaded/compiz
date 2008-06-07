@@ -1956,6 +1956,9 @@ freeDisplay (CompDisplay *d)
 
     compFiniOptionValue (&d->plugin, CompOptionTypeList);
 
+    if (d->modMap)
+	XFreeModifiermap (d->modMap);
+
     if (d->screenInfo)
 	XFree (d->screenInfo);
 

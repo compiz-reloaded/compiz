@@ -579,7 +579,7 @@ getWindowState (CompDisplay *display,
 				 0L, 1024L, FALSE, XA_ATOM, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
 	Atom *a = (Atom *) data;
 

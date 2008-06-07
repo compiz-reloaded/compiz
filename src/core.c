@@ -217,10 +217,17 @@ initCore (void)
 void
 finiCore (void)
 {
+    CompPlugin *p;
+
     while (core.displays)
 	removeDisplay (core.displays);
 
-    while (popPlugin ());
+    p = popPlugin ();
+    while (p)
+    {
+	unloadPlugin (p);
+	p = popPlugin ();
+    }
 
     XDestroyRegion (core.outputRegion);
     XDestroyRegion (core.tmpRegion);

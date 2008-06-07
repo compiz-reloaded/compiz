@@ -1873,7 +1873,8 @@ dbusSendChangeSignalForOption (CompObject *object,
 
 static Bool
 dbusGetPathDecomposed (char *data,
-		       char ***path)
+		       char ***path,
+		       int  *count)
 {
     char **retval;
     char *temp;
@@ -1899,7 +1900,9 @@ dbusGetPathDecomposed (char *data,
     {
 	retval[0] = malloc (sizeof (char));
 	retval[0][0] = '\0';
-	*path = retval;
+	*path  = retval;
+	*count = 1;
+
 	return TRUE;
     }
 
@@ -1918,8 +1921,22 @@ dbusGetPathDecomposed (char *data,
 
     free (temp);
 
-    *path = retval;
+    *path  = retval;
+    *count = i;
+
     return TRUE;
+}
+
+static void
+dbusFreePathDecomposed (char **path,
+			int  count)
+{
+    int i;
+
+    for (i = 0; i < count; i++)
+	free (path[i]);
+
+    free (path);
 }
 
 /* dbus registration */
@@ -1932,13 +1949,14 @@ dbusRegisterOptions (DBusConnection *connection,
     int        nOptions;
     char       objectPath[256];
     char       **path;
+    int        count;
 
-    dbusGetPathDecomposed (screenPath, &path);
+    dbusGetPathDecomposed (screenPath, &path, &count);
 
     option = dbusGetOptionsFromPath (&path[3], NULL, NULL, &nOptions);
 
     if (!option) {
-        free(path);
+	dbusFreePathDecomposed (path, count);
 	return FALSE;
     }
 
@@ -1951,7 +1969,7 @@ dbusRegisterOptions (DBusConnection *connection,
 	option++;
     }
 
-    free(path);
+    dbusFreePathDecomposed (path, count);
 
     return TRUE;
 }
@@ -1961,15 +1979,16 @@ dbusUnregisterOptions (DBusConnection *connection,
 		       char           *screenPath)
 {
     CompOption *option = NULL;
-    int nOptions;
-    char objectPath[256];
-    char **path;
+    int        nOptions;
+    char       objectPath[256];
+    char       **path;
+    int        count;
 
-    dbusGetPathDecomposed (screenPath, &path);
+    dbusGetPathDecomposed (screenPath, &path, &count);
 
     option = dbusGetOptionsFromPath (&path[3], NULL, NULL, &nOptions);
 
-    free (path);
+    dbusFreePathDecomposed (path, count);
 
     if (!option)
 	return FALSE;

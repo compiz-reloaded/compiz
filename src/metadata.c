@@ -948,8 +948,12 @@ initActionState (CompMetadata    *metadata,
 
 	value = xmlGetProp (*xPath.obj->nodesetval->nodeTab,
 			    BAD_CAST map[i].name);
-	if (value && xmlStrcmp (value, BAD_CAST "true") == 0)
-	    *state |= map[i].state;
+	if (value)
+	{
+	    if (xmlStrcmp (value, BAD_CAST "true") == 0)
+		*state |= map[i].state;
+	    xmlFree (value);
+	}
     }
 
     finiXPath (&xPath);
