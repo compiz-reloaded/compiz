@@ -1922,7 +1922,7 @@ dbusGetPathDecomposed (char *data,
     free (temp);
 
     *path  = retval;
-    *count = i;
+    *count = i + 1;
 
     return TRUE;
 }
