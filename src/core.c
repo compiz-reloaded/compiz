@@ -222,7 +222,7 @@ finiCore (void)
     while (core.displays)
 	removeDisplay (core.displays);
 
-    while (p = popPlugin ())
+    while ((p = popPlugin ()))
 	unloadPlugin (p);
 
     XDestroyRegion (core.outputRegion);
