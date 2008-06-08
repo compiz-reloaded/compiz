@@ -1559,10 +1559,10 @@ initWindowWalker (CompScreen *screen,
 static void
 freeScreen (CompScreen *s)
 {
+    int i, j;
+
     if (s->outputDev)
     {
-	int i;
-
 	for (i = 0; i < s->nOutputDev; i++)
 	    if (s->outputDev[i].name)
 		free (s->outputDev[i].name);
@@ -1587,6 +1587,16 @@ freeScreen (CompScreen *s)
 
     if (s->damage)
 	XDestroyRegion (s->damage);
+
+    if (s->grabs)
+	free (s->grabs);
+
+    /* XXX: Maybe we should free all fragment functions here? But
+       the definition of CompFunction is private to fragment.c ... */
+    for (i = 0; i < 2; i++)
+	for (j = 0; j < 64; j++)
+	    if (s->saturateFunction[i][j])
+		destroyFragmentFunction (s, s->saturateFunction[i][j]);
 
     compFiniScreenOptions (s, s->opt, COMP_SCREEN_OPTION_NUM);
 

@@ -1989,7 +1989,7 @@ switchFiniScreen (CompPlugin *p,
     if (ss->popupWindow)
 	XDestroyWindow (s->display->display, ss->popupWindow);
 
-    if (ss->windowsSize)
+    if (ss->windows)
 	free (ss->windows);
 
     compFiniScreenOptions (s, ss->opt, SWITCH_SCREEN_OPTION_NUM);

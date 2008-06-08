@@ -2085,7 +2085,7 @@ scaleFiniScreen (CompPlugin *p,
     if (ss->slotsSize)
 	free (ss->slots);
 
-    if (ss->windowsSize)
+    if (ss->windows)
 	free (ss->windows);
 
     freeWindowPrivateIndex (s, ss->windowPrivateIndex);
