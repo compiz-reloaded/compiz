@@ -39,7 +39,6 @@ typedef struct _MinDisplay {
     int		    screenPrivateIndex;
     HandleEventProc handleEvent;
     Atom	    winChangeStateAtom;
-    Atom	    winIconGeometryAtom;
 } MinDisplay;
 
 #define MIN_SCREEN_OPTION_SPEED		   0
@@ -70,8 +69,6 @@ typedef struct _MinWindow {
     GLfloat tx, ty;
 
     Bool adjust;
-
-    XRectangle icon;
 
     int state, newState;
 
@@ -181,44 +178,6 @@ minSetShade (CompWindow *w,
     (*w->screen->windowResizeNotify) (w, 0, 0, 0, 0);
 }
 
-static Bool
-minGetWindowIconGeometry (CompWindow *w,
-			  XRectangle *rect)
-{
-    Atom	  actual;
-    int		  result, format;
-    unsigned long n, left;
-    unsigned char *data;
-
-    MIN_DISPLAY (w->screen->display);
-
-    result = XGetWindowProperty (w->screen->display->display, w->id,
-				 md->winIconGeometryAtom,
-				 0L, 4L, FALSE, XA_CARDINAL, &actual, &format,
-				 &n, &left, &data);
-
-    if (result == Success && n && data)
-    {
-	if (n == 4)
-	{
-	    unsigned long *geometry = (unsigned long *) data;
-
-	    rect->x	 = geometry[0];
-	    rect->y	 = geometry[1];
-	    rect->width  = geometry[2];
-	    rect->height = geometry[3];
-
-	    XFree (data);
-
-	    return TRUE;
-	}
-
-	XFree (data);
-    }
-
-    return FALSE;
-}
-
 static int
 minGetWindowState (CompWindow *w)
 {
@@ -255,10 +214,10 @@ adjustMinVelocity (CompWindow *w)
 
     if (mw->newState == IconicState)
     {
-	x1 = mw->icon.x;
-	y1 = mw->icon.y;
-	xScale = (float) mw->icon.width  / w->width;
-	yScale = (float) mw->icon.height / w->height;
+	x1 = w->iconGeometry.x;
+	y1 = w->iconGeometry.y;
+	xScale = (float) w->iconGeometry.width  / w->width;
+	yScale = (float) w->iconGeometry.height / w->height;
     }
     else
     {
@@ -643,7 +602,7 @@ minHandleEvent (CompDisplay *d,
 		}
 		else if (!w->invisible && matchEval (match, w))
 		{
-		    if (minGetWindowIconGeometry (w, &mw->icon))
+		    if (w->iconGeometrySet)
 		    {
 			mw->newState = IconicState;
 
@@ -721,19 +680,19 @@ minDamageWindowRect (CompWindow *w,
 
 	    mw->state = NormalState;
 
-	    if (!w->invisible	     &&
-		matchEval (match, w) &&
-		minGetWindowIconGeometry (w, &mw->icon))
+	    if (!w->invisible	   &&
+		w->iconGeometrySet &&
+		matchEval (match, w))
 	    {
 		if (!mw->adjust)
 		{
 		    mw->adjust     = TRUE;
 		    ms->moreAdjust = TRUE;
 
-		    mw->tx     = mw->icon.x - w->serverX;
-		    mw->ty     = mw->icon.y - w->serverY;
-		    mw->xScale = (float) mw->icon.width  / w->width;
-		    mw->yScale = (float) mw->icon.height / w->height;
+		    mw->tx     = w->iconGeometry.x - w->serverX;
+		    mw->ty     = w->iconGeometry.y - w->serverY;
+		    mw->xScale = (float) w->iconGeometry.width  / w->width;
+		    mw->yScale = (float) w->iconGeometry.height / w->height;
 
 		    addWindowDamage (w);
 		}
@@ -818,8 +777,6 @@ minInitDisplay (CompPlugin  *p,
     }
 
     md->winChangeStateAtom  = XInternAtom (d->display, "WM_CHANGE_STATE", 0);
-    md->winIconGeometryAtom =
-	XInternAtom (d->display, "_NET_WM_ICON_GEOMETRY", 0);
 
     WRAP (md, d, handleEvent, minHandleEvent);
 
