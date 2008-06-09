@@ -286,11 +286,18 @@ isSwitchWin (CompWindow *w)
     }
     else
     {
+	CompMatch *match;
+
 	if (w->wmType & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))
 	    return FALSE;
 
 	if (w->state & CompWindowStateSkipTaskbarMask)
 	    return FALSE;
+
+	match = &ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match;
+	if (!matchEval (match, w))
+	    return FALSE;
+
     }
 
     if (ss->selection == CurrentViewport)
@@ -309,9 +316,6 @@ isSwitchWin (CompWindow *w)
 		return FALSE;
 	}
     }
-
-    if (!matchEval (&ss->opt[SWITCH_SCREEN_OPTION_WINDOW_MATCH].value.match, w))
-	return FALSE;
 
     return TRUE;
 }
