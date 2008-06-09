@@ -1523,6 +1523,12 @@ handleEvent (CompDisplay *d,
 	    if (w)
 		w->clientLeader = getClientLeader (w);
 	}
+	else if (event->xproperty.atom == d->wmIconGeometryAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xproperty.window);
+	    if (w)
+		updateIconGeometry (w);
+	}
 	else if (event->xproperty.atom == d->winOpacityAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);

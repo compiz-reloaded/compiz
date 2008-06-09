@@ -1000,6 +1000,7 @@ struct _CompDisplay {
     Atom wmUserTimeAtom;
 
     Atom wmIconAtom;
+    Atom wmIconGeometryAtom;
 
     Atom clientListAtom;
     Atom clientListStackingAtom;
@@ -2652,6 +2653,9 @@ struct _CompWindow {
     CompIcon **icon;
     int	     nIcon;
 
+    XRectangle iconGeometry;
+    Bool       iconGeometrySet;
+
     XWindowChanges saveWc;
     int		   saveMask;
 
@@ -2813,6 +2817,9 @@ updateWindowClassHints (CompWindow *window);
 
 void
 updateTransientHint (CompWindow *w);
+
+void
+updateIconGeometry (CompWindow *w);
 
 Window
 getClientLeader (CompWindow *w);

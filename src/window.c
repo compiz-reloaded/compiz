@@ -388,6 +388,39 @@ updateTransientHint (CompWindow *w)
     }
 }
 
+void
+updateIconGeometry (CompWindow *w)
+{
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    unsigned char *data;
+
+    result = XGetWindowProperty (w->screen->display->display, w->id,
+				 w->screen->display->wmIconGeometryAtom,
+				 0L, 1024L, False, XA_CARDINAL,
+				 &actual, &format, &n, &left, &data);
+
+    w->iconGeometrySet = FALSE;
+
+    if (result == Success && data)
+    {
+	if (n == 4)
+	{
+	    unsigned long *geometry = (unsigned long *) data;
+
+	    w->iconGeometry.x      = geometry[0];
+	    w->iconGeometry.y      = geometry[1];
+	    w->iconGeometry.width  = geometry[2];
+	    w->iconGeometry.height = geometry[3];
+
+	    w->iconGeometrySet = TRUE;
+	}
+
+	XFree (data);
+    }
+}
+
 static Window
 getClientLeaderOfAncestor (CompWindow *w)
 {
@@ -1963,6 +1996,12 @@ addWindow (CompScreen *screen,
     w->icon  = 0;
     w->nIcon = 0;
 
+    w->iconGeometry.x      = 0;
+    w->iconGeometry.y      = 0;
+    w->iconGeometry.width  = 0;
+    w->iconGeometry.height = 0;
+    w->iconGeometrySet     = FALSE;
+
     w->input.left   = 0;
     w->input.right  = 0;
     w->input.top    = 0;
@@ -2241,6 +2280,7 @@ addWindow (CompScreen *screen,
 
     recalcWindowActions (w);
     updateWindowOpacity (w);
+    updateIconGeometry (w);
 
     if (w->shaded)
 	resizeWindow (w,
