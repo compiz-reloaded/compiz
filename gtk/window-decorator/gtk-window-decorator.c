@@ -5949,11 +5949,17 @@ meta_update_button_layout (const char *value)
 
     if (sides[0] != NULL)
     {
-	gboolean used[META_BUTTON_FUNCTION_LAST];
 	char	 **buttons;
 	int	 b;
+	gboolean used[META_BUTTON_FUNCTION_LAST];
 
-	memset (used, 0, sizeof (used));
+	for (i = 0; i < META_BUTTON_FUNCTION_LAST; i++)
+	{
+	   used[i] = FALSE;
+#ifdef HAVE_METACITY_2_23_2
+	   new_layout.left_buttons_has_spacer[i] = FALSE;
+#endif
+        }
 
 	buttons = g_strsplit (sides[0], ",", -1);
 
@@ -5961,54 +5967,90 @@ meta_update_button_layout (const char *value)
 	while (buttons[b] != NULL)
 	{
 	    f = meta_button_function_from_string (buttons[b]);
-	    if (f != META_BUTTON_FUNCTION_LAST && !used[f])
-	    {
-		new_layout.left_buttons[i++] = f;
-		used[f] = TRUE;
+#ifdef HAVE_METACITY_2_23_2
+	    if (i > 0 && strcmp("spacer", buttons[b]) == 0)
+            {
+	       new_layout.left_buttons_has_spacer[i - 1] = TRUE;
+	       f = meta_button_opposite_function (f);
 
-		f = meta_button_opposite_function (f);
-		if (f != META_BUTTON_FUNCTION_LAST)
-		    new_layout.left_buttons[i++] = f;
-	    }
+	       if (f != META_BUTTON_FUNCTION_LAST)
+                  new_layout.left_buttons_has_spacer[i - 2] = TRUE;
+            }
 	    else
+#endif
 	    {
-		fprintf (stderr, "%s: Ignoring unknown or already-used "
-			 "button name \"%s\"\n", program_name, buttons[b]);
-	    }
+	       if (f != META_BUTTON_FUNCTION_LAST && !used[f])
+	       {
+                  used[f] = TRUE;
+                  new_layout.left_buttons[i++] = f;
 
+		  f = meta_button_opposite_function (f);
+
+                  if (f != META_BUTTON_FUNCTION_LAST)
+                      new_layout.left_buttons[i++] = f;
+
+	       }
+	       else
+	       {
+		  fprintf (stderr, "%s: Ignoring unknown or already-used "
+			   "button name \"%s\"\n", program_name, buttons[b]);
+	       }
+	    }
 	    b++;
 	}
+
+	new_layout.left_buttons[i] = META_BUTTON_FUNCTION_LAST;
 
 	g_strfreev (buttons);
 
 	if (sides[1] != NULL)
 	{
-	    memset (used, 0, sizeof (used));
+	    for (i = 0; i < META_BUTTON_FUNCTION_LAST; i++)
+	    {
+		used[i] = FALSE;
+#ifdef HAVE_METACITY_2_23_2
+		new_layout.right_buttons_has_spacer[i] = FALSE;
+#endif
+	    }
 
 	    buttons = g_strsplit (sides[1], ",", -1);
 
 	    i = b = 0;
 	    while (buttons[b] != NULL)
 	    {
-		f = meta_button_function_from_string (buttons[b]);
-		if (f != META_BUTTON_FUNCTION_LAST && !used[f])
-		{
-		    new_layout.right_buttons[i++] = f;
-		    used[f] = TRUE;
+	       f = meta_button_function_from_string (buttons[b]);
+#ifdef HAVE_METACITY_2_23_2
+	       if (i > 0 && strcmp("spacer", buttons[b]) == 0)
+	       {
+		  new_layout.right_buttons_has_spacer[i - 1] = TRUE;
+		  f = meta_button_opposite_function (f);
+		  if (f != META_BUTTON_FUNCTION_LAST)
+		     new_layout.right_buttons_has_spacer[i - 2] = TRUE;
+	       }
+	       else
+#endif
+	       {
+		   if (f != META_BUTTON_FUNCTION_LAST && !used[f])
+		   {
+		       used[f] = TRUE;
+		       new_layout.right_buttons[i++] = f;
 
-		    f = meta_button_opposite_function (f);
-		    if (f != META_BUTTON_FUNCTION_LAST)
-			new_layout.right_buttons[i++] = f;
-		}
-		else
-		{
-		    fprintf (stderr, "%s: Ignoring unknown or already-used "
-			     "button name \"%s\"\n", program_name, buttons[b]);
-		}
+		       f = meta_button_opposite_function (f);
 
-		b++;
+		       if (f != META_BUTTON_FUNCTION_LAST)
+			   new_layout.right_buttons[i++] = f;
+		   }
+		   else
+		   {
+		       fprintf (stderr, "%s: Ignoring unknown or "
+				"already-used button name \"%s\"\n",
+				program_name, buttons[b]);
+		   }
+	       }
+	       b++;
 	    }
-
+	    new_layout.right_buttons[i] = META_BUTTON_FUNCTION_LAST;
+	    
 	    g_strfreev (buttons);
 	}
     }

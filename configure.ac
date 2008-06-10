@@ -326,6 +326,8 @@ if test "x$use_gtk" = "xyes"; then
 		       [have_metacity_2_15_21=yes], [have_metacity_2_15_21=no])
       PKG_CHECK_EXISTS(libmetacity-private >= 2.17.0,
 		       [have_metacity_2_17_0=yes], [have_metacity_2_17_0=no])
+      PKG_CHECK_EXISTS(libmetacity-private >= 2.23.2,
+		       [have_metacity_2_23_2=yes], [have_metacity_2_23_2=no])
     fi
 
     if test "x$use_gnome" = "xyes"; then
@@ -378,6 +380,10 @@ if test "$use_metacity" = yes; then
   if test "$have_metacity_2_17_0" = yes; then
     AC_DEFINE(HAVE_METACITY_2_17_0, 1,
 	      [Define to 1 if metacity version >= 2.17.0])
+  fi
+  if test "$have_metacity_2_23_2" = yes; then
+    AC_DEFINE(HAVE_METACITY_2_23_2, 1,
+	      [Define to 1 if metacity version >= 2.23.2])
   fi
 fi
 
