@@ -440,6 +440,7 @@ main (int argc, char **argv)
 	closeSession ();
 
     finiCore ();
+    compFiniMetadata (&coreMetadata);
 
     xmlCleanupParser ();
 

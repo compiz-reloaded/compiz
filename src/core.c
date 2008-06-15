@@ -222,6 +222,9 @@ finiCore (void)
     while (core.displays)
 	removeDisplay (core.displays);
 
+    if (core.watchPollFds)
+	free (core.watchPollFds);
+
     while ((p = popPlugin ()))
 	unloadPlugin (p);
 
