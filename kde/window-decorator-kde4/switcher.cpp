@@ -167,9 +167,10 @@ KWD::Switcher::update ()
 
     p.setCompositionMode (QPainter::CompositionMode_Source);
 
-    mBackground->paint (&p, QRect (mBorder.left, mBorder.top +
+
+    mBackground->paintPanel (&p, QRect (mBorder.left, mBorder.top +
 			mGeometry.height () + 5, mGeometry.width (),
-			fm.height ()), "center");
+			fm.height ()));
 
     p.setFont (font);
     p.setPen (Plasma::Theme::defaultTheme ()->color(Plasma::Theme::TextColor));
