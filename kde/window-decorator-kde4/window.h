@@ -187,7 +187,6 @@ class Window:public QWidget, public KDecorationBridge {
 
     private:
 	void createDecoration (void);
-	void updateShadow (void);
 	bool resizeDecoration (bool force = false);
 	void updateBlurProperty (int topOffset,
 				 int bottomOffset,
@@ -203,6 +202,7 @@ class Window:public QWidget, public KDecorationBridge {
 
 
     private slots:
+	void updateShadow (void);
 	void handlePopupActivated (QAction *action);
 	void handleOpacityPopupActivated (QAction *action);
 	void handleDesktopPopupActivated (QAction *action);
