@@ -895,7 +895,8 @@ setDisplayOption (CompPlugin	  *plugin,
 		compRemoveTimeout (display->pingHandle);
 
 	    display->pingHandle =
-		compAddTimeout (o->value.i, pingTimeout, display);
+		compAddTimeout (o->value.i, o->value.i + 500,
+				pingTimeout, display);
 	    return TRUE;
 	}
 	break;
@@ -1030,14 +1031,15 @@ addTimeout (CompTimeout *timeout)
 
     for (t = core.timeouts; t; t = t->next)
     {
-	if (timeout->time < t->left)
+	if (timeout->minTime < t->minLeft)
 	    break;
 
 	p = t;
     }
 
     timeout->next = t;
-    timeout->left = timeout->time;
+    timeout->minLeft = timeout->minTime;
+    timeout->maxLeft = timeout->maxTime;
 
     if (p)
 	p->next = timeout;
@@ -1046,7 +1048,8 @@ addTimeout (CompTimeout *timeout)
 }
 
 CompTimeoutHandle
-compAddTimeout (int	     time,
+compAddTimeout (int	     minTime,
+		int	     maxTime,
 		CallBackProc callBack,
 		void	     *closure)
 {
@@ -1056,7 +1059,8 @@ compAddTimeout (int	     time,
     if (!timeout)
 	return 0;
 
-    timeout->time     = time;
+    timeout->minTime  = minTime;
+    timeout->maxTime  = (maxTime >= minTime) ? maxTime : minTime;
     timeout->callBack = callBack;
     timeout->closure  = closure;
     timeout->handle   = core.lastTimeoutHandle++;
@@ -1433,9 +1437,12 @@ handleTimeouts (struct timeval *tv)
 	timeDiff = 0;
 
     for (t = core.timeouts; t; t = t->next)
-	t->left -= timeDiff;
+    {
+	t->minLeft -= timeDiff;
+	t->maxLeft -= timeDiff;
+    }
 
-    while (core.timeouts && core.timeouts->left <= 0)
+    while (core.timeouts && core.timeouts->minLeft <= 0)
     {
 	t = core.timeouts;
 	if ((*t->callBack) (t->closure))
@@ -1544,6 +1551,7 @@ eventLoop (void)
     CompDisplay    *d;
     CompScreen	   *s;
     CompWindow	   *w;
+    CompTimeout    *t;
     int		   time, timeToNextRedraw = 0;
     unsigned int   damageMask, mask;
 
@@ -1842,8 +1850,18 @@ eventLoop (void)
 	{
 	    if (core.timeouts)
 	    {
-		if (core.timeouts->left > 0)
-		    doPoll (core.timeouts->left);
+		if (core.timeouts->minLeft > 0)
+		{
+		    t = core.timeouts;
+		    time = t->maxLeft;
+		    while (t && t->minLeft <= time)
+		    {
+			if (t->maxLeft < time)
+			    time = t->maxLeft;
+			t = t->next;
+		    }
+		    doPoll (time);
+		}
 
 		gettimeofday (&tv, 0);
 
@@ -2594,6 +2612,7 @@ addDisplay (const char *name)
 
     d->pingHandle =
 	compAddTimeout (d->opt[COMP_DISPLAY_OPTION_PING_DELAY].value.i,
+			d->opt[COMP_DISPLAY_OPTION_PING_DELAY].value.i + 500,
 			pingTimeout, d);
 
     return TRUE;

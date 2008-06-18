@@ -732,7 +732,7 @@ gconfInitCore (CompPlugin *p,
     gconf_client_add_dir (gc->client, "/apps/" APP_NAME,
 			  GCONF_CLIENT_PRELOAD_NONE, NULL);
 
-    gc->reloadHandle = compAddTimeout (0, gconfReload, 0);
+    gc->reloadHandle = compAddTimeout (0, 0, gconfReload, 0);
 
     gc->cnxn = gconf_client_notify_add (gc->client, "/apps/" APP_NAME,
 					gconfKeyChanged, c, NULL, NULL);

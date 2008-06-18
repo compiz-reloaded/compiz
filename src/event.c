@@ -783,7 +783,7 @@ triggerEdgeEnter (CompDisplay     *d,
 	for (i = 0; i < nArgument; i++)
 	    delayedSettings->option[i] = argument[i];
 
-	d->edgeDelayHandle = compAddTimeout (delay,
+	d->edgeDelayHandle = compAddTimeout (delay, (float) delay * 1.2,
 					     delayedEdgeTimeout,
 					     delayedSettings);
 
@@ -2186,7 +2186,8 @@ handleEvent (CompDisplay *d,
 			    {
 				d->autoRaiseWindow = w->id;
 				d->autoRaiseHandle =
-				    compAddTimeout (delay, autoRaiseTimeout, d);
+				    compAddTimeout (delay, (float) delay * 1.2,
+						    autoRaiseTimeout, d);
 			    }
 			    else
 			    {

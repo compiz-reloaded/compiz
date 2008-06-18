@@ -1335,7 +1335,8 @@ waterToggleRain (CompDisplay     *d,
 	    int delay;
 
 	    delay = wd->opt[WATER_DISPLAY_OPTION_RAIN_DELAY].value.i;
-	    ws->rainHandle = compAddTimeout (delay, waterRainTimeout, s);
+	    ws->rainHandle = compAddTimeout (delay, (float) delay * 1.2,
+					     waterRainTimeout, s);
 	}
 	else
 	{
@@ -1363,10 +1364,7 @@ waterToggleWiper (CompDisplay     *d,
 
 	if (!ws->wiperHandle)
 	{
-	    int delay;
-
-	    delay = 2000;
-	    ws->wiperHandle = compAddTimeout (delay, waterWiperTimeout, s);
+	    ws->wiperHandle = compAddTimeout (2000, 2400, waterWiperTimeout, s);
 	}
 	else
 	{
@@ -1565,7 +1563,9 @@ waterSetDisplayOption (CompPlugin      *plugin,
 		    continue;
 
 		compRemoveTimeout (ws->rainHandle);
-		ws->rainHandle = compAddTimeout (value->i, waterRainTimeout, s);
+		ws->rainHandle = compAddTimeout (value->i,
+						 (float)value->i * 1.2,
+						 waterRainTimeout, s);
 	    }
 	    return TRUE;
 	}

@@ -120,7 +120,8 @@ compSetOption (CompOption      *option,
 	       CompOptionValue *value);
 
 CompTimeoutHandle
-compAddTimeout (int	     time,
+compAddTimeout (int	     minTime,
+		int	     maxTime,
 		CallBackProc callBack,
 		void	     *closure);
 

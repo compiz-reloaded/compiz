@@ -1252,7 +1252,7 @@ decorWindowResizeNotify (CompWindow *w,
        we never should call a wrapped function that's currently
        processed, we need the timer for the moment. updateWindowOutputExtents
        should be fixed so that it does not emit a resize notification. */
-    dw->resizeUpdateHandle = compAddTimeout (0, decorResizeUpdateTimeout, w);
+    dw->resizeUpdateHandle = compAddTimeout (0, 0, decorResizeUpdateTimeout, w);
     updateWindowDecorationScale (w);
 
     UNWRAP (ds, w->screen, windowResizeNotify);

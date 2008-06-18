@@ -387,7 +387,7 @@ regexInitDisplay (CompPlugin  *p,
 
     /* one shot timeout to which will register the expression handler
        after all screens and windows have been initialized */
-    compAddTimeout (0, regexRegisterExpHandler, (void *) d);
+    compAddTimeout (0, 0, regexRegisterExpHandler, (void *) d);
 
     return TRUE;
 }

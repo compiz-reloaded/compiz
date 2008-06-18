@@ -1752,7 +1752,7 @@ scaleHandleEvent (CompDisplay *d,
 
 			if (!ss->hoverHandle)
 			    ss->hoverHandle =
-				compAddTimeout (time,
+ 				compAddTimeout (time, (float) time * 1.2,
 						scaleHoverTimeout,
 						s);
 
