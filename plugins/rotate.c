@@ -130,6 +130,8 @@ typedef struct _RotateScreen {
     Bool    moving;
     GLfloat moveTo;
 
+    Bool focusDefault;
+
     Window moveWindow;
     int    moveWindowX;
 
@@ -392,18 +394,9 @@ rotatePreparePaintScreen (CompScreen *s,
 			    syncWindowPosition (w);
 			}
 		    }
-		    else
+		    else if (rs->focusDefault)
 		    {
-			int i;
-
-			for (i = 0; i < s->maxGrab; i++)
-			    if (s->grabs[i].active &&
-				strcmp ("switcher", s->grabs[i].name) == 0)
-				break;
-
-			/* only focus default window if switcher isn't active */
-			if (i == s->maxGrab)
-			    focusDefaultWindow (s);
+			focusDefaultWindow (s);
 		    }
 
 		    rs->moveWindow = 0;
@@ -732,6 +725,8 @@ rotate (CompDisplay     *d,
 
 	if (rs->moveWindow)
 	    rotateReleaseMoveWindow (s);
+
+	rs->focusDefault = TRUE;
 
 	/* we allow the grab to fail here so that we can rotate on
 	   drag-and-drop */
@@ -1615,6 +1610,8 @@ rotateActivateWindow (CompWindow *w)
 	    o[3].value.i = dx;
 
 	    rotate (s->display, NULL, 0, o, 4);
+
+	    rs->focusDefault = FALSE;
 	}
     }
 
@@ -1836,6 +1833,8 @@ rotateInitScreen (CompPlugin *p,
 
     rs->moving = FALSE;
     rs->moveTo = 0.0f;
+
+    rs->focusDefault = TRUE;
 
     rs->moveWindow = 0;
 
