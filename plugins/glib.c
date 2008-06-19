@@ -93,7 +93,7 @@ glibWakeup (CompDisplay *display)
     if (gd->timeoutHandle)
     {
 	compRemoveTimeout (gd->timeoutHandle);
-	compAddTimeout (0, glibDispatchAndPrepare, (void *) display);
+	compAddTimeout (0, 0, glibDispatchAndPrepare, (void *) display);
 
 	gd->timeoutHandle = 0;
     }
@@ -166,7 +166,7 @@ glibPrepare (CompDisplay  *display,
 
     gd->nFds	      = nFds;
     gd->timeoutHandle =
-	compAddTimeout (timeout, glibDispatchAndPrepare, display);
+	compAddTimeout (timeout, timeout, glibDispatchAndPrepare, display);
 }
 
 static void

@@ -259,7 +259,7 @@ kconfigSetOption (CompObject *object,
     }
 
     if (!kc->syncHandle)
-	kc->syncHandle = compAddTimeout (0, kconfigRcSync, 0);
+	kc->syncHandle = compAddTimeout (0, 0, kconfigRcSync, 0);
 }
 
 static Bool
@@ -537,7 +537,7 @@ kconfigRcChanged (const char *name,
 	KCONFIG_CORE (&core);
 
 	if (!kc->reloadHandle)
-	    kc->reloadHandle = compAddTimeout (0, kconfigRcReload, closure);
+	    kc->reloadHandle = compAddTimeout (0, 0, kconfigRcReload, closure);
     }
 }
 
@@ -621,7 +621,7 @@ kconfigInitCore (CompPlugin *p,
 	return FALSE;
     }
 
-    kc->reloadHandle = compAddTimeout (0, kconfigRcReload, 0);
+    kc->reloadHandle = compAddTimeout (0, 0, kconfigRcReload, 0);
     kc->syncHandle   = 0;
     kc->fileWatch    = 0;
 

@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080609
+#define CORE_ABIVERSION 20080618
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -636,8 +636,10 @@ typedef void (*FileWatchRemovedProc) (CompCore      *core,
 
 typedef struct _CompTimeout {
     struct _CompTimeout *next;
-    int			time;
-    int			left;
+    int			minTime;
+    int			maxTime;
+    int			minLeft;
+    int			maxLeft;
     CallBackProc	callBack;
     void		*closure;
     CompTimeoutHandle   handle;

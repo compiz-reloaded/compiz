@@ -1147,7 +1147,7 @@ KWD::Window::setMask (const QRegion &reg, int)
 	mUniqueVertShape = uniqueVertShape;
 
 	if (mPixmap)
-	    updateShadow ();
+	    QTimer::singleShot (0, this, SLOT (updateShadow ()));
     }
 }
 
@@ -1288,8 +1288,6 @@ KWD::Window::rebindPixmap (void)
 				     xformat, 0, NULL);
 
     updateShadow ();
-
-    mDecor->widget ()->update ();
 }
 
 bool

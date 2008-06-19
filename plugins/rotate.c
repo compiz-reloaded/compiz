@@ -1165,7 +1165,9 @@ rotateEdgeFlip (CompScreen      *s,
 	    {
 		int flipTime = rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME].value.i;
 
-		rs->rotateHandle = compAddTimeout (flipTime, rotateFlipLeft, s);
+		rs->rotateHandle = compAddTimeout (flipTime,
+						   (float) flipTime * 1.2,
+						   rotateFlipLeft, s);
 	    }
 
 	    rs->moving  = TRUE;
@@ -1211,7 +1213,8 @@ rotateEdgeFlip (CompScreen      *s,
 		int flipTime = rd->opt[ROTATE_DISPLAY_OPTION_FLIPTIME].value.i;
 
 		rs->rotateHandle =
-		    compAddTimeout (flipTime, rotateFlipRight, s);
+		    compAddTimeout (flipTime, (float) flipTime * 1.2,
+				    rotateFlipRight, s);
 	    }
 
 	    rs->moving  = TRUE;

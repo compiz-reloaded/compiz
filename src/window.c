@@ -2758,7 +2758,7 @@ sendSyncRequest (CompWindow *w)
     w->syncBorderWidth = w->serverBorderWidth;
 
     if (!w->syncWaitHandle)
-	w->syncWaitHandle = compAddTimeout (1000, syncWaitTimeout, w);
+	w->syncWaitHandle = compAddTimeout (1000, 1200, syncWaitTimeout, w);
 }
 
 void
