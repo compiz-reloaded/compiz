@@ -1217,7 +1217,7 @@ scaleInitiate (CompDisplay     *d,
 	    ss->type = ScaleTypeNormal;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	else if (state & EDGE_STATE)
 	{
 	    if (ss->type == ScaleTypeNormal)
 		return scaleTerminate (s->display, action,
@@ -1250,7 +1250,7 @@ scaleInitiateAll (CompDisplay     *d,
 	    ss->type = ScaleTypeAll;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	else if (state & EDGE_STATE)
 	{
 	    if (ss->type == ScaleTypeAll)
 		return scaleTerminate (s->display, action,
@@ -1292,7 +1292,7 @@ scaleInitiateGroup (CompDisplay     *d,
 		return scaleInitiateCommon (s, action, state, option, nOption);
 	    }
 	}
-	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	else if (state & EDGE_STATE)
 	{
 	    if (ss->type == ScaleTypeGroup)
 		return scaleTerminate (s->display, action,
@@ -1325,7 +1325,7 @@ scaleInitiateOutput (CompDisplay     *d,
 	    ss->type = ScaleTypeOutput;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if ((state & EDGE_STATE) && ss->state == SCALE_STATE_WAIT)
+	else if (state & EDGE_STATE)
 	{
 	    if (ss->type == ScaleTypeOutput)
 		return scaleTerminate (s->display, action,
