@@ -117,18 +117,28 @@ KWD::Window::Window (WId  parentId,
 					 KWindowSystem::NETWM |
 					 KWindowSystem::WMHints );
 
-	    if (mIcon.isNull())
-		mIcon = KWindowSystem::icon (mClientId, 16, 16, true,
+	    mMiniIcon = KWindowSystem::icon (mClientId, 16, 16, true,
 					     KWindowSystem::NETWM |
 					     KWindowSystem::WMHints );
+
+	    if (mIcon.isNull ())
+	    {
+		mIcon = KWindowSystem::icon (mClientId, 32, 32, true,
+					     KWindowSystem::ClassHint |
+					     KWindowSystem::XApp );
+		mMiniIcon = KWindowSystem::icon (mClientId, 16, 16, true,
+						 KWindowSystem::ClassHint |
+						 KWindowSystem::XApp );
+	    }
 
 	    mOpacity = readPropertyShort (mClientId, Atoms::netWmWindowOpacity,
 					  0xffff);
 	}
 	else
 	{
-	    mIcon = QIcon ();
-	    mName = QString ("");
+	    mIcon     = QPixmap ();
+	    mMiniIcon = QPixmap ();
+	    mName     = QString ("");
 	}
 
 	updateFrame (frame);
@@ -139,7 +149,8 @@ KWD::Window::Window (WId  parentId,
     }
     else
     {
-	mIcon = QIcon ();
+	mIcon     = QPixmap ();
+	mMiniIcon = QPixmap ();
 	mName = QString ("");
 	mGeometry = QRect (50, 50, 30, 1);
     }
@@ -335,7 +346,9 @@ KWD::Window::isResizable (void) const
 QIcon
 KWD::Window::icon (void) const
 {
-    return mIcon;
+    QIcon icon (mIcon);
+    icon.addPixmap (mMiniIcon);
+    return icon;
 }
 
 QString
@@ -1828,10 +1841,20 @@ KWD::Window::updateIcons (void)
 				 KWindowSystem::NETWM |
 				 KWindowSystem::WMHints);
 
-    if (mIcon.isNull())
-	mIcon = KWindowSystem::icon (mClientId, 16, 16, true,
+    mMiniIcon = KWindowSystem::icon (mClientId, 16, 16, true,
 				     KWindowSystem::NETWM |
 				     KWindowSystem::WMHints);
+
+    if (mIcon.isNull ())
+    {
+	mIcon = KWindowSystem::icon (mClientId, 32, 32, true,
+				     KWindowSystem::ClassHint |
+				     KWindowSystem::XApp );
+	mMiniIcon = KWindowSystem::icon (mClientId, 16, 16, true,
+					 KWindowSystem::ClassHint |
+					 KWindowSystem::XApp );
+    }
+
     mDecor->iconChange ();
 }
 
