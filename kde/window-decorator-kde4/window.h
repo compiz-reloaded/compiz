@@ -217,7 +217,8 @@ class Window:public QWidget, public KDecorationBridge {
 	WId mSelectedId;
 	QRect mGeometry;
 	QString mName;
-	QIcon mIcon;
+	QPixmap mIcon;
+	QPixmap mMiniIcon;
 	decor_extents_t mBorder;
 	unsigned short mOpacity;
 	KDecoration *mDecor;
