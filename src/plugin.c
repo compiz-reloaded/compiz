@@ -735,11 +735,21 @@ Bool
 checkPluginABI (const char *name,
 		int	   abi)
 {
-    if (getPluginABI (name) != abi)
+    int pluginABI;
+
+    pluginABI = getPluginABI (name);
+    if (!pluginABI)
     {
 	compLogMessage (NULL, "core", CompLogLevelError,
-			"no '%s' plugin with ABI version '%d' loaded\n",
-			name, abi);
+			"Plugin '%s' not loaded.\n");
+	return FALSE;
+    }
+    else if (pluginABI != abi)
+    {
+	compLogMessage (NULL, "core", CompLogLevelError,
+			"Plugin '%s' has ABI version '%d', expected "
+			"ABI version '%d'.\n",
+			name, pluginABI, abi);
 	return FALSE;
     }
 
