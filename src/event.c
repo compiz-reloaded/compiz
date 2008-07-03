@@ -1422,8 +1422,9 @@ handleEvent (CompDisplay *d,
 			updateWindowAttributes (w,
 					CompStackingUpdateModeAboveFullscreen);
 
-		    if (!(w->type & CompWindowTypeDockMask))
-			moveInputFocusToWindow (w);
+		    if (w->id != d->activeWindow)
+			if (!(w->type & CompWindowTypeDockMask))
+			    moveInputFocusToWindow (w);
 		}
 	    }
 
