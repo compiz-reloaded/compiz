@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:22+0530\n"
-"PO-Revision-Date: 2008-03-16 15:37+0100\n"
-"Last-Translator: Tristan RABLAT <tristan.rablat@gmail.com>\n"
+"POT-Creation-Date: 2008-07-09 16:59+0530\n"
+"PO-Revision-Date: 2008-06-25 12:30+0200\n"
+"Last-Translator: Maxime Corteel <mcorteel@yahoo.fr>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.0.2\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -99,68 +99,68 @@ msgstr "Utiliser le thème Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Utiliser le thème Metacity pour dessiner les décorations de fenêtres"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../gtk/window-decorator/gtk-window-decorator.c:4417
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Fermer la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Restaurer la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Optimiser la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../gtk/window-decorator/gtk-window-decorator.c:4484
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Minimiser la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../gtk/window-decorator/gtk-window-decorator.c:4601
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Menu de la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../gtk/window-decorator/gtk-window-decorator.c:4620
 msgid "Shade"
 msgstr "Ombrer"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
+#: ../gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
 msgstr "Placer au dessus"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
 msgstr "Coller"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
 msgstr "Ne plus ombrer"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
 msgstr "Ne plus placer au dessus"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
 msgstr "Décoller"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: ../gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La fenêtre \"%s\" ne répond pas."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forcer cette application à quitter causera la perte de tout changement non "
 "enregistré."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: ../gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
 msgstr "_Forcer à quitter"
 
@@ -658,6 +658,8 @@ msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
+"Durée pendant laquelle le pointeur doit rester au bord de l'écran avant que "
+"l'action ait lieu."
 
 #: ../metadata/core.xml.in.h:57
 msgid "Edge Trigger Delay"

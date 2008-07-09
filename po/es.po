@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:22+0530\n"
-"PO-Revision-Date: 2008-05-09 19:49+0200\n"
-"Last-Translator: ESTEBAN DE JESUS RODRIGUEZ BUJAIDAR <KORN_B8S@HOTMAIL.COM>\n"
+"POT-Creation-Date: 2008-07-09 16:58+0530\n"
+"PO-Revision-Date: 2008-06-28 16:34+0100\n"
+"Last-Translator: Rafa Ramírez <berylog@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr "Escritorio"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
 msgid "Window Management"
-msgstr "Configuración de Ventanas"
+msgstr "Gestión de Ventanas"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
@@ -93,69 +93,68 @@ msgstr "Usar el tema Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Usar el tema Metacity para dibujar las decoraciones de ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../gtk/window-decorator/gtk-window-decorator.c:4417
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Cerrar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "Desmaximizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "Maximizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../gtk/window-decorator/gtk-window-decorator.c:4484
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "Minimizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../gtk/window-decorator/gtk-window-decorator.c:4601
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "Menú de ventanas"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../gtk/window-decorator/gtk-window-decorator.c:4620
 msgid "Shade"
 msgstr "Tonalidad"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
-msgstr "Marcar arriba"
+msgstr "Subir"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
-msgstr ""
+msgstr "Adherir"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
 msgstr "Anular sombra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
 msgstr "Desmarcar Sobre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
-msgstr ""
+msgstr "Despegar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: ../gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La ventana \"%s\" no responde."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forzando la salida de la aplicación puede causar la pérdida de los datos que "
 "no haya guardado."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: ../gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
 msgstr "Forzar salida"
 
@@ -320,7 +319,7 @@ msgstr "Fuerza Gaussiana"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "Muestra de textura independiente"
 
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
@@ -348,6 +347,8 @@ msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"Usar las unidades de textura disponibles para crear tantas muestras de "
+"textura independiente como sea posible."
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -657,23 +658,24 @@ msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
+"Tiempo que el puntero del ratón debe estar en el borde de la pantalla antes "
+"de que se lance la acción."
 
 #: ../metadata/core.xml.in.h:57
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Retrazo del Disparador de Bordes"
 
 #: ../metadata/core.xml.in.h:58
 msgid "Fast"
 msgstr "Rápido"
 
 #: ../metadata/core.xml.in.h:59
-#, fuzzy
 msgid "Focus Prevention Level"
-msgstr "Ventanas de Prevención de Nivel"
+msgstr "Nivel de Prevención de Enfoque"
 
 #: ../metadata/core.xml.in.h:60
 msgid "Focus Prevention Windows"
-msgstr "Ventanas de Prevención de Foco"
+msgstr "Ventanas de Prevención de Enfoque"
 
 #: ../metadata/core.xml.in.h:61
 msgid "Focus prevention windows"
@@ -681,7 +683,7 @@ msgstr "Ventanas de prevencion de foco"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Forzar el pintado de salida independiente."
 
 #: ../metadata/core.xml.in.h:63
 msgid "General Options"
@@ -749,9 +751,8 @@ msgid "Interval between ping messages"
 msgstr "Intervalo entre mensajes de ping"
 
 #: ../metadata/core.xml.in.h:78
-#, fuzzy
 msgid "Level of focus stealing prevention"
-msgstr "Habilitar partición ZEN"
+msgstr "Nivel de prevención de atracción de enfoque"
 
 #: ../metadata/core.xml.in.h:79
 msgid "Lighting"
@@ -767,7 +768,7 @@ msgstr "Lista de cadenas que describen los dispositivos de salida"
 
 #: ../metadata/core.xml.in.h:82
 msgid "Low"
-msgstr ""
+msgstr "Bajo"
 
 #: ../metadata/core.xml.in.h:83
 msgid "Lower Window"
@@ -810,9 +811,8 @@ msgid "Number of virtual desktops"
 msgstr "Número de escritorios virtuales"
 
 #: ../metadata/core.xml.in.h:95
-#, fuzzy
 msgid "Off"
-msgstr "Apagar"
+msgstr "Apagado"
 
 #: ../metadata/core.xml.in.h:96
 msgid "Only perform screen updates during vertical blanking period"
@@ -851,11 +851,13 @@ msgstr "Salidas"
 
 #: ../metadata/core.xml.in.h:104
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "Manejo de Salida de Traslapes"
 
 #: ../metadata/core.xml.in.h:105
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Pintar independientemente la salida de cada dispositivo, inclusive si el "
+"dispositivo de salida se sobrepone"
 
 #: ../metadata/core.xml.in.h:106
 msgid "Ping Delay"
@@ -863,11 +865,11 @@ msgstr "Retardo de ping"
 
 #: ../metadata/core.xml.in.h:107
 msgid "Prefer larger output"
-msgstr ""
+msgstr "Preferir salidas grandes"
 
 #: ../metadata/core.xml.in.h:108
 msgid "Prefer smaller output"
-msgstr ""
+msgstr "Preferir salidas pequeñas"
 
 #: ../metadata/core.xml.in.h:109
 msgid "Raise On Click"
@@ -978,9 +980,8 @@ msgid "Slow Animations"
 msgstr "Ralentizar animaciones"
 
 #: ../metadata/core.xml.in.h:136
-#, fuzzy
 msgid "Smart mode"
-msgstr "Inteligente"
+msgstr "Modo inteligente"
 
 #: ../metadata/core.xml.in.h:137
 msgid "Sync To VBlank"
@@ -999,21 +1000,20 @@ msgid "Terminal command line"
 msgstr "Línea de comandos para abrir Terminal"
 
 #: ../metadata/core.xml.in.h:141
-#, fuzzy
 msgid "Texture Compression"
-msgstr "Filtro de texturas"
+msgstr "Compresión de Textura"
 
 #: ../metadata/core.xml.in.h:142
 msgid "Texture Filter"
-msgstr "Filtro de textura"
+msgstr "Filtro de Textura"
 
 #: ../metadata/core.xml.in.h:143
 msgid "Texture filtering"
-msgstr "Filtro de texturas"
+msgstr "Filtrado de Texturas"
 
 #: ../metadata/core.xml.in.h:144
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "Velocidad con la que se redibuja la pantalla (veces por segundo)"
+msgstr "Velocidad con la que se redibuja la pantalla (veces/segundo)"
 
 #: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized"
@@ -1069,11 +1069,11 @@ msgstr "Tamaño vertical virtual"
 
 #: ../metadata/core.xml.in.h:159
 msgid "Very High"
-msgstr ""
+msgstr "Muy Alto"
 
 #: ../metadata/core.xml.in.h:160
 msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "Cual de los dispositivos de salida de sobreposición debe ser preferido"
 
 #: ../metadata/core.xml.in.h:162
 msgid "Window menu button binding"
@@ -1205,9 +1205,8 @@ msgid "Next Slide"
 msgstr "Diapositiva siguiente"
 
 #: ../metadata/cube.xml.in.h:28
-#, fuzzy
 msgid "One big cube"
-msgstr "En un gran cubo"
+msgstr "Un cubo grande"
 
 #: ../metadata/cube.xml.in.h:29
 msgid "Opacity During Rotation"
@@ -1582,9 +1581,8 @@ msgid "Centered"
 msgstr "Centrado"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "Ventanas de Prevención de Foco"
+msgstr "Forzar Ventanas de Ubicación"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
@@ -1600,7 +1598,7 @@ msgstr "Colocar ventanas"
 
 #: ../metadata/place.xml.in.h:9
 msgid "Place across all outputs"
-msgstr ""
+msgstr "Colocar en todas las salidas"
 
 #: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
@@ -1619,28 +1617,27 @@ msgid "Random"
 msgstr "Aleatorio"
 
 #: ../metadata/place.xml.in.h:14
-#, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
-"Seleccionar qué ventanas escalar si se usan múltiples dispositivos de salida"
+"Selecciona como debe comportarse el acomodamiento de ventanas si se "
+"selecciona multipes salidas"
 
 #: ../metadata/place.xml.in.h:15
 msgid "Smart"
 msgstr "Inteligente"
 
 #: ../metadata/place.xml.in.h:16
-#, fuzzy
 msgid "Use active output device"
-msgstr "En todos los dispositivos de salida"
+msgstr "Usar el dispositivo de salida activo"
 
 #: ../metadata/place.xml.in.h:17
 msgid "Use output device of focussed window"
-msgstr ""
+msgstr "Usar el dispositivo de salida de la ventana enfocada"
 
 #: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
-msgstr ""
+msgstr "Usar el dispositivo de salida con apuntador"
 
 #: ../metadata/place.xml.in.h:19
 msgid "Vertical viewport positions"
@@ -1648,7 +1645,7 @@ msgstr "Posiciones de viewport verticales"
 
 #: ../metadata/place.xml.in.h:20
 msgid "Viewport positioned windows"
-msgstr "ventanas posicionadas en Viewport"
+msgstr "Ventanas posicionadas en viewport"
 
 #: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
@@ -1667,6 +1664,8 @@ msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
+"Ventanas que deben ser colocadas forzosamente, inclusive si indican que el "
+"administrador de ventanas debe evitar colocarlas"
 
 #: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
@@ -2406,9 +2405,8 @@ msgid "Minimized"
 msgstr "Minimizada"
 
 #: ../metadata/switcher.xml.in.h:14
-#, fuzzy
 msgid "Next Panel"
-msgstr "Plano de escritorio"
+msgstr "Panel siguiente"
 
 #: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
@@ -2446,21 +2444,20 @@ msgstr ""
 "del conjunto total de ventanas"
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev Panel"
-msgstr "Diapositiva anterior"
+msgstr "Panel anterior"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
-msgstr "Ventana anterior"
+msgstr "Ventana ant"
 
 #: ../metadata/switcher.xml.in.h:25
 msgid "Prev window (All windows)"
-msgstr "Ventana anterior (Todas las ventanas)"
+msgstr "Ventana ant (Todas las ventanas)"
 
 #: ../metadata/switcher.xml.in.h:26
 msgid "Prev window (No popup)"
-msgstr "Ventana anterior (Sin Emerger)"
+msgstr "Ventana ant (Sin Emerger)"
 
 #: ../metadata/switcher.xml.in.h:27
 msgid "Rotate to the selected window while switching"
@@ -2471,18 +2468,16 @@ msgid "Saturation"
 msgstr "Saturación"
 
 #: ../metadata/switcher.xml.in.h:29
-#, fuzzy
 msgid "Select next panel type window."
-msgstr "Seleccionar la siguiente ventana"
+msgstr "Seleccionar la ventana del tipo de panel siguiente"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Seleccionar la ventana siguiente sin mostrar la ventana emergente"
 
 #: ../metadata/switcher.xml.in.h:31
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "Seleccionar la ventana anterior"
+msgstr "Seleccionar la ventana del tipo de panel anterior"
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
@@ -2526,7 +2521,7 @@ msgstr "Reproducción de video"
 
 #: ../metadata/video.xml.in.h:4
 msgid "YV12 colorspace"
-msgstr "espacio de color YV12"
+msgstr "Espacio de color YV12"
 
 #: ../metadata/water.xml.in.h:1
 msgid "Add line"
