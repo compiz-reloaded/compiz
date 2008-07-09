@@ -741,7 +741,7 @@ checkPluginABI (const char *name,
     if (!pluginABI)
     {
 	compLogMessage (NULL, "core", CompLogLevelError,
-			"Plugin '%s' not loaded.\n");
+			"Plugin '%s' not loaded.\n", name);
 	return FALSE;
     }
     else if (pluginABI != abi)
