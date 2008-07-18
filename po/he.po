@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:22+0530\n"
-"PO-Revision-Date: 2008-05-05 20:49+0200\n"
+"POT-Creation-Date: 2008-07-09 16:59+0530\n"
+"PO-Revision-Date: 2008-07-07 15:57+0200\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: Hebrew <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -91,68 +91,68 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "השתמש בערכת הנושא של Metacity בעת ציור מסגרות חלון"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../gtk/window-decorator/gtk-window-decorator.c:4417
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "סגור חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
 msgstr "שחזר גודל חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "הגדל חלון למקסימום"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../gtk/window-decorator/gtk-window-decorator.c:4484
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "מזער חלון"
 
 #  Label text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../gtk/window-decorator/gtk-window-decorator.c:4601
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "תפריט חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../gtk/window-decorator/gtk-window-decorator.c:4620
 msgid "Shade"
 msgstr "גלול"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
+#: ../gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
 msgstr "העבר למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
 msgstr "נעל במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
 msgstr "פרוס גלילה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
 msgstr "בטל העברה למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
 msgstr "בטל נעילה במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: ../gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "החלון \"%s\" אינו מגיב."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "סגירה כפויה של היישום תביא לאובדן שינויים שלא נשמרו."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: ../gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
 msgstr "_סגור יישום"
 
@@ -1587,9 +1587,8 @@ msgid "Place Windows"
 msgstr "מקם חלונות"
 
 #: ../metadata/place.xml.in.h:9
-#, fuzzy
 msgid "Place across all outputs"
-msgstr "העדף פלט קטן יותר"
+msgstr "מקם לרוחב כל התקני הפלט"
 
 #: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
@@ -1622,9 +1621,8 @@ msgid "Use active output device"
 msgstr "השתמש בהתקן פלט פעיל"
 
 #: ../metadata/place.xml.in.h:17
-#, fuzzy
 msgid "Use output device of focussed window"
-msgstr "השתמש בהתקן הפלט עם הסמן"
+msgstr "השתמש בהתקן הפלט של החלון הפעיל"
 
 #: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
@@ -2337,11 +2335,11 @@ msgstr "בהתקן הפלט הנוכחי"
 
 #: ../metadata/scale.xml.in.h:22
 msgid "Overlay Icon"
-msgstr "סמל מודבק"
+msgstr "צלמית מודבקת"
 
 #: ../metadata/scale.xml.in.h:23
 msgid "Overlay an icon on windows once they are scaled"
-msgstr "הדבק סמל על חלונות במבט על"
+msgstr "הדבק צלמית על חלונות במבט על"
 
 #: ../metadata/scale.xml.in.h:24
 msgid "Scale"
@@ -2464,7 +2462,7 @@ msgstr "מרחק הזום של שולחן העבודה בעת העברת חלו�
 
 #: ../metadata/switcher.xml.in.h:11
 msgid "Icon"
-msgstr "סמלון"
+msgstr "צלמית"
 
 #  button text
 #: ../metadata/switcher.xml.in.h:12
@@ -2555,7 +2553,7 @@ msgstr "בחר את החלון הקודם בלי להראות את החלון ה
 
 #: ../metadata/switcher.xml.in.h:33
 msgid "Show icon next to thumbnail"
-msgstr "הראה סמלון לצד תמונה מוקטנת"
+msgstr "הראה צלמית לצד תמונה מוקטנת"
 
 #  button text
 #: ../metadata/switcher.xml.in.h:34

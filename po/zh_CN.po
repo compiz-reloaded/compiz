@@ -1,20 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Compiz chinese translation.
+# Copyright (C) 2008 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the compiz package.
+# JING Cheng <jingcheng01@gmail.com> 2008
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:24+0530\n"
-"PO-Revision-Date: 2007-12-30 15:19+0100\n"
-"Last-Translator: Gao Dexiang <biaji.cn@gmail.com>\n"
+"POT-Creation-Date: 2008-07-09 17:01+0530\n"
+"PO-Revision-Date: 2008-07-09 08:48+0200\n"
+"Last-Translator: JING Cheng <jingcheng01@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.0.2\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -30,21 +30,19 @@ msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "在窗口标题上滚动鼠标中键时将要采取的操作"
+msgstr "鼠标滚轮在窗口标题栏上的动作"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
 msgstr "模糊类型"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
-#, fuzzy
 msgid "Metacity theme active window opacity"
 msgstr "Metacity主题活动窗口透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
-#, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "水平方向最大化活动窗口"
+msgstr "Metacity主题活动窗口阴影"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
@@ -52,12 +50,11 @@ msgstr "Metacity主题透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
-msgstr ""
+msgstr "Metacity主题阴影"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
-#, fuzzy
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "以metacity主题为装饰的激活窗口使用的透明度"
+msgstr "以Metacity主题为装饰器的活动窗口使用的透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
@@ -67,12 +64,12 @@ msgstr "metacity主题装饰器使用的透明度"
 msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
-msgstr ""
+msgstr "以metacity主题装饰器为活动窗口添加透明渐变效果"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
-msgstr ""
+msgstr "以metacity主题装饰器为窗口添加透明渐变效果"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
@@ -90,94 +87,89 @@ msgstr "使用metacity主题"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "绘制窗口装饰时使用metacity主题"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../gtk/window-decorator/gtk-window-decorator.c:4417
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "关闭窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
-msgstr "取消窗口最大化"
+msgstr "恢复窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
 msgstr "最大化窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../gtk/window-decorator/gtk-window-decorator.c:4484
 #: ../metadata/core.xml.in.h:91
 msgid "Minimize Window"
 msgstr "最小化窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../gtk/window-decorator/gtk-window-decorator.c:4601
 #: ../metadata/core.xml.in.h:161
 msgid "Window Menu"
 msgstr "窗口菜单"
 
 # 此功能完全不能用调整大小来描述，我找这个功能找了N久，才发现：调整大小！ = =；
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4620
 msgid "Shade"
-msgstr "窗口缩放"
+msgstr "阴影"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
+#: ../gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
-msgstr ""
+msgstr "置于上面"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
-msgstr ""
+msgstr "粘滞窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
-msgstr ""
+msgstr "去除阴影"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
-msgstr ""
+msgstr "取消顶置"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
-msgstr ""
+msgstr "取消粘滞"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: ../gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "窗口\"%s\"无响应"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
-msgstr ""
+msgstr "强制退出此应用程序将导致你丢失未保存的数据。"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: ../gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
-msgstr ""
+msgstr "强制退出(_F)"
 
 #: ../metadata/annotate.xml.in.h:1
-#, fuzzy
 msgid "Annotate"
-msgstr "启动"
+msgstr "注解"
 
 #: ../metadata/annotate.xml.in.h:2
-#, fuzzy
 msgid "Annotate Fill Color"
-msgstr "立方体颜色"
+msgstr "注解填充颜色"
 
 #: ../metadata/annotate.xml.in.h:3
 msgid "Annotate Stroke Color"
-msgstr ""
+msgstr "注解描边颜色"
 
 #: ../metadata/annotate.xml.in.h:4
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "活动插件"
+msgstr "注解插件"
 
 #: ../metadata/annotate.xml.in.h:5
-#, fuzzy
 msgid "Clear"
-msgstr "清除(_L)"
+msgstr "清除"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
@@ -248,7 +240,7 @@ msgstr "柔化滤镜"
 #: ../metadata/blur.xml.in.h:5
 #, fuzzy
 msgid "Blur Occlusion"
-msgstr "饱和度"
+msgstr "柔化饱和度"
 
 #: ../metadata/blur.xml.in.h:6
 msgid "Blur Saturation"
@@ -264,7 +256,7 @@ msgstr "柔化窗口"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "柔化半透明窗口后部"
 
 #: ../metadata/blur.xml.in.h:10
 msgid "Blur saturation"
@@ -280,22 +272,19 @@ msgstr "对非当前窗口采取柔化"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+msgstr "不对其它窗口遮挡的屏幕部分进行柔化"
 
 #: ../metadata/blur.xml.in.h:14
-#, fuzzy
 msgid "Filter method used for blurring"
-msgstr "用于柔化的滤镜方法"
+msgstr "过滤用于柔化的方法"
 
 #: ../metadata/blur.xml.in.h:15
-#, fuzzy
 msgid "Focus Blur"
 msgstr "焦点柔化"
 
 #: ../metadata/blur.xml.in.h:16
-#, fuzzy
 msgid "Focus blur windows"
-msgstr "调整窗口大小"
+msgstr "聚焦柔化窗口"
 
 #: ../metadata/blur.xml.in.h:17
 msgid "Gaussian"
@@ -319,7 +308,7 @@ msgstr "高斯柔化力度"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "独立纹理取回"
 
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
@@ -327,13 +316,12 @@ msgid "Mipmap"
 msgstr "Mipmap"
 
 #: ../metadata/blur.xml.in.h:24
-#, fuzzy
 msgid "Mipmap LOD"
-msgstr "Mipmap"
+msgstr "Mipmap LOD"
 
 #: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
-msgstr ""
+msgstr "Mipmap细节层次"
 
 #: ../metadata/blur.xml.in.h:26
 msgid "Pulse"
@@ -347,7 +335,7 @@ msgstr "脉冲效果"
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
-msgstr ""
+msgstr "使用现存的纹理单位尽可能多的进行独立纹理取回"
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -377,73 +365,73 @@ msgstr "输出克隆调用"
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
-msgstr "键绑定在调用时，将运行 command0 定义的 shell 命令"
+msgstr "一个按键绑定，调用时将运行由command0定义的shell命令"
 
 #: ../metadata/core.xml.in.h:2
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
-msgstr "键绑定在调用时，将运行 command1 定义的 shell 命令"
+msgstr "一个按键绑定，调用时将运行由command1定义的shell命令"
 
 #: ../metadata/core.xml.in.h:3
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
-msgstr "键绑定在调用时，将运行 command10 定义的 shell 命令"
+msgstr "一个按键绑定，调用时将运行由command10定义的shell命令"
 
 #: ../metadata/core.xml.in.h:4
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
-msgstr "键绑定在调用时，将运行 command11 定义的 shell 命令"
+msgstr "一个按键绑定，调用时将运行由command11定义的shell命令"
 
 #: ../metadata/core.xml.in.h:5
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
-msgstr "键绑定在调用时，将运行 command2 定义的 shell 命令"
+msgstr "一个按键绑定，调用时将运行由command2定义的shell命令"
 
 #: ../metadata/core.xml.in.h:6
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
-msgstr "键绑定在调用时，将运行 command3 定义的 shell 命令"
+msgstr "一个按键绑定，调用时将运行由command3定义的shell命令"
 
 #: ../metadata/core.xml.in.h:7
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
-msgstr "键绑定在调用时，将运行 command4 定义的shell 命令"
+msgstr "一个按键绑定，调用时将运行由command4定义的shell命令"
 
 #: ../metadata/core.xml.in.h:8
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
-msgstr "键绑定在调用时，将运行 command5 定义的shell 命令"
+msgstr "一个按键绑定，调用时将运行由command5定义的shell命令"
 
 #: ../metadata/core.xml.in.h:9
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
-msgstr "键绑定在调用时，将运行 command6 定义的shell 命令"
+msgstr "一个按键绑定，调用时将运行由command6定义的shell命令"
 
 #: ../metadata/core.xml.in.h:10
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
-msgstr "键绑定在调用时，将运行 command7 定义的shell 命令"
+msgstr "一个按键绑定，调用时将运行由command7定义的shell命令"
 
 #: ../metadata/core.xml.in.h:11
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
-msgstr "键绑定在调用时，将运行 command8 定义的shell 命令"
+msgstr "一个按键绑定，调用时将运行由command8定义的shell命令"
 
 #: ../metadata/core.xml.in.h:12
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
-msgstr "键绑定在调用时，将运行 command9 定义的shell 命令"
+msgstr "一个按键绑定，调用时将运行由command9定义的shell命令"
 
 #: ../metadata/core.xml.in.h:13
 msgid "Active Plugins"
@@ -456,11 +444,11 @@ msgstr "允许全屏窗口的绘制不重定向到屏幕外的象素映射"
 
 #: ../metadata/core.xml.in.h:15
 msgid "Audible Bell"
-msgstr "可听见的铃声"
+msgstr "可闻铃声"
 
 #: ../metadata/core.xml.in.h:16
 msgid "Audible system beep"
-msgstr "可听见的系统嘟嘟声"
+msgstr "可听见的系统响铃"
 
 #: ../metadata/core.xml.in.h:17
 msgid "Auto-Raise"
@@ -484,121 +472,119 @@ msgstr "最佳"
 
 #: ../metadata/core.xml.in.h:22
 msgid "Click To Focus"
-msgstr "单击设置焦点"
+msgstr "点击聚焦"
 
 #: ../metadata/core.xml.in.h:23
 msgid "Click on window moves input focus to it"
-msgstr "单击窗口将输入焦点移至它"
+msgstr "点击窗口将输入焦点移至它"
 
 #: ../metadata/core.xml.in.h:25
 msgid "Close active window"
-msgstr "关闭活动窗口"
+msgstr "关闭激活的窗口"
 
 #: ../metadata/core.xml.in.h:26
-#, fuzzy
 msgid "Command line 0"
-msgstr "命令行 10"
+msgstr "命令行0"
 
 #: ../metadata/core.xml.in.h:27
 msgid "Command line 1"
-msgstr "命令行 1"
+msgstr "命令行1"
 
 #: ../metadata/core.xml.in.h:28
 msgid "Command line 10"
-msgstr "命令行 10"
+msgstr "命令行10"
 
 #: ../metadata/core.xml.in.h:29
 msgid "Command line 11"
-msgstr "命令行 11"
+msgstr "命令行11"
 
 #: ../metadata/core.xml.in.h:30
 msgid "Command line 2"
-msgstr "命令行 2"
+msgstr "命令行2"
 
 #: ../metadata/core.xml.in.h:31
 msgid "Command line 3"
-msgstr "命令行 3"
+msgstr "命令行3"
 
 #: ../metadata/core.xml.in.h:32
 msgid "Command line 4"
-msgstr "命令行 4"
+msgstr "命令行4"
 
 #: ../metadata/core.xml.in.h:33
 msgid "Command line 5"
-msgstr "命令行 5"
+msgstr "命令行5"
 
 #: ../metadata/core.xml.in.h:34
 msgid "Command line 6"
-msgstr "命令行 6"
+msgstr "命令行6"
 
 #: ../metadata/core.xml.in.h:35
 msgid "Command line 7"
-msgstr "命令行 7"
+msgstr "命令行7"
 
 #: ../metadata/core.xml.in.h:36
 msgid "Command line 8"
-msgstr "命令行 8"
+msgstr "命令行8"
 
 #: ../metadata/core.xml.in.h:37
 msgid "Command line 9"
-msgstr "命令行 9"
+msgstr "命令行9"
 
 #: ../metadata/core.xml.in.h:38
-#, fuzzy
 msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "调用 run_command10 时，shell 中要执行的命令行"
+msgstr "调用run_command0时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:39
 msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "调用 run_command1 时，shell 中要执行的命令行"
+msgstr "调用run_command1时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:40
 msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "调用 run_command10 时，shell 中要执行的命令行"
+msgstr "调用run_command10时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:41
 msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "调用 run_command11 时，shell 中要执行的命令行"
+msgstr "调用run_command11时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:42
 msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "调用 run_command2 时，shell 中要执行的命令行"
+msgstr "调用run_command2时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:43
 msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "调用 run_command3 时，shell 中要执行的命令行"
+msgstr "调用run_command3时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:44
 msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "调用 run_command4 时，shell 中要执行的命令行"
+msgstr "调用run_command4时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:45
 msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "调用 run_command5 时，shell 中要执行的命令行"
+msgstr "调用run_command5时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:46
 msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "调用 run_command6 时，shell 中要执行的命令行"
+msgstr "调用run_command6时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:47
 msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "调用 run_command7 时，shell 中要执行的命令行"
+msgstr "调用run_command7时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:48
 msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "调用 run_command8 时，shell 中要执行的命令行"
+msgstr "调用run_command8时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:49
 msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "调用 run_command9 时，shell 中要执行的命令行"
+msgstr "调用run_command9时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.h:50
 msgid "Decrease Opacity"
-msgstr "降低不透明度"
+msgstr "增加透明度"
 
 #: ../metadata/core.xml.in.h:51
 msgid "Decrease window opacity"
-msgstr "降低窗口不透明度"
+msgstr "增加窗口透明度"
 
 #: ../metadata/core.xml.in.h:52
 msgid "Default Icon"
@@ -620,34 +606,31 @@ msgstr "检测刷新率"
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
-msgstr ""
+msgstr "边缘动作执行前，鼠标指针必须置于屏幕的一个边缘"
 
 #: ../metadata/core.xml.in.h:57
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "边缘触发延迟"
 
 #: ../metadata/core.xml.in.h:58
 msgid "Fast"
 msgstr "快速"
 
 #: ../metadata/core.xml.in.h:59
-#, fuzzy
 msgid "Focus Prevention Level"
-msgstr "聚焦窗口类型"
+msgstr "聚焦预防级别"
 
 #: ../metadata/core.xml.in.h:60
-#, fuzzy
 msgid "Focus Prevention Windows"
-msgstr "聚焦窗口类型"
+msgstr "阻碍焦点窗口"
 
 #: ../metadata/core.xml.in.h:61
-#, fuzzy
 msgid "Focus prevention windows"
-msgstr "聚焦窗口类型"
+msgstr "阻碍焦点窗口"
 
 #: ../metadata/core.xml.in.h:62
 msgid "Force independent output painting."
-msgstr ""
+msgstr "强制独立输出绘图"
 
 #: ../metadata/core.xml.in.h:63
 msgid "General Options"
@@ -667,23 +650,23 @@ msgstr "隐藏跳过任务栏窗口"
 
 #: ../metadata/core.xml.in.h:67
 msgid "Hide all windows and focus desktop"
-msgstr "隐藏所有窗口和焦点桌面"
+msgstr "隐藏所有窗口并聚焦于桌面"
 
 #: ../metadata/core.xml.in.h:68
 msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "隐藏进入显示桌面方式时不在任务栏中的窗口"
+msgstr "进入显示桌面模式时隐藏不在任务栏中的窗口"
 
 #: ../metadata/core.xml.in.h:69
 msgid "High"
-msgstr ""
+msgstr "高"
 
 #: ../metadata/core.xml.in.h:70
 msgid "Horizontal Virtual Size"
-msgstr "水平虚拟大小"
+msgstr "水平虚拟尺寸"
 
 #: ../metadata/core.xml.in.h:71
 msgid "If available use compression for textures converted from images"
-msgstr ""
+msgstr "如果可能，对从图片转换来的纹理进行压缩"
 
 #: ../metadata/core.xml.in.h:72
 msgid "Ignore Hints When Maximized"
@@ -691,33 +674,33 @@ msgstr "最大化时忽略提示"
 
 #: ../metadata/core.xml.in.h:73
 msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr "最大化窗口时忽略大小递增和屏幕比例提示"
+msgstr "最大化窗口时忽略尺寸递增和外观提示"
 
+# 增加不透明度应该翻成减少透明度才符合中文语言习惯
 #: ../metadata/core.xml.in.h:74
 msgid "Increase Opacity"
-msgstr "增加不透明度"
+msgstr "减少透明度"
 
+# 增加不透明度应该翻成减少透明度才符合中文语言习惯
 #: ../metadata/core.xml.in.h:75
 msgid "Increase window opacity"
-msgstr "增加窗口不透明度"
+msgstr "减少窗口透明度"
 
 #: ../metadata/core.xml.in.h:76
-#, fuzzy
 msgid "Interval before raising selected windows"
-msgstr "上升所选窗口前的时间间隔"
+msgstr "升起所选窗口前的时间间隔"
 
 #: ../metadata/core.xml.in.h:77
 msgid "Interval between ping messages"
-msgstr ""
+msgstr "ping消息之间的间隔"
 
 #: ../metadata/core.xml.in.h:78
-#, fuzzy
 msgid "Level of focus stealing prevention"
-msgstr "启用 ZEN 分区"
+msgstr "聚焦预防的级别"
 
 #: ../metadata/core.xml.in.h:79
 msgid "Lighting"
-msgstr "加亮"
+msgstr "光线"
 
 #: ../metadata/core.xml.in.h:80
 msgid "List of currently active plugins"
@@ -729,7 +712,7 @@ msgstr "描述输出设备的字符串列表"
 
 #: ../metadata/core.xml.in.h:82
 msgid "Low"
-msgstr ""
+msgstr "低"
 
 #: ../metadata/core.xml.in.h:83
 msgid "Lower Window"
@@ -749,58 +732,55 @@ msgstr "垂直方向最大化窗口"
 
 #: ../metadata/core.xml.in.h:88
 msgid "Maximize active window"
-msgstr "最大化活动窗口"
+msgstr "最大化激活的窗口"
 
 #: ../metadata/core.xml.in.h:89
 msgid "Maximize active window horizontally"
-msgstr "水平方向最大化活动窗口"
+msgstr "水平方向最大化激活的窗口"
 
 #: ../metadata/core.xml.in.h:90
 msgid "Maximize active window vertically"
-msgstr "垂直方向最大化活动窗口"
+msgstr "垂直方向最大化激活的窗口"
 
 #: ../metadata/core.xml.in.h:92
 msgid "Minimize active window"
-msgstr "最小化活动窗口"
+msgstr "最小化激活的窗口"
 
 #: ../metadata/core.xml.in.h:93
 msgid "Number of Desktops"
-msgstr "桌面数"
+msgstr "桌面数量"
 
 #: ../metadata/core.xml.in.h:94
-#, fuzzy
 msgid "Number of virtual desktops"
-msgstr "虚拟桌面数"
+msgstr "虚拟桌面的数量"
 
 #: ../metadata/core.xml.in.h:95
 msgid "Off"
-msgstr ""
+msgstr "关闭"
 
 #: ../metadata/core.xml.in.h:96
 msgid "Only perform screen updates during vertical blanking period"
-msgstr "垂直清屏期间仅执行屏幕更新"
+msgstr "只在垂直清屏期间执行屏幕更新"
 
 #: ../metadata/core.xml.in.h:97
 msgid "Opacity Step"
 msgstr "不透明度级别"
 
 #: ../metadata/core.xml.in.h:98
-#, fuzzy
 msgid "Opacity change step"
-msgstr "不透明度更改级别"
+msgstr "更改不透明度级别"
 
 #: ../metadata/core.xml.in.h:99
 msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
+msgstr "默认为半透明的窗口的不透明度"
 
 #: ../metadata/core.xml.in.h:100
 msgid "Opacity window values"
-msgstr ""
+msgstr "不透明窗口值"
 
 #: ../metadata/core.xml.in.h:101
-#, fuzzy
 msgid "Opacity windows"
-msgstr "窗口之间的间隔"
+msgstr "不透明窗口"
 
 #: ../metadata/core.xml.in.h:102
 msgid "Open a terminal"
@@ -812,44 +792,43 @@ msgstr "输出"
 
 #: ../metadata/core.xml.in.h:104
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "重叠输出处理"
 
 #: ../metadata/core.xml.in.h:105
 msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
+msgstr "单独绘制每个输出设备，即便输出设备重复"
 
 #: ../metadata/core.xml.in.h:106
-#, fuzzy
 msgid "Ping Delay"
-msgstr "电子流延迟"
+msgstr "Ping延迟"
 
 #: ../metadata/core.xml.in.h:107
 msgid "Prefer larger output"
-msgstr ""
+msgstr "首选较大的输出"
 
 #: ../metadata/core.xml.in.h:108
 msgid "Prefer smaller output"
-msgstr ""
+msgstr "首选较小的输出"
 
 #: ../metadata/core.xml.in.h:109
 msgid "Raise On Click"
-msgstr "单击时上升"
+msgstr "点击时升起"
 
 #: ../metadata/core.xml.in.h:110
 msgid "Raise Window"
-msgstr "上升窗口"
+msgstr "升起窗口"
 
 #: ../metadata/core.xml.in.h:111
 msgid "Raise selected windows after interval"
-msgstr "在以下间隔后上升选中窗口"
+msgstr "在间隔一段时间后升起选中窗口"
 
 #: ../metadata/core.xml.in.h:112
 msgid "Raise window above other windows"
-msgstr "将窗口升到其它窗口以上"
+msgstr "将窗口升起到其它窗口之上"
 
 #: ../metadata/core.xml.in.h:113
 msgid "Raise windows when clicked"
-msgstr "单击时上升窗口"
+msgstr "点击时升起窗口"
 
 #: ../metadata/core.xml.in.h:114
 msgid "Refresh Rate"
@@ -860,72 +839,68 @@ msgid "Run Dialog"
 msgstr "运行对话框"
 
 #: ../metadata/core.xml.in.h:116
-#, fuzzy
 msgid "Run command 0"
-msgstr "运行命令 10"
+msgstr "运行命令0"
 
 #: ../metadata/core.xml.in.h:117
 msgid "Run command 1"
-msgstr "运行命令 1"
+msgstr "运行命令1"
 
 #: ../metadata/core.xml.in.h:118
 msgid "Run command 10"
-msgstr "运行命令 10"
+msgstr "运行命令10"
 
 #: ../metadata/core.xml.in.h:119
 msgid "Run command 11"
-msgstr "运行命令 11"
+msgstr "运行命令11"
 
 #: ../metadata/core.xml.in.h:120
 msgid "Run command 2"
-msgstr "运行命令 2"
+msgstr "运行命令2"
 
 #: ../metadata/core.xml.in.h:121
 msgid "Run command 3"
-msgstr "运行命令 3"
+msgstr "运行命令3"
 
 #: ../metadata/core.xml.in.h:122
 msgid "Run command 4"
-msgstr "运行命令 4"
+msgstr "运行命令4"
 
 #: ../metadata/core.xml.in.h:123
 msgid "Run command 5"
-msgstr "运行命令 5"
+msgstr "运行命令5"
 
 #: ../metadata/core.xml.in.h:124
 msgid "Run command 6"
-msgstr "运行命令 6"
+msgstr "运行命令6"
 
 #: ../metadata/core.xml.in.h:125
 msgid "Run command 7"
-msgstr "运行命令 7"
+msgstr "运行命令7"
 
 #: ../metadata/core.xml.in.h:126
 msgid "Run command 8"
-msgstr "运行命令 8"
+msgstr "运行命令8"
 
 #: ../metadata/core.xml.in.h:127
 msgid "Run command 9"
-msgstr "运行命令 9"
+msgstr "运行命令9"
 
 #: ../metadata/core.xml.in.h:128
-#, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
-msgstr "用于水平虚拟大小的屏幕大小倍增器"
+msgstr "水平虚拟尺寸的放大倍数"
 
 #: ../metadata/core.xml.in.h:129
-#, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
-msgstr "用于垂直虚拟大小的屏幕大小倍增器"
+msgstr "垂直虚拟尺寸的放大倍数"
 
 #: ../metadata/core.xml.in.h:130
 msgid "Screenshot command line"
-msgstr "屏幕快照命令行"
+msgstr "截屏命令行"
 
 #: ../metadata/core.xml.in.h:131
-#, fuzzy
 msgid "Show Desktop"
-msgstr "缩放桌面"
+msgstr "显示桌面"
 
 #: ../metadata/core.xml.in.h:132
 msgid "Show Main Menu"
@@ -945,29 +920,27 @@ msgstr "慢速动画"
 
 #: ../metadata/core.xml.in.h:136
 msgid "Smart mode"
-msgstr ""
+msgstr "智能模式"
 
 #: ../metadata/core.xml.in.h:137
 msgid "Sync To VBlank"
-msgstr "与 Vblank 同步"
+msgstr "与VBlank同步"
 
 #: ../metadata/core.xml.in.h:138
 msgid "Take a screenshot"
-msgstr "拍摄屏幕快照"
+msgstr "拍摄截屏"
 
 #: ../metadata/core.xml.in.h:139
 msgid "Take a screenshot of a window"
-msgstr "拍摄窗口的屏幕快照"
+msgstr "拍摄窗口截屏"
 
 #: ../metadata/core.xml.in.h:140
-#, fuzzy
 msgid "Terminal command line"
-msgstr "屏幕快照命令行"
+msgstr "终端命令行"
 
 #: ../metadata/core.xml.in.h:141
-#, fuzzy
 msgid "Texture Compression"
-msgstr "纹理过滤"
+msgstr "纹理压缩"
 
 #: ../metadata/core.xml.in.h:142
 msgid "Texture Filter"
@@ -978,9 +951,8 @@ msgid "Texture filtering"
 msgstr "纹理过滤"
 
 #: ../metadata/core.xml.in.h:144
-#, fuzzy
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "屏幕刷新速率（次/秒）"
+msgstr "屏幕重绘速率(次/秒)"
 
 #: ../metadata/core.xml.in.h:145
 msgid "Toggle Window Maximized"
@@ -1000,27 +972,27 @@ msgstr "将窗口切换到遮蔽"
 
 #: ../metadata/core.xml.in.h:149
 msgid "Toggle active window maximized"
-msgstr "将活动窗口切换到最大化"
+msgstr "将激活的窗口切换到最大化"
 
 #: ../metadata/core.xml.in.h:150
 msgid "Toggle active window maximized horizontally"
-msgstr "将活动窗口水平方向切换到最大化"
+msgstr "将激活的窗口水平方向切换到最大化"
 
 #: ../metadata/core.xml.in.h:151
 msgid "Toggle active window maximized vertically"
-msgstr "将活动窗口垂直方向切换到最大化"
+msgstr "将激活的窗口垂直方向切换到最大化"
 
 #: ../metadata/core.xml.in.h:152
 msgid "Toggle active window shaded"
-msgstr "将活动窗口切换到遮蔽"
+msgstr "将激活的窗口切换到遮蔽"
 
 #: ../metadata/core.xml.in.h:153
 msgid "Toggle use of slow animations"
-msgstr "转换慢速动画的使用"
+msgstr "切换使用慢速动画"
 
 #: ../metadata/core.xml.in.h:155
 msgid "Unmaximize active window"
-msgstr "取消最大化活动窗口"
+msgstr "恢复激活的窗口"
 
 #: ../metadata/core.xml.in.h:156
 msgid "Unredirect Fullscreen Windows"
@@ -1028,36 +1000,35 @@ msgstr "取消重定向全屏窗口"
 
 #: ../metadata/core.xml.in.h:157
 msgid "Use diffuse light when screen is transformed"
-msgstr "转换屏幕时使用漫射灯"
+msgstr "转换屏幕时使用漫射光"
 
 #: ../metadata/core.xml.in.h:158
 msgid "Vertical Virtual Size"
-msgstr "垂直虚拟大小"
+msgstr "垂直虚拟尺寸"
 
 #: ../metadata/core.xml.in.h:159
 msgid "Very High"
-msgstr ""
+msgstr "很高"
 
 #: ../metadata/core.xml.in.h:160
 msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "哪个重叠输出设备将成为首选"
 
 #: ../metadata/core.xml.in.h:162
 msgid "Window menu button binding"
-msgstr ""
+msgstr "窗口菜单按钮绑定"
 
 #: ../metadata/core.xml.in.h:163
 msgid "Window menu key binding"
-msgstr ""
+msgstr "窗口菜单按键绑定"
 
 #: ../metadata/core.xml.in.h:164
 msgid "Window screenshot command line"
-msgstr "窗口屏幕快照命令行"
+msgstr "窗口截屏命令行"
 
 #: ../metadata/core.xml.in.h:165
-#, fuzzy
 msgid "Windows that should be translucent by default"
-msgstr "应渐弱的窗口类型"
+msgstr "默认应为半透明的窗口"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1065,11 +1036,11 @@ msgstr "加速"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
-msgstr ""
+msgstr "调整图像"
 
 #: ../metadata/cube.xml.in.h:3
 msgid "Adjust top face image to rotation"
-msgstr ""
+msgstr "调整顶部图片以旋转"
 
 #: ../metadata/cube.xml.in.h:4
 msgid "Advance to next slide"
@@ -1077,28 +1048,27 @@ msgstr "前进到下一个滑块"
 
 #: ../metadata/cube.xml.in.h:5
 msgid "Animate Skydome"
-msgstr "动画背景"
+msgstr "动画天穹"
 
 #: ../metadata/cube.xml.in.h:6
 msgid "Animate skydome when rotating cube"
-msgstr "旋转立方体时的动画背景"
+msgstr "旋转立方体时给天穹加上动画"
 
 #: ../metadata/cube.xml.in.h:7
-#, fuzzy
 msgid "Automatic"
-msgstr "自动升起"
+msgstr "自动"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Color of top and bottom sides of the cube"
-msgstr "立方体顶边和底边的颜色"
+msgstr "立方体顶面和底面的颜色"
 
 #: ../metadata/cube.xml.in.h:9
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "背景降色渐变使用的底部结束颜色"
+msgstr "天穹降色渐变使用的底部结束颜色"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr "背景降色渐变使用的顶部结束颜色"
+msgstr "天穹降色渐变使用的顶部结束颜色"
 
 #: ../metadata/cube.xml.in.h:11
 msgid "Cube Color"
@@ -1118,11 +1088,11 @@ msgstr "折叠速度"
 
 #: ../metadata/cube.xml.in.h:15
 msgid "Fold Timestep"
-msgstr "折叠时间区间"
+msgstr "折叠时间步长"
 
 #: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr "生成可能用于更高质量缩放比例的 mipmap"
+msgstr "有可能时生成mipmaps用于更高质量的缩放比例"
 
 #: ../metadata/cube.xml.in.h:17
 msgid "Go back to previous slide"
@@ -1134,74 +1104,72 @@ msgstr "图像文件"
 
 #: ../metadata/cube.xml.in.h:19
 msgid "Image to use as texture for the skydome"
-msgstr "要用作背景纹理的图像"
+msgstr "用作穹顶纹理的图像"
 
 #: ../metadata/cube.xml.in.h:20
 msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr ""
+msgstr "仅当旋转由鼠标驱动时启用立方体透明"
 
 #: ../metadata/cube.xml.in.h:21
 msgid "Inside Cube"
-msgstr "立方体内"
+msgstr "立方体内部"
 
 #: ../metadata/cube.xml.in.h:22
 msgid "Inside cube"
-msgstr "立方体内"
+msgstr "立方体内部"
 
 #: ../metadata/cube.xml.in.h:23
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "应在立方体顶面显示的 PNG 和 SVG 文件列表"
+msgstr "应渲染于立方体顶面的PNG和SVG文件列表"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
 #: ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
-msgstr ""
+msgstr "多重输出模式"
 
 #: ../metadata/cube.xml.in.h:26
 msgid "Multiple cubes"
-msgstr ""
+msgstr "多重立方体"
 
 #: ../metadata/cube.xml.in.h:27
 msgid "Next Slide"
 msgstr "下一个滑块"
 
 #: ../metadata/cube.xml.in.h:28
-#, fuzzy
 msgid "One big cube"
-msgstr "立方体内"
+msgstr "单一大立方体"
 
 #: ../metadata/cube.xml.in.h:29
 msgid "Opacity During Rotation"
-msgstr ""
+msgstr "旋转时的不透明度"
 
 #: ../metadata/cube.xml.in.h:30
 msgid "Opacity When Not Rotating"
-msgstr ""
+msgstr "不旋转时的不透明度"
 
 #: ../metadata/cube.xml.in.h:31
 msgid "Opacity of desktop window during rotation."
-msgstr ""
+msgstr "旋转时桌面窗口的不透明度"
 
 #: ../metadata/cube.xml.in.h:32
 msgid "Opacity of desktop window when not rotating."
-msgstr ""
+msgstr "不旋转时桌面窗口的不透明度"
 
 #: ../metadata/cube.xml.in.h:33
 msgid "Place windows on cube"
 msgstr "将窗口放置在立方体上"
 
 #: ../metadata/cube.xml.in.h:34
-#, fuzzy
 msgid "Prev Slide"
 msgstr "上一个滑块"
 
 #: ../metadata/cube.xml.in.h:35
 msgid "Render skydome"
-msgstr "呈现背景"
+msgstr "渲染穹顶"
 
 #: ../metadata/cube.xml.in.h:36
 msgid "Scale image"
-msgstr "调整图像大小"
+msgstr "按比例调整图像大小"
 
 #: ../metadata/cube.xml.in.h:37
 msgid "Scale images to cover top face of cube"
@@ -1209,23 +1177,23 @@ msgstr "调整图像大小以覆盖立方体的顶面"
 
 #: ../metadata/cube.xml.in.h:38
 msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr ""
+msgstr "选择当使用多重输出设备时立方体如何显示"
 
 #: ../metadata/cube.xml.in.h:39
 msgid "Skydome"
-msgstr "背景"
+msgstr "天穹"
 
 #: ../metadata/cube.xml.in.h:40
 msgid "Skydome Gradient End Color"
-msgstr "背景渐变结束颜色"
+msgstr "天穹渐变结束颜色"
 
 #: ../metadata/cube.xml.in.h:41
 msgid "Skydome Gradient Start Color"
-msgstr "背景渐变起始颜色"
+msgstr "天穹渐变起始颜色"
 
 #: ../metadata/cube.xml.in.h:42
 msgid "Skydome Image"
-msgstr "背景图像"
+msgstr "天穹图像"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
@@ -1237,11 +1205,11 @@ msgstr "速度"
 #: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
-msgstr "时间区间"
+msgstr "时间步长"
 
 #: ../metadata/cube.xml.in.h:45
 msgid "Transparency Only on Mouse Rotate"
-msgstr ""
+msgstr "仅当用鼠标旋转时透明"
 
 #: ../metadata/cube.xml.in.h:46
 msgid "Unfold"
@@ -1253,29 +1221,28 @@ msgstr "展开立方体"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
-msgstr ""
+msgstr "Dbus"
 
 #: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
-msgstr ""
+msgstr "Dbus控制后端"
 
 #: ../metadata/decoration.xml.in.h:1
 msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
+msgstr "允许为装饰纹理生成mipmap"
 
 #: ../metadata/decoration.xml.in.h:2
 msgid "Command"
 msgstr "命令"
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
-msgstr "调整窗口大小"
+msgstr "装饰窗口"
 
 #: ../metadata/decoration.xml.in.h:4
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
-msgstr "尚无装饰程序运行时运行的装饰程序命令行"
+msgstr "尚无装饰程序运行时执行的装饰程序命令行"
 
 #: ../metadata/decoration.xml.in.h:5
 msgid "Drop shadow X offset"
@@ -1286,9 +1253,8 @@ msgid "Drop shadow Y offset"
 msgstr "减小阴影 Y 偏移"
 
 #: ../metadata/decoration.xml.in.h:7
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "减小阴影半径"
+msgstr "投影颜色"
 
 #: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow opacity"
@@ -1299,9 +1265,8 @@ msgid "Drop shadow radius"
 msgstr "减小阴影半径"
 
 #: ../metadata/decoration.xml.in.h:11
-#, fuzzy
 msgid "Shadow Color"
-msgstr "窗口快照"
+msgstr "阴影颜色"
 
 #: ../metadata/decoration.xml.in.h:12
 msgid "Shadow Offset X"
@@ -1320,9 +1285,8 @@ msgid "Shadow Radius"
 msgstr "阴影半径"
 
 #: ../metadata/decoration.xml.in.h:16
-#, fuzzy
 msgid "Shadow windows"
-msgstr "窗口快照"
+msgstr "阴影窗口"
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
@@ -1333,43 +1297,40 @@ msgid "Window decorations"
 msgstr "窗口装饰"
 
 #: ../metadata/decoration.xml.in.h:19
-#, fuzzy
 msgid "Windows that should be decorated"
-msgstr "应渐弱的窗口类型"
+msgstr "应装饰的窗口"
 
 #: ../metadata/decoration.xml.in.h:20
-#, fuzzy
 msgid "Windows that should have a shadow"
-msgstr "应渐弱的窗口类型"
+msgstr "应有阴影的窗口"
 
 #: ../metadata/fade.xml.in.h:1
 msgid "Fade On Minimize/Open/Close"
-msgstr ""
+msgstr "当最小化/打开/关闭时渐隐"
 
 #: ../metadata/fade.xml.in.h:2
 msgid "Fade Speed"
-msgstr "减弱速度"
+msgstr "渐隐速度"
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Fade effect on minimize/open/close window events"
-msgstr ""
+msgstr "产生窗口最小化/打开/关闭事件时使用渐隐效果"
 
 #: ../metadata/fade.xml.in.h:4
 msgid "Fade effect on system beep"
-msgstr "系统嘟嘟声的减弱效果"
+msgstr "系统嘟嘟声时使用渐隐效果"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr "映射时渐现窗口和不映射时渐弱窗口"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Fade windows"
-msgstr "调整窗口大小"
+msgstr "渐隐窗口"
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fading Windows"
-msgstr "渐弱窗口"
+msgstr "渐隐窗口"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fullscreen Visual Bell"
@@ -1377,87 +1338,81 @@ msgstr "全屏静音"
 
 #: ../metadata/fade.xml.in.h:9
 msgid "Fullscreen fade effect on system beep"
-msgstr "系统嘟嘟声的全屏减弱效果"
+msgstr "系统嘟嘟声的全屏渐隐效果"
 
 #: ../metadata/fade.xml.in.h:10
 msgid "Visual Bell"
-msgstr "静音"
+msgstr "视觉振铃"
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Window fade speed"
-msgstr "窗口渐弱速度"
+msgstr "窗口渐隐速度"
 
 #: ../metadata/fade.xml.in.h:12
-#, fuzzy
 msgid "Windows that should be fading"
-msgstr "应渐弱的窗口类型"
+msgstr "应渐隐的窗口"
 
 #: ../metadata/fs.xml.in.h:1
-#, fuzzy
 msgid "Mount Point"
-msgstr "点"
+msgstr "挂载点"
 
 #: ../metadata/fs.xml.in.h:2
-#, fuzzy
 msgid "Mount point"
-msgstr "增加点"
+msgstr "挂载点"
 
 #: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
-msgstr ""
+msgstr "用户空间文件系统"
 
 #: ../metadata/fs.xml.in.h:4
 msgid "Userspace file system"
-msgstr ""
+msgstr "用户空间文件系统"
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr ""
+msgstr "GConf"
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
-msgstr ""
+msgstr "GConf控制后端"
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
-msgstr ""
+msgstr "GLib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
-msgstr ""
+msgstr "GLib主循环支持"
 
 #: ../metadata/ini.xml.in.h:1
-#, fuzzy
 msgid "Ini"
-msgstr "不修改"
+msgstr "Ini"
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
-msgstr ""
+msgstr "ini纯文本后端"
 
 #: ../metadata/inotify.xml.in.h:1
 msgid "File change notification plugin"
-msgstr ""
+msgstr "文件修改通知插件"
 
 #: ../metadata/inotify.xml.in.h:2
-#, fuzzy
 msgid "Inotify"
-msgstr "不修改"
+msgstr "Inotify"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr ""
+msgstr "Kconfig"
 
 #: ../metadata/kconfig.xml.in.h:2
 msgid "Kconfig Control Backend"
-msgstr ""
+msgstr "Kconfig控制后端"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
 msgstr "最小化效果"
 
 #: ../metadata/minimize.xml.in.h:2
-#, fuzzy
 msgid "Minimize Windows"
 msgstr "最小化窗口"
 
@@ -1479,12 +1434,11 @@ msgstr "抗遮蔽性"
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
-msgstr "最小化和取消最小化窗口时进行转换"
+msgstr "最小化和取消最小化窗口时进行变形"
 
 #: ../metadata/minimize.xml.in.h:10
-#, fuzzy
 msgid "Windows that should be transformed when minimized"
-msgstr "最小化时应转换的窗口类型"
+msgstr "最小化时应变形的窗口"
 
 #: ../metadata/move.xml.in.h:1
 msgid "Constrain Y"
@@ -1496,16 +1450,15 @@ msgstr "约束工作空间区域的 Y 坐标"
 
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
-msgstr ""
+msgstr "结束移动前不更新服务端的位置信息"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
 msgstr "启动窗口移动"
 
 #: ../metadata/move.xml.in.h:5
-#, fuzzy
 msgid "Lazy Positioning"
-msgstr "显示最小化的窗口"
+msgstr "懒惰定位"
 
 #: ../metadata/move.xml.in.h:6
 msgid "Move Window"
@@ -1538,30 +1491,27 @@ msgstr "开始移动窗口"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr ""
+msgstr "放置窗口所用的算法"
 
 #: ../metadata/place.xml.in.h:2
 msgid "Cascade"
-msgstr ""
+msgstr "层叠"
 
 #: ../metadata/place.xml.in.h:3
 msgid "Centered"
-msgstr ""
+msgstr "居中"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "聚焦窗口类型"
+msgstr "强制窗口放置"
 
 #: ../metadata/place.xml.in.h:5
-#, fuzzy
 msgid "Horizontal viewport positions"
-msgstr "水平虚拟大小"
+msgstr "水平视图位置"
 
 #: ../metadata/place.xml.in.h:6
-#, fuzzy
 msgid "Maximize"
-msgstr "最小化"
+msgstr "最大化"
 
 #: ../metadata/place.xml.in.h:8
 msgid "Place Windows"
@@ -1569,7 +1519,7 @@ msgstr "放置窗口"
 
 #: ../metadata/place.xml.in.h:9
 msgid "Place across all outputs"
-msgstr ""
+msgstr "跨越所有输出放置"
 
 #: ../metadata/place.xml.in.h:10
 msgid "Place windows at appropriate positions when mapped"
@@ -1577,158 +1527,142 @@ msgstr "映射时将窗口放置在适当位置"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Placement Mode"
-msgstr ""
+msgstr "安置模式"
 
 #: ../metadata/place.xml.in.h:12
-#, fuzzy
 msgid "Positioned windows"
-msgstr "显示最小化的窗口"
+msgstr "已定位的窗口"
 
 #: ../metadata/place.xml.in.h:13
 msgid "Random"
-msgstr ""
+msgstr "随机"
 
 #: ../metadata/place.xml.in.h:14
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
-msgstr ""
+msgstr "选择当选用了多重输出时窗口放置的行为"
 
 #: ../metadata/place.xml.in.h:15
 msgid "Smart"
-msgstr ""
+msgstr "灵巧"
 
 #: ../metadata/place.xml.in.h:16
 msgid "Use active output device"
-msgstr ""
+msgstr "使用当前输出设备"
 
 #: ../metadata/place.xml.in.h:17
 msgid "Use output device of focussed window"
-msgstr ""
+msgstr "使用当前窗口的输出设备"
 
 #: ../metadata/place.xml.in.h:18
 msgid "Use output device with pointer"
-msgstr ""
+msgstr "使用指针所指的输出设备"
 
 #: ../metadata/place.xml.in.h:19
-#, fuzzy
 msgid "Vertical viewport positions"
-msgstr "水平虚拟大小"
+msgstr "垂直视图位置"
 
 #: ../metadata/place.xml.in.h:20
-#, fuzzy
 msgid "Viewport positioned windows"
-msgstr "显示最小化的窗口"
+msgstr "视图中的定位窗口"
 
 #: ../metadata/place.xml.in.h:21
 msgid "Window placement workarounds"
 msgstr "窗口放置工作区"
 
 #: ../metadata/place.xml.in.h:22
-#, fuzzy
 msgid "Windows that should be positioned by default"
-msgstr "应渐弱的窗口类型"
+msgstr "默认应定位的窗口"
 
 #: ../metadata/place.xml.in.h:23
-#, fuzzy
 msgid "Windows that should be positioned in specific viewports by default"
-msgstr "比例模式下应缩放的窗口类型"
+msgstr "指定视图中默认应定位的窗口"
 
 #: ../metadata/place.xml.in.h:24
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
-msgstr ""
+msgstr "即便向窗口管理器提出避免放置的请求，仍应强制放置的窗口"
 
 #: ../metadata/place.xml.in.h:25
 msgid "Workarounds"
 msgstr "工作区"
 
 #: ../metadata/place.xml.in.h:26
-#, fuzzy
 msgid "X Positions"
-msgstr "显示最小化的窗口"
+msgstr "X位置"
 
 #: ../metadata/place.xml.in.h:27
-#, fuzzy
 msgid "X Viewport Positions"
-msgstr "水平虚拟大小"
+msgstr "X视图位置"
 
 #: ../metadata/place.xml.in.h:28
 msgid "X position values"
-msgstr ""
+msgstr "X位置取值"
 
 #: ../metadata/place.xml.in.h:29
-#, fuzzy
 msgid "Y Positions"
-msgstr "显示最小化的窗口"
+msgstr "Y位置"
 
 #: ../metadata/place.xml.in.h:30
-#, fuzzy
 msgid "Y Viewport Positions"
-msgstr "水平虚拟大小"
+msgstr "Y视图位置"
 
 #: ../metadata/place.xml.in.h:31
 msgid "Y position values"
-msgstr ""
+msgstr "Y位置取值"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
-msgstr ""
+msgstr "Png"
 
 #: ../metadata/png.xml.in.h:2
 msgid "Png image loader"
-msgstr ""
+msgstr "Png图像加载器"
 
 #: ../metadata/regex.xml.in.h:1
-#, fuzzy
 msgid "Regex Matching"
-msgstr "转换窗口快照"
+msgstr "正则表达符合"
 
 #: ../metadata/regex.xml.in.h:2
-#, fuzzy
 msgid "Regex window matching"
-msgstr "转换窗口快照"
+msgstr "正则表达符合的窗口"
 
 #: ../metadata/resize.xml.in.h:1
-#, fuzzy
 msgid "Border Color"
-msgstr "立方体颜色"
+msgstr "边颜色"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border color used for outline and rectangle resize modes"
-msgstr ""
+msgstr "用于描边和矩形大小调整模式的边颜色"
 
 #: ../metadata/resize.xml.in.h:3
 msgid "Default Resize Mode"
-msgstr ""
+msgstr "默认大小调整模式"
 
 #: ../metadata/resize.xml.in.h:4
 msgid "Default mode used for window resizing"
-msgstr ""
+msgstr "窗口大小调整的默认模式"
 
 #: ../metadata/resize.xml.in.h:5
-#, fuzzy
 msgid "Fill Color"
-msgstr "立方体颜色"
+msgstr "填充颜色"
 
 #: ../metadata/resize.xml.in.h:6
 msgid "Fill color used for rectangle resize mode"
-msgstr ""
+msgstr "用于矩形大小调整模式的填充颜色"
 
 #: ../metadata/resize.xml.in.h:7
-#, fuzzy
 msgid "Initiate Normal Window Resize"
-msgstr "启动窗口大小调整"
+msgstr "初始普通窗口大小调整"
 
 #: ../metadata/resize.xml.in.h:8
-#, fuzzy
 msgid "Initiate Outline Window Resize"
-msgstr "启动窗口大小调整"
+msgstr "初始化窗口外框大小调整"
 
 #: ../metadata/resize.xml.in.h:9
-#, fuzzy
 msgid "Initiate Rectangle Window Resize"
-msgstr "启动窗口大小调整"
+msgstr "初始矩形窗口大小调整"
 
 #: ../metadata/resize.xml.in.h:10
 #, fuzzy
@@ -1744,28 +1678,24 @@ msgid "Normal"
 msgstr "常规"
 
 #: ../metadata/resize.xml.in.h:13
-#, fuzzy
 msgid "Normal Resize Windows"
-msgstr "调整窗口大小"
+msgstr "普通窗口大小调整"
 
 #: ../metadata/resize.xml.in.h:14
-#, fuzzy
 msgid "Outline"
-msgstr "立方体颜色"
+msgstr "轮廓"
 
 #: ../metadata/resize.xml.in.h:15
-#, fuzzy
 msgid "Outline Resize Windows"
-msgstr "调整窗口大小"
+msgstr "窗口外框大小调整"
 
 #: ../metadata/resize.xml.in.h:16
 msgid "Rectangle"
-msgstr ""
+msgstr "矩形"
 
 #: ../metadata/resize.xml.in.h:17
-#, fuzzy
 msgid "Rectangle Resize Windows"
-msgstr "调整窗口大小"
+msgstr "矩形窗口大小调整"
 
 #: ../metadata/resize.xml.in.h:18
 msgid "Resize Window"
@@ -1780,28 +1710,24 @@ msgid "Start resizing window"
 msgstr "开始调整窗口大小"
 
 #: ../metadata/resize.xml.in.h:21
-#, fuzzy
 msgid "Start resizing window by stretching it"
-msgstr "开始使用键盘调整窗口大小"
+msgstr "用拖曳调整窗口大小"
 
 #: ../metadata/resize.xml.in.h:22
-#, fuzzy
 msgid "Start resizing window normally"
-msgstr "开始调整窗口大小"
+msgstr "开始如常调整窗口大小"
 
 #: ../metadata/resize.xml.in.h:23
-#, fuzzy
 msgid "Start resizing window with outline"
-msgstr "开始调整窗口大小"
+msgstr "开始以轮廓调整窗口大小"
 
 #: ../metadata/resize.xml.in.h:24
-#, fuzzy
 msgid "Start resizing window with rectangle"
-msgstr "开始调整窗口大小"
+msgstr "开始以矩形调整窗口大小"
 
 #: ../metadata/resize.xml.in.h:25
 msgid "Stretch"
-msgstr ""
+msgstr "拉伸"
 
 #: ../metadata/resize.xml.in.h:26
 #, fuzzy
@@ -1878,12 +1804,11 @@ msgstr "指针灵敏度"
 
 #: ../metadata/rotate.xml.in.h:15
 msgid "Raise on rotate"
-msgstr ""
+msgstr "转动时提升"
 
 #: ../metadata/rotate.xml.in.h:16
-#, fuzzy
 msgid "Raise window when rotating"
-msgstr "单击时上升窗口"
+msgstr "转动时上升窗口"
 
 #: ../metadata/rotate.xml.in.h:17
 msgid "Rotate Cube"
@@ -1918,14 +1843,12 @@ msgid "Rotate To"
 msgstr "旋转到"
 
 #: ../metadata/rotate.xml.in.h:25
-#, fuzzy
 msgid "Rotate To Face 1"
-msgstr "旋转到第 10 面"
+msgstr "旋转到第 1 面"
 
 #: ../metadata/rotate.xml.in.h:26
-#, fuzzy
 msgid "Rotate To Face 1 with Window"
-msgstr "旋转到带窗口的第 10 面"
+msgstr "旋转到带窗口的第 1 面"
 
 #: ../metadata/rotate.xml.in.h:27
 msgid "Rotate To Face 10"
@@ -2021,31 +1944,27 @@ msgstr "旋转桌面立方体"
 
 #: ../metadata/rotate.xml.in.h:50
 msgid "Rotate left"
-msgstr "逆时针旋转"
+msgstr "左转"
 
 #: ../metadata/rotate.xml.in.h:51
-#, fuzzy
 msgid "Rotate left and bring active window along"
-msgstr "逆时针旋转并带来活动窗口"
+msgstr "带着活动窗口左转"
 
 #: ../metadata/rotate.xml.in.h:52
 msgid "Rotate right"
-msgstr "顺时针旋转"
+msgstr "右转"
 
 #: ../metadata/rotate.xml.in.h:53
-#, fuzzy
 msgid "Rotate right and bring active window along"
-msgstr "顺时针旋转并带来活动窗口"
+msgstr "带着活动窗口右转"
 
 #: ../metadata/rotate.xml.in.h:54
-#, fuzzy
 msgid "Rotate to face 1"
-msgstr "旋转到第 10 面"
+msgstr "旋转到第 1 面"
 
 #: ../metadata/rotate.xml.in.h:55
-#, fuzzy
 msgid "Rotate to face 1 and bring active window along"
-msgstr "旋转到第 10 面并带来活动窗口"
+msgstr "旋转到第 1面并带来活动窗口"
 
 #: ../metadata/rotate.xml.in.h:56
 msgid "Rotate to face 10"
@@ -2140,7 +2059,6 @@ msgid "Rotate to viewport"
 msgstr "旋转到视点"
 
 #: ../metadata/rotate.xml.in.h:79
-#, fuzzy
 msgid "Rotate window"
 msgstr "旋转窗口"
 
@@ -2158,30 +2076,27 @@ msgstr "旋转速度"
 
 #: ../metadata/rotate.xml.in.h:83
 msgid "Rotation Timestep"
-msgstr "旋转时间区间"
+msgstr "旋转时间步长"
 
 #: ../metadata/rotate.xml.in.h:84
-#, fuzzy
 msgid "Rotation Zoom"
-msgstr "旋转速度"
+msgstr "旋转缩放"
 
 #: ../metadata/rotate.xml.in.h:85
 msgid "Sensitivity of pointer movement"
 msgstr "指针移动灵敏度"
 
 #: ../metadata/rotate.xml.in.h:86
-#, fuzzy
 msgid "Snap Cube Rotation to Bottom Face"
-msgstr "将立方体快速旋转到顶面"
+msgstr "将立方体快速旋转到底面"
 
 #: ../metadata/rotate.xml.in.h:87
 msgid "Snap Cube Rotation to Top Face"
 msgstr "将立方体快速旋转到顶面"
 
 #: ../metadata/rotate.xml.in.h:88
-#, fuzzy
 msgid "Snap To Bottom Face"
-msgstr "迅速移至顶面"
+msgstr "迅速移至底面"
 
 #: ../metadata/rotate.xml.in.h:89
 msgid "Snap To Top Face"
@@ -2193,7 +2108,7 @@ msgstr "开始旋转"
 
 #: ../metadata/rotate.xml.in.h:92
 msgid "Timeout before flipping viewport"
-msgstr "翻转十点之前发生超时"
+msgstr "翻转视点之前超时"
 
 #: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
 msgid "Zoom"
@@ -2209,7 +2124,7 @@ msgstr "大"
 
 #: ../metadata/scale.xml.in.h:3
 msgid "Click Desktop to Show Desktop"
-msgstr ""
+msgstr "点击桌面以显示桌面"
 
 #: ../metadata/scale.xml.in.h:4
 msgid "Darken Background"
@@ -2225,7 +2140,7 @@ msgstr "标志"
 
 #: ../metadata/scale.xml.in.h:7
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr ""
+msgstr "在缩放时，点击桌面会进入显示桌面模式"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Hover Time"
@@ -2269,11 +2184,11 @@ msgstr "无"
 
 #: ../metadata/scale.xml.in.h:19
 msgid "On all output devices"
-msgstr ""
+msgstr "在所有输出设备上"
 
 #: ../metadata/scale.xml.in.h:20
 msgid "On current output device"
-msgstr ""
+msgstr "在当前输出设备上"
 
 #: ../metadata/scale.xml.in.h:22
 msgid "Overlay Icon"
@@ -2286,12 +2201,11 @@ msgstr "缩放窗口时覆盖图标"
 # 此功能完全不能用调整大小来描述，我找这个功能找了N久，才发现：调整大小！ = =；
 #: ../metadata/scale.xml.in.h:24
 msgid "Scale"
-msgstr "窗口缩放"
+msgstr "缩放"
 
 #: ../metadata/scale.xml.in.h:25
-#, fuzzy
 msgid "Scale Windows"
-msgstr "调整窗口大小"
+msgstr "窗口缩放"
 
 #: ../metadata/scale.xml.in.h:26
 msgid "Scale speed"
@@ -2299,15 +2213,16 @@ msgstr "缩放速度"
 
 #: ../metadata/scale.xml.in.h:27
 msgid "Scale timestep"
-msgstr "缩放时间区间"
+msgstr "缩放时间步长"
 
 #: ../metadata/scale.xml.in.h:28
 msgid "Scale windows"
-msgstr "调整窗口大小"
+msgstr "窗口缩放"
 
 #: ../metadata/scale.xml.in.h:29
+#, fuzzy
 msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr ""
+msgstr "在使用了多重输出设备的情况下选择窗口缩放的地方"
 
 #: ../metadata/scale.xml.in.h:30
 msgid "Space between windows"
@@ -2320,17 +2235,15 @@ msgstr "间距"
 #: ../metadata/scale.xml.in.h:33
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr "悬停在窗口上时比例模式终止前的时间（以毫秒为）"
+msgstr "悬停在窗口上时比例模式终止前的时间（毫秒）"
 
 #: ../metadata/scale.xml.in.h:35
-#, fuzzy
 msgid "Windows that should be scaled in scale mode"
-msgstr "比例模式下应缩放的窗口类型"
+msgstr "缩放模式下应缩放的窗口类型"
 
 #: ../metadata/screenshot.xml.in.h:1
-#, fuzzy
 msgid "Automatically open screenshot in this application"
-msgstr "登录时自动启动该小程序"
+msgstr "在该应用程序中自动开启截屏"
 
 #: ../metadata/screenshot.xml.in.h:2
 #, fuzzy
@@ -2338,9 +2251,8 @@ msgid "Directory"
 msgstr "目录\n"
 
 #: ../metadata/screenshot.xml.in.h:4
-#, fuzzy
 msgid "Initiate rectangle screenshot"
-msgstr "拍摄屏幕快照"
+msgstr "初始化矩形截屏"
 
 #: ../metadata/screenshot.xml.in.h:5
 #, fuzzy
@@ -2348,27 +2260,24 @@ msgid "Launch Application"
 msgstr "起动应用程序"
 
 #: ../metadata/screenshot.xml.in.h:6
-#, fuzzy
 msgid "Put screenshot images in this directory"
-msgstr "递归到目录中"
+msgstr "保存截屏图片到此目录"
 
 #: ../metadata/screenshot.xml.in.h:7
-#, fuzzy
 msgid "Screenshot"
-msgstr "屏幕"
+msgstr "截屏"
 
 #: ../metadata/screenshot.xml.in.h:8
-#, fuzzy
 msgid "Screenshot plugin"
-msgstr "屏幕快照命令行"
+msgstr "截屏插件"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
-msgstr ""
+msgstr "Svg"
 
 #: ../metadata/svg.xml.in.h:2
 msgid "Svg image loader"
-msgstr ""
+msgstr "Svg 图像加载器"
 
 #: ../metadata/switcher.xml.in.h:1
 msgid "Amount of brightness in percent"
@@ -2421,14 +2330,12 @@ msgid "Next window"
 msgstr "下一个窗口"
 
 #: ../metadata/switcher.xml.in.h:16
-#, fuzzy
 msgid "Next window (All windows)"
-msgstr "下一个窗口"
+msgstr "下一个窗口（所有）"
 
 #: ../metadata/switcher.xml.in.h:17
-#, fuzzy
 msgid "Next window (No popup)"
-msgstr "下一个窗口"
+msgstr "下一个窗口（非弹出）"
 
 #: ../metadata/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window"
@@ -2448,9 +2355,8 @@ msgid ""
 msgstr "不可见时弹出切换程序并选择所有窗口的上一个窗口"
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev Panel"
-msgstr "上一个滑块"
+msgstr "上一个面板"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
@@ -2459,7 +2365,7 @@ msgstr "上一个窗口"
 #: ../metadata/switcher.xml.in.h:25
 #, fuzzy
 msgid "Prev window (All windows)"
-msgstr "上一个窗口"
+msgstr "上一个窗口(全部窗口)"
 
 #: ../metadata/switcher.xml.in.h:26
 #, fuzzy
@@ -2468,7 +2374,7 @@ msgstr "上一个窗口"
 
 #: ../metadata/switcher.xml.in.h:27
 msgid "Rotate to the selected window while switching"
-msgstr ""
+msgstr "切换时转到所选窗口"
 
 #: ../metadata/switcher.xml.in.h:28
 msgid "Saturation"
@@ -2481,7 +2387,7 @@ msgstr "选择下一个窗口"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
-msgstr ""
+msgstr "选取下一个窗口，且排除显示弹出窗口。"
 
 #: ../metadata/switcher.xml.in.h:31
 #, fuzzy
@@ -2490,7 +2396,7 @@ msgstr "选择上一个窗口"
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
-msgstr ""
+msgstr "选取下一个窗口，且排除显示弹出窗口。"
 
 #: ../metadata/switcher.xml.in.h:33
 msgid "Show icon next to thumbnail"
@@ -2520,7 +2426,7 @@ msgstr "切换程序中应显示的窗口类型"
 
 #: ../metadata/video.xml.in.h:1
 msgid "Provide YV12 colorspace support"
-msgstr ""
+msgstr "提供 YV12 色彩空间支持"
 
 #: ../metadata/video.xml.in.h:2
 msgid "Video Playback"
@@ -2532,7 +2438,7 @@ msgstr "视频回放"
 
 #: ../metadata/video.xml.in.h:4
 msgid "YV12 colorspace"
-msgstr ""
+msgstr "YV12 色彩空间"
 
 #: ../metadata/water.xml.in.h:1
 msgid "Add line"
@@ -2662,7 +2568,6 @@ msgid "Minimum Vertex Grid Size"
 msgstr "最小顶点栅格大小"
 
 #: ../metadata/wobbly.xml.in.h:15
-#, fuzzy
 msgid "Move Windows"
 msgstr "移动窗口"
 
@@ -2736,7 +2641,6 @@ msgid "Filter Linear"
 msgstr "过滤器线性"
 
 #: ../metadata/zoom.xml.in.h:5
-#, fuzzy
 msgid "Use linear filter when zoomed in"
 msgstr "放大时使用线性过滤器"
 

@@ -8,14 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 22:24+0530\n"
-"PO-Revision-Date: 2001-10-18 11:02+0200\n"
-"Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
+"POT-Creation-Date: 2008-07-09 17:00+0530\n"
+"PO-Revision-Date: 2008-06-12 01:19+0200\n"
+"Last-Translator: benjamin povirk <benjamin.povirk@gmail.com>\n"
 "Language-Team: Slovenian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 #, fuzzy
@@ -43,122 +45,119 @@ msgstr "Izbran(i)"
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 #, fuzzy
 msgid "Metacity theme active window opacity"
-msgstr "V celoti &izbriši Windows"
+msgstr "Metacity tema motnost aktivnega okna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 #, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "V celoti &izbriši Windows"
+msgstr "Metacity tema motnost sence aktivnega okna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr ""
+msgstr "Metacity tema motnost"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
-msgstr ""
+msgstr "Metacity tema motnost senca"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr ""
+msgstr "Motnost za aktivna okna z metacity temo dekoracij"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
-msgstr ""
+msgstr "Motnost za metacity temo dekoracij"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
-msgstr ""
+msgstr "Zasenči aktivna okna z metacity temo dekoracij od motne do prozorne"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
-msgstr ""
+msgstr "Zasenči okna z metacity temo dekoracij od motne do prozorne"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr ""
+msgstr "Akcija miškinega kolesca na naslovni vrstici"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
-msgstr ""
+msgstr "Tip neaktivnosti uporabljen za dekoracije okna"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "Uporabi metacity temo"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr ""
+msgstr "Uporabi metacity temo ko rišeš dekoracije okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4409
+#: ../gtk/window-decorator/gtk-window-decorator.c:4417
 #: ../metadata/core.xml.in.h:24
-#, fuzzy
 msgid "Close Window"
-msgstr "I&zbriši Windows"
+msgstr "Zapri okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4431
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.h:154
 msgid "Unmaximize Window"
-msgstr ""
+msgstr "Odmaksimiziraj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize Window"
-msgstr ""
+msgstr "Maksimiziraj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4476
+#: ../gtk/window-decorator/gtk-window-decorator.c:4484
 #: ../metadata/core.xml.in.h:91
-#, fuzzy
 msgid "Minimize Window"
-msgstr "&Skrčite Windows"
+msgstr "Minimiziraj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4593
+#: ../gtk/window-decorator/gtk-window-decorator.c:4601
 #: ../metadata/core.xml.in.h:161
-#, fuzzy
 msgid "Window Menu"
-msgstr "Upravljalnik oken"
+msgstr "Okenski meni"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4620
 msgid "Shade"
-msgstr "Optični bralnik (scanner)"
+msgstr "Zasenči"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
+#: ../gtk/window-decorator/gtk-window-decorator.c:4640
 msgid "Make Above"
-msgstr ""
+msgstr "Postavi na vrh"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4666
 msgid "Stick"
-msgstr ""
+msgstr "Prilepi"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4686
 msgid "Unshade"
-msgstr ""
+msgstr "Odsenči"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4706
 msgid "Unmake Above"
-msgstr ""
+msgstr "Postavi iz ospredja"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4732
 msgid "Unstick"
-msgstr ""
+msgstr "Odlepi"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5081
+#: ../gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "Okno \"%s\" se ne odziva"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
+"Nasilno zaprtje te aplikacije lahko povzroči izgubo neshranjenih sprememb."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5105
+#: ../gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
-msgstr ""
+msgstr "_Nasilni izhod"
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
@@ -181,17 +180,16 @@ msgid "Annotate plugin"
 msgstr "Aktivni profil"
 
 #: ../metadata/annotate.xml.in.h:5
-#, fuzzy
 msgid "Clear"
-msgstr "počisti"
+msgstr "Počisti"
 
 #: ../metadata/annotate.xml.in.h:6
 msgid "Draw"
-msgstr ""
+msgstr "Izriši"
 
 #: ../metadata/annotate.xml.in.h:7
 msgid "Draw using tool"
-msgstr ""
+msgstr "Izriši z uporabo orodja"
 
 #: ../metadata/annotate.xml.in.h:8
 msgid "Fill color for annotations"
@@ -200,9 +198,8 @@ msgstr ""
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
 #: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
-#, fuzzy
 msgid "Initiate"
-msgstr "Init"
+msgstr "Inicializiraj"
 
 #: ../metadata/annotate.xml.in.h:10
 #, fuzzy
@@ -215,13 +212,12 @@ msgid "Initiate annotate erasing"
 msgstr "Init"
 
 #: ../metadata/annotate.xml.in.h:12
-#, fuzzy
 msgid "Initiate erase"
-msgstr "Init"
+msgstr "Inicializiraj izbris"
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "širina črte"
 
 #: ../metadata/annotate.xml.in.h:14
 msgid "Line width for annotations"
@@ -232,70 +228,62 @@ msgid "Stroke color for annotations"
 msgstr ""
 
 #: ../metadata/annotate.xml.in.h:16
+#, fuzzy
 msgid "Stroke width"
-msgstr ""
+msgstr "širina črte"
 
 #: ../metadata/annotate.xml.in.h:17
 msgid "Stroke width for annotations"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:1
-#, fuzzy
 msgid "4xBilinear"
-msgstr "Filter: "
+msgstr "4xbilinearno"
 
 #: ../metadata/blur.xml.in.h:2
-#, fuzzy
 msgid "Alpha Blur"
-msgstr "I&zbriši Windows"
+msgstr "Zamaži z transparenco"
 
 #: ../metadata/blur.xml.in.h:3
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "I&zbriši Windows"
+msgstr "Zamaži okna z transparenco"
 
 #: ../metadata/blur.xml.in.h:4
-#, fuzzy
 msgid "Blur Filter"
-msgstr "&Nastavi filter"
+msgstr "Filter madeža"
 
 #: ../metadata/blur.xml.in.h:5
-#, fuzzy
 msgid "Blur Occlusion"
-msgstr "Trajanje"
+msgstr "Madež absorpcije"
 
 #: ../metadata/blur.xml.in.h:6
 #, fuzzy
 msgid "Blur Saturation"
-msgstr "Trajanje"
+msgstr "Madež zasičenosti"
 
 #: ../metadata/blur.xml.in.h:7
-#, fuzzy
 msgid "Blur Speed"
-msgstr "Izbran(i)"
+msgstr "Zamaži hitrost"
 
 #: ../metadata/blur.xml.in.h:8
-#, fuzzy
 msgid "Blur Windows"
-msgstr "I&zbriši Windows"
+msgstr "Zamaži okna"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "Zamaži za prosojnimi deli oken"
 
 #: ../metadata/blur.xml.in.h:10
-#, fuzzy
 msgid "Blur saturation"
-msgstr "Trajanje"
+msgstr "Madež nasičenosti"
 
 #: ../metadata/blur.xml.in.h:11
-#, fuzzy
 msgid "Blur windows"
-msgstr "I&zbriši Windows"
+msgstr "Zamaži okna"
 
 #: ../metadata/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
-msgstr ""
+msgstr "Zamaži okna v ozadju"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
@@ -306,41 +294,34 @@ msgid "Filter method used for blurring"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:15
-#, fuzzy
 msgid "Focus Blur"
-msgstr "I&zbriši Windows"
+msgstr "Zamaži v ospredju"
 
 #: ../metadata/blur.xml.in.h:16
-#, fuzzy
 msgid "Focus blur windows"
-msgstr "I&zbriši Windows"
+msgstr "Zamaži okna v ospredju"
 
 #: ../metadata/blur.xml.in.h:17
-#, fuzzy
 msgid "Gaussian"
-msgstr "Ruska"
+msgstr "Gausova"
 
 # RU
 #: ../metadata/blur.xml.in.h:18
-#, fuzzy
 msgid "Gaussian Radius"
-msgstr "Ruska federacija"
+msgstr "Gausov radij"
 
 #: ../metadata/blur.xml.in.h:19
-#, fuzzy
 msgid "Gaussian Strength"
-msgstr "Ruska"
+msgstr "Gausova moč"
 
 # RU
 #: ../metadata/blur.xml.in.h:20
-#, fuzzy
 msgid "Gaussian radius"
-msgstr "Ruska federacija"
+msgstr "gausov radij"
 
 #: ../metadata/blur.xml.in.h:21
-#, fuzzy
 msgid "Gaussian strength"
-msgstr "Ruska"
+msgstr "Gausova moč"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
@@ -348,9 +329,8 @@ msgstr ""
 
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
-#, fuzzy
 msgid "Mipmap"
-msgstr "Lima"
+msgstr "Mini zemljevid"
 
 #: ../metadata/blur.xml.in.h:24
 #, fuzzy
@@ -359,26 +339,27 @@ msgstr "Lima"
 
 #: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
-msgstr ""
+msgstr "stopnja podrobnosti Mini zemljevida"
 
 #: ../metadata/blur.xml.in.h:26
 msgid "Pulse"
-msgstr ""
+msgstr "Pulz"
 
 #: ../metadata/blur.xml.in.h:27
 msgid "Pulse effect"
-msgstr ""
+msgstr "Pulz efekt"
 
 #: ../metadata/blur.xml.in.h:28
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"Uporabi vse teksturne enote ki so na voljo, da ustvariš karseda veliko "
+"neodvisnih novih tekstur."
 
 #: ../metadata/blur.xml.in.h:29
-#, fuzzy
 msgid "Window blur speed"
-msgstr "Windows prosto (%1)"
+msgstr "Hitrost zamaznitve okna"
 
 #: ../metadata/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
