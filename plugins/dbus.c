@@ -1011,6 +1011,8 @@ dbusHandleSetOptionMessage (DBusConnection *connection,
 
 		    do
 		    {
+			memset (&tmpValue, 0, sizeof (tmpValue));
+
 			if (dbusGetOptionValue (object,
 						&aiter,
 						option->value.list.type,
