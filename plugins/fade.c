@@ -40,11 +40,14 @@ typedef struct _FadeDisplay {
 } FadeDisplay;
 
 #define FADE_SCREEN_OPTION_FADE_SPEED		  0
-#define FADE_SCREEN_OPTION_WINDOW_MATCH		  1
-#define FADE_SCREEN_OPTION_VISUAL_BELL		  2
-#define FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL 3
-#define FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE	  4
-#define FADE_SCREEN_OPTION_NUM			  5
+#define FADE_SCREEN_OPTION_WINDOW_MATCH		   1
+#define FADE_SCREEN_OPTION_VISUAL_BELL		   2
+#define FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL  3
+#define FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE	   4
+#define FADE_SCREEN_OPTION_DIM_UNRESPONSIVE	   5
+#define FADE_SCREEN_OPTION_UNRESPONSIVE_BRIGHTNESS 6
+#define FADE_SCREEN_OPTION_UNRESPONSIVE_SATURATION 7
+#define FADE_SCREEN_OPTION_NUM			   8
 
 typedef struct _FadeScreen {
     int			   windowPrivateIndex;
@@ -226,10 +229,17 @@ fadePaintWindow (CompWindow		 *w,
     {
 	WindowPaintAttrib fAttrib = *attrib;
 
-	if (!w->alive)
+	if (!w->alive && fs->opt[FADE_SCREEN_OPTION_DIM_UNRESPONSIVE].value.b)
 	{
-	    fAttrib.brightness = 0xa8a8;
-	    fAttrib.saturation = 0;
+	    GLuint value;
+
+	    value = fs->opt[FADE_SCREEN_OPTION_UNRESPONSIVE_BRIGHTNESS].value.i;
+	    if (value != 100)
+		fAttrib.brightness = fAttrib.brightness * value / 100;
+	    
+	    value = fs->opt[FADE_SCREEN_OPTION_UNRESPONSIVE_SATURATION].value.i;
+	    if (value != 100 && s->canDoSlightlySaturated)
+		fAttrib.saturation = fAttrib.saturation * value / 100;
 	}
 
 	if (fw->fadeOut)
@@ -712,7 +722,10 @@ static const CompMetadataOptionInfo fadeScreenOptionInfo[] = {
     { "window_match", "match", "<helper>true</helper>", 0, 0 },
     { "visual_bell", "bool", 0, 0, 0 },
     { "fullscreen_visual_bell", "bool", 0, 0, 0 },
-    { "minimize_open_close", "bool", 0, 0, 0 }
+    { "minimize_open_close", "bool", 0, 0, 0 },
+    { "dim_unresponsive", "bool", 0, 0, 0 },
+    { "unresponsive_brightness", "int", "<min>0</min><max>100</max>", 0, 0 },
+    { "unresponsive_saturation", "int", "<min>0</min><max>100</max>", 0, 0 }
 };
 
 static Bool

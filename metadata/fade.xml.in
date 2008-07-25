@@ -37,6 +37,25 @@
 		<_long>Fade effect on minimize/open/close window events</_long>
 		<default>true</default>
 	    </option>
+	    <option name="dim_unresponsive" type="bool">
+		<_short>Dim Unresponsive Windows</_short>
+		<_long>Dim windows that are not responding to window manager requests</_long>
+		<default>true</default>
+	    </option>
+	    <option name="unresponsive_brightness" type="int">
+		<_short>Unresponsive Window Brightness</_short>
+		<_long>Brightness (in %) of unresponsive windows</_long>
+		<min>0</min>
+		<max>100</max>
+		<default>65</default>
+	    </option>
+	    <option name="unresponsive_saturation" type="int">
+		<_short>Unresponsive Window Saturation</_short>
+		<_long>Saturation (in %) of unresponsive windows</_long>
+		<min>0</min>
+		<max>100</max>
+		<default>0</default>
+	    </option>
 	</screen>
     </plugin>
 </compiz>
