@@ -815,9 +815,7 @@ pingTimeout (void *closure)
 		{
 		    if (w->alive)
 		    {
-			w->alive	    = FALSE;
-			w->paint.brightness = 0xa8a8;
-			w->paint.saturation = 0;
+			w->alive = FALSE;
 
 			if (w->closeRequests)
 			{

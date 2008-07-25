@@ -72,6 +72,7 @@ typedef struct _FadeWindow {
     int unmapCnt;
 
     Bool shaded;
+    Bool alive;
     Bool fadeOut;
 
     int steps;
@@ -216,13 +217,20 @@ fadePaintWindow (CompWindow		 *w,
     if (!w->screen->canDoSlightlySaturated)
 	fw->saturation = attrib->saturation;
 
-    if (fw->destroyCnt			     ||
+    if (!w->alive                            ||
+	fw->destroyCnt			     ||
 	fw->unmapCnt			     ||
 	fw->opacity    != attrib->opacity    ||
 	fw->brightness != attrib->brightness ||
 	fw->saturation != attrib->saturation)
     {
 	WindowPaintAttrib fAttrib = *attrib;
+
+	if (!w->alive)
+	{
+	    fAttrib.brightness = 0xa8a8;
+	    fAttrib.saturation = 0;
+	}
 
 	if (fw->fadeOut)
 	    fAttrib.opacity = 0;
@@ -252,31 +260,31 @@ fadePaintWindow (CompWindow		 *w,
 	    }
 
 	    brightness = fw->brightness;
-	    if (attrib->brightness > fw->brightness)
+	    if (fAttrib.brightness > fw->brightness)
 	    {
 		brightness = fw->brightness + (fw->steps / 12);
-		if (brightness > attrib->brightness)
-		    brightness = attrib->brightness;
+		if (brightness > fAttrib.brightness)
+		    brightness = fAttrib.brightness;
 	    }
-	    else if (attrib->brightness < fw->brightness)
+	    else if (fAttrib.brightness < fw->brightness)
 	    {
 		brightness = fw->brightness - (fw->steps / 12);
-		if (brightness < attrib->brightness)
-		    brightness = attrib->brightness;
+		if (brightness < fAttrib.brightness)
+		    brightness = fAttrib.brightness;
 	    }
 
 	    saturation = fw->saturation;
-	    if (attrib->saturation > fw->saturation)
+	    if (fAttrib.saturation > fw->saturation)
 	    {
 		saturation = fw->saturation + (fw->steps / 6);
-		if (saturation > attrib->saturation)
-		    saturation = attrib->saturation;
+		if (saturation > fAttrib.saturation)
+		    saturation = fAttrib.saturation;
 	    }
-	    else if (attrib->saturation < fw->saturation)
+	    else if (fAttrib.saturation < fw->saturation)
 	    {
 		saturation = fw->saturation - (fw->steps / 6);
-		if (saturation < attrib->saturation)
-		    saturation = attrib->saturation;
+		if (saturation < fAttrib.saturation)
+		    saturation = fAttrib.saturation;
 	    }
 
 	    fw->steps = 0;
@@ -287,9 +295,9 @@ fadePaintWindow (CompWindow		 *w,
 		fw->brightness = brightness;
 		fw->saturation = saturation;
 
-		if (opacity    != attrib->opacity    ||
-		    brightness != attrib->brightness ||
-		    saturation != attrib->saturation)
+		if (opacity    != fAttrib.opacity    ||
+		    brightness != fAttrib.brightness ||
+		    saturation != fAttrib.saturation)
 		    addWindowDamage (w);
 	    }
 	    else
@@ -551,6 +559,22 @@ fadeHandleEvent (CompDisplay *d,
 	    }
 	}
 	break;
+    case ClientMessage:
+	if (event->xclient.message_type == d->wmProtocolsAtom &&
+	    event->xclient.data.l[0] == d->wmPingAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xclient.data.l[2]);
+	    if (w)
+	    {
+		FADE_WINDOW (w);
+
+		if (w->alive != fw->alive)
+		{
+		    addWindowDamage (w);
+		    fw->alive = w->alive;
+		}
+	    }
+	}
     }
 }
 
@@ -783,6 +807,7 @@ fadeInitWindow (CompPlugin *p,
     fw->unmapCnt   = 0;
     fw->shaded     = w->shaded;
     fw->fadeOut    = FALSE;
+    fw->alive      = w->alive;
 
     w->base.privates[fs->windowPrivateIndex].ptr = fw;
 

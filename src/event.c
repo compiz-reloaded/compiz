@@ -1547,20 +1547,9 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
 	    {
-		GLushort brightness;
-
-		brightness = getWindowProp32 (d, w->id,
-					      d->winBrightnessAtom,
-					      BRIGHT);
-		if (brightness != w->brightness)
-		{
-		    w->brightness = brightness;
-		    if (w->alive)
-		    {
-			w->paint.brightness = w->brightness;
-			addWindowDamage (w);
-		    }
-		}
+		w->brightness = getWindowProp32 (d, w->id,
+						 d->winBrightnessAtom,
+						 BRIGHT);
 	    }
 	}
 	else if (event->xproperty.atom == d->winSaturationAtom)
@@ -1568,20 +1557,9 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w && w->screen->canDoSaturated)
 	    {
-		GLushort saturation;
-
-		saturation = getWindowProp32 (d, w->id,
-					      d->winSaturationAtom,
-					      COLOR);
-		if (saturation != w->saturation)
-		{
-		    w->saturation = saturation;
-		    if (w->alive)
-		    {
-			w->paint.saturation = w->saturation;
-			addWindowDamage (w);
-		    }
-		}
+		w->saturation = getWindowProp32 (d, w->id,
+						 d->winSaturationAtom,
+						 COLOR);
 	    }
 	}
 	else if (event->xproperty.atom == d->xBackgroundAtom[0] ||
@@ -1766,9 +1744,7 @@ handleEvent (CompDisplay *d,
 		{
 		    if (!w->alive)
 		    {
-			w->alive	    = TRUE;
-			w->paint.saturation = w->saturation;
-			w->paint.brightness = w->brightness;
+			w->alive = TRUE;
 
 			if (w->lastCloseRequestTime)
 			{
@@ -1782,8 +1758,6 @@ handleEvent (CompDisplay *d,
 
 			    w->lastCloseRequestTime = 0;
 			}
-
-			addWindowDamage (w);
 		    }
 		    w->lastPong = d->lastPing;
 		}
