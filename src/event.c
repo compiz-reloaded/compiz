@@ -1547,9 +1547,16 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
 	    {
-		w->brightness = getWindowProp32 (d, w->id,
-						 d->winBrightnessAtom,
-						 BRIGHT);
+		int brightness;
+
+		brightness = getWindowProp32 (d, w->id,
+	     				      d->winBrightnessAtom, BRIGHT);
+		if (brightness != w->brightness)
+		{
+		    w->brightness       = brightness;
+		    w->paint.brightness = brightness;
+		    addWindowDamage (w);
+		}
 	    }
 	}
 	else if (event->xproperty.atom == d->winSaturationAtom)
@@ -1557,9 +1564,16 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w && w->screen->canDoSaturated)
 	    {
-		w->saturation = getWindowProp32 (d, w->id,
-						 d->winSaturationAtom,
-						 COLOR);
+		int saturation;
+
+		saturation = getWindowProp32 (d, w->id,
+					      d->winSaturationAtom, COLOR);
+		if (saturation != w->saturation)
+		{
+		    w->saturation       = saturation;
+		    w->paint.saturation = saturation;
+		    addWindowDamage (w);
+		}
 	    }
 	}
 	else if (event->xproperty.atom == d->xBackgroundAtom[0] ||
