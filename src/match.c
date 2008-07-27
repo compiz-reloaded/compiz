@@ -738,7 +738,6 @@ matchExpHandlerChanged (CompDisplay *display)
     int	       nOption;
     CompPlugin *p;
     CompScreen *s;
-    CompWindow *w;
 
     for (p = getPlugins (); p; p = p->next)
     {
@@ -759,9 +758,6 @@ matchExpHandlerChanged (CompDisplay *display)
 	    option = (*p->vTable->getObjectOptions) (p, &s->base, &nOption);
 	    matchUpdateMatchOptions (option, nOption);
 	}
-
-	for (w = s->windows; w; w = w->next)
-	    updateWindowOpacity (w);
     }
 }
 
@@ -769,5 +765,4 @@ void
 matchPropertyChanged (CompDisplay *display,
 		      CompWindow  *w)
 {
-    updateWindowOpacity (w);
 }

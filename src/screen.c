@@ -603,32 +603,6 @@ setScreenOption (CompPlugin	 *plugin,
 	    return TRUE;
 	}
 	break;
-    case COMP_SCREEN_OPTION_OPACITY_MATCHES:
-	if (compSetOptionList (o, value))
-	{
-	    CompWindow *w;
-	    int	       i;
-
-	    for (i = 0; i < o->value.list.nValue; i++)
-		matchUpdate (screen->display, &o->value.list.value[i].match);
-
-	    for (w = screen->windows; w; w = w->next)
-		updateWindowOpacity (w);
-
-	    return TRUE;
-	}
-	break;
-    case COMP_SCREEN_OPTION_OPACITY_VALUES:
-	if (compSetOptionList (o, value))
-	{
-	    CompWindow *w;
-
-	    for (w = screen->windows; w; w = w->next)
-		updateWindowOpacity (w);
-
-	    return TRUE;
-	}
-	break;
      case COMP_SCREEN_OPTION_FORCE_INDEPENDENT:
 	if (compSetBoolOption (o, value))
 	{
@@ -651,7 +625,6 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "refresh_rate", "int", "<min>1</min>", 0, 0 },
     { "hsize", "int", "<min>1</min><max>32</max>", 0, 0 },
     { "vsize", "int", "<min>1</min><max>32</max>", 0, 0 },
-    { "opacity_step", "int", "<min>1</min>", 0, 0 },
     { "unredirect_fullscreen_windows", "bool", 0, 0, 0 },
     { "default_icon", "string", 0, 0, 0 },
     { "sync_to_vblank", "bool", 0, 0, 0 },
@@ -663,8 +636,6 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "focus_prevention_level", "int",
       RESTOSTRING (0, FOCUS_PREVENTION_LEVEL_LAST), 0, 0 },
     { "focus_prevention_match", "match", 0, 0, 0 },
-    { "opacity_matches", "list", "<type>match</type>", 0, 0 },
-    { "opacity_values", "list", "<type>int</type>", 0, 0 },
     { "texture_compression", "bool", 0, 0, 0 },
     { "force_independent_output_painting", "bool", 0, 0, 0 }
 };

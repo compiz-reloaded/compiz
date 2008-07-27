@@ -1533,13 +1533,17 @@ handleEvent (CompDisplay *d,
 	else if (event->xproperty.atom == d->winOpacityAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
-	    if (w && (w->type & CompWindowTypeDesktopMask) == 0)
+	    if (w && !(w->type & CompWindowTypeDesktopMask))
 	    {
-		w->opacity	  = OPAQUE;
-		w->opacityPropSet =
-		    readWindowProp32 (d, w->id, d->winOpacityAtom, &w->opacity);
+		int opacity;
 
-		updateWindowOpacity (w);
+		opacity = getWindowProp32 (d, w->id, d->winOpacityAtom, OPAQUE);
+		if (opacity != w->opacity)
+		{
+		    w->opacity       = opacity;
+		    w->paint.opacity = opacity;
+		    addWindowDamage (w);
+		}
 	    }
 	}
 	else if (event->xproperty.atom == d->winBrightnessAtom)
@@ -1662,7 +1666,7 @@ handleEvent (CompDisplay *d,
 	else if (event->xclient.message_type == d->winOpacityAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xclient.window);
-	    if (w && (w->type & CompWindowTypeDesktopMask) == 0)
+	    if (w && !(w->type & CompWindowTypeDesktopMask))
 	    {
 		GLushort opacity = event->xclient.data.l[0] >> 16;
 

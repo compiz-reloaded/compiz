@@ -399,77 +399,6 @@ lowerInitiate (CompDisplay     *d,
     return TRUE;
 }
 
-static void
-changeWindowOpacity (CompWindow *w,
-		     int	direction)
-{
-    CompScreen *s = w->screen;
-    int	       step, opacity;
-
-    if (w->attrib.override_redirect)
-	return;
-
-    if (w->type & CompWindowTypeDesktopMask)
-	return;
-
-    step = (0xff * s->opt[COMP_SCREEN_OPTION_OPACITY_STEP].value.i) / 100;
-
-    w->opacityFactor = w->opacityFactor + step * direction;
-    if (w->opacityFactor > 0xff)
-    {
-	w->opacityFactor = 0xff;
-    }
-    else if (w->opacityFactor < step)
-    {
-	w->opacityFactor = step;
-    }
-
-    opacity = (w->opacity * w->opacityFactor) / 0xff;
-    if (opacity != w->paint.opacity)
-    {
-	w->paint.opacity = opacity;
-	addWindowDamage (w);
-    }
-}
-
-static Bool
-increaseOpacity (CompDisplay     *d,
-		 CompAction      *action,
-		 CompActionState state,
-		 CompOption      *option,
-		 int	         nOption)
-{
-    CompWindow *w;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "window", 0);
-
-    w = findTopLevelWindowAtDisplay (d, xid);
-    if (w)
-	changeWindowOpacity (w, 1);
-
-    return TRUE;
-}
-
-static Bool
-decreaseOpacity (CompDisplay     *d,
-		 CompAction      *action,
-		 CompActionState state,
-		 CompOption      *option,
-		 int	         nOption)
-{
-    CompWindow *w;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "window", 0);
-
-    w = findTopLevelWindowAtDisplay (d, xid);
-    if (w)
-	changeWindowOpacity (w, -1);
-
-    return TRUE;
-}
-
 static Bool
 runCommandDispatch (CompDisplay     *d,
 		    CompAction      *action,
@@ -729,8 +658,6 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "maximize_window_key", "key", 0, maximize, 0 },
     { "maximize_window_horizontally_key", "key", 0, maximizeHorizontally, 0 },
     { "maximize_window_vertically_key", "key", 0, maximizeVertically, 0 },
-    { "opacity_increase_button", "button", 0, increaseOpacity, 0 },
-    { "opacity_decrease_button", "button", 0, decreaseOpacity, 0 },
     { "command_screenshot", "string", 0, 0, 0 },
     { "run_command_screenshot_key", "key", 0, runCommandScreenshot, 0 },
     { "command_window_screenshot", "string", 0, 0, 0 },
