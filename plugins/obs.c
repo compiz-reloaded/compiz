@@ -170,7 +170,8 @@ updatePaintModifier (CompWindow *w,
 	values  = os->valueOptions[modifier];
 	min     = MIN (matches->value.list.nValue, values->value.list.nValue);
 
-	lastMatchFactor = info->matchFactor;
+	lastMatchFactor   = info->matchFactor;
+	info->matchFactor = 100;
 
 	for (i = 0; i < min; i++)
 	{
