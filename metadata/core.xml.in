@@ -231,16 +231,6 @@
 		<_short>Maximize Window Vertically</_short>
 		<_long>Maximize active window vertically</_long>
 	    </option>
-	    <option name="opacity_increase_button" type="button">
-		<_short>Increase Opacity</_short>
-		<_long>Increase window opacity</_long>
-		<default>&lt;Alt&gt;Button4</default>
-	    </option>
-	    <option name="opacity_decrease_button" type="button">
-		<_short>Decrease Opacity</_short>
-		<_long>Decrease window opacity</_long>
-		<default>&lt;Alt&gt;Button5</default>
-	    </option>
 	    <option name="command_screenshot" type="string">
 		<_short>Screenshot command line</_short>
 		<_long>Screenshot command line</_long>
@@ -371,13 +361,6 @@
 		<min>1</min>
 		<max>32</max>
 	    </option>
-	    <option name="opacity_step" type="int">
-		<_short>Opacity Step</_short>
-		<_long>Opacity change step</_long>
-		<default>10</default>
-		<min>1</min>
-		<max>50</max>
-	    </option>
 	    <option name="unredirect_fullscreen_windows" type="bool">
 		<_short>Unredirect Fullscreen Windows</_short>
 		<_long>Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps</_long>
@@ -464,18 +447,6 @@
 		<_short>Focus Prevention Windows</_short>
 		<_long>Focus prevention windows</_long>
 		<default>any</default>
-	    </option>
-	    <option name="opacity_matches" type="list">
-		<_short>Opacity windows</_short>
-		<_long>Windows that should be translucent by default</_long>
-		<type>match</type>
-	    </option>
-	    <option name="opacity_values" type="list">
-		<_short>Opacity window values</_short>
-		<_long>Opacity values for windows that should be translucent by default</_long>
-		<type>int</type>
-		<min>0</min>
-		<max>100</max>
 	    </option>
 	    <option name="texture_compression" type="bool">
 		<_short>Texture Compression</_short>
