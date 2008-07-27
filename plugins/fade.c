@@ -214,6 +214,7 @@ fadePaintWindow (CompWindow		 *w,
     CompScreen *s = w->screen;
     Bool       status;
 
+    FADE_DISPLAY (s->display);
     FADE_SCREEN (s);
     FADE_WINDOW (w);
 
@@ -225,7 +226,8 @@ fadePaintWindow (CompWindow		 *w,
 	fw->unmapCnt			     ||
 	fw->opacity    != attrib->opacity    ||
 	fw->brightness != attrib->brightness ||
-	fw->saturation != attrib->saturation)
+	fw->saturation != attrib->saturation ||
+	fd->displayModals)
     {
 	WindowPaintAttrib fAttrib = *attrib;
 
@@ -240,6 +242,11 @@ fadePaintWindow (CompWindow		 *w,
 	    value = fs->opt[FADE_SCREEN_OPTION_UNRESPONSIVE_SATURATION].value.i;
 	    if (value != 100 && s->canDoSlightlySaturated)
 		fAttrib.saturation = fAttrib.saturation * value / 100;
+	}
+	else if (fd->displayModals && !fw->dModal)
+	{
+	    fAttrib.brightness = 0xa8a8;
+	    fAttrib.saturation = 0;
 	}
 
 	if (fw->fadeOut)
@@ -355,22 +362,8 @@ fadeAddDisplayModal (CompDisplay *d,
     if (fd->displayModals == 1)
     {
 	CompScreen *s;
-
 	for (s = d->screens; s; s = s->next)
-	{
-	    for (w = s->windows; w; w = w->next)
-	    {
-		FADE_WINDOW (w);
-
-		if (fw->dModal)
-		    continue;
-
-		w->paint.brightness = 0xa8a8;
-		w->paint.saturation = 0;
-	    }
-
 	    damageScreen (s);
-	}
     }
 }
 
@@ -390,25 +383,8 @@ fadeRemoveDisplayModal (CompDisplay *d,
     if (fd->displayModals == 0)
     {
 	CompScreen *s;
-
 	for (s = d->screens; s; s = s->next)
-	{
-	    for (w = s->windows; w; w = w->next)
-	    {
-		FADE_WINDOW (w);
-
-		if (fw->dModal)
-		    continue;
-
-		if (w->alive)
-		{
-		    w->paint.brightness = w->brightness;
-		    w->paint.saturation = w->saturation;
-		}
-	    }
-
 	    damageScreen (s);
-	}
     }
 }
 
@@ -841,10 +817,6 @@ fadeFiniWindow (CompPlugin *p,
 
     fadeRemoveDisplayModal (w->screen->display, w);
     fadeWindowStop (w);
-
-    w->paint.opacity    = w->opacity;
-    w->paint.brightness = w->brightness;
-    w->paint.saturation = w->saturation;
 
     free (fw);
 }
