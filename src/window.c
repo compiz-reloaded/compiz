@@ -2154,22 +2154,21 @@ addWindow (CompScreen *screen,
 	recalcWindowType (w);
     }
 
-    if (!(w->type & CompWindowTypeDesktopMask))
-	w->opacity = getWindowProp32 (d, w->id, d->winOpacityAtom, OPAQUE);
+    if (w->type & CompWindowTypeDesktopMask)
+	w->paint.opacity = OPAQUE;
     else
-	w->opacity = OPAQUE;
+	w->paint.opacity = getWindowProp32 (d, w->id,
+					    d->winOpacityAtom, OPAQUE);
 
-    w->brightness = getWindowProp32 (d, w->id, d->winBrightnessAtom, BRIGHT);
+    w->paint.brightness = getWindowProp32 (d, w->id,
+					   d->winBrightnessAtom, BRIGHT);
 
-    if (screen->canDoSaturated)
-	w->saturation = getWindowProp32 (d, w->id, d->winSaturationAtom, COLOR);
+    if (!screen->canDoSaturated)
+	w->paint.saturation = COLOR;
     else
-	w->saturation = COLOR;
+	w->paint.saturation = getWindowProp32 (d, w->id,
+					       d->winSaturationAtom, COLOR);
 	
-    w->paint.opacity    = w->opacity;
-    w->paint.brightness = w->brightness;
-    w->paint.saturation = w->saturation;
-
     if (w->attrib.map_state == IsViewable)
     {
 	w->placed = TRUE;

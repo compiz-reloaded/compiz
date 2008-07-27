@@ -2632,10 +2632,6 @@ struct _CompWindow {
     unsigned int lastPong;
     Bool	 alive;
 
-    GLushort opacity;
-    GLushort brightness;
-    GLushort saturation;
-
     WindowPaintAttrib paint;
     WindowPaintAttrib lastPaint;
 
