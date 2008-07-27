@@ -16,6 +16,7 @@ xml_in_files =		  \
 	kconfig.xml.in	  \
 	minimize.xml.in	  \
 	move.xml.in	  \
+	obs.xml.in	  \
 	place.xml.in	  \
 	png.xml.in	  \
 	regex.xml.in	  \

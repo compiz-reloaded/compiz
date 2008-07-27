@@ -65,6 +65,9 @@ libvideo_la_SOURCES = video.c
 libini_la_LDFLAGS = -module -avoid-version -no-undefined
 libini_la_SOURCES = ini.c
 
+libobs_la_LDFLAGS = -module -avoid-version -no-undefined
+libobs_la_SOURCES = obs.c
+
 if USE_LIBRSVG
 libsvg_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
@@ -169,6 +172,7 @@ module_LTLIBRARIES =		\
 	libregex.la		\
 	libvideo.la		\
 	libini.la		\
+	libobs.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libinotify_module)	\
