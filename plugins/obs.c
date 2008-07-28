@@ -70,12 +70,6 @@ typedef struct _ObsDisplay
 #define MODIFIER_BRIGHTNESS  2
 #define MODIFIER_COUNT       3
 
-typedef struct _ModifierInfo
-{
-    int customFactor;
-    int matchFactor;
-} ModifierInfo;
-
 typedef struct _ObsScreen
 {
     int windowPrivateIndex;
@@ -92,7 +86,8 @@ typedef struct _ObsScreen
 
 typedef struct _ObsWindow
 {
-    ModifierInfo info[MODIFIER_COUNT];
+    int customFactor[MODIFIER_COUNT];
+    int matchFactor[MODIFIER_COUNT];
 } ObsWindow;
 
 #define GET_OBS_DISPLAY(d) \
@@ -130,15 +125,15 @@ changePaintModifier (CompWindow *w,
     if (modifier == MODIFIER_OPACITY && (w->type & CompWindowTypeDesktopMask))
 	return;
 
-    value = ow->info[modifier].customFactor;
+    value = ow->customFactor[modifier];
     value += os->stepOptions[modifier]->value.i * direction;
 
     value = MIN (value, 100);
     value = MAX (value, os->stepOptions[modifier]->value.i);
 
-    if (value != ow->info[modifier].customFactor)
+    if (value != ow->customFactor[modifier])
     {
-	ow->info[modifier].customFactor = value;
+	ow->customFactor[modifier] = value;
 	addWindowDamage (w);
     }
 }
@@ -147,19 +142,17 @@ static void
 updatePaintModifier (CompWindow *w,
 		     int        modifier)
 {
-    ModifierInfo *info;
-    int          lastFactor;
+    int lastFactor;
 
     OBS_WINDOW (w);
     OBS_SCREEN (w->screen);
 
-    info       = &ow->info[modifier];
-    lastFactor = info->customFactor;
+    lastFactor = ow->customFactor[modifier];
 
     if ((w->type & CompWindowTypeDesktopMask) && (modifier == MODIFIER_OPACITY))
     {
-	info->customFactor = 100;
-	info->matchFactor  = 100;
+	ow->customFactor[modifier] = 100;
+	ow->matchFactor[modifier]  = 100;
     }
     else
     {
@@ -170,23 +163,23 @@ updatePaintModifier (CompWindow *w,
 	values  = os->valueOptions[modifier];
 	min     = MIN (matches->value.list.nValue, values->value.list.nValue);
 
-	lastMatchFactor   = info->matchFactor;
-	info->matchFactor = 100;
+	lastMatchFactor           = ow->matchFactor[modifier];
+	ow->matchFactor[modifier] = 100;
 
 	for (i = 0; i < min; i++)
 	{
 	    if (matchEval (&matches->value.list.value[i].match, w))
 	    {
-		info->matchFactor = values->value.list.value[i].i;
+		ow->matchFactor[modifier] = values->value.list.value[i].i;
 		break;
 	    }
 	}
 
-	if (info->customFactor == lastMatchFactor)
-	    info->customFactor = info->matchFactor;
+	if (ow->customFactor[modifier] == lastMatchFactor)
+	    ow->customFactor[modifier] = ow->matchFactor[modifier];
     }
 
-    if (info->customFactor != lastFactor)
+    if (ow->customFactor[modifier] != lastFactor)
 	addWindowDamage (w);
 }
 
@@ -223,7 +216,7 @@ obsPaintWindow (CompWindow              *w,
     OBS_SCREEN (s);
     OBS_WINDOW (w);
 
-    if (ow->info[MODIFIER_OPACITY].customFactor != 100)
+    if (ow->customFactor[MODIFIER_OPACITY] != 100)
 	mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
 
     UNWRAP (os, s, paintWindow);
@@ -249,7 +242,7 @@ obsDrawWindow (CompWindow           *w,
     OBS_WINDOW (w);
 
     for (i = 0; i < MODIFIER_COUNT; i++)
-	if (ow->info[i].customFactor != 100)
+	if (ow->customFactor[i] != 100)
 	{
 	    hasCustomFactor = TRUE;
 	    break;
@@ -260,15 +253,15 @@ obsDrawWindow (CompWindow           *w,
 	FragmentAttrib fragment = *attrib;
 	int            factor;
 
-	factor = ow->info[MODIFIER_OPACITY].customFactor;
+	factor = ow->customFactor[MODIFIER_OPACITY];
 	if (factor != 100)
 	    fragment.opacity = (int) fragment.opacity * factor / 100;
 
-	factor = ow->info[MODIFIER_BRIGHTNESS].customFactor;
+	factor = ow->customFactor[MODIFIER_BRIGHTNESS];
 	if (factor != 100)
 	    fragment.brightness = (int) fragment.brightness * factor / 100;
 
-	factor = ow->info[MODIFIER_SATURATION].customFactor;
+	factor = ow->customFactor[MODIFIER_SATURATION];
 	if (factor != 100)
 	    fragment.saturation = (int) fragment.saturation * factor / 100;
 
@@ -637,8 +630,8 @@ obsInitWindow (CompPlugin *p,
 
     for (i = 0; i < MODIFIER_COUNT; i++)
     {
-	ow->info[i].customFactor = 100;
-	ow->info[i].matchFactor  = 100;
+	ow->customFactor[i] = 100;
+	ow->matchFactor[i]  = 100;
     }
 
     w->base.privates[os->windowPrivateIndex].ptr = ow;
