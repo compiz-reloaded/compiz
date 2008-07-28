@@ -39,15 +39,21 @@ typedef struct _FadeDisplay {
     int			       displayModals;
 } FadeDisplay;
 
-#define FADE_SCREEN_OPTION_FADE_SPEED		  0
-#define FADE_SCREEN_OPTION_WINDOW_MATCH		   1
-#define FADE_SCREEN_OPTION_VISUAL_BELL		   2
-#define FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL  3
-#define FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE	   4
-#define FADE_SCREEN_OPTION_DIM_UNRESPONSIVE	   5
-#define FADE_SCREEN_OPTION_UNRESPONSIVE_BRIGHTNESS 6
-#define FADE_SCREEN_OPTION_UNRESPONSIVE_SATURATION 7
-#define FADE_SCREEN_OPTION_NUM			   8
+#define FADE_SCREEN_OPTION_FADE_MODE		   0
+#define FADE_SCREEN_OPTION_FADE_SPEED		   1
+#define FADE_SCREEN_OPTION_FADE_TIME		   2
+#define FADE_SCREEN_OPTION_WINDOW_MATCH		   3
+#define FADE_SCREEN_OPTION_VISUAL_BELL		   4
+#define FADE_SCREEN_OPTION_FULLSCREEN_VISUAL_BELL  5
+#define FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE	   6
+#define FADE_SCREEN_OPTION_DIM_UNRESPONSIVE	   7
+#define FADE_SCREEN_OPTION_UNRESPONSIVE_BRIGHTNESS 8
+#define FADE_SCREEN_OPTION_UNRESPONSIVE_SATURATION 9
+#define FADE_SCREEN_OPTION_NUM			   10
+
+#define FADE_MODE_CONSTANTSPEED 0
+#define FADE_MODE_CONSTANTTIME  1
+#define FADE_MODE_MAX           FADE_MODE_CONSTANTTIME
 
 typedef struct _FadeScreen {
     int			   windowPrivateIndex;
@@ -79,6 +85,16 @@ typedef struct _FadeWindow {
     Bool fadeOut;
 
     int steps;
+
+    int fadeTime;
+
+    GLushort sourceOpacity;
+    GLushort sourceBrightness;
+    GLushort sourceSaturation;
+
+    GLushort targetOpacity;
+    GLushort targetBrightness;
+    GLushort targetSaturation;
 } FadeWindow;
 
 #define GET_FADE_DISPLAY(d)					  \
@@ -174,12 +190,41 @@ fadePreparePaintScreen (CompScreen *s,
 
     FADE_SCREEN (s);
 
-    steps = (msSinceLastPaint * OPAQUE) / fs->fadeTime;
-    if (steps < 12)
-	steps = 12;
+    switch (fs->opt[FADE_SCREEN_OPTION_FADE_MODE].value.i) {
+    case FADE_MODE_CONSTANTSPEED:
+	steps = (msSinceLastPaint * OPAQUE) / fs->fadeTime;
+	if (steps < 12)
+	    steps = 12;
 
-    for (w = s->windows; w; w = w->next)
-	GET_FADE_WINDOW (w, fs)->steps = steps;
+	for (w = s->windows; w; w = w->next)
+	{
+	    FadeWindow *fw = GET_FADE_WINDOW (w, fs);
+	    fw->steps    = steps;
+	    fw->fadeTime = 0;
+	}
+
+	break;
+    case FADE_MODE_CONSTANTTIME:
+	for (w = s->windows; w; w = w->next)
+	{
+	    FadeWindow *fw = GET_FADE_WINDOW (w, fs);
+
+	    if (fw->fadeTime)
+	    {
+		fw->steps     = 1;
+		fw->fadeTime -= msSinceLastPaint;
+		if (fw->fadeTime < 0)
+		    fw->fadeTime = 0;
+	    }
+	    else
+	    {
+		fw->steps = 0;
+	    }
+	}
+	
+	break;
+    }
+
 
     UNWRAP (fs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
@@ -230,6 +275,7 @@ fadePaintWindow (CompWindow		 *w,
 	fd->displayModals)
     {
 	WindowPaintAttrib fAttrib = *attrib;
+	int               mode = fs->opt[FADE_SCREEN_OPTION_FADE_MODE].value.i;
 
 	if (!w->alive && fs->opt[FADE_SCREEN_OPTION_DIM_UNRESPONSIVE].value.b)
 	{
@@ -252,56 +298,92 @@ fadePaintWindow (CompWindow		 *w,
 	if (fw->fadeOut)
 	    fAttrib.opacity = 0;
 
+	if (mode == FADE_MODE_CONSTANTTIME)
+	{
+	    if (fAttrib.opacity    != fw->targetOpacity    ||
+		fAttrib.brightness != fw->targetBrightness ||
+		fAttrib.saturation != fw->targetSaturation)
+	    {
+		fw->fadeTime = fs->opt[FADE_SCREEN_OPTION_FADE_TIME].value.i;
+		fw->steps    = 1;
+
+		fw->sourceOpacity    = fw->opacity;
+		fw->sourceBrightness = fw->brightness;
+		fw->sourceSaturation = fw->saturation;
+
+		fw->targetOpacity    = fAttrib.opacity;
+		fw->targetBrightness = fAttrib.brightness;
+		fw->targetSaturation = fAttrib.saturation;
+	    }
+	}
+
 	if (fw->steps)
 	{
-	    GLint opacity;
-	    GLint brightness;
-	    GLint saturation;
+	    GLint opacity = OPAQUE;
+	    GLint brightness = BRIGHT;
+	    GLint saturation = COLOR;
 
-	    opacity = fw->opacity;
-	    if (fAttrib.opacity > fw->opacity)
+	    if (mode == FADE_MODE_CONSTANTSPEED)
 	    {
-		opacity = fw->opacity + fw->steps;
-		if (opacity > fAttrib.opacity)
-		    opacity = fAttrib.opacity;
-	    }
-	    else if (fAttrib.opacity < fw->opacity)
-	    {
-		if (w->type & CompWindowTypeUnknownMask)
-		    opacity = fw->opacity - (fw->steps >> 1);
-		else
-		    opacity = fw->opacity - fw->steps;
+		opacity = fw->opacity;
+		if (fAttrib.opacity > fw->opacity)
+		{
+		    opacity = fw->opacity + fw->steps;
+		    if (opacity > fAttrib.opacity)
+			opacity = fAttrib.opacity;
+		}
+		else if (fAttrib.opacity < fw->opacity)
+		{
+		    if (w->type & CompWindowTypeUnknownMask)
+			opacity = fw->opacity - (fw->steps >> 1);
+		    else
+			opacity = fw->opacity - fw->steps;
 
-		if (opacity < fAttrib.opacity)
-		    opacity = fAttrib.opacity;
-	    }
+		    if (opacity < fAttrib.opacity)
+			opacity = fAttrib.opacity;
+		}
 
-	    brightness = fw->brightness;
-	    if (fAttrib.brightness > fw->brightness)
-	    {
-		brightness = fw->brightness + (fw->steps / 12);
-		if (brightness > fAttrib.brightness)
-		    brightness = fAttrib.brightness;
-	    }
-	    else if (fAttrib.brightness < fw->brightness)
-	    {
-		brightness = fw->brightness - (fw->steps / 12);
-		if (brightness < fAttrib.brightness)
-		    brightness = fAttrib.brightness;
-	    }
+		brightness = fw->brightness;
+		if (fAttrib.brightness > fw->brightness)
+		{
+		    brightness = fw->brightness + (fw->steps / 12);
+		    if (brightness > fAttrib.brightness)
+			brightness = fAttrib.brightness;
+		}
+		else if (fAttrib.brightness < fw->brightness)
+		{
+		    brightness = fw->brightness - (fw->steps / 12);
+		    if (brightness < fAttrib.brightness)
+			brightness = fAttrib.brightness;
+		}
 
-	    saturation = fw->saturation;
-	    if (fAttrib.saturation > fw->saturation)
-	    {
-		saturation = fw->saturation + (fw->steps / 6);
-		if (saturation > fAttrib.saturation)
-		    saturation = fAttrib.saturation;
+		saturation = fw->saturation;
+		if (fAttrib.saturation > fw->saturation)
+		{
+		    saturation = fw->saturation + (fw->steps / 6);
+		    if (saturation > fAttrib.saturation)
+			saturation = fAttrib.saturation;
+		}
+		else if (fAttrib.saturation < fw->saturation)
+		{
+		    saturation = fw->saturation - (fw->steps / 6);
+		    if (saturation < fAttrib.saturation)
+			saturation = fAttrib.saturation;
+		}
 	    }
-	    else if (fAttrib.saturation < fw->saturation)
+	    else if (mode == FADE_MODE_CONSTANTTIME)
 	    {
-		saturation = fw->saturation - (fw->steps / 6);
-		if (saturation < fAttrib.saturation)
-		    saturation = fAttrib.saturation;
+		int fadeTime, elapsed;
+
+		fadeTime = fs->opt[FADE_SCREEN_OPTION_FADE_TIME].value.i;
+		elapsed  = fadeTime - fw->fadeTime;
+
+		opacity    = ((fw->sourceOpacity * fw->fadeTime) +
+			      (fAttrib.opacity * elapsed)) / fadeTime;
+		brightness = ((fw->sourceBrightness * fw->fadeTime) +
+			      (fAttrib.brightness * elapsed)) / fadeTime;
+		saturation = ((fw->sourceSaturation * fw->fadeTime) +
+			      (fAttrib.saturation * elapsed)) / fadeTime;
 	    }
 
 	    fw->steps = 0;
@@ -694,7 +776,9 @@ fadeFiniDisplay (CompPlugin  *p,
 }
 
 static const CompMetadataOptionInfo fadeScreenOptionInfo[] = {
+    { "fade_mode", "int", RESTOSTRING (0, FADE_MODE_MAX), 0, 0 }, 
     { "fade_speed", "float", "<min>0.1</min>", 0, 0 },
+    { "fade_time", "int", "<min>1</min>", 0, 0 },
     { "window_match", "match", "<helper>true</helper>", 0, 0 },
     { "visual_bell", "bool", 0, 0, 0 },
     { "fullscreen_visual_bell", "bool", 0, 0, 0 },
@@ -790,6 +874,10 @@ fadeInitWindow (CompPlugin *p,
     fw->brightness = w->paint.brightness;
     fw->saturation = w->paint.saturation;
 
+    fw->targetOpacity    = fw->sourceOpacity    = fw->opacity;
+    fw->targetBrightness = fw->sourceBrightness = fw->brightness;
+    fw->targetSaturation = fw->sourceSaturation = fw->saturation;
+
     fw->dModal = 0;
 
     fw->destroyCnt = 0;
@@ -797,6 +885,9 @@ fadeInitWindow (CompPlugin *p,
     fw->shaded     = w->shaded;
     fw->fadeOut    = FALSE;
     fw->alive      = w->alive;
+
+    fw->steps      = 0;
+    fw->fadeTime   = 0;
 
     w->base.privates[fs->windowPrivateIndex].ptr = fw;
 

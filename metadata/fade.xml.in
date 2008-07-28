@@ -9,13 +9,35 @@
 	    </relation>
 	</deps>
 	<screen>
+	    <option name="fade_mode" type="int">
+		<_short>Fade Mode</_short>
+		<_long>Window fade mode</_long>
+		<min>0</min>
+		<max>1</max>
+		<default>0</default>
+		<desc>
+		    <value>0</value>
+		    <_name>Constant speed</_name>
+		</desc>
+		<desc>
+		    <value>1</value>
+		    <_name>Constant time</_name>
+		</desc>
+	    </option>
 	    <option name="fade_speed" type="float">
 		<_short>Fade Speed</_short>
-		<_long>Window fade speed</_long>
+		<_long>Window fade speed in "Constant speed" mode</_long>
 		<default>5.0</default>
 		<min>0.1</min>
 		<max>25.0</max>
 		<precision>0.1</precision>
+	    </option>
+	    <option name="fade_time" type="int">
+		<_short>Fade Time</_short>
+		<_long>Window fade time (in ms) in "Constant time" mode</_long>
+		<default>100</default>
+		<min>1</min>
+		<max>5000</max>
 	    </option>
 	    <option name="window_match" type="match">
 		<_short>Fade windows</_short>
