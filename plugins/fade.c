@@ -334,11 +334,7 @@ fadePaintWindow (CompWindow		 *w,
 		}
 		else if (fAttrib.opacity < fw->opacity)
 		{
-		    if (w->type & CompWindowTypeUnknownMask)
-			opacity = fw->opacity - (fw->steps >> 1);
-		    else
-			opacity = fw->opacity - fw->steps;
-
+		    opacity = fw->opacity - fw->steps;
 		    if (opacity < fAttrib.opacity)
 			opacity = fAttrib.opacity;
 		}
