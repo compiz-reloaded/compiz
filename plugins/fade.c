@@ -88,9 +88,9 @@ typedef struct _FadeWindow {
 
     int fadeTime;
 
-    GLushort sourceOpacity;
-    GLushort sourceBrightness;
-    GLushort sourceSaturation;
+    int opacityDiff;
+    int brightnessDiff;
+    int saturationDiff;
 
     GLushort targetOpacity;
     GLushort targetBrightness;
@@ -307,9 +307,9 @@ fadePaintWindow (CompWindow		 *w,
 		fw->fadeTime = fs->opt[FADE_SCREEN_OPTION_FADE_TIME].value.i;
 		fw->steps    = 1;
 
-		fw->sourceOpacity    = fw->opacity;
-		fw->sourceBrightness = fw->brightness;
-		fw->sourceSaturation = fw->saturation;
+		fw->opacityDiff    = fAttrib.opacity - fw->opacity;
+		fw->brightnessDiff = fAttrib.brightness - fw->brightness;
+		fw->saturationDiff = fAttrib.saturation - fw->saturation;
 
 		fw->targetOpacity    = fAttrib.opacity;
 		fw->targetBrightness = fAttrib.brightness;
@@ -373,17 +373,14 @@ fadePaintWindow (CompWindow		 *w,
 	    }
 	    else if (mode == FADE_MODE_CONSTANTTIME)
 	    {
-		int fadeTime, elapsed;
+		int fadeTime = fs->opt[FADE_SCREEN_OPTION_FADE_TIME].value.i;
 
-		fadeTime = fs->opt[FADE_SCREEN_OPTION_FADE_TIME].value.i;
-		elapsed  = fadeTime - fw->fadeTime;
-
-		opacity    = ((fw->sourceOpacity * fw->fadeTime) +
-			      (fAttrib.opacity * elapsed)) / fadeTime;
-		brightness = ((fw->sourceBrightness * fw->fadeTime) +
-			      (fAttrib.brightness * elapsed)) / fadeTime;
-		saturation = ((fw->sourceSaturation * fw->fadeTime) +
-			      (fAttrib.saturation * elapsed)) / fadeTime;
+		opacity = fAttrib.opacity -
+		          (fw->opacityDiff * fw->fadeTime / fadeTime);
+		brightness = fAttrib.brightness -
+			     (fw->brightnessDiff * fw->fadeTime / fadeTime);
+		saturation = fAttrib.saturation -
+			     (fw->saturationDiff * fw->fadeTime / fadeTime);
 	    }
 
 	    fw->steps = 0;
@@ -874,9 +871,13 @@ fadeInitWindow (CompPlugin *p,
     fw->brightness = w->paint.brightness;
     fw->saturation = w->paint.saturation;
 
-    fw->targetOpacity    = fw->sourceOpacity    = fw->opacity;
-    fw->targetBrightness = fw->sourceBrightness = fw->brightness;
-    fw->targetSaturation = fw->sourceSaturation = fw->saturation;
+    fw->targetOpacity    = fw->opacity;
+    fw->targetBrightness = fw->brightness;
+    fw->targetSaturation = fw->saturation;
+
+    fw->opacityDiff    = 0;
+    fw->brightnessDiff = 0;
+    fw->saturationDiff = 0;
 
     fw->dModal = 0;
 
