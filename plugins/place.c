@@ -47,17 +47,18 @@ typedef struct _PlaceDisplay {
 #define PLACE_MOMODE_FULLSCREEN 3
 #define PLACE_MOMODE_LAST       PLACE_MOMODE_FULLSCREEN
 
-#define PLACE_SCREEN_OPTION_WORKAROUND        0
-#define PLACE_SCREEN_OPTION_MODE              1
-#define PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE  2
-#define PLACE_SCREEN_OPTION_FORCE_PLACEMENT   3
-#define PLACE_SCREEN_OPTION_POSITION_MATCHES  4
-#define PLACE_SCREEN_OPTION_POSITION_X_VALUES 5
-#define PLACE_SCREEN_OPTION_POSITION_Y_VALUES 6
-#define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES  7
-#define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES 8
-#define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES 9
-#define PLACE_SCREEN_OPTION_NUM               10
+#define PLACE_SCREEN_OPTION_WORKAROUND         0
+#define PLACE_SCREEN_OPTION_MODE               1
+#define PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE   2
+#define PLACE_SCREEN_OPTION_FORCE_PLACEMENT    3
+#define PLACE_SCREEN_OPTION_POSITION_MATCHES   4
+#define PLACE_SCREEN_OPTION_POSITION_X_VALUES  5
+#define PLACE_SCREEN_OPTION_POSITION_Y_VALUES  6
+#define PLACE_SCREEN_OPTION_POSITION_CONSTRAIN 7
+#define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES   8
+#define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES  9
+#define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES  10
+#define PLACE_SCREEN_OPTION_NUM                11
 
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
@@ -110,8 +111,10 @@ placeMatchXYValue (CompWindow *w,
 		   CompOption *matches,
 		   CompOption *xValues,
 		   CompOption *yValues,
+		   CompOption *constrain,
 		   int	      *x,
-		   int	      *y)
+		   int	      *y,
+		   Bool       *keepInWorkarea)
 {
     int i, min;
 
@@ -127,6 +130,14 @@ placeMatchXYValue (CompWindow *w,
 	{
 	    *x = xValues->value.list.value[i].i;
 	    *y = yValues->value.list.value[i].i;
+	    
+	    if (keepInWorkarea)
+	    {
+		if (constrain && constrain->value.list.nValue > i)
+		    *keepInWorkarea = constrain->value.list.value[i].b;
+		else
+		    *keepInWorkarea = TRUE;
+	    }
 
 	    return TRUE;
 	}
@@ -138,7 +149,8 @@ placeMatchXYValue (CompWindow *w,
 static Bool
 placeMatchPosition (CompWindow *w,
 		    int	       *x,
-		    int	       *y)
+		    int	       *y,
+		    Bool       *keepInWorkarea)
 {
     PLACE_SCREEN (w->screen);
 
@@ -146,8 +158,10 @@ placeMatchPosition (CompWindow *w,
 			      &ps->opt[PLACE_SCREEN_OPTION_POSITION_MATCHES],
 			      &ps->opt[PLACE_SCREEN_OPTION_POSITION_X_VALUES],
 			      &ps->opt[PLACE_SCREEN_OPTION_POSITION_Y_VALUES],
+			      &ps->opt[PLACE_SCREEN_OPTION_POSITION_CONSTRAIN],
 			      x,
-			      y);
+			      y,
+			      keepInWorkarea);
 }
 
 static Bool
@@ -161,8 +175,10 @@ placeMatchViewport (CompWindow *w,
 			   &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_MATCHES],
 			   &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES],
 			   &ps->opt[PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES],
+			   NULL,
 			   x,
-			   y))
+			   y,
+			   NULL))
     {
 	/* Viewport matches are given 1-based, so we need to adjust that */
 	*x -= 1;
@@ -1098,6 +1114,7 @@ placeDoWindowPlacement (CompWindow *w,
     int               targetVpX, targetVpY;
     CompOutput        *output;
     PlacementStrategy strategy;
+    Bool	      keepInWorkarea;
 
     PLACE_SCREEN (s);
 
@@ -1106,10 +1123,9 @@ placeDoWindowPlacement (CompWindow *w,
     if (strategy == NoPlacement)
 	return FALSE;
 
-    if (placeMatchPosition (w, &x, &y))
+    if (placeMatchPosition (w, &x, &y, &keepInWorkarea))
     {
-	/* FIXME: perhaps ConstrainOnly? */
-	strategy = NoPlacement;
+	strategy = keepInWorkarea ? ConstrainOnly : NoPlacement;
     }
 
     output   = placeGetPlacementOutput (w, strategy, x, y);
@@ -1461,6 +1477,7 @@ static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
     { "position_matches", "list", "<type>match</type>", 0, 0 },
     { "position_x_values", "list", "<type>int</type>", 0, 0 },
     { "position_y_values", "list", "<type>int</type>", 0, 0 },
+    { "position_constrain_workarea", "list", "<type>bool</type>", 0, 0 },
     { "viewport_matches", "list", "<type>match</type>", 0, 0 },
     { "viewport_x_values", "list",
 	"<type>int</type><min>1</min><max>32</max>", 0, 0 },

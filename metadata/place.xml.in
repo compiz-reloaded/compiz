@@ -78,6 +78,11 @@
 		<_long>Y position values</_long>
 		<type>int</type>
 	    </option>
+	    <option name="position_constrain_workarea" type="list">
+		<_short>Keep In Workarea</_short>
+		<_long>Keep placed window in work area, even if that means that the position might differ from the specified position</_long>
+		<type>bool</type>
+	    </option>
 	    <option name="viewport_matches" type="list">
 		<_short>Viewport positioned windows</_short>
 		<_long>Windows that should be positioned in specific viewports by default</_long>
