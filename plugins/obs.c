@@ -226,6 +226,11 @@ obsPaintWindow (CompWindow              *w,
     return status;
 }
 
+/* Note: Normally plugins should wrap into PaintWindow to modify opacity,
+	 brightness and saturation. As some plugins bypass paintWindow when
+	 they draw windows and our custom values always need to be applied,
+	 we wrap into DrawWindow here */
+
 static Bool
 obsDrawWindow (CompWindow           *w,
 	       const CompTransform  *transform,
