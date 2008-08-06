@@ -2279,12 +2279,16 @@ handleEvent (CompDisplay *d,
 	    w = NULL;
 
 	    for (s = d->screens; s; s = s->next)
+	    {
 		for (w = s->windows; w; w = w->next)
+		{
 		    if (w->syncAlarm == sa->alarm)
-			break;
-
-	    if (w)
-		handleSyncAlarm (w);
+		    {
+			handleSyncAlarm(w);
+			return;
+		    }
+		}
+	    }
 	}
 	break;
     }
