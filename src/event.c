@@ -2276,15 +2276,13 @@ handleEvent (CompDisplay *d,
 
 	    sa = (XSyncAlarmNotifyEvent *) event;
 
-	    w = NULL;
-
 	    for (s = d->screens; s; s = s->next)
 	    {
 		for (w = s->windows; w; w = w->next)
 		{
 		    if (w->syncAlarm == sa->alarm)
 		    {
-			handleSyncAlarm(w);
+			handleSyncAlarm (w);
 			return;
 		    }
 		}
