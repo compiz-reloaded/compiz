@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 16:58+0530\n"
+"POT-Creation-Date: 2008-08-07 11:30+0530\n"
 "PO-Revision-Date: 2008-03-15 16:49+0100\n"
 "Last-Translator: biswajyoti mahanta <biswajyotim@gmail.com>\n"
 "Language-Team: gist bengali  team <info.gist@cdac.in>\n"
@@ -93,22 +93,22 @@ msgid "Close Window"
 msgstr "উইন্ডো বন্ধ করা"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4439
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:145
 msgid "Unmaximize Window"
 msgstr "উইন্ডো সর্বাধিক না করা"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4442
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
 msgstr "উইন্ডো বড় করা"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4484
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
 msgstr "উইন্ডোটি ছোট করা"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4601
-#: ../metadata/core.xml.in.h:161
+#: ../metadata/core.xml.in.h:152
 msgid "Window Menu"
 msgstr "উইন্ডো মেনু"
 
@@ -614,483 +614,443 @@ msgstr "যখন run_command8 চাওয়া হবে তখন শেলে 
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "যখন run_command9 চাওয়া হবে তখন শেলে নির্দেশ লাইনটি সম্পাদন করা হবে"
 
-#: ../metadata/core.xml.in.h:50
-msgid "Decrease Opacity"
-msgstr "অস্বচ্ছতা হ্রাস করুন"
-
-#: ../metadata/core.xml.in.h:51
-msgid "Decrease window opacity"
-msgstr "উইন্ডোর অস্বচ্ছতা হ্রাস করুন"
-
 #  button label
-#: ../metadata/core.xml.in.h:52
+#: ../metadata/core.xml.in.h:50
 #, fuzzy
 msgid "Default Icon"
 msgstr "ডিফল্ট (&e)"
 
 #  progress stage title
-#: ../metadata/core.xml.in.h:53
+#: ../metadata/core.xml.in.h:51
 #, fuzzy
 msgid "Default window icon image"
 msgstr "ডিফল্ট উইন্ডো ম্যানেজার আরাম্ভ করা হচ্ছে"
 
-#: ../metadata/core.xml.in.h:54
+#: ../metadata/core.xml.in.h:52
 msgid "Detect Outputs"
 msgstr "আউটপুট সন্ধান"
 
 #  headline for dialog "Select for update"
-#: ../metadata/core.xml.in.h:55
+#: ../metadata/core.xml.in.h:53
 #, fuzzy
 msgid "Detect Refresh Rate"
 msgstr "পরিবর্ধনের জন্য নির্বাচন করুন"
 
-#: ../metadata/core.xml.in.h:56
+#: ../metadata/core.xml.in.h:54
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
 
-#: ../metadata/core.xml.in.h:57
+#: ../metadata/core.xml.in.h:55
 msgid "Edge Trigger Delay"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:58
+#: ../metadata/core.xml.in.h:56
 msgid "Fast"
 msgstr "দ্রুত"
 
-#: ../metadata/core.xml.in.h:59
+#: ../metadata/core.xml.in.h:57
 #, fuzzy
 msgid "Focus Prevention Level"
 msgstr "ফোকাস প্রতিরোধের উইন্ডো"
 
-#: ../metadata/core.xml.in.h:60
+#: ../metadata/core.xml.in.h:58
 msgid "Focus Prevention Windows"
 msgstr "ফোকাস প্রতিরোধের উইন্ডো"
 
-#: ../metadata/core.xml.in.h:61
+#: ../metadata/core.xml.in.h:59
 msgid "Focus prevention windows"
 msgstr "ফোকাস প্রতিরোধের উইন্ডো"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.h:60
 msgid "Force independent output painting."
 msgstr ""
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:61
 msgid "General Options"
 msgstr "সাধারণ বিকল্প"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:62
 msgid "General compiz options"
 msgstr "সাধারণ কমপিজ বিকল্প"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:63
 msgid "Good"
 msgstr "ভালো"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:64
 msgid "Hide Skip Taskbar Windows"
 msgstr "টাস্কবার উইন্ডোগুলি বাদ দেওয়া গোপন করা"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:65
 msgid "Hide all windows and focus desktop"
 msgstr "সব উইন্ডোগুলি গোপন করা এবং ডেস্কটপে ফোকাস করা"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.h:66
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "ডেস্কটপ প্রদর্শন প্রণালীতে প্রবেশ করার সময় টাস্কবারে নেই এরকম উইন্ডোগুলি গোপন করুন"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.h:67
 msgid "High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:68
 msgid "Horizontal Virtual Size"
 msgstr "অনুভূমিক ভার্চুয়াল আকার"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:69
 msgid "If available use compression for textures converted from images"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:70
 msgid "Ignore Hints When Maximized"
 msgstr "বড় করার হলে ইঙ্গিতগুলি অগ্রাহ্য করা"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:71
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "উইন্ডো বড় করার সময় আকার বৃদ্ধি এবং আকৃতির ইঙ্গিত অগ্রাহ্য করুন"
 
-#: ../metadata/core.xml.in.h:74
-msgid "Increase Opacity"
-msgstr "অস্বচ্ছতা বৃদ্ধি করুন"
-
-#: ../metadata/core.xml.in.h:75
-msgid "Increase window opacity"
-msgstr "উইন্ডোর অস্বচ্ছতা বৃদ্ধি করুন"
-
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:72
 msgid "Interval before raising selected windows"
 msgstr "নির্বাচিত উইন্ডোগুলিকে তোলার আগে ব্যবধান"
 
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:73
 msgid "Interval between ping messages"
 msgstr "পিং বার্তাগুলির মধ্যে ব্যবধান"
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:74
 msgid "Level of focus stealing prevention"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:75
 msgid "Lighting"
 msgstr "আলোকপাত"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:76
 msgid "List of currently active plugins"
 msgstr "বর্তমানে সক্রিয় প্লাগইনের তালিকা"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:77
 msgid "List of strings describing output devices"
 msgstr "আউটপুট ডিভাইস বর্ণনাকারী স্ট্রিংয়ের তালিকা"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:78
 msgid "Low"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:79
 msgid "Lower Window"
 msgstr "নিচের উইন্ডো"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.h:80
 msgid "Lower window beneath other windows"
 msgstr "অন্যান্য উইন্ডগুলির নিচে উইন্ডোটিকে নামিয়ে দিন"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:82
 msgid "Maximize Window Horizontally"
 msgstr "উইন্ডোটিকে অনুভূমিকভাবে বড় করা"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:83
 msgid "Maximize Window Vertically"
 msgstr "উইন্ডোটিকে উল্লম্বভাবে বড় করা"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:84
 msgid "Maximize active window"
 msgstr "সক্রিয় উইন্ডো বড় করা"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize active window horizontally"
 msgstr "সক্রিয় উইন্ডোটিকে অনুভূমিকভাবে বড় করা"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize active window vertically"
 msgstr "সক্রিয় উইন্ডোটিকে উল্লম্বভাবে বড় করা"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:88
 msgid "Minimize active window"
 msgstr "সক্রিয় উইন্ডো ছোট করা"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:89
 msgid "Number of Desktops"
 msgstr "ডেস্কটপের সংখ্যা"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:90
 msgid "Number of virtual desktops"
 msgstr "ভার্চুয়াল ডেস্কটপের সংখ্যা"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:91
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:92
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "উল্লম্ব ফাঁকা পর্যায়ে শুধুমাত্র স্ক্রিন আপডেট সম্পাদন করুন"
 
-#: ../metadata/core.xml.in.h:97
-msgid "Opacity Step"
-msgstr "অস্বচ্ছতার ধাপ"
-
-#: ../metadata/core.xml.in.h:98
-msgid "Opacity change step"
-msgstr "অস্বচ্ছতা পরিবর্তনের ধাপ"
-
-#: ../metadata/core.xml.in.h:99
-msgid "Opacity values for windows that should be translucent by default"
-msgstr "উইন্ডোর যে অস্বচ্ছতাকে প্রথাস্বরূপভাবে অর্ধস্বচ্ছ করা হবে"
-
-#: ../metadata/core.xml.in.h:100
-msgid "Opacity window values"
-msgstr "অস্বচ্ছতা উইন্ডোর মূল্যগুলি"
-
-#: ../metadata/core.xml.in.h:101
-msgid "Opacity windows"
-msgstr "অস্বচ্ছতা উইন্ডো"
-
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:93
 msgid "Open a terminal"
 msgstr "একটি টার্মিনাল খুলুন"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:94
 msgid "Outputs"
 msgstr "আউটপুটগুলি"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:95
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:96
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:97
 msgid "Ping Delay"
 msgstr "পিং বিলম্ব"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:98
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:100
 msgid "Raise On Click"
 msgstr "ক্লিক করে বৃদ্ধি করুন"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:101
 msgid "Raise Window"
 msgstr "উইন্ডো তুলে ধরা"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:102
 msgid "Raise selected windows after interval"
 msgstr "ব্যবধানের পরে নির্বাচিত উইন্ডোটিকে তুলে ধরুন"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:103
 msgid "Raise window above other windows"
 msgstr "অন্যান্য উইন্ডোগুলির ওপরে উইন্ডো তুলে ধরা"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:104
 msgid "Raise windows when clicked"
 msgstr "ক্লিক করা হলে উইন্ডোটি তুলে ধরা"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:105
 #, fuzzy
 msgid "Refresh Rate"
 msgstr "পুনরায় তালিকা প্রদর্শন করো (&R)"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:106
 msgid "Run Dialog"
 msgstr "ডায়ালগ চালনা করা"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:107
 #, fuzzy
 msgid "Run command 0"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:108
 #, fuzzy
 msgid "Run command 1"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:109
 #, fuzzy
 msgid "Run command 10"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:110
 #, fuzzy
 msgid "Run command 11"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:111
 #, fuzzy
 msgid "Run command 2"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:112
 #, fuzzy
 msgid "Run command 3"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:113
 #, fuzzy
 msgid "Run command 4"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:114
 #, fuzzy
 msgid "Run command 5"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:115
 #, fuzzy
 msgid "Run command 6"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:116
 #, fuzzy
 msgid "Run command 7"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:117
 #, fuzzy
 msgid "Run command 8"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:118
 #, fuzzy
 msgid "Run command 9"
 msgstr "কমান্ড '%1'"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:119
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "অনুভূমিক ভার্চুয়াল আকারের জন্য স্ক্রিন আকারের গুণিতক"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:120
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "উল্লম্ব ভার্চুয়াল আকারের জন্য স্ক্রিন আকারের গুণিতক"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:121
 #, fuzzy
 msgid "Screenshot command line"
 msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
 
 #  label text
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:122
 #, fuzzy
 msgid "Show Desktop"
 msgstr "সময়"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:123
 msgid "Show Main Menu"
 msgstr "প্রধান মেনু প্রদর্শন করা"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:124
 msgid "Show Run Application dialog"
 msgstr "চালনা করার অনুপ্রয়োগ ডায়ালগ প্রদর্শন করা"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:125
 msgid "Show the main menu"
 msgstr "প্রধান তালিকা প্রদর্শন"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:126
 #, fuzzy
 msgid "Slow Animations"
 msgstr "সবগুলো পার্টিশন প্রদর্শন করো"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:127
 #, fuzzy
 msgid "Smart mode"
 msgstr "স্মার্ট"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:128
 msgid "Sync To VBlank"
 msgstr "VBlank এ Sync "
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot"
 msgstr "একটি স্ক্রিনশট নিন"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot of a window"
 msgstr "উইন্ডোর একটি স্ক্রিনশট নিন"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:131
 #, fuzzy
 msgid "Terminal command line"
 msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:132
 #, fuzzy
 msgid "Texture Compression"
 msgstr "টেক্সচার ফিল্টার করা"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:133
 msgid "Texture Filter"
 msgstr "টেক্সচার ফিল্টার"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:134
 msgid "Texture filtering"
 msgstr "টেক্সচার ফিল্টার করা"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:135
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "যে হারে স্ক্রিনটি পুনরায় অঙ্কন করা হবে (গুণ/সেকেন্ড)"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized"
 msgstr "সর্বাধিক উইন্ডো টগল করা"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized Horizontally"
 msgstr "অনুভূমিকভাবে সর্বাধিক উইন্ডো টগল করা"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Vertically"
 msgstr "উল্লম্বভাবে সর্বাধিক উইন্ডো টগল করা"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Shaded"
 msgstr "উইন্ডো শেড টগল করা"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized"
 msgstr "সর্বাধিক সক্রিয় উইন্ডো টগল করা"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized horizontally"
 msgstr "অনুভূমিকভাবে সর্বাধিক সক্রিয় উইন্ডোকে টগল করা"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized vertically"
 msgstr "উল্লম্বভাবে সর্বাধিক সক্রিয় উইন্ডোকে টগল করা"
 
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window shaded"
 msgstr "সক্রিয় উইন্ডো শেড টগল করা"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle use of slow animations"
 msgstr "মন্থর অ্যানিমেশনগুলির ব্যবহার টগল করা"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize active window"
 msgstr "সক্রিয় উইন্ডো সর্বাধিক না করা"
 
-#: ../metadata/core.xml.in.h:156
+#: ../metadata/core.xml.in.h:147
 msgid "Unredirect Fullscreen Windows"
 msgstr "পূর্ণস্ক্রিনের উইন্ডোগুলি পুনর্নির্দেশ না করা"
 
-#: ../metadata/core.xml.in.h:157
+#: ../metadata/core.xml.in.h:148
 msgid "Use diffuse light when screen is transformed"
 msgstr "স্ক্রিন স্থানান্তরিত করার সময় বিচ্ছুরিত আলো প্রয়োগ করুন"
 
-#: ../metadata/core.xml.in.h:158
+#: ../metadata/core.xml.in.h:149
 msgid "Vertical Virtual Size"
 msgstr "উল্লম্ব ভার্চুয়াল আকার"
 
-#: ../metadata/core.xml.in.h:159
+#: ../metadata/core.xml.in.h:150
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:160
+#: ../metadata/core.xml.in.h:151
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:162
+#: ../metadata/core.xml.in.h:153
 msgid "Window menu button binding"
 msgstr "উইন্ডোর মেনু বোতাম বন্ধন"
 
-#: ../metadata/core.xml.in.h:163
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu key binding"
 msgstr "উইন্ডোর কী বোতাম বন্ধন"
 
-#: ../metadata/core.xml.in.h:164
+#: ../metadata/core.xml.in.h:155
 msgid "Window screenshot command line"
 msgstr "উইন্ডো স্ক্রিনশট নির্দেশ লাইন"
-
-#: ../metadata/core.xml.in.h:165
-msgid "Windows that should be translucent by default"
-msgstr "প্রথাস্বরূপভাবে যে উইন্ডোগুলি অর্ধস্বচ্ছ করা হবে"
 
 # নির্বাচন 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
@@ -1194,7 +1154,7 @@ msgstr "ঘনকের অভ্যন্তরে"
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "ঘনকের উপরিতলে PNG এবং SVG র যে তালিকা প্রয়োগ করা হবে"
 
-#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
 #: ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "বিবিধ আউটপুট প্রণালী"
@@ -1398,54 +1358,116 @@ msgstr "যে উইন্ডোগুলি অলঙ্করণ করা �
 msgid "Windows that should have a shadow"
 msgstr "যে উইন্ডোগুলি ছায়াযুক্ত করা হবে"
 
-#: ../metadata/fade.xml.in.h:1
+#: ../metadata/fade.xml.in.h:2
+#, no-c-format
+msgid "Brightness (in %) of unresponsive windows"
+msgstr ""
+
+#  label text
+#: ../metadata/fade.xml.in.h:3
+#, fuzzy
+msgid "Constant speed"
+msgstr "সময়"
+
+#: ../metadata/fade.xml.in.h:4
+#, fuzzy
+msgid "Constant time"
+msgstr "ধারন করে"
+
+#: ../metadata/fade.xml.in.h:5
+#, fuzzy
+msgid "Dim Unresponsive Windows"
+msgstr "বিস্তারিত দেখাও (&d)"
+
+#: ../metadata/fade.xml.in.h:6
+msgid "Dim windows that are not responding to window manager requests"
+msgstr ""
+
+#  label text, Clock setting: local time (not UTC)
+#  ComboBox entry: hardware clock set to local time
+#: ../metadata/fade.xml.in.h:7
+#, fuzzy
+msgid "Fade Mode"
+msgstr "স্থানীয় সময়"
+
+#: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
 msgstr "ছোট করা/খোলা/বন্ধ করার ওপর মলিনতার প্রভাব"
 
-#: ../metadata/fade.xml.in.h:2
+#: ../metadata/fade.xml.in.h:9
 #, fuzzy
 msgid "Fade Speed"
 msgstr "বাদ দেয়া হয়েছে\n"
 
-#: ../metadata/fade.xml.in.h:3
+#  label text, Clock setting: local time (not UTC)
+#  ComboBox entry: hardware clock set to local time
+#: ../metadata/fade.xml.in.h:10
+#, fuzzy
+msgid "Fade Time"
+msgstr "স্থানীয় সময়"
+
+#: ../metadata/fade.xml.in.h:11
 msgid "Fade effect on minimize/open/close window events"
 msgstr "উইন্ডো ছোট করা/খোলা/বন্ধ করার ওপর মলিনতার প্রভাব"
 
-#: ../metadata/fade.xml.in.h:4
+#: ../metadata/fade.xml.in.h:12
 msgid "Fade effect on system beep"
 msgstr "সিস্টেম বিপে মলিনতার প্রভাব"
 
-#: ../metadata/fade.xml.in.h:5
+#: ../metadata/fade.xml.in.h:13
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr "ম্যাপ করার সময় উইন্ডো ফেড ইন করা এবং আনম্যাপ করার সময় উইন্ডো ফেড আউট করা"
 
-#: ../metadata/fade.xml.in.h:6
+#: ../metadata/fade.xml.in.h:14
 #, fuzzy
 msgid "Fade windows"
 msgstr "বিস্তারিত দেখাও (&d)"
 
-#: ../metadata/fade.xml.in.h:7
+#: ../metadata/fade.xml.in.h:15
 #, fuzzy
 msgid "Fading Windows"
 msgstr "বিস্তারিত দেখাও (&d)"
 
-#: ../metadata/fade.xml.in.h:8
+#: ../metadata/fade.xml.in.h:16
 msgid "Fullscreen Visual Bell"
 msgstr "পূর্ণস্ক্রিনের দৃশ্যমান বেল"
 
-#: ../metadata/fade.xml.in.h:9
+#: ../metadata/fade.xml.in.h:17
 msgid "Fullscreen fade effect on system beep"
 msgstr "সিস্টেম বিপে পূর্ণ পর্দার মলিন প্রভাব"
 
-#: ../metadata/fade.xml.in.h:10
+#: ../metadata/fade.xml.in.h:19
+#, no-c-format
+msgid "Saturation (in %) of unresponsive windows"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:20
+msgid "Unresponsive Window Brightness"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:21
+msgid "Unresponsive Window Saturation"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "দৃশ্যমান বেল"
 
-#: ../metadata/fade.xml.in.h:11
-msgid "Window fade speed"
+#: ../metadata/fade.xml.in.h:23
+#, fuzzy
+msgid "Window fade mode"
 msgstr "উইন্ডো মলিন হওয়ার গতি"
 
-#: ../metadata/fade.xml.in.h:12
+#: ../metadata/fade.xml.in.h:24
+#, fuzzy
+msgid "Window fade speed in \"Constant speed\" mode"
+msgstr "স্কেল প্রণালীতে উইন্ডোগুলি স্কেল করা"
+
+#: ../metadata/fade.xml.in.h:25
+msgid "Window fade time (in ms) in \"Constant time\" mode"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
 msgstr "যে উইন্ডোগুলি মলিন করা হবে"
 
@@ -1616,34 +1638,44 @@ msgid "Horizontal viewport positions"
 msgstr "অনুভূমিক ভিউপোর্টের অবস্থান"
 
 #: ../metadata/place.xml.in.h:6
+msgid "Keep In Workarea"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:7
+msgid ""
+"Keep placed window in work area, even if that means that the position might "
+"differ from the specified position"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:8
 msgid "Maximize"
 msgstr "বড় করা"
 
-#: ../metadata/place.xml.in.h:8
+#: ../metadata/place.xml.in.h:10
 msgid "Place Windows"
 msgstr "উইন্ডোগুলি স্থাপন করা"
 
-#: ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:11
 msgid "Place across all outputs"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:12
 msgid "Place windows at appropriate positions when mapped"
 msgstr "ম্যাপ করার পর উপযুক্ত স্থানে উইন্ডোগুলি স্থাপন করুন"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:13
 msgid "Placement Mode"
 msgstr "প্রতিস্থাপন প্রণালী"
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:14
 msgid "Positioned windows"
 msgstr "অবস্থানযুক্ত উইন্ডো"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:15
 msgid "Random"
 msgstr "ইচ্ছামত"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:16
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
@@ -1651,74 +1683,74 @@ msgstr ""
 "যদি একাধিক আউটপুট ডিভাইস ব্যবহার করা হয় তাহলে উইন্ডোগুলি কোথায় স্কেল করা হবে তা "
 "নির্বাচন করে"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:17
 msgid "Smart"
 msgstr "স্মার্ট"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:18
 #, fuzzy
 msgid "Use active output device"
 msgstr "সব আউটপুট ডিভাইসে"
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:19
 msgid "Use output device of focussed window"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 msgid "Vertical viewport positions"
 msgstr "উল্লম্ব ভিউপোর্ট অবস্থান"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 msgid "Viewport positioned windows"
 msgstr "ভিউপোর্ট অবস্থানের উইন্ডো"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Window placement workarounds"
 msgstr "উইন্ডো প্রতিস্থাপন ওয়ার্কএরাউন্ড"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 msgid "Windows that should be positioned by default"
 msgstr "প্রথাস্বরূপভাবে যে উইন্ডোগুলির অবস্থান নির্ণয় করা হবে"
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "প্রথাস্বরূপভাবে যে ভিউপোর্টে উইন্ডোগুলি রাখা হবে "
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "Workarounds"
 msgstr "ওয়ার্কএরাউন্ড"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 msgid "X Positions"
 msgstr "X অবস্থান"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 msgid "X Viewport Positions"
 msgstr "X ভিউপোর্ট অবস্থান"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "X position values"
 msgstr "X অবস্থানের মূল্য"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 msgid "Y Positions"
 msgstr "Y অবস্থান"
 
-#: ../metadata/place.xml.in.h:30
+#: ../metadata/place.xml.in.h:32
 msgid "Y Viewport Positions"
 msgstr "Y ভিউপোর্ট অবস্থান"
 
-#: ../metadata/place.xml.in.h:31
+#: ../metadata/place.xml.in.h:33
 msgid "Y position values"
 msgstr "Y অবস্থানের মূল্য"
 
@@ -2855,6 +2887,36 @@ msgstr "জুম ফ্যাক্টর"
 msgid "Zoom pan"
 msgstr "বাদ দেয়া হয়েছে\n"
 
+#~ msgid "Decrease Opacity"
+#~ msgstr "অস্বচ্ছতা হ্রাস করুন"
+
+#~ msgid "Decrease window opacity"
+#~ msgstr "উইন্ডোর অস্বচ্ছতা হ্রাস করুন"
+
+#~ msgid "Increase Opacity"
+#~ msgstr "অস্বচ্ছতা বৃদ্ধি করুন"
+
+#~ msgid "Increase window opacity"
+#~ msgstr "উইন্ডোর অস্বচ্ছতা বৃদ্ধি করুন"
+
+#~ msgid "Opacity Step"
+#~ msgstr "অস্বচ্ছতার ধাপ"
+
+#~ msgid "Opacity change step"
+#~ msgstr "অস্বচ্ছতা পরিবর্তনের ধাপ"
+
+#~ msgid "Opacity values for windows that should be translucent by default"
+#~ msgstr "উইন্ডোর যে অস্বচ্ছতাকে প্রথাস্বরূপভাবে অর্ধস্বচ্ছ করা হবে"
+
+#~ msgid "Opacity window values"
+#~ msgstr "অস্বচ্ছতা উইন্ডোর মূল্যগুলি"
+
+#~ msgid "Opacity windows"
+#~ msgstr "অস্বচ্ছতা উইন্ডো"
+
+#~ msgid "Windows that should be translucent by default"
+#~ msgstr "প্রথাস্বরূপভাবে যে উইন্ডোগুলি অর্ধস্বচ্ছ করা হবে"
+
 #~ msgid "Background Images"
 #~ msgstr "পটভূমির চিত্রগুলি"
 
@@ -2964,12 +3026,6 @@ msgstr "বাদ দেয়া হয়েছে\n"
 
 #~ msgid "Desktop Window Opacity Fade Time."
 #~ msgstr "ডেস্কটপের উইন্ডো অস্বচ্ছতা মলিন হওয়ার সময়."
-
-#  label text, Clock setting: local time (not UTC)
-#  ComboBox entry: hardware clock set to local time
-#, fuzzy
-#~ msgid "Fade Time"
-#~ msgstr "স্থানীয় সময়"
 
 #, fuzzy
 #~ msgid "Notification"
