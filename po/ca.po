@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 16:58+0530\n"
-"PO-Revision-Date: 2008-04-19 12:46+0200\n"
-"Last-Translator: Sauedking <silverlightjava@hotmail.es>\n"
+"POT-Creation-Date: 2008-08-07 11:30+0530\n"
+"PO-Revision-Date: 2008-07-19 14:27+0200\n"
+"Last-Translator: Josep Puigdemont <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,22 +106,22 @@ msgid "Close Window"
 msgstr "Tanca la finestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4439
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:145
 msgid "Unmaximize Window"
 msgstr "Desmaximitza la finestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4442
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
 msgstr "Maximitza la finestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4484
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
 msgstr "Minimitza la finestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4601
-#: ../metadata/core.xml.in.h:161
+#: ../metadata/core.xml.in.h:152
 msgid "Window Menu"
 msgstr "Menú de la finestra"
 
@@ -153,18 +153,18 @@ msgstr "No pals"
 #: ../gtk/window-decorator/gtk-window-decorator.c:5089
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr "La finestra \"%s\" no esta responent."
+msgstr "La finestra «%s» no està responent."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5098
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
-"Forzant l´aplicació per quitar perqué causa perdides de tots els canvis no "
-"guardats."
+"Si forceu la sortida d'aquesta aplicació perdreu els canvis que encara no "
+"hagueu desat."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5113
 msgid "_Force Quit"
-msgstr "Força Quita"
+msgstr "_Força'n la sortida"
 
 #: ../metadata/annotate.xml.in.h:1
 #, fuzzy
@@ -708,491 +708,448 @@ msgstr ""
 "d"
 
 #: ../metadata/core.xml.in.h:50
-msgid "Decrease Opacity"
-msgstr "Redueix l'opacitat"
-
-#: ../metadata/core.xml.in.h:51
-msgid "Decrease window opacity"
-msgstr "Redueix l'opacitat de la finestra"
-
-#: ../metadata/core.xml.in.h:52
 msgid "Default Icon"
 msgstr "Icona per defecte"
 
-#: ../metadata/core.xml.in.h:53
+#: ../metadata/core.xml.in.h:51
 msgid "Default window icon image"
 msgstr "Imatge d'icona de finestra per defecte"
 
-#: ../metadata/core.xml.in.h:54
+#: ../metadata/core.xml.in.h:52
 msgid "Detect Outputs"
 msgstr "Detecta les sortides"
 
-#: ../metadata/core.xml.in.h:55
+#: ../metadata/core.xml.in.h:53
 msgid "Detect Refresh Rate"
 msgstr "Detecta la freqüència d'actualització"
 
-#: ../metadata/core.xml.in.h:56
+#: ../metadata/core.xml.in.h:54
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
 
-#: ../metadata/core.xml.in.h:57
+#: ../metadata/core.xml.in.h:55
 msgid "Edge Trigger Delay"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:58
+#: ../metadata/core.xml.in.h:56
 msgid "Fast"
 msgstr "Ràpid"
 
-#: ../metadata/core.xml.in.h:59
+#: ../metadata/core.xml.in.h:57
 #, fuzzy
 msgid "Focus Prevention Level"
 msgstr "Tipus de finestres de focus"
 
-#: ../metadata/core.xml.in.h:60
+#: ../metadata/core.xml.in.h:58
 #, fuzzy
 msgid "Focus Prevention Windows"
 msgstr "Tipus de finestres de focus"
 
-#: ../metadata/core.xml.in.h:61
+#: ../metadata/core.xml.in.h:59
 #, fuzzy
 msgid "Focus prevention windows"
 msgstr "Tipus de finestres de focus"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.h:60
 msgid "Force independent output painting."
 msgstr ""
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.h:61
 msgid "General Options"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.h:62
 msgid "General compiz options"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.h:63
 msgid "Good"
 msgstr "Bo"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.h:64
 msgid "Hide Skip Taskbar Windows"
 msgstr "Oculta les finestres ignorades de la barra de tasques"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.h:65
 msgid "Hide all windows and focus desktop"
 msgstr "Oculta totes les finestres i passa el focus a l'escriptori"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.h:66
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Oculta les finestres que no es troben a la barra de tasques en accedir al "
 "mode d'escriptori de visualització"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.h:67
 msgid "High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.h:68
 msgid "Horizontal Virtual Size"
 msgstr "Mida virtual horitzontal"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.h:69
 msgid "If available use compression for textures converted from images"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.h:70
 msgid "Ignore Hints When Maximized"
 msgstr "Ignora els suggeriments quan està maximitzada"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.h:71
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 "Ignora els suggeriments d'increment de mida i aspecte quan la finestra es "
 "troba maximitzada"
 
-#: ../metadata/core.xml.in.h:74
-msgid "Increase Opacity"
-msgstr "Augmenta l'opacitat"
-
-#: ../metadata/core.xml.in.h:75
-msgid "Increase window opacity"
-msgstr "Augmenta l'opacitat de la finestra"
-
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.h:72
 #, fuzzy
 msgid "Interval before raising selected windows"
 msgstr ""
 "Interval que ha de transcórrer abans d'elevar les finestres seleccionades"
 
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.h:73
 msgid "Interval between ping messages"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.h:74
 msgid "Level of focus stealing prevention"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.h:75
 msgid "Lighting"
 msgstr "Il·luminació"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.h:76
 msgid "List of currently active plugins"
 msgstr "Llista dels connectors actius actualment"
 
-#: ../metadata/core.xml.in.h:81
+#: ../metadata/core.xml.in.h:77
 msgid "List of strings describing output devices"
 msgstr "Llista de cadenes que descriuen els dispositius de sortida"
 
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.h:78
 msgid "Low"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.h:79
 msgid "Lower Window"
 msgstr "Abaixa la finestra"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.h:80
 msgid "Lower window beneath other windows"
 msgstr "Abaixa la finestra per sota de les altres"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.h:82
 msgid "Maximize Window Horizontally"
 msgstr "Maximitza la finestra horitzontalment"
 
-#: ../metadata/core.xml.in.h:87
+#: ../metadata/core.xml.in.h:83
 msgid "Maximize Window Vertically"
 msgstr "Maximitza la finestra verticalment"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.h:84
 msgid "Maximize active window"
 msgstr "Maximitza la finestra activa"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:85
 msgid "Maximize active window horizontally"
 msgstr "Maximitza la finestra activa horitzontalment"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:86
 msgid "Maximize active window vertically"
 msgstr "Maximitza la finestra activa verticalment"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:88
 msgid "Minimize active window"
 msgstr "Minimitza la finestra activa"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:89
 msgid "Number of Desktops"
 msgstr "Nombre d'escriptoris"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:90
 #, fuzzy
 msgid "Number of virtual desktops"
 msgstr "Nombre d'escriptoris virtuals"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:91
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:92
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Només actualitza la pantalla durant els períodes d'enfosquiment vertical"
 
-#: ../metadata/core.xml.in.h:97
-msgid "Opacity Step"
-msgstr "Etapa d'opacitat"
-
-#: ../metadata/core.xml.in.h:98
-#, fuzzy
-msgid "Opacity change step"
-msgstr "Etapa de canvi d'opacitat"
-
-#: ../metadata/core.xml.in.h:99
-msgid "Opacity values for windows that should be translucent by default"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:100
-msgid "Opacity window values"
-msgstr ""
-
-#: ../metadata/core.xml.in.h:101
-#, fuzzy
-msgid "Opacity windows"
-msgstr "Espai entre finestres"
-
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:93
 msgid "Open a terminal"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:94
 msgid "Outputs"
 msgstr "Sortides"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:95
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:96
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
 # SH
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:97
 #, fuzzy
 msgid "Ping Delay"
 msgstr "Retard de pluja"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:98
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:100
 msgid "Raise On Click"
 msgstr "Eleva en fer clic"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:101
 msgid "Raise Window"
 msgstr "Eleva la finestra"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:102
 msgid "Raise selected windows after interval"
 msgstr "Eleva les finestres seleccionades un cop transcorregut l'interval"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:103
 msgid "Raise window above other windows"
 msgstr "Eleva la finestra per damunt de les altres"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:104
 msgid "Raise windows when clicked"
 msgstr "Eleva les finestres en fer clic"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:105
 msgid "Refresh Rate"
 msgstr "Freqüència d'actualització"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:106
 msgid "Run Dialog"
 msgstr "Diàleg d'execució"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:107
 #, fuzzy
 msgid "Run command 0"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:108
 #, fuzzy
 msgid "Run command 1"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:109
 #, fuzzy
 msgid "Run command 10"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:110
 #, fuzzy
 msgid "Run command 11"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:111
 #, fuzzy
 msgid "Run command 2"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:112
 #, fuzzy
 msgid "Run command 3"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:113
 #, fuzzy
 msgid "Run command 4"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:114
 #, fuzzy
 msgid "Run command 5"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:115
 #, fuzzy
 msgid "Run command 6"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:116
 #, fuzzy
 msgid "Run command 7"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:117
 #, fuzzy
 msgid "Run command 8"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:118
 #, fuzzy
 msgid "Run command 9"
 msgstr "Executa l'ordre %d"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:119
 #, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 "Multiplicador de la mida de la pantalla per a la mida virtual horitzontal"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:120
 #, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplicador de la mida de la pantalla per a la mida virtual vertical"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:121
 msgid "Screenshot command line"
 msgstr "Línia d'ordres de captura de pantalla"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:122
 #, fuzzy
 msgid "Show Desktop"
 msgstr "Fes zoom a l'escriptori"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:123
 msgid "Show Main Menu"
 msgstr "Mostra el menú principal"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:124
 msgid "Show Run Application dialog"
 msgstr "Mostra el diàleg d'execució de l'aplicació"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:125
 msgid "Show the main menu"
 msgstr "Mostra el menú principal"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:126
 msgid "Slow Animations"
 msgstr "Animacions lentes"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:127
 msgid "Smart mode"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:128
 msgid "Sync To VBlank"
 msgstr "Sincronitza amb enfosquiment vertical"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:129
 msgid "Take a screenshot"
 msgstr "Fes una captura de pantalla"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot of a window"
 msgstr "Fes una captura de pantalla d'una finestra"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:131
 #, fuzzy
 msgid "Terminal command line"
 msgstr "Línia d'ordres de captura de pantalla"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:132
 #, fuzzy
 msgid "Texture Compression"
 msgstr "Filtre de textura"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:133
 msgid "Texture Filter"
 msgstr "Filtre de textura"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:134
 #, fuzzy
 msgid "Texture filtering"
 msgstr "Filtre de textura"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:135
 #, fuzzy
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr ""
 "Freqüència amb la qual es torna a representar la pantalla (vegades/segon)"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:136
 msgid "Toggle Window Maximized"
 msgstr "Commuta la finestra maximitzada"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Commuta la finestra maximitzada horitzontalment"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Vertically"
 msgstr "Commuta la finestra maximitzada verticalment"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Shaded"
 msgstr "Commuta la finestra ombrejada"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle active window maximized"
 msgstr "Commuta la finestra activa maximitzada"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized horizontally"
 msgstr "Commuta la finestra activa maximitzada horitzontalment"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized vertically"
 msgstr "Commuta la finestra activa maximitzada verticalment"
 
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window shaded"
 msgstr "Commuta la finestra activa ombrejada"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle use of slow animations"
 msgstr "Commuta l'ús d'animacions lentes"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize active window"
 msgstr "Desmaximitza la finestra activa"
 
-#: ../metadata/core.xml.in.h:156
+#: ../metadata/core.xml.in.h:147
 msgid "Unredirect Fullscreen Windows"
 msgstr "No redirigeixis les finestres a pantalla completa"
 
-#: ../metadata/core.xml.in.h:157
+#: ../metadata/core.xml.in.h:148
 msgid "Use diffuse light when screen is transformed"
 msgstr "Utilitza llum de difusió en transformar la pantalla"
 
-#: ../metadata/core.xml.in.h:158
+#: ../metadata/core.xml.in.h:149
 msgid "Vertical Virtual Size"
 msgstr "Mida virtual vertical"
 
-#: ../metadata/core.xml.in.h:159
+#: ../metadata/core.xml.in.h:150
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:160
+#: ../metadata/core.xml.in.h:151
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:162
+#: ../metadata/core.xml.in.h:153
 msgid "Window menu button binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:163
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu key binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:164
+#: ../metadata/core.xml.in.h:155
 msgid "Window screenshot command line"
 msgstr "Línia d'ordres de captura de pantalla de finestra"
-
-#: ../metadata/core.xml.in.h:165
-#, fuzzy
-msgid "Windows that should be translucent by default"
-msgstr "Tipus de finestres que s'hauran d'esvair"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1295,7 +1252,7 @@ msgstr ""
 "Llista de fitxers PNG i SVG que s'hauran de representar a la cara superior "
 "del cub"
 
-#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:7
+#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
 #: ../metadata/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr ""
@@ -1488,54 +1445,111 @@ msgstr "Tipus de finestres que s'hauran d'esvair"
 msgid "Windows that should have a shadow"
 msgstr "Tipus de finestres que s'hauran d'esvair"
 
-#: ../metadata/fade.xml.in.h:1
+#: ../metadata/fade.xml.in.h:2
+#, no-c-format
+msgid "Brightness (in %) of unresponsive windows"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:3
+#, fuzzy
+msgid "Constant speed"
+msgstr "Velocitat del gir"
+
+#: ../metadata/fade.xml.in.h:4
+#, fuzzy
+msgid "Constant time"
+msgstr "Restringeix Y"
+
+#: ../metadata/fade.xml.in.h:5
+#, fuzzy
+msgid "Dim Unresponsive Windows"
+msgstr "Canvia la mida de la finestra"
+
+#: ../metadata/fade.xml.in.h:6
+msgid "Dim windows that are not responding to window manager requests"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:7
+#, fuzzy
+msgid "Fade Mode"
+msgstr "Temps d'inversió"
+
+#: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:2
+#: ../metadata/fade.xml.in.h:9
 msgid "Fade Speed"
 msgstr "Velocitat d'esvaïment"
 
-#: ../metadata/fade.xml.in.h:3
+#: ../metadata/fade.xml.in.h:10
+#, fuzzy
+msgid "Fade Time"
+msgstr "Temps d'inversió"
+
+#: ../metadata/fade.xml.in.h:11
 msgid "Fade effect on minimize/open/close window events"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:4
+#: ../metadata/fade.xml.in.h:12
 msgid "Fade effect on system beep"
 msgstr "Efecte d'esvaïment amb avís sonor del sistema"
 
-#: ../metadata/fade.xml.in.h:5
+#: ../metadata/fade.xml.in.h:13
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
 "Es fan aparèixer progressivament les finestres quan s'assignen i s'esvaeixen "
 "quan no estan assignades"
 
-#: ../metadata/fade.xml.in.h:6
+#: ../metadata/fade.xml.in.h:14
 #, fuzzy
 msgid "Fade windows"
 msgstr "Canvia la mida de les finestres"
 
-#: ../metadata/fade.xml.in.h:7
+#: ../metadata/fade.xml.in.h:15
 msgid "Fading Windows"
 msgstr "Esvaïment de finestres"
 
-#: ../metadata/fade.xml.in.h:8
+#: ../metadata/fade.xml.in.h:16
 msgid "Fullscreen Visual Bell"
 msgstr "Campana visual a pantalla completa"
 
-#: ../metadata/fade.xml.in.h:9
+#: ../metadata/fade.xml.in.h:17
 msgid "Fullscreen fade effect on system beep"
 msgstr "Efecte d'esvaïment a pantalla completa amb avís sonor del sistema"
 
-#: ../metadata/fade.xml.in.h:10
+#: ../metadata/fade.xml.in.h:19
+#, no-c-format
+msgid "Saturation (in %) of unresponsive windows"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:20
+msgid "Unresponsive Window Brightness"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:21
+msgid "Unresponsive Window Saturation"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "Campana visual"
 
-#: ../metadata/fade.xml.in.h:11
-msgid "Window fade speed"
+#: ../metadata/fade.xml.in.h:23
+#, fuzzy
+msgid "Window fade mode"
 msgstr "Velocitat d'esvaïment de la finestra"
 
-#: ../metadata/fade.xml.in.h:12
+#: ../metadata/fade.xml.in.h:24
+#, fuzzy
+msgid "Window fade speed in \"Constant speed\" mode"
+msgstr "Tipus de finestres que s'hauran de canviar de mida en el mode d'escala"
+
+#: ../metadata/fade.xml.in.h:25
+msgid "Window fade time (in ms) in \"Constant time\" mode"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:26
 #, fuzzy
 msgid "Windows that should be fading"
 msgstr "Tipus de finestres que s'hauran d'esvair"
@@ -1707,115 +1721,125 @@ msgid "Horizontal viewport positions"
 msgstr "Mida virtual horitzontal"
 
 #: ../metadata/place.xml.in.h:6
+msgid "Keep In Workarea"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:7
+msgid ""
+"Keep placed window in work area, even if that means that the position might "
+"differ from the specified position"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:8
 #, fuzzy
 msgid "Maximize"
 msgstr "Minimitzades"
 
-#: ../metadata/place.xml.in.h:8
+#: ../metadata/place.xml.in.h:10
 msgid "Place Windows"
 msgstr "Situa les finestres"
 
-#: ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:11
 msgid "Place across all outputs"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:12
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Situa les finestres en les posicions adequades quan s'assignin"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:13
 msgid "Placement Mode"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:14
 #, fuzzy
 msgid "Positioned windows"
 msgstr "Mostra les finestres minimitzades"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:15
 msgid "Random"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:16
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:17
 msgid "Smart"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:18
 msgid "Use active output device"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:19
 msgid "Use output device of focussed window"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:20
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:21
 #, fuzzy
 msgid "Vertical viewport positions"
 msgstr "Mida virtual horitzontal"
 
-#: ../metadata/place.xml.in.h:20
+#: ../metadata/place.xml.in.h:22
 #, fuzzy
 msgid "Viewport positioned windows"
 msgstr "Mostra les finestres minimitzades"
 
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:23
 msgid "Window placement workarounds"
 msgstr "Solucions alternatives de disposició de finestres"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:24
 #, fuzzy
 msgid "Windows that should be positioned by default"
 msgstr "Tipus de finestres que s'hauran d'esvair"
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:25
 #, fuzzy
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "Tipus de finestres que s'hauran de canviar de mida en el mode d'escala"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:26
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:27
 msgid "Workarounds"
 msgstr "Solucions alternatives"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:28
 #, fuzzy
 msgid "X Positions"
 msgstr "Mostra les finestres minimitzades"
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:29
 #, fuzzy
 msgid "X Viewport Positions"
 msgstr "Mida virtual horitzontal"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:30
 msgid "X position values"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:31
 #, fuzzy
 msgid "Y Positions"
 msgstr "Mostra les finestres minimitzades"
 
-#: ../metadata/place.xml.in.h:30
+#: ../metadata/place.xml.in.h:32
 #, fuzzy
 msgid "Y Viewport Positions"
 msgstr "Mida virtual horitzontal"
 
-#: ../metadata/place.xml.in.h:31
+#: ../metadata/place.xml.in.h:33
 msgid "Y position values"
 msgstr ""
 
@@ -2985,6 +3009,33 @@ msgstr "Factor del zoom"
 msgid "Zoom pan"
 msgstr "Amplia el zoom"
 
+#~ msgid "Decrease Opacity"
+#~ msgstr "Redueix l'opacitat"
+
+#~ msgid "Decrease window opacity"
+#~ msgstr "Redueix l'opacitat de la finestra"
+
+#~ msgid "Increase Opacity"
+#~ msgstr "Augmenta l'opacitat"
+
+#~ msgid "Increase window opacity"
+#~ msgstr "Augmenta l'opacitat de la finestra"
+
+#~ msgid "Opacity Step"
+#~ msgstr "Etapa d'opacitat"
+
+#, fuzzy
+#~ msgid "Opacity change step"
+#~ msgstr "Etapa de canvi d'opacitat"
+
+#, fuzzy
+#~ msgid "Opacity windows"
+#~ msgstr "Espai entre finestres"
+
+#, fuzzy
+#~ msgid "Windows that should be translucent by default"
+#~ msgstr "Tipus de finestres que s'hauran d'esvair"
+
 #, fuzzy
 #~ msgid "Place windows on a plane"
 #~ msgstr "Situa les finestres al cub"
@@ -3116,10 +3167,6 @@ msgstr "Amplia el zoom"
 #, fuzzy
 #~ msgid "Plane up"
 #~ msgstr "Situa les finestres"
-
-#, fuzzy
-#~ msgid "Fade Time"
-#~ msgstr "Temps d'inversió"
 
 #~ msgid "Open window menu"
 #~ msgstr "Obre el menú de la finestra"
