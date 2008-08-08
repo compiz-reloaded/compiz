@@ -2438,7 +2438,13 @@ focusDefaultWindow (CompScreen *s)
     {
 	w = findTopLevelWindowAtDisplay (d, d->below);
 
-	if (!w || !(*w->screen->focusWindow) (w))
+	if (w && (*w->screen->focusWindow) (w))
+	{
+	    if (!(w->type & (CompWindowTypeDesktopMask |
+			    CompWindowTypeDockMask)))
+		focus = w;
+	}
+	else
 	{
 	    Bool         status;
 	    Window       rootReturn, childReturn;
@@ -2447,18 +2453,20 @@ focusDefaultWindow (CompScreen *s)
 
 	    /* huh, we didn't find d->below ... perhaps it's out of date;
 	       try grabbing it through the server */
+
 	    status = XQueryPointer (d->display, s->root, &rootReturn,
 				    &childReturn, &dummyInt, &dummyInt,
 				    &dummyInt, &dummyInt, &dummyUInt);
+
 	    if (status && rootReturn == s->root)
 		w = findTopLevelWindowAtDisplay (d, childReturn);
-	}
 
-	if (w && !(w->type & (CompWindowTypeDesktopMask |
-			      CompWindowTypeDockMask)))
-	{
-	    if ((*w->screen->focusWindow) (w))
-		focus = w;
+	    if (w && (*w->screen->focusWindow) (w))
+	    {
+		if (!(w->type & (CompWindowTypeDesktopMask |
+				 CompWindowTypeDockMask)))
+		    focus = w;
+	    }
 	}
     }
 
