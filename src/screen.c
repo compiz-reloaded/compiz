@@ -2459,13 +2459,15 @@ focusDefaultWindow (CompScreen *s)
 				    &dummyInt, &dummyInt, &dummyUInt);
 
 	    if (status && rootReturn == s->root)
+	    {
 		w = findTopLevelWindowAtDisplay (d, childReturn);
 
-	    if (w && (*w->screen->focusWindow) (w))
-	    {
-		if (!(w->type & (CompWindowTypeDesktopMask |
-				 CompWindowTypeDockMask)))
-		    focus = w;
+		if (w && (*w->screen->focusWindow) (w))
+		{
+		    if (!(w->type & (CompWindowTypeDesktopMask |
+				     CompWindowTypeDockMask)))
+			focus = w;
+		}
 	    }
 	}
     }
