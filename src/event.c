@@ -2144,7 +2144,7 @@ handleEvent (CompDisplay *d,
 	    d->below = w->id;
 
 	    if (!d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b &&
-		!d->screens->maxGrab				    &&
+		!s->maxGrab				            &&
 		event->xcrossing.mode   != NotifyGrab		    &&
 		event->xcrossing.mode   != NotifyUngrab		    &&
 		event->xcrossing.detail != NotifyInferior)
