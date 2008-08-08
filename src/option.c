@@ -234,10 +234,11 @@ compSetActionOption (CompOption      *option,
     CompAction	    *action = &option->value.action;
     CompOptionValue v = *value;
 
-    /* initiate, terminate and state should never be changed */
+    /* initiate, terminate, priv and state should never be changed */
     v.action.initiate  = action->initiate;
     v.action.terminate = action->terminate;
     v.action.state     = action->state;
+    v.action.priv      = action->priv;
 
     if (action->type == v.action.type)
     {
