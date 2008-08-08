@@ -2437,6 +2437,23 @@ focusDefaultWindow (CompScreen *s)
     if (!d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
     {
 	w = findTopLevelWindowAtDisplay (d, d->below);
+
+	if (!w || !(*w->screen->focusWindow) (w))
+	{
+	    Bool         status;
+	    Window       rootReturn, childReturn;
+	    int          dummyInt;
+	    unsigned int dummyUInt;
+
+	    /* huh, we didn't find d->below ... perhaps it's out of date;
+	       try grabbing it through the server */
+	    status = XQueryPointer (d->display, s->root, &rootReturn,
+				    &childReturn, &dummyInt, &dummyInt,
+				    &dummyInt, &dummyInt, &dummyUInt);
+	    if (status && rootReturn == s->root)
+		w = findTopLevelWindowAtDisplay (d, childReturn);
+	}
+
 	if (w && !(w->type & (CompWindowTypeDesktopMask |
 			      CompWindowTypeDockMask)))
 	{
