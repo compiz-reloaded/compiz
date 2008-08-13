@@ -166,12 +166,6 @@ typedef struct _CompWalker        CompWalker;
 #define MwmFuncMaximize (1L << 4)
 #define MwmFuncClose    (1L << 5)
 
-#define MwmDecorHandle   (1L << 2)
-#define MwmDecorTitle    (1L << 3)
-#define MwmDecorMenu     (1L << 4)
-#define MwmDecorMinimize (1L << 5)
-#define MwmDecorMaximize (1L << 6)
-
 #define MwmDecorAll      (1L << 0)
 #define MwmDecorBorder   (1L << 1)
 #define MwmDecorHandle   (1L << 2)
