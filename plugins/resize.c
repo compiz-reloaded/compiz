@@ -924,6 +924,20 @@ resizeHandleEvent (CompDisplay *d,
 		    }
 		}
 	    }
+	    else if (rd->w && event->xclient.data.l[2] == WmMoveResizeCancel)
+	    {
+		if (rd->w->id == event->xclient.window)
+		{
+		    int option;
+
+		    option = RESIZE_DISPLAY_OPTION_INITIATE_BUTTON;
+		    resizeTerminate (d, &rd->opt[option].value.action,
+				     CompActionStateCancel, NULL, 0);
+		    option = RESIZE_DISPLAY_OPTION_INITIATE_KEY;
+		    resizeTerminate (d, &rd->opt[option].value.action,
+				     CompActionStateCancel, NULL, 0);
+		}
+	    }
 	}
 	break;
     case DestroyNotify:

@@ -185,6 +185,7 @@ typedef struct _CompWalker        CompWalker;
 #define WmMoveResizeMove             8
 #define WmMoveResizeSizeKeyboard     9
 #define WmMoveResizeMoveKeyboard    10
+#define WmMoveResizeCancel	    11
 
 #define OPAQUE 0xffff
 #define COLOR  0xffff
