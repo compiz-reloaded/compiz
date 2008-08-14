@@ -1869,7 +1869,8 @@ typedef Bool (*PlaceWindowProc) (CompWindow *window,
 
 typedef void (*ValidateWindowResizeRequestProc) (CompWindow     *window,
 						 unsigned int   *mask,
-						 XWindowChanges *xwc);
+						 XWindowChanges *xwc,
+						 unsigned int   source);
 
 typedef void (*WindowResizeNotifyProc) (CompWindow *window,
 					int        dx,
@@ -2884,7 +2885,8 @@ void
 moveResizeWindow (CompWindow     *w,
 		  XWindowChanges *xwc,
 		  unsigned int   xwcm,
-		  int            gravity);
+		  int            gravity,
+		  unsigned int   source);
 
 void
 syncWindowPosition (CompWindow *w);
@@ -2953,7 +2955,8 @@ placeWindow (CompWindow *w,
 void
 validateWindowResizeRequest (CompWindow     *w,
 			     unsigned int   *mask,
-			     XWindowChanges *xwc);
+			     XWindowChanges *xwc,
+			     unsigned int   source);
 
 void
 windowResizeNotify (CompWindow *w,

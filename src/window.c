@@ -2850,7 +2850,8 @@ placeWindow (CompWindow *w,
 void
 validateWindowResizeRequest (CompWindow     *w,
 			     unsigned int   *mask,
-			     XWindowChanges *xwc)
+			     XWindowChanges *xwc,
+			     unsigned int   source)
 {
 }
 
@@ -3798,7 +3799,8 @@ void
 moveResizeWindow (CompWindow     *w,
 		  XWindowChanges *xwc,
 		  unsigned int   xwcm,
-		  int            gravity)
+		  int            gravity,
+		  unsigned int   source)
 {
     Bool placed = xwcm & (CWX | CWY);
 
@@ -3874,7 +3876,7 @@ moveResizeWindow (CompWindow     *w,
 	}
     }
 
-    (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc);
+    (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc, source);
 
     /* when horizontally maximized only allow width changes added by
        addWindowSizeChanges */

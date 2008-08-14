@@ -1249,7 +1249,8 @@ placeDoWindowPlacement (CompWindow *w,
 static void
 placeValidateWindowResizeRequest (CompWindow     *w,
 				  unsigned int   *mask,
-				  XWindowChanges *xwc)
+				  XWindowChanges *xwc,
+				  unsigned int   source)
 {
     CompScreen *s = w->screen;
     XRectangle workArea;
@@ -1259,9 +1260,12 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     PLACE_SCREEN (s);
 
     UNWRAP (ps, s, validateWindowResizeRequest);
-    (*s->validateWindowResizeRequest) (w, mask, xwc);
+    (*s->validateWindowResizeRequest) (w, mask, xwc, source);
     WRAP (ps, s, validateWindowResizeRequest,
 	  placeValidateWindowResizeRequest);
+
+    if (source == ClientTypePager)
+	return;
 
     if (w->state & CompWindowStateFullscreenMask)
 	return;
