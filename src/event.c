@@ -1651,9 +1651,9 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
-		/* use focus stealing prevention if request came from an
-		   application (which means data.l[0] is 1 */
-		if (event->xclient.data.l[0] != 1 ||
+		/* use focus stealing prevention if request came
+		   from an application */
+		if (event->xclient.data.l[0] != ClientTypeApplication ||
 		    allowWindowFocus (w, 0, event->xclient.data.l[1]))
 		{
 		    (*w->screen->activateWindow) (w);

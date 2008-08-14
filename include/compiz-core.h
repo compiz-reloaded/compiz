@@ -187,6 +187,11 @@ typedef struct _CompWalker        CompWalker;
 #define WmMoveResizeMoveKeyboard    10
 #define WmMoveResizeCancel	    11
 
+/* EWMH source indication client types */
+#define ClientTypeUnknown      0
+#define ClientTypeApplication  1
+#define ClientTypePager        2
+
 #define OPAQUE 0xffff
 #define COLOR  0xffff
 #define BRIGHT 0xffff

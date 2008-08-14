@@ -3738,7 +3738,7 @@ sendWindowActivationRequest (CompScreen *s,
     xev.xclient.message_type = s->display->winActiveAtom;
     xev.xclient.window	     = id;
 
-    xev.xclient.data.l[0] = 2;
+    xev.xclient.data.l[0] = ClientTypePager;
     xev.xclient.data.l[1] = 0;
     xev.xclient.data.l[2] = 0;
     xev.xclient.data.l[3] = 0;
