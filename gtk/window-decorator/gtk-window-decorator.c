@@ -3732,8 +3732,9 @@ update_switcher_window (WnckWindow *win,
 
     if (selected != switcher_selected_window)
     {
-	gtk_label_set_text (GTK_LABEL (switcher_label),
-			    (selected_win && d->name) ? d->name : "");
+	gtk_label_set_text (GTK_LABEL (switcher_label), "");
+	if (selected_win && d->name)
+	    gtk_label_set_text (GTK_LABEL (switcher_label), d->name);
 	switcher_selected_window = selected;
     }
 
