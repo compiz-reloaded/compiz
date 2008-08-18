@@ -662,7 +662,8 @@ fadeDamageWindowRect (CompWindow *w,
 	{
 	    if (fs->opt[FADE_SCREEN_OPTION_MINIMIZE_OPEN_CLOSE].value.b)
 	    {
-		fw->opacity = 0;
+		fw->opacity       = 0;
+		fw->targetOpacity = 0;
 	    }
 	}
     }
