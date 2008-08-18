@@ -2279,10 +2279,15 @@ handleEvent (CompDisplay *d,
 		for (w = s->windows; w; w = w->next)
 		{
 		    if (w->syncAlarm == sa->alarm)
-		    {
-			handleSyncAlarm (w);
-			return;
-		    }
+			break;
+		}
+
+		if (w)
+		{
+		    handleSyncAlarm (w);
+		    /* it makes no sense to search for the already
+		       found window on other screens, so leave screen loop */
+		    break;
 		}
 	    }
 	}
