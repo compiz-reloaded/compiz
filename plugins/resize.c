@@ -339,7 +339,7 @@ resizeInitiate (CompDisplay     *d,
 	mask = getIntOptionNamed (option, nOption, "direction", 0);
 
 	/* Initiate the resize in the direction suggested by the
-	 * quarter of the window the mouse is in, eg drag in top left
+	 * sector of the window the mouse is in, eg drag in top left
 	 * will resize up and to the left.  Keyboard resize starts out
 	 * with the cursor in the middle of the window and then starts
 	 * resizing the edge corresponding to the next key press. */
@@ -349,11 +349,25 @@ resizeInitiate (CompDisplay     *d,
 	}
 	else if (!mask)
 	{
-	    mask |= ((x - w->serverX) < (w->serverWidth / 2)) ?
-		ResizeLeftMask : ResizeRightMask;
+	    unsigned int sectorSizeX = w->serverWidth / 3;
+	    unsigned int sectorSizeY = w->serverHeight / 3;
+	    unsigned int posX        = x - w->serverX;
+	    unsigned int posY        = y - w->serverY;
 
-	    mask |= ((y - w->serverY) < (w->serverHeight / 2)) ?
-		ResizeUpMask : ResizeDownMask;
+	    if (posX < sectorSizeX)
+		mask |= ResizeLeftMask;
+	    else if (posX > (2 * sectorSizeX))
+		mask |= ResizeRightMask;
+
+	    if (posY < sectorSizeY)
+		mask |= ResizeUpMask;
+	    else if (posY > (2 * sectorSizeY))
+		mask |= ResizeDownMask;
+
+	    /* if the pointer was in the middle of the window,
+	       do nothing */
+	    if (!mask)
+		return FALSE;
 	}
 
 	if (otherScreenGrabExist (w->screen, "resize", 0))
