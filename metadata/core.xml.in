@@ -424,7 +424,7 @@
 		<_short>Focus Prevention Level</_short>
 		<_long>Level of focus stealing prevention</_long>
 		<min>0</min>
-		<max>3</max>
+		<max>4</max>
 		<default>1</default>
 		<desc>
 		    <value>0</value>
@@ -436,10 +436,14 @@
 		</desc>
 		<desc>
 		    <value>2</value>
-		    <_name>High</_name>
+		    <_name>Normal</_name>
 		</desc>
 		<desc>
 		    <value>3</value>
+		    <_name>High</_name>
+		</desc>
+		<desc>
+		    <value>4</value>
 		    <_name>Very High</_name>
 		</desc>
 	    </option>

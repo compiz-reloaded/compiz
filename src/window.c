@@ -4786,6 +4786,19 @@ isWindowFocusAllowed (CompWindow *w,
     if (level == FOCUS_PREVENTION_LEVEL_VERYHIGH)
 	return FALSE;
 
+    active = findWindowAtDisplay (d, d->activeWindow);
+
+    /* no active window */
+    if (!active || (active->type & CompWindowTypeDesktopMask))
+	return TRUE;
+
+    /* active window belongs to same application */
+    if (w->clientLeader == active->clientLeader)
+	return TRUE;
+
+    if (level == FOCUS_PREVENTION_LEVEL_HIGH)
+	return FALSE;
+
     /* not in current viewport */
     defaultViewportForWindow (w, &vx, &vy);
     if (vx != s->x || vy != s->y)
@@ -4794,16 +4807,15 @@ isWindowFocusAllowed (CompWindow *w,
     if (!gotTimestamp)
     {
 	/* unsure as we have nothing to compare - allow focus in low level,
-	   don't allow in high level */
-	if (level == FOCUS_PREVENTION_LEVEL_HIGH)
+	   don't allow in normal level */
+	if (level == FOCUS_PREVENTION_LEVEL_NORMAL)
 	    return FALSE;
 
 	return TRUE;
     }
 
     /* can't get user time for active window */
-    active = findWindowAtDisplay (d, d->activeWindow);
-    if (!active || !getWindowUserTime (active, &aUserTime))
+    if (!getWindowUserTime (active, &aUserTime))
 	return TRUE;
 
     if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
