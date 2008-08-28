@@ -171,8 +171,7 @@ dlloaderLoadPlugin (CompPlugin *p,
 	error = dlerror ();
 	if (error)
 	{
-	    compLogMessage (NULL, "core", CompLogLevelError,
-			    "dlsym: %s", error);
+	    compLogMessage ("core", CompLogLevelError, "dlsym: %s", error);
 
 	    getInfo = 0;
 	}
@@ -182,7 +181,7 @@ dlloaderLoadPlugin (CompPlugin *p,
 	    p->vTable = (*getInfo) ();
 	    if (!p->vTable)
 	    {
-		compLogMessage (NULL, "core", CompLogLevelError,
+		compLogMessage ("core", CompLogLevelError,
 				"Couldn't get vtable from '%s' plugin",
 				file);
 
@@ -368,7 +367,7 @@ initObjectTree (CompObject *object,
     {
 	if (!(*p->vTable->initObject) (p, object))
 	{
-	    compLogMessage (NULL, p->vTable->name, CompLogLevelError,
+	    compLogMessage (p->vTable->name, CompLogLevelError,
 			    "InitObject failed");
 	    return FALSE;
 	}
@@ -433,7 +432,7 @@ initPlugin (CompPlugin *p)
 
     if (!(*p->vTable->init) (p))
     {
-	compLogMessage (NULL, "core", CompLogLevelError,
+	compLogMessage ("core", CompLogLevelError,
 			"InitPlugin '%s' failed", p->vTable->name);
 	return FALSE;
     }
@@ -575,7 +574,7 @@ loadPlugin (const char *name)
     if (status)
 	return p;
 
-    compLogMessage (NULL, "core", CompLogLevelError,
+    compLogMessage ("core", CompLogLevelError,
 		    "Couldn't load plugin '%s'", name);
 
     return 0;
@@ -586,7 +585,7 @@ pushPlugin (CompPlugin *p)
 {
     if (findActivePlugin (p->vTable->name))
     {
-	compLogMessage (NULL, "core", CompLogLevelWarn,
+	compLogMessage ("core", CompLogLevelWarn,
 			"Plugin '%s' already active",
 			p->vTable->name);
 
@@ -598,7 +597,7 @@ pushPlugin (CompPlugin *p)
 
     if (!initPlugin (p))
     {
-	compLogMessage (NULL, "core", CompLogLevelError,
+	compLogMessage ("core", CompLogLevelError,
 			"Couldn't activate plugin '%s'", p->vTable->name);
 	plugins = p->next;
 
@@ -740,13 +739,13 @@ checkPluginABI (const char *name,
     pluginABI = getPluginABI (name);
     if (!pluginABI)
     {
-	compLogMessage (NULL, "core", CompLogLevelError,
+	compLogMessage ("core", CompLogLevelError,
 			"Plugin '%s' not loaded.\n", name);
 	return FALSE;
     }
     else if (pluginABI != abi)
     {
-	compLogMessage (NULL, "core", CompLogLevelError,
+	compLogMessage ("core", CompLogLevelError,
 			"Plugin '%s' has ABI version '%d', expected "
 			"ABI version '%d'.\n",
 			name, pluginABI, abi);

@@ -221,7 +221,7 @@ regexMatchInitExp (CompDisplay  *d,
 
 		regerror (status, preg, errMsg, sizeof (errMsg));
 
-		compLogMessage (d, "regex", CompLogLevelWarn,
+		compLogMessage ("regex", CompLogLevelWarn,
 				"%s = %s", errMsg, value);
 
 		regfree (preg);

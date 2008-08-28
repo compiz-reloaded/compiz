@@ -245,7 +245,7 @@ shotPaintScreen (CompScreen   *s,
 			if (!writeImageToFile (s->display, dir, name, "png",
 					       w, h, buffer))
 			{
-			    compLogMessage (s->display, "screenshot", CompLogLevelError,
+			    compLogMessage ("screenshot", CompLogLevelError,
 					    "failed to write screenshot image");
 			}
 			else if (*app != '\0')

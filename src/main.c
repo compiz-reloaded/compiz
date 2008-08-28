@@ -52,6 +52,7 @@ char *defaultTextureFilter = "Good";
 
 Bool shutDown = FALSE;
 Bool restartSignal = FALSE;
+Bool coreInitialized = FALSE;
 
 CompWindow *lastFoundWindow = 0;
 CompWindow *lastDamagedWindow = 0;
@@ -99,8 +100,7 @@ usage (void)
 }
 
 void
-compLogMessage (CompDisplay *d,
-		const char   *componentName,
+compLogMessage (const char   *componentName,
 		CompLogLevel level,
 		const char   *format,
 		...)
@@ -112,17 +112,16 @@ compLogMessage (CompDisplay *d,
 
     vsnprintf (message, 2048, format, args);
 
-    if (d)
-	(*d->logMessage) (d, componentName, level, message);
+    if (coreInitialized)
+	(*core.logMessage) (componentName, level, message);
     else
-	logMessage (d, componentName, level, message);
+	logMessage (componentName, level, message);
 
     va_end (args);
 }
 
 void
-logMessage (CompDisplay	 *d,
-	    const char	 *componentName,
+logMessage (const char	 *componentName,
 	    CompLogLevel level,
 	    const char	 *message)
 {
@@ -361,7 +360,7 @@ main (int argc, char **argv)
 	}
 	else if (*argv[i] == '-')
 	{
-	    compLogMessage (NULL, "core", CompLogLevelWarn,
+	    compLogMessage ("core", CompLogLevelWarn,
 			    "Unknown option '%s'\n", argv[i]);
 	}
 	else
@@ -407,7 +406,7 @@ main (int argc, char **argv)
 
     if (!compInitMetadata (&coreMetadata))
     {
-	compLogMessage (NULL, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"Couldn't initialize core metadata");
 	return 1;
     }
@@ -428,6 +427,8 @@ main (int argc, char **argv)
     if (!initCore ())
 	return 1;
 
+    coreInitialized = TRUE;
+
     if (!disableSm)
 	initSession (clientId);
 
@@ -438,6 +439,8 @@ main (int argc, char **argv)
 
     if (!disableSm)
 	closeSession ();
+
+    coreInitialized = FALSE;
 
     finiCore ();
     compFiniMetadata (&coreMetadata);

@@ -1426,7 +1426,7 @@ loadFragmentProgram (CompScreen *s,
     glGetIntegerv (GL_PROGRAM_ERROR_POSITION_ARB, &errorPos);
     if (glGetError () != GL_NO_ERROR || errorPos != -1)
     {
-	compLogMessage (s->display, "blur", CompLogLevelError,
+	compLogMessage ("blur", CompLogLevelError,
 			"Failed to load blur program %s", string);
 
 	(*s->deletePrograms) (1, program);
@@ -1553,7 +1553,7 @@ fboPrologue (CompScreen *s)
 	bs->fboStatus = (*s->checkFramebufferStatus) (GL_FRAMEBUFFER_EXT);
 	if (bs->fboStatus != GL_FRAMEBUFFER_COMPLETE_EXT)
 	{
-	    compLogMessage (s->display, "blur", CompLogLevelError,
+	    compLogMessage ("blur", CompLogLevelError,
 			    "Framebuffer incomplete");
 
 	    (*s->bindFramebuffer) (GL_FRAMEBUFFER_EXT, 0);
@@ -1994,7 +1994,7 @@ blurUpdateDstTexture (CompWindow	  *w,
 		(*s->genFramebuffers) (1, &bs->fbo);
 
 	    if (!bs->fbo)
-		compLogMessage (s->display, "blur", CompLogLevelError,
+		compLogMessage ("blur", CompLogLevelError,
 				"Failed to create framebuffer object");
 
 	    textures = 2;
@@ -2029,15 +2029,15 @@ blurUpdateDstTexture (CompWindow	  *w,
 	    {
 		if (!s->fbo)
 		{
-		    compLogMessage (s->display, "blur", CompLogLevelWarn,
-			     "GL_EXT_framebuffer_object extension "
-			     "is required for mipmap filter");
+		    compLogMessage ("blur", CompLogLevelWarn,
+				    "GL_EXT_framebuffer_object extension "
+				    "is required for mipmap filter");
 		}
 		else if (bs->target != GL_TEXTURE_2D)
 		{
-		    compLogMessage (s->display, "blur", CompLogLevelWarn,
-			     "GL_ARB_texture_non_power_of_two "
-			     "extension is required for mipmap filter");
+		    compLogMessage ("blur", CompLogLevelWarn,
+				    "GL_ARB_texture_non_power_of_two "
+				    "extension is required for mipmap filter");
 		}
 		else
 		{
@@ -2994,7 +2994,7 @@ blurInitScreen (CompPlugin *p,
 
     glGetIntegerv (GL_STENCIL_BITS, &bs->stencilBits);
     if (!bs->stencilBits)
-	compLogMessage (s->display, "blur", CompLogLevelWarn,
+	compLogMessage ("blur", CompLogLevelWarn,
 			"No stencil buffer. Region based blur disabled");
 
     /* We need GL_ARB_fragment_program for blur */

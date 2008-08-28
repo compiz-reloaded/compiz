@@ -2293,7 +2293,7 @@ dbusInitCore (CompPlugin *p,
     dc->connection = dbus_bus_get (DBUS_BUS_SESSION, &error);
     if (dbus_error_is_set (&error))
     {
-	compLogMessage (NULL, "dbus", CompLogLevelError,
+	compLogMessage ("dbus", CompLogLevelError,
 			"dbus_bus_get error: %s", error.message);
 
 	dbus_error_free (&error);
@@ -2310,7 +2310,7 @@ dbusInitCore (CompPlugin *p,
 
     if (dbus_error_is_set (&error))
     {
-	compLogMessage (NULL, "dbus", CompLogLevelError,
+	compLogMessage ("dbus", CompLogLevelError,
 			"dbus_bus_request_name error: %s", error.message);
 
 	/* dbus_connection_unref (dc->connection); */
@@ -2324,7 +2324,7 @@ dbusInitCore (CompPlugin *p,
 
     if (ret != DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER)
     {
-	compLogMessage (NULL, "dbus", CompLogLevelError,
+	compLogMessage ("dbus", CompLogLevelError,
 			"dbus_bus_request_name reply is not primary owner");
 
 	/* dbus_connection_unref (dc->connection); */
@@ -2336,7 +2336,7 @@ dbusInitCore (CompPlugin *p,
     status = dbus_connection_get_unix_fd (dc->connection, &fd);
     if (!status)
     {
-	compLogMessage (NULL, "dbus", CompLogLevelError,
+	compLogMessage ("dbus", CompLogLevelError,
 			"dbus_connection_get_unix_fd failed");
 
 	/* dbus_connection_unref (dc->connection); */

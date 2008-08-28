@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080814
+#define CORE_ABIVERSION 20080828
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -653,6 +653,10 @@ typedef struct _CompWatchFd {
     CompWatchFdHandle   handle;
 } CompWatchFd;
 
+typedef void (*LogMessageProc) (const char   *componentName,
+				CompLogLevel level,
+				const char   *message);
+
 struct _CompCore {
     CompObject base;
 
@@ -685,6 +689,7 @@ struct _CompCore {
     FileWatchRemovedProc fileWatchRemoved;
 
     SessionEventProc sessionEvent;
+    LogMessageProc   logMessage;
 };
 
 int
@@ -885,11 +890,6 @@ typedef void (*MatchExpHandlerChangedProc) (CompDisplay *display);
 
 typedef void (*MatchPropertyChangedProc) (CompDisplay *display,
 					  CompWindow  *window);
-
-typedef void (*LogMessageProc) (CompDisplay  *d,
-				const char   *componentName,
-				CompLogLevel level,
-				const char   *message);
 
 struct _CompDisplay {
     CompObject base;
@@ -1137,15 +1137,13 @@ setDisplayOption (CompPlugin	  *plugin,
 		  CompOptionValue *value);
 
 void
-compLogMessage (CompDisplay  *d,
-		const char   *componentName,
+compLogMessage (const char   *componentName,
 		CompLogLevel level,
 		const char   *format,
 		...);
 
 void
-logMessage (CompDisplay  *d,
-	    const char   *componentName,
+logMessage (const char   *componentName,
 	    CompLogLevel level,
 	    const char   *message);
 

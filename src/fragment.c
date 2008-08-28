@@ -587,7 +587,7 @@ buildFragmentProgram (CompScreen     *s,
 
     if (!mask)
     {
-	compLogMessage (NULL, "core", CompLogLevelWarn,
+	compLogMessage ("core", CompLogLevelWarn,
 			"fragment functions can't be linked together "
 			"because a common type doesn't exist");
     }
@@ -639,7 +639,7 @@ buildFragmentProgram (CompScreen     *s,
     glGetIntegerv (GL_PROGRAM_ERROR_POSITION_ARB, &errorPos);
     if (glGetError () != GL_NO_ERROR || errorPos != -1)
     {
-	compLogMessage (NULL, "core", CompLogLevelError,
+	compLogMessage ("core", CompLogLevelError,
 			"failed to load fragment program");
 
 	(*s->deletePrograms) (1, &program->name);
@@ -933,7 +933,7 @@ addHeaderOpToFunctionData (CompFunctionData *data,
     {
 	if (strncmp (name, reserved[i], strlen (reserved[i])) == 0)
 	{
-	    compLogMessage (NULL, "core", CompLogLevelWarn,
+	    compLogMessage ("core", CompLogLevelWarn,
 			    "%s is a reserved word", name);
 	    return FALSE;
 	}

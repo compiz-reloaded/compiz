@@ -374,8 +374,7 @@ csvToList (CompDisplay *d, char *csv, CompListValue *list, CompOptionType type)
 	    }
 
 	    if (!item) {
-	        compLogMessage (NULL, "ini", CompLogLevelError,
-			      "Not enough memory");
+	        compLogMessage ("ini", CompLogLevelError, "Not enough memory");
 	        list->nValue = 0;
 	        return FALSE;
 	    }
@@ -440,7 +439,7 @@ iniMakeDirectories (void)
     }
     else
     {
-	compLogMessage (NULL, "ini", CompLogLevelWarn,
+	compLogMessage ("ini", CompLogLevelWarn,
 			"Could not get HOME environmental variable");
 	return FALSE;
     }
@@ -465,7 +464,7 @@ iniLoadOptionsFromFile (FILE       *optionFile,
 	p = findActivePlugin (plugin);
 	if (!p)
 	{
-	    compLogMessage (NULL, "ini", CompLogLevelWarn,
+	    compLogMessage ("ini", CompLogLevelWarn,
 			    "Could not find running plugin " \
 			    "%s (iniLoadOptionsFromFile)", plugin);
 	    return FALSE;
@@ -485,9 +484,8 @@ iniLoadOptionsFromFile (FILE       *optionFile,
 
 	if (!iniParseLine (tmp, &optionName, &optionValue))
 	{
-	    compLogMessage (NULL, "ini", CompLogLevelWarn,
-			    "Ignoring line '%s' in %s",
-			    tmp, plugin);
+	    compLogMessage ("ini", CompLogLevelWarn,
+			    "Ignoring line '%s' in %s", tmp, plugin);
 	    continue;
 	}
 
@@ -640,7 +638,7 @@ iniSaveOptions (CompObject *object,
 
     if (!optionFile)
     {
-	compLogMessage (NULL, "ini", CompLogLevelError,
+	compLogMessage ("ini", CompLogLevelError,
 			"Failed to write to %s, check you " \
 			"have the correct permissions", fullPath);
 	free (filename);
@@ -724,7 +722,7 @@ iniSaveOptions (CompObject *object,
 		break;
 	    }
 	    default:
-		compLogMessage (NULL, "ini", CompLogLevelWarn,
+		compLogMessage ("ini", CompLogLevelWarn,
 				"Unknown list option type %d, %s\n",
 				option->value.list.type,
 				optionTypeToString (option->value.list.type));
@@ -819,9 +817,10 @@ iniLoadOptions (CompObject *object,
 
 	    value.list.type = CompOptionTypeString;
 
-	    compLogMessage (NULL, "ini", CompLogLevelWarn,
-			    "Could not open main display config file %s", fullPath);
-	    compLogMessage (NULL, "ini", CompLogLevelWarn,
+	    compLogMessage ("ini", CompLogLevelWarn,
+			    "Could not open main display config file %s",
+			    fullPath);
+	    compLogMessage ("ini", CompLogLevelWarn,
 			    "Loading default plugins (%s)", DEFAULT_PLUGINS);
 
 	    (*core.setOptionForPlugin) (object,
@@ -848,9 +847,10 @@ iniLoadOptions (CompObject *object,
 	}
 	else
 	{
-	    compLogMessage (NULL, "ini", CompLogLevelWarn,
-			    "Could not open config file %s - using " \
-			    "defaults for %s", fullPath, (plugin)?plugin:"core");
+	    compLogMessage ("ini", CompLogLevelWarn,
+			    "Could not open config file %s - "
+			    "using defaults for %s",
+			    fullPath, plugin ? plugin : "core");
 
 	    fileData->blockWrites = FALSE;
 

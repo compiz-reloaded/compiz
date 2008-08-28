@@ -1955,8 +1955,6 @@ addDisplay (const char *name)
 
     d->edgeDelayHandle = 0;
 
-    d->logMessage = logMessage;
-
     d->modMap = 0;
 
     for (i = 0; i < CompModNum; i++)
@@ -1995,7 +1993,7 @@ addDisplay (const char *name)
     d->display = dpy = XOpenDisplay (name);
     if (!d->display)
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"Couldn't open display %s", XDisplayName (name));
 	return FALSE;
     }
@@ -2212,7 +2210,7 @@ addDisplay (const char *name)
 			  &d->compositeEvent,
 			  &d->compositeError))
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"No composite extension");
 	return FALSE;
     }
@@ -2220,28 +2218,28 @@ addDisplay (const char *name)
     XCompositeQueryVersion (dpy, &compositeMajor, &compositeMinor);
     if (compositeMajor == 0 && compositeMinor < 2)
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"Old composite extension");
 	return FALSE;
     }
 
     if (!XDamageQueryExtension (dpy, &d->damageEvent, &d->damageError))
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"No damage extension");
 	return FALSE;
     }
 
     if (!XSyncQueryExtension (dpy, &d->syncEvent, &d->syncError))
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"No sync extension");
 	return FALSE;
     }
 
     if (!XFixesQueryExtension (dpy, &d->fixesEvent, &d->fixesError))
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"No fixes extension");
 	return FALSE;
     }
@@ -2277,7 +2275,7 @@ addDisplay (const char *name)
     }
     else
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"No XKB extension");
 
 	d->xkbEvent = d->xkbError = -1;
@@ -2336,7 +2334,7 @@ addDisplay (const char *name)
 	{
 	    if (!replaceCurrentWm)
 	    {
-		compLogMessage (d, "core", CompLogLevelError,
+		compLogMessage ("core", CompLogLevelError,
 				"Screen %d on display \"%s\" already "
 				"has a window manager; try using the "
 				"--replace option to replace the current "
@@ -2359,7 +2357,7 @@ addDisplay (const char *name)
 	{
 	    if (!replaceCurrentWm)
 	    {
-		compLogMessage (d, "core", CompLogLevelError,
+		compLogMessage ("core", CompLogLevelError,
 				"Screen %d on display \"%s\" already "
 				"has a compositing manager; try using the "
 				"--replace option to replace the current "
@@ -2400,7 +2398,7 @@ addDisplay (const char *name)
 
 	if (XGetSelectionOwner (dpy, wmSnAtom) != newWmSnOwner)
 	{
-	    compLogMessage (d, "core", CompLogLevelError,
+	    compLogMessage ("core", CompLogLevelError,
 			    "Could not acquire window manager "
 			    "selection on screen %d display \"%s\"",
 			    i, DisplayString (dpy));
@@ -2440,7 +2438,7 @@ addDisplay (const char *name)
 
 	if (compCheckForError (dpy))
 	{
-	    compLogMessage (d, "core", CompLogLevelError,
+	    compLogMessage ("core", CompLogLevelError,
 			    "Another composite manager is already "
 			    "running on screen: %d", i);
 
@@ -2451,7 +2449,7 @@ addDisplay (const char *name)
 
 	if (XGetSelectionOwner (dpy, cmSnAtom) != newCmSnOwner)
 	{
-	    compLogMessage (d, "core", CompLogLevelError,
+	    compLogMessage ("core", CompLogLevelError,
 			    "Could not acquire compositing manager "
 			    "selection on screen %d display \"%s\"",
 			    i, DisplayString (dpy));
@@ -2477,7 +2475,7 @@ addDisplay (const char *name)
 
 	if (compCheckForError (dpy))
 	{
-	    compLogMessage (d, "core", CompLogLevelError,
+	    compLogMessage ("core", CompLogLevelError,
 			    "Another window manager is "
 			    "already running on screen: %d", i);
 
@@ -2487,7 +2485,7 @@ addDisplay (const char *name)
 
 	if (!addScreen (d, i, newWmSnOwner, wmSnAtom, wmSnTimestamp))
 	{
-	    compLogMessage (d, "core", CompLogLevelError,
+	    compLogMessage ("core", CompLogLevelError,
 			    "Failed to manage screen: %d", i);
 	}
 
@@ -2504,7 +2502,7 @@ addDisplay (const char *name)
 
     if (!d->screens)
     {
-	compLogMessage (d, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"No manageable screens found on display %s",
 			XDisplayName (name));
 	return FALSE;

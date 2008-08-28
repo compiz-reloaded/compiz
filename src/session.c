@@ -249,7 +249,7 @@ initSession (char *prevClientId)
 					   sizeof (errorBuffer),
 					   errorBuffer);
 	if (!smcConnection)
-	    compLogMessage (NULL, "core", CompLogLevelWarn,
+	    compLogMessage ("core", CompLogLevelWarn,
 			    "SmcOpenConnection failed: %s",
 			    errorBuffer);
 	else

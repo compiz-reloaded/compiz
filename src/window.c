@@ -1353,7 +1353,7 @@ bindWindow (CompWindow *w)
 			      w->width, w->height,
 			      w->attrib.depth))
     {
-	compLogMessage (w->screen->display, "core", CompLogLevelInfo,
+	compLogMessage ("core", CompLogLevelInfo,
 			"Couldn't bind redirected window 0x%x to "
 			"texture\n", (int) w->id);
     }

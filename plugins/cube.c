@@ -79,7 +79,7 @@ cubeLoadImg (CompScreen *s,
 			    imgFiles[cs->imgCurFile].s,
 			    &width, &height))
     {
-	compLogMessage (s->display, "cube", CompLogLevelWarn,
+	compLogMessage ("cube", CompLogLevelWarn,
 			"Failed to load slide: %s",
 			imgFiles[cs->imgCurFile].s);
 

@@ -221,7 +221,7 @@ loadFragmentProgram (CompScreen *s,
     glGetIntegerv (GL_PROGRAM_ERROR_POSITION_ARB, &errorPos);
     if (glGetError () != GL_NO_ERROR || errorPos != -1)
     {
-	compLogMessage (s->display, "water", CompLogLevelError,
+	compLogMessage ("water", CompLogLevelError,
 			"failed to load bump map program");
 
 	(*s->deletePrograms) (1, program);
@@ -447,7 +447,7 @@ fboPrologue (CompScreen *s,
 	ws->fboStatus = (*s->checkFramebufferStatus) (GL_FRAMEBUFFER_EXT);
 	if (ws->fboStatus != GL_FRAMEBUFFER_COMPLETE_EXT)
 	{
-	    compLogMessage (s->display, "water", CompLogLevelError,
+	    compLogMessage ("water", CompLogLevelError,
 			    "framebuffer incomplete");
 
 	    (*s->bindFramebuffer) (GL_FRAMEBUFFER_EXT, 0);

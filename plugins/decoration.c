@@ -418,7 +418,7 @@ decorCreateDecoration (CompScreen *screen,
 
     if (decor_property_get_version (prop) != decor_version ())
     {
-	compLogMessage (screen->display, "decoration", CompLogLevelWarn,
+	compLogMessage ("decoration", CompLogLevelWarn,
 			"Property ignored because "
 			"version is %d and decoration plugin version is %d\n",
 			decor_property_get_version (prop), decor_version ());

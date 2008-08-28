@@ -195,18 +195,19 @@ initCore (void)
     core.fileWatchRemoved = fileWatchRemoved;
 
     core.sessionEvent = sessionEvent;
+    core.logMessage   = logMessage;
 
     corePlugin = loadPlugin ("core");
     if (!corePlugin)
     {
-	compLogMessage (0, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"Couldn't load core plugin");
 	return FALSE;
     }
 
     if (!pushPlugin (corePlugin))
     {
-	compLogMessage (0, "core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelFatal,
 			"Couldn't activate core plugin");
 	return FALSE;
     }

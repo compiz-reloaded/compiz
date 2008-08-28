@@ -122,7 +122,7 @@ annoCairoContext (CompScreen *s)
 
 	if (!bindPixmapToTexture (s, &as->texture, as->pixmap, w, h, 32))
 	{
-	    compLogMessage (s->display, "annotate", CompLogLevelError,
+	    compLogMessage ("annotate", CompLogLevelError,
 			    "Couldn't bind pixmap 0x%x to texture",
 			    (int) as->pixmap);
 
