@@ -1,12 +1,12 @@
 # Compiz Italian Translation
 # Copyright (C) 2007 compiz's COPYRIGHT HOLDER
 # This file is distributed under the same license as the Compiz package.
-# Milo Casagrande <milo_casagrandeATyahoo.it>, 2007
+# Milo Casagrande <milo@ubuntu.com>, 2007-2008
 #
 # **** Glossario ****
 #
 #
-# enable -> usato sempre come 'attivare'
+# enable -> usato sempre come 'abilitare'
 # viewport -> area di lavoro (fino a quando non sia effettivamente una concezione diversa)
 # bevel, to -> smussare
 # workaround -> alternativa
@@ -39,9 +39,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz_0.7.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-07 11:32+0530\n"
-"PO-Revision-Date: 2008-06-03 21:00+0200\n"
-"Last-Translator: Milo Casagrande <milo_casagrande@yahoo.it>\n"
+"POT-Creation-Date: 2008-08-30 11:51+0530\n"
+"PO-Revision-Date: 2008-08-11 15:58+0200\n"
+"Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,68 +124,68 @@ msgstr "Usa il tema Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Usa il tema Metacity per le decorazioni delle finestre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/window-decorator/gtk-window-decorator.c:4418
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Chiude la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4440
 #: ../metadata/core.xml.in.h:145
 msgid "Unmaximize Window"
 msgstr "Demassimizza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4443
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
 msgstr "Massimizza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4485
 #: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
 msgstr "Minimizza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4602
 #: ../metadata/core.xml.in.h:152
 msgid "Window Menu"
 msgstr "Menù della finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4621
 msgid "Shade"
 msgstr "Sfuma"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4641
 msgid "Make Above"
 msgstr "Porta sopra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4667
 msgid "Stick"
 msgstr "Blocca"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4687
 msgid "Unshade"
 msgstr "De-sfuma"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4707
 msgid "Unmake Above"
 msgstr "Porta sotto"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4733
 msgid "Unstick"
 msgstr "Sblocca"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La finestra «%s» non risponde."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forzare la chiusura dell'applicazione comporta la perdita delle modifiche "
 "non salvate."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5114
 msgid "_Force Quit"
 msgstr "_Forza uscita"
 
@@ -1407,31 +1407,29 @@ msgstr "Tipi di finestre a cui applicare l'ombreggiatura"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Luminosità (in percentuale) delle finestre bloccate"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
 msgid "Constant speed"
-msgstr "Velocità rotazione"
+msgstr "Velocità costante"
 
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Constant time"
-msgstr "Mantenere Y"
+msgstr "Tempo costante"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Ridimensionamento finestre normale"
+msgstr "Oscurare finestre bloccate"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
+"Oscurare le finestre che non rispondono alle richieste del gestore di "
+"finestre"
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fade Mode"
-msgstr "Velocità dissolvenza"
+msgstr "Modalità dissolvenza"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1442,9 +1440,8 @@ msgid "Fade Speed"
 msgstr "Velocità dissolvenza"
 
 #: ../metadata/fade.xml.in.h:10
-#, fuzzy
 msgid "Fade Time"
-msgstr "Tempo scorrimento"
+msgstr "Tempo dissolvenza"
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Fade effect on minimize/open/close window events"
@@ -1481,33 +1478,31 @@ msgstr "Effetto dissolvenza schermo intero al suono di sistema"
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Saturazione (in percentuale) delle finestre bloccate"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Luminosità finestre bloccate"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Saturazione finestre bloccate"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "Segnale acustico visivo"
 
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
-msgstr "Velocità dissolvenza finestra"
+msgstr "Modalità dissolvenza finestra"
 
 #: ../metadata/fade.xml.in.h:24
-#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Tipi di finestre da ridimensionare nella modalità «Scala finestra»"
+msgstr "Velocità dissolvenza finestra nella modalità «Velocità costante»"
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr ""
+msgstr "Tempo (in ms) dissolvenza finestra nella modalità «Tempo costante»"
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1678,13 +1673,15 @@ msgstr "Posizioni orizzontali area di lavoro"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "Mantenere nell'area di lavoro"
 
 #: ../metadata/place.xml.in.h:7
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"Mantiene le finestre posizione nell'area di lavoro, anche se ciò significa "
+"che la posizione possa differire da quella specificata."
 
 #: ../metadata/place.xml.in.h:8
 msgid "Maximize"
@@ -2647,7 +2644,7 @@ msgstr "Ritardo (in ms) tra le gocce di pioggia"
 
 #: ../metadata/water.xml.in.h:5
 msgid "Enable pointer water effects"
-msgstr "Attiva effetti acqua puntatore"
+msgstr "Abilita effetti acqua puntatore"
 
 #: ../metadata/water.xml.in.h:7
 msgid "Line"
