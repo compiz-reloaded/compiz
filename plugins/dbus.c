@@ -2427,17 +2427,9 @@ static Bool
 dbusInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
-    char objectPath[256];
-
     DBUS_CORE (&core);
 
-    /* register core 'plugin' */
-    dbusRegisterPluginForDisplay (dc->connection, d, "core");
     dbusRegisterPluginsForDisplay (dc->connection, d);
-
-    snprintf (objectPath, 256, "%s/core/allscreens", COMPIZ_DBUS_ROOT_PATH);
-
-    dbusRegisterOptions (dc->connection, objectPath);
 
     return TRUE;
 }
@@ -2448,7 +2440,6 @@ dbusFiniDisplay (CompPlugin  *p,
 {
     DBUS_CORE (&core);
 
-    dbusUnregisterPluginForDisplay (dc->connection, d, "core");
     dbusUnregisterPluginsForDisplay (dc->connection, d);
 }
 
@@ -2456,16 +2447,9 @@ static Bool
 dbusInitScreen (CompPlugin *p,
 		CompScreen *s)
 {
-    char objectPath[256];
-
     DBUS_CORE (&core);
 
-    snprintf (objectPath, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
-	      "core", s->screenNum);
-
-    dbusRegisterPluginForScreen (dc->connection, s, "core");
     dbusRegisterPluginsForScreen (dc->connection, s);
-    dbusRegisterOptions (dc->connection, objectPath);
 
     return TRUE;
 }
@@ -2476,7 +2460,6 @@ dbusFiniScreen (CompPlugin *p,
 {
     DBUS_CORE (&core);
 
-    dbusUnregisterPluginForScreen (dc->connection, s, "core");
     dbusUnregisterPluginsForScreen (dc->connection, s);
 }
 
