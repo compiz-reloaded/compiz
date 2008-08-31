@@ -1213,18 +1213,35 @@ getDesktopHints (CompScreen *s)
     unsigned long n, left;
     unsigned char *propData;
 
-    result = XGetWindowProperty (s->display->display, s->root,
-				 d->numberOfDesktopsAtom, 0L, 1L, FALSE,
-				 XA_CARDINAL, &actual, &format,
-				 &n, &left, &propData);
-
-    if (result == Success && n && propData && useDesktopHints)
+    if (useDesktopHints)
     {
-	memcpy (data, propData, sizeof (unsigned long));
-	XFree (propData);
+	result = XGetWindowProperty (s->display->display, s->root,
+				     d->numberOfDesktopsAtom, 0L, 1L, FALSE,
+				     XA_CARDINAL, &actual, &format,
+				     &n, &left, &propData);
 
-	if (data[0] > 0 && data[0] < 0xffffffff)
-	    s->nDesktop = data[0];
+	if (result == Success && n && propData)
+	{
+	    memcpy (data, propData, sizeof (unsigned long));
+	    XFree (propData);
+
+	    if (data[0] > 0 && data[0] < 0xffffffff)
+		s->nDesktop = data[0];
+	}
+
+	result = XGetWindowProperty (s->display->display, s->root,
+				     d->currentDesktopAtom, 0L, 1L, FALSE,
+				     XA_CARDINAL, &actual, &format,
+				     &n, &left, &propData);
+
+	if (result == Success && n && propData)
+	{
+	    memcpy (data, propData, sizeof (unsigned long));
+	    XFree (propData);
+
+	    if (data[0] < s->nDesktop)
+		s->currentDesktop = data[0];
+	}
     }
 
     result = XGetWindowProperty (s->display->display, s->root,
@@ -1246,20 +1263,6 @@ getDesktopHints (CompScreen *s)
 	}
 
 	XFree (propData);
-    }
-
-    result = XGetWindowProperty (s->display->display, s->root,
-				 d->currentDesktopAtom, 0L, 1L, FALSE,
-				 XA_CARDINAL, &actual, &format,
-				 &n, &left, &propData);
-
-    if (result == Success && n && propData && useDesktopHints)
-    {
-	memcpy (data, propData, sizeof (unsigned long));
-	XFree (propData);
-
-	if (data[0] < s->nDesktop)
-	    s->currentDesktop = data[0];
     }
 
     result = XGetWindowProperty (s->display->display, s->root,
