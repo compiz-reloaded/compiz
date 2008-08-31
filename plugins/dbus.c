@@ -57,6 +57,7 @@ static CompMetadata dbusMetadata;
 #define DBUS_FILE_WATCH_NUM     3
 
 static int corePrivateIndex;
+static int displayPrivateIndex;
 
 typedef struct _DbusCore {
     DBusConnection    *connection;
@@ -67,6 +68,11 @@ typedef struct _DbusCore {
     InitPluginForObjectProc initPluginForObject;
     SetOptionForPluginProc  setOptionForPlugin;
 } DbusCore;
+
+typedef struct _DbusDisplay {
+    char         **pluginList;
+    unsigned int nPlugins;
+} DbusDisplay;
 
 static DBusHandlerResult dbusHandleMessage (DBusConnection *,
 					    DBusMessage *,
@@ -83,6 +89,37 @@ static DBusObjectPathVTable dbusMessagesVTable = {
 #define DBUS_CORE(c)		     \
     DbusCore *dc = GET_DBUS_CORE (c)
 
+#define GET_DBUS_DISPLAY(d)                                       \
+    ((DbusDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
+
+#define DBUS_DISPLAY(d)                    \
+    DbusDisplay *dd = GET_DBUS_DISPLAY (d)
+
+static void
+dbusUpdatePluginList (CompDisplay *d)
+{
+    CompListValue *pl;
+    unsigned int  i;
+
+    DBUS_DISPLAY (d);
+
+    pl = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+
+    for (i = 0; i < dd->nPlugins; i++)
+	free (dd->pluginList[i]);
+
+    dd->pluginList = realloc (dd->pluginList, pl->nValue * sizeof (char *));
+    if (!dd->pluginList)
+    {
+	dd->nPlugins = 0;
+	return;
+    }
+
+    for (i = 0; i < pl->nValue; i++)
+	dd->pluginList[i] = strdup (pl->value[i].s);
+
+    dd->nPlugins = pl->nValue;
+}
 
 static CompOption *
 dbusGetOptionsFromPath (char	     **path,
@@ -2043,19 +2080,17 @@ static void
 dbusRegisterPluginsForDisplay (DBusConnection *connection,
 			       CompDisplay    *d)
 {
-    CompListValue *pl;
-    int           nPlugins;
-    char          path[256];
+    unsigned int i;
+    char         path[256];
 
-    pl = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+    DBUS_DISPLAY (d);
 
-    nPlugins = pl->nValue;
-
-    while (nPlugins--)
+    for (i = 0; i < dd->nPlugins; i++)
     {
-	snprintf (path, 256, "%s/%s/allscreens", COMPIZ_DBUS_ROOT_PATH,
-						 pl->value[nPlugins].s);
-	dbusRegisterPluginForDisplay (connection, d, pl->value[nPlugins].s);
+	snprintf (path, 256, "%s/%s/allscreens",
+		  COMPIZ_DBUS_ROOT_PATH, dd->pluginList[i]);
+
+	dbusRegisterPluginForDisplay (connection, d, dd->pluginList[i]);
 	dbusRegisterOptions (connection, path);
     }
 }
@@ -2064,20 +2099,16 @@ static void
 dbusRegisterPluginsForScreen (DBusConnection *connection,
 			      CompScreen    *s)
 {
-    CompListValue *pl;
-    int           nPlugins;
-    char          path[256];
+    unsigned int i;
+    char         path[256];
 
-    pl = &s->display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+    DBUS_DISPLAY (s->display);
 
-    nPlugins = pl->nValue;
-
-    while (nPlugins--)
+    for (i = 0; i < dd->nPlugins; i++)
     {
-	snprintf (path, 256, "%s/%s/screen%d", COMPIZ_DBUS_ROOT_PATH,
-						 pl->value[nPlugins].s,
-						 s->screenNum);
-	dbusRegisterPluginForScreen (connection, s, pl->value[nPlugins].s);
+	snprintf (path, 256, "%s/%s/screen%d",
+		  COMPIZ_DBUS_ROOT_PATH, dd->pluginList[i], s->screenNum);
+	dbusRegisterPluginForScreen (connection, s, dd->pluginList[i]);
 	dbusRegisterOptions (connection, path);
     }
 }
@@ -2103,15 +2134,12 @@ static void
 dbusUnregisterPluginsForDisplay (DBusConnection *connection,
 			         CompDisplay    *d)
 {
-    CompListValue *pl;
-    int           nPlugins;
+    unsigned int i;
 
-    pl = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+    DBUS_DISPLAY (d);
 
-    nPlugins = pl->nValue;
-
-    while (nPlugins--)
-	dbusUnregisterPluginForDisplay (connection, d, pl->value[nPlugins].s);
+    for (i = 0; i < dd->nPlugins; i++)
+	dbusUnregisterPluginForDisplay (connection, d, dd->pluginList[i]);
 }
 
 static void
@@ -2132,15 +2160,12 @@ static void
 dbusUnregisterPluginsForScreen (DBusConnection *connection,
 			        CompScreen     *s)
 {
-    CompListValue *pl;
-    int           nPlugins;
+    unsigned int i;
 
-    pl = &s->display->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS].value.list;
+    DBUS_DISPLAY (s->display);
 
-    nPlugins = pl->nValue;
-
-    while (nPlugins--)
-	dbusUnregisterPluginForScreen (connection, s, pl->value[nPlugins].s);
+    for (i = 0; i < dd->nPlugins; i++)
+	dbusUnregisterPluginForScreen (connection, s, dd->pluginList[i]);
 }
 
 static CompBool
@@ -2239,13 +2264,14 @@ dbusSetOptionForPlugin (CompObject      *object,
 		CORE_DISPLAY (object);
 
 		dbusUnregisterPluginsForDisplay (dc->connection, d);
-		dbusRegisterPluginsForDisplay (dc->connection, d);
-
 		for (s = d->screens; s; s = s->next)
-		{
 		    dbusUnregisterPluginsForScreen (dc->connection, s);
+
+		dbusUpdatePluginList (d);
+
+		dbusRegisterPluginsForDisplay (dc->connection, d);
+		for (s = d->screens; s; s = s->next)
 		    dbusRegisterPluginsForScreen (dc->connection, s);
-		}
 	    }
 	}
     }
@@ -2287,6 +2313,13 @@ dbusInitCore (CompPlugin *p,
     dc = malloc (sizeof (DbusCore));
     if (!dc)
 	return FALSE;
+
+    displayPrivateIndex = allocateDisplayPrivateIndex ();
+    if (displayPrivateIndex < 0)
+    {
+	free (dc);
+	return FALSE;
+    }
 
     dbus_error_init (&error);
 
@@ -2406,6 +2439,8 @@ dbusFiniCore (CompPlugin *p,
     for (i = 0; i < DBUS_FILE_WATCH_NUM; i++)
 	removeFileWatch (dc->fileWatch[i]);
 
+    freeDisplayPrivateIndex (displayPrivateIndex);
+
     compRemoveWatchFd (dc->watchFdHandle);
 
     dbus_bus_release_name (dc->connection, COMPIZ_DBUS_SERVICE_NAME, NULL);
@@ -2427,8 +2462,20 @@ static Bool
 dbusInitDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
+    DbusDisplay *dd;
+
     DBUS_CORE (&core);
 
+    dd = malloc (sizeof (DbusDisplay));
+    if (!dd)
+	return FALSE;
+
+    dd->pluginList = NULL;
+    dd->nPlugins   = 0;
+
+    d->base.privates[displayPrivateIndex].ptr = dd;
+    
+    dbusUpdatePluginList (d);
     dbusRegisterPluginsForDisplay (dc->connection, d);
 
     return TRUE;
@@ -2439,8 +2486,20 @@ dbusFiniDisplay (CompPlugin  *p,
 		 CompDisplay *d)
 {
     DBUS_CORE (&core);
+    DBUS_DISPLAY (d);
 
     dbusUnregisterPluginsForDisplay (dc->connection, d);
+
+    if (dd->pluginList)
+    {
+	unsigned int i;
+
+	for (i = 0; i < dd->nPlugins; i++)
+	    free (dd->pluginList[i]);
+	free (dd->pluginList);
+    }
+
+    free (dd);
 }
 
 static Bool
