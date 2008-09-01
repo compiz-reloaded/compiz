@@ -7461,7 +7461,7 @@ main (int argc, char *argv[])
     gdk_x11_display_set_window_scale(gdkdisplay, 1);
 #endif
 
-    frame_window_atom	= XInternAtom (xdisplay, "_NET_FRAME_WINDOW", FALSE);
+    frame_window_atom	= XInternAtom (xdisplay, DECOR_INPUT_FRAME_ATOM_NAME, FALSE);
     win_decor_atom	= XInternAtom (xdisplay, DECOR_WINDOW_ATOM_NAME, FALSE);
     win_blur_decor_atom	= XInternAtom (xdisplay, DECOR_BLUR_ATOM_NAME, FALSE);
     wm_move_resize_atom = XInternAtom (xdisplay, "_NET_WM_MOVERESIZE", FALSE);

@@ -115,6 +115,7 @@ typedef struct _DecorDisplay {
     Atom		     winDecorAtom;
     Atom		     requestFrameExtentsAtom;
     Atom		     decorAtom[DECOR_NUM];
+    Atom		     inputFrameAtom;
 
     CompOption opt[DECOR_DISPLAY_OPTION_NUM];
 } DecorDisplay;
@@ -142,6 +143,8 @@ typedef struct _DecorScreen {
 typedef struct _DecorWindow {
     WindowDecoration *wd;
     Decoration	     *decor;
+
+    Window	     inputFrame;
 
     CompTimeoutHandle resizeUpdateHandle;
 } DecorWindow;
@@ -783,6 +786,114 @@ decorWindowShiftY (CompWindow *w)
     return 0;
 }
 
+static void
+decorWindowUpdateFrame (CompWindow *w)
+{
+    CompDisplay	     *d = w->screen->display;
+    WindowDecoration *wd;
+
+    DECOR_DISPLAY (w->screen->display);
+    DECOR_WINDOW (w);
+
+    wd = dw->wd;
+
+    if (wd && (w->input.left || w->input.right ||
+	w->input.top || w->input.bottom))
+    {
+	XRectangle           rects[4];
+	int	             x, y, width, height;
+	int	             i = 0;
+	int                  bw = w->serverBorderWidth * 2;
+	CompWindowExtents    input;
+
+	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+	    input = wd->decor->maxInput;
+	else
+	    input = wd->decor->input;
+
+	x      = w->input.left - input.left;
+	y      = w->input.top - input.top;
+	width  = w->serverWidth + input.left + input.right + bw;
+	height = w->serverHeight + input.top  + input.bottom + bw;
+
+	if (w->shaded)
+	    height = input.top + input.bottom;
+
+	if (!dw->inputFrame)
+	{
+	    XSetWindowAttributes attr;
+
+	    attr.event_mask	   = StructureNotifyMask;
+	    attr.override_redirect = TRUE;
+
+	    dw->inputFrame = XCreateWindow (d->display, w->frame,
+					    x, y, width, height, 0, CopyFromParent,
+					    InputOnly, CopyFromParent,
+					    CWOverrideRedirect | CWEventMask,
+					    &attr);
+
+	    XGrabButton (d->display, AnyButton, AnyModifier, dw->inputFrame,
+			 TRUE, ButtonPressMask | ButtonReleaseMask |
+			 ButtonMotionMask, GrabModeSync, GrabModeSync, None,
+			 None);
+
+	    XMapWindow (d->display, dw->inputFrame);
+
+	    XChangeProperty (d->display, w->id,
+			     dd->inputFrameAtom, XA_WINDOW, 32,
+			     PropModeReplace, (unsigned char *) &dw->inputFrame, 1);
+	}
+
+	XMoveResizeWindow (d->display, dw->inputFrame, x, y, width, height);
+	XLowerWindow (d->display, dw->inputFrame);
+
+	rects[i].x	= 0;
+	rects[i].y	= 0;
+	rects[i].width  = width;
+	rects[i].height = input.top;
+
+	if (rects[i].width && rects[i].height)
+	    i++;
+
+	rects[i].x	= 0;
+	rects[i].y	= input.top;
+	rects[i].width  = input.left;
+	rects[i].height = height - input.top - input.bottom;
+
+	if (rects[i].width && rects[i].height)
+	    i++;
+
+	rects[i].x	= width - input.right;
+	rects[i].y	= input.top;
+	rects[i].width  = input.right;
+	rects[i].height = height - input.top - input.bottom;
+
+	if (rects[i].width && rects[i].height)
+	    i++;
+
+	rects[i].x	= 0;
+	rects[i].y	= height - input.bottom;
+	rects[i].width  = width;
+	rects[i].height = input.bottom;
+
+	if (rects[i].width && rects[i].height)
+	    i++;
+
+	XShapeCombineRectangles (d->display, dw->inputFrame, ShapeInput,
+				 0, 0, rects, i, ShapeSet, YXBanded);
+    }
+    else
+    {
+	if (dw->inputFrame)
+	{
+	    XDeleteProperty (d->display, w->id,
+			     dd->inputFrameAtom);
+	    XDestroyWindow (d->display, dw->inputFrame);
+	    dw->inputFrame = None;
+	}
+    }
+}
+
 static Bool
 decorWindowUpdate (CompWindow *w,
 		   Bool	      allowDecoration)
@@ -887,6 +998,7 @@ decorWindowUpdate (CompWindow *w,
 	moveDx = decorWindowShiftX (w) - oldShiftX;
 	moveDy = decorWindowShiftY (w) - oldShiftY;
 
+	decorWindowUpdateFrame (w);
 	updateWindowOutputExtents (w);
 	damageWindowOutputExtents (w);
 	updateWindowDecorationScale (w);
@@ -902,6 +1014,8 @@ decorWindowUpdate (CompWindow *w,
 
 	moveDx = -oldShiftX;
 	moveDy = -oldShiftY;
+
+	decorWindowUpdateFrame (w);
     }
 
     if (w->placed && !w->attrib.override_redirect && (moveDx || moveDy))
@@ -1152,6 +1266,29 @@ decorHandleEvent (CompDisplay *d,
 			}
 		    }
 		}
+	    }
+	}
+	break;
+    case ConfigureNotify:
+	w = findTopLevelWindowAtDisplay (d, event->xproperty.window);
+	if (w)
+	{
+	    DECOR_WINDOW (w);
+	    if (dw->decor)
+		decorWindowUpdateFrame (w);
+	}
+	break;
+    case DestroyNotify:
+	w = findTopLevelWindowAtDisplay (d, event->xproperty.window);
+	if (w)
+	{
+	    DECOR_WINDOW (w);
+	    if (dw->inputFrame &&
+		dw->inputFrame == event->xdestroywindow.window)
+	    {
+		XDeleteProperty (d->display, w->id,
+				 dd->inputFrameAtom);
+		dw->inputFrame = None;
 	    }
 	}
 	break;
@@ -1428,6 +1565,7 @@ decorWindowStateChangeNotify (CompWindow   *w,
 		setWindowFrameExtents (w, &dw->wd->decor->maxInput);
 	    else
 		setWindowFrameExtents (w, &dw->wd->decor->input);
+	    decorWindowUpdateFrame (w);
 	}
     }
 
@@ -1599,6 +1737,8 @@ decorInitDisplay (CompPlugin  *p,
 	XInternAtom (d->display, DECOR_NORMAL_ATOM_NAME, 0);
     dd->decorAtom[DECOR_ACTIVE] =
 	XInternAtom (d->display, DECOR_ACTIVE_ATOM_NAME, 0);
+    dd->inputFrameAtom =
+	XInternAtom (d->display, DECOR_INPUT_FRAME_ATOM_NAME, 0);
     dd->requestFrameExtentsAtom =
 	XInternAtom (d->display, "_NET_REQUEST_FRAME_EXTENTS", 0);
 
@@ -1714,6 +1854,7 @@ decorInitWindow (CompPlugin *p,
 
     dw->wd    = NULL;
     dw->decor = NULL;
+    dw->inputFrame = None;
 
     dw->resizeUpdateHandle = 0;
 

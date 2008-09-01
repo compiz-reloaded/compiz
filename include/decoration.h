@@ -44,6 +44,9 @@ extern "C" {
 #define DECOR_BLUR_ATOM_NAME                    "_COMPIZ_WM_WINDOW_BLUR_DECOR"
 #define DECOR_SWITCH_WINDOW_ATOM_NAME           "_COMPIZ_SWITCH_SELECT_WINDOW"
 #define DECOR_SWITCH_FOREGROUND_COLOR_ATOM_NAME "_COMPIZ_SWITCH_FOREGROUND_COLOR"
+#define DECOR_INPUT_FRAME_ATOM_NAME             "_COMPIZ_WINDOW_DECOR_INPUT_FRAME"
+
+#define WINDOW_DECORATION_TYPE_PIXMAP 0
 
 #define GRAVITY_WEST  (1 << 0)
 #define GRAVITY_EAST  (1 << 1)
@@ -165,7 +168,7 @@ typedef void (*decor_draw_func_t) (Display	   *xdisplay,
 				   decor_context_t *context,
 				   void		   *closure);
 
-#define BASE_PROP_SIZE 12
+#define BASE_PROP_SIZE 13
 #define QUAD_PROP_SIZE 9
 #define N_QUADS_MAX    24
 

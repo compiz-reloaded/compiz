@@ -44,20 +44,25 @@ decor_version (void)
 
   data[0] = version
 
-  data[1] = pixmap
+  data[1] = decoration type
 
-  data[2] = input left
-  data[3] = input right
-  data[4] = input top
-  data[5] = input bottom
+  WINDOW_DECORATION_TYPE_PIXMAP property
+  --------------------------------------
 
-  data[6] = input left when maximized
-  data[7] = input right when maximized
-  data[8] = input top when maximized
-  data[9] = input bottom when maximized
+  data[2] = pixmap
 
-  data[10] = min width
-  data[11] = min height
+  data[3] = input left
+  data[4] = input right
+  data[5] = input top
+  data[6] = input bottom
+
+  data[7]  = input left when maximized
+  data[8]  = input right when maximized
+  data[9]  = input top when maximized
+  data[10] = input bottom when maximized
+
+  data[11] = min width
+  data[12] = min height
 
   flags
 
@@ -65,15 +70,15 @@ decor_version (void)
   9rd and 10th bit alignment, 11rd and 12th bit clamp,
   13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
 
-  data[11 + n * 9 + 1] = flags
-  data[11 + n * 9 + 2] = p1 x
-  data[11 + n * 9 + 3] = p1 y
-  data[11 + n * 9 + 4] = p2 x
-  data[11 + n * 9 + 5] = p2 y
-  data[11 + n * 9 + 6] = widthMax
-  data[11 + n * 9 + 7] = heightMax
-  data[11 + n * 9 + 8] = x0
-  data[11 + n * 9 + 9] = y0
+  data[12 + n * 9 + 1] = flags
+  data[12 + n * 9 + 2] = p1 x
+  data[12 + n * 9 + 3] = p1 y
+  data[12 + n * 9 + 4] = p2 x
+  data[12 + n * 9 + 5] = p2 y
+  data[12 + n * 9 + 6] = widthMax
+  data[12 + n * 9 + 7] = heightMax
+  data[12 + n * 9 + 8] = x0
+  data[12 + n * 9 + 9] = y0
  */
 void
 decor_quads_to_property (long		 *data,
@@ -86,6 +91,7 @@ decor_quads_to_property (long		 *data,
 			 int		 nQuad)
 {
     *data++ = DECOR_INTERFACE_VERSION;
+    *data++ = WINDOW_DECORATION_TYPE_PIXMAP;
 
     memcpy (data++, &pixmap, sizeof (Pixmap));
 
@@ -153,6 +159,9 @@ decor_property_to_quads (long		 *data,
 	return 0;
 
     data++;
+
+    if (*data++ != WINDOW_DECORATION_TYPE_PIXMAP)
+	return 0;
 
     memcpy (pixmap, data++, sizeof (Pixmap));
 
