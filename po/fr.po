@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-07 11:31+0530\n"
-"PO-Revision-Date: 2008-06-25 12:30+0200\n"
-"Last-Translator: Maxime Corteel <mcorteel@yahoo.fr>\n"
+"POT-Creation-Date: 2008-08-30 11:50+0530\n"
+"PO-Revision-Date: 2008-08-11 21:14+0200\n"
+"Last-Translator: Florent <cartman@igstaff.com>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,68 +99,68 @@ msgstr "Utiliser le thème Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Utiliser le thème Metacity pour dessiner les décorations de fenêtres"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/window-decorator/gtk-window-decorator.c:4418
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Fermer la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4440
 #: ../metadata/core.xml.in.h:145
 msgid "Unmaximize Window"
 msgstr "Restaurer la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4443
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
 msgstr "Optimiser la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4485
 #: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
 msgstr "Minimiser la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4602
 #: ../metadata/core.xml.in.h:152
 msgid "Window Menu"
 msgstr "Menu de la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4621
 msgid "Shade"
 msgstr "Ombrer"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4641
 msgid "Make Above"
 msgstr "Placer au dessus"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4667
 msgid "Stick"
 msgstr "Coller"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4687
 msgid "Unshade"
 msgstr "Ne plus ombrer"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4707
 msgid "Unmake Above"
 msgstr "Ne plus placer au dessus"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4733
 msgid "Unstick"
 msgstr "Décoller"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La fenêtre \"%s\" ne répond pas."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forcer cette application à quitter causera la perte de tout changement non "
 "enregistré."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5114
 msgid "_Force Quit"
 msgstr "_Forcer à quitter"
 
@@ -321,7 +321,7 @@ msgstr "Puissance Gaussienne"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "Récupérer la texture indépendante"
 
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
@@ -349,6 +349,8 @@ msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"utiliser les unités de texture disponible pour récupérer autant que possible "
+"la texture indépendante"
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -655,16 +657,15 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:55
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Délai de déclenchement des bordures"
 
 #: ../metadata/core.xml.in.h:56
 msgid "Fast"
 msgstr "Rapide"
 
 #: ../metadata/core.xml.in.h:57
-#, fuzzy
 msgid "Focus Prevention Level"
-msgstr "Fenêtres prévenues du Focus"
+msgstr "Niveau de sensibilité du Focus"
 
 #: ../metadata/core.xml.in.h:58
 msgid "Focus Prevention Windows"
@@ -674,9 +675,10 @@ msgstr "Fenêtres prévenues du Focus"
 msgid "Focus prevention windows"
 msgstr "fenêtres prévenues du focus"
 
+# coloration trouvé plus juste que peinture
 #: ../metadata/core.xml.in.h:60
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Forcer le rendement indépendant de coloration"
 
 #: ../metadata/core.xml.in.h:61
 msgid "General Options"
@@ -706,7 +708,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:67
 msgid "High"
-msgstr ""
+msgstr "Élevé"
 
 #: ../metadata/core.xml.in.h:68
 msgid "Horizontal Virtual Size"
@@ -715,6 +717,8 @@ msgstr "Taille virtuelle horizontale"
 #: ../metadata/core.xml.in.h:69
 msgid "If available use compression for textures converted from images"
 msgstr ""
+"Si elle est disponible, utiliser la compression des textures venant d'images "
+"converties"
 
 #: ../metadata/core.xml.in.h:70
 msgid "Ignore Hints When Maximized"
@@ -734,9 +738,10 @@ msgstr "Intervalle avant de remonter les fenêtres sélectionnées"
 msgid "Interval between ping messages"
 msgstr "Intervalle entre les messages ping"
 
+# En français, on ne vole pas un focus mais je n'ai pas trouvé mieux.
 #: ../metadata/core.xml.in.h:74
 msgid "Level of focus stealing prevention"
-msgstr ""
+msgstr "Niveau de sensibilité du vol de Focus"
 
 #: ../metadata/core.xml.in.h:75
 msgid "Lighting"
@@ -752,7 +757,7 @@ msgstr "Liste des chaînes décrivant les périphériques de sortie"
 
 #: ../metadata/core.xml.in.h:78
 msgid "Low"
-msgstr ""
+msgstr "Faible"
 
 #: ../metadata/core.xml.in.h:79
 msgid "Lower Window"
@@ -794,9 +799,10 @@ msgstr "Nombre de bureaux"
 msgid "Number of virtual desktops"
 msgstr "Nombre de bureaux virtuels"
 
+# En français, on/off est compris par tout le monde et on préfèreéviter de réutiliser le mot désactivé
 #: ../metadata/core.xml.in.h:91
 msgid "Off"
-msgstr ""
+msgstr "Off"
 
 #: ../metadata/core.xml.in.h:92
 msgid "Only perform screen updates during vertical blanking period"
@@ -812,13 +818,16 @@ msgstr "Ouvrir un terminal"
 msgid "Outputs"
 msgstr "Sorties"
 
+# Traduction très peu sûre
 #: ../metadata/core.xml.in.h:95
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "Chevauchement de manipulations de sorties"
 
 #: ../metadata/core.xml.in.h:96
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Peindre chaque sortie de périphérique indépendamment, même si elles se "
+"chevauchent."
 
 #: ../metadata/core.xml.in.h:97
 msgid "Ping Delay"
@@ -961,9 +970,8 @@ msgid "Terminal command line"
 msgstr "Commande à lancer pour le Terminal"
 
 #: ../metadata/core.xml.in.h:132
-#, fuzzy
 msgid "Texture Compression"
-msgstr "Filtrage de texture"
+msgstr "Compression de texture"
 
 #: ../metadata/core.xml.in.h:133
 msgid "Texture Filter"
@@ -1031,12 +1039,11 @@ msgstr "Taille virtuelle verticale"
 
 #: ../metadata/core.xml.in.h:150
 msgid "Very High"
-msgstr ""
+msgstr "Très élevé"
 
 #: ../metadata/core.xml.in.h:151
-#, fuzzy
 msgid "Which one of overlapping output devices should be preferred"
-msgstr "Quel périphérique de sortie devrait être préféré"
+msgstr "Quel périphérique de sortie chevauchée devrait être préférée"
 
 #: ../metadata/core.xml.in.h:153
 msgid "Window menu button binding"
@@ -1164,9 +1171,8 @@ msgid "Next Slide"
 msgstr "Diapositive suivante"
 
 #: ../metadata/cube.xml.in.h:28
-#, fuzzy
 msgid "One big cube"
-msgstr "Sur un grand cube"
+msgstr "Un grand cube"
 
 #: ../metadata/cube.xml.in.h:29
 msgid "Opacity During Rotation"
@@ -1340,31 +1346,29 @@ msgstr "Types de fenêtres devant avoir une ombre"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Luminosité (en %) des fenêtres ne répondant pas"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
 msgid "Constant speed"
-msgstr "Vitesse de la rotation"
+msgstr "Vitesse constante"
 
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Constant time"
-msgstr "Contraindre Y"
+msgstr "Temps constant"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Redimensionne les fenêtres en mode Normal"
+msgstr "Fenêtres ne répondant pas ternes"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
+"Les Fenêtres ternes qui ne répondent pas aux requêtes du gestionnaire de "
+"fenêtres."
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fade Mode"
-msgstr "Temps de Fondu"
+msgstr "Mode de Fondu"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1409,33 +1413,32 @@ msgstr "Effet de fondu plein écran au signal sonore du système"
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Saturation (en %) des fenêtres ne répondant pas"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Luminosité d'une fenêtre ne répondant pas"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Saturation d'une fenêtre ne répondant pas"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "Cloche visuelle"
 
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
-msgstr "Vitesse de fondu de la fenêtre"
+msgstr "Mode de fondu de la fenêtre"
 
 #: ../metadata/fade.xml.in.h:24
-#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Types de fenêtres à mettre à l'échelle en mode Échelle"
+msgstr "Vitesse du fondu d'une fenêtre dans le mode de \"Vitesse constante\""
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
 msgstr ""
+"Temps (en ms) du fondu d'une fenêtre dans le mode de \"Vitesse constante\""
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1595,9 +1598,8 @@ msgid "Centered"
 msgstr "Centré"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "Fenêtres prévenues du Focus"
+msgstr "Forcer le Placement d'une fenêtre"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Horizontal viewport positions"
@@ -1605,13 +1607,15 @@ msgstr "Positions du viewport horizontal"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "Garder dans la Zone de Travail"
 
 #: ../metadata/place.xml.in.h:7
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"Garder la fenêtre dans la zone de travail, même si cela signifie que la "
+"position peut différer de celle spécifiée"
 
 #: ../metadata/place.xml.in.h:8
 msgid "Maximize"
@@ -1622,9 +1626,8 @@ msgid "Place Windows"
 msgstr "Placer des fenêtres"
 
 #: ../metadata/place.xml.in.h:11
-#, fuzzy
 msgid "Place across all outputs"
-msgstr "Préférer une sortie plus petite"
+msgstr "Placer à travers toutes les sorties"
 
 #: ../metadata/place.xml.in.h:12
 msgid "Place windows at appropriate positions when mapped"
@@ -1643,29 +1646,27 @@ msgid "Random"
 msgstr "Aléatoire"
 
 #: ../metadata/place.xml.in.h:16
-#, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
-"Choisir où les fenêtres sont mises à l'échelle si plusieurs périphériques de "
-"sortie sont utilisés."
+"Sélectionne comme un emplacement de fenêtre pourrait se comporter si "
+"plusieurs sorties sont sélectionnées"
 
 #: ../metadata/place.xml.in.h:17
 msgid "Smart"
 msgstr "Intelligent"
 
 #: ../metadata/place.xml.in.h:18
-#, fuzzy
 msgid "Use active output device"
-msgstr "Sur tous les périphériques de sortie"
+msgstr "Utilise la périphérique de sortie actif"
 
 #: ../metadata/place.xml.in.h:19
 msgid "Use output device of focussed window"
-msgstr ""
+msgstr "Utilise la périphérique de sortie sur la fenêtre active"
 
 #: ../metadata/place.xml.in.h:20
 msgid "Use output device with pointer"
-msgstr ""
+msgstr "Utilise la périphérique de sortie avec le pointeur"
 
 #: ../metadata/place.xml.in.h:21
 msgid "Vertical viewport positions"
@@ -1694,6 +1695,8 @@ msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
+"Les fenêtres pourrait être forcées à se situer, même si elles indiquent que "
+"le gestionnaire de fenêtre pourrait éviter de les situer."
 
 #: ../metadata/place.xml.in.h:27
 msgid "Workarounds"
@@ -2441,9 +2444,8 @@ msgid "Minimized"
 msgstr "Minimisé"
 
 #: ../metadata/switcher.xml.in.h:14
-#, fuzzy
 msgid "Next Panel"
-msgstr "Bureaux sur un Plan"
+msgstr "Panneau Suivant"
 
 #: ../metadata/switcher.xml.in.h:15
 msgid "Next window"
@@ -2483,9 +2485,8 @@ msgstr ""
 "précédente parmi toutes les fenêtres"
 
 #: ../metadata/switcher.xml.in.h:23
-#, fuzzy
 msgid "Prev Panel"
-msgstr "Diapositive précédente"
+msgstr "Panneau Précédent"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev window"
@@ -2507,18 +2508,18 @@ msgstr "Tourner vers la fenêtre sélectionnée pendant la commutation"
 msgid "Saturation"
 msgstr "Saturation"
 
+# Ca ne veut rien dire...
 #: ../metadata/switcher.xml.in.h:29
 msgid "Select next panel type window."
-msgstr ""
+msgstr "Sélectionner la prochaine fenêtre de la police du panneau"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Sélectionner la fenêtre suivante sans montrer le sélecteur"
 
 #: ../metadata/switcher.xml.in.h:31
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "Sélectionner la fenêtre précédente sans montrer le sélecteur"
+msgstr "Sélectionner la précédente fenêtre de la police du panneau"
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."

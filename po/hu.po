@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_compiz-hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-07 11:31+0530\n"
-"PO-Revision-Date: 2008-05-31 08:52+0200\n"
+"POT-Creation-Date: 2008-08-30 11:51+0530\n"
+"PO-Revision-Date: 2008-08-15 11:19+0200\n"
 "Last-Translator: KAMI <kamihir@freemail.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -91,67 +91,67 @@ msgstr "Metacity téma alkalmazása"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Metacity téma alkalmazása az ablakdíszítések rajzolásakor"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/window-decorator/gtk-window-decorator.c:4418
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Ablak bezárása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4440
 #: ../metadata/core.xml.in.h:145
 msgid "Unmaximize Window"
 msgstr "Ablak visszaállítása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4443
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
 msgstr "Ablak maximalizálása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4485
 #: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
 msgstr "Ablak minimalizálása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4602
 #: ../metadata/core.xml.in.h:152
 msgid "Window Menu"
 msgstr "Ablak menü"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4621
 msgid "Shade"
 msgstr "Felgördítés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4641
 msgid "Make Above"
 msgstr "Előrehozás"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4667
 msgid "Stick"
 msgstr "Rögzítés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4687
 msgid "Unshade"
 msgstr "Legördítés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4707
 msgid "Unmake Above"
 msgstr "Hátraküldés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4733
 msgid "Unstick"
 msgstr "Rögzítés feloldása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "A(z) \"%s\" ablak nem válaszol."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "A kilépés kényszerítésének hatására minden el nem mentett adat el fog veszni."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5114
 msgid "_Force Quit"
 msgstr "_Kilépés kényszerítése"
 
@@ -1287,31 +1287,28 @@ msgstr "Árnyékolandó ablakok"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Nem válaszoló ablak fényerőssége (százalékban megadva)"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
 msgid "Constant speed"
-msgstr "Forgatás sebessége"
+msgstr "Állandó sebesség"
 
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Constant time"
-msgstr "Y megszorítás"
+msgstr "Állandó útidő"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Hagyományos ablakátméretezés"
+msgstr "Nem válaszoló ablak elhalványítása"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
+"Azon ablakok elhalványítása, amelyek nem válaszolnak az ablakkezelő kéréseire"
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fade Mode"
-msgstr "Elhalványítási idő"
+msgstr "Elhalványítási üzemmód"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1358,33 +1355,31 @@ msgstr "Teljes képernyő halványuló effektus rendszercsengő esetén"
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Nem válaszoló ablak telítettsége (százalékban megadva)"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Nem válaszoló ablak fényerőssége"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Nem válaszoló ablak telítettsége"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "Vizuális csengő"
 
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
-msgstr "Ablak elhalványulásának sebessége"
+msgstr "Ablak elhalványulásának üzemmódja"
 
 #: ../metadata/fade.xml.in.h:24
-#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Ablaktípusok, amelyek áttekintő nézetben megjelennek"
+msgstr "Ablak elhalványulásának sebessége \"Állandó sebesség\" módban"
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr ""
+msgstr "Ablak elhalványulásának sebessége \"Állandó útidő\" módban"
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1550,13 +1545,15 @@ msgstr "Vízszintes munkalap pozíció"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "Munkaasztalon tartás"
 
 #: ../metadata/place.xml.in.h:7
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"Ablakelhelyezés erőltetésének felülbírálása úgy, hogy az ablak minden "
+"esetben a munkaasztalon maradjon"
 
 #: ../metadata/place.xml.in.h:8
 msgid "Maximize"

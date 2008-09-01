@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-07 11:31+0530\n"
-"PO-Revision-Date: 2008-07-07 15:57+0200\n"
+"POT-Creation-Date: 2008-08-30 11:51+0530\n"
+"PO-Revision-Date: 2008-08-08 17:47+0200\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: Hebrew <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -91,68 +91,68 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "השתמש בערכת הנושא של Metacity בעת ציור מסגרות חלון"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/window-decorator/gtk-window-decorator.c:4418
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "סגור חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4440
 #: ../metadata/core.xml.in.h:145
 msgid "Unmaximize Window"
 msgstr "שחזר גודל חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4443
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
 msgstr "הגדל חלון למקסימום"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4485
 #: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
 msgstr "מזער חלון"
 
 #  Label text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4602
 #: ../metadata/core.xml.in.h:152
 msgid "Window Menu"
 msgstr "תפריט חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4621
 msgid "Shade"
 msgstr "גלול"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4641
 msgid "Make Above"
 msgstr "העבר למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4667
 msgid "Stick"
 msgstr "נעל במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4687
 msgid "Unshade"
 msgstr "פרוס גלילה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4707
 msgid "Unmake Above"
 msgstr "בטל העברה למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4733
 msgid "Unstick"
 msgstr "בטל נעילה במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "החלון \"%s\" אינו מגיב."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "סגירה כפויה של היישום תביא לאובדן שינויים שלא נשמרו."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5114
 msgid "_Force Quit"
 msgstr "_סגור יישום"
 
@@ -1314,69 +1314,64 @@ msgstr "חלונות האמורים להטיל צל"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "בהירות חלונות שאינם מגיבים (באחוזים)"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
 msgid "Constant speed"
-msgstr "מהירות סיבוב"
+msgstr "מהירות קבועה"
 
 #  header text
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Constant time"
-msgstr "מגבלת Y"
+msgstr "משך קבוע"
 
 #  heading text
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "שינוי גודל חלונות במצב רגיל"
+msgstr "עמעם חלונות שאינם מגיבים"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
-msgstr ""
+msgstr "עמעם חלונות שאינם מגיבים להודעות מנהל החלונות"
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fade Mode"
-msgstr "&בחינה"
+msgstr "מצב עמעום"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
-msgstr "פייד בעת מזעור\\פתיחה\\סגירה"
+msgstr "עמעום בעת מזעור\\פתיחה\\סגירה"
 
 #: ../metadata/fade.xml.in.h:9
 msgid "Fade Speed"
-msgstr "מהירות פייד"
+msgstr "מהירות עמעום"
 
 #: ../metadata/fade.xml.in.h:10
-#, fuzzy
 msgid "Fade Time"
-msgstr "&בחינה"
+msgstr "משך עמעום"
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Fade effect on minimize/open/close window events"
-msgstr "אפקט \"פייד\" בעת ארועי מזעור, פתיחה וסגירה של חלון"
+msgstr "אפקט עמעום בעת ארועי מזעור, פתיחה וסגירה של חלון"
 
 #  label text 
 #: ../metadata/fade.xml.in.h:12
 msgid "Fade effect on system beep"
-msgstr "אפקט פייד בעת צפצוף מערכת"
+msgstr "אפקט עמעום בעת צפצוף מערכת"
 
 #: ../metadata/fade.xml.in.h:13
 msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "\"פייד אין\" לחלונות בעת מיפוים ו-\"פייד אאוט\" לחלונות בעת מחיקתם"
+msgstr "עמעום פנימה לחלונות בעת מיפוי ועמעום החוצה לחלונות בעת מחיקה"
 
 #  button text
 #: ../metadata/fade.xml.in.h:14
 msgid "Fade windows"
-msgstr "פייד עבור חלונות"
+msgstr "עמעום חלונות"
 
 #  button text
 #: ../metadata/fade.xml.in.h:15
 msgid "Fading Windows"
-msgstr "פייד לחלונות"
+msgstr "עמעום חלונות"
 
 #: ../metadata/fade.xml.in.h:16
 msgid "Fullscreen Visual Bell"
@@ -1384,20 +1379,20 @@ msgstr "פעמון חזותי במסך מלא"
 
 #: ../metadata/fade.xml.in.h:17
 msgid "Fullscreen fade effect on system beep"
-msgstr "אפקט פייד במסך מלא בעת צפצוף מערכת"
+msgstr "אפקט עמעום במסך מלא בעת צפצוף מערכת"
 
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "רווית חלונות שאינם מגיבים (באחוזים)"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "בהירות חלונות שאינם מגיבים"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "רווית חלונות שאינם מגיבים"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
@@ -1406,22 +1401,20 @@ msgstr "פעמון חזותי"
 #  label text, %1 is replaced by a unit value ("MB")
 #  Labels for input fields. "%1" will be replaced with the current unit (MB).
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
-msgstr "מהירות פייד של חלון"
+msgstr "מצב עמעום חלון"
 
 #: ../metadata/fade.xml.in.h:24
-#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "חלונות שיש להציגם במבט על"
+msgstr "מהירות עמעום חלון במצב \"מהירות קבועה\""
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr ""
+msgstr "משך עמעום חלון במצב \"משך קבוע\" (במילישניות)"
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
-msgstr "חלונות האמורים לעבור פייד"
+msgstr "חלונות האמורים לעבור עמעום"
 
 #: ../metadata/fs.xml.in.h:1
 msgid "Mount Point"
@@ -1595,13 +1588,15 @@ msgstr "מיקומי משטח אופקיים"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "שמור בתוך משטח העבודה"
 
 #: ../metadata/place.xml.in.h:7
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"שמור את החלונות בתוך משטח העבודה לאחר מיקום, גם אם יש להציבם לשם כך במיקום "
+"שונה מזה המבוקש"
 
 #  button text
 #: ../metadata/place.xml.in.h:8

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-07 11:31+0530\n"
-"PO-Revision-Date: 2008-06-08 16:22+0200\n"
+"POT-Creation-Date: 2008-08-30 11:50+0530\n"
+"PO-Revision-Date: 2008-08-08 14:19+0200\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
@@ -101,68 +101,68 @@ msgstr "Käytä Metacity-teemaa"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Käytä Metacity-teemaa ikkunoiden kehyksissä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4417
+#: ../gtk/window-decorator/gtk-window-decorator.c:4418
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4440
 #: ../metadata/core.xml.in.h:145
 msgid "Unmaximize Window"
 msgstr "Palauta suurennettu ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4442
+#: ../gtk/window-decorator/gtk-window-decorator.c:4443
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
 msgstr "Suurenna ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4484
+#: ../gtk/window-decorator/gtk-window-decorator.c:4485
 #: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
 msgstr "Pienennä ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4601
+#: ../gtk/window-decorator/gtk-window-decorator.c:4602
 #: ../metadata/core.xml.in.h:152
 msgid "Window Menu"
 msgstr "Ikkunavalikko"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4620
+#: ../gtk/window-decorator/gtk-window-decorator.c:4621
 msgid "Shade"
 msgstr "Näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4640
+#: ../gtk/window-decorator/gtk-window-decorator.c:4641
 msgid "Make Above"
 msgstr "Näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4666
+#: ../gtk/window-decorator/gtk-window-decorator.c:4667
 msgid "Stick"
 msgstr "Näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4686
+#: ../gtk/window-decorator/gtk-window-decorator.c:4687
 msgid "Unshade"
 msgstr "Älä näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4706
+#: ../gtk/window-decorator/gtk-window-decorator.c:4707
 msgid "Unmake Above"
 msgstr "Älä näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4732
+#: ../gtk/window-decorator/gtk-window-decorator.c:4733
 msgid "Unstick"
 msgstr "Älä näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5089
+#: ../gtk/window-decorator/gtk-window-decorator.c:5090
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Ikkuna \"%s\" ei vastaa."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Tämän sovelluksen sulkeminen väkisin saa tallentamattomat muutokset "
 "katoamaan."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5113
+#: ../gtk/window-decorator/gtk-window-decorator.c:5114
 msgid "_Force Quit"
 msgstr "Sulje _väkisin"
 
@@ -1297,31 +1297,27 @@ msgstr "Ikkunatyypit, joille tulisi lisätä varjo"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Kirkkaus prosenteissa ikkunoille, jotka eivät vastaa"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
 msgid "Constant speed"
-msgstr "Kääntämisnopeus"
+msgstr "Vakionopeus"
 
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Constant time"
-msgstr "Rajoita Y-koordinaatti"
+msgstr "Vakioaika"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Ikkunan koon muuttaminen tavallisesti"
+msgstr "Himmennä ikkunat, jotka eivät vastaa"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
-msgstr ""
+msgstr "Himmennä ikkunat, jotka eivät vastaa ikkunanhallinnan pyyntöihin"
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fade Mode"
-msgstr "Häivytysviive"
+msgstr "Häivytystapa"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1366,33 +1362,31 @@ msgstr "Kokoruudun häivytystehoste järjestelmän piippauksesta"
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Värikylläisyys prosenteissa ikkunoille, jotka eivät vastaa"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Kirkkaus ikkunoille, jotka eivät vastaa"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Värikylläisyys ikkunoille, jotka eivät vastaa"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "Näkyvä kello"
 
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
-msgstr "Ikkunan häivytyksen nopeus"
+msgstr "Ikkunan häivytystapa"
 
 #: ../metadata/fade.xml.in.h:24
-#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Ikkunatyypit, jotka tulisi skaalata skaalaustilassa"
+msgstr "Ikkunan häivytysnopeus \"Vakionopeus\"-tilassa"
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr ""
+msgstr "Ikkunan häivytysaika (millisekunneissa) \"Vakioaika\"-tilassa"
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1558,13 +1552,15 @@ msgstr "Työpöytien vaakataso-sijainti"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "Pidä työtilassa"
 
 #: ../metadata/place.xml.in.h:7
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"Pidä asetettu ikkuna työtilassa, vaikka se tarkoittaisi sijainnin eriävyyttä "
+"määritellystä sijainnista"
 
 #: ../metadata/place.xml.in.h:8
 msgid "Maximize"
