@@ -1166,8 +1166,40 @@ decorSetDisplayOption (CompPlugin      *plugin,
 	    return TRUE;
 	}
 	break;
-    case DECOR_DISPLAY_OPTION_DECOR_MATCH:
     case DECOR_DISPLAY_OPTION_SHADOW_MATCH:
+	{
+	    char *matchString;
+
+	    /*
+	       Make sure RGBA matching is always present and disable shadows
+	       for RGBA windows by default if the user didn't specify an
+	       RGBA match.
+	       Reasoning for that is that shadows are desired for some RGBA
+	       windows (e.g. rectangular windows that just happen to have an
+	       RGBA colormap), while it's absolutely undesired for others
+	       (especially shaped ones) ... by enforcing no shadows for RGBA
+	       windows by default, we are flexible to user desires while still
+	       making sure we don't show ugliness by default
+	     */
+
+	    matchString = matchToString (&value->match);
+	    if (matchString)
+	    {
+		if (!strstr (matchString, "rgba="))
+		{
+		    CompMatch rgbaMatch;
+
+		    matchInit (&rgbaMatch);
+		    matchAddFromString (&rgbaMatch, "rgba=0");
+		    matchAddGroup (&value->match, MATCH_OP_AND_MASK,
+				   &rgbaMatch);
+		    matchFini (&rgbaMatch);
+		}
+		free (matchString);
+	    }
+	}
+	/* fall-through intended */
+    case DECOR_DISPLAY_OPTION_DECOR_MATCH:
 	if (compSetMatchOption (o, value))
 	{
 	    CompScreen *s;
