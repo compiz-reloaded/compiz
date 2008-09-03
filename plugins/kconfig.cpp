@@ -633,7 +633,7 @@ kconfigInitCore (CompPlugin *p,
     }
     else
     {
-	compLogMessage (0, "kconfig", CompLogLevelWarn, "Bad access \"%s\"",
+	compLogMessage ("kconfig", CompLogLevelWarn, "Bad access \"%s\"",
 			dir.ascii ());
     }
 
