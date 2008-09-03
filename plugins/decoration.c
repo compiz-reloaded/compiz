@@ -772,10 +772,6 @@ decorWindowUpdate (CompWindow *w,
 	    if (w->region->numRects == 1 && !w->alpha)
 		decor = ds->decor[DECOR_BARE];
 
-	    /* no decoration on windows with below state */
-	    if (w->state & CompWindowStateBelowMask)
-		decor = NULL;
-
 	    if (decor)
 	    {
 		if (!decorCheckSize (w, decor))
