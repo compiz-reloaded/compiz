@@ -769,7 +769,7 @@ decorWindowUpdate (CompWindow *w,
 	match = &dd->opt[DECOR_DISPLAY_OPTION_SHADOW_MATCH].value.match;
 	if (matchEval (match, w))
 	{
-	    if (w->region->numRects == 1 && !w->alpha)
+	    if (w->region->numRects == 1)
 		decor = ds->decor[DECOR_BARE];
 
 	    if (decor)
