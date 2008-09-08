@@ -1637,10 +1637,19 @@ handleEvent (CompDisplay *d,
 
 		if (w->managed && w->startupId)
 		{
-		    Time timestamp = 0;
+		    Time         timestamp = 0;
+		    unsigned int vx, vy;
 
 		    w->initialTimestampSet = FALSE;
 		    applyStartupProperties (w->screen, w);
+
+		    /* as the viewport can't be transmitted via startup
+		       notification, assume the client changing the ID
+		       wanted to activate the window on the viewport it
+		       current is on */
+		    defaultViewportForWindow (w, &vx, &vy);
+		    w->initialViewportX = vx;
+		    w->initialViewportY = vy;
 
 		    if (w->initialTimestampSet)
 			timestamp = w->initialTimestamp;
