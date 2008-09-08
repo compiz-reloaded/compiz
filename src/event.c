@@ -1632,8 +1632,27 @@ handleEvent (CompDisplay *d,
 	    {
 		if (w->startupId)
 		    free (w->startupId);
-
+		
 		w->startupId = getStartupId (w);
+
+		if (w->managed && w->startupId)
+		{
+		    Time timestamp = 0;
+
+		    w->initialTimestampSet = FALSE;
+		    applyStartupProperties (w->screen, w);
+
+		    if (w->initialTimestampSet)
+			timestamp = w->initialTimestamp;
+
+		    if (allowWindowFocus (w, 0,
+					  w->initialViewportX,
+					  w->initialViewportY,
+					  timestamp))
+		    {
+			(*w->screen->activateWindow) (w);
+		    }
+		}
 	    }
 	}
 	else if (event->xproperty.atom == XA_WM_CLASS)
@@ -1651,13 +1670,18 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
+		Bool focusAllowed = TRUE;
+
 		/* use focus stealing prevention if request came
 		   from an application */
-		if (event->xclient.data.l[0] != ClientTypeApplication ||
-		    allowWindowFocus (w, 0, event->xclient.data.l[1]))
-		{
+		if (event->xclient.data.l[0] == ClientTypeApplication)
+		    focusAllowed = allowWindowFocus (w, 0,
+						     w->screen->x,
+						     w->screen->y,
+						     event->xclient.data.l[1]);
+
+		if (focusAllowed)
 		    (*w->screen->activateWindow) (w);
-		}
 	    }
 	}
 	else if (event->xclient.message_type == d->winOpacityAtom)
@@ -1998,7 +2022,10 @@ handleEvent (CompDisplay *d,
 		    w->placed   = TRUE;
 		}
 
-		allowFocus = allowWindowFocus (w, NO_FOCUS_MASK, 0);
+		allowFocus = allowWindowFocus (w, NO_FOCUS_MASK,
+					       w->initialViewportX,
+					       w->initialViewportY,
+					       0);
 
 		if (!allowFocus && (w->type & ~NO_FOCUS_MASK))
 		    stackingMode = CompStackingUpdateModeInitialMapDeniedFocus;
@@ -2059,7 +2086,8 @@ handleEvent (CompDisplay *d,
 
 		switch (event->xconfigurerequest.detail) {
 		case Above:
-		    if (allowWindowFocus (w, NO_FOCUS_MASK, 0))
+		    if (allowWindowFocus (w, NO_FOCUS_MASK,
+					  w->screen->x, w->screen->y, 0))
 		    {
 			if (above)
 			{

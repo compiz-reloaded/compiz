@@ -4733,8 +4733,10 @@ getUsageTimestampForWindow (CompWindow *w,
 }
 
 static Bool
-isWindowFocusAllowed (CompWindow *w,
-		      Time       timestamp)
+isWindowFocusAllowed (CompWindow   *w,
+		      unsigned int viewportX,
+		      unsigned int viewportY,
+		      Time         timestamp)
 {
     CompDisplay  *d = w->screen->display;
     CompScreen   *s = w->screen;
@@ -4801,7 +4803,7 @@ isWindowFocusAllowed (CompWindow *w,
 
     /* not in current viewport */
     defaultViewportForWindow (w, &vx, &vy);
-    if (vx != s->x || vy != s->y)
+    if (vx != viewportX || vy != viewportY)
 	return FALSE;
 
     if (!gotTimestamp)
@@ -4827,6 +4829,8 @@ isWindowFocusAllowed (CompWindow *w,
 Bool
 allowWindowFocus (CompWindow   *w,
 		  unsigned int noFocusMask,
+		  unsigned int viewportX,
+		  unsigned int viewportY,
 		  Time         timestamp)
 {
     Bool retval;
@@ -4842,7 +4846,7 @@ allowWindowFocus (CompWindow   *w,
     if (!w->inputHint && !(w->protocols & CompWindowProtocolTakeFocusMask))
 	return FALSE;
 
-    retval = isWindowFocusAllowed (w, timestamp);
+    retval = isWindowFocusAllowed (w, viewportX, viewportY, timestamp);
 
     if (!retval)
     {

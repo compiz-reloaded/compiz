@@ -3049,6 +3049,8 @@ setWindowUserTime (CompWindow *w,
 Bool
 allowWindowFocus (CompWindow   *w,
 		  unsigned int noFocusMask,
+		  unsigned int viewportX,
+		  unsigned int viewportY,
 		  Time         timestamp);
 
 void
