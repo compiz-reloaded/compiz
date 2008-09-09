@@ -135,6 +135,7 @@ typedef struct _RotateScreen {
 
     XPoint savedPointer;
     Bool   grabbed;
+    Bool   focusDefault;
 
     CompTimeoutHandle rotateHandle;
     Bool	      slow;
@@ -392,7 +393,7 @@ rotatePreparePaintScreen (CompScreen *s,
 			    syncWindowPosition (w);
 			}
 		    }
-		    else
+		    else if (rs->focusDefault)
 		    {
 			int i;
 
@@ -754,6 +755,8 @@ rotate (CompDisplay     *d,
 	    rotateInitiate (d, NULL, 0, o, 3);
 	}
 
+	rs->focusDefault = getBoolOptionNamed (option, nOption,
+					       "focus_default", TRUE);
 	rs->moving  = TRUE;
 	rs->moveTo += (360.0f / s->hsize) * direction;
 	rs->grabbed = FALSE;
@@ -1591,7 +1594,7 @@ rotateActivateWindow (CompWindow *w)
 	    Window	 win;
 	    int		 i, x, y;
 	    unsigned int ui;
-	    CompOption   o[4];
+	    CompOption   o[5];
 
 	    XQueryPointer (s->display->display, s->root,
 			   &win, &win, &x, &y, &i, &i, &ui);
@@ -1616,6 +1619,10 @@ rotateActivateWindow (CompWindow *w)
 	    o[3].type    = CompOptionTypeInt;
 	    o[3].name    = "direction";
 	    o[3].value.i = dx;
+
+	    o[4].type    = CompOptionTypeBool;
+	    o[4].name    = "focus_default";
+	    o[4].value.b = FALSE;
 
 	    rotate (s->display, NULL, 0, o, 4);
 	}
@@ -1845,9 +1852,10 @@ rotateInitScreen (CompPlugin *p,
     rs->savedPointer.x = 0;
     rs->savedPointer.y = 0;
 
-    rs->grabbed	   = FALSE;
-    rs->snapTop	   = FALSE;
-    rs->snapBottom = FALSE;
+    rs->focusDefault = TRUE;
+    rs->grabbed	     = FALSE;
+    rs->snapTop	     = FALSE;
+    rs->snapBottom   = FALSE;
 
     rs->slow       = FALSE;
     rs->grabMask   = FALSE;
