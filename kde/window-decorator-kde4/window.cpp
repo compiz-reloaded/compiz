@@ -87,7 +87,7 @@ KWD::Window::Window (WId  parentId,
     mMapped (false),
     mPendingMap (0),
     mPendingConfigure (0),
-    mProcessKiller (0),
+    mProcessKiller (this),
     mKeys (this),
     mResizeOpAction (0),
     mMoveOpAction (0),
@@ -183,8 +183,16 @@ KWD::Window::~Window (void)
     if (mPopup)
 	delete mPopup;
 
-    if (mProcessKiller)
-	delete mProcessKiller;
+    if (mProcessKiller.state () == QProcess::Running)
+    {
+	mProcessKiller.terminate ();
+	mProcessKiller.waitForFinished (10000);
+	if (mProcessKiller.state () == QProcess::Running)
+	{
+	    mProcessKiller.kill ();
+	    mProcessKiller.waitForFinished (5000);
+	}
+    }
 }
 
 bool
@@ -2148,16 +2156,6 @@ KWD::Window::processDamage (void)
 }
 
 void
-KWD::Window::handleProcessKillerExited (void)
-{
-    if (mProcessKiller)
-    {
-	delete mProcessKiller;
-	mProcessKiller = NULL;
-    }
-}
-
-void
 KWD::Window::showKillProcessDialog (Time timestamp)
 {
     KWindowInfo kWinInfo =
@@ -2169,7 +2167,7 @@ KWD::Window::showKillProcessDialog (Time timestamp)
     pid_t	     pid;
     char	     buf[257];
 
-    if (mProcessKiller)
+    if (mProcessKiller.state () == QProcess::Running)
 	return;
 
     clientMachine = kWinInfo.clientMachine ();
@@ -2182,25 +2180,21 @@ KWD::Window::showKillProcessDialog (Time timestamp)
 	    clientMachine = "localhost";
     }
 
-    mProcessKiller = new QProcess (this);
-
-    connect (mProcessKiller, SIGNAL (finished (int, QProcess::ExitStatus)),
-	     SLOT (handleProcessKillerExited ()));
-    connect (mProcessKiller, SIGNAL (error (QProcess::ProcessError)),
-	     SLOT (handleProcessKillerExited ()));
-    
-
-    mProcessKiller->start (KStandardDirs::findExe ("kwin_killer_helper"),
+    mProcessKiller.start (KStandardDirs::findExe ("kwin_killer_helper"),
 	QStringList () << "--pid" << QByteArray ().setNum (pid) <<
 	"--hostname" << clientMachine <<
 	"--windowname" << mName.toUtf8 () <<
 	"--applicationname" << resourceClass <<
 	"--wid" << QByteArray ().setNum ((unsigned int) mClientId) <<
-	"--timestamp" << QByteArray ().setNum ((unsigned int) timestamp));
+	"--timestamp" << QByteArray ().setNum ((unsigned int) timestamp),
+	QIODevice::NotOpen);
 }
 
 void
 KWD::Window::hideKillProcessDialog (void)
 {
-    handleProcessKillerExited ();
+    if (mProcessKiller.state () == QProcess::Running)
+    {
+	mProcessKiller.terminate ();
+    }
 }
