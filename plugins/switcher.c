@@ -1089,6 +1089,16 @@ switchHandleEvent (CompDisplay *d,
     WRAP (sd, d, handleEvent, switchHandleEvent);
 
     switch (event->type) {
+    case MapNotify:
+	w = findWindowAtDisplay (d, event->xmap.window);
+	if (w)
+	{
+	    SWITCH_SCREEN (w->screen);
+
+	    if (w->id == ss->popupWindow)
+		updateWindowAttributes (w, CompStackingUpdateModeNormal);
+	}
+	break;
     case UnmapNotify:
 	switchWindowRemove (d, event->xunmap.window);
 	break;
