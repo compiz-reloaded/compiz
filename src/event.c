@@ -440,34 +440,40 @@ triggerKeyReleaseBindings (CompDisplay *d,
 			   CompOption  *argument,
 			   int	       nArgument)
 {
-    if (!d->xkbEvent)
+    CompActionState state = CompActionStateTermKey;
+    CompAction	    *action;
+    unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
+    unsigned int    bindMods;
+    unsigned int    mods;
+
+    mods = keycodeToModifiers (d, event->xkey.keycode);
+    if (!d->xkbEvent && !mods)
+	return FALSE;
+
+    while (nOption--)
     {
-	CompActionState state = CompActionStateTermKey;
-	CompAction	*action;
-	unsigned int	modMask = REAL_MOD_MASK & ~d->ignoredModMask;
-	unsigned int	bindMods;
-	unsigned int	mods;
-
-	mods = keycodeToModifiers (d, event->xkey.keycode);
-	if (mods == 0)
-	    return FALSE;
-
-	while (nOption--)
+	if (isTerminateBinding (option, CompBindingTypeKey, state, &action))
 	{
-	    if (isTerminateBinding (option, CompBindingTypeKey, state, &action))
-	    {
-		bindMods = virtualToRealModMask (d, action->key.modifiers);
+	    bindMods = virtualToRealModMask (d, action->key.modifiers);
 
-		if ((mods & modMask & bindMods) != bindMods)
+	    if ((bindMods & modMask) == 0)
+	    {
+		if (action->key.keycode == event->xkey.keycode)
 		{
 		    if ((*action->terminate) (d, action, state,
 					      argument, nArgument))
 			return TRUE;
 		}
 	    }
-
-	    option++;
+	    else if (!d->xkbEvent && ((mods & modMask & bindMods) != bindMods))
+	    {
+		if ((*action->terminate) (d, action, state,
+					  argument, nArgument))
+		    return TRUE;
+	    }
 	}
+
+	option++;
     }
 
     return FALSE;
