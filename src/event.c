@@ -1647,8 +1647,7 @@ handleEvent (CompDisplay *d,
 		if (w->managed && w->startupId)
 		{
 		    Time         timestamp = 0;
-		    unsigned int vx, vy;
-		    int          x, y;
+		    int          vx, vy, x, y;
 		    CompScreen   *s = w->screen;
 
 		    w->initialTimestampSet = FALSE;
