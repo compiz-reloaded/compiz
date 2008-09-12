@@ -621,7 +621,7 @@ switchInitiate (CompScreen            *s,
 		count = 3;
 	}
 
-	xsh.flags       = PSize | PPosition | PWinGravity;
+	xsh.flags       = PSize | PWinGravity;
 	xsh.width       = WINDOW_WIDTH (count);
 	xsh.height      = WINDOW_HEIGHT;
 	xsh.win_gravity = StaticGravity;
