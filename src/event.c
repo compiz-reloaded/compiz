@@ -253,12 +253,12 @@ isTerminateBinding (CompOption	    *option,
 }
 
 static Bool
-triggerButtonPressBindings (CompDisplay *d,
-			    CompOption  *option,
-			    int		nOption,
-			    XEvent	*event,
-			    CompOption  *argument,
-			    int		nArgument)
+triggerButtonPressBindings (CompDisplay  *d,
+			    CompOption   *option,
+			    int		 nOption,
+			    XButtonEvent *event,
+			    CompOption   *argument,
+			    int		 nArgument)
 {
     CompActionState state = CompActionStateInitButton;
     CompAction	    *action;
@@ -271,13 +271,13 @@ triggerButtonPressBindings (CompDisplay *d,
 	CompScreen   *s;
 	unsigned int i;
 
-	s = findScreenAtDisplay (d, event->xbutton.root);
+	s = findScreenAtDisplay (d, event->root);
 	if (!s)
 	    return FALSE;
 
-	if (event->xbutton.window != edgeWindow)
+	if (event->window != edgeWindow)
 	{
-	    if (!s->maxGrab || event->xbutton.window != s->root)
+	    if (!s->maxGrab || event->window != s->root)
 		return FALSE;
 	}
 
@@ -296,11 +296,11 @@ triggerButtonPressBindings (CompDisplay *d,
     {
 	if (isInitiateBinding (option, CompBindingTypeButton, state, &action))
 	{
-	    if (action->button.button == event->xbutton.button)
+	    if (action->button.button == event->button)
 	    {
 		bindMods = virtualToRealModMask (d, action->button.modifiers);
 
-		if ((bindMods & modMask) == (event->xbutton.state & modMask))
+		if ((bindMods & modMask) == (event->state & modMask))
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
@@ -312,14 +312,13 @@ triggerButtonPressBindings (CompDisplay *d,
 	    if (isInitiateBinding (option, CompBindingTypeEdgeButton,
 				   state | CompActionStateInitEdge, &action))
 	    {
-		if ((action->button.button == event->xbutton.button) &&
+		if ((action->button.button == event->button) &&
 		    (action->edgeMask & edge))
 		{
 		    bindMods = virtualToRealModMask (d,
 						     action->button.modifiers);
 
-		    if ((bindMods & modMask) ==
-			(event->xbutton.state & modMask))
+		    if ((bindMods & modMask) == (event->state & modMask))
 			if ((*action->initiate) (d, action, state |
 						 CompActionStateInitEdge,
 						 argument, nArgument))
@@ -335,12 +334,12 @@ triggerButtonPressBindings (CompDisplay *d,
 }
 
 static Bool
-triggerButtonReleaseBindings (CompDisplay *d,
-			      CompOption  *option,
-			      int	  nOption,
-			      XEvent	  *event,
-			      CompOption  *argument,
-			      int	  nArgument)
+triggerButtonReleaseBindings (CompDisplay  *d,
+			      CompOption   *option,
+			      int	   nOption,
+			      XButtonEvent *event,
+			      CompOption   *argument,
+			      int	   nArgument)
 {
     CompActionState state = CompActionStateTermButton;
     CompBindingType type  = CompBindingTypeButton | CompBindingTypeEdgeButton;
@@ -350,7 +349,7 @@ triggerButtonReleaseBindings (CompDisplay *d,
     {
 	if (isTerminateBinding (option, type, state, &action))
 	{
-	    if (action->button.button == event->xbutton.button)
+	    if (action->button.button == event->button)
 	    {
 		if ((*action->terminate) (d, action, state,
 					  argument, nArgument))
@@ -368,7 +367,7 @@ static Bool
 triggerKeyPressBindings (CompDisplay *d,
 			 CompOption  *option,
 			 int	     nOption,
-			 XEvent	     *event,
+			 XKeyEvent   *event,
 			 CompOption  *argument,
 			 int	     nArgument)
 {
@@ -377,9 +376,9 @@ triggerKeyPressBindings (CompDisplay *d,
     unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
     unsigned int    bindMods;
 
-    if (event->xkey.keycode == d->escapeKeyCode)
+    if (event->keycode == d->escapeKeyCode)
 	state = CompActionStateCancel;
-    else if (event->xkey.keycode == d->returnKeyCode)
+    else if (event->keycode == d->returnKeyCode)
 	state = CompActionStateCommit;
 
     if (state)
@@ -410,16 +409,16 @@ triggerKeyPressBindings (CompDisplay *d,
 	{
 	    bindMods = virtualToRealModMask (d, action->key.modifiers);
 
-	    if (action->key.keycode == event->xkey.keycode)
+	    if (action->key.keycode == event->keycode)
 	    {
-		if ((bindMods & modMask) == (event->xkey.state & modMask))
+		if ((bindMods & modMask) == (event->state & modMask))
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
 	    }
 	    else if (!d->xkbEvent && action->key.keycode == 0)
 	    {
-		if (bindMods == (event->xkey.state & modMask))
+		if (bindMods == (event->state & modMask))
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
@@ -436,7 +435,7 @@ static Bool
 triggerKeyReleaseBindings (CompDisplay *d,
 			   CompOption  *option,
 			   int	       nOption,
-			   XEvent      *event,
+			   XKeyEvent   *event,
 			   CompOption  *argument,
 			   int	       nArgument)
 {
@@ -446,7 +445,7 @@ triggerKeyReleaseBindings (CompDisplay *d,
     unsigned int    bindMods;
     unsigned int    mods;
 
-    mods = keycodeToModifiers (d, event->xkey.keycode);
+    mods = keycodeToModifiers (d, event->keycode);
     if (!d->xkbEvent && !mods)
 	return FALSE;
 
@@ -458,7 +457,7 @@ triggerKeyReleaseBindings (CompDisplay *d,
 
 	    if ((bindMods & modMask) == 0)
 	    {
-		if (action->key.keycode == event->xkey.keycode)
+		if (action->key.keycode == event->keycode)
 		{
 		    if ((*action->terminate) (d, action, state,
 					      argument, nArgument))
@@ -859,7 +858,8 @@ handleActionEvent (CompDisplay *d,
 		continue;
 
 	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
-	    if (triggerButtonPressBindings (d, option, nOption, event, o, 8))
+	    if (triggerButtonPressBindings (d, option, nOption,
+					    &event->xbutton, o, 8))
 		return TRUE;
 	}
 	break;
@@ -885,7 +885,8 @@ handleActionEvent (CompDisplay *d,
 		continue;
 
 	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
-	    if (triggerButtonReleaseBindings (d, option, nOption, event, o, 8))
+	    if (triggerButtonReleaseBindings (d, option, nOption,
+					      &event->xbutton, o, 8))
 		return TRUE;
 	}
 	break;
@@ -911,7 +912,8 @@ handleActionEvent (CompDisplay *d,
 		continue;
 
 	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
-	    if (triggerKeyPressBindings (d, option, nOption, event, o, 8))
+	    if (triggerKeyPressBindings (d, option, nOption,
+					 &event->xkey, o, 8))
 		return TRUE;
 	}
 	break;
@@ -936,7 +938,8 @@ handleActionEvent (CompDisplay *d,
 	    if (!p->vTable->getObjectOptions)
 		continue;
 	    option = (*p->vTable->getObjectOptions) (p, obj, &nOption);
-	    if (triggerKeyReleaseBindings (d, option, nOption, event, o, 8))
+	    if (triggerKeyReleaseBindings (d, option, nOption,
+					   &event->xkey, o, 8))
 		return TRUE;
 	}
 	break;
