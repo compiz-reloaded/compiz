@@ -1341,7 +1341,7 @@ handleEvent (CompDisplay *d,
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
-	    if (!w->attrib.override_redirect)
+	    if (w->pendingMaps)
 		w->managed = TRUE;
 
 	    /* been shaded */
