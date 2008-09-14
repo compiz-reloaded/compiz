@@ -2387,7 +2387,8 @@ mapWindow (CompWindow *w)
     if (w->attrib.map_state == IsViewable)
 	return;
 
-    w->pendingMaps--;
+    if (w->pendingMaps > 0)
+	w->pendingMaps--;
 
     w->mapNum = w->screen->mapNum++;
 
