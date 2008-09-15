@@ -133,6 +133,8 @@ typedef struct _DecorScreen {
     WindowResizeNotifyProc windowResizeNotify;
 
     WindowStateChangeNotifyProc windowStateChangeNotify;
+
+    CompTimeoutHandle decoratorStartHandle;
 } DecorScreen;
 
 typedef struct _DecorWindow {
@@ -1123,6 +1125,22 @@ decorGetOutputExtentsForWindow (CompWindow	  *w,
     }
 }
 
+static CompBool
+decorStartDecorator (void *closure)
+{
+    CompScreen *s = (CompScreen *) closure;
+
+    DECOR_DISPLAY (s->display);
+    DECOR_SCREEN (s);
+
+    ds->decoratorStartHandle = 0;
+
+    if (!ds->dmWin)
+	runCommand (s, dd->opt[DECOR_DISPLAY_OPTION_COMMAND].value.s);
+
+    return FALSE;
+}
+
 static CompOption *
 decorGetDisplayOptions (CompPlugin  *plugin,
 			CompDisplay *display,
@@ -1520,7 +1538,8 @@ decorInitScreen (CompPlugin *p,
 
     memset (ds->decor, 0, sizeof (ds->decor));
 
-    ds->dmWin = None;
+    ds->dmWin                = None;
+    ds->decoratorStartHandle = 0;
 
     WRAP (ds, s, drawWindow, decorDrawWindow);
     WRAP (ds, s, damageWindowRect, decorDamageWindowRect);
@@ -1534,7 +1553,8 @@ decorInitScreen (CompPlugin *p,
     decorCheckForDmOnScreen (s, FALSE);
 
     if (!ds->dmWin)
-	runCommand (s, dd->opt[DECOR_DISPLAY_OPTION_COMMAND].value.s);
+	ds->decoratorStartHandle = compAddTimeout (0, -1,
+						   decorStartDecorator, s);
 
     return TRUE;
 }
@@ -1550,6 +1570,9 @@ decorFiniScreen (CompPlugin *p,
     for (i = 0; i < DECOR_NUM; i++)
 	if (ds->decor[i])
 	    decorReleaseDecoration (s, ds->decor[i]);
+
+    if (ds->decoratorStartHandle)
+	compRemoveTimeout (ds->decoratorStartHandle);
 
     freeWindowPrivateIndex (s, ds->windowPrivateIndex);
 
