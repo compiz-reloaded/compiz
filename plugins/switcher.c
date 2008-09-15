@@ -605,6 +605,7 @@ switchInitiate (CompScreen            *s,
 	Display		     *dpy = s->display->display;
 	XSizeHints	     xsh;
 	XWMHints	     xwmh;
+	XClassHint           xch;
 	Atom		     state[4];
 	int		     nState = 0;
 	XSetWindowAttributes attr;
@@ -629,6 +630,9 @@ switchInitiate (CompScreen            *s,
 	xwmh.flags = InputHint;
 	xwmh.input = 0;
 
+	xch.res_name  = "compiz";
+	xch.res_class = "switcher-window";
+
 	attr.background_pixel = 0;
 	attr.border_pixel     = 0;
 	attr.colormap	      = XCreateColormap (dpy, s->root, visual,
@@ -644,7 +648,7 @@ switchInitiate (CompScreen            *s,
 
 	XSetWMProperties (dpy, ss->popupWindow, NULL, NULL,
 			  programArgv, programArgc,
-			  &xsh, &xwmh, NULL);
+			  &xsh, &xwmh, &xch);
 
 	state[nState++] = s->display->winStateAboveAtom;
 	state[nState++] = s->display->winStateStickyAtom;
