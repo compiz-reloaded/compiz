@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 11:51+0530\n"
+"POT-Creation-Date: 2008-09-15 14:50+0530\n"
 "PO-Revision-Date: 2006-01-04 08:58+0100\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Lao <i18n@suse.de>\n"
@@ -91,7 +91,7 @@ msgid "Close Window"
 msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgid "Minimize Window"
 msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:153
 msgid "Window Menu"
 msgstr ""
 
@@ -724,263 +724,267 @@ msgstr ""
 msgid "Minimize active window"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:89
-msgid "Number of Desktops"
+#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+msgid "Normal"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:90
-msgid "Number of virtual desktops"
+msgid "Number of Desktops"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:91
-msgid "Off"
+msgid "Number of virtual desktops"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:92
-msgid "Only perform screen updates during vertical blanking period"
+msgid "Off"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:93
-msgid "Open a terminal"
+msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:94
-msgid "Outputs"
+msgid "Open a terminal"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:95
-msgid "Overlapping Output Handling"
+msgid "Outputs"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:96
-msgid "Paint each output device independly, even if the output devices overlap"
+msgid "Overlapping Output Handling"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:97
-msgid "Ping Delay"
+msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:98
-msgid "Prefer larger output"
+msgid "Ping Delay"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:99
-msgid "Prefer smaller output"
+msgid "Prefer larger output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:100
-msgid "Raise On Click"
+msgid "Prefer smaller output"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:101
-msgid "Raise Window"
+msgid "Raise On Click"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:102
-msgid "Raise selected windows after interval"
+msgid "Raise Window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:103
-msgid "Raise window above other windows"
+msgid "Raise selected windows after interval"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:104
-msgid "Raise windows when clicked"
+msgid "Raise window above other windows"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:105
-msgid "Refresh Rate"
+msgid "Raise windows when clicked"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:106
-msgid "Run Dialog"
+msgid "Refresh Rate"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:107
-msgid "Run command 0"
+msgid "Run Dialog"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:108
-msgid "Run command 1"
+msgid "Run command 0"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:109
-msgid "Run command 10"
+msgid "Run command 1"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:110
-msgid "Run command 11"
+msgid "Run command 10"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:111
-msgid "Run command 2"
+msgid "Run command 11"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:112
-msgid "Run command 3"
+msgid "Run command 2"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:113
-msgid "Run command 4"
+msgid "Run command 3"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:114
-msgid "Run command 5"
+msgid "Run command 4"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:115
-msgid "Run command 6"
+msgid "Run command 5"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:116
-msgid "Run command 7"
+msgid "Run command 6"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:117
-msgid "Run command 8"
+msgid "Run command 7"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:118
-msgid "Run command 9"
+msgid "Run command 8"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:119
-msgid "Screen size multiplier for horizontal virtual size"
+msgid "Run command 9"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:120
-msgid "Screen size multiplier for vertical virtual size"
+msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:121
-msgid "Screenshot command line"
+msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:122
-msgid "Show Desktop"
+msgid "Screenshot command line"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:123
-msgid "Show Main Menu"
+msgid "Show Desktop"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:124
-msgid "Show Run Application dialog"
+msgid "Show Main Menu"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:125
-msgid "Show the main menu"
+msgid "Show Run Application dialog"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:126
-msgid "Slow Animations"
+msgid "Show the main menu"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:127
-msgid "Smart mode"
+msgid "Slow Animations"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:128
-msgid "Sync To VBlank"
+msgid "Smart mode"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:129
-msgid "Take a screenshot"
+msgid "Sync To VBlank"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:130
-msgid "Take a screenshot of a window"
+msgid "Take a screenshot"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:131
-msgid "Terminal command line"
+msgid "Take a screenshot of a window"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:132
-msgid "Texture Compression"
+msgid "Terminal command line"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:133
-msgid "Texture Filter"
+msgid "Texture Compression"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:134
-msgid "Texture filtering"
+msgid "Texture Filter"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:135
-msgid "The rate at which the screen is redrawn (times/second)"
+msgid "Texture filtering"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:136
-msgid "Toggle Window Maximized"
+msgid "The rate at which the screen is redrawn (times/second)"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:137
-msgid "Toggle Window Maximized Horizontally"
+msgid "Toggle Window Maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:138
-msgid "Toggle Window Maximized Vertically"
+msgid "Toggle Window Maximized Horizontally"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:139
-msgid "Toggle Window Shaded"
+msgid "Toggle Window Maximized Vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:140
-msgid "Toggle active window maximized"
+msgid "Toggle Window Shaded"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:141
-msgid "Toggle active window maximized horizontally"
+msgid "Toggle active window maximized"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:142
-msgid "Toggle active window maximized vertically"
+msgid "Toggle active window maximized horizontally"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:143
-msgid "Toggle active window shaded"
+msgid "Toggle active window maximized vertically"
 msgstr ""
 
 #: ../metadata/core.xml.in.h:144
+msgid "Toggle active window shaded"
+msgstr ""
+
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle use of slow animations"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:147
 msgid "Unmaximize active window"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:148
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:149
 msgid "Use diffuse light when screen is transformed"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:150
 msgid "Vertical Virtual Size"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:151
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:152
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu button binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:155
 msgid "Window menu key binding"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:156
 msgid "Window screenshot command line"
 msgstr ""
 
@@ -1684,10 +1688,6 @@ msgstr ""
 
 #: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
-msgstr ""
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
 msgstr ""
 
 #: ../metadata/resize.xml.in.h:13

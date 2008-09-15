@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 11:51+0530\n"
+"POT-Creation-Date: 2008-09-15 14:50+0530\n"
 "PO-Revision-Date: 2007-12-16 17:03+0530\n"
 "Last-Translator: Sangeeta Kumari\n"
 "Language-Team: <en@li.org>\n"
@@ -98,7 +98,7 @@ msgid "Close Window"
 msgstr "windows"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
 msgstr "विंडो अधिकतम खत्म करें"
 
@@ -113,7 +113,7 @@ msgid "Minimize Window"
 msgstr "विंडो न्यूनतम करें"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:153
 #, fuzzy
 msgid "Window Menu"
 msgstr "विन्डो मैनेजर"
@@ -806,291 +806,295 @@ msgstr "सक्रिय विंडो लंबवत रूप से अ�
 msgid "Minimize active window"
 msgstr "सक्रिय विंडो न्यूनतम करें"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "सामान्य"
+
+#: ../metadata/core.xml.in.h:90
 #, fuzzy
 msgid "Number of Desktops"
 msgstr "डेसक्टाप"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:91
 #, fuzzy
 msgid "Number of virtual desktops"
 msgstr "डेसक्टाप"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "लंबवत रिक्ति अवधि के दौरान सिर्फ स्क्रीन अद्यतन निष्पादित करें"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Open a terminal"
 msgstr "टर्मिनल खोलें"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:95
 msgid "Outputs"
 msgstr "आउटपुट"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:96
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 #, fuzzy
 msgid "Ping Delay"
 msgstr "डिले"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 #, fuzzy
 msgid "Raise On Click"
 msgstr "रेडियो क्लोक (&R)"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 #, fuzzy
 msgid "Raise Window"
 msgstr "windows"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Raise selected windows after interval"
 msgstr "चयनित विंडो अंतराल के बाद उठाएं"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
 msgid "Raise window above other windows"
 msgstr "विंडो को अन्य विंडो के ऊपर रखें"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:105
 msgid "Raise windows when clicked"
 msgstr "क्लिक किये जाने पर विंडो उठाएं"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:106
 #, fuzzy
 msgid "Refresh Rate"
 msgstr "ताजा करो"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:107
 #, fuzzy
 msgid "Run Dialog"
 msgstr "टोण डायलिन्क (&T)"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:108
 #, fuzzy
 msgid "Run command 0"
 msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:109
 #, fuzzy
 msgid "Run command 1"
 msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:110
 #, fuzzy
 msgid "Run command 10"
 msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:111
 #, fuzzy
 msgid "Run command 11"
 msgstr "कमान्ड '%1'"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:112
 #, fuzzy
 msgid "Run command 2"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:113
 #, fuzzy
 msgid "Run command 3"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:114
 #, fuzzy
 msgid "Run command 4"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:115
 #, fuzzy
 msgid "Run command 5"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:116
 #, fuzzy
 msgid "Run command 6"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:117
 #, fuzzy
 msgid "Run command 7"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:118
 #, fuzzy
 msgid "Run command 8"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:119
 #, fuzzy
 msgid "Run command 9"
 msgstr "कमांड:"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:120
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "क्षैतिज वर्चुअल आकार के लिए स्क्रीन आकार गुणक"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:121
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "लंबवत वर्चुअल आकार के लिए स्क्रीन आकार गुणक"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:122
 #, fuzzy
 msgid "Screenshot command line"
 msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:123
 #, fuzzy
 msgid "Show Desktop"
 msgstr "डेसक्टाप"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:124
 msgid "Show Main Menu"
 msgstr "दिखाएँ मुख्य मेनू"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:125
 msgid "Show Run Application dialog"
 msgstr "रन अनुप्रयोग संवाद दिखाएँ"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:126
 msgid "Show the main menu"
 msgstr "मुख्य मेनू दिखाएँ"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:127
 #, fuzzy
 msgid "Slow Animations"
 msgstr "सिमुलेशन"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:128
 #, fuzzy
 msgid "Smart mode"
 msgstr "स्मार्ट"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:129
 msgid "Sync To VBlank"
 msgstr "VBlank में तुल्यकालित करें"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot"
 msgstr "स्क्रीनशॉट का चित्र लें"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:131
 msgid "Take a screenshot of a window"
 msgstr "विंडो का स्क्रीनशॉट लें"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:132
 #, fuzzy
 msgid "Terminal command line"
 msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:133
 #, fuzzy
 msgid "Texture Compression"
 msgstr "फिल्टर सैट करें"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:134
 #, fuzzy
 msgid "Texture Filter"
 msgstr "फिल्टर सैट करें"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:135
 #, fuzzy
 msgid "Texture filtering"
 msgstr "फिल्टर सैट करें"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:136
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "दर जिसपर स्क्रीन फिर खीचा जाता है (समय/सेकेंड)"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized"
 msgstr "विंडो अधिकतम पर टॉगल करें"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Horizontally"
 msgstr "विंडो अधिकतम पर क्षैतिज रूप से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Maximized Vertically"
 msgstr "विंडो अधिकतम पर लंबवत रूप से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle Window Shaded"
 msgstr "विंडो छायांकित रूप में टॉगल करें"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized"
 msgstr "सक्रिय विंडो अधिकतम रूप में टॉगल करें"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized horizontally"
 msgstr "सक्रिय विंडो अधिकतम रूप में क्षैतिज प्रकार से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window maximized vertically"
 msgstr "सक्रिय विंडो अधिकतम रूप में लंवबत प्रकार से टॉगल करें"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle active window shaded"
 msgstr "सक्रिय विंडो छायांकित रूप में टॉगल करें"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle use of slow animations"
 msgstr "धीमा संजीवन के प्रयोग को टॉगल करें"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:147
 msgid "Unmaximize active window"
 msgstr "सक्रिय विंडो अधिकतम खत्म करें"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:148
 msgid "Unredirect Fullscreen Windows"
 msgstr "पूर्ण स्क्रीन विंडोज़ को पुनर्निर्देशित मत करें"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:149
 msgid "Use diffuse light when screen is transformed"
 msgstr "स्क्रीन के बदले जाने पर विसरित प्रकाश का प्रयोग करें"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:150
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "विरचयुल उपकरण"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:151
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:152
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu button binding"
 msgstr "विंडो मेनू बटन बाइंडिंग"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:155
 msgid "Window menu key binding"
 msgstr "विंडो मेनू की बाइंडिंग"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:156
 msgid "Window screenshot command line"
 msgstr "विंडो स्क्रीनशॉट कमांड लाइन"
 
@@ -1876,10 +1880,6 @@ msgstr "भारत"
 #, fuzzy
 msgid "Initiate Window Resize"
 msgstr "भारत"
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "सामान्य"
 
 #: ../metadata/resize.xml.in.h:13
 #, fuzzy
