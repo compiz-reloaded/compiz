@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 11:51+0530\n"
+"POT-Creation-Date: 2008-09-15 14:50+0530\n"
 "PO-Revision-Date: 2008-04-18 17:08+0200\n"
 "Last-Translator: Harald van Bree <harald@vanbree.nl.eu.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -109,7 +109,7 @@ msgid "Close Window"
 msgstr "Venster sluiten"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
 msgstr "Demaximaliseer venster"
 
@@ -124,7 +124,7 @@ msgid "Minimize Window"
 msgstr "Venster minimaliseren"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:153
 msgid "Window Menu"
 msgstr "Venster menu"
 
@@ -800,266 +800,270 @@ msgstr "Maximaliseer actief venster verticaal"
 msgid "Minimize active window"
 msgstr "Minimaliseer actief venster"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Normaal"
+
+#: ../metadata/core.xml.in.h:90
 msgid "Number of Desktops"
 msgstr "Aantal bureaubladen"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:91
 msgid "Number of virtual desktops"
 msgstr "Aantal virtuele bureabladen"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Scherm alleen bijwerken tijdens verticale blanking periode"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Open a terminal"
 msgstr "Een terminal openen"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:95
 msgid "Outputs"
 msgstr "Uitvoer"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:96
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Ping Delay"
 msgstr "Ping vertraging"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 msgid "Raise On Click"
 msgstr "Op voorgrond na klikken"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 msgid "Raise Window"
 msgstr "Venster naar de voorgrond"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Raise selected windows after interval"
 msgstr "Breng venster naar de voorgrond na interval"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
 msgid "Raise window above other windows"
 msgstr "Breng venster op voorgrond over andere vensters"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:105
 msgid "Raise windows when clicked"
 msgstr "Breng venster naar de voorgrond na aanklikken"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:106
 msgid "Refresh Rate"
 msgstr "Verversings snelheid"
 
 # /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:336
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:107
 msgid "Run Dialog"
 msgstr "Uitvoeren dialoog"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 0"
 msgstr "Start commando 0"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 1"
 msgstr "Start commando 1"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 10"
 msgstr "Start commando 10"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 11"
 msgstr "Start commando 11"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 2"
 msgstr "Start commando 2"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 3"
 msgstr "Start commando 3"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 4"
 msgstr "Start commando 4"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 5"
 msgstr "Start commando 5"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 6"
 msgstr "Start commando 6"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 7"
 msgstr "Start commando 7"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 8"
 msgstr "Start commando 8"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 9"
 msgstr "Start commando 9"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:120
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Schermgrootte vermenigvuldiger voor horizontale grootte"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:121
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "scherm grootte vermenigvuldiger voor verticale grootte"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:122
 msgid "Screenshot command line"
 msgstr "Schermafdruk commodo regel"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:123
 msgid "Show Desktop"
 msgstr "Toon bureaublad"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:124
 msgid "Show Main Menu"
 msgstr "Toon Hoofdmenu"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:125
 msgid "Show Run Application dialog"
 msgstr "Toon start applicatie dialoog venster"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:126
 msgid "Show the main menu"
 msgstr "Toon hoofdmenu"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:127
 msgid "Slow Animations"
 msgstr "Langzame animaties"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:128
 #, fuzzy
 msgid "Smart mode"
 msgstr "Slim"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:129
 msgid "Sync To VBlank"
 msgstr "Sync naar VBlank"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot"
 msgstr "Maak een schermafdruk"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:131
 msgid "Take a screenshot of a window"
 msgstr "Maak een schermafdruk van een venster"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:132
 msgid "Terminal command line"
 msgstr "Terminal commando regel"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:133
 #, fuzzy
 msgid "Texture Compression"
 msgstr "Texturen filteren"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:134
 msgid "Texture Filter"
 msgstr "Texturen filter"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:135
 msgid "Texture filtering"
 msgstr "Texturen filteren"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:136
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "De snelheid waarin een scherm opnieuw getekend wordt (tijd/seconden)"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized"
 msgstr "Schakel venster gemaximaliseerd"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Schakel venster horizontaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Maximized Vertically"
 msgstr "Schakel venster vertikaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle Window Shaded"
 msgstr "Schakel venster opgerold"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized"
 msgstr "Schakel actief venster gemaximaliseerd"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized horizontally"
 msgstr "Schakel actief venster horizontaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window maximized vertically"
 msgstr "Schakel actief venster vertikaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle active window shaded"
 msgstr "Schakel actief venster schaduw"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle use of slow animations"
 msgstr "Schakel het gebruik van langzame animaties"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:147
 msgid "Unmaximize active window"
 msgstr "Demaximaliseer actief venster"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:148
 msgid "Unredirect Fullscreen Windows"
 msgstr "Niet omleiden van volledig scherm vensters"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:149
 msgid "Use diffuse light when screen is transformed"
 msgstr "Gebruik diffuus licht als het scherm wordt getransformeerd"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:150
 msgid "Vertical Virtual Size"
 msgstr "Verticale virtuele grootte"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:151
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:152
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu button binding"
 msgstr "Venster menu knop verbinding"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:155
 msgid "Window menu key binding"
 msgstr "Venster menu knop verbinding"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:156
 msgid "Window screenshot command line"
 msgstr "Venster schermafdruk commando"
 
@@ -1807,10 +1811,6 @@ msgstr "Initiëer rekken venster grootte aanpassing"
 #: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
 msgstr "Initiëer venster grootte aanpassing"
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "Normaal"
 
 #: ../metadata/resize.xml.in.h:13
 msgid "Normal Resize Windows"
