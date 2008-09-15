@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 11:52+0530\n"
+"POT-Creation-Date: 2008-09-15 14:51+0530\n"
 "PO-Revision-Date: 2008-02-18 19:36+0100\n"
 "Last-Translator: Sebastian Parborg <zedDB@hotmail.com>\n"
 "Language-Team: Compiz Fusion Translators <i18n@lists.compiz-fusion.org>\n"
@@ -104,7 +104,7 @@ msgid "Close Window"
 msgstr "Stäng fönster"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
 msgstr "Avmaximera fönster"
 
@@ -119,7 +119,7 @@ msgid "Minimize Window"
 msgstr "Minimera fönster"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:153
 msgid "Window Menu"
 msgstr "Fönstermeny"
 
@@ -778,270 +778,274 @@ msgstr "Maximera aktivt fönster vertikalt"
 msgid "Minimize active window"
 msgstr "Minimera aktivt fönster"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Normal"
+
+#: ../metadata/core.xml.in.h:90
 msgid "Number of Desktops"
 msgstr "Antal skrivbord"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:91
 msgid "Number of virtual desktops"
 msgstr "Antal virtuella skrivbord"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 #, fuzzy
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Uför endast skärmuppdateringar under den vertikala blanknings perioden"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Open a terminal"
 msgstr "Öppna en terminal"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:95
 msgid "Outputs"
 msgstr "Utmatningar"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:96
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Ping Delay"
 msgstr "Fördröjning för ping"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 msgid "Raise On Click"
 msgstr "Höj vid klick"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 msgid "Raise Window"
 msgstr "Höj fönster"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Raise selected windows after interval"
 msgstr "Höj markerade fönster efter intervall"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
 msgid "Raise window above other windows"
 msgstr "Höj fönstret över andra fönster"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:105
 msgid "Raise windows when clicked"
 msgstr "Höj fönster när de klickas på"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:106
 msgid "Refresh Rate"
 msgstr "Uppdateringsfrekvens"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:107
 msgid "Run Dialog"
 msgstr "Kördialog"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 0"
 msgstr "Kör kommando 0"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 1"
 msgstr "Kör kommando 1"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 10"
 msgstr "Kör kommando 10"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 11"
 msgstr "Kör kommando 11"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 2"
 msgstr "Kör kommando 2"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 3"
 msgstr "Kör kommando 3"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 4"
 msgstr "Kör kommando 4"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 5"
 msgstr "Kör kommando 5"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 6"
 msgstr "Kör kommando 6"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 7"
 msgstr "Kör kommando 7"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 8"
 msgstr "Kör kommando 8"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 9"
 msgstr "Kör kommando 9"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:120
 #, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Skärmstorleksfaktor för virtuell horisontell storlek"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:121
 #, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Skärmstorleksfaktor för virtuell vertikal storlek"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:122
 msgid "Screenshot command line"
 msgstr "Kommandorad för skärmbild"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:123
 msgid "Show Desktop"
 msgstr "Visa skrivbordet"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:124
 msgid "Show Main Menu"
 msgstr "Visa huvudmeny"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:125
 msgid "Show Run Application dialog"
 msgstr "Visa dialogen Kör program"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:126
 msgid "Show the main menu"
 msgstr "Visa huvudmenyn"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:127
 msgid "Slow Animations"
 msgstr "Långsamma animeringar"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:128
 #, fuzzy
 msgid "Smart mode"
 msgstr "Smart"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:129
 msgid "Sync To VBlank"
 msgstr "Synkronisera till VBlank"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot"
 msgstr "Ta en skärmbild"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:131
 msgid "Take a screenshot of a window"
 msgstr "Ta en skärmbild av ett fönster"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:132
 msgid "Terminal command line"
 msgstr "Kommandorad för terminal"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:133
 #, fuzzy
 msgid "Texture Compression"
 msgstr "Texturfiltrering"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:134
 msgid "Texture Filter"
 msgstr "Texturfilter"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:135
 msgid "Texture filtering"
 msgstr "Texturfiltrering"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:136
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Frekvensen för updatering av skärmen (gånger/sekund)"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized"
 msgstr "Växla fönstermaximering"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Växla fönstermaximering horisontellt"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Maximized Vertically"
 msgstr "Växla fönstermaximering vertikalt"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle Window Shaded"
 msgstr "Växla fönsterskuggning"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized"
 msgstr "Växla maximering av aktivt fönster"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized horizontally"
 msgstr "Växla horisontell maximering av aktivt fönster"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window maximized vertically"
 msgstr "Växla vertikal maximering av aktivt fönster"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle active window shaded"
 msgstr "Växla skuggning av aktivt fönster"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle use of slow animations"
 msgstr "Växla användning av långsamma animeringar"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:147
 msgid "Unmaximize active window"
 msgstr "Avmaximera aktivt fönster"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:148
 msgid "Unredirect Fullscreen Windows"
 msgstr "Omdirigera tillbaka helskärmsfönster"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:149
 msgid "Use diffuse light when screen is transformed"
 msgstr "Använd diffus belysning när skärmen transformeras"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:150
 msgid "Vertical Virtual Size"
 msgstr "Vertikal virtuell storlek"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:151
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:152
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:154
 #, fuzzy
 msgid "Window menu button binding"
 msgstr "Fönstermenyns knappbindning"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:155
 #, fuzzy
 msgid "Window menu key binding"
 msgstr "Fönstermenyns tangentbindning"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:156
 msgid "Window screenshot command line"
 msgstr "Kommandorad för fönsterskärmbild"
 
@@ -1780,10 +1784,6 @@ msgstr "Initiera töjnings fönsterskalning"
 #: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
 msgstr "Initiera fönsterskalning"
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "Normal"
 
 #: ../metadata/resize.xml.in.h:13
 msgid "Normal Resize Windows"

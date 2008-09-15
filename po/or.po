@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Oriya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 11:51+0530\n"
+"POT-Creation-Date: 2008-09-15 14:51+0530\n"
 "PO-Revision-Date: 2007-12-16 01:13+0530\n"
 "Last-Translator: jayashree pujari <sspujari@hotmail.com>\n"
 "Language-Team: gisti <info.gist@cdac.in>\n"
@@ -94,7 +94,7 @@ msgid "Close Window"
 msgstr "ଉଇଣ୍ଡୋ ବନ୍ଦକର"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
 msgstr "ଅଣ-ସର୍ବାଧିକ ଉଇଣ୍ଡୋ"
 
@@ -109,7 +109,7 @@ msgid "Minimize Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ନ୍ଯୁନତମ କର"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:153
 msgid "Window Menu"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ"
 
@@ -741,265 +741,269 @@ msgstr "ଦଣ୍ଡରୂପରେ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ 
 msgid "Minimize active window"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ନ୍ଯୁନତମ କର"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "ସାମାନ୍ଯ"
+
+#: ../metadata/core.xml.in.h:90
 msgid "Number of Desktops"
 msgstr "ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:91
 msgid "Number of virtual desktops"
 msgstr "କଳ୍ପିତ ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "ଦଣ୍ଡରୂପ ଖାଲିକରିବା ଅବଧି ସମଯରେ କେବଳ ସ୍କ୍ରିନ ଅପଡେଟଗୁଡିକୁ କର"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Open a terminal"
 msgstr "ଗୋଟିଏ ଟର୍ମିନାଲ ଖୋଲ"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:95
 msgid "Outputs"
 msgstr "ଆଉଟପୁଟଗୁଡିକ"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:96
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Ping Delay"
 msgstr "ପିଙ୍ଗ ବିଳମ୍ବ"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 msgid "Raise On Click"
 msgstr "କ୍ଲିକରେ ଉତ୍ଥାନକର"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 msgid "Raise Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଉଠାଅ"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Raise selected windows after interval"
 msgstr "ବ୍ଯବଧାନ ପରେ ମନୋନୀତ ଉଇଣ୍ଡୋକୁ ଉତ୍ଥାନ କର"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
 msgid "Raise window above other windows"
 msgstr "ଅନ୍ଯ ଉଇଣ୍ଡୋ ଗୁଡିକ ଉପରକୁ ଉଠାଅ"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:105
 msgid "Raise windows when clicked"
 msgstr "ୟେବେ କ୍ଲିକ ହୁଏ ଉଇଣ୍ଡୋକୁ ଉତ୍ଥାନକର"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:106
 msgid "Refresh Rate"
 msgstr "ରିଫ୍ରେସ ଦର"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:107
 msgid "Run Dialog"
 msgstr "ଚଳାଅ ଡାଏଲଗ"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 0"
 msgstr "ଚଳାଅ ଆଦେଶ ୦"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 1"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 10"
 msgstr "ଚଳାଅ ଆଦେଶ ୧୦"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 11"
 msgstr "ଚଳାଅ ଆଦେଶ ୧୧"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 2"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 3"
 msgstr "ଚଳାଅ ଆଦେଶ ୩"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 4"
 msgstr "ଚଳାଅ ଆଦେଶ ୪"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 5"
 msgstr "ଚଳାଅ ଆଦେଶ ୫"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 6"
 msgstr "ଚଳାଅ ଆଦେଶ ୬"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 7"
 msgstr "ଚଳାଅ ଆଦେଶ ୭"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 8"
 msgstr "ଚଳାଅ ଆଦେଶ ୮"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 9"
 msgstr "ଚଳାଅ ଆଦେଶ ୯"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:120
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "ଦିଗବଳୀଯ କଳ୍ପିତ ଆକାର ପାଇଁ ସ୍କ୍ରିନ ଆକାର ଗୁଣକ"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:121
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "ଦଣ୍ଡରୂପୀ କଳ୍ପିତ ଆକାର ପାଇଁ ସ୍କ୍ରିନ ଆକାର ଗୁଣକ"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:122
 msgid "Screenshot command line"
 msgstr "ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:123
 msgid "Show Desktop"
 msgstr "ଡେସ୍କଟପ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:124
 msgid "Show Main Menu"
 msgstr "ମୂଖ୍ଯ ମେନୁ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:125
 msgid "Show Run Application dialog"
 msgstr "ଚାଳାଅ ପ୍ରଯୋଗ ଡାଏଲଗକୁ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:126
 msgid "Show the main menu"
 msgstr "ମୂଖ୍ଯ ମେନୁକୁ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:127
 msgid "Slow Animations"
 msgstr "ଧୀର ଚଳଚ୍ଚିତ୍ର  "
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:128
 #, fuzzy
 msgid "Smart mode"
 msgstr "ସ୍ଫୁର୍ତ୍ତି"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:129
 msgid "Sync To VBlank"
 msgstr "ସିଙ୍କ Vଖାଲିକୁ"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot"
 msgstr "ଗୋଟିଏ ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:131
 msgid "Take a screenshot of a window"
 msgstr "ଗୋଟିଏ ଉଇଣ୍ଡୋର ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:132
 msgid "Terminal command line"
 msgstr "ଟର୍ମିନାଲ ଆଦେଶ ରେଖା"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:133
 #, fuzzy
 msgid "Texture Compression"
 msgstr "ଟେକ୍ସଟର ଫିଲ୍ଟର କରିବା"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:134
 msgid "Texture Filter"
 msgstr "ଟେକ୍ସଚର ଫିଲ୍ଟର"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:135
 msgid "Texture filtering"
 msgstr "ଟେକ୍ସଟର ଫିଲ୍ଟର କରିବା"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:136
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "ଦର ୟେଉଁଥିରେ ସ୍କ୍ରିନ ପୁନଃଅଂକିତ ହୋଇଛି (ସମଯ/ସେକେଣ୍ଡ)"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized"
 msgstr "ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Horizontally"
 msgstr "ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Maximized Vertically"
 msgstr "ଦଣ୍ଡ ଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle Window Shaded"
 msgstr "ଛାଯାୟୁକ୍ତ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized"
 msgstr "ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized horizontally"
 msgstr "ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window maximized vertically"
 msgstr "ଦଣ୍ଡ ଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle active window shaded"
 msgstr "ଛାଯାୟୁକ୍ତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle use of slow animations"
 msgstr "ଧୀର ଚଳଚିତ୍ରଗୁଡିକର ଉପୟୋଗକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:147
 msgid "Unmaximize active window"
 msgstr "ଅଣ-ସର୍ବାଧିକ ସକ୍ରିଯ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:148
 msgid "Unredirect Fullscreen Windows"
 msgstr "ଅଣ-ପୁନଃନିର୍ଦ୍ଦେଶିତ ପୂର୍ଣ୍ଣ ସ୍କ୍ରିନ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:149
 msgid "Use diffuse light when screen is transformed"
 msgstr "ୟେବେ ସ୍କ୍ରିନ ରୂପାନ୍ତରିତ ହୋଇଥାଏ, ବିକ୍ଷିପ୍ତ ଆଲୋକ ଉପୟୋଗ କର"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:150
 msgid "Vertical Virtual Size"
 msgstr "ଦଣ୍ଡରୂପୀ କଳ୍ପିତ ଆକାର"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:151
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:152
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu button binding"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ ବଟନ ବନ୍ଧନ"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:155
 msgid "Window menu key binding"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ କି ବନ୍ଧନ"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:156
 msgid "Window screenshot command line"
 msgstr "ଉଇଣ୍ଡୋ ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 
@@ -1716,10 +1720,6 @@ msgstr "ବିସ୍ତାରିତ ଉଇଣ୍ଡୋ ପୁନଃଆକାର�
 #: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
 msgstr "ଉଇଣ୍ଡୋ ପୁନଃଆକାରଦେବା ପ୍ରାରମ୍ଭ କର"
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "ସାମାନ୍ଯ"
 
 #: ../metadata/resize.xml.in.h:13
 msgid "Normal Resize Windows"

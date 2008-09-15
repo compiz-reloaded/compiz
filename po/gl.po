@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 11:50+0530\n"
+"POT-Creation-Date: 2008-09-15 14:50+0530\n"
 "PO-Revision-Date: 2008-05-25 20:04+0200\n"
 "Last-Translator: Fran Diéguez (GLUG) <fran.dieguez@glug.es>\n"
 "Language-Team: <gl@li.org>\n"
@@ -103,7 +103,7 @@ msgid "Close Window"
 msgstr "Pechar Fiestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
 msgstr "Desmaximizar Fiestra"
 
@@ -118,7 +118,7 @@ msgid "Minimize Window"
 msgstr "Minimizar Fiestra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:153
 msgid "Window Menu"
 msgstr "Menú da Fiestra"
 
@@ -784,266 +784,270 @@ msgstr "Maximizar fiestra activa verticalmente"
 msgid "Minimize active window"
 msgstr "Minimizar fiestra activa"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Normal"
+
+#: ../metadata/core.xml.in.h:90
 msgid "Number of Desktops"
 msgstr "Número de escritorios"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:91
 msgid "Number of virtual desktops"
 msgstr "Número de escritorios virtuais"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Só efectuar actualizacións de pantalla durante o período de limpeza vertical"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Open a terminal"
 msgstr "Abrir un terminal"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:95
 msgid "Outputs"
 msgstr "Saídas"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:96
 msgid "Overlapping Output Handling"
 msgstr "Mantemento das Saídas Superpostas"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 "Debuxar cada dispositivo de caída independentemente, aínda que os "
 "dispositivos de saída se superpoñan"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Ping Delay"
 msgstr "Atraso de ping"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer larger output"
 msgstr "Preferir saída máis grande"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Prefer smaller output"
 msgstr "Preferir saída máis pequena"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 msgid "Raise On Click"
 msgstr "Elevar cun clic"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 msgid "Raise Window"
 msgstr "Elevar fiestra"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Raise selected windows after interval"
 msgstr "Elevar fiestras selecionadas despois dun intervalo"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
 msgid "Raise window above other windows"
 msgstr "Elevar fiestra enriba das restantes"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:105
 msgid "Raise windows when clicked"
 msgstr "Elevar fiestras cando sexan clicadas"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:106
 msgid "Refresh Rate"
 msgstr "Taxa de Actualización"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:107
 msgid "Run Dialog"
 msgstr "Caixa de Diálogo Executar"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 0"
 msgstr "Executar comando 0"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 1"
 msgstr "Executar comando 1"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 10"
 msgstr "Executar comando 10"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 11"
 msgstr "Executar comando 11"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 2"
 msgstr "Executar comando 2"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 3"
 msgstr "Executar comando 3"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 4"
 msgstr "Executar comando 4"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 5"
 msgstr "Executar comando 5"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 6"
 msgstr "Executar comando 6"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 7"
 msgstr "Executar comando 7"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 8"
 msgstr "Executar comando 8"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 9"
 msgstr "Executar comando 9"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:120
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplicador de tamaño horizontal de pantalla para tamaño virtual"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:121
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplicador de tamaño vertical de pantalla para tamaño virtual"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:122
 msgid "Screenshot command line"
 msgstr "Capturar pantalla da liña de comando"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:123
 msgid "Show Desktop"
 msgstr "Mostrar Área de Traballo"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:124
 msgid "Show Main Menu"
 msgstr "Mostrar Menú Principal"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:125
 msgid "Show Run Application dialog"
 msgstr "Mostrar caixa de diálogo Executar Aplicativo"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:126
 msgid "Show the main menu"
 msgstr "Mostrar o menú principal"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:127
 msgid "Slow Animations"
 msgstr "Animacións Lentas"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:128
 msgid "Smart mode"
 msgstr "Modo intelixente"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:129
 msgid "Sync To VBlank"
 msgstr "Sincronizar a VBlank"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot"
 msgstr "Efetuar unha captura de pantalla"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:131
 msgid "Take a screenshot of a window"
 msgstr "Efetuar captura de pantalla dunha fiestra"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:132
 msgid "Terminal command line"
 msgstr "Liña de comando do terminal"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:133
 msgid "Texture Compression"
 msgstr "Compresión de Texturas"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:134
 msgid "Texture Filter"
 msgstr "Filtro de Textura"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:135
 msgid "Texture filtering"
 msgstr "Filtro de Texturas"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:136
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Taxa en que a pantalla é redebuxada (veces/segundo) "
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized"
 msgstr "Alternar Fiestra Maximizada"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Alternar Fiestra Maximizada Horizontalmente"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Maximized Vertically"
 msgstr "Alternar Fiestra Maximizada Verticalmente"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle Window Shaded"
 msgstr "Alternar Fiestra Sombreada"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized"
 msgstr "Alternar fiestra activa maximizada"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized horizontally"
 msgstr "Alternar fiestra activa maximizada horizontalmente"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window maximized vertically"
 msgstr "Alternar fiestra activa maximizada verticalmente"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle active window shaded"
 msgstr "Alternar fiestra activa sombreada"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle use of slow animations"
 msgstr "Alternar uso de animacións lentas"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:147
 msgid "Unmaximize active window"
 msgstr "Desmaximizar fiestra activa"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:148
 msgid "Unredirect Fullscreen Windows"
 msgstr "Anular redirecionamento de fiestras de pantalla inteira"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:149
 msgid "Use diffuse light when screen is transformed"
 msgstr "Empregar luz difusa cando a pantalla sexa transformada"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:150
 msgid "Vertical Virtual Size"
 msgstr "Tamaño Vertical Virtual"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:151
 msgid "Very High"
 msgstr "Moi Alta"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:152
 msgid "Which one of overlapping output devices should be preferred"
 msgstr "Cal dos dispositivos de saída de sobreposición debería ser preferido"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu button binding"
 msgstr "Botón de atallo para menú da fiestra"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:155
 msgid "Window menu key binding"
 msgstr "Tecla de atallo para menú da fiestra"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:156
 msgid "Window screenshot command line"
 msgstr "Liña de comando para captura de pantalla de fiestras"
 
@@ -1769,10 +1773,6 @@ msgstr "Iniciar Redimensionamento Esticado de Fiestras"
 #: ../metadata/resize.xml.in.h:11
 msgid "Initiate Window Resize"
 msgstr "Iniciar Redimensionamento de Fiestras"
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "Normal"
 
 #: ../metadata/resize.xml.in.h:13
 msgid "Normal Resize Windows"

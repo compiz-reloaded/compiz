@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 11:52+0530\n"
+"POT-Creation-Date: 2008-09-15 14:51+0530\n"
 "PO-Revision-Date: 2008-05-19 19:29+0300\n"
 "Last-Translator: Sergiu Bivol <sbivol87@gmail.com>\n"
 "Language-Team: Română <kde-i18n-ro@kde.org>\n"
@@ -100,7 +100,7 @@ msgid "Close Window"
 msgstr "Închide fereastra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
 msgstr "Demaximizează fereastra"
 
@@ -115,7 +115,7 @@ msgid "Minimize Window"
 msgstr "Minimizează fereastra"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.h:153
 msgid "Window Menu"
 msgstr "Meniu fereastră"
 
@@ -785,265 +785,269 @@ msgstr "Maximizează vertical fereastra activă"
 msgid "Minimize active window"
 msgstr "Minimizează fereastra activă"
 
-#: ../metadata/core.xml.in.h:89
+#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+msgid "Normal"
+msgstr "Normală"
+
+#: ../metadata/core.xml.in.h:90
 msgid "Number of Desktops"
 msgstr "Număr de birouri"
 
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.h:91
 msgid "Number of virtual desktops"
 msgstr "Numărul de birouri virtuale"
 
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.h:92
 msgid "Off"
 msgstr "Deconectat"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.h:93
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Actualizează ecranul numai în timpul golirii verticale"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.h:94
 msgid "Open a terminal"
 msgstr "Deschide o consolă"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.h:95
 msgid "Outputs"
 msgstr "Ieșiri"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.h:96
 msgid "Overlapping Output Handling"
 msgstr "Manipulant suprapunere ieșiri"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.h:97
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 "Desenează independent fiecare dispozitiv de ieșire, chiar dacă dispozitivele "
 "de ieșire se suprapun"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.h:98
 msgid "Ping Delay"
 msgstr "Întîrziere interogare"
 
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.h:99
 msgid "Prefer larger output"
 msgstr "Preferă ieșirea mai mare"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.h:100
 msgid "Prefer smaller output"
 msgstr "Preferă ieșirea mai mică"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.h:101
 msgid "Raise On Click"
 msgstr "Ridicare la clic"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.h:102
 msgid "Raise Window"
 msgstr "Ridicare fereastră"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.h:103
 msgid "Raise selected windows after interval"
 msgstr "Ridicare ferestre alese după interval"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.h:104
 msgid "Raise window above other windows"
 msgstr "Ridicare fereastră deasupra celorlalte ferestre"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.h:105
 msgid "Raise windows when clicked"
 msgstr "Ridică ferestrele la clic"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.h:106
 msgid "Refresh Rate"
 msgstr "Rata de reîmprospătare"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.h:107
 msgid "Run Dialog"
 msgstr "Dialog ececuție"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.h:108
 msgid "Run command 0"
 msgstr "Execută comanda 0"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.h:109
 msgid "Run command 1"
 msgstr "Execută comanda 1"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.h:110
 msgid "Run command 10"
 msgstr "Execută comanda 10"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.h:111
 msgid "Run command 11"
 msgstr "Execută comanda 11"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.h:112
 msgid "Run command 2"
 msgstr "Execută comanda 2"
 
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.h:113
 msgid "Run command 3"
 msgstr "Execută comanda 3"
 
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.h:114
 msgid "Run command 4"
 msgstr "Execută comanda 4"
 
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.h:115
 msgid "Run command 5"
 msgstr "Execută comanda 5"
 
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.h:116
 msgid "Run command 6"
 msgstr "Execută comanda 6"
 
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.h:117
 msgid "Run command 7"
 msgstr "Execută comanda 7"
 
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.h:118
 msgid "Run command 8"
 msgstr "Execută comanda 8"
 
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.h:119
 msgid "Run command 9"
 msgstr "Execută comanda 9"
 
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.h:120
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplicator dimensiune ecran pentru dimensiunea virtuală orizontală"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.h:121
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplicator dimensiune ecran pentru dimensiunea virtuală verticală"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.h:122
 msgid "Screenshot command line"
 msgstr "Linie de comandă pentru captură de ecran"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.h:123
 msgid "Show Desktop"
 msgstr "Afișare birou"
 
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.h:124
 msgid "Show Main Menu"
 msgstr "Afișare meniu principal"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.h:125
 msgid "Show Run Application dialog"
 msgstr "Afișare dialog de lansare aplicație"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.h:126
 msgid "Show the main menu"
 msgstr "Afișează meniul principal"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.h:127
 msgid "Slow Animations"
 msgstr "Afișare animații"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.h:128
 msgid "Smart mode"
 msgstr "Regim inteligent"
 
-#: ../metadata/core.xml.in.h:128
+#: ../metadata/core.xml.in.h:129
 msgid "Sync To VBlank"
 msgstr "Sincronizare la VBlank"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.h:130
 msgid "Take a screenshot"
 msgstr "Fă o captură de ecran"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.h:131
 msgid "Take a screenshot of a window"
 msgstr "Face captura unei ferestre"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.h:132
 msgid "Terminal command line"
 msgstr "Linie de comandă în terminal"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.h:133
 msgid "Texture Compression"
 msgstr "Compresie textură"
 
-#: ../metadata/core.xml.in.h:133
+#: ../metadata/core.xml.in.h:134
 msgid "Texture Filter"
 msgstr "Filtru textură"
 
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.h:135
 msgid "Texture filtering"
 msgstr "Filtrare textură"
 
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.h:136
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Rata de redesenare a ecranului (ori/secundă)"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized"
 msgstr "Comută maximizare fereastră"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Comută maximizare orizontală fereastră"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Maximized Vertically"
 msgstr "Comută maximizare verticală fereastră"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.h:140
 msgid "Toggle Window Shaded"
 msgstr "Comută umbrire fereastră"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized"
 msgstr "Comută maximizarea ferestrei active"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized horizontally"
 msgstr "Comută maximizarea orizontală a ferestrei active"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.h:143
 msgid "Toggle active window maximized vertically"
 msgstr "Comută maximizarea verticală a ferestrei active"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.h:144
 msgid "Toggle active window shaded"
 msgstr "Comută umbrirea ferestrei active"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.h:145
 msgid "Toggle use of slow animations"
 msgstr "Comută utilizarea animațiilor lente"
 
-#: ../metadata/core.xml.in.h:146
+#: ../metadata/core.xml.in.h:147
 msgid "Unmaximize active window"
 msgstr "Demaximizează fereastra activă"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.h:148
 msgid "Unredirect Fullscreen Windows"
 msgstr "Dezredirecționează  ferestrele în ecran comlpet"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.h:149
 msgid "Use diffuse light when screen is transformed"
 msgstr "Utilizare lumină difuză la transformarea ecranului"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.h:150
 msgid "Vertical Virtual Size"
 msgstr "Dimensiune virtuală verticală"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.h:151
 msgid "Very High"
 msgstr "Foarte înaltă"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.h:152
 msgid "Which one of overlapping output devices should be preferred"
 msgstr "Care din dispozitivele de ieșire suprapuse să fie preferat"
 
-#: ../metadata/core.xml.in.h:153
+#: ../metadata/core.xml.in.h:154
 msgid "Window menu button binding"
 msgstr "Buton pentru meniu fereastră"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.h:155
 msgid "Window menu key binding"
 msgstr "Tastă pentru meniu fereastră"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.h:156
 msgid "Window screenshot command line"
 msgstr "Linie de comandă pentru captură fereastră"
 
@@ -1790,10 +1794,6 @@ msgstr "India"
 #, fuzzy
 msgid "Initiate Window Resize"
 msgstr "India"
-
-#: ../metadata/resize.xml.in.h:12
-msgid "Normal"
-msgstr "Normală"
 
 #: ../metadata/resize.xml.in.h:13
 #, fuzzy
