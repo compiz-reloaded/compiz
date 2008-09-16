@@ -115,12 +115,8 @@ xslt_files =		       	  \
 xslt_DATA  = $(xslt_files)
 
 EXTRA_DIST =		    \
-	$(xml_files)        \
 	$(xml_in_files)     \
-	$(xslt_files)	    \
-	$(schema_files)     \
-	$(kde_kcfg_files)   \
-	$(kde_config_files)
+	$(xslt_files)
 
 DISTCLEANFILES =	    \
 	$(xml_files)        \

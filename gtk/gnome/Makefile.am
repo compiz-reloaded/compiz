@@ -73,9 +73,7 @@ noinst_DATA =		      \
 	$(xml_files)
 
 EXTRA_DIST =			 \
-	$(desktopfiles_files) 	 \
 	$(desktopfiles_in_files) \
-	$(xml_files)		 \
 	$(xml_in_files)
 
 DISTCLEANFILES = \

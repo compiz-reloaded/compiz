@@ -10,8 +10,7 @@ kde_window_decorator_DEPENDENCIES = \
 kde_window_decorator_LDADD   =			       \
 	$(top_builddir)/libdecoration/libdecoration.la \
 	@KDE_WINDOW_DECORATOR_LIBS@ @KDE_LIBS@
-kde_window_decorator_SOURCES = \
-	$(BUILDSOURCES)	       \
+dist_kde_window_decorator_SOURCES = \
 	main.cpp	       \
 	utils.cpp	       \
 	utils.h		       \
@@ -22,6 +21,8 @@ kde_window_decorator_SOURCES = \
 	options.cpp	       \
 	options.h	       \
 	KWinInterface.h
+
+nodist_kde_window_decorator_SOURCES = $(BUILDSOURCES)
 
 kde_window_decorator_program = kde-window-decorator
 
@@ -39,6 +40,5 @@ bin_PROGRAMS = $(kde_window_decorator_program)
 	$(DCOPIDL2CPP) $< > $@
 
 CLEANFILES = $(BUILDSOURCES) KWinInterface_skel.* KWinInterface_stub.*
-EXTRA_DIST = $(BUILDSOURCES)
 
 endif
