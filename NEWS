@@ -1,3 +1,29 @@
+Release 0.7.8 (2008-09-17 Danny Baumann <dannybaumann@web.de>)
+==============================================================
+Development release.
+
+New plugin "obs" that handles opacity, brightness and saturation bindings
+and matches.
+
+Put unresponsive window greyout, including options to configure it, to
+fade plugin.
+
+Add "constant fade time" fade mode to fade plugin.
+
+Removed opacity bindings and matches from core. Users that entered opacity
+matches should enable the obs plugin and enter the matches there.
+
+Enhanced timer infrastructure to allow synchronization of execution of
+multiple timer callbacks.
+
+Added matching for window's alpha channel (match type rgba=[0|1]).
+
+Reflect new Metacity "spacer" button type in gtk-window-decorator.
+
+Various bugfixes.
+
+Translation updates.
+
 Release 0.7.6 (2008-05-29 Dennis Kasprzyk <onestone@opencompositing.org>)
 =========================================================================
 Development release.
