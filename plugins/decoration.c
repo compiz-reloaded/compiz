@@ -413,8 +413,14 @@ decorCreateDecoration (CompScreen *screen,
 				 XA_INTEGER, &actual, &format,
 				 &n, &nleft, &data);
 
-    if (result != Success || !n || !data)
+    if (result != Success || !data)
 	return NULL;
+
+    if (!n)
+    {
+	XFree (data);
+	return NULL;
+    }
 
     prop = (long *) data;
 
@@ -878,19 +884,23 @@ decorCheckForDmOnScreen (CompScreen *s,
 				 XA_WINDOW, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	XWindowAttributes attr;
+	if (n)
+	{
+	    XWindowAttributes attr;
 
-	memcpy (&dmWin, data, sizeof (Window));
+	    memcpy (&dmWin, data, sizeof (Window));
+
+	    compCheckForError (d->display);
+
+	    XGetWindowAttributes (d->display, dmWin, &attr);
+
+	    if (compCheckForError (d->display))
+		dmWin = None;
+	}
+
 	XFree (data);
-
-	compCheckForError (d->display);
-
-	XGetWindowAttributes (d->display, dmWin, &attr);
-
-	if (compCheckForError (d->display))
-	    dmWin = None;
     }
 
     if (dmWin != ds->dmWin)

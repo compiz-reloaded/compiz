@@ -805,7 +805,7 @@ videoWindowUpdate (CompWindow *w)
 				 XA_INTEGER, &actual, &format,
 				 &n, &left, &propData);
 
-    if (result == Success && n && propData)
+    if (result == Success && propData)
     {
 	if (n == 13)
 	{

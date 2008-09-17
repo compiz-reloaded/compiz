@@ -977,7 +977,7 @@ updateScreenBackground (CompScreen  *screen,
 				     &actualType, &actualFormat, &nItems,
 				     &bytesAfter, &prop);
 
-	if (status == Success && nItems && prop)
+	if (status == Success && prop)
 	{
 	    if (actualType   == pixmapAtom &&
 		actualFormat == 32         &&
@@ -1220,13 +1220,16 @@ getDesktopHints (CompScreen *s)
 				     XA_CARDINAL, &actual, &format,
 				     &n, &left, &propData);
 
-	if (result == Success && n && propData)
+	if (result == Success && propData)
 	{
-	    memcpy (data, propData, sizeof (unsigned long));
-	    XFree (propData);
+	    if (n)
+	    {
+		memcpy (data, propData, sizeof (unsigned long));
 
-	    if (data[0] > 0 && data[0] < 0xffffffff)
-		s->nDesktop = data[0];
+		if (data[0] > 0 && data[0] < 0xffffffff)
+		    s->nDesktop = data[0];
+	    }
+	    XFree (propData);
 	}
 
 	result = XGetWindowProperty (s->display->display, s->root,
@@ -1234,13 +1237,17 @@ getDesktopHints (CompScreen *s)
 				     XA_CARDINAL, &actual, &format,
 				     &n, &left, &propData);
 
-	if (result == Success && n && propData)
+	if (result == Success && propData)
 	{
-	    memcpy (data, propData, sizeof (unsigned long));
-	    XFree (propData);
+	    if (n)
+	    {
+		memcpy (data, propData, sizeof (unsigned long));
 
-	    if (data[0] < s->nDesktop)
-		s->currentDesktop = data[0];
+		if (data[0] < s->nDesktop)
+		    s->currentDesktop = data[0];
+	    }
+
+	    XFree (propData);
 	}
     }
 
@@ -1249,7 +1256,7 @@ getDesktopHints (CompScreen *s)
 				 FALSE, XA_CARDINAL, &actual, &format,
 				 &n, &left, &propData);
 
-    if (result == Success && n && propData)
+    if (result == Success && propData)
     {
 	if (n == 2)
 	{
@@ -1270,13 +1277,16 @@ getDesktopHints (CompScreen *s)
 				 XA_CARDINAL, &actual, &format,
 				 &n, &left, &propData);
 
-    if (result == Success && n && propData)
+    if (result == Success && propData)
     {
-	memcpy (data, propData, sizeof (unsigned long));
-	XFree (propData);
+	if (n)
+	{
+	    memcpy (data, propData, sizeof (unsigned long));
 
-	if (data[0])
-	    (*s->enterShowDesktopMode) (s);
+	    if (data[0])
+		(*s->enterShowDesktopMode) (s);
+	}
+	XFree (propData);
     }
 
     data[0] = s->currentDesktop;
@@ -3406,9 +3416,10 @@ getActiveWindow (CompDisplay *display,
 				 XA_WINDOW, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	memcpy (&w, data, sizeof (Window));
+	if (n)
+	    memcpy (&w, data, sizeof (Window));
 	XFree (data);
     }
 

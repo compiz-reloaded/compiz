@@ -452,11 +452,12 @@ getClientLeader (CompWindow *w)
 				 0L, 1L, False, XA_WINDOW, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	Window win;
+	Window win = None;
 
-	memcpy (&win, data, sizeof (Window));
+	if (n)
+	    memcpy (&win, data, sizeof (Window));
 	XFree ((void *) data);
 
 	if (win)
@@ -481,11 +482,12 @@ getStartupId (CompWindow *w)
 				 &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	char *id;
+	char *id = NULL;
 
-	id = strdup ((char *) data);
+	if (n)
+	    id = strdup ((char *) data);
 	XFree ((void *) data);
 
 	return id;
@@ -509,9 +511,10 @@ getWmState (CompDisplay *display,
 				 display->wmStateAtom, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	memcpy (&state, data, sizeof (unsigned long));
+	if (n)
+	    memcpy (&state, data, sizeof (unsigned long));
 	XFree ((void *) data);
     }
 
@@ -908,7 +911,7 @@ unsigned int
 getWindowType (CompDisplay *display,
 	       Window      id)
 {
-    Atom	  actual;
+    Atom	  actual, a = None;
     int		  result, format;
     unsigned long n, left;
     unsigned char *data;
@@ -917,13 +920,16 @@ getWindowType (CompDisplay *display,
 				 0L, 1L, FALSE, XA_ATOM, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	Atom a;
+	if (n)
+	    memcpy (&a, data, sizeof (Atom));
 
-	memcpy (&a, data, sizeof (Atom));
 	XFree ((void *) data);
+    }
 
+    if (a)
+    {
 	if (a == display->winTypeNormalAtom)
 	    return CompWindowTypeNormalMask;
 	else if (a == display->winTypeMenuAtom)
@@ -1004,7 +1010,7 @@ getMwmHints (CompDisplay  *display,
 				 0L, 20L, FALSE, display->mwmHintsAtom,
 				 &actual, &format, &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
 	MwmHints *mwmHints = (MwmHints *) data;
 
@@ -1061,23 +1067,26 @@ getWindowProp (CompDisplay  *display,
     int		  result, format;
     unsigned long n, left;
     unsigned char *data;
+    unsigned int  retval = defaultValue;
 
     result = XGetWindowProperty (display->display, id, property,
 				 0L, 1L, FALSE, XA_CARDINAL, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	unsigned long value;
+	if (n)
+	{
+	    unsigned long value;
 
-	memcpy (&value, data, sizeof (unsigned long));
+	    memcpy (&value, data, sizeof (unsigned long));
+	    retval = (unsigned int) value;
+	}
 
 	XFree (data);
-
-	return (unsigned int) value;
     }
 
-    return defaultValue;
+    return retval;
 }
 
 void
@@ -1103,25 +1112,27 @@ readWindowProp32 (CompDisplay    *display,
     int		  result, format;
     unsigned long n, left;
     unsigned char *data;
+    Bool          retval = FALSE;
 
     result = XGetWindowProperty (display->display, id, property,
 				 0L, 1L, FALSE, XA_CARDINAL, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	CARD32 value;
+	if (n)
+	{
+	    CARD32 value;
+	    memcpy (&value, data, sizeof (CARD32));
 
-	memcpy (&value, data, sizeof (CARD32));
+	    retval = TRUE;
+	    *returnValue = value >> 16;
+	}
 
 	XFree (data);
-
-	*returnValue = value >> 16;
-
-	return TRUE;
     }
 
-    return FALSE;
+    return retval;
 }
 
 unsigned short
@@ -1696,7 +1707,7 @@ updateWindowStruts (CompWindow *w)
 				 0L, 12L, FALSE, XA_CARDINAL, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
 	unsigned long *struts = (unsigned long *) data;
 
@@ -1742,7 +1753,7 @@ updateWindowStruts (CompWindow *w)
 				     0L, 4L, FALSE, XA_CARDINAL,
 				     &actual, &format, &n, &left, &data);
 
-	if (result == Success && n && data)
+	if (result == Success && data)
 	{
 	    unsigned long *struts = (unsigned long *) data;
 
@@ -2672,6 +2683,10 @@ initializeSyncCounter (CompWindow *w)
 
 	XSyncDestroyAlarm (w->screen->display->display, w->syncAlarm);
 	w->syncAlarm = None;
+    }
+    else if (result == Success && data)
+    {
+	XFree (data);
     }
 
     return FALSE;
@@ -4657,24 +4672,28 @@ getWindowUserTime (CompWindow *w,
     int		  result, format;
     unsigned long n, left;
     unsigned char *data;
+    Bool          retval = FALSE;
 
     result = XGetWindowProperty (w->screen->display->display, w->id,
 				 w->screen->display->wmUserTimeAtom,
 				 0L, 1L, False, XA_CARDINAL, &actual, &format,
 				 &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	CARD32 value;
+	if (n)
+	{
+	    CARD32 value;
 
-	memcpy (&value, data, sizeof (CARD32));
+	    memcpy (&value, data, sizeof (CARD32));
+	    retval = TRUE;
+	    *time = (Time) value;
+	}
+
 	XFree ((void *) data);
-
-	*time = (Time) value;
-	return TRUE;
     }
 
-    return FALSE;
+    return retval;
 }
 
 void
@@ -4937,7 +4956,7 @@ getWindowIcon (CompWindow *w,
 				     &actual, &format, &n,
 				     &left, &data);
 
-	if (result == Success && n && data)
+	if (result == Success && data)
 	{
 	    CompIcon **pIcon;
 	    CARD32   *p;

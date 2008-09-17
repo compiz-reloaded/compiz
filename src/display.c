@@ -2767,6 +2767,9 @@ handleSelectionRequest (CompDisplay *display,
 			     event->xselectionrequest.property,
 			     display->atomPairAtom,
 			     32, PropModeReplace, data, num);
+
+	    if (data)
+		XFree (data);
 	}
     }
     else

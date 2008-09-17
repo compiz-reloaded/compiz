@@ -185,23 +185,22 @@ minGetWindowState (CompWindow *w)
     int		  result, format;
     unsigned long n, left;
     unsigned char *data;
+    int           retval = WithdrawnState;
 
     result = XGetWindowProperty (w->screen->display->display, w->id,
 				 w->screen->display->wmStateAtom, 0L, 1L, FALSE,
 				 w->screen->display->wmStateAtom,
 				 &actual, &format, &n, &left, &data);
 
-    if (result == Success && n && data)
+    if (result == Success && data)
     {
-	int state;
+	if (n)
+	    memcpy (&retval, data, sizeof (int));
 
-	memcpy (&state, data, sizeof (int));
 	XFree ((void *) data);
-
-	return state;
     }
 
-    return WithdrawnState;
+    return retval;
 }
 
 static int
