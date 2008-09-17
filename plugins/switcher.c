@@ -1088,6 +1088,23 @@ switchHandleEvent (CompDisplay *d,
     CompWindow *w;
     SWITCH_DISPLAY (d);
 
+    switch (event->type) {
+	w = findWindowAtDisplay (d, event->xmap.window);
+	if (w)
+	{
+	    SWITCH_SCREEN (w->screen);
+
+	    if (w->id == ss->popupWindow)
+	    {
+		w->wmType = getWindowType (d, w->id);
+		recalcWindowType (w);
+		recalcWindowActions (w);
+		updateWindowClassHints (w);
+	    }
+	}
+	break;
+    }
+
     UNWRAP (sd, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (sd, d, handleEvent, switchHandleEvent);
