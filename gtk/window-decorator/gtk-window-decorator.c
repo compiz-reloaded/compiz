@@ -2731,7 +2731,7 @@ get_mwm_prop (Window xwindow)
     if (err != Success || result != Success)
 	return decor;
 
-    if (n && data)
+    if (data)
     {
 	MwmHints *mwm_hints = (MwmHints *) data;
 
