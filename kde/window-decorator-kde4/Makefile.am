@@ -13,6 +13,9 @@ kde4_window_decorator_LDADD   =			       \
 	$(top_builddir)/libdecoration/libdecoration.la \
 	@KDE4_WINDOW_DECORATOR_LIBS@ @KDE4_LIBS@
 
+nodist_kde4_window_decorator_SOURCES = \
+	$(BUILDSOURCES)
+
 dist_kde4_window_decorator_SOURCES = \
 	main.cpp	       \
 	utils.cpp	       \
@@ -29,16 +32,11 @@ dist_kde4_window_decorator_SOURCES = \
 	switcher.h              \
 	org.kde.KWin.xml
 
-
-nodist_kde4_window_decorator_SOURCES = \
-	$(BUILDSOURCES)
-
 kde4_window_decorator_program = kde4-window-decorator
 
 INCLUDES = -I$(top_srcdir)/include -I$(top_builddir)/include @KDE4_WINDOW_DECORATOR_CFLAGS@ @KDE4_CFLAGS@
 
 bin_PROGRAMS = $(kde4_window_decorator_program)
-
 
 %.moc.cpp: %.h
 	$(QT4_MOC) $< > $@
@@ -47,6 +45,9 @@ kwinadaptor.h: kwinadaptor.cpp
 
 kwinadaptor.cpp: org.kde.KWin.xml
 	$(QDBUSXML2CPP) -a kwinadaptor -i decorator.h -l KWD::Decorator $<
+
+# make sure kwinadaptor.h is built before any of the dist_SOURCES uses it
+main.cpp: kwinadaptor.h
 
 CLEANFILES = $(BUILDSOURCES)
 EXTRA_DIST = org.kde.KWin.xml
