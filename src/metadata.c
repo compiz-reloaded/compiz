@@ -29,6 +29,7 @@
 #include <libxml/tree.h>
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
+#include <locale.h>
 
 #include <compiz-core.h>
 
@@ -470,12 +471,15 @@ initFloatValue (CompOptionValue	      *v,
 		xmlNodePtr	      node)
 {
     xmlChar *value;
+    char *loc;
 
     v->f = (r->f.min + r->f.max) / 2;
 
     if (!doc)
 	return;
 
+    loc = setlocale (LC_NUMERIC, NULL);
+    setlocale (LC_NUMERIC, "C");
     value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
     if (value)
     {
@@ -486,6 +490,7 @@ initFloatValue (CompOptionValue	      *v,
 
 	xmlFree (value);
     }
+    setlocale (LC_NUMERIC, loc);
 }
 
 static void
@@ -866,11 +871,14 @@ initFloatRestriction (CompMetadata	    *metadata,
 		      const char	    *path)
 {
     char *value;
+    char *loc;
 
     r->f.min	   = MINSHORT;
     r->f.max	   = MAXSHORT;
     r->f.precision = 0.1f;
 
+    loc = setlocale (LC_NUMERIC, NULL);
+    setlocale (LC_NUMERIC, "C");
     value = stringFromMetadataPathElement (metadata, path, "min");
     if (value)
     {
@@ -891,6 +899,8 @@ initFloatRestriction (CompMetadata	    *metadata,
 	r->f.precision = strtod ((char *) value, NULL);
 	free (value);
     }
+
+    setlocale (LC_NUMERIC, loc);
 }
 
 static void
