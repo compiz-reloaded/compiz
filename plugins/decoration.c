@@ -513,14 +513,14 @@ decorCreateDecoration (CompScreen *screen,
 	return NULL;
     }
 
-    nQuad = decor_property_to_quads (prop,
-				     n,
-				     &pixmap,
-				     &input,
-				     &maxInput,
-				     &minWidth,
-				     &minHeight,
-				     quad);
+    nQuad = decor_pixmap_property_to_quads (prop,
+					    n,
+					    &pixmap,
+					    &input,
+					    &maxInput,
+					    &minWidth,
+					    &minHeight,
+					    quad);
 
     XFree (data);
 

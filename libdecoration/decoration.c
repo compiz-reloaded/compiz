@@ -46,6 +46,22 @@ decor_version (void)
 
   data[1] = decoration type
 
+  WINDOW_DECORATION_TYPE_WINDOW property
+  --------------------------------------
+  data[3] = input left
+  data[4] = input right
+  data[5] = input top
+  data[6] = input bottom
+
+  data[7]  = input left when maximized
+  data[8]  = input right when maximized
+  data[9]  = input top when maximized
+  data[10] = input bottom when maximized
+
+  data[11] = min width
+  data[12] = min height
+
+
   WINDOW_DECORATION_TYPE_PIXMAP property
   --------------------------------------
 
@@ -134,6 +150,30 @@ decor_quads_to_property (long		 *data,
     }
 }
 
+void
+decor_gen_window_property (long		   *data,
+			   decor_extents_t *input,
+			   decor_extents_t *max_input,
+			   int		   min_width,
+			   int		   min_height)
+{
+    *data++ = DECOR_INTERFACE_VERSION;
+    *data++ = WINDOW_DECORATION_TYPE_WINDOW;
+
+    *data++ = input->left;
+    *data++ = input->right;
+    *data++ = input->top;
+    *data++ = input->bottom;
+
+    *data++ = max_input->left;
+    *data++ = max_input->right;
+    *data++ = max_input->top;
+    *data++ = max_input->bottom;
+
+    *data++ = min_width;
+    *data++ = min_height;
+}
+
 int
 decor_property_get_version (long *data)
 {
@@ -141,14 +181,20 @@ decor_property_get_version (long *data)
 }
 
 int
-decor_property_to_quads (long		 *data,
-			 int		 size,
-			 Pixmap		 *pixmap,
-			 decor_extents_t *input,
-			 decor_extents_t *max_input,
-			 int		 *min_width,
-			 int		 *min_height,
-			 decor_quad_t    *quad)
+decor_property_get_type (long *data)
+{
+    return (int) data[1];
+}
+
+int
+decor_pixmap_property_to_quads (long		*data,
+				int		size,
+				Pixmap		*pixmap,
+				decor_extents_t *input,
+				decor_extents_t *max_input,
+				int		*min_width,
+				int		*min_height,
+				decor_quad_t    *quad)
 {
     int i, n, flags;
 
@@ -158,10 +204,11 @@ decor_property_to_quads (long		 *data,
     if (decor_property_get_version (data) != decor_version ())
 	return 0;
 
-    data++;
-
-    if (*data++ != WINDOW_DECORATION_TYPE_PIXMAP)
+    if (decor_property_get_type (data) != WINDOW_DECORATION_TYPE_PIXMAP)
 	return 0;
+
+    data++;
+    data++;
 
     memcpy (pixmap, data++, sizeof (Pixmap));
 
@@ -211,6 +258,42 @@ decor_property_to_quads (long		 *data,
     }
 
     return n;
+}
+
+int
+decor_window_property (long	       *data,
+		       int	       size,
+		       decor_extents_t *input,
+		       decor_extents_t *max_input,
+		       int	       *min_width,
+		       int	       *min_height)
+{
+    if (size < WINDOW_PROP_SIZE)
+	return 0;
+
+    if (decor_property_get_version (data) != decor_version ())
+	return 0;
+
+    if (decor_property_get_type (data) != WINDOW_DECORATION_TYPE_WINDOW)
+	return 0;
+
+    data++;
+    data++;
+
+    input->left   = *data++;
+    input->right  = *data++;
+    input->top    = *data++;
+    input->bottom = *data++;
+
+    max_input->left   = *data++;
+    max_input->right  = *data++;
+    max_input->top    = *data++;
+    max_input->bottom = *data++;
+
+    *min_width  = *data++;
+    *min_height = *data++;
+
+    return 1;
 }
 
 static int
@@ -2670,12 +2753,25 @@ decor_acquire_dm_session (Display    *xdisplay,
 
 void
 decor_set_dm_check_hint (Display *xdisplay,
-			 int	 screen)
+			 int	 screen,
+			 int	 supports)
 {
     XSetWindowAttributes attrs;
     unsigned long	 data;
     Window		 xroot;
     Atom		 atom;
+    Atom		 type_pixmap_atom;
+    Atom		 type_window_atom;
+    Atom		 type_supported_atom;
+    Atom		 supported_deco_atoms[2];
+    int			 i;
+
+    type_supported_atom = XInternAtom (xdisplay, DECOR_TYPE_ATOM_NAME, 0);
+    type_pixmap_atom = XInternAtom (xdisplay, DECOR_TYPE_PIXMAP_ATOM_NAME, 0);
+    type_window_atom = XInternAtom (xdisplay, DECOR_TYPE_WINDOW_ATOM_NAME, 0);
+
+    if (!supports)
+	return;
 
     attrs.override_redirect = 1;
     attrs.event_mask	    = PropertyChangeMask;
@@ -2691,6 +2787,25 @@ decor_set_dm_check_hint (Display *xdisplay,
 			  (Visual *) CopyFromParent,
 			  CWOverrideRedirect | CWEventMask,
 			  &attrs);
+
+    i = 0;
+    if (supports & WINDOW_DECORATION_TYPE_PIXMAP)
+    {
+	supported_deco_atoms[i] = type_pixmap_atom;
+	i++;
+    }
+    if (supports & WINDOW_DECORATION_TYPE_WINDOW)
+    {
+	supported_deco_atoms[i] = type_window_atom;
+	i++;
+    }
+    XChangeProperty (xdisplay,
+		     data,
+		     type_supported_atom,
+		     XA_ATOM, 32,
+		     PropModeReplace,
+		     (unsigned char *) supported_deco_atoms,
+		     i);
 
     atom = XInternAtom (xdisplay, DECOR_SUPPORTING_DM_CHECK_ATOM_NAME, 0);
 

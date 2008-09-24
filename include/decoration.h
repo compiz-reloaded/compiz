@@ -45,8 +45,14 @@ extern "C" {
 #define DECOR_SWITCH_WINDOW_ATOM_NAME           "_COMPIZ_SWITCH_SELECT_WINDOW"
 #define DECOR_SWITCH_FOREGROUND_COLOR_ATOM_NAME "_COMPIZ_SWITCH_FOREGROUND_COLOR"
 #define DECOR_INPUT_FRAME_ATOM_NAME             "_COMPIZ_WINDOW_DECOR_INPUT_FRAME"
+#define DECOR_OUTPUT_FRAME_ATOM_NAME            "_COMPIZ_WINDOW_DECOR_OUTPUT_FRAME"
 
-#define WINDOW_DECORATION_TYPE_PIXMAP 0
+#define DECOR_TYPE_ATOM_NAME                    "_COMPIZ_WINDOW_DECOR_TYPE"
+#define DECOR_TYPE_PIXMAP_ATOM_NAME             "_COMPIZ_WINDOW_DECOR_TYPE_PIXMAP"
+#define DECOR_TYPE_WINDOW_ATOM_NAME             "_COMPIZ_WINDOW_DECOR_TYPE_WINDOW"
+
+#define WINDOW_DECORATION_TYPE_PIXMAP (1 << 0)
+#define WINDOW_DECORATION_TYPE_WINDOW (1 << 1)
 
 #define GRAVITY_WEST  (1 << 0)
 #define GRAVITY_EAST  (1 << 1)
@@ -168,6 +174,7 @@ typedef void (*decor_draw_func_t) (Display	   *xdisplay,
 				   decor_context_t *context,
 				   void		   *closure);
 
+#define WINDOW_PROP_SIZE 12
 #define BASE_PROP_SIZE 13
 #define QUAD_PROP_SIZE 9
 #define N_QUADS_MAX    24
@@ -185,18 +192,36 @@ decor_quads_to_property (long		 *data,
 			 decor_quad_t    *quad,
 			 int		 nQuad);
 
+void
+decor_gen_window_property (long		   *data,
+			   decor_extents_t *input,
+			   decor_extents_t *max_input,
+			   int		   min_width,
+			   int		   min_height);
+
 int
 decor_property_get_version (long *data);
 
 int
-decor_property_to_quads (long		 *data,
-			 int		 size,
-			 Pixmap		 *pixmap,
-			 decor_extents_t *input,
-			 decor_extents_t *max_input,
-			 int		 *min_width,
-			 int		 *min_height,
-			 decor_quad_t    *quad);
+decor_property_get_type (long *data);
+
+int
+decor_pixmap_property_to_quads (long		 *data,
+				int		 size,
+				Pixmap		 *pixmap,
+				decor_extents_t *input,
+				decor_extents_t *max_input,
+				int		 *min_width,
+				int		 *min_height,
+				decor_quad_t    *quad);
+
+int
+decor_window_property (long	       *data,
+		       int	       size,
+		       decor_extents_t *input,
+		       decor_extents_t *max_input,
+		       int	       *min_width,
+		       int	       *min_height);
 
 void
 decor_region_to_blur_property (long   *data,
@@ -380,7 +405,8 @@ decor_acquire_dm_session (Display    *xdisplay,
 
 void
 decor_set_dm_check_hint (Display *xdisplay,
-			 int	 screen);
+			 int	 screen,
+			 int	 supports);
 
 #define DECOR_SELECTION_KEEP    0
 #define DECOR_SELECTION_GIVE_UP 1
