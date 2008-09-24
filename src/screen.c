@@ -4103,17 +4103,26 @@ outputDeviceForGeometry (CompScreen *s,
 
     if (strategy == OUTPUT_OVERLAP_MODE_SMART)
     {
+	int centerX, centerY;
+
 	/* for smart mode, calculate the overlap of the whole rectangle
 	   with the output device rectangle */
 	geomRect.x2 = width + 2 * borderWidth;
 	geomRect.y2 = height + 2 * borderWidth;
 
 	geomRect.x1 = x % s->width;
-	if ((geomRect.x1 + geomRect.x2 / 2) < 0)
+	centerX = geomRect.x1 + (geomRect.x2 / 2);
+	if (centerX < 0)
 	    geomRect.x1 += s->width;
+	else if (centerX > s->width)
+	    geomRect.x1 -= s->width;
+
 	geomRect.y1 = y % s->height;
-	if ((geomRect.y1 + geomRect.y2 / 2) < 0)
+	centerY = geomRect.y1 + (geomRect.y2 / 2);
+	if (centerY < 0)
 	    geomRect.y1 += s->height;
+	else if (centerY > s->height)
+	    geomRect.y1 -= s->height;
 
 	geomRect.x2 += geomRect.x1;
 	geomRect.y2 += geomRect.y1;
