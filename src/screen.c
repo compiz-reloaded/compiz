@@ -4013,8 +4013,7 @@ clearScreenOutput (CompScreen	*s,
    more than one viewport the most appropriate viewport is returned. How the
    most appropriate viewport is computed can be made optional if necessary. It
    is currently computed as the viewport where the center of the window is
-   located, except for when the window is visible in the current viewport as
-   the current viewport is then always returned. */
+   located. */
 void
 viewportForGeometry (CompScreen *s,
 		     int	x,
@@ -4030,18 +4029,6 @@ viewportForGeometry (CompScreen *s,
 
     width  += borderWidth * 2;
     height += borderWidth * 2;
-
-    if ((x < s->width  && x + width  > 0) &&
-	(y < s->height && y + height > 0))
-    {
-	if (viewportX)
-	    *viewportX = s->x;
-
-	if (viewportY)
-	    *viewportY = s->y;
-
-	return;
-    }
 
     if (viewportX)
     {

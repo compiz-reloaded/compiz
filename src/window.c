@@ -4924,7 +4924,23 @@ defaultViewportForWindow (CompWindow *w,
 			  int	     *vx,
 			  int	     *vy)
 {
-    viewportForGeometry (w->screen,
+    CompScreen *s = w->screen;
+
+    /* return the current viewport if a part of the window is
+       visible on it */
+    if ((w->serverX < s->width  && w->serverX + w->serverWidth  > 0) &&
+	(w->serverY < s->height && w->serverY + w->serverHeight > 0))
+    {
+	if (vx)
+	    *vx = s->x;
+
+	if (vy)
+	    *vy = s->y;
+
+	return;
+    }
+
+    viewportForGeometry (s,
 			 w->serverX, w->serverY,
 			 w->serverWidth, w->serverHeight,
 			 w->serverBorderWidth,
