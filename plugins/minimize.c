@@ -76,6 +76,8 @@ typedef struct _MinWindow {
     Region region;
 
     int unmapCnt;
+
+    Bool ignoreDamage;
 } MinWindow;
 
 #define GET_MIN_DISPLAY(d)					 \
@@ -330,11 +332,13 @@ minPreparePaintScreen (CompScreen *s,
 		    {
 			mw->state = mw->newState;
 
+			mw->ignoreDamage = TRUE;
 			while (mw->unmapCnt)
 			{
 			    unmapWindow (w);
 			    mw->unmapCnt--;
 			}
+			mw->ignoreDamage = FALSE;
 		    }
 		}
 		else if (mw->region && w->damaged)
@@ -353,11 +357,13 @@ minPreparePaintScreen (CompScreen *s,
 			    {
 				mw->shade = 0;
 
+				mw->ignoreDamage = TRUE;
 				while (mw->unmapCnt)
 				{
 				    unmapWindow (w);
 				    mw->unmapCnt--;
 				}
+				mw->ignoreDamage = FALSE;
 			    }
 			}
 		    }
@@ -555,11 +561,13 @@ minHandleEvent (CompDisplay *d,
 	    if (mw->region)
 		w->height = 0;
 
+	    mw->ignoreDamage = TRUE;
 	    while (mw->unmapCnt)
 	    {
 		unmapWindow (w);
 		mw->unmapCnt--;
 	    }
+	    mw->ignoreDamage = FALSE;
 	}
 	break;
     case UnmapNotify:
@@ -669,6 +677,9 @@ minDamageWindowRect (CompWindow *w,
 
     MIN_SCREEN (w->screen);
     MIN_WINDOW (w);
+
+    if (mw->ignoreDamage)
+	return TRUE;
 
     if (initial)
     {
@@ -890,6 +901,8 @@ minInitWindow (CompPlugin *p,
 
     mw->unmapCnt = 0;
 
+    mw->ignoreDamage = FALSE;
+
     if (w->state & CompWindowStateHiddenMask)
     {
 	if (w->shaded)
@@ -923,8 +936,10 @@ minFiniWindow (CompPlugin *p,
 {
     MIN_WINDOW (w);
 
+    mw->ignoreDamage = TRUE;
     while (mw->unmapCnt--)
 	unmapWindow (w);
+    mw->ignoreDamage = FALSE;
 
     if (mw->region)
 	XDestroyRegion (mw->region);
