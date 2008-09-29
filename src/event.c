@@ -2016,7 +2016,7 @@ handleEvent (CompDisplay *d,
 		    int            newX, newY;
 		    int            gravity = w->sizeHints.win_gravity;
 		    XWindowChanges xwc;
-		    unsigned int   xwcm;
+		    unsigned int   xwcm, source;
 
 		    /* adjust for gravity */
 		    xwc.x      = w->serverX;
@@ -2035,6 +2035,10 @@ handleEvent (CompDisplay *d,
 			xwc.y = newY;
 			xwcm |= CWX | CWY;
 		    }
+
+		    source = ClientTypeApplication;
+		    (*w->screen->validateWindowResizeRequest) (w, &xwcm, &xwc,
+							       source);
 
 		    if (xwcm)
 			configureXWindow (w, xwcm, &xwc);
