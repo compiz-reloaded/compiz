@@ -2920,7 +2920,10 @@ isGroupTransient (CompWindow *w,
 
     if (w->transientFor == None || w->transientFor == w->screen->root)
     {
-	if (w->type & (CompWindowTypeDialogMask |
+	if (w->type & (CompWindowTypeUtilMask    |
+		       CompWindowTypeToolbarMask |
+		       CompWindowTypeMenuMask    |
+		       CompWindowTypeDialogMask  |
 		       CompWindowTypeModalDialogMask))
 	{
 	    if (w->clientLeader == clientLeader)
