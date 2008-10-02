@@ -4826,7 +4826,10 @@ isWindowFocusAllowed (CompWindow   *w,
     if (level == FOCUS_PREVENTION_LEVEL_HIGH)
 	return FALSE;
 
-    /* not in current viewport */
+    /* not in current viewport or desktop */
+    if (!onCurrentDesktop (w))
+	return FALSE;
+
     defaultViewportForWindow (w, &vx, &vy);
     if (vx != viewportX || vy != viewportY)
 	return FALSE;

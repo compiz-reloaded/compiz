@@ -1995,23 +1995,26 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 
-	    w->managed = TRUE;
-
 	    if (w->state & CompWindowStateHiddenMask)
 		if (!w->minimized && !w->inShowDesktopMode)
 		    doMapProcessing = FALSE;
 
 	    if (doMapProcessing)
 	    {
-		Bool                   allowFocus;
-		CompStackingUpdateMode stackingMode;
-
 		w->initialViewportX = w->screen->x;
 		w->initialViewportY = w->screen->y;
 
 		w->initialTimestampSet = FALSE;
 
 		applyStartupProperties (w->screen, w);
+	    }
+
+	    w->managed = TRUE;
+
+	    if (doMapProcessing)
+	    {
+		Bool                   allowFocus;
+		CompStackingUpdateMode stackingMode;
 
 		if (!w->placed)
 		{
@@ -2065,12 +2068,11 @@ handleEvent (CompDisplay *d,
 
 		(*w->screen->leaveShowDesktopMode) (w->screen, w);
 
+		if (allowFocus && !onCurrentDesktop (w))
+		    setCurrentDesktop (w->screen, w->desktop);
+
 		if (!(w->state & CompWindowStateHiddenMask))
-		{
-		    w->pendingMaps++;
-		    XMapWindow (d->display, w->id);
-		    setWindowState (d, w->id, w->state);
-		}
+		    showWindow (w);
 
 		if (allowFocus)
 		    moveInputFocusToWindow (w);
