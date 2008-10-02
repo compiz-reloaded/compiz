@@ -2069,6 +2069,7 @@ handleEvent (CompDisplay *d,
 		{
 		    w->pendingMaps++;
 		    XMapWindow (d->display, w->id);
+		    setWindowState (d, w->id, w->state);
 		}
 
 		if (allowFocus)

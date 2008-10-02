@@ -4590,6 +4590,7 @@ showWindow (CompWindow *w)
     XMapWindow (w->screen->display->display, w->id);
 
     changeWindowState (w, w->state & ~CompWindowStateHiddenMask);
+    setWindowState (w->screen->display, w->state, w->id);
 }
 
 static void
