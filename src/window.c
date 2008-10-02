@@ -684,7 +684,8 @@ changeWindowState (CompWindow   *w,
     recalcWindowType (w);
     recalcWindowActions (w);
 
-    setWindowState (d, w->state, w->id);
+    if (w->managed)
+	setWindowState (d, w->state, w->id);
 
     (*w->screen->windowStateChangeNotify) (w, oldState);
     (*d->matchPropertyChanged) (d, w);
