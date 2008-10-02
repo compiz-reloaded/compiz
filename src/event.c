@@ -1498,15 +1498,10 @@ handleEvent (CompDisplay *d,
 
 		if (state != w->state)
 		{
-		    w->state = state;
-
-		    recalcWindowType (w);
-		    recalcWindowActions (w);
-
 		    if (w->type & CompWindowTypeDesktopMask)
 			w->paint.opacity = OPAQUE;
 
-		    (*d->matchPropertyChanged) (d, w);
+		    changeWindowState (w, state);
 		}
 	    }
 	}
