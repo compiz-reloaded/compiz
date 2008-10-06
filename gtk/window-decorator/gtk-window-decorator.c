@@ -3562,6 +3562,8 @@ add_frame_window (WnckWindow *win,
 
     xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
+    d->active = wnck_window_is_active (win);
+
     attr.event_mask = ButtonPressMask | EnterWindowMask | LeaveWindowMask;
     attr.override_redirect = TRUE;
 
@@ -4033,8 +4035,6 @@ window_opened (WnckScreen *screen,
     wnck_window_get_client_window_geometry (win, NULL, NULL,
 					    &d->client_width,
 					    &d->client_height);
-
-    d->active = wnck_window_is_active (win);
 
     d->draw = theme_draw_window_decoration;
 
