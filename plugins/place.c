@@ -1270,6 +1270,7 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     XRectangle workArea;
     int        x, y, left, right, top, bottom;
     int        output;
+    Bool       sizeOnly = FALSE;
 
     PLACE_SCREEN (s);
 
@@ -1301,7 +1302,9 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 	if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b ||
 	    (w->type & CompWindowTypeNormalMask))
 	{
-	    return;
+	    /* try to keep the window position intact for USPosition -
+	       obviously we can't do that if we need to change the size */
+	    sizeOnly = TRUE;
 	}
     }
 
@@ -1380,28 +1383,33 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     top    += w->input.top;
     bottom -= w->input.bottom;
 
-    if (left != x)
-    {
-	xwc->x += left - x;
-	*mask  |= CWX;
-    }
-
-    if (top != y)
-    {
-	xwc->y += top - y;
-	*mask  |= CWY;
-    }
-
     if ((right - left) != xwc->width)
     {
 	xwc->width = right - left;
 	*mask      |= CWWidth;
+	sizeOnly   = FALSE;
     }
 
     if ((bottom - top) != xwc->height)
     {
 	xwc->height = bottom - top;
 	*mask       |= CWHeight;
+	sizeOnly    = FALSE;
+    }
+
+    if (!sizeOnly)
+    {
+	if (left != x)
+	{
+	    xwc->x += left - x;
+	    *mask  |= CWX;
+	}
+
+	if (top != y)
+	{
+	    xwc->y += top - y;
+	    *mask  |= CWY;
+	}
     }
 }
 

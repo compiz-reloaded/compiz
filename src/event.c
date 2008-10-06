@@ -2033,6 +2033,10 @@ handleEvent (CompDisplay *d,
 							     CWX | CWY,
 							     gravity);
 
+		    source = ClientTypeApplication;
+		    (*w->screen->validateWindowResizeRequest) (w, &xwcm, &xwc,
+							       source);
+
 		    if ((*w->screen->placeWindow) (w, xwc.x, xwc.y,
 						   &newX, &newY))
 		    {
@@ -2040,10 +2044,6 @@ handleEvent (CompDisplay *d,
 			xwc.y = newY;
 			xwcm |= CWX | CWY;
 		    }
-
-		    source = ClientTypeApplication;
-		    (*w->screen->validateWindowResizeRequest) (w, &xwcm, &xwc,
-							       source);
 
 		    if (xwcm)
 			configureXWindow (w, xwcm, &xwc);
