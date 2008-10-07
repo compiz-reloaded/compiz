@@ -2218,7 +2218,7 @@ addWindow (CompScreen *screen,
 
 	mapWindow (w);
 
-	updateWindowAttributes (w, CompStackingUpdateModeNormal);
+	updateWindowAttributes (w, CompStackingUpdateModeInitialMap);
 
 	if (w->minimized || w->inShowDesktopMode || w->hidden || w->shaded)
 	{

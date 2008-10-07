@@ -2301,6 +2301,11 @@ addScreen (CompDisplay *display,
 	}
     }
 
+    /* enforce restack on all windows */
+    for (i = 0, w = s->reverseWindows; w && i < nchildren; i++, w = w->prev)
+	children[i] = w->id;
+    XRestackWindows (dpy, children, i);
+
     XFree (children);
 
     attrib.override_redirect = 1;
