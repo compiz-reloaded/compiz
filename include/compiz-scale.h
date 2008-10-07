@@ -30,7 +30,7 @@
 
 COMPIZ_BEGIN_DECLS
 
-#define SCALE_ABIVERSION 20080301
+#define SCALE_ABIVERSION 20081007
 
 #define SCALE_STATE_NONE 0
 #define SCALE_STATE_OUT  1
@@ -73,7 +73,9 @@ typedef struct _SlotArea {
 #define SCALE_DISPLAY_OPTION_INITIATE_OUTPUT_KEY    13
 #define SCALE_DISPLAY_OPTION_SHOW_DESKTOP           14
 #define SCALE_DISPLAY_OPTION_RELAYOUT               15
-#define SCALE_DISPLAY_OPTION_NUM                    16
+#define SCALE_DISPLAY_OPTION_KEY_BINDINGS_TOGGLE    16
+#define SCALE_DISPLAY_OPTION_BUTTON_BINDINGS_TOGGLE 17
+#define SCALE_DISPLAY_OPTION_NUM                    18
 
 typedef struct _ScaleDisplay {
     int		    screenPrivateIndex;

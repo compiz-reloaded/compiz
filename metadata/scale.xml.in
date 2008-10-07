@@ -14,6 +14,16 @@
 		</default>
 		<allowed edgednd="true"/>
 	    </option>
+	    <option name="key_bindings_toggle" type="bool">
+		<_short>Key Bindings Toggle Scale Mode</_short>
+		<_long>Key bindings toggle scale mode instead of enabling it when pressed and disabling it when released.</_long>
+		<default>false</default>
+	    </option>
+	    <option name="button_bindings_toggle" type="bool">
+		<_short>Button Bindings Toggle Scale Mode</_short>
+		<_long>Button bindings toggle scale mode instead of enabling it when pressed and disabling it when released.</_long>
+		<default>false</default>
+	    </option>
 	    <option name="initiate_key" type="key">
 		<_short>Initiate Window Picker</_short>
 		<_long>Layout and start transforming windows</_long>

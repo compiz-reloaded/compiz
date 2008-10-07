@@ -1019,20 +1019,32 @@ scaleTerminate (CompDisplay     *d,
 {
     CompScreen *s;
     Window     xid;
+    Bool       terminate = TRUE;
 
     SCALE_DISPLAY (d);
 
-    xid = getIntOptionNamed (option, nOption, "root", 0);
+    if (action->state & CompActionStateTermKey)
+	if (sd->opt[SCALE_DISPLAY_OPTION_KEY_BINDINGS_TOGGLE].value.b)
+	    terminate = FALSE;
 
-    for (s = d->screens; s; s = s->next)
+    if (action->state & CompActionStateTermButton)
+	if (sd->opt[SCALE_DISPLAY_OPTION_BUTTON_BINDINGS_TOGGLE].value.b)
+	    terminate = FALSE;
+
+    if (terminate)
     {
-	SCALE_SCREEN (s);
+	xid = getIntOptionNamed (option, nOption, "root", 0);
 
-	if (xid && s->root != xid)
-	    continue;
-
-	if (ss->grab)
+	for (s = d->screens; s; s = s->next)
 	{
+	    SCALE_SCREEN (s);
+
+	    if (xid && s->root != xid)
+		continue;
+
+	    if (!ss->grab)
+		continue;
+
 	    if (ss->grabIndex)
 	    {
 		removeScreenGrab (s, ss->grabIndex, 0);
@@ -1196,6 +1208,26 @@ scaleInitiateCommon (CompScreen      *s,
 }
 
 static Bool
+scaleInitiateShouldTerminate (CompDisplay     *d,
+			      CompActionState state)
+{
+    SCALE_DISPLAY (d);
+
+    if (state & EDGE_STATE)
+	return TRUE;
+
+    if (state & CompActionStateInitKey)
+	if (sd->opt[SCALE_DISPLAY_OPTION_KEY_BINDINGS_TOGGLE].value.b)
+	    return TRUE;
+
+    if (state & CompActionStateInitButton)
+	if (sd->opt[SCALE_DISPLAY_OPTION_BUTTON_BINDINGS_TOGGLE].value.b)
+	    return TRUE;
+
+    return FALSE;
+}
+
+static Bool
 scaleInitiate (CompDisplay     *d,
 	       CompAction      *action,
 	       CompActionState state,
@@ -1217,7 +1249,7 @@ scaleInitiate (CompDisplay     *d,
 	    ss->type = ScaleTypeNormal;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if (state & EDGE_STATE)
+	else if (scaleInitiateShouldTerminate (d, state))
 	{
 	    if (ss->type == ScaleTypeNormal)
 		return scaleTerminate (s->display, action,
@@ -1250,7 +1282,7 @@ scaleInitiateAll (CompDisplay     *d,
 	    ss->type = ScaleTypeAll;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if (state & EDGE_STATE)
+	else if (scaleInitiateShouldTerminate (d, state))
 	{
 	    if (ss->type == ScaleTypeAll)
 		return scaleTerminate (s->display, action,
@@ -1292,7 +1324,7 @@ scaleInitiateGroup (CompDisplay     *d,
 		return scaleInitiateCommon (s, action, state, option, nOption);
 	    }
 	}
-	else if (state & EDGE_STATE)
+	else if (scaleInitiateShouldTerminate (d, state))
 	{
 	    if (ss->type == ScaleTypeGroup)
 		return scaleTerminate (s->display, action,
@@ -1325,7 +1357,7 @@ scaleInitiateOutput (CompDisplay     *d,
 	    ss->type = ScaleTypeOutput;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if (state & EDGE_STATE)
+	else if (scaleInitiateShouldTerminate (d, state))
 	{
 	    if (ss->type == ScaleTypeOutput)
 		return scaleTerminate (s->display, action,
@@ -1933,7 +1965,9 @@ static const CompMetadataOptionInfo scaleDisplayOptionInfo[] = {
       scaleInitiateOutput, scaleTerminate },
     { "initiate_output_key", "key", 0, scaleInitiateOutput, scaleTerminate },
     { "show_desktop", "bool", 0, 0, 0 },
-    { "relayout_slots", "action", 0, scaleRelayoutSlots, 0 }
+    { "relayout_slots", "action", 0, scaleRelayoutSlots, 0 },
+    { "key_bindings_toggle", "bool", 0, 0, 0 },
+    { "button_bindings_toggle", "bool", 0, 0, 0 }
 };
 
 static Bool
