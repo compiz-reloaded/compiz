@@ -1610,6 +1610,7 @@ scaleHandleEvent (CompDisplay *d,
 		  XEvent      *event)
 {
     CompScreen *s;
+    Bool       consumeEvent = FALSE;
 
     SCALE_DISPLAY (d);
 
@@ -1623,13 +1624,25 @@ scaleHandleEvent (CompDisplay *d,
 	    if (ss->grabIndex)
 	    {
 		if (event->xkey.keycode == sd->leftKeyCode)
+		{
 		    scaleMoveFocusWindow (s, -1, 0);
+		    consumeEvent = TRUE;
+		}
 		else if (event->xkey.keycode == sd->rightKeyCode)
+		{
 		    scaleMoveFocusWindow (s, 1, 0);
+		    consumeEvent = TRUE;
+		}
 		else if (event->xkey.keycode == sd->upKeyCode)
+		{
 		    scaleMoveFocusWindow (s, 0, -1);
+		    consumeEvent = TRUE;
+		}
 		else if (event->xkey.keycode == sd->downKeyCode)
+		{
 		    scaleMoveFocusWindow (s, 0, 1);
+		    consumeEvent = TRUE;
+		}
 	    }
 	}
 	break;
@@ -1803,9 +1816,12 @@ scaleHandleEvent (CompDisplay *d,
 	break;
     }
 
-    UNWRAP (sd, d, handleEvent);
-    (*d->handleEvent) (d, event);
-    WRAP (sd, d, handleEvent, scaleHandleEvent);
+    if (!consumeEvent)
+    {
+	UNWRAP (sd, d, handleEvent);
+	(*d->handleEvent) (d, event);
+	WRAP (sd, d, handleEvent, scaleHandleEvent);
+    }
 
     switch (event->type) {
     case UnmapNotify:
