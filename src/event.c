@@ -1433,7 +1433,8 @@ handleEvent (CompDisplay *d,
 
 		    if (w->id != d->activeWindow)
 			if (!(w->type & CompWindowTypeDockMask))
-			    moveInputFocusToWindow (w);
+			    if ((*s->focusWindow) (w))
+				moveInputFocusToWindow (w);
 		}
 	    }
 
@@ -2207,7 +2208,7 @@ handleEvent (CompDisplay *d,
 		event->xcrossing.mode   != NotifyUngrab		    &&
 		event->xcrossing.detail != NotifyInferior)
 	    {
-		Bool raise;
+		Bool raise, focus;
 		int  delay;
 
 		raise = d->opt[COMP_DISPLAY_OPTION_AUTORAISE].value.b;
@@ -2219,8 +2220,12 @@ handleEvent (CompDisplay *d,
 		    d->autoRaiseHandle = 0;
 		}
 
-		if (w->type & ~(CompWindowTypeDockMask |
-				CompWindowTypeDesktopMask))
+		if (w->type & NO_FOCUS_MASK)
+		    focus = FALSE;
+		else
+		    focus = (*w->screen->focusWindow) (w);
+
+		if (focus)
 		{
 		    moveInputFocusToWindow (w);
 
