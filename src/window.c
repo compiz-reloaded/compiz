@@ -4758,6 +4758,27 @@ getUsageTimestampForWindow (CompWindow *w,
 }
 
 static Bool
+getFocusWindowUsageTimestamp (CompWindow *w,
+			      Time       *timestamp)
+{
+    if (getUsageTimestampForWindow (w, timestamp))
+	return TRUE;
+
+    /* if we got no timestamp for the window, try to get at least a timestamp
+       for its transient parent, if any */
+    if (w->transientFor)
+    {
+	CompWindow *parent;
+
+	parent = findWindowAtScreen (w->screen, w->transientFor);
+	if (parent && getUsageTimestampForWindow (parent, timestamp))
+	    return TRUE;
+    }
+
+    return FALSE;
+}
+
+static Bool
 isWindowFocusAllowed (CompWindow   *w,
 		      unsigned int viewportX,
 		      unsigned int viewportY,
@@ -4766,8 +4787,7 @@ isWindowFocusAllowed (CompWindow   *w,
     CompDisplay  *d = w->screen->display;
     CompScreen   *s = w->screen;
     CompWindow   *active;
-    Time	 wUserTime, aUserTime;
-    Bool         gotTimestamp = FALSE;
+    Time	 aUserTime;
     CompMatch    *match;
     int          level, vx, vy;
 
@@ -4775,35 +4795,6 @@ isWindowFocusAllowed (CompWindow   *w,
 
     if (level == FOCUS_PREVENTION_LEVEL_NONE)
 	return TRUE;
-
-    if (timestamp)
-    {
-	/* the caller passed a timestamp, so use that
-	   instead of the window's user time */
-	wUserTime = timestamp;
-	gotTimestamp = TRUE;
-    }
-    else
-    {
-	gotTimestamp = getUsageTimestampForWindow (w, &wUserTime);
-    }
-
-    /* if we got no timestamp for the window, try to get at least a timestamp
-       for its transient parent, if any */
-    if (!gotTimestamp && w->transientFor)
-    {
-	CompWindow *parent;
-
-	parent = findWindowAtScreen (w->screen, w->transientFor);
-	if (parent)
-	    gotTimestamp = getUsageTimestampForWindow (parent, &wUserTime);
-    }
-
-    if (gotTimestamp && !wUserTime)
-    {
-	/* window explicitly requested no focus */
-	return FALSE;
-    }
 
     /* allow focus for excluded windows */
     match = &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match;
@@ -4834,7 +4825,7 @@ isWindowFocusAllowed (CompWindow   *w,
     if (vx != viewportX || vy != viewportY)
 	return FALSE;
 
-    if (!gotTimestamp)
+    if (!timestamp)
     {
 	/* unsure as we have nothing to compare - allow focus in low level,
 	   don't allow in normal level */
@@ -4848,7 +4839,7 @@ isWindowFocusAllowed (CompWindow   *w,
     if (!getWindowUserTime (active, &aUserTime))
 	return TRUE;
 
-    if (XSERVER_TIME_IS_BEFORE (wUserTime, aUserTime))
+    if (XSERVER_TIME_IS_BEFORE (timestamp, aUserTime))
 	return FALSE;
 
     return TRUE;
@@ -4874,8 +4865,14 @@ allowWindowFocus (CompWindow   *w,
     if (!w->inputHint && !(w->protocols & CompWindowProtocolTakeFocusMask))
 	return FALSE;
 
-    retval = isWindowFocusAllowed (w, viewportX, viewportY, timestamp);
+    if (!timestamp)
+    {
+	/* if the window has a 0 timestamp, it explicitly requested no focus */
+	if (getFocusWindowUsageTimestamp (w, &timestamp) && !timestamp)
+	    return FALSE;
+    }
 
+    retval = isWindowFocusAllowed (w, viewportX, viewportY, timestamp);
     if (!retval)
     {
 	/* add demands attention state if focus was prevented */
