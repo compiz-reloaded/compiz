@@ -1289,12 +1289,6 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 		     CompWindowTypeDesktopMask))
 	return;
 
-    if (!(w->type & (CompWindowTypeNormalMask |
-		     CompWindowTypeSplashMask |
-		     CompWindowTypeDialogMask |
-		     CompWindowTypeModalDialogMask)))
-	return;
-
     if (w->sizeHints.flags & USPosition)
     {
 	/* only respect USPosition on normal windows if
