@@ -1703,7 +1703,7 @@ handleEvent (CompDisplay *d,
 						     w->screen->y,
 						     event->xclient.data.l[1]);
 
-		if (focusAllowed && (*w->screen->focusWindow) (w))
+		if (focusAllowed)
 		    (*w->screen->activateWindow) (w);
 	    }
 	}
