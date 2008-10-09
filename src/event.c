@@ -2038,16 +2038,16 @@ handleEvent (CompDisplay *d,
 		    (*w->screen->validateWindowResizeRequest) (w, &xwcm, &xwc,
 							       source);
 
+		    if (xwcm)
+			configureXWindow (w, xwcm, &xwc);
+
 		    if ((*w->screen->placeWindow) (w, xwc.x, xwc.y,
 						   &newX, &newY))
 		    {
 			xwc.x = newX;
 			xwc.y = newY;
-			xwcm |= CWX | CWY;
+			configureXWindow (w, CWX | CWY, &xwc);
 		    }
-
-		    if (xwcm)
-			configureXWindow (w, xwcm, &xwc);
 
 		    w->placed   = TRUE;
 		}
