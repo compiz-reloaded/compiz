@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Oriya\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:51+0530\n"
+"POT-Creation-Date: 2008-10-14 15:04+0530\n"
 "PO-Revision-Date: 2007-12-16 01:13+0530\n"
 "Last-Translator: jayashree pujari <sspujari@hotmail.com>\n"
 "Language-Team: gisti <info.gist@cdac.in>\n"
@@ -1100,7 +1100,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr " PNG ଏବଂ SVG ଫାଇଲଗୁଡିକର ତାଲିକା ୟାହାକି ଘନକ୍ଷେତ୍ରର ଉପର ମୁହଁରେ ପ୍ରଦାନ ହେବା ଉଚିତ"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "ବହୁ-ଆଉଟପୁଟ ମୋଡ"
 
@@ -1174,13 +1174,13 @@ msgid "Skydome Image"
 msgstr "ସ୍କାଇଡୋମ ଚିତ୍ର"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "ଗତି"
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "ସମଯସୋପାନ"
@@ -1503,7 +1503,7 @@ msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 msgid "Move window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "ଅସ୍ବଚ୍ଛତା"
@@ -2164,120 +2164,140 @@ msgid "Big"
 msgstr "ବଡ"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "ଡେସ୍କଟପକୁ ଦେଖାଇବା ପାଇଁ ଡେସ୍କଟପକୁ କ୍ଲିକ କର"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "ପୃଷ୍ଠଭୂମିକୁ ଗାଢକର"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ମାପିବା ବେଳେ ପୃଷ୍ଠଭୂମିକୁ ଗାଢ କର"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "ଚିହ୍ନ"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr "ମାପ ବେଳେ ୟେବେ ଡେସ୍କଟପ କ୍ଲିକ ହୋଇଥାଏ ଡେସ୍କଟପ ଦେଖାଅ ମୋଡକୁ ପ୍ରବେଶ କର"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "ହୋଭର ସମଯ"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker"
 msgstr "ଉଇଣ୍ଡୋ ଗୋଟାଇବାକୁ ଆରମ୍ଭକର"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "ସବୁ ଉଇଣ୍ଡୋ ପାଇଁ ଉଇଣ୍ଡୋ ପିକ୍କର ପ୍ରାରମ୍ଭକର"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "ଉଇଣ୍ଡୋ ସମୂହ ପାଇଁ ଉଇଣ୍ଡୋ ପିକ୍କର ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "ଚଳିତ ଆଉଟପୁଟରେ ଉଇଣ୍ଡୋ ପାଇଁ ଉଇଣ୍ଡୋ ପିକ୍କର ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ସବୁ ଉଇଣ୍ଡୋକୁ ରୂପାନ୍ତରିତକରୁଛି "
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ଉଇଣ୍ଡୋ ସମୂହକୁ ରୂପାନ୍ତରିତ କରୁଛି"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ଉଇଣ୍ଡୋକୁ ରୂପାନ୍ତରିତ କରୁଛି"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ଚଳିତ ଆଉଟପୁଟରେ ଉଇଣ୍ଡୋକୁ ରୂପାନ୍ତରିତ କରୁଛି"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "କିଛିନାହିଁ"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "ସବୁ ଆଉଟପୁଟ ଉପକରଣରେ"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "ଚଳିତ ଆଉଟପୁଟ ଉପକରଣରେ"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "ବିସ୍ତୃତକରିବା ଆଇକନ"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "ଥରେ ସେଗୁଡିକ ମାପ ହେବା ପରେ ଉଇଣ୍ଡୋରେ ଗୋଟିଏ ଆଇକନକୁ ବିସ୍ତୃତକର"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale"
 msgstr "ମାପକ"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 msgid "Scale Windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ମାପ"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 msgid "Scale speed"
 msgstr "ଗତି ମାପ"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale timestep"
 msgstr "ସମଯସୋପାନକୁ ମାପ"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 msgid "Scale windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ମାପ"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "ଉଇଣ୍ଡୋ ଗୁଡିକ କେଉଁଠାରେ ମାପ ହେବେ ମନୋନୀତ କରେ ୟଦି ବହୁବିଧ ଆଉଟପୁଟ ଉପକରଣ ଉପୟୋଗ ହୋଇଥାଆନ୍ତି ।"
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 msgid "Space between windows"
 msgstr "ଉଇଣ୍ଡୋଗୁଡିକ ମଧ୍ଯରେ ଅନ୍ତର"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 msgid "Spacing"
 msgstr "ଅନ୍ତରଦେବା"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr "ସମଯ (in ms)ମାପ ମୋଡ ପୂର୍ବରୁ ନଷ୍ଟ ହୋଇଥାଏ ୟେବେ ଗୋଟିଏ ଉଇଣ୍ଡୋ ଉପରେ ଦୋଳାଯମାନ ହୁଏ "
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ମାପ ମୋଡରେ ମାପ ହେବା ଉଚିତ"
 

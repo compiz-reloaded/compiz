@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:50+0530\n"
+"POT-Creation-Date: 2008-10-14 15:03+0530\n"
 "PO-Revision-Date: 2007-12-17 12:25+0530\n"
 "Last-Translator: \n"
 "Language-Team: gist Gujarati team <info.gist@cdac.in>\n"
@@ -1136,7 +1136,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "PNG અને SVG ફાઈલોની યાદી કે જે ઘનની ટોચે રેન્ડર થવી જોઈએ"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "વિવિધ આઉટપુટ સ્થિતિ"
 
@@ -1211,13 +1211,13 @@ msgid "Skydome Image"
 msgstr "Skydome ચિત્ર"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "ઝડપ"
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "સમયપગલું"
@@ -1545,7 +1545,7 @@ msgstr "વિન્ડો ખસેડો"
 msgid "Move window"
 msgstr "વિન્ડોને ખસાડો"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "અપારદર્શકતા"
@@ -2221,123 +2221,143 @@ msgid "Big"
 msgstr "મોટું"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "ડેસ્કટોપ બતાવવા માટે ડેસ્કટોપ ક્લિક કરો"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "ઘાટું પાશ્વભાગ"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "જ્યારે વિન્ડો ખેંચી રહ્યા હોય ત્યારે ઘાટું પાશ્વભાગ"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "સંજ્ઞા"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr "જ્યારે ખેંચવા દરમ્યાન ડેસ્કટોપ પર ક્લિક થાય ત્યારે ડેસ્કટોપ બતાવો સ્થિતિ દાખલ કરો"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "રક્ષણ સમય"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 #, fuzzy
 msgid "Initiate Window Picker"
 msgstr "પ્રારંભ કરાઈ રહયું છે."
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "બધી વિન્ડો માટે વિન્ડો લેનારનો આરંભ કરો"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "વિન્ડો જૂથ માટે વિન્ડો લેનારનો આરંભ કરો"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "વર્તમાન આઉટપુટ પર વિન્ડો માટે વિન્ડો લેનારનો આરંભ કરો"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "બધી વિન્ડોનું રૂપાંતરણ અને લેઆઉટ શરૂ કરો"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "વિન્ડો જૂથનું રૂપાંતરણ અને લેઆઉટ શરૂ કરો"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "દેખાવ અને વિન્ડોનું રૂપાંતરણ શરૂ કરો"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "વર્તમાન આઉટપુટ પર વિન્ડોનું રૂપાંતરણ અને લેઆઉટ શરૂ કરો"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "કંઈ નહિં"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "બધા આઉટપુટ ઉપકરણો પર"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "વર્તમાન આઉટપુટ ઉપકરણ પર"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "ઓવરલે ચિહ્ન"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "વિન્ડો પર ચિહ્ન ઓવરલે કરો જ્યારે તેઓ ખેંચાય"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale"
 msgstr "માપદંડ"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 msgid "Scale Windows"
 msgstr "વિન્ડો ખેંચો"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 msgid "Scale speed"
 msgstr "ખેંચાવાની ઝડપ"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale timestep"
 msgstr "ખેંચાવાનું સમયપગલું"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 #, fuzzy
 msgid "Scale windows"
 msgstr "એકપણ પસંદ ન કરો"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr "જો વિવિધ આઉટપુટ ઉપકરણો વપરાય તો વિન્ડો ક્યાં ખેંચાય તે પસંદ કરે છે."
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 #, fuzzy
 msgid "Space between windows"
 msgstr "એકપણ પસંદ ન કરો"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 msgid "Spacing"
 msgstr "છોડેલી જગ્યા"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "જ્યારે વિન્ડો ઉપર ફરી રહ્યા હોય ત્યારે ખેંચાણ સ્થિતિ બંધ થાય તે પહેલાંનો સમય (મિલિસેકન્ડમાં)"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "વિન્ડો કે જે ખેંચાણ સ્થિતિમાં ખેંચાવી જોઈએ"
 
