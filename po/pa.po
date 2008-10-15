@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:51+0530\n"
+"POT-Creation-Date: 2008-10-14 15:04+0530\n"
 "PO-Revision-Date: 2007-12-15 09:26+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@users.sf.net>\n"
 "Language-Team: American English <punjabi-users@llist.sf.net>\n"
@@ -1205,7 +1205,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "PNG ਅਤੇ SVG ਫਾਇਲਾਂ ਦੀ ਲਿਸਟ, ਜੋ ਕਿ ਕਿਊਬ ਦੇ ਟਾਪ ਫੇਸ ਉੱਤੇ ਰੈਂਡਰ ਕੀਤੇ ਜਾਣੇ ਹਨ"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "ਮਲਟੀ ਆਉਟਪੁੱਟ ਮੋਡ"
 
@@ -1283,14 +1283,14 @@ msgid "Skydome Image"
 msgstr "ਸਕਾਈਡੋਮ ਚਿੱਤਰ"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "ਚੁਣੇ"
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
@@ -1647,7 +1647,7 @@ msgstr "ਹੇਠਾਂ ਜਾਓ(&D)"
 msgid "Move window"
 msgstr "ਹੇਠਾਂ ਜਾਓ(&D)"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 #, fuzzy
 msgid "Opacity"
@@ -2415,131 +2415,151 @@ msgid "Big"
 msgstr "ਵੱਡਾ"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "ਡੈਸਕਟਾਪ ਵੇਖਣ ਲਈ ਡੈਸਕਟਾਪ ਕਲਿੱਕ ਕਰੋ"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 #, fuzzy
 msgid "Darken Background"
 msgstr "ਪਿੱਠਭੂਮੀ"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "ਬੈਕਗਰਾਊਂਡ ਗੂੜ੍ਹਾਪਨ, ਜਦੋਂ ਵਿੰਡੋ ਸਕੇਲ ਕੀਤੀ ਜਾਵੇ"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "ਨਿਸ਼ਾਨ"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr "ਜਦੋਂ ਸਕੇਲ ਦੌਰਾਨ ਡੈਸਕਟਾਪ ਕਲਿੱਕ ਕੀਤਾ ਜਾਵੇ ਤਾਂ ਡੈਸਕਟਾਪ ਵੇਖੋ ਮੋਡ ਦਿਓ"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "ਹੋਵਰ ਟਾਈਮ"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 #, fuzzy
 msgid "Initiate Window Picker"
 msgstr "ਸ਼ੁਰੂਆਤੀ RAM ਡਿਸਕ"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 #, fuzzy
 msgid "Initiate Window Picker For All Windows"
 msgstr "ਸ਼ੁਰੂਆਤੀ RAM ਡਿਸਕ"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 #, fuzzy
 msgid "Initiate Window Picker For Window Group"
 msgstr "ਸ਼ੁਰੂਆਤੀ RAM ਡਿਸਕ"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 #, fuzzy
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "ਸ਼ੁਰੂਆਤੀ RAM ਡਿਸਕ"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "ਲੇਆਉਟ ਅਤੇ ਸਭ ਵਿੰਡੋਜ਼ ਲਈ ਟਰਾਸਫਰਮੇਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "ਲੇਆਉਟ ਅਤੇ ਵਿੰਡੋ ਲਈ ਟਰਾਸਫਰਮੇਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "ਵਿੰਡੋ ਲੇਆਉਟ ਅਤੇ ਟਰਾਂਸਫਰਮੇਸ਼ਨ ਸਟਾਰਟ"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "ਮੌਜੂਦਾ ਆਉਟਪੁੱਟ ਉੱਤੇ ਲੇਆਉਟ ਅਤੇ ਸਭ ਵਿੰਡੋਜ਼ ਲਈ ਟਰਾਸਫਰਮੇਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "ਸਭ ਆਉਟਪੁੱਟ ਜੰਤਰਾਂ ਉੱਤੇ"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "ਮੌਜੂਦਾ ਆਉਟਪੁੱਟ ਜੰਤਰ ਉੱਤੇ"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "ਓਵਰਲੇ ਆਈਕਾਨ"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "ਵਿੰਡੋ ਉੱਤੇ ਇੱਕ ਆਈਕਾਨ ਰੱਖੋ, ਜਦੋਂ ਉਹ ਸਕੇਲ ਕੀਤੇ ਜਾਣ"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 #, fuzzy
 msgid "Scale"
 msgstr "ਸੰਭਾਲੋ"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 #, fuzzy
 msgid "Scale Windows"
 msgstr "Win&dows ਹਟਾਓ"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 #, fuzzy
 msgid "Scale speed"
 msgstr "ਸਥਾਨਕ ਸਮਾਂ"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 #, fuzzy
 msgid "Scale timestep"
 msgstr "ਸਥਾਨਕ ਸਮਾਂ"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 #, fuzzy
 msgid "Scale windows"
 msgstr "Win&dows ਹਟਾਓ"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr "ਚੁਣੋ, ਜਿੱਥੇ ਵਿੰਡੋ ਸਕੇਲ ਕਰਨੀ ਹੈ, ਜਦੋਂ ਕਿ ਕਈ ਆਉਟਪੁੱਟ ਜੰਤਰ ਚੁਣੇ ਜਾਂਦੇ ਹਨ।"
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 #, fuzzy
 msgid "Space between windows"
 msgstr "Win&dows ਹਟਾਓ"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 #, fuzzy
 msgid "Spacing"
 msgstr "ਸਪੇਨ"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr "ਸਕੇਲ ਮੋਡ ਖਤਮ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਟਾਈਮ (ms ਵਿੱਚ), ਜਦੋਂ ਕਿ ਹੋਵਰ ਵਿੰਡੋ ਉੱਤੇ ਹੋਵੇ"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "ਵਿੰਡੋਜ਼, ਜੋ ਕਿ ਸਕੇਲ ਮੋਡ 'ਚ ਸਕੇਲ ਕਰਨੀਆਂ ਹਨ"
 

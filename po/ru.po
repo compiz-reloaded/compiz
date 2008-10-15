@@ -11,16 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:51+0530\n"
-"PO-Revision-Date: 2008-05-28 17:22+0300\n"
-"Last-Translator: Dimitriy Ryazantcev <DJm00n@mail.ru>\n"
+"POT-Creation-Date: 2008-10-14 15:05+0530\n"
+"PO-Revision-Date: 2008-10-09 13:17+0200\n"
+"Last-Translator: Alex Muravya <raimoschmidt@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -1172,7 +1172,7 @@ msgstr ""
 "Список PNG- и SVG-файлов, которые следует отобразить на верхней грани куба"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "Режим множественного вывода"
 
@@ -1246,13 +1246,13 @@ msgstr "Изображение для фона"
 
 #  combo box item
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Скорость"
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Шаг времени"
@@ -1361,7 +1361,7 @@ msgstr "Окна которые будут отбрасывать тень"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Яркость (в %) неотвечающих окон"
 
 #: ../metadata/fade.xml.in.h:3
 #, fuzzy
@@ -1374,18 +1374,17 @@ msgid "Constant time"
 msgstr "Ограничить Y"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Нормальное изменение размеров окна"
+msgstr "Затемнить неотвечающие окна"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
-msgstr ""
+msgstr "Затемнить окна, которые не отвечают на запросы оконного менеджера"
 
 #: ../metadata/fade.xml.in.h:7
 #, fuzzy
 msgid "Fade Mode"
-msgstr "Скорость затенения"
+msgstr "Режим затенения"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1432,17 +1431,17 @@ msgstr ""
 "Полноэкранный эффект проявления/исчезания при системном звуковом сигнале"
 
 #: ../metadata/fade.xml.in.h:19
-#, no-c-format
+#, fuzzy, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Насыщение (в %) неотвечающих окон"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Яркость неотвечающих окон"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Насыщение неотвечающих окон"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
@@ -1456,11 +1455,12 @@ msgstr "Скорость проявления/исчезания окна"
 #: ../metadata/fade.xml.in.h:24
 #, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Типы окон, для которых следует применять режим масштабирования"
+msgstr "Скорость сворачивания окна в режиме масштабирования"
 
 #: ../metadata/fade.xml.in.h:25
+#, fuzzy
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr ""
+msgstr "Время сворачивания окна (в миллисекундах) в режиме масштабирования"
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1584,7 +1584,7 @@ msgid "Move window"
 msgstr "Переместить окно"
 
 #  int field
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Прозрачность"
@@ -1628,14 +1628,18 @@ msgid "Horizontal viewport positions"
 msgstr "Горизонтальные позиции видовых окон"
 
 #: ../metadata/place.xml.in.h:6
+#, fuzzy
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "Оставить в рабочей области"
 
 #: ../metadata/place.xml.in.h:7
+#, fuzzy
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"Оставить окно в рабочей области, даже если это означает, что положение могло "
+"бы отличаться от указанного положения"
 
 #: ../metadata/place.xml.in.h:8
 msgid "Maximize"
@@ -2261,125 +2265,145 @@ msgid "Big"
 msgstr "Большой"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "Щелкнуть на рабочем столе для отображения рабочего стола"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "Затемнить фон"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "Затемнение фона при масштабировании окон"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "Эмблема"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 "Переход в режим отображения рабочего стола при щелчке мышью на рабочем столе "
 "во время масштабирования"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "Время задержки при наведении"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker"
 msgstr "Инициировать средство выбора окна"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "Инициировать средство выбора окна для всех окон"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "Инициировать средство выбора окна для группы окон"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "Инициировать средство выбора окна для окон текущего устройства вывода"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "Компоновка и запуск преобразования всех окон"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "Компоновка и запуск преобразования группы окон"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "Компоновка и запуск преобразования окон"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Никакой"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "На все устройства вывода"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "На текущее устройство вывода"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "Наложить значок"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Наложение значка на окна при их масштабировании"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale"
 msgstr "Масштабировать"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 msgid "Scale Windows"
 msgstr "Масштабирование окон"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 msgid "Scale speed"
 msgstr "Скорость масштабирования"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale timestep"
 msgstr "Квант времени масштабирования"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 msgid "Scale windows"
 msgstr "Масштабирование окон"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "Выбрать, где масштабировать окна если используются устройства множественного "
 "вывода."
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 msgid "Space between windows"
 msgstr "Расстояние между окнами"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 msgid "Spacing"
 msgstr "Интервал"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Время (в мс) до завершения режима масштабирования при наведении указателя на "
 "окно"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "Типы окон, для которых следует применять режим масштабирования"
 

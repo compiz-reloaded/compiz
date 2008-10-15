@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:49+0530\n"
+"POT-Creation-Date: 2008-10-14 15:02+0530\n"
 "PO-Revision-Date: 2008-03-15 16:49+0100\n"
 "Last-Translator: biswajyoti mahanta <biswajyotim@gmail.com>\n"
 "Language-Team: gist bengali  team <info.gist@cdac.in>\n"
@@ -1159,7 +1159,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "ঘনকের উপরিতলে PNG এবং SVG র যে তালিকা প্রয়োগ করা হবে"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "বিবিধ আউটপুট প্রণালী"
 
@@ -1238,7 +1238,7 @@ msgid "Skydome Image"
 msgstr "স্কাইডোম চিত্র"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
@@ -1246,7 +1246,7 @@ msgstr "বাদ দেয়া হয়েছে\n"
 
 #  label text
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
@@ -1598,7 +1598,7 @@ msgstr "উইন্ডো সরানো"
 msgid "Move window"
 msgstr "বিস্তারিত দেখাও (&d)"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "অস্বচ্ছতা"
@@ -2285,134 +2285,154 @@ msgid "Big"
 msgstr "বড়"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "ডেস্কটপ প্রদর্শন করার জন্য ডেস্কটপে ক্লিক করুন"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "পটভূমি গাঢ় করা"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "উইন্ডো স্কেল করার সময় পটভূমি গাঢ় করা"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "প্রতীক"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 "স্কেল করার সময় ডেস্কটপে যখন ক্লিক করা হবে তখন ডেস্কটপ প্রণালী প্রদর্শন প্রবেশ করান "
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "ঘুরে বেড়ানোর সময়"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 #, fuzzy
 msgid "Initiate Window Picker"
 msgstr "ভারত"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "সব উইন্ডোর জন্য উইন্ডো পিকার আরম্ভ করা"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "সব উইন্ডো শ্রেণীর জন্য উইন্ডো পিকার আরম্ভ করা"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "বর্তমান আউটপুটের উইন্ডোর জন্য উইন্ডো পিকার আরম্ভ করা"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "সব উইন্ডোগুলির বিন্যাস করছে এবং রূপান্তরিত করছে"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "উইন্ডো শ্রেণীর বিন্যাস করছে এবং রূপান্তরিত করছে"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "উইন্ডোগুলির বিন্যাস করছে এবং রূপান্তরিত করছে"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "বর্তমান আউটপুটের উইন্ডোগুলির বিন্যাস করা এবং তার রূপান্তর শুরু করা"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "কিছু না"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "সব আউটপুট ডিভাইসে"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "বর্তমান আউটপুট ডিভাইসে"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "ওভারলে চিত্রসংকেত"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "উইন্ডোগুলিকে স্কেল করার পর সেগুলির ওপর চিত্রসংকেত স্থাপন করুন"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 #, fuzzy
 msgid "Scale"
 msgstr "স্ক্যানার"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 #, fuzzy
 msgid "Scale Windows"
 msgstr "বিস্তারিত দেখাও (&d)"
 
 #  label text, Clock setting: local time (not UTC)
 #  ComboBox entry: hardware clock set to local time
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 #, fuzzy
 msgid "Scale speed"
 msgstr "স্হানীয় সময়"
 
 #  label text, Clock setting: local time (not UTC)
 #  ComboBox entry: hardware clock set to local time
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 #, fuzzy
 msgid "Scale timestep"
 msgstr "স্হানীয় সময়"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 #, fuzzy
 msgid "Scale windows"
 msgstr "বিস্তারিত দেখাও (&d)"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "যদি একাধিক আউটপুট ডিভাইস ব্যবহার করা হয় তাহলে উইন্ডোগুলি কোথায় স্কেল করা হবে তা "
 "নির্বাচন করে"
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 #, fuzzy
 msgid "Space between windows"
 msgstr "বিস্তারিত দেখাও (&d)"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 #, fuzzy
 msgid "Spacing"
 msgstr "স্পেন"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr "উইন্ডোর ওপর ঘুরে বেড়ানোর সময় স্কেল প্রণালী বন্ধ করার পূর্ববর্তী সময় (মিনিটে)"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "স্কেল প্রণালীতে উইন্ডোগুলি স্কেল করা"
 

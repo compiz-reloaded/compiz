@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:51+0530\n"
+"POT-Creation-Date: 2008-10-14 15:05+0530\n"
 "PO-Revision-Date: 2008-08-14 16:32+0200\n"
 "Last-Translator: Nicolau Gonçalves <excentriko@gmail.com>\n"
 "Language-Team: \n"
@@ -1142,7 +1142,7 @@ msgstr ""
 "cubo"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "Modo de Multi Saída"
 
@@ -1217,13 +1217,13 @@ msgid "Skydome Image"
 msgstr "Imagem do Skydome"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Velocidade"
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Espaço de tempo"
@@ -1544,7 +1544,7 @@ msgstr "Mover Janela"
 msgid "Move window"
 msgstr "Mover janela"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Opacidade"
@@ -2212,125 +2212,145 @@ msgid "Big"
 msgstr "Grande"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "Clicar área de trabalho para Mostrar Área"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "Escurecer Segundo Plano"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "Escurecer segundo plano ao dimensionar janelas"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "Emblema"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 "Entrar no modo Mostrar Área de Trabalho quando o ambiente é clicado durante "
 "o dimensionamento"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "Tempo a pairar"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker"
 msgstr "Iniciar Seletor de Janelas"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "Iniciar Selector de Janelas para Todas as Janelas"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "Iniciar Selector de Janelas para Grupo de Janelas"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "Iniciar Selector de Janelas para Todas as Janelas na Saída Actual"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "Criar layout de todas as janelas e iniciar sua transformação"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "Criar layout de grupo de janelas e iniciar sua transformação"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "Criar layout das janelas e iniciar sua transformação"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "Criar layout de janelas na saída actual e iniciar sua transformação"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Nenhum"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "Em todos os dispositivos de saída"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "Apenas no dispositivo de saída actual"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "Ícone de Instalação Sobreposta"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Sobrepor um ícone nas janelas quando elas são dimensionadas"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale"
 msgstr "Dimensionar"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 msgid "Scale Windows"
 msgstr "Janelas a dimensionar"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 msgid "Scale speed"
 msgstr "Velocidade de dimensionamento"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale timestep"
 msgstr "Etapa de dimensionamento"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 msgid "Scale windows"
 msgstr "Dimensionar janelas"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "Selecciona onde as janelas são dimensionadas se existirem múltiplos "
 "dispositivos de saída."
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 msgid "Space between windows"
 msgstr "Espaço entre janelas"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 msgid "Spacing"
 msgstr "Espaçamento"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Tempo (em ms) antes que o modo de dimensionar seja terminado ao pairar sobre "
 "uma janela"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "Janelas a serem dimensionadas no modo Dimensionar"
 

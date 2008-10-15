@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:49+0530\n"
+"POT-Creation-Date: 2008-10-14 15:03+0530\n"
 "PO-Revision-Date: 2008-08-08 14:19+0200\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -1115,7 +1115,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "Lista kuution päälle asetettavista PNG- ja SVG-tiedostoista"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "Useita ulostuloja"
 
@@ -1190,13 +1190,13 @@ msgid "Skydome Image"
 msgstr "Taivaan kuva"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Nopeus"
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Aikaviive"
@@ -1513,7 +1513,7 @@ msgstr "Siirrä Ikkuna"
 msgid "Move window"
 msgstr "Ikkunan siirtäminen"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Läpinäkyvyys"
@@ -2177,122 +2177,142 @@ msgid "Big"
 msgstr "Suuri"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "Näytä työpöytä siihen klikatessa"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "Tummenna tausta"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "Tummenna tausta ikkunoita skaalatessa"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "Tunnus"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr "Siirry työpöytätilaan kun työpöytää klikataan skaalauksen aikana"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "Päälläoloaika"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker"
 msgstr "Käynnistä ikkunavalitsin"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "Aktivoi ikkunavalitsin kaikille ikkunoille"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "Aktivoi ikkunavalitsin ikkunaryhmälle"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "Aktivoi ikkunavalitsin ikkunoille nykyisessä ulostulossa"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "Asettele ja ala mukauttaa kaikkia ikkunoita"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "Asettele ja ala mukauttaa ikkunaryhmää"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "Asettele ja ala mukauttaa ikkunoita"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "Asettele ja ala mukauttaa ikkunoita nykyisessä ulostulossa"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "Kaikissa ulostulolaitteissa"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "Vain nykyisessä ulostulolaitteessa"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "Aseta kuvake päälle"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Asettaa kuvakkeen ikkunan päälle skaalaamisen jälkeen"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale"
 msgstr "Skaalaus"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 msgid "Scale Windows"
 msgstr "Ikkunoiden skaalaus"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 msgid "Scale speed"
 msgstr "Skaalausnopeus"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale timestep"
 msgstr "Skaalausaikaväli"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 msgid "Scale windows"
 msgstr "Määrittää ikkunatyypit, jotka tulisi skaalata skaalaustilassa"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "Määrittää missä ikkunat skaalataan jos käytössä on useampi ulostulo laite"
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 msgid "Space between windows"
 msgstr "Ikkunoiden välinen tila"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 msgid "Spacing"
 msgstr "Tila"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Aika (ms), jonka jälkeen skaalaustila lopetetaan, kun ikkunan päälle "
 "asettaminen on käytössä"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "Ikkunatyypit, jotka tulisi skaalata skaalaustilassa"
 

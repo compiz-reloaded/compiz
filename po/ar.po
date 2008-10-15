@@ -8,49 +8,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:49+0530\n"
-"PO-Revision-Date: 2001-07-13 15:36+0200\n"
-"Last-Translator: Ghayss Tarraf <jodi@suse.de>\n"
+"POT-Creation-Date: 2008-10-14 15:02+0530\n"
+"PO-Revision-Date: 2008-09-29 20:47+0200\n"
+"Last-Translator: maher  <s6r@live.com>\n"
 "Language-Team: Arabic <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
-msgstr ""
+msgstr "سطح المكتب"
 
 #: ../gtk/gnome/50-compiz-key.xml.in.h:1
 msgid "Window Management"
-msgstr ""
+msgstr "إدارة النوافذ"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr ""
+msgstr "Compiz"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr ""
+msgstr "الإجراء المتخذ عند تمرير عجلة الفأرة على شريط عنوان النافذة."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
-msgstr ""
+msgstr "نوع الطمس"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
-msgstr ""
+msgstr "درجة وضوح النافذة النشطة لثيم ميتاسيتي"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 msgid "Metacity theme active window opacity shade"
-msgstr ""
+msgstr "تظليل درجة وضح النافذة النشطة لثيم ميتاسيتي"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
-msgstr ""
+msgstr "درجة وضوح  ثيم ميتاسيتي"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:6
 msgid "Metacity theme opacity shade"
-msgstr ""
+msgstr "درجة وضوح ثيم ميتاسيتي"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
@@ -81,7 +82,7 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use metacity theme"
-msgstr ""
+msgstr "إستخدم ثيم ميتاسيتي"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
@@ -90,31 +91,31 @@ msgstr ""
 #: ../gtk/window-decorator/gtk-window-decorator.c:4418
 #: ../metadata/core.xml.in.h:24
 msgid "Close Window"
-msgstr ""
+msgstr "أغلق النافذة"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4440
 #: ../metadata/core.xml.in.h:146
 msgid "Unmaximize Window"
-msgstr ""
+msgstr "التراجع عن تكبير النافذة"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4443
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
-msgstr ""
+msgstr "تكبير النافذة"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4485
 #: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
-msgstr ""
+msgstr "تصغير النافذة"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
 #: ../metadata/core.xml.in.h:153
 msgid "Window Menu"
-msgstr ""
+msgstr "قائمة النافذه"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4621
 msgid "Shade"
-msgstr ""
+msgstr "الظل"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4641
 msgid "Make Above"
@@ -122,11 +123,11 @@ msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4667
 msgid "Stick"
-msgstr ""
+msgstr "الصق"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4687
 msgid "Unshade"
-msgstr ""
+msgstr "إزالة التظليل"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4707
 msgid "Unmake Above"
@@ -134,12 +135,12 @@ msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4733
 msgid "Unstick"
-msgstr ""
+msgstr "إزالة اللصق"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5090
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "النافذة \"%s\" لا تستجيب."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5099
 msgid ""
@@ -148,7 +149,7 @@ msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5114
 msgid "_Force Quit"
-msgstr ""
+msgstr "_الإجبار على الإنهاء"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -202,7 +203,7 @@ msgstr ""
 
 #: ../metadata/annotate.xml.in.h:13
 msgid "Line width"
-msgstr ""
+msgstr "درجة عرض الخط"
 
 #: ../metadata/annotate.xml.in.h:14
 msgid "Line width for annotations"
@@ -214,7 +215,7 @@ msgstr ""
 
 #: ../metadata/annotate.xml.in.h:16
 msgid "Stroke width"
-msgstr ""
+msgstr "درجة عرض التحديد"
 
 #: ../metadata/annotate.xml.in.h:17
 msgid "Stroke width for annotations"
@@ -354,7 +355,7 @@ msgstr ""
 
 #: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
-msgstr ""
+msgstr "استنساخ المخرجات"
 
 #: ../metadata/clone.xml.in.h:3
 msgid "Initiate clone selection"
@@ -1088,7 +1089,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr ""
 
@@ -1161,13 +1162,13 @@ msgid "Skydome Image"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr ""
@@ -1483,7 +1484,7 @@ msgstr ""
 msgid "Move window"
 msgstr ""
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr ""
@@ -2138,119 +2139,139 @@ msgid "Big"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:3
-msgid "Click Desktop to Show Desktop"
+msgid "Button Bindings Toggle Scale Mode"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:4
-msgid "Darken Background"
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:5
-msgid "Darken background when scaling windows"
+msgid "Click Desktop to Show Desktop"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:6
-msgid "Emblem"
+msgid "Darken Background"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:7
-msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgid "Darken background when scaling windows"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:8
-msgid "Hover Time"
+msgid "Emblem"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:9
-msgid "Initiate Window Picker"
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:10
-msgid "Initiate Window Picker For All Windows"
+msgid "Hover Time"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:11
-msgid "Initiate Window Picker For Window Group"
+msgid "Initiate Window Picker"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:12
-msgid "Initiate Window Picker For Windows on Current Output"
+msgid "Initiate Window Picker For All Windows"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:13
-msgid "Layout and start transforming all windows"
+msgid "Initiate Window Picker For Window Group"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:14
-msgid "Layout and start transforming window group"
+msgid "Initiate Window Picker For Windows on Current Output"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:15
-msgid "Layout and start transforming windows"
+msgid "Key Bindings Toggle Scale Mode"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:16
-msgid "Layout and start transforming windows on current output"
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
-msgid "None"
+#: ../metadata/scale.xml.in.h:17
+msgid "Layout and start transforming all windows"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:18
+msgid "Layout and start transforming window group"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:19
-msgid "On all output devices"
+msgid "Layout and start transforming windows"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:20
-msgid "On current output device"
+msgid "Layout and start transforming windows on current output"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:22
-msgid "Overlay Icon"
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
+msgid "None"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:23
-msgid "Overlay an icon on windows once they are scaled"
+msgid "On all output devices"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:24
-msgid "Scale"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:25
-msgid "Scale Windows"
+msgid "On current output device"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:26
-msgid "Scale speed"
+msgid "Overlay Icon"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:27
-msgid "Scale timestep"
+msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:28
-msgid "Scale windows"
+msgid "Scale"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:29
-msgid "Selects where windows are scaled if multiple output devices are used."
+msgid "Scale Windows"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:30
-msgid "Space between windows"
+msgid "Scale speed"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:31
-msgid "Spacing"
+msgid "Scale timestep"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:32
+msgid "Scale windows"
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:33
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:34
+msgid "Space between windows"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:35
+msgid "Spacing"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr ""
 

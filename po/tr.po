@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz-new\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:51+0530\n"
+"POT-Creation-Date: 2008-10-14 15:05+0530\n"
 "PO-Revision-Date: 2007-11-03 17:48+0200\n"
 "Last-Translator: Serdar Soytetir <tulliana@gmail.com>\n"
 "Language-Team:  <tr@li.org>\n"
@@ -1185,7 +1185,7 @@ msgstr ""
 "Küpün üst kapağı için hazırlanması gereken PNG ve SVG dosyalarının listesi"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "Çoklu Çıktı Kipi"
 
@@ -1262,14 +1262,14 @@ msgid "Skydome Image"
 msgstr "Arkaplan Resmi"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Hız"
 
 # classnames.ycp:73
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Süre aralığı"
@@ -1614,7 +1614,7 @@ msgstr "Pencereyi Taşı"
 msgid "Move window"
 msgstr "Pencereyi taşı"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Matlık"
@@ -2323,129 +2323,149 @@ msgid "Big"
 msgstr "Büyük"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "Masaüstünü Göstermek için Masaüstüne Tıkla"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "Arkaplanı Koyulaştır"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "Pencereleri yeniden boyutlandırırken arkaplanı koyulaştır"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "Simge"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 "Boyutlandırma sırasında masaüstüne tıklanırsa Masaüstünü Göster kipine geç"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "Üzerine Gelme Süresi"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker"
 msgstr "Pencere Tutucuyu Başlat"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "Tüm Pencereler için Pencere Yakalayıcıyı Başlat"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "Pencere Grubu için Pencere Yakalayıcıyı Başlat"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "Geçerli Çıktıyı Kullanan Pencereler için Pencere Yakalayıcıyı Başlat"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "Tüm pencereleri yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "Pencere grubunu yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "Pencereleri yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr "Geçerli çıktıyı kullanan pencereleri yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Hiçbiri"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "Tüm çıktı aygıtları üzerinde"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "Sadece geçerli çıktı aygıtı üzerinde"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "Örtülü Durum Simgesi"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Boyutlandırılan pencerelerin üzerinde simge göster"
 
 # menuentries/menuentry_scanner.ycp:36
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale"
 msgstr "Boyutlandır"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 msgid "Scale Windows"
 msgstr "Pencereleri Boyutlandır"
 
 # clients/inst_environment.ycp:306
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 msgid "Scale speed"
 msgstr "Boyutlandırma hızı"
 
 # clients/inst_environment.ycp:306
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale timestep"
 msgstr "Boyutlandırma zamanı basamağı"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 msgid "Scale windows"
 msgstr "Pencereleri boyutlandır"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr "Çoklu çıktı aygıtı kullanılıyorken boyutlandırılmış pencereleri seçer."
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 msgid "Space between windows"
 msgstr "Pencereler arasında bırakılacak boşluk"
 
 # /usr/lib/YaST2/keyboard_raw.ycp:200
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 msgid "Spacing"
 msgstr "Aralık"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Bir pencerenin üzerindeyken boyutlandırma kipi bitirilmeden önce geçmesi "
 "gereken süre (ms olarak)"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "Boyutlandırma kipinde boyutlandırılacak pencereler"
 

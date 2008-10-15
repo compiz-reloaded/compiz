@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 14:49+0530\n"
-"PO-Revision-Date: 2008-08-11 21:14+0200\n"
-"Last-Translator: Florent <cartman@igstaff.com>\n"
+"POT-Creation-Date: 2008-10-14 15:03+0530\n"
+"PO-Revision-Date: 2008-10-08 09:58+0200\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,12 +112,12 @@ msgstr "Restaurer la fenêtre"
 #: ../gtk/window-decorator/gtk-window-decorator.c:4443
 #: ../metadata/core.xml.in.h:81
 msgid "Maximize Window"
-msgstr "Optimiser la fenêtre"
+msgstr "Maximiser la fenêtre"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4485
 #: ../metadata/core.xml.in.h:87
 msgid "Minimize Window"
-msgstr "Minimiser la fenêtre"
+msgstr "Réduire la fenêtre"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4602
 #: ../metadata/core.xml.in.h:153
@@ -722,13 +722,13 @@ msgstr ""
 
 #: ../metadata/core.xml.in.h:70
 msgid "Ignore Hints When Maximized"
-msgstr "Ignorer les conseils lorsque la fenêtre est agrandie"
+msgstr "Ignorer les indications lorsque la fenêtre est maximisée"
 
 #: ../metadata/core.xml.in.h:71
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
-"Ignorer l'incrément de taille et les conseils d'aspect lorsque la fenêtre "
-"est agrandie"
+"Ignorer l'incrément de taille et les indications d'aspect lorsque la fenêtre "
+"est maximisée"
 
 #: ../metadata/core.xml.in.h:72
 msgid "Interval before raising selected windows"
@@ -769,27 +769,27 @@ msgstr "Abaisser la fenêtre sous d'autres fenêtres"
 
 #: ../metadata/core.xml.in.h:82
 msgid "Maximize Window Horizontally"
-msgstr "Optimiser la fenêtre horizontalement"
+msgstr "Maximiser la fenêtre horizontalement"
 
 #: ../metadata/core.xml.in.h:83
 msgid "Maximize Window Vertically"
-msgstr "Optimiser la fenêtre verticalement"
+msgstr "Maximiser la fenêtre verticalement"
 
 #: ../metadata/core.xml.in.h:84
 msgid "Maximize active window"
-msgstr "Optimiser la fenêtre active"
+msgstr "Maximiser la fenêtre active"
 
 #: ../metadata/core.xml.in.h:85
 msgid "Maximize active window horizontally"
-msgstr "Optimiser la fenêtre active horizontalement"
+msgstr "Maximiser la fenêtre active horizontalement"
 
 #: ../metadata/core.xml.in.h:86
 msgid "Maximize active window vertically"
-msgstr "Optimiser la fenêtre active verticalement"
+msgstr "Maximiser la fenêtre active verticalement"
 
 #: ../metadata/core.xml.in.h:88
 msgid "Minimize active window"
-msgstr "Minimiser la fenêtre active"
+msgstr "Réduire la fenêtre active"
 
 #: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
 msgid "Normal"
@@ -991,15 +991,15 @@ msgstr "Vitesse à laquelle l'écran est redessiné (fois/seconde)"
 
 #: ../metadata/core.xml.in.h:137
 msgid "Toggle Window Maximized"
-msgstr "Basculer la fenêtre agrandie"
+msgstr "Basculer la fenêtre maximisée"
 
 #: ../metadata/core.xml.in.h:138
 msgid "Toggle Window Maximized Horizontally"
-msgstr "Basculer la fenêtre agrandie horizontalement"
+msgstr "Basculer la fenêtre maximisée horizontalement"
 
 #: ../metadata/core.xml.in.h:139
 msgid "Toggle Window Maximized Vertically"
-msgstr "Basculer la fenêtre agrandie verticalement"
+msgstr "Basculer la fenêtre maximisée verticalement"
 
 #: ../metadata/core.xml.in.h:140
 msgid "Toggle Window Shaded"
@@ -1007,15 +1007,15 @@ msgstr "Basculer la fenêtre ombrée"
 
 #: ../metadata/core.xml.in.h:141
 msgid "Toggle active window maximized"
-msgstr "Basculer la fenêtre active agrandie"
+msgstr "Basculer la fenêtre active maximisée"
 
 #: ../metadata/core.xml.in.h:142
 msgid "Toggle active window maximized horizontally"
-msgstr "Basculer la fenêtre active agrandie horizontalement"
+msgstr "Basculer la fenêtre active maximisée horizontalement"
 
 #: ../metadata/core.xml.in.h:143
 msgid "Toggle active window maximized vertically"
-msgstr "Basculer la fenêtre active agrandie verticalement"
+msgstr "Basculer la fenêtre active maximisée verticalement"
 
 #: ../metadata/core.xml.in.h:144
 msgid "Toggle active window shaded"
@@ -1162,7 +1162,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "Liste de fichiers PNG et SVG à afficher sur la face supérieure du cube"
 
 #: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:21
 msgid "Multi Output Mode"
 msgstr "Mode de sorties multiples"
 
@@ -1237,13 +1237,13 @@ msgid "Skydome Image"
 msgstr "Image du Skydome"
 
 #: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
 #: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Vitesse"
 
 #: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
 #: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Intervalle"
@@ -1376,7 +1376,7 @@ msgstr "Mode de Fondu"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
-msgstr "Fondu quand une fenêtre est Minimisée/ouverte/fermée"
+msgstr "Fondu quand une fenêtre est réduite/ouverte/fermée"
 
 #: ../metadata/fade.xml.in.h:9
 msgid "Fade Speed"
@@ -1388,7 +1388,7 @@ msgstr "Temps de Fondu"
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Fade effect on minimize/open/close window events"
-msgstr "Effet de fondu lors des événements Minimiser/Ouvrir/Fermer la fenêtre"
+msgstr "Effet de fondu lors des événements réduire/ouvrir/fermer la fenêtre"
 
 #: ../metadata/fade.xml.in.h:12
 msgid "Fade effect on system beep"
@@ -1506,19 +1506,19 @@ msgstr "Backend de contrôle Kconfig"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
-msgstr "Effet de Minimisation"
+msgstr "Effet de réduction"
 
 #: ../metadata/minimize.xml.in.h:2
 msgid "Minimize Windows"
-msgstr "Minimiser la fenêtre"
+msgstr "Réduire la fenêtre"
 
 #: ../metadata/minimize.xml.in.h:3
 msgid "Minimize speed"
-msgstr "Vitesse de minimisation"
+msgstr "Vitesse de réduction"
 
 #: ../metadata/minimize.xml.in.h:4
 msgid "Minimize timestep"
-msgstr "Intervalle de minimisation"
+msgstr "Intervalle de réduction"
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
@@ -1530,7 +1530,7 @@ msgstr "Résistance de l'ombre"
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
-msgstr "Transformer les fenêtres lorsqu'elles sont réduites ou agrandies"
+msgstr "Transformer les fenêtres lorsqu'elles sont réduites ou maximisées"
 
 #: ../metadata/minimize.xml.in.h:10
 msgid "Windows that should be transformed when minimized"
@@ -1566,7 +1566,7 @@ msgstr "Déplacer la fenêtre"
 msgid "Move window"
 msgstr "Déplacer la fenêtre"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:21
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
 #: ../metadata/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Opacité"
@@ -1578,12 +1578,12 @@ msgstr "Niveau d'opacité pour déplacer des fenêtres"
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr ""
-"Désactiver l'alignement et la démaximisation automatique des fenêtres "
+"Désactiver l'alignement et la réduction automatique des fenêtres maximisées "
 "lorsque vous les faites glisser"
 
 #: ../metadata/move.xml.in.h:11
 msgid "Snapoff maximized windows"
-msgstr "Désactiver l'alignement des fenêtres agrandies"
+msgstr "Désactiver l'alignement des fenêtres maximisées"
 
 #: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
@@ -2240,128 +2240,148 @@ msgid "Big"
 msgstr "Grand"
 
 #: ../metadata/scale.xml.in.h:3
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:4
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
 msgid "Click Desktop to Show Desktop"
 msgstr "Cliquez sur le Bureau pour l'afficher"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:6
 msgid "Darken Background"
 msgstr "Assombrir l'arrière-plan"
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:7
 msgid "Darken background when scaling windows"
 msgstr "Assombrir l'arrière-plan lors de la Mise à l'Échelle des fenêtres"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:8
 msgid "Emblem"
 msgstr "Emblème"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:9
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 "Entrer en mode Affichage Du Bureau quand celui-ci est cliqué pendant la Mise "
 "à l'Échelle"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:10
 msgid "Hover Time"
 msgstr "Temps de survol"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:11
 msgid "Initiate Window Picker"
 msgstr "Lancer le sélecteur de fenêtre"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For All Windows"
 msgstr "Lancer le sélecteur de fenêtre pour toutes les fenêtres"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:13
 msgid "Initiate Window Picker For Window Group"
 msgstr "Lancer le sélecteur de fenêtre pour un groupe de fenêtres"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr ""
 "Lancer le sélecteur de fenêtre pour les fenêtres sur la sortie actuelle"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:15
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:16
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:17
 msgid "Layout and start transforming all windows"
 msgstr "Disposer et commencer à transformer toutes les fenêtres"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:18
 msgid "Layout and start transforming window group"
 msgstr "Disposer et commencer à transformer un groupe de fenêtres"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:19
 msgid "Layout and start transforming windows"
 msgstr "Disposer et commencer à transformer les fenêtres"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming windows on current output"
 msgstr ""
 "Disposer et commencer à transformer des fenêtres sur la sortie actuelle"
 
-#: ../metadata/scale.xml.in.h:18 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Aucun"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:23
 msgid "On all output devices"
 msgstr "Sur tous les périphériques de sortie"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:24
 msgid "On current output device"
 msgstr "Sur le périphérique de sortie courant"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:26
 msgid "Overlay Icon"
 msgstr "Superposer l'icône"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:27
 msgid "Overlay an icon on windows once they are scaled"
 msgstr ""
 "Superposer une icône sur les fenêtres lorsqu'elles ont été mises à l'échelle"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:28
 msgid "Scale"
 msgstr "Échelle"
 
-#: ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:29
 msgid "Scale Windows"
 msgstr "Mettre les fenêtres à l'échelle"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:30
 msgid "Scale speed"
 msgstr "Vitesse de mise à l'échelle"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale timestep"
 msgstr "Intervalle de mise à l'échelle"
 
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:32
 msgid "Scale windows"
 msgstr "Mettre toutes les fenêtres à la même échelle"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:33
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "Choisir où les fenêtres sont mises à l'échelle si plusieurs périphériques de "
 "sortie sont utilisés."
 
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:34
 msgid "Space between windows"
 msgstr "Espace entre les fenêtres"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:35
 msgid "Spacing"
 msgstr "Espacement"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:37
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Temps (en ms) avant que le mode Échelle soit terminé lors du survol au-"
 "dessus d'une fenêtre"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:39
 msgid "Windows that should be scaled in scale mode"
 msgstr "Types de fenêtres à mettre à l'échelle en mode Échelle"
 
@@ -2441,7 +2461,7 @@ msgstr "Icône"
 
 #: ../metadata/switcher.xml.in.h:12
 msgid "Minimized"
-msgstr "Minimisé"
+msgstr "Réduite"
 
 #: ../metadata/switcher.xml.in.h:14
 msgid "Next Panel"
@@ -2679,7 +2699,7 @@ msgstr "Mapper les types de fenêtres"
 
 #: ../metadata/wobbly.xml.in.h:12
 msgid "Maximize Effect"
-msgstr "Optimiser l'effet"
+msgstr "Maximiser l'effet"
 
 #: ../metadata/wobbly.xml.in.h:13
 msgid "Minimum Grid Size"
@@ -2751,8 +2771,8 @@ msgstr "Types de fenêtres à déformer lorsqu'elles sont déplacées"
 #: ../metadata/wobbly.xml.in.h:30
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr ""
-"Effet de déformation lors de la maximisation et de la démaximisation des "
-"fenêtres"
+"Effet de déformation lors de la maximisation et de la réduction/restauration "
+"des fenêtres"
 
 #: ../metadata/wobbly.xml.in.h:31
 msgid "Wobbly Windows"
