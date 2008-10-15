@@ -3,6 +3,11 @@
 	<_short>Scale</_short>
 	<_long>Scale windows</_long>
 	<category>Window Management</category>
+	<deps>
+	    <relation type="after">
+		<plugin>fade</plugin>
+	    </relation>
+	</deps>
 	<display>
 	    <option name="abi" type="int" read_only="true"/>
 	    <option name="index" type="int" read_only="true"/>
