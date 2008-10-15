@@ -1624,7 +1624,7 @@ rotateActivateWindow (CompWindow *w)
 	    o[4].name    = "focus_default";
 	    o[4].value.b = FALSE;
 
-	    rotate (s->display, NULL, 0, o, 4);
+	    rotate (s->display, NULL, 0, o, 5);
 	}
     }
 
