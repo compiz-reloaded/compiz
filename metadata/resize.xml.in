@@ -2,37 +2,41 @@
     <plugin name="resize">
 	<_short>Resize Window</_short>
 	<_long>Resize window</_long>
+	<category>Window Management</category>
 	<display>
-	    <option name="initiate_normal_key" type="key">
-		<_short>Initiate Normal Window Resize</_short>
-		<_long>Start resizing window normally</_long>
-		<default/>
-	    </option>
-	    <option name="initiate_outline_key" type="key">
-		<_short>Initiate Outline Window Resize</_short>
-		<_long>Start resizing window with outline</_long>
-		<default/>
-	    </option>
-	    <option name="initiate_rectangle_key" type="key">
-		<_short>Initiate Rectangle Window Resize</_short>
-		<_long>Start resizing window with rectangle</_long>
-		<default/>
-	    </option>
-	    <option name="initiate_stretch_key" type="key">
-		<_short>Initiate Stretch Window Resize</_short>
-		<_long>Start resizing window by stretching it</_long>
-		<default/>
-	    </option>
-	    <option name="initiate_button" type="button">
-		<_short>Initiate Window Resize</_short>
-		<_long>Start resizing window</_long>
-		<default>&lt;Alt&gt;Button2</default>
-	    </option>
-	    <option name="initiate_key" type="key">
-		<_short>Initiate Window Resize</_short>
-		<_long>Start resizing window</_long>
-		<default>&lt;Alt&gt;F8</default>
-	    </option>
+	    <group>
+		<_short>Bindings</_short>
+		<option name="initiate_normal_key" type="key">
+		    <_short>Initiate Normal Window Resize</_short>
+		    <_long>Start resizing window normally</_long>
+		    <default/>
+		</option>
+		<option name="initiate_outline_key" type="key">
+		    <_short>Initiate Outline Window Resize</_short>
+		    <_long>Start resizing window with outline</_long>
+		    <default/>
+		</option>
+		<option name="initiate_rectangle_key" type="key">
+		    <_short>Initiate Rectangle Window Resize</_short>
+		    <_long>Start resizing window with rectangle</_long>
+		    <default/>
+		</option>
+		<option name="initiate_stretch_key" type="key">
+		    <_short>Initiate Stretch Window Resize</_short>
+		    <_long>Start resizing window by stretching it</_long>
+		    <default/>
+		</option>
+		<option name="initiate_button" type="button">
+		    <_short>Initiate Window Resize</_short>
+		    <_long>Start resizing window</_long>
+		    <default>&lt;Alt&gt;Button2</default>
+		</option>
+		<option name="initiate_key" type="key">
+		    <_short>Initiate Window Resize</_short>
+		    <_long>Start resizing window</_long>
+		    <default>&lt;Alt&gt;F8</default>
+		</option>
+	    </group>
 	    <option name="mode" type="int">
 		<_short>Default Resize Mode</_short>
 		<_long>Default mode used for window resizing</_long>

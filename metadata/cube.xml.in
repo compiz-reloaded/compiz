@@ -2,6 +2,7 @@
     <plugin name="cube">
 	<_short>Desktop Cube</_short>
 	<_long>Place windows on cube</_long>
+	<category>Desktop</category>
 	<feature>largedesktop</feature>
 	<deps>
 	    <relation type="before">
@@ -29,118 +30,9 @@
 	    </option>
 	</display>
 	<screen>
-	    <option name="color" type="color">
-		<_short>Cube Color</_short>
-		<_long>Color of top and bottom sides of the cube</_long>
-		<default>
-		    <red>0xfefe</red>
-		    <green>0xffff</green>
-		    <blue>0xc7c7</blue>
-		</default>
-	    </option>
-	    <option name="in" type="bool">
-		<_short>Inside Cube</_short>
-		<_long>Inside cube</_long>
-		<default>false</default>
-	    </option>
-	    <option name="scale_image" type="bool">
-		<_short>Scale image</_short>
-		<_long>Scale images to cover top face of cube</_long>
-		<default>false</default>
-	    </option>
-	    <option name="images" type="list">
-		<_short>Image files</_short>
-		<_long>List of PNG and SVG files that should be rendered on top face of cube</_long>
-		<type>string</type>
-		<default>
-		    <value>freedesktop</value>
-		</default>
-	    </option>
-	    <option name="skydome" type="bool">
-		<_short>Skydome</_short>
-		<_long>Render skydome</_long>
-		<default>false</default>
-	    </option>
-	    <option name="skydome_image" type="string">
-		<_short>Skydome Image</_short>
-		<_long>Image to use as texture for the skydome</_long>
-	    </option>
-	    <option name="skydome_animated" type="bool">
-		<_short>Animate Skydome</_short>
-		<_long>Animate skydome when rotating cube</_long>
-		<default>false</default>
-	    </option>
-	    <option name="skydome_gradient_start_color" type="color">
-		<_short>Skydome Gradient Start Color</_short>
-		<_long>Color to use for the top color-stop of the skydome-fallback gradient</_long>
-		<default>
-		    <red>0x0d0d</red>
-		    <green>0xb1b1</green>
-		    <blue>0xfdfd</blue>
-		</default>
-	    </option>
-	    <option name="skydome_gradient_end_color" type="color">
-		<_short>Skydome Gradient End Color</_short>
-		<_long>Color to use for the bottom color-stop of the skydome-fallback gradient</_long>
-		<default>
-		    <red>0xfefe</red>
-		    <green>0xffff</green>
-		    <blue>0xc7c7</blue>
-		</default>
-	    </option>
-	    <option name="acceleration" type="float">
-		<_short>Acceleration</_short>
-		<_long>Fold Acceleration</_long>
-		<default>4.0</default>
-		<min>1.0</min>
-		<max>20.0</max>
-		<precision>0.1</precision>
-	    </option>
-	    <option name="speed" type="float">
-		<_short>Speed</_short>
-		<_long>Fold Speed</_long>
-		<default>1.5</default>
-		<min>0.1</min>
-		<max>50.0</max>
-		<precision>0.1</precision>
-	    </option>
-	    <option name="timestep" type="float">
-		<_short>Timestep</_short>
-		<_long>Fold Timestep</_long>
-		<default>1.2</default>
-		<min>0.1</min>
-		<max>50.0</max>
-		<precision>0.1</precision>
-	    </option>
 	    <option name="mipmap" type="bool">
 		<_short>Mipmap</_short>
 		<_long>Generate mipmaps when possible for higher quality scaling</_long>
-		<default>true</default>
-	    </option>
-	    <option name="adjust_image" type="bool">
-		<_short>Adjust Image</_short>
-		<_long>Adjust top face image to rotation</_long>
-		<default>false</default>
-	    </option>
-	    <option name="active_opacity" type="float">
-		<_short>Opacity During Rotation</_short>
-		<_long>Opacity of desktop window during rotation.</_long>
-		<default>100.0</default>
-		<min>0.0</min>
-		<max>100.0</max>
-		<precision>1.0</precision>
-	    </option>
-	    <option name="inactive_opacity" type="float">
-		<_short>Opacity When Not Rotating</_short>
-		<_long>Opacity of desktop window when not rotating.</_long>
-		<default>100.0</default>
-		<min>0.0</min>
-		<max>100.0</max>
-		<precision>1.0</precision>
-	    </option>
-	    <option name="transparent_manual_only" type="bool">
-		<_short>Transparency Only on Mouse Rotate</_short>
-		<_long>Initiates Cube transparency only if rotation is mouse driven.</_long>
 		<default>true</default>
 	    </option>
 	    <option name="multioutput_mode" type="int">
@@ -162,6 +54,132 @@
 		    <_name>One big cube</_name>
 		</desc>
 	    </option>
+	    <group>
+		<_short>Behaviour</_short>
+		<option name="in" type="bool">
+		    <_short>Inside Cube</_short>
+		    <_long>Inside cube</_long>
+		    <default>false</default>
+		</option>
+		<option name="acceleration" type="float">
+		    <_short>Acceleration</_short>
+		    <_long>Fold Acceleration</_long>
+		    <default>4.0</default>
+		    <min>1.0</min>
+		    <max>20.0</max>
+		    <precision>0.1</precision>
+		</option>
+		<option name="speed" type="float">
+		    <_short>Speed</_short>
+		    <_long>Fold Speed</_long>
+		    <default>1.5</default>
+		    <min>0.1</min>
+		    <max>50.0</max>
+		    <precision>0.1</precision>
+		</option>
+		<option name="timestep" type="float">
+		    <_short>Timestep</_short>
+		    <_long>Fold Timestep</_long>
+		    <default>1.2</default>
+		    <min>0.1</min>
+		    <max>50.0</max>
+		    <precision>0.1</precision>
+		</option>
+	    </group>
+	    <group>
+		<_short>Appearance</_short>
+		<option name="color" type="color">
+		    <_short>Cube Color</_short>
+		    <_long>Color of top and bottom sides of the cube</_long>
+		    <default>
+			<red>0xfefe</red>
+			<green>0xffff</green>
+			<blue>0xc7c7</blue>
+		    </default>
+		</option>
+		<subgroup>
+		    <_short>Cube Caps</_short>
+		    <option name="scale_image" type="bool">
+			<_short>Scale image</_short>
+			<_long>Scale images to cover top face of cube</_long>
+			<default>false</default>
+		    </option>
+		    <option name="images" type="list">
+			<_short>Image files</_short>
+			<_long>List of PNG and SVG files that should be rendered on top face of cube</_long>
+			<type>string</type>
+			<hints>file;image;</hints>
+			<default>
+			    <value>freedesktop</value>
+			</default>
+		    </option>
+		    <option name="adjust_image" type="bool">
+			<_short>Adjust Image</_short>
+			<_long>Adjust top face image to rotation</_long>
+			<default>false</default>
+		    </option>
+		</subgroup>
+		<subgroup>
+		    <_short>Skydome</_short>
+		    <option name="skydome" type="bool">
+			<_short>Skydome</_short>
+			<_long>Render skydome</_long>
+			<default>false</default>
+		    </option>
+		    <option name="skydome_image" type="string">
+			<_short>Skydome Image</_short>
+			<_long>Image to use as texture for the skydome</_long>
+			<hints>file;image;</hints>
+		    </option>
+		    <option name="skydome_animated" type="bool">
+			<_short>Animate Skydome</_short>
+			<_long>Animate skydome when rotating cube</_long>
+			<default>false</default>
+		    </option>
+		    <option name="skydome_gradient_start_color" type="color">
+			<_short>Skydome Gradient Start Color</_short>
+			<_long>Color to use for the top color-stop of the skydome-fallback gradient</_long>
+			<default>
+			    <red>0x0d0d</red>
+			    <green>0xb1b1</green>
+			    <blue>0xfdfd</blue>
+			</default>
+		    </option>
+		    <option name="skydome_gradient_end_color" type="color">
+			<_short>Skydome Gradient End Color</_short>
+			<_long>Color to use for the bottom color-stop of the skydome-fallback gradient</_long>
+			<default>
+			    <red>0xfefe</red>
+			    <green>0xffff</green>
+			    <blue>0xc7c7</blue>
+			</default>
+		    </option>
+		</subgroup>
+	    </group>
+	    <group>
+		<_short>Transparent Cube</_short>
+		<option name="active_opacity" type="float">
+		    <_short>Opacity During Rotation</_short>
+		    <_long>Opacity of desktop window during rotation.</_long>
+		    <default>100.0</default>
+		    <min>0.0</min>
+		    <max>100.0</max>
+		    <precision>1.0</precision>
+		</option>
+		<option name="inactive_opacity" type="float">
+		    <_short>Opacity When Not Rotating</_short>
+		    <_long>Opacity of desktop window when not rotating.</_long>
+		    <default>100.0</default>
+		    <min>0.0</min>
+		    <max>100.0</max>
+		    <precision>1.0</precision>
+		</option>
+		<option name="transparent_manual_only" type="bool">
+		    <_short>Transparency Only on Mouse Rotate</_short>
+		    <_long>Initiates Cube transparency only if rotation is mouse driven.</_long>
+		    <default>true</default>
+		</option>
+	    </group>
 	</screen>
     </plugin>
 </compiz>
