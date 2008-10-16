@@ -314,6 +314,9 @@ main (int argc, char **argv)
 	}
 	else if (!strcmp (argv[i], "--indirect-rendering"))
 	{
+	    /* force Mesa libGL into indirect rendering mode, because
+	       glXQueryExtensionsString is context-independant */
+	    setenv ("LIBGL_ALWAYS_INDIRECT", "1", True);
 	    indirectRendering = TRUE;
 	}
 	else if (!strcmp (argv[i], "--loose-binding"))
