@@ -464,6 +464,10 @@ resizeInitiate (CompDisplay     *d,
 					   CompWindowGrabResizeMask |
 					   CompWindowGrabButtonMask);
 
+	    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
+		updateWindowAttributes (w,
+					CompStackingUpdateModeAboveFullscreen);
+
 	    /* using the paint rectangle is enough here
 	       as we don't have any stretch yet */
 	    resizeGetPaintRectangle (d, &box);

@@ -196,6 +196,10 @@ moveInitiate (CompDisplay     *d,
 					   CompWindowGrabMoveMask |
 					   CompWindowGrabButtonMask);
 
+	    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
+		updateWindowAttributes (w,
+					CompStackingUpdateModeAboveFullscreen);
+
 	    if (state & CompActionStateInitKey)
 	    {
 		int xRoot, yRoot;
