@@ -327,9 +327,9 @@ updateWmHints (CompWindow *w)
 	dFlags ^= hints->flags;
 
 	iconChanged = (dFlags & (IconPixmapHint | IconMaskHint))    ||
-		      (w->hints && hints->IconPixmapHint &&
+		      (w->hints && (hints->flags & IconPixmapHint)  &&
 		       w->hints->icon_pixmap != hints->icon_pixmap) ||
-		      (w->hints && hints->IconMaskHint   &&
+		      (w->hints && (hints->flags & IconMaskHint)    &&
 		       w->hints->icon_mask != hints->icon_mask);
 
 	if (iconChanged)
