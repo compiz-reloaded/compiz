@@ -319,10 +319,29 @@ updateWmHints (CompWindow *w)
     hints = XGetWMHints (w->screen->display->display, w->id);
     if (hints)
     {
+	long dFlags = 0;
+	Bool iconChanged = FALSE;
+
+	if (w->hints)
+	    dFlags = w->hints->flags;
+	dFlags ^= hints->flags;
+
+	iconChanged = (dFlags & (IconPixmapHint | IconMaskHint))    ||
+		      (w->hints && hints->IconPixmapHint &&
+		       w->hints->icon_pixmap != hints->icon_pixmap) ||
+		      (w->hints && hints->IconMaskHint   &&
+		       w->hints->icon_mask != hints->icon_mask);
+
+	if (iconChanged)
+	    freeWindowIcons (w);
+
 	if (hints->flags & InputHint)
 	    w->inputHint = hints->input;
 
-	XFree (hints);
+	if (w->hints)
+	    XFree (w->hints);
+
+	w->hints = hints;
     }
 }
 
@@ -1418,6 +1437,9 @@ freeWindow (CompWindow *w)
     if (w->region)
 	XDestroyRegion (w->region);
 
+    if (w->hints)
+	XFree (w->hints);
+
     if (w->base.privates)
 	free (w->base.privates);
 
@@ -1955,6 +1977,7 @@ addWindow (CompScreen *screen,
     w->unmapRefCnt   = 1;
 
     w->group = NULL;
+    w->hints = NULL;
 
     w->damageRects = 0;
     w->sizeDamage  = 0;
@@ -4952,6 +4975,113 @@ defaultViewportForWindow (CompWindow *w,
 			 vx, vy);
 }
 
+static CompIcon *
+allocateWindowIcon (CompWindow   *w,
+		    unsigned int width,
+		    unsigned int height)
+{
+    CompIcon *icon, **pIcon;
+
+    icon = malloc (sizeof (CompIcon) +
+		   width * height * sizeof (CARD32));
+    if (!icon)
+	return NULL;
+
+    pIcon = realloc (w->icon, sizeof (CompIcon *) * (w->nIcon + 1));
+    if (!pIcon)
+    {
+	free (icon);
+	return NULL;
+    }
+
+    w->icon = pIcon;
+    w->icon[w->nIcon] = icon;
+    w->nIcon++;
+
+    icon->width  = width;
+    icon->height = height;
+
+    initTexture (w->screen, &icon->texture);
+
+    return icon;
+}
+
+static void
+readWindowIconHint (CompWindow *w)
+{
+    XImage       *image, *maskImage = NULL;
+    Display      *dpy = w->screen->display->display;
+    unsigned int width, height, dummy;
+    int          i, j, k, iDummy;
+    Window       wDummy;
+    CompIcon     *icon;
+    CARD32       *p;
+    CARD32       red, green, blue, alpha;
+    XColor       *colors;
+
+    if (!XGetGeometry (dpy, w->hints->icon_pixmap, &wDummy, &iDummy,
+		       &iDummy, &width, &height, &dummy, &dummy))
+	return;
+
+    image = XGetImage (dpy, w->hints->icon_pixmap, 0, 0, width, height,
+		       AllPlanes, ZPixmap);
+    if (!image)
+	return;
+
+    colors = malloc (width * height * sizeof (XColor));
+    if (!colors)
+    {
+	XDestroyImage (image);
+	return;
+    }
+
+    if (w->hints->flags & IconMaskHint)
+	maskImage = XGetImage (dpy, w->hints->icon_mask, 0, 0,
+			       width, height, AllPlanes, ZPixmap);
+
+    k = 0;
+    for (j = 0; j < height; j++)
+	for (i = 0; i < width; i++)
+	    colors[k++].pixel = XGetPixel (image, i, j);
+
+    for (i = 0; i < k; i += 256)
+	XQueryColors (dpy, w->screen->colormap,
+		      &colors[i], MIN (k - i, 256));
+
+    XDestroyImage (image);
+
+    icon = allocateWindowIcon (w, width, height);
+    if (!icon)
+    {
+	if (maskImage)
+	    XDestroyImage (maskImage);
+	free (colors);
+	return;
+    }
+
+    p = (CARD32 *) (icon + 1);
+    k = 0;
+    for (j = 0; j < height; j++)
+    {
+	for (i = 0; i < width; i++)
+	{
+	    alpha = (maskImage && !XGetPixel (maskImage, i, j)) ? 0 : 0xff;
+	    red   = (colors[k].red >> 8) & 0xff;
+	    green = (colors[k].green >> 8) & 0xff;
+	    blue  = (colors[k].blue >> 8) & 0xff;
+
+	    red   = (red   * alpha) >> 8;
+	    green = (green * alpha) >> 8;
+	    blue  = (blue  * alpha) >> 8;
+
+	    k++;
+	    *p++ = (alpha << 24) | (red << 16) | (green << 8) | blue;
+	}
+    }
+
+    free (colors);
+}
+
 /* returns icon with dimensions as close as possible to width and height
    but never greater. */
 CompIcon *
@@ -4979,7 +5109,6 @@ getWindowIcon (CompWindow *w,
 
 	if (result == Success && data)
 	{
-	    CompIcon **pIcon;
 	    CARD32   *p;
 	    CARD32   alpha, red, green, blue;
 	    int      iw, ih, j;
@@ -4996,27 +5125,9 @@ getWindowIcon (CompWindow *w,
 
 		if (iw && ih)
 		{
-		    icon = malloc (sizeof (CompIcon) +
-				   iw * ih * sizeof (CARD32));
+		    icon = allocateWindowIcon (w, iw, ih);
 		    if (!icon)
 			continue;
-
-		    pIcon = realloc (w->icon,
-				     sizeof (CompIcon *) * (w->nIcon + 1));
-		    if (!pIcon)
-		    {
-			free (icon);
-			continue;
-		    }
-
-		    w->icon = pIcon;
-		    w->icon[w->nIcon] = icon;
-		    w->nIcon++;
-
-		    icon->width  = iw;
-		    icon->height = ih;
-
-		    initTexture (w->screen, &icon->texture);
 
 		    p = (CARD32 *) (icon + 1);
 
@@ -5045,6 +5156,8 @@ getWindowIcon (CompWindow *w,
 
 	    XFree (data);
 	}
+	else if (w->hints && (w->hints->flags & IconPixmapHint))
+	    readWindowIconHint (w);
 
 	/* don't fetch property again */
 	if (w->nIcon == 0)

@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20080828
+#define CORE_ABIVERSION 20081017
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -2575,6 +2575,7 @@ struct _CompWindow {
     int		      serverBorderWidth;
     Window	      transientFor;
     Window	      clientLeader;
+    XWMHints	      *hints;
     XSizeHints	      sizeHints;
     Pixmap	      pixmap;
     CompTexture       *texture;
