@@ -363,8 +363,8 @@ compareTopmost (const void *a,
     CompWindow *bw = *((CompWindow **) b);
     int	       ay, by;
 
-    ay = WIN_FULL_X (aw);
-    by = WIN_FULL_X (bw);
+    ay = WIN_FULL_Y (aw);
+    by = WIN_FULL_Y (bw);
 
     if (ay < by)
 	return -1;
