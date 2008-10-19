@@ -4975,7 +4975,7 @@ defaultViewportForWindow (CompWindow *w,
 			 vx, vy);
 }
 
-static CompIcon *
+static CARD32 *
 allocateWindowIcon (CompWindow   *w,
 		    unsigned int width,
 		    unsigned int height)
@@ -5003,7 +5003,7 @@ allocateWindowIcon (CompWindow   *w,
 
     initTexture (w->screen, &icon->texture);
 
-    return icon;
+    return (CARD32 *) (icon + 1);
 }
 
 static void
@@ -5014,9 +5014,7 @@ readWindowIconHint (CompWindow *w)
     unsigned int width, height, dummy;
     int          i, j, k, iDummy;
     Window       wDummy;
-    CompIcon     *icon;
     CARD32       *p;
-    CARD32       red, green, blue, alpha;
     XColor       *colors;
 
     if (!XGetGeometry (dpy, w->hints->icon_pixmap, &wDummy, &iDummy,
@@ -5035,10 +5033,6 @@ readWindowIconHint (CompWindow *w)
 	return;
     }
 
-    if (w->hints->flags & IconMaskHint)
-	maskImage = XGetImage (dpy, w->hints->icon_mask, 0, 0,
-			       width, height, AllPlanes, ZPixmap);
-
     k = 0;
     for (j = 0; j < height; j++)
 	for (i = 0; i < width; i++)
@@ -5050,36 +5044,37 @@ readWindowIconHint (CompWindow *w)
 
     XDestroyImage (image);
 
-    icon = allocateWindowIcon (w, width, height);
-    if (!icon)
+    p = allocateWindowIcon (w, width, height);
+    if (!p)
     {
-	if (maskImage)
-	    XDestroyImage (maskImage);
 	free (colors);
 	return;
     }
 
-    p = (CARD32 *) (icon + 1);
+    if (w->hints->flags & IconMaskHint)
+	maskImage = XGetImage (dpy, w->hints->icon_mask, 0, 0,
+			       width, height, AllPlanes, ZPixmap);
+
     k = 0;
     for (j = 0; j < height; j++)
     {
 	for (i = 0; i < width; i++)
 	{
-	    alpha = (maskImage && !XGetPixel (maskImage, i, j)) ? 0 : 0xff;
-	    red   = (colors[k].red >> 8) & 0xff;
-	    green = (colors[k].green >> 8) & 0xff;
-	    blue  = (colors[k].blue >> 8) & 0xff;
-
-	    red   = (red   * alpha) >> 8;
-	    green = (green * alpha) >> 8;
-	    blue  = (blue  * alpha) >> 8;
+	    if (maskImage && !XGetPixel (maskImage, i, j))
+		*p++ = 0;
+	    else
+		*p++ = 0xff000000                             | /* alpha */
+		       (((colors[k].red >> 8) & 0xff) << 16)  | /* red */
+		       (((colors[k].green >> 8) & 0xff) << 8) | /* green */
+		       ((colors[k].blue >> 8) & 0xff);          /* blue */
 
 	    k++;
-	    *p++ = (alpha << 24) | (red << 16) | (green << 8) | blue;
 	}
     }
 
     free (colors);
+    if (maskImage)
+	XDestroyImage (maskImage);
 }
 
 /* returns icon with dimensions as close as possible to width and height
@@ -5125,11 +5120,9 @@ getWindowIcon (CompWindow *w,
 
 		if (iw && ih)
 		{
-		    icon = allocateWindowIcon (w, iw, ih);
-		    if (!icon)
+		    p = allocateWindowIcon (w, iw, ih);
+		    if (!p)
 			continue;
-
-		    p = (CARD32 *) (icon + 1);
 
 		    /* EWMH doesn't say if icon data is premultiplied or
 		       not but most applications seem to assume data should
