@@ -315,34 +315,46 @@ void
 updateWmHints (CompWindow *w)
 {
     XWMHints *hints;
+    long     dFlags = 0;
+    Bool     iconChanged = FALSE;
+
+    if (w->hints)
+	dFlags = w->hints->flags;
+
+    w->inputHint = TRUE;
 
     hints = XGetWMHints (w->screen->display->display, w->id);
     if (hints)
     {
-	long dFlags = 0;
-	Bool iconChanged = FALSE;
-
-	if (w->hints)
-	    dFlags = w->hints->flags;
 	dFlags ^= hints->flags;
-
-	iconChanged = (dFlags & (IconPixmapHint | IconMaskHint))    ||
-		      (w->hints && (hints->flags & IconPixmapHint)  &&
-		       w->hints->icon_pixmap != hints->icon_pixmap) ||
-		      (w->hints && (hints->flags & IconMaskHint)    &&
-		       w->hints->icon_mask != hints->icon_mask);
-
-	if (iconChanged)
-	    freeWindowIcons (w);
 
 	if (hints->flags & InputHint)
 	    w->inputHint = hints->input;
 
 	if (w->hints)
-	    XFree (w->hints);
-
-	w->hints = hints;
+	{
+	    if ((hints->flags & IconPixmapHint) &&
+		(w->hints->icon_pixmap != hints->icon_pixmap))
+	    {
+		iconChanged = TRUE;
+	    }
+	    else if ((hints->flags & IconMaskHint) &&
+		     (w->hints->icon_mask != hints->icon_mask))
+	    {
+		iconChanged = TRUE;
+	    }
+	}
     }
+
+    iconChanged |= (dFlags & (IconPixmapHint | IconMaskHint));
+
+    if (iconChanged)
+	freeWindowIcons (w);
+
+    if (w->hints)
+	XFree (w->hints);
+
+    w->hints = hints;
 }
 
 void
