@@ -5936,6 +5936,22 @@ meta_button_opposite_function (MetaButtonFunction ofwhat)
 }
 
 static void
+meta_initialize_button_layout (MetaButtonLayout *layout)
+{
+    int	i;
+
+    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
+    {
+	layout->left_buttons[i] = META_BUTTON_FUNCTION_LAST;
+	layout->right_buttons[i] = META_BUTTON_FUNCTION_LAST;
+#ifdef HAVE_METACITY_2_23_2
+	layout->left_buttons_has_spacer[i] = FALSE;
+	layout->right_buttons_has_spacer[i] = FALSE;
+#endif
+    }
+}
+
+static void
 meta_update_button_layout (const char *value)
 {
     MetaButtonLayout   new_layout;
@@ -5943,11 +5959,7 @@ meta_update_button_layout (const char *value)
     char	       **sides;
     int		       i;
 
-    for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
-    {
-	new_layout.left_buttons[i] = META_BUTTON_FUNCTION_LAST;
-	new_layout.right_buttons[i] = META_BUTTON_FUNCTION_LAST;
-    }
+    meta_initialize_button_layout (&new_layout);
 
     sides = g_strsplit (value, ":", 2);
 
@@ -5958,12 +5970,7 @@ meta_update_button_layout (const char *value)
 	gboolean used[META_BUTTON_FUNCTION_LAST];
 
 	for (i = 0; i < META_BUTTON_FUNCTION_LAST; i++)
-	{
 	   used[i] = FALSE;
-#ifdef HAVE_METACITY_2_23_2
-	   new_layout.left_buttons_has_spacer[i] = FALSE;
-#endif
-        }
 
 	buttons = g_strsplit (sides[0], ",", -1);
 
@@ -6010,12 +6017,7 @@ meta_update_button_layout (const char *value)
 	if (sides[1] != NULL)
 	{
 	    for (i = 0; i < META_BUTTON_FUNCTION_LAST; i++)
-	    {
 		used[i] = FALSE;
-#ifdef HAVE_METACITY_2_23_2
-		new_layout.right_buttons_has_spacer[i] = FALSE;
-#endif
-	    }
 
 	    buttons = g_strsplit (sides[1], ",", -1);
 
@@ -6060,6 +6062,51 @@ meta_update_button_layout (const char *value)
     }
 
     g_strfreev (sides);
+
+    /* Invert the button layout for RTL languages */
+    if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
+    {
+       	MetaButtonLayout rtl_layout;
+	int j;
+
+	meta_initialize_button_layout (&rtl_layout);
+
+	i = 0;
+	while (new_layout.left_buttons[i] != META_BUTTON_FUNCTION_LAST)
+	    i++;
+
+	for (j = 0; j < i; j++)
+	{
+	    rtl_layout.right_buttons[j] = new_layout.left_buttons[i - j - 1];
+#ifdef HAVE_METACITY_2_23_2
+	    if (j == 0)
+		rtl_layout.right_buttons_has_spacer[i - 1] =
+		    new_layout.left_buttons_has_spacer[i - j - 1];
+	    else
+		rtl_layout.right_buttons_has_spacer[j - 1] =
+		    new_layout.left_buttons_has_spacer[i - j - 1];
+#endif
+	}
+      
+	i = 0;
+	while (new_layout.right_buttons[i] != META_BUTTON_FUNCTION_LAST)
+	    i++;
+
+	for (j = 0; j < i; j++)
+	{
+	    rtl_layout.left_buttons[j] = new_layout.right_buttons[i - j - 1];
+#ifdef HAVE_METACITY_2_23_2
+	    if (j == 0)
+		rtl_layout.left_buttons_has_spacer[i - 1] =
+		    new_layout.right_buttons_has_spacer[i - j - 1];
+	    else
+		rtl_layout.left_buttons_has_spacer[j - 1] =
+		    new_layout.right_buttons_has_spacer[i - j - 1];
+#endif
+	}
+
+	new_layout = rtl_layout;
+    }
 
     meta_button_layout = new_layout;
 }
