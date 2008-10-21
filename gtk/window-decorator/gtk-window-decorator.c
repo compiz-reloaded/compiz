@@ -6074,7 +6074,7 @@ meta_update_button_layout (const char *value)
     /* Invert the button layout for RTL languages */
     if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
     {
-       	MetaButtonLayout rtl_layout;
+	MetaButtonLayout rtl_layout;
 	int j;
 
 	meta_initialize_button_layout (&rtl_layout);
@@ -6095,7 +6095,7 @@ meta_update_button_layout (const char *value)
 		    new_layout.left_buttons_has_spacer[i - j - 1];
 #endif
 	}
-      
+
 	i = 0;
 	while (new_layout.right_buttons[i] != META_BUTTON_FUNCTION_LAST)
 	    i++;
