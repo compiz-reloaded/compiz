@@ -4513,13 +4513,21 @@ position_action_menu (GtkMenu  *menu,
 {
     WnckWindow *win = (WnckWindow *) user_data;
     decor_t    *d = g_object_get_data (G_OBJECT (win), "decor");
-    gint	bx, by, width, height;
+    gint       bx, by, width, height;
 
     wnck_window_get_client_window_geometry (win, x, y, &width, &height);
 
     if ((*theme_get_button_position) (d, BUTTON_MENU, width, height,
 				      &bx, &by, &width, &height))
 	*x = *x - _win_extents.left + bx;
+
+    if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
+    {
+	GtkRequisition req;
+
+	gtk_widget_size_request (GTK_WIDGET (menu), &req);
+	*x = MAX (0, *x - req.width + width);
+    }
 
     *push_in = TRUE;
 }
