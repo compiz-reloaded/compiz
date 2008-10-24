@@ -2957,6 +2957,44 @@ validateWindowResizeRequest (CompWindow     *w,
 			     XWindowChanges *xwc,
 			     unsigned int   source)
 {
+    CompScreen *s = w->screen;
+
+    if (w->type & (CompWindowTypeDockMask       |
+		   CompWindowTypeFullscreenMask |
+		   CompWindowTypeUnknownMask))
+	return;
+
+    if (*mask & CWY)
+    {
+	int min, max;
+
+	min = s->workArea.y + w->input.top;
+	max = s->workArea.y + s->workArea.height;
+
+	min -= s->y * s->height;
+	max += (s->vsize - s->y - 1) * s->height;
+
+	if (xwc->y < min)
+	    xwc->y = min;
+	else if (xwc->y > max)
+	    xwc->y = max;
+    }
+
+    if (*mask & CWX)
+    {
+	int min, max;
+
+	min = s->workArea.x + w->input.left;
+	max = s->workArea.x + s->workArea.width;
+
+	min -= s->x * s->width;
+	max += (s->hsize - s->x - 1) * s->width;
+
+	if (xwc->x < min)
+	    xwc->x = min;
+	else if (xwc->x > max)
+	    xwc->x = max;
+    }
 }
 
 void
@@ -3962,43 +4000,6 @@ moveResizeWindow (CompWindow     *w,
     }
 
     xwcm |= adjustConfigureRequestForGravity (w, xwc, xwcm, gravity);
-
-    if (!(w->type & (CompWindowTypeDockMask       |
-		     CompWindowTypeFullscreenMask |
-		     CompWindowTypeUnknownMask)))
-    {
-	if (xwcm & CWY)
-	{
-	    int min, max;
-
-	    min = w->screen->workArea.y + w->input.top;
-	    max = w->screen->workArea.y + w->screen->workArea.height;
-
-	    min -= w->screen->y * w->screen->height;
-	    max += (w->screen->vsize - w->screen->y - 1) * w->screen->height;
-
-	    if (xwc->y < min)
-		xwc->y = min;
-	    else if (xwc->y > max)
-		xwc->y = max;
-	}
-
-	if (xwcm & CWX)
-	{
-	    int min, max;
-
-	    min = w->screen->workArea.x + w->input.left;
-	    max = w->screen->workArea.x + w->screen->workArea.width;
-
-	    min -= w->screen->x * w->screen->width;
-	    max += (w->screen->hsize - w->screen->x - 1) * w->screen->width;
-
-	    if (xwc->x < min)
-		xwc->x = min;
-	    else if (xwc->x > max)
-		xwc->x = max;
-	}
-    }
 
     (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc, source);
 
