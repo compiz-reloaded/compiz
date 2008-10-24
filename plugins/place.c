@@ -1329,7 +1329,12 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     if (xwc->width >= workArea.width &&
 	xwc->height >= workArea.height)
     {
-	placeSendWindowMaximizationRequest (w);
+	if ((w->actions & MAXIMIZE_STATE) == MAXIMIZE_STATE &&
+	    (w->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
+	    !(w->state & CompWindowStateFullscreenMask))
+	{
+	    placeSendWindowMaximizationRequest (w);
+	}
     }
 
     if ((right - left) > workArea.width)
