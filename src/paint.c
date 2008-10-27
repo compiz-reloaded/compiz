@@ -359,7 +359,8 @@ paintOutputRegion (CompScreen	       *screen,
 		}
 	    }
 
-	    count++;
+	    if (!w->invisible)
+		count++;
 	}
     }
 
