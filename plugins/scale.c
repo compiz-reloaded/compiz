@@ -1011,6 +1011,31 @@ sendDndStatusMessage (CompScreen *s,
 }
 
 static Bool
+scaleActionShouldToggle (CompDisplay     *d,
+			 CompAction      *action,
+			 CompActionState state)
+{
+    SCALE_DISPLAY (d);
+
+    if (state & EDGE_STATE)
+	return TRUE;
+
+    if (state & (CompActionStateInitKey | CompActionStateTermKey))
+    {
+	if (sd->opt[SCALE_DISPLAY_OPTION_KEY_BINDINGS_TOGGLE].value.b)
+	    return TRUE;
+	else if (!action->key.modifiers)
+	    return TRUE;
+    }
+
+    if (state & (CompActionStateInitButton | CompActionStateTermButton))
+	if (sd->opt[SCALE_DISPLAY_OPTION_BUTTON_BINDINGS_TOGGLE].value.b)
+	    return TRUE;
+
+    return FALSE;
+}
+
+static Bool
 scaleTerminate (CompDisplay     *d,
 		CompAction      *action,
 		CompActionState state,
@@ -1019,19 +1044,10 @@ scaleTerminate (CompDisplay     *d,
 {
     CompScreen *s;
     Window     xid;
-    Bool       terminate = TRUE;
 
     SCALE_DISPLAY (d);
 
-    if (action->state & CompActionStateTermKey)
-	if (sd->opt[SCALE_DISPLAY_OPTION_KEY_BINDINGS_TOGGLE].value.b)
-	    terminate = FALSE;
-
-    if (action->state & CompActionStateTermButton)
-	if (sd->opt[SCALE_DISPLAY_OPTION_BUTTON_BINDINGS_TOGGLE].value.b)
-	    terminate = FALSE;
-
-    if (terminate)
+    if (!scaleActionShouldToggle (d, action, state))
     {
 	xid = getIntOptionNamed (option, nOption, "root", 0);
 
@@ -1208,26 +1224,6 @@ scaleInitiateCommon (CompScreen      *s,
 }
 
 static Bool
-scaleInitiateShouldTerminate (CompDisplay     *d,
-			      CompActionState state)
-{
-    SCALE_DISPLAY (d);
-
-    if (state & EDGE_STATE)
-	return TRUE;
-
-    if (state & CompActionStateInitKey)
-	if (sd->opt[SCALE_DISPLAY_OPTION_KEY_BINDINGS_TOGGLE].value.b)
-	    return TRUE;
-
-    if (state & CompActionStateInitButton)
-	if (sd->opt[SCALE_DISPLAY_OPTION_BUTTON_BINDINGS_TOGGLE].value.b)
-	    return TRUE;
-
-    return FALSE;
-}
-
-static Bool
 scaleInitiate (CompDisplay     *d,
 	       CompAction      *action,
 	       CompActionState state,
@@ -1249,7 +1245,7 @@ scaleInitiate (CompDisplay     *d,
 	    ss->type = ScaleTypeNormal;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if (scaleInitiateShouldTerminate (d, state))
+	else if (scaleActionShouldToggle (d, action, state))
 	{
 	    if (ss->type == ScaleTypeNormal)
 		return scaleTerminate (s->display, action,
@@ -1282,7 +1278,7 @@ scaleInitiateAll (CompDisplay     *d,
 	    ss->type = ScaleTypeAll;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if (scaleInitiateShouldTerminate (d, state))
+	else if (scaleActionShouldToggle (d, action, state))
 	{
 	    if (ss->type == ScaleTypeAll)
 		return scaleTerminate (s->display, action,
@@ -1324,7 +1320,7 @@ scaleInitiateGroup (CompDisplay     *d,
 		return scaleInitiateCommon (s, action, state, option, nOption);
 	    }
 	}
-	else if (scaleInitiateShouldTerminate (d, state))
+	else if (scaleActionShouldToggle (d, action, state))
 	{
 	    if (ss->type == ScaleTypeGroup)
 		return scaleTerminate (s->display, action,
@@ -1357,7 +1353,7 @@ scaleInitiateOutput (CompDisplay     *d,
 	    ss->type = ScaleTypeOutput;
 	    return scaleInitiateCommon (s, action, state, option, nOption);
 	}
-	else if (scaleInitiateShouldTerminate (d, state))
+	else if (scaleActionShouldToggle (d, action, state))
 	{
 	    if (ss->type == ScaleTypeOutput)
 		return scaleTerminate (s->display, action,
