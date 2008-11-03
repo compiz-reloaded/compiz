@@ -137,21 +137,34 @@ setRestartStyle (SmcConn connection,
 
 static void
 setProgram (SmcConn    connection,
-	    const char *program)
+	    const char *program,
+	    pid_t      pid)
 {
-    SmProp	prop, *pProp;
-    SmPropValue propVal;
+    SmProp	progProp, pidProp;
+    SmPropValue progVal, pidVal;
+    SmProp	*props[2];
+    char	pidBuffer[32];
 
-    prop.name = SmProgram;
-    prop.type = SmARRAY8;
-    prop.num_vals = 1;
-    prop.vals = &propVal;
-    propVal.value = (SmPointer) program;
-    propVal.length = strlen (program);
+    progProp.name     = SmProgram;
+    progProp.type     = SmARRAY8;
+    progProp.num_vals = 1;
+    progProp.vals     = &progVal;
+    progVal.value     = (SmPointer) program;
+    progVal.length    = strlen (program);
 
-    pProp = &prop;
+    snprintf (pidBuffer, sizeof (pidBuffer), "%d", pid);
 
-    SmcSetProperties (connection, 1, &pProp);
+    pidProp.name     = SmProcessID;
+    pidProp.type     = SmARRAY8;
+    pidProp.num_vals = 1;
+    pidProp.vals     = &pidVal;
+    pidVal.value     = (SmPointer) pidBuffer;
+    pidVal.length    = strlen (pidBuffer);
+
+    props[0] = &progProp;
+    props[1] = &pidProp;
+
+    SmcSetProperties (connection, 2, props);
 }
 
 static void
@@ -184,7 +197,7 @@ saveYourselfCallback (SmcConn	connection,
 
     setCloneRestartCommands (connection);
     setRestartStyle (connection, SmRestartImmediately);
-    setProgram (connection, programName);
+    setProgram (connection, programName, getpid ());
     SmcSaveYourselfDone (connection, 1);
 }
 
