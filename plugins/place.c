@@ -987,7 +987,9 @@ placeGetStrategyForWindow (CompWindow *w)
 	(w->type & (CompWindowTypeDialogMask |
 		    CompWindowTypeModalDialogMask)))
     {
-	return PlaceOverParent;
+	CompWindow *parent = findWindowAtScreen (w->screen, w->transientFor);
+	if (parent && parent->managed)
+	    return PlaceOverParent;
     }
 
     if (w->type & (CompWindowTypeDialogMask |
@@ -1138,9 +1140,7 @@ placeDoWindowPlacement (CompWindow *w,
 	return FALSE;
 
     if (placeMatchPosition (w, &x, &y, &keepInWorkarea))
-    {
 	strategy = keepInWorkarea ? ConstrainOnly : NoPlacement;
-    }
 
     output   = placeGetPlacementOutput (w, strategy, x, y);
     workArea = output->workArea;
