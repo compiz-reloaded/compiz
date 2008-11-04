@@ -3,7 +3,6 @@ Type=Application
 Encoding=UTF-8
 _Name=Compiz
 Exec=compiz
-NoDisplay=true
 # name of loadable control center module
 X-GNOME-WMSettingsModule=compiz
 # autostart phase
@@ -13,3 +12,6 @@ X-GNOME-Provides=windowmanager
 X-GNOME-WMName=compiz
 # back compat only 
 X-GnomeWMSettingsLibrary=compiz
+
+[Window Manager]
+SessionManaged=false
