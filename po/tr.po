@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz-new\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-14 15:05+0530\n"
-"PO-Revision-Date: 2007-11-03 17:48+0200\n"
-"Last-Translator: Serdar Soytetir <tulliana@gmail.com>\n"
-"Language-Team:  <tr@li.org>\n"
+"POT-Creation-Date: 2008-11-04 12:44+0530\n"
+"PO-Revision-Date: 2008-10-28 17:44+0100\n"
+"Last-Translator: Emre KURNAZ <kurnaz@yeacon.com.tr>\n"
+"Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=1; plural=0;\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.1.0\n"
 
 # clients/inst_sw_single.ycp:146
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
@@ -103,72 +103,73 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "Pencere dekorasyonlarını oluştururken metacity temasını kullan"
 
 # clients/inst_target_part.ycp:404
-#: ../gtk/window-decorator/gtk-window-decorator.c:4418
-#: ../metadata/core.xml.in.h:24
+#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Pencereyi Kapat"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4440
-#: ../metadata/core.xml.in.h:146
+#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Pencereyi Büyütme"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
-#: ../metadata/core.xml.in.h:81
+#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Pencereyi Büyüt"
 
 # clients/inst_target_part.ycp:387
-#: ../gtk/window-decorator/gtk-window-decorator.c:4485
-#: ../metadata/core.xml.in.h:87
+#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Pencereyi Küçült"
 
 # clients/inst_sw_single.ycp:188
-#: ../gtk/window-decorator/gtk-window-decorator.c:4602
-#: ../metadata/core.xml.in.h:153
+#: ../gtk/window-decorator/gtk-window-decorator.c:4613
+#: ../metadata/core.xml.in.in.h:161
 msgid "Window Menu"
 msgstr "Pencere Menüsü"
 
 # menuentries/menuentry_scanner.ycp:36
-#: ../gtk/window-decorator/gtk-window-decorator.c:4621
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4632
 msgid "Shade"
-msgstr "Boyutlandır"
+msgstr "Gölgelendir"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4641
+#: ../gtk/window-decorator/gtk-window-decorator.c:4652
 msgid "Make Above"
-msgstr ""
+msgstr "Üstte Göster"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4667
+#: ../gtk/window-decorator/gtk-window-decorator.c:4678
 msgid "Stick"
-msgstr ""
+msgstr "Yapıştır"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4687
+#: ../gtk/window-decorator/gtk-window-decorator.c:4698
 msgid "Unshade"
-msgstr ""
+msgstr "Gölgelendirme"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4707
+#: ../gtk/window-decorator/gtk-window-decorator.c:4718
 msgid "Unmake Above"
-msgstr ""
+msgstr "Üstte Gösterme"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4733
+#: ../gtk/window-decorator/gtk-window-decorator.c:4744
 msgid "Unstick"
-msgstr ""
+msgstr "Yapıştırma"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5090
+#: ../gtk/window-decorator/gtk-window-decorator.c:5101
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "Pencere \"%s\" yanıt vermiyor."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5099
+#: ../gtk/window-decorator/gtk-window-decorator.c:5110
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
+"Bu uygulamayı kapatmaya zorlamak, kaydetmediğiniz değişiklikleri "
+"kaybetmenize neden olacaktır."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5114
+#: ../gtk/window-decorator/gtk-window-decorator.c:5125
 msgid "_Force Quit"
-msgstr ""
+msgstr "_Kapatmaya Zorla"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
@@ -204,7 +205,7 @@ msgid "Fill color for annotations"
 msgstr "Notlar için dolgu rengi"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:11 ../metadata/screenshot.xml.in.h:3
+#: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
 #: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "Başla"
@@ -296,7 +297,7 @@ msgstr "Odaklanmamış pencereleri bulanıklaştır"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+msgstr "Diğer pencereler tarafından örtülen ekran bölgelerini bulanıklaştırma"
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
@@ -339,10 +340,10 @@ msgstr "Gaussian sertliği"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "Bağımsız doku getirmek"
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:24
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:13
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
 msgid "Mipmap"
 msgstr "Mipmap"
 
@@ -367,6 +368,8 @@ msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"Mümkün olduğunca çok bağımsız doku getirisi sağlamak için, müsait olan doku "
+"birimlerini kullan."
 
 # clients/inst_resize_ui.ycp:597
 #: ../metadata/blur.xml.in.h:29
@@ -393,7 +396,7 @@ msgstr "İkileme seçimini başlat"
 msgid "Output clone handler"
 msgstr "Çıktı ikilemesi sağlayıcı"
 
-#: ../metadata/core.xml.in.h:1
+#: ../metadata/core.xml.in.in.h:1
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
@@ -401,7 +404,7 @@ msgstr ""
 "Tetiklendiğinde komut0 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:2
+#: ../metadata/core.xml.in.in.h:2
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
@@ -409,7 +412,7 @@ msgstr ""
 "Tetiklendiğinde komut1 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:3
+#: ../metadata/core.xml.in.in.h:3
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
@@ -417,7 +420,7 @@ msgstr ""
 "Tetiklendiğinde komut10 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:4
+#: ../metadata/core.xml.in.in.h:4
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
@@ -425,7 +428,7 @@ msgstr ""
 "Tetiklendiğinde komut11 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:5
+#: ../metadata/core.xml.in.in.h:5
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
@@ -433,7 +436,7 @@ msgstr ""
 "Tetiklendiğinde komut2 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:6
+#: ../metadata/core.xml.in.in.h:6
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
@@ -441,7 +444,7 @@ msgstr ""
 "Tetiklendiğinde komut3 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:7
+#: ../metadata/core.xml.in.in.h:7
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
@@ -449,7 +452,7 @@ msgstr ""
 "Tetiklendiğinde komut4 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:8
+#: ../metadata/core.xml.in.in.h:8
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
@@ -457,7 +460,7 @@ msgstr ""
 "Tetiklendiğinde komut5 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:9
+#: ../metadata/core.xml.in.in.h:9
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
@@ -465,7 +468,7 @@ msgstr ""
 "Tetiklendiğinde komut6 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:10
+#: ../metadata/core.xml.in.in.h:10
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
@@ -473,7 +476,7 @@ msgstr ""
 "Tetiklendiğinde komut7 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:11
+#: ../metadata/core.xml.in.in.h:11
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
@@ -481,7 +484,7 @@ msgstr ""
 "Tetiklendiğinde komut8 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:12
+#: ../metadata/core.xml.in.in.h:12
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
@@ -489,600 +492,642 @@ msgstr ""
 "Tetiklendiğinde komut9 olarak tanımlanmış olan kabuk komutunu çalıştıracak "
 "bir kısayol birleşimi"
 
-#: ../metadata/core.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:13
 msgid "Active Plugins"
 msgstr "Etkin Eklentiler"
 
-#: ../metadata/core.xml.in.h:14
+#: ../metadata/core.xml.in.in.h:14
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
+"Pencere dışındaki gözek haritalarına yönlendirilmemeleri için tam ekran "
+"pencerelerini germeye izin ver"
 
-#: ../metadata/core.xml.in.h:15
+#: ../metadata/core.xml.in.in.h:15
 msgid "Audible Bell"
 msgstr "İşitilebilir Zil"
 
 # include/partitioning/custom_part_dialogs.ycp:288
-#: ../metadata/core.xml.in.h:16
+#: ../metadata/core.xml.in.in.h:16
 msgid "Audible system beep"
 msgstr "İşitilebilir sistem bip sesi"
 
-#: ../metadata/core.xml.in.h:17
+#: ../metadata/core.xml.in.in.h:17
 msgid "Auto-Raise"
 msgstr "Otomatik-Yükselt"
 
-#: ../metadata/core.xml.in.h:18
+#: ../metadata/core.xml.in.in.h:18
 msgid "Auto-Raise Delay"
 msgstr "Otomatik-Yükselme Gecikmesi"
 
-#: ../metadata/core.xml.in.h:19
+#: ../metadata/core.xml.in.in.h:19
 msgid "Automatic detection of output devices"
 msgstr "Çıktı aygıtlarını otomatik bul"
 
-#: ../metadata/core.xml.in.h:20
+#: ../metadata/core.xml.in.in.h:20
 msgid "Automatic detection of refresh rate"
 msgstr "Tazeleme oranını otomatik bul"
 
-#: ../metadata/core.xml.in.h:21
+#: ../metadata/core.xml.in.in.h:21
 msgid "Best"
 msgstr "En iyi"
 
-#: ../metadata/core.xml.in.h:22
+#: ../metadata/core.xml.in.in.h:22
 msgid "Click To Focus"
 msgstr "Odaklamak için Tıkla"
 
-#: ../metadata/core.xml.in.h:23
+#: ../metadata/core.xml.in.in.h:23
 msgid "Click on window moves input focus to it"
 msgstr "Pencereyi odaklamaya almak için tıkla"
 
-#: ../metadata/core.xml.in.h:25
+#: ../metadata/core.xml.in.in.h:25
 msgid "Close active window"
 msgstr "Etkin pencereyi kapat"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:26
+#: ../metadata/core.xml.in.in.h:26
 msgid "Command line 0"
 msgstr "0. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:27
+#: ../metadata/core.xml.in.in.h:27
 msgid "Command line 1"
 msgstr "1. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:28
+#: ../metadata/core.xml.in.in.h:28
 msgid "Command line 10"
 msgstr "10. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:29
+#: ../metadata/core.xml.in.in.h:29
 msgid "Command line 11"
 msgstr "11. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:30
+#: ../metadata/core.xml.in.in.h:30
 msgid "Command line 2"
 msgstr "2. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:31
+#: ../metadata/core.xml.in.in.h:31
 msgid "Command line 3"
 msgstr "3. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:32
+#: ../metadata/core.xml.in.in.h:32
 msgid "Command line 4"
 msgstr "4. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:33
+#: ../metadata/core.xml.in.in.h:33
 msgid "Command line 5"
 msgstr "5. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:34
+#: ../metadata/core.xml.in.in.h:34
 msgid "Command line 6"
 msgstr "6. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:35
+#: ../metadata/core.xml.in.in.h:35
 msgid "Command line 7"
 msgstr "7. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:36
+#: ../metadata/core.xml.in.in.h:36
 msgid "Command line 8"
 msgstr "8. komut satırı"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:37
+#: ../metadata/core.xml.in.in.h:37
 msgid "Command line 9"
 msgstr "9. komut satırı"
 
-#: ../metadata/core.xml.in.h:38
+#: ../metadata/core.xml.in.in.h:38
 msgid "Command line to be executed in shell when run_command0 is invoked"
 msgstr "Komut0_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:39
+#: ../metadata/core.xml.in.in.h:39
 msgid "Command line to be executed in shell when run_command1 is invoked"
 msgstr "Komut1_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:40
+#: ../metadata/core.xml.in.in.h:40
 msgid "Command line to be executed in shell when run_command10 is invoked"
 msgstr "Komut10_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:41
+#: ../metadata/core.xml.in.in.h:41
 msgid "Command line to be executed in shell when run_command11 is invoked"
 msgstr "Komut11_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:42
+#: ../metadata/core.xml.in.in.h:42
 msgid "Command line to be executed in shell when run_command2 is invoked"
 msgstr "Komut2_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:43
+#: ../metadata/core.xml.in.in.h:43
 msgid "Command line to be executed in shell when run_command3 is invoked"
 msgstr "Komut3_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:44
+#: ../metadata/core.xml.in.in.h:44
 msgid "Command line to be executed in shell when run_command4 is invoked"
 msgstr "Komut4_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:45
+#: ../metadata/core.xml.in.in.h:45
 msgid "Command line to be executed in shell when run_command5 is invoked"
 msgstr "Komut5_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:46
+#: ../metadata/core.xml.in.in.h:46
 msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr "Komut6_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:47
+#: ../metadata/core.xml.in.in.h:47
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr "Komut7_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:48
+#: ../metadata/core.xml.in.in.h:48
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr "Komut8_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
-#: ../metadata/core.xml.in.h:49
+#: ../metadata/core.xml.in.in.h:49
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "Komut9_çalıştır çağrıldığında kabukta çalıştırılacak komut"
 
+# clients/support_registration.ycp:66
+#: ../metadata/core.xml.in.in.h:50
+#, fuzzy
+msgid "Commands"
+msgstr "Komut"
+
 # include/tv/ui.ycp:398
-#: ../metadata/core.xml.in.h:50
+#: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
 msgstr "Öntanımlı Simge"
 
-#: ../metadata/core.xml.in.h:51
+#: ../metadata/core.xml.in.in.h:52
 msgid "Default window icon image"
 msgstr "Öntanımlı pencere simge resmi"
 
-#: ../metadata/core.xml.in.h:52
+# clients/inst_sw_single.ycp:146
+#: ../metadata/core.xml.in.in.h:53
+#, fuzzy
+msgid "Desktop Size"
+msgstr "Masaüstü Küpü"
+
+#: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
 msgstr "Çıktıları Bul"
 
 # clients/inst_sw_single.ycp:1620
-#: ../metadata/core.xml.in.h:53
+#: ../metadata/core.xml.in.in.h:55
 msgid "Detect Refresh Rate"
 msgstr "Tazeleme Oranını Bul"
 
-#: ../metadata/core.xml.in.h:54
+#: ../metadata/core.xml.in.in.h:56
+msgid "Display Settings"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:57
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
 
-#: ../metadata/core.xml.in.h:55
+#: ../metadata/core.xml.in.in.h:58
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Kenar Tetikleme Gecikmesi"
 
-#: ../metadata/core.xml.in.h:56
+#: ../metadata/core.xml.in.in.h:59
 msgid "Fast"
 msgstr "Hızlı"
 
-#: ../metadata/core.xml.in.h:57
-msgid "Focus Prevention Level"
+#: ../metadata/core.xml.in.in.h:60
+msgid "Focus &amp; Raise Behaviour"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:58
+#: ../metadata/core.xml.in.in.h:61
+msgid "Focus Prevention Level"
+msgstr "Odaklanma Önleyici Seviyesi"
+
+#: ../metadata/core.xml.in.in.h:62
 msgid "Focus Prevention Windows"
-msgstr ""
+msgstr "Odaklanma Önleyici Pencereleri"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/core.xml.in.h:59
+#: ../metadata/core.xml.in.in.h:63
 msgid "Focus prevention windows"
-msgstr ""
+msgstr "Odaklanma önleyici pencereleri"
 
-#: ../metadata/core.xml.in.h:60
+#: ../metadata/core.xml.in.in.h:64
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Bağımsız çıkış boyamasına zorla"
 
-#: ../metadata/core.xml.in.h:61
+#: ../metadata/core.xml.in.in.h:65
 msgid "General Options"
 msgstr "Genel Seçenekler"
 
-#: ../metadata/core.xml.in.h:62
+#: ../metadata/core.xml.in.in.h:66
 msgid "General compiz options"
 msgstr "Genel compiz seçenekleri"
 
-#: ../metadata/core.xml.in.h:63
+#: ../metadata/core.xml.in.in.h:67
 msgid "Good"
 msgstr "İyi"
 
-#: ../metadata/core.xml.in.h:64
+#: ../metadata/core.xml.in.in.h:68
 msgid "Hide Skip Taskbar Windows"
 msgstr "Görev Çubuğu Pencerelerini Atlamayı Gizle"
 
-#: ../metadata/core.xml.in.h:65
+#: ../metadata/core.xml.in.in.h:69
 msgid "Hide all windows and focus desktop"
 msgstr "Tüm pencereleri gizle ve masaüstünü odakla"
 
-#: ../metadata/core.xml.in.h:66
+#: ../metadata/core.xml.in.in.h:70
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Masaüstünü Göster Kipine geçerken görev çubuğunda olmayan pencereleri gizle"
 
-#: ../metadata/core.xml.in.h:67
+#: ../metadata/core.xml.in.in.h:71
 msgid "High"
-msgstr ""
+msgstr "Yüksek"
 
-#: ../metadata/core.xml.in.h:68
+#: ../metadata/core.xml.in.in.h:72
 msgid "Horizontal Virtual Size"
 msgstr "Yatay Sanal Boyut"
 
-#: ../metadata/core.xml.in.h:69
+#: ../metadata/core.xml.in.in.h:73
 msgid "If available use compression for textures converted from images"
 msgstr ""
+"Eğer mümkünse, görüntülerden dönüştürülmüş dokular için sıkıştırma kullan"
 
-#: ../metadata/core.xml.in.h:70
+#: ../metadata/core.xml.in.in.h:74
 msgid "Ignore Hints When Maximized"
 msgstr "Büyütülünce ipuçlarını yoksay"
 
-#: ../metadata/core.xml.in.h:71
+#: ../metadata/core.xml.in.in.h:75
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "Pencere büyütülmüşse boyut büyütmeyi ve ipuçlarını pasifleştir"
 
-#: ../metadata/core.xml.in.h:72
+#: ../metadata/core.xml.in.in.h:76
 msgid "Interval before raising selected windows"
 msgstr "Seçilen pencerelerin yükseltilmesinden önce geçecek süre"
 
-#: ../metadata/core.xml.in.h:73
+#: ../metadata/core.xml.in.in.h:77
 msgid "Interval between ping messages"
 msgstr "Ping mesajları arasında geçecek süre"
 
-#: ../metadata/core.xml.in.h:74
-msgid "Level of focus stealing prevention"
+#: ../metadata/core.xml.in.in.h:78
+msgid "Key bindings"
 msgstr ""
 
-#: ../metadata/core.xml.in.h:75
+#: ../metadata/core.xml.in.in.h:79
+msgid "Level of focus stealing prevention"
+msgstr "Odaklanma çalınmasının önlenme seviyesi"
+
+#: ../metadata/core.xml.in.in.h:80
 msgid "Lighting"
 msgstr "Aydınlatma"
 
 # include/scanner/scanner_functions.ycp:218
-#: ../metadata/core.xml.in.h:76
+#: ../metadata/core.xml.in.in.h:81
 msgid "List of currently active plugins"
 msgstr "Algılanan eklentilerin listesi"
 
-#: ../metadata/core.xml.in.h:77
+#: ../metadata/core.xml.in.in.h:82
 msgid "List of strings describing output devices"
 msgstr "Çıktı aygıtlarını tanımlayan sözcüklerin listesi"
 
-#: ../metadata/core.xml.in.h:78
+#: ../metadata/core.xml.in.in.h:83
 msgid "Low"
-msgstr ""
+msgstr "Düşük"
 
 # clients/inst_resize_ui.ycp:688
-#: ../metadata/core.xml.in.h:79
+#: ../metadata/core.xml.in.in.h:84
 msgid "Lower Window"
 msgstr "Pencereyi Alta Gönder"
 
-#: ../metadata/core.xml.in.h:80
+#: ../metadata/core.xml.in.in.h:85
 msgid "Lower window beneath other windows"
 msgstr "Pencereyi diğer pencerelerin altına gönder"
 
 # clients/inst_target_part.ycp:387
-#: ../metadata/core.xml.in.h:82
+#: ../metadata/core.xml.in.in.h:87
 msgid "Maximize Window Horizontally"
 msgstr "Pencereyi Yatay Olarak Büyüt"
 
 # clients/inst_target_part.ycp:387
-#: ../metadata/core.xml.in.h:83
+#: ../metadata/core.xml.in.in.h:88
 msgid "Maximize Window Vertically"
 msgstr "Pencereyi Dikey Olarak Büyüt"
 
-#: ../metadata/core.xml.in.h:84
+#: ../metadata/core.xml.in.in.h:89
 msgid "Maximize active window"
 msgstr "Etkin pencereyi büyüt"
 
-#: ../metadata/core.xml.in.h:85
+#: ../metadata/core.xml.in.in.h:90
 msgid "Maximize active window horizontally"
 msgstr "Etkin pencereyi yatay olarak büyüt"
 
-#: ../metadata/core.xml.in.h:86
+#: ../metadata/core.xml.in.in.h:91
 msgid "Maximize active window vertically"
 msgstr "Etkin pencereyi dikey olarak büyüt"
 
-#: ../metadata/core.xml.in.h:88
+#: ../metadata/core.xml.in.in.h:93
 msgid "Minimize active window"
 msgstr "Etkin pencereyi küçült"
 
-#: ../metadata/core.xml.in.h:89 ../metadata/resize.xml.in.h:12
+#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "Normal"
 
 # clients/inst_sw_single.ycp:146
-#: ../metadata/core.xml.in.h:90
+#: ../metadata/core.xml.in.in.h:95
 msgid "Number of Desktops"
 msgstr "Masaüstü Sayısı"
 
 # clients/inst_sw_single.ycp:146
-#: ../metadata/core.xml.in.h:91
+#: ../metadata/core.xml.in.in.h:96
 msgid "Number of virtual desktops"
 msgstr "Sanal masaüstü sayısı"
 
-#: ../metadata/core.xml.in.h:92
+#: ../metadata/core.xml.in.in.h:97
 msgid "Off"
-msgstr ""
+msgstr "Kapalı"
 
-#: ../metadata/core.xml.in.h:93
+#: ../metadata/core.xml.in.in.h:98
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Ekran güncellemeyi sadece dikey boşaltma sürecinde yap"
 
-#: ../metadata/core.xml.in.h:94
+#: ../metadata/core.xml.in.in.h:99
 msgid "Open a terminal"
 msgstr "Bir konsol aç"
 
-#: ../metadata/core.xml.in.h:95
+#: ../metadata/core.xml.in.in.h:100
 msgid "Outputs"
 msgstr "Çıktılar"
 
-#: ../metadata/core.xml.in.h:96
+#: ../metadata/core.xml.in.in.h:101
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "Örtüşen Çıktı İşlemesi"
 
-#: ../metadata/core.xml.in.h:97
+#: ../metadata/core.xml.in.in.h:102
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Çıktı aygıtları birbiriyle örtüşse dahi her çıktı aygıtını bağımsız olarak "
+"boya"
 
 # clients/hwinfo.ycp:71
-#: ../metadata/core.xml.in.h:98
+#: ../metadata/core.xml.in.in.h:103
 msgid "Ping Delay"
 msgstr "Ping Gecikmesi"
 
-#: ../metadata/core.xml.in.h:99
+#: ../metadata/core.xml.in.in.h:104
 msgid "Prefer larger output"
-msgstr ""
+msgstr "Daha büyük çıktıyı tercih et"
 
-#: ../metadata/core.xml.in.h:100
+#: ../metadata/core.xml.in.in.h:105
 msgid "Prefer smaller output"
-msgstr ""
+msgstr "Daha küçük çıktıyı tercih et"
 
-#: ../metadata/core.xml.in.h:101
+#: ../metadata/core.xml.in.in.h:106
 msgid "Raise On Click"
 msgstr "Tıklayınca Yükselt"
 
-#: ../metadata/core.xml.in.h:102
+#: ../metadata/core.xml.in.in.h:107
 msgid "Raise Window"
 msgstr "Pencereyi Yükselt"
 
-#: ../metadata/core.xml.in.h:103
+#: ../metadata/core.xml.in.in.h:108
 msgid "Raise selected windows after interval"
 msgstr "Süre bittiğinde seçilen pencereleri yükselt"
 
-#: ../metadata/core.xml.in.h:104
+#: ../metadata/core.xml.in.in.h:109
 msgid "Raise window above other windows"
 msgstr "Pencereyi diğer pencerelerin üzerine yükselt"
 
-#: ../metadata/core.xml.in.h:105
+#: ../metadata/core.xml.in.in.h:110
 msgid "Raise windows when clicked"
 msgstr "Tıklayınca pencereleri yükselt"
 
-#: ../metadata/core.xml.in.h:106
+#: ../metadata/core.xml.in.in.h:111
 msgid "Refresh Rate"
 msgstr "Tazeleme Oranı"
 
-#: ../metadata/core.xml.in.h:107
+#: ../metadata/core.xml.in.in.h:112
 msgid "Run Dialog"
 msgstr "Çalıştırma Penceresi"
 
-#: ../metadata/core.xml.in.h:108
+#: ../metadata/core.xml.in.in.h:113
 msgid "Run command 0"
 msgstr "0. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:109
+#: ../metadata/core.xml.in.in.h:114
 msgid "Run command 1"
 msgstr "1. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:110
+#: ../metadata/core.xml.in.in.h:115
 msgid "Run command 10"
 msgstr "10. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:111
+#: ../metadata/core.xml.in.in.h:116
 msgid "Run command 11"
 msgstr "11. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:112
+#: ../metadata/core.xml.in.in.h:117
 msgid "Run command 2"
 msgstr "2. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:113
+#: ../metadata/core.xml.in.in.h:118
 msgid "Run command 3"
 msgstr "3. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:114
+#: ../metadata/core.xml.in.in.h:119
 msgid "Run command 4"
 msgstr "4. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:115
+#: ../metadata/core.xml.in.in.h:120
 msgid "Run command 5"
 msgstr "5. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:116
+#: ../metadata/core.xml.in.in.h:121
 msgid "Run command 6"
 msgstr "6. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:117
+#: ../metadata/core.xml.in.in.h:122
 msgid "Run command 7"
 msgstr "7. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:118
+#: ../metadata/core.xml.in.in.h:123
 msgid "Run command 8"
 msgstr "8. komutu çalıştır"
 
 # clients/support_registration.ycp:66
-#: ../metadata/core.xml.in.h:119
+#: ../metadata/core.xml.in.in.h:124
 msgid "Run command 9"
 msgstr "9. komutu çalıştır"
 
-#: ../metadata/core.xml.in.h:120
+#: ../metadata/core.xml.in.in.h:125
+#, fuzzy
+msgid "Run terminal command"
+msgstr "Uçbirim komut satırı"
+
+#: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Yatay sanal boyut için ekran boyutu çoklayıcı"
 
-#: ../metadata/core.xml.in.h:121
+#: ../metadata/core.xml.in.in.h:127
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Dikey sanal boyut için ekran boyutu çoklayıcı"
 
-#: ../metadata/core.xml.in.h:122
+#: ../metadata/core.xml.in.in.h:128
 msgid "Screenshot command line"
 msgstr "Ekran görüntüsü komut satırı"
 
+#: ../metadata/core.xml.in.in.h:129
+#, fuzzy
+msgid "Screenshot commands"
+msgstr "Ekran görüntüsü komut satırı"
+
+#: ../metadata/core.xml.in.in.h:130
+#, fuzzy
+msgid "Screenshot key bindings"
+msgstr "Ekran görüntüsü komut satırı"
+
 # clients/inst_sw_single.ycp:146
-#: ../metadata/core.xml.in.h:123
+#: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
 msgstr "Masaüstünü Göster"
 
-#: ../metadata/core.xml.in.h:124
+#: ../metadata/core.xml.in.in.h:132
 msgid "Show Main Menu"
 msgstr "Ana Menüyü Göster"
 
-#: ../metadata/core.xml.in.h:125
+#: ../metadata/core.xml.in.in.h:133
 msgid "Show Run Application dialog"
 msgstr "Uygulama Çalıştırma Penceresini Göster"
 
-#: ../metadata/core.xml.in.h:126
+#: ../metadata/core.xml.in.in.h:134
 msgid "Show the main menu"
 msgstr "Ana menüyü göster"
 
-#: ../metadata/core.xml.in.h:127
+#: ../metadata/core.xml.in.in.h:135
 msgid "Slow Animations"
 msgstr "Yavaş Animasyonlar"
 
-#: ../metadata/core.xml.in.h:128
-#, fuzzy
+#: ../metadata/core.xml.in.in.h:136
 msgid "Smart mode"
-msgstr "Akıllı"
+msgstr "Akıllı kip"
 
-#: ../metadata/core.xml.in.h:129
+#: ../metadata/core.xml.in.in.h:137
 msgid "Sync To VBlank"
 msgstr "Dikey Boşaltma ile Eşzamanla"
 
-#: ../metadata/core.xml.in.h:130
+#: ../metadata/core.xml.in.in.h:138
 msgid "Take a screenshot"
 msgstr "Ekran görüntüsü al"
 
-#: ../metadata/core.xml.in.h:131
+#: ../metadata/core.xml.in.in.h:139
 msgid "Take a screenshot of a window"
 msgstr "Bir pencerenin ekran görüntüsünü al"
 
-#: ../metadata/core.xml.in.h:132
+#: ../metadata/core.xml.in.in.h:140
 msgid "Terminal command line"
 msgstr "Uçbirim komut satırı"
 
 # include/tv/ui.ycp:493
-#: ../metadata/core.xml.in.h:133
-#, fuzzy
+#: ../metadata/core.xml.in.in.h:141
 msgid "Texture Compression"
-msgstr "Doku filtreleme"
+msgstr "Doku Sıkıştırma"
 
 # include/tv/ui.ycp:493
-#: ../metadata/core.xml.in.h:134
+#: ../metadata/core.xml.in.in.h:142
 msgid "Texture Filter"
 msgstr "Doku Filtresi"
 
 # include/tv/ui.ycp:493
-#: ../metadata/core.xml.in.h:135
+#: ../metadata/core.xml.in.in.h:143
 msgid "Texture filtering"
 msgstr "Doku filtreleme"
 
-#: ../metadata/core.xml.in.h:136
+#: ../metadata/core.xml.in.in.h:144
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Ekranın yeniden çizilmesinde kullanılacak oran (tekrar sayısı/saniye)"
 
-#: ../metadata/core.xml.in.h:137
+#: ../metadata/core.xml.in.in.h:145
 msgid "Toggle Window Maximized"
 msgstr "Pencereyi Büyüt / Küçült"
 
-#: ../metadata/core.xml.in.h:138
+#: ../metadata/core.xml.in.in.h:146
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Pencereyi Yatay Olarak Büyüt / Küçült"
 
-#: ../metadata/core.xml.in.h:139
+#: ../metadata/core.xml.in.in.h:147
 msgid "Toggle Window Maximized Vertically"
 msgstr "Pencereyi Dikey Olarak Büyüt / Küçült"
 
-#: ../metadata/core.xml.in.h:140
+#: ../metadata/core.xml.in.in.h:148
 msgid "Toggle Window Shaded"
 msgstr "Pencereyi Gölgele / Geri Yükle"
 
-#: ../metadata/core.xml.in.h:141
+#: ../metadata/core.xml.in.in.h:149
 msgid "Toggle active window maximized"
 msgstr "Etkin pencereyi büyüt / geri yükle"
 
-#: ../metadata/core.xml.in.h:142
+#: ../metadata/core.xml.in.in.h:150
 msgid "Toggle active window maximized horizontally"
 msgstr "Etkin pencereyi yatay olarak büyüt / geri yükle"
 
-#: ../metadata/core.xml.in.h:143
+#: ../metadata/core.xml.in.in.h:151
 msgid "Toggle active window maximized vertically"
 msgstr "Etkin pencereyi dikey olarak büyüt / geri yükle"
 
-#: ../metadata/core.xml.in.h:144
+#: ../metadata/core.xml.in.in.h:152
 msgid "Toggle active window shaded"
 msgstr "Etkin pencereyi gölgele / geri yükle"
 
-#: ../metadata/core.xml.in.h:145
+#: ../metadata/core.xml.in.in.h:153
 msgid "Toggle use of slow animations"
 msgstr "Yavaş canlandırmaları aç / kapat"
 
-#: ../metadata/core.xml.in.h:147
+#: ../metadata/core.xml.in.in.h:155
 msgid "Unmaximize active window"
 msgstr "Etkin pencereyi büyütme"
 
-#: ../metadata/core.xml.in.h:148
+#: ../metadata/core.xml.in.in.h:156
 msgid "Unredirect Fullscreen Windows"
 msgstr "Tam Ekran Pencerelerin Yönlendirmesini Geri Al"
 
-#: ../metadata/core.xml.in.h:149
+#: ../metadata/core.xml.in.in.h:157
 msgid "Use diffuse light when screen is transformed"
 msgstr "Ekran boyutu değiştirildiğinde geçirgenlik ışığı kullan"
 
-#: ../metadata/core.xml.in.h:150
+#: ../metadata/core.xml.in.in.h:158
 msgid "Vertical Virtual Size"
 msgstr "Dikey Sanal Boyut"
 
-#: ../metadata/core.xml.in.h:151
+#: ../metadata/core.xml.in.in.h:159
 msgid "Very High"
-msgstr ""
+msgstr "Çok Yüksek"
 
-#: ../metadata/core.xml.in.h:152
+#: ../metadata/core.xml.in.in.h:160
 msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "Üst üste binen çıktı aygıtlarından hangisi tercih edilmeli"
 
-#: ../metadata/core.xml.in.h:154
+#: ../metadata/core.xml.in.in.h:162
 msgid "Window menu button binding"
 msgstr "Pencere menüsü düğme bağlayıcısı"
 
-#: ../metadata/core.xml.in.h:155
+#: ../metadata/core.xml.in.in.h:163
 msgid "Window menu key binding"
 msgstr "Pencere menüsü kısayol bağlayıcısı"
 
-#: ../metadata/core.xml.in.h:156
+#: ../metadata/core.xml.in.in.h:164
 msgid "Window screenshot command line"
 msgstr "Pencere ekran görüntüsü alma komutu"
 
@@ -1111,178 +1156,195 @@ msgstr "Arkaplanı Canlandır"
 msgid "Animate skydome when rotating cube"
 msgstr "Küpü döndürürken arkaplanı canlandır"
 
-#: ../metadata/cube.xml.in.h:7
+#: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
+msgid "Appearance"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
 msgstr "Otomatik"
 
-#: ../metadata/cube.xml.in.h:8
-msgid "Color of top and bottom sides of the cube"
-msgstr "Küpün taban ve tavan rengi"
-
-#: ../metadata/cube.xml.in.h:9
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+#: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
+msgid "Behaviour"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:10
+msgid "Color of top and bottom sides of the cube"
+msgstr "Küpün taban ve tavan rengi"
+
+#: ../metadata/cube.xml.in.h:11
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "Gök kubbe-geri düşüş-eğiminin alttaki renk-durağında kullanılacak renk"
+
+#: ../metadata/cube.xml.in.h:12
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr ""
+msgstr "Gök kubbe-geri düşüş-eğiminin üstteki renk-durağında kullanılacak renk"
 
 # include/security/ui.ycp:774
-#: ../metadata/cube.xml.in.h:11
+#: ../metadata/cube.xml.in.h:13
+#, fuzzy
+msgid "Cube Caps"
+msgstr "Küp Rengi"
+
+# include/security/ui.ycp:774
+#: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
 msgstr "Küp Rengi"
 
 # clients/inst_sw_single.ycp:146
-#: ../metadata/cube.xml.in.h:12
+#: ../metadata/cube.xml.in.h:15
 msgid "Desktop Cube"
 msgstr "Masaüstü Küpü"
 
 # include/x11/resolution_dialog.ycp:81
-#: ../metadata/cube.xml.in.h:13
+#: ../metadata/cube.xml.in.h:16
 msgid "Fold Acceleration"
 msgstr "Katlama Hızlandırması"
 
-#: ../metadata/cube.xml.in.h:14
+#: ../metadata/cube.xml.in.h:17
 msgid "Fold Speed"
 msgstr "Katlama Hızı"
 
 # classnames.ycp:73
-#: ../metadata/cube.xml.in.h:15
+#: ../metadata/cube.xml.in.h:18
 msgid "Fold Timestep"
 msgstr "Katlama Zaman Aralığı"
 
-#: ../metadata/cube.xml.in.h:16 ../metadata/switcher.xml.in.h:10
+#: ../metadata/cube.xml.in.h:19 ../metadata/switcher.xml.in.h:11
 msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr ""
+msgstr "Yüksek kalitede ölçeklendirme için mümkün olduğunda mipmapler oluştur"
 
-#: ../metadata/cube.xml.in.h:17
+#: ../metadata/cube.xml.in.h:20
 msgid "Go back to previous slide"
 msgstr "Önceki slayta geri dön"
 
-#: ../metadata/cube.xml.in.h:18
+#: ../metadata/cube.xml.in.h:21
 msgid "Image files"
 msgstr "Resim dosyaları"
 
-#: ../metadata/cube.xml.in.h:19
+#: ../metadata/cube.xml.in.h:22
 msgid "Image to use as texture for the skydome"
 msgstr "Arkaplan dokusu olarak kullanılacak resim"
 
-#: ../metadata/cube.xml.in.h:20
+#: ../metadata/cube.xml.in.h:23
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr "Küp şeffaflığını sadece döndürme işlemi fare ile yapılıyorsa başlatır."
 
-#: ../metadata/cube.xml.in.h:21
+#: ../metadata/cube.xml.in.h:24
 msgid "Inside Cube"
 msgstr "Küpün İçerisine Gir"
 
-#: ../metadata/cube.xml.in.h:22
+#: ../metadata/cube.xml.in.h:25
 msgid "Inside cube"
 msgstr "Küpün içerisine gir"
 
-#: ../metadata/cube.xml.in.h:23
+#: ../metadata/cube.xml.in.h:26
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 "Küpün üst kapağı için hazırlanması gereken PNG ve SVG dosyalarının listesi"
 
-#: ../metadata/cube.xml.in.h:25 ../metadata/place.xml.in.h:9
-#: ../metadata/scale.xml.in.h:21
+#: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
+#: ../metadata/scale.xml.in.h:24
 msgid "Multi Output Mode"
 msgstr "Çoklu Çıktı Kipi"
 
-#: ../metadata/cube.xml.in.h:26
+#: ../metadata/cube.xml.in.h:29
 msgid "Multiple cubes"
 msgstr "Çoklu küp"
 
 # clients/inst_sw_single.ycp:1623
-#: ../metadata/cube.xml.in.h:27
+#: ../metadata/cube.xml.in.h:30
 msgid "Next Slide"
 msgstr "Sonraki Slayt"
 
-#: ../metadata/cube.xml.in.h:28
-#, fuzzy
+#: ../metadata/cube.xml.in.h:31
 msgid "One big cube"
-msgstr "Büyük küpün üzerinde"
+msgstr "Tek büyük küp"
 
-#: ../metadata/cube.xml.in.h:29
+#: ../metadata/cube.xml.in.h:32
 msgid "Opacity During Rotation"
 msgstr "Döndürme Sırasındaki Matlık"
 
-#: ../metadata/cube.xml.in.h:30
+#: ../metadata/cube.xml.in.h:33
 msgid "Opacity When Not Rotating"
 msgstr "Döndürülmezken Kullanılan Matlık"
 
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:34
 msgid "Opacity of desktop window during rotation."
 msgstr "Döndürme sırasında masaüstü penceresinin matlığı."
 
-#: ../metadata/cube.xml.in.h:32
+#: ../metadata/cube.xml.in.h:35
 msgid "Opacity of desktop window when not rotating."
 msgstr "Döndürülmediği esnada masaüstü penceresinin matlığı."
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/cube.xml.in.h:33
+#: ../metadata/cube.xml.in.h:36
 msgid "Place windows on cube"
 msgstr "Pencereleri küp üzerine yerleştir"
 
-#: ../metadata/cube.xml.in.h:34
+#: ../metadata/cube.xml.in.h:37
 msgid "Prev Slide"
 msgstr "Önceki Slayt"
 
-#: ../metadata/cube.xml.in.h:35
+#: ../metadata/cube.xml.in.h:38
 msgid "Render skydome"
 msgstr "Arkaplanı hazırla"
 
 # clients/inst_environment.ycp:306
-#: ../metadata/cube.xml.in.h:36
+#: ../metadata/cube.xml.in.h:39
 msgid "Scale image"
 msgstr "Resmi boyutlandır"
 
-#: ../metadata/cube.xml.in.h:37
+#: ../metadata/cube.xml.in.h:40
 msgid "Scale images to cover top face of cube"
 msgstr "Küpün tavan yüzünü kaplamak için resimleri boyutlandır"
 
-#: ../metadata/cube.xml.in.h:38
+#: ../metadata/cube.xml.in.h:41
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr "Çoklu çıktı aygıtı kullanılırken küpün nasıl gösterileceğini seçer."
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:42
 msgid "Skydome"
 msgstr "Arkaplan"
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient End Color"
 msgstr "Arkaplan Gradyan Bitim Rengi"
 
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:44
 msgid "Skydome Gradient Start Color"
 msgstr "Arkaplan Gradyan Başlangıç Rengi"
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:45
 msgid "Skydome Image"
 msgstr "Arkaplan Resmi"
 
-#: ../metadata/cube.xml.in.h:43 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:90 ../metadata/scale.xml.in.h:36
-#: ../metadata/switcher.xml.in.h:35 ../metadata/zoom.xml.in.h:3
+#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Hız"
 
 # classnames.ycp:73
-#: ../metadata/cube.xml.in.h:44 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:93 ../metadata/scale.xml.in.h:38
-#: ../metadata/switcher.xml.in.h:39 ../metadata/zoom.xml.in.h:4
+#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Süre aralığı"
 
-#: ../metadata/cube.xml.in.h:45
+#: ../metadata/cube.xml.in.h:48
 msgid "Transparency Only on Mouse Rotate"
 msgstr "Sadece Fare ile Döndürüldüğünde Şeffaflaştır"
 
-#: ../metadata/cube.xml.in.h:46
+#: ../metadata/cube.xml.in.h:49
+msgid "Transparent Cube"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
 msgstr "Katlamayı Geri Al"
 
-#: ../metadata/cube.xml.in.h:47
+#: ../metadata/cube.xml.in.h:51
 msgid "Unfold cube"
 msgstr "Küpü Katlamayı Geri Al"
 
@@ -1296,7 +1358,7 @@ msgstr "Dbus Denetim Altyapısı"
 
 #: ../metadata/decoration.xml.in.h:1
 msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
+msgstr "Dekorasyon dokuları için mipmaplerin yaratılmalarına izin ver"
 
 # clients/support_registration.ycp:66
 #: ../metadata/decoration.xml.in.h:2
@@ -1395,19 +1457,18 @@ msgid "Constant time"
 msgstr "Dikey (Y) Sınırlama"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Pencereleri Normal Şekilde Yeniden Boyutlandır"
+msgstr "Tepki Vermeyen Pencreleri Donuklaştır"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
+"Pencere yöneticisinin isteklerine yanıt vermeyen pencereleri donuklaştır"
 
 # clients/online_update.ycp:223
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fade Mode"
-msgstr "Solma Süresi"
+msgstr "Solma Kipi"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1457,15 +1518,15 @@ msgstr "Sistem bip durumunda tam ekran solma efektini uygula"
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Tepki vermeyen pencerelerin doygunluğu (in %)"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Tepki Vermeyen Pencere Parlaklığı"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Tepki Vermeyen Pencere Doygunluğu"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
@@ -1473,9 +1534,8 @@ msgstr "Görünür Zil"
 
 # clients/inst_resize_ui.ycp:597
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
-msgstr "Pencere solma hızı"
+msgstr "Pencere solma kipi"
 
 #: ../metadata/fade.xml.in.h:24
 #, fuzzy
@@ -1614,8 +1674,8 @@ msgstr "Pencereyi Taşı"
 msgid "Move window"
 msgstr "Pencereyi taşı"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:25
-#: ../metadata/switcher.xml.in.h:18
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
+#: ../metadata/switcher.xml.in.h:19
 msgid "Opacity"
 msgstr "Matlık"
 
@@ -1652,130 +1712,144 @@ msgstr "Basamakla"
 msgid "Centered"
 msgstr "Ortalanmış"
 
-# clients/inst_target_part.ycp:404
+# clients/inst_sw_single.ycp:188
 #: ../metadata/place.xml.in.h:4
 #, fuzzy
-msgid "Force Placement Windows"
-msgstr "Pencereleri Yerleştir"
+msgid "Fixed Window Placement"
+msgstr "Pencere Yönetimi"
 
+# clients/inst_target_part.ycp:404
 #: ../metadata/place.xml.in.h:5
+msgid "Force Placement Windows"
+msgstr "Pencerelerin Yetleşimini Zorla"
+
+#: ../metadata/place.xml.in.h:6
 msgid "Horizontal viewport positions"
 msgstr "Yatay masaüstü konumları"
 
-#: ../metadata/place.xml.in.h:6
-msgid "Keep In Workarea"
-msgstr ""
-
 #: ../metadata/place.xml.in.h:7
+msgid "Keep In Workarea"
+msgstr "Çalışma Bölgesinde Kal"
+
+#: ../metadata/place.xml.in.h:8
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
 
 # clients/inst_target_part.ycp:387
-#: ../metadata/place.xml.in.h:8
+#: ../metadata/place.xml.in.h:9
 msgid "Maximize"
 msgstr "Büyüt"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
 msgstr "Pencereleri Yerleştir"
 
-#: ../metadata/place.xml.in.h:11
+#: ../metadata/place.xml.in.h:12
 msgid "Place across all outputs"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:12
+#: ../metadata/place.xml.in.h:13
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Haritalandıklarında pencereleri belirli bir konuma yerleştir"
 
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:14
 msgid "Placement Mode"
 msgstr "Yerleştirme Kipi"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:15
 msgid "Positioned windows"
 msgstr "Konumlandırılmış pencereler"
 
-#: ../metadata/place.xml.in.h:15
+#: ../metadata/place.xml.in.h:16
 msgid "Random"
 msgstr "Rastgele"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:17
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr "Çoklu çıktı aygıtı kullanılıyorken boyutlandırılmış pencereleri seçer."
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:18
 msgid "Smart"
 msgstr "Akıllı"
 
-#: ../metadata/place.xml.in.h:18
+#: ../metadata/place.xml.in.h:19
 #, fuzzy
 msgid "Use active output device"
 msgstr "Tüm çıktı aygıtları üzerinde"
 
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:20
 msgid "Use output device of focussed window"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:20
-msgid "Use output device with pointer"
-msgstr ""
-
 #: ../metadata/place.xml.in.h:21
+msgid "Use output device with pointer"
+msgstr "Çıktı aygıtını işaretçi ile kullan"
+
+#: ../metadata/place.xml.in.h:22
 msgid "Vertical viewport positions"
 msgstr "Dikey masaüstü konumları"
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:23
 msgid "Viewport positioned windows"
 msgstr "Masaüstüne konumlandırılacak pencereler"
 
-#: ../metadata/place.xml.in.h:23
+#: ../metadata/place.xml.in.h:24
 msgid "Window placement workarounds"
 msgstr "Pencere konumlandırma hızlı çözümleri"
 
-#: ../metadata/place.xml.in.h:24
+#: ../metadata/place.xml.in.h:25
 msgid "Windows that should be positioned by default"
 msgstr "Öntanımlı olarak konumlandırılacak pencereler"
 
-#: ../metadata/place.xml.in.h:25
+#: ../metadata/place.xml.in.h:26
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "Öntanımlı olarak belirli bir masaüstüne konumlandırılacak pencereler"
 
-#: ../metadata/place.xml.in.h:26
+#: ../metadata/place.xml.in.h:27
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:28
+#, fuzzy
+msgid "Windows with fixed positions"
+msgstr "Pencere dekorasyonları"
+
+#: ../metadata/place.xml.in.h:29
+msgid "Windows with fixed viewport"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
 msgstr "Hızlı Çözümler"
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:31
 msgid "X Positions"
 msgstr "X Konumları"
 
-#: ../metadata/place.xml.in.h:29
+#: ../metadata/place.xml.in.h:32
 msgid "X Viewport Positions"
 msgstr "X Görünüm Yüzü Konumları"
 
-#: ../metadata/place.xml.in.h:30
+#: ../metadata/place.xml.in.h:33
 msgid "X position values"
 msgstr "X konum değerleri"
 
-#: ../metadata/place.xml.in.h:31
+#: ../metadata/place.xml.in.h:34
 msgid "Y Positions"
 msgstr "Y Konumları"
 
-#: ../metadata/place.xml.in.h:32
+#: ../metadata/place.xml.in.h:35
 msgid "Y Viewport Positions"
 msgstr "Y Görünüm Yüzü Konumları"
 
-#: ../metadata/place.xml.in.h:33
+#: ../metadata/place.xml.in.h:36
 msgid "Y position values"
 msgstr "Y konum değerleri"
 
@@ -1795,522 +1869,543 @@ msgstr "Düzenli İfade Eşlemesi"
 msgid "Regex window matching"
 msgstr "Düzenli ifade pencere eşlemesi"
 
+#: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
+#: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
+msgid "Bindings"
+msgstr ""
+
 # include/security/ui.ycp:774
-#: ../metadata/resize.xml.in.h:1
+#: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
 msgstr "Kenarlık Rengi"
 
-#: ../metadata/resize.xml.in.h:2
+#: ../metadata/resize.xml.in.h:3
 msgid "Border color used for outline and rectangle resize modes"
 msgstr ""
 "Taslak görünümü ve dikdörtgen yeniden boyutlandırma kipinde kullanılacak "
 "kenarlık rengi"
 
-#: ../metadata/resize.xml.in.h:3
+#: ../metadata/resize.xml.in.h:4
 msgid "Default Resize Mode"
 msgstr "Öntanımlı Yeniden Boyutlandırma Kipi"
 
-#: ../metadata/resize.xml.in.h:4
+#: ../metadata/resize.xml.in.h:5
 msgid "Default mode used for window resizing"
 msgstr "Pencereleri yeniden boyutlandırmak için kullanılacak öntanımlı kip"
 
 # include/security/ui.ycp:774
-#: ../metadata/resize.xml.in.h:5
+#: ../metadata/resize.xml.in.h:6
 msgid "Fill Color"
 msgstr "Dolgu Rengi"
 
-#: ../metadata/resize.xml.in.h:6
+#: ../metadata/resize.xml.in.h:7
 msgid "Fill color used for rectangle resize mode"
 msgstr "Dolgu rengi dikdörtgen şeklinde yeniden boyutlandırmada kullanılır"
 
-#: ../metadata/resize.xml.in.h:7
+#: ../metadata/resize.xml.in.h:8
 msgid "Initiate Normal Window Resize"
 msgstr "Normal Yeniden Boyutlandırmaya Başla"
 
-#: ../metadata/resize.xml.in.h:8
+#: ../metadata/resize.xml.in.h:9
 msgid "Initiate Outline Window Resize"
 msgstr "Taslak Göstererek Yeniden Boyutlandırmaya Başla"
 
-#: ../metadata/resize.xml.in.h:9
+#: ../metadata/resize.xml.in.h:10
 msgid "Initiate Rectangle Window Resize"
 msgstr "Dikdörtgen Yeniden Boyutlandırmaya Başla"
 
-#: ../metadata/resize.xml.in.h:10
+#: ../metadata/resize.xml.in.h:11
 msgid "Initiate Stretch Window Resize"
 msgstr "Gergin Yeniden Boyutlandırmaya Başla"
 
-#: ../metadata/resize.xml.in.h:11
+#: ../metadata/resize.xml.in.h:12
 msgid "Initiate Window Resize"
 msgstr "Pencereyi Yeniden Boyutlandırmaya Başla"
 
-#: ../metadata/resize.xml.in.h:13
+#: ../metadata/resize.xml.in.h:14
 msgid "Normal Resize Windows"
 msgstr "Pencereleri Normal Şekilde Yeniden Boyutlandır"
 
-#: ../metadata/resize.xml.in.h:14
+#: ../metadata/resize.xml.in.h:15
 msgid "Outline"
 msgstr "Taslak"
 
-#: ../metadata/resize.xml.in.h:15
+#: ../metadata/resize.xml.in.h:16
 msgid "Outline Resize Windows"
 msgstr "Yeniden Boyutlandırmada Taslak Göster"
 
-#: ../metadata/resize.xml.in.h:16
+#: ../metadata/resize.xml.in.h:17
 msgid "Rectangle"
 msgstr "Dikdörtgen"
 
-#: ../metadata/resize.xml.in.h:17
+#: ../metadata/resize.xml.in.h:18
 msgid "Rectangle Resize Windows"
 msgstr "Pencereleri Dikdörtgen Şeklinde Yeniden Boyutlandır"
 
-#: ../metadata/resize.xml.in.h:18
+#: ../metadata/resize.xml.in.h:19
 msgid "Resize Window"
 msgstr "Pencereyi Yeniden Boyutlandır"
 
-#: ../metadata/resize.xml.in.h:19
+#: ../metadata/resize.xml.in.h:20
 msgid "Resize window"
 msgstr "Pencereyi yeniden boyutlandır"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/resize.xml.in.h:20
+#: ../metadata/resize.xml.in.h:21
 msgid "Start resizing window"
 msgstr "Pencereyi yeniden boyutlandırmaya başla"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/resize.xml.in.h:21
+#: ../metadata/resize.xml.in.h:22
 msgid "Start resizing window by stretching it"
 msgstr "Pencereyi esneterek yeniden boyutlandırmaya başla"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/resize.xml.in.h:22
+#: ../metadata/resize.xml.in.h:23
 msgid "Start resizing window normally"
 msgstr "Pencereyi normal şekilde yeniden boyutlandırmaya başla"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/resize.xml.in.h:23
+#: ../metadata/resize.xml.in.h:24
 msgid "Start resizing window with outline"
 msgstr "Pencereyi taslak göstererek yeniden boyutlandırmaya başla"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/resize.xml.in.h:24
+#: ../metadata/resize.xml.in.h:25
 msgid "Start resizing window with rectangle"
 msgstr "Pencereyi dikdörtgen şeklinde yeniden boyutlandırmaya başla"
 
-#: ../metadata/resize.xml.in.h:25
+#: ../metadata/resize.xml.in.h:26
 msgid "Stretch"
 msgstr "Gergin"
 
-#: ../metadata/resize.xml.in.h:26
+#: ../metadata/resize.xml.in.h:27
 msgid "Stretch Resize Windows"
 msgstr "Pencereleri Gergin Şekilde Yeniden Boyutlandır"
 
-#: ../metadata/resize.xml.in.h:27
+#: ../metadata/resize.xml.in.h:28
 msgid "Windows that normal resize should be used for"
 msgstr "Normal yeniden boyutlandırma kullanılacak pencereler"
 
-#: ../metadata/resize.xml.in.h:28
+#: ../metadata/resize.xml.in.h:29
 msgid "Windows that outline resize should be used for"
 msgstr "Taslak görünümünde yeniden boyutlandırma kullanılacak pencereler"
 
-#: ../metadata/resize.xml.in.h:29
+#: ../metadata/resize.xml.in.h:30
 msgid "Windows that rectangle resize should be used for"
 msgstr "Dikdörtgen yeniden boyutlandırma kullanılacak pencereler"
 
-#: ../metadata/resize.xml.in.h:30
+#: ../metadata/resize.xml.in.h:31
 msgid "Windows that stretch resize should be used for"
 msgstr "Gerginlik kullanılarak yeniden boyutlandırma kullanılacak pencereler"
 
-#: ../metadata/rotate.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:3
 msgid "Edge Flip DnD"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:3
+#: ../metadata/rotate.xml.in.h:4
 msgid "Edge Flip Move"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:4
+#: ../metadata/rotate.xml.in.h:5
 msgid "Edge Flip Pointer"
 msgstr ""
 
 # clients/online_update.ycp:223
-#: ../metadata/rotate.xml.in.h:5
+#: ../metadata/rotate.xml.in.h:6
 msgid "Flip Time"
 msgstr "Çevirme Zamanı"
 
-#: ../metadata/rotate.xml.in.h:6
+#: ../metadata/rotate.xml.in.h:7
 msgid "Flip to left viewport and warp pointer"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:9
+#: ../metadata/rotate.xml.in.h:10
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:10
+#: ../metadata/rotate.xml.in.h:11
 msgid "Flip to right viewport and warp pointer"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:12
+#: ../metadata/rotate.xml.in.h:13
 msgid "Invert Y axis for pointer movement"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:13
+#: ../metadata/rotate.xml.in.h:14
 msgid "Pointer Invert Y"
 msgstr ""
 
 # include/cups/ui.ycp:541
-#: ../metadata/rotate.xml.in.h:14
+#: ../metadata/rotate.xml.in.h:15
 msgid "Pointer Sensitivity"
 msgstr "İşaretçi Hassasiyeti"
 
-#: ../metadata/rotate.xml.in.h:15
+#: ../metadata/rotate.xml.in.h:16
 msgid "Raise on rotate"
 msgstr "Döndürürken Yüksel"
 
-#: ../metadata/rotate.xml.in.h:16
+#: ../metadata/rotate.xml.in.h:17
 msgid "Raise window when rotating"
 msgstr "Döndürülürken pencereleri yükselt"
 
-#: ../metadata/rotate.xml.in.h:17
+#: ../metadata/rotate.xml.in.h:18
 msgid "Rotate Cube"
 msgstr "Küpü Döndür"
 
-#: ../metadata/rotate.xml.in.h:18
+#: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Flip Left"
 msgstr "Döndürürken Sola Çevir"
 
-#: ../metadata/rotate.xml.in.h:19
+#: ../metadata/rotate.xml.in.h:20
 msgid "Rotate Flip Right"
 msgstr "Döndürürken Sağa Çevir"
 
-#: ../metadata/rotate.xml.in.h:20
+#: ../metadata/rotate.xml.in.h:21
 msgid "Rotate Left"
 msgstr "Sola Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:21
+#: ../metadata/rotate.xml.in.h:22
 msgid "Rotate Left with Window"
 msgstr "Pencere ile birlikte Sola Döndür"
 
-#: ../metadata/rotate.xml.in.h:22
+#: ../metadata/rotate.xml.in.h:23
 msgid "Rotate Right"
 msgstr "Sağa Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:23
+#: ../metadata/rotate.xml.in.h:24
 msgid "Rotate Right with Window"
 msgstr "Pencere ile birlikte Sağa Döndür"
 
-#: ../metadata/rotate.xml.in.h:24
+#: ../metadata/rotate.xml.in.h:25
 msgid "Rotate To"
 msgstr "Buraya Döndür"
 
-#: ../metadata/rotate.xml.in.h:25
+#: ../metadata/rotate.xml.in.h:26
 msgid "Rotate To Face 1"
 msgstr "1. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:26
+#: ../metadata/rotate.xml.in.h:27
 msgid "Rotate To Face 1 with Window"
 msgstr "1. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:27
+#: ../metadata/rotate.xml.in.h:28
 msgid "Rotate To Face 10"
 msgstr "10. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:28
+#: ../metadata/rotate.xml.in.h:29
 msgid "Rotate To Face 10 with Window"
 msgstr "10. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:29
+#: ../metadata/rotate.xml.in.h:30
 msgid "Rotate To Face 11"
 msgstr "11. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:30
+#: ../metadata/rotate.xml.in.h:31
 msgid "Rotate To Face 11 with Window"
 msgstr "11. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:31
+#: ../metadata/rotate.xml.in.h:32
 msgid "Rotate To Face 12"
 msgstr "12. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:32
+#: ../metadata/rotate.xml.in.h:33
 msgid "Rotate To Face 12 with Window"
 msgstr "12. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:33
+#: ../metadata/rotate.xml.in.h:34
 msgid "Rotate To Face 2"
 msgstr "2. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:34
+#: ../metadata/rotate.xml.in.h:35
 msgid "Rotate To Face 2 with Window"
 msgstr "2. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:35
+#: ../metadata/rotate.xml.in.h:36
 msgid "Rotate To Face 3"
 msgstr "3. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:36
+#: ../metadata/rotate.xml.in.h:37
 msgid "Rotate To Face 3 with Window"
 msgstr "3. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:37
+#: ../metadata/rotate.xml.in.h:38
 msgid "Rotate To Face 4"
 msgstr "4. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:38
+#: ../metadata/rotate.xml.in.h:39
 msgid "Rotate To Face 4 with Window"
 msgstr "4. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:39
+#: ../metadata/rotate.xml.in.h:40
 msgid "Rotate To Face 5"
 msgstr "5. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:40
+#: ../metadata/rotate.xml.in.h:41
 msgid "Rotate To Face 5 with Window"
 msgstr "5. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:41
+#: ../metadata/rotate.xml.in.h:42
 msgid "Rotate To Face 6"
 msgstr "6. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:42
+#: ../metadata/rotate.xml.in.h:43
 msgid "Rotate To Face 6 with Window"
 msgstr "6. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:43
+#: ../metadata/rotate.xml.in.h:44
 msgid "Rotate To Face 7"
 msgstr "7. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:44
+#: ../metadata/rotate.xml.in.h:45
 msgid "Rotate To Face 7 with Window"
 msgstr "7. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:45
+#: ../metadata/rotate.xml.in.h:46
 msgid "Rotate To Face 8"
 msgstr "8. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:46
+#: ../metadata/rotate.xml.in.h:47
 msgid "Rotate To Face 8 with Window"
 msgstr "8. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:47
+#: ../metadata/rotate.xml.in.h:48
 msgid "Rotate To Face 9"
 msgstr "9. Yüze Döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:48
+#: ../metadata/rotate.xml.in.h:49
 msgid "Rotate To Face 9 with Window"
 msgstr "9. Yüze Pencere ile Döndür"
 
-#: ../metadata/rotate.xml.in.h:49
+#: ../metadata/rotate.xml.in.h:50
+#, fuzzy
+msgid "Rotate cube"
+msgstr "Küpü Döndür"
+
+#: ../metadata/rotate.xml.in.h:51
 msgid "Rotate desktop cube"
 msgstr "Masaüstü küpünü döndür"
 
-#: ../metadata/rotate.xml.in.h:50
+#: ../metadata/rotate.xml.in.h:52
 msgid "Rotate left"
 msgstr "Sola döndür"
 
-#: ../metadata/rotate.xml.in.h:51
+#: ../metadata/rotate.xml.in.h:53
 msgid "Rotate left and bring active window along"
 msgstr "Sola döndür ve etkin pencereyi getir"
 
-#: ../metadata/rotate.xml.in.h:52
+#: ../metadata/rotate.xml.in.h:54
 msgid "Rotate right"
 msgstr "Sağa döndür"
 
-#: ../metadata/rotate.xml.in.h:53
+#: ../metadata/rotate.xml.in.h:55
 msgid "Rotate right and bring active window along"
 msgstr "Sağa döndür ve etkin pencereyi getir"
 
-#: ../metadata/rotate.xml.in.h:54
+#: ../metadata/rotate.xml.in.h:56
+#, fuzzy
+msgid "Rotate to cube face"
+msgstr "1. yüze döndür ve etkin pencereyi yerleştir"
+
+# include/nis_server/io.ycp:465
+#: ../metadata/rotate.xml.in.h:57
+#, fuzzy
+msgid "Rotate to cube face with window"
+msgstr "1. Yüze Pencere ile Döndür"
+
+#: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
 msgstr "1. yüze döndür ve etkin pencereyi yerleştir"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:55
+#: ../metadata/rotate.xml.in.h:59
 msgid "Rotate to face 1 and bring active window along"
 msgstr "1. yüze döndür "
 
-#: ../metadata/rotate.xml.in.h:56
+#: ../metadata/rotate.xml.in.h:60
 msgid "Rotate to face 10"
 msgstr "10. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:57
+#: ../metadata/rotate.xml.in.h:61
 msgid "Rotate to face 10 and bring active window along"
 msgstr "10. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:58
+#: ../metadata/rotate.xml.in.h:62
 msgid "Rotate to face 11"
 msgstr "11. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:59
+#: ../metadata/rotate.xml.in.h:63
 msgid "Rotate to face 11 and bring active window along"
 msgstr "11. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:60
+#: ../metadata/rotate.xml.in.h:64
 msgid "Rotate to face 12"
 msgstr "12. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:61
+#: ../metadata/rotate.xml.in.h:65
 msgid "Rotate to face 12 and bring active window along"
 msgstr "12. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:62
+#: ../metadata/rotate.xml.in.h:66
 msgid "Rotate to face 2"
 msgstr "2. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:63
+#: ../metadata/rotate.xml.in.h:67
 msgid "Rotate to face 2 and bring active window along"
 msgstr "2. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:64
+#: ../metadata/rotate.xml.in.h:68
 msgid "Rotate to face 3"
 msgstr "3. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:65
+#: ../metadata/rotate.xml.in.h:69
 msgid "Rotate to face 3 and bring active window along"
 msgstr "3. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:66
+#: ../metadata/rotate.xml.in.h:70
 msgid "Rotate to face 4"
 msgstr "4. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:67
+#: ../metadata/rotate.xml.in.h:71
 msgid "Rotate to face 4 and bring active window along"
 msgstr "4. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:68
+#: ../metadata/rotate.xml.in.h:72
 msgid "Rotate to face 5"
 msgstr "5. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:69
+#: ../metadata/rotate.xml.in.h:73
 msgid "Rotate to face 5 and bring active window along"
 msgstr "5. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:70
+#: ../metadata/rotate.xml.in.h:74
 msgid "Rotate to face 6"
 msgstr "6. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:71
+#: ../metadata/rotate.xml.in.h:75
 msgid "Rotate to face 6 and bring active window along"
 msgstr "6. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:72
+#: ../metadata/rotate.xml.in.h:76
 msgid "Rotate to face 7"
 msgstr "7. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:73
+#: ../metadata/rotate.xml.in.h:77
 msgid "Rotate to face 7 and bring active window along"
 msgstr "7. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:74
+#: ../metadata/rotate.xml.in.h:78
 msgid "Rotate to face 8"
 msgstr "8. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:75
+#: ../metadata/rotate.xml.in.h:79
 msgid "Rotate to face 8 and bring active window along"
 msgstr "8. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:76
+#: ../metadata/rotate.xml.in.h:80
 msgid "Rotate to face 9"
 msgstr "9. yüze döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:77
+#: ../metadata/rotate.xml.in.h:81
 msgid "Rotate to face 9 and bring active window along"
 msgstr "9. yüze döndür ve etkin pencereyi yerleştir"
 
-#: ../metadata/rotate.xml.in.h:78
+#: ../metadata/rotate.xml.in.h:82
 msgid "Rotate to viewport"
 msgstr "Masaüstüne döndür"
 
-#: ../metadata/rotate.xml.in.h:79
+#: ../metadata/rotate.xml.in.h:83
 msgid "Rotate window"
 msgstr "Pencereyi döndür"
 
 # include/nis_server/io.ycp:465
-#: ../metadata/rotate.xml.in.h:80
+#: ../metadata/rotate.xml.in.h:84
 msgid "Rotate with window"
 msgstr "Pencere ile birlikte döndür"
 
 # include/x11/resolution_dialog.ycp:81
-#: ../metadata/rotate.xml.in.h:81
+#: ../metadata/rotate.xml.in.h:85
 msgid "Rotation Acceleration"
 msgstr "Döndürme Hızlandırması"
 
 # classnames.ycp:73
-#: ../metadata/rotate.xml.in.h:82
+#: ../metadata/rotate.xml.in.h:86
 msgid "Rotation Speed"
 msgstr "Döndürme Hızı"
 
 # classnames.ycp:73
-#: ../metadata/rotate.xml.in.h:83
+#: ../metadata/rotate.xml.in.h:87
 msgid "Rotation Timestep"
 msgstr "Döndürme zaman aralığı"
 
 # classnames.ycp:73
-#: ../metadata/rotate.xml.in.h:84
+#: ../metadata/rotate.xml.in.h:88
 msgid "Rotation Zoom"
 msgstr "Döndürme Büyütmesi"
 
-#: ../metadata/rotate.xml.in.h:85
+#: ../metadata/rotate.xml.in.h:89
 msgid "Sensitivity of pointer movement"
 msgstr "İşaretçi hareketinin hassaslığı"
 
-#: ../metadata/rotate.xml.in.h:86
+#: ../metadata/rotate.xml.in.h:90
 msgid "Snap Cube Rotation to Bottom Face"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:87
+#: ../metadata/rotate.xml.in.h:91
 msgid "Snap Cube Rotation to Top Face"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:88
+#: ../metadata/rotate.xml.in.h:92
 msgid "Snap To Bottom Face"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:89
+#: ../metadata/rotate.xml.in.h:93
 msgid "Snap To Top Face"
 msgstr ""
 
 # include/ui/wizard_hw.ycp:51
-#: ../metadata/rotate.xml.in.h:91
+#: ../metadata/rotate.xml.in.h:95
 msgid "Start Rotation"
 msgstr "Döndürmeyi Başlat"
 
-#: ../metadata/rotate.xml.in.h:92
+#: ../metadata/rotate.xml.in.h:96
 msgid "Timeout before flipping viewport"
 msgstr "Masaüstü değiştirme zamanaşımı"
 
-#: ../metadata/rotate.xml.in.h:94 ../metadata/switcher.xml.in.h:41
+#: ../metadata/rotate.xml.in.h:98 ../metadata/switcher.xml.in.h:42
 msgid "Zoom"
 msgstr "Büyüt"
 
@@ -2318,154 +2413,156 @@ msgstr "Büyüt"
 msgid "Amount of opacity in percent"
 msgstr "Yüzde olarak matlık miktarı"
 
-#: ../metadata/scale.xml.in.h:2
+#: ../metadata/scale.xml.in.h:4
 msgid "Big"
 msgstr "Büyük"
 
-#: ../metadata/scale.xml.in.h:3
+# Kastedileni tam olarak anlayamadım. (drake)
+#: ../metadata/scale.xml.in.h:6
+#, fuzzy
 msgid "Button Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Ölçeklendirme Kipine Geçen Düğme Bağlayıcıları"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:5
+#: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
 msgstr "Masaüstünü Göstermek için Masaüstüne Tıkla"
 
-#: ../metadata/scale.xml.in.h:6
+#: ../metadata/scale.xml.in.h:9
 msgid "Darken Background"
 msgstr "Arkaplanı Koyulaştır"
 
-#: ../metadata/scale.xml.in.h:7
+#: ../metadata/scale.xml.in.h:10
 msgid "Darken background when scaling windows"
 msgstr "Pencereleri yeniden boyutlandırırken arkaplanı koyulaştır"
 
-#: ../metadata/scale.xml.in.h:8
+#: ../metadata/scale.xml.in.h:11
 msgid "Emblem"
 msgstr "Simge"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../metadata/scale.xml.in.h:12
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 "Boyutlandırma sırasında masaüstüne tıklanırsa Masaüstünü Göster kipine geç"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../metadata/scale.xml.in.h:13
 msgid "Hover Time"
 msgstr "Üzerine Gelme Süresi"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker"
 msgstr "Pencere Tutucuyu Başlat"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../metadata/scale.xml.in.h:15
 msgid "Initiate Window Picker For All Windows"
 msgstr "Tüm Pencereler için Pencere Yakalayıcıyı Başlat"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../metadata/scale.xml.in.h:16
 msgid "Initiate Window Picker For Window Group"
 msgstr "Pencere Grubu için Pencere Yakalayıcıyı Başlat"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../metadata/scale.xml.in.h:17
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "Geçerli Çıktıyı Kullanan Pencereler için Pencere Yakalayıcıyı Başlat"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../metadata/scale.xml.in.h:18
 msgid "Key Bindings Toggle Scale Mode"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:16
+#: ../metadata/scale.xml.in.h:19
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:17
+#: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
 msgstr "Tüm pencereleri yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:18
+#: ../metadata/scale.xml.in.h:21
 msgid "Layout and start transforming window group"
 msgstr "Pencere grubunu yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:19
+#: ../metadata/scale.xml.in.h:22
 msgid "Layout and start transforming windows"
 msgstr "Pencereleri yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:20
+#: ../metadata/scale.xml.in.h:23
 msgid "Layout and start transforming windows on current output"
 msgstr "Geçerli çıktıyı kullanan pencereleri yerleştir ve dönüştür"
 
-#: ../metadata/scale.xml.in.h:22 ../metadata/wobbly.xml.in.h:16
+#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Hiçbiri"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "Tüm çıktı aygıtları üzerinde"
 
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/scale.xml.in.h:27
 msgid "On current output device"
 msgstr "Sadece geçerli çıktı aygıtı üzerinde"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../metadata/scale.xml.in.h:29
 msgid "Overlay Icon"
 msgstr "Örtülü Durum Simgesi"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../metadata/scale.xml.in.h:30
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Boyutlandırılan pencerelerin üzerinde simge göster"
 
 # menuentries/menuentry_scanner.ycp:36
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/scale.xml.in.h:31
 msgid "Scale"
 msgstr "Boyutlandır"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/scale.xml.in.h:29
+#: ../metadata/scale.xml.in.h:32
 msgid "Scale Windows"
 msgstr "Pencereleri Boyutlandır"
 
 # clients/inst_environment.ycp:306
-#: ../metadata/scale.xml.in.h:30
+#: ../metadata/scale.xml.in.h:33
 msgid "Scale speed"
 msgstr "Boyutlandırma hızı"
 
 # clients/inst_environment.ycp:306
-#: ../metadata/scale.xml.in.h:31
+#: ../metadata/scale.xml.in.h:34
 msgid "Scale timestep"
 msgstr "Boyutlandırma zamanı basamağı"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/scale.xml.in.h:32
+#: ../metadata/scale.xml.in.h:35
 msgid "Scale windows"
 msgstr "Pencereleri boyutlandır"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../metadata/scale.xml.in.h:36
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr "Çoklu çıktı aygıtı kullanılıyorken boyutlandırılmış pencereleri seçer."
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/scale.xml.in.h:34
+#: ../metadata/scale.xml.in.h:37
 msgid "Space between windows"
 msgstr "Pencereler arasında bırakılacak boşluk"
 
 # /usr/lib/YaST2/keyboard_raw.ycp:200
-#: ../metadata/scale.xml.in.h:35
+#: ../metadata/scale.xml.in.h:38
 msgid "Spacing"
 msgstr "Aralık"
 
-#: ../metadata/scale.xml.in.h:37
+#: ../metadata/scale.xml.in.h:40
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Bir pencerenin üzerindeyken boyutlandırma kipi bitirilmeden önce geçmesi "
 "gereken süre (ms olarak)"
 
-#: ../metadata/scale.xml.in.h:39
+#: ../metadata/scale.xml.in.h:42
 msgid "Windows that should be scaled in scale mode"
 msgstr "Boyutlandırma kipinde boyutlandırılacak pencereler"
 
@@ -2522,138 +2619,136 @@ msgid "Auto Rotate"
 msgstr "Otomatik Döndür"
 
 # classnames.ycp:50 classnames.ycp:59
-#: ../metadata/switcher.xml.in.h:6
+#: ../metadata/switcher.xml.in.h:7
 msgid "Brightness"
 msgstr "Parlaklık"
 
-#: ../metadata/switcher.xml.in.h:7
+#: ../metadata/switcher.xml.in.h:8
 msgid "Bring To Front"
 msgstr "Öne Getir"
 
-#: ../metadata/switcher.xml.in.h:8
+#: ../metadata/switcher.xml.in.h:9
 msgid "Bring selected window to front"
 msgstr "Seçilen pencereyi öne getir"
 
-#: ../metadata/switcher.xml.in.h:9
+#: ../metadata/switcher.xml.in.h:10
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr "Masaüstünün pencereler değiştirilirken uzaklaştırılacağı mesafe"
 
-#: ../metadata/switcher.xml.in.h:11
+#: ../metadata/switcher.xml.in.h:12
 msgid "Icon"
 msgstr "Simge"
 
 # clients/inst_target_part.ycp:387
-#: ../metadata/switcher.xml.in.h:12
+#: ../metadata/switcher.xml.in.h:13
 msgid "Minimized"
 msgstr "Küçültülmüş"
 
 # clients/inst_sw_single.ycp:146
-#: ../metadata/switcher.xml.in.h:14
-#, fuzzy
+#: ../metadata/switcher.xml.in.h:15
 msgid "Next Panel"
-msgstr "Masaüstü Uçağı"
+msgstr "Sonraki Panel"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/switcher.xml.in.h:15
+#: ../metadata/switcher.xml.in.h:16
 msgid "Next window"
 msgstr "Sonraki pencere"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/switcher.xml.in.h:16
+#: ../metadata/switcher.xml.in.h:17
 msgid "Next window (All windows)"
 msgstr "Sonraki pencere (Tüm pencereler)"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/switcher.xml.in.h:17
+#: ../metadata/switcher.xml.in.h:18
 msgid "Next window (No popup)"
 msgstr "Sonraki pencere (Açılabilir pencere yok)"
 
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:20
+#: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:22
 msgid "Popup switcher if not visible and select previous window"
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:22
+#: ../metadata/switcher.xml.in.h:23
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:23
-#, fuzzy
+#: ../metadata/switcher.xml.in.h:24
 msgid "Prev Panel"
-msgstr "Önceki Slayt"
+msgstr "Önceki Panel"
 
 # clients/inst_resize_ui.ycp:688
-#: ../metadata/switcher.xml.in.h:24
+#: ../metadata/switcher.xml.in.h:25
 msgid "Prev window"
 msgstr "Önceki pencere"
 
 # clients/inst_resize_ui.ycp:688
-#: ../metadata/switcher.xml.in.h:25
+#: ../metadata/switcher.xml.in.h:26
 msgid "Prev window (All windows)"
 msgstr "Önceki pencere (Tüm pencereler)"
 
 # clients/inst_resize_ui.ycp:688
-#: ../metadata/switcher.xml.in.h:26
+#: ../metadata/switcher.xml.in.h:27
 msgid "Prev window (No popup)"
 msgstr "Önceki pencere (Açılabilir pencere yok)"
 
-#: ../metadata/switcher.xml.in.h:27
+#: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
 msgstr "Değiştirirken seçilen pencereyi döndür"
 
-#: ../metadata/switcher.xml.in.h:28
+#: ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "Doygunluk"
 
-#: ../metadata/switcher.xml.in.h:29
+#: ../metadata/switcher.xml.in.h:30
 msgid "Select next panel type window."
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:30
+#: ../metadata/switcher.xml.in.h:31
 msgid "Select next window without showing the popup window."
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:31
+#: ../metadata/switcher.xml.in.h:32
 msgid "Select previous panel type window."
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:33
 msgid "Select previous window without showing the popup window."
 msgstr ""
 
-#: ../metadata/switcher.xml.in.h:33
+#: ../metadata/switcher.xml.in.h:34
 msgid "Show icon next to thumbnail"
 msgstr ""
 
 # clients/inst_target_part.ycp:387
-#: ../metadata/switcher.xml.in.h:34
+#: ../metadata/switcher.xml.in.h:35
 msgid "Show minimized windows"
 msgstr "Küçültülmüş pencereleri göster"
 
 # clients/inst_environment.ycp:306
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:37
 msgid "Switcher speed"
 msgstr "Değiştirici hızı"
 
 # clients/inst_environment.ycp:306
-#: ../metadata/switcher.xml.in.h:37
+#: ../metadata/switcher.xml.in.h:38
 msgid "Switcher timestep"
 msgstr "Değiştirici zaman aralığı"
 
 # clients/inst_target_part.ycp:404
-#: ../metadata/switcher.xml.in.h:38
+#: ../metadata/switcher.xml.in.h:39
 msgid "Switcher windows"
 msgstr "Pencere değiştirici"
 
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:41
 msgid "Windows that should be shown in switcher"
 msgstr "Değiştiricide gösterilmesi gereken pencereler"
 
