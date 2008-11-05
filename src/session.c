@@ -33,6 +33,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <pwd.h>
 #include <X11/SM/SMlib.h>
 #include <X11/ICE/ICElib.h>
 
@@ -136,14 +137,17 @@ setRestartStyle (SmcConn connection,
 }
 
 static void
-setProgram (SmcConn    connection,
-	    const char *program,
-	    pid_t      pid)
+setProgramInfo (SmcConn    connection,
+		const char *program,
+		pid_t      pid,
+		uid_t      uid)
 {
-    SmProp	progProp, pidProp;
-    SmPropValue progVal, pidVal;
-    SmProp	*props[2];
-    char	pidBuffer[32];
+    SmProp	  progProp, pidProp, userProp;
+    SmPropValue   progVal, pidVal, userVal;
+    SmProp	  *props[3];
+    char	  pidBuffer[32];
+    unsigned int  count = 0;
+    struct passwd *pw;
 
     progProp.name     = SmProgram;
     progProp.type     = SmARRAY8;
@@ -151,6 +155,8 @@ setProgram (SmcConn    connection,
     progProp.vals     = &progVal;
     progVal.value     = (SmPointer) program;
     progVal.length    = strlen (program);
+
+    props[count++] = &progProp;
 
     snprintf (pidBuffer, sizeof (pidBuffer), "%d", pid);
 
@@ -161,10 +167,22 @@ setProgram (SmcConn    connection,
     pidVal.value     = (SmPointer) pidBuffer;
     pidVal.length    = strlen (pidBuffer);
 
-    props[0] = &progProp;
-    props[1] = &pidProp;
+    props[count++] = &pidProp;
 
-    SmcSetProperties (connection, 2, props);
+    pw = getpwuid (uid);
+    if (pw)
+    {
+	userProp.name     = SmUserID;
+	userProp.type     = SmARRAY8;
+	userProp.num_vals = 1;
+	userProp.vals     = &userVal;
+	userVal.value     = (SmPointer) pw->pw_name;
+	userVal.length    = strlen (pw->pw_name);
+
+	props[count++] = &userProp;
+    }
+
+    SmcSetProperties (connection, count, props);
 }
 
 static void
@@ -197,7 +215,7 @@ saveYourselfCallback (SmcConn	connection,
 
     setCloneRestartCommands (connection);
     setRestartStyle (connection, SmRestartImmediately);
-    setProgram (connection, programName, getpid ());
+    setProgramInfo (connection, programName, getpid (), getuid ());
     SmcSaveYourselfDone (connection, 1);
 }
 
