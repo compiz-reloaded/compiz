@@ -577,6 +577,8 @@ loadPlugin (const char *name)
     compLogMessage ("core", CompLogLevelError,
 		    "Couldn't load plugin '%s'", name);
 
+    free (p);
+
     return 0;
 }
 
