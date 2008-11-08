@@ -1575,6 +1575,9 @@ freeScreen (CompScreen *s)
     if (s->grabs)
 	free (s->grabs);
 
+    if (s->exposeRects)
+	free (s->exposeRects);
+
     /* XXX: Maybe we should free all fragment functions here? But
        the definition of CompFunction is private to fragment.c ... */
     for (i = 0; i < 2; i++)
