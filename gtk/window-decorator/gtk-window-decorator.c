@@ -217,7 +217,9 @@ enum {
     CLICK_ACTION_MINIMIZE,
     CLICK_ACTION_RAISE,
     CLICK_ACTION_LOWER,
-    CLICK_ACTION_MENU
+    CLICK_ACTION_MENU,
+    CLICK_ACTION_MAXIMIZE_HORZ,
+    CLICK_ACTION_MAXIMIZE_VERT
 };
 
 enum {
@@ -4772,6 +4774,18 @@ handle_title_button_event (WnckWindow   *win,
 	else
 	    wnck_window_maximize (win);
 	break;
+    case CLICK_ACTION_MAXIMIZE_HORZ:
+	if (wnck_window_is_maximized_horizontally (win))
+	    wnck_window_unmaximize_horizontally (win);
+	else
+	    wnck_window_maximize_horizontally (win);
+	break;
+    case CLICK_ACTION_MAXIMIZE_VERT:
+	if (wnck_window_is_maximized_vertically (win))
+	    wnck_window_unmaximize_vertically (win);
+	else
+	    wnck_window_maximize_vertically (win);
+	break;
     case CLICK_ACTION_MINIMIZE:
 	if (!wnck_window_is_minimized (win))
 	    wnck_window_minimize (win);
@@ -5849,6 +5863,10 @@ titlebar_click_action_changed (GConfClient *client,
 	    *action_value = CLICK_ACTION_SHADE;
 	else if (strcmp (action, "toggle_maximize") == 0)
 	    *action_value = CLICK_ACTION_MAXIMIZE;
+	else if (strcmp (action, "toggle_maximize_horizontally") == 0)
+	    *action_value = CLICK_ACTION_MAXIMIZE_HORZ;
+	else if (strcmp (action, "toggle_maximize_vertically") == 0)
+	    *action_value = CLICK_ACTION_MAXIMIZE_VERT;
 	else if (strcmp (action, "minimize") == 0)
 	    *action_value = CLICK_ACTION_MINIMIZE;
 	else if (strcmp (action, "raise") == 0)
