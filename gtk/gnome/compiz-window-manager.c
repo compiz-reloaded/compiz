@@ -177,10 +177,9 @@ compiz_change_settings (GnomeWindowManager    *wm,
     if (settings->flags & GNOME_WM_SETTING_DOUBLE_CLICK_ACTION)
     {
 	const char   *action = NULL;
-	unsigned int i, size;
+	unsigned int i;
 
-	size = sizeof (double_click_actions) / sizeof (double_click_actions[0]);
-	for (i = 0; i < size; i++)
+	for (i = 0; i < G_N_ELEMENTS (double_click_actions); i++)
 	{
 	    if (settings->double_click_action ==
 		double_click_actions[i].action)
@@ -325,12 +324,9 @@ compiz_get_settings (GnomeWindowManager *wm,
 
 	if (str)
 	{
-	    unsigned int i, size;
+	    unsigned int i;
 
-	    size = sizeof (double_click_actions) /
-		   sizeof (double_click_actions[0]);
-
-	    for (i = 0; i < size; i++)
+	    for (i = 0; i < G_N_ELEMENTS (double_click_actions); i++)
 	    {
 		if (strcmp (str, double_click_actions[i].value) == 0)
 		{
