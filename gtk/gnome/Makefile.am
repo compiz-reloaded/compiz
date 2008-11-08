@@ -77,7 +77,8 @@ endif
 endif
 
 INCLUDES = @GNOME_WINDOW_SETTINGS_CFLAGS@			   \
-	-DMETACITY_THEME_DIR=\""$(windowsettingsdatadir)/themes"\"
+	-DMETACITY_THEME_DIR=\""$(windowsettingsdatadir)/themes"\" \
+	-DLOCALEDIR="\"@datadir@/locale"\"
 
 noinst_LTLIBRARIES = \
 	$(libcompiz_module)

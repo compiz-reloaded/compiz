@@ -28,13 +28,9 @@
 #include <dirent.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
-#include <libintl.h>
+#include <glib/gi18n.h>
 
 #include "compiz-window-manager.h"
-
-/* I18N helpers */
-#define _(x) gettext (x)
-#define N_(x) x
 
 #define COMPIZ_CLICK_TO_FOCUS_KEY			     \
     "/apps/compiz/general/allscreens/options/click_to_focus"
@@ -513,6 +509,10 @@ compiz_window_manager_class_init (CompizWindowManagerClass *class)
 {
     GObjectClass	    *object_class;
     GnomeWindowManagerClass *wm_class;
+
+    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
 
     object_class = G_OBJECT_CLASS (class);
     wm_class	 = GNOME_WINDOW_MANAGER_CLASS (class);
