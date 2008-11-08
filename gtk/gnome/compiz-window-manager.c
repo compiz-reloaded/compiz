@@ -28,8 +28,13 @@
 #include <dirent.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
+#include <libintl.h>
 
 #include "compiz-window-manager.h"
+
+/* I18N helpers */
+#define _(x) gettext (x)
+#define N_(x) x
 
 #define COMPIZ_CLICK_TO_FOCUS_KEY			     \
     "/apps/compiz/general/allscreens/options/click_to_focus"
@@ -424,17 +429,28 @@ compiz_get_double_click_actions (GnomeWindowManager             *wm,
 				 const GnomeWMDoubleClickAction **actions_p,
 				 int                            *n_actions_p)
 {
+    static gboolean initialized = FALSE;
     static GnomeWMDoubleClickAction actions[] = {
-	{ DOUBLE_CLICK_NONE,		      "None"		      },
-	{ DOUBLE_CLICK_SHADE,		      "Shade"		      },
-	{ DOUBLE_CLICK_MAXIMIZE,	      "Maximize"	      },
-	{ DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY, "Maximize Horizontally" },
-	{ DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY, "Maximize Vertically"   },
-	{ DOUBLE_CLICK_MINIMIZE,	      "Minimize"	      },
-	{ DOUBLE_CLICK_RAISE,		      "Raise"		      },
-	{ DOUBLE_CLICK_LOWER,		      "Lower"		      },
-	{ DOUBLE_CLICK_MENU,		      "Window Menu"	      }
+	{ DOUBLE_CLICK_NONE,		      N_("None")		  },
+	{ DOUBLE_CLICK_SHADE,		      N_("Shade")		  },
+	{ DOUBLE_CLICK_MAXIMIZE,	      N_("Maximize")		  },
+	{ DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY, N_("Maximize Horizontally") },
+	{ DOUBLE_CLICK_MAXIMIZE_HORIZONTALLY, N_("Maximize Vertically")   },
+	{ DOUBLE_CLICK_MINIMIZE,	      N_("Minimize")		  },
+	{ DOUBLE_CLICK_RAISE,		      N_("Raise")		  },
+	{ DOUBLE_CLICK_LOWER,		      N_("Lower")		  },
+	{ DOUBLE_CLICK_MENU,		      N_("Window Menu")	          }
     };
+
+    if (!initialized)
+    {
+	unsigned int i;
+
+	for (i = 0; i < G_N_ELEMENTS (actions); i++)
+	    actions[i].human_readable_name = _(actions[i].human_readable_name);
+
+	initialized = TRUE;
+    }
 
     *actions_p   = actions;
     *n_actions_p = (int) G_N_ELEMENTS (actions);
