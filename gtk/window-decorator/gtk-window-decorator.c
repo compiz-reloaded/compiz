@@ -41,6 +41,7 @@
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <glib/gi18n.h>
 
 #ifdef USE_GCONF
 #include <gconf/gconf-client.h>
@@ -77,10 +78,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <signal.h>
-
-#include <libintl.h>
-#define _(x)  gettext (x)
-#define N_(x) x
 
 #ifdef USE_METACITY
 #include <metacity-private/theme.h>
