@@ -61,7 +61,7 @@ Bool replaceCurrentWm = FALSE;
 Bool indirectRendering = FALSE;
 Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
-Bool useDesktopHints = TRUE;
+Bool useDesktopHints = FALSE;
 Bool onlyCurrentScreen = FALSE;
 
 #ifdef USE_COW
@@ -325,7 +325,12 @@ main (int argc, char **argv)
 	}
 	else if (!strcmp (argv[i], "--ignore-desktop-hints"))
 	{
+	    /* keep command line parameter for backward compatibility */
 	    useDesktopHints = FALSE;
+	}
+	else if (!strcmp (argv[i], "--keep-desktop-hints"))
+	{
+	    useDesktopHints = TRUE;
 	}
 	else if (!strcmp (argv[i], "--only-current-screen"))
 	{
