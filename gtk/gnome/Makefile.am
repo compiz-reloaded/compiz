@@ -8,7 +8,7 @@ libcompiz_la_SOURCES = 		\
 	compiz-window-manager.h
 libcompiz_module     = libcompiz.la
 
-desktopfilesdir	      = $(datadir)/applications
+desktopfilesdir	      = $(DESTDIR)$(datadir)/applications
 desktopfiles_in_files = compiz.desktop.in
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
 
