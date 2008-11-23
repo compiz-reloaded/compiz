@@ -691,9 +691,9 @@ gconfKeyChanged (GConfClient *client,
 }
 
 static void
-gconfSendGLibNotify (CompDisplay *d)
+gconfSendGLibNotify (CompScreen *s)
 {
-    Display *dpy = d->display;
+    Display *dpy = s->display->display;
     XEvent  xev;
 
     xev.xclient.type    = ClientMessage;
@@ -701,12 +701,12 @@ gconfSendGLibNotify (CompDisplay *d)
     xev.xclient.format  = 32;
 
     xev.xclient.message_type = XInternAtom (dpy, "_COMPIZ_GLIB_NOTIFY", 0);
-    xev.xclient.window	     = d->screens->root;
+    xev.xclient.window	     = s->root;
 
     memset (xev.xclient.data.l, 0, sizeof (xev.xclient.data.l));
 
     XSendEvent (dpy,
-		d->screens->root,
+		s->root,
 		FALSE,
 		SubstructureRedirectMask | SubstructureNotifyMask,
 		&xev);
@@ -767,10 +767,10 @@ gconfFiniCore (CompPlugin *p,
 }
 
 static Bool
-gconfInitDisplay (CompPlugin  *p,
-		  CompDisplay *d)
+gconfInitScreen (CompPlugin *p,
+		 CompScreen *s)
 {
-    gconfSendGLibNotify (d);
+    gconfSendGLibNotify (s);
 
     return TRUE;
 }
@@ -781,7 +781,8 @@ gconfInitObject (CompPlugin *p,
 {
     static InitPluginObjectProc dispTab[] = {
 	(InitPluginObjectProc) gconfInitCore,
-	(InitPluginObjectProc) gconfInitDisplay
+	(InitPluginObjectProc) 0, /* InitDisplay */
+	(InitPluginObjectProc) gconfInitScreen
     };
 
     RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
