@@ -32,6 +32,8 @@ static int displayPrivateIndex;
 
 typedef struct _PlaceDisplay {
     int		    screenPrivateIndex;
+
+    HandleEventProc handleEvent;
 } PlaceDisplay;
 
 #define PLACE_MODE_CASCADE  0
@@ -1453,6 +1455,95 @@ placePlaceWindow (CompWindow *w,
     return TRUE;
 }
 
+static void
+placeHandleScreenSizeChange (CompScreen *s,
+			     int        width,
+			     int        height)
+{
+    CompWindow     *w;
+    int            vpX, vpY, shiftX, shiftY;
+    XRectangle     extents;
+    unsigned int   mask;
+    XWindowChanges xwc;
+
+    for (w = s->windows; w; w = w->next)
+    {
+	if (!w->managed)
+	    continue;
+
+	if (w->wmType & (CompWindowTypeDockMask |
+			 CompWindowTypeDesktopMask))
+	    continue;
+
+	mask = 0;
+	getWindowExtentsRect (w, &extents);
+
+	vpX = extents.x / s->width;
+	if (extents.x < 0)
+	    vpX -= 1;
+	vpY = extents.y / s->height;
+	if (extents.y < 0)
+	    vpY -= 1;
+
+	shiftX = vpX * (width - s->width);
+	shiftY = vpY * (height - s->height);
+
+	extents.x = extents.x % s->width;
+	if (extents.x < 0)
+	    extents.x += s->width;
+	extents.y = extents.y % s->height;
+	if (extents.y < 0)
+	    extents.y += s->height;
+
+	if (extents.x + extents.width > width)
+	    shiftX += width - extents.x - extents.width;
+	if (extents.y + extents.height > height)
+	    shiftY += height - extents.y - extents.height;
+
+	if (shiftX)
+	{
+	    mask |= CWX;
+	    xwc.x = w->serverX + shiftX;
+	}
+
+	if (shiftY)
+	{
+	    mask |= CWY;
+	    xwc.y = w->serverY + shiftY;
+	}
+
+	if (mask)
+	    configureXWindow (w, mask, &xwc);
+    }
+}
+
+static void
+placeHandleEvent (CompDisplay *d,
+		  XEvent      *event)
+{
+    PLACE_DISPLAY (d);
+
+    switch (event->type) {
+    case ConfigureNotify:
+	{
+	    CompScreen *s;
+
+	    s = findScreenAtDisplay (d, event->xconfigure.window);
+	    if (s)
+		placeHandleScreenSizeChange (s,
+					     event->xconfigure.width,
+					     event->xconfigure.height);
+	}
+	break;
+    default:
+	break;
+    }
+
+    UNWRAP (pd, d, handleEvent);
+    (*d->handleEvent) (d, event);
+    WRAP (pd, d, handleEvent, placeHandleEvent);
+}
+
 static Bool
 placeInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
@@ -1475,6 +1566,8 @@ placeInitDisplay (CompPlugin  *p,
 
     d->base.privates[displayPrivateIndex].ptr = pd;
 
+    WRAP (pd, d, handleEvent, placeHandleEvent);
+
     return TRUE;
 }
 
@@ -1483,6 +1576,8 @@ placeFiniDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
     PLACE_DISPLAY (d);
+
+    UNWRAP (pd, d, handleEvent);
 
     freeScreenPrivateIndex (d, pd->screenPrivateIndex);
 
