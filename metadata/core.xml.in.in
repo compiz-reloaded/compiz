@@ -23,6 +23,11 @@
 		<_long>Ignore size increment and aspect hints when window is maximized</_long>
 		<default>true</default>
 	    </option>
+	    <option name="hide_skip_taskbar_windows" type="bool">
+		<_short>Hide Skip Taskbar Windows</_short>
+		<_long>Hide windows not in taskbar when entering show desktop mode</_long>
+		<default>true</default>
+	    </option>
 	    <option name="edge_delay" type="int">
 		<_short>Edge Trigger Delay</_short>
 		<_long>Duration the pointer must rest in a screen edge before an edge action is taken.</_long>
@@ -186,11 +191,6 @@
 		<option name="toggle_window_maximized_vertically_key" type="key">
 		    <_short>Toggle Window Maximized Vertically</_short>
 		    <_long>Toggle active window maximized vertically</_long>
-		</option>
-		<option name="hide_skip_taskbar_windows" type="bool">
-		    <_short>Hide Skip Taskbar Windows</_short>
-		    <_long>Hide windows not in taskbar when entering show desktop mode</_long>
-		    <default>true</default>
 		</option>
 		<option name="toggle_window_shaded_key" type="key">
 		    <_short>Toggle Window Shaded</_short>
