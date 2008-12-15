@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:44+0530\n"
-"PO-Revision-Date: 2008-11-02 08:37+0100\n"
+"POT-Creation-Date: 2008-12-15 15:36+0530\n"
+"PO-Revision-Date: 2008-11-08 06:31+0100\n"
 "Last-Translator: JING Cheng <jingcheng01@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,52 @@ msgstr "窗口管理"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "无"
+
+# 此功能完全不能用调整大小来描述，我找这个功能找了N久，才发现：调整大小！ = =；
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "阴影"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "最大化"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "水平方向最大化窗口"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "垂直方向最大化窗口"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "最小化"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "自动升起"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "低"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "窗口菜单"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -87,67 +133,57 @@ msgstr "使用metacity主题"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "绘制窗口装饰时使用metacity主题"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "关闭窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "恢复窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "最大化窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "最小化窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "窗口菜单"
-
-# 此功能完全不能用调整大小来描述，我找这个功能找了N久，才发现：调整大小！ = =；
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "阴影"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "置于上面"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "粘滞窗口"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "去除阴影"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "取消顶置"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "取消粘滞"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "窗口\"%s\"无响应"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "强制退出此应用程序将导致你丢失未保存的数据。"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "强制退出(_F)"
 
@@ -185,7 +221,7 @@ msgstr "注解使用的填充颜色"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "初始化"
 
@@ -578,7 +614,6 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "调用run_command9时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.in.h:50
-#, fuzzy
 msgid "Commands"
 msgstr "命令"
 
@@ -591,9 +626,8 @@ msgid "Default window icon image"
 msgstr "默认窗口图标图像"
 
 #: ../metadata/core.xml.in.in.h:53
-#, fuzzy
 msgid "Desktop Size"
-msgstr "桌面立方体"
+msgstr "桌面大小"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -605,7 +639,7 @@ msgstr "检测刷新率"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr ""
+msgstr "显示设置"
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -623,7 +657,7 @@ msgstr "快速"
 
 #: ../metadata/core.xml.in.in.h:60
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "聚焦与升起行为"
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Focus Prevention Level"
@@ -695,7 +729,7 @@ msgstr "ping消息之间的间隔"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr ""
+msgstr "按键绑定"
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -874,9 +908,8 @@ msgid "Run command 9"
 msgstr "运行命令9"
 
 #: ../metadata/core.xml.in.in.h:125
-#, fuzzy
 msgid "Run terminal command"
-msgstr "终端命令行"
+msgstr "运行终端命令"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -891,14 +924,12 @@ msgid "Screenshot command line"
 msgstr "截屏命令行"
 
 #: ../metadata/core.xml.in.in.h:129
-#, fuzzy
 msgid "Screenshot commands"
-msgstr "截屏命令行"
+msgstr "截屏命令"
 
 #: ../metadata/core.xml.in.in.h:130
-#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "截屏命令行"
+msgstr "截屏的按键绑定"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1054,7 +1085,7 @@ msgstr "旋转立方体时制作动画天穹"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "外观"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1062,7 +1093,7 @@ msgstr "自动"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "行为"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1077,9 +1108,8 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "天穹降色渐变使用的顶部结束颜色"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "立方体颜色"
+msgstr "立方体盖子"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1208,13 +1238,13 @@ msgstr "天穹图像"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "速度"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "时间步长"
 
@@ -1224,7 +1254,7 @@ msgstr "仅当用鼠标旋转时透明"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "透明立方体"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1567,9 +1597,8 @@ msgid "Centered"
 msgstr "居中"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "窗口管理"
+msgstr "固定窗口放置"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1588,10 +1617,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr "保持设置的窗口在工作区，甚至位置可能不同于那特别位置。"
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "最大化"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -1665,13 +1690,12 @@ msgid ""
 msgstr "即便向窗口管理器提出避免放置的请求，仍应强制放置的窗口"
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "窗口装饰"
+msgstr "有固定位置的窗口"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "有固定视口的窗口"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -1720,7 +1744,7 @@ msgstr "正则表达式的窗口匹配"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "绑定"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2023,7 +2047,6 @@ msgid "Rotate To Face 9 with Window"
 msgstr "带着窗口旋转至第9面"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
 msgstr "旋转立方体"
 
@@ -2048,14 +2071,12 @@ msgid "Rotate right and bring active window along"
 msgstr "带着激活的窗口一起向右旋转"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "旋转至第1面"
+msgstr "旋转至立方体表面"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "带着窗口旋转至第1面"
+msgstr "带窗口旋转至立方体表面"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2296,10 +2317,6 @@ msgstr "布局和开始转换窗口"
 #: ../metadata/scale.xml.in.h:23
 msgid "Layout and start transforming windows on current output"
 msgstr "对当前输出窗口调整布局并开始转换"
-
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "无"
 
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
@@ -2737,49 +2754,38 @@ msgstr "最大化和取消最大化窗口时的颤动效果"
 msgid "Wobbly Windows"
 msgstr "震颤窗口"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "过滤器线性"
+#~ msgid "Filter Linear"
+#~ msgstr "过滤器线性"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "放大时使用线性过滤器"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "放大时使用线性过滤器"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "缩放桌面"
+#~ msgid "Zoom Desktop"
+#~ msgstr "缩放桌面"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "放大"
+#~ msgid "Zoom In"
+#~ msgstr "放大"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "缩小"
+#~ msgid "Zoom Out"
+#~ msgstr "缩小"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "缩放盘"
+#~ msgid "Zoom Pan"
+#~ msgstr "缩放盘"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "缩放速度"
+#~ msgid "Zoom Speed"
+#~ msgstr "缩放速度"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "缩放时间区间"
+#~ msgid "Zoom Timestep"
+#~ msgstr "缩放时间区间"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "缩放和桌面立方体"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "缩放和桌面立方体"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "缩放比例"
+#~ msgid "Zoom factor"
+#~ msgstr "缩放比例"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "缩放盘"
+#~ msgid "Zoom pan"
+#~ msgstr "缩放盘"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "增加透明度"

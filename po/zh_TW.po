@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:45+0530\n"
+"POT-Creation-Date: 2008-12-15 15:36+0530\n"
 "PO-Revision-Date: 2008-04-13 09:18+0200\n"
 "Last-Translator: Kevin Liao <brrrey@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -27,6 +27,52 @@ msgstr "視窗管理員"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "無"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+#, fuzzy
+msgid "Shade"
+msgstr "調整比例"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Maximize"
+msgstr "最小化"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "將視窗水平最大化"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "將視窗垂直最大化"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "最小化"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "自動發出"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "視窗功能表"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -91,67 +137,57 @@ msgstr "使用 metacity 主題"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "當繪製視窗裝飾時使用 metacity 佈景主題"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "關閉視窗"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "視窗解除最大化"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "最大化視窗"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "最小化視窗"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "視窗功能表"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-#, fuzzy
-msgid "Shade"
-msgstr "調整比例"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr ""
 
@@ -193,7 +229,7 @@ msgstr ""
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "起始化"
 
@@ -1265,13 +1301,13 @@ msgstr "天空頂影像"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "速度"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "時間間隔"
 
@@ -1669,11 +1705,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#: ../metadata/place.xml.in.h:9
-#, fuzzy
-msgid "Maximize"
-msgstr "最小化"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2424,10 +2455,6 @@ msgstr "配置和開始轉換視窗"
 msgid "Layout and start transforming windows on current output"
 msgstr "在目前輸出配置並開始轉換視窗"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "無"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "在所有的輸出裝置上"
@@ -2891,52 +2918,41 @@ msgstr "視窗最大化和解除最大化時啟用搖擺特效"
 msgid "Wobbly Windows"
 msgstr "搖擺視窗"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "線性過濾器"
+#~ msgid "Filter Linear"
+#~ msgstr "線性過濾器"
 
-#: ../metadata/zoom.xml.in.h:5
 #, fuzzy
-msgid "Use linear filter when zoomed in"
-msgstr "在放大時使用線性過濾器"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "在放大時使用線性過濾器"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "縮放桌面"
+#~ msgid "Zoom Desktop"
+#~ msgstr "縮放桌面"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "放大"
+#~ msgid "Zoom In"
+#~ msgstr "放大"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "縮小"
+#~ msgid "Zoom Out"
+#~ msgstr "縮小"
 
-#: ../metadata/zoom.xml.in.h:9
 #, fuzzy
-msgid "Zoom Pan"
-msgstr "放大"
+#~ msgid "Zoom Pan"
+#~ msgstr "放大"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "縮放速度"
+#~ msgid "Zoom Speed"
+#~ msgstr "縮放速度"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "縮放時間間隔"
+#~ msgid "Zoom Timestep"
+#~ msgstr "縮放時間間隔"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "縮放和平移桌面立方體"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "縮放和平移桌面立方體"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "縮放倍率"
+#~ msgid "Zoom factor"
+#~ msgstr "縮放倍率"
 
-#: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom pan"
-msgstr "放大"
+#~ msgid "Zoom pan"
+#~ msgstr "放大"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "降低不透明度"

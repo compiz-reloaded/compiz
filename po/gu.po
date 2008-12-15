@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:42+0530\n"
+"POT-Creation-Date: 2008-12-15 15:34+0530\n"
 "PO-Revision-Date: 2007-12-17 12:25+0530\n"
 "Last-Translator: \n"
 "Language-Team: gist Gujarati team <info.gist@cdac.in>\n"
@@ -29,6 +29,51 @@ msgstr "વિન્ડો વ્યવસ્થાપન"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "કંઈ નહિં"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+#, fuzzy
+msgid "Shade"
+msgstr "માપદંડ"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "મહત્તમ કરો"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "વિન્ડોને આડી રીતે મહત્તમ બનાવો"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "વિન્ડોને ઊભી રીતે મહત્તમ બનાવો"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "ન્યૂનતમ કરેલ"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "આપોઆપ-વધારો"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "વિન્ડોનું મેનુ"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -92,67 +137,57 @@ msgstr "મેટાસીટી થીમ વાપરો"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "જ્યારે વિન્ડો શણગારો દોરી રહ્યા હોય ત્યારે મેટાસીટી થીમ વાપરો"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "વિન્ડો બંધ કરો"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "વિન્ડોને મહત્તમ સ્થિતિમાંથી પાછી લાવો"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "વિન્ડોને મહત્તમ સ્થિતિમાં લાવો"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "વિન્ડોને ન્યૂનત્તમ સ્થિતિમાં લાવો"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "વિન્ડોનું મેનુ"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-#, fuzzy
-msgid "Shade"
-msgstr "માપદંડ"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr ""
 
@@ -193,7 +228,7 @@ msgstr "ટિપ્પણીઓ માટે રંગ ભરો"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 #, fuzzy
 msgid "Initiate"
 msgstr "પ્રારંભ કરાઈ રહયું છે."
@@ -1262,13 +1297,13 @@ msgstr "Skydome ચિત્ર"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "ઝડપ"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "સમયપગલું"
 
@@ -1655,10 +1690,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "મહત્તમ કરો"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2385,10 +2416,6 @@ msgstr "દેખાવ અને વિન્ડોનું રૂપાંત
 msgid "Layout and start transforming windows on current output"
 msgstr "વર્તમાન આઉટપુટ પર વિન્ડોનું રૂપાંતરણ અને લેઆઉટ શરૂ કરો"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "કંઈ નહિં"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "બધા આઉટપુટ ઉપકરણો પર"
@@ -2843,51 +2870,40 @@ msgstr ""
 msgid "Wobbly Windows"
 msgstr "વિન્ડો વમળ કરો"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "ગાળક રેખીય"
+#~ msgid "Filter Linear"
+#~ msgstr "ગાળક રેખીય"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "જ્યારે મોટું થાય ત્યારે રેખીય ગાળણ વાપરો"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "જ્યારે મોટું થાય ત્યારે રેખીય ગાળણ વાપરો"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "ડેસ્કટોપ નાનીમોટી કરો"
+#~ msgid "Zoom Desktop"
+#~ msgstr "ડેસ્કટોપ નાનીમોટી કરો"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "મોટુ કરો"
+#~ msgid "Zoom In"
+#~ msgstr "મોટુ કરો"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "નાનુ કરો"
+#~ msgid "Zoom Out"
+#~ msgstr "નાનુ કરો"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "પેન નાનુંમોટું કરો"
+#~ msgid "Zoom Pan"
+#~ msgstr "પેન નાનુંમોટું કરો"
 
-#: ../metadata/zoom.xml.in.h:10
 #, fuzzy
-msgid "Zoom Speed"
-msgstr "સ્થાપન પૂરું થયું"
+#~ msgid "Zoom Speed"
+#~ msgstr "સ્થાપન પૂરું થયું"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "નાનામોટાપણાનું સમયપગલું"
+#~ msgid "Zoom Timestep"
+#~ msgstr "નાનામોટાપણાનું સમયપગલું"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "ડેસ્કટોપ ઘન નાનુંમોટું કરો અને વિસ્તારો"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "ડેસ્કટોપ ઘન નાનુંમોટું કરો અને વિસ્તારો"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "નાનામોટાપણાનો અવયવ"
+#~ msgid "Zoom factor"
+#~ msgstr "નાનામોટાપણાનો અવયવ"
 
-#: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom pan"
-msgstr "સ્થાપન પૂરું થયું"
+#~ msgid "Zoom pan"
+#~ msgstr "સ્થાપન પૂરું થયું"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "અપારદર્શકતા ઘટાડો"
