@@ -260,7 +260,10 @@ obsDrawWindow (CompWindow           *w,
 
 	factor = ow->customFactor[MODIFIER_OPACITY];
 	if (factor != 100)
+	{
 	    fragment.opacity = (int) fragment.opacity * factor / 100;
+	    mask |= PAINT_WINDOW_TRANSLUCENT_MASK;
+	}
 
 	factor = ow->customFactor[MODIFIER_BRIGHTNESS];
 	if (factor != 100)
