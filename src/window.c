@@ -1353,6 +1353,62 @@ updateWindowOutputExtents (CompWindow *w)
     }
 }
 
+void
+setWindowFullscreenMonitors (CompWindow               *w,
+			     CompFullscreenMonitorSet *monitors)
+{
+    CompScreen  *s = w->screen;
+    CompDisplay *d = s->display;
+    Region      region = NULL;
+    long        data[4];
+
+    /* sanity check monitor numbers */
+    if (monitors->left >= s->nOutputDev || monitors->right  >= s->nOutputDev ||
+	monitors->top  >= s->nOutputDev || monitors->bottom >= s->nOutputDev)
+    {
+	monitors = NULL;
+    }
+
+    if (monitors)
+	region = XCreateRegion ();
+
+    if (!monitors || !region)
+    {
+	if (w->fullscreenMonitorsSet)
+	{
+	    w->fullscreenMonitorsSet = FALSE;
+	    XDeleteProperty (d->display, w->id, d->wmFullscreenMonitorsAtom);
+	}
+
+	return;
+    }
+
+    XUnionRegion (region, &s->outputDev[monitors->top].region, region);
+    XUnionRegion (region, &s->outputDev[monitors->bottom].region, region);
+    XUnionRegion (region, &s->outputDev[monitors->left].region, region);
+    XUnionRegion (region, &s->outputDev[monitors->right].region, region);
+
+    w->fullscreenMonitorsSet   = TRUE;
+    w->fullscreenMonitorRect.x      = region->extents.x1;
+    w->fullscreenMonitorRect.y      = region->extents.y1;
+    w->fullscreenMonitorRect.width  = region->extents.x2 - region->extents.x1;
+    w->fullscreenMonitorRect.height = region->extents.y2 - region->extents.y1;
+
+    XDestroyRegion (region);
+
+    data[0] = monitors->top;
+    data[1] = monitors->bottom;
+    data[2] = monitors->left;
+    data[3] = monitors->right;
+
+    XChangeProperty (d->display, w->id, d->wmFullscreenMonitorsAtom,
+		     XA_CARDINAL, 32, PropModeReplace,
+		     (unsigned char *) data, 4);
+
+    if (w->state & CompWindowStateFullscreenMask)
+	updateWindowAttributes (w, CompStackingUpdateModeNone);
+}
+
 static void
 setWindowMatrix (CompWindow *w)
 {
@@ -2046,7 +2102,8 @@ addWindow (CompScreen *screen,
     w->closeRequests	    = 0;
     w->lastCloseRequestTime = 0;
 
-    w->overlayWindow = FALSE;
+    w->fullscreenMonitorsSet = FALSE;
+    w->overlayWindow         = FALSE;
 
     if (screen->windowPrivateLen)
     {
@@ -3588,11 +3645,24 @@ addWindowSizeChanges (CompWindow     *w,
     {
 	saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
 
-	xwc->width	  = w->screen->outputDev[output].width;
-	xwc->height	  = w->screen->outputDev[output].height;
+	if (w->fullscreenMonitorsSet)
+	{
+	    xwc->x      = x + w->fullscreenMonitorRect.x;
+	    xwc->y      = y + w->fullscreenMonitorRect.y;
+	    xwc->width  = w->fullscreenMonitorRect.width;
+	    xwc->height = w->fullscreenMonitorRect.height;
+	}
+	else
+	{
+	    xwc->x      = x + w->screen->outputDev[output].region.extents.x1;
+	    xwc->y      = y + w->screen->outputDev[output].region.extents.y1;
+	    xwc->width  = w->screen->outputDev[output].width;
+	    xwc->height = w->screen->outputDev[output].height;
+	}
+
 	xwc->border_width = 0;
 
-	mask |= CWWidth | CWHeight | CWBorderWidth;
+	mask |= CWX | CWY | CWWidth | CWHeight | CWBorderWidth;
     }
     else
     {
@@ -3657,14 +3727,7 @@ addWindowSizeChanges (CompWindow     *w,
 
     if (mask & (CWWidth | CWHeight))
     {
-	if (w->type & CompWindowTypeFullscreenMask)
-	{
-	    xwc->x = x + w->screen->outputDev[output].region.extents.x1;
-	    xwc->y = y + w->screen->outputDev[output].region.extents.y1;
-
-	    mask |= CWX | CWY;
-	}
-	else
+	if (!(w->type & CompWindowTypeFullscreenMask))
 	{
 	    int width, height, max;
 

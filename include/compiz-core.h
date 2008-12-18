@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20081017
+#define CORE_ABIVERSION 20081218
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -72,6 +72,7 @@ COMPIZ_BEGIN_DECLS
 typedef struct _CompTexture	  CompTexture;
 typedef struct _CompIcon	  CompIcon;
 typedef struct _CompWindowExtents CompWindowExtents;
+typedef struct _CompWindowExtents CompFullscreenMonitorSet;
 typedef struct _CompProgram	  CompProgram;
 typedef struct _CompFunction	  CompFunction;
 typedef struct _CompFunctionData  CompFunctionData;
@@ -1016,9 +1017,11 @@ struct _CompDisplay {
     Atom wmDeleteWindowAtom;
     Atom wmTakeFocusAtom;
     Atom wmPingAtom;
-    Atom wmSyncRequestAtom;
 
+    Atom wmSyncRequestAtom;
     Atom wmSyncRequestCounterAtom;
+
+    Atom wmFullscreenMonitorsAtom;
 
     Atom closeWindowAtom;
     Atom wmMoveResizeAtom;
@@ -2647,6 +2650,9 @@ struct _CompWindow {
     XRectangle iconGeometry;
     Bool       iconGeometrySet;
 
+    XRectangle fullscreenMonitorRect;
+    Bool       fullscreenMonitorsSet;
+
     XWindowChanges saveWc;
     int		   saveMask;
 
@@ -2823,6 +2829,10 @@ void
 setWmState (CompDisplay *display,
 	    int		state,
 	    Window      id);
+
+void
+setWindowFullscreenMonitors (CompWindow               *w,
+			     CompFullscreenMonitorSet *monitors);
 
 void
 setWindowFrameExtents (CompWindow	 *w,

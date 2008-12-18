@@ -1971,6 +1971,21 @@ handleEvent (CompDisplay *d,
 	    if (w)
 		setDesktopForWindow (w, event->xclient.data.l[0]);
 	}
+	else if (event->xclient.message_type == d->wmFullscreenMonitorsAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xclient.window);
+	    if (w)
+	    {
+		CompFullscreenMonitorSet monitors;
+
+		monitors.top    = event->xclient.data.l[0];
+		monitors.bottom = event->xclient.data.l[1];
+		monitors.left   = event->xclient.data.l[2];
+		monitors.right  = event->xclient.data.l[3];
+
+		setWindowFullscreenMonitors (w, &monitors);
+	    }
+	}
 	break;
     case MappingNotify:
 	updateModifierMappings (d);

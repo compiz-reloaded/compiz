@@ -271,6 +271,7 @@ updateOutputDevices (CompScreen	*s)
     unsigned int  width, height;
     int		  x1, y1, x2, y2;
     Region	  region;
+    CompWindow    *w;
 
     for (i = 0; i < list->nValue; i++)
     {
@@ -372,6 +373,12 @@ updateOutputDevices (CompScreen	*s)
     s->hasOverlappingOutputs = FALSE;
 
     setCurrentOutput (s, s->currentOutputDev);
+
+    /* clear out fullscreen monitor hints of all windows as
+       suggested on monitor layout changes in EWMH */
+    for (w = s->windows; w; w = w->next)
+	if (w->fullscreenMonitorsSet)
+	    setWindowFullscreenMonitors (w, NULL);
 
     updateWorkareaForScreen (s);
 
@@ -1198,6 +1205,8 @@ setSupported (CompScreen *s)
     data[i++] = d->wmMoveResizeAtom;
     data[i++] = d->moveResizeWindowAtom;
     data[i++] = d->restackWindowAtom;
+
+    data[i++] = d->wmFullscreenMonitorsAtom;
 
     XChangeProperty (d->display, s->root, d->supportedAtom, XA_ATOM, 32,
 		     PropModeReplace, (unsigned char *) data, i);

@@ -2154,10 +2154,13 @@ addDisplay (const char *name)
     d->wmDeleteWindowAtom = XInternAtom (dpy, "WM_DELETE_WINDOW", 0);
     d->wmTakeFocusAtom	  = XInternAtom (dpy, "WM_TAKE_FOCUS", 0);
     d->wmPingAtom	  = XInternAtom (dpy, "_NET_WM_PING", 0);
-    d->wmSyncRequestAtom  = XInternAtom (dpy, "_NET_WM_SYNC_REQUEST", 0);
 
+    d->wmSyncRequestAtom  = XInternAtom (dpy, "_NET_WM_SYNC_REQUEST", 0);
     d->wmSyncRequestCounterAtom =
 	XInternAtom (dpy, "_NET_WM_SYNC_REQUEST_COUNTER", 0);
+
+    d->wmFullscreenMonitorsAtom =
+	XInternAtom (dpy, "_NET_WM_FULLSCREEN_MONITORS", 0);
 
     d->closeWindowAtom	    = XInternAtom (dpy, "_NET_CLOSE_WINDOW", 0);
     d->wmMoveResizeAtom	    = XInternAtom (dpy, "_NET_WM_MOVERESIZE", 0);
