@@ -11,16 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:44+0530\n"
-"PO-Revision-Date: 2008-05-28 17:22+0300\n"
-"Last-Translator: Dimitriy Ryazantcev <DJm00n@mail.ru>\n"
+"POT-Creation-Date: 2008-12-15 15:35+0530\n"
+"PO-Revision-Date: 2008-11-14 08:51+0100\n"
+"Last-Translator: Alex Muravya <raimoschmidt@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -33,6 +33,51 @@ msgstr "Управление Окнами"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Никакой"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "Свернуть в заголовок"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Развернуть"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Развернуть окно горизонтально"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Развернуть окно вертикально"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Свернутые"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Автораскрытие"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "Низкий"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "Меню окна"
 
 # Действие при прокрутке колесика мыши на заголовке окна
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
@@ -99,67 +144,58 @@ msgstr "Использовать тему metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Использовать тему metacity для отрисовки оформлений окна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Закрыть окно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Отменить полное развертывание окна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Развернуть окно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Свернуть окно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Меню окна"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Свернуть в заголовок"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Поверх всех"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "Приклеить"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "Развернуть из заголовка"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Не делать поверх всех"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "Отклеить"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Окно \"%s\" не отвечает."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Ускоренное закрытие приложения приведет к потере не сохраненных изменений."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_Ускоренный выход"
 
@@ -197,7 +233,7 @@ msgstr "Цвет заливки для заметок"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Инициировать"
 
@@ -636,9 +672,8 @@ msgstr ""
 "Командная строка, которая будет выполнена в оболочке при вызове run_command9"
 
 #: ../metadata/core.xml.in.in.h:50
-#, fuzzy
 msgid "Commands"
-msgstr "Команда"
+msgstr "Команды"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -649,9 +684,8 @@ msgid "Default window icon image"
 msgstr "Значок окна по умолчанию"
 
 #: ../metadata/core.xml.in.in.h:53
-#, fuzzy
 msgid "Desktop Size"
-msgstr "Куб рабочего стола"
+msgstr "Размер рабочего стола"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -664,7 +698,7 @@ msgstr "Определить частоту обновления"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr ""
+msgstr "Настройки дисплея"
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -683,8 +717,9 @@ msgid "Fast"
 msgstr "Быстрое"
 
 #: ../metadata/core.xml.in.in.h:60
+#, fuzzy
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "Поведение при развёртивании"
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Focus Prevention Level"
@@ -763,7 +798,7 @@ msgstr "Интервал между сообщениями отклика"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr ""
+msgstr "Назначенные клавиши"
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -946,9 +981,8 @@ msgid "Run command 9"
 msgstr "Выполнить команду 9"
 
 #: ../metadata/core.xml.in.in.h:125
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Командная строка терминала"
+msgstr "Выполнить команду в окне терминала"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -968,9 +1002,8 @@ msgid "Screenshot commands"
 msgstr "Командная строка снимка экрана"
 
 #: ../metadata/core.xml.in.in.h:130
-#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "Командная строка снимка экрана"
+msgstr "Назначенные клавиши для снимка экрана"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1135,7 +1168,7 @@ msgstr "Анимирование фона при вращении куба"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "Оформление"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1143,7 +1176,7 @@ msgstr "Автоматический"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Поведение"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1158,9 +1191,8 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "Цвет, используемый для верхней границы градиента фона"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "Цвета куба"
+msgstr "Верхняя и нижняя грань куба"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1297,13 +1329,13 @@ msgstr "Изображение для фона"
 #  combo box item
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Скорость"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Шаг времени"
 
@@ -1313,7 +1345,7 @@ msgstr "Прозрачность только при вращении мышью
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "Прозрачный куб"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1415,7 +1447,7 @@ msgstr "Окна которые будут отбрасывать тень"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Яркость (в %) неотвечающих окон"
 
 #: ../metadata/fade.xml.in.h:3
 #, fuzzy
@@ -1428,13 +1460,13 @@ msgid "Constant time"
 msgstr "Ограничить Y"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Нормальное изменение размеров окна"
+msgstr "Затемнить неотвечающее окно"
 
 #: ../metadata/fade.xml.in.h:6
+#, fuzzy
 msgid "Dim windows that are not responding to window manager requests"
-msgstr ""
+msgstr "Затемнить окно, которое не отвечает на запросы оконного менеджера"
 
 #: ../metadata/fade.xml.in.h:7
 #, fuzzy
@@ -1492,7 +1524,7 @@ msgstr ""
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "яркость неотвечающих окон"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
@@ -1503,7 +1535,6 @@ msgid "Visual Bell"
 msgstr "Визуализация звукового сигнала"
 
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
 msgstr "Скорость проявления/исчезания окна"
 
@@ -1674,9 +1705,8 @@ msgid "Centered"
 msgstr "По центру"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Управление Окнами"
+msgstr "Фиксированное положение окон"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1695,10 +1725,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Развернуть"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -1832,8 +1858,9 @@ msgstr "Соответствие окон с помощью регулярных
 
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
+#, fuzzy
 msgid "Bindings"
-msgstr ""
+msgstr "Назначенные клавиши"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2427,10 +2454,6 @@ msgstr "Компоновка и запуск преобразования око
 msgid "Layout and start transforming windows on current output"
 msgstr "Компоновка и запуск преобразования окон текущего устройства вывода"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Никакой"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "На все устройства вывода"
@@ -2882,52 +2905,41 @@ msgstr "Эффект вязкости при развертывании и св�
 msgid "Wobbly Windows"
 msgstr "Вязкие окна"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Линейная фильтрация"
+#~ msgid "Filter Linear"
+#~ msgstr "Линейная фильтрация"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Использовать линейную фильтрацию при приближении"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Использовать линейную фильтрацию при приближении"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Изменить масштаб рабочего стола"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Изменить масштаб рабочего стола"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Уменьшить"
+#~ msgid "Zoom In"
+#~ msgstr "Уменьшить"
 
 #  combo box item
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Увеличить"
+#~ msgid "Zoom Out"
+#~ msgstr "Увеличить"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Панорамирование"
+#~ msgid "Zoom Pan"
+#~ msgstr "Панорамирование"
 
 #  combo box item
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Скорость изменения масштаба"
+#~ msgid "Zoom Speed"
+#~ msgstr "Скорость изменения масштаба"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Квант времени изменения масштаба"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Квант времени изменения масштаба"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Изменение масштаба и сдвига куба рабочего стола"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Изменение масштаба и сдвига куба рабочего стола"
 
 #  combo box item
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Коэффициент масштабирования"
+#~ msgid "Zoom factor"
+#~ msgstr "Коэффициент масштабирования"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Панорамирование масштабирования"
+#~ msgid "Zoom pan"
+#~ msgstr "Панорамирование масштабирования"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "Уменьшить прозрачность"

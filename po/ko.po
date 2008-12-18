@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:43+0530\n"
+"POT-Creation-Date: 2008-12-15 15:34+0530\n"
 "PO-Revision-Date: 2008-08-07 15:10+0200\n"
 "Last-Translator: Lee June Hee <bugbear5@gmail.com>\n"
 "Language-Team: Korean <bugbear5@gmail.com>\n"
@@ -30,6 +30,51 @@ msgstr "창 관리"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "컴피즈"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "없음"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "말아올리기"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "최대화"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "가로로 창 최대화"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "세로로 창 최대화"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "최소화"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "자동으로 떠오름"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "낮음"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "창 메뉴"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -90,66 +135,57 @@ msgstr "메타시티 테마를 사용합니다."
 msgid "Use metacity theme when drawing window decorations"
 msgstr "창 장식을 그릴 때 메타시티 테마를 사용합니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "창 최대화 취소"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "창 최대화"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "창 최소화"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "창 메뉴"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "말아올리기"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "항상 위에"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "끈적이 창 설정"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "말아올리기 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "항상 위에 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "끈적이 창 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "창 \"%s\"가 응답하지 않습니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "이 응용프로그램을 강제로 종료하면 저장하지 않은 데이터는 손실됩니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_강제 종료"
 
@@ -187,7 +223,7 @@ msgstr "주석의 채우기 색"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "시작"
 
@@ -1213,13 +1249,13 @@ msgstr "스카이 돔 그림"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "속도"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "시간 간격"
 
@@ -1596,10 +1632,6 @@ msgid ""
 msgstr ""
 "위치 설정에 적용되는 창을 작업 영역에 유지합니다. 그 위치가 특정한 위치와 다"
 "를지라도 유지합니다."
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "최대화"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2309,10 +2341,6 @@ msgstr "창을 배치하고 변형함"
 msgid "Layout and start transforming windows on current output"
 msgstr "현재 작업 공간상의 창들을 배치하고 변형함"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "없음"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "모든 출력 장치에 대하여"
@@ -2747,49 +2775,38 @@ msgstr "창을 최대화하거나 해제할 때 출렁거리는 효과"
 msgid "Wobbly Windows"
 msgstr "창 출렁거림"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "선형 필터"
+#~ msgid "Filter Linear"
+#~ msgstr "선형 필터"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "확대할 때 선형 필터 적용"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "확대할 때 선형 필터 적용"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "데스크탑 확대"
+#~ msgid "Zoom Desktop"
+#~ msgstr "데스크탑 확대"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "확대"
+#~ msgid "Zoom In"
+#~ msgstr "확대"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "축소"
+#~ msgid "Zoom Out"
+#~ msgstr "축소"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "확대 이동"
+#~ msgid "Zoom Pan"
+#~ msgstr "확대 이동"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "확대 속도"
+#~ msgid "Zoom Speed"
+#~ msgstr "확대 속도"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "확대 시간 간격"
+#~ msgid "Zoom Timestep"
+#~ msgstr "확대 시간 간격"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "데스크탑 큐브 확대 이동"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "데스크탑 큐브 확대 이동"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "확대율"
+#~ msgid "Zoom factor"
+#~ msgstr "확대율"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "확대 이동"
+#~ msgid "Zoom pan"
+#~ msgstr "확대 이동"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "투명도 줄이기"

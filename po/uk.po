@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:44+0530\n"
+"POT-Creation-Date: 2008-12-15 15:35+0530\n"
 "PO-Revision-Date: 2008-09-08 00:00+0200\n"
 "Last-Translator: Andriy Golovin <andygol@ua.fm>\n"
 "Language-Team: Ukrainian <i18n@suse.de>\n"
@@ -29,6 +29,52 @@ msgstr "Керування вікнами"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Нема"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+#, fuzzy
+msgid "Shade"
+msgstr "Затьмарити"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Maximize"
+msgstr "Windows"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Розгорнути активне вікно за горизонталлю"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Розгорнути активне вікно за вертикаллю"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Windows"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Авто-піднесення"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "Меню вікна"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -91,69 +137,59 @@ msgstr "Використовувати теми metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Використовувати теми metacity для малювання декорації вікна "
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Закрити вікно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Відновити розмір вікна"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Розгорнути вікно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Згорнути вікно"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Меню вікна"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-#, fuzzy
-msgid "Shade"
-msgstr "Затьмарити"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Винести нагору"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "Приклеїти"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 #, fuzzy
 msgid "Unshade"
 msgstr "Просвітлити"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Відмінити винесення нагору"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "Відклеїти"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Вікно \"%s\" не відкликається."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Примусове завершення програми призведе до втрати всіх незбережених змін."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_Примусове завершення"
 
@@ -197,7 +233,7 @@ msgstr "Колір заповнення для анотації"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 #, fuzzy
 msgid "Initiate"
 msgstr "Початок"
@@ -1312,13 +1348,13 @@ msgstr "Зображення неба"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Швидкість"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 #, fuzzy
 msgid "Timestep"
 msgstr "Тест"
@@ -1730,11 +1766,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#: ../metadata/place.xml.in.h:9
-#, fuzzy
-msgid "Maximize"
-msgstr "Windows"
 
 #: ../metadata/place.xml.in.h:11
 #, fuzzy
@@ -2546,10 +2577,6 @@ msgstr ""
 msgid "Layout and start transforming windows on current output"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Нема"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr ""
@@ -3045,57 +3072,40 @@ msgstr "Ефект тремтіння при розгортанні і згор�
 msgid "Wobbly Windows"
 msgstr "Тремячі Вікна"
 
-#: ../metadata/zoom.xml.in.h:1
 #, fuzzy
-msgid "Filter Linear"
-msgstr "Фільтр: "
+#~ msgid "Filter Linear"
+#~ msgstr "Фільтр: "
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:6
 #, fuzzy
-msgid "Zoom Desktop"
-msgstr "Збільшити стільницю"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Збільшити стільницю"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Збільшити"
+#~ msgid "Zoom In"
+#~ msgstr "Збільшити"
 
-#: ../metadata/zoom.xml.in.h:8
 #, fuzzy
-msgid "Zoom Out"
-msgstr "Робоча станція"
+#~ msgid "Zoom Out"
+#~ msgstr "Робоча станція"
 
-#: ../metadata/zoom.xml.in.h:9
 #, fuzzy
-msgid "Zoom Pan"
-msgstr "Робоча станція"
+#~ msgid "Zoom Pan"
+#~ msgstr "Робоча станція"
 
-#: ../metadata/zoom.xml.in.h:10
 #, fuzzy
-msgid "Zoom Speed"
-msgstr "Вибрано"
+#~ msgid "Zoom Speed"
+#~ msgstr "Вибрано"
 
-#: ../metadata/zoom.xml.in.h:11
 #, fuzzy
-msgid "Zoom Timestep"
-msgstr "Тест"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Тест"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:13
 #, fuzzy
-msgid "Zoom factor"
-msgstr "Робоча станція"
+#~ msgid "Zoom factor"
+#~ msgstr "Робоча станція"
 
-#: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom pan"
-msgstr "Вибрано"
+#~ msgid "Zoom pan"
+#~ msgstr "Вибрано"
 
 #, fuzzy
 #~ msgid "Opacity windows"

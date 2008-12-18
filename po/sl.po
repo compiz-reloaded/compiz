@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:44+0530\n"
+"POT-Creation-Date: 2008-12-15 15:35+0530\n"
 "PO-Revision-Date: 2008-06-12 01:19+0200\n"
 "Last-Translator: benjamin povirk <benjamin.povirk@gmail.com>\n"
 "Language-Team: Slovenian\n"
@@ -32,6 +32,51 @@ msgstr "Upravljalnik oken"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "brez izbire"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "Zasenči"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Maximize"
+msgstr "&Skrčite Windows"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "&Skrčite Windows"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "&Skrčite Windows"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "&Skrčite Windows"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Samodejno"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "Okenski meni"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -95,67 +140,58 @@ msgstr "Uporabi metacity temo"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Uporabi metacity temo ko rišeš dekoracije okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Zapri okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Odmaksimiziraj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Maksimiziraj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Minimiziraj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Okenski meni"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Zasenči"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Postavi na vrh"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "Prilepi"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "Odsenči"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Postavi iz ospredja"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "Odlepi"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Okno \"%s\" se ne odziva"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Nasilno zaprtje te aplikacije lahko povzroči izgubo neshranjenih sprememb."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_Nasilni izhod"
 
@@ -197,7 +233,7 @@ msgstr ""
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Inicializiraj"
 
@@ -1308,7 +1344,7 @@ msgstr "Sydney"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 #, fuzzy
 msgid "Speed"
 msgstr "Izbran(i)"
@@ -1317,7 +1353,7 @@ msgstr "Izbran(i)"
 # fuzzy
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 #, fuzzy
 msgid "Timestep"
 msgstr "Trst"
@@ -1739,11 +1775,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#: ../metadata/place.xml.in.h:9
-#, fuzzy
-msgid "Maximize"
-msgstr "&Skrčite Windows"
 
 #: ../metadata/place.xml.in.h:11
 #, fuzzy
@@ -2564,10 +2595,6 @@ msgstr ""
 msgid "Layout and start transforming windows on current output"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "brez izbire"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr ""
@@ -3064,60 +3091,43 @@ msgstr ""
 msgid "Wobbly Windows"
 msgstr "Windows uporabljeno:"
 
-#: ../metadata/zoom.xml.in.h:1
 #, fuzzy
-msgid "Filter Linear"
-msgstr "Filter: "
+#~ msgid "Filter Linear"
+#~ msgstr "Filter: "
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:6
 #, fuzzy
-msgid "Zoom Desktop"
-msgstr "Namizje"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Namizje"
 
-#: ../metadata/zoom.xml.in.h:7
 #, fuzzy
-msgid "Zoom In"
-msgstr "Odjava"
+#~ msgid "Zoom In"
+#~ msgstr "Odjava"
 
-#: ../metadata/zoom.xml.in.h:8
 #, fuzzy
-msgid "Zoom Out"
-msgstr "Odjava"
+#~ msgid "Zoom Out"
+#~ msgstr "Odjava"
 
-#: ../metadata/zoom.xml.in.h:9
 #, fuzzy
-msgid "Zoom Pan"
-msgstr "Odjava"
+#~ msgid "Zoom Pan"
+#~ msgstr "Odjava"
 
-#: ../metadata/zoom.xml.in.h:10
 #, fuzzy
-msgid "Zoom Speed"
-msgstr "Izbran(i)"
+#~ msgid "Zoom Speed"
+#~ msgstr "Izbran(i)"
 
 # TL
 # fuzzy
-#: ../metadata/zoom.xml.in.h:11
 #, fuzzy
-msgid "Zoom Timestep"
-msgstr "Trst"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Trst"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:13
 #, fuzzy
-msgid "Zoom factor"
-msgstr "Odjava"
+#~ msgid "Zoom factor"
+#~ msgstr "Odjava"
 
-#: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom pan"
-msgstr "Odjava"
+#~ msgid "Zoom pan"
+#~ msgstr "Odjava"
 
 #, fuzzy
 #~ msgid "Decrease window opacity"

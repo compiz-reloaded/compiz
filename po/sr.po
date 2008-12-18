@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST2 (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:44+0530\n"
+"POT-Creation-Date: 2008-12-15 15:35+0530\n"
 "PO-Revision-Date: 2008-04-25 17:17+0200\n"
 "Last-Translator: Dragonny <drax@virus.la>\n"
 "Language-Team: Serbian <i18n@suse.de>\n"
@@ -34,6 +34,64 @@ msgstr "Window Manager"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Nema"
+
+#  label of an output field
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+#, fuzzy
+msgid "Shade"
+msgstr "Senka"
+
+#  button text
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#, fuzzy
+msgid "Maximize"
+msgstr "&Smanji Windowse"
+
+#  button text
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "&Smanji Windowse"
+
+#  button text
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "&Smanji Windowse"
+
+#  button text
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "&Smanji Windowse"
+
+#  ComboBox item
+#  Combobox item
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Automatski"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+#, fuzzy
+msgid "Window Menu"
+msgstr "Meni prozora"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -100,75 +158,63 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 #, fuzzy
 msgid "Close Window"
 msgstr "Zatvori prozor"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr ""
 
 #  button text
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 #, fuzzy
 msgid "Minimize Window"
 msgstr "Smanji prozor"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-#, fuzzy
-msgid "Window Menu"
-msgstr "Meni prozora"
-
-#  label of an output field
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-#, fuzzy
-msgid "Shade"
-msgstr "Senka"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Napravi iznad"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "Ne senči"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Rastavi iznad"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Prozor \"%s\" ne reaguje."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forsiranjem aplikacije da se zatvori moze izazvati gubitak nesnimljenih "
 "promena."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_Forsiraj Zatvaranje"
 
@@ -211,7 +257,7 @@ msgstr ""
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 #, fuzzy
 msgid "Initiate"
 msgstr "хетски"
@@ -1397,14 +1443,14 @@ msgstr "Sidnej"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 #, fuzzy
 msgid "Speed"
 msgstr "Suspend"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 #, fuzzy
 msgid "Timestep"
 msgstr "Источни Тимор"
@@ -1850,13 +1896,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#  button text
-#  button text
-#: ../metadata/place.xml.in.h:9
-#, fuzzy
-msgid "Maximize"
-msgstr "&Smanji Windowse"
 
 #  button text
 #: ../metadata/place.xml.in.h:11
@@ -2696,10 +2735,6 @@ msgstr ""
 msgid "Layout and start transforming windows on current output"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Nema"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr ""
@@ -3244,60 +3279,43 @@ msgstr ""
 msgid "Wobbly Windows"
 msgstr "&Obriši Windowse"
 
-#: ../metadata/zoom.xml.in.h:1
 #, fuzzy
-msgid "Filter Linear"
-msgstr "Filter: "
-
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr ""
+#~ msgid "Filter Linear"
+#~ msgstr "Filter: "
 
 #  Headline for X11 configuration screen:
 #  The user selects screen resolution and color depth.
-#: ../metadata/zoom.xml.in.h:6
 #, fuzzy
-msgid "Zoom Desktop"
-msgstr "Setovanja Desktop-a"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Setovanja Desktop-a"
 
-#: ../metadata/zoom.xml.in.h:7
 #, fuzzy
-msgid "Zoom In"
-msgstr "Odjavi se"
+#~ msgid "Zoom In"
+#~ msgstr "Odjavi se"
 
-#: ../metadata/zoom.xml.in.h:8
 #, fuzzy
-msgid "Zoom Out"
-msgstr "Odjavi se"
+#~ msgid "Zoom Out"
+#~ msgstr "Odjavi se"
 
-#: ../metadata/zoom.xml.in.h:9
 #, fuzzy
-msgid "Zoom Pan"
-msgstr "Odjavi se"
+#~ msgid "Zoom Pan"
+#~ msgstr "Odjavi se"
 
-#: ../metadata/zoom.xml.in.h:10
 #, fuzzy
-msgid "Zoom Speed"
-msgstr "Suspend"
+#~ msgid "Zoom Speed"
+#~ msgstr "Suspend"
 
-#: ../metadata/zoom.xml.in.h:11
 #, fuzzy
-msgid "Zoom Timestep"
-msgstr "Источни Тимор"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Источни Тимор"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:13
 #, fuzzy
-msgid "Zoom factor"
-msgstr "Odjavi se"
+#~ msgid "Zoom factor"
+#~ msgstr "Odjavi se"
 
-#: ../metadata/zoom.xml.in.h:14
 #, fuzzy
-msgid "Zoom pan"
-msgstr "Odjavi se"
+#~ msgid "Zoom pan"
+#~ msgstr "Odjavi se"
 
 #  Radio button for using an entire (Windows) partition for Linux
 #, fuzzy

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:44+0530\n"
+"POT-Creation-Date: 2008-12-15 15:35+0530\n"
 "PO-Revision-Date: 2008-08-14 16:32+0200\n"
 "Last-Translator: Nicolau Gonçalves <excentriko@gmail.com>\n"
 "Language-Team: \n"
@@ -29,6 +29,51 @@ msgstr "Gestão de Janelas"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Nenhum"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "Encolher"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Maximizar"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Maximizar Janela Horizontalmente"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Maximizar Janela Verticalmente"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Minimizado"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Elevação Automática"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "Baixo"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "Menu da Janela"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -92,67 +137,58 @@ msgstr "Usar tema metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Usar tema metacity ao desenhar as decorações das janelas"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Fechar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Desmaximizar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Maximizar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Minimizar Janela"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Menu da Janela"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Encolher"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Colocar no Topo"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "Stick"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "Desencolher"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Retirar do Topo"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "Unstick"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "A janela \"%s\" não está a responder."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forçar a aplicação a terminar causará perda de alterações não guardadas."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_Forçar saída"
 
@@ -190,7 +226,7 @@ msgstr "Cor de preenchimento para anotações"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Iniciar"
 
@@ -1268,13 +1304,13 @@ msgstr "Imagem do Skydome"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Velocidade"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Espaço de tempo"
 
@@ -1656,10 +1692,6 @@ msgid ""
 msgstr ""
 "Manter janelas colocadas na área de trabalho, mesmo que isso signifique que "
 "a posição possa diferir da posição especificada"
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Maximizar"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2377,10 +2409,6 @@ msgstr "Criar layout das janelas e iniciar sua transformação"
 msgid "Layout and start transforming windows on current output"
 msgstr "Criar layout de janelas na saída actual e iniciar sua transformação"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Nenhum"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "Em todos os dispositivos de saída"
@@ -2824,49 +2852,38 @@ msgstr "Efeito gelatina quando se maximizam e minimizam janelas"
 msgid "Wobbly Windows"
 msgstr "Janelas Gelatinosas"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtro Linear"
+#~ msgid "Filter Linear"
+#~ msgstr "Filtro Linear"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Usar filtro linear quando magnificado"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Usar filtro linear quando magnificado"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Zoom Área de Trabalho"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Zoom Área de Trabalho"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Mais Zoom"
+#~ msgid "Zoom In"
+#~ msgstr "Mais Zoom"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Menos Zoom"
+#~ msgid "Zoom Out"
+#~ msgstr "Menos Zoom"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Mover Zoom"
+#~ msgid "Zoom Pan"
+#~ msgstr "Mover Zoom"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Velocidade Zoom"
+#~ msgid "Zoom Speed"
+#~ msgstr "Velocidade Zoom"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Salto Temporal Zoom"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Salto Temporal Zoom"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Magnificar e deslocar o cubo da área de trabalho"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Magnificar e deslocar o cubo da área de trabalho"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Fator de magnificação"
+#~ msgid "Zoom factor"
+#~ msgstr "Fator de magnificação"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Deslocar zoom"
+#~ msgid "Zoom pan"
+#~ msgstr "Deslocar zoom"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "Reduzir Opacidade"

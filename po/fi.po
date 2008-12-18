@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:42+0530\n"
-"PO-Revision-Date: 2008-08-08 14:19+0200\n"
+"POT-Creation-Date: 2008-12-15 15:33+0530\n"
+"PO-Revision-Date: 2008-11-24 20:09+0100\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,51 @@ msgstr "Ikkunoiden hallinta"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Ei mitään"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "Näytä rullattuna"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Suurenna"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Suurenna ikkunaa vaakatasossa"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Suurenna ikkunaa pystytasossa"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Pienennetty"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Automaattinosto"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "Matala"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "Ikkunavalikko"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -101,68 +146,59 @@ msgstr "Käytä Metacity-teemaa"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Käytä Metacity-teemaa ikkunoiden kehyksissä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Palauta suurennettu ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Suurenna ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Pienennä ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Ikkunavalikko"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Näytä rullattuna"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "Näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "Älä näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Älä näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "Älä näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Ikkuna \"%s\" ei vastaa."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Tämän sovelluksen sulkeminen väkisin saa tallentamattomat muutokset "
 "katoamaan."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "Sulje _väkisin"
 
@@ -200,7 +236,7 @@ msgstr "Piirroksen väri"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Aktivoi"
 
@@ -597,9 +633,8 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "Suoritettava komentorivi, kun run_command9 suoritetaan"
 
 #: ../metadata/core.xml.in.in.h:50
-#, fuzzy
 msgid "Commands"
-msgstr "Komento"
+msgstr "Komennot"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -610,9 +645,8 @@ msgid "Default window icon image"
 msgstr "Oletuskuva ikkunoille, joilla ei ole kuvaketta"
 
 #: ../metadata/core.xml.in.in.h:53
-#, fuzzy
 msgid "Desktop Size"
-msgstr "Työpöytäkuutio"
+msgstr "Työpöydän koko"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -624,7 +658,7 @@ msgstr "Tunnista virkistystaajuus"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr ""
+msgstr "Näytön asetukset"
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -644,7 +678,7 @@ msgstr "Nopea"
 
 #: ../metadata/core.xml.in.in.h:60
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "Kohdistus- ja nostokäyttäytyminen"
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Focus Prevention Level"
@@ -718,7 +752,7 @@ msgstr "Viive ping-viestien välillä"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr ""
+msgstr "Näppäinsidokset"
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -899,9 +933,8 @@ msgid "Run command 9"
 msgstr "Suorita komento 9"
 
 #: ../metadata/core.xml.in.in.h:125
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Päätteen komentorivi"
+msgstr "Suorita päätekomento"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -916,14 +949,12 @@ msgid "Screenshot command line"
 msgstr "Kuvakaappauksen komento"
 
 #: ../metadata/core.xml.in.in.h:129
-#, fuzzy
 msgid "Screenshot commands"
-msgstr "Kuvakaappauksen komento"
+msgstr "Kuvakaappauksen komennot"
 
 #: ../metadata/core.xml.in.in.h:130
-#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "Kuvakaappauksen komento"
+msgstr "Kuvakaappauksen näppäinsidokset"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1083,7 +1114,7 @@ msgstr "Animoi taivaankansi työpöytäkuutiota kääntäessä"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "Ulkoasu"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1091,7 +1122,7 @@ msgstr "Automaattinen"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Käyttäytyminen"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1106,9 +1137,8 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "Ylin väri taivaankannen liukuvärissä"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "Kuution väri"
+msgstr "Kuution kannet"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1241,13 +1271,13 @@ msgstr "Taivaan kuva"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Nopeus"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Aikaviive"
 
@@ -1257,7 +1287,7 @@ msgstr "Läpinäkyvä vain hiirellä pyörittäessä"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "Läpinäkyvä kuutio"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1601,9 +1631,8 @@ msgid "Centered"
 msgstr "Keskitetty"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Ikkunoiden hallinta"
+msgstr "Kiinteä ikkunoiden sijoittelu"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1624,10 +1653,6 @@ msgid ""
 msgstr ""
 "Pidä asetettu ikkuna työtilassa, vaikka se tarkoittaisi sijainnin eriävyyttä "
 "määritellystä sijainnista"
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Suurenna"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -1705,13 +1730,12 @@ msgstr ""
 "kieltäisivät ikkunointiohjelmaa tekemästä niin."
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Ikkunan kehyksen asetukset"
+msgstr "Kiinteiden sijaintien ikkunat"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "Kiinteän työtilan ikkunat"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -1760,7 +1784,7 @@ msgstr "Lausekkeen määrittelemien ikkunoiden täsmäys"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "Sidokset"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2066,9 +2090,8 @@ msgid "Rotate To Face 9 with Window"
 msgstr "Käännä työpöydälle 9 ikkunan kanssa"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
-msgstr "Käännä kuutiota"
+msgstr "Kuution kääntäminen"
 
 #: ../metadata/rotate.xml.in.h:51
 msgid "Rotate desktop cube"
@@ -2091,14 +2114,12 @@ msgid "Rotate right and bring active window along"
 msgstr "Kääntää kuution oikealle aktiivisen ikkuna kanssa"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Käännä työpöydälle 1"
+msgstr "Käännä kuution sivulle"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Käännä työpöydälle 1 ikkunan kanssa"
+msgstr "Käännä kuution sivulle joka sisältää ikkunan"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2266,13 +2287,15 @@ msgstr "Suuri"
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Painikesidokset vaihtavat skaalaustilaa"
 
 #: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Painikesidokset vaihtavat skaalaustilaa sen sijaan että painettaessa "
+"skaalaustila otettaisiin käyttöön ja vapautettaessa poistettaisiin käytöstä."
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
@@ -2316,13 +2339,15 @@ msgstr "Aktivoi ikkunavalitsin ikkunoille nykyisessä ulostulossa"
 
 #: ../metadata/scale.xml.in.h:18
 msgid "Key Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Näppäinsidokset vaihtavat skaalaustilaa"
 
 #: ../metadata/scale.xml.in.h:19
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Näppäinsidokset vaihtavat skaalaustilaa sen sijaan että painettaessa "
+"skaalaustila otettaisiin käyttöön ja vapautettaessa poistettaisiin käytöstä."
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -2339,10 +2364,6 @@ msgstr "Asettele ja ala mukauttaa ikkunoita"
 #: ../metadata/scale.xml.in.h:23
 msgid "Layout and start transforming windows on current output"
 msgstr "Asettele ja ala mukauttaa ikkunoita nykyisessä ulostulossa"
-
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Ei mitään"
 
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
@@ -2787,49 +2808,38 @@ msgstr "Huojumistehoste ikkuna suurentaessa ja pienentäessä"
 msgid "Wobbly Windows"
 msgstr "Huojuvat ikkunat"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Suodata lineaarisesti"
+#~ msgid "Filter Linear"
+#~ msgstr "Suodata lineaarisesti"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Käytä lineaarista suodatinta zoomin aikana"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Käytä lineaarista suodatinta zoomin aikana"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Työpöydän zoomaus"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Työpöydän zoomaus"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Lähennys"
+#~ msgid "Zoom In"
+#~ msgstr "Lähennys"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Loitonnus"
+#~ msgid "Zoom Out"
+#~ msgstr "Loitonnus"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Zoomin muutosarvo"
+#~ msgid "Zoom Pan"
+#~ msgstr "Zoomin muutosarvo"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Zoomausnopeus"
+#~ msgid "Zoom Speed"
+#~ msgstr "Zoomausnopeus"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Zoomausaikaväli"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Zoomausaikaväli"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Zoomaa ja panoroi työpöytää"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Zoomaa ja panoroi työpöytää"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Suurennuskerroin"
+#~ msgid "Zoom factor"
+#~ msgstr "Suurennuskerroin"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Panorointi suurennettaessa"
+#~ msgid "Zoom pan"
+#~ msgstr "Panorointi suurennettaessa"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "Vähennä läpikuultavuutta"

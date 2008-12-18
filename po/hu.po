@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_compiz-hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:43+0530\n"
-"PO-Revision-Date: 2008-10-20 08:30+0200\n"
+"POT-Creation-Date: 2008-12-15 15:34+0530\n"
+"PO-Revision-Date: 2008-11-30 12:28+0100\n"
 "Last-Translator: KAMI <kamihir@freemail.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,51 @@ msgstr "Ablakkezelés"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Egyik sem"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "Felgördítés"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Maximalizálás"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Ablak maximalizálása vízszintesen"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Ablak maximalizálása függőlegesen"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Minimalizálva"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Automatikus megnyitás"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "Alacsony"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "Ablak menü"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -91,67 +136,58 @@ msgstr "Metacity téma alkalmazása"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Metacity téma alkalmazása az ablakdíszítések rajzolásakor"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Ablak bezárása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Ablak visszaállítása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Ablak maximalizálása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Ablak minimalizálása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Ablak menü"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Felgördítés"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Előrehozás"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "Rögzítés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "Legördítés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Hátraküldés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "Rögzítés feloldása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr "A(z) \"%s\" ablak nem válaszol."
+msgstr "A(z) „%s” ablak nem válaszol."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "A kilépés kényszerítésének hatására minden el nem mentett adat el fog veszni."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_Kilépés kényszerítése"
 
@@ -190,7 +226,7 @@ msgstr "Feljegyzések kitöltő színe"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Indítás"
 
@@ -588,9 +624,8 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "A run_command9 által elindított parancs"
 
 #: ../metadata/core.xml.in.in.h:50
-#, fuzzy
 msgid "Commands"
-msgstr "Parancs"
+msgstr "Parancsok"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -601,9 +636,8 @@ msgid "Default window icon image"
 msgstr "Alapértelmezett ikon képe"
 
 #: ../metadata/core.xml.in.in.h:53
-#, fuzzy
 msgid "Desktop Size"
-msgstr "Munkaasztal kocka"
+msgstr "Munkaasztal mérete"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -615,7 +649,7 @@ msgstr "Frissítési frekvencia felismerése"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr ""
+msgstr "Kijelző beállításai"
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -635,7 +669,7 @@ msgstr "Gyors"
 
 #: ../metadata/core.xml.in.in.h:60
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "Fókuszálás és megjelenítés"
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Focus Prevention Level"
@@ -711,7 +745,7 @@ msgstr "Ping üzenetek közti időköz"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr ""
+msgstr "Billentyűk"
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -893,9 +927,8 @@ msgid "Run command 9"
 msgstr "9. parancs futtatása"
 
 #: ../metadata/core.xml.in.in.h:125
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Terminál parancssor"
+msgstr "Parancs futtatása terminálban"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -910,14 +943,12 @@ msgid "Screenshot command line"
 msgstr "Képernyőkép parancssor"
 
 #: ../metadata/core.xml.in.in.h:129
-#, fuzzy
 msgid "Screenshot commands"
-msgstr "Képernyőkép parancssor"
+msgstr "Képernyőkép parancsok"
 
 #: ../metadata/core.xml.in.in.h:130
-#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "Képernyőkép parancssor"
+msgstr "Képernyőkép billentyűk"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -929,7 +960,7 @@ msgstr "Főmenü megjelenítése"
 
 #: ../metadata/core.xml.in.in.h:133
 msgid "Show Run Application dialog"
-msgstr "\"Alkalmazás futtatása\" párbeszédablak megjelenítése"
+msgstr "„Alkalmazás futtatása” párbeszédablak megjelenítése"
 
 #: ../metadata/core.xml.in.in.h:134
 msgid "Show the main menu"
@@ -1009,7 +1040,7 @@ msgstr "Aktív ablak felgördítése"
 
 #: ../metadata/core.xml.in.in.h:153
 msgid "Toggle use of slow animations"
-msgstr "\"Lassú animációk\" effektus kapcsoló"
+msgstr "„Lassú animációk” effektus kapcsoló"
 
 #: ../metadata/core.xml.in.in.h:155
 msgid "Unmaximize active window"
@@ -1074,7 +1105,7 @@ msgstr "Kupola animálása a kocka forgatásánál"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "Megjelenés"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1082,7 +1113,7 @@ msgstr "Automatikus"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Viselkedés"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1097,9 +1128,8 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "A kupola tartalék színátmenet felső színállomásához használandó szín"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "Kocka színe"
+msgstr "Kocka fedőlapok"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1230,13 +1260,13 @@ msgstr "Kupola képe"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Sebesség"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Időköz"
 
@@ -1246,7 +1276,7 @@ msgstr "Átlátszóság csak egérrel forgatáskor"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "Átlátszó kocka"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1433,11 +1463,11 @@ msgstr "Ablak elhalványulásának üzemmódja"
 
 #: ../metadata/fade.xml.in.h:24
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Ablak elhalványulásának sebessége \"Állandó sebesség\" módban"
+msgstr "Ablak elhalványulásának sebessége „Állandó sebesség” módban"
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr "Ablak elhalványulásának sebessége \"Állandó útidő\" módban"
+msgstr "Ablak elhalványulásának sebessége „Állandó útidő” módban"
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1594,9 +1624,8 @@ msgid "Centered"
 msgstr "Középre"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Ablakkezelés"
+msgstr "Meghatározott ablak elhelyezés"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1617,10 +1646,6 @@ msgid ""
 msgstr ""
 "Ablakelhelyezés erőltetésének felülbírálása úgy, hogy az ablak minden "
 "esetben a munkaasztalon maradjon"
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Maximalizálás"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -1698,13 +1723,12 @@ msgstr ""
 "szabályozni."
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Ablakdíszítések"
+msgstr "Ablakok állandó elhelyezéssel"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "Ablakok állandó munkalapon"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -1753,7 +1777,7 @@ msgstr "Reguláris kifejezéssel ablakegyeztetés"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "Billentyűk"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2056,7 +2080,6 @@ msgid "Rotate To Face 9 with Window"
 msgstr "Forgatás a 9. előlap felé az ablakkal együtt"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
 msgstr "Kocka forgatása"
 
@@ -2081,14 +2104,12 @@ msgid "Rotate right and bring active window along"
 msgstr "Jobbra forgatás az aktív ablakkal együtt"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Forgatás az 1. előlap felé"
+msgstr "Forgatás az előlap felé"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Forgatás az 1. előlap felé az ablakkal együtt"
+msgstr "Forgatás az előlap felé az ablakkal együtt"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2333,10 +2354,6 @@ msgstr "Ablaktranszformáció és elrendezés indítása"
 #: ../metadata/scale.xml.in.h:23
 msgid "Layout and start transforming windows on current output"
 msgstr "Elrendezés és a jelenlegi kimenet ablakai transzformációjának indítása"
-
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Egyik sem"
 
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
@@ -2636,19 +2653,19 @@ msgstr "Címhullám"
 
 #: ../metadata/water.xml.in.h:12
 msgid "Toggle rain"
-msgstr "\"Eső\" kapcsoló"
+msgstr "„Eső” kapcsoló"
 
 #: ../metadata/water.xml.in.h:13
 msgid "Toggle rain effect"
-msgstr "\"Eső\" effektus kapcsoló"
+msgstr "„Eső” effektus kapcsoló"
 
 #: ../metadata/water.xml.in.h:14
 msgid "Toggle wiper"
-msgstr "\"Ablaktörlő\" kapcsoló"
+msgstr "„Ablaktörlő” kapcsoló"
 
 #: ../metadata/water.xml.in.h:15
 msgid "Toggle wiper effect"
-msgstr "\"Ablaktörlő\" effektus kapcsoló"
+msgstr "„Ablaktörlő” effektus kapcsoló"
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
@@ -2750,7 +2767,7 @@ msgstr "Rugóállandó (K)"
 
 #: ../metadata/wobbly.xml.in.h:23
 msgid "Toggle window snapping"
-msgstr "\"Ablakok illesztése\" effektus kapcsoló"
+msgstr "„Ablakok illesztése” effektus kapcsoló"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
@@ -2784,49 +2801,38 @@ msgstr "Imbolygás ablakok maximalizálásakor és visszaállításakor"
 msgid "Wobbly Windows"
 msgstr "Imbolygó ablakok"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Lineáris szűrő"
+#~ msgid "Filter Linear"
+#~ msgstr "Lineáris szűrő"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Lineáris szűrő használata nagyításnál"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Lineáris szűrő használata nagyításnál"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Munkaasztal nagyítása"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Munkaasztal nagyítása"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Nagyítás"
+#~ msgid "Zoom In"
+#~ msgstr "Nagyítás"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Kicsinyítés"
+#~ msgid "Zoom Out"
+#~ msgstr "Kicsinyítés"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Nagyítás"
+#~ msgid "Zoom Pan"
+#~ msgstr "Nagyítás"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Nagyítás sebessége"
+#~ msgid "Zoom Speed"
+#~ msgstr "Nagyítás sebessége"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Nagyítás időköz"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Nagyítás időköz"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "A munkaasztalkocka nagyítása és pásztázása"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "A munkaasztalkocka nagyítása és pásztázása"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Nagyítási arány"
+#~ msgid "Zoom factor"
+#~ msgstr "Nagyítási arány"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Nagyítás"
+#~ msgid "Zoom pan"
+#~ msgstr "Nagyítás"
 
 #~ msgid "Decrease Opacity"
 #~ msgstr "Átlátszatlanság csökkentése"
