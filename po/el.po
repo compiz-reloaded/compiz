@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-15 15:33+0530\n"
-"PO-Revision-Date: 2008-11-06 02:23+0100\n"
+"POT-Creation-Date: 2008-12-26 12:30+0530\n"
+"PO-Revision-Date: 2008-09-03 05:45+0200\n"
 "Last-Translator: Jim Dusis <jimdusis@yahoo.gr>\n"
 "Language-Team: Greek <jimdusis@yahoo.gr>\n"
 "MIME-Version: 1.0\n"
@@ -666,8 +666,9 @@ msgstr ""
 "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής9"
 
 #: ../metadata/core.xml.in.in.h:50
+#, fuzzy
 msgid "Commands"
-msgstr "Εντολές"
+msgstr "Εντολή"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -678,8 +679,9 @@ msgid "Default window icon image"
 msgstr "Προεπιλεγμένη εικόνα εικονιδίου παραθύρου"
 
 #: ../metadata/core.xml.in.in.h:53
+#, fuzzy
 msgid "Desktop Size"
-msgstr "Μέγεθος Επιφάνειας Εργασίας"
+msgstr "Κύβος Επιφάνειας Εργασίας"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -691,7 +693,7 @@ msgstr "Ανίχνευση Ρυθμού Ανανέωσης"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr "Ρυθμίσεις Οθόνης"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -789,7 +791,7 @@ msgstr "Διάστημα μεταξύ των μηνυμάτων ping"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr "Συνδυασμοί πλήκτρων"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -970,8 +972,9 @@ msgid "Run command 9"
 msgstr "Τρέξιμο εντολής 9"
 
 #: ../metadata/core.xml.in.in.h:125
+#, fuzzy
 msgid "Run terminal command"
-msgstr "Εκτέλεση εντολής τερματικού"
+msgstr "Γραμμή εντολών τερματικού"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -986,12 +989,14 @@ msgid "Screenshot command line"
 msgstr "Γραμμή εντολών αρπαγής οθόνης"
 
 #: ../metadata/core.xml.in.in.h:129
+#, fuzzy
 msgid "Screenshot commands"
-msgstr "Εντολές αρπαγής οθόνης"
+msgstr "Γραμμή εντολών αρπαγής οθόνης"
 
 #: ../metadata/core.xml.in.in.h:130
+#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "Συνδυασμοί πλήκτρων εντολών αρπαγής οθόνης"
+msgstr "Γραμμή εντολών αρπαγής οθόνης"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1147,7 +1152,7 @@ msgstr "Κίνηση skydome όταν περιστρέφεται ο κύβος"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr "Εμφάνιση"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1155,7 +1160,7 @@ msgstr "Αυτόματα"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr "Συμπεριφορά"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1173,8 +1178,9 @@ msgstr ""
 "fallback"
 
 #: ../metadata/cube.xml.in.h:13
+#, fuzzy
 msgid "Cube Caps"
-msgstr "Καπάκια Κύβου"
+msgstr "Χρώμα Κύβου"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1325,7 +1331,7 @@ msgstr "Διαφάνεια Μόνο στην Περιστροφή με το Πο
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "Διάφανος Κύβος"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1679,8 +1685,9 @@ msgid "Centered"
 msgstr "Στο Κέντρο"
 
 #: ../metadata/place.xml.in.h:4
+#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Σταθερή Τοποθέτηση Παραθύρου"
+msgstr "Διαχείρηση Παραθύρου"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1727,11 +1734,12 @@ msgid "Random"
 msgstr "Τυχαία"
 
 #: ../metadata/place.xml.in.h:17
+#, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
-"Επιλέγει το πως η τοποθέτηση παράθυρων θα συμπεριφερθεί αν επιλεχθούν "
-"πολλαπλές συσκευές εξόδου."
+"Επιλέγει το αν τα παράθυρα κλιμακωθούν αν γινει χρήση πολλαπλών συσκευών "
+"εξόδου."
 
 #: ../metadata/place.xml.in.h:18
 msgid "Smart"
@@ -1780,12 +1788,13 @@ msgstr ""
 "στον διαχειριστή παραθύρων οτι πρέπει να αποφύγει να τα τοποθετήσει."
 
 #: ../metadata/place.xml.in.h:28
+#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Παράθυρα με σταθερές θέσεις"
+msgstr "Διακοσμήσεις παραθύρου"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr "Παράθυρα με σταθερές εικονικές επιφάνειες εργασίας"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -1834,7 +1843,7 @@ msgstr "Ταίριαγμα παραθύρου regex"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr "Συνδυασμοί"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2143,6 +2152,7 @@ msgid "Rotate To Face 9 with Window"
 msgstr "Περιστροφή Στην Όψη 9 με Παράθυρο"
 
 #: ../metadata/rotate.xml.in.h:50
+#, fuzzy
 msgid "Rotate cube"
 msgstr "Περιστροφή Κύβου"
 
@@ -2167,12 +2177,14 @@ msgid "Rotate right and bring active window along"
 msgstr "Περιστροφή δεξιά και μεταφορά ενεργού παραθύρου κατα μήκος"
 
 #: ../metadata/rotate.xml.in.h:56
+#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Περιστροφή κύβου στην πρόσοψη"
+msgstr "Περιστροφή στην όψη 1"
 
 #: ../metadata/rotate.xml.in.h:57
+#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Περιστροφή κύβου στην πρόσοψη με παράθυρο"
+msgstr "Περιστροφή Στην Όψη 1 με Παράθυρο"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2341,16 +2353,12 @@ msgstr "Μεγάλο"
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
 msgstr ""
-"Συνδυασμοί Κουμπιών για Ενεργοποίηση/Απενεργοποίηση της Κατάστασης Κλιμάκωσης"
 
 #: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
-"Συνδυασμοί κουμπιών που ενεργοποιούν κ απενεργοποιούν την κατάσταση "
-"κλιμάκωσης αντι μόνο να την ενεργοποιούν όταν πατηθούν κ την απενεργοποιούν "
-"όταν αφεθούν."
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"

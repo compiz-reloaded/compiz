@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-15 15:36+0530\n"
-"PO-Revision-Date: 2008-11-08 06:31+0100\n"
+"POT-Creation-Date: 2008-12-26 12:33+0530\n"
+"PO-Revision-Date: 2008-11-02 08:37+0100\n"
 "Last-Translator: JING Cheng <jingcheng01@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -614,6 +614,7 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "调用run_command9时要在shell中执行的命令行"
 
 #: ../metadata/core.xml.in.in.h:50
+#, fuzzy
 msgid "Commands"
 msgstr "命令"
 
@@ -626,8 +627,9 @@ msgid "Default window icon image"
 msgstr "默认窗口图标图像"
 
 #: ../metadata/core.xml.in.in.h:53
+#, fuzzy
 msgid "Desktop Size"
-msgstr "桌面大小"
+msgstr "桌面立方体"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -639,7 +641,7 @@ msgstr "检测刷新率"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr "显示设置"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -657,7 +659,7 @@ msgstr "快速"
 
 #: ../metadata/core.xml.in.in.h:60
 msgid "Focus &amp; Raise Behaviour"
-msgstr "聚焦与升起行为"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Focus Prevention Level"
@@ -729,7 +731,7 @@ msgstr "ping消息之间的间隔"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr "按键绑定"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -908,8 +910,9 @@ msgid "Run command 9"
 msgstr "运行命令9"
 
 #: ../metadata/core.xml.in.in.h:125
+#, fuzzy
 msgid "Run terminal command"
-msgstr "运行终端命令"
+msgstr "终端命令行"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -924,12 +927,14 @@ msgid "Screenshot command line"
 msgstr "截屏命令行"
 
 #: ../metadata/core.xml.in.in.h:129
+#, fuzzy
 msgid "Screenshot commands"
-msgstr "截屏命令"
+msgstr "截屏命令行"
 
 #: ../metadata/core.xml.in.in.h:130
+#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "截屏的按键绑定"
+msgstr "截屏命令行"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1085,7 +1090,7 @@ msgstr "旋转立方体时制作动画天穹"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr "外观"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1093,7 +1098,7 @@ msgstr "自动"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr "行为"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1108,8 +1113,9 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "天穹降色渐变使用的顶部结束颜色"
 
 #: ../metadata/cube.xml.in.h:13
+#, fuzzy
 msgid "Cube Caps"
-msgstr "立方体盖子"
+msgstr "立方体颜色"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1254,7 +1260,7 @@ msgstr "仅当用鼠标旋转时透明"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "透明立方体"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1597,8 +1603,9 @@ msgid "Centered"
 msgstr "居中"
 
 #: ../metadata/place.xml.in.h:4
+#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "固定窗口放置"
+msgstr "窗口管理"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1690,12 +1697,13 @@ msgid ""
 msgstr "即便向窗口管理器提出避免放置的请求，仍应强制放置的窗口"
 
 #: ../metadata/place.xml.in.h:28
+#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "有固定位置的窗口"
+msgstr "窗口装饰"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr "有固定视口的窗口"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -1744,7 +1752,7 @@ msgstr "正则表达式的窗口匹配"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr "绑定"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2047,6 +2055,7 @@ msgid "Rotate To Face 9 with Window"
 msgstr "带着窗口旋转至第9面"
 
 #: ../metadata/rotate.xml.in.h:50
+#, fuzzy
 msgid "Rotate cube"
 msgstr "旋转立方体"
 
@@ -2071,12 +2080,14 @@ msgid "Rotate right and bring active window along"
 msgstr "带着激活的窗口一起向右旋转"
 
 #: ../metadata/rotate.xml.in.h:56
+#, fuzzy
 msgid "Rotate to cube face"
-msgstr "旋转至立方体表面"
+msgstr "旋转至第1面"
 
 #: ../metadata/rotate.xml.in.h:57
+#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "带窗口旋转至立方体表面"
+msgstr "带着窗口旋转至第1面"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"

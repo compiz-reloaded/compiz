@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-15 15:35+0530\n"
-"PO-Revision-Date: 2008-11-14 08:51+0100\n"
-"Last-Translator: Alex Muravya <raimoschmidt@gmail.com>\n"
+"POT-Creation-Date: 2008-12-26 12:32+0530\n"
+"PO-Revision-Date: 2008-12-22 14:12+0100\n"
+"Last-Translator: Selivanov Leonid <silvanus@bk.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,14 +49,12 @@ msgid "Maximize"
 msgstr "Развернуть"
 
 #: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
 msgid "Maximize Horizontally"
-msgstr "Развернуть окно горизонтально"
+msgstr "Развернуть в ширину"
 
 #: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
 msgid "Maximize Vertically"
-msgstr "Развернуть окно вертикально"
+msgstr "Развернуть в высоту"
 
 #: ../gtk/gnome/compiz-window-manager.c:431
 #, fuzzy
@@ -672,8 +670,9 @@ msgstr ""
 "Командная строка, которая будет выполнена в оболочке при вызове run_command9"
 
 #: ../metadata/core.xml.in.in.h:50
+#, fuzzy
 msgid "Commands"
-msgstr "Команды"
+msgstr "Команда"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -684,6 +683,7 @@ msgid "Default window icon image"
 msgstr "Значок окна по умолчанию"
 
 #: ../metadata/core.xml.in.in.h:53
+#, fuzzy
 msgid "Desktop Size"
 msgstr "Размер рабочего стола"
 
@@ -698,7 +698,7 @@ msgstr "Определить частоту обновления"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr "Настройки дисплея"
+msgstr "Настройки отображения"
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -717,9 +717,8 @@ msgid "Fast"
 msgstr "Быстрое"
 
 #: ../metadata/core.xml.in.in.h:60
-#, fuzzy
 msgid "Focus &amp; Raise Behaviour"
-msgstr "Поведение при развёртивании"
+msgstr "Фокусировка и способ активирования"
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Focus Prevention Level"
@@ -798,7 +797,7 @@ msgstr "Интервал между сообщениями отклика"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr "Назначенные клавиши"
+msgstr "Сочетания клавиш"
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -981,8 +980,9 @@ msgid "Run command 9"
 msgstr "Выполнить команду 9"
 
 #: ../metadata/core.xml.in.in.h:125
+#, fuzzy
 msgid "Run terminal command"
-msgstr "Выполнить команду в окне терминала"
+msgstr "Запустить команду в терминале"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -997,13 +997,12 @@ msgid "Screenshot command line"
 msgstr "Командная строка снимка экрана"
 
 #: ../metadata/core.xml.in.in.h:129
-#, fuzzy
 msgid "Screenshot commands"
-msgstr "Командная строка снимка экрана"
+msgstr "Команды снимка экрана"
 
 #: ../metadata/core.xml.in.in.h:130
 msgid "Screenshot key bindings"
-msgstr "Назначенные клавиши для снимка экрана"
+msgstr "Горячие клавиши снимка экрана"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1168,7 +1167,7 @@ msgstr "Анимирование фона при вращении куба"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr "Оформление"
+msgstr "Внешний вид"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1191,8 +1190,9 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "Цвет, используемый для верхней границы градиента фона"
 
 #: ../metadata/cube.xml.in.h:13
+#, fuzzy
 msgid "Cube Caps"
-msgstr "Верхняя и нижняя грань куба"
+msgstr "Шапка куба"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1345,7 +1345,7 @@ msgstr "Прозрачность только при вращении мышью
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "Прозрачный куб"
+msgstr "Прозрачность куба"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1447,31 +1447,27 @@ msgstr "Окна которые будут отбрасывать тень"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr "Яркость (в %) неотвечающих окон"
+msgstr "Яркость (в %) неактивного окна"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
 msgid "Constant speed"
-msgstr "Скорость вращения"
+msgstr "Постоянная скорость"
 
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Constant time"
-msgstr "Ограничить Y"
+msgstr "Постоянное время"
 
 #: ../metadata/fade.xml.in.h:5
 msgid "Dim Unresponsive Windows"
-msgstr "Затемнить неотвечающее окно"
+msgstr "Затемнение не отвечающего окна"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Dim windows that are not responding to window manager requests"
-msgstr "Затемнить окно, которое не отвечает на запросы оконного менеджера"
+msgstr "Затемнение окна, которое не отвечает на запросы менеджера окон"
 
 #: ../metadata/fade.xml.in.h:7
-#, fuzzy
 msgid "Fade Mode"
-msgstr "Скорость затенения"
+msgstr "Скорость исчезновения"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1482,9 +1478,8 @@ msgid "Fade Speed"
 msgstr "Скорость затенения"
 
 #: ../metadata/fade.xml.in.h:10
-#, fuzzy
 msgid "Fade Time"
-msgstr "Время отражения"
+msgstr "Время исчезновения"
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Fade effect on minimize/open/close window events"
@@ -1520,15 +1515,15 @@ msgstr ""
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Насыщенность (в %) не отвечающего окна"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr "яркость неотвечающих окон"
+msgstr "Яркость не отвечающего окна"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Насыщенность не отвечающего окна"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
@@ -1536,16 +1531,15 @@ msgstr "Визуализация звукового сигнала"
 
 #: ../metadata/fade.xml.in.h:23
 msgid "Window fade mode"
-msgstr "Скорость проявления/исчезания окна"
+msgstr "Режим проявления/исчезновения окна"
 
 #: ../metadata/fade.xml.in.h:24
-#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Типы окон, для которых следует применять режим масштабирования"
+msgstr "Скорость исчезновения окна в режиме \"Постоянная скорость\""
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr ""
+msgstr "Время исчезновения окна в режиме \"Постоянная скорость\""
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1705,8 +1699,9 @@ msgid "Centered"
 msgstr "По центру"
 
 #: ../metadata/place.xml.in.h:4
+#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Фиксированное положение окон"
+msgstr "Фиксированное размещение окна"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1804,9 +1799,8 @@ msgstr ""
 "этого делать не нужно."
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Оформление окна"
+msgstr "Окно с фиксированной позицией"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
@@ -1858,9 +1852,8 @@ msgstr "Соответствие окон с помощью регулярных
 
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
-#, fuzzy
 msgid "Bindings"
-msgstr "Назначенные клавиши"
+msgstr "Закрепление"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2047,7 +2040,7 @@ msgstr "Поднимать окна при вращении"
 #  Translators: text entry label
 #: ../metadata/rotate.xml.in.h:18
 msgid "Rotate Cube"
-msgstr "Вращать куб"
+msgstr "Вращение куб"
 
 #: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Flip Left"
