@@ -1359,54 +1359,55 @@ setWindowFullscreenMonitors (CompWindow               *w,
 {
     CompScreen  *s = w->screen;
     CompDisplay *d = s->display;
-    Region      region = NULL;
-    long        data[4];
+    Bool        hadFsMonitors = w->fullscreenMonitorsSet;
 
-    /* sanity check monitor numbers */
-    if (monitors->left >= s->nOutputDev || monitors->right  >= s->nOutputDev ||
-	monitors->top  >= s->nOutputDev || monitors->bottom >= s->nOutputDev)
+    w->fullscreenMonitorsSet = FALSE;
+
+    if (monitors                         &&
+	monitors->left   < s->nOutputDev &&
+	monitors->right  < s->nOutputDev &&
+	monitors->top    < s->nOutputDev &&
+	monitors->bottom < s->nOutputDev)
     {
-	monitors = NULL;
-    }
+	BOX fsBox;
 
-    if (monitors)
-	region = XCreateRegion ();
+	fsBox.x1 = s->outputDev[monitors->left].region.extents.x1;
+	fsBox.y1 = s->outputDev[monitors->top].region.extents.y1;
+	fsBox.x2 = s->outputDev[monitors->right].region.extents.x2;
+	fsBox.y2 = s->outputDev[monitors->bottom].region.extents.y2;
 
-    if (!monitors || !region)
-    {
-	if (w->fullscreenMonitorsSet)
+	if (fsBox.x1 < fsBox.x2 && fsBox.y1 < fsBox.y2)
 	{
-	    w->fullscreenMonitorsSet = FALSE;
-	    XDeleteProperty (d->display, w->id, d->wmFullscreenMonitorsAtom);
-	}
+	    w->fullscreenMonitorsSet = TRUE;
 
-	return;
+	    w->fullscreenMonitorRect.x      = fsBox.x1;
+	    w->fullscreenMonitorRect.y      = fsBox.y1;
+	    w->fullscreenMonitorRect.width  = fsBox.x2 - fsBox.x1;
+	    w->fullscreenMonitorRect.height = fsBox.y2 - fsBox.y1;
+	}
     }
 
-    XUnionRegion (region, &s->outputDev[monitors->top].region, region);
-    XUnionRegion (region, &s->outputDev[monitors->bottom].region, region);
-    XUnionRegion (region, &s->outputDev[monitors->left].region, region);
-    XUnionRegion (region, &s->outputDev[monitors->right].region, region);
+    if (w->fullscreenMonitorsSet)
+    {
+	long data[4];
 
-    w->fullscreenMonitorsSet   = TRUE;
-    w->fullscreenMonitorRect.x      = region->extents.x1;
-    w->fullscreenMonitorRect.y      = region->extents.y1;
-    w->fullscreenMonitorRect.width  = region->extents.x2 - region->extents.x1;
-    w->fullscreenMonitorRect.height = region->extents.y2 - region->extents.y1;
+	data[0] = monitors->top;
+	data[1] = monitors->bottom;
+	data[2] = monitors->left;
+	data[3] = monitors->right;
 
-    XDestroyRegion (region);
-
-    data[0] = monitors->top;
-    data[1] = monitors->bottom;
-    data[2] = monitors->left;
-    data[3] = monitors->right;
-
-    XChangeProperty (d->display, w->id, d->wmFullscreenMonitorsAtom,
-		     XA_CARDINAL, 32, PropModeReplace,
-		     (unsigned char *) data, 4);
+	XChangeProperty (d->display, w->id, d->wmFullscreenMonitorsAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) data, 4);
+    }
+    else if (hadFsMonitors)
+    {
+	XDeleteProperty (d->display, w->id, d->wmFullscreenMonitorsAtom);
+    }
 
     if (w->state & CompWindowStateFullscreenMask)
-	updateWindowAttributes (w, CompStackingUpdateModeNone);
+	if (w->fullscreenMonitorsSet || hadFsMonitors)
+	    updateWindowAttributes (w, CompStackingUpdateModeNone);
 }
 
 static void
