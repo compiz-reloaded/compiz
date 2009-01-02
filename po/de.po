@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-15 15:33+0530\n"
-"PO-Revision-Date: 2008-11-12 14:13+0100\n"
-"Last-Translator: Andreas Galonska <andreas.galonska@rwth-aachen.de>\n"
+"POT-Creation-Date: 2008-12-26 12:30+0530\n"
+"PO-Revision-Date: 2008-07-04 15:54+0200\n"
+"Last-Translator: mandavi <mandavi@web.de>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -353,7 +353,7 @@ msgstr "Stärke des Gaußfilters"
 #: ../metadata/blur.xml.in.h:22
 #, fuzzy
 msgid "Independent texture fetch"
-msgstr "Eigenständige Texturabrufe"
+msgstr "eigenständige Texturabrufe"
 
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
@@ -382,7 +382,7 @@ msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
-"Nutze die verfügbaren Texturen für möglichst viele eigenständige Texturabrufe"
+"nutze verfügbare Texturen für möglichst viele eigenständige Texturabrufe"
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -677,7 +677,7 @@ msgstr ""
 #: ../metadata/core.xml.in.in.h:50
 #, fuzzy
 msgid "Commands"
-msgstr "Kommandos"
+msgstr "Kommando"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -688,8 +688,9 @@ msgid "Default window icon image"
 msgstr "Standardfenstersymbol"
 
 #: ../metadata/core.xml.in.in.h:53
+#, fuzzy
 msgid "Desktop Size"
-msgstr "Desktop-Größe"
+msgstr "Desktop-Würfel"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -700,9 +701,8 @@ msgid "Detect Refresh Rate"
 msgstr "Aktualisierungsrate erkennen"
 
 #: ../metadata/core.xml.in.in.h:56
-#, fuzzy
 msgid "Display Settings"
-msgstr "Anzeigeeigenschaften"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -741,9 +741,8 @@ msgstr ""
 "zu diesem Zeitpunkt mit anderen Fenstern gearbeitet wird."
 
 #: ../metadata/core.xml.in.in.h:64
-#, fuzzy
 msgid "Force independent output painting."
-msgstr "Erzwinge unabhängige Ausgabe der Grafik"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:65
 msgid "General Options"
@@ -803,7 +802,7 @@ msgstr "Intervall zwischen Ping-Meldungen"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr "Tastaturbelegungen"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -896,7 +895,7 @@ msgstr "Behandlung von überlappenden Ausgabegeräten"
 #, fuzzy
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
-"Zeichne jede Ausgabeeinheit unabhängig voneinander, auch wenn sich die "
+"zeichne jede Ausgabeeinheit unabhängig voneinander, auch wenn sich die "
 "Einheiten überlappen"
 
 #: ../metadata/core.xml.in.in.h:103
@@ -990,7 +989,7 @@ msgstr "Befehl 9 ausführen"
 #: ../metadata/core.xml.in.in.h:125
 #, fuzzy
 msgid "Run terminal command"
-msgstr "Rufe Befehl im Terminal auf"
+msgstr "Kommandozeile für Terminal"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -1009,12 +1008,12 @@ msgstr "Kommandozeile für Bildschirmfoto"
 #: ../metadata/core.xml.in.in.h:129
 #, fuzzy
 msgid "Screenshot commands"
-msgstr "Kommandos zur Erstellung von Bildschirmfotos"
+msgstr "Kommandozeile für Bildschirmfoto"
 
 #: ../metadata/core.xml.in.in.h:130
 #, fuzzy
 msgid "Screenshot key bindings"
-msgstr "Tastaturbelegung zur Erstellung Bildschirmfoto"
+msgstr "Kommandozeile für Bildschirmfoto"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1172,7 +1171,7 @@ msgstr "Beim Drehen von Würfel Skydome animieren"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr "Erscheinungsbild"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1180,7 +1179,7 @@ msgstr "Automatisch"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr "Verhalten"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1197,7 +1196,7 @@ msgstr "Farbe, die oben im Skydome-Fallback-Verlauf verwendet werden soll"
 #: ../metadata/cube.xml.in.h:13
 #, fuzzy
 msgid "Cube Caps"
-msgstr "Würfelabdeckung"
+msgstr "Würfelfarbe"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1347,7 +1346,7 @@ msgstr "Transparenz nur bei Maus-Rotation"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "Transparenter Würfel"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1445,9 +1444,9 @@ msgid "Windows that should have a shadow"
 msgstr "Fenster, um die ein Schatten gezeichnet werden soll"
 
 #: ../metadata/fade.xml.in.h:2
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr "Helligkeit (in %) für Fenster, die nicht mehr reagieren"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:3
 #, fuzzy
@@ -1457,21 +1456,21 @@ msgstr "Drehgeschwindigkeit"
 #: ../metadata/fade.xml.in.h:4
 #, fuzzy
 msgid "Constant time"
-msgstr "Konstante Zeit"
+msgstr "Y einschränken"
 
 #: ../metadata/fade.xml.in.h:5
+#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Verdunkle Fenster, die nicht mehr reagieren"
+msgstr "\"Normal\" skalierte Fenster"
 
 #: ../metadata/fade.xml.in.h:6
-#, fuzzy
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
-"Verdunkle Fenster, die nicht mehr auf Befehle des Window Managers reagieren"
 
 #: ../metadata/fade.xml.in.h:7
+#, fuzzy
 msgid "Fade Mode"
-msgstr "Ausblendungs-Modus"
+msgstr "Ausblendungszeit"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1515,19 +1514,17 @@ msgid "Fullscreen fade effect on system beep"
 msgstr "Ausblendeffekt für visuelle Glocke im Vollbildmodus"
 
 #: ../metadata/fade.xml.in.h:19
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr "Sättigung (in %) für Fenster, die nicht mehr reagieren"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:20
-#, fuzzy
 msgid "Unresponsive Window Brightness"
-msgstr "Helligkeit von Fenstern, die nicht mehr reagieren"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:21
-#, fuzzy
 msgid "Unresponsive Window Saturation"
-msgstr "Sättigung von Fenstern, die nicht mehr reagieren"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
@@ -1536,7 +1533,7 @@ msgstr "Visuelle Glocke"
 #: ../metadata/fade.xml.in.h:23
 #, fuzzy
 msgid "Window fade mode"
-msgstr "Ausblend-Modus für Fenster"
+msgstr "Fensterausblendgeschwindigkeit"
 
 #: ../metadata/fade.xml.in.h:24
 #, fuzzy

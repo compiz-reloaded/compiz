@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 08:20+0100\n"
-"PO-Revision-Date: 2008-12-09 00:32+0100\n"
+"POT-Creation-Date: 2008-12-26 12:30+0530\n"
+"PO-Revision-Date: 2008-12-11 09:04+0100\n"
 "Last-Translator: Fran Diéguez Souto <fran.dieguez@glug.es>\n"
 "Language-Team: <gl@li.org> <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -33,9 +33,56 @@ msgstr "Xestión de Fiestras"
 msgid "Compiz"
 msgstr "Compiz"
 
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Ningún"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+msgid "Shade"
+msgstr "Sombra"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Maximizar"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Maximizar a Fiestra Horizontalmente"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Maximizar a Fiestra Verticalmente"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Minimizado"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Elevación Automática"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "Baixa"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4612
+#: ../metadata/core.xml.in.in.h:161
+msgid "Window Menu"
+msgstr "Menú da Fiestra"
+
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "Acción a levar a cabo cando se emprega a roda do rato na barra de título da fiestra."
+msgstr ""
+"Acción a levar a cabo cando se emprega a roda do rato na barra de título da "
+"fiestra."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -66,12 +113,18 @@ msgid "Opacity to use for metacity theme decorations"
 msgstr "Opacidade a empregar para decoracións metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid "Shade active windows with metacity theme decorations from opaque to translucent"
-msgstr "Sombrear decoración de fiestras activas con temas metacity de opaco para transparente"
+msgid ""
+"Shade active windows with metacity theme decorations from opaque to "
+"translucent"
+msgstr ""
+"Sombrear decoración de fiestras activas con temas metacity de opaco para "
+"transparente"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid "Shade windows with metacity theme decorations from opaque to translucent"
-msgstr "Sombrear decoración de fiestras con temas metacity de opaco para transparente"
+msgid ""
+"Shade windows with metacity theme decorations from opaque to translucent"
+msgstr ""
+"Sombrear decoración de fiestras con temas metacity de opaco para transparente"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
@@ -89,65 +142,58 @@ msgstr "Empregar tema metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Empregar tema metacity ao debuxar as decoracións das fiestras"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
+#: ../gtk/window-decorator/gtk-window-decorator.c:4420
 #: ../metadata/core.xml.in.in.h:24
 msgid "Close Window"
 msgstr "Pechar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
+#: ../gtk/window-decorator/gtk-window-decorator.c:4442
 #: ../metadata/core.xml.in.in.h:154
 msgid "Unmaximize Window"
 msgstr "Desmaximizar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
+#: ../gtk/window-decorator/gtk-window-decorator.c:4445
 #: ../metadata/core.xml.in.in.h:86
 msgid "Maximize Window"
 msgstr "Maximizar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
+#: ../gtk/window-decorator/gtk-window-decorator.c:4487
 #: ../metadata/core.xml.in.in.h:92
 msgid "Minimize Window"
 msgstr "Minimizar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Menú da Fiestra"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Sombra"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
 msgstr "Facer Sempre Enriba"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
 msgstr "Fixar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
 msgstr "Desdegradar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
 msgstr "Desfacer Sempre Enriba"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
 msgstr "Desfixar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "A fiestra \"%s\" non está respondendo."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
-msgid "Forcing this application to quit will cause you to lose any unsaved changes."
-msgstr "Forzar a saída desta aplicación causará a perda dos cambios non gardados."
+#: ../gtk/window-decorator/gtk-window-decorator.c:5121
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+"Forzar a saída desta aplicación causará a perda dos cambios non gardados."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
 msgstr "_Forzar Saída"
 
@@ -183,12 +229,9 @@ msgstr "Debuxar empregando unha ferramenta"
 msgid "Fill color for annotations"
 msgstr "Cor de preenchemento para anotacións"
 
-#: ../metadata/annotate.xml.in.h:9
-#: ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:12
-#: ../metadata/screenshot.xml.in.h:3
+#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
 #: ../metadata/water.xml.in.h:6
-#: ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "Iniciar"
 
@@ -274,7 +317,9 @@ msgstr "Desenfocar fiestras que non teñan foco"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr "Desactivar desenfoque de rexións de pantalla obscurecidas por outras fiestras."
+msgstr ""
+"Desactivar desenfoque de rexións de pantalla obscurecidas por outras "
+"fiestras."
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
@@ -314,10 +359,8 @@ msgstr "Forza gausiana"
 msgid "Independent texture fetch"
 msgstr "Recollida de Textura Independente"
 
-#: ../metadata/blur.xml.in.h:23
-#: ../metadata/cube.xml.in.h:27
-#: ../metadata/decoration.xml.in.h:10
-#: ../metadata/switcher.xml.in.h:14
+#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
+#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
 msgid "Mipmap"
 msgstr "MipMap"
 
@@ -338,8 +381,12 @@ msgid "Pulse effect"
 msgstr "Efecto de pulso"
 
 #: ../metadata/blur.xml.in.h:28
-msgid "Use the available texture units to do as many as possible independent texture fetches."
-msgstr "Empregar as unidades de textura dispoñibles para facer cantas recollidas de textura independentes sexa posibles."
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+"Empregar as unidades de textura dispoñibles para facer cantas recollidas de "
+"textura independentes sexa posibles."
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -366,60 +413,111 @@ msgid "Output clone handler"
 msgstr "Xestor de clonación de saída"
 
 #: ../metadata/core.xml.in.in.h:1
-msgid "A keybinding that when invoked, will run the shell command identified by command0"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando0"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando0"
 
 #: ../metadata/core.xml.in.in.h:2
-msgid "A keybinding that when invoked, will run the shell command identified by command1"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando shell identificado polo comando1"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando shell "
+"identificado polo comando1"
 
 #: ../metadata/core.xml.in.in.h:3
-msgid "A keybinding that when invoked, will run the shell command identified by command10"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando10"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando10"
 
 #: ../metadata/core.xml.in.in.h:4
-msgid "A keybinding that when invoked, will run the shell command identified by command11"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando11"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando11"
 
 #: ../metadata/core.xml.in.in.h:5
-msgid "A keybinding that when invoked, will run the shell command identified by command2"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando2"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando2"
 
 #: ../metadata/core.xml.in.in.h:6
-msgid "A keybinding that when invoked, will run the shell command identified by command3"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando3"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando3"
 
 #: ../metadata/core.xml.in.in.h:7
-msgid "A keybinding that when invoked, will run the shell command identified by command4"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando4"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando4"
 
 #: ../metadata/core.xml.in.in.h:8
-msgid "A keybinding that when invoked, will run the shell command identified by command5"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando5"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando5"
 
 #: ../metadata/core.xml.in.in.h:9
-msgid "A keybinding that when invoked, will run the shell command identified by command6"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando6"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando6"
 
 #: ../metadata/core.xml.in.in.h:10
-msgid "A keybinding that when invoked, will run the shell command identified by command7"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando7"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando7"
 
 #: ../metadata/core.xml.in.in.h:11
-msgid "A keybinding that when invoked, will run the shell command identified by command8"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando8"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando8"
 
 #: ../metadata/core.xml.in.in.h:12
-msgid "A keybinding that when invoked, will run the shell command identified by command9"
-msgstr "Un atallo de teclado que, cando é accionado, executa o comando de shell identificado polo comando9"
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Un atallo de teclado que, cando é accionado, executa o comando de shell "
+"identificado polo comando9"
 
 #: ../metadata/core.xml.in.in.h:13
 msgid "Active Plugins"
 msgstr "Engadidos Activos"
 
 #: ../metadata/core.xml.in.in.h:14
-msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr "Permitir que o renderizado das fiestras a pantalla completa non sexa redirecionado para mapas de imaxe fora da pantalla"
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Permitir que o renderizado das fiestras a pantalla completa non sexa "
+"redirecionado para mapas de imaxe fora da pantalla"
 
 #: ../metadata/core.xml.in.in.h:15
 msgid "Audible Bell"
@@ -511,51 +609,63 @@ msgstr "Liña de comando 9"
 
 #: ../metadata/core.xml.in.in.h:38
 msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command0 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command0 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:39
 msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command1 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command1 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:40
 msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command10 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command10 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:41
 msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command11 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command11 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:42
 msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command2 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command2 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:43
 msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command3 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command3 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:44
 msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command4 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command4 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:45
 msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command5 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command5 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:46
 msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command6 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command6 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:47
 msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command7 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command7 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:48
 msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command8 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command8 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:49
 msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "Liña de comando a ser executada no shell cando run_command9 sexa accionado"
+msgstr ""
+"Liña de comando a ser executada no shell cando run_command9 sexa accionado"
 
 #: ../metadata/core.xml.in.in.h:50
 msgid "Commands"
@@ -586,8 +696,12 @@ msgid "Display Settings"
 msgstr "Configuracións de Pantalla"
 
 #: ../metadata/core.xml.in.in.h:57
-msgid "Duration the pointer must rest in a screen edge before an edge action is taken."
-msgstr "A duración do punteiro debe estar no borde da pantalla antes de que acción do borde se leve a cabo."
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
+"A duración do punteiro debe estar no borde da pantalla antes de que acción "
+"do borde se leve a cabo."
 
 #: ../metadata/core.xml.in.in.h:58
 msgid "Edge Trigger Delay"
@@ -639,7 +753,9 @@ msgstr "Ocultar todas as fiestras e enfocar o escritorio"
 
 #: ../metadata/core.xml.in.in.h:70
 msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr "Agochar as fiestras que non están na barra de tarefas ao entrar no modo mostrar escritorio"
+msgstr ""
+"Agochar as fiestras que non están na barra de tarefas ao entrar no modo "
+"mostrar escritorio"
 
 #: ../metadata/core.xml.in.in.h:71
 msgid "High"
@@ -659,7 +775,9 @@ msgstr "Ignorar os Consellos Cando Estea Maximizado"
 
 #: ../metadata/core.xml.in.in.h:75
 msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr "Ignorar incremento de tamaño e aspecto dos consellos cando a fiestra está maximizada"
+msgstr ""
+"Ignorar incremento de tamaño e aspecto dos consellos cando a fiestra está "
+"maximizada"
 
 #: ../metadata/core.xml.in.in.h:76
 msgid "Interval before raising selected windows"
@@ -725,8 +843,7 @@ msgstr "Maximizar verticalmente a fiestra activa"
 msgid "Minimize active window"
 msgstr "Minimizar a fiestra activa"
 
-#: ../metadata/core.xml.in.in.h:94
-#: ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "Normal"
 
@@ -744,7 +861,9 @@ msgstr "Apagado"
 
 #: ../metadata/core.xml.in.in.h:98
 msgid "Only perform screen updates during vertical blanking period"
-msgstr "Levar a cabo actualizacións de pantalla só durante o período de limpeza vertical"
+msgstr ""
+"Levar a cabo actualizacións de pantalla só durante o período de limpeza "
+"vertical"
 
 #: ../metadata/core.xml.in.in.h:99
 msgid "Open a terminal"
@@ -760,7 +879,9 @@ msgstr "Xestión de Saídas Superpostas"
 
 #: ../metadata/core.xml.in.in.h:102
 msgid "Paint each output device independly, even if the output devices overlap"
-msgstr "Debuxar cada dispositivo de saída de forma independente, aínda que o dispositivo de saída se superpoña"
+msgstr ""
+"Debuxar cada dispositivo de saída de forma independente, aínda que o "
+"dispositivo de saída se superpoña"
 
 #: ../metadata/core.xml.in.in.h:103
 msgid "Ping Delay"
@@ -1002,8 +1123,7 @@ msgstr "Tecla de atallo para menú da fiestra"
 msgid "Window screenshot command line"
 msgstr "Liña de comando para captura de pantalla de fiestras"
 
-#: ../metadata/cube.xml.in.h:1
-#: ../metadata/rotate.xml.in.h:1
+#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
 msgstr "Aceleración"
 
@@ -1027,8 +1147,7 @@ msgstr "Animar Skydome"
 msgid "Animate skydome when rotating cube"
 msgstr "Animar Skydome ao xirar o cubo"
 
-#: ../metadata/cube.xml.in.h:7
-#: ../metadata/scale.xml.in.h:2
+#: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
 msgstr "Apariencia"
 
@@ -1036,8 +1155,7 @@ msgstr "Apariencia"
 msgid "Automatic"
 msgstr "Automático"
 
-#: ../metadata/cube.xml.in.h:9
-#: ../metadata/scale.xml.in.h:3
+#: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
 msgstr "Comportamento"
 
@@ -1077,8 +1195,7 @@ msgstr "Velocidade de dobraxe"
 msgid "Fold Timestep"
 msgstr "Timestep de dobraxe"
 
-#: ../metadata/cube.xml.in.h:19
-#: ../metadata/switcher.xml.in.h:11
+#: ../metadata/cube.xml.in.h:19 ../metadata/switcher.xml.in.h:11
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "Xerar mapas cando sexa posíbel para dimensionamento de mellor calidade"
 
@@ -1108,10 +1225,11 @@ msgstr "Dentro do cubo"
 
 #: ../metadata/cube.xml.in.h:26
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "Lista de arquivos PNG e SVG que deben ser renderizados na cara superior do cubo"
+msgstr ""
+"Lista de arquivos PNG e SVG que deben ser renderizados na cara superior do "
+"cubo"
 
-#: ../metadata/cube.xml.in.h:28
-#: ../metadata/place.xml.in.h:10
+#: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
 #: ../metadata/scale.xml.in.h:24
 msgid "Multi Output Mode"
 msgstr "Modo de Multí Saída"
@@ -1166,7 +1284,9 @@ msgstr "Dimensionar imaxes para cobertura da face superior do cubo"
 
 #: ../metadata/cube.xml.in.h:41
 msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr "Selecciona como o cubo é mostrado se existiren múltiplos dispositivos de  saída."
+msgstr ""
+"Selecciona como o cubo é mostrado se existiren múltiplos dispositivos de  "
+"saída."
 
 #: ../metadata/cube.xml.in.h:42
 msgid "Skydome"
@@ -1184,21 +1304,15 @@ msgstr "Cor Inicial do gradiente Skydome"
 msgid "Skydome Image"
 msgstr "Imaxe do Skydome"
 
-#: ../metadata/cube.xml.in.h:46
-#: ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:94
-#: ../metadata/scale.xml.in.h:39
+#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
 #: ../metadata/switcher.xml.in.h:36
-#: ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Velocidade"
 
-#: ../metadata/cube.xml.in.h:47
-#: ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:97
-#: ../metadata/scale.xml.in.h:41
+#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
 #: ../metadata/switcher.xml.in.h:40
-#: ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Timestep"
 
@@ -1239,7 +1353,8 @@ msgid "Decoration windows"
 msgstr "Fiestras a decorar"
 
 #: ../metadata/decoration.xml.in.h:4
-msgid "Decorator command line that is executed if no decorator is already running"
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
 msgstr "Liña de comando a executar se non estivese ningún decorador a correr"
 
 #: ../metadata/decoration.xml.in.h:5
@@ -1321,7 +1436,9 @@ msgstr "Escurecer as Fiestras que non Responden"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
-msgstr "Escurecer as fiestras que non están a responder ó que o xestor de fiestras require"
+msgstr ""
+"Escurecer as fiestras que non están a responder ó que o xestor de fiestras "
+"require"
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fade Mode"
@@ -1341,7 +1458,9 @@ msgstr "Tempo de desvanecemento"
 
 #: ../metadata/fade.xml.in.h:11
 msgid "Fade effect on minimize/open/close window events"
-msgstr "Realizar Efecto de Desvanecemento cos eventos de minimizar/abrir/pechar fiestras"
+msgstr ""
+"Realizar Efecto de Desvanecemento cos eventos de minimizar/abrir/pechar "
+"fiestras"
 
 #: ../metadata/fade.xml.in.h:12
 msgid "Fade effect on system beep"
@@ -1349,7 +1468,9 @@ msgstr "Efecto de desvanecemento coa campá do sistema"
 
 #: ../metadata/fade.xml.in.h:13
 msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "Amosar as fiestras cando houbera mapeado e desvaecelas cando non houbera mapeado"
+msgstr ""
+"Amosar as fiestras cando houbera mapeado e desvaecelas cando non houbera "
+"mapeado"
 
 #: ../metadata/fade.xml.in.h:14
 msgid "Fade windows"
@@ -1390,7 +1511,8 @@ msgstr "Modo de desvanecemento das fiestras"
 
 #: ../metadata/fade.xml.in.h:24
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Velocidade de Desvaecemento das Fiestras en Modo \"Velocidade Constante\""
+msgstr ""
+"Velocidade de Desvaecemento das Fiestras en Modo \"Velocidade Constante\""
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
@@ -1498,7 +1620,9 @@ msgstr "Restrinxir a coordenada Y segundo á area de traballo"
 
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
-msgstr "Non actualizar a posición das fiestras no lado do servidor ata acabar o movemento"
+msgstr ""
+"Non actualizar a posición das fiestras no lado do servidor ata acabar o "
+"movemento"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
@@ -1516,8 +1640,7 @@ msgstr "Mover Fiestra"
 msgid "Move window"
 msgstr "Mover fiestra"
 
-#: ../metadata/move.xml.in.h:8
-#: ../metadata/scale.xml.in.h:28
+#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
 #: ../metadata/switcher.xml.in.h:19
 msgid "Opacity"
 msgstr "Opacidade"
@@ -1567,12 +1690,12 @@ msgid "Keep In Workarea"
 msgstr "Manter no Entorno de Traballo"
 
 #: ../metadata/place.xml.in.h:8
-msgid "Keep placed window in work area, even if that means that the position might differ from the specified position"
-msgstr "Manter as fiestras dispostas na área de traballo, aínda que isto signifique que a posición poida difereir da posición especificada"
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Maximizar"
+msgid ""
+"Keep placed window in work area, even if that means that the position might "
+"differ from the specified position"
+msgstr ""
+"Manter as fiestras dispostas na área de traballo, aínda que isto signifique "
+"que a posición poida difereir da posición especificada"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -1599,8 +1722,11 @@ msgid "Random"
 msgstr "Aleatorio"
 
 #: ../metadata/place.xml.in.h:17
-msgid "Selects how window placement should behave if multiple outputs are selected"
-msgstr "Selecciona como se debe comportar o posicionadamento de fiestras cando se seleccionan saídas múltiples"
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+"Selecciona como se debe comportar o posicionadamento de fiestras cando se "
+"seleccionan saídas múltiples"
 
 #: ../metadata/place.xml.in.h:18
 msgid "Smart"
@@ -1636,11 +1762,16 @@ msgstr "Fiestras que deben ser colacadas por omisión"
 
 #: ../metadata/place.xml.in.h:26
 msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Fiestras que deben ser colocadas en puntos de vista específicos por omisión"
+msgstr ""
+"Fiestras que deben ser colocadas en puntos de vista específicos por omisión"
 
 #: ../metadata/place.xml.in.h:27
-msgid "Windows that should forcedly be placed, even if they indicate the window manager should avoid placing them."
-msgstr "Fiestras que deben ser colocadas de forma forzada, aínda que se indique no xestor de fiestras que se deben evitar a súa colocación"
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+"Fiestras que deben ser colocadas de forma forzada, aínda que se indique no "
+"xestor de fiestras que se deben evitar a súa colocación"
 
 #: ../metadata/place.xml.in.h:28
 msgid "Windows with fixed positions"
@@ -1694,10 +1825,8 @@ msgstr "Filtraxe Rexex"
 msgid "Regex window matching"
 msgstr "Filtraxe Rexex de fiestras"
 
-#: ../metadata/resize.xml.in.h:1
-#: ../metadata/rotate.xml.in.h:2
-#: ../metadata/scale.xml.in.h:5
-#: ../metadata/switcher.xml.in.h:6
+#: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
+#: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
 msgstr "Atallos"
 
@@ -1707,7 +1836,9 @@ msgstr "Cor do borde"
 
 #: ../metadata/resize.xml.in.h:3
 msgid "Border color used for outline and rectangle resize modes"
-msgstr "Cor do borde empregada na liña de bordee modos de rectangulos de redimensionado"
+msgstr ""
+"Cor do borde empregada na liña de bordee modos de rectangulos de "
+"redimensionado"
 
 #: ../metadata/resize.xml.in.h:4
 msgid "Default Resize Mode"
@@ -1839,15 +1970,19 @@ msgstr "Cambiar cara o punto de vista da esquerda e manter punteiro"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when dragging object to screen edge"
-msgstr "Cambiar ó punto de vista seguinte ao arrastrar un obxecto cara o borde da pantalla"
+msgstr ""
+"Cambiar ó punto de vista seguinte ao arrastrar un obxecto cara o borde da "
+"pantalla"
 
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr "Cambiar ó punto de vista seguinte ao mover o punteiro cara o borde da fiestra"
+msgstr ""
+"Cambiar ó punto de vista seguinte ao mover o punteiro cara o borde da fiestra"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to next viewport when moving window to screen edge"
-msgstr "Cambiar ó punto de vista seguinte ao mover a fiestra cara o borde da fiestra"
+msgstr ""
+"Cambiar ó punto de vista seguinte ao mover a fiestra cara o borde da fiestra"
 
 #: ../metadata/rotate.xml.in.h:11
 msgid "Flip to right viewport and warp pointer"
@@ -2185,13 +2320,11 @@ msgstr "Iniciar Rotación"
 msgid "Timeout before flipping viewport"
 msgstr "Tempo de espera ata rodar o punto de vista"
 
-#: ../metadata/rotate.xml.in.h:98
-#: ../metadata/switcher.xml.in.h:42
+#: ../metadata/rotate.xml.in.h:98 ../metadata/switcher.xml.in.h:42
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../metadata/scale.xml.in.h:1
-#: ../metadata/switcher.xml.in.h:2
+#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
 msgstr "Cantidade de opacidade en porcentaxe"
 
@@ -2204,8 +2337,12 @@ msgid "Button Bindings Toggle Scale Mode"
 msgstr "Atallos para Trocar o Modo Escala"
 
 #: ../metadata/scale.xml.in.h:7
-msgid "Button bindings toggle scale mode instead of enabling it when pressed and disabling it when released."
-msgstr "Atallos de botóns para trocar o modo escala no canto de activalos cando son presionados e desactivados cando se solta."
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+"Atallos de botóns para trocar o modo escala no canto de activalos cando son "
+"presionados e desactivados cando se solta."
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
@@ -2225,11 +2362,13 @@ msgstr "Emblema"
 
 #: ../metadata/scale.xml.in.h:12
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "Entrar no modo Amosar Escritorio cando se fai clic no Escritorio durante o Escalado"
+msgstr ""
+"Entrar no modo Amosar Escritorio cando se fai clic no Escritorio durante o "
+"Escalado"
 
 #: ../metadata/scale.xml.in.h:13
 msgid "Hover Time"
-msgstr ""
+msgstr "Tempo durante o cal se deixa o rato pousado"
 
 #: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker"
@@ -2252,8 +2391,12 @@ msgid "Key Bindings Toggle Scale Mode"
 msgstr "Atallos de teclado para Trocar Modo Escala"
 
 #: ../metadata/scale.xml.in.h:19
-msgid "Key bindings toggle scale mode instead of enabling it when pressed and disabling it when released."
-msgstr "Os atallos de teclado trocan o modo de escala no canto de activalo cando é presionado e desactivado cando é liberado."
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+"Os atallos de teclado trocan o modo de escala no canto de activalo cando é "
+"presionado e desactivado cando é liberado."
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -2270,11 +2413,6 @@ msgstr "Dispor as fiestras e iniciar súa transformación"
 #: ../metadata/scale.xml.in.h:23
 msgid "Layout and start transforming windows on current output"
 msgstr "Dispor as fiestras na saída actual e iniciar a súa transformación"
-
-#: ../metadata/scale.xml.in.h:25
-#: ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Ningún"
 
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
@@ -2314,7 +2452,9 @@ msgstr "Escala de Fiestras"
 
 #: ../metadata/scale.xml.in.h:36
 msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr "Selecciona cando as fiestras son escaladas se se empregan múltiples dispositivos de saída."
+msgstr ""
+"Selecciona cando as fiestras son escaladas se se empregan múltiples "
+"dispositivos de saída."
 
 #: ../metadata/scale.xml.in.h:37
 msgid "Space between windows"
@@ -2325,8 +2465,11 @@ msgid "Spacing"
 msgstr "Espaciado"
 
 #: ../metadata/scale.xml.in.h:40
-msgid "Time (in ms) before scale mode is terminated when hovering over a window"
-msgstr "Tempo (en ms) antes de que o modo de escalado remate ao pasar sobre unha fiestra"
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+"Tempo (en ms) antes de que o modo de escalado remate ao pasar sobre unha "
+"fiestra"
 
 #: ../metadata/scale.xml.in.h:42
 msgid "Windows that should be scaled in scale mode"
@@ -2398,7 +2541,7 @@ msgstr "Coloca a fiestra seleccionada en primeiro plano"
 
 #: ../metadata/switcher.xml.in.h:10
 msgid "Distance desktop should be zoom out while switching windows"
-msgstr "Distancia que debe ter ó escribitorio mentres se cambian as fiestras"
+msgstr "Distancia ó escribitorio mentres se cambian as fiestras"
 
 #: ../metadata/switcher.xml.in.h:12
 msgid "Icon"
@@ -2430,15 +2573,21 @@ msgstr "Amosar trocador se non estivese visíbel e seleccionar seguinte fiestra"
 
 #: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr "Amosar trocador se non estivese visíbel e seleccionar a seguinte fiestra de tódalas fiestras"
+msgstr ""
+"Amosar trocador se non estivese visíbel e seleccionar a seguinte fiestra de "
+"tódalas fiestras"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Popup switcher if not visible and select previous window"
-msgstr "Amosar trocador se non estivese visíbel e seleccionar a fiestra anterior"
+msgstr ""
+"Amosar trocador se non estivese visíbel e seleccionar a fiestra anterior"
 
 #: ../metadata/switcher.xml.in.h:23
-msgid "Popup switcher if not visible and select previous window out of all windows"
-msgstr "Amosar trocador se non estivese visíbel e seleccionar a fiestra anterior de todas"
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Amosar trocador se non estivese visíbel e seleccionar a fiestra anterior de "
+"todas"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev Panel"
@@ -2702,53 +2851,181 @@ msgstr "Fiestras que deben temblar cando son movidas"
 
 #: ../metadata/wobbly.xml.in.h:30
 msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "Activar o efecto temblar cando son maximizadas ou minimizadas as fiestras"
+msgstr ""
+"Activar o efecto temblar cando son maximizadas ou minimizadas as fiestras"
 
 #: ../metadata/wobbly.xml.in.h:31
 msgid "Wobbly Windows"
 msgstr "Fiestras temblantes"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtro lineal"
+#~ msgid "Filter Linear"
+#~ msgstr "Filtro lineal"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Empregar o filtro lineal cando se fai zoom"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Empregar o filtro lineal cando se fai zoom"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Zoom do escritorio"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Zoom do escritorio"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Acercar"
+#~ msgid "Zoom In"
+#~ msgstr "Acercar"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Afastar"
+#~ msgid "Zoom Out"
+#~ msgstr "Afastar"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Colocación do Zoom"
+#~ msgid "Zoom Pan"
+#~ msgstr "Colocación do Zoom"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Velocidade de Zoom"
+#~ msgid "Zoom Speed"
+#~ msgstr "Velocidade de Zoom"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Salto de tempo do Zoom"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Salto de tempo do Zoom"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Afastar e mover cubo do escritorio"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Afastar e mover cubo do escritorio"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Factor de zoom"
+#~ msgid "Zoom factor"
+#~ msgstr "Factor de zoom"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Colocación do Zoom"
+#~ msgid "Zoom pan"
+#~ msgstr "Colocación do Zoom"
 
+#~ msgid "Decrease Opacity"
+#~ msgstr "Reducir Opacidade"
+
+#~ msgid "Decrease window opacity"
+#~ msgstr "Reducir opacidade da fiestra"
+
+#~ msgid "Increase Opacity"
+#~ msgstr "Aumentar Opacidade"
+
+#~ msgid "Increase window opacity"
+#~ msgstr "Aumentar opacidade da fiestra"
+
+#~ msgid "Opacity Step"
+#~ msgstr "Etapa de Opacidade"
+
+#~ msgid "Opacity change step"
+#~ msgstr "Etapa de mudanza de opacidade"
+
+#~ msgid "Opacity values for windows that should be translucent by default"
+#~ msgstr ""
+#~ "Valores de opacidade para fiestras que deben ser translúcidas por omisión"
+
+#~ msgid "Opacity window values"
+#~ msgstr "Valores de opacidade da fiestra"
+
+#~ msgid "Opacity windows"
+#~ msgstr "Opacidade de fiestras"
+
+#~ msgid "Windows that should be translucent by default"
+#~ msgstr "Fiestras que deben ser translúcidas por omisión"
+
+#~ msgid "Background Images"
+#~ msgstr "Imaxes de fondo"
+
+#~ msgid "Background images"
+#~ msgstr "Imaxes de fondo"
+
+#~ msgid "Place windows on a plane"
+#~ msgstr "Colocar fiestras nun plano"
+
+#~ msgid "Plane Down"
+#~ msgstr "Plano Abaixo"
+
+#~ msgid "Plane Left"
+#~ msgstr "Plano á esquerda"
+
+#~ msgid "Plane Right"
+#~ msgstr "Plano á dereita"
+
+#~ msgid "Plane To Face 1"
+#~ msgstr "Plano á Cara 1"
+
+#~ msgid "Plane To Face 10"
+#~ msgstr "Plano á Cara 10"
+
+#~ msgid "Plane To Face 11"
+#~ msgstr "Plano á Cara 11"
+
+#~ msgid "Plane To Face 12"
+#~ msgstr "Plano á Cara 12"
+
+#~ msgid "Plane To Face 2"
+#~ msgstr "Plano á Cara 2"
+
+#~ msgid "Plane To Face 3"
+#~ msgstr "Plano á Cara 3"
+
+#~ msgid "Plane To Face 4"
+#~ msgstr "Plano á Cara 4"
+
+#~ msgid "Plane To Face 5"
+#~ msgstr "Plano á Cara 5"
+
+#~ msgid "Plane To Face 6"
+#~ msgstr "Plano á Cara 6"
+
+#~ msgid "Plane To Face 7"
+#~ msgstr "Plano á Cara 7"
+
+#~ msgid "Plane To Face 8"
+#~ msgstr "Plano á Cara 8"
+
+#~ msgid "Plane To Face 9"
+#~ msgstr "Plano á Cara 9"
+
+#~ msgid "Plane Up"
+#~ msgstr "Plano acima"
+
+#~ msgid "Plane down"
+#~ msgstr "Plano abaixo"
+
+#~ msgid "Plane left"
+#~ msgstr "Plano á esquerda"
+
+#~ msgid "Plane right"
+#~ msgstr "Plano á dereita"
+
+#~ msgid "Plane to face 1"
+#~ msgstr "Plano á cara 1"
+
+#~ msgid "Plane to face 10"
+#~ msgstr "Plano á cara 10"
+
+#~ msgid "Plane to face 11"
+#~ msgstr "Plano á cara 11"
+
+#~ msgid "Plane to face 12"
+#~ msgstr "Plano á cara 12"
+
+#~ msgid "Plane to face 2"
+#~ msgstr "Plano á cara 2"
+
+#~ msgid "Plane to face 3"
+#~ msgstr "Plano á cara 3"
+
+#~ msgid "Plane to face 4"
+#~ msgstr "Plano á cara 4"
+
+#~ msgid "Plane to face 5"
+#~ msgstr "Plano á cara 5"
+
+#~ msgid "Plane to face 6"
+#~ msgstr "Plano á cara 6"
+
+#~ msgid "Plane to face 7"
+#~ msgstr "Plano á cara 7"
+
+#~ msgid "Plane to face 8"
+#~ msgstr "Plano á cara 8"
+
+#~ msgid "Plane to face 9"
+#~ msgstr "Plano á cara 9"
+
+#~ msgid "Plane up"
+#~ msgstr "Plano á cima"
+
+#~ msgid "Desktop Window Opacity Fade Time."
+#~ msgstr "Tempo de desvanecemento da opacidade do escritorio"

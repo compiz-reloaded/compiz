@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-15 15:34+0530\n"
-"PO-Revision-Date: 2008-11-17 02:00+0100\n"
+"POT-Creation-Date: 2008-12-26 12:31+0530\n"
+"PO-Revision-Date: 2008-11-02 22:50+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: Hebrew <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -641,8 +641,9 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "שורת הפקודה שתופעל בעת הרצת פקודה9"
 
 #: ../metadata/core.xml.in.in.h:50
+#, fuzzy
 msgid "Commands"
-msgstr "פקודות"
+msgstr "פקודה"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -653,8 +654,9 @@ msgid "Default window icon image"
 msgstr "תמונת צלמית ברירת המחדל של חלון"
 
 #: ../metadata/core.xml.in.in.h:53
+#, fuzzy
 msgid "Desktop Size"
-msgstr "גודל שולחן העבודה"
+msgstr "שולחן קוביה"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -666,7 +668,7 @@ msgstr "זהה קצב עדכון"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr "הגדרות תצוגה"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -684,7 +686,7 @@ msgstr "מהיר"
 
 #: ../metadata/core.xml.in.in.h:60
 msgid "Focus &amp; Raise Behaviour"
-msgstr "אופן מיקוד והעלאה"
+msgstr ""
 
 #  heading text
 #: ../metadata/core.xml.in.in.h:61
@@ -759,7 +761,7 @@ msgstr "פסק זמן בין מסרי פינג"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr "צירופי מקשים"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -943,8 +945,9 @@ msgid "Run command 9"
 msgstr "הרץ פקודה 9"
 
 #: ../metadata/core.xml.in.in.h:125
+#, fuzzy
 msgid "Run terminal command"
-msgstr "הרץ פקודת מסוף"
+msgstr "שורת פקודה עבור מסוף"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -959,12 +962,14 @@ msgid "Screenshot command line"
 msgstr "שורת פקודה לצילום מסך"
 
 #: ../metadata/core.xml.in.in.h:129
+#, fuzzy
 msgid "Screenshot commands"
-msgstr "פקודות צילום מסך"
+msgstr "שורת פקודה לצילום מסך"
 
 #: ../metadata/core.xml.in.in.h:130
+#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "צירופי מקשים לצילום מסך"
+msgstr "שורת פקודה לצילום מסך"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -1120,7 +1125,7 @@ msgstr "הנפש את כיפת הרקיע בעת סיבוב הקוביה"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr "מראה"
+msgstr ""
 
 # IN
 #: ../metadata/cube.xml.in.h:8
@@ -1129,7 +1134,7 @@ msgstr "אוטומטי"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr "התנהגות"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1144,8 +1149,9 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "צבע הקצה העליון של כיפת-הרקיע - רקע הדרגתי כברירת מחדל"
 
 #: ../metadata/cube.xml.in.h:13
+#, fuzzy
 msgid "Cube Caps"
-msgstr "מכסי הקוביה"
+msgstr "צבע הקוביה"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1295,7 +1301,7 @@ msgstr "שקיפות רק בעת סיבוב עכבר"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "קוביה שקופה"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1672,8 +1678,9 @@ msgstr "ממורכז"
 
 #  Label text
 #: ../metadata/place.xml.in.h:4
+#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "מיקום חלונות קבוע"
+msgstr "ניהול חלונות"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1771,12 +1778,13 @@ msgstr "חלונות שיש למקמם בכפייה, גם אם הם מבקשים
 
 #  Label text
 #: ../metadata/place.xml.in.h:28
+#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "חלונות במיקום קבוע"
+msgstr "מסגרות לחלונות"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr "חלונות במשטח עבודה קבוע"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -1827,7 +1835,7 @@ msgstr "התאמת חלונות לביטוי רגולרי"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr "צירופים"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2174,8 +2182,9 @@ msgid "Rotate To Face 9 with Window"
 msgstr "סובב אל פאה 9 עם החלון"
 
 #: ../metadata/rotate.xml.in.h:50
+#, fuzzy
 msgid "Rotate cube"
-msgstr "סובב קוביה"
+msgstr "סיבוב קוביה"
 
 #: ../metadata/rotate.xml.in.h:51
 msgid "Rotate desktop cube"
@@ -2202,13 +2211,15 @@ msgstr "סובב ימינה וקח את החלון הפעיל"
 
 #  heading text
 #: ../metadata/rotate.xml.in.h:56
+#, fuzzy
 msgid "Rotate to cube face"
-msgstr "סובב קוביה לפאה"
+msgstr "סובב לפאה 1"
 
 #  heading text
 #: ../metadata/rotate.xml.in.h:57
+#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "סובב קןביה לפאה עם החלון"
+msgstr "סובב אל פאה 1 עם החלון"
 
 #  heading text
 #: ../metadata/rotate.xml.in.h:58

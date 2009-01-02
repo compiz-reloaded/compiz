@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-15 15:35+0530\n"
-"PO-Revision-Date: 2008-12-09 10:04+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"POT-Creation-Date: 2008-12-26 12:32+0530\n"
+"PO-Revision-Date: 2008-02-18 19:36+0100\n"
+"Last-Translator: Sebastian Parborg <zedDB@hotmail.com>\n"
 "Language-Team: Compiz Fusion Translators <i18n@lists.compiz-fusion.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0\n"
+"X-Generator: Pootle 1.0.2\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -38,8 +38,9 @@ msgstr "Ingen"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
 #: ../gtk/window-decorator/gtk-window-decorator.c:4631
+#, fuzzy
 msgid "Shade"
-msgstr "Rulla ner"
+msgstr "Skala"
 
 #: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
 msgid "Maximize"
@@ -66,9 +67,8 @@ msgid "Raise"
 msgstr "Automatisk höjning"
 
 #: ../gtk/gnome/compiz-window-manager.c:433
-#, fuzzy
 msgid "Lower"
-msgstr "Låg"
+msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
 #: ../gtk/window-decorator/gtk-window-decorator.c:4612
@@ -86,12 +86,14 @@ msgid "Blur type"
 msgstr "Suddighets typ"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
+#, fuzzy
 msgid "Metacity theme active window opacity"
-msgstr "Aktiv fönsteropacitet för Metacity-tema"
+msgstr "Metacitys aktiva tema opacitet"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
+#, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "Skugga för aktiv fönsteropacitet för Metacity-tema"
+msgstr "Metacitys aktiva tema opacitets skugga"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
@@ -124,8 +126,9 @@ msgstr ""
 "Skugga fönster med metacity tema dekorationer från opact till genomskinlig"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
+#, fuzzy
 msgid "Title bar mouse wheel action"
-msgstr "Mushjulsåtgärd för titellist"
+msgstr "Fönstertitel mushjul åtgärd"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
@@ -162,51 +165,51 @@ msgstr "Minimera fönster"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4651
 msgid "Make Above"
-msgstr "Lägg överst"
+msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4677
 msgid "Stick"
-msgstr "Klistra"
+msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4697
 msgid "Unshade"
-msgstr "Rulla upp"
+msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4717
 msgid "Unmake Above"
-msgstr "Gör inte överst"
+msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4743
 msgid "Unstick"
-msgstr "Avklistra"
+msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr "Fönstret \"%s\" svarar inte."
+msgstr ""
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
-"Tvinga detta program att avsluta kommer att orsaka att du förlorar alla "
-"osparade ändringar."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5136
 msgid "_Force Quit"
-msgstr "_Tvinga avslut"
+msgstr ""
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
 msgstr "Anteckning"
 
 #: ../metadata/annotate.xml.in.h:2
+#, fuzzy
 msgid "Annotate Fill Color"
-msgstr "Fyllnadsfärg för anteckningar"
+msgstr "Antecknings fyllfärg"
 
 #: ../metadata/annotate.xml.in.h:3
+#, fuzzy
 msgid "Annotate Stroke Color"
-msgstr "Streckfärg för anteckningar"
+msgstr "Antecknings streckfärg"
 
 #: ../metadata/annotate.xml.in.h:4
 msgid "Annotate plugin"
@@ -271,20 +274,23 @@ msgid "4xBilinear"
 msgstr "4xBilinjär"
 
 #: ../metadata/blur.xml.in.h:2
+#, fuzzy
 msgid "Alpha Blur"
-msgstr "Alfa-oskärpa"
+msgstr "Alfa oskärpa"
 
 #: ../metadata/blur.xml.in.h:3
+#, fuzzy
 msgid "Alpha blur windows"
-msgstr "Alfa-oskärpa på fönster"
+msgstr "Alfa oskärpa fönster"
 
 #: ../metadata/blur.xml.in.h:4
 msgid "Blur Filter"
 msgstr "Suddighetsfilter"
 
 #: ../metadata/blur.xml.in.h:5
+#, fuzzy
 msgid "Blur Occlusion"
-msgstr "Oskärpeocclusion"
+msgstr "Suddighetsocclusion"
 
 #: ../metadata/blur.xml.in.h:6
 msgid "Blur Saturation"
@@ -327,32 +333,38 @@ msgid "Focus Blur"
 msgstr "Fokus suddighet"
 
 #: ../metadata/blur.xml.in.h:16
+#, fuzzy
 msgid "Focus blur windows"
-msgstr "Fokusoskärpa på fönster"
+msgstr "Fokusera suddiga fönster"
 
 #: ../metadata/blur.xml.in.h:17
+#, fuzzy
 msgid "Gaussian"
-msgstr "Gaussisk"
+msgstr "Gaussian"
 
 #: ../metadata/blur.xml.in.h:18
+#, fuzzy
 msgid "Gaussian Radius"
-msgstr "Gaussisk radie"
+msgstr "Gaussian radie"
 
 #: ../metadata/blur.xml.in.h:19
+#, fuzzy
 msgid "Gaussian Strength"
-msgstr "Gaussisk styrka"
+msgstr "Gaussian strycka"
 
 #: ../metadata/blur.xml.in.h:20
+#, fuzzy
 msgid "Gaussian radius"
-msgstr "Gaussisk radie"
+msgstr "Gaussian radie"
 
 #: ../metadata/blur.xml.in.h:21
+#, fuzzy
 msgid "Gaussian strength"
-msgstr "Gaussisk styrka"
+msgstr "Gaussian stryka"
 
 #: ../metadata/blur.xml.in.h:22
 msgid "Independent texture fetch"
-msgstr "Oberoende texturhämtning"
+msgstr ""
 
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
@@ -380,8 +392,6 @@ msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
-"Använd tillgängliga texturenheter för att göra så många oberoende "
-"texturhämtningar som möjligt."
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -651,8 +661,9 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "Kommandorad som ska köras i ett skal när run_command9 anropas"
 
 #: ../metadata/core.xml.in.in.h:50
+#, fuzzy
 msgid "Commands"
-msgstr "Kommandon"
+msgstr "Kommando"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -663,8 +674,9 @@ msgid "Default window icon image"
 msgstr "Standardikonbild för fönster"
 
 #: ../metadata/core.xml.in.in.h:53
+#, fuzzy
 msgid "Desktop Size"
-msgstr "Skrivbordsstorlek"
+msgstr "Skrivbordskub"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -676,18 +688,17 @@ msgstr "Detektera uppdateringsfrekvens"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr "Visningsinställningar"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
-"Tidslängden som pekaren måste vila vid en skärmkant innan en kantåtgärd sker."
 
 #: ../metadata/core.xml.in.in.h:58
 msgid "Edge Trigger Delay"
-msgstr "Fördröjning för kantutlösare"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:59
 msgid "Fast"
@@ -695,19 +706,22 @@ msgstr "Snabb"
 
 #: ../metadata/core.xml.in.in.h:60
 msgid "Focus &amp; Raise Behaviour"
-msgstr "Beteende för fokus och höj"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:61
+#, fuzzy
 msgid "Focus Prevention Level"
-msgstr "Förhindringsnivå för fokus"
+msgstr "Förhindra fokus"
 
 #: ../metadata/core.xml.in.in.h:62
+#, fuzzy
 msgid "Focus Prevention Windows"
-msgstr "Fokusförhindring för fönster"
+msgstr "Förhindra fokus"
 
 #: ../metadata/core.xml.in.in.h:63
+#, fuzzy
 msgid "Focus prevention windows"
-msgstr "Fokusförhindring för fönster"
+msgstr "Förhindra fokus"
 
 #: ../metadata/core.xml.in.in.h:64
 msgid "Force independent output painting."
@@ -739,7 +753,7 @@ msgstr "Dölj fönster som inte är i verktygsraden vid visa skrivbordsläget"
 
 #: ../metadata/core.xml.in.in.h:71
 msgid "High"
-msgstr "Hög"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:72
 msgid "Horizontal Virtual Size"
@@ -748,7 +762,6 @@ msgstr "Virtuell horisontell storlek"
 #: ../metadata/core.xml.in.in.h:73
 msgid "If available use compression for textures converted from images"
 msgstr ""
-"Om tillgängligt, använd komprimering för texturer konverterade från bilder"
 
 #: ../metadata/core.xml.in.in.h:74
 msgid "Ignore Hints When Maximized"
@@ -768,7 +781,7 @@ msgstr "Intervall mellan ping-meddelanden"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr "Tangentbindningar"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -788,7 +801,7 @@ msgstr "Lista över strängar som beskriver utmatningsenheter"
 
 #: ../metadata/core.xml.in.in.h:83
 msgid "Low"
-msgstr "Låg"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:84
 msgid "Lower Window"
@@ -836,11 +849,12 @@ msgstr "Antal virtuella skrivbord"
 
 #: ../metadata/core.xml.in.in.h:97
 msgid "Off"
-msgstr "Av"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:98
+#, fuzzy
 msgid "Only perform screen updates during vertical blanking period"
-msgstr "Genomför endast skärmuppdateringar under vertikal blankningsperiod"
+msgstr "Uför endast skärmuppdateringar under den vertikala blanknings perioden"
 
 #: ../metadata/core.xml.in.in.h:99
 msgid "Open a terminal"
@@ -947,28 +961,33 @@ msgid "Run command 9"
 msgstr "Kör kommando 9"
 
 #: ../metadata/core.xml.in.in.h:125
+#, fuzzy
 msgid "Run terminal command"
-msgstr "Kör terminalkommando"
+msgstr "Kommandorad för terminal"
 
 #: ../metadata/core.xml.in.in.h:126
+#, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
-msgstr "Skärmstorleksfaktor för horisontell, virtuell storlek"
+msgstr "Skärmstorleksfaktor för virtuell horisontell storlek"
 
 #: ../metadata/core.xml.in.in.h:127
+#, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
-msgstr "Skärmstorleksfaktor för vertikal, virtuell storlek"
+msgstr "Skärmstorleksfaktor för virtuell vertikal storlek"
 
 #: ../metadata/core.xml.in.in.h:128
 msgid "Screenshot command line"
 msgstr "Kommandorad för skärmbild"
 
 #: ../metadata/core.xml.in.in.h:129
+#, fuzzy
 msgid "Screenshot commands"
-msgstr "Skärmbildskommandon"
+msgstr "Kommandorad för skärmbild"
 
 #: ../metadata/core.xml.in.in.h:130
+#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "Tangentbindningar för skärmbild"
+msgstr "Kommandorad för skärmbild"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -991,8 +1010,9 @@ msgid "Slow Animations"
 msgstr "Långsamma animeringar"
 
 #: ../metadata/core.xml.in.in.h:136
+#, fuzzy
 msgid "Smart mode"
-msgstr "Smart läge"
+msgstr "Smart"
 
 #: ../metadata/core.xml.in.in.h:137
 msgid "Sync To VBlank"
@@ -1011,8 +1031,9 @@ msgid "Terminal command line"
 msgstr "Kommandorad för terminal"
 
 #: ../metadata/core.xml.in.in.h:141
+#, fuzzy
 msgid "Texture Compression"
-msgstr "Texturkomprimering"
+msgstr "Texturfiltrering"
 
 #: ../metadata/core.xml.in.in.h:142
 msgid "Texture Filter"
@@ -1080,17 +1101,19 @@ msgstr "Vertikal virtuell storlek"
 
 #: ../metadata/core.xml.in.in.h:159
 msgid "Very High"
-msgstr "Mycket hög"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:160
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
 #: ../metadata/core.xml.in.in.h:162
+#, fuzzy
 msgid "Window menu button binding"
 msgstr "Fönstermenyns knappbindning"
 
 #: ../metadata/core.xml.in.in.h:163
+#, fuzzy
 msgid "Window menu key binding"
 msgstr "Fönstermenyns tangentbindning"
 
@@ -1124,7 +1147,7 @@ msgstr "Animera skydome när kub roterar"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr "Utseende"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1132,7 +1155,7 @@ msgstr "Automatisk"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr "Beteende"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1222,8 +1245,9 @@ msgid "Next Slide"
 msgstr "Nästa diabild"
 
 #: ../metadata/cube.xml.in.h:31
+#, fuzzy
 msgid "One big cube"
-msgstr "En stor kub"
+msgstr "På stora kuben"
 
 #: ../metadata/cube.xml.in.h:32
 msgid "Opacity During Rotation"
@@ -1301,7 +1325,7 @@ msgstr "Genomskinlighet endast via musrotation"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "Transparent kub"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1400,27 +1424,31 @@ msgstr "Fönster som ska ha en skugga"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr "Ljusstyrka (i %) för fönster som inte svarar"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:3
+#, fuzzy
 msgid "Constant speed"
-msgstr "Konstant hastighet"
+msgstr "Rotationshastighet"
 
 #: ../metadata/fade.xml.in.h:4
+#, fuzzy
 msgid "Constant time"
-msgstr "Konstant tid"
+msgstr "Begränsa Y"
 
 #: ../metadata/fade.xml.in.h:5
+#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Dämpa fönster som inte svarar"
+msgstr "Ändra fönstrets storlek normalt"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
-msgstr "Dämpa fönster som inte svarar på fönsterhanterarens begäran"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:7
+#, fuzzy
 msgid "Fade Mode"
-msgstr "Toningsläge"
+msgstr "Toningstid"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1466,7 +1494,7 @@ msgstr "Helskärmstoningseffekt vid systemsignal"
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr "Färgmättnad (i %) för fönster som inte svarar"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
@@ -1481,8 +1509,9 @@ msgid "Visual Bell"
 msgstr "Visuell signal"
 
 #: ../metadata/fade.xml.in.h:23
+#, fuzzy
 msgid "Window fade mode"
-msgstr "Fönstertoningsläge"
+msgstr "Fönstertoningshastighet"
 
 #: ../metadata/fade.xml.in.h:24
 #, fuzzy
@@ -1611,8 +1640,9 @@ msgid "Initiate Window Move"
 msgstr "Initiera fönsterflyttning"
 
 #: ../metadata/move.xml.in.h:5
+#, fuzzy
 msgid "Lazy Positioning"
-msgstr "Lat positionering"
+msgstr "Lat postionering"
 
 #: ../metadata/move.xml.in.h:6
 msgid "Move Window"
@@ -1671,7 +1701,7 @@ msgstr "Horisontella skivbordsvypositioner"
 
 #: ../metadata/place.xml.in.h:7
 msgid "Keep In Workarea"
-msgstr "Behåll i arbetsyta"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:8
 msgid ""
@@ -1714,16 +1744,17 @@ msgid "Smart"
 msgstr "Smart"
 
 #: ../metadata/place.xml.in.h:19
+#, fuzzy
 msgid "Use active output device"
-msgstr "Använd aktiv utmatningsenhet"
+msgstr "På alla utmatningsenheter"
 
 #: ../metadata/place.xml.in.h:20
 msgid "Use output device of focussed window"
-msgstr "Använd utmatningsenhet för fokuserat fönster"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:21
 msgid "Use output device with pointer"
-msgstr "Använd utmatningsenhet med pekare"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:22
 #, fuzzy
@@ -1812,7 +1843,7 @@ msgstr "Växla fönsterfästning"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr "Bindningar"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2119,6 +2150,7 @@ msgid "Rotate To Face 9 with Window"
 msgstr "Rotera till yta 9 med fönster"
 
 #: ../metadata/rotate.xml.in.h:50
+#, fuzzy
 msgid "Rotate cube"
 msgstr "Rotera kub"
 
@@ -2143,12 +2175,14 @@ msgid "Rotate right and bring active window along"
 msgstr "Rotera åt höger och ta med aktivt fönster"
 
 #: ../metadata/rotate.xml.in.h:56
+#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Rotera till kubyta"
+msgstr "Rotera till yta 1"
 
 #: ../metadata/rotate.xml.in.h:57
+#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Rotera till kubyta med fönster"
+msgstr "Rotera till yta 1 med fönster"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2530,8 +2564,9 @@ msgid "Minimized"
 msgstr "Minimerat"
 
 #: ../metadata/switcher.xml.in.h:15
+#, fuzzy
 msgid "Next Panel"
-msgstr "Nästa panel"
+msgstr "Skrivbordsplan"
 
 #: ../metadata/switcher.xml.in.h:16
 msgid "Next window"
@@ -2572,8 +2607,9 @@ msgstr ""
 "fönsterutav alla fönster"
 
 #: ../metadata/switcher.xml.in.h:24
+#, fuzzy
 msgid "Prev Panel"
-msgstr "Föreg panel"
+msgstr "Föregående diabild"
 
 #: ../metadata/switcher.xml.in.h:25
 msgid "Prev window"

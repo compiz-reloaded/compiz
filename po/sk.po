@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-15 15:35+0530\n"
-"PO-Revision-Date: 2008-12-14 10:54+0100\n"
+"POT-Creation-Date: 2008-12-26 12:32+0530\n"
+"PO-Revision-Date: 2008-05-17 10:28+0200\n"
 "Last-Translator: Brusnica P <pepino@pobox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Správa okien"
 
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
-msgstr "Compiz f"
+msgstr "Compiz"
 
 #: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
@@ -111,13 +111,13 @@ msgid ""
 "translucent"
 msgstr ""
 "Vytieňovať aktívne okná s dekoráciou témy metacity z nepriehľadnej do "
-"priehľadnej"
+"priehľadnej."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr ""
-"Vytieňovať okná s dekoráciou témy metacity z nepriehľadnej do priehľadnej"
+"Vytieňovať okná s dekoráciou témy metacity z nepriehľadnej do priehľadnej."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
@@ -178,7 +178,7 @@ msgstr "Odlepiť"
 #: ../gtk/window-decorator/gtk-window-decorator.c:5112
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr "Okno \"%s\" neodpovedá."
+msgstr "Okno „%s“ neodpovedá."
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:5121
 msgid ""
@@ -261,7 +261,7 @@ msgstr "Šírka ťahu poznámok"
 
 #: ../metadata/blur.xml.in.h:1
 msgid "4xBilinear"
-msgstr "4xBilineárne"
+msgstr "Filter:"
 
 #: ../metadata/blur.xml.in.h:2
 msgid "Alpha Blur"
@@ -354,7 +354,7 @@ msgstr "Mipmapy"
 
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
-msgstr "LOD mipmáp"
+msgstr "Úroveň detailu mipmáp"
 
 #: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
@@ -374,7 +374,7 @@ msgid ""
 "texture fetches."
 msgstr ""
 "Použiť dostupné jednotky textúr na vykonanie čo najväčšieho počtu "
-"nezávislých stiahnutí textúr."
+"nezávislých stiahnutí textúr"
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -620,8 +620,9 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "Príkaz, ktorý sa vykoná, ak sa v shelli volá run_command9"
 
 #: ../metadata/core.xml.in.in.h:50
+#, fuzzy
 msgid "Commands"
-msgstr "Príkazy"
+msgstr "Príkaz"
 
 #: ../metadata/core.xml.in.in.h:51
 msgid "Default Icon"
@@ -632,8 +633,9 @@ msgid "Default window icon image"
 msgstr "Východzí obrázok ikony okna"
 
 #: ../metadata/core.xml.in.in.h:53
+#, fuzzy
 msgid "Desktop Size"
-msgstr "Veľkosť pracovnej plochy"
+msgstr "Kocka plochy"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Detect Outputs"
@@ -645,7 +647,7 @@ msgstr "Deteguj Obnovovaciu Frekvenciu"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Display Settings"
-msgstr "Nastavenie zobrazenia"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:57
 msgid ""
@@ -665,7 +667,7 @@ msgstr "Rýchlo"
 
 #: ../metadata/core.xml.in.in.h:60
 msgid "Focus &amp; Raise Behaviour"
-msgstr "Zameranie &amp; Vyspujúce Správanie"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Focus Prevention Level"
@@ -681,7 +683,7 @@ msgstr "Predchádzať zameraniu okien"
 
 #: ../metadata/core.xml.in.in.h:64
 msgid "Force independent output painting."
-msgstr "Vynútenie vykreslenia nezávislého výstupu."
+msgstr "Vynútenie vykreslenia nezávislého výstupu"
 
 #: ../metadata/core.xml.in.in.h:65
 msgid "General Options"
@@ -689,7 +691,7 @@ msgstr "Všeobecné nastavenia"
 
 #: ../metadata/core.xml.in.in.h:66
 msgid "General compiz options"
-msgstr "Všeobecné nastavenia compiz"
+msgstr "Všeobecné nastavenia Compiz"
 
 #: ../metadata/core.xml.in.in.h:67
 msgid "Good"
@@ -719,7 +721,7 @@ msgstr "Vodorovná virtuálna veľkosť"
 
 #: ../metadata/core.xml.in.in.h:73
 msgid "If available use compression for textures converted from images"
-msgstr "Ak sa dá, použiť kompresiu textúr, ktoré boli konvertované z obrázkov"
+msgstr "Ak sa dá, použiť kompresiu textúr, ktoré boli konvertované z obrázkov."
 
 #: ../metadata/core.xml.in.in.h:74
 msgid "Ignore Hints When Maximized"
@@ -739,7 +741,7 @@ msgstr "Interval medzi odosielaním pingu"
 
 #: ../metadata/core.xml.in.in.h:78
 msgid "Key bindings"
-msgstr "Klávesová väzba"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:79
 msgid "Level of focus stealing prevention"
@@ -921,8 +923,9 @@ msgid "Run command 9"
 msgstr "Spustiť príkaz 9"
 
 #: ../metadata/core.xml.in.in.h:125
+#, fuzzy
 msgid "Run terminal command"
-msgstr "Spusť terminálový príkaz"
+msgstr "Príkaz pre terminál"
 
 #: ../metadata/core.xml.in.in.h:126
 msgid "Screen size multiplier for horizontal virtual size"
@@ -937,12 +940,14 @@ msgid "Screenshot command line"
 msgstr "Príkaz pre snímanie obrazovky"
 
 #: ../metadata/core.xml.in.in.h:129
+#, fuzzy
 msgid "Screenshot commands"
-msgstr "Príkazy pre odfotenie obrazovky"
+msgstr "Príkaz pre snímanie obrazovky"
 
 #: ../metadata/core.xml.in.in.h:130
+#, fuzzy
 msgid "Screenshot key bindings"
-msgstr "Klávesová väzba pre snímanie obrazovky"
+msgstr "Príkaz pre snímanie obrazovky"
 
 #: ../metadata/core.xml.in.in.h:131
 msgid "Show Desktop"
@@ -998,7 +1003,7 @@ msgstr "Filtrovanie textúr"
 
 #: ../metadata/core.xml.in.in.h:144
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "Frekvencia prekresľovania obrazovky v (počet/sekundu)"
+msgstr "Frekvencia prekresľovania obrazovky v Hz"
 
 #: ../metadata/core.xml.in.in.h:145
 msgid "Toggle Window Maximized"
@@ -1106,7 +1111,7 @@ msgstr "Animovať skydome pri rotácii kocky"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr "Vzhľad"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1114,7 +1119,7 @@ msgstr "Automatický"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr "Správanie"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1130,8 +1135,9 @@ msgstr "Farba, ktorá sa použije na hornú časť gradientu skydome"
 
 # KM
 #: ../metadata/cube.xml.in.h:13
+#, fuzzy
 msgid "Cube Caps"
-msgstr "Vrch Kocky"
+msgstr "Farba kocky"
 
 # KM
 #: ../metadata/cube.xml.in.h:14
@@ -1231,7 +1237,7 @@ msgstr "Predchádzajúca snímka"
 
 #: ../metadata/cube.xml.in.h:38
 msgid "Render skydome"
-msgstr "Vykresliť nebeskú kupolu"
+msgstr "Vykresliť Skydome"
 
 #: ../metadata/cube.xml.in.h:39
 msgid "Scale image"
@@ -1249,7 +1255,7 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:42
 msgid "Skydome"
-msgstr "Nebeská kupola"
+msgstr "Skydome"
 
 #: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient End Color"
@@ -1281,7 +1287,7 @@ msgstr "Priehľadnosť iba v prípade otáčania použitím myši"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "Priehľadná kocka"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1293,7 +1299,7 @@ msgstr "Roztvoriť kocku"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
-msgstr "D-bus"
+msgstr "Dbus"
 
 #: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
@@ -1381,27 +1387,31 @@ msgstr "Okná, ktoré by mali mať tieň"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr "Jas (v %) neodpovedajúcich okien"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:3
+#, fuzzy
 msgid "Constant speed"
-msgstr "Konštantná rýchlosť"
+msgstr "Rýchlosť otáčania"
 
 #: ../metadata/fade.xml.in.h:4
+#, fuzzy
 msgid "Constant time"
-msgstr "Konštantný čas"
+msgstr "Obmedzenie Y"
 
 #: ../metadata/fade.xml.in.h:5
+#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Stmav neodpovedajúce okná"
+msgstr "Normálna veľkosť okien"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
-msgstr "Stmavnutie okien, ktoré neodpovedajú okennému manažérovi na požiadavku"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:7
+#, fuzzy
 msgid "Fade Mode"
-msgstr "Režim Strácania"
+msgstr "Doba stmavnutia"
 
 #: ../metadata/fade.xml.in.h:8
 msgid "Fade On Minimize/Open/Close"
@@ -1446,31 +1456,33 @@ msgstr "Celoobrazovkový efekt blednutia pri systémovom pípnutí"
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr "Saturácia (v%) neodpovedajúcich okien"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr "Jas Neodpovedajúcich Okien"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr "Saturácia Neodpovedajúcich Okien"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "Vizuálny zvonček"
 
 #: ../metadata/fade.xml.in.h:23
+#, fuzzy
 msgid "Window fade mode"
-msgstr "Režim strácania okna"
+msgstr "Rýchlosť stmievania okna"
 
 #: ../metadata/fade.xml.in.h:24
+#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Rýchlosť miznutia v režime \"Konštantná rýchlosť\""
+msgstr "Okná, ktoré majú meniť veľkosť v režime zmeny mierky"
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr "Čas miznutie okna (v ms) v režime \"Konštantného času\""
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
@@ -1494,7 +1506,7 @@ msgstr "Používateľský súborový systém"
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr "G-Conf"
+msgstr "GConf"
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
@@ -1502,7 +1514,7 @@ msgstr "Backend pre riadenie GConf"
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
-msgstr "G-Lib"
+msgstr "GLib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
@@ -1510,7 +1522,7 @@ msgstr "Podpora hlavného napojenia na GLib"
 
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
-msgstr "Ini súbor"
+msgstr "Ini"
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
@@ -1522,11 +1534,11 @@ msgstr "Modul upozornenia zmeny súboru"
 
 #: ../metadata/inotify.xml.in.h:2
 msgid "Inotify"
-msgstr "I-upozornenie"
+msgstr "Inotify"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr "K-config"
+msgstr "Kconfig"
 
 #: ../metadata/kconfig.xml.in.h:2
 msgid "Kconfig Control Backend"
@@ -1626,8 +1638,9 @@ msgid "Centered"
 msgstr "Vystrednené"
 
 #: ../metadata/place.xml.in.h:4
+#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Pevné umiestnenie okna"
+msgstr "Správa okien"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1639,23 +1652,22 @@ msgstr "Vodorovné pozície pohľadov"
 
 #: ../metadata/place.xml.in.h:7
 msgid "Keep In Workarea"
-msgstr "Nechaj V Pracovnej Oblasti"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:8
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-"Nechaj umiestnené v pracovnej oblasti, aj keď to bude znamenať, že pozícia "
-"bude odlišná od špecifikovanej pozície"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
 msgstr "Rozmiestniť okná"
 
 #: ../metadata/place.xml.in.h:12
+#, fuzzy
 msgid "Place across all outputs"
-msgstr "Umiestniť cez všetky výstupy"
+msgstr "Uprednostniť menší výstup"
 
 #: ../metadata/place.xml.in.h:13
 msgid "Place windows at appropriate positions when mapped"
@@ -1689,8 +1701,9 @@ msgid "Use active output device"
 msgstr "Použiť aktívne výstupné zariadenie"
 
 #: ../metadata/place.xml.in.h:20
+#, fuzzy
 msgid "Use output device of focussed window"
-msgstr "Použiť výstupné zariadenie zameraného okna"
+msgstr "Použiť výstupné zariadenie s ukazovateľom"
 
 #: ../metadata/place.xml.in.h:21
 msgid "Use output device with pointer"
@@ -1725,12 +1738,13 @@ msgstr ""
 "vyhnúť takémuto umiestneniu."
 
 #: ../metadata/place.xml.in.h:28
+#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Okná s pevnými pozíciami"
+msgstr "Dekorácie okna"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr "Okná s pevným výrezom"
+msgstr ""
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -1746,7 +1760,7 @@ msgstr "Pozície plochy na osi X"
 
 #: ../metadata/place.xml.in.h:33
 msgid "X position values"
-msgstr "X hodnoty pozície"
+msgstr "Hodnoty pozíce na osi X"
 
 #: ../metadata/place.xml.in.h:34
 msgid "Y Positions"
@@ -1758,15 +1772,15 @@ msgstr "Pozície plochy na osi Y"
 
 #: ../metadata/place.xml.in.h:36
 msgid "Y position values"
-msgstr "Y hodnoty pozície"
+msgstr "Hodnoty pozíce na osi Y"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
-msgstr "Png súbor"
+msgstr "PNG"
 
 #: ../metadata/png.xml.in.h:2
 msgid "Png image loader"
-msgstr "Png načítač obrázkov"
+msgstr " Načítanie PNG obrázkov"
 
 #: ../metadata/regex.xml.in.h:1
 msgid "Regex Matching"
@@ -1779,7 +1793,7 @@ msgstr "Zodpovedajúce regulárne výrazy okna"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr "Náväznosti"
+msgstr ""
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2084,8 +2098,9 @@ msgid "Rotate To Face 9 with Window"
 msgstr "Otočiť na stranu 9 s oknom"
 
 #: ../metadata/rotate.xml.in.h:50
+#, fuzzy
 msgid "Rotate cube"
-msgstr "Rotácia kocky"
+msgstr "Otáčať kockou"
 
 #: ../metadata/rotate.xml.in.h:51
 msgid "Rotate desktop cube"
@@ -2108,12 +2123,14 @@ msgid "Rotate right and bring active window along"
 msgstr "Otočiť vpravo a vziať aktívne okno so sebou"
 
 #: ../metadata/rotate.xml.in.h:56
+#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Otočiť na čelo kocky"
+msgstr "Otočiť na stranu 1"
 
 #: ../metadata/rotate.xml.in.h:57
+#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Otočiť na čelo kocky s oknom"
+msgstr "Otočiť na stranu 1 s oknom"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2289,15 +2306,13 @@ msgstr "Veľký"
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
-msgstr "Tlačidlová väzba Toggle Scale Mode"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
-"Tlačdlová väzba toggle scale mode namiesto zapnutia keď je stlačené a "
-"vypnutia keď je uvoľnené."
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
@@ -2342,15 +2357,13 @@ msgstr "Spustiť vyberanie okien na štandardnom výstupe"
 
 #: ../metadata/scale.xml.in.h:18
 msgid "Key Bindings Toggle Scale Mode"
-msgstr "Klávesová väzba Toggle Scale Mode"
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:19
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
-"Klávesové prepojenia toggle scale mode namiesto zapnutia keď je stlačené a "
-"vypnutia keď je uvoľnené."
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -2455,11 +2468,11 @@ msgstr "Modul snímky obrazovky"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
-msgstr "Svg súbor"
+msgstr "SVG"
 
 #: ../metadata/svg.xml.in.h:2
 msgid "Svg image loader"
-msgstr "Svg načítač obrázkov"
+msgstr "Načítanie SVG obrázkov"
 
 #: ../metadata/switcher.xml.in.h:1
 msgid "Amount of brightness in percent"
@@ -2565,19 +2578,19 @@ msgstr "Sýtosť"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next panel type window."
-msgstr "Označ nasledujúci typ výplne okna."
+msgstr "Označ nasledujúci typ výplne okna"
 
 #: ../metadata/switcher.xml.in.h:31
 msgid "Select next window without showing the popup window."
-msgstr "Vybrať ďalšie okno bez ukázania vyskakovacieho okna."
+msgstr "Vybrať ďalšie okno bez ukázania vyskakovacieho okna"
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous panel type window."
-msgstr "Vybrať predchádzajúci typ výplne okna."
+msgstr "Vybrať predchádzajúci typ výplne okna"
 
 #: ../metadata/switcher.xml.in.h:33
 msgid "Select previous window without showing the popup window."
-msgstr "Vybrať predchádzajúce okno bez ukázania vyskakovacieho okna."
+msgstr "Vybrať predchádzajúce okno bez ukázania vyskakovacieho okna"
 
 #: ../metadata/switcher.xml.in.h:34
 msgid "Show icon next to thumbnail"
