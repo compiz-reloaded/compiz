@@ -3723,11 +3723,8 @@ addWindowSizeChanges (CompWindow     *w,
 	    xwc->height = w->sizeHints.max_height;
 	    mask |= CWHeight;
 	}
-    }
 
-    if (mask & (CWWidth | CWHeight))
-    {
-	if (!(w->type & CompWindowTypeFullscreenMask))
+	if (mask & (CWWidth | CWHeight))
 	{
 	    int width, height, max;
 
