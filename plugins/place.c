@@ -1136,13 +1136,16 @@ placeDoWindowPlacement (CompWindow *w,
 
     PLACE_SCREEN (s);
 
-    strategy = placeGetStrategyForWindow (w);
-
-    if (strategy == NoPlacement)
-	return FALSE;
-
     if (placeMatchPosition (w, &x, &y, &keepInWorkarea))
+    {
 	strategy = keepInWorkarea ? ConstrainOnly : NoPlacement;
+    }
+    else
+    {
+	strategy = placeGetStrategyForWindow (w);
+	if (strategy == NoPlacement)
+	    return FALSE;
+    }
 
     output   = placeGetPlacementOutput (w, strategy, x, y);
     workArea = output->workArea;
