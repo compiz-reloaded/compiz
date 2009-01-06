@@ -3938,6 +3938,16 @@ moveResizeWindow (CompWindow     *w,
     if (!(xwcm & CWHeight))
 	xwc->height = w->serverHeight;
 
+    /* when horizontally maximized only allow width changes added by
+       addWindowSizeChanges or constrainNewWindowState */
+    if (w->state & CompWindowStateMaximizedHorzMask)
+	xwcm &= ~CWWidth;
+
+    /* when vertically maximized only allow height changes added by
+       addWindowSizeChanges or constrainNewWindowState */
+    if (w->state & CompWindowStateMaximizedVertMask)
+	xwcm &= ~CWHeight;
+
     if (xwcm & (CWWidth | CWHeight))
     {
 	int width, height;
@@ -3997,16 +4007,6 @@ moveResizeWindow (CompWindow     *w,
     }
 
     (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc, source);
-
-    /* when horizontally maximized only allow width changes added by
-       addWindowSizeChanges */
-    if (w->state & CompWindowStateMaximizedHorzMask)
-	xwcm &= ~CWWidth;
-
-    /* when vertically maximized only allow height changes added by
-       addWindowSizeChanges */
-    if (w->state & CompWindowStateMaximizedVertMask)
-	xwcm &= ~CWHeight;
 
     xwcm |= addWindowSizeChanges (w, xwc,
 				  xwc->x, xwc->y,
