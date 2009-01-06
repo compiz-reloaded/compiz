@@ -748,6 +748,9 @@ decorWindowUpdate (CompWindow *w,
 	break;
     }
 
+    if (w->wmType & (CompWindowTypeDockMask | CompWindowTypeDesktopMask))
+	decorate = FALSE;
+
     if (w->attrib.override_redirect)
 	decorate = FALSE;
 
