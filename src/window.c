@@ -1894,8 +1894,11 @@ updateWindowStruts (CompWindow *w)
 
 	    strutX1 = new.left.x;
 	    strutX2 = strutX1 + new.left.width;
+	    strutY1 = new.left.y;
+	    strutY2 = strutY1 + new.left.height;
 
-	    if (strutX2 > x1 && strutX2 <= x2)
+	    if (strutX2 > x1  && strutX2 <= x2 &&
+		strutY1 <= y2 && strutY2 >= y1)
 	    {
 		new.left.x     = x1;
 		new.left.width = strutX2 - x1;
@@ -1903,26 +1906,35 @@ updateWindowStruts (CompWindow *w)
 
 	    strutX1 = new.right.x;
 	    strutX2 = strutX1 + new.right.width;
+	    strutY1 = new.right.y;
+	    strutY2 = strutY1 + new.right.height;
 
-	    if (strutX1 > x1 && strutX1 <= x2)
+	    if (strutX1 > x1  && strutX1 <= x2 &&
+		strutY1 <= y2 && strutY2 >= y1)
 	    {
 		new.right.x     = strutX1;
 		new.right.width = x2 - strutX1;
 	    }
 
+	    strutX1 = new.top.x;
+	    strutX2 = strutX1 + new.top.width;
 	    strutY1 = new.top.y;
 	    strutY2 = strutY1 + new.top.height;
 
-	    if (strutY2 > y1 && strutY2 <= y2)
+	    if (strutX1 <= x2 && strutX2 >= x1 &&
+		strutY2 > y1  && strutY2 <= y2)
 	    {
 		new.top.y      = y1;
 		new.top.height = strutY2 - y1;
 	    }
 
+	    strutX1 = new.bottom.x;
+	    strutX2 = strutX1 + new.bottom.width;
 	    strutY1 = new.bottom.y;
 	    strutY2 = strutY1 + new.bottom.height;
 
-	    if (strutY1 > y1 && strutY1 <= y2)
+	    if (strutX1 <= x2 && strutX2 >= x1 &&
+		strutY1 > y1  && strutY1 <= y2)
 	    {
 		new.bottom.y      = strutY1;
 		new.bottom.height = y2 - strutY1;
