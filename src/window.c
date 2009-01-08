@@ -1756,8 +1756,6 @@ updateWindowStruts (CompWindow *w)
     Bool	  hasOld, hasNew;
     CompStruts    old, new;
 
-#define MIN_EMPTY 76
-
     if (w->struts)
     {
 	hasOld = TRUE;
@@ -1805,34 +1803,25 @@ updateWindowStruts (CompWindow *w)
 
 	if (n == 12)
 	{
-	    int gap;
-
 	    hasNew = TRUE;
 
-	    gap = w->screen->width - struts[0] - struts[1];
-	    gap -= MIN_EMPTY;
-
-	    new.left.width  = (int) struts[0] + MIN (0, gap / 2);
-	    new.right.width = (int) struts[1] + MIN (0, gap / 2);
-
-	    gap = w->screen->height - struts[2] - struts[3];
-	    gap -= MIN_EMPTY;
-
-	    new.top.height    = (int) struts[2] + MIN (0, gap / 2);
-	    new.bottom.height = (int) struts[3] + MIN (0, gap / 2);
-
-	    new.right.x  = w->screen->width  - new.right.width;
-	    new.bottom.y = w->screen->height - new.bottom.height;
-
 	    new.left.y       = struts[4];
+	    new.left.width   = struts[0];
 	    new.left.height  = struts[5] - new.left.y + 1;
+
+	    new.right.width  = struts[1];
+	    new.right.x      = w->screen->width - new.right.width;
 	    new.right.y      = struts[6];
 	    new.right.height = struts[7] - new.right.y + 1;
 
 	    new.top.x        = struts[8];
 	    new.top.width    = struts[9] - new.top.x + 1;
-	    new.bottom.x     = struts[10];
-	    new.bottom.width = struts[11] - new.bottom.x + 1;
+	    new.top.height   = struts[2];
+
+	    new.bottom.x      = struts[10];
+	    new.bottom.width  = struts[11] - new.bottom.x + 1;
+	    new.bottom.height = struts[3];
+	    new.bottom.y      = w->screen->height - new.bottom.height;
 	}
 
 	XFree (data);
@@ -1851,27 +1840,19 @@ updateWindowStruts (CompWindow *w)
 
 	    if (n == 4)
 	    {
-		int gap;
-
 		hasNew = TRUE;
 
-		gap = w->screen->width - struts[0] - struts[1];
-		gap -= MIN_EMPTY;
+		new.left.x     = 0;
+		new.left.width = struts[0];
 
-		new.left.width  = (int) struts[0] + MIN (0, gap / 2);
-		new.right.width = (int) struts[1] + MIN (0, gap / 2);
+		new.right.width = struts[1];
+		new.right.x     = w->screen->width - new.right.width;
 
-		gap = w->screen->height - struts[2] - struts[3];
-		gap -= MIN_EMPTY;
+		new.top.y      = 0;
+		new.top.height = struts[2];
 
-		new.top.height    = (int) struts[2] + MIN (0, gap / 2);
-		new.bottom.height = (int) struts[3] + MIN (0, gap / 2);
-
-		new.left.x  = 0;
-		new.right.x = w->screen->width - new.right.width;
-
-		new.top.y    = 0;
-		new.bottom.y = w->screen->height - new.bottom.height;
+		new.bottom.height = struts[3];
+		new.bottom.y      = w->screen->height - new.bottom.height;
 	    }
 
 	    XFree (data);
