@@ -3221,6 +3221,13 @@ computeWorkareaForBox (CompScreen *s,
 	}
     }
 
+    if (XEmptyRegion (region))
+    {
+	compLogMessage ("core", CompLogLevelWarn,
+			"Empty box after applying struts, ignoring struts");
+	region->extents = *pBox;
+    }
+
     area->x      = region->extents.x1;
     area->y      = region->extents.y1;
     area->width  = region->extents.x2 - region->extents.x1;
