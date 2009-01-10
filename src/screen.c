@@ -3159,65 +3159,65 @@ computeWorkareaForBox (CompScreen *s,
 	if (!w->mapNum)
 	    continue;
 
-	if (w->struts)
+	if (!w->struts)
+	    continue;
+
+	r.extents.y1 = pBox->y1;
+	r.extents.y2 = pBox->y2;
+
+	x1 = w->struts->left.x;
+	y1 = w->struts->left.y;
+	x2 = x1 + w->struts->left.width;
+	y2 = y1 + w->struts->left.height;
+
+	if (y1 < pBox->y2 && y2 > pBox->y1)
 	{
-	    r.extents.y1 = pBox->y1;
-	    r.extents.y2 = pBox->y2;
+	    r.extents.x1 = x1;
+	    r.extents.x2 = x2;
 
-	    x1 = w->struts->left.x;
-	    y1 = w->struts->left.y;
-	    x2 = x1 + w->struts->left.width;
-	    y2 = y1 + w->struts->left.height;
+	    XSubtractRegion (region, &r, region);
+	}
 
-	    if (y1 < pBox->y2 && y2 > pBox->y1)
-	    {
-		r.extents.x1 = x1;
-		r.extents.x2 = x2;
+	x1 = w->struts->right.x;
+	y1 = w->struts->right.y;
+	x2 = x1 + w->struts->right.width;
+	y2 = y1 + w->struts->right.height;
 
-		XSubtractRegion (region, &r, region);
-	    }
+	if (y1 < pBox->y2 && y2 > pBox->y1)
+	{
+	    r.extents.x1 = x1;
+	    r.extents.x2 = x2;
 
-	    x1 = w->struts->right.x;
-	    y1 = w->struts->right.y;
-	    x2 = x1 + w->struts->right.width;
-	    y2 = y1 + w->struts->right.height;
+	    XSubtractRegion (region, &r, region);
+	}
 
-	    if (y1 < pBox->y2 && y2 > pBox->y1)
-	    {
-		r.extents.x1 = x1;
-		r.extents.x2 = x2;
+	r.extents.x1 = pBox->x1;
+	r.extents.x2 = pBox->x2;
 
-		XSubtractRegion (region, &r, region);
-	    }
+	x1 = w->struts->top.x;
+	y1 = w->struts->top.y;
+	x2 = x1 + w->struts->top.width;
+	y2 = y1 + w->struts->top.height;
 
-	    r.extents.x1 = pBox->x1;
-	    r.extents.x2 = pBox->x2;
+	if (x1 < pBox->x2 && x2 > pBox->x1)
+	{
+	    r.extents.y1 = y1;
+	    r.extents.y2 = y2;
 
-	    x1 = w->struts->top.x;
-	    y1 = w->struts->top.y;
-	    x2 = x1 + w->struts->top.width;
-	    y2 = y1 + w->struts->top.height;
+	    XSubtractRegion (region, &r, region);
+	}
 
-	    if (x1 < pBox->x2 && x2 > pBox->x1)
-	    {
-		r.extents.y1 = y1;
-		r.extents.y2 = y2;
+	x1 = w->struts->bottom.x;
+	y1 = w->struts->bottom.y;
+	x2 = x1 + w->struts->bottom.width;
+	y2 = y1 + w->struts->bottom.height;
 
-		XSubtractRegion (region, &r, region);
-	    }
+	if (x1 < pBox->x2 && x2 > pBox->x1)
+	{
+	    r.extents.y1 = y1;
+	    r.extents.y2 = y2;
 
-	    x1 = w->struts->bottom.x;
-	    y1 = w->struts->bottom.y;
-	    x2 = x1 + w->struts->bottom.width;
-	    y2 = y1 + w->struts->bottom.height;
-
-	    if (x1 < pBox->x2 && x2 > pBox->x1)
-	    {
-		r.extents.y1 = y1;
-		r.extents.y2 = y2;
-
-		XSubtractRegion (region, &r, region);
-	    }
+	    XSubtractRegion (region, &r, region);
 	}
     }
 
