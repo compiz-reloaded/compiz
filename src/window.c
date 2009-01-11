@@ -1426,6 +1426,7 @@ bindWindow (CompWindow *w)
     if (!w->pixmap)
     {
 	XWindowAttributes attr;
+	Display           *dpy = w->screen->display->display;
 
 	/* don't try to bind window again if it failed previously */
 	if (w->bindFailed)
@@ -1433,20 +1434,20 @@ bindWindow (CompWindow *w)
 
 	/* We have to grab the server here to make sure that window
 	   is mapped when getting the window pixmap */
-	XGrabServer (w->screen->display->display);
-	XGetWindowAttributes (w->screen->display->display, w->id, &attr);
-	if (attr.map_state != IsViewable)
+	XGrabServer (dpy);
+
+	if (!XGetWindowAttributes (dpy, w->id, &attr) ||
+	    attr.map_state != IsViewable)
 	{
-	    XUngrabServer (w->screen->display->display);
+	    XUngrabServer (dpy);
 	    finiTexture (w->screen, w->texture);
 	    w->bindFailed = TRUE;
 	    return FALSE;
 	}
 
-	w->pixmap = XCompositeNameWindowPixmap (w->screen->display->display,
-						w->id);
+	w->pixmap = XCompositeNameWindowPixmap (dpy, w->id);
 
-	XUngrabServer (w->screen->display->display);
+	XUngrabServer (dpy);
     }
 
     if (!bindPixmapToTexture (w->screen, w->texture, w->pixmap,
@@ -3931,6 +3932,16 @@ moveResizeWindow (CompWindow     *w,
     if (!(xwcm & CWHeight))
 	xwc->height = w->serverHeight;
 
+    /* when horizontally maximized only allow width changes added by
+       addWindowSizeChanges or constrainNewWindowState */
+    if (w->state & CompWindowStateMaximizedHorzMask)
+	xwcm &= ~CWWidth;
+
+    /* when vertically maximized only allow height changes added by
+       addWindowSizeChanges or constrainNewWindowState */
+    if (w->state & CompWindowStateMaximizedVertMask)
+	xwcm &= ~CWHeight;
+
     if (xwcm & (CWWidth | CWHeight))
     {
 	int width, height;
@@ -3990,16 +4001,6 @@ moveResizeWindow (CompWindow     *w,
     }
 
     (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc, source);
-
-    /* when horizontally maximized only allow width changes added by
-       addWindowSizeChanges */
-    if (w->state & CompWindowStateMaximizedHorzMask)
-	xwcm &= ~CWWidth;
-
-    /* when vertically maximized only allow height changes added by
-       addWindowSizeChanges */
-    if (w->state & CompWindowStateMaximizedVertMask)
-	xwcm &= ~CWHeight;
 
     xwcm |= addWindowSizeChanges (w, xwc,
 				  xwc->x, xwc->y,
