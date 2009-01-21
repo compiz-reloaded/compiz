@@ -1784,11 +1784,12 @@ handleEvent (CompDisplay *d,
 
 		    /* raise the window whenever its fullscreen state,
 		       above/below state or maximization state changed */
-		    if (dState & (CompWindowStateFullscreenMask |
-				  CompWindowStateAboveMask |
-				  CompWindowStateBelowMask |
-				  CompWindowStateMaximizedHorzMask |
-				  CompWindowStateMaximizedVertMask))
+		    if (dState & CompWindowStateFullscreenMask)
+			stackingUpdateMode = CompStackingUpdateModeAboveFullscreen;
+		    else if (dState & (CompWindowStateAboveMask         |
+				       CompWindowStateBelowMask         |
+				       CompWindowStateMaximizedHorzMask |
+				       CompWindowStateMaximizedVertMask))
 			stackingUpdateMode = CompStackingUpdateModeNormal;
 
 		    changeWindowState (w, wState);
