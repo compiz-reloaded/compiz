@@ -4083,7 +4083,14 @@ addWindowStackChanges (CompWindow     *w,
 
     if (!sibling || sibling->id != w->id)
     {
-	if (w->prev)
+	CompWindow *prev = w->prev;
+
+	/* the frame window is always our next sibling window in the stack, although
+	   we're searching for the next 'real' sibling, so skip the frame window */
+	if (prev && prev->id == w->frame)
+		prev = prev->prev;
+
+	if (prev)
 	{
 	    if (!sibling)
 	    {
@@ -4091,7 +4098,7 @@ addWindowStackChanges (CompWindow     *w,
 		if (w->frame)
 		    XLowerWindow (w->screen->display->display, w->frame);
 	    }
-	    else if (sibling->id != w->prev->id)
+	    else if (sibling->id != prev->id)
 	    {
 		mask |= CWSibling | CWStackMode;
 
