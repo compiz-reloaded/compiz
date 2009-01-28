@@ -400,43 +400,6 @@ lowerInitiate (CompDisplay     *d,
 }
 
 static Bool
-runCommandDispatch (CompDisplay     *d,
-		    CompAction      *action,
-		    CompActionState state,
-		    CompOption      *option,
-		    int		    nOption)
-{
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-    {
-	int index = -1;
-	int i = COMP_DISPLAY_OPTION_RUN_COMMAND0_KEY;
-
-	while (i <= COMP_DISPLAY_OPTION_RUN_COMMAND11_KEY)
-	{
-	    if (action == &d->opt[i].value.action)
-	    {
-		index = i - COMP_DISPLAY_OPTION_RUN_COMMAND0_KEY +
-		    COMP_DISPLAY_OPTION_COMMAND0;
-		break;
-	    }
-
-	    i++;
-	}
-
-	if (index > 0)
-	    runCommand (s, d->opt[index].value.s);
-    }
-
-    return TRUE;
-}
-
-static Bool
 runCommandScreenshot (CompDisplay     *d,
 		      CompAction      *action,
 		      CompActionState state,
@@ -623,30 +586,6 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "close_window_button", "button", 0, closeWin, 0 },
     { "main_menu_key", "key", 0, mainMenu, 0 },
     { "run_key", "key", 0, runDialog, 0 },
-    { "command0", "string", 0, 0, 0 },
-    { "command1", "string", 0, 0, 0 },
-    { "command2", "string", 0, 0, 0 },
-    { "command3", "string", 0, 0, 0 },
-    { "command4", "string", 0, 0, 0 },
-    { "command5", "string", 0, 0, 0 },
-    { "command6", "string", 0, 0, 0 },
-    { "command7", "string", 0, 0, 0 },
-    { "command8", "string", 0, 0, 0 },
-    { "command9", "string", 0, 0, 0 },
-    { "command10", "string", 0, 0, 0 },
-    { "command11", "string", 0, 0, 0 },
-    { "run_command0_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command1_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command2_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command3_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command4_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command5_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command6_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command7_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command8_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command9_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command10_key", "key", 0, runCommandDispatch, 0 },
-    { "run_command11_key", "key", 0, runCommandDispatch, 0 },
     { "slow_animations_key", "key", 0, toggleSlowAnimations, 0 },
     { "raise_window_key", "key", 0, raiseInitiate, 0 },
     { "raise_window_button", "button", 0, raiseInitiate, 0 },
