@@ -65,6 +65,9 @@ libini_la_SOURCES = ini.c
 libobs_la_LDFLAGS = -module -avoid-version -no-undefined
 libobs_la_SOURCES = obs.c
 
+libcommands_la_LDFLAGS = -module -avoid-version -no-undefined
+libcommands_la_SOURCES = commands.c
+
 if USE_LIBRSVG
 libsvg_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
@@ -169,6 +172,7 @@ module_LTLIBRARIES =		\
 	libvideo.la		\
 	libini.la		\
 	libobs.la		\
+	libcommands.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libinotify_module)	\

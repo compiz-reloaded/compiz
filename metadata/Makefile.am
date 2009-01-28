@@ -4,6 +4,7 @@ xml_in_files =		  \
 	annotate.xml.in   \
 	blur.xml.in	  \
 	clone.xml.in	  \
+	commands.xml.in	  \
 	cube.xml.in	  \
 	dbus.xml.in	  \
 	decoration.xml.in \
