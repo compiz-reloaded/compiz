@@ -180,50 +180,6 @@ closeWin (CompDisplay     *d,
 }
 
 static Bool
-mainMenu (CompDisplay     *d,
-	  CompAction      *action,
-	  CompActionState state,
-	  CompOption      *option,
-	  int		  nOption)
-{
-    CompScreen   *s;
-    Window       xid;
-    unsigned int time;
-
-    xid  = getIntOptionNamed (option, nOption, "root", 0);
-    time = getIntOptionNamed (option, nOption, "time", CurrentTime);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s && !s->maxGrab)
-	toolkitAction (s, s->display->toolkitActionMainMenuAtom, time, s->root,
-		       0, 0, 0);
-
-    return TRUE;
-}
-
-static Bool
-runDialog (CompDisplay     *d,
-	   CompAction      *action,
-	   CompActionState state,
-	   CompOption      *option,
-	   int		   nOption)
-{
-    CompScreen   *s;
-    Window       xid;
-    unsigned int time;
-
-    xid  = getIntOptionNamed (option, nOption, "root", 0);
-    time = getIntOptionNamed (option, nOption, "time", CurrentTime);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s && !s->maxGrab)
-	toolkitAction (s, s->display->toolkitActionRunDialogAtom, time, s->root,
-		       0, 0, 0);
-
-    return TRUE;
-}
-
-static Bool
 unmaximize (CompDisplay     *d,
 	    CompAction      *action,
 	    CompActionState state,
@@ -400,63 +356,6 @@ lowerInitiate (CompDisplay     *d,
 }
 
 static Bool
-runCommandScreenshot (CompDisplay     *d,
-		      CompAction      *action,
-		      CompActionState state,
-		      CompOption      *option,
-		      int	      nOption)
-{
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-	runCommand (s, d->opt[COMP_DISPLAY_OPTION_SCREENSHOT].value.s);
-
-    return TRUE;
-}
-
-static Bool
-runCommandWindowScreenshot (CompDisplay     *d,
-			    CompAction      *action,
-			    CompActionState state,
-			    CompOption      *option,
-			    int	            nOption)
-{
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-	runCommand (s, d->opt[COMP_DISPLAY_OPTION_WINDOW_SCREENSHOT].value.s);
-
-    return TRUE;
-}
-
-static Bool
-runCommandTerminal (CompDisplay     *d,
-		    CompAction      *action,
-		    CompActionState state,
-		    CompOption      *option,
-		    int	            nOption)
-{
-    CompScreen *s;
-    Window     xid;
-
-    xid = getIntOptionNamed (option, nOption, "root", 0);
-
-    s = findScreenAtDisplay (d, xid);
-    if (s)
-	runCommand (s, d->opt[COMP_DISPLAY_OPTION_TERMINAL].value.s);
-
-    return TRUE;
-}
-
-static Bool
 windowMenu (CompDisplay     *d,
 	    CompAction      *action,
 	    CompActionState state,
@@ -584,8 +483,6 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "autoraise_delay", "int", 0, 0, 0 },
     { "close_window_key", "key", 0, closeWin, 0 },
     { "close_window_button", "button", 0, closeWin, 0 },
-    { "main_menu_key", "key", 0, mainMenu, 0 },
-    { "run_key", "key", 0, runDialog, 0 },
     { "slow_animations_key", "key", 0, toggleSlowAnimations, 0 },
     { "raise_window_key", "key", 0, raiseInitiate, 0 },
     { "raise_window_button", "button", 0, raiseInitiate, 0 },
@@ -597,11 +494,6 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "maximize_window_key", "key", 0, maximize, 0 },
     { "maximize_window_horizontally_key", "key", 0, maximizeHorizontally, 0 },
     { "maximize_window_vertically_key", "key", 0, maximizeVertically, 0 },
-    { "command_screenshot", "string", 0, 0, 0 },
-    { "run_command_screenshot_key", "key", 0, runCommandScreenshot, 0 },
-    { "command_window_screenshot", "string", 0, 0, 0 },
-    { "run_command_window_screenshot_key", "key", 0,
-      runCommandWindowScreenshot, 0 },
     { "window_menu_button", "button", 0, windowMenu, 0 },
     { "window_menu_key", "key", 0, windowMenu, 0 },
     { "show_desktop_key", "key", 0, showDesktop, 0 },
@@ -617,8 +509,6 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "hide_skip_taskbar_windows", "bool", 0, 0, 0 },
     { "toggle_window_shaded_key", "key", 0, shade, 0 },
     { "ignore_hints_when_maximized", "bool", 0, 0, 0 },
-    { "command_terminal", "string", 0, 0, 0 },
-    { "run_command_terminal_key", "key", 0, runCommandTerminal, 0 },
     { "ping_delay", "int", "<min>1000</min>", 0, 0 },
     { "edge_delay", "int", "<min>0</min>", 0, 0 }
 };
@@ -2113,10 +2003,6 @@ addDisplay (const char *name)
 
     d->toolkitActionAtom	  =
 	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION", 0);
-    d->toolkitActionMainMenuAtom  =
-	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_MAIN_MENU", 0);
-    d->toolkitActionRunDialogAtom =
-	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", 0);
     d->toolkitActionWindowMenuAtom  =
 	XInternAtom (dpy, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", 0);
     d->toolkitActionForceQuitDialogAtom  =
