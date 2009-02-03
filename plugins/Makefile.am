@@ -68,6 +68,9 @@ libobs_la_SOURCES = obs.c
 libcommands_la_LDFLAGS = -module -avoid-version -no-undefined
 libcommands_la_SOURCES = commands.c
 
+libgnomecompat_la_LDFLAGS = -module -avoid-version -no-undefined
+libgnomecompat_la_SOURCES = gnomecompat.c
+
 if USE_LIBRSVG
 libsvg_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
 libsvg_la_LDFLAGS = -module -avoid-version -no-undefined
@@ -173,6 +176,7 @@ module_LTLIBRARIES =		\
 	libini.la		\
 	libobs.la		\
 	libcommands.la		\
+	libgnomecompat.la	\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libinotify_module)	\

@@ -1,0 +1,52 @@
+<compiz>
+    <plugin name="gnomecompat">
+	<_short>Gnome Compatibility</_short>
+	<_long>Options that keep Compiz compatible to the Gnome desktop environment</_long>
+	<category>General</category>
+	<display>
+	    <option name="main_menu_key" type="key">
+		<_short>Show Main Menu</_short>
+		<_long>Show the main menu</_long>
+		<default>&lt;Alt&gt;F1</default>
+	    </option>
+	    <option name="run_key" type="key">
+		<_short>Run Dialog</_short>
+		<_long>Show Run Application dialog</_long>
+		<default>&lt;Alt&gt;F2</default>
+	    </option>
+	    <group>
+		<_short>Commands</_short>
+		<option name="command_screenshot" type="string">
+		    <_short>Screenshot command line</_short>
+		    <_long>Screenshot command line</_long>
+		    <default>gnome-screenshot</default>
+		</option>
+		<option name="run_command_screenshot_key" type="key">
+		    <_short>Take a screenshot</_short>
+		    <_long>Take a screenshot</_long>
+		    <default>Print</default>
+		</option>
+		<option name="command_window_screenshot" type="string">
+		    <_short>Window screenshot command line</_short>
+		    <_long>Window screenshot command line</_long>
+		    <default>gnome-screenshot --window</default>
+		</option>
+		<option name="run_command_window_screenshot_key" type="key">
+		    <_short>Take a screenshot of a window</_short>
+		    <_long>Take a screenshot of a window</_long>
+		    <default>&lt;Alt&gt;Print</default>
+		</option>
+		<_short>Run terminal command</_short>
+		<option name="command_terminal" type="string">
+		    <_short>Terminal command line</_short>
+		    <_long>Terminal command line</_long>
+		    <default></default>
+		</option>
+		<option name="run_command_terminal_key" type="key">
+		    <_short>Open a terminal</_short>
+		    <_long>Open a terminal</_long>
+		</option>
+	    </group>
+	</display>
+    </plugin>
+</compiz>
