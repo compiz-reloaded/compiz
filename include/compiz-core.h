@@ -2544,6 +2544,12 @@ typedef enum {
     CompStackingUpdateModeInitialMapDeniedFocus
 } CompStackingUpdateMode;
 
+typedef enum {
+    CompFocusAllowed = 0,
+    CompFocusPrevent,
+    CompFocusDenied
+} CompFocusResult;
+
 struct _CompWindowExtents {
     int left;
     int right;
@@ -3057,7 +3063,7 @@ void
 setWindowUserTime (CompWindow *w,
 		   Time       time);
 
-Bool
+CompFocusResult
 allowWindowFocus (CompWindow   *w,
 		  unsigned int noFocusMask,
 		  unsigned int viewportX,

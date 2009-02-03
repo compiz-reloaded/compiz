@@ -4964,41 +4964,42 @@ isWindowFocusAllowed (CompWindow   *w,
     return TRUE;
 }
 
-Bool
+CompFocusResult
 allowWindowFocus (CompWindow   *w,
 		  unsigned int noFocusMask,
 		  unsigned int viewportX,
 		  unsigned int viewportY,
 		  Time         timestamp)
 {
-    Bool retval;
+    Bool status;
 
     if (w->id == w->screen->display->activeWindow)
-	return TRUE;
+	return CompFocusAllowed;
 
     /* do not focus windows of these types */
     if (w->type & noFocusMask)
-	return FALSE;
+	return CompFocusPrevent;
 
     /* window doesn't take focus */
     if (!w->inputHint && !(w->protocols & CompWindowProtocolTakeFocusMask))
-	return FALSE;
+	return CompFocusPrevent;
 
     if (!timestamp)
     {
 	/* if the window has a 0 timestamp, it explicitly requested no focus */
 	if (getFocusWindowUsageTimestamp (w, &timestamp) && !timestamp)
-	    return FALSE;
+	    return CompFocusPrevent;
     }
 
-    retval = isWindowFocusAllowed (w, viewportX, viewportY, timestamp);
-    if (!retval)
+    status = isWindowFocusAllowed (w, viewportX, viewportY, timestamp);
+    if (!status)
     {
 	/* add demands attention state if focus was prevented */
 	changeWindowState (w, w->state | CompWindowStateDemandsAttentionMask);
+	return CompFocusDenied;
     }
 
-    return retval;
+    return CompFocusAllowed;
 }
 
 void
