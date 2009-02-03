@@ -644,16 +644,6 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 		    client->showWindowMenu (pos);
 		}
 	    }
-	    else if (action == Atoms::toolkitActionMainMenuAtom)
-	    {
-	    }
-	    else if (action == Atoms::toolkitActionRunDialogAtom)
-	    {
-		QDBusInterface krunner ("org.kde.krunner", "/App",
-					"org.kde.krunner.App");
-		if (krunner.isValid ())
-		    krunner.call ("display");
-	    }
 	    else if (action == Atoms::toolkitActionForceQuitDialogAtom)
 	    {
 		if (mClients.contains (xevent->xclient.window))

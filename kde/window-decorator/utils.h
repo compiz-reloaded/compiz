@@ -44,8 +44,6 @@ namespace KWD
 	extern Atom wmProtocols;
 	extern Atom toolkitActionAtom;
 	extern Atom toolkitActionWindowMenuAtom;
-	extern Atom toolkitActionMainMenuAtom;
-	extern Atom toolkitActionRunDialogAtom;
 	extern Atom toolkitActionForceQuitDialogAtom;
 	extern Atom compizWindowBlurDecor;
 
