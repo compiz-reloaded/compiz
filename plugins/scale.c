@@ -321,11 +321,11 @@ setScaledPaintAttributes (CompWindow        *w,
 	    ss->opacity != OPAQUE		  &&
 	    ss->state   != SCALE_STATE_IN)
 	{
-    	    /* modify opacity of windows that are not active */
+	    /* modify opacity of windows that are not active */
 	    attrib->opacity = (attrib->opacity * ss->opacity) >> 16;
 	}
 
-     	drawScaled = TRUE;
+	drawScaled = TRUE;
     }
     else if (ss->state != SCALE_STATE_IN)
     {
@@ -335,7 +335,7 @@ setScaledPaintAttributes (CompWindow        *w,
 	    attrib->brightness = attrib->brightness / 2;
 	}
 
-     	/* hide windows on the outputs used for scaling 
+	/* hide windows on the outputs used for scaling
 	   that are not in scale mode */
 	if (!isNeverScaleWin (w))
 	{
@@ -344,11 +344,11 @@ setScaledPaintAttributes (CompWindow        *w,
 
 	    switch (moMode) {
 	    case SCALE_MOMODE_CURRENT:
-    		if (outputDeviceForWindow (w) == w->screen->currentOutputDev)
+		if (outputDeviceForWindow (w) == w->screen->currentOutputDev)
 		    attrib->opacity = 0;
 		break;
 	    default:
-	      	attrib->opacity = 0;
+		attrib->opacity = 0;
 		break;
 	    }
 	}
@@ -440,9 +440,9 @@ compareWindowsDistance (const void *elem1,
 	GET_SCALE_WINDOW (w2, ss)->distance;
 }
 
-static void 
-layoutSlotsForArea (CompScreen * s, 
-		    XRectangle workArea, 
+static void
+layoutSlotsForArea (CompScreen *s,
+		    XRectangle workArea,
 		    int        nWindows)
 {
     int i, j;
@@ -575,7 +575,7 @@ layoutSlots (CompScreen *s)
 
     moMode  = ss->opt[SCALE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
 
-    /* if we have only one head, we don't need the 
+    /* if we have only one head, we don't need the
        additional effort of the all outputs mode */
     if (s->nOutputDev == 1)
 	moMode = SCALE_MOMODE_CURRENT;
@@ -591,8 +591,8 @@ layoutSlots (CompScreen *s)
 	    if (slotAreas)
 	    {
 		for (i = 0; i < s->nOutputDev; i++)
-		    layoutSlotsForArea (s, 
-					slotAreas[i].workArea, 
+		    layoutSlotsForArea (s,
+					slotAreas[i].workArea,
 					slotAreas[i].nWindows);
 		free (slotAreas);
 	    }
@@ -1793,7 +1793,7 @@ scaleHandleEvent (CompDisplay *d,
 
 			if (!ss->hoverHandle)
 			    ss->hoverHandle =
- 				compAddTimeout (time, (float) time * 1.2,
+				compAddTimeout (time, (float) time * 1.2,
 						scaleHoverTimeout,
 						s);
 

@@ -4032,7 +4032,7 @@ moveResizeWindow (CompWindow     *w,
        safe to assume that the saved coordinates should be updated too, e.g.
        because the window was moved to another viewport by some client */
     if ((xwcm & CWX) && (w->saveMask & CWX))
-    	w->saveWc.x += (xwc->x - w->serverX);
+	w->saveWc.x += (xwc->x - w->serverX);
 
     if ((xwcm & CWY) && (w->saveMask & CWY))
 	w->saveWc.y += (xwc->y - w->serverY);

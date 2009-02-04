@@ -132,7 +132,7 @@ placeMatchXYValue (CompWindow *w,
 	{
 	    *x = xValues->value.list.value[i].i;
 	    *y = yValues->value.list.value[i].i;
-	    
+
 	    if (keepInWorkarea)
 	    {
 		if (constrain && constrain->value.list.nValue > i)
@@ -1102,7 +1102,7 @@ placeConstrainToWorkarea (CompWindow *w,
 
     delta = workArea->x - extents.left;
     if (delta > 0)
-    	extents.left  += delta;
+	extents.left  += delta;
 
     delta = workArea->y + workArea->height - extents.bottom;
     if (delta < 0)
@@ -1110,7 +1110,7 @@ placeConstrainToWorkarea (CompWindow *w,
 
     delta = workArea->y - extents.top;
     if (delta > 0)
-    	extents.top += delta;
+	extents.top += delta;
 
     *x = extents.left + w->input.left;
     *y = extents.top  + w->input.top;

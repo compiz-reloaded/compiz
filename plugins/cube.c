@@ -783,8 +783,8 @@ cubePreparePaintScreen (CompScreen *s,
     if (cs->desktopOpacity != cs->toOpacity ||
 	(progress > 0.0 && progress < 1.0))
     {
-	cs->desktopOpacity = 
-	    (cs->opt[CUBE_SCREEN_OPTION_INACTIVE_OPACITY].value.f - 
+	cs->desktopOpacity =
+	    (cs->opt[CUBE_SCREEN_OPTION_INACTIVE_OPACITY].value.f -
 	    ((cs->opt[CUBE_SCREEN_OPTION_INACTIVE_OPACITY].value.f -
 	    cs->opt[cs->lastOpacityIndex].value.f) * progress))
 	    / 100.0f * OPAQUE;
@@ -792,7 +792,7 @@ cubePreparePaintScreen (CompScreen *s,
     }
 
     cs->paintAllViewports = (cs->desktopOpacity != OPAQUE);
- 
+
     UNWRAP (cs, s, preparePaintScreen);
     (*s->preparePaintScreen) (s, msSinceLastPaint);
     WRAP (cs, s, preparePaintScreen, cubePreparePaintScreen);
@@ -989,7 +989,7 @@ cubeMoveViewportAndPaint (CompScreen		  *s,
 
 	setWindowPaintOffset (s, -dView * s->width, 0);
 	(*cs->paintViewport) (s, sAttrib, transform,
-			      &s->outputDev[output].region, 
+			      &s->outputDev[output].region,
 			      &s->outputDev[output], mask);
 	setWindowPaintOffset (s, 0, 0);
     }
@@ -1277,10 +1277,10 @@ cubePaintInside (CompScreen		 *s,
 }
 
 static void
-cubeEnableOutputClipping (CompScreen 	      *s,
+cubeEnableOutputClipping (CompScreen	      *s,
 			  const CompTransform *transform,
 			  Region	      region,
-			  CompOutput 	      *output)
+			  CompOutput	      *output)
 {
     CUBE_SCREEN (s);
 

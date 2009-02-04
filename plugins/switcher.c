@@ -1851,7 +1851,7 @@ static const CompMetadataOptionInfo switchDisplayOptionInfo[] = {
     { "next_panel_button", "button", 0, switchNextPanel, switchTerminate },
     { "next_panel_key", "key", 0, switchNextPanel, switchTerminate },
     { "prev_panel_button", "button", 0, switchPrevPanel, switchTerminate },
-    { "prev_panel_key", "key", 0, switchPrevPanel, switchTerminate } 
+    { "prev_panel_key", "key", 0, switchPrevPanel, switchTerminate }
 };
 
 static Bool

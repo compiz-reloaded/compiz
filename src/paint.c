@@ -315,7 +315,7 @@ paintOutputRegion (CompScreen	       *screen,
 
 		vTransform = *transform;
 		matrixTranslate (&vTransform, offX, offY, 0);
-	 
+
 		XOffsetRegion (w->clip, -offX, -offY);
 
 		odMask |= PAINT_WINDOW_WITH_OFFSET_MASK;
@@ -416,10 +416,10 @@ paintOutputRegion (CompScreen	       *screen,
 }
 
 void
-enableOutputClipping (CompScreen 	  *screen,
+enableOutputClipping (CompScreen	  *screen,
 		      const CompTransform *transform,
 		      Region		  region,
-		      CompOutput 	  *output)
+		      CompOutput	  *output)
 {
     GLdouble h = screen->height;
 

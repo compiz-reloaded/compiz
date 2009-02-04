@@ -181,7 +181,7 @@ shotSort (const void *_a,
 static void
 shotPaintScreen (CompScreen   *s,
 		 CompOutput   *outputs,
-		 int          numOutput,  
+		 int          numOutput,
 		 unsigned int mask)
 {
     SHOT_SCREEN (s);

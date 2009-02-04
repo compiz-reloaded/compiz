@@ -2930,7 +2930,7 @@ meta_button_present (MetaButtonLayout   *button_layout,
 		     MetaButtonFunction function)
 {
     int i;
-		     
+
     for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
 	if (button_layout->left_buttons[i] == function)
 	    return TRUE;
@@ -3963,7 +3963,7 @@ window_actions_changed (WnckWindow *win)
 	if (!update_window_decoration_size (win))
 	    queue_decor_draw (d);
 
-    	update_event_windows (win);
+	update_event_windows (win);
     }
 }
 
@@ -6040,7 +6040,7 @@ meta_update_button_layout (const char *value)
 	       b++;
 	    }
 	    new_layout.right_buttons[i] = META_BUTTON_FUNCTION_LAST;
-	    
+
 	    g_strfreev (buttons);
 	}
     }

@@ -284,7 +284,7 @@ fadePaintWindow (CompWindow		 *w,
 	    value = fs->opt[FADE_SCREEN_OPTION_UNRESPONSIVE_BRIGHTNESS].value.i;
 	    if (value != 100)
 		fAttrib.brightness = fAttrib.brightness * value / 100;
-	    
+
 	    value = fs->opt[FADE_SCREEN_OPTION_UNRESPONSIVE_SATURATION].value.i;
 	    if (value != 100 && s->canDoSlightlySaturated)
 		fAttrib.saturation = fAttrib.saturation * value / 100;
@@ -770,7 +770,7 @@ fadeFiniDisplay (CompPlugin  *p,
 }
 
 static const CompMetadataOptionInfo fadeScreenOptionInfo[] = {
-    { "fade_mode", "int", RESTOSTRING (0, FADE_MODE_MAX), 0, 0 }, 
+    { "fade_mode", "int", RESTOSTRING (0, FADE_MODE_MAX), 0, 0 },
     { "fade_speed", "float", "<min>0.1</min>", 0, 0 },
     { "fade_time", "int", "<min>1</min>", 0, 0 },
     { "window_match", "match", "<helper>true</helper>", 0, 0 },

@@ -1366,10 +1366,10 @@ typedef void (*ApplyScreenTransformProc) (CompScreen		  *screen,
 					  CompOutput		  *output,
 					  CompTransform	          *transform);
 
-typedef void (*EnableOutputClippingProc) (CompScreen 	      *screen,
+typedef void (*EnableOutputClippingProc) (CompScreen	      *screen,
 					  const CompTransform *transform,
 					  Region	      region,
-					  CompOutput 	      *output);
+					  CompOutput	      *output);
 
 typedef void (*DisableOutputClippingProc) (CompScreen *screen);
 
@@ -1508,7 +1508,7 @@ void
 enableOutputClipping (CompScreen	  *screen,
 		      const CompTransform *transform,
 		      Region		  region,
-		      CompOutput 	  *output);
+		      CompOutput	  *output);
 
 void
 disableOutputClipping (CompScreen *screen);

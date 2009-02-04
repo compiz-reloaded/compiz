@@ -1220,7 +1220,6 @@ getDstBlurFragmentFunction (CompScreen  *s,
 		ok &= addTempHeaderOpToFunctionData (data, str);
 	    }
 
-	    
 	    ok &= addFetchOpToFunctionData (data, "output", NULL, target);
 	    ok &= addColorOpToFunctionData (data, "output", "output");
 
@@ -1623,7 +1622,7 @@ fboUpdate (CompScreen *s,
 
     BLUR_SCREEN (s);
 
-    if (s->maxTextureUnits && 
+    if (s->maxTextureUnits &&
 	bs->opt[BLUR_SCREEN_OPTION_INDEPENDENT_TEX].value.b)
 	iTC = MIN ((s->maxTextureUnits - 1) / 2, bs->numTexop);
 
@@ -2294,7 +2293,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 		param = allocFragmentParameters (&dstFa, 3);
 		unit  = allocFragmentTextureUnits (&dstFa, 1);
 
-		function = 
+		function =
 		    getDstBlurFragmentFunction (s, texture, param, unit, 0, 0);
 		if (function)
 		{
@@ -2329,8 +2328,8 @@ blurDrawWindowTexture (CompWindow	    *w,
 		param = allocFragmentParameters (&dstFa, 2);
 		unit  = allocFragmentTextureUnits (&dstFa, 2);
 
-		function = 
-		    getDstBlurFragmentFunction (s, texture, param, unit, 
+		function =
+		    getDstBlurFragmentFunction (s, texture, param, unit,
 						iTC, w->texUnits);
 		if (function)
 		{
@@ -2454,7 +2453,7 @@ blurDrawWindowTexture (CompWindow	    *w,
 		param = allocFragmentParameters (&dstFa, 2);
 		unit  = allocFragmentTextureUnits (&dstFa, 1);
 
-		function = 
+		function =
 		    getDstBlurFragmentFunction (s, texture, param, unit, 0, 0);
 		if (function)
 		{
