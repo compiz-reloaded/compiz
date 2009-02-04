@@ -90,13 +90,17 @@ panelAction (CompDisplay *d,
 
     GNOME_DISPLAY (d);
 
-    xid = getIntOptionNamed (option, nOption, "window", 0);
+    xid = getIntOptionNamed (option, nOption, "root", 0);
     s   = findScreenAtDisplay (d, xid);
 
     if (!s)
 	return;
 
-    time = getIntOptionNamed (option, nOption, "time", 0);
+    time = getIntOptionNamed (option, nOption, "time", CurrentTime);
+
+    /* we need to ungrab the keyboard here, otherwise the panel main
+       menu won't popup as it wants to grab the keyboard itself */
+    XUngrabKeyboard (d->display, time);
 
     event.type                 = ClientMessage;
     event.xclient.window       = s->root;
@@ -140,7 +144,7 @@ showRunDialog (CompDisplay     *d,
 }
 static const CompMetadataOptionInfo gnomeDisplayOptionInfo[] = {
     { "main_menu_key", "key", 0, showMainMenu, 0 },
-    { "run_dialog_key", "key", 0, showRunDialog, 0 },
+    { "run_key", "key", 0, showRunDialog, 0 },
     { "command_screenshot", "string", 0, 0, 0 },
     { "run_command_screenshot_key", "key", 0, runDispatch, 0 },
     { "command_window_screenshot", "string", 0, 0, 0 },
