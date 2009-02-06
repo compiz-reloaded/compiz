@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-26 12:32+0530\n"
+"POT-Creation-Date: 2009-02-06 11:19+0530\n"
 "PO-Revision-Date: 2007-12-15 09:26+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@users.sf.net>\n"
 "Language-Team: American English <punjabi-users@llist.sf.net>\n"
@@ -39,7 +39,7 @@ msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 #, fuzzy
 msgid "Shade"
 msgstr "ਸੰਭਾਲੋ"
@@ -74,8 +74,8 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
-#: ../metadata/core.xml.in.in.h:161
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../metadata/core.xml.in.in.h:100
 #, fuzzy
 msgid "Window Menu"
 msgstr "ਝਰੋਖਾ ਪਰਬੰਧਕ"
@@ -142,59 +142,59 @@ msgstr "ਮੇਟਾਸਿਟੀ ਥੀਮ ਵਰਤੋਂ"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "ਵਿੰਡੋ ਸਜਾਵਟ ਡਰਾਇੰਗ ਦੌਰਾਨ ਮੇਟਾਸਿਟੀ ਥੀਮ ਵਰਤੋਂ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4420
-#: ../metadata/core.xml.in.in.h:24
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.in.h:12
 #, fuzzy
 msgid "Close Window"
 msgstr "Win&dows ਹਟਾਓ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4442
-#: ../metadata/core.xml.in.in.h:154
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4445
-#: ../metadata/core.xml.in.in.h:86
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "ਵਿੰਡੋ ਅਧਿਕਤਮ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4487
-#: ../metadata/core.xml.in.in.h:92
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../metadata/core.xml.in.in.h:55
 #, fuzzy
 msgid "Minimize Window"
 msgstr "Window&s ਸਮੇਟੋ"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4651
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4677
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4697
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4717
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4743
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5112
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5121
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5136
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr ""
 
@@ -436,21 +436,119 @@ msgstr "Init"
 msgid "Output clone handler"
 msgstr "ਆਉਟਪੁੱਟ ਕਲੋਨ ਹੈਂਡਲਰ"
 
-#: ../metadata/core.xml.in.in.h:1
+#: ../metadata/commands.xml.in.h:1
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command0 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:2
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command1 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:3
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command10 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ "
+"ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:4
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command11 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ "
+"ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:5
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command2 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:6
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command3 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:7
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command5 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:8
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command5 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:9
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command6 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:10
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command7 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:11
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command8 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:12
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command9 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command0 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:2
+#: ../metadata/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command1 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
@@ -458,7 +556,7 @@ msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command10 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ "
 "ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
@@ -466,714 +564,768 @@ msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command11 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ "
 "ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:5
+#: ../metadata/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command2 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:6
+#: ../metadata/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command3 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:7
+#: ../metadata/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command5 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:8
+#: ../metadata/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command5 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:9
+#: ../metadata/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command6 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:10
+#: ../metadata/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command7 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:11
+#: ../metadata/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command8 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:12
+#: ../metadata/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
 "ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command9 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:13
+#: ../metadata/commands.xml.in.h:25
 #, fuzzy
-msgid "Active Plugins"
-msgstr "ਸਰਗਰਮ ਪਰੋਫਾਇਲ"
-
-#: ../metadata/core.xml.in.in.h:14
 msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr "ਪੂਰੀ ਸਕਰੀਨ ਵਿੰਡੋਜ਼ ਦੀ ਡਰਾਇੰਗ ਨੂੰ ਆਫ਼-ਸਕਰੀਨ ਪਿਕਸਮੈਪ ਨੂੰ ਰੀ-ਡਿਰੈਕਟ ਨਾ ਕਰਨ ਲਈ ਮਨਜ਼ੂਰੀ"
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command0 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:15
-msgid "Audible Bell"
-msgstr "ਸੁਣਨਯੋਗ ਘੰਟੀ"
-
-#: ../metadata/core.xml.in.in.h:16
+#: ../metadata/commands.xml.in.h:26
 #, fuzzy
-msgid "Audible system beep"
-msgstr "ਫਾਇਲ ਸਿਸਟਮ"
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command1 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:17
+#: ../metadata/commands.xml.in.h:27
 #, fuzzy
-msgid "Auto-Raise"
-msgstr "ਸਵੈ-ਚਾਲਤ"
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command10 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ "
+"ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:18
-msgid "Auto-Raise Delay"
-msgstr "ਆਟੋ-ਉਭਾਰਨ ਅੰਤਰਾਲ"
-
-#: ../metadata/core.xml.in.in.h:19
-msgid "Automatic detection of output devices"
-msgstr "ਆਉਟਪੁੱਟ ਜੰਤਰਾਂ ਦੀ ਆਟੋਮੈਟਿਕ ਖੋਜ"
-
-#: ../metadata/core.xml.in.in.h:20
-msgid "Automatic detection of refresh rate"
-msgstr "ਤਾਜ਼ਾ ਦਰ ਲਈ ਆਟੋਮੈਟਿਕ ਖੋਜ"
-
-#: ../metadata/core.xml.in.in.h:21
-msgid "Best"
-msgstr "ਉੱਤਮ"
-
-#: ../metadata/core.xml.in.in.h:22
-msgid "Click To Focus"
-msgstr "ਫੋਕਸ ਲਈ ਕਲਿੱਕ ਕਰੋ"
-
-#: ../metadata/core.xml.in.in.h:23
-msgid "Click on window moves input focus to it"
-msgstr "ਵਿੰਡੋ ਲਈ ਇੰਪੁੱਟ ਫੋਕਸ ਲੈਣ ਲਈ ਕਲਿੱਕ ਕਰੋ"
-
-#: ../metadata/core.xml.in.in.h:25
-msgid "Close active window"
-msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਬੰਦ ਕਰੋ"
-
-#: ../metadata/core.xml.in.in.h:26
+#: ../metadata/commands.xml.in.h:28
 #, fuzzy
-msgid "Command line 0"
-msgstr "ਕਮਾਂਡ: "
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command11 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ "
+"ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:27
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command2 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command3 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command5 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command5 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command6 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command7 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command8 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"ਇੱਕ ਕੀ-ਬਾਈਡਿੰਗ, ਜੋ ਕਿ ਉਦੋਂ ਸ਼ਾਮਲ ਹੁੰਦੀ ਹੈ, ਜਦੋਂ command9 ਰਾਹੀਂ ਪਛਾਣੀ ਸ਼ੈੱਲ ਕਮਾਂਡ ਰਾਹੀਂ ਚੱਲਦੀ ਹੈ।"
+
+#: ../metadata/commands.xml.in.h:37
+msgid "Assigns bindings to arbitrary commands"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:38
+msgid "Button Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:39
 #, fuzzy
 msgid "Command line 1"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:28
+#: ../metadata/commands.xml.in.h:40
 #, fuzzy
 msgid "Command line 10"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:29
+#: ../metadata/commands.xml.in.h:41
 #, fuzzy
 msgid "Command line 11"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:30
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:43
 #, fuzzy
 msgid "Command line 2"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:31
+#: ../metadata/commands.xml.in.h:44
 #, fuzzy
 msgid "Command line 3"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:32
+#: ../metadata/commands.xml.in.h:45
 #, fuzzy
 msgid "Command line 4"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:33
+#: ../metadata/commands.xml.in.h:46
 #, fuzzy
 msgid "Command line 5"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:34
+#: ../metadata/commands.xml.in.h:47
 #, fuzzy
 msgid "Command line 6"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:35
+#: ../metadata/commands.xml.in.h:48
 #, fuzzy
 msgid "Command line 7"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:36
+#: ../metadata/commands.xml.in.h:49
 #, fuzzy
 msgid "Command line 8"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:37
+#: ../metadata/commands.xml.in.h:50
 #, fuzzy
 msgid "Command line 9"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:38
+#: ../metadata/commands.xml.in.h:51
 msgid "Command line to be executed in shell when run_command0 is invoked"
 msgstr "ਜਦੋਂ run_command0 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:39
+#: ../metadata/commands.xml.in.h:52
 msgid "Command line to be executed in shell when run_command1 is invoked"
 msgstr "ਜਦੋਂ run_command1 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:40
+#: ../metadata/commands.xml.in.h:53
 msgid "Command line to be executed in shell when run_command10 is invoked"
 msgstr "ਜਦੋਂ run_command10 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:41
+#: ../metadata/commands.xml.in.h:54
 msgid "Command line to be executed in shell when run_command11 is invoked"
 msgstr "ਜਦੋਂ run_command11 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:42
+#: ../metadata/commands.xml.in.h:55
 msgid "Command line to be executed in shell when run_command2 is invoked"
 msgstr "ਜਦੋਂ run_command2 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:43
+#: ../metadata/commands.xml.in.h:56
 msgid "Command line to be executed in shell when run_command3 is invoked"
 msgstr "ਜਦੋਂ run_command3 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:44
+#: ../metadata/commands.xml.in.h:57
 msgid "Command line to be executed in shell when run_command4 is invoked"
 msgstr "ਜਦੋਂ run_command4 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:45
+#: ../metadata/commands.xml.in.h:58
 msgid "Command line to be executed in shell when run_command5 is invoked"
 msgstr "ਜਦੋਂ run_command5 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:46
+#: ../metadata/commands.xml.in.h:59
 msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr "ਜਦੋਂ run_command6 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:47
+#: ../metadata/commands.xml.in.h:60
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr "ਜਦੋਂ run_command7 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:48
+#: ../metadata/commands.xml.in.h:61
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr "ਜਦੋਂ run_command8 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:49
+#: ../metadata/commands.xml.in.h:62
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "ਜਦੋਂ run_command9 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/core.xml.in.in.h:50
+#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "ਕਮਾਂਡ: "
 
-#: ../metadata/core.xml.in.in.h:51
+#: ../metadata/commands.xml.in.h:64
+msgid "Edge Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:65
+msgid "Key Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:66
+#, fuzzy
+msgid "Run command 1"
+msgstr "ਕਮਾਂਡ '%1'"
+
+#: ../metadata/commands.xml.in.h:67
+#, fuzzy
+msgid "Run command 10"
+msgstr "ਕਮਾਂਡ '%1'"
+
+#: ../metadata/commands.xml.in.h:68
+#, fuzzy
+msgid "Run command 11"
+msgstr "ਕਮਾਂਡ '%1'"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "ਕਮਾਂਡ '%1'"
+
+#: ../metadata/commands.xml.in.h:70
+#, fuzzy
+msgid "Run command 2"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:71
+#, fuzzy
+msgid "Run command 3"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:72
+#, fuzzy
+msgid "Run command 4"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:73
+#, fuzzy
+msgid "Run command 5"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:74
+#, fuzzy
+msgid "Run command 6"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:75
+#, fuzzy
+msgid "Run command 7"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:76
+#, fuzzy
+msgid "Run command 8"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/commands.xml.in.h:77
+#, fuzzy
+msgid "Run command 9"
+msgstr "ਕਮਾਂਡ: "
+
+#: ../metadata/core.xml.in.in.h:1
+#, fuzzy
+msgid "Active Plugins"
+msgstr "ਸਰਗਰਮ ਪਰੋਫਾਇਲ"
+
+#: ../metadata/core.xml.in.in.h:2
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr "ਪੂਰੀ ਸਕਰੀਨ ਵਿੰਡੋਜ਼ ਦੀ ਡਰਾਇੰਗ ਨੂੰ ਆਫ਼-ਸਕਰੀਨ ਪਿਕਸਮੈਪ ਨੂੰ ਰੀ-ਡਿਰੈਕਟ ਨਾ ਕਰਨ ਲਈ ਮਨਜ਼ੂਰੀ"
+
+#: ../metadata/core.xml.in.in.h:3
+msgid "Audible Bell"
+msgstr "ਸੁਣਨਯੋਗ ਘੰਟੀ"
+
+#: ../metadata/core.xml.in.in.h:4
+#, fuzzy
+msgid "Audible system beep"
+msgstr "ਫਾਇਲ ਸਿਸਟਮ"
+
+#: ../metadata/core.xml.in.in.h:5
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "ਸਵੈ-ਚਾਲਤ"
+
+#: ../metadata/core.xml.in.in.h:6
+msgid "Auto-Raise Delay"
+msgstr "ਆਟੋ-ਉਭਾਰਨ ਅੰਤਰਾਲ"
+
+#: ../metadata/core.xml.in.in.h:7
+msgid "Automatic detection of output devices"
+msgstr "ਆਉਟਪੁੱਟ ਜੰਤਰਾਂ ਦੀ ਆਟੋਮੈਟਿਕ ਖੋਜ"
+
+#: ../metadata/core.xml.in.in.h:8
+msgid "Automatic detection of refresh rate"
+msgstr "ਤਾਜ਼ਾ ਦਰ ਲਈ ਆਟੋਮੈਟਿਕ ਖੋਜ"
+
+#: ../metadata/core.xml.in.in.h:9
+msgid "Best"
+msgstr "ਉੱਤਮ"
+
+#: ../metadata/core.xml.in.in.h:10
+msgid "Click To Focus"
+msgstr "ਫੋਕਸ ਲਈ ਕਲਿੱਕ ਕਰੋ"
+
+#: ../metadata/core.xml.in.in.h:11
+msgid "Click on window moves input focus to it"
+msgstr "ਵਿੰਡੋ ਲਈ ਇੰਪੁੱਟ ਫੋਕਸ ਲੈਣ ਲਈ ਕਲਿੱਕ ਕਰੋ"
+
+#: ../metadata/core.xml.in.in.h:13
+msgid "Close active window"
+msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਬੰਦ ਕਰੋ"
+
+#: ../metadata/core.xml.in.in.h:14
 #, fuzzy
 msgid "Default Icon"
 msgstr "ਮੂਲ ਹਿੱਸਾ"
 
-#: ../metadata/core.xml.in.in.h:52
+#: ../metadata/core.xml.in.in.h:15
 #, fuzzy
 msgid "Default window icon image"
 msgstr "ਮੂਲ ਡੋਮੇਨ"
 
-#: ../metadata/core.xml.in.in.h:53
+#: ../metadata/core.xml.in.in.h:16
 #, fuzzy
 msgid "Desktop Size"
 msgstr "ਵੇਹੜਾ"
 
-#: ../metadata/core.xml.in.in.h:54
+#: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
 msgstr "ਆਉਟਪੁੱਟ ਖੋਜੋ"
 
-#: ../metadata/core.xml.in.in.h:55
+#: ../metadata/core.xml.in.in.h:18
 #, fuzzy
 msgid "Detect Refresh Rate"
 msgstr "ਅੱਪਡੇਟ ਲਈ ਚੁਣੋ"
 
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/core.xml.in.in.h:20
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:58
+#: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "ਤੇਜ਼"
 
-#: ../metadata/core.xml.in.in.h:60
+#: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:61
+#: ../metadata/core.xml.in.in.h:24
 #, fuzzy
 msgid "Focus Prevention Level"
 msgstr "ਫੋਕਸ ਤੋਂ ਬਚਾਅ ਵਿੰਡੋ"
 
-#: ../metadata/core.xml.in.in.h:62
+#: ../metadata/core.xml.in.in.h:25
 msgid "Focus Prevention Windows"
 msgstr "ਫੋਕਸ ਤੋਂ ਬਚਾਅ ਵਿੰਡੋ"
 
-#: ../metadata/core.xml.in.in.h:63
+#: ../metadata/core.xml.in.in.h:26
 #, fuzzy
 msgid "Focus prevention windows"
 msgstr "ਡੈਮਨ ਚਲਾ ਰਿਹਾ ਹੈ।"
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:65
+#: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
 msgstr "ਆਮ ਚੋਣਾਂ"
 
-#: ../metadata/core.xml.in.in.h:66
+#: ../metadata/core.xml.in.in.h:29
 msgid "General compiz options"
 msgstr "ਆਮ ਕੰਪਿਜ਼ ਚੋਣਾਂ"
 
-#: ../metadata/core.xml.in.in.h:67
+#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "ਚੰਗਾ"
 
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.in.h:31
 msgid "Hide Skip Taskbar Windows"
 msgstr "ਗ਼ੈਰ-ਟਾਸਕਬਾਰ ਵਿੰਡੋ ਓਹਲੇ"
 
-#: ../metadata/core.xml.in.in.h:69
+#: ../metadata/core.xml.in.in.h:32
 msgid "Hide all windows and focus desktop"
 msgstr "ਸਭ ਵਿੰਡੋ ਓਹਲੇ ਕਰੋ ਅਤੇ ਡੈਸਕਟਾਪ ਫੋਕਸ ਕਰੋ"
 
-#: ../metadata/core.xml.in.in.h:70
+#: ../metadata/core.xml.in.in.h:33
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "ਜਦੋਂ ਡੈਸਕਟਾਪ ਮੋਡ ਵਿੱਚ ਜਾਣ ਲੱਗੋ ਤਾਂ ਟਾਸਕਬਾਰ ਵਿੱਚ ਨਾ ਮੌਜੂਦ ਵਿੰਡੋ ਓਹਲੇ"
 
-#: ../metadata/core.xml.in.in.h:71
+#: ../metadata/core.xml.in.in.h:34
 msgid "High"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.in.h:35
 #, fuzzy
 msgid "Horizontal Virtual Size"
 msgstr "ਫ਼ਰਜ਼ੀ ਜੰਤਰ"
 
-#: ../metadata/core.xml.in.in.h:73
+#: ../metadata/core.xml.in.in.h:36
 msgid "If available use compression for textures converted from images"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.in.h:37
 msgid "Ignore Hints When Maximized"
 msgstr "ਜਦੋਂ ਵੱਧੋ-ਵੱਧ ਹੋਵੇ ਤਾਂ ਹਿੰਟ ਅਣਡਿੱਠੇ"
 
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "ਜਦੋਂ ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਹੋਵੇ ਤਾਂ ਵਾਧਾ ਸਾਈਜ਼ ਅਤੇ ਅਨੁਪਾਤ ਹਿੰਟ ਅਣਡਿੱਠੇ"
 
-#: ../metadata/core.xml.in.in.h:76
+#: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
 msgstr "ਚੁਣੇ ਵਿੰਡੋ ਉਭਾਰਨ ਤੋਂ ਪਹਿਲਾਂ ਅੰਤਰਾਲ"
 
-#: ../metadata/core.xml.in.in.h:77
+#: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
 msgstr "ਪਿੰਗ ਸੁਨੇਹਿਆਂ ਦੌਰਾਨ ਅੰਤਰਾਲ"
 
-#: ../metadata/core.xml.in.in.h:78
+#: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:79
+#: ../metadata/core.xml.in.in.h:42
 #, fuzzy
 msgid "Level of focus stealing prevention"
 msgstr "ਸਵੈ-ਮੁਅੱਤਲ ਯੋਗ"
 
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:43
 #, fuzzy
 msgid "Lighting"
 msgstr "ਲਾਗਿੰਗ"
 
-#: ../metadata/core.xml.in.in.h:81
+#: ../metadata/core.xml.in.in.h:44
 #, fuzzy
 msgid "List of currently active plugins"
 msgstr "ਖੋਜੇ ਪਰਿੰਟਰ ਹੀ ਵੇਖਾਓ"
 
-#: ../metadata/core.xml.in.in.h:82
+#: ../metadata/core.xml.in.in.h:45
 msgid "List of strings describing output devices"
 msgstr " ਆਉਟਪੁੱਟ ਜੰਤਰਾਂ ਬਾਰੇ ਜਾਣਕਾਰੀ ਲਈ ਲਾਈਨਾਂ ਦੀ ਲਿਸਟ"
 
-#: ../metadata/core.xml.in.in.h:83
+#: ../metadata/core.xml.in.in.h:46
 msgid "Low"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:84
+#: ../metadata/core.xml.in.in.h:47
 #, fuzzy
 msgid "Lower Window"
 msgstr "Windows"
 
-#: ../metadata/core.xml.in.in.h:85
+#: ../metadata/core.xml.in.in.h:48
 msgid "Lower window beneath other windows"
 msgstr "ਵਿੰਡੋ ਨੂੰ ਹੋਰ ਵਿੰਡੋ ਦੇ ਹੇਠਾਂ ਭੇਜੋ"
 
-#: ../metadata/core.xml.in.in.h:87
+#: ../metadata/core.xml.in.in.h:50
 #, fuzzy
 msgid "Maximize Window Horizontally"
 msgstr "Window&s ਸਮੇਟੋ"
 
-#: ../metadata/core.xml.in.in.h:88
+#: ../metadata/core.xml.in.in.h:51
 #, fuzzy
 msgid "Maximize Window Vertically"
 msgstr "Window&s ਸਮੇਟੋ"
 
-#: ../metadata/core.xml.in.in.h:89
+#: ../metadata/core.xml.in.in.h:52
 msgid "Maximize active window"
 msgstr "ਵੱਧੋ-ਵੱਧ ਐਕਟਿਵ ਵਿੰਡੋ"
 
-#: ../metadata/core.xml.in.in.h:90
+#: ../metadata/core.xml.in.in.h:53
 msgid "Maximize active window horizontally"
 msgstr "ਵੱਧੋ-ਵੱਧ ਐਕਟਿਵ ਵਿੰਡੋ ਹਰੀਜ਼ਟਲ"
 
-#: ../metadata/core.xml.in.in.h:91
+#: ../metadata/core.xml.in.in.h:54
 msgid "Maximize active window vertically"
 msgstr "ਵੱਧੋ-ਵੱਧ ਐਕਟਿਵ ਵਿੰਡੋ ਵਰਟੀਕਲ"
 
-#: ../metadata/core.xml.in.in.h:93
+#: ../metadata/core.xml.in.in.h:56
 msgid "Minimize active window"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਘੱਟੋ-ਘੱਟ"
 
-#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "ਸਧਾਰਨ"
 
-#: ../metadata/core.xml.in.in.h:95
+#: ../metadata/core.xml.in.in.h:58
 #, fuzzy
 msgid "Number of Desktops"
 msgstr "ਵੇਹੜਾ"
 
-#: ../metadata/core.xml.in.in.h:96
+#: ../metadata/core.xml.in.in.h:59
 #, fuzzy
 msgid "Number of virtual desktops"
 msgstr "ਵੇਹੜਾ"
 
-#: ../metadata/core.xml.in.in.h:97
+#: ../metadata/core.xml.in.in.h:60
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:98
+#: ../metadata/core.xml.in.in.h:61
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "ਵਰਟੀਕਲ ਝਪਕ ਪੀਰੀਅਡ ਦੌਰਾਨ ਹੀ ਸਕਰੀਨ ਅੱਪਡੇਟ ਕਰੋ"
 
-#: ../metadata/core.xml.in.in.h:99
-msgid "Open a terminal"
-msgstr "ਇੱਕ ਟਰਮੀਨਲ ਖੋਲ੍ਹੋ"
-
-#: ../metadata/core.xml.in.in.h:100
+#: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
 msgstr "ਆਉਟਪੁੱਟ"
 
-#: ../metadata/core.xml.in.in.h:101
+#: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:102
+#: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:103
+#: ../metadata/core.xml.in.in.h:65
 #, fuzzy
 msgid "Ping Delay"
 msgstr "ਵਕਫਾ"
 
-#: ../metadata/core.xml.in.in.h:104
+#: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:105
+#: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:106
+#: ../metadata/core.xml.in.in.h:68
 #, fuzzy
 msgid "Raise On Click"
 msgstr "ਰੇਡੀਓ ਘੜੀ(&R)"
 
-#: ../metadata/core.xml.in.in.h:107
+#: ../metadata/core.xml.in.in.h:69
 #, fuzzy
 msgid "Raise Window"
 msgstr "Win&dows ਹਟਾਓ"
 
-#: ../metadata/core.xml.in.in.h:108
+#: ../metadata/core.xml.in.in.h:70
 msgid "Raise selected windows after interval"
 msgstr "ਚੁਣੇ ਵਿੰਡੋ ਅੰਤਰਾਲ ਬਾਅਦ ਉਭਾਰੋ"
 
-#: ../metadata/core.xml.in.in.h:109
+#: ../metadata/core.xml.in.in.h:71
 msgid "Raise window above other windows"
 msgstr "ਵਿੰਡੋ ਨੂੰ ਹੋਰ ਵਿੰਡੋਜ਼ ਉੱਤੇ ਉਭਾਰੋ"
 
-#: ../metadata/core.xml.in.in.h:110
+#: ../metadata/core.xml.in.in.h:72
 msgid "Raise windows when clicked"
 msgstr "ਵਿੰਡੋ ਉਭਾਰੋ, ਜਦੋਂ ਕਲਿੱਕ ਕੀਤਾ ਜਾਵੇ"
 
-#: ../metadata/core.xml.in.in.h:111
+#: ../metadata/core.xml.in.in.h:73
 #, fuzzy
 msgid "Refresh Rate"
 msgstr "ਤਾਜ਼ਾ"
 
-#: ../metadata/core.xml.in.in.h:112
-#, fuzzy
-msgid "Run Dialog"
-msgstr "ਟੋਨ ਡਾਇਲ(&T)"
-
-#: ../metadata/core.xml.in.in.h:113
-#, fuzzy
-msgid "Run command 0"
-msgstr "ਕਮਾਂਡ '%1'"
-
-#: ../metadata/core.xml.in.in.h:114
-#, fuzzy
-msgid "Run command 1"
-msgstr "ਕਮਾਂਡ '%1'"
-
-#: ../metadata/core.xml.in.in.h:115
-#, fuzzy
-msgid "Run command 10"
-msgstr "ਕਮਾਂਡ '%1'"
-
-#: ../metadata/core.xml.in.in.h:116
-#, fuzzy
-msgid "Run command 11"
-msgstr "ਕਮਾਂਡ '%1'"
-
-#: ../metadata/core.xml.in.in.h:117
-#, fuzzy
-msgid "Run command 2"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:118
-#, fuzzy
-msgid "Run command 3"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:119
-#, fuzzy
-msgid "Run command 4"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:120
-#, fuzzy
-msgid "Run command 5"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:121
-#, fuzzy
-msgid "Run command 6"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:122
-#, fuzzy
-msgid "Run command 7"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:123
-#, fuzzy
-msgid "Run command 8"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:124
-#, fuzzy
-msgid "Run command 9"
-msgstr "ਕਮਾਂਡ: "
-
-#: ../metadata/core.xml.in.in.h:125
-#, fuzzy
-msgid "Run terminal command"
-msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
-
-#: ../metadata/core.xml.in.in.h:126
+#: ../metadata/core.xml.in.in.h:74
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "ਹਰੀਜੱਟਲ ਵੁਰਚੁਅਲ ਸਾਈਜ਼ ਲਈ ਸਕਰੀਨ ਸਾਈਜ਼ ਮਲਟੀਪਲਾਇਰ"
 
-#: ../metadata/core.xml.in.in.h:127
+#: ../metadata/core.xml.in.in.h:75
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "ਵਰਟੀਕਲ ਵੁਰਚੁਅਲ ਸਾਈਜ਼ ਲਈ ਸਕਰੀਨ ਸਾਈਜ਼ ਮਲਟੀਪਲਾਇਰ"
 
-#: ../metadata/core.xml.in.in.h:128
-#, fuzzy
-msgid "Screenshot command line"
-msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
-
-#: ../metadata/core.xml.in.in.h:129
-#, fuzzy
-msgid "Screenshot commands"
-msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
-
-#: ../metadata/core.xml.in.in.h:130
-#, fuzzy
-msgid "Screenshot key bindings"
-msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
-
-#: ../metadata/core.xml.in.in.h:131
+#: ../metadata/core.xml.in.in.h:76
 #, fuzzy
 msgid "Show Desktop"
 msgstr "ਵੇਹੜਾ"
 
-#: ../metadata/core.xml.in.in.h:132
-#, fuzzy
-msgid "Show Main Menu"
-msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
-
-#: ../metadata/core.xml.in.in.h:133
-msgid "Show Run Application dialog"
-msgstr "ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਓ ਡਾਈਲਾਗ ਵੇਖੋ"
-
-#: ../metadata/core.xml.in.in.h:134
-#, fuzzy
-msgid "Show the main menu"
-msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
-
-#: ../metadata/core.xml.in.in.h:135
+#: ../metadata/core.xml.in.in.h:77
 #, fuzzy
 msgid "Slow Animations"
 msgstr "ਸਾਰੇ ਭਾਗ ਵਿਖਾਓ"
 
-#: ../metadata/core.xml.in.in.h:136
+#: ../metadata/core.xml.in.in.h:78
 #, fuzzy
 msgid "Smart mode"
 msgstr "ਸਮਾਰਟ"
 
-#: ../metadata/core.xml.in.in.h:137
+#: ../metadata/core.xml.in.in.h:79
 msgid "Sync To VBlank"
 msgstr "VBlank ਨਾਲ ਸੈਕਰੋਨਾਈਜ਼"
 
-#: ../metadata/core.xml.in.in.h:138
-msgid "Take a screenshot"
-msgstr "ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
-
-#: ../metadata/core.xml.in.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "ਇੱਕ ਵਿੰਡੋ ਦਾ ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
-
-#: ../metadata/core.xml.in.in.h:140
-#, fuzzy
-msgid "Terminal command line"
-msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
-
-#: ../metadata/core.xml.in.in.h:141
+#: ../metadata/core.xml.in.in.h:80
 #, fuzzy
 msgid "Texture Compression"
 msgstr "ਫਿਲਟਰ ਸੈਟ(&S)"
 
-#: ../metadata/core.xml.in.in.h:142
+#: ../metadata/core.xml.in.in.h:81
 #, fuzzy
 msgid "Texture Filter"
 msgstr "ਫਿਲਟਰ ਸੈਟ(&S)"
 
-#: ../metadata/core.xml.in.in.h:143
+#: ../metadata/core.xml.in.in.h:82
 #, fuzzy
 msgid "Texture filtering"
 msgstr "ਫਿਲਟਰ ਸੈਟ(&S)"
 
-#: ../metadata/core.xml.in.in.h:144
+#: ../metadata/core.xml.in.in.h:83
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "ਰੇਟ, ਜਿਸ ਮੁਤਾਬਕ ਸਕਰੀਨ ਨੂੰ ਰੀ-ਡਰਾਅ ਕੀਤਾ ਜਾਵੇ (ਟਾਈਮ/ਸਕਿੰਟ)"
 
-#: ../metadata/core.xml.in.in.h:145
+#: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
 msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:146
+#: ../metadata/core.xml.in.in.h:85
 msgid "Toggle Window Maximized Horizontally"
 msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਹਰੀਜ਼ਟਲ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:147
+#: ../metadata/core.xml.in.in.h:86
 msgid "Toggle Window Maximized Vertically"
 msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਵਰਟੀਕਲ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:148
+#: ../metadata/core.xml.in.in.h:87
 msgid "Toggle Window Shaded"
 msgstr "ਵਿੰਡੋ ਸ਼ੇਡ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:149
+#: ../metadata/core.xml.in.in.h:88
 msgid "Toggle active window maximized"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:150
+#: ../metadata/core.xml.in.in.h:89
 msgid "Toggle active window maximized horizontally"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਹਰੀਜੱਟਲ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:151
+#: ../metadata/core.xml.in.in.h:90
 msgid "Toggle active window maximized vertically"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਵਰਟੀਕਲ ਵੱਧੋ-ਵੱਧ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:152
+#: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
 msgstr "ਸਰਗਰਮ ਵਿੰਡੋ ਸ਼ੇਡ ਬਦਲੋ"
 
-#: ../metadata/core.xml.in.in.h:153
+#: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
 msgstr "ਹੌਲੀ ਐਨੀਮੇਸ਼ਨ ਲਈ ਟਾਗਲ ਵਰਤੋਂ"
 
-#: ../metadata/core.xml.in.in.h:155
+#: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
 msgstr "ਐਕਟਿਵ ਵਿੰਡੋ ਅਣ-ਵੱਧੋ-ਵੱਧ"
 
-#: ../metadata/core.xml.in.in.h:156
+#: ../metadata/core.xml.in.in.h:95
 msgid "Unredirect Fullscreen Windows"
 msgstr "ਪੂਰੀ-ਸਕਰੀਨ ਵਿੰਡੋ ਗ਼ੈਰ-ਡਿਰੈਕਸ਼ਨ"
 
-#: ../metadata/core.xml.in.in.h:157
+#: ../metadata/core.xml.in.in.h:96
 msgid "Use diffuse light when screen is transformed"
 msgstr "ਜਦੋਂ ਸਕਰੀਨ ਟਰਾਂਸਫਰਮ ਕੀਤੀ ਜਾਵੇ ਤਾਂ ਹਲਕੀ ਲਾਈਟ ਵਰਤੋਂ"
 
-#: ../metadata/core.xml.in.in.h:158
+#: ../metadata/core.xml.in.in.h:97
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "ਫ਼ਰਜ਼ੀ ਜੰਤਰ"
 
-#: ../metadata/core.xml.in.in.h:159
+#: ../metadata/core.xml.in.in.h:98
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:160
+#: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:162
+#: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
 msgstr "ਵਿੰਡੋ ਮੇਨੂ ਬਟਨ ਬਾਈਡਿੰਗ"
 
-#: ../metadata/core.xml.in.in.h:163
+#: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
 msgstr "ਵਿੰਡੋ ਮੇਨੂ ਕੀ ਬਾਈਡਿੰਗ"
-
-#: ../metadata/core.xml.in.in.h:164
-msgid "Window screenshot command line"
-msgstr "ਵਿੰਡੋ ਸਕਰੀਨ-ਸ਼ਾਟ ਕਮਾਂਡ ਲਾਈਨ"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 #, fuzzy
@@ -1642,6 +1794,64 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "GLib ਮੇਨ ਲੂਪ ਸਹਿਯੋਗ"
 
+#: ../metadata/gnomecompat.xml.in.h:2
+msgid "Gnome Compatibility"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:3
+msgid "Open a terminal"
+msgstr "ਇੱਕ ਟਰਮੀਨਲ ਖੋਲ੍ਹੋ"
+
+#: ../metadata/gnomecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:5
+#, fuzzy
+msgid "Run Dialog"
+msgstr "ਟੋਨ ਡਾਇਲ(&T)"
+
+#: ../metadata/gnomecompat.xml.in.h:6
+#, fuzzy
+msgid "Run terminal command"
+msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
+
+#: ../metadata/gnomecompat.xml.in.h:7
+#, fuzzy
+msgid "Screenshot command line"
+msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
+
+#: ../metadata/gnomecompat.xml.in.h:8
+#, fuzzy
+msgid "Show Main Menu"
+msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
+
+#: ../metadata/gnomecompat.xml.in.h:9
+msgid "Show Run Application dialog"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਓ ਡਾਈਲਾਗ ਵੇਖੋ"
+
+#: ../metadata/gnomecompat.xml.in.h:10
+#, fuzzy
+msgid "Show the main menu"
+msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
+
+#: ../metadata/gnomecompat.xml.in.h:11
+msgid "Take a screenshot"
+msgstr "ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
+
+#: ../metadata/gnomecompat.xml.in.h:12
+msgid "Take a screenshot of a window"
+msgstr "ਇੱਕ ਵਿੰਡੋ ਦਾ ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
+
+#: ../metadata/gnomecompat.xml.in.h:13
+#, fuzzy
+msgid "Terminal command line"
+msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
+
+#: ../metadata/gnomecompat.xml.in.h:14
+msgid "Window screenshot command line"
+msgstr "ਵਿੰਡੋ ਸਕਰੀਨ-ਸ਼ਾਟ ਕਮਾਂਡ ਲਾਈਨ"
+
 #: ../metadata/ini.xml.in.h:1
 #, fuzzy
 msgid "Ini"
@@ -1737,8 +1947,8 @@ msgstr "ਹੇਠਾਂ ਜਾਓ(&D)"
 msgid "Move window"
 msgstr "ਹੇਠਾਂ ਜਾਓ(&D)"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
 #, fuzzy
 msgid "Opacity"
 msgstr "ਘੱਟ ਸਮਰੱਥਾ(&L)"
@@ -1761,6 +1971,126 @@ msgstr "Window&s ਸਮੇਟੋ"
 #, fuzzy
 msgid "Start moving window"
 msgstr "ਡੈਮਨ ਚਲਾ ਰਿਹਾ ਹੈ।"
+
+#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+#, fuzzy
+msgid "Brightness"
+msgstr "ਬਰਿੱਜ"
+
+#: ../metadata/obs.xml.in.h:2
+#, fuzzy
+msgid "Brightness Decrease"
+msgstr "ਬਰਿੱਜ"
+
+#: ../metadata/obs.xml.in.h:3
+#, fuzzy
+msgid "Brightness Increase"
+msgstr "ਬਰਿੱਜ"
+
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Brightness Step"
+msgstr "ਬਰਿੱਜ"
+
+#: ../metadata/obs.xml.in.h:5
+msgid "Brightness values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease"
+msgstr "ਧੁੰਦਲਾਪਨ ਘਟਾਓ"
+
+#: ../metadata/obs.xml.in.h:7
+#, fuzzy
+msgid "Increase"
+msgstr "ਧੁੰਦਲਾਪਨ ਵਧਾਓ"
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Opacity Decrease"
+msgstr "ਉਸਟਾਨ (ਪੋਸਟ 1500)"
+
+#: ../metadata/obs.xml.in.h:10
+#, fuzzy
+msgid "Opacity Increase"
+msgstr "ਉਸਟਾਨ (ਪੋਸਟ 1500)"
+
+#: ../metadata/obs.xml.in.h:11
+msgid "Opacity Step"
+msgstr "ਧੁੰਦਲਾਪਨ ਸਟੈਪ"
+
+#: ../metadata/obs.xml.in.h:12
+#, fuzzy
+msgid "Opacity values for windows"
+msgstr "ਡੈਮਨ ਚਲਾ ਰਿਹਾ ਹੈ।"
+
+#: ../metadata/obs.xml.in.h:13
+#, fuzzy
+msgid "Opacity, Brightness and Saturation"
+msgstr "ਘੁੰਮਾਉਣ ਦੌਰਾਨ ਧੁੰਦਲਾਪਨ"
+
+#: ../metadata/obs.xml.in.h:14
+msgid "Opacity, Brightness and Saturation adjustments"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+#, fuzzy
+msgid "Saturation"
+msgstr "ਅੰਤਰਾਲ"
+
+#: ../metadata/obs.xml.in.h:16
+#, fuzzy
+msgid "Saturation Decrease"
+msgstr "ਅੰਤਰਾਲ"
+
+#: ../metadata/obs.xml.in.h:17
+#, fuzzy
+msgid "Saturation Increase"
+msgstr "ਅੰਤਰਾਲ"
+
+#: ../metadata/obs.xml.in.h:18
+#, fuzzy
+msgid "Saturation Step"
+msgstr "ਅੰਤਰਾਲ"
+
+#: ../metadata/obs.xml.in.h:19
+msgid "Saturation values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:20
+msgid "Step"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:21
+#, fuzzy
+msgid "Window specific settings"
+msgstr "ypbind ਚੋਣ"
+
+#: ../metadata/obs.xml.in.h:22
+#, fuzzy
+msgid "Window values"
+msgstr "Windows"
+
+#: ../metadata/obs.xml.in.h:23
+#, fuzzy
+msgid "Windows"
+msgstr "Windows"
+
+#: ../metadata/obs.xml.in.h:24
+#, fuzzy
+msgid "Windows that should have a different brightness by default"
+msgstr "ਵਿੰਡੋ. ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਸਥਿਤ ਕੀਤੀ ਜਾਵੇ"
+
+#: ../metadata/obs.xml.in.h:25
+#, fuzzy
+msgid "Windows that should have a different opacity by default"
+msgstr "ਵਿੰਡੋ,. ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਪਾਰਦਰਸ਼ੀ ਹੋਵੇ"
+
+#: ../metadata/obs.xml.in.h:26
+#, fuzzy
+msgid "Windows that should have a different saturation by default"
+msgstr "ਵਿੰਡੋ. ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਸਥਿਤ ਕੀਤੀ ਜਾਵੇ"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -2737,11 +3067,6 @@ msgstr "ਕਾਰਜ ਕਰਮ"
 msgid "Auto Rotate"
 msgstr "ਸਵੈ-ਚਾਲਤ"
 
-#: ../metadata/switcher.xml.in.h:7
-#, fuzzy
-msgid "Brightness"
-msgstr "ਬਰਿੱਜ"
-
 #: ../metadata/switcher.xml.in.h:8
 #, fuzzy
 msgid "Bring To Front"
@@ -2825,11 +3150,6 @@ msgstr "Windows"
 #: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
 msgstr "ਚੁਣੀ ਵਿੰਡੋ ਨੂੰ ਘੁੰਮਾਓ, ਜਦੋਂ ਕਿ ਸਵਿੱਚ ਕਰਨਾ ਹੋਵੇ"
-
-#: ../metadata/switcher.xml.in.h:29
-#, fuzzy
-msgid "Saturation"
-msgstr "ਅੰਤਰਾਲ"
 
 #: ../metadata/switcher.xml.in.h:30
 #, fuzzy
@@ -3111,6 +3431,22 @@ msgid "Wobbly Windows"
 msgstr "Windows"
 
 #, fuzzy
+#~ msgid "Command line 0"
+#~ msgstr "ਕਮਾਂਡ: "
+
+#, fuzzy
+#~ msgid "Run command 0"
+#~ msgstr "ਕਮਾਂਡ '%1'"
+
+#, fuzzy
+#~ msgid "Screenshot commands"
+#~ msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
+
+#, fuzzy
+#~ msgid "Screenshot key bindings"
+#~ msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
+
+#, fuzzy
 #~ msgid "Filter Linear"
 #~ msgstr "ਫਿਲਟਰ:"
 
@@ -3152,25 +3488,12 @@ msgstr "Windows"
 #~ msgid "Zoom pan"
 #~ msgstr "ਲਾਗਆਉਟ"
 
-#~ msgid "Decrease Opacity"
-#~ msgstr "ਧੁੰਦਲਾਪਨ ਘਟਾਓ"
-
 #, fuzzy
 #~ msgid "Decrease window opacity"
 #~ msgstr "Win&dows ਭਾਗ ਹਟਾਓ"
 
-#~ msgid "Increase Opacity"
-#~ msgstr "ਧੁੰਦਲਾਪਨ ਵਧਾਓ"
-
 #~ msgid "Increase window opacity"
 #~ msgstr "ਵਿੰਡੋ ਧੁੰਦਲਾਪਨ ਵਧਾਓ"
-
-#~ msgid "Opacity Step"
-#~ msgstr "ਧੁੰਦਲਾਪਨ ਸਟੈਪ"
-
-#, fuzzy
-#~ msgid "Opacity change step"
-#~ msgstr "ਉਸਟਾਨ (ਪੋਸਟ 1500)"
 
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr "ਵਿੰਡੋਜ਼ ਲਈ ਧੁੰਦਲੇਪਨ ਮੁੱਲ, ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਅਲਪ-ਪਾਰਦਰਸ਼ੀ ਹੋਵੇ"
@@ -3181,9 +3504,6 @@ msgstr "Windows"
 #, fuzzy
 #~ msgid "Opacity windows"
 #~ msgstr "Win&dows ਹਟਾਓ"
-
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "ਵਿੰਡੋ,. ਜੋ ਕਿ ਡਿਫਾਲਟ ਹੀ ਪਾਰਦਰਸ਼ੀ ਹੋਵੇ"
 
 #~ msgid "Background Images"
 #~ msgstr "ਬੈਕਗਰਾਊਂਡ ਚਿੱਤਰ"
@@ -3519,10 +3839,6 @@ msgstr "Windows"
 #, fuzzy
 #~ msgid "Run command %d"
 #~ msgstr "ਕਮਾਂਡ: "
-
-#, fuzzy
-#~ msgid "Window Types"
-#~ msgstr "Windows"
 
 #, fuzzy
 #~ msgid "Move Window Types"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-26 12:29+0530\n"
+"POT-Creation-Date: 2009-02-06 11:17+0530\n"
 "PO-Revision-Date: 2008-12-25 18:14+0100\n"
 "Last-Translator: Dean Spirov <dean@spirov.com>\n"
 "Language-Team: Bulgarian <i18n@suse.de>\n"
@@ -37,7 +37,7 @@ msgid "None"
 msgstr "Без избор"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4631
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Сянка"
 
@@ -71,8 +71,8 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4612
-#: ../metadata/core.xml.in.in.h:161
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Меню на прозорец"
 
@@ -139,62 +139,62 @@ msgstr "използвай темата на Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Използвай Metacity темата при рисуване на декорациите на прозорците"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4420
-#: ../metadata/core.xml.in.in.h:24
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Затваряне на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4442
-#: ../metadata/core.xml.in.in.h:154
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Демаксимизиране на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4445
-#: ../metadata/core.xml.in.in.h:86
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Максимизиране на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4487
-#: ../metadata/core.xml.in.in.h:92
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Минимизиране на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4651
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 #, fuzzy
 msgid "Make Above"
 msgstr "Над другите"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4677
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 #, fuzzy
 msgid "Stick"
 msgstr "Лепкав"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4697
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4717
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 #, fuzzy
 msgid "Unmake Above"
 msgstr "Изключи над другите"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4743
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5112
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Прозорецът \"%s\" не отговаря."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5121
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Ако принудително изключите приложението ще загубите всички промени, които не "
 "са запазени"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5136
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Принудително изключване"
 
@@ -417,7 +417,115 @@ msgstr "Започни дублиране на изхода"
 msgid "Output clone handler"
 msgstr "Обработчик за дублиране на изхода"
 
-#: ../metadata/core.xml.in.in.h:1
+#: ../metadata/commands.xml.in.h:1
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда0"
+
+#: ../metadata/commands.xml.in.h:2
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда1"
+
+#: ../metadata/commands.xml.in.h:3
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда10"
+
+#: ../metadata/commands.xml.in.h:4
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда11"
+
+#: ../metadata/commands.xml.in.h:5
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда12"
+
+#: ../metadata/commands.xml.in.h:6
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда3"
+
+#: ../metadata/commands.xml.in.h:7
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда4"
+
+#: ../metadata/commands.xml.in.h:8
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда5"
+
+#: ../metadata/commands.xml.in.h:9
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда6"
+
+#: ../metadata/commands.xml.in.h:10
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда7"
+
+#: ../metadata/commands.xml.in.h:11
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда8"
+
+#: ../metadata/commands.xml.in.h:12
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда9"
+
+#: ../metadata/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
@@ -425,7 +533,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда0"
 
-#: ../metadata/core.xml.in.in.h:2
+#: ../metadata/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
@@ -433,7 +541,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда1"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
@@ -441,7 +549,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда10"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
@@ -449,7 +557,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда11"
 
-#: ../metadata/core.xml.in.in.h:5
+#: ../metadata/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
@@ -457,7 +565,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда12"
 
-#: ../metadata/core.xml.in.in.h:6
+#: ../metadata/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
@@ -465,7 +573,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда3"
 
-#: ../metadata/core.xml.in.in.h:7
+#: ../metadata/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
@@ -473,7 +581,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда4"
 
-#: ../metadata/core.xml.in.in.h:8
+#: ../metadata/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
@@ -481,7 +589,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда5"
 
-#: ../metadata/core.xml.in.in.h:9
+#: ../metadata/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
@@ -489,7 +597,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда6"
 
-#: ../metadata/core.xml.in.in.h:10
+#: ../metadata/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
@@ -497,7 +605,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда7"
 
-#: ../metadata/core.xml.in.in.h:11
+#: ../metadata/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
@@ -505,7 +613,7 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда8"
 
-#: ../metadata/core.xml.in.in.h:12
+#: ../metadata/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
@@ -513,210 +621,386 @@ msgstr ""
 "Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
 "идентифицирана от команда9"
 
-#: ../metadata/core.xml.in.in.h:13
-msgid "Active Plugins"
-msgstr "Активни модули"
-
-#: ../metadata/core.xml.in.in.h:14
+#: ../metadata/commands.xml.in.h:25
+#, fuzzy
 msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда0"
+
+#: ../metadata/commands.xml.in.h:26
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда1"
+
+#: ../metadata/commands.xml.in.h:27
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда10"
+
+#: ../metadata/commands.xml.in.h:28
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда11"
+
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда12"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда3"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда4"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда5"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда6"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда7"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда8"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
+"идентифицирана от команда9"
+
+#: ../metadata/commands.xml.in.h:37
+msgid "Assigns bindings to arbitrary commands"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:15
-msgid "Audible Bell"
+#: ../metadata/commands.xml.in.h:38
+msgid "Button Bindings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:16
-#, fuzzy
-msgid "Audible system beep"
-msgstr "Файлова &система"
-
-#: ../metadata/core.xml.in.in.h:17
-#, fuzzy
-msgid "Auto-Raise"
-msgstr "AutoYast"
-
-#: ../metadata/core.xml.in.in.h:18
-msgid "Auto-Raise Delay"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:19
-#, fuzzy
-msgid "Automatic detection of output devices"
-msgstr "Автоматично откриване"
-
-#: ../metadata/core.xml.in.in.h:20
-msgid "Automatic detection of refresh rate"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:21
-#, fuzzy
-msgid "Best"
-msgstr "Най-добър"
-
-#: ../metadata/core.xml.in.in.h:22
-msgid "Click To Focus"
-msgstr "Фокусиране при цъкане"
-
-#: ../metadata/core.xml.in.in.h:23
-msgid "Click on window moves input focus to it"
-msgstr "Цъкането върху прозорец премества фокуса върху него"
-
-#: ../metadata/core.xml.in.in.h:25
-msgid "Close active window"
-msgstr "Затвори активния прозорец"
-
-#: ../metadata/core.xml.in.in.h:26
-msgid "Command line 0"
-msgstr "Команден ред 0"
-
-#: ../metadata/core.xml.in.in.h:27
+#: ../metadata/commands.xml.in.h:39
 msgid "Command line 1"
 msgstr "Команден ред 1"
 
-#: ../metadata/core.xml.in.in.h:28
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Команден ред 10"
 
-#: ../metadata/core.xml.in.in.h:29
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Команден ред 11"
 
-#: ../metadata/core.xml.in.in.h:30
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "Команден ред 1"
+
+#: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
 msgstr "Команден ред 2"
 
-#: ../metadata/core.xml.in.in.h:31
+#: ../metadata/commands.xml.in.h:44
 msgid "Command line 3"
 msgstr "Команден ред 3"
 
-#: ../metadata/core.xml.in.in.h:32
+#: ../metadata/commands.xml.in.h:45
 msgid "Command line 4"
 msgstr "Команден ред 4"
 
-#: ../metadata/core.xml.in.in.h:33
+#: ../metadata/commands.xml.in.h:46
 msgid "Command line 5"
 msgstr "Команден ред 5"
 
-#: ../metadata/core.xml.in.in.h:34
+#: ../metadata/commands.xml.in.h:47
 msgid "Command line 6"
 msgstr "Команден ред 6"
 
-#: ../metadata/core.xml.in.in.h:35
+#: ../metadata/commands.xml.in.h:48
 msgid "Command line 7"
 msgstr "Команден ред 7"
 
-#: ../metadata/core.xml.in.in.h:36
+#: ../metadata/commands.xml.in.h:49
 msgid "Command line 8"
 msgstr "Команден ред 8"
 
-#: ../metadata/core.xml.in.in.h:37
+#: ../metadata/commands.xml.in.h:50
 msgid "Command line 9"
 msgstr "Команден ред 9"
 
-#: ../metadata/core.xml.in.in.h:38
+#: ../metadata/commands.xml.in.h:51
 msgid "Command line to be executed in shell when run_command0 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command0 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:39
+#: ../metadata/commands.xml.in.h:52
 msgid "Command line to be executed in shell when run_command1 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command1 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:40
+#: ../metadata/commands.xml.in.h:53
 msgid "Command line to be executed in shell when run_command10 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command10 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:41
+#: ../metadata/commands.xml.in.h:54
 msgid "Command line to be executed in shell when run_command11 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command11 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:42
+#: ../metadata/commands.xml.in.h:55
 msgid "Command line to be executed in shell when run_command2 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command2 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:43
+#: ../metadata/commands.xml.in.h:56
 msgid "Command line to be executed in shell when run_command3 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command3 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:44
+#: ../metadata/commands.xml.in.h:57
 msgid "Command line to be executed in shell when run_command4 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command4 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:45
+#: ../metadata/commands.xml.in.h:58
 msgid "Command line to be executed in shell when run_command5 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command5 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:46
+#: ../metadata/commands.xml.in.h:59
 msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command6 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:47
+#: ../metadata/commands.xml.in.h:60
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command7 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:48
+#: ../metadata/commands.xml.in.h:61
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command8 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:49
+#: ../metadata/commands.xml.in.h:62
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command9 е "
 "извикана"
 
-#: ../metadata/core.xml.in.in.h:50
+#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "Команда: "
 
-#: ../metadata/core.xml.in.in.h:51
+#: ../metadata/commands.xml.in.h:64
+#, fuzzy
+msgid "Edge Bindings"
+msgstr "Комбинации от клавиши"
+
+#: ../metadata/commands.xml.in.h:65
+#, fuzzy
+msgid "Key Bindings"
+msgstr "Комбинации от клавиши"
+
+#: ../metadata/commands.xml.in.h:66
+msgid "Run command 1"
+msgstr "Изпълни команда 1"
+
+#: ../metadata/commands.xml.in.h:67
+msgid "Run command 10"
+msgstr "Изпълни команда 10"
+
+#: ../metadata/commands.xml.in.h:68
+msgid "Run command 11"
+msgstr "Изпълни команда 11"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "Изпълни команда 1"
+
+#: ../metadata/commands.xml.in.h:70
+msgid "Run command 2"
+msgstr "Изпълни команда 2"
+
+#: ../metadata/commands.xml.in.h:71
+msgid "Run command 3"
+msgstr "Изпълни команда 3"
+
+#: ../metadata/commands.xml.in.h:72
+msgid "Run command 4"
+msgstr "Изпълни команда 4"
+
+#: ../metadata/commands.xml.in.h:73
+msgid "Run command 5"
+msgstr "Изпълни команда 5"
+
+#: ../metadata/commands.xml.in.h:74
+msgid "Run command 6"
+msgstr "Изпълни команда 6"
+
+#: ../metadata/commands.xml.in.h:75
+msgid "Run command 7"
+msgstr "Изпълни команда 7"
+
+#: ../metadata/commands.xml.in.h:76
+msgid "Run command 8"
+msgstr "Изпълни команда 8"
+
+#: ../metadata/commands.xml.in.h:77
+msgid "Run command 9"
+msgstr "Изпълни команда 9"
+
+#: ../metadata/core.xml.in.in.h:1
+msgid "Active Plugins"
+msgstr "Активни модули"
+
+#: ../metadata/core.xml.in.in.h:2
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:3
+msgid "Audible Bell"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:4
+#, fuzzy
+msgid "Audible system beep"
+msgstr "Файлова &система"
+
+#: ../metadata/core.xml.in.in.h:5
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "AutoYast"
+
+#: ../metadata/core.xml.in.in.h:6
+msgid "Auto-Raise Delay"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:7
+#, fuzzy
+msgid "Automatic detection of output devices"
+msgstr "Автоматично откриване"
+
+#: ../metadata/core.xml.in.in.h:8
+msgid "Automatic detection of refresh rate"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:9
+#, fuzzy
+msgid "Best"
+msgstr "Най-добър"
+
+#: ../metadata/core.xml.in.in.h:10
+msgid "Click To Focus"
+msgstr "Фокусиране при цъкане"
+
+#: ../metadata/core.xml.in.in.h:11
+msgid "Click on window moves input focus to it"
+msgstr "Цъкането върху прозорец премества фокуса върху него"
+
+#: ../metadata/core.xml.in.in.h:13
+msgid "Close active window"
+msgstr "Затвори активния прозорец"
+
+#: ../metadata/core.xml.in.in.h:14
 msgid "Default Icon"
 msgstr "Икона по подразбиране"
 
-#: ../metadata/core.xml.in.in.h:52
+#: ../metadata/core.xml.in.in.h:15
 msgid "Default window icon image"
 msgstr "Икона на прозореца по подразбиране"
 
-#: ../metadata/core.xml.in.in.h:53
+#: ../metadata/core.xml.in.in.h:16
 #, fuzzy
 msgid "Desktop Size"
 msgstr "Работна станция"
 
-#: ../metadata/core.xml.in.in.h:54
+#: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
 msgstr "Засичане на екраните"
 
-#: ../metadata/core.xml.in.in.h:55
+#: ../metadata/core.xml.in.in.h:18
 msgid "Detect Refresh Rate"
 msgstr "Засичане на честотата на обновяване"
 
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
 msgstr "Настройки на екрана"
 
-#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/core.xml.in.in.h:20
 #, fuzzy
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
@@ -725,434 +1009,333 @@ msgstr ""
 "Колко време трябва показалецът да стои на ръбът на екрана преди да се "
 "задейства действието на ръба"
 
-#: ../metadata/core.xml.in.in.h:58
+#: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
 msgstr "Закъснение за задействане на ръба"
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "Бързо"
 
-#: ../metadata/core.xml.in.in.h:60
+#: ../metadata/core.xml.in.in.h:23
 #, fuzzy
 msgid "Focus &amp; Raise Behaviour"
 msgstr "Поведение за фокусиране и издигане"
 
-#: ../metadata/core.xml.in.in.h:61
+#: ../metadata/core.xml.in.in.h:24
 #, fuzzy
 msgid "Focus Prevention Level"
 msgstr "Промяната на размера е неуспешно."
 
-#: ../metadata/core.xml.in.in.h:62
+#: ../metadata/core.xml.in.in.h:25
 msgid "Focus Prevention Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:63
+#: ../metadata/core.xml.in.in.h:26
 #, fuzzy
 msgid "Focus prevention windows"
 msgstr "Промяната на размера е неуспешно."
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:65
+#: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
 msgstr "Общи настройки"
 
-#: ../metadata/core.xml.in.in.h:66
+#: ../metadata/core.xml.in.in.h:29
 msgid "General compiz options"
 msgstr "Общи настройки на Compiz"
 
-#: ../metadata/core.xml.in.in.h:67
+#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "Добро"
 
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.in.h:31
 msgid "Hide Skip Taskbar Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:69
+#: ../metadata/core.xml.in.in.h:32
 msgid "Hide all windows and focus desktop"
 msgstr "Скриване на всички прозорци и фокусиране на десктопа"
 
-#: ../metadata/core.xml.in.in.h:70
+#: ../metadata/core.xml.in.in.h:33
 #, fuzzy
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Скривай прозорците които не се показват в taskbar-a когато се показва "
 "десктопа"
 
-#: ../metadata/core.xml.in.in.h:71
+#: ../metadata/core.xml.in.in.h:34
 msgid "High"
 msgstr "Високо"
 
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.in.h:35
 msgid "Horizontal Virtual Size"
 msgstr "Хоризонтален брой на виртуалните екрани"
 
-#: ../metadata/core.xml.in.in.h:73
+#: ../metadata/core.xml.in.in.h:36
 msgid "If available use compression for textures converted from images"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.in.h:37
 msgid "Ignore Hints When Maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:76
+#: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:77
+#: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:78
+#: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
 msgstr "Комбинации от клавиши"
 
-#: ../metadata/core.xml.in.in.h:79
+#: ../metadata/core.xml.in.in.h:42
 #, fuzzy
 msgid "Level of focus stealing prevention"
 msgstr "Разрешаване на авто-спирането"
 
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:43
 #, fuzzy
 msgid "Lighting"
 msgstr "Осветление"
 
-#: ../metadata/core.xml.in.in.h:81
+#: ../metadata/core.xml.in.in.h:44
 msgid "List of currently active plugins"
 msgstr "Списък с включените модули"
 
-#: ../metadata/core.xml.in.in.h:82
+#: ../metadata/core.xml.in.in.h:45
 msgid "List of strings describing output devices"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:83
+#: ../metadata/core.xml.in.in.h:46
 msgid "Low"
 msgstr "Ниско"
 
-#: ../metadata/core.xml.in.in.h:84
+#: ../metadata/core.xml.in.in.h:47
 #, fuzzy
 msgid "Lower Window"
 msgstr "Долно-сорбийски"
 
-#: ../metadata/core.xml.in.in.h:85
+#: ../metadata/core.xml.in.in.h:48
 msgid "Lower window beneath other windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:87
+#: ../metadata/core.xml.in.in.h:50
 #, fuzzy
 msgid "Maximize Window Horizontally"
 msgstr "Хоризонтално максимизиране"
 
-#: ../metadata/core.xml.in.in.h:88
+#: ../metadata/core.xml.in.in.h:51
 msgid "Maximize Window Vertically"
 msgstr "Вертикално максимизиране"
 
-#: ../metadata/core.xml.in.in.h:89
+#: ../metadata/core.xml.in.in.h:52
 msgid "Maximize active window"
 msgstr "Максимизиране на активния прозорец"
 
-#: ../metadata/core.xml.in.in.h:90
+#: ../metadata/core.xml.in.in.h:53
 msgid "Maximize active window horizontally"
 msgstr "Хоризонтално максимизиране на активния прозорец"
 
-#: ../metadata/core.xml.in.in.h:91
+#: ../metadata/core.xml.in.in.h:54
 msgid "Maximize active window vertically"
 msgstr "Вертикално максимизиране на активния прозорец"
 
-#: ../metadata/core.xml.in.in.h:93
+#: ../metadata/core.xml.in.in.h:56
 msgid "Minimize active window"
 msgstr "Минимизирай активния прозорец"
 
-#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "Нормална"
 
-#: ../metadata/core.xml.in.in.h:95
+#: ../metadata/core.xml.in.in.h:58
 msgid "Number of Desktops"
 msgstr "Брой на работните плотове"
 
-#: ../metadata/core.xml.in.in.h:96
+#: ../metadata/core.xml.in.in.h:59
 msgid "Number of virtual desktops"
 msgstr "Брой на виртуалните работни плотове"
 
-#: ../metadata/core.xml.in.in.h:97
+#: ../metadata/core.xml.in.in.h:60
 msgid "Off"
 msgstr "Изключено"
 
-#: ../metadata/core.xml.in.in.h:98
+#: ../metadata/core.xml.in.in.h:61
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:99
-msgid "Open a terminal"
-msgstr "Стартиране в терминал"
-
-#: ../metadata/core.xml.in.in.h:100
+#: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
 msgstr "Екрани"
 
-#: ../metadata/core.xml.in.in.h:101
+#: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:102
+#: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:103
+#: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
 msgstr "Закъснение"
 
-#: ../metadata/core.xml.in.in.h:104
+#: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
 msgstr "Предпочитане на по-голям екран"
 
-#: ../metadata/core.xml.in.in.h:105
+#: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
 msgstr "Предпочитане на по-малък екран"
 
-#: ../metadata/core.xml.in.in.h:106
+#: ../metadata/core.xml.in.in.h:68
 msgid "Raise On Click"
 msgstr "Повдигане при цъкане"
 
-#: ../metadata/core.xml.in.in.h:107
+#: ../metadata/core.xml.in.in.h:69
 msgid "Raise Window"
 msgstr "Повдигане на прозореца"
 
-#: ../metadata/core.xml.in.in.h:108
+#: ../metadata/core.xml.in.in.h:70
 msgid "Raise selected windows after interval"
 msgstr "Повдигане на избраният прозорец след интервал от време"
 
-#: ../metadata/core.xml.in.in.h:109
+#: ../metadata/core.xml.in.in.h:71
 msgid "Raise window above other windows"
 msgstr "Повдигане на прозореца над другите"
 
-#: ../metadata/core.xml.in.in.h:110
+#: ../metadata/core.xml.in.in.h:72
 msgid "Raise windows when clicked"
 msgstr "Повдигане на прозореца при цъкане"
 
-#: ../metadata/core.xml.in.in.h:111
+#: ../metadata/core.xml.in.in.h:73
 msgid "Refresh Rate"
 msgstr "Честота на обновяване"
 
-#: ../metadata/core.xml.in.in.h:112
-#, fuzzy
-msgid "Run Dialog"
-msgstr "Диалог за изпълняване на програма"
-
-#: ../metadata/core.xml.in.in.h:113
-msgid "Run command 0"
-msgstr "Изпълни команда 0"
-
-#: ../metadata/core.xml.in.in.h:114
-msgid "Run command 1"
-msgstr "Изпълни команда 1"
-
-#: ../metadata/core.xml.in.in.h:115
-msgid "Run command 10"
-msgstr "Изпълни команда 10"
-
-#: ../metadata/core.xml.in.in.h:116
-msgid "Run command 11"
-msgstr "Изпълни команда 11"
-
-#: ../metadata/core.xml.in.in.h:117
-msgid "Run command 2"
-msgstr "Изпълни команда 2"
-
-#: ../metadata/core.xml.in.in.h:118
-msgid "Run command 3"
-msgstr "Изпълни команда 3"
-
-#: ../metadata/core.xml.in.in.h:119
-msgid "Run command 4"
-msgstr "Изпълни команда 4"
-
-#: ../metadata/core.xml.in.in.h:120
-msgid "Run command 5"
-msgstr "Изпълни команда 5"
-
-#: ../metadata/core.xml.in.in.h:121
-msgid "Run command 6"
-msgstr "Изпълни команда 6"
-
-#: ../metadata/core.xml.in.in.h:122
-msgid "Run command 7"
-msgstr "Изпълни команда 7"
-
-#: ../metadata/core.xml.in.in.h:123
-msgid "Run command 8"
-msgstr "Изпълни команда 8"
-
-#: ../metadata/core.xml.in.in.h:124
-msgid "Run command 9"
-msgstr "Изпълни команда 9"
-
-#: ../metadata/core.xml.in.in.h:125
-msgid "Run terminal command"
-msgstr "Изпълняване на команда в терминала"
-
-#: ../metadata/core.xml.in.in.h:126
+#: ../metadata/core.xml.in.in.h:74
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:127
+#: ../metadata/core.xml.in.in.h:75
 msgid "Screen size multiplier for vertical virtual size"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:128
-msgid "Screenshot command line"
-msgstr "Команда за заснемане на екрана"
-
-#: ../metadata/core.xml.in.in.h:129
-msgid "Screenshot commands"
-msgstr "Команди за заснемане на екрана"
-
-#: ../metadata/core.xml.in.in.h:130
-msgid "Screenshot key bindings"
-msgstr "Ключови комбинации за заснемане на екрана"
-
-#: ../metadata/core.xml.in.in.h:131
+#: ../metadata/core.xml.in.in.h:76
 msgid "Show Desktop"
 msgstr "Покажи работния плот"
 
-#: ../metadata/core.xml.in.in.h:132
-msgid "Show Main Menu"
-msgstr "Покажи главното меню"
-
-#: ../metadata/core.xml.in.in.h:133
-msgid "Show Run Application dialog"
-msgstr "Покажи диалога за изпълняване на програма"
-
-#: ../metadata/core.xml.in.in.h:134
-msgid "Show the main menu"
-msgstr "Показване на главното меню"
-
-#: ../metadata/core.xml.in.in.h:135
+#: ../metadata/core.xml.in.in.h:77
 msgid "Slow Animations"
 msgstr "Бавни анимации"
 
-#: ../metadata/core.xml.in.in.h:136
+#: ../metadata/core.xml.in.in.h:78
 #, fuzzy
 msgid "Smart mode"
 msgstr "Умен режим"
 
-#: ../metadata/core.xml.in.in.h:137
+#: ../metadata/core.xml.in.in.h:79
 msgid "Sync To VBlank"
 msgstr "Синхронизиране с VBlank"
 
-#: ../metadata/core.xml.in.in.h:138
-msgid "Take a screenshot"
-msgstr "Снимай екрана"
-
-#: ../metadata/core.xml.in.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "Снимай прозорец"
-
-#: ../metadata/core.xml.in.in.h:140
-msgid "Terminal command line"
-msgstr "Команда в терминала"
-
-#: ../metadata/core.xml.in.in.h:141
+#: ../metadata/core.xml.in.in.h:80
 #, fuzzy
 msgid "Texture Compression"
 msgstr "Компресия на повърхностите"
 
-#: ../metadata/core.xml.in.in.h:142
+#: ../metadata/core.xml.in.in.h:81
 #, fuzzy
 msgid "Texture Filter"
 msgstr "Филтър на повърхностите"
 
-#: ../metadata/core.xml.in.in.h:143
+#: ../metadata/core.xml.in.in.h:82
 #, fuzzy
 msgid "Texture filtering"
 msgstr "Филтриране на повърхностите"
 
-#: ../metadata/core.xml.in.in.h:144
+#: ../metadata/core.xml.in.in.h:83
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Колко често се прерисува екрана (пъти в секунда)"
 
-#: ../metadata/core.xml.in.in.h:145
+#: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:146
+#: ../metadata/core.xml.in.in.h:85
 msgid "Toggle Window Maximized Horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:147
+#: ../metadata/core.xml.in.in.h:86
 msgid "Toggle Window Maximized Vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:148
+#: ../metadata/core.xml.in.in.h:87
 msgid "Toggle Window Shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:149
+#: ../metadata/core.xml.in.in.h:88
 msgid "Toggle active window maximized"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:150
+#: ../metadata/core.xml.in.in.h:89
 msgid "Toggle active window maximized horizontally"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:151
+#: ../metadata/core.xml.in.in.h:90
 msgid "Toggle active window maximized vertically"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:152
+#: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:153
+#: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:155
+#: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:156
+#: ../metadata/core.xml.in.in.h:95
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:157
+#: ../metadata/core.xml.in.in.h:96
 #, fuzzy
 msgid "Use diffuse light when screen is transformed"
 msgstr "Използвай дифузно осветление когато екрана се трансформира"
 
-#: ../metadata/core.xml.in.in.h:158
+#: ../metadata/core.xml.in.in.h:97
 #, fuzzy
 msgid "Vertical Virtual Size"
 msgstr "Вертикален виртуален размер"
 
-#: ../metadata/core.xml.in.in.h:159
+#: ../metadata/core.xml.in.in.h:98
 msgid "Very High"
 msgstr "Много високо"
 
-#: ../metadata/core.xml.in.in.h:160
+#: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
 msgstr "Кое от застъпващите се устройства да се предпочита"
 
-#: ../metadata/core.xml.in.in.h:162
+#: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
 msgstr "Комбинация от клавиши за менюто на прозореца"
 
-#: ../metadata/core.xml.in.in.h:163
+#: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
 msgstr "Комбинация от клавиши за менюто на прозореца"
-
-#: ../metadata/core.xml.in.in.h:164
-msgid "Window screenshot command line"
-msgstr "Команден ред за заснемане на прозореца"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 #, fuzzy
@@ -1608,6 +1791,59 @@ msgstr ""
 msgid "GLib main loop support"
 msgstr ""
 
+#: ../metadata/gnomecompat.xml.in.h:2
+msgid "Gnome Compatibility"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:3
+msgid "Open a terminal"
+msgstr "Стартиране в терминал"
+
+#: ../metadata/gnomecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:5
+#, fuzzy
+msgid "Run Dialog"
+msgstr "Диалог за изпълняване на програма"
+
+#: ../metadata/gnomecompat.xml.in.h:6
+msgid "Run terminal command"
+msgstr "Изпълняване на команда в терминала"
+
+#: ../metadata/gnomecompat.xml.in.h:7
+msgid "Screenshot command line"
+msgstr "Команда за заснемане на екрана"
+
+#: ../metadata/gnomecompat.xml.in.h:8
+msgid "Show Main Menu"
+msgstr "Покажи главното меню"
+
+#: ../metadata/gnomecompat.xml.in.h:9
+msgid "Show Run Application dialog"
+msgstr "Покажи диалога за изпълняване на програма"
+
+#: ../metadata/gnomecompat.xml.in.h:10
+msgid "Show the main menu"
+msgstr "Показване на главното меню"
+
+#: ../metadata/gnomecompat.xml.in.h:11
+msgid "Take a screenshot"
+msgstr "Снимай екрана"
+
+#: ../metadata/gnomecompat.xml.in.h:12
+msgid "Take a screenshot of a window"
+msgstr "Снимай прозорец"
+
+#: ../metadata/gnomecompat.xml.in.h:13
+msgid "Terminal command line"
+msgstr "Команда в терминала"
+
+#: ../metadata/gnomecompat.xml.in.h:14
+msgid "Window screenshot command line"
+msgstr "Команден ред за заснемане на прозореца"
+
 #: ../metadata/ini.xml.in.h:1
 #, fuzzy
 msgid "Ini"
@@ -1703,8 +1939,8 @@ msgstr "&Надолу"
 msgid "Move window"
 msgstr "&Надолу"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
 #, fuzzy
 msgid "Opacity"
 msgstr "&Нисък капацитет"
@@ -1727,6 +1963,130 @@ msgstr "&Намаляване на Windows"
 #, fuzzy
 msgid "Start moving window"
 msgstr "Промяната на размера е неуспешно."
+
+#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+#, fuzzy
+msgid "Brightness"
+msgstr "Мост"
+
+#: ../metadata/obs.xml.in.h:2
+#, fuzzy
+msgid "Brightness Decrease"
+msgstr "Мост"
+
+#: ../metadata/obs.xml.in.h:3
+#, fuzzy
+msgid "Brightness Increase"
+msgstr "Мост"
+
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Brightness Step"
+msgstr "Мост"
+
+#: ../metadata/obs.xml.in.h:5
+#, fuzzy
+msgid "Brightness values for windows"
+msgstr "Яркост(в %) на прозорците които не отговарят"
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease"
+msgstr "Понижи непрозрачността"
+
+#: ../metadata/obs.xml.in.h:7
+msgid "Increase"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Opacity Decrease"
+msgstr "Окцитан (след 1500)"
+
+#: ../metadata/obs.xml.in.h:10
+#, fuzzy
+msgid "Opacity Increase"
+msgstr "Окцитан (след 1500)"
+
+#: ../metadata/obs.xml.in.h:11
+#, fuzzy
+msgid "Opacity Step"
+msgstr "&Нисък капацитет"
+
+#: ../metadata/obs.xml.in.h:12
+#, fuzzy
+msgid "Opacity values for windows"
+msgstr "&Изтриване на Windows"
+
+#: ../metadata/obs.xml.in.h:13
+#, fuzzy
+msgid "Opacity, Brightness and Saturation"
+msgstr "Прозрачност при въртене"
+
+#: ../metadata/obs.xml.in.h:14
+msgid "Opacity, Brightness and Saturation adjustments"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+#, fuzzy
+msgid "Saturation"
+msgstr "Продължителност"
+
+#: ../metadata/obs.xml.in.h:16
+#, fuzzy
+msgid "Saturation Decrease"
+msgstr "Продължителност"
+
+#: ../metadata/obs.xml.in.h:17
+#, fuzzy
+msgid "Saturation Increase"
+msgstr "Продължителност"
+
+#: ../metadata/obs.xml.in.h:18
+#, fuzzy
+msgid "Saturation Step"
+msgstr "Продължителност"
+
+#: ../metadata/obs.xml.in.h:19
+msgid "Saturation values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:20
+msgid "Step"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:21
+#, fuzzy
+msgid "Window specific settings"
+msgstr "Декорации на прозореца"
+
+#: ../metadata/obs.xml.in.h:22
+#, fuzzy
+msgid "Window values"
+msgstr "Windows"
+
+#: ../metadata/obs.xml.in.h:23
+#, fuzzy
+msgid "Windows"
+msgstr "Windows"
+
+#: ../metadata/obs.xml.in.h:24
+#, fuzzy
+msgid "Windows that should have a different brightness by default"
+msgstr ""
+"Прозорзи, за които се използва размиване по алфа канала по подразбиране"
+
+#: ../metadata/obs.xml.in.h:25
+#, fuzzy
+msgid "Windows that should have a different opacity by default"
+msgstr ""
+"Прозорзи, за които се използва размиване по алфа канала по подразбиране"
+
+#: ../metadata/obs.xml.in.h:26
+#, fuzzy
+msgid "Windows that should have a different saturation by default"
+msgstr ""
+"Прозорзи, за които се използва размиване по алфа канала по подразбиране"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -2686,11 +3046,6 @@ msgstr "Ред на прилагане"
 msgid "Auto Rotate"
 msgstr "AutoYast"
 
-#: ../metadata/switcher.xml.in.h:7
-#, fuzzy
-msgid "Brightness"
-msgstr "Мост"
-
 #: ../metadata/switcher.xml.in.h:8
 #, fuzzy
 msgid "Bring To Front"
@@ -2771,11 +3126,6 @@ msgstr "Windows"
 #: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
 msgstr ""
-
-#: ../metadata/switcher.xml.in.h:29
-#, fuzzy
-msgid "Saturation"
-msgstr "Продължителност"
 
 #: ../metadata/switcher.xml.in.h:30
 #, fuzzy
@@ -3054,6 +3404,18 @@ msgstr "Треперене при максимизиране и демаксим
 msgid "Wobbly Windows"
 msgstr "Треперещи прозорци"
 
+#~ msgid "Command line 0"
+#~ msgstr "Команден ред 0"
+
+#~ msgid "Run command 0"
+#~ msgstr "Изпълни команда 0"
+
+#~ msgid "Screenshot commands"
+#~ msgstr "Команди за заснемане на екрана"
+
+#~ msgid "Screenshot key bindings"
+#~ msgstr "Ключови комбинации за заснемане на екрана"
+
 #~ msgid "Filter Linear"
 #~ msgstr "Линеен филтър"
 
@@ -3088,15 +3450,8 @@ msgstr "Треперещи прозорци"
 #~ msgid "Zoom pan"
 #~ msgstr "Излизане"
 
-#~ msgid "Decrease Opacity"
-#~ msgstr "Понижи непрозрачността"
-
 #~ msgid "Decrease window opacity"
 #~ msgstr "Понижи непрозрачността на прозореца"
-
-#, fuzzy
-#~ msgid "Opacity change step"
-#~ msgstr "Окцитан (след 1500)"
 
 #, fuzzy
 #~ msgid "Opacity windows"
@@ -3432,10 +3787,6 @@ msgstr "Треперещи прозорци"
 #, fuzzy
 #~ msgid "Run command %d"
 #~ msgstr "Команда: "
-
-#, fuzzy
-#~ msgid "Window Types"
-#~ msgstr "Windows"
 
 #, fuzzy
 #~ msgid "Move Window Types"
