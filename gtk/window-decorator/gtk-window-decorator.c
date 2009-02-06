@@ -310,6 +310,7 @@ static Atom wm_move_resize_atom;
 static Atom restack_window_atom;
 static Atom select_window_atom;
 static Atom mwm_hints_atom;
+static Atom switcher_fg_atom;
 
 static Atom toolkit_action_atom;
 static Atom toolkit_action_window_menu_atom;
@@ -618,36 +619,6 @@ decor_update_window_property (decor_t *d)
 				&bottom, w / 2,
 				&left, h / 2,
 				&right, h / 2);
-}
-
-static void
-decor_update_switcher_property (decor_t *d)
-{
-    long	 data[256];
-    Display	 *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    gint	 nQuad;
-    decor_quad_t quads[N_QUADS_MAX];
-
-    nQuad = decor_set_lSrStSbX_window_quads (quads, &switcher_context,
-					     &d->border_layout,
-					     d->border_layout.top.x2 -
-					     d->border_layout.top.x1 -
-					     switcher_context.extents.left -
-					     switcher_context.extents.right -
-					     32);
-
-    decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			     &_switcher_extents, &_switcher_extents,
-			     0, 0, quads, nQuad);
-
-    gdk_error_trap_push ();
-    XChangeProperty (xdisplay, d->prop_xid,
-		     win_decor_atom,
-		     XA_INTEGER,
-		     32, PropModeReplace, (guchar *) data,
-		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
-    gdk_display_sync (gdk_display_get_default ());
-    gdk_error_trap_pop ();
 }
 
 static void
@@ -2197,6 +2168,47 @@ meta_draw_window_decoration (decor_t *d)
 #define SWITCHER_ALPHA 0xa0a0
 
 static void
+decor_update_switcher_property (decor_t *d)
+{
+    long	 data[256];
+    Display	 *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    gint	 nQuad;
+    decor_quad_t quads[N_QUADS_MAX];
+    GtkStyle     *style;
+    long         fgColor[4];
+
+    nQuad = decor_set_lSrStSbX_window_quads (quads, &switcher_context,
+					     &d->border_layout,
+					     d->border_layout.top.x2 -
+					     d->border_layout.top.x1 -
+					     switcher_context.extents.left -
+					     switcher_context.extents.right -
+					     32);
+
+    decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			     &_switcher_extents, &_switcher_extents,
+			     0, 0, quads, nQuad);
+
+    style = gtk_widget_get_style (style_window);
+
+    fgColor[0] = style->fg[GTK_STATE_NORMAL].red;
+    fgColor[1] = style->fg[GTK_STATE_NORMAL].green;
+    fgColor[2] = style->fg[GTK_STATE_NORMAL].blue;
+    fgColor[3] = SWITCHER_ALPHA;
+
+    gdk_error_trap_push ();
+    XChangeProperty (xdisplay, d->prop_xid,
+		     win_decor_atom,
+		     XA_INTEGER,
+		     32, PropModeReplace, (guchar *) data,
+		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+    XChangeProperty (xdisplay, d->prop_xid, switcher_fg_atom,
+		     XA_INTEGER, 32, PropModeReplace, (guchar *) fgColor, 4);
+    gdk_display_sync (gdk_display_get_default ());
+    gdk_error_trap_pop ();
+}
+
+static void
 draw_switcher_background (decor_t *d)
 {
     Display	  *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
@@ -2394,6 +2406,7 @@ draw_switcher_background (decor_t *d)
     gdk_error_trap_push ();
     XSetWindowBackground (xdisplay, d->prop_xid, pixel);
     XClearWindow (xdisplay, d->prop_xid);
+
     gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 
@@ -7041,6 +7054,9 @@ main (int argc, char *argv[])
     select_window_atom	= XInternAtom (xdisplay, DECOR_SWITCH_WINDOW_ATOM_NAME,
 				       FALSE);
     mwm_hints_atom	= XInternAtom (xdisplay, "_MOTIF_WM_HINTS", FALSE);
+    switcher_fg_atom    = XInternAtom (xdisplay,
+				       DECOR_SWITCH_FOREGROUND_COLOR_ATOM_NAME,
+				       FALSE);
 
     toolkit_action_atom			  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION", FALSE);
