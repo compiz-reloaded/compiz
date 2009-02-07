@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 11:18+0530\n"
+"POT-Creation-Date: 2009-02-07 21:13+0530\n"
 "PO-Revision-Date: 2009-02-04 18:15+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: Hebrew <i18n@suse.de>\n"
@@ -35,7 +35,7 @@ msgid "None"
 msgstr "ללא"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk/window-decorator/gtk-window-decorator.c:4638
 msgid "Shade"
 msgstr "גלול"
 
@@ -69,7 +69,7 @@ msgstr "תחתון"
 
 #  Label text
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "תפריט חלון"
@@ -136,58 +136,58 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "השתמש בערכת הנושא של Metacity בעת ציור מסגרות חלון"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "סגור חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../gtk/window-decorator/gtk-window-decorator.c:4449
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "שחזר גודל חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4452
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "הגדל חלון למקסימום"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../gtk/window-decorator/gtk-window-decorator.c:4494
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "מזער חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Make Above"
 msgstr "העבר למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk/window-decorator/gtk-window-decorator.c:4684
 msgid "Stick"
 msgstr "נעל במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk/window-decorator/gtk-window-decorator.c:4704
 msgid "Unshade"
 msgstr "פרוס גלילה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unmake Above"
 msgstr "בטל העברה למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk/window-decorator/gtk-window-decorator.c:4750
 msgid "Unstick"
 msgstr "בטל נעילה במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "החלון \"%s\" אינו מגיב."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk/window-decorator/gtk-window-decorator.c:5107
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "סגירה כפויה של היישום תביא לאובדן שינויים שלא נשמרו."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk/window-decorator/gtk-window-decorator.c:5122
 msgid "_Force Quit"
 msgstr "_סגור יישום"
 
@@ -228,7 +228,7 @@ msgstr "צבע מילוי עבור הערות"
 # IN
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "התחל"
 
@@ -1411,13 +1411,13 @@ msgstr "תמונת כיפת-הרקיע"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "מהירות"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "יחידת זמן"
 
@@ -3256,6 +3256,50 @@ msgstr "אפקט נדנוד בעת הגדלה למקסימום ומזעור חל
 msgid "Wobbly Windows"
 msgstr "חלונות מתנדנדים"
 
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "פילטר לינארי"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "השתמש בפילטר לינארי בזמן תקריב הגדלה"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "תקריב"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "תקריב הגדלה"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "תקריב הקטנה"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "הטיית תקריב"
+
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "מהירות תקריב"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "יחידת זמן לתקריב"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "תקריב והטיה אל קובית שולחן העבודה"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "מקדם תקריב"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "הטיית תקריב"
+
 #~ msgid "Command line 0"
 #~ msgstr "שורת פקודה 0"
 
@@ -3267,39 +3311,6 @@ msgstr "חלונות מתנדנדים"
 
 #~ msgid "Screenshot key bindings"
 #~ msgstr "צירופי מקשים לצילום מסך"
-
-#~ msgid "Filter Linear"
-#~ msgstr "פילטר לינארי"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "השתמש בפילטר לינארי בזמן תקריב הגדלה"
-
-#~ msgid "Zoom Desktop"
-#~ msgstr "תקריב"
-
-#~ msgid "Zoom In"
-#~ msgstr "תקריב הגדלה"
-
-#~ msgid "Zoom Out"
-#~ msgstr "תקריב הקטנה"
-
-#~ msgid "Zoom Pan"
-#~ msgstr "הטיית תקריב"
-
-#~ msgid "Zoom Speed"
-#~ msgstr "מהירות תקריב"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "יחידת זמן לתקריב"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "תקריב והטיה אל קובית שולחן העבודה"
-
-#~ msgid "Zoom factor"
-#~ msgstr "מקדם תקריב"
-
-#~ msgid "Zoom pan"
-#~ msgstr "הטיית תקריב"
 
 #  Radio button for using an entire (Windows) partition for Linux
 #~ msgid "Decrease window opacity"

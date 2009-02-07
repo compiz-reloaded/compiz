@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 11:18+0530\n"
+"POT-Creation-Date: 2009-02-07 21:13+0530\n"
 "PO-Revision-Date: 2007-12-16 17:03+0530\n"
 "Last-Translator: Sangeeta Kumari\n"
 "Language-Team: <en@li.org>\n"
@@ -37,7 +37,7 @@ msgid "None"
 msgstr "कुछ नहीं"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk/window-decorator/gtk-window-decorator.c:4638
 #, fuzzy
 msgid "Shade"
 msgstr "स्कैनर"
@@ -72,7 +72,7 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 #: ../metadata/core.xml.in.in.h:100
 #, fuzzy
 msgid "Window Menu"
@@ -138,58 +138,58 @@ msgstr "मेटासिटी थीम का उपयोग करें"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "विंडो सजवाट खींचने के दौरान मेटासिटी थीम का उपयोग करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:12
 #, fuzzy
 msgid "Close Window"
 msgstr "windows"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../gtk/window-decorator/gtk-window-decorator.c:4449
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "विंडो अधिकतम खत्म करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4452
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "विंडो अधिकतम करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../gtk/window-decorator/gtk-window-decorator.c:4494
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "विंडो न्यूनतम करें"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk/window-decorator/gtk-window-decorator.c:4684
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk/window-decorator/gtk-window-decorator.c:4704
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk/window-decorator/gtk-window-decorator.c:4750
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk/window-decorator/gtk-window-decorator.c:5107
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk/window-decorator/gtk-window-decorator.c:5122
 msgid "_Force Quit"
 msgstr ""
 
@@ -230,7 +230,7 @@ msgstr "व्याख्या के लिए रंग भरें"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 #, fuzzy
 msgid "Initiate"
 msgstr "भारत"
@@ -1542,14 +1542,14 @@ msgstr "डिस्क इमेज"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "छोडं दिया \n"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
 msgstr "टाइम"
@@ -3433,6 +3433,58 @@ msgstr "विंडो को अधिकतम व न्यूनतम क�
 msgid "Wobbly Windows"
 msgstr "windows"
 
+#: ../metadata/zoom.xml.in.h:1
+#, fuzzy
+msgid "Filter Linear"
+msgstr "फिल्टर:"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "जूम इन करने के दौरान रैखिक फिल्टर का प्रयोग करें"
+
+#: ../metadata/zoom.xml.in.h:6
+#, fuzzy
+msgid "Zoom Desktop"
+msgstr "डेसक्टाप"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "ज़ूम इन"
+
+#: ../metadata/zoom.xml.in.h:8
+#, fuzzy
+msgid "Zoom Out"
+msgstr "डेसक्टाप"
+
+#: ../metadata/zoom.xml.in.h:9
+#, fuzzy
+msgid "Zoom Pan"
+msgstr "डेसक्टाप"
+
+#: ../metadata/zoom.xml.in.h:10
+#, fuzzy
+msgid "Zoom Speed"
+msgstr "छोडं दिया \n"
+
+#: ../metadata/zoom.xml.in.h:11
+#, fuzzy
+msgid "Zoom Timestep"
+msgstr "टाइम"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "ज़ूम और पैन डेस्कटॉप घन"
+
+#: ../metadata/zoom.xml.in.h:13
+#, fuzzy
+msgid "Zoom factor"
+msgstr "डेसक्टाप"
+
+#: ../metadata/zoom.xml.in.h:14
+#, fuzzy
+msgid "Zoom pan"
+msgstr "छोडं दिया \n"
+
 #, fuzzy
 #~ msgid "Command line 0"
 #~ msgstr "कमांड:"
@@ -3448,47 +3500,6 @@ msgstr "windows"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "कमाडं लैन पार्स करने पर्ड खराबी आ गया।"
-
-#, fuzzy
-#~ msgid "Filter Linear"
-#~ msgstr "फिल्टर:"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "जूम इन करने के दौरान रैखिक फिल्टर का प्रयोग करें"
-
-#, fuzzy
-#~ msgid "Zoom Desktop"
-#~ msgstr "डेसक्टाप"
-
-#~ msgid "Zoom In"
-#~ msgstr "ज़ूम इन"
-
-#, fuzzy
-#~ msgid "Zoom Out"
-#~ msgstr "डेसक्टाप"
-
-#, fuzzy
-#~ msgid "Zoom Pan"
-#~ msgstr "डेसक्टाप"
-
-#, fuzzy
-#~ msgid "Zoom Speed"
-#~ msgstr "छोडं दिया \n"
-
-#, fuzzy
-#~ msgid "Zoom Timestep"
-#~ msgstr "टाइम"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "ज़ूम और पैन डेस्कटॉप घन"
-
-#, fuzzy
-#~ msgid "Zoom factor"
-#~ msgstr "डेसक्टाप"
-
-#, fuzzy
-#~ msgid "Zoom pan"
-#~ msgstr "छोडं दिया \n"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "विंडो अपारदर्शिता घटायें"

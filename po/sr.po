@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST2 (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 11:20+0530\n"
+"POT-Creation-Date: 2009-02-07 21:14+0530\n"
 "PO-Revision-Date: 2008-04-25 17:17+0200\n"
 "Last-Translator: Dragonny <drax@virus.la>\n"
 "Language-Team: Serbian <i18n@suse.de>\n"
@@ -42,7 +42,7 @@ msgstr "Nema"
 
 #  label of an output field
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk/window-decorator/gtk-window-decorator.c:4638
 #, fuzzy
 msgid "Shade"
 msgstr "Senka"
@@ -87,7 +87,7 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 #: ../metadata/core.xml.in.in.h:100
 #, fuzzy
 msgid "Window Menu"
@@ -158,63 +158,63 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:12
 #, fuzzy
 msgid "Close Window"
 msgstr "Zatvori prozor"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../gtk/window-decorator/gtk-window-decorator.c:4449
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4452
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr ""
 
 #  button text
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../gtk/window-decorator/gtk-window-decorator.c:4494
 #: ../metadata/core.xml.in.in.h:55
 #, fuzzy
 msgid "Minimize Window"
 msgstr "Smanji prozor"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Make Above"
 msgstr "Napravi iznad"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk/window-decorator/gtk-window-decorator.c:4684
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk/window-decorator/gtk-window-decorator.c:4704
 msgid "Unshade"
 msgstr "Ne senči"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unmake Above"
 msgstr "Rastavi iznad"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk/window-decorator/gtk-window-decorator.c:4750
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Prozor \"%s\" ne reaguje."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk/window-decorator/gtk-window-decorator.c:5107
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forsiranjem aplikacije da se zatvori moze izazvati gubitak nesnimljenih "
 "promena."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk/window-decorator/gtk-window-decorator.c:5122
 msgid "_Force Quit"
 msgstr "_Forsiraj Zatvaranje"
 
@@ -257,7 +257,7 @@ msgstr ""
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 #, fuzzy
 msgid "Initiate"
 msgstr "хетски"
@@ -1546,14 +1546,14 @@ msgstr "Sidnej"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "Suspend"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
 msgstr "Источни Тимор"
@@ -3548,6 +3548,64 @@ msgstr ""
 msgid "Wobbly Windows"
 msgstr "&Obriši Windowse"
 
+#: ../metadata/zoom.xml.in.h:1
+#, fuzzy
+msgid "Filter Linear"
+msgstr "Filter: "
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr ""
+
+#  Headline for X11 configuration screen:
+#  The user selects screen resolution and color depth.
+#: ../metadata/zoom.xml.in.h:6
+#, fuzzy
+msgid "Zoom Desktop"
+msgstr "Setovanja Desktop-a"
+
+#: ../metadata/zoom.xml.in.h:7
+#, fuzzy
+msgid "Zoom In"
+msgstr "Odjavi se"
+
+#: ../metadata/zoom.xml.in.h:8
+#, fuzzy
+msgid "Zoom Out"
+msgstr "Odjavi se"
+
+#: ../metadata/zoom.xml.in.h:9
+#, fuzzy
+msgid "Zoom Pan"
+msgstr "Odjavi se"
+
+#: ../metadata/zoom.xml.in.h:10
+#, fuzzy
+msgid "Zoom Speed"
+msgstr "Suspend"
+
+#: ../metadata/zoom.xml.in.h:11
+#, fuzzy
+msgid "Zoom Timestep"
+msgstr "Источни Тимор"
+
+#  Headline for X11 configuration screen:
+#  The user selects screen resolution and color depth.
+#: ../metadata/zoom.xml.in.h:12
+#, fuzzy
+msgid "Zoom and pan desktop cube"
+msgstr "Setovanja Desktop-a"
+
+#: ../metadata/zoom.xml.in.h:13
+#, fuzzy
+msgid "Zoom factor"
+msgstr "Odjavi se"
+
+#: ../metadata/zoom.xml.in.h:14
+#, fuzzy
+msgid "Zoom pan"
+msgstr "Odjavi se"
+
 #, fuzzy
 #~ msgid "Command line 0"
 #~ msgstr "Komanda :"
@@ -3565,44 +3623,6 @@ msgstr "&Obriši Windowse"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Greška, niste uneli ispravno komandu."
-
-#, fuzzy
-#~ msgid "Filter Linear"
-#~ msgstr "Filter: "
-
-#  Headline for X11 configuration screen:
-#  The user selects screen resolution and color depth.
-#, fuzzy
-#~ msgid "Zoom Desktop"
-#~ msgstr "Setovanja Desktop-a"
-
-#, fuzzy
-#~ msgid "Zoom In"
-#~ msgstr "Odjavi se"
-
-#, fuzzy
-#~ msgid "Zoom Out"
-#~ msgstr "Odjavi se"
-
-#, fuzzy
-#~ msgid "Zoom Pan"
-#~ msgstr "Odjavi se"
-
-#, fuzzy
-#~ msgid "Zoom Speed"
-#~ msgstr "Suspend"
-
-#, fuzzy
-#~ msgid "Zoom Timestep"
-#~ msgstr "Источни Тимор"
-
-#, fuzzy
-#~ msgid "Zoom factor"
-#~ msgstr "Odjavi se"
-
-#, fuzzy
-#~ msgid "Zoom pan"
-#~ msgstr "Odjavi se"
 
 #  Radio button for using an entire (Windows) partition for Linux
 #, fuzzy

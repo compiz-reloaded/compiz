@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 11:18+0530\n"
+"POT-Creation-Date: 2009-02-07 21:12+0530\n"
 "PO-Revision-Date: 2008-12-23 10:30+0100\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -40,7 +40,7 @@ msgid "None"
 msgstr "Ei mitään"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk/window-decorator/gtk-window-decorator.c:4638
 msgid "Shade"
 msgstr "Näytä rullattuna"
 
@@ -69,7 +69,7 @@ msgid "Lower"
 msgstr "Laske"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Ikkunavalikko"
@@ -141,59 +141,59 @@ msgstr "Käytä Metacity-teemaa"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Käytä Metacity-teemaa ikkunoiden kehyksissä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../gtk/window-decorator/gtk-window-decorator.c:4449
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Palauta suurennettu ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4452
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Suurenna ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../gtk/window-decorator/gtk-window-decorator.c:4494
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Pienennä ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Make Above"
 msgstr "Näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk/window-decorator/gtk-window-decorator.c:4684
 msgid "Stick"
 msgstr "Näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk/window-decorator/gtk-window-decorator.c:4704
 msgid "Unshade"
 msgstr "Älä näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unmake Above"
 msgstr "Älä näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk/window-decorator/gtk-window-decorator.c:4750
 msgid "Unstick"
 msgstr "Älä näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Ikkuna \"%s\" ei vastaa."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk/window-decorator/gtk-window-decorator.c:5107
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Tämän sovelluksen sulkeminen väkisin saa tallentamattomat muutokset "
 "katoamaan."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk/window-decorator/gtk-window-decorator.c:5122
 msgid "_Force Quit"
 msgstr "Sulje _väkisin"
 
@@ -231,7 +231,7 @@ msgstr "Piirroksen väri"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "Aktivoi"
 
@@ -1403,13 +1403,13 @@ msgstr "Taivaan kuva"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Nopeus"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Aikaviive"
 
@@ -3104,6 +3104,50 @@ msgstr "Huojumistehoste ikkuna suurentaessa ja pienentäessä"
 msgid "Wobbly Windows"
 msgstr "Huojuvat ikkunat"
 
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "Suodata lineaarisesti"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "Käytä lineaarista suodatinta zoomin aikana"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "Työpöydän zoomaus"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "Lähennys"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "Loitonnus"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "Zoomin muutosarvo"
+
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "Zoomausnopeus"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Zoomausaikaväli"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "Zoomaa ja panoroi työpöytää"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "Suurennuskerroin"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "Panorointi suurennettaessa"
+
 #~ msgid "Command line 0"
 #~ msgstr "Komentorivi 0"
 
@@ -3115,39 +3159,6 @@ msgstr "Huojuvat ikkunat"
 
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Kuvakaappauksen pikanäppäimet"
-
-#~ msgid "Filter Linear"
-#~ msgstr "Suodata lineaarisesti"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Käytä lineaarista suodatinta zoomin aikana"
-
-#~ msgid "Zoom Desktop"
-#~ msgstr "Työpöydän zoomaus"
-
-#~ msgid "Zoom In"
-#~ msgstr "Lähennys"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Loitonnus"
-
-#~ msgid "Zoom Pan"
-#~ msgstr "Zoomin muutosarvo"
-
-#~ msgid "Zoom Speed"
-#~ msgstr "Zoomausnopeus"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Zoomausaikaväli"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "Zoomaa ja panoroi työpöytää"
-
-#~ msgid "Zoom factor"
-#~ msgstr "Suurennuskerroin"
-
-#~ msgid "Zoom pan"
-#~ msgstr "Panorointi suurennettaessa"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Vähennä ikkunan läpikuultavuutta"
