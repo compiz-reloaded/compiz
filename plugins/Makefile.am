@@ -7,9 +7,6 @@ libcube_la_SOURCES = cube.c
 librotate_la_LDFLAGS = -module -avoid-version -no-undefined
 librotate_la_SOURCES = rotate.c
 
-libzoom_la_LDFLAGS = -module -avoid-version -no-undefined
-libzoom_la_SOURCES = zoom.c
-
 libscale_la_LDFLAGS = -module -avoid-version -no-undefined
 libscale_la_SOURCES = scale.c
 
@@ -67,6 +64,12 @@ libini_la_SOURCES = ini.c
 
 libobs_la_LDFLAGS = -module -avoid-version -no-undefined
 libobs_la_SOURCES = obs.c
+
+libcommands_la_LDFLAGS = -module -avoid-version -no-undefined
+libcommands_la_SOURCES = commands.c
+
+libgnomecompat_la_LDFLAGS = -module -avoid-version -no-undefined
+libgnomecompat_la_SOURCES = gnomecompat.c
 
 if USE_LIBRSVG
 libsvg_la_DEPENDENCIES = $(top_builddir)/libdecoration/libdecoration.la
@@ -157,7 +160,6 @@ module_LTLIBRARIES =		\
 	libminimize.la		\
 	libcube.la		\
 	librotate.la		\
-	libzoom.la		\
 	libscale.la		\
 	libmove.la		\
 	libresize.la		\
@@ -173,6 +175,8 @@ module_LTLIBRARIES =		\
 	libvideo.la		\
 	libini.la		\
 	libobs.la		\
+	libcommands.la		\
+	libgnomecompat.la	\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
 	$(libinotify_module)	\

@@ -79,18 +79,16 @@ usage (void)
 	    "[--refresh-rate RATE]\n       "
 	    "[--fast-filter] "
 	    "[--indirect-rendering] "
+	    "[--no-detection]\n       "
+	    "[--keep-desktop-hints] "
 	    "[--loose-binding] "
 	    "[--replace]\n       "
 	    "[--sm-disable] "
 	    "[--sm-client-id ID] "
-	    "[--no-detection]\n       "
-	    "[--ignore-desktop-hints] "
-	    "[--only-current-screen]"
+	    "[--only-current-screen]\n      "
 
 #ifdef USE_COW
-	    " [--use-root-window]\n       "
-#else
-	    "\n       "
+	    " [--use-root-window] "
 #endif
 
 	    "[--version] "

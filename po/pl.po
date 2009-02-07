@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:44+0530\n"
+"POT-Creation-Date: 2009-02-06 11:19+0530\n"
 "PO-Revision-Date: 2008-10-26 22:59+0100\n"
 "Last-Translator: Michal Kaluzniak <the_hooltay@o2.pl>\n"
 "Language-Team: <pl@li.org>\n"
@@ -29,6 +29,51 @@ msgstr "Zarządzanie oknem"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Brak"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+msgid "Shade"
+msgstr "Cieniuj"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Maksymalizuj"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Maksymalizuj okno w poziomie"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Maksymalizuj okno w pionie"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Zminimalizowane"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Automatyczne wysuwanie okien"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+#, fuzzy
+msgid "Lower"
+msgstr "Niski"
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../metadata/core.xml.in.in.h:100
+msgid "Window Menu"
+msgstr "Menu okna"
 
 # I find my translation easier to understand
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
@@ -94,67 +139,58 @@ msgstr "Używaj motywu Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Używaj motywu Metacity podczas rysowania dekoracji okien"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
-#: ../metadata/core.xml.in.in.h:24
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Zamknij okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
-#: ../metadata/core.xml.in.in.h:154
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Cofnij maksymalizację okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
-#: ../metadata/core.xml.in.in.h:86
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maksymalizuj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
-#: ../metadata/core.xml.in.in.h:92
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Zminimalizuj okno"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Menu okna"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Cieniuj"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Stwórz powyżej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Przyklej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 #, fuzzy
 msgid "Unshade"
 msgstr "Odcieniuj"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Nie twórz powyżej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Odklej"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Okno \"%s\" nie odpowiada."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "Wymuszenie zamknięcia aplikacji spowoduje utratę niezapisanych zmian."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Wymuś Zamknięcie"
 
@@ -192,7 +228,7 @@ msgstr "Kolor wypełnienia dla rysowania"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Inicjuj"
 
@@ -370,256 +406,490 @@ msgstr "Rozpocznij klonowanie zaznaczenia"
 msgid "Output clone handler"
 msgstr "Zewnętrzna obsługa klonowania"
 
-#: ../metadata/core.xml.in.in.h:1
+#: ../metadata/commands.xml.in.h:1
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:2
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:3
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:4
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:5
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:6
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:7
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:8
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:9
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:10
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:11
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:12
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:2
+#: ../metadata/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:5
+#: ../metadata/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:6
+#: ../metadata/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:7
+#: ../metadata/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:8
+#: ../metadata/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:9
+#: ../metadata/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:10
+#: ../metadata/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:11
+#: ../metadata/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:12
+#: ../metadata/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
 
-#: ../metadata/core.xml.in.in.h:13
+#: ../metadata/commands.xml.in.h:25
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:26
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:27
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:28
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "Skrót klawiaturowy, który spowoduje uruchomienie polecenia command%d"
+
+#: ../metadata/commands.xml.in.h:37
+msgid "Assigns bindings to arbitrary commands"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:38
+msgid "Button Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:39
+msgid "Command line 1"
+msgstr "Linia poleceń 1"
+
+#: ../metadata/commands.xml.in.h:40
+msgid "Command line 10"
+msgstr "Linia poleceń 10"
+
+#: ../metadata/commands.xml.in.h:41
+msgid "Command line 11"
+msgstr "Linia poleceń 11"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "Linia poleceń 1"
+
+#: ../metadata/commands.xml.in.h:43
+msgid "Command line 2"
+msgstr "Linia poleceń 2"
+
+#: ../metadata/commands.xml.in.h:44
+msgid "Command line 3"
+msgstr "Linia poleceń 3"
+
+#: ../metadata/commands.xml.in.h:45
+msgid "Command line 4"
+msgstr "Linia poleceń 4"
+
+#: ../metadata/commands.xml.in.h:46
+msgid "Command line 5"
+msgstr "Linia poleceń 5"
+
+#: ../metadata/commands.xml.in.h:47
+msgid "Command line 6"
+msgstr "Linia poleceń 6"
+
+#: ../metadata/commands.xml.in.h:48
+msgid "Command line 7"
+msgstr "Linia poleceń 7"
+
+#: ../metadata/commands.xml.in.h:49
+msgid "Command line 8"
+msgstr "Linia poleceń 8"
+
+#: ../metadata/commands.xml.in.h:50
+msgid "Command line 9"
+msgstr "Linia poleceń 9"
+
+#: ../metadata/commands.xml.in.h:51
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:52
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:53
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:54
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:55
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:56
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:57
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:58
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:59
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:60
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:61
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:62
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
+
+#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#, fuzzy
+msgid "Commands"
+msgstr "Polecenie"
+
+#: ../metadata/commands.xml.in.h:64
+msgid "Edge Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:65
+msgid "Key Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:66
+msgid "Run command 1"
+msgstr "Wykonaj polecenie 1"
+
+#: ../metadata/commands.xml.in.h:67
+msgid "Run command 10"
+msgstr "Wykonaj polecenie 10"
+
+#: ../metadata/commands.xml.in.h:68
+msgid "Run command 11"
+msgstr "Wykonaj polecenie 11"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "Wykonaj polecenie 1"
+
+#: ../metadata/commands.xml.in.h:70
+msgid "Run command 2"
+msgstr "Wykonaj polecenie 2"
+
+#: ../metadata/commands.xml.in.h:71
+msgid "Run command 3"
+msgstr "Wykonaj polecenie 3"
+
+#: ../metadata/commands.xml.in.h:72
+msgid "Run command 4"
+msgstr "Wykonaj polecenie 4"
+
+#: ../metadata/commands.xml.in.h:73
+msgid "Run command 5"
+msgstr "Wykonaj polecenie 5"
+
+#: ../metadata/commands.xml.in.h:74
+msgid "Run command 6"
+msgstr "Wykonaj polecenie 6"
+
+#: ../metadata/commands.xml.in.h:75
+msgid "Run command 7"
+msgstr "Wykonaj polecenie 7"
+
+#: ../metadata/commands.xml.in.h:76
+msgid "Run command 8"
+msgstr "Wykonaj polecenie 8"
+
+#: ../metadata/commands.xml.in.h:77
+msgid "Run command 9"
+msgstr "Wykonaj polecenie 9"
+
+#: ../metadata/core.xml.in.in.h:1
 msgid "Active Plugins"
 msgstr "Włączone wtyczki"
 
-#: ../metadata/core.xml.in.in.h:14
+#: ../metadata/core.xml.in.in.h:2
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Zezwól na to, by rysowanie okien pełnoekranowych nie było przekierowywane do "
 "obrazków rastrowych poza ekranem"
 
-#: ../metadata/core.xml.in.in.h:15
+#: ../metadata/core.xml.in.in.h:3
 msgid "Audible Bell"
 msgstr "Dzwonek systemowy"
 
-#: ../metadata/core.xml.in.in.h:16
+#: ../metadata/core.xml.in.in.h:4
 msgid "Audible system beep"
 msgstr "Dzwonek systemowy"
 
-#: ../metadata/core.xml.in.in.h:17
+#: ../metadata/core.xml.in.in.h:5
 msgid "Auto-Raise"
 msgstr "Automatyczne wysuwanie okien"
 
-#: ../metadata/core.xml.in.in.h:18
+#: ../metadata/core.xml.in.in.h:6
 msgid "Auto-Raise Delay"
 msgstr "Opóźnienie automatycznego wysuwania okien"
 
-#: ../metadata/core.xml.in.in.h:19
+#: ../metadata/core.xml.in.in.h:7
 msgid "Automatic detection of output devices"
 msgstr "Automatyczne wykrywanie urządzeń wyjściowych"
 
-#: ../metadata/core.xml.in.in.h:20
+#: ../metadata/core.xml.in.in.h:8
 msgid "Automatic detection of refresh rate"
 msgstr "Automatyczne wykrywanie częstotliwości odświeżania"
 
-#: ../metadata/core.xml.in.in.h:21
+#: ../metadata/core.xml.in.in.h:9
 msgid "Best"
 msgstr "Najlepszy"
 
-#: ../metadata/core.xml.in.in.h:22
+#: ../metadata/core.xml.in.in.h:10
 msgid "Click To Focus"
 msgstr "Kliknij by wybrać"
 
-#: ../metadata/core.xml.in.in.h:23
+#: ../metadata/core.xml.in.in.h:11
 msgid "Click on window moves input focus to it"
 msgstr "Kliknięcie okna ogniskuje na nim wprowadzanie"
 
-#: ../metadata/core.xml.in.in.h:25
+#: ../metadata/core.xml.in.in.h:13
 msgid "Close active window"
 msgstr "Zamknij aktywne okno"
 
-#: ../metadata/core.xml.in.in.h:26
-msgid "Command line 0"
-msgstr "Linia poleceń 0"
-
-#: ../metadata/core.xml.in.in.h:27
-msgid "Command line 1"
-msgstr "Linia poleceń 1"
-
-#: ../metadata/core.xml.in.in.h:28
-msgid "Command line 10"
-msgstr "Linia poleceń 10"
-
-#: ../metadata/core.xml.in.in.h:29
-msgid "Command line 11"
-msgstr "Linia poleceń 11"
-
-#: ../metadata/core.xml.in.in.h:30
-msgid "Command line 2"
-msgstr "Linia poleceń 2"
-
-#: ../metadata/core.xml.in.in.h:31
-msgid "Command line 3"
-msgstr "Linia poleceń 3"
-
-#: ../metadata/core.xml.in.in.h:32
-msgid "Command line 4"
-msgstr "Linia poleceń 4"
-
-#: ../metadata/core.xml.in.in.h:33
-msgid "Command line 5"
-msgstr "Linia poleceń 5"
-
-#: ../metadata/core.xml.in.in.h:34
-msgid "Command line 6"
-msgstr "Linia poleceń 6"
-
-#: ../metadata/core.xml.in.in.h:35
-msgid "Command line 7"
-msgstr "Linia poleceń 7"
-
-#: ../metadata/core.xml.in.in.h:36
-msgid "Command line 8"
-msgstr "Linia poleceń 8"
-
-#: ../metadata/core.xml.in.in.h:37
-msgid "Command line 9"
-msgstr "Linia poleceń 9"
-
-#: ../metadata/core.xml.in.in.h:38
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:39
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:40
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:41
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:42
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:43
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:44
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:45
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:46
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:47
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:48
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:49
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "Polecenie do wykonania w powłoce po wywołaniu run_command%d"
-
-#: ../metadata/core.xml.in.in.h:50
-#, fuzzy
-msgid "Commands"
-msgstr "Polecenie"
-
-#: ../metadata/core.xml.in.in.h:51
+#: ../metadata/core.xml.in.in.h:14
 msgid "Default Icon"
 msgstr "Domyślna ikona"
 
-#: ../metadata/core.xml.in.in.h:52
+#: ../metadata/core.xml.in.in.h:15
 msgid "Default window icon image"
 msgstr "Obraz domyślnej ikony okna"
 
-#: ../metadata/core.xml.in.in.h:53
+#: ../metadata/core.xml.in.in.h:16
 #, fuzzy
 msgid "Desktop Size"
 msgstr "Kostka pulpitu"
 
-#: ../metadata/core.xml.in.in.h:54
+#: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
 msgstr "Wykryj wyjścia"
 
-#: ../metadata/core.xml.in.in.h:55
+#: ../metadata/core.xml.in.in.h:18
 msgid "Detect Refresh Rate"
 msgstr "Wykryj częstotliwość odświeżania"
 
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/core.xml.in.in.h:20
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
@@ -627,98 +897,98 @@ msgstr ""
 "Czas jaki musi spędzić wskaźnik na krawędzi ekranu zanim zostanie wykonana "
 "akcja"
 
-#: ../metadata/core.xml.in.in.h:58
+#: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
 msgstr "Opóźnienie zapadki krawędzi"
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "Szybki"
 
-#: ../metadata/core.xml.in.in.h:60
+#: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:61
+#: ../metadata/core.xml.in.in.h:24
 #, fuzzy
 msgid "Focus Prevention Level"
 msgstr "Stopień zapobiegania skupienia"
 
-#: ../metadata/core.xml.in.in.h:62
+#: ../metadata/core.xml.in.in.h:25
 #, fuzzy
 msgid "Focus Prevention Windows"
 msgstr "Zapobieganie skupieniu okien"
 
-#: ../metadata/core.xml.in.in.h:63
+#: ../metadata/core.xml.in.in.h:26
 #, fuzzy
 msgid "Focus prevention windows"
 msgstr "Zapobieganie skupieniu okien"
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../metadata/core.xml.in.in.h:27
 #, fuzzy
 msgid "Force independent output painting."
 msgstr "Wymuś niezależne wyjście malowania"
 
-#: ../metadata/core.xml.in.in.h:65
+#: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
 msgstr "Opcje Ogólne"
 
-#: ../metadata/core.xml.in.in.h:66
+#: ../metadata/core.xml.in.in.h:29
 msgid "General compiz options"
 msgstr "Ogólne opcje Compiza"
 
-#: ../metadata/core.xml.in.in.h:67
+#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "Dobry"
 
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.in.h:31
 msgid "Hide Skip Taskbar Windows"
 msgstr "Ukryj okna spoza paska zadań"
 
-#: ../metadata/core.xml.in.in.h:69
+#: ../metadata/core.xml.in.in.h:32
 msgid "Hide all windows and focus desktop"
 msgstr "Schowaj wszystkie okna i wybierz pulpit"
 
-#: ../metadata/core.xml.in.in.h:70
+#: ../metadata/core.xml.in.in.h:33
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "Ukrywa okna spoza paska zadań w trybie pokazywania pulpitu"
 
-#: ../metadata/core.xml.in.in.h:71
+#: ../metadata/core.xml.in.in.h:34
 msgid "High"
 msgstr "Wysokość"
 
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.in.h:35
 msgid "Horizontal Virtual Size"
 msgstr "Poziomy rozmiar wirtualny"
 
-#: ../metadata/core.xml.in.in.h:73
+#: ../metadata/core.xml.in.in.h:36
 msgid "If available use compression for textures converted from images"
 msgstr ""
 "Jeśli możliwe używaj kompresji dla tekstur przekonwertowanych z obrazków"
 
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.in.h:37
 msgid "Ignore Hints When Maximized"
 msgstr "Ignoruj podpowiedzi dla zmaksymalizowanych okien"
 
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 "Ignorowanie podpowiedzi zwiększenia rozmiaru i proporcji gdy okno jest "
 "zmaksymalizowane"
 
-#: ../metadata/core.xml.in.in.h:76
+#: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
 msgstr "Odstęp czasu przed podniesieniem wskazanych okien"
 
-#: ../metadata/core.xml.in.in.h:77
+#: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
 msgstr "Odstęp czasu pomiędzy wiadomościami ping"
 
-#: ../metadata/core.xml.in.in.h:78
+#: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:79
+#: ../metadata/core.xml.in.in.h:42
 #, fuzzy
 msgid "Level of focus stealing prevention"
 msgstr "Stopień zapobiegania wykradania ostrości"
@@ -726,336 +996,233 @@ msgstr "Stopień zapobiegania wykradania ostrości"
 # Zmieniłem z "Błyskawica" na "Oświetlenie":
 # lightNing=Błyskawica
 # lighting=Oświetlenie, cieniowanie
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:43
 msgid "Lighting"
 msgstr "Oświetlenie"
 
-#: ../metadata/core.xml.in.in.h:81
+#: ../metadata/core.xml.in.in.h:44
 msgid "List of currently active plugins"
 msgstr "Lista aktualnie włączonych wtyczek"
 
-#: ../metadata/core.xml.in.in.h:82
+#: ../metadata/core.xml.in.in.h:45
 msgid "List of strings describing output devices"
 msgstr "Lista opisów urządzeń wyjściowych"
 
-#: ../metadata/core.xml.in.in.h:83
+#: ../metadata/core.xml.in.in.h:46
 msgid "Low"
 msgstr "Niski"
 
-#: ../metadata/core.xml.in.in.h:84
+#: ../metadata/core.xml.in.in.h:47
 msgid "Lower Window"
 msgstr "Obniż okno"
 
-#: ../metadata/core.xml.in.in.h:85
+#: ../metadata/core.xml.in.in.h:48
 msgid "Lower window beneath other windows"
 msgstr "Przenieś okno pod pozostałe"
 
-#: ../metadata/core.xml.in.in.h:87
+#: ../metadata/core.xml.in.in.h:50
 msgid "Maximize Window Horizontally"
 msgstr "Maksymalizuj okno w poziomie"
 
-#: ../metadata/core.xml.in.in.h:88
+#: ../metadata/core.xml.in.in.h:51
 msgid "Maximize Window Vertically"
 msgstr "Maksymalizuj okno w pionie"
 
-#: ../metadata/core.xml.in.in.h:89
+#: ../metadata/core.xml.in.in.h:52
 msgid "Maximize active window"
 msgstr "Maksymalizuj aktywne okno"
 
-#: ../metadata/core.xml.in.in.h:90
+#: ../metadata/core.xml.in.in.h:53
 msgid "Maximize active window horizontally"
 msgstr "Maksymalizuj aktywne okno w poziomie"
 
-#: ../metadata/core.xml.in.in.h:91
+#: ../metadata/core.xml.in.in.h:54
 msgid "Maximize active window vertically"
 msgstr "Maksymalizuj aktywne okno w pionie"
 
-#: ../metadata/core.xml.in.in.h:93
+#: ../metadata/core.xml.in.in.h:56
 msgid "Minimize active window"
 msgstr "Minimalizuj aktywne okno"
 
-#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "Normalne"
 
-#: ../metadata/core.xml.in.in.h:95
+#: ../metadata/core.xml.in.in.h:58
 msgid "Number of Desktops"
 msgstr "Ilość pulpitów"
 
-#: ../metadata/core.xml.in.in.h:96
+#: ../metadata/core.xml.in.in.h:59
 msgid "Number of virtual desktops"
 msgstr "Ilość wirtualnych pulpitów"
 
-#: ../metadata/core.xml.in.in.h:97
+#: ../metadata/core.xml.in.in.h:60
 msgid "Off"
 msgstr "Wyłączenie"
 
-#: ../metadata/core.xml.in.in.h:98
+#: ../metadata/core.xml.in.in.h:61
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Odświeżaj ekran tylko podczas okresu poziomego wygaszania"
 
-#: ../metadata/core.xml.in.in.h:99
-msgid "Open a terminal"
-msgstr "Otwiera terminal"
-
-#: ../metadata/core.xml.in.in.h:100
+#: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
 msgstr "Wyjścia"
 
-#: ../metadata/core.xml.in.in.h:101
+#: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
 msgstr "Radzenie sobie z zachodzącymi na siebie wyjściami"
 
-#: ../metadata/core.xml.in.in.h:102
+#: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 "Rysuj każde urządzenie wyjściowe niezaleźnie, nawet jeśli zachodzą one na "
 "siebie"
 
-#: ../metadata/core.xml.in.in.h:103
+#: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
 msgstr "Opóźnienie ping"
 
-#: ../metadata/core.xml.in.in.h:104
+#: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
 msgstr "Preferuj większe wyjście"
 
-#: ../metadata/core.xml.in.in.h:105
+#: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
 msgstr "Preferuj mniejsze wyjście"
 
-#: ../metadata/core.xml.in.in.h:106
+#: ../metadata/core.xml.in.in.h:68
 msgid "Raise On Click"
 msgstr "Podnieś przy kliknięciu"
 
-#: ../metadata/core.xml.in.in.h:107
+#: ../metadata/core.xml.in.in.h:69
 msgid "Raise Window"
 msgstr "Podnieś okno"
 
-#: ../metadata/core.xml.in.in.h:108
+#: ../metadata/core.xml.in.in.h:70
 msgid "Raise selected windows after interval"
 msgstr "Podnieś wskazane okno po interwale"
 
-#: ../metadata/core.xml.in.in.h:109
+#: ../metadata/core.xml.in.in.h:71
 msgid "Raise window above other windows"
 msgstr "Podnosi okno ponad pozostałe"
 
-#: ../metadata/core.xml.in.in.h:110
+#: ../metadata/core.xml.in.in.h:72
 msgid "Raise windows when clicked"
 msgstr "Podnieś okna po kliknięciu"
 
-#: ../metadata/core.xml.in.in.h:111
+#: ../metadata/core.xml.in.in.h:73
 msgid "Refresh Rate"
 msgstr "Częstotliwość odświeżania"
 
-#: ../metadata/core.xml.in.in.h:112
-msgid "Run Dialog"
-msgstr "Dialog Uruchom"
-
-#: ../metadata/core.xml.in.in.h:113
-msgid "Run command 0"
-msgstr "Wykonaj polecenie 0"
-
-#: ../metadata/core.xml.in.in.h:114
-msgid "Run command 1"
-msgstr "Wykonaj polecenie 1"
-
-#: ../metadata/core.xml.in.in.h:115
-msgid "Run command 10"
-msgstr "Wykonaj polecenie 10"
-
-#: ../metadata/core.xml.in.in.h:116
-msgid "Run command 11"
-msgstr "Wykonaj polecenie 11"
-
-#: ../metadata/core.xml.in.in.h:117
-msgid "Run command 2"
-msgstr "Wykonaj polecenie 2"
-
-#: ../metadata/core.xml.in.in.h:118
-msgid "Run command 3"
-msgstr "Wykonaj polecenie 3"
-
-#: ../metadata/core.xml.in.in.h:119
-msgid "Run command 4"
-msgstr "Wykonaj polecenie 4"
-
-#: ../metadata/core.xml.in.in.h:120
-msgid "Run command 5"
-msgstr "Wykonaj polecenie 5"
-
-#: ../metadata/core.xml.in.in.h:121
-msgid "Run command 6"
-msgstr "Wykonaj polecenie 6"
-
-#: ../metadata/core.xml.in.in.h:122
-msgid "Run command 7"
-msgstr "Wykonaj polecenie 7"
-
-#: ../metadata/core.xml.in.in.h:123
-msgid "Run command 8"
-msgstr "Wykonaj polecenie 8"
-
-#: ../metadata/core.xml.in.in.h:124
-msgid "Run command 9"
-msgstr "Wykonaj polecenie 9"
-
-#: ../metadata/core.xml.in.in.h:125
-#, fuzzy
-msgid "Run terminal command"
-msgstr "Polecenie terminala"
-
-#: ../metadata/core.xml.in.in.h:126
+#: ../metadata/core.xml.in.in.h:74
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Mnożnik rozmiaru ekranu dla poziomego wirtualnego rozmiaru"
 
-#: ../metadata/core.xml.in.in.h:127
+#: ../metadata/core.xml.in.in.h:75
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Mnożnik rozmiaru ekranu dla pionowego wirtualnego rozmiaru"
 
-#: ../metadata/core.xml.in.in.h:128
-msgid "Screenshot command line"
-msgstr "Polecenie zrzutu ekranu"
-
-#: ../metadata/core.xml.in.in.h:129
-#, fuzzy
-msgid "Screenshot commands"
-msgstr "Polecenie zrzutu ekranu"
-
-#: ../metadata/core.xml.in.in.h:130
-#, fuzzy
-msgid "Screenshot key bindings"
-msgstr "Polecenie zrzutu ekranu"
-
-#: ../metadata/core.xml.in.in.h:131
+#: ../metadata/core.xml.in.in.h:76
 msgid "Show Desktop"
 msgstr "Pokaż pulpit"
 
-#: ../metadata/core.xml.in.in.h:132
-msgid "Show Main Menu"
-msgstr "Wyświetl menu główne"
-
-#: ../metadata/core.xml.in.in.h:133
-msgid "Show Run Application dialog"
-msgstr "Wyświetl okno dialogowe \"Uruchom program\""
-
-#: ../metadata/core.xml.in.in.h:134
-msgid "Show the main menu"
-msgstr "Wyświetl menu główne"
-
-#: ../metadata/core.xml.in.in.h:135
+#: ../metadata/core.xml.in.in.h:77
 msgid "Slow Animations"
 msgstr "Powolne animacje"
 
-#: ../metadata/core.xml.in.in.h:136
+#: ../metadata/core.xml.in.in.h:78
 msgid "Smart mode"
 msgstr "\"sprytny\" tryb"
 
-#: ../metadata/core.xml.in.in.h:137
+#: ../metadata/core.xml.in.in.h:79
 msgid "Sync To VBlank"
 msgstr "Synchronizuj z VBlank"
 
-#: ../metadata/core.xml.in.in.h:138
-msgid "Take a screenshot"
-msgstr "Pobierz zrzut ekranu"
-
-#: ../metadata/core.xml.in.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "Pobierz zrzut okna"
-
-#: ../metadata/core.xml.in.in.h:140
-msgid "Terminal command line"
-msgstr "Polecenie terminala"
-
-#: ../metadata/core.xml.in.in.h:141
+#: ../metadata/core.xml.in.in.h:80
 msgid "Texture Compression"
 msgstr "Kompresja tekstur"
 
-#: ../metadata/core.xml.in.in.h:142
+#: ../metadata/core.xml.in.in.h:81
 msgid "Texture Filter"
 msgstr "Filtr tekstury"
 
-#: ../metadata/core.xml.in.in.h:143
+#: ../metadata/core.xml.in.in.h:82
 msgid "Texture filtering"
 msgstr "Filtrowanie tekstur"
 
-#: ../metadata/core.xml.in.in.h:144
+#: ../metadata/core.xml.in.in.h:83
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Częstotliwość przerysowywania ekranu (razy na sekundę)"
 
-#: ../metadata/core.xml.in.in.h:145
+#: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
 msgstr "Przełącz maksymalizację okna"
 
-#: ../metadata/core.xml.in.in.h:146
+#: ../metadata/core.xml.in.in.h:85
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Przełącz maksymalizację poziomą okna"
 
-#: ../metadata/core.xml.in.in.h:147
+#: ../metadata/core.xml.in.in.h:86
 msgid "Toggle Window Maximized Vertically"
 msgstr "Przełącz maksymalizację pionową okna"
 
-#: ../metadata/core.xml.in.in.h:148
+#: ../metadata/core.xml.in.in.h:87
 msgid "Toggle Window Shaded"
 msgstr "Przełącz przyciemnianie okna"
 
-#: ../metadata/core.xml.in.in.h:149
+#: ../metadata/core.xml.in.in.h:88
 msgid "Toggle active window maximized"
 msgstr "Przełącza maksymalizację aktywnego okna"
 
-#: ../metadata/core.xml.in.in.h:150
+#: ../metadata/core.xml.in.in.h:89
 msgid "Toggle active window maximized horizontally"
 msgstr "Przełącz maksymalizację poziomą aktywnego okna"
 
-#: ../metadata/core.xml.in.in.h:151
+#: ../metadata/core.xml.in.in.h:90
 msgid "Toggle active window maximized vertically"
 msgstr "Przełącz maksymalizację poziomą aktywnego okna"
 
-#: ../metadata/core.xml.in.in.h:152
+#: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
 msgstr "Przełącza przyciemnianie aktywnego okna"
 
-#: ../metadata/core.xml.in.in.h:153
+#: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
 msgstr "Wyłącz powolne animacje"
 
-#: ../metadata/core.xml.in.in.h:155
+#: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
 msgstr "Cofnij maksymalizację aktywnego okna"
 
-#: ../metadata/core.xml.in.in.h:156
+#: ../metadata/core.xml.in.in.h:95
 msgid "Unredirect Fullscreen Windows"
 msgstr "Cofnij przekierowanie okien pełnoekranowych"
 
-#: ../metadata/core.xml.in.in.h:157
+#: ../metadata/core.xml.in.in.h:96
 msgid "Use diffuse light when screen is transformed"
 msgstr "Używaj rozproszonego światła podczas przekształceń ekranu"
 
-#: ../metadata/core.xml.in.in.h:158
+#: ../metadata/core.xml.in.in.h:97
 msgid "Vertical Virtual Size"
 msgstr "Pionowy rozmiar wirtualny"
 
-#: ../metadata/core.xml.in.in.h:159
+#: ../metadata/core.xml.in.in.h:98
 msgid "Very High"
 msgstr "Bardzo wysoko"
 
-#: ../metadata/core.xml.in.in.h:160
+#: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 "Które z zachodzących na siebie urządzonych wyjściowych powinny być "
 "preferowne?"
 
-#: ../metadata/core.xml.in.in.h:162
+#: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
 msgstr "Przypisanie przycisku do menu okien"
 
-#: ../metadata/core.xml.in.in.h:163
+#: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
 msgstr "Przypisanie klawisza do menu okien"
-
-#: ../metadata/core.xml.in.in.h:164
-msgid "Window screenshot command line"
-msgstr "Polecenie zrzutu okna"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1241,13 +1408,13 @@ msgstr "Obrazek tła dla kostki"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Szybkość"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Opóźnienie"
 
@@ -1487,6 +1654,59 @@ msgstr "Glib"
 msgid "GLib main loop support"
 msgstr "Wsparcie głównego węzła GLib"
 
+#: ../metadata/gnomecompat.xml.in.h:2
+msgid "Gnome Compatibility"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:3
+msgid "Open a terminal"
+msgstr "Otwiera terminal"
+
+#: ../metadata/gnomecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:5
+msgid "Run Dialog"
+msgstr "Dialog Uruchom"
+
+#: ../metadata/gnomecompat.xml.in.h:6
+#, fuzzy
+msgid "Run terminal command"
+msgstr "Polecenie terminala"
+
+#: ../metadata/gnomecompat.xml.in.h:7
+msgid "Screenshot command line"
+msgstr "Polecenie zrzutu ekranu"
+
+#: ../metadata/gnomecompat.xml.in.h:8
+msgid "Show Main Menu"
+msgstr "Wyświetl menu główne"
+
+#: ../metadata/gnomecompat.xml.in.h:9
+msgid "Show Run Application dialog"
+msgstr "Wyświetl okno dialogowe \"Uruchom program\""
+
+#: ../metadata/gnomecompat.xml.in.h:10
+msgid "Show the main menu"
+msgstr "Wyświetl menu główne"
+
+#: ../metadata/gnomecompat.xml.in.h:11
+msgid "Take a screenshot"
+msgstr "Pobierz zrzut ekranu"
+
+#: ../metadata/gnomecompat.xml.in.h:12
+msgid "Take a screenshot of a window"
+msgstr "Pobierz zrzut okna"
+
+#: ../metadata/gnomecompat.xml.in.h:13
+msgid "Terminal command line"
+msgstr "Polecenie terminala"
+
+#: ../metadata/gnomecompat.xml.in.h:14
+msgid "Window screenshot command line"
+msgstr "Polecenie zrzutu okna"
+
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
 msgstr "Ini"
@@ -1572,8 +1792,8 @@ msgstr "Przenieś okno"
 msgid "Move window"
 msgstr "Przenieś okno"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
 msgid "Opacity"
 msgstr "Nieprzezroczystość"
 
@@ -1593,6 +1813,126 @@ msgstr "Odepnij zmaksymalizowane okna"
 #: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
 msgstr "Rozpocznij przenoszenie okna"
+
+#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+msgid "Brightness"
+msgstr "Jasność"
+
+#: ../metadata/obs.xml.in.h:2
+#, fuzzy
+msgid "Brightness Decrease"
+msgstr "Jasność"
+
+#: ../metadata/obs.xml.in.h:3
+#, fuzzy
+msgid "Brightness Increase"
+msgstr "Jasność"
+
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Brightness Step"
+msgstr "Jasność"
+
+#: ../metadata/obs.xml.in.h:5
+#, fuzzy
+msgid "Brightness values for windows"
+msgstr "Jasność (w %) nieodpowiadających okien"
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease"
+msgstr "Zmniejsz nieprzezroczystość"
+
+#: ../metadata/obs.xml.in.h:7
+#, fuzzy
+msgid "Increase"
+msgstr "Zwiększ nieprzezroczystość"
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Opacity Decrease"
+msgstr "Krok zmiany nieprzezroczystości"
+
+#: ../metadata/obs.xml.in.h:10
+#, fuzzy
+msgid "Opacity Increase"
+msgstr "Krok zmiany nieprzezroczystości"
+
+#: ../metadata/obs.xml.in.h:11
+msgid "Opacity Step"
+msgstr "Krok nieprzezroczystości"
+
+#: ../metadata/obs.xml.in.h:12
+#, fuzzy
+msgid "Opacity values for windows"
+msgstr "Poziom nieprzezroczystości przesuwanych okien"
+
+#: ../metadata/obs.xml.in.h:13
+#, fuzzy
+msgid "Opacity, Brightness and Saturation"
+msgstr "Nieprzezroczystość kostki podczas obracania "
+
+#: ../metadata/obs.xml.in.h:14
+msgid "Opacity, Brightness and Saturation adjustments"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+msgid "Saturation"
+msgstr "Nasycenie"
+
+#: ../metadata/obs.xml.in.h:16
+#, fuzzy
+msgid "Saturation Decrease"
+msgstr "Nasycenie"
+
+#: ../metadata/obs.xml.in.h:17
+#, fuzzy
+msgid "Saturation Increase"
+msgstr "Nasycenie"
+
+#: ../metadata/obs.xml.in.h:18
+#, fuzzy
+msgid "Saturation Step"
+msgstr "Nasycenie"
+
+#: ../metadata/obs.xml.in.h:19
+#, fuzzy
+msgid "Saturation values for windows"
+msgstr "Nasycenie (w %) nieodpowiadających okien"
+
+#: ../metadata/obs.xml.in.h:20
+msgid "Step"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:21
+#, fuzzy
+msgid "Window specific settings"
+msgstr "Dekoracje okna"
+
+#: ../metadata/obs.xml.in.h:22
+#, fuzzy
+msgid "Window values"
+msgstr "Rodzaje okien"
+
+#: ../metadata/obs.xml.in.h:23
+#, fuzzy
+msgid "Windows"
+msgstr "Rodzaje mapowanych okien"
+
+#: ../metadata/obs.xml.in.h:24
+#, fuzzy
+msgid "Windows that should have a different brightness by default"
+msgstr "Typy okien, które powinny być standardowo ułożone"
+
+#: ../metadata/obs.xml.in.h:25
+#, fuzzy
+msgid "Windows that should have a different opacity by default"
+msgstr "Typy okien, które standardowo mają być półprzezroczyste"
+
+#: ../metadata/obs.xml.in.h:26
+#, fuzzy
+msgid "Windows that should have a different saturation by default"
+msgstr "Typy okien, które powinny być standardowo ułożone"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1630,10 +1970,6 @@ msgid ""
 msgstr ""
 "Utrzymuj wskazane okna na pulpicie , nawet jeśli ich pozycja będzie się "
 "różnić od ich określonej pozycji"
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Maksymalizuj"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2356,10 +2692,6 @@ msgstr "Rozmieść i zacznij przekształcać okna"
 msgid "Layout and start transforming windows on current output"
 msgstr "Rozmieść i zacznij przekształcać okna w bieżącym widoku"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Brak"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "Na wszystkich urządzeniach wyjściowych"
@@ -2474,10 +2806,6 @@ msgstr "Przełącznik aplikacji"
 msgid "Auto Rotate"
 msgstr "Automatycznie obracaj"
 
-#: ../metadata/switcher.xml.in.h:7
-msgid "Brightness"
-msgstr "Jasność"
-
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring To Front"
 msgstr "Przenieś na pierwszy plan"
@@ -2553,10 +2881,6 @@ msgstr "Poprzednie okno (bez pop-upów)"
 #: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
 msgstr "Obracaj do wybranego okna podczas przełączania"
-
-#: ../metadata/switcher.xml.in.h:29
-msgid "Saturation"
-msgstr "Nasycenie"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next panel type window."
@@ -2803,67 +3127,58 @@ msgstr "Efekt drgania podczas maksymalizacji i demaksymalizacji okien"
 msgid "Wobbly Windows"
 msgstr "Drgające okna"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtruj liniowo"
+#~ msgid "Command line 0"
+#~ msgstr "Linia poleceń 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Używaj filtru liniowego podczas powiększania"
+#~ msgid "Run command 0"
+#~ msgstr "Wykonaj polecenie 0"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Powiększanie pulpitu"
+#, fuzzy
+#~ msgid "Screenshot commands"
+#~ msgstr "Polecenie zrzutu ekranu"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Powiększ"
+#, fuzzy
+#~ msgid "Screenshot key bindings"
+#~ msgstr "Polecenie zrzutu ekranu"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Pomniejsz"
+#~ msgid "Filter Linear"
+#~ msgstr "Filtruj liniowo"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Powiększ"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Używaj filtru liniowego podczas powiększania"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Szybkość przybliżania"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Powiększanie pulpitu"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Opóźnienie przybliżania"
+#~ msgid "Zoom In"
+#~ msgstr "Powiększ"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Powiększ i przesuń kostkę pulpitu"
+#~ msgid "Zoom Out"
+#~ msgstr "Pomniejsz"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Współczynnik przybliżania"
+#~ msgid "Zoom Pan"
+#~ msgstr "Powiększ"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Powiększ"
+#~ msgid "Zoom Speed"
+#~ msgstr "Szybkość przybliżania"
 
-#~ msgid "Decrease Opacity"
-#~ msgstr "Zmniejsz nieprzezroczystość"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Opóźnienie przybliżania"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Powiększ i przesuń kostkę pulpitu"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Współczynnik przybliżania"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Powiększ"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Zmniejsz nieprzezroczystość okna"
 
-#~ msgid "Increase Opacity"
-#~ msgstr "Zwiększ nieprzezroczystość"
-
 #~ msgid "Increase window opacity"
 #~ msgstr "Zwiększ nieprzezroczystość okna"
-
-#~ msgid "Opacity Step"
-#~ msgstr "Krok nieprzezroczystości"
-
-#~ msgid "Opacity change step"
-#~ msgstr "Krok zmiany nieprzezroczystości"
 
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr ""
@@ -2875,9 +3190,6 @@ msgstr "Powiększ"
 
 #~ msgid "Opacity windows"
 #~ msgstr "Nieprzezroczystość okien"
-
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "Typy okien, które standardowo mają być półprzezroczyste"
 
 #~ msgid "Background Images"
 #~ msgstr "Obrazki tła"
@@ -3501,9 +3813,6 @@ msgstr "Powiększ"
 
 #~ msgid "Rotate to face %d and bring active window along"
 #~ msgstr "Obrót do ściany %d i przeniesienie tam aktywnego okna"
-
-#~ msgid "Window Types"
-#~ msgstr "Rodzaje okien"
 
 #~ msgid "Move Window Types"
 #~ msgstr "Rodzaje przenoszonych okien"

@@ -28,6 +28,9 @@
 #include <string.h>
 #include <dlfcn.h>
 #include <dirent.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include <compiz-core.h>
 
@@ -145,8 +148,10 @@ dlloaderLoadPlugin (CompPlugin *p,
 		    const char *path,
 		    const char *name)
 {
-    char *file;
-    void *dlhand;
+    char        *file;
+    void        *dlhand;
+    struct stat fileInfo;
+    Bool        loaded = FALSE;
 
     file = malloc ((path ? strlen (path) : 0) + strlen (name) + 8);
     if (!file)
@@ -157,6 +162,13 @@ dlloaderLoadPlugin (CompPlugin *p,
     else
 	sprintf (file, "lib%s.so", name);
 
+    if (stat (file, &fileInfo) != 0)
+    {
+	/* file not present - try core plugin or fail */
+	free (file);
+	return cloaderLoadPlugin (p, path, name);
+    }
+
     dlhand = dlopen (file, RTLD_LAZY);
     if (dlhand)
     {
@@ -165,8 +177,8 @@ dlloaderLoadPlugin (CompPlugin *p,
 
 	dlerror ();
 
-	getInfo = (PluginGetInfoProc)
-	    dlsym (dlhand, "getCompPluginInfo20070830");
+	getInfo = (PluginGetInfoProc) dlsym (dlhand,
+					     "getCompPluginInfo20070830");
 
 	error = dlerror ();
 	if (error)
@@ -184,29 +196,28 @@ dlloaderLoadPlugin (CompPlugin *p,
 		compLogMessage ("core", CompLogLevelError,
 				"Couldn't get vtable from '%s' plugin",
 				file);
-
-		dlclose (dlhand);
-		free (file);
-
-		return FALSE;
 	    }
-	}
-	else
-	{
-	    dlclose (dlhand);
-	    free (file);
-
-	    return FALSE;
+	    else
+	    {
+		loaded = TRUE;
+	    }
 	}
     }
     else
     {
-	free (file);
-
-	return cloaderLoadPlugin (p, path, name);
+	compLogMessage ("core", CompLogLevelError,
+			"Couldn't load plugin '%s' : %s", file, dlerror ());
     }
 
     free (file);
+
+    if (!loaded)
+    {
+	if (dlhand)
+	    dlclose (dlhand);
+
+	return FALSE;
+    }
 
     p->devPrivate.ptr = dlhand;
     p->devType	      = "dlloader";

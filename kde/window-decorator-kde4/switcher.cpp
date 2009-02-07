@@ -30,7 +30,7 @@
 
 #include <fixx11h.h>
 
-#include <KDE/Plasma/PanelSvg>
+#include <KDE/Plasma/FrameSvg>
 #include <KDE/Plasma/Theme>
 
 #include <kwindowsystem.h>
@@ -46,9 +46,9 @@ mId (id)
     QColor   color;
     color = Plasma::Theme::defaultTheme ()->color (Plasma::Theme::TextColor);
 
-    mBackground = new Plasma::PanelSvg();
+    mBackground = new Plasma::FrameSvg();
     mBackground->setImagePath ("dialogs/background");
-    mBackground->setEnabledBorders(Plasma::PanelSvg::AllBorders);
+    mBackground->setEnabledBorders(Plasma::FrameSvg::AllBorders);
 
     mBorder.left   = mBackground->marginSize(Plasma::LeftMargin);
     mBorder.right  = mBackground->marginSize(Plasma::RightMargin);
@@ -131,9 +131,8 @@ KWD::Switcher::redrawPixmap ()
     p.setCompositionMode (QPainter::CompositionMode_Source);
     p.setRenderHint (QPainter::SmoothPixmapTransform);
 
-    mBackground->resizePanel (QSizeF (contentWidth, contentHeight));
-    mBackground->paintPanel (&p, QRect (0, 0, contentWidth,
-			contentHeight));
+    mBackground->resizeFrame (QSizeF (contentWidth, contentHeight));
+    mBackground->paintFrame (&p, QRect (0, 0, contentWidth, contentHeight));
 
     mBackgroundPixmap = mPixmap.copy (mBorder.left, mBorder.top,
 				      mGeometry.width (),
@@ -167,10 +166,11 @@ KWD::Switcher::update ()
 
     p.setCompositionMode (QPainter::CompositionMode_Source);
 
-
-    mBackground->paintPanel (&p, QRect (mBorder.left, mBorder.top +
-			mGeometry.height () + 5, mGeometry.width (),
-			fm.height ()));
+    mBackground->paintFrame (&p, QRect (mBorder.left,
+					mBorder.top +
+					mGeometry.height () + 5,
+					mGeometry.width (),
+					fm.height ()));
 
     p.setFont (font);
     p.setPen (Plasma::Theme::defaultTheme ()->color(Plasma::Theme::TextColor));

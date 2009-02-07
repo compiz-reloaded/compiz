@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:43+0530\n"
+"POT-Creation-Date: 2009-02-06 11:19+0530\n"
 "PO-Revision-Date: 2008-04-18 17:08+0200\n"
 "Last-Translator: Harald van Bree <harald@vanbree.nl.eu.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -35,6 +35,52 @@ msgstr "Venster Beheer"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Geen"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#, fuzzy
+msgid "Shade"
+msgstr "Schaal"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Maximaliseer"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Maximaliseer venster horizontaal"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Maximaliseer venster verticaal"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Geminimaliseerd"
+
+# /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:80
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Automatisch naar de voorgrond"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../metadata/core.xml.in.in.h:100
+msgid "Window Menu"
+msgstr "Venster menu"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -103,69 +149,59 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "Gebruik metacity thema voor venster decoratie"
 
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
-#: ../metadata/core.xml.in.in.h:24
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Venster sluiten"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
-#: ../metadata/core.xml.in.in.h:154
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Demaximaliseer venster"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
-#: ../metadata/core.xml.in.in.h:86
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maximaliseer venster"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
-#: ../metadata/core.xml.in.in.h:92
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Venster minimaliseren"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Venster menu"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-#, fuzzy
-msgid "Shade"
-msgstr "Schaal"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Het venster \"%s\" reageert niet"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Door deze applicatie geforceerd te sluiten kunt u niet opgeslagen "
 "wijzigingen kwijt raken."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr ""
 
@@ -204,7 +240,7 @@ msgstr "Opvul kleur voor annotatie's"
 # Maybe "start" or "begin" would be better in dutch
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Initialiseren"
 
@@ -388,7 +424,115 @@ msgstr "Start kloon selectie"
 msgid "Output clone handler"
 msgstr "Kloon uitvoer afhandelaar"
 
-#: ../metadata/core.xml.in.in.h:1
+#: ../metadata/commands.xml.in.h:1
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Een toetsbinding, die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando0"
+
+#: ../metadata/commands.xml.in.h:2
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando1"
+
+#: ../metadata/commands.xml.in.h:3
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando10"
+
+#: ../metadata/commands.xml.in.h:4
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando11"
+
+#: ../metadata/commands.xml.in.h:5
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando2"
+
+#: ../metadata/commands.xml.in.h:6
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando3"
+
+#: ../metadata/commands.xml.in.h:7
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando4"
+
+#: ../metadata/commands.xml.in.h:8
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando5"
+
+#: ../metadata/commands.xml.in.h:9
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando6"
+
+#: ../metadata/commands.xml.in.h:10
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando7"
+
+#: ../metadata/commands.xml.in.h:11
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando8"
+
+#: ../metadata/commands.xml.in.h:12
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando9"
+
+#: ../metadata/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
@@ -396,7 +540,7 @@ msgstr ""
 "Een toetsbinding, die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando0"
 
-#: ../metadata/core.xml.in.in.h:2
+#: ../metadata/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
@@ -404,7 +548,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando1"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
@@ -412,7 +556,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando10"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
@@ -420,7 +564,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando11"
 
-#: ../metadata/core.xml.in.in.h:5
+#: ../metadata/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
@@ -428,7 +572,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando2"
 
-#: ../metadata/core.xml.in.in.h:6
+#: ../metadata/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
@@ -436,7 +580,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando3"
 
-#: ../metadata/core.xml.in.in.h:7
+#: ../metadata/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
@@ -444,7 +588,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando4"
 
-#: ../metadata/core.xml.in.in.h:8
+#: ../metadata/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
@@ -452,7 +596,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando5"
 
-#: ../metadata/core.xml.in.in.h:9
+#: ../metadata/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
@@ -460,7 +604,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando6"
 
-#: ../metadata/core.xml.in.in.h:10
+#: ../metadata/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
@@ -468,7 +612,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando7"
 
-#: ../metadata/core.xml.in.in.h:11
+#: ../metadata/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
@@ -476,7 +620,7 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando8"
 
-#: ../metadata/core.xml.in.in.h:12
+#: ../metadata/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
@@ -484,625 +628,695 @@ msgstr ""
 "Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
 "herkenbaar aan commando9"
 
-#: ../metadata/core.xml.in.in.h:13
+#: ../metadata/commands.xml.in.h:25
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"Een toetsbinding, die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando0"
+
+#: ../metadata/commands.xml.in.h:26
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando1"
+
+#: ../metadata/commands.xml.in.h:27
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando10"
+
+#: ../metadata/commands.xml.in.h:28
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando11"
+
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando2"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando3"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando4"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando5"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando6"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando7"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando8"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"Een toetsbinding die wanneer gekozen een shell opdracht zal uitvoeren "
+"herkenbaar aan commando9"
+
+#: ../metadata/commands.xml.in.h:37
+msgid "Assigns bindings to arbitrary commands"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:38
+msgid "Button Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:39
+msgid "Command line 1"
+msgstr "Commando regel 1"
+
+#: ../metadata/commands.xml.in.h:40
+msgid "Command line 10"
+msgstr "Commando regel 10"
+
+#: ../metadata/commands.xml.in.h:41
+msgid "Command line 11"
+msgstr "Commando regel 11"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "Commando regel 1"
+
+#: ../metadata/commands.xml.in.h:43
+msgid "Command line 2"
+msgstr "Commando regel 2 "
+
+#: ../metadata/commands.xml.in.h:44
+msgid "Command line 3"
+msgstr "Commando regel 3"
+
+#: ../metadata/commands.xml.in.h:45
+msgid "Command line 4"
+msgstr "Commando regel 4"
+
+#: ../metadata/commands.xml.in.h:46
+msgid "Command line 5"
+msgstr "Commando regel 5"
+
+#: ../metadata/commands.xml.in.h:47
+msgid "Command line 6"
+msgstr "Commando regel 6"
+
+#: ../metadata/commands.xml.in.h:48
+msgid "Command line 7"
+msgstr "Commando regel 7"
+
+#: ../metadata/commands.xml.in.h:49
+msgid "Command line 8"
+msgstr "Commando regel 8"
+
+#: ../metadata/commands.xml.in.h:50
+msgid "Command line 9"
+msgstr "Commando regel 9"
+
+#: ../metadata/commands.xml.in.h:51
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr ""
+"Commando regel om uit te voerenin de shell als run_command0 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:52
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command1 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:53
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command10 aangeroepen "
+"wordt"
+
+#: ../metadata/commands.xml.in.h:54
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command11 aangeroepen "
+"wordt"
+
+#: ../metadata/commands.xml.in.h:55
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command2 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:56
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command3 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:57
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command4 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:58
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command5 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:59
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command6 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:60
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command7 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:61
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command8 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:62
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr ""
+"Command regel die uitgevoerd moet worden als start_command9 aangeroepen wordt"
+
+#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#, fuzzy
+msgid "Commands"
+msgstr "Opdracht"
+
+#: ../metadata/commands.xml.in.h:64
+msgid "Edge Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:65
+msgid "Key Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:66
+msgid "Run command 1"
+msgstr "Start commando 1"
+
+#: ../metadata/commands.xml.in.h:67
+msgid "Run command 10"
+msgstr "Start commando 10"
+
+#: ../metadata/commands.xml.in.h:68
+msgid "Run command 11"
+msgstr "Start commando 11"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "Start commando 1"
+
+#: ../metadata/commands.xml.in.h:70
+msgid "Run command 2"
+msgstr "Start commando 2"
+
+#: ../metadata/commands.xml.in.h:71
+msgid "Run command 3"
+msgstr "Start commando 3"
+
+#: ../metadata/commands.xml.in.h:72
+msgid "Run command 4"
+msgstr "Start commando 4"
+
+#: ../metadata/commands.xml.in.h:73
+msgid "Run command 5"
+msgstr "Start commando 5"
+
+#: ../metadata/commands.xml.in.h:74
+msgid "Run command 6"
+msgstr "Start commando 6"
+
+#: ../metadata/commands.xml.in.h:75
+msgid "Run command 7"
+msgstr "Start commando 7"
+
+#: ../metadata/commands.xml.in.h:76
+msgid "Run command 8"
+msgstr "Start commando 8"
+
+#: ../metadata/commands.xml.in.h:77
+msgid "Run command 9"
+msgstr "Start commando 9"
+
+#: ../metadata/core.xml.in.in.h:1
 msgid "Active Plugins"
 msgstr "Actieve plugins"
 
-#: ../metadata/core.xml.in.in.h:14
+#: ../metadata/core.xml.in.in.h:2
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Sta volledig scherm vensters toe om niet omgeleid te worden naar off-screen "
 "pixmaps"
 
-#: ../metadata/core.xml.in.in.h:15
+#: ../metadata/core.xml.in.in.h:3
 msgid "Audible Bell"
 msgstr "Hoorbaar signaal"
 
-#: ../metadata/core.xml.in.in.h:16
+#: ../metadata/core.xml.in.in.h:4
 msgid "Audible system beep"
 msgstr "Hoorbare systeem piep"
 
 # /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:80
-#: ../metadata/core.xml.in.in.h:17
+#: ../metadata/core.xml.in.in.h:5
 msgid "Auto-Raise"
 msgstr "Automatisch naar de voorgrond"
 
-#: ../metadata/core.xml.in.in.h:18
+#: ../metadata/core.xml.in.in.h:6
 msgid "Auto-Raise Delay"
 msgstr "Automatisch naar de voorgrond vetraging"
 
-#: ../metadata/core.xml.in.in.h:19
+#: ../metadata/core.xml.in.in.h:7
 msgid "Automatic detection of output devices"
 msgstr "Automatische herkenning van uitvoer apparaten"
 
-#: ../metadata/core.xml.in.in.h:20
+#: ../metadata/core.xml.in.in.h:8
 msgid "Automatic detection of refresh rate"
 msgstr "Automatische herkenning van verversings snelheid"
 
-#: ../metadata/core.xml.in.in.h:21
+#: ../metadata/core.xml.in.in.h:9
 msgid "Best"
 msgstr "Best"
 
-#: ../metadata/core.xml.in.in.h:22
+#: ../metadata/core.xml.in.in.h:10
 msgid "Click To Focus"
 msgstr "Klik voor focus"
 
-#: ../metadata/core.xml.in.in.h:23
+#: ../metadata/core.xml.in.in.h:11
 msgid "Click on window moves input focus to it"
 msgstr "Klik op venster neemt invoer focus mee"
 
-#: ../metadata/core.xml.in.in.h:25
+#: ../metadata/core.xml.in.in.h:13
 msgid "Close active window"
 msgstr "Sluit actief venster"
 
-#: ../metadata/core.xml.in.in.h:26
-msgid "Command line 0"
-msgstr "Commando regel 0"
-
-#: ../metadata/core.xml.in.in.h:27
-msgid "Command line 1"
-msgstr "Commando regel 1"
-
-#: ../metadata/core.xml.in.in.h:28
-msgid "Command line 10"
-msgstr "Commando regel 10"
-
-#: ../metadata/core.xml.in.in.h:29
-msgid "Command line 11"
-msgstr "Commando regel 11"
-
-#: ../metadata/core.xml.in.in.h:30
-msgid "Command line 2"
-msgstr "Commando regel 2 "
-
-#: ../metadata/core.xml.in.in.h:31
-msgid "Command line 3"
-msgstr "Commando regel 3"
-
-#: ../metadata/core.xml.in.in.h:32
-msgid "Command line 4"
-msgstr "Commando regel 4"
-
-#: ../metadata/core.xml.in.in.h:33
-msgid "Command line 5"
-msgstr "Commando regel 5"
-
-#: ../metadata/core.xml.in.in.h:34
-msgid "Command line 6"
-msgstr "Commando regel 6"
-
-#: ../metadata/core.xml.in.in.h:35
-msgid "Command line 7"
-msgstr "Commando regel 7"
-
-#: ../metadata/core.xml.in.in.h:36
-msgid "Command line 8"
-msgstr "Commando regel 8"
-
-#: ../metadata/core.xml.in.in.h:37
-msgid "Command line 9"
-msgstr "Commando regel 9"
-
-#: ../metadata/core.xml.in.in.h:38
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
-"Commando regel om uit te voerenin de shell als run_command0 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:39
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command1 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:40
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command10 aangeroepen "
-"wordt"
-
-#: ../metadata/core.xml.in.in.h:41
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command11 aangeroepen "
-"wordt"
-
-#: ../metadata/core.xml.in.in.h:42
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command2 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:43
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command3 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:44
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command4 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:45
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command5 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:46
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command6 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:47
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command7 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:48
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command8 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:49
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
-"Command regel die uitgevoerd moet worden als start_command9 aangeroepen wordt"
-
-#: ../metadata/core.xml.in.in.h:50
-#, fuzzy
-msgid "Commands"
-msgstr "Opdracht"
-
 # /usr/lib/YaST2/clients/lan_address.ycp:88
-#: ../metadata/core.xml.in.in.h:51
+#: ../metadata/core.xml.in.in.h:14
 msgid "Default Icon"
 msgstr "Standaard pictogram"
 
-#: ../metadata/core.xml.in.in.h:52
+#: ../metadata/core.xml.in.in.h:15
 msgid "Default window icon image"
 msgstr "Standaard venster pictogram afbeelding"
 
-#: ../metadata/core.xml.in.in.h:53
+#: ../metadata/core.xml.in.in.h:16
 #, fuzzy
 msgid "Desktop Size"
 msgstr "Bureaublad kubus"
 
-#: ../metadata/core.xml.in.in.h:54
+#: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
 msgstr "Detecteer uitvoer"
 
-#: ../metadata/core.xml.in.in.h:55
+#: ../metadata/core.xml.in.in.h:18
 msgid "Detect Refresh Rate"
 msgstr "Detecteer verversings snelheid"
 
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/core.xml.in.in.h:20
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:58
+#: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "Snel"
 
-#: ../metadata/core.xml.in.in.h:60
+#: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:61
+#: ../metadata/core.xml.in.in.h:24
 #, fuzzy
 msgid "Focus Prevention Level"
 msgstr "Focus Vensters Voorkomen"
 
-#: ../metadata/core.xml.in.in.h:62
+#: ../metadata/core.xml.in.in.h:25
 msgid "Focus Prevention Windows"
 msgstr "Focus Vensters Voorkomen"
 
-#: ../metadata/core.xml.in.in.h:63
+#: ../metadata/core.xml.in.in.h:26
 msgid "Focus prevention windows"
 msgstr "Focus vensters voorkomen"
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:65
+#: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
 msgstr "Algemene opties"
 
-#: ../metadata/core.xml.in.in.h:66
+#: ../metadata/core.xml.in.in.h:29
 msgid "General compiz options"
 msgstr "Algemene compiz opties"
 
-#: ../metadata/core.xml.in.in.h:67
+#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "Goed"
 
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.in.h:31
 msgid "Hide Skip Taskbar Windows"
 msgstr "Verberg taakbalk overgeslagen vensters"
 
-#: ../metadata/core.xml.in.in.h:69
+#: ../metadata/core.xml.in.in.h:32
 msgid "Hide all windows and focus desktop"
 msgstr "Verberg alle vensters en laat bureaublad zien"
 
-#: ../metadata/core.xml.in.in.h:70
+#: ../metadata/core.xml.in.in.h:33
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Verberg vensters die niet in de taakbalk staan als Toon Bureaublad modus "
 "ingeschakeld wordt"
 
-#: ../metadata/core.xml.in.in.h:71
+#: ../metadata/core.xml.in.in.h:34
 msgid "High"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.in.h:35
 msgid "Horizontal Virtual Size"
 msgstr "Virtuele horizontale grootte"
 
-#: ../metadata/core.xml.in.in.h:73
+#: ../metadata/core.xml.in.in.h:36
 msgid "If available use compression for textures converted from images"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.in.h:37
 msgid "Ignore Hints When Maximized"
 msgstr "Negeer tips wanneer gemaximalizeerd"
 
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "Negeer vergroting en aspect hints indien venster is gemaximaliseerd"
 
-#: ../metadata/core.xml.in.in.h:76
+#: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
 msgstr "interval voor het omhoogbrengen van geselecteerd venster"
 
-#: ../metadata/core.xml.in.in.h:77
+#: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
 msgstr "Interval tussen ping berichten"
 
-#: ../metadata/core.xml.in.in.h:78
+#: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:79
+#: ../metadata/core.xml.in.in.h:42
 msgid "Level of focus stealing prevention"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:43
 msgid "Lighting"
 msgstr "Belichting"
 
-#: ../metadata/core.xml.in.in.h:81
+#: ../metadata/core.xml.in.in.h:44
 msgid "List of currently active plugins"
 msgstr "Lijst met actieve plung-ins"
 
-#: ../metadata/core.xml.in.in.h:82
+#: ../metadata/core.xml.in.in.h:45
 msgid "List of strings describing output devices"
 msgstr "Lijst met strings die uitvoer apparaten omschrĳven"
 
-#: ../metadata/core.xml.in.in.h:83
+#: ../metadata/core.xml.in.in.h:46
 msgid "Low"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:84
+#: ../metadata/core.xml.in.in.h:47
 msgid "Lower Window"
 msgstr "Laat venster zakken"
 
-#: ../metadata/core.xml.in.in.h:85
+#: ../metadata/core.xml.in.in.h:48
 msgid "Lower window beneath other windows"
 msgstr "Laat venster zakken achter andere vensters"
 
-#: ../metadata/core.xml.in.in.h:87
+#: ../metadata/core.xml.in.in.h:50
 msgid "Maximize Window Horizontally"
 msgstr "Maximaliseer venster horizontaal"
 
-#: ../metadata/core.xml.in.in.h:88
+#: ../metadata/core.xml.in.in.h:51
 msgid "Maximize Window Vertically"
 msgstr "Maximaliseer venster verticaal"
 
-#: ../metadata/core.xml.in.in.h:89
+#: ../metadata/core.xml.in.in.h:52
 msgid "Maximize active window"
 msgstr "Maximaliseer actief venster"
 
-#: ../metadata/core.xml.in.in.h:90
+#: ../metadata/core.xml.in.in.h:53
 msgid "Maximize active window horizontally"
 msgstr "Maximaliseer actief venster horizontaal"
 
-#: ../metadata/core.xml.in.in.h:91
+#: ../metadata/core.xml.in.in.h:54
 msgid "Maximize active window vertically"
 msgstr "Maximaliseer actief venster verticaal"
 
-#: ../metadata/core.xml.in.in.h:93
+#: ../metadata/core.xml.in.in.h:56
 msgid "Minimize active window"
 msgstr "Minimaliseer actief venster"
 
-#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "Normaal"
 
-#: ../metadata/core.xml.in.in.h:95
+#: ../metadata/core.xml.in.in.h:58
 msgid "Number of Desktops"
 msgstr "Aantal bureaubladen"
 
-#: ../metadata/core.xml.in.in.h:96
+#: ../metadata/core.xml.in.in.h:59
 msgid "Number of virtual desktops"
 msgstr "Aantal virtuele bureabladen"
 
-#: ../metadata/core.xml.in.in.h:97
+#: ../metadata/core.xml.in.in.h:60
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:98
+#: ../metadata/core.xml.in.in.h:61
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Scherm alleen bijwerken tijdens verticale blanking periode"
 
-#: ../metadata/core.xml.in.in.h:99
-msgid "Open a terminal"
-msgstr "Een terminal openen"
-
-#: ../metadata/core.xml.in.in.h:100
+#: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
 msgstr "Uitvoer"
 
-#: ../metadata/core.xml.in.in.h:101
+#: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:102
+#: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:103
+#: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
 msgstr "Ping vertraging"
 
-#: ../metadata/core.xml.in.in.h:104
+#: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:105
+#: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:106
+#: ../metadata/core.xml.in.in.h:68
 msgid "Raise On Click"
 msgstr "Op voorgrond na klikken"
 
-#: ../metadata/core.xml.in.in.h:107
+#: ../metadata/core.xml.in.in.h:69
 msgid "Raise Window"
 msgstr "Venster naar de voorgrond"
 
-#: ../metadata/core.xml.in.in.h:108
+#: ../metadata/core.xml.in.in.h:70
 msgid "Raise selected windows after interval"
 msgstr "Breng venster naar de voorgrond na interval"
 
-#: ../metadata/core.xml.in.in.h:109
+#: ../metadata/core.xml.in.in.h:71
 msgid "Raise window above other windows"
 msgstr "Breng venster op voorgrond over andere vensters"
 
-#: ../metadata/core.xml.in.in.h:110
+#: ../metadata/core.xml.in.in.h:72
 msgid "Raise windows when clicked"
 msgstr "Breng venster naar de voorgrond na aanklikken"
 
-#: ../metadata/core.xml.in.in.h:111
+#: ../metadata/core.xml.in.in.h:73
 msgid "Refresh Rate"
 msgstr "Verversings snelheid"
 
-# /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:336
-#: ../metadata/core.xml.in.in.h:112
-msgid "Run Dialog"
-msgstr "Uitvoeren dialoog"
-
-#: ../metadata/core.xml.in.in.h:113
-msgid "Run command 0"
-msgstr "Start commando 0"
-
-#: ../metadata/core.xml.in.in.h:114
-msgid "Run command 1"
-msgstr "Start commando 1"
-
-#: ../metadata/core.xml.in.in.h:115
-msgid "Run command 10"
-msgstr "Start commando 10"
-
-#: ../metadata/core.xml.in.in.h:116
-msgid "Run command 11"
-msgstr "Start commando 11"
-
-#: ../metadata/core.xml.in.in.h:117
-msgid "Run command 2"
-msgstr "Start commando 2"
-
-#: ../metadata/core.xml.in.in.h:118
-msgid "Run command 3"
-msgstr "Start commando 3"
-
-#: ../metadata/core.xml.in.in.h:119
-msgid "Run command 4"
-msgstr "Start commando 4"
-
-#: ../metadata/core.xml.in.in.h:120
-msgid "Run command 5"
-msgstr "Start commando 5"
-
-#: ../metadata/core.xml.in.in.h:121
-msgid "Run command 6"
-msgstr "Start commando 6"
-
-#: ../metadata/core.xml.in.in.h:122
-msgid "Run command 7"
-msgstr "Start commando 7"
-
-#: ../metadata/core.xml.in.in.h:123
-msgid "Run command 8"
-msgstr "Start commando 8"
-
-#: ../metadata/core.xml.in.in.h:124
-msgid "Run command 9"
-msgstr "Start commando 9"
-
-#: ../metadata/core.xml.in.in.h:125
-#, fuzzy
-msgid "Run terminal command"
-msgstr "Terminal commando regel"
-
-#: ../metadata/core.xml.in.in.h:126
+#: ../metadata/core.xml.in.in.h:74
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Schermgrootte vermenigvuldiger voor horizontale grootte"
 
-#: ../metadata/core.xml.in.in.h:127
+#: ../metadata/core.xml.in.in.h:75
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "scherm grootte vermenigvuldiger voor verticale grootte"
 
-#: ../metadata/core.xml.in.in.h:128
-msgid "Screenshot command line"
-msgstr "Schermafdruk commodo regel"
-
-#: ../metadata/core.xml.in.in.h:129
-#, fuzzy
-msgid "Screenshot commands"
-msgstr "Schermafdruk commodo regel"
-
-#: ../metadata/core.xml.in.in.h:130
-#, fuzzy
-msgid "Screenshot key bindings"
-msgstr "Schermafdruk commodo regel"
-
-#: ../metadata/core.xml.in.in.h:131
+#: ../metadata/core.xml.in.in.h:76
 msgid "Show Desktop"
 msgstr "Toon bureaublad"
 
-#: ../metadata/core.xml.in.in.h:132
-msgid "Show Main Menu"
-msgstr "Toon Hoofdmenu"
-
-#: ../metadata/core.xml.in.in.h:133
-msgid "Show Run Application dialog"
-msgstr "Toon start applicatie dialoog venster"
-
-#: ../metadata/core.xml.in.in.h:134
-msgid "Show the main menu"
-msgstr "Toon hoofdmenu"
-
-#: ../metadata/core.xml.in.in.h:135
+#: ../metadata/core.xml.in.in.h:77
 msgid "Slow Animations"
 msgstr "Langzame animaties"
 
-#: ../metadata/core.xml.in.in.h:136
+#: ../metadata/core.xml.in.in.h:78
 #, fuzzy
 msgid "Smart mode"
 msgstr "Slim"
 
-#: ../metadata/core.xml.in.in.h:137
+#: ../metadata/core.xml.in.in.h:79
 msgid "Sync To VBlank"
 msgstr "Sync naar VBlank"
 
-#: ../metadata/core.xml.in.in.h:138
-msgid "Take a screenshot"
-msgstr "Maak een schermafdruk"
-
-#: ../metadata/core.xml.in.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "Maak een schermafdruk van een venster"
-
-#: ../metadata/core.xml.in.in.h:140
-msgid "Terminal command line"
-msgstr "Terminal commando regel"
-
-#: ../metadata/core.xml.in.in.h:141
+#: ../metadata/core.xml.in.in.h:80
 #, fuzzy
 msgid "Texture Compression"
 msgstr "Texturen filteren"
 
-#: ../metadata/core.xml.in.in.h:142
+#: ../metadata/core.xml.in.in.h:81
 msgid "Texture Filter"
 msgstr "Texturen filter"
 
-#: ../metadata/core.xml.in.in.h:143
+#: ../metadata/core.xml.in.in.h:82
 msgid "Texture filtering"
 msgstr "Texturen filteren"
 
-#: ../metadata/core.xml.in.in.h:144
+#: ../metadata/core.xml.in.in.h:83
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "De snelheid waarin een scherm opnieuw getekend wordt (tijd/seconden)"
 
-#: ../metadata/core.xml.in.in.h:145
+#: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
 msgstr "Schakel venster gemaximaliseerd"
 
-#: ../metadata/core.xml.in.in.h:146
+#: ../metadata/core.xml.in.in.h:85
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Schakel venster horizontaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.in.h:147
+#: ../metadata/core.xml.in.in.h:86
 msgid "Toggle Window Maximized Vertically"
 msgstr "Schakel venster vertikaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.in.h:148
+#: ../metadata/core.xml.in.in.h:87
 msgid "Toggle Window Shaded"
 msgstr "Schakel venster opgerold"
 
-#: ../metadata/core.xml.in.in.h:149
+#: ../metadata/core.xml.in.in.h:88
 msgid "Toggle active window maximized"
 msgstr "Schakel actief venster gemaximaliseerd"
 
-#: ../metadata/core.xml.in.in.h:150
+#: ../metadata/core.xml.in.in.h:89
 msgid "Toggle active window maximized horizontally"
 msgstr "Schakel actief venster horizontaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.in.h:151
+#: ../metadata/core.xml.in.in.h:90
 msgid "Toggle active window maximized vertically"
 msgstr "Schakel actief venster vertikaal gemaximaliseerd"
 
-#: ../metadata/core.xml.in.in.h:152
+#: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
 msgstr "Schakel actief venster schaduw"
 
-#: ../metadata/core.xml.in.in.h:153
+#: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
 msgstr "Schakel het gebruik van langzame animaties"
 
-#: ../metadata/core.xml.in.in.h:155
+#: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
 msgstr "Demaximaliseer actief venster"
 
-#: ../metadata/core.xml.in.in.h:156
+#: ../metadata/core.xml.in.in.h:95
 msgid "Unredirect Fullscreen Windows"
 msgstr "Niet omleiden van volledig scherm vensters"
 
-#: ../metadata/core.xml.in.in.h:157
+#: ../metadata/core.xml.in.in.h:96
 msgid "Use diffuse light when screen is transformed"
 msgstr "Gebruik diffuus licht als het scherm wordt getransformeerd"
 
-#: ../metadata/core.xml.in.in.h:158
+#: ../metadata/core.xml.in.in.h:97
 msgid "Vertical Virtual Size"
 msgstr "Verticale virtuele grootte"
 
-#: ../metadata/core.xml.in.in.h:159
+#: ../metadata/core.xml.in.in.h:98
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:160
+#: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:162
+#: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
 msgstr "Venster menu knop verbinding"
 
-#: ../metadata/core.xml.in.in.h:163
+#: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
 msgstr "Venster menu knop verbinding"
-
-#: ../metadata/core.xml.in.in.h:164
-msgid "Window screenshot command line"
-msgstr "Venster schermafdruk commando"
 
 # workflow: "3D Beschleunigung aktivieren"
 # -ke-
@@ -1304,14 +1518,14 @@ msgstr "Hemelkoepel afbeelding"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Snelheid"
 
 # /usr/lib/YaST2/clients/inst_config_x11.ycp:821
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Tijdstempel"
 
@@ -1558,6 +1772,60 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "GLib main loop ondersteuning"
 
+#: ../metadata/gnomecompat.xml.in.h:2
+msgid "Gnome Compatibility"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:3
+msgid "Open a terminal"
+msgstr "Een terminal openen"
+
+#: ../metadata/gnomecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+msgstr ""
+
+# /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:336
+#: ../metadata/gnomecompat.xml.in.h:5
+msgid "Run Dialog"
+msgstr "Uitvoeren dialoog"
+
+#: ../metadata/gnomecompat.xml.in.h:6
+#, fuzzy
+msgid "Run terminal command"
+msgstr "Terminal commando regel"
+
+#: ../metadata/gnomecompat.xml.in.h:7
+msgid "Screenshot command line"
+msgstr "Schermafdruk commodo regel"
+
+#: ../metadata/gnomecompat.xml.in.h:8
+msgid "Show Main Menu"
+msgstr "Toon Hoofdmenu"
+
+#: ../metadata/gnomecompat.xml.in.h:9
+msgid "Show Run Application dialog"
+msgstr "Toon start applicatie dialoog venster"
+
+#: ../metadata/gnomecompat.xml.in.h:10
+msgid "Show the main menu"
+msgstr "Toon hoofdmenu"
+
+#: ../metadata/gnomecompat.xml.in.h:11
+msgid "Take a screenshot"
+msgstr "Maak een schermafdruk"
+
+#: ../metadata/gnomecompat.xml.in.h:12
+msgid "Take a screenshot of a window"
+msgstr "Maak een schermafdruk van een venster"
+
+#: ../metadata/gnomecompat.xml.in.h:13
+msgid "Terminal command line"
+msgstr "Terminal commando regel"
+
+#: ../metadata/gnomecompat.xml.in.h:14
+msgid "Window screenshot command line"
+msgstr "Venster schermafdruk commando"
+
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
 msgstr "Ini"
@@ -1645,8 +1913,8 @@ msgstr "Verplaats venster"
 msgid "Move window"
 msgstr "Verplaats venster"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
 msgid "Opacity"
 msgstr "Ondoorzichtigheid"
 
@@ -1666,6 +1934,125 @@ msgstr "Los springen van gemaximaliseerde vensters"
 #: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
 msgstr "Start vensters verplaatsen"
+
+#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+msgid "Brightness"
+msgstr "Helderheid"
+
+#: ../metadata/obs.xml.in.h:2
+#, fuzzy
+msgid "Brightness Decrease"
+msgstr "Helderheid"
+
+#: ../metadata/obs.xml.in.h:3
+#, fuzzy
+msgid "Brightness Increase"
+msgstr "Helderheid"
+
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Brightness Step"
+msgstr "Helderheid"
+
+#: ../metadata/obs.xml.in.h:5
+msgid "Brightness values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease"
+msgstr "Verminderen opaciteit"
+
+#: ../metadata/obs.xml.in.h:7
+#, fuzzy
+msgid "Increase"
+msgstr "Verhoog opaciteit"
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Opacity Decrease"
+msgstr "Opaciteit verander stap"
+
+#: ../metadata/obs.xml.in.h:10
+#, fuzzy
+msgid "Opacity Increase"
+msgstr "Opaciteit verander stap"
+
+#: ../metadata/obs.xml.in.h:11
+msgid "Opacity Step"
+msgstr "Opaciteit stap"
+
+#: ../metadata/obs.xml.in.h:12
+#, fuzzy
+msgid "Opacity values for windows"
+msgstr "Ondoorzichtigheid van vensters als zij worden verplaatst"
+
+#: ../metadata/obs.xml.in.h:13
+#, fuzzy
+msgid "Opacity, Brightness and Saturation"
+msgstr "Doorzichtig tijdens draaien"
+
+#: ../metadata/obs.xml.in.h:14
+msgid "Opacity, Brightness and Saturation adjustments"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+msgid "Saturation"
+msgstr "Verzadiging"
+
+#: ../metadata/obs.xml.in.h:16
+#, fuzzy
+msgid "Saturation Decrease"
+msgstr "Verzadiging"
+
+#: ../metadata/obs.xml.in.h:17
+#, fuzzy
+msgid "Saturation Increase"
+msgstr "Verzadiging"
+
+#: ../metadata/obs.xml.in.h:18
+#, fuzzy
+msgid "Saturation Step"
+msgstr "Verzadiging"
+
+#: ../metadata/obs.xml.in.h:19
+msgid "Saturation values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:20
+msgid "Step"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:21
+#, fuzzy
+msgid "Window specific settings"
+msgstr "Venster decoraties"
+
+#: ../metadata/obs.xml.in.h:22
+#, fuzzy
+msgid "Window values"
+msgstr "Venster opaciteit waarde"
+
+# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
+#: ../metadata/obs.xml.in.h:23
+#, fuzzy
+msgid "Windows"
+msgstr "Vervagen Vensters"
+
+#: ../metadata/obs.xml.in.h:24
+#, fuzzy
+msgid "Windows that should have a different brightness by default"
+msgstr "Vensters die standaard gepositioneerd moeten worden"
+
+#: ../metadata/obs.xml.in.h:25
+#, fuzzy
+msgid "Windows that should have a different opacity by default"
+msgstr "Vensters die standaard licht doorlatend moeten zijn"
+
+#: ../metadata/obs.xml.in.h:26
+#, fuzzy
+msgid "Windows that should have a different saturation by default"
+msgstr "Vensters die standaard gepositioneerd moeten worden"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1702,10 +2089,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Maximaliseer"
 
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
 #: ../metadata/place.xml.in.h:11
@@ -2442,10 +2825,6 @@ msgstr "Uitleggen en start transformeren vensters"
 msgid "Layout and start transforming windows on current output"
 msgstr "Uitleggen en start transformeren vensters op huidige uitvoer"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Geen"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "Op alle uitvoer apparaten"
@@ -2563,10 +2942,6 @@ msgstr "Applicatie wisselaar"
 msgid "Auto Rotate"
 msgstr "Auto rotatie"
 
-#: ../metadata/switcher.xml.in.h:7
-msgid "Brightness"
-msgstr "Helderheid"
-
 # /usr/lib/YaST2/clients/inst_ask_config.ycp:100
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring To Front"
@@ -2653,10 +3028,6 @@ msgstr "Vorig venster (geen popup)"
 #: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
 msgstr "Roteer naar het geselecteerde venster tijdens wisseling"
-
-#: ../metadata/switcher.xml.in.h:29
-msgid "Saturation"
-msgstr "Verzadiging"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next panel type window."
@@ -2909,82 +3280,67 @@ msgstr "Wiebel effect tijdens maximaliseren en herstellen vensters"
 msgid "Wobbly Windows"
 msgstr "Wiebelende Vensters"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filter Lineair"
+#~ msgid "Command line 0"
+#~ msgstr "Commando regel 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Gebruik lineair filter zodra ingezoomd"
+#~ msgid "Run command 0"
+#~ msgstr "Start commando 0"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Zoom bureaublad"
+#, fuzzy
+#~ msgid "Screenshot commands"
+#~ msgstr "Schermafdruk commodo regel"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Zoom in"
+#, fuzzy
+#~ msgid "Screenshot key bindings"
+#~ msgstr "Schermafdruk commodo regel"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Zoom uit"
+#~ msgid "Filter Linear"
+#~ msgstr "Filter Lineair"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Zoom verschuiven"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Gebruik lineair filter zodra ingezoomd"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Zoom snelheid"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Zoom bureaublad"
+
+#~ msgid "Zoom In"
+#~ msgstr "Zoom in"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Zoom uit"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Zoom verschuiven"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Zoom snelheid"
 
 # /usr/lib/YaST2/clients/inst_config_x11.ycp:821
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Zoom tijdstap"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Zoom tijdstap"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Zoomen en verschuiven van bureaublad kubus"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Zoomen en verschuiven van bureaublad kubus"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Zoom factor"
+#~ msgid "Zoom factor"
+#~ msgstr "Zoom factor"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Zoom verschuiven"
-
-#~ msgid "Decrease Opacity"
-#~ msgstr "Verminderen opaciteit"
+#~ msgid "Zoom pan"
+#~ msgstr "Zoom verschuiven"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Verminderen venster opaciteit"
 
-#~ msgid "Increase Opacity"
-#~ msgstr "Verhoog opaciteit"
-
 #~ msgid "Increase window opacity"
 #~ msgstr "Verhoog venster opaciteit"
-
-#~ msgid "Opacity Step"
-#~ msgstr "Opaciteit stap"
-
-#~ msgid "Opacity change step"
-#~ msgstr "Opaciteit verander stap"
 
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr ""
 #~ "Opaciteit waarde voor vensters die standaard lichtdoorlatend moeten zijn"
 
-#~ msgid "Opacity window values"
-#~ msgstr "Venster opaciteit waarde"
-
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
 #~ msgid "Opacity windows"
 #~ msgstr "Opaciteit vensters"
-
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "Vensters die standaard licht doorlatend moeten zijn"
 
 #~ msgid "Background Images"
 #~ msgstr "Achtergrond afbeelding"

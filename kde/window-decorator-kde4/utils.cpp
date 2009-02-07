@@ -49,8 +49,6 @@ namespace KWD
 	Atom wmProtocols;
 	Atom toolkitActionAtom;
 	Atom toolkitActionWindowMenuAtom;
-	Atom toolkitActionMainMenuAtom;
-	Atom toolkitActionRunDialogAtom;
 	Atom toolkitActionForceQuitDialogAtom;
         Atom compizWindowBlurDecor;
     }
@@ -201,10 +199,6 @@ KWD::Atoms::init (void)
     toolkitActionAtom = XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION", false);
     toolkitActionWindowMenuAtom =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", false);
-    toolkitActionMainMenuAtom =
-	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_MAIN_MENU", false);
-    toolkitActionRunDialogAtom =
-	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", false);
     toolkitActionForceQuitDialogAtom =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_FORCE_QUIT_DIALOG",
 		     false);

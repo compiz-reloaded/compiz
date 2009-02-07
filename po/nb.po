@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:43+0530\n"
+"POT-Creation-Date: 2009-02-06 11:19+0530\n"
 "PO-Revision-Date: 2008-04-03 23:15+0200\n"
 "Last-Translator: Ketil Wendelbo Aanensen <ketil.w.aanensen@gmail.com>\n"
 "Language-Team: Norwegian Bokmaal <ketil.w.aanensen@gmail.com>\n"
@@ -29,6 +29,50 @@ msgstr "Vindushåndtering"
 #: ../gtk/gnome/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
+
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "Ingen"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+msgid "Shade"
+msgstr "Skyggelegg"
+
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "Maksimer"
+
+#: ../gtk/gnome/compiz-window-manager.c:429
+#, fuzzy
+msgid "Maximize Horizontally"
+msgstr "Maksimer vindu horisontalt"
+
+#: ../gtk/gnome/compiz-window-manager.c:430
+#, fuzzy
+msgid "Maximize Vertically"
+msgstr "Maksimer vindu vertikalt"
+
+#: ../gtk/gnome/compiz-window-manager.c:431
+#, fuzzy
+msgid "Minimize"
+msgstr "Minimert"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+#, fuzzy
+msgid "Raise"
+msgstr "Auto-hev"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr ""
+
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../metadata/core.xml.in.in.h:100
+msgid "Window Menu"
+msgstr "Vindusmeny"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
@@ -94,68 +138,59 @@ msgstr "Bruk Metacity-tema"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Bruk Metacity-tema når vindusdekorasjoner tegnes"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
-#: ../metadata/core.xml.in.in.h:24
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Lukk vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
-#: ../metadata/core.xml.in.in.h:154
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Avmaksimer vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
-#: ../metadata/core.xml.in.in.h:86
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maksimer vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
-#: ../metadata/core.xml.in.in.h:92
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Minimer vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "Vindusmeny"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "Skyggelegg"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Hold over"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Klistre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Av-skyggelegg"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Ikke hold over"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Avklistre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Vinduet \"%s\" svarer ikke."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Å tvinge denne applikasjonen til å avslutte vil gjøre at du mister alle "
 "endringer som ikke er lagret."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Tving avslutt"
 
@@ -193,7 +228,7 @@ msgstr "Fyllfarge for påførte elementer"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Begynn"
 
@@ -370,7 +405,115 @@ msgstr "Begynn klonseleksjon"
 msgid "Output clone handler"
 msgstr "Håndterer for klone-utdata"
 
-#: ../metadata/core.xml.in.in.h:1
+#: ../metadata/commands.xml.in.h:1
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando0"
+
+#: ../metadata/commands.xml.in.h:2
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando1"
+
+#: ../metadata/commands.xml.in.h:3
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando10"
+
+#: ../metadata/commands.xml.in.h:4
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando11"
+
+#: ../metadata/commands.xml.in.h:5
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando2"
+
+#: ../metadata/commands.xml.in.h:6
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando3"
+
+#: ../metadata/commands.xml.in.h:7
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando4"
+
+#: ../metadata/commands.xml.in.h:8
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando5"
+
+#: ../metadata/commands.xml.in.h:9
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando6"
+
+#: ../metadata/commands.xml.in.h:10
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando7"
+
+#: ../metadata/commands.xml.in.h:11
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando8"
+
+#: ../metadata/commands.xml.in.h:12
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando9"
+
+#: ../metadata/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
@@ -378,7 +521,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando0"
 
-#: ../metadata/core.xml.in.in.h:2
+#: ../metadata/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
@@ -386,7 +529,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando1"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
@@ -394,7 +537,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando10"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
@@ -402,7 +545,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando11"
 
-#: ../metadata/core.xml.in.in.h:5
+#: ../metadata/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
@@ -410,7 +553,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando2"
 
-#: ../metadata/core.xml.in.in.h:6
+#: ../metadata/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
@@ -418,7 +561,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando3"
 
-#: ../metadata/core.xml.in.in.h:7
+#: ../metadata/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
@@ -426,7 +569,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando4"
 
-#: ../metadata/core.xml.in.in.h:8
+#: ../metadata/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
@@ -434,7 +577,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando5"
 
-#: ../metadata/core.xml.in.in.h:9
+#: ../metadata/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
@@ -442,7 +585,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando6"
 
-#: ../metadata/core.xml.in.in.h:10
+#: ../metadata/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
@@ -450,7 +593,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando7"
 
-#: ../metadata/core.xml.in.in.h:11
+#: ../metadata/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
@@ -458,7 +601,7 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando8"
 
-#: ../metadata/core.xml.in.in.h:12
+#: ../metadata/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
@@ -466,619 +609,690 @@ msgstr ""
 "En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
 "som kommando9"
 
-#: ../metadata/core.xml.in.in.h:13
+#: ../metadata/commands.xml.in.h:25
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando0"
+
+#: ../metadata/commands.xml.in.h:26
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando1"
+
+#: ../metadata/commands.xml.in.h:27
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando10"
+
+#: ../metadata/commands.xml.in.h:28
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando11"
+
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando2"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando3"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando4"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando5"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando6"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando7"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando8"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"En hurtigtast som, når innhentet, vil kjøre konsollkommandoen identifisert "
+"som kommando9"
+
+#: ../metadata/commands.xml.in.h:37
+msgid "Assigns bindings to arbitrary commands"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:38
+msgid "Button Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:39
+msgid "Command line 1"
+msgstr "Kommandolinje 1"
+
+#: ../metadata/commands.xml.in.h:40
+msgid "Command line 10"
+msgstr "Kommandolinje 10"
+
+#: ../metadata/commands.xml.in.h:41
+msgid "Command line 11"
+msgstr "Kommandolinje 11"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "Kommandolinje 1"
+
+#: ../metadata/commands.xml.in.h:43
+msgid "Command line 2"
+msgstr "Kommandolinje 2"
+
+#: ../metadata/commands.xml.in.h:44
+msgid "Command line 3"
+msgstr "Kommandolinje 3"
+
+#: ../metadata/commands.xml.in.h:45
+msgid "Command line 4"
+msgstr "Kommandolinje 4"
+
+#: ../metadata/commands.xml.in.h:46
+msgid "Command line 5"
+msgstr "Kommandolinje 5"
+
+#: ../metadata/commands.xml.in.h:47
+msgid "Command line 6"
+msgstr "Kommandolinje 6"
+
+#: ../metadata/commands.xml.in.h:48
+msgid "Command line 7"
+msgstr "Kommandolinje 7"
+
+#: ../metadata/commands.xml.in.h:49
+msgid "Command line 8"
+msgstr "Kommandolinje 8"
+
+#: ../metadata/commands.xml.in.h:50
+msgid "Command line 9"
+msgstr "Kommandolinje 9"
+
+#: ../metadata/commands.xml.in.h:51
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando0 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:52
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando1 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:53
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando10 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:54
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando11 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:55
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando2 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:56
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando3 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:57
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando4 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:58
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando5 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:59
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando6 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:60
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando7 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:61
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando8 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:62
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr ""
+"Kommandolinje som skal kjøres i konsoll når kjør_kommando9 blir innhentet"
+
+#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#, fuzzy
+msgid "Commands"
+msgstr "Kommando"
+
+#: ../metadata/commands.xml.in.h:64
+msgid "Edge Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:65
+msgid "Key Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:66
+msgid "Run command 1"
+msgstr "Kjør kommando 1"
+
+#: ../metadata/commands.xml.in.h:67
+msgid "Run command 10"
+msgstr "Kjør kommando 10"
+
+#: ../metadata/commands.xml.in.h:68
+msgid "Run command 11"
+msgstr "Kjør kommando 11"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "Kjør kommando 1"
+
+#: ../metadata/commands.xml.in.h:70
+msgid "Run command 2"
+msgstr "Kjør kommando 2"
+
+#: ../metadata/commands.xml.in.h:71
+msgid "Run command 3"
+msgstr "Kjør kommando 3"
+
+#: ../metadata/commands.xml.in.h:72
+msgid "Run command 4"
+msgstr "Kjør kommando 4"
+
+#: ../metadata/commands.xml.in.h:73
+msgid "Run command 5"
+msgstr "Kjør kommando 5"
+
+#: ../metadata/commands.xml.in.h:74
+msgid "Run command 6"
+msgstr "Kjør kommando 6"
+
+#: ../metadata/commands.xml.in.h:75
+msgid "Run command 7"
+msgstr "Kjør kommando 7"
+
+#: ../metadata/commands.xml.in.h:76
+msgid "Run command 8"
+msgstr "Kjør kommando 8"
+
+#: ../metadata/commands.xml.in.h:77
+msgid "Run command 9"
+msgstr "Kjør kommando 9"
+
+#: ../metadata/core.xml.in.in.h:1
 msgid "Active Plugins"
 msgstr "Aktive tillegg"
 
-#: ../metadata/core.xml.in.in.h:14
+#: ../metadata/core.xml.in.in.h:2
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Tilatt tegning av fullskjermvinduer å ikke bli omdirigert til bilder utenfor "
 "skjermen"
 
-#: ../metadata/core.xml.in.in.h:15
+#: ../metadata/core.xml.in.in.h:3
 msgid "Audible Bell"
 msgstr "Hørbar bjelle"
 
-#: ../metadata/core.xml.in.in.h:16
+#: ../metadata/core.xml.in.in.h:4
 msgid "Audible system beep"
 msgstr "Hørbart systempip"
 
-#: ../metadata/core.xml.in.in.h:17
+#: ../metadata/core.xml.in.in.h:5
 msgid "Auto-Raise"
 msgstr "Auto-hev"
 
-#: ../metadata/core.xml.in.in.h:18
+#: ../metadata/core.xml.in.in.h:6
 msgid "Auto-Raise Delay"
 msgstr "Forsinkelse for auto-hev"
 
-#: ../metadata/core.xml.in.in.h:19
+#: ../metadata/core.xml.in.in.h:7
 msgid "Automatic detection of output devices"
 msgstr "Automatisk gjenkjennelse av skjermenheter"
 
-#: ../metadata/core.xml.in.in.h:20
+#: ../metadata/core.xml.in.in.h:8
 msgid "Automatic detection of refresh rate"
 msgstr "Automatisk gjenkjennelse av oppdateringshastighet"
 
-#: ../metadata/core.xml.in.in.h:21
+#: ../metadata/core.xml.in.in.h:9
 msgid "Best"
 msgstr "Beste"
 
-#: ../metadata/core.xml.in.in.h:22
+#: ../metadata/core.xml.in.in.h:10
 msgid "Click To Focus"
 msgstr "Klikk for fokus"
 
-#: ../metadata/core.xml.in.in.h:23
+#: ../metadata/core.xml.in.in.h:11
 msgid "Click on window moves input focus to it"
 msgstr "Klikk på vindu flytter inndatafokus til det"
 
-#: ../metadata/core.xml.in.in.h:25
+#: ../metadata/core.xml.in.in.h:13
 msgid "Close active window"
 msgstr "Lukk aktivt vindu"
 
-#: ../metadata/core.xml.in.in.h:26
-msgid "Command line 0"
-msgstr "Kommandolinje 0"
-
-#: ../metadata/core.xml.in.in.h:27
-msgid "Command line 1"
-msgstr "Kommandolinje 1"
-
-#: ../metadata/core.xml.in.in.h:28
-msgid "Command line 10"
-msgstr "Kommandolinje 10"
-
-#: ../metadata/core.xml.in.in.h:29
-msgid "Command line 11"
-msgstr "Kommandolinje 11"
-
-#: ../metadata/core.xml.in.in.h:30
-msgid "Command line 2"
-msgstr "Kommandolinje 2"
-
-#: ../metadata/core.xml.in.in.h:31
-msgid "Command line 3"
-msgstr "Kommandolinje 3"
-
-#: ../metadata/core.xml.in.in.h:32
-msgid "Command line 4"
-msgstr "Kommandolinje 4"
-
-#: ../metadata/core.xml.in.in.h:33
-msgid "Command line 5"
-msgstr "Kommandolinje 5"
-
-#: ../metadata/core.xml.in.in.h:34
-msgid "Command line 6"
-msgstr "Kommandolinje 6"
-
-#: ../metadata/core.xml.in.in.h:35
-msgid "Command line 7"
-msgstr "Kommandolinje 7"
-
-#: ../metadata/core.xml.in.in.h:36
-msgid "Command line 8"
-msgstr "Kommandolinje 8"
-
-#: ../metadata/core.xml.in.in.h:37
-msgid "Command line 9"
-msgstr "Kommandolinje 9"
-
-#: ../metadata/core.xml.in.in.h:38
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando0 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:39
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando1 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:40
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando10 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:41
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando11 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:42
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando2 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:43
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando3 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:44
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando4 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:45
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando5 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:46
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando6 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:47
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando7 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:48
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando8 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:49
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr ""
-"Kommandolinje som skal kjøres i konsoll når kjør_kommando9 blir innhentet"
-
-#: ../metadata/core.xml.in.in.h:50
-#, fuzzy
-msgid "Commands"
-msgstr "Kommando"
-
-#: ../metadata/core.xml.in.in.h:51
+#: ../metadata/core.xml.in.in.h:14
 msgid "Default Icon"
 msgstr "Standardikon"
 
-#: ../metadata/core.xml.in.in.h:52
+#: ../metadata/core.xml.in.in.h:15
 msgid "Default window icon image"
 msgstr "Standard bilde for vindusikon"
 
-#: ../metadata/core.xml.in.in.h:53
+#: ../metadata/core.xml.in.in.h:16
 #, fuzzy
 msgid "Desktop Size"
 msgstr "Skrivebordskube"
 
-#: ../metadata/core.xml.in.in.h:54
+#: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
 msgstr "Gjenkjenn utdata"
 
-#: ../metadata/core.xml.in.in.h:55
+#: ../metadata/core.xml.in.in.h:18
 msgid "Detect Refresh Rate"
 msgstr "Gjenkjenn oppfriskingshastighet"
 
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/core.xml.in.in.h:20
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
 "Varigheten musepekeren må hvile i en skjermkant før en kanthendelse utføres."
 
-#: ../metadata/core.xml.in.in.h:58
+#: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
 msgstr "Forsinkelse for kantutløsning"
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "Rask"
 
-#: ../metadata/core.xml.in.in.h:60
+#: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:61
+#: ../metadata/core.xml.in.in.h:24
 msgid "Focus Prevention Level"
 msgstr "Fokusunngående nivå"
 
-#: ../metadata/core.xml.in.in.h:62
+#: ../metadata/core.xml.in.in.h:25
 msgid "Focus Prevention Windows"
 msgstr "Fokusunngående vinduer"
 
-#: ../metadata/core.xml.in.in.h:63
+#: ../metadata/core.xml.in.in.h:26
 msgid "Focus prevention windows"
 msgstr "Fokusunngående vinduer"
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:65
+#: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
 msgstr "Generelle valg"
 
-#: ../metadata/core.xml.in.in.h:66
+#: ../metadata/core.xml.in.in.h:29
 msgid "General compiz options"
 msgstr "Generelle Compiz-valg"
 
-#: ../metadata/core.xml.in.in.h:67
+#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "God"
 
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.in.h:31
 msgid "Hide Skip Taskbar Windows"
 msgstr "Skjul vinduer som hopper over oppgavelinjen"
 
-#: ../metadata/core.xml.in.in.h:69
+#: ../metadata/core.xml.in.in.h:32
 msgid "Hide all windows and focus desktop"
 msgstr "Skjul alle vinduer og fokuser på skrivebordet"
 
-#: ../metadata/core.xml.in.in.h:70
+#: ../metadata/core.xml.in.in.h:33
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Skjul vinduer som ikke er i oppgavelinjen når Visskrivebord-modus startes"
 
-#: ../metadata/core.xml.in.in.h:71
+#: ../metadata/core.xml.in.in.h:34
 msgid "High"
 msgstr "Høy"
 
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.in.h:35
 msgid "Horizontal Virtual Size"
 msgstr "Horisontal virtuell størrelse"
 
-#: ../metadata/core.xml.in.in.h:73
+#: ../metadata/core.xml.in.in.h:36
 msgid "If available use compression for textures converted from images"
 msgstr "Hvis mulig, bruk kompresjon for teksturer hentet fra bilder"
 
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.in.h:37
 msgid "Ignore Hints When Maximized"
 msgstr "Ignorer hint når maksimert"
 
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "Ignorer størrelsesøkning- og forholdshint når vinduet er maksimert"
 
-#: ../metadata/core.xml.in.in.h:76
+#: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
 msgstr "Intervall før valgte vinduer heves"
 
-#: ../metadata/core.xml.in.in.h:77
+#: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
 msgstr "Intervall mellom ping-beskjeder"
 
-#: ../metadata/core.xml.in.in.h:78
+#: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:79
+#: ../metadata/core.xml.in.in.h:42
 msgid "Level of focus stealing prevention"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:43
 msgid "Lighting"
 msgstr "Lyn"
 
-#: ../metadata/core.xml.in.in.h:81
+#: ../metadata/core.xml.in.in.h:44
 msgid "List of currently active plugins"
 msgstr "Liste over aktive tillegg nå"
 
-#: ../metadata/core.xml.in.in.h:82
+#: ../metadata/core.xml.in.in.h:45
 msgid "List of strings describing output devices"
 msgstr "Liste over strenger som beskriver skjermenheter"
 
-#: ../metadata/core.xml.in.in.h:83
+#: ../metadata/core.xml.in.in.h:46
 msgid "Low"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:84
+#: ../metadata/core.xml.in.in.h:47
 msgid "Lower Window"
 msgstr "Senk vindu"
 
-#: ../metadata/core.xml.in.in.h:85
+#: ../metadata/core.xml.in.in.h:48
 msgid "Lower window beneath other windows"
 msgstr "Senk vindu under andre vinduer"
 
-#: ../metadata/core.xml.in.in.h:87
+#: ../metadata/core.xml.in.in.h:50
 msgid "Maximize Window Horizontally"
 msgstr "Maksimer vindu horisontalt"
 
-#: ../metadata/core.xml.in.in.h:88
+#: ../metadata/core.xml.in.in.h:51
 msgid "Maximize Window Vertically"
 msgstr "Maksimer vindu vertikalt"
 
-#: ../metadata/core.xml.in.in.h:89
+#: ../metadata/core.xml.in.in.h:52
 msgid "Maximize active window"
 msgstr "Maksimer aktivt vindu"
 
-#: ../metadata/core.xml.in.in.h:90
+#: ../metadata/core.xml.in.in.h:53
 msgid "Maximize active window horizontally"
 msgstr "Maksimer aktivt vindu horisontalt"
 
-#: ../metadata/core.xml.in.in.h:91
+#: ../metadata/core.xml.in.in.h:54
 msgid "Maximize active window vertically"
 msgstr "Maksimer aktivt vindu vertikalt"
 
-#: ../metadata/core.xml.in.in.h:93
+#: ../metadata/core.xml.in.in.h:56
 msgid "Minimize active window"
 msgstr "Minimer aktivt vindu"
 
-#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "Normal"
 
-#: ../metadata/core.xml.in.in.h:95
+#: ../metadata/core.xml.in.in.h:58
 msgid "Number of Desktops"
 msgstr "Antall skrivebord"
 
-#: ../metadata/core.xml.in.in.h:96
+#: ../metadata/core.xml.in.in.h:59
 msgid "Number of virtual desktops"
 msgstr "Antall viruelle skrivebord"
 
-#: ../metadata/core.xml.in.in.h:97
+#: ../metadata/core.xml.in.in.h:60
 msgid "Off"
 msgstr ""
 
 # fuzzy
-#: ../metadata/core.xml.in.in.h:98
+#: ../metadata/core.xml.in.in.h:61
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Bare utfør skjermoppdateringer ved vertikale blankingsperioder"
 
-#: ../metadata/core.xml.in.in.h:99
-msgid "Open a terminal"
-msgstr "Åpne en terminal"
-
-#: ../metadata/core.xml.in.in.h:100
+#: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
 msgstr "Utdata"
 
-#: ../metadata/core.xml.in.in.h:101
+#: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
 msgstr "Overlappende utdata-håndtering"
 
-#: ../metadata/core.xml.in.in.h:102
+#: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:103
+#: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
 msgstr "Ping-forsinkelse"
 
-#: ../metadata/core.xml.in.in.h:104
+#: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
 msgstr "Foretrekk større utdata"
 
-#: ../metadata/core.xml.in.in.h:105
+#: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
 msgstr "Foretrekk mindre utdata"
 
-#: ../metadata/core.xml.in.in.h:106
+#: ../metadata/core.xml.in.in.h:68
 msgid "Raise On Click"
 msgstr "Hev ved klikk"
 
-#: ../metadata/core.xml.in.in.h:107
+#: ../metadata/core.xml.in.in.h:69
 msgid "Raise Window"
 msgstr "Hev vindu"
 
-#: ../metadata/core.xml.in.in.h:108
+#: ../metadata/core.xml.in.in.h:70
 msgid "Raise selected windows after interval"
 msgstr "Hev valgt vindu etter intervall"
 
-#: ../metadata/core.xml.in.in.h:109
+#: ../metadata/core.xml.in.in.h:71
 msgid "Raise window above other windows"
 msgstr "Hev vindu over andre vinduer"
 
-#: ../metadata/core.xml.in.in.h:110
+#: ../metadata/core.xml.in.in.h:72
 msgid "Raise windows when clicked"
 msgstr "Hev vinduer når de klikkes"
 
-#: ../metadata/core.xml.in.in.h:111
+#: ../metadata/core.xml.in.in.h:73
 msgid "Refresh Rate"
 msgstr "Oppfriskingsrate"
 
-#: ../metadata/core.xml.in.in.h:112
-msgid "Run Dialog"
-msgstr "Kjør-dialog"
-
-#: ../metadata/core.xml.in.in.h:113
-msgid "Run command 0"
-msgstr "Kjør kommando 0"
-
-#: ../metadata/core.xml.in.in.h:114
-msgid "Run command 1"
-msgstr "Kjør kommando 1"
-
-#: ../metadata/core.xml.in.in.h:115
-msgid "Run command 10"
-msgstr "Kjør kommando 10"
-
-#: ../metadata/core.xml.in.in.h:116
-msgid "Run command 11"
-msgstr "Kjør kommando 11"
-
-#: ../metadata/core.xml.in.in.h:117
-msgid "Run command 2"
-msgstr "Kjør kommando 2"
-
-#: ../metadata/core.xml.in.in.h:118
-msgid "Run command 3"
-msgstr "Kjør kommando 3"
-
-#: ../metadata/core.xml.in.in.h:119
-msgid "Run command 4"
-msgstr "Kjør kommando 4"
-
-#: ../metadata/core.xml.in.in.h:120
-msgid "Run command 5"
-msgstr "Kjør kommando 5"
-
-#: ../metadata/core.xml.in.in.h:121
-msgid "Run command 6"
-msgstr "Kjør kommando 6"
-
-#: ../metadata/core.xml.in.in.h:122
-msgid "Run command 7"
-msgstr "Kjør kommando 7"
-
-#: ../metadata/core.xml.in.in.h:123
-msgid "Run command 8"
-msgstr "Kjør kommando 8"
-
-#: ../metadata/core.xml.in.in.h:124
-msgid "Run command 9"
-msgstr "Kjør kommando 9"
-
-#: ../metadata/core.xml.in.in.h:125
-#, fuzzy
-msgid "Run terminal command"
-msgstr "Kommandolinje for terminal"
-
-#: ../metadata/core.xml.in.in.h:126
+#: ../metadata/core.xml.in.in.h:74
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Multiplikator for skjermstørrelse for horisontal virtuell størrelse"
 
-#: ../metadata/core.xml.in.in.h:127
+#: ../metadata/core.xml.in.in.h:75
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Multiplikator for skjermstørrelse for vertikal virtuell størrelse"
 
-#: ../metadata/core.xml.in.in.h:128
-msgid "Screenshot command line"
-msgstr "Kommandolinje for skjermbilde"
-
-#: ../metadata/core.xml.in.in.h:129
-#, fuzzy
-msgid "Screenshot commands"
-msgstr "Kommandolinje for skjermbilde"
-
-#: ../metadata/core.xml.in.in.h:130
-#, fuzzy
-msgid "Screenshot key bindings"
-msgstr "Kommandolinje for skjermbilde"
-
-#: ../metadata/core.xml.in.in.h:131
+#: ../metadata/core.xml.in.in.h:76
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
 
-#: ../metadata/core.xml.in.in.h:132
-msgid "Show Main Menu"
-msgstr "Vis hovedmeny"
-
-#: ../metadata/core.xml.in.in.h:133
-msgid "Show Run Application dialog"
-msgstr "Vis \"Kjør program\"-dialog"
-
-#: ../metadata/core.xml.in.in.h:134
-msgid "Show the main menu"
-msgstr "Vis hovedmenyen"
-
-#: ../metadata/core.xml.in.in.h:135
+#: ../metadata/core.xml.in.in.h:77
 msgid "Slow Animations"
 msgstr "Trege animasjoner"
 
-#: ../metadata/core.xml.in.in.h:136
+#: ../metadata/core.xml.in.in.h:78
 msgid "Smart mode"
 msgstr "Smartmodus"
 
-#: ../metadata/core.xml.in.in.h:137
+#: ../metadata/core.xml.in.in.h:79
 msgid "Sync To VBlank"
 msgstr "Synkroniser til VBlank"
 
-#: ../metadata/core.xml.in.in.h:138
-msgid "Take a screenshot"
-msgstr "Ta et skjermbilde"
-
-#: ../metadata/core.xml.in.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "Ta et skjermbilde av et vindu"
-
-#: ../metadata/core.xml.in.in.h:140
-msgid "Terminal command line"
-msgstr "Kommandolinje for terminal"
-
-#: ../metadata/core.xml.in.in.h:141
+#: ../metadata/core.xml.in.in.h:80
 #, fuzzy
 msgid "Texture Compression"
 msgstr "Teksturfiltrering"
 
-#: ../metadata/core.xml.in.in.h:142
+#: ../metadata/core.xml.in.in.h:81
 msgid "Texture Filter"
 msgstr "Teksturfilter"
 
-#: ../metadata/core.xml.in.in.h:143
+#: ../metadata/core.xml.in.in.h:82
 msgid "Texture filtering"
 msgstr "Teksturfiltrering"
 
-#: ../metadata/core.xml.in.in.h:144
+#: ../metadata/core.xml.in.in.h:83
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "Hastigheten for omtegning av skjermen (ganger/sekund)"
 
-#: ../metadata/core.xml.in.in.h:145
+#: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
 msgstr "Skru av/på maksimert vindu"
 
-#: ../metadata/core.xml.in.in.h:146
+#: ../metadata/core.xml.in.in.h:85
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Skru av/på horisontalt maksimert vindu"
 
-#: ../metadata/core.xml.in.in.h:147
+#: ../metadata/core.xml.in.in.h:86
 msgid "Toggle Window Maximized Vertically"
 msgstr "Skru av/på vertikalt maksimert vindu"
 
-#: ../metadata/core.xml.in.in.h:148
+#: ../metadata/core.xml.in.in.h:87
 msgid "Toggle Window Shaded"
 msgstr "Skru av/på rull opp/ ned vindu"
 
-#: ../metadata/core.xml.in.in.h:149
+#: ../metadata/core.xml.in.in.h:88
 msgid "Toggle active window maximized"
 msgstr "Skru av/på maksimert aktivt vindu"
 
-#: ../metadata/core.xml.in.in.h:150
+#: ../metadata/core.xml.in.in.h:89
 msgid "Toggle active window maximized horizontally"
 msgstr "Skru av/på horisontalt maksimert aktivt vindu"
 
-#: ../metadata/core.xml.in.in.h:151
+#: ../metadata/core.xml.in.in.h:90
 msgid "Toggle active window maximized vertically"
 msgstr "Skru av/på vertikalt maksimert aktivt vindu"
 
-#: ../metadata/core.xml.in.in.h:152
+#: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
 msgstr "Skru av/på rull opp/ned vindu"
 
-#: ../metadata/core.xml.in.in.h:153
+#: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
 msgstr "Skru av/på bruk av trege animasjoner"
 
-#: ../metadata/core.xml.in.in.h:155
+#: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
 msgstr "Avmaksimer aktivt vindu"
 
-#: ../metadata/core.xml.in.in.h:156
+#: ../metadata/core.xml.in.in.h:95
 msgid "Unredirect Fullscreen Windows"
 msgstr "Ikke-videresend vinduer i fullskjerm"
 
-#: ../metadata/core.xml.in.in.h:157
+#: ../metadata/core.xml.in.in.h:96
 msgid "Use diffuse light when screen is transformed"
 msgstr "Bruk diffust lys når skjermen omdannes"
 
-#: ../metadata/core.xml.in.in.h:158
+#: ../metadata/core.xml.in.in.h:97
 msgid "Vertical Virtual Size"
 msgstr "Vertikal virtuell størrelse"
 
-#: ../metadata/core.xml.in.in.h:159
+#: ../metadata/core.xml.in.in.h:98
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:160
+#: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
 msgstr "Hvilken av de overlappende utdata-enhetene skal foretrekkes"
 
-#: ../metadata/core.xml.in.in.h:162
+#: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
 msgstr "Snarvei for vindusmeny"
 
-#: ../metadata/core.xml.in.in.h:163
+#: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
 msgstr "Hurtigtast for vindusmeny"
-
-#: ../metadata/core.xml.in.in.h:164
-msgid "Window screenshot command line"
-msgstr "Kommandolinje for skjermbilde av vindu"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1267,13 +1481,13 @@ msgstr "Bilde for himmelkuppel"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Hastighet"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Tidsskritt"
 
@@ -1517,6 +1731,59 @@ msgstr "Glib"
 msgid "GLib main loop support"
 msgstr "Glib støtte for hovedløkke"
 
+#: ../metadata/gnomecompat.xml.in.h:2
+msgid "Gnome Compatibility"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:3
+msgid "Open a terminal"
+msgstr "Åpne en terminal"
+
+#: ../metadata/gnomecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:5
+msgid "Run Dialog"
+msgstr "Kjør-dialog"
+
+#: ../metadata/gnomecompat.xml.in.h:6
+#, fuzzy
+msgid "Run terminal command"
+msgstr "Kommandolinje for terminal"
+
+#: ../metadata/gnomecompat.xml.in.h:7
+msgid "Screenshot command line"
+msgstr "Kommandolinje for skjermbilde"
+
+#: ../metadata/gnomecompat.xml.in.h:8
+msgid "Show Main Menu"
+msgstr "Vis hovedmeny"
+
+#: ../metadata/gnomecompat.xml.in.h:9
+msgid "Show Run Application dialog"
+msgstr "Vis \"Kjør program\"-dialog"
+
+#: ../metadata/gnomecompat.xml.in.h:10
+msgid "Show the main menu"
+msgstr "Vis hovedmenyen"
+
+#: ../metadata/gnomecompat.xml.in.h:11
+msgid "Take a screenshot"
+msgstr "Ta et skjermbilde"
+
+#: ../metadata/gnomecompat.xml.in.h:12
+msgid "Take a screenshot of a window"
+msgstr "Ta et skjermbilde av et vindu"
+
+#: ../metadata/gnomecompat.xml.in.h:13
+msgid "Terminal command line"
+msgstr "Kommandolinje for terminal"
+
+#: ../metadata/gnomecompat.xml.in.h:14
+msgid "Window screenshot command line"
+msgstr "Kommandolinje for skjermbilde av vindu"
+
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
 msgstr "Ini"
@@ -1603,8 +1870,8 @@ msgstr "Flytt vindu"
 msgid "Move window"
 msgstr "Flytt vindu"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
 msgid "Opacity"
 msgstr "Dekkevne"
 
@@ -1623,6 +1890,124 @@ msgstr "Smekk av maksimerte vinduer"
 #: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
 msgstr "Begynn å bevege vindu"
+
+#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+msgid "Brightness"
+msgstr "Skarphet"
+
+#: ../metadata/obs.xml.in.h:2
+#, fuzzy
+msgid "Brightness Decrease"
+msgstr "Skarphet"
+
+#: ../metadata/obs.xml.in.h:3
+#, fuzzy
+msgid "Brightness Increase"
+msgstr "Skarphet"
+
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Brightness Step"
+msgstr "Skarphet"
+
+#: ../metadata/obs.xml.in.h:5
+msgid "Brightness values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease"
+msgstr "Reduser dekkevne"
+
+#: ../metadata/obs.xml.in.h:7
+#, fuzzy
+msgid "Increase"
+msgstr "Øk dekkevne"
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Opacity Decrease"
+msgstr "Endringssteg for dekkevne"
+
+#: ../metadata/obs.xml.in.h:10
+#, fuzzy
+msgid "Opacity Increase"
+msgstr "Endringssteg for dekkevne"
+
+#: ../metadata/obs.xml.in.h:11
+msgid "Opacity Step"
+msgstr "Steg for dekkevne"
+
+#: ../metadata/obs.xml.in.h:12
+#, fuzzy
+msgid "Opacity values for windows"
+msgstr "Dekkevnenivå for bevegende vinduer"
+
+#: ../metadata/obs.xml.in.h:13
+#, fuzzy
+msgid "Opacity, Brightness and Saturation"
+msgstr "Dekkevne ved rotasjon"
+
+#: ../metadata/obs.xml.in.h:14
+msgid "Opacity, Brightness and Saturation adjustments"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+msgid "Saturation"
+msgstr "Metning"
+
+#: ../metadata/obs.xml.in.h:16
+#, fuzzy
+msgid "Saturation Decrease"
+msgstr "Metning"
+
+#: ../metadata/obs.xml.in.h:17
+#, fuzzy
+msgid "Saturation Increase"
+msgstr "Metning"
+
+#: ../metadata/obs.xml.in.h:18
+#, fuzzy
+msgid "Saturation Step"
+msgstr "Metning"
+
+#: ../metadata/obs.xml.in.h:19
+msgid "Saturation values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:20
+msgid "Step"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:21
+#, fuzzy
+msgid "Window specific settings"
+msgstr "Vindusdekorasjoner"
+
+#: ../metadata/obs.xml.in.h:22
+#, fuzzy
+msgid "Window values"
+msgstr "Dekkevneverdier for vinduer"
+
+#: ../metadata/obs.xml.in.h:23
+#, fuzzy
+msgid "Windows"
+msgstr "Kartlegg vinduer"
+
+#: ../metadata/obs.xml.in.h:24
+#, fuzzy
+msgid "Windows that should have a different brightness by default"
+msgstr "Vinduer som skal posisjoneres som standard"
+
+#: ../metadata/obs.xml.in.h:25
+#, fuzzy
+msgid "Windows that should have a different opacity by default"
+msgstr "Vinduer som skal være gjennomsiktige som standard"
+
+#: ../metadata/obs.xml.in.h:26
+#, fuzzy
+msgid "Windows that should have a different saturation by default"
+msgstr "Vinduer som skal posisjoneres som standard"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1659,10 +2044,6 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Maksimer"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2373,10 +2754,6 @@ msgstr "Utform og start omdanning av vinduer"
 msgid "Layout and start transforming windows on current output"
 msgstr "Utform og start omdanning av vinduer på denne skjermen"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Ingen"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "På alle skjermenheter"
@@ -2486,10 +2863,6 @@ msgstr "Programbytter"
 msgid "Auto Rotate"
 msgstr "Autoroter"
 
-#: ../metadata/switcher.xml.in.h:7
-msgid "Brightness"
-msgstr "Skarphet"
-
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring To Front"
 msgstr "Hent til front"
@@ -2566,10 +2939,6 @@ msgstr "Forrige vindu (ikke sprett-opp)"
 #: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
 msgstr "Roter til det valgte vinduent mens skifting"
-
-#: ../metadata/switcher.xml.in.h:29
-msgid "Saturation"
-msgstr "Metning"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next panel type window."
@@ -2820,80 +3189,65 @@ msgstr "Ustødighetseffekt når vinduer maksimeres og avmaksimeres"
 msgid "Wobbly Windows"
 msgstr "Ustødige vinduer"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtrer lineært"
+#~ msgid "Command line 0"
+#~ msgstr "Kommandolinje 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Bruk lineært filter når forstørret"
+#~ msgid "Run command 0"
+#~ msgstr "Kjør kommando 0"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Forstørr skrivebord"
+#, fuzzy
+#~ msgid "Screenshot commands"
+#~ msgstr "Kommandolinje for skjermbilde"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Forstørr"
+#, fuzzy
+#~ msgid "Screenshot key bindings"
+#~ msgstr "Kommandolinje for skjermbilde"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Forminsk"
+#~ msgid "Filter Linear"
+#~ msgstr "Filtrer lineært"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Panorer forstørrelse"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Bruk lineært filter når forstørret"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Forstørringshastighet"
+#~ msgid "Zoom Desktop"
+#~ msgstr "Forstørr skrivebord"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Tidsskritt for forstørrelse"
+#~ msgid "Zoom In"
+#~ msgstr "Forstørr"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Forstørr og panorer skrivebordskuben"
+#~ msgid "Zoom Out"
+#~ msgstr "Forminsk"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Forstørrelsesfaktor"
+#~ msgid "Zoom Pan"
+#~ msgstr "Panorer forstørrelse"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Forstørrelsespanorering"
+#~ msgid "Zoom Speed"
+#~ msgstr "Forstørringshastighet"
 
-#~ msgid "Decrease Opacity"
-#~ msgstr "Reduser dekkevne"
+#~ msgid "Zoom Timestep"
+#~ msgstr "Tidsskritt for forstørrelse"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Forstørr og panorer skrivebordskuben"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Forstørrelsesfaktor"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Forstørrelsespanorering"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Reduser vinduets dekkevne"
 
-#~ msgid "Increase Opacity"
-#~ msgstr "Øk dekkevne"
-
 #~ msgid "Increase window opacity"
 #~ msgstr "Øk vinduets dekkevne"
-
-#~ msgid "Opacity Step"
-#~ msgstr "Steg for dekkevne"
-
-#~ msgid "Opacity change step"
-#~ msgstr "Endringssteg for dekkevne"
 
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr ""
 #~ "Dekkevneverdier for vinduer som skal være gjennomsiktige som standard"
 
-#~ msgid "Opacity window values"
-#~ msgstr "Dekkevneverdier for vinduer"
-
 #~ msgid "Opacity windows"
 #~ msgstr "Vinduer som blir påvirket"
-
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "Vinduer som skal være gjennomsiktige som standard"
 
 #~ msgid "Background Images"
 #~ msgstr "Bakgrunnsbilder"

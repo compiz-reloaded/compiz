@@ -310,16 +310,11 @@ static Atom wm_move_resize_atom;
 static Atom restack_window_atom;
 static Atom select_window_atom;
 static Atom mwm_hints_atom;
+static Atom switcher_fg_atom;
 
 static Atom toolkit_action_atom;
-static Atom toolkit_action_main_menu_atom;
-static Atom toolkit_action_run_dialog_atom;
 static Atom toolkit_action_window_menu_atom;
 static Atom toolkit_action_force_quit_dialog_atom;
-
-static Atom panel_action_atom;
-static Atom panel_action_main_menu_atom;
-static Atom panel_action_run_dialog_atom;
 
 static Time dm_sn_timestamp;
 
@@ -624,36 +619,6 @@ decor_update_window_property (decor_t *d)
 				&bottom, w / 2,
 				&left, h / 2,
 				&right, h / 2);
-}
-
-static void
-decor_update_switcher_property (decor_t *d)
-{
-    long	 data[256];
-    Display	 *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    gint	 nQuad;
-    decor_quad_t quads[N_QUADS_MAX];
-
-    nQuad = decor_set_lSrStSbX_window_quads (quads, &switcher_context,
-					     &d->border_layout,
-					     d->border_layout.top.x2 -
-					     d->border_layout.top.x1 -
-					     switcher_context.extents.left -
-					     switcher_context.extents.right -
-					     32);
-
-    decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
-			     &_switcher_extents, &_switcher_extents,
-			     0, 0, quads, nQuad);
-
-    gdk_error_trap_push ();
-    XChangeProperty (xdisplay, d->prop_xid,
-		     win_decor_atom,
-		     XA_INTEGER,
-		     32, PropModeReplace, (guchar *) data,
-		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
-    gdk_display_sync (gdk_display_get_default ());
-    gdk_error_trap_pop ();
 }
 
 static void
@@ -2203,6 +2168,47 @@ meta_draw_window_decoration (decor_t *d)
 #define SWITCHER_ALPHA 0xa0a0
 
 static void
+decor_update_switcher_property (decor_t *d)
+{
+    long	 data[256];
+    Display	 *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    gint	 nQuad;
+    decor_quad_t quads[N_QUADS_MAX];
+    GtkStyle     *style;
+    long         fgColor[4];
+
+    nQuad = decor_set_lSrStSbX_window_quads (quads, &switcher_context,
+					     &d->border_layout,
+					     d->border_layout.top.x2 -
+					     d->border_layout.top.x1 -
+					     switcher_context.extents.left -
+					     switcher_context.extents.right -
+					     32);
+
+    decor_quads_to_property (data, GDK_PIXMAP_XID (d->pixmap),
+			     &_switcher_extents, &_switcher_extents,
+			     0, 0, quads, nQuad);
+
+    style = gtk_widget_get_style (style_window);
+
+    fgColor[0] = style->fg[GTK_STATE_NORMAL].red;
+    fgColor[1] = style->fg[GTK_STATE_NORMAL].green;
+    fgColor[2] = style->fg[GTK_STATE_NORMAL].blue;
+    fgColor[3] = SWITCHER_ALPHA;
+
+    gdk_error_trap_push ();
+    XChangeProperty (xdisplay, d->prop_xid,
+		     win_decor_atom,
+		     XA_INTEGER,
+		     32, PropModeReplace, (guchar *) data,
+		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+    XChangeProperty (xdisplay, d->prop_xid, switcher_fg_atom,
+		     XA_INTEGER, 32, PropModeReplace, (guchar *) fgColor, 4);
+    gdk_display_sync (gdk_display_get_default ());
+    gdk_error_trap_pop ();
+}
+
+static void
 draw_switcher_background (decor_t *d)
 {
     Display	  *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
@@ -2400,6 +2406,7 @@ draw_switcher_background (decor_t *d)
     gdk_error_trap_push ();
     XSetWindowBackground (xdisplay, d->prop_xid, pixel);
     XClearWindow (xdisplay, d->prop_xid);
+
     gdk_display_sync (gdk_display_get_default ());
     gdk_error_trap_pop ();
 
@@ -2936,7 +2943,7 @@ meta_button_present (MetaButtonLayout   *button_layout,
 		     MetaButtonFunction function)
 {
     int i;
-		     
+
     for (i = 0; i < MAX_BUTTONS_PER_CORNER; i++)
 	if (button_layout->left_buttons[i] == function)
 	    return TRUE;
@@ -3969,7 +3976,7 @@ window_actions_changed (WnckWindow *win)
 	if (!update_window_decoration_size (win))
 	    queue_decor_draw (d);
 
-    	update_event_windows (win);
+	update_event_windows (win);
     }
 }
 
@@ -4975,27 +4982,6 @@ bottom_right_event (WnckWindow *win,
 }
 
 static void
-panel_action (Display *xdisplay,
-	      Window  root,
-	      Atom    panel_action,
-	      Time    event_time)
-{
-    XEvent ev;
-
-    ev.type		    = ClientMessage;
-    ev.xclient.window	    = root;
-    ev.xclient.message_type = panel_action_atom;
-    ev.xclient.format	    = 32;
-    ev.xclient.data.l[0]    = panel_action;
-    ev.xclient.data.l[1]    = event_time;
-    ev.xclient.data.l[2]    = 0;
-    ev.xclient.data.l[3]    = 0;
-    ev.xclient.data.l[4]    = 0;
-
-    XSendEvent (xdisplay, root, FALSE, StructureNotifyMask, &ev);
-}
-
-static void
 force_quit_dialog_realize (GtkWidget *dialog,
 			   void      *data)
 {
@@ -5284,19 +5270,7 @@ event_filter_func (GdkXEvent *gdkxevent,
 	    long action;
 
 	    action = xevent->xclient.data.l[0];
-	    if (action == toolkit_action_main_menu_atom)
-	    {
-		panel_action (xdisplay, xevent->xclient.window,
-			      panel_action_main_menu_atom,
-			      xevent->xclient.data.l[1]);
-	    }
-	    else if (action == toolkit_action_run_dialog_atom)
-	    {
-		panel_action (xdisplay, xevent->xclient.window,
-			      panel_action_run_dialog_atom,
-			      xevent->xclient.data.l[1]);
-	    }
-	    else if (action == toolkit_action_window_menu_atom)
+	    if (action == toolkit_action_window_menu_atom)
 	    {
 		WnckWindow *win;
 
@@ -6079,7 +6053,7 @@ meta_update_button_layout (const char *value)
 	       b++;
 	    }
 	    new_layout.right_buttons[i] = META_BUTTON_FUNCTION_LAST;
-	    
+
 	    g_strfreev (buttons);
 	}
     }
@@ -7080,25 +7054,17 @@ main (int argc, char *argv[])
     select_window_atom	= XInternAtom (xdisplay, DECOR_SWITCH_WINDOW_ATOM_NAME,
 				       FALSE);
     mwm_hints_atom	= XInternAtom (xdisplay, "_MOTIF_WM_HINTS", FALSE);
+    switcher_fg_atom    = XInternAtom (xdisplay,
+				       DECOR_SWITCH_FOREGROUND_COLOR_ATOM_NAME,
+				       FALSE);
 
     toolkit_action_atom			  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION", FALSE);
-    toolkit_action_main_menu_atom	  =
-	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_MAIN_MENU", FALSE);
-    toolkit_action_run_dialog_atom	  =
-	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_RUN_DIALOG", FALSE);
     toolkit_action_window_menu_atom	  =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_WINDOW_MENU", FALSE);
     toolkit_action_force_quit_dialog_atom =
 	XInternAtom (xdisplay, "_COMPIZ_TOOLKIT_ACTION_FORCE_QUIT_DIALOG",
 		     FALSE);
-
-    panel_action_atom		 =
-	XInternAtom (xdisplay, "_GNOME_PANEL_ACTION", FALSE);
-    panel_action_main_menu_atom  =
-	XInternAtom (xdisplay, "_GNOME_PANEL_ACTION_MAIN_MENU", FALSE);
-    panel_action_run_dialog_atom =
-	XInternAtom (xdisplay, "_GNOME_PANEL_ACTION_RUN_DIALOG", FALSE);
 
     status = decor_acquire_dm_session (xdisplay,
 				       gdk_screen_get_number (gdkscreen),

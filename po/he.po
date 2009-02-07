@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-04 12:42+0530\n"
-"PO-Revision-Date: 2008-11-02 22:50+0100\n"
+"POT-Creation-Date: 2009-02-06 11:18+0530\n"
+"PO-Revision-Date: 2009-02-04 18:15+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: Hebrew <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -29,9 +29,54 @@ msgstr "ניהול חלונות"
 msgid "Compiz"
 msgstr "קומפיז"
 
+#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:16
+msgid "None"
+msgstr "ללא"
+
+#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+msgid "Shade"
+msgstr "גלול"
+
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+msgid "Maximize"
+msgstr "הגדל למקסימום"
+
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:429
+msgid "Maximize Horizontally"
+msgstr "הרחב למקסימום"
+
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:430
+msgid "Maximize Vertically"
+msgstr "הגבה למקסימום"
+
+#  button text
+#: ../gtk/gnome/compiz-window-manager.c:431
+msgid "Minimize"
+msgstr "מזער"
+
+#: ../gtk/gnome/compiz-window-manager.c:432
+msgid "Raise"
+msgstr "העלה"
+
+#: ../gtk/gnome/compiz-window-manager.c:433
+msgid "Lower"
+msgstr "תחתון"
+
+#  Label text
+#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../metadata/core.xml.in.in.h:100
+msgid "Window Menu"
+msgstr "תפריט חלון"
+
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "פעולה לביצוע בעת גלגול גלגלת העכבר שורת הכותרת."
+msgstr "פעולה לביצוע בעת גלילת גלגלת העכבר על שורת הכותרת."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -91,68 +136,58 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr "השתמש בערכת הנושא של Metacity בעת ציור מסגרות חלון"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4421
-#: ../metadata/core.xml.in.in.h:24
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "סגור חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4443
-#: ../metadata/core.xml.in.in.h:154
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "שחזר גודל חלון"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4446
-#: ../metadata/core.xml.in.in.h:86
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "הגדל חלון למקסימום"
 
 #  button text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4488
-#: ../metadata/core.xml.in.in.h:92
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "מזער חלון"
 
-#  Label text
-#: ../gtk/window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:161
-msgid "Window Menu"
-msgstr "תפריט חלון"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4632
-msgid "Shade"
-msgstr "גלול"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4652
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "העבר למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4678
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "נעל במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4698
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "פרוס גלילה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4718
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "בטל העברה למעלה"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4744
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "בטל נעילה במקום"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5101
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "החלון \"%s\" אינו מגיב."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5110
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "סגירה כפויה של היישום תביא לאובדן שינויים שלא נשמרו."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5125
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_סגור יישום"
 
@@ -193,7 +228,7 @@ msgstr "צבע מילוי עבור הערות"
 # IN
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "התחל"
 
@@ -382,682 +417,814 @@ msgstr "התחל בחירת שיבוט"
 msgid "Output clone handler"
 msgstr "הליך טיפול בפלט משובט"
 
-#: ../metadata/core.xml.in.in.h:1
+#: ../metadata/commands.xml.in.h:1
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המזוהה על ידי פקודה0"
+
+#: ../metadata/commands.xml.in.h:2
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה1"
+
+#: ../metadata/commands.xml.in.h:3
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה10"
+
+#: ../metadata/commands.xml.in.h:4
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה11"
+
+#: ../metadata/commands.xml.in.h:5
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה2"
+
+#: ../metadata/commands.xml.in.h:6
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה3"
+
+#: ../metadata/commands.xml.in.h:7
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה4"
+
+#: ../metadata/commands.xml.in.h:8
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה5"
+
+#: ../metadata/commands.xml.in.h:9
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה6"
+
+#: ../metadata/commands.xml.in.h:10
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה7"
+
+#: ../metadata/commands.xml.in.h:11
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה8"
+
+#: ../metadata/commands.xml.in.h:12
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה9"
+
+#: ../metadata/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המזוהה על ידי פקודה0"
 
-#: ../metadata/core.xml.in.in.h:2
+#: ../metadata/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה1"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה10"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה11"
 
-#: ../metadata/core.xml.in.in.h:5
+#: ../metadata/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה2"
 
-#: ../metadata/core.xml.in.in.h:6
+#: ../metadata/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה3"
 
-#: ../metadata/core.xml.in.in.h:7
+#: ../metadata/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה4"
 
-#: ../metadata/core.xml.in.in.h:8
+#: ../metadata/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה5"
 
-#: ../metadata/core.xml.in.in.h:9
+#: ../metadata/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה6"
 
-#: ../metadata/core.xml.in.in.h:10
+#: ../metadata/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה7"
 
-#: ../metadata/core.xml.in.in.h:11
+#: ../metadata/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה8"
 
-#: ../metadata/core.xml.in.in.h:12
+#: ../metadata/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה9"
 
-#: ../metadata/core.xml.in.in.h:13
+#: ../metadata/commands.xml.in.h:25
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המזוהה על ידי פקודה0"
+
+#: ../metadata/commands.xml.in.h:26
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה1"
+
+#: ../metadata/commands.xml.in.h:27
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה10"
+
+#: ../metadata/commands.xml.in.h:28
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה11"
+
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה2"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה3"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה4"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה5"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה6"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה7"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה8"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "צירוף מקשים להפעלת פקודת המעטפת המוגדרת על ידי פקודה9"
+
+#: ../metadata/commands.xml.in.h:37
+msgid "Assigns bindings to arbitrary commands"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:38
+#, fuzzy
+msgid "Button Bindings"
+msgstr "צירופים"
+
+#: ../metadata/commands.xml.in.h:39
+msgid "Command line 1"
+msgstr "שורת פקודה 1"
+
+#: ../metadata/commands.xml.in.h:40
+msgid "Command line 10"
+msgstr "שורת פקודה 10"
+
+#: ../metadata/commands.xml.in.h:41
+msgid "Command line 11"
+msgstr "שורת פקודה 11"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "שורת פקודה 1"
+
+#: ../metadata/commands.xml.in.h:43
+msgid "Command line 2"
+msgstr "שורת פקודה 2"
+
+#: ../metadata/commands.xml.in.h:44
+msgid "Command line 3"
+msgstr "שורת פקודה 3"
+
+#: ../metadata/commands.xml.in.h:45
+msgid "Command line 4"
+msgstr "שורת פקודה 4"
+
+#: ../metadata/commands.xml.in.h:46
+msgid "Command line 5"
+msgstr "שורת פקודה 5"
+
+#: ../metadata/commands.xml.in.h:47
+msgid "Command line 6"
+msgstr "שורת פקודה 6"
+
+#: ../metadata/commands.xml.in.h:48
+msgid "Command line 7"
+msgstr "שורת פקודה 7"
+
+#: ../metadata/commands.xml.in.h:49
+msgid "Command line 8"
+msgstr "שורת פקודה 8"
+
+#: ../metadata/commands.xml.in.h:50
+msgid "Command line 9"
+msgstr "שורת פקודה 9"
+
+#: ../metadata/commands.xml.in.h:51
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה0"
+
+#: ../metadata/commands.xml.in.h:52
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה1"
+
+#: ../metadata/commands.xml.in.h:53
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה10"
+
+#: ../metadata/commands.xml.in.h:54
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה11"
+
+#: ../metadata/commands.xml.in.h:55
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה2"
+
+#: ../metadata/commands.xml.in.h:56
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה3"
+
+#: ../metadata/commands.xml.in.h:57
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה4"
+
+#: ../metadata/commands.xml.in.h:58
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה5"
+
+#: ../metadata/commands.xml.in.h:59
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה6"
+
+#: ../metadata/commands.xml.in.h:60
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה7"
+
+#: ../metadata/commands.xml.in.h:61
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה8"
+
+#: ../metadata/commands.xml.in.h:62
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "שורת הפקודה שתופעל בעת הרצת פקודה9"
+
+#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+msgid "Commands"
+msgstr "פקודות"
+
+#: ../metadata/commands.xml.in.h:64
+#, fuzzy
+msgid "Edge Bindings"
+msgstr "צירופים"
+
+#: ../metadata/commands.xml.in.h:65
+#, fuzzy
+msgid "Key Bindings"
+msgstr "צירופי מקשים"
+
+#: ../metadata/commands.xml.in.h:66
+msgid "Run command 1"
+msgstr "הרץ פקודה 1"
+
+#: ../metadata/commands.xml.in.h:67
+msgid "Run command 10"
+msgstr "הרץ פקודה 10"
+
+#: ../metadata/commands.xml.in.h:68
+msgid "Run command 11"
+msgstr "הרץ פקודה 11"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "הרץ פקודה 1"
+
+#: ../metadata/commands.xml.in.h:70
+msgid "Run command 2"
+msgstr "הרץ פקודה 2"
+
+#: ../metadata/commands.xml.in.h:71
+msgid "Run command 3"
+msgstr "הרץ פקודה 3"
+
+#: ../metadata/commands.xml.in.h:72
+msgid "Run command 4"
+msgstr "הרץ פקודה 4"
+
+#: ../metadata/commands.xml.in.h:73
+msgid "Run command 5"
+msgstr "הרץ פקודה 5"
+
+#: ../metadata/commands.xml.in.h:74
+msgid "Run command 6"
+msgstr "הרץ פקודה 6"
+
+#: ../metadata/commands.xml.in.h:75
+msgid "Run command 7"
+msgstr "הרץ פקודה 7"
+
+#: ../metadata/commands.xml.in.h:76
+msgid "Run command 8"
+msgstr "הרץ פקודה 8"
+
+#: ../metadata/commands.xml.in.h:77
+msgid "Run command 9"
+msgstr "הרץ פקודה 9"
+
+#: ../metadata/core.xml.in.in.h:1
 msgid "Active Plugins"
 msgstr "התקנים מופעלים"
 
-#: ../metadata/core.xml.in.in.h:14
+#: ../metadata/core.xml.in.in.h:2
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr "אל תנתב חלונות במסך מלא למפות-פיקסלים שמחוץ למסך"
 
-#: ../metadata/core.xml.in.in.h:15
+#: ../metadata/core.xml.in.in.h:3
 msgid "Audible Bell"
 msgstr "צלצול ניתן לשמיעה"
 
 #  label text 
-#: ../metadata/core.xml.in.in.h:16
+#: ../metadata/core.xml.in.in.h:4
 msgid "Audible system beep"
 msgstr "צפצוף מערכת ניתן לשמיעה"
 
-#: ../metadata/core.xml.in.in.h:17
+#: ../metadata/core.xml.in.in.h:5
 msgid "Auto-Raise"
 msgstr "העלאה אוטומטית"
 
-#: ../metadata/core.xml.in.in.h:18
+#: ../metadata/core.xml.in.in.h:6
 msgid "Auto-Raise Delay"
 msgstr "השהייה לפני העלאה אוטומטית"
 
-#: ../metadata/core.xml.in.in.h:19
+#: ../metadata/core.xml.in.in.h:7
 msgid "Automatic detection of output devices"
 msgstr "זיהוי אוומטי של התקני פלט"
 
-#: ../metadata/core.xml.in.in.h:20
+#: ../metadata/core.xml.in.in.h:8
 msgid "Automatic detection of refresh rate"
 msgstr "זיהוי אוטומטי של קצב רענון"
 
-#: ../metadata/core.xml.in.in.h:21
+#: ../metadata/core.xml.in.in.h:9
 msgid "Best"
 msgstr "מיטבי"
 
-#: ../metadata/core.xml.in.in.h:22
+#: ../metadata/core.xml.in.in.h:10
 msgid "Click To Focus"
 msgstr "הקלקה למיקוד"
 
-#: ../metadata/core.xml.in.in.h:23
+#: ../metadata/core.xml.in.in.h:11
 msgid "Click on window moves input focus to it"
 msgstr "הקלקה על חלון תעביר אליו את מוקד הקלט"
 
-#: ../metadata/core.xml.in.in.h:25
+#: ../metadata/core.xml.in.in.h:13
 msgid "Close active window"
 msgstr "סגירת חלון פעיל"
 
-#: ../metadata/core.xml.in.in.h:26
-msgid "Command line 0"
-msgstr "שורת פקודה 0"
-
-#: ../metadata/core.xml.in.in.h:27
-msgid "Command line 1"
-msgstr "שורת פקודה 1"
-
-#: ../metadata/core.xml.in.in.h:28
-msgid "Command line 10"
-msgstr "שורת פקודה 10"
-
-#: ../metadata/core.xml.in.in.h:29
-msgid "Command line 11"
-msgstr "שורת פקודה 11"
-
-#: ../metadata/core.xml.in.in.h:30
-msgid "Command line 2"
-msgstr "שורת פקודה 2"
-
-#: ../metadata/core.xml.in.in.h:31
-msgid "Command line 3"
-msgstr "שורת פקודה 3"
-
-#: ../metadata/core.xml.in.in.h:32
-msgid "Command line 4"
-msgstr "שורת פקודה 4"
-
-#: ../metadata/core.xml.in.in.h:33
-msgid "Command line 5"
-msgstr "שורת פקודה 5"
-
-#: ../metadata/core.xml.in.in.h:34
-msgid "Command line 6"
-msgstr "שורת פקודה 6"
-
-#: ../metadata/core.xml.in.in.h:35
-msgid "Command line 7"
-msgstr "שורת פקודה 7"
-
-#: ../metadata/core.xml.in.in.h:36
-msgid "Command line 8"
-msgstr "שורת פקודה 8"
-
-#: ../metadata/core.xml.in.in.h:37
-msgid "Command line 9"
-msgstr "שורת פקודה 9"
-
-#: ../metadata/core.xml.in.in.h:38
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה0"
-
-#: ../metadata/core.xml.in.in.h:39
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה1"
-
-#: ../metadata/core.xml.in.in.h:40
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה10"
-
-#: ../metadata/core.xml.in.in.h:41
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה11"
-
-#: ../metadata/core.xml.in.in.h:42
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה2"
-
-#: ../metadata/core.xml.in.in.h:43
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה3"
-
-#: ../metadata/core.xml.in.in.h:44
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה4"
-
-#: ../metadata/core.xml.in.in.h:45
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה5"
-
-#: ../metadata/core.xml.in.in.h:46
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה6"
-
-#: ../metadata/core.xml.in.in.h:47
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה7"
-
-#: ../metadata/core.xml.in.in.h:48
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה8"
-
-#: ../metadata/core.xml.in.in.h:49
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "שורת הפקודה שתופעל בעת הרצת פקודה9"
-
-#: ../metadata/core.xml.in.in.h:50
-#, fuzzy
-msgid "Commands"
-msgstr "פקודה"
-
-#: ../metadata/core.xml.in.in.h:51
+#: ../metadata/core.xml.in.in.h:14
 msgid "Default Icon"
 msgstr "צלמית ברירת מחדל"
 
-#: ../metadata/core.xml.in.in.h:52
+#: ../metadata/core.xml.in.in.h:15
 msgid "Default window icon image"
 msgstr "תמונת צלמית ברירת המחדל של חלון"
 
-#: ../metadata/core.xml.in.in.h:53
-#, fuzzy
+#: ../metadata/core.xml.in.in.h:16
 msgid "Desktop Size"
-msgstr "שולחן קוביה"
+msgstr "גודל שולחן עבודה"
 
-#: ../metadata/core.xml.in.in.h:54
+#: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
 msgstr "זהה סוגי פלט"
 
-#: ../metadata/core.xml.in.in.h:55
+#: ../metadata/core.xml.in.in.h:18
 msgid "Detect Refresh Rate"
 msgstr "זהה קצב עדכון"
 
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
-msgstr ""
+msgstr "הגדרות תצוגה"
 
-#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/core.xml.in.in.h:20
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr "משך הזמן שבו מצביע העכבר ישהה בקצה המסך לפני הפעלת פעולת קצה מסך."
 
-#: ../metadata/core.xml.in.in.h:58
+#: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
 msgstr "השהיית הפעלת קצה מסך"
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "מהיר"
 
-#: ../metadata/core.xml.in.in.h:60
+#: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "אופן עליה וקבלת מוקד"
 
 #  heading text
-#: ../metadata/core.xml.in.in.h:61
+#: ../metadata/core.xml.in.in.h:24
 msgid "Focus Prevention Level"
 msgstr "רמת מניעת מיקוד"
 
-#: ../metadata/core.xml.in.in.h:62
+#: ../metadata/core.xml.in.in.h:25
 msgid "Focus Prevention Windows"
 msgstr "חלונות מניעת מיקוד"
 
 #  heading text
-#: ../metadata/core.xml.in.in.h:63
+#: ../metadata/core.xml.in.in.h:26
 msgid "Focus prevention windows"
 msgstr "חלונות מניעת מיקוד"
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
 msgstr "כפה צביעת פלט עצמאית."
 
-#: ../metadata/core.xml.in.in.h:65
+#: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
 msgstr "אפשרויות כלליות"
 
-#: ../metadata/core.xml.in.in.h:66
+#: ../metadata/core.xml.in.in.h:29
 msgid "General compiz options"
 msgstr "אפשרויות כלליות של קומפיז"
 
-#: ../metadata/core.xml.in.in.h:67
+#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "טוב"
 
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.in.h:31
 msgid "Hide Skip Taskbar Windows"
 msgstr "הסתרת חלונות הנעדרים משורת המשימות"
 
-#: ../metadata/core.xml.in.in.h:69
+#: ../metadata/core.xml.in.in.h:32
 msgid "Hide all windows and focus desktop"
 msgstr "הסתר את כל החלונות וגלה את שולחן העבודה"
 
-#: ../metadata/core.xml.in.in.h:70
+#: ../metadata/core.xml.in.in.h:33
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "הסתרת החלונות שאינם מופיעים בשורת המשימות בעת כניסה למצב גילוי שולחן עבודה"
 
-#: ../metadata/core.xml.in.in.h:71
+#: ../metadata/core.xml.in.in.h:34
 msgid "High"
 msgstr "גבוהה"
 
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.in.h:35
 msgid "Horizontal Virtual Size"
 msgstr "גודל אופקי וירטואלי"
 
-#: ../metadata/core.xml.in.in.h:73
+#: ../metadata/core.xml.in.in.h:36
 msgid "If available use compression for textures converted from images"
 msgstr "אם ניתן, השתמש בדחיסה עבור טקסטורות שהומרו מתמונות"
 
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.in.h:37
 msgid "Ignore Hints When Maximized"
 msgstr "התעלם מרמזים כאשר החלון מוגדל למקסימום"
 
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "התעלם מרמזים הנוגעים לגודל שגוי ולאספקט כאשר החלון מוגדל למקסימום"
 
-#: ../metadata/core.xml.in.in.h:76
+#: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
 msgstr "פסק זמן לפני העלאת החלונות שנבחרו"
 
-#: ../metadata/core.xml.in.in.h:77
+#: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
 msgstr "פסק זמן בין מסרי פינג"
 
-#: ../metadata/core.xml.in.in.h:78
+#: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
-msgstr ""
+msgstr "צירופי מקשים"
 
-#: ../metadata/core.xml.in.in.h:79
+#: ../metadata/core.xml.in.in.h:42
 msgid "Level of focus stealing prevention"
 msgstr "רמת מניעת גניבת מיקוד"
 
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:43
 msgid "Lighting"
 msgstr "תאורה"
 
-#: ../metadata/core.xml.in.in.h:81
+#: ../metadata/core.xml.in.in.h:44
 msgid "List of currently active plugins"
 msgstr "רשימת ההתקנים הפעילים"
 
-#: ../metadata/core.xml.in.in.h:82
+#: ../metadata/core.xml.in.in.h:45
 msgid "List of strings describing output devices"
 msgstr "רשימת המחרוזות המתארות התקני פלט"
 
-#: ../metadata/core.xml.in.in.h:83
+#: ../metadata/core.xml.in.in.h:46
 msgid "Low"
 msgstr "נמוכה"
 
 #  label text 
-#: ../metadata/core.xml.in.in.h:84
+#: ../metadata/core.xml.in.in.h:47
 msgid "Lower Window"
 msgstr "הורד חלון"
 
-#: ../metadata/core.xml.in.in.h:85
+#: ../metadata/core.xml.in.in.h:48
 msgid "Lower window beneath other windows"
 msgstr "הורד חלון אל מתחת לחלונות אחרים"
 
 #  button text
-#: ../metadata/core.xml.in.in.h:87
+#: ../metadata/core.xml.in.in.h:50
 msgid "Maximize Window Horizontally"
 msgstr "הרחב את החלון למקסימום"
 
 #  button text
-#: ../metadata/core.xml.in.in.h:88
+#: ../metadata/core.xml.in.in.h:51
 msgid "Maximize Window Vertically"
 msgstr "הגבה את החלון למקסימום"
 
-#: ../metadata/core.xml.in.in.h:89
+#: ../metadata/core.xml.in.in.h:52
 msgid "Maximize active window"
 msgstr "הגדל חלון פעיל למקסימום"
 
-#: ../metadata/core.xml.in.in.h:90
+#: ../metadata/core.xml.in.in.h:53
 msgid "Maximize active window horizontally"
 msgstr "הרחב חלון פעיל למקסימום"
 
-#: ../metadata/core.xml.in.in.h:91
+#: ../metadata/core.xml.in.in.h:54
 msgid "Maximize active window vertically"
 msgstr "הגבה חלון פעיל למקסימום"
 
-#: ../metadata/core.xml.in.in.h:93
+#: ../metadata/core.xml.in.in.h:56
 msgid "Minimize active window"
 msgstr "מזער חלון פעיל"
 
-#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "רגיל"
 
-#: ../metadata/core.xml.in.in.h:95
+#: ../metadata/core.xml.in.in.h:58
 msgid "Number of Desktops"
 msgstr "מספר שולחנות עבודה"
 
-#: ../metadata/core.xml.in.in.h:96
+#: ../metadata/core.xml.in.in.h:59
 msgid "Number of virtual desktops"
 msgstr "מספר שולחנות עבודה וירטואליים"
 
-#: ../metadata/core.xml.in.in.h:97
+#: ../metadata/core.xml.in.in.h:60
 msgid "Off"
 msgstr "כבויה"
 
-#: ../metadata/core.xml.in.in.h:98
+#: ../metadata/core.xml.in.in.h:61
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "בצע עדכוני מסך רק במשך המחיקות האנכיות"
 
-#: ../metadata/core.xml.in.in.h:99
-msgid "Open a terminal"
-msgstr "פתח מסוף"
-
-#: ../metadata/core.xml.in.in.h:100
+#: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
 msgstr "פלטים"
 
-#: ../metadata/core.xml.in.in.h:101
+#: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
 msgstr "טיפול בחפיפת פלט"
 
-#: ../metadata/core.xml.in.in.h:102
+#: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr "צבע כל פלט כשלעצמו, אפילו אם התקני הפלט חופפים"
 
-#: ../metadata/core.xml.in.in.h:103
+#: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
 msgstr "השהיית פינג"
 
-#: ../metadata/core.xml.in.in.h:104
+#: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
 msgstr "העדף פלט גדול יותר"
 
-#: ../metadata/core.xml.in.in.h:105
+#: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
 msgstr "העדף פלט קטן יותר"
 
-#: ../metadata/core.xml.in.in.h:106
+#: ../metadata/core.xml.in.in.h:68
 msgid "Raise On Click"
 msgstr "העלה בעת קליק"
 
 #  heading text
-#: ../metadata/core.xml.in.in.h:107
+#: ../metadata/core.xml.in.in.h:69
 msgid "Raise Window"
 msgstr "העלה חלון"
 
-#: ../metadata/core.xml.in.in.h:108
+#: ../metadata/core.xml.in.in.h:70
 msgid "Raise selected windows after interval"
 msgstr "העלה את החלונות שנבחרו לאחר פסק זמן"
 
-#: ../metadata/core.xml.in.in.h:109
+#: ../metadata/core.xml.in.in.h:71
 msgid "Raise window above other windows"
 msgstr "העלה חלון מעל ליתר החלונות"
 
-#: ../metadata/core.xml.in.in.h:110
+#: ../metadata/core.xml.in.in.h:72
 msgid "Raise windows when clicked"
 msgstr "העלה חלונות כאשר מקליקים עליהם"
 
 #  label text
-#: ../metadata/core.xml.in.in.h:111
+#: ../metadata/core.xml.in.in.h:73
 msgid "Refresh Rate"
 msgstr "קצב רענון"
 
-#: ../metadata/core.xml.in.in.h:112
-msgid "Run Dialog"
-msgstr "דיאלוג הרץ"
-
-#: ../metadata/core.xml.in.in.h:113
-msgid "Run command 0"
-msgstr "הרץ פקודה 0"
-
-#: ../metadata/core.xml.in.in.h:114
-msgid "Run command 1"
-msgstr "הרץ פקודה 1"
-
-#: ../metadata/core.xml.in.in.h:115
-msgid "Run command 10"
-msgstr "הרץ פקודה 10"
-
-#: ../metadata/core.xml.in.in.h:116
-msgid "Run command 11"
-msgstr "הרץ פקודה 11"
-
-#: ../metadata/core.xml.in.in.h:117
-msgid "Run command 2"
-msgstr "הרץ פקודה 2"
-
-#: ../metadata/core.xml.in.in.h:118
-msgid "Run command 3"
-msgstr "הרץ פקודה 3"
-
-#: ../metadata/core.xml.in.in.h:119
-msgid "Run command 4"
-msgstr "הרץ פקודה 4"
-
-#: ../metadata/core.xml.in.in.h:120
-msgid "Run command 5"
-msgstr "הרץ פקודה 5"
-
-#: ../metadata/core.xml.in.in.h:121
-msgid "Run command 6"
-msgstr "הרץ פקודה 6"
-
-#: ../metadata/core.xml.in.in.h:122
-msgid "Run command 7"
-msgstr "הרץ פקודה 7"
-
-#: ../metadata/core.xml.in.in.h:123
-msgid "Run command 8"
-msgstr "הרץ פקודה 8"
-
-#: ../metadata/core.xml.in.in.h:124
-msgid "Run command 9"
-msgstr "הרץ פקודה 9"
-
-#: ../metadata/core.xml.in.in.h:125
-#, fuzzy
-msgid "Run terminal command"
-msgstr "שורת פקודה עבור מסוף"
-
-#: ../metadata/core.xml.in.in.h:126
+#: ../metadata/core.xml.in.in.h:74
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "מכפיל גודל מסך עבור גודל וירטואלי אופקי"
 
-#: ../metadata/core.xml.in.in.h:127
+#: ../metadata/core.xml.in.in.h:75
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "מכפיל גודל מסך עבור גודל וירטואלי אנכי"
 
-#: ../metadata/core.xml.in.in.h:128
-msgid "Screenshot command line"
-msgstr "שורת פקודה לצילום מסך"
-
-#: ../metadata/core.xml.in.in.h:129
-#, fuzzy
-msgid "Screenshot commands"
-msgstr "שורת פקודה לצילום מסך"
-
-#: ../metadata/core.xml.in.in.h:130
-#, fuzzy
-msgid "Screenshot key bindings"
-msgstr "שורת פקודה לצילום מסך"
-
-#: ../metadata/core.xml.in.in.h:131
+#: ../metadata/core.xml.in.in.h:76
 msgid "Show Desktop"
 msgstr "גלה שולחן עבודה"
 
-#: ../metadata/core.xml.in.in.h:132
-msgid "Show Main Menu"
-msgstr "הצג תפריט ראשי"
-
-#: ../metadata/core.xml.in.in.h:133
-msgid "Show Run Application dialog"
-msgstr "הצג דיאלוג הרץ יישום"
-
-#: ../metadata/core.xml.in.in.h:134
-msgid "Show the main menu"
-msgstr "הצג את התפריט הראשי"
-
-#: ../metadata/core.xml.in.in.h:135
+#: ../metadata/core.xml.in.in.h:77
 msgid "Slow Animations"
 msgstr "אנימציה איטית"
 
-#: ../metadata/core.xml.in.in.h:136
+#: ../metadata/core.xml.in.in.h:78
 msgid "Smart mode"
 msgstr "מצב חכם"
 
-#: ../metadata/core.xml.in.in.h:137
+#: ../metadata/core.xml.in.in.h:79
 msgid "Sync To VBlank"
 msgstr "סינכרון עם VBlank"
 
-#: ../metadata/core.xml.in.in.h:138
-msgid "Take a screenshot"
-msgstr "צור צילום מסך"
-
-#: ../metadata/core.xml.in.in.h:139
-msgid "Take a screenshot of a window"
-msgstr "צור צילום מסך של חלון"
-
-#: ../metadata/core.xml.in.in.h:140
-msgid "Terminal command line"
-msgstr "שורת פקודה עבור מסוף"
-
-#: ../metadata/core.xml.in.in.h:141
+#: ../metadata/core.xml.in.in.h:80
 msgid "Texture Compression"
 msgstr "דחיסת טקסטורות"
 
-#: ../metadata/core.xml.in.in.h:142
+#: ../metadata/core.xml.in.in.h:81
 msgid "Texture Filter"
 msgstr "מסנן טקסטורות"
 
-#: ../metadata/core.xml.in.in.h:143
+#: ../metadata/core.xml.in.in.h:82
 msgid "Texture filtering"
 msgstr "סינון טקסטורות"
 
-#: ../metadata/core.xml.in.in.h:144
+#: ../metadata/core.xml.in.in.h:83
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "הקצב שבו מתעדכן המסך (פעמים\\שניה)"
 
-#: ../metadata/core.xml.in.in.h:145
+#: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
 msgstr "הפעלת\\ניטרול גודל חלון מקסימלי"
 
-#: ../metadata/core.xml.in.in.h:146
+#: ../metadata/core.xml.in.in.h:85
 msgid "Toggle Window Maximized Horizontally"
 msgstr "הפעלת\\ניטרול רוחב חלון מקסימלי"
 
-#: ../metadata/core.xml.in.in.h:147
+#: ../metadata/core.xml.in.in.h:86
 msgid "Toggle Window Maximized Vertically"
 msgstr "הפעלת\\ניטרול גובה חלון מקסימלי"
 
-#: ../metadata/core.xml.in.in.h:148
+#: ../metadata/core.xml.in.in.h:87
 msgid "Toggle Window Shaded"
 msgstr "הפעלת\\ניטרול גלילת חלון"
 
-#: ../metadata/core.xml.in.in.h:149
+#: ../metadata/core.xml.in.in.h:88
 msgid "Toggle active window maximized"
 msgstr "הפעלת\\ניטרול גודל חלון פעיל מקסימלי"
 
-#: ../metadata/core.xml.in.in.h:150
+#: ../metadata/core.xml.in.in.h:89
 msgid "Toggle active window maximized horizontally"
 msgstr "הפעלת\\ניטרול רוחב חלון פעיל מקסימלי"
 
-#: ../metadata/core.xml.in.in.h:151
+#: ../metadata/core.xml.in.in.h:90
 msgid "Toggle active window maximized vertically"
 msgstr "הפעלת\\ניטרול גובה חלון פעיל מקסימלי"
 
-#: ../metadata/core.xml.in.in.h:152
+#: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
 msgstr "הפעלת\\ניטרול חלון פעיל גלול"
 
-#: ../metadata/core.xml.in.in.h:153
+#: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
 msgstr "הפעלת\\ניטרול שימוש באנימציה איטית"
 
-#: ../metadata/core.xml.in.in.h:155
+#: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
 msgstr "שחזר גודל חלון פעיל"
 
-#: ../metadata/core.xml.in.in.h:156
+#: ../metadata/core.xml.in.in.h:95
 msgid "Unredirect Fullscreen Windows"
 msgstr "אל תעביר חלונות במסך מלא"
 
-#: ../metadata/core.xml.in.in.h:157
+#: ../metadata/core.xml.in.in.h:96
 msgid "Use diffuse light when screen is transformed"
 msgstr "השתמש בפיזור אור בעת שינוי צורת מסך"
 
-#: ../metadata/core.xml.in.in.h:158
+#: ../metadata/core.xml.in.in.h:97
 msgid "Vertical Virtual Size"
 msgstr "גודל אנכי וירטואלי"
 
-#: ../metadata/core.xml.in.in.h:159
+#: ../metadata/core.xml.in.in.h:98
 msgid "Very High"
 msgstr "גבוהה מאוד"
 
-#: ../metadata/core.xml.in.in.h:160
+#: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
 msgstr "איזה התקן פלט להעדיף מבין ההתקנים החופפים"
 
-#: ../metadata/core.xml.in.in.h:162
+#: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
 msgstr "צירוף כפתורים עבור תפריט חלון"
 
-#: ../metadata/core.xml.in.in.h:163
+#: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
 msgstr "צירוף מקשים עבור תפריט חלון"
-
-#: ../metadata/core.xml.in.in.h:164
-msgid "Window screenshot command line"
-msgstr "שורת פקודה לצילום מסך של חלון"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1085,7 +1252,7 @@ msgstr "הנפש את כיפת הרקיע בעת סיבוב הקוביה"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "מראה"
 
 # IN
 #: ../metadata/cube.xml.in.h:8
@@ -1094,7 +1261,7 @@ msgstr "אוטומטי"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "אופן"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1109,9 +1276,8 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "צבע הקצה העליון של כיפת-הרקיע - רקע הדרגתי כברירת מחדל"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "צבע הקוביה"
+msgstr "מכסי הקוביה"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1245,13 +1411,13 @@ msgstr "תמונת כיפת-הרקיע"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "מהירות"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "יחידת זמן"
 
@@ -1261,7 +1427,7 @@ msgstr "שקיפות רק בעת סיבוב עכבר"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "קוביה שקופה"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1506,6 +1672,58 @@ msgstr "GLib "
 msgid "GLib main loop support"
 msgstr "תמיכה בלולאה ראשית של GLib"
 
+#: ../metadata/gnomecompat.xml.in.h:2
+msgid "Gnome Compatibility"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:3
+msgid "Open a terminal"
+msgstr "פתח מסוף"
+
+#: ../metadata/gnomecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+msgstr ""
+
+#: ../metadata/gnomecompat.xml.in.h:5
+msgid "Run Dialog"
+msgstr "דיאלוג הרץ"
+
+#: ../metadata/gnomecompat.xml.in.h:6
+msgid "Run terminal command"
+msgstr "הרץ פקודת מסוף"
+
+#: ../metadata/gnomecompat.xml.in.h:7
+msgid "Screenshot command line"
+msgstr "שורת פקודה לצילום מסך"
+
+#: ../metadata/gnomecompat.xml.in.h:8
+msgid "Show Main Menu"
+msgstr "הצג תפריט ראשי"
+
+#: ../metadata/gnomecompat.xml.in.h:9
+msgid "Show Run Application dialog"
+msgstr "הצג דיאלוג הרץ יישום"
+
+#: ../metadata/gnomecompat.xml.in.h:10
+msgid "Show the main menu"
+msgstr "הצג את התפריט הראשי"
+
+#: ../metadata/gnomecompat.xml.in.h:11
+msgid "Take a screenshot"
+msgstr "צור צילום מסך"
+
+#: ../metadata/gnomecompat.xml.in.h:12
+msgid "Take a screenshot of a window"
+msgstr "צור צילום מסך של חלון"
+
+#: ../metadata/gnomecompat.xml.in.h:13
+msgid "Terminal command line"
+msgstr "שורת פקודה עבור מסוף"
+
+#: ../metadata/gnomecompat.xml.in.h:14
+msgid "Window screenshot command line"
+msgstr "שורת פקודה לצילום מסך של חלון"
+
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
 msgstr "Ini "
@@ -1600,8 +1818,8 @@ msgid "Move window"
 msgstr "הזזת חלון"
 
 #  button text
-#: ../metadata/move.xml.in.h:8 ../metadata/scale.xml.in.h:28
-#: ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
 msgid "Opacity"
 msgstr "אטימות"
 
@@ -1624,6 +1842,130 @@ msgstr "שחזר חלונות שהוגדלו למקסימום"
 msgid "Start moving window"
 msgstr "התחל להזיז חלון"
 
+#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+msgid "Brightness"
+msgstr "בהירות"
+
+#: ../metadata/obs.xml.in.h:2
+#, fuzzy
+msgid "Brightness Decrease"
+msgstr "בהירות"
+
+#: ../metadata/obs.xml.in.h:3
+#, fuzzy
+msgid "Brightness Increase"
+msgstr "בהירות"
+
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Brightness Step"
+msgstr "בהירות"
+
+#: ../metadata/obs.xml.in.h:5
+#, fuzzy
+msgid "Brightness values for windows"
+msgstr "בהירות חלונות שאינם מגיבים (באחוזים)"
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease"
+msgstr "הפחתת אטימות"
+
+#: ../metadata/obs.xml.in.h:7
+#, fuzzy
+msgid "Increase"
+msgstr "הגבר אטימות"
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Opacity Decrease"
+msgstr "הדרגה שבה משתנה האטימות"
+
+#: ../metadata/obs.xml.in.h:10
+#, fuzzy
+msgid "Opacity Increase"
+msgstr "הדרגה שבה משתנה האטימות"
+
+#: ../metadata/obs.xml.in.h:11
+msgid "Opacity Step"
+msgstr "דרגת שינוי אטימות"
+
+#  button text
+#: ../metadata/obs.xml.in.h:12
+#, fuzzy
+msgid "Opacity values for windows"
+msgstr "רמת אטימות של חלונות בתזוזה"
+
+#: ../metadata/obs.xml.in.h:13
+#, fuzzy
+msgid "Opacity, Brightness and Saturation"
+msgstr "אטימות בעת סיבוב"
+
+#: ../metadata/obs.xml.in.h:14
+msgid "Opacity, Brightness and Saturation adjustments"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+msgid "Saturation"
+msgstr "רווייה"
+
+#: ../metadata/obs.xml.in.h:16
+#, fuzzy
+msgid "Saturation Decrease"
+msgstr "רווייה"
+
+#: ../metadata/obs.xml.in.h:17
+#, fuzzy
+msgid "Saturation Increase"
+msgstr "רווייה"
+
+#: ../metadata/obs.xml.in.h:18
+#, fuzzy
+msgid "Saturation Step"
+msgstr "רווייה"
+
+#: ../metadata/obs.xml.in.h:19
+#, fuzzy
+msgid "Saturation values for windows"
+msgstr "רווית חלונות שאינם מגיבים (באחוזים)"
+
+#: ../metadata/obs.xml.in.h:20
+msgid "Step"
+msgstr ""
+
+#  Label text
+#: ../metadata/obs.xml.in.h:21
+#, fuzzy
+msgid "Window specific settings"
+msgstr "מסגרות לחלונות"
+
+#  label text 
+#: ../metadata/obs.xml.in.h:22
+#, fuzzy
+msgid "Window values"
+msgstr "חלונות"
+
+#  label text 
+#: ../metadata/obs.xml.in.h:23
+#, fuzzy
+msgid "Windows"
+msgstr "מיפוי חלונות"
+
+#: ../metadata/obs.xml.in.h:24
+#, fuzzy
+msgid "Windows that should have a different brightness by default"
+msgstr "חלונות שיש למקמם כברירת מחדל"
+
+#: ../metadata/obs.xml.in.h:25
+#, fuzzy
+msgid "Windows that should have a different opacity by default"
+msgstr "חלונות האמורים להיות שקופים כברירת מחדל"
+
+#: ../metadata/obs.xml.in.h:26
+#, fuzzy
+msgid "Windows that should have a different saturation by default"
+msgstr "חלונות שיש למקמם כברירת מחדל"
+
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
 msgstr "אלגוריתם לקביעת מיקום החלון"
@@ -1638,9 +1980,8 @@ msgstr "ממורכז"
 
 #  Label text
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "ניהול חלונות"
+msgstr "הצבת חלונות במיקום קבוע"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1661,11 +2002,6 @@ msgid ""
 msgstr ""
 "שמור את החלונות בתוך משטח העבודה לאחר מיקום, גם אם יש להציבם לשם כך במיקום "
 "שונה מזה המבוקש"
-
-#  button text
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "הגדל למקסימום"
 
 #  button text
 #: ../metadata/place.xml.in.h:11
@@ -1743,17 +2079,16 @@ msgstr "חלונות שיש למקמם בכפייה, גם אם הם מבקשים
 
 #  Label text
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "מסגרות לחלונות"
+msgstr "חלונות בעלי מיקום קבוע"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "חלונות בעלי משטח עבודה קבוע"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
-msgstr "פתרונות מעקף"
+msgstr "מעקפים"
 
 #  heading text
 #: ../metadata/place.xml.in.h:31
@@ -1800,7 +2135,7 @@ msgstr "התאמת חלונות לביטוי רגולרי"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "צירופים"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2147,7 +2482,6 @@ msgid "Rotate To Face 9 with Window"
 msgstr "סובב אל פאה 9 עם החלון"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
 msgstr "סיבוב קוביה"
 
@@ -2176,15 +2510,13 @@ msgstr "סובב ימינה וקח את החלון הפעיל"
 
 #  heading text
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "סובב לפאה 1"
+msgstr "סובב לפאת הקוביה"
 
 #  heading text
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "סובב אל פאה 1 עם החלון"
+msgstr "סובב לפאת הקוביה עם החלון"
 
 #  heading text
 #: ../metadata/rotate.xml.in.h:58
@@ -2458,10 +2790,6 @@ msgstr "סדר את החלונות והתחל לשנות את גודלם"
 msgid "Layout and start transforming windows on current output"
 msgstr "סדר את החלונות בהתקן הפלט הנוכחי והתחל לשנות את גודלם"
 
-#: ../metadata/scale.xml.in.h:25 ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "ללא"
-
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
 msgstr "בכל התקני הפלט"
@@ -2581,10 +2909,6 @@ msgstr "מעביר יישומים"
 msgid "Auto Rotate"
 msgstr "סיבוב אוטומטי"
 
-#: ../metadata/switcher.xml.in.h:7
-msgid "Brightness"
-msgstr "בהירות"
-
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring To Front"
 msgstr "הבא לחזית"
@@ -2665,10 +2989,6 @@ msgstr "חלון קודם (ללא קופצים)"
 #: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
 msgstr "סובב אל החלון הנבחר בעת העברה"
-
-#: ../metadata/switcher.xml.in.h:29
-msgid "Saturation"
-msgstr "רווייה"
 
 #  button text
 #: ../metadata/switcher.xml.in.h:30
@@ -2936,68 +3256,57 @@ msgstr "אפקט נדנוד בעת הגדלה למקסימום ומזעור חל
 msgid "Wobbly Windows"
 msgstr "חלונות מתנדנדים"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "פילטר לינארי"
+#~ msgid "Command line 0"
+#~ msgstr "שורת פקודה 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "השתמש בפילטר לינארי בזמן תקריב הגדלה"
+#~ msgid "Run command 0"
+#~ msgstr "הרץ פקודה 0"
 
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "תקריב"
+#~ msgid "Screenshot commands"
+#~ msgstr "פקודות לצילום מסך"
 
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "תקריב הגדלה"
+#~ msgid "Screenshot key bindings"
+#~ msgstr "צירופי מקשים לצילום מסך"
 
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "תקריב הקטנה"
+#~ msgid "Filter Linear"
+#~ msgstr "פילטר לינארי"
 
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "הטיית תקריב"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "השתמש בפילטר לינארי בזמן תקריב הגדלה"
 
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "מהירות תקריב"
+#~ msgid "Zoom Desktop"
+#~ msgstr "תקריב"
 
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "יחידת זמן לתקריב"
+#~ msgid "Zoom In"
+#~ msgstr "תקריב הגדלה"
 
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "תקריב והטיה אל קובית שולחן העבודה"
+#~ msgid "Zoom Out"
+#~ msgstr "תקריב הקטנה"
 
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "מקדם תקריב"
+#~ msgid "Zoom Pan"
+#~ msgstr "הטיית תקריב"
 
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "הטיית תקריב"
+#~ msgid "Zoom Speed"
+#~ msgstr "מהירות תקריב"
 
-#~ msgid "Decrease Opacity"
-#~ msgstr "הפחתת אטימות"
+#~ msgid "Zoom Timestep"
+#~ msgstr "יחידת זמן לתקריב"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "תקריב והטיה אל קובית שולחן העבודה"
+
+#~ msgid "Zoom factor"
+#~ msgstr "מקדם תקריב"
+
+#~ msgid "Zoom pan"
+#~ msgstr "הטיית תקריב"
 
 #  Radio button for using an entire (Windows) partition for Linux
 #~ msgid "Decrease window opacity"
 #~ msgstr "הפחתת אטימות החלון"
 
-#~ msgid "Increase Opacity"
-#~ msgstr "הגבר אטימות"
-
 #~ msgid "Increase window opacity"
 #~ msgstr "הגבר אטימות חלון"
-
-#~ msgid "Opacity Step"
-#~ msgstr "דרגת שינוי אטימות"
-
-#~ msgid "Opacity change step"
-#~ msgstr "הדרגה שבה משתנה האטימות"
 
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr "ערכי אטימות לחלונות השקופים כברירת מחדל"
@@ -3008,9 +3317,6 @@ msgstr "הטיית תקריב"
 #  button text
 #~ msgid "Opacity windows"
 #~ msgstr "חלונות אטימות"
-
-#~ msgid "Windows that should be translucent by default"
-#~ msgstr "חלונות האמורים להיות שקופים כברירת מחדל"
 
 #~ msgid "Background Images"
 #~ msgstr "תמונות רקע"
@@ -3273,11 +3579,6 @@ msgstr "הטיית תקריב"
 #, fuzzy
 #~ msgid "Run command %d"
 #~ msgstr "פקודה:"
-
-#  label text 
-#, fuzzy
-#~ msgid "Window Types"
-#~ msgstr "חלונות"
 
 #, fuzzy
 #~ msgid "Corners"

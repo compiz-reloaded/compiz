@@ -45,7 +45,7 @@ class QMenu;
 
 namespace KWD
 {
-class Window:public QWidget, public KDecorationBridge {
+class Window:public QWidget, public KDecorationBridgeUnstable {
     Q_OBJECT public:
 
 	enum Type
@@ -103,6 +103,12 @@ class Window:public QWidget, public KDecorationBridge {
 	virtual QWidget *initialParentWidget (void) const;
 	virtual Qt::WFlags initialWFlags (void) const;
 	virtual void grabXServer (bool grab);
+
+	/* unstable API */
+	virtual void repaintShadow ();
+	virtual bool compositingActive () const;
+	virtual bool shadowsActive () const;
+	virtual double opacity () const;
 
 	void handleActiveChange (void);
 	void updateFrame (WId frame);

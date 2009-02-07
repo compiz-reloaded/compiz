@@ -1035,7 +1035,7 @@ resizePaintRectangle (CompScreen              *s,
     glPushMatrix ();
 
     transformToScreenSpace (s, output, -DEFAULT_Z_CAMERA, &sTransform);
-    
+
     glLoadMatrixf (sTransform.m);
 
     glDisableClientState (GL_TEXTURE_COORD_ARRAY);

@@ -2474,7 +2474,7 @@ dbusInitDisplay (CompPlugin  *p,
     dd->nPlugins   = 0;
 
     d->base.privates[displayPrivateIndex].ptr = dd;
-    
+
     dbusUpdatePluginList (d);
     dbusRegisterPluginsForDisplay (dc->connection, d);
 

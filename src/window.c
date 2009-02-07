@@ -1353,6 +1353,63 @@ updateWindowOutputExtents (CompWindow *w)
     }
 }
 
+void
+setWindowFullscreenMonitors (CompWindow               *w,
+			     CompFullscreenMonitorSet *monitors)
+{
+    CompScreen  *s = w->screen;
+    CompDisplay *d = s->display;
+    Bool        hadFsMonitors = w->fullscreenMonitorsSet;
+
+    w->fullscreenMonitorsSet = FALSE;
+
+    if (monitors                         &&
+	monitors->left   < s->nOutputDev &&
+	monitors->right  < s->nOutputDev &&
+	monitors->top    < s->nOutputDev &&
+	monitors->bottom < s->nOutputDev)
+    {
+	BOX fsBox;
+
+	fsBox.x1 = s->outputDev[monitors->left].region.extents.x1;
+	fsBox.y1 = s->outputDev[monitors->top].region.extents.y1;
+	fsBox.x2 = s->outputDev[monitors->right].region.extents.x2;
+	fsBox.y2 = s->outputDev[monitors->bottom].region.extents.y2;
+
+	if (fsBox.x1 < fsBox.x2 && fsBox.y1 < fsBox.y2)
+	{
+	    w->fullscreenMonitorsSet = TRUE;
+
+	    w->fullscreenMonitorRect.x      = fsBox.x1;
+	    w->fullscreenMonitorRect.y      = fsBox.y1;
+	    w->fullscreenMonitorRect.width  = fsBox.x2 - fsBox.x1;
+	    w->fullscreenMonitorRect.height = fsBox.y2 - fsBox.y1;
+	}
+    }
+
+    if (w->fullscreenMonitorsSet)
+    {
+	long data[4];
+
+	data[0] = monitors->top;
+	data[1] = monitors->bottom;
+	data[2] = monitors->left;
+	data[3] = monitors->right;
+
+	XChangeProperty (d->display, w->id, d->wmFullscreenMonitorsAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) data, 4);
+    }
+    else if (hadFsMonitors)
+    {
+	XDeleteProperty (d->display, w->id, d->wmFullscreenMonitorsAtom);
+    }
+
+    if (w->state & CompWindowStateFullscreenMask)
+	if (w->fullscreenMonitorsSet || hadFsMonitors)
+	    updateWindowAttributes (w, CompStackingUpdateModeNone);
+}
+
 static void
 setWindowMatrix (CompWindow *w)
 {
@@ -1369,6 +1426,7 @@ bindWindow (CompWindow *w)
     if (!w->pixmap)
     {
 	XWindowAttributes attr;
+	Display           *dpy = w->screen->display->display;
 
 	/* don't try to bind window again if it failed previously */
 	if (w->bindFailed)
@@ -1376,20 +1434,20 @@ bindWindow (CompWindow *w)
 
 	/* We have to grab the server here to make sure that window
 	   is mapped when getting the window pixmap */
-	XGrabServer (w->screen->display->display);
-	XGetWindowAttributes (w->screen->display->display, w->id, &attr);
-	if (attr.map_state != IsViewable)
+	XGrabServer (dpy);
+
+	if (!XGetWindowAttributes (dpy, w->id, &attr) ||
+	    attr.map_state != IsViewable)
 	{
-	    XUngrabServer (w->screen->display->display);
+	    XUngrabServer (dpy);
 	    finiTexture (w->screen, w->texture);
 	    w->bindFailed = TRUE;
 	    return FALSE;
 	}
 
-	w->pixmap = XCompositeNameWindowPixmap (w->screen->display->display,
-						w->id);
+	w->pixmap = XCompositeNameWindowPixmap (dpy, w->id);
 
-	XUngrabServer (w->screen->display->display);
+	XUngrabServer (dpy);
     }
 
     if (!bindPixmapToTexture (w->screen, w->texture, w->pixmap,
@@ -1699,8 +1757,6 @@ updateWindowStruts (CompWindow *w)
     Bool	  hasOld, hasNew;
     CompStruts    old, new;
 
-#define MIN_EMPTY 76
-
     if (w->struts)
     {
 	hasOld = TRUE;
@@ -1748,34 +1804,25 @@ updateWindowStruts (CompWindow *w)
 
 	if (n == 12)
 	{
-	    int gap;
-
 	    hasNew = TRUE;
 
-	    gap = w->screen->width - struts[0] - struts[1];
-	    gap -= MIN_EMPTY;
-
-	    new.left.width  = (int) struts[0] + MIN (0, gap / 2);
-	    new.right.width = (int) struts[1] + MIN (0, gap / 2);
-
-	    gap = w->screen->height - struts[2] - struts[3];
-	    gap -= MIN_EMPTY;
-
-	    new.top.height    = (int) struts[2] + MIN (0, gap / 2);
-	    new.bottom.height = (int) struts[3] + MIN (0, gap / 2);
-
-	    new.right.x  = w->screen->width  - new.right.width;
-	    new.bottom.y = w->screen->height - new.bottom.height;
-
 	    new.left.y       = struts[4];
+	    new.left.width   = struts[0];
 	    new.left.height  = struts[5] - new.left.y + 1;
+
+	    new.right.width  = struts[1];
+	    new.right.x      = w->screen->width - new.right.width;
 	    new.right.y      = struts[6];
 	    new.right.height = struts[7] - new.right.y + 1;
 
 	    new.top.x        = struts[8];
 	    new.top.width    = struts[9] - new.top.x + 1;
-	    new.bottom.x     = struts[10];
-	    new.bottom.width = struts[11] - new.bottom.x + 1;
+	    new.top.height   = struts[2];
+
+	    new.bottom.x      = struts[10];
+	    new.bottom.width  = struts[11] - new.bottom.x + 1;
+	    new.bottom.height = struts[3];
+	    new.bottom.y      = w->screen->height - new.bottom.height;
 	}
 
 	XFree (data);
@@ -1794,27 +1841,19 @@ updateWindowStruts (CompWindow *w)
 
 	    if (n == 4)
 	    {
-		int gap;
-
 		hasNew = TRUE;
 
-		gap = w->screen->width - struts[0] - struts[1];
-		gap -= MIN_EMPTY;
+		new.left.x     = 0;
+		new.left.width = struts[0];
 
-		new.left.width  = (int) struts[0] + MIN (0, gap / 2);
-		new.right.width = (int) struts[1] + MIN (0, gap / 2);
+		new.right.width = struts[1];
+		new.right.x     = w->screen->width - new.right.width;
 
-		gap = w->screen->height - struts[2] - struts[3];
-		gap -= MIN_EMPTY;
+		new.top.y      = 0;
+		new.top.height = struts[2];
 
-		new.top.height    = (int) struts[2] + MIN (0, gap / 2);
-		new.bottom.height = (int) struts[3] + MIN (0, gap / 2);
-
-		new.left.x  = 0;
-		new.right.x = w->screen->width - new.right.width;
-
-		new.top.y    = 0;
-		new.bottom.y = w->screen->height - new.bottom.height;
+		new.bottom.height = struts[3];
+		new.bottom.y      = w->screen->height - new.bottom.height;
 	    }
 
 	    XFree (data);
@@ -1837,8 +1876,11 @@ updateWindowStruts (CompWindow *w)
 
 	    strutX1 = new.left.x;
 	    strutX2 = strutX1 + new.left.width;
+	    strutY1 = new.left.y;
+	    strutY2 = strutY1 + new.left.height;
 
-	    if (strutX2 > x1 && strutX2 <= x2)
+	    if (strutX2 > x1 && strutX2 <= x2 &&
+		strutY1 < y2 && strutY2 >= y1)
 	    {
 		new.left.x     = x1;
 		new.left.width = strutX2 - x1;
@@ -1846,26 +1888,35 @@ updateWindowStruts (CompWindow *w)
 
 	    strutX1 = new.right.x;
 	    strutX2 = strutX1 + new.right.width;
+	    strutY1 = new.right.y;
+	    strutY2 = strutY1 + new.right.height;
 
-	    if (strutX1 > x1 && strutX1 <= x2)
+	    if (strutX1 > x1 && strutX1 <= x2 &&
+		strutY1 < y2 && strutY2 >= y1)
 	    {
 		new.right.x     = strutX1;
 		new.right.width = x2 - strutX1;
 	    }
 
+	    strutX1 = new.top.x;
+	    strutX2 = strutX1 + new.top.width;
 	    strutY1 = new.top.y;
 	    strutY2 = strutY1 + new.top.height;
 
-	    if (strutY2 > y1 && strutY2 <= y2)
+	    if (strutX1 < x2 && strutX2 >= x1 &&
+		strutY2 > y1 && strutY2 <= y2)
 	    {
 		new.top.y      = y1;
 		new.top.height = strutY2 - y1;
 	    }
 
+	    strutX1 = new.bottom.x;
+	    strutX2 = strutX1 + new.bottom.width;
 	    strutY1 = new.bottom.y;
 	    strutY2 = strutY1 + new.bottom.height;
 
-	    if (strutY1 > y1 && strutY1 <= y2)
+	    if (strutX1 < x2 && strutX2 >= x1 &&
+		strutY1 > y1 && strutY1 <= y2)
 	    {
 		new.bottom.y      = strutY1;
 		new.bottom.height = y2 - strutY1;
@@ -2046,7 +2097,8 @@ addWindow (CompScreen *screen,
     w->closeRequests	    = 0;
     w->lastCloseRequestTime = 0;
 
-    w->overlayWindow = FALSE;
+    w->fullscreenMonitorsSet = FALSE;
+    w->overlayWindow         = FALSE;
 
     if (screen->windowPrivateLen)
     {
@@ -2905,6 +2957,44 @@ validateWindowResizeRequest (CompWindow     *w,
 			     XWindowChanges *xwc,
 			     unsigned int   source)
 {
+    CompScreen *s = w->screen;
+
+    if (w->type & (CompWindowTypeDockMask       |
+		   CompWindowTypeFullscreenMask |
+		   CompWindowTypeUnknownMask))
+	return;
+
+    if (*mask & CWY)
+    {
+	int min, max;
+
+	min = s->workArea.y + w->input.top;
+	max = s->workArea.y + s->workArea.height;
+
+	min -= s->y * s->height;
+	max += (s->vsize - s->y - 1) * s->height;
+
+	if (xwc->y < min)
+	    xwc->y = min;
+	else if (xwc->y > max)
+	    xwc->y = max;
+    }
+
+    if (*mask & CWX)
+    {
+	int min, max;
+
+	min = s->workArea.x + w->input.left;
+	max = s->workArea.x + s->workArea.width;
+
+	min -= s->x * s->width;
+	max += (s->hsize - s->x - 1) * s->width;
+
+	if (xwc->x < min)
+	    xwc->x = min;
+	else if (xwc->x > max)
+	    xwc->x = max;
+    }
 }
 
 void
@@ -3588,11 +3678,24 @@ addWindowSizeChanges (CompWindow     *w,
     {
 	saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
 
-	xwc->width	  = w->screen->outputDev[output].width;
-	xwc->height	  = w->screen->outputDev[output].height;
+	if (w->fullscreenMonitorsSet)
+	{
+	    xwc->x      = x + w->fullscreenMonitorRect.x;
+	    xwc->y      = y + w->fullscreenMonitorRect.y;
+	    xwc->width  = w->fullscreenMonitorRect.width;
+	    xwc->height = w->fullscreenMonitorRect.height;
+	}
+	else
+	{
+	    xwc->x      = x + w->screen->outputDev[output].region.extents.x1;
+	    xwc->y      = y + w->screen->outputDev[output].region.extents.y1;
+	    xwc->width  = w->screen->outputDev[output].width;
+	    xwc->height = w->screen->outputDev[output].height;
+	}
+
 	xwc->border_width = 0;
 
-	mask |= CWWidth | CWHeight | CWBorderWidth;
+	mask |= CWX | CWY | CWWidth | CWHeight | CWBorderWidth;
     }
     else
     {
@@ -3653,18 +3756,8 @@ addWindowSizeChanges (CompWindow     *w,
 	    xwc->height = w->sizeHints.max_height;
 	    mask |= CWHeight;
 	}
-    }
 
-    if (mask & (CWWidth | CWHeight))
-    {
-	if (w->type & CompWindowTypeFullscreenMask)
-	{
-	    xwc->x = x + w->screen->outputDev[output].region.extents.x1;
-	    xwc->y = y + w->screen->outputDev[output].region.extents.y1;
-
-	    mask |= CWX | CWY;
-	}
-	else
+	if (mask & (CWWidth | CWHeight))
 	{
 	    int width, height, max;
 
@@ -3877,6 +3970,16 @@ moveResizeWindow (CompWindow     *w,
     if (!(xwcm & CWHeight))
 	xwc->height = w->serverHeight;
 
+    /* when horizontally maximized only allow width changes added by
+       addWindowSizeChanges or constrainNewWindowState */
+    if (w->state & CompWindowStateMaximizedHorzMask)
+	xwcm &= ~CWWidth;
+
+    /* when vertically maximized only allow height changes added by
+       addWindowSizeChanges or constrainNewWindowState */
+    if (w->state & CompWindowStateMaximizedVertMask)
+	xwcm &= ~CWHeight;
+
     if (xwcm & (CWWidth | CWHeight))
     {
 	int width, height;
@@ -3898,54 +4001,7 @@ moveResizeWindow (CompWindow     *w,
 
     xwcm |= adjustConfigureRequestForGravity (w, xwc, xwcm, gravity);
 
-    if (!(w->type & (CompWindowTypeDockMask       |
-		     CompWindowTypeFullscreenMask |
-		     CompWindowTypeUnknownMask)))
-    {
-	if (xwcm & CWY)
-	{
-	    int min, max;
-
-	    min = w->screen->workArea.y + w->input.top;
-	    max = w->screen->workArea.y + w->screen->workArea.height;
-
-	    min -= w->screen->y * w->screen->height;
-	    max += (w->screen->vsize - w->screen->y - 1) * w->screen->height;
-
-	    if (xwc->y < min)
-		xwc->y = min;
-	    else if (xwc->y > max)
-		xwc->y = max;
-	}
-
-	if (xwcm & CWX)
-	{
-	    int min, max;
-
-	    min = w->screen->workArea.x + w->input.left;
-	    max = w->screen->workArea.x + w->screen->workArea.width;
-
-	    min -= w->screen->x * w->screen->width;
-	    max += (w->screen->hsize - w->screen->x - 1) * w->screen->width;
-
-	    if (xwc->x < min)
-		xwc->x = min;
-	    else if (xwc->x > max)
-		xwc->x = max;
-	}
-    }
-
     (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc, source);
-
-    /* when horizontally maximized only allow width changes added by
-       addWindowSizeChanges */
-    if (w->state & CompWindowStateMaximizedHorzMask)
-	xwcm &= ~CWWidth;
-
-    /* when vertically maximized only allow height changes added by
-       addWindowSizeChanges */
-    if (w->state & CompWindowStateMaximizedVertMask)
-	xwcm &= ~CWHeight;
 
     xwcm |= addWindowSizeChanges (w, xwc,
 				  xwc->x, xwc->y,
@@ -3976,7 +4032,7 @@ moveResizeWindow (CompWindow     *w,
        safe to assume that the saved coordinates should be updated too, e.g.
        because the window was moved to another viewport by some client */
     if ((xwcm & CWX) && (w->saveMask & CWX))
-    	w->saveWc.x += (xwc->x - w->serverX);
+	w->saveWc.x += (xwc->x - w->serverX);
 
     if ((xwcm & CWY) && (w->saveMask & CWY))
 	w->saveWc.y += (xwc->y - w->serverY);
@@ -4028,7 +4084,14 @@ addWindowStackChanges (CompWindow     *w,
 
     if (!sibling || sibling->id != w->id)
     {
-	if (w->prev)
+	CompWindow *prev = w->prev;
+
+	/* the frame window is always our next sibling window in the stack, although
+	   we're searching for the next 'real' sibling, so skip the frame window */
+	if (prev && prev->id == w->frame)
+		prev = prev->prev;
+
+	if (prev)
 	{
 	    if (!sibling)
 	    {
@@ -4036,7 +4099,7 @@ addWindowStackChanges (CompWindow     *w,
 		if (w->frame)
 		    XLowerWindow (w->screen->display->display, w->frame);
 	    }
-	    else if (sibling->id != w->prev->id)
+	    else if (sibling->id != prev->id)
 	    {
 		mask |= CWSibling | CWStackMode;
 
@@ -4902,41 +4965,42 @@ isWindowFocusAllowed (CompWindow   *w,
     return TRUE;
 }
 
-Bool
+CompFocusResult
 allowWindowFocus (CompWindow   *w,
 		  unsigned int noFocusMask,
 		  unsigned int viewportX,
 		  unsigned int viewportY,
 		  Time         timestamp)
 {
-    Bool retval;
+    Bool status;
 
     if (w->id == w->screen->display->activeWindow)
-	return TRUE;
+	return CompFocusAllowed;
 
     /* do not focus windows of these types */
     if (w->type & noFocusMask)
-	return FALSE;
+	return CompFocusPrevent;
 
     /* window doesn't take focus */
     if (!w->inputHint && !(w->protocols & CompWindowProtocolTakeFocusMask))
-	return FALSE;
+	return CompFocusPrevent;
 
     if (!timestamp)
     {
 	/* if the window has a 0 timestamp, it explicitly requested no focus */
 	if (getFocusWindowUsageTimestamp (w, &timestamp) && !timestamp)
-	    return FALSE;
+	    return CompFocusPrevent;
     }
 
-    retval = isWindowFocusAllowed (w, viewportX, viewportY, timestamp);
-    if (!retval)
+    status = isWindowFocusAllowed (w, viewportX, viewportY, timestamp);
+    if (!status)
     {
 	/* add demands attention state if focus was prevented */
 	changeWindowState (w, w->state | CompWindowStateDemandsAttentionMask);
+	return CompFocusDenied;
     }
 
-    return retval;
+    return CompFocusAllowed;
 }
 
 void

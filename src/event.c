@@ -1649,9 +1649,10 @@ handleEvent (CompDisplay *d,
 
 		if (w->managed && w->startupId)
 		{
-		    Time         timestamp = 0;
-		    int          vx, vy, x, y;
-		    CompScreen   *s = w->screen;
+		    Time            timestamp = 0;
+		    int             vx, vy, x, y;
+		    CompScreen      *s = w->screen;
+		    CompFocusResult focus;
 
 		    w->initialTimestampSet = FALSE;
 		    applyStartupProperties (w->screen, w);
@@ -1668,13 +1669,13 @@ handleEvent (CompDisplay *d,
 		    y = w->attrib.y + (s->y - vy) * s->height;
 		    moveWindowToViewportPosition (w, x, y, TRUE);
 
-		    if (allowWindowFocus (w, 0,
-					  w->initialViewportX,
-					  w->initialViewportY,
-					  timestamp))
-		    {
+		    focus = allowWindowFocus (w, 0,
+					      w->initialViewportX,
+					      w->initialViewportY,
+					      timestamp);
+
+		    if (focus == CompFocusAllowed)
 			(*w->screen->activateWindow) (w);
-		    }
 		}
 	    }
 	}
@@ -1693,17 +1694,17 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
-		Bool focusAllowed = TRUE;
+		CompFocusResult focus = CompFocusAllowed;
 
 		/* use focus stealing prevention if request came
 		   from an application */
 		if (event->xclient.data.l[0] == ClientTypeApplication)
-		    focusAllowed = allowWindowFocus (w, 0,
-						     w->screen->x,
-						     w->screen->y,
-						     event->xclient.data.l[1]);
+		    focus = allowWindowFocus (w, 0,
+					      w->screen->x,
+					      w->screen->y,
+					      event->xclient.data.l[1]);
 
-		if (focusAllowed)
+		if (focus == CompFocusAllowed)
 		    (*w->screen->activateWindow) (w);
 	    }
 	}
@@ -1784,11 +1785,12 @@ handleEvent (CompDisplay *d,
 
 		    /* raise the window whenever its fullscreen state,
 		       above/below state or maximization state changed */
-		    if (dState & (CompWindowStateFullscreenMask |
-				  CompWindowStateAboveMask |
-				  CompWindowStateBelowMask |
-				  CompWindowStateMaximizedHorzMask |
-				  CompWindowStateMaximizedVertMask))
+		    if (dState & CompWindowStateFullscreenMask)
+			stackingUpdateMode = CompStackingUpdateModeAboveFullscreen;
+		    else if (dState & (CompWindowStateAboveMask         |
+				       CompWindowStateBelowMask         |
+				       CompWindowStateMaximizedHorzMask |
+				       CompWindowStateMaximizedVertMask))
 			stackingUpdateMode = CompStackingUpdateModeNormal;
 
 		    changeWindowState (w, wState);
@@ -1971,6 +1973,21 @@ handleEvent (CompDisplay *d,
 	    if (w)
 		setDesktopForWindow (w, event->xclient.data.l[0]);
 	}
+	else if (event->xclient.message_type == d->wmFullscreenMonitorsAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xclient.window);
+	    if (w)
+	    {
+		CompFullscreenMonitorSet monitors;
+
+		monitors.top    = event->xclient.data.l[0];
+		monitors.bottom = event->xclient.data.l[1];
+		monitors.left   = event->xclient.data.l[2];
+		monitors.right  = event->xclient.data.l[3];
+
+		setWindowFullscreenMonitors (w, &monitors);
+	    }
+	}
 	break;
     case MappingNotify:
 	updateModifierMappings (d);
@@ -2014,7 +2031,7 @@ handleEvent (CompDisplay *d,
 
 	    if (doMapProcessing)
 	    {
-		Bool                   allowFocus;
+		CompFocusResult        focus;
 		CompStackingUpdateMode stackingMode;
 
 		if (!w->placed)
@@ -2052,10 +2069,10 @@ handleEvent (CompDisplay *d,
 		    w->placed   = TRUE;
 		}
 
-		allowFocus = allowWindowFocus (w, NO_FOCUS_MASK,
-					       w->screen->x, w->screen->y, 0);
+		focus = allowWindowFocus (w, NO_FOCUS_MASK,
+					  w->screen->x, w->screen->y, 0);
 
-		if (!allowFocus && (w->type & ~NO_FOCUS_MASK))
+		if (focus == CompFocusDenied)
 		    stackingMode = CompStackingUpdateModeInitialMapDeniedFocus;
 		else
 		    stackingMode = CompStackingUpdateModeInitialMap;
@@ -2067,13 +2084,13 @@ handleEvent (CompDisplay *d,
 
 		(*w->screen->leaveShowDesktopMode) (w->screen, w);
 
-		if (allowFocus && !onCurrentDesktop (w))
+		if (focus == CompFocusAllowed && !onCurrentDesktop (w))
 		    setCurrentDesktop (w->screen, w->desktop);
 
 		if (!(w->state & CompWindowStateHiddenMask))
 		    showWindow (w);
 
-		if (allowFocus)
+		if (focus == CompFocusAllowed)
 		    moveInputFocusToWindow (w);
 	    }
 
@@ -2103,8 +2120,9 @@ handleEvent (CompDisplay *d,
 
 	    if (event->xconfigurerequest.value_mask & CWStackMode)
 	    {
-		Window     above    = None;
-		CompWindow *sibling = NULL;
+		Window          above    = None;
+		CompWindow      *sibling = NULL;
+		CompFocusResult focus;
 
 		if (event->xconfigurerequest.value_mask & CWSibling)
 		{
@@ -2114,8 +2132,9 @@ handleEvent (CompDisplay *d,
 
 		switch (event->xconfigurerequest.detail) {
 		case Above:
-		    if (allowWindowFocus (w, NO_FOCUS_MASK,
-					  w->screen->x, w->screen->y, 0))
+		    focus = allowWindowFocus (w, NO_FOCUS_MASK,
+					      w->screen->x, w->screen->y, 0);
+		    if (focus == CompFocusAllowed)
 		    {
 			if (above)
 			{
@@ -2205,7 +2224,6 @@ handleEvent (CompDisplay *d,
 	    if (!d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b &&
 		!s->maxGrab				            &&
 		event->xcrossing.mode   != NotifyGrab		    &&
-		event->xcrossing.mode   != NotifyUngrab		    &&
 		event->xcrossing.detail != NotifyInferior)
 	    {
 		Bool raise, focus;

@@ -764,6 +764,31 @@ KWD::Window::grabXServer (bool)
 }
 
 void
+KWD::Window::repaintShadow (void)
+{
+}
+
+bool
+KWD::Window::compositingActive (void) const
+{
+    return true;
+}
+
+bool
+KWD::Window::shadowsActive (void) const
+{
+    /* we are drawing the shadows ourselves, no need for the
+       decoration engine to do so */
+    return false;
+}
+
+double
+KWD::Window::opacity (void) const
+{
+    return 1.0;
+}
+
+void
 KWD::Window::createDecoration (void)
 {
     KDecoration *decor;

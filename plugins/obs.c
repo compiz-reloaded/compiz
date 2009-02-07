@@ -158,7 +158,7 @@ updatePaintModifier (CompWindow *w,
     {
 	int        i, min, lastMatchFactor;
 	CompOption *matches, *values;
-    
+
 	matches = os->matchOptions[modifier];
 	values  = os->valueOptions[modifier];
 	min     = MIN (matches->value.list.nValue, values->value.list.nValue);
@@ -617,7 +617,7 @@ obsFiniScreen (CompPlugin *p,
     UNWRAP (os, s, drawWindow);
 
     damageScreen (s);
-    
+
     compFiniScreenOptions (s, os->opt, OBS_SCREEN_OPTION_NUM);
 
     free (os);

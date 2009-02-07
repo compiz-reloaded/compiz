@@ -118,8 +118,7 @@ AC_SUBST(imagedir)
 metadatadir=$datadir/compiz
 AC_SUBST(metadatadir)
 
-COMPIZ_REQUIRES="x11-xcb    \
-		 xcomposite \
+COMPIZ_REQUIRES="xcomposite \
 		 xfixes	    \
 		 xdamage    \
 		 xrandr	    \
@@ -487,7 +486,7 @@ if test "x$use_kde4" = "xyes"; then
   kde4libs=`kde4-config --install lib --expandvars 2>/dev/null`
   kde4incs=`kde4-config --install include --expandvars 2>/dev/null`
 
-  kde4_test_includes="kdecoration.h kcommondecoration.h kdecorationbridge.h plasma/panelsvg.h"
+  kde4_test_includes="kdecoration.h kcommondecoration.h kdecorationbridge.h plasma/framesvg.h"
 
   dnl Check for KWin headers
   AC_MSG_CHECKING([for KWin headers])
