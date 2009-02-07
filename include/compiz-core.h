@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 200900203
+#define CORE_ABIVERSION 20090207
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1057,6 +1057,8 @@ struct _CompDisplay {
     MatchPropertyChangedProc   matchPropertyChanged;
 
     LogMessageProc logMessage;
+
+    void *reserved;
 };
 
 #define GET_CORE_DISPLAY(object) ((CompDisplay *) (object))
@@ -2187,6 +2189,8 @@ struct _CompScreen {
     OutputChangeNotifyProc outputChangeNotify;
 
     InitWindowWalkerProc initWindowWalker;
+
+    void *reserved;
 };
 
 #define GET_CORE_SCREEN(object) ((CompScreen *) (object))
@@ -2657,6 +2661,8 @@ struct _CompWindow {
 
     /* must be set by addWindowGeometry */
     DrawWindowGeometryProc drawWindowGeometry;
+
+    void *reserved;
 };
 
 #define GET_CORE_WINDOW(object) ((CompWindow *) (object))
