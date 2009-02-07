@@ -272,8 +272,9 @@ gnomeGetObjectOptions (CompPlugin *p,
 	(GetPluginObjectOptionsProc) gnomeGetDisplayOptions
     };
 
+    *count = 0;
     RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab),
-		     (void *) (*count = 0), (p, o, count));
+		     (void *) count, (p, o, count));
 }
 
 static CompBool

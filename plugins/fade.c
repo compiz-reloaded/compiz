@@ -977,8 +977,9 @@ fadeGetObjectOptions (CompPlugin *plugin,
 	(GetPluginObjectOptionsProc) fadeGetScreenOptions
     };
 
+    *count = 0;
     RETURN_DISPATCH (object, dispTab, ARRAY_SIZE (dispTab),
-		     (void *) (*count = 0), (plugin, object, count));
+		     (void *) count, (plugin, object, count));
 }
 
 static CompBool
