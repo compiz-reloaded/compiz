@@ -7,6 +7,9 @@ libcube_la_SOURCES = cube.c
 librotate_la_LDFLAGS = -module -avoid-version -no-undefined
 librotate_la_SOURCES = rotate.c
 
+libzoom_la_LDFLAGS = -module -avoid-version -no-undefined
+libzoom_la_SOURCES = zoom.c
+
 libscale_la_LDFLAGS = -module -avoid-version -no-undefined
 libscale_la_SOURCES = scale.c
 
@@ -160,6 +163,7 @@ module_LTLIBRARIES =		\
 	libminimize.la		\
 	libcube.la		\
 	librotate.la		\
+	libzoom.la		\
 	libscale.la		\
 	libmove.la		\
 	libresize.la		\

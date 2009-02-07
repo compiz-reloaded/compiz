@@ -1,0 +1,60 @@
+<compiz>
+    <plugin name="zoom">
+	<_short>Zoom Desktop</_short>
+	<_long>Zoom and pan desktop cube</_long>
+	<category>Accessibility</category>
+	<display>
+	    <option name="initiate_button" type="button">
+		<_short>Initiate</_short>
+		<_long>Zoom In</_long>
+		<default>&lt;Super&gt;Button3</default>
+	    </option>
+	    <option name="zoom_in_button" type="button">
+		<_short>Zoom In</_short>
+		<_long>Zoom In</_long>
+		<default>&lt;Super&gt;Button4</default>
+	    </option>
+	    <option name="zoom_out_button" type="button">
+		<_short>Zoom Out</_short>
+		<_long>Zoom Out</_long>
+		<default>&lt;Super&gt;Button5</default>
+	    </option>
+	    <option name="zoom_pan_button" type="button">
+		<_short>Zoom Pan</_short>
+		<_long>Zoom pan</_long>
+		<default>&lt;Super&gt;Button2</default>
+	    </option>
+	</display>
+	<screen>
+	    <option name="speed" type="float">
+		<_short>Speed</_short>
+		<_long>Zoom Speed</_long>
+		<default>1.5</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="timestep" type="float">
+		<_short>Timestep</_short>
+		<_long>Zoom Timestep</_long>
+		<default>1.2</default>
+		<min>0.1</min>
+		<max>50</max>
+		<precision>0.1</precision>
+	    </option>
+	    <option name="zoom_factor" type="float">
+		<_short>Zoom factor</_short>
+		<_long>Zoom factor</_long>
+		<default>2</default>
+		<min>1.01</min>
+		<max>3</max>
+		<precision>0.01</precision>
+	    </option>
+	    <option name="filter_linear" type="bool">
+		<_short>Filter Linear</_short>
+		<_long>Use linear filter when zoomed in</_long>
+		<default>false</default>
+	    </option>
+	</screen>
+    </plugin>
+</compiz>
