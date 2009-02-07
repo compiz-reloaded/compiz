@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 11:18+0530\n"
+"POT-Creation-Date: 2009-02-07 21:12+0530\n"
 "PO-Revision-Date: 2008-08-25 10:20+0200\n"
 "Last-Translator: Ander Elortondo <ander.elor@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
@@ -35,7 +35,7 @@ msgid "None"
 msgstr "Bat ere ez"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk/window-decorator/gtk-window-decorator.c:4638
 msgid "Shade"
 msgstr "Itzala"
 
@@ -69,7 +69,7 @@ msgid "Lower"
 msgstr "Azpian"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Leiho Menua"
@@ -139,59 +139,59 @@ msgstr "Erabili metacity gaia"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Erabili metacity gaia leiho dekorazioa marraztean"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Itxi leihoa"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../gtk/window-decorator/gtk-window-decorator.c:4449
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Leheneratu leihoa"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4452
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maximizatu leihoa"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../gtk/window-decorator/gtk-window-decorator.c:4494
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Leihoa Minimizatu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Make Above"
 msgstr "Ezarri gainean"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk/window-decorator/gtk-window-decorator.c:4684
 msgid "Stick"
 msgstr "Itsatsi"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk/window-decorator/gtk-window-decorator.c:4704
 msgid "Unshade"
 msgstr "Itzala kendu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unmake Above"
 msgstr "Gainean ezartzea kendu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk/window-decorator/gtk-window-decorator.c:4750
 msgid "Unstick"
 msgstr "itsastea kendu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "\"%s\" leihoak ez du erantzuten."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk/window-decorator/gtk-window-decorator.c:5107
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Aplikazio honi irtetzera behartuz, gorde gabeko aldaketak galtzea ekar "
 "dezake."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk/window-decorator/gtk-window-decorator.c:5122
 msgid "_Force Quit"
 msgstr "_Irtetzera behartu"
 
@@ -229,7 +229,7 @@ msgstr "Betetze kolorea oharrentzat"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "Hasi"
 
@@ -1408,13 +1408,13 @@ msgstr "Skydome irudia"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Abiadura"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "denbora-pausoa"
 
@@ -3112,6 +3112,50 @@ msgstr "Dar-dar efektua leihoak maximizatzean eta maximizatzea kentzean"
 msgid "Wobbly Windows"
 msgstr "Dardara duten leihoak"
 
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "Iragazki lineala"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "Erabili iragazki lineala zooma gerturatzean"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "Mahaigain zooma"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "Zoom gerturatzea"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "Zoom urrundu"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "Zoom pan"
+
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "Zoom abiadura"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Zoom denbora-pausoa"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "Zoom eta pan mahaigain kuboa"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "Zoom faktorea"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "Zoom pan"
+
 #~ msgid "Command line 0"
 #~ msgstr "0 komando lerroa"
 
@@ -3125,39 +3169,6 @@ msgstr "Dardara duten leihoak"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Pantaila-argazkia komando lerroa"
-
-#~ msgid "Filter Linear"
-#~ msgstr "Iragazki lineala"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Erabili iragazki lineala zooma gerturatzean"
-
-#~ msgid "Zoom Desktop"
-#~ msgstr "Mahaigain zooma"
-
-#~ msgid "Zoom In"
-#~ msgstr "Zoom gerturatzea"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Zoom urrundu"
-
-#~ msgid "Zoom Pan"
-#~ msgstr "Zoom pan"
-
-#~ msgid "Zoom Speed"
-#~ msgstr "Zoom abiadura"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Zoom denbora-pausoa"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "Zoom eta pan mahaigain kuboa"
-
-#~ msgid "Zoom factor"
-#~ msgstr "Zoom faktorea"
-
-#~ msgid "Zoom pan"
-#~ msgstr "Zoom pan"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Txikitu leiho opakutasuna"

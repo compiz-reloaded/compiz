@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 11:17+0530\n"
+"POT-Creation-Date: 2009-02-07 21:11+0530\n"
 "PO-Revision-Date: 2008-01-03 03:23+0100\n"
 "Last-Translator: Mahdee Jameel <mahdee.jameel@gmail.com>\n"
 "Language-Team: gist bengali  team <info.gist@cdac.in>\n"
@@ -34,7 +34,7 @@ msgid "None"
 msgstr "কিছু না"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk/window-decorator/gtk-window-decorator.c:4638
 #, fuzzy
 msgid "Shade"
 msgstr "স্ক্যানার"
@@ -69,7 +69,7 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "উইন্ডো মেনু"
@@ -133,57 +133,57 @@ msgstr "মেটাসিটি বিষয় ব্যবহার করুন
 msgid "Use metacity theme when drawing window decorations"
 msgstr "উইন্ডো অলঙ্করণ করার সময় মেটাসিটি বিষয় ব্যবহার করুন"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "উইন্ডো বন্ধ করা"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../gtk/window-decorator/gtk-window-decorator.c:4449
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "উইন্ডো সর্বাধিক না করা"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4452
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "উইন্ডো বড় করা"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../gtk/window-decorator/gtk-window-decorator.c:4494
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "উইন্ডোটি ছোট করা"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk/window-decorator/gtk-window-decorator.c:4684
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk/window-decorator/gtk-window-decorator.c:4704
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk/window-decorator/gtk-window-decorator.c:4750
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk/window-decorator/gtk-window-decorator.c:5107
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk/window-decorator/gtk-window-decorator.c:5122
 msgid "_Force Quit"
 msgstr ""
 
@@ -221,7 +221,7 @@ msgstr "অ্যানোটেশন পূর্ণ করার রঙ"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "শুরু "
 
@@ -1494,7 +1494,7 @@ msgstr "স্কাইডোম চিত্র"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 #, fuzzy
 msgid "Speed"
 msgstr "বাদ দেয়া হয়েছে\n"
@@ -1502,7 +1502,7 @@ msgstr "বাদ দেয়া হয়েছে\n"
 #  label text
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 #, fuzzy
 msgid "Timestep"
 msgstr "সময়"
@@ -3306,6 +3306,57 @@ msgstr "উইন্ডোগুলি সর্বাধিক করা বা
 msgid "Wobbly Windows"
 msgstr "টলমলে উইন্ডো"
 
+#: ../metadata/zoom.xml.in.h:1
+#, fuzzy
+msgid "Filter Linear"
+msgstr "ফিল্টার:"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "জুম ইন করার সময় রৈখিক ফিল্টার ব্যবহার করুন"
+
+#  label text
+#: ../metadata/zoom.xml.in.h:6
+#, fuzzy
+msgid "Zoom Desktop"
+msgstr "সময়"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "জুম ইন"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "জুম আউট"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "জুম প্যান"
+
+#: ../metadata/zoom.xml.in.h:10
+#, fuzzy
+msgid "Zoom Speed"
+msgstr "বাদ দেয়া হয়েছে\n"
+
+#  label text
+#: ../metadata/zoom.xml.in.h:11
+#, fuzzy
+msgid "Zoom Timestep"
+msgstr "সময়"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "ডেস্কটপ ঘনক জুম করা এবং প্যান করা"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "জুম ফ্যাক্টর"
+
+#: ../metadata/zoom.xml.in.h:14
+#, fuzzy
+msgid "Zoom pan"
+msgstr "বাদ দেয়া হয়েছে\n"
+
 #, fuzzy
 #~ msgid "Command line 0"
 #~ msgstr "কমান্ড '%1'"
@@ -3321,46 +3372,6 @@ msgstr "টলমলে উইন্ডো"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
-
-#, fuzzy
-#~ msgid "Filter Linear"
-#~ msgstr "ফিল্টার:"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "জুম ইন করার সময় রৈখিক ফিল্টার ব্যবহার করুন"
-
-#  label text
-#, fuzzy
-#~ msgid "Zoom Desktop"
-#~ msgstr "সময়"
-
-#~ msgid "Zoom In"
-#~ msgstr "জুম ইন"
-
-#~ msgid "Zoom Out"
-#~ msgstr "জুম আউট"
-
-#~ msgid "Zoom Pan"
-#~ msgstr "জুম প্যান"
-
-#, fuzzy
-#~ msgid "Zoom Speed"
-#~ msgstr "বাদ দেয়া হয়েছে\n"
-
-#  label text
-#, fuzzy
-#~ msgid "Zoom Timestep"
-#~ msgstr "সময়"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "ডেস্কটপ ঘনক জুম করা এবং প্যান করা"
-
-#~ msgid "Zoom factor"
-#~ msgstr "জুম ফ্যাক্টর"
-
-#, fuzzy
-#~ msgid "Zoom pan"
-#~ msgstr "বাদ দেয়া হয়েছে\n"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "উইন্ডোর অস্বচ্ছতা হ্রাস করুন"

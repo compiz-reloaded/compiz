@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 11:20+0530\n"
+"POT-Creation-Date: 2009-02-07 21:14+0530\n"
 "PO-Revision-Date: 2008-02-18 19:36+0100\n"
 "Last-Translator: Sebastian Parborg <zedDB@hotmail.com>\n"
 "Language-Team: Compiz Fusion Translators <i18n@lists.compiz-fusion.org>\n"
@@ -37,7 +37,7 @@ msgid "None"
 msgstr "Ingen"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk/window-decorator/gtk-window-decorator.c:4638
 #, fuzzy
 msgid "Shade"
 msgstr "Skala"
@@ -71,7 +71,7 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Fönstermeny"
@@ -143,57 +143,57 @@ msgstr "Använd metacity tema"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Använd metacity tema vid ritande av fönsterramar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Stäng fönster"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
+#: ../gtk/window-decorator/gtk-window-decorator.c:4449
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Avmaximera fönster"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
+#: ../gtk/window-decorator/gtk-window-decorator.c:4452
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maximera fönster"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
+#: ../gtk/window-decorator/gtk-window-decorator.c:4494
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Minimera fönster"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk/window-decorator/gtk-window-decorator.c:4658
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk/window-decorator/gtk-window-decorator.c:4684
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk/window-decorator/gtk-window-decorator.c:4704
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk/window-decorator/gtk-window-decorator.c:4724
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk/window-decorator/gtk-window-decorator.c:4750
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5098
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk/window-decorator/gtk-window-decorator.c:5107
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk/window-decorator/gtk-window-decorator.c:5122
 msgid "_Force Quit"
 msgstr ""
 
@@ -233,7 +233,7 @@ msgstr "Fyllnings färg för anteckningar"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
+#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "Initiera"
 
@@ -1488,13 +1488,13 @@ msgstr "Skydome bild"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
+#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Hastighet"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
+#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Tidsintervall"
 
@@ -3221,6 +3221,50 @@ msgstr "Geléeffekt vid maximering och avmaximering av fönster"
 msgid "Wobbly Windows"
 msgstr "Geléaktiga fönster"
 
+#: ../metadata/zoom.xml.in.h:1
+msgid "Filter Linear"
+msgstr "Filtrera linjärt"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Use linear filter when zoomed in"
+msgstr "Använd linjärt filter när inzoomad"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Desktop"
+msgstr "Zooma skrivbord"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom In"
+msgstr "Zooma in"
+
+#: ../metadata/zoom.xml.in.h:8
+msgid "Zoom Out"
+msgstr "Zooma ut"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Pan"
+msgstr "Zooma panorering"
+
+#: ../metadata/zoom.xml.in.h:10
+msgid "Zoom Speed"
+msgstr "Zoomhastighet"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Tidsintervall för zoom"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom and pan desktop cube"
+msgstr "Zooma och panorera skrivbordskub"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Zoom factor"
+msgstr "Zoomfaktor"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Zoom pan"
+msgstr "Zooma panorering"
+
 #~ msgid "Command line 0"
 #~ msgstr "Kommandorad 0"
 
@@ -3234,39 +3278,6 @@ msgstr "Geléaktiga fönster"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Kommandorad för skärmbild"
-
-#~ msgid "Filter Linear"
-#~ msgstr "Filtrera linjärt"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Använd linjärt filter när inzoomad"
-
-#~ msgid "Zoom Desktop"
-#~ msgstr "Zooma skrivbord"
-
-#~ msgid "Zoom In"
-#~ msgstr "Zooma in"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Zooma ut"
-
-#~ msgid "Zoom Pan"
-#~ msgstr "Zooma panorering"
-
-#~ msgid "Zoom Speed"
-#~ msgstr "Zoomhastighet"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Tidsintervall för zoom"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "Zooma och panorera skrivbordskub"
-
-#~ msgid "Zoom factor"
-#~ msgstr "Zoomfaktor"
-
-#~ msgid "Zoom pan"
-#~ msgstr "Zooma panorering"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Minska fönstret opacitet"
