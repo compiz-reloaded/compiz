@@ -637,32 +637,10 @@ static GdkPixmap *
 create_pixmap (int w,
 	       int h)
 {
-    GdkPixmap	*pixmap;
-    GdkVisual	*visual;
-    GdkColormap *colormap;
-
-    visual = gdk_visual_get_best_with_depth (32);
-    if (!visual)
-	return NULL;
-
     if (w == 0 || h ==0)
 	abort ();
 
-    pixmap = gdk_pixmap_new (NULL, w, h, 32);
-    if (!pixmap)
-	return NULL;
-
-    colormap = gdk_colormap_new (visual, FALSE);
-    if (!colormap)
-    {
-	g_object_unref (G_OBJECT (pixmap));
-	return NULL;
-    }
-
-    gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), colormap);
-    g_object_unref (G_OBJECT (colormap));
-
-    return pixmap;
+    return gdk_pixmap_new (GDK_DRAWABLE (style_window->window), w, h, 32);
 }
 
 #define CORNER_TOPLEFT     (1 << 0)
