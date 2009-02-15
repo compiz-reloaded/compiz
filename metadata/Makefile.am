@@ -39,7 +39,7 @@ core.xml.in: core.xml.in.in Makefile
 	plugins=$(default_plugins); \
 	if [ -z $$plugins ]; then plugins="core"; fi; \
 	plugin_values=`echo $$plugins | sed 's/\([a-zA-Z0-9]*\)/<value>\1<\/value>/g' | tr ',' '\n' | sed 's/^/\t\t    /g'`; \
-	$(AWK) -v aa="$$plugin_values" '{gsub("\t\t    <default_plugins/>", aa); print }' <core.xml.in.in >core.xml.in
+	$(AWK) -v aa="$$plugin_values" '{gsub("\t\t    <default_plugins/>", aa); print }' <$(srcdir)/core.xml.in.in >core.xml.in
 
 @INTLTOOL_XML_RULE@
 
