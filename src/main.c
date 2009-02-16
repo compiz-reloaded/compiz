@@ -63,6 +63,7 @@ Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
 Bool useDesktopHints = FALSE;
 Bool onlyCurrentScreen = FALSE;
+static Bool debugOutput = FALSE;
 
 #ifdef USE_COW
 Bool useCow = TRUE;
@@ -73,7 +74,7 @@ CompMetadata coreMetadata;
 static void
 usage (void)
 {
-    printf ("Usage: %s "
+    printf ("Usage: %s\n       "
 	    "[--display DISPLAY] "
 	    "[--bg-image PNG] "
 	    "[--refresh-rate RATE]\n       "
@@ -91,6 +92,7 @@ usage (void)
 	    " [--use-root-window] "
 #endif
 
+	    "[--debug] "
 	    "[--version] "
 	    "[--help] "
 	    "[PLUGIN]...\n",
@@ -123,6 +125,9 @@ logMessage (const char	 *componentName,
 	    CompLogLevel level,
 	    const char	 *message)
 {
+    if (!debugOutput && level >= CompLogLevelDebug)
+	return;
+
     fprintf (stderr, "%s (%s) - %s: %s\n",
 	      programName, componentName,
 	      logLevelToString (level), message);
@@ -289,6 +294,10 @@ main (int argc, char **argv)
 	{
 	    printf (PACKAGE_STRING "\n");
 	    return 0;
+	}
+	else if (!strcmp (argv[i], "--debug"))
+	{
+	    debugOutput = TRUE;
 	}
 	else if (!strcmp (argv[i], "--display"))
 	{
