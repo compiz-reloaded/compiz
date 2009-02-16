@@ -153,6 +153,9 @@ dlloaderLoadPlugin (CompPlugin *p,
     struct stat fileInfo;
     Bool        loaded = FALSE;
 
+    if (cloaderLoadPlugin (p, path, name))
+	return TRUE;
+
     file = malloc ((path ? strlen (path) : 0) + strlen (name) + 8);
     if (!file)
 	return FALSE;
@@ -164,9 +167,9 @@ dlloaderLoadPlugin (CompPlugin *p,
 
     if (stat (file, &fileInfo) != 0)
     {
-	/* file not present - try core plugin or fail */
+	/* file not present */
 	free (file);
-	return cloaderLoadPlugin (p, path, name);
+	return FALSE;
     }
 
     dlhand = dlopen (file, RTLD_LAZY);
@@ -199,7 +202,9 @@ dlloaderLoadPlugin (CompPlugin *p,
 	    }
 	    else
 	    {
-		loaded = TRUE;
+		p->devPrivate.ptr = dlhand;
+		p->devType	  = "dlloader";
+		loaded		  = TRUE;
 	    }
 	}
     }
@@ -211,18 +216,10 @@ dlloaderLoadPlugin (CompPlugin *p,
 
     free (file);
 
-    if (!loaded)
-    {
-	if (dlhand)
-	    dlclose (dlhand);
+    if (!loaded && dlhand)
+	dlclose (dlhand);
 
-	return FALSE;
-    }
-
-    p->devPrivate.ptr = dlhand;
-    p->devType	      = "dlloader";
-
-    return TRUE;
+    return loaded;
 }
 
 static void
