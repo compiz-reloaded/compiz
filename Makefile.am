@@ -44,10 +44,10 @@ pkgconfig_DATA =	\
 #		make release-check
 # or		make release-publish
 
-RELEASE_UPLOAD_HOST =   xorg.freedesktop.org
-RELEASE_UPLOAD_BASE =	/srv/xorg.freedesktop.org/archive/individual/app
+RELEASE_UPLOAD_HOST =   releases.compiz.org
+RELEASE_UPLOAD_BASE =	/home/releases/core
 RELEASE_UPLOAD_DIR =	$(RELEASE_UPLOAD_BASE)
-RELEASE_URL_BASE = 	http://xorg.freedesktop.org/archive/individual/app
+RELEASE_URL_BASE = 	http://releases.compiz.org/core
 RELEASE_ANNOUNCE_LIST = compiz@list.freedesktop.org
 
 tar_file  = $(PACKAGE)-$(VERSION).tar.gz
@@ -111,7 +111,7 @@ release-publish-message: releases/$(sha1_file)
 	@echo ""
 	@echo "  Additionally, a git clone of the source tree:"
 	@echo ""
-	@echo "	git clone git://git.freedesktop.org/git/xorg/app/compiz"
+	@echo "	git clone git://git.compiz.org/compiz/core"
 	@echo ""
 	@echo "    will include a signed compiz-$(VERSION) tag which points to a commit named:"
 	@echo "	`git cat-file tag compiz-$(VERSION) | grep ^object | sed -e 's,object ,,'`"
