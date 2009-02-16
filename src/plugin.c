@@ -29,6 +29,7 @@
 #include <dlfcn.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -167,7 +168,10 @@ dlloaderLoadPlugin (CompPlugin *p,
 
     if (stat (file, &fileInfo) != 0)
     {
-	/* file not present */
+	/* file likely not present */
+	compLogMessage ("core", CompLogLevelDebug,
+			"Could not stat() file %s : %s",
+			file, strerror (errno));
 	free (file);
 	return FALSE;
     }
