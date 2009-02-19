@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-07 21:12+0530\n"
+"POT-Creation-Date: 2009-02-19 09:08+0100\n"
 "PO-Revision-Date: 2008-07-04 15:54+0200\n"
 "Last-Translator: mandavi <mandavi@web.de>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -36,7 +36,7 @@ msgid "None"
 msgstr "Keine"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4638
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
 msgid "Shade"
 msgstr "Aufrollen"
 
@@ -70,7 +70,7 @@ msgid "Lower"
 msgstr "Niedrig"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4619
+#: ../gtk/window-decorator/gtk-window-decorator.c:4597
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Fenstermenü"
@@ -140,59 +140,59 @@ msgstr "Metacity-Thema verwenden"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Metacity-Thema für das Zeichnen der Fensterdekoration verwenden"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4405
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Fenster schließen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4449
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Maximierung aufheben"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4452
+#: ../gtk/window-decorator/gtk-window-decorator.c:4430
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Fenster maximieren"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4494
+#: ../gtk/window-decorator/gtk-window-decorator.c:4472
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Fenster minimieren"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
 msgid "Make Above"
 msgstr "Über anderen Fenstern anordnen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4684
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
 msgid "Stick"
 msgstr "Immer auf der sichtbaren Arbeitsfläche"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4704
+#: ../gtk/window-decorator/gtk-window-decorator.c:4682
 msgid "Unshade"
 msgstr "Abrollen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4702
 msgid "Unmake Above"
 msgstr "Nicht mehr über anderen Fenstern anordnen"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4750
+#: ../gtk/window-decorator/gtk-window-decorator.c:4728
 msgid "Unstick"
 msgstr "Nur auf aktueller Arbeitsfläche"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5076
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Das Fenster \"%s\" reagiert nicht mehr."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5107
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Das Erzwingen des Beendens dieser Anwendung wird den Verlust von "
 "ungespeicherten Daten zur Folge haben."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5122
+#: ../gtk/window-decorator/gtk-window-decorator.c:5100
 msgid "_Force Quit"
 msgstr "Beenden erzwingen"
 
@@ -729,21 +729,20 @@ msgid "Button Bindings"
 msgstr ""
 
 #: ../metadata/commands.xml.in.h:39
+msgid "Command line 0"
+msgstr "Kommandozeile 0"
+
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Kommandozeile 1"
 
-#: ../metadata/commands.xml.in.h:40
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 10"
 msgstr "Kommandozeile 10"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:42
 msgid "Command line 11"
 msgstr "Kommandozeile 11"
-
-#: ../metadata/commands.xml.in.h:42
-#, fuzzy
-msgid "Command line 12"
-msgstr "Kommandozeile 1"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -863,21 +862,20 @@ msgid "Key Bindings"
 msgstr ""
 
 #: ../metadata/commands.xml.in.h:66
+msgid "Run command 0"
+msgstr "Befehl 0 ausführen"
+
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Befehl 1 ausführen"
 
-#: ../metadata/commands.xml.in.h:67
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 10"
 msgstr "Befehl 10 ausführen"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:69
 msgid "Run command 11"
 msgstr "Befehl 11 ausführen"
-
-#: ../metadata/commands.xml.in.h:69
-#, fuzzy
-msgid "Run command 12"
-msgstr "Befehl 1 ausführen"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -3294,11 +3292,13 @@ msgstr "Zoomfaktor"
 msgid "Zoom pan"
 msgstr "Ansicht verschieben"
 
-#~ msgid "Command line 0"
-#~ msgstr "Kommandozeile 0"
+#, fuzzy
+#~ msgid "Command line 12"
+#~ msgstr "Kommandozeile 1"
 
-#~ msgid "Run command 0"
-#~ msgstr "Befehl 0 ausführen"
+#, fuzzy
+#~ msgid "Run command 12"
+#~ msgstr "Befehl 1 ausführen"
 
 #, fuzzy
 #~ msgid "Screenshot commands"

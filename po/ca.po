@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-07 21:12+0530\n"
+"POT-Creation-Date: 2009-02-19 09:08+0100\n"
 "PO-Revision-Date: 2008-07-19 14:27+0200\n"
 "Last-Translator: Josep Puigdemont <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan\n"
@@ -37,7 +37,7 @@ msgid "None"
 msgstr "Cap"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4638
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
 #, fuzzy
 msgid "Shade"
 msgstr "Canvia la mida"
@@ -72,7 +72,7 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4619
+#: ../gtk/window-decorator/gtk-window-decorator.c:4597
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Menú de la finestra"
@@ -146,59 +146,59 @@ msgstr "Utilitzar el tema Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Utilitzar el tema Metacity quan dibuixes decoracions de finestres"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4405
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Tanca la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4449
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Desmaximitza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4452
+#: ../gtk/window-decorator/gtk-window-decorator.c:4430
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maximitza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4494
+#: ../gtk/window-decorator/gtk-window-decorator.c:4472
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Minimitza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
 msgid "Make Above"
 msgstr "Fer a sobre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4684
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
 msgid "Stick"
 msgstr "Pal"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4704
+#: ../gtk/window-decorator/gtk-window-decorator.c:4682
 msgid "Unshade"
 msgstr "No canvia la mida"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4702
 msgid "Unmake Above"
 msgstr "No fer a sobre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4750
+#: ../gtk/window-decorator/gtk-window-decorator.c:4728
 msgid "Unstick"
 msgstr "No pals"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5076
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La finestra «%s» no està responent."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5107
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Si forceu la sortida d'aquesta aplicació perdreu els canvis que encara no "
 "hagueu desat."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5122
+#: ../gtk/window-decorator/gtk-window-decorator.c:5100
 msgid "_Force Quit"
 msgstr "_Força'n la sortida"
 
@@ -774,22 +774,22 @@ msgstr ""
 
 #: ../metadata/commands.xml.in.h:39
 #, fuzzy
-msgid "Command line 1"
+msgid "Command line 0"
 msgstr "Línia d'ordres %d"
 
 #: ../metadata/commands.xml.in.h:40
 #, fuzzy
-msgid "Command line 10"
+msgid "Command line 1"
 msgstr "Línia d'ordres %d"
 
 #: ../metadata/commands.xml.in.h:41
 #, fuzzy
-msgid "Command line 11"
+msgid "Command line 10"
 msgstr "Línia d'ordres %d"
 
 #: ../metadata/commands.xml.in.h:42
 #, fuzzy
-msgid "Command line 12"
+msgid "Command line 11"
 msgstr "Línia d'ordres %d"
 
 #: ../metadata/commands.xml.in.h:43
@@ -931,22 +931,22 @@ msgstr ""
 
 #: ../metadata/commands.xml.in.h:66
 #, fuzzy
-msgid "Run command 1"
+msgid "Run command 0"
 msgstr "Executa l'ordre %d"
 
 #: ../metadata/commands.xml.in.h:67
 #, fuzzy
-msgid "Run command 10"
+msgid "Run command 1"
 msgstr "Executa l'ordre %d"
 
 #: ../metadata/commands.xml.in.h:68
 #, fuzzy
-msgid "Run command 11"
+msgid "Run command 10"
 msgstr "Executa l'ordre %d"
 
 #: ../metadata/commands.xml.in.h:69
 #, fuzzy
-msgid "Run command 12"
+msgid "Run command 11"
 msgstr "Executa l'ordre %d"
 
 #: ../metadata/commands.xml.in.h:70
@@ -3486,11 +3486,11 @@ msgid "Zoom pan"
 msgstr "Amplia el zoom"
 
 #, fuzzy
-#~ msgid "Command line 0"
+#~ msgid "Command line 12"
 #~ msgstr "Línia d'ordres %d"
 
 #, fuzzy
-#~ msgid "Run command 0"
+#~ msgid "Run command 12"
 #~ msgstr "Executa l'ordre %d"
 
 #, fuzzy

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-07 21:12+0530\n"
+"POT-Creation-Date: 2009-02-19 09:08+0100\n"
 "PO-Revision-Date: 2008-12-23 10:30+0100\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -40,7 +40,7 @@ msgid "None"
 msgstr "Ei mitään"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4638
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
 msgid "Shade"
 msgstr "Näytä rullattuna"
 
@@ -69,7 +69,7 @@ msgid "Lower"
 msgstr "Laske"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4619
+#: ../gtk/window-decorator/gtk-window-decorator.c:4597
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Ikkunavalikko"
@@ -141,59 +141,59 @@ msgstr "Käytä Metacity-teemaa"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Käytä Metacity-teemaa ikkunoiden kehyksissä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4405
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4449
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Palauta suurennettu ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4452
+#: ../gtk/window-decorator/gtk-window-decorator.c:4430
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Suurenna ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4494
+#: ../gtk/window-decorator/gtk-window-decorator.c:4472
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Pienennä ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
 msgid "Make Above"
 msgstr "Näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4684
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
 msgid "Stick"
 msgstr "Näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4704
+#: ../gtk/window-decorator/gtk-window-decorator.c:4682
 msgid "Unshade"
 msgstr "Älä näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4702
 msgid "Unmake Above"
 msgstr "Älä näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4750
+#: ../gtk/window-decorator/gtk-window-decorator.c:4728
 msgid "Unstick"
 msgstr "Älä näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5076
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Ikkuna \"%s\" ei vastaa."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5107
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Tämän sovelluksen sulkeminen väkisin saa tallentamattomat muutokset "
 "katoamaan."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5122
+#: ../gtk/window-decorator/gtk-window-decorator.c:5100
 msgid "_Force Quit"
 msgstr "Sulje _väkisin"
 
@@ -660,21 +660,20 @@ msgid "Button Bindings"
 msgstr "Pikanäppäimet"
 
 #: ../metadata/commands.xml.in.h:39
+msgid "Command line 0"
+msgstr "Komentorivi 0"
+
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Komentorivi 1"
 
-#: ../metadata/commands.xml.in.h:40
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 10"
 msgstr "Komentorivi 10"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:42
 msgid "Command line 11"
 msgstr "Komentorivi 11"
-
-#: ../metadata/commands.xml.in.h:42
-#, fuzzy
-msgid "Command line 12"
-msgstr "Komentorivi 1"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -771,21 +770,20 @@ msgid "Key Bindings"
 msgstr "Pikanäppäimet"
 
 #: ../metadata/commands.xml.in.h:66
+msgid "Run command 0"
+msgstr "Suorita komento 0"
+
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Suorita komento 1"
 
-#: ../metadata/commands.xml.in.h:67
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 10"
 msgstr "Suorita komento 10"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:69
 msgid "Run command 11"
 msgstr "Suorita komento 11"
-
-#: ../metadata/commands.xml.in.h:69
-#, fuzzy
-msgid "Run command 12"
-msgstr "Suorita komento 1"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -3148,11 +3146,13 @@ msgstr "Suurennuskerroin"
 msgid "Zoom pan"
 msgstr "Panorointi suurennettaessa"
 
-#~ msgid "Command line 0"
-#~ msgstr "Komentorivi 0"
+#, fuzzy
+#~ msgid "Command line 12"
+#~ msgstr "Komentorivi 1"
 
-#~ msgid "Run command 0"
-#~ msgstr "Suorita komento 0"
+#, fuzzy
+#~ msgid "Run command 12"
+#~ msgstr "Suorita komento 1"
 
 #~ msgid "Screenshot commands"
 #~ msgstr "Kuvakaappauksen komennot"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-07 21:15+0530\n"
+"POT-Creation-Date: 2009-02-19 09:10+0100\n"
 "PO-Revision-Date: 2009-01-31 22:29+0100\n"
 "Last-Translator: mosky <mosky9180@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -34,7 +34,7 @@ msgid "None"
 msgstr "無"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4638
+#: ../gtk/window-decorator/gtk-window-decorator.c:4616
 msgid "Shade"
 msgstr "陰影"
 
@@ -65,7 +65,7 @@ msgid "Lower"
 msgstr "調低"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4619
+#: ../gtk/window-decorator/gtk-window-decorator.c:4597
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "視窗功能表"
@@ -131,61 +131,61 @@ msgstr "使用 metacity 主題"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "當繪製視窗裝飾時使用 metacity 佈景主題"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4405
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "關閉視窗"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4449
+#: ../gtk/window-decorator/gtk-window-decorator.c:4427
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "視窗解除最大化"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4452
+#: ../gtk/window-decorator/gtk-window-decorator.c:4430
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "最大化視窗"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4494
+#: ../gtk/window-decorator/gtk-window-decorator.c:4472
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "最小化視窗"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4658
+#: ../gtk/window-decorator/gtk-window-decorator.c:4636
 msgid "Make Above"
 msgstr "保持至頂"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4684
+#: ../gtk/window-decorator/gtk-window-decorator.c:4662
 #, fuzzy
 msgid "Stick"
 msgstr "沾黏"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4704
+#: ../gtk/window-decorator/gtk-window-decorator.c:4682
 #, fuzzy
 msgid "Unshade"
 msgstr "解除陰影"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4724
+#: ../gtk/window-decorator/gtk-window-decorator.c:4702
 #, fuzzy
 msgid "Unmake Above"
 msgstr "取消至頂"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4750
+#: ../gtk/window-decorator/gtk-window-decorator.c:4728
 #, fuzzy
 msgid "Unstick"
 msgstr "反沾黏"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5098
+#: ../gtk/window-decorator/gtk-window-decorator.c:5076
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "視窗\"%s\"已經沒有反應"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5107
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "強制離開這個應用程式，會導致您尚未儲存的資料遺失。"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5122
+#: ../gtk/window-decorator/gtk-window-decorator.c:5100
 msgid "_Force Quit"
 msgstr "強制離開"
 
@@ -682,21 +682,21 @@ msgid "Button Bindings"
 msgstr ""
 
 #: ../metadata/commands.xml.in.h:39
+#, fuzzy
+msgid "Command line 0"
+msgstr "指令行 10"
+
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "指令行 1"
 
-#: ../metadata/commands.xml.in.h:40
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 10"
 msgstr "指令行 10"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:42
 msgid "Command line 11"
 msgstr "指令行 11"
-
-#: ../metadata/commands.xml.in.h:42
-#, fuzzy
-msgid "Command line 12"
-msgstr "指令行 1"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -793,21 +793,21 @@ msgid "Key Bindings"
 msgstr ""
 
 #: ../metadata/commands.xml.in.h:66
+#, fuzzy
+msgid "Run command 0"
+msgstr "執行指令 10"
+
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "執行指令 1"
 
-#: ../metadata/commands.xml.in.h:67
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 10"
 msgstr "執行指令 10"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:69
 msgid "Run command 11"
 msgstr "執行指令 11"
-
-#: ../metadata/commands.xml.in.h:69
-#, fuzzy
-msgid "Run command 12"
-msgstr "執行指令 1"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -3259,12 +3259,12 @@ msgid "Zoom pan"
 msgstr "放大"
 
 #, fuzzy
-#~ msgid "Command line 0"
-#~ msgstr "指令行 10"
+#~ msgid "Command line 12"
+#~ msgstr "指令行 1"
 
 #, fuzzy
-#~ msgid "Run command 0"
-#~ msgstr "執行指令 10"
+#~ msgid "Run command 12"
+#~ msgstr "執行指令 1"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
