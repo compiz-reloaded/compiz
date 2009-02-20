@@ -1,3 +1,40 @@
+Release 0.8.0 (2009-02-20 Danny Baumann <dannybaumann@web.de>)
+==============================================================
+Fourth stable release of compiz.
+
+New plugin "commands" that handles the bindings for arbitrary commands that
+previously were handled in core. In addition to the previously present key
+bindings button and edge bindings were added as well.
+
+New plugin "gnomecompat" which handles bindings that are exclusively used
+in the Gnome desktop environment and removed the corresponding bindings
+from core. This change fixes main menu and run dialog bindings for KDE users
+as those previously were conflicting between compiz and KDE. Gnome users
+upgrading should make sure to enable this plugin.
+
+Added support for _NET_WM_FULLSCREEN_MONITORS EWMH hint.
+
+Added support for reading the icon hint from the WM_HINTS property if
+_NET_WM_ICON is not available.
+
+Update Gnome support for Gnome 2.24.
+
+Added options to scale plugin that allow "toggle type" behaviour for
+key and button bindings.
+
+Several memory leak fixes.
+
+Adjusted gtk-window-decorator for newer libmetacity-private versions.
+
+Fixed gtk-window-decorator display for RTL languages.
+
+Adjusted kde4-window-decorator for KDE 4.2 API.
+
+Large number of minor bug fixes, especially in resize handling and
+stacking code.
+
+Translation updates
+
 Release 0.7.8 (2008-09-17 Danny Baumann <dannybaumann@web.de>)
 ==============================================================
 Development release.
