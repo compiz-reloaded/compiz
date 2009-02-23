@@ -1310,7 +1310,12 @@ placeValidateWindowResizeRequest (CompWindow     *w,
        sizes as we don't need to validate movements to other viewports;
        we are only interested in inner-viewport movements */
     x = xwc->x % s->width;
+    if ((x + xwc->width) < 0)
+	x += s->width;
+
     y = xwc->y % s->height;
+    if ((y + xwc->height) < 0)
+	y += s->height;
 
     left   = x - w->input.left;
     right  = x + xwc->width + w->input.right;
