@@ -46,8 +46,8 @@ pkgconfig_DATA =	\
 
 RELEASE_UPLOAD_HOST =   releases.compiz.org
 RELEASE_UPLOAD_BASE =	/home/releases/core
-RELEASE_UPLOAD_DIR =	$(RELEASE_UPLOAD_BASE)
-RELEASE_URL_BASE = 	http://releases.compiz.org/core
+RELEASE_UPLOAD_DIR =	$(RELEASE_UPLOAD_BASE)/$(VERSION)
+RELEASE_URL_BASE = 	http://releases.compiz.org/core/$(VERSION)
 RELEASE_ANNOUNCE_LIST = compiz@list.freedesktop.org
 
 tar_file  = $(PACKAGE)-$(VERSION).tar.gz
