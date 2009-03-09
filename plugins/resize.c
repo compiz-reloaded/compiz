@@ -365,9 +365,9 @@ resizeInitiate (CompDisplay     *d,
 		mask |= ResizeDownMask;
 
 	    /* if the pointer was in the middle of the window,
-	       do nothing */
+	       just prevent input to the window */
 	    if (!mask)
-		return FALSE;
+		return TRUE;
 	}
 
 	if (otherScreenGrabExist (w->screen, "resize", 0))
