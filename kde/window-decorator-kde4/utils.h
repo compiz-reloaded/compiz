@@ -28,6 +28,12 @@
 #include <fixx11h.h>
 #include <QWidget>
 
+#include <qglobal.h>
+
+#if (QT_VERSION >= QT_VERSION_CHECK(4, 5, 0))
+    #define QT_45
+#endif
+
 namespace KWD
 {
     namespace Atoms

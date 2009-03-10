@@ -90,9 +90,15 @@ KWD::PluginManager::PluginManager (KSharedConfigPtr config):
             "kwin3_oxygen" : "kwin3_plastik";
 }
 
-
+#ifdef QT_45
 KWD::Decorator::Decorator () :
     KApplication (),
+#else
+KWD::Decorator::Decorator (Display* display,
+			   Qt::HANDLE visual,
+			   Qt::HANDLE colormap) :
+    KApplication (display, visual, colormap),
+#endif
     mConfig (0),
     mCompositeWindow (0),
     mSwitcher (0)

@@ -41,6 +41,7 @@
 #include "window.h"
 #include "switcher.h"
 #include "kdecoration_plugins.h"
+#include "utils.h"
 
 #define ROOT_OFF_X 8192
 #define ROOT_OFF_Y 8192
@@ -84,7 +85,11 @@ class PluginManager:public KDecorationPlugins {
 
 class Decorator:public KApplication {
     Q_OBJECT public:
+#ifdef QT_45
 	Decorator ();
+#else
+        Decorator (Display* display, Qt::HANDLE visual, Qt::HANDLE colormap);
+#endif
 	~Decorator (void);
 
 	static NETRootInfo *rootInfo (void)

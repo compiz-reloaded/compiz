@@ -31,6 +31,7 @@
 #include <KDE/KLocale>
 
 #include "decorator.h"
+#include "utils.h"
 
 #include <QX11Info>
 #include <QtDBus/QtDBus>
@@ -47,6 +48,14 @@ main (int argc, char **argv)
     int		    event, error;
     Time	    timestamp;
     QString         appname;
+
+#ifndef QT_45
+    Colormap        colormap = 0;
+    Visual          *visual = 0;
+    int             event_base, error_base;
+    Display         *dpy;
+    int             screen;
+#endif
 
     options.add ("replace", ki18n ("Replace existing window decorator"));
     options.add ("sm-disable", ki18n ("Disable connection to session manager"));
@@ -92,7 +101,44 @@ main (int argc, char **argv)
     // Disable window less child widgets
     QApplication::setAttribute(Qt::AA_NativeWindows, true);
 
+#ifdef QT_45
     app = new KWD::Decorator ();
+#else
+    dpy = XOpenDisplay(0); // open default display
+    screen = DefaultScreen (dpy);
+    if (!dpy) {
+        kError() << "Cannot connect to the X server" << endl;
+        return 0;
+    }
+
+    if (XRenderQueryExtension (dpy, &event_base, &error_base))
+    {
+	int nvi;
+	XVisualInfo templ;
+	templ.screen = screen;
+	templ.depth = 32;
+	templ.c_class = TrueColor;
+        XVisualInfo *xvi = XGetVisualInfo (dpy, VisualScreenMask |
+					   VisualDepthMask |
+					   VisualClassMask, &templ, &nvi);
+
+	for (int i = 0; i < nvi; i++)
+	{
+	    XRenderPictFormat *format =
+		XRenderFindVisualFormat (dpy, xvi[i].visual);
+	    if (format->type == PictTypeDirect && format->direct.alphaMask)
+	    {
+		visual = xvi[i].visual;
+		colormap = XCreateColormap (dpy, RootWindow (dpy, screen),
+					    visual, AllocNone);
+	        break;
+	    }
+	}
+    }
+
+    app = new KWD::Decorator (dpy, visual ? Qt::HANDLE(visual) : 0,
+			      colormap ? Qt::HANDLE(colormap) : 0);
+#endif
 
     if (args->isSet ("sm-disable"))
 	app->disableSessionManagement ();
