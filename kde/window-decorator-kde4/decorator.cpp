@@ -91,10 +91,8 @@ KWD::PluginManager::PluginManager (KSharedConfigPtr config):
 }
 
 
-KWD::Decorator::Decorator (Display* display,
-			   Qt::HANDLE visual,
-			   Qt::HANDLE colormap) :
-    KApplication (display, visual, colormap),
+KWD::Decorator::Decorator () :
+    KApplication (),
     mConfig (0),
     mCompositeWindow (0),
     mSwitcher (0)

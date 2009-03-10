@@ -84,7 +84,7 @@ class PluginManager:public KDecorationPlugins {
 
 class Decorator:public KApplication {
     Q_OBJECT public:
-	Decorator (Display* display, Qt::HANDLE visual, Qt::HANDLE colormap);
+	Decorator ();
 	~Decorator (void);
 
 	static NETRootInfo *rootInfo (void)

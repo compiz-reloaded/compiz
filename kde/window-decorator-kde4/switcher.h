@@ -72,7 +72,9 @@ class Switcher
 
 	Plasma::FrameSvg *mBackground;
 	QPixmap mPixmap;
+	Pixmap mX11Pixmap;
 	QPixmap mBackgroundPixmap;
+	Pixmap mX11BackgroundPixmap;
 
 	decor_layout_t mDecorLayout;
 	decor_context_t mContext;

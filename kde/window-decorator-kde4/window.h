@@ -228,8 +228,9 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
 	decor_extents_t mBorder;
 	unsigned short mOpacity;
 	KDecoration *mDecor;
-	QPixmap mTexturePixmap;
-	QPixmap mTexturePixmapBuffer;
+	Pixmap mTexturePixmap;
+	Pixmap mTexturePixmapBuffer;
+	QSize mTexturePixmapSize;
 	Pixmap mPixmap;
 	QRegion mDamage;
 	WId mDamageId;

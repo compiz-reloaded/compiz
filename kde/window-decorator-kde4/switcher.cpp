@@ -39,7 +39,9 @@
 #include <QPainter>
 
 KWD::Switcher::Switcher (WId parentId, WId id):
-mId (id)
+    mId (id),
+    mX11Pixmap (0),
+    mX11BackgroundPixmap (0)
 {
     QPalette palette;
     long     prop[4];
@@ -86,6 +88,10 @@ mId (id)
 
 KWD::Switcher::~Switcher ()
 {
+    if (mX11Pixmap)
+	XFreePixmap (QX11Info::display (), mX11Pixmap);
+    if (mX11BackgroundPixmap)
+	XFreePixmap (QX11Info::display (), mX11BackgroundPixmap);
     delete mBackground;
 }
 
@@ -104,8 +110,23 @@ KWD::Switcher::updateGeometry ()
     KWD::readWindowProperty (mId, Atoms::switchSelectWindow,
 			     (long *)&mSelected);
 
-    mPixmap = QPixmap (width + mBorder.left + mBorder.right,
-		       height + mBorder.top + mBorder.bottom);
+    if (mX11Pixmap)
+	XFreePixmap (QX11Info::display (), mX11Pixmap);
+    if (mX11BackgroundPixmap)
+	XFreePixmap (QX11Info::display (), mX11BackgroundPixmap);
+
+    mX11Pixmap = XCreatePixmap (QX11Info::display (),
+				QX11Info::appRootWindow (),
+				width + mBorder.left + mBorder.right,
+				height + mBorder.top + mBorder.bottom, 32);
+
+    mX11BackgroundPixmap = XCreatePixmap (QX11Info::display (),
+					  QX11Info::appRootWindow (),
+					  width, height, 32);
+    
+    mPixmap = QPixmap::fromX11Pixmap (mX11Pixmap, QPixmap::ExplicitlyShared);
+    mBackgroundPixmap = QPixmap::fromX11Pixmap (mX11BackgroundPixmap,
+	    					QPixmap::ExplicitlyShared);
 
     redrawPixmap ();
     update ();
@@ -122,6 +143,7 @@ void
 KWD::Switcher::redrawPixmap ()
 {
     QPainter p (&mPixmap);
+    QPainter bp (&mBackgroundPixmap);
 
     const int contentWidth  = mPixmap.width ();
     const int contentHeight = mPixmap.height ();
@@ -134,12 +156,12 @@ KWD::Switcher::redrawPixmap ()
     mBackground->resizeFrame (QSizeF (contentWidth, contentHeight));
     mBackground->paintFrame (&p, QRect (0, 0, contentWidth, contentHeight));
 
-    mBackgroundPixmap = mPixmap.copy (mBorder.left, mBorder.top,
-				      mGeometry.width (),
-				      mGeometry.height ());
+    bp.drawPixmap (0, 0, mPixmap, mBorder.left, mBorder.top,
+		   mGeometry.width (), mGeometry.height ());
 
     XSetWindowBackgroundPixmap (QX11Info::display (), mId,
-				mBackgroundPixmap.handle ());
+				mX11BackgroundPixmap);
+
     XClearWindow (QX11Info::display (), mId);
 }
 
@@ -197,7 +219,7 @@ KWD::Switcher::updateWindowProperties ()
     nQuad = decor_set_lXrXtXbX_window_quads (quads, &mContext, &mDecorLayout,
 					     lh / 2, rh / 2, w, w / 2);
 
-    decor_quads_to_property (data, mPixmap.handle (),
+    decor_quads_to_property (data, mX11Pixmap,
 			     &mBorder, &mBorder,
 			     0, 0,
 			     quads, nQuad);

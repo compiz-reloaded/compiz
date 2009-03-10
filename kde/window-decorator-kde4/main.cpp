@@ -46,11 +46,6 @@ main (int argc, char **argv)
     int		    status;
     int		    event, error;
     Time	    timestamp;
-    Colormap        colormap = 0;
-    Visual          *visual = 0;
-    int             event_base, error_base;
-    Display         *dpy;
-    int             screen;
     QString         appname;
 
     options.add ("replace", ki18n ("Replace existing window decorator"));
@@ -94,43 +89,10 @@ main (int argc, char **argv)
 	    blurType = BLUR_TYPE_ALL;
     }
 
-    dpy = XOpenDisplay(0); // open default display
-    screen = DefaultScreen (dpy);
-    if (!dpy) {
-        kError() << "Cannot connect to the X server" << endl;
-        return 0;
-    }
-
-    if (XRenderQueryExtension (dpy, &event_base, &error_base))
-    {
-	int nvi;
-	XVisualInfo templ;
-	templ.screen = screen;
-	templ.depth = 32;
-	templ.c_class = TrueColor;
-        XVisualInfo *xvi = XGetVisualInfo (dpy, VisualScreenMask |
-					   VisualDepthMask |
-					   VisualClassMask, &templ, &nvi);
-
-	for (int i = 0; i < nvi; i++)
-	{
-	    XRenderPictFormat *format =
-		XRenderFindVisualFormat (dpy, xvi[i].visual);
-	    if (format->type == PictTypeDirect && format->direct.alphaMask)
-	    {
-		visual = xvi[i].visual;
-		colormap = XCreateColormap (dpy, RootWindow (dpy, screen),
-					    visual, AllocNone);
-	        break;
-	    }
-	}
-    }
-
     // Disable window less child widgets
     QApplication::setAttribute(Qt::AA_NativeWindows, true);
 
-    app = new KWD::Decorator (dpy, visual ? Qt::HANDLE(visual) : 0,
-			      colormap ? Qt::HANDLE(colormap) : 0);
+    app = new KWD::Decorator ();
 
     if (args->isSet ("sm-disable"))
 	app->disableSessionManagement ();
