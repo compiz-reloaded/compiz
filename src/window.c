@@ -3860,7 +3860,8 @@ unsigned int
 adjustConfigureRequestForGravity (CompWindow     *w,
 				  XWindowChanges *xwc,
 				  unsigned int   xwcm,
-				  int            gravity)
+				  int            gravity,
+				  int            direction)
 {
     int          newX, newY;
     unsigned int mask = 0;
@@ -3875,23 +3876,23 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 	case WestGravity:
 	case SouthWestGravity:
 	    if (xwcm & CWX)
-		newX += w->input.left;
+		newX += w->input.left * direction;
 	    break;
 
 	case NorthGravity:
 	case CenterGravity:
 	case SouthGravity:
 	    if (!(xwcm & CWX))
-		newX += (w->serverWidth - xwc->width) / 2;
+		newX += ((w->serverWidth - xwc->width) / 2) * direction;
 	    break;
 
 	case NorthEastGravity:
 	case EastGravity:
 	case SouthEastGravity:
 	    if (xwcm & CWX)
-		newX -= w->input.right;
+		newX -= w->input.right * direction;
 	    else
-		newX += w->serverWidth - xwc->width;
+		newX += (w->serverWidth - xwc->width) * direction;
 	    break;
 
 	case StaticGravity:
@@ -3907,23 +3908,23 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 	case NorthGravity:
 	case NorthEastGravity:
 	    if (xwcm & CWY)
-		newY += w->input.top;
+		newY += w->input.top * direction;
 	    break;
 
 	case WestGravity:
 	case CenterGravity:
 	case EastGravity:
 	    if (!(xwcm & CWY))
-		newY += (w->serverHeight - xwc->height) / 2;
+		newY += ((w->serverHeight - xwc->height) / 2) * direction;
 	    break;
 
 	case SouthWestGravity:
 	case SouthGravity:
 	case SouthEastGravity:
 	    if (xwcm & CWY)
-		newY -= w->input.bottom;
+		newY -= w->input.bottom * direction;
 	    else
-		newY += w->serverHeight - xwc->height;
+		newY += (w->serverHeight - xwc->height) * direction;
 	    break;
 
 	case StaticGravity:
@@ -3999,7 +4000,7 @@ moveResizeWindow (CompWindow     *w,
 	}
     }
 
-    xwcm |= adjustConfigureRequestForGravity (w, xwc, xwcm, gravity);
+    xwcm |= adjustConfigureRequestForGravity (w, xwc, xwcm, gravity, 1);
 
     (*w->screen->validateWindowResizeRequest) (w, &xwcm, xwc, source);
 

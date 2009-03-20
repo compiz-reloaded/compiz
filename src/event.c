@@ -1380,6 +1380,26 @@ handleEvent (CompDisplay *d,
 		if (!w->attrib.override_redirect)
 		    setWmState (d, WithdrawnState, w->id);
 
+		if (w->managed)
+		{
+		    XWindowChanges xwc;
+		    unsigned int   xwcm;
+		    int            gravity = w->sizeHints.win_gravity;
+
+		    /* revert gravity adjustment made at MapRequest time */
+		    xwc.x      = w->serverX;
+		    xwc.y      = w->serverY;
+		    xwc.width  = w->serverWidth;
+		    xwc.height = w->serverHeight;
+
+		    xwcm = adjustConfigureRequestForGravity (w, &xwc,
+							     CWX | CWY,
+							     gravity, -1);
+
+		    if (xwcm)
+			configureXWindow (w, xwcm, &xwc);
+		}
+
 		w->placed  = FALSE;
 		w->managed = FALSE;
 	    }
@@ -2049,7 +2069,7 @@ handleEvent (CompDisplay *d,
 
 		    xwcm = adjustConfigureRequestForGravity (w, &xwc,
 							     CWX | CWY,
-							     gravity);
+							     gravity, 1);
 
 		    source = ClientTypeApplication;
 		    (*w->screen->validateWindowResizeRequest) (w, &xwcm, &xwc,
