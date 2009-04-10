@@ -130,6 +130,9 @@ shotTerminate (CompDisplay     *d,
 	    removeScreenGrab (s, ss->grabIndex, NULL);
 	    ss->grabIndex = 0;
 
+	    if (state & CompActionStateCancel)
+		ss->grab = FALSE;
+
 	    if (ss->x1 != ss->x2 && ss->y1 != ss->y2)
 	    {
 		REGION reg;
