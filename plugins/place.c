@@ -60,7 +60,9 @@ typedef struct _PlaceDisplay {
 #define PLACE_SCREEN_OPTION_VIEWPORT_MATCHES   8
 #define PLACE_SCREEN_OPTION_VIEWPORT_X_VALUES  9
 #define PLACE_SCREEN_OPTION_VIEWPORT_Y_VALUES  10
-#define PLACE_SCREEN_OPTION_NUM                11
+#define PLACE_SCREEN_OPTION_MODE_MATCHES       11
+#define PLACE_SCREEN_OPTION_MODE_MODES         12
+#define PLACE_SCREEN_OPTION_NUM                13
 
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
@@ -221,6 +223,7 @@ placeSetScreenOption (CompPlugin      *plugin,
     switch (index) {
     case PLACE_SCREEN_OPTION_POSITION_MATCHES:
     case PLACE_SCREEN_OPTION_VIEWPORT_MATCHES:
+    case PLACE_SCREEN_OPTION_MODE_MATCHES:
 	if (compSetOptionList (o, value))
 	{
 	    int i;
@@ -1082,6 +1085,25 @@ placeGetPlacementOutput (CompWindow        *w,
     return &s->outputDev[output];
 }
 
+static int
+placeGetPlacementMode (CompWindow *w)
+{
+    CompListValue *matches, *modes;
+    int           i, min;
+
+    PLACE_SCREEN (w->screen);
+
+    matches = &ps->opt[PLACE_SCREEN_OPTION_MODE_MATCHES].value.list;
+    modes   = &ps->opt[PLACE_SCREEN_OPTION_MODE_MODES].value.list;
+    min     = MIN (matches->nValue, modes->nValue);
+
+    for (i = 0; i < min; i++)
+	if (matchEval (&matches->value[i].match, w))
+	    return modes->value[i].i;
+
+    return ps->opt[PLACE_SCREEN_OPTION_MODE].value.i;
+}
+
 static void
 placeConstrainToWorkarea (CompWindow *w,
 			  XRectangle *workArea,
@@ -1202,7 +1224,7 @@ placeDoWindowPlacement (CompWindow *w,
 
     if (strategy == PlaceOnly || strategy == PlaceAndConstrain)
     {
-	switch (ps->opt[PLACE_SCREEN_OPTION_MODE].value.i) {
+	switch (placeGetPlacementMode (w)) {
 	case PLACE_MODE_CASCADE:
 	    placeCascade (w, &workArea, &x, &y);
 	    break;
@@ -1605,6 +1627,9 @@ static const CompMetadataOptionInfo placeScreenOptionInfo[] = {
 	"<type>int</type><min>1</min><max>32</max>", 0, 0 },
     { "viewport_y_values", "list",
 	"<type>int</type><min>1</min><max>32</max>", 0, 0 },
+    { "mode_matches", "list", "<type>match</type>", 0, 0 },
+    { "mode_modes", "list",
+	"<type>int</type>" RESTOSTRING (0, PLACE_MODE_LAST), 0, 0 }
 };
 
 static Bool
