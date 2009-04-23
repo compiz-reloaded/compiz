@@ -113,6 +113,7 @@ typedef struct _DecorDisplay {
     DecorTexture	     *textures;
     Atom		     supportingDmCheckAtom;
     Atom		     winDecorAtom;
+    Atom		     requestFrameExtentsAtom;
     Atom		     decorAtom[DECOR_NUM];
 
     CompOption opt[DECOR_DISPLAY_OPTION_NUM];
@@ -975,6 +976,14 @@ decorHandleEvent (CompDisplay *d,
 	if (w)
 	    decorWindowUpdate (w, TRUE);
 	break;
+    case ClientMessage:
+	if (event->xclient.message_type == dd->requestFrameExtentsAtom)
+	{
+	    w = findWindowAtDisplay (d, event->xclient.window);
+	    if (w)
+		decorWindowUpdate (w, TRUE);
+	}
+	break;
     default:
 	if (event->type == d->damageEvent + XDamageNotify)
 	{
@@ -1505,6 +1514,8 @@ decorInitDisplay (CompPlugin  *p,
 	XInternAtom (d->display, DECOR_NORMAL_ATOM_NAME, 0);
     dd->decorAtom[DECOR_ACTIVE] =
 	XInternAtom (d->display, DECOR_ACTIVE_ATOM_NAME, 0);
+    dd->requestFrameExtentsAtom =
+	XInternAtom (d->display, "_NET_REQUEST_FRAME_EXTENTS", 0);
 
     WRAP (dd, d, handleEvent, decorHandleEvent);
     WRAP (dd, d, matchPropertyChanged, decorMatchPropertyChanged);
