@@ -129,6 +129,7 @@ typedef struct _DecorScreen {
     DrawWindowProc		  drawWindow;
     DamageWindowRectProc	  damageWindowRect;
     GetOutputExtentsForWindowProc getOutputExtentsForWindow;
+    AddSupportedAtomsProc         addSupportedAtoms;
 
     WindowMoveNotifyProc   windowMoveNotify;
     WindowResizeNotifyProc windowResizeNotify;
@@ -1120,6 +1121,26 @@ decorDamageWindowRect (CompWindow *w,
     return status;
 }
 
+static unsigned int
+decorAddSupportedAtoms (CompScreen   *s,
+			Atom         *atoms,
+			unsigned int size)
+{
+    unsigned int count;
+
+    DECOR_DISPLAY (s->display);
+    DECOR_SCREEN (s);
+
+    UNWRAP (ds, s, addSupportedAtoms);
+    count = (*s->addSupportedAtoms) (s, atoms, size);
+    WRAP (ds, s, addSupportedAtoms, decorAddSupportedAtoms);
+
+    if (count < size)
+	atoms[count++] = dd->requestFrameExtentsAtom;
+
+    return count;
+}
+
 static void
 decorGetOutputExtentsForWindow (CompWindow	  *w,
 				CompWindowExtents *output)
@@ -1571,10 +1592,12 @@ decorInitScreen (CompPlugin *p,
     WRAP (ds, s, windowMoveNotify, decorWindowMoveNotify);
     WRAP (ds, s, windowResizeNotify, decorWindowResizeNotify);
     WRAP (ds, s, windowStateChangeNotify, decorWindowStateChangeNotify);
+    WRAP (ds, s, addSupportedAtoms, decorAddSupportedAtoms);
 
     s->base.privates[dd->screenPrivateIndex].ptr = ds;
 
     decorCheckForDmOnScreen (s, FALSE);
+    setSupportedWmHints (s);
 
     if (!ds->dmWin)
 	ds->decoratorStartHandle = compAddTimeout (0, -1,
@@ -1606,6 +1629,9 @@ decorFiniScreen (CompPlugin *p,
     UNWRAP (ds, s, windowMoveNotify);
     UNWRAP (ds, s, windowResizeNotify);
     UNWRAP (ds, s, windowStateChangeNotify);
+    UNWRAP (ds, s, addSupportedAtoms);
+
+    setSupportedWmHints (s);
 
     free (ds);
 }

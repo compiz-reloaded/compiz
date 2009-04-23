@@ -1870,6 +1870,10 @@ typedef void (*WindowStateChangeNotifyProc) (CompWindow   *window,
 
 typedef void (*OutputChangeNotifyProc) (CompScreen *screen);
 
+typedef unsigned int (*AddSupportedAtomsProc) (CompScreen   *s,
+					       Atom         *atoms,
+					       unsigned int size);
+
 typedef void (*InitWindowWalkerProc) (CompScreen *screen,
 				      CompWalker *walker);
 
@@ -2190,6 +2194,7 @@ struct _CompScreen {
     WindowStateChangeNotifyProc windowStateChangeNotify;
 
     OutputChangeNotifyProc outputChangeNotify;
+    AddSupportedAtomsProc  addSupportedAtoms;
 
     InitWindowWalkerProc initWindowWalker;
 
@@ -2247,6 +2252,9 @@ configureScreen (CompScreen	 *s,
 void
 setCurrentOutput (CompScreen *s,
 		  int	     outputNum);
+
+void
+setSupportedWmHints (CompScreen *s);
 
 void
 updateScreenBackground (CompScreen  *screen,

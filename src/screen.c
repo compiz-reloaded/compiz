@@ -1110,106 +1110,114 @@ setSupportingWmCheck (CompScreen *s)
 		     (unsigned char *) &s->grabWindow, 1);
 }
 
-static void
-setSupported (CompScreen *s)
+static unsigned int
+addSupportedAtoms (CompScreen   *s,
+		   Atom         *atoms,
+		   unsigned int size)
 {
-    CompDisplay *d = s->display;
-    Atom	data[256];
-    int		i = 0;
+    CompDisplay  *d = s->display;
+    unsigned int count = 0;
 
-    data[i++] = d->supportedAtom;
-    data[i++] = d->supportingWmCheckAtom;
+    atoms[count++] = d->utf8StringAtom;
 
-    data[i++] = d->utf8StringAtom;
+    atoms[count++] = d->clientListAtom;
+    atoms[count++] = d->clientListStackingAtom;
 
-    data[i++] = d->clientListAtom;
-    data[i++] = d->clientListStackingAtom;
+    atoms[count++] = d->winActiveAtom;
 
-    data[i++] = d->winActiveAtom;
+    atoms[count++] = d->desktopViewportAtom;
+    atoms[count++] = d->desktopGeometryAtom;
+    atoms[count++] = d->currentDesktopAtom;
+    atoms[count++] = d->numberOfDesktopsAtom;
+    atoms[count++] = d->showingDesktopAtom;
 
-    data[i++] = d->desktopViewportAtom;
-    data[i++] = d->desktopGeometryAtom;
-    data[i++] = d->currentDesktopAtom;
-    data[i++] = d->numberOfDesktopsAtom;
-    data[i++] = d->showingDesktopAtom;
+    atoms[count++] = d->workareaAtom;
 
-    data[i++] = d->workareaAtom;
+    atoms[count++] = d->wmNameAtom;
 
-    data[i++] = d->wmNameAtom;
-/*
-    data[i++] = d->wmVisibleNameAtom;
-*/
+    atoms[count++] = d->wmStrutAtom;
+    atoms[count++] = d->wmStrutPartialAtom;
 
-    data[i++] = d->wmStrutAtom;
-    data[i++] = d->wmStrutPartialAtom;
+    atoms[count++] = d->wmUserTimeAtom;
+    atoms[count++] = d->frameExtentsAtom;
+    atoms[count++] = d->frameWindowAtom;
 
-/*
-    data[i++] = d->wmPidAtom;
-*/
+    atoms[count++] = d->winStateAtom;
+    atoms[count++] = d->winStateModalAtom;
+    atoms[count++] = d->winStateStickyAtom;
+    atoms[count++] = d->winStateMaximizedVertAtom;
+    atoms[count++] = d->winStateMaximizedHorzAtom;
+    atoms[count++] = d->winStateShadedAtom;
+    atoms[count++] = d->winStateSkipTaskbarAtom;
+    atoms[count++] = d->winStateSkipPagerAtom;
+    atoms[count++] = d->winStateHiddenAtom;
+    atoms[count++] = d->winStateFullscreenAtom;
+    atoms[count++] = d->winStateAboveAtom;
+    atoms[count++] = d->winStateBelowAtom;
+    atoms[count++] = d->winStateDemandsAttentionAtom;
 
-    data[i++] = d->wmUserTimeAtom;
-    data[i++] = d->frameExtentsAtom;
-    data[i++] = d->frameWindowAtom;
-
-    data[i++] = d->winStateAtom;
-    data[i++] = d->winStateModalAtom;
-    data[i++] = d->winStateStickyAtom;
-    data[i++] = d->winStateMaximizedVertAtom;
-    data[i++] = d->winStateMaximizedHorzAtom;
-    data[i++] = d->winStateShadedAtom;
-    data[i++] = d->winStateSkipTaskbarAtom;
-    data[i++] = d->winStateSkipPagerAtom;
-    data[i++] = d->winStateHiddenAtom;
-    data[i++] = d->winStateFullscreenAtom;
-    data[i++] = d->winStateAboveAtom;
-    data[i++] = d->winStateBelowAtom;
-    data[i++] = d->winStateDemandsAttentionAtom;
-
-    data[i++] = d->winOpacityAtom;
-    data[i++] = d->winBrightnessAtom;
+    atoms[count++] = d->winOpacityAtom;
+    atoms[count++] = d->winBrightnessAtom;
 
     if (s->canDoSaturated)
     {
-	data[i++] = d->winSaturationAtom;
-	data[i++] = d->winStateDisplayModalAtom;
+	atoms[count++] = d->winSaturationAtom;
+	atoms[count++] = d->winStateDisplayModalAtom;
     }
 
-    data[i++] = d->wmAllowedActionsAtom;
+    atoms[count++] = d->wmAllowedActionsAtom;
 
-    data[i++] = d->winActionMoveAtom;
-    data[i++] = d->winActionResizeAtom;
-    data[i++] = d->winActionStickAtom;
-    data[i++] = d->winActionMinimizeAtom;
-    data[i++] = d->winActionMaximizeHorzAtom;
-    data[i++] = d->winActionMaximizeVertAtom;
-    data[i++] = d->winActionFullscreenAtom;
-    data[i++] = d->winActionCloseAtom;
-    data[i++] = d->winActionShadeAtom;
-    data[i++] = d->winActionChangeDesktopAtom;
-    data[i++] = d->winActionAboveAtom;
-    data[i++] = d->winActionBelowAtom;
+    atoms[count++] = d->winActionMoveAtom;
+    atoms[count++] = d->winActionResizeAtom;
+    atoms[count++] = d->winActionStickAtom;
+    atoms[count++] = d->winActionMinimizeAtom;
+    atoms[count++] = d->winActionMaximizeHorzAtom;
+    atoms[count++] = d->winActionMaximizeVertAtom;
+    atoms[count++] = d->winActionFullscreenAtom;
+    atoms[count++] = d->winActionCloseAtom;
+    atoms[count++] = d->winActionShadeAtom;
+    atoms[count++] = d->winActionChangeDesktopAtom;
+    atoms[count++] = d->winActionAboveAtom;
+    atoms[count++] = d->winActionBelowAtom;
 
-    data[i++] = d->winTypeAtom;
-    data[i++] = d->winTypeDesktopAtom;
-    data[i++] = d->winTypeDockAtom;
-    data[i++] = d->winTypeToolbarAtom;
-    data[i++] = d->winTypeMenuAtom;
-    data[i++] = d->winTypeSplashAtom;
-    data[i++] = d->winTypeDialogAtom;
-    data[i++] = d->winTypeUtilAtom;
-    data[i++] = d->winTypeNormalAtom;
+    atoms[count++] = d->winTypeAtom;
+    atoms[count++] = d->winTypeDesktopAtom;
+    atoms[count++] = d->winTypeDockAtom;
+    atoms[count++] = d->winTypeToolbarAtom;
+    atoms[count++] = d->winTypeMenuAtom;
+    atoms[count++] = d->winTypeSplashAtom;
+    atoms[count++] = d->winTypeDialogAtom;
+    atoms[count++] = d->winTypeUtilAtom;
+    atoms[count++] = d->winTypeNormalAtom;
 
-    data[i++] = d->wmDeleteWindowAtom;
-    data[i++] = d->wmPingAtom;
+    atoms[count++] = d->wmDeleteWindowAtom;
+    atoms[count++] = d->wmPingAtom;
 
-    data[i++] = d->wmMoveResizeAtom;
-    data[i++] = d->moveResizeWindowAtom;
-    data[i++] = d->restackWindowAtom;
+    atoms[count++] = d->wmMoveResizeAtom;
+    atoms[count++] = d->moveResizeWindowAtom;
+    atoms[count++] = d->restackWindowAtom;
 
-    data[i++] = d->wmFullscreenMonitorsAtom;
+    atoms[count++] = d->wmFullscreenMonitorsAtom;
+
+    assert (count < size);
+
+    return count;
+}
+
+void
+setSupportedWmHints (CompScreen *s)
+{
+    CompDisplay  *d = s->display;
+    Atom	 data[256];
+    unsigned int count = 0;
+
+    data[count++] = d->supportedAtom;
+    data[count++] = d->supportingWmCheckAtom;
+
+    count += (*s->addSupportedAtoms) (s, data + count, 256 - count);
 
     XChangeProperty (d->display, s->root, d->supportedAtom, XA_ATOM, 32,
-		     PropModeReplace, (unsigned char *) data, i);
+		     PropModeReplace, (unsigned char *) data, count);
 }
 
 static void
@@ -1802,6 +1810,7 @@ addScreen (CompDisplay *display,
     s->windowStateChangeNotify = windowStateChangeNotify;
 
     s->outputChangeNotify = outputChangeNotify;
+    s->addSupportedAtoms  = addSupportedAtoms;
 
     s->initWindowWalker = initWindowWalker;
 
@@ -2357,7 +2366,7 @@ addScreen (CompDisplay *display,
 
     setDesktopHints (s);
     setSupportingWmCheck (s);
-    setSupported (s);
+    setSupportedWmHints (s);
 
     s->normalCursor = XCreateFontCursor (dpy, XC_left_ptr);
     s->busyCursor   = XCreateFontCursor (dpy, XC_watch);
