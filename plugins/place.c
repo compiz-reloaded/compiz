@@ -33,6 +33,8 @@ static int displayPrivateIndex;
 typedef struct _PlaceDisplay {
     int		    screenPrivateIndex;
 
+    Atom            fullPlacementAtom;
+
     HandleEventProc handleEvent;
 } PlaceDisplay;
 
@@ -67,6 +69,7 @@ typedef struct _PlaceDisplay {
 typedef struct _PlaceScreen {
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
 
+    AddSupportedAtomsProc           addSupportedAtoms;
     PlaceWindowProc                 placeWindow;
     ValidateWindowResizeRequestProc validateWindowResizeRequest;
 } PlaceScreen;
@@ -1438,6 +1441,26 @@ placeValidateWindowResizeRequest (CompWindow     *w,
     }
 }
 
+static unsigned int
+placeAddSupportedAtoms (CompScreen   *s,
+			Atom         *atoms,
+			unsigned int size)
+{
+    unsigned int count;
+
+    PLACE_DISPLAY (s->display);
+    PLACE_SCREEN (s);
+
+    UNWRAP (ps, s, addSupportedAtoms);
+    count = (*s->addSupportedAtoms) (s, atoms, size);
+    WRAP (ps, s, addSupportedAtoms, placeAddSupportedAtoms);
+
+    if (count < size)
+	atoms[count++] = pd->fullPlacementAtom;
+
+    return count;
+}
+
 static Bool
 placePlaceWindow (CompWindow *w,
 		  int        x,
@@ -1593,6 +1616,9 @@ placeInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
+    pd->fullPlacementAtom = XInternAtom (d->display,
+					 "_NET_WM_FULL_PLACEMENT", 0);
+
     d->base.privates[displayPrivateIndex].ptr = pd;
 
     WRAP (pd, d, handleEvent, placeHandleEvent);
@@ -1657,8 +1683,11 @@ placeInitScreen (CompPlugin *p,
     WRAP (ps, s, placeWindow, placePlaceWindow);
     WRAP (ps, s, validateWindowResizeRequest,
 	  placeValidateWindowResizeRequest);
+    WRAP (ps, s, addSupportedAtoms, placeAddSupportedAtoms);
 
     s->base.privates[pd->screenPrivateIndex].ptr = ps;
+
+    setSupportedWmHints (s);
 
     return TRUE;
 }
@@ -1671,6 +1700,9 @@ placeFiniScreen (CompPlugin *p,
 
     UNWRAP (ps, s, placeWindow);
     UNWRAP (ps, s, validateWindowResizeRequest);
+    UNWRAP (ps, s, addSupportedAtoms);
+
+    setSupportedWmHints (s);
 
     compFiniScreenOptions (s, ps->opt, PLACE_SCREEN_OPTION_NUM);
 
