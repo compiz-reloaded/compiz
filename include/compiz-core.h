@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20090207
+#define CORE_ABIVERSION 20090619
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1759,6 +1759,8 @@ typedef GLXPixmap (*GLXCreatePixmapProc) (Display     *display,
 					  GLXFBConfig config,
 					  Pixmap      pixmap,
 					  const int   *attribList);
+typedef void (*GLXDestroyPixmapProc) (Display   *display,
+				      GLXPixmap pixmap);
 
 typedef void (*GLActiveTextureProc) (GLenum texture);
 typedef void (*GLClientActiveTextureProc) (GLenum texture);
@@ -2129,6 +2131,7 @@ struct _CompScreen {
     GLXGetFBConfigsProc      getFBConfigs;
     GLXGetFBConfigAttribProc getFBConfigAttrib;
     GLXCreatePixmapProc      createPixmap;
+    GLXDestroyPixmapProc     destroyPixmap;
 
     GLActiveTextureProc       activeTexture;
     GLClientActiveTextureProc clientActiveTexture;

@@ -1921,6 +1921,8 @@ addScreen (CompDisplay *display,
 	getProcAddress (s, "glXGetFBConfigAttrib");
     s->createPixmap = (GLXCreatePixmapProc)
 	getProcAddress (s, "glXCreatePixmap");
+    s->destroyPixmap = (GLXDestroyPixmapProc)
+	getProcAddress (s, "glXDestroyPixmap");
 
     if (!s->bindTexImage)
     {
@@ -1939,7 +1941,8 @@ addScreen (CompDisplay *display,
     if (!s->queryDrawable     ||
 	!s->getFBConfigs      ||
 	!s->getFBConfigAttrib ||
-	!s->createPixmap)
+	!s->createPixmap      ||
+	!s->destroyPixmap)
     {
 	compLogMessage ("core", CompLogLevelFatal,
 			"fbconfig functions missing");

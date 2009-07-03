@@ -342,7 +342,7 @@ bindPixmapToTexture (CompScreen  *screen,
 			"pixmap 0x%x can't be bound to texture",
 			(int) pixmap);
 
-	glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
+	(*screen->destroyPixmap) (screen->display->display, texture->pixmap);
 	texture->pixmap = None;
 
 	return FALSE;
@@ -396,7 +396,7 @@ releasePixmapFromTexture (CompScreen  *screen,
 	glBindTexture (texture->target, 0);
 	glDisable (texture->target);
 
-	glXDestroyGLXPixmap (screen->display->display, texture->pixmap);
+	(*screen->destroyPixmap) (screen->display->display, texture->pixmap);
 
 	texture->pixmap = None;
     }
