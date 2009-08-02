@@ -948,7 +948,7 @@ switchWindowRemove (CompDisplay *d,
 
 		if (w->id == selected)
 		{
-		    if (i < ss->nWindows)
+		    if (i + 1 < ss->nWindows)
 			selected = ss->windows[i + 1]->id;
 		    else
 			selected = ss->windows[0]->id;
