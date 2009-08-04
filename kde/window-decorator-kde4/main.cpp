@@ -27,6 +27,7 @@
 #include <fixx11h.h>
 #include <KDE/KApplication>
 #include <KDE/KCmdLineArgs>
+#include <KDE/KAboutData>
 #include <KDE/KDebug>
 #include <KDE/KLocale>
 
@@ -67,6 +68,10 @@ main (int argc, char **argv)
 		 ki18n ("No active decoration opacity shading"));
     options.add ("blur <type>", ki18n ("Blur type"), "none");
 
+    KAboutData about("kde-window-decorator", "kwin", ki18n ("KDE Window Decorator"),
+                     "0.0.1", KLocalizedString(), KAboutData::License_GPL,
+                     KLocalizedString(), KLocalizedString(), "http://www.compiz.org", 
+		     "dev@lists.compiz-fusion.org");
     KCmdLineArgs::init (argc, argv,
 			"kde-window-decorator",
 			"kwin",
