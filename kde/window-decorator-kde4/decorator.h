@@ -55,11 +55,6 @@ struct _cursor {
 
 extern struct _cursor cursors[3][3];
 
-extern double decorationOpacity;
-extern bool   decorationOpacityShade;
-extern double activeDecorationOpacity;
-extern bool   activeDecorationOpacityShade;
-
 #define BLUR_TYPE_NONE     0
 #define BLUR_TYPE_TITLEBAR 1
 #define BLUR_TYPE_ALL      2
@@ -85,11 +80,8 @@ class PluginManager:public KDecorationPlugins {
 
 class Decorator:public KApplication {
     Q_OBJECT public:
-#ifdef QT_45
+
 	Decorator ();
-#else
-        Decorator (Display* display, Qt::HANDLE visual, Qt::HANDLE colormap);
-#endif
 	~Decorator (void);
 
 	static NETRootInfo *rootInfo (void)
@@ -112,18 +104,7 @@ class Decorator:public KApplication {
 	{
 	    return &mShadowOptions;
 	}
-	static decor_shadow_t *defaultWindowShadow (decor_context_t *context,
-						    decor_extents_t *border)
-	{
-	    if (!mDefaultShadow)
-		return NULL;
 
-	    if (memcmp (border, &mDefaultBorder, sizeof (decor_extents_t)) != 0)
-		return NULL;
-
-	    *context = mDefaultContext;
-	    return mDefaultShadow;
-	}
 	static void sendClientMessage (WId  eventWid,
 				       WId  wid,
 				       Atom atom,
@@ -131,9 +112,8 @@ class Decorator:public KApplication {
 				       long data1 = 0,
 				       long data2 = 0,
 				       long data3 = 0);
-	static void updateDefaultShadow (KWD::Window *w);
 
-	bool enableDecorations (Time timestamp, int  damageEvent);
+	bool enableDecorations (Time timestamp);
 	bool x11EventFilter (XEvent *xevent);
 	void changeShadowOptions (decor_shadow_options_t *opt);
 
@@ -151,7 +131,7 @@ class Decorator:public KApplication {
 	void handleActiveWindowChanged (WId id);
 	void handleWindowChanged (WId		      id,
 				  const unsigned long *properties);
-	void processDamage (void);
+
 	void shadowRadiusChanged (double value);
 	void shadowOpacityChanged (double value);
 	void shadowXOffsetChanged (int value);
@@ -163,9 +143,6 @@ class Decorator:public KApplication {
     private:
 	static PluginManager *mPlugins;
 	static KWD::Options *mOptions;
-	static decor_extents_t mDefaultBorder;
-	static decor_context_t mDefaultContext;
-	static decor_shadow_t *mDefaultShadow;
 	static decor_shadow_t *mNoBorderShadow;
 	static decor_shadow_options_t mShadowOptions;
 	static NETRootInfo *mRootInfo;
@@ -175,11 +152,8 @@ class Decorator:public KApplication {
 	KWD::Window *mDecorActive;
 	QMap <WId, KWD::Window *>mClients;
 	QMap <WId, KWD::Window *>mFrames;
-	QMap <WId, KWD::Window *>mWindows;
 	KConfig *mConfig;
 	Time mDmSnTimestamp;
-	int mDamageEvent;
-	QTimer mIdleTimer;
 
 	WId mCompositeWindow;
 

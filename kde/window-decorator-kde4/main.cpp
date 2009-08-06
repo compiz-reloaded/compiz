@@ -46,27 +46,12 @@ main (int argc, char **argv)
     KCmdLineArgs    *args;
     KCmdLineOptions options;
     int		    status;
-    int		    event, error;
     Time	    timestamp;
     QString         appname;
 
-#ifndef QT_45
-    Colormap        colormap = 0;
-    Visual          *visual = 0;
-    int             event_base, error_base;
-    Display         *dpy;
-    int             screen;
-#endif
-
     options.add ("replace", ki18n ("Replace existing window decorator"));
     options.add ("sm-disable", ki18n ("Disable connection to session manager"));
-    options.add ("opacity <value>", ki18n ("Decoration opacity"), "0.75");
-    options.add ("no-opacity-shade", ki18n ("No decoration opacity shading"));
-    options.add ("active-opacity <value>",
-		 ki18n ("Active decoration opacity"), "1.0");
-    options.add ("no-active-opacity-shade",
-		 ki18n ("No active decoration opacity shading"));
-    options.add ("blur <type>", ki18n ("Blur type"), "none");
+    options.add ("blur <type>", ki18n ("Blur type (none/titlebar/all)"), "none");
 
     KAboutData about("kde-window-decorator", "kwin", ki18n ("KDE Window Decorator"),
                      "0.0.1", KLocalizedString(), KAboutData::License_GPL,
@@ -80,19 +65,6 @@ main (int argc, char **argv)
     KCmdLineArgs::addCmdLineOptions (options);
     args = KCmdLineArgs::parsedArgs ();
 
-    if (args->isSet ("opacity"))
-	decorationOpacity = args->getOption ("opacity").toDouble ();
-
-    if (args->isSet ("-opacity-shade"))
-	decorationOpacityShade = true;
-
-    if (args->isSet ("active-opacity"))
-	activeDecorationOpacity =
-	    args->getOption ("active-opacity").toDouble ();
-
-    if (args->isSet ("-active-opacity-shade"))
-	activeDecorationOpacityShade = true;
-
     if (args->isSet ("blur"))
     {
 	QString blur = args->getOption ("blur");
@@ -103,59 +75,10 @@ main (int argc, char **argv)
 	    blurType = BLUR_TYPE_ALL;
     }
 
-    // Disable window less child widgets
-    QApplication::setAttribute(Qt::AA_NativeWindows, true);
-
-#ifdef QT_45
     app = new KWD::Decorator ();
-#else
-    dpy = XOpenDisplay(0); // open default display
-    screen = DefaultScreen (dpy);
-    if (!dpy) {
-        kError() << "Cannot connect to the X server" << endl;
-        return 0;
-    }
-
-    if (XRenderQueryExtension (dpy, &event_base, &error_base))
-    {
-	int nvi;
-	XVisualInfo templ;
-	templ.screen = screen;
-	templ.depth = 32;
-	templ.c_class = TrueColor;
-        XVisualInfo *xvi = XGetVisualInfo (dpy, VisualScreenMask |
-					   VisualDepthMask |
-					   VisualClassMask, &templ, &nvi);
-
-	for (int i = 0; i < nvi; i++)
-	{
-	    XRenderPictFormat *format =
-		XRenderFindVisualFormat (dpy, xvi[i].visual);
-	    if (format->type == PictTypeDirect && format->direct.alphaMask)
-	    {
-		visual = xvi[i].visual;
-		colormap = XCreateColormap (dpy, RootWindow (dpy, screen),
-					    visual, AllocNone);
-	        break;
-	    }
-	}
-    }
-
-    app = new KWD::Decorator (dpy, visual ? Qt::HANDLE(visual) : 0,
-			      colormap ? Qt::HANDLE(colormap) : 0);
-#endif
 
     if (args->isSet ("sm-disable"))
 	app->disableSessionManagement ();
-
-    if (!XDamageQueryExtension (QX11Info::display(), &event, &error))
-    {
-	fprintf (stderr,
-		 "%s: Damage extension is missing on display \"%s\"\n",
-		 argv[0], DisplayString (QX11Info::display()));
-
-	return 1;
-    }
 
     status = decor_acquire_dm_session (QX11Info::display(),
 				       QX11Info::appScreen (),
@@ -187,7 +110,7 @@ main (int argc, char **argv)
 
     decor_set_dm_check_hint (QX11Info::display(), QX11Info::appScreen ());
 
-    if (!app->enableDecorations (timestamp, event))
+    if (!app->enableDecorations (timestamp))
     {
 	fprintf (stderr,
 		 "%s: Could not enable decorations on display \"%s\"\n",
