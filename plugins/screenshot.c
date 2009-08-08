@@ -23,6 +23,8 @@
  * Author: David Reveman <davidr@novell.com>
  */
 
+#define _GNU_SOURCE
+
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
@@ -37,6 +39,8 @@ static int displayPrivateIndex;
 #define SHOT_DISPLAY_OPTION_DIR             1
 #define SHOT_DISPLAY_OPTION_LAUNCH_APP      2
 #define SHOT_DISPLAY_OPTION_NUM             3
+
+#define MAX_LINE_LENGTH 1024
 
 typedef struct _ShotDisplay {
     int		    screenPrivateIndex;
@@ -181,6 +185,105 @@ shotSort (const void *_a,
 	return al - bl;
 }
 
+static char *
+shotGetXDGDesktopDir (void)
+{
+    int nPrinted;
+    FILE *userDirsFile;
+    char *userDirsFilePath = NULL;
+    const char *userDirsPathSuffix = "/user-dirs.dirs";
+    const char *varName = "XDG_DESKTOP_DIR";
+    size_t varLength = strlen (varName);
+    char line[MAX_LINE_LENGTH];
+
+    char *home = getenv ("HOME");
+    if (!home)
+	return NULL;
+
+    int homeLength = strlen (home);
+    if (!homeLength)
+	return NULL;
+
+    char *configHome = getenv ("XDG_CONFIG_HOME");
+    if (configHome && strlen (configHome))
+    {
+	nPrinted = asprintf (&userDirsFilePath, "%s%s",
+			     configHome, userDirsPathSuffix);
+    }
+    else
+    {
+	nPrinted = asprintf (&userDirsFilePath, "%s/.config%s",
+			     home, userDirsPathSuffix);
+    }
+    if (nPrinted < 0)
+	return NULL;
+
+    userDirsFile = fopen (userDirsFilePath, "r");
+    free (userDirsFilePath);
+
+    if (!userDirsFile)
+    {
+	return NULL;
+    }
+
+    /* The user-dirs file has lines like:
+     * XDG_DESKTOP_DIR="$HOME/Desktop"
+     * Read it line by line until the desired directory variable is found.
+     */
+    while (fgets (line, MAX_LINE_LENGTH, userDirsFile) != NULL)
+    {
+	char *varStart = strstr (line, varName);
+	if (varStart) /* if found */
+	{
+	    fclose (userDirsFile);
+
+	     /* Remove any trailing \r \n characters */
+	    while (strlen (line) > 0 &&
+		   (line[strlen (line) - 1] == '\r' ||
+		    line[strlen (line) - 1] == '\n'))
+		line[strlen (line) - 1] = '\0';
+
+	    /* Skip the =" part */
+	    size_t valueStartPos = (varStart - line) + varLength + 2;
+
+	    /* Ignore the " at the end */
+	    size_t valueSrcLength = strlen (line) - valueStartPos - 1;
+	    size_t homeEndSrcPos = 0;
+
+	    size_t valueDstLength = valueSrcLength;
+	    size_t homeEndDstPos = 0;
+
+	    if (!strncmp (line + valueStartPos, "$HOME", 5))
+	    {
+		valueDstLength += homeLength - 5;
+		homeEndDstPos = homeLength;
+		homeEndSrcPos = 5;
+	    }
+	    else if (!strncmp (line + valueStartPos, "${HOME}", 7))
+	    {
+		valueDstLength += homeLength - 7;
+		homeEndDstPos = homeLength;
+		homeEndSrcPos = 7;
+	    }
+
+	    char *desktopDir = malloc (valueDstLength + 1);
+
+	    /* Copy the home folder part (if necessary) */
+	    if (homeEndDstPos > 0)
+		strcpy (desktopDir, home);
+
+	    /* Copy the rest */
+	    strncpy (desktopDir + homeEndDstPos,
+		     line + valueStartPos + homeEndSrcPos,
+		     valueSrcLength - homeEndSrcPos);
+	    desktopDir[valueDstLength] = '\0';
+
+	    return desktopDir;
+	}
+    }
+    return NULL;
+}
+
 static void
 shotPaintScreen (CompScreen   *s,
 		 CompOutput   *outputs,
@@ -213,6 +316,17 @@ shotPaintScreen (CompScreen   *s,
 	    {
 		GLubyte *buffer;
 		char	*dir = sd->opt[SHOT_DISPLAY_OPTION_DIR].value.s;
+		Bool    allocatedDir = FALSE;
+
+		if (strlen (dir) == 0)
+		{
+		    // If dir is empty, use user's desktop directory instead
+		    dir = shotGetXDGDesktopDir ();
+		    if (dir)
+			allocatedDir = TRUE;
+		    else
+			dir = "";
+		}
 
 		buffer = malloc (sizeof (GLubyte) * w * h * 4);
 		if (buffer)
@@ -275,6 +389,8 @@ shotPaintScreen (CompScreen   *s,
 
 		    free (buffer);
 		}
+		if (allocatedDir)
+		    free (dir);
 	    }
 
 	    ss->grab = FALSE;
