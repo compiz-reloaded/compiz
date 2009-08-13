@@ -281,6 +281,7 @@ shotGetXDGDesktopDir (void)
 	    return desktopDir;
 	}
     }
+    fclose (userDirsFile);
     return NULL;
 }
 
