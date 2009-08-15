@@ -349,10 +349,10 @@ resizeInitiate (CompDisplay     *d,
 	}
 	else if (!mask)
 	{
-	    unsigned int sectorSizeX = w->serverWidth / 3;
-	    unsigned int sectorSizeY = w->serverHeight / 3;
-	    unsigned int posX        = x - w->serverX;
-	    unsigned int posY        = y - w->serverY;
+	    int sectorSizeX = w->serverWidth / 3;
+	    int sectorSizeY = w->serverHeight / 3;
+	    int posX        = x - w->serverX;
+	    int posY        = y - w->serverY;
 
 	    if (posX < sectorSizeX)
 		mask |= ResizeLeftMask;
