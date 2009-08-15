@@ -1089,6 +1089,7 @@ switchHandleEvent (CompDisplay *d,
     SWITCH_DISPLAY (d);
 
     switch (event->type) {
+    case MapNotify:
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
