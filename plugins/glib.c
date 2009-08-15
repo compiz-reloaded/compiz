@@ -40,6 +40,7 @@ typedef struct _GLibWatch {
 typedef struct _GConfDisplay {
     HandleEventProc   handleEvent;
     CompTimeoutHandle timeoutHandle;
+    CompTimeoutHandle wakeupTimeoutHandle;
     gint	      maxPriority;
     GPollFD	      *fds;
     gint	      fdsSize;
@@ -77,7 +78,14 @@ static Bool
 glibDispatchAndPrepare (void *closure)
 {
     CompDisplay  *display = (CompDisplay *) closure;
+    GLIB_DISPLAY (display);
     GMainContext *context = g_main_context_default ();
+
+    if (gd->wakeupTimeoutHandle)
+    {
+	compRemoveTimeout (gd->wakeupTimeoutHandle);
+	gd->wakeupTimeoutHandle = 0;
+    }
 
     glibDispatch (display, context);
     glibPrepare (display, context);
@@ -93,9 +101,10 @@ glibWakeup (CompDisplay *display)
     if (gd->timeoutHandle)
     {
 	compRemoveTimeout (gd->timeoutHandle);
-	compAddTimeout (0, 0, glibDispatchAndPrepare, (void *) display);
-
 	gd->timeoutHandle = 0;
+
+	gd->wakeupTimeoutHandle =
+	    compAddTimeout (0, 0, glibDispatchAndPrepare, (void *) display);
     }
 }
 
@@ -202,6 +211,7 @@ glibInitDisplay (CompPlugin  *p,
     gd->fds	      = NULL;
     gd->fdsSize	      = 0;
     gd->timeoutHandle = 0;
+    gd->wakeupTimeoutHandle = 0;
     gd->notifyAtom    = XInternAtom (d->display, "_COMPIZ_GLIB_NOTIFY", 0);
 
     WRAP (gd, d, handleEvent, glibHandleEvent);
@@ -221,6 +231,9 @@ glibFiniDisplay (CompPlugin  *p,
 
     if (gd->timeoutHandle)
 	compRemoveTimeout (gd->timeoutHandle);
+
+    if (gd->wakeupTimeoutHandle)
+	compRemoveTimeout (gd->wakeupTimeoutHandle);
 
     glibDispatch (d, g_main_context_default ());
 
