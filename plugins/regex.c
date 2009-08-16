@@ -43,6 +43,7 @@ typedef struct _RegexDisplay {
     MatchInitExpProc matchInitExp;
     Atom	     roleAtom;
     Atom             visibleNameAtom;
+    CompTimeoutHandle timeoutHandle;
 } RegexDisplay;
 
 typedef struct _RegexScreen {
@@ -354,6 +355,10 @@ regexRegisterExpHandler (void *closure)
 
     (*display->matchExpHandlerChanged) (display);
 
+    REGEX_DISPLAY (display);
+
+    rd->timeoutHandle = 0;
+
     return FALSE;
 }
 
@@ -387,7 +392,8 @@ regexInitDisplay (CompPlugin  *p,
 
     /* one shot timeout to which will register the expression handler
        after all screens and windows have been initialized */
-    compAddTimeout (0, 0, regexRegisterExpHandler, (void *) d);
+    rd->timeoutHandle =
+	compAddTimeout (0, 0, regexRegisterExpHandler, (void *) d);
 
     return TRUE;
 }
@@ -399,6 +405,9 @@ regexFiniDisplay (CompPlugin  *p,
     REGEX_DISPLAY (d);
 
     freeScreenPrivateIndex (d, rd->screenPrivateIndex);
+
+    if (rd->timeoutHandle)
+	compRemoveTimeout (rd->timeoutHandle);
 
     UNWRAP (rd, d, handleEvent);
     UNWRAP (rd, d, matchInitExp);

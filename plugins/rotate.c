@@ -1893,6 +1893,9 @@ rotateFiniScreen (CompPlugin *p,
     CUBE_SCREEN (s);
     ROTATE_SCREEN (s);
 
+    if (rs->rotateHandle)
+	compRemoveTimeout (rs->rotateHandle);
+
     UNWRAP (rs, cs, getRotation);
 
     UNWRAP (rs, s, preparePaintScreen);
