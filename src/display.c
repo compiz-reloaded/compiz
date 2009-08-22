@@ -2388,6 +2388,18 @@ removeDisplay (CompDisplay *d)
 
     objectFiniPlugins (&d->base);
 
+    if (d->edgeDelayHandle)
+    {
+	void *closure;
+
+	closure = compRemoveTimeout (d->edgeDelayHandle);
+	if (closure)
+	    free (closure);
+    }
+
+    if (d->autoRaiseHandle)
+	compRemoveTimeout (d->autoRaiseHandle);
+
     compRemoveTimeout (d->pingHandle);
 
     if (d->snDisplay)
