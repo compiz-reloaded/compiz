@@ -2128,6 +2128,9 @@ scaleFiniScreen (CompPlugin *p,
     if (ss->cursor)
 	XFreeCursor (s->display->display, ss->cursor);
 
+    if (ss->hoverHandle)
+	compRemoveTimeout (ss->hoverHandle);
+
     if (ss->slotsSize)
 	free (ss->slots);
 

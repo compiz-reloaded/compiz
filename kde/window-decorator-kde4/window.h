@@ -43,9 +43,14 @@ class KDecoration;
 class KActionCollection;
 class QMenu;
 
+namespace KWin
+{
+    class PaintRedirector;
+}
+
 namespace KWD
 {
-class Window:public QWidget, public KDecorationBridgeUnstable {
+class Window: public QObject, public KDecorationBridgeUnstable {
     Q_OBJECT public:
 
 	enum Type
@@ -105,44 +110,38 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
 	virtual void grabXServer (bool grab);
 
 	/* unstable API */
-	virtual void repaintShadow ();
 	virtual bool compositingActive () const;
-	virtual bool shadowsActive () const;
-	virtual double opacity () const;
 
 	void handleActiveChange (void);
 	void updateFrame (WId frame);
 	void updateWindowGeometry (void);
 	void updateCursor (QPoint pos);
 	void updateSelected (WId selected);
+	
 	WId frameId (void) const
 	{
 	    return mFrame;
 	}
+	
 	KDecoration *decoration (void) const
 	{
 	    return mDecor;
 	}
+	
+	QWidget *decorWidget (void) const;
+	QWidget *childAt (int x, int y) const;
+	QPoint mapToChildAt (QPoint p) const;
+	
 	QWidget *activeChild (void) const
 	{
 	    return mActiveChild;
 	}
+	
 	void setActiveChild (QWidget * child)
 	{
 	    mActiveChild = child;
 	}
-	QRegion *getShape (void)
-	{
-	    if (mShapeSet)
-		return &mShape;
-
-	    return NULL;
-	}
-	void getShapeInfo (bool *horz, bool *vert)
-	{
-	    *horz = mUniqueHorzShape;
-	    *vert = mUniqueVertShape;
-	}
+	
 	void moveWindow (QMouseEvent *qme);
 	void reloadDecoration (void);
 	void updateState (void);
@@ -157,21 +156,10 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
 	{
 	    return mPixmap;
 	}
-	void addDamageRect (int x, int y, int w, int h)
-	{
-	    mDamage += QRegion (x, y, w, h);
-	}
+	
 	bool handleMap (void);
 	bool handleConfigure (QSize size);
-	void processDamage (void);
-	decor_context_t *context (void)
-	{
-	    return &mContext;
-	}
-	decor_shadow_t *shadow (void)
-	{
-	    return mShadow;
-	}
+	
 	decor_extents_t *border (void)
 	{
 	    return &mBorder;
@@ -194,7 +182,7 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
 
     private:
 	void createDecoration (void);
-	bool resizeDecoration (bool force = false);
+	void resizeDecoration (bool force = false);
 	void updateBlurProperty (int topOffset,
 				 int bottomOffset,
 				 int leftOffset,
@@ -205,15 +193,14 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
 				  QMouseEvent		     *qme);
 	NET::Direction positionToDirection (int pos);
 	Cursor positionToCursor (QPoint pos);
-	void rebindPixmap (void);
-
 
     private slots:
-	void updateShadow (void);
 	void handlePopupActivated (QAction *action);
 	void handleOpacityPopupActivated (QAction *action);
 	void handleDesktopPopupActivated (QAction *action);
 	void handlePopupAboutToShow (void);
+
+	void decorRepaintPending ();
 
     private:
 	Type mType;
@@ -226,24 +213,14 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
 	QPixmap mIcon;
 	QPixmap mMiniIcon;
 	decor_extents_t mBorder;
+	decor_extents_t mPadding;
+	decor_extents_t mExtents;
 	unsigned short mOpacity;
 	KDecoration *mDecor;
-	Pixmap mTexturePixmap;
-	Pixmap mTexturePixmapBuffer;
-	QSize mTexturePixmapSize;
 	Pixmap mPixmap;
-	QRegion mDamage;
-	WId mDamageId;
-	decor_layout_t mLayout;
-	decor_context_t mContext;
-	decor_shadow_t *mShadow;
-	Picture mPicture;
-	Picture mTexturePicture;
-	Picture mDecorationPicture;
+	QPixmap mPixmapQt;
 	bool mUpdateProperty;
 	bool mShapeSet;
-	bool mUniqueHorzShape;
-	bool mUniqueVertShape;
 	QRegion mShape;
 	QWidget *mActiveChild;
 	bool mSupportTakeFocus;
@@ -253,10 +230,7 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
 	QMenu *mOpacityMenu;
 	QMenu *mDesktopMenu;
 	unsigned long mState;
-	bool mMapped;
-	int mPendingMap;
-	int mPendingConfigure;
-	QSize mSize;
+
 	QProcess mProcessKiller;
 	KActionCollection mKeys;
 	bool mFakeRelease;
@@ -272,6 +246,8 @@ class Window:public QWidget, public KDecorationBridgeUnstable {
         QAction *mMinimizeOpAction;
         QAction *mCloseOpAction;
 	QAction *mDesktopOpAction;
+
+	KWin::PaintRedirector *mPaintRedirector;
     };
 }
 

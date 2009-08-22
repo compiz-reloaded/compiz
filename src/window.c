@@ -1697,7 +1697,7 @@ updateWindowRegion (CompWindow *w)
 					  ShapeBounding, &n, &order);
     }
 
-    if (n < 2)
+    if (n < 1)
     {
 	r.x      = -w->attrib.border_width;
 	r.y      = -w->attrib.border_width;

@@ -704,9 +704,10 @@ addSequence (CompScreen        *screen,
     screen->startupSequences = s;
 
     if (!screen->startupSequenceTimeoutHandle)
-	compAddTimeout (1000, 1500,
-			startupSequenceTimeout,
-			screen);
+	screen->startupSequenceTimeoutHandle =
+	    compAddTimeout (1000, 1500,
+			    startupSequenceTimeout,
+			    screen);
 
     updateStartupFeedback (screen);
 }
@@ -743,6 +744,27 @@ removeSequence (CompScreen        *screen,
 	screen->startupSequenceTimeoutHandle = 0;
     }
 
+    updateStartupFeedback (screen);
+}
+
+static void
+removeAllSequences (CompScreen *screen)
+{
+    CompStartupSequence *s;
+    CompStartupSequence *sNext;
+
+    for (s = screen->startupSequences; s; s = sNext)
+    {
+	sn_startup_sequence_unref (s->sequence);
+	free (s);
+    }
+    screen->startupSequences = NULL;
+
+    if (screen->startupSequenceTimeoutHandle)
+    {
+	compRemoveTimeout (screen->startupSequenceTimeoutHandle);
+	screen->startupSequenceTimeoutHandle = 0;
+    }
     updateStartupFeedback (screen);
 }
 
@@ -2395,6 +2417,8 @@ removeScreen (CompScreen *s)
 	p->next = s->next;
     else
 	d->screens = NULL;
+
+    removeAllSequences (s);
 
     while (s->windows)
 	removeWindow (s->windows);

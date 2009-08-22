@@ -3,6 +3,7 @@ if USE_KDE4
 BUILDSOURCES =		      \
 	decorator.moc.cpp     \
 	window.moc.cpp        \
+	paintredirector.moc.cpp \
 	kwinadaptor.moc.cpp   \
 	kwinadaptor.cpp       \
 	kwinadaptor.h
@@ -30,6 +31,8 @@ dist_kde4_window_decorator_SOURCES = \
 	kdecoration_plugins.h   \
 	switcher.cpp            \
 	switcher.h              \
+	paintredirector.cpp     \
+	paintredirector.h       \
 	org.kde.KWin.xml
 
 kde4_window_decorator_program = kde4-window-decorator

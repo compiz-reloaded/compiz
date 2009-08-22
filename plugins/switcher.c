@@ -948,7 +948,7 @@ switchWindowRemove (CompDisplay *d,
 
 		if (w->id == selected)
 		{
-		    if (i < ss->nWindows)
+		    if (i + 1 < ss->nWindows)
 			selected = ss->windows[i + 1]->id;
 		    else
 			selected = ss->windows[0]->id;
@@ -1089,6 +1089,7 @@ switchHandleEvent (CompDisplay *d,
     SWITCH_DISPLAY (d);
 
     switch (event->type) {
+    case MapNotify:
 	w = findWindowAtDisplay (d, event->xmap.window);
 	if (w)
 	{
