@@ -704,9 +704,10 @@ addSequence (CompScreen        *screen,
     screen->startupSequences = s;
 
     if (!screen->startupSequenceTimeoutHandle)
-	compAddTimeout (1000, 1500,
-			startupSequenceTimeout,
-			screen);
+	screen->startupSequenceTimeoutHandle =
+	    compAddTimeout (1000, 1500,
+			    startupSequenceTimeout,
+			    screen);
 
     updateStartupFeedback (screen);
 }
