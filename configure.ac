@@ -331,7 +331,7 @@ if test "x$use_gtk" = "xyes"; then
 
     if test "x$use_gnome" = "xyes"; then
       PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,
-			gnome-window-settings-2.0 gnome-desktop-2.0,
+			gnome-window-settings-2.0 gnome-desktop-2.0 gconf-2.0,
 			[use_gnome=yes], [use_gnome=no])
     fi
 
