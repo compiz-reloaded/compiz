@@ -4273,12 +4273,15 @@ updateWindowAttributes (CompWindow             *w,
 	{
 	    /* put active or soon-to-be-active fullscreen windows over
 	       all others in their layer */
-	    if (w->id == w->screen->display->activeWindow ||
-		stackingMode == CompStackingUpdateModeInitialMap)
+	    if (w->id == w->screen->display->activeWindow)
 	    {
 		aboveFs = TRUE;
 	    }
 	}
+
+	/* put windows that are just mapped, over fullscreen windows */
+	if (stackingMode == CompStackingUpdateModeInitialMap)
+	    aboveFs = TRUE;
 
 	sibling = findSiblingBelow (w, aboveFs);
 
