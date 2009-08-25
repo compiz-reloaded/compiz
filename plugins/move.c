@@ -899,6 +899,9 @@ moveFiniDisplay (CompPlugin  *p,
 
     compFiniDisplayOptions (d, md->opt, MOVE_DISPLAY_OPTION_NUM);
 
+    if (md->region)
+	XDestroyRegion (md->region);
+
     free (md);
 }
 
