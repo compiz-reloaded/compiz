@@ -2083,8 +2083,6 @@ addWindow (CompScreen *screen,
     w->paint.xTranslate	= 0.0f;
     w->paint.yTranslate	= 0.0f;
 
-    w->lastPaint = w->paint;
-
     w->alive = TRUE;
 
     w->mwmDecor = MwmDecorAll;
@@ -2268,6 +2266,8 @@ addWindow (CompScreen *screen,
 	w->paint.saturation = getWindowProp32 (d, w->id,
 					       d->winSaturationAtom, COLOR);
 	
+    w->lastPaint = w->paint;
+
     if (w->attrib.map_state == IsViewable)
     {
 	w->placed = TRUE;
