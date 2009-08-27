@@ -1458,6 +1458,9 @@ KWD::Window::moveWindow (QMouseEvent *qme)
     NET::Direction direction;
 
     direction = positionToDirection (mDecor->mousePosition (qme->pos ()));
+    
+    QPoint p (mGeometry.x () - mExtents.left, mGeometry.y () - mExtents.top);
+    p += qme->pos ();
 
     XUngrabPointer (QX11Info::display(), CurrentTime);
     XUngrabKeyboard (QX11Info::display(), CurrentTime);
@@ -1465,9 +1468,10 @@ KWD::Window::moveWindow (QMouseEvent *qme)
     Decorator::rootInfo ()->restackRequest (mClientId, NET::FromApplication,
 			 		    None, Above,
 					    QX11Info::appTime());
+					    
     Decorator::rootInfo ()->moveResizeRequest (mClientId,
-					       qme->globalX (),
-					       qme->globalY (),
+					       p.x (),
+					       p.y (),
 					       direction);
     mFakeRelease = true;
 

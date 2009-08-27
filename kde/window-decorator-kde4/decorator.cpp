@@ -512,6 +512,10 @@ KWD::Decorator::x11EventFilter (XEvent *xevent)
 	    p = client->mapToChildAt (QPoint (xbe->x, xbe->y));
 	    xbe2.x = p.x ();
 	    xbe2.y = p.y ();
+	    
+	    p = child->mapToGlobal(p);
+	    xbe2.x_root = p.x ();
+	    xbe2.y_root = p.y ();
 
 	    client->setFakeRelease (false);
 	    QApplication::x11ProcessEvent ((XEvent *) &xbe2);
