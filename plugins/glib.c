@@ -81,14 +81,10 @@ glibDispatchAndPrepare (void *closure)
     GLIB_DISPLAY (display);
     GMainContext *context = g_main_context_default ();
 
-    if (gd->wakeupTimeoutHandle)
-    {
-	compRemoveTimeout (gd->wakeupTimeoutHandle);
-	gd->wakeupTimeoutHandle = 0;
-    }
-
     glibDispatch (display, context);
     glibPrepare (display, context);
+
+    gd->wakeupTimeoutHandle = 0;
 
     return FALSE;
 }
