@@ -40,6 +40,9 @@ char *programName;
 char **programArgv;
 int  programArgc;
 
+char **initialPlugins = NULL;
+int nInitialPlugins = 0;
+
 char *backgroundImage = NULL;
 
 REGION   emptyRegion;
@@ -413,6 +416,11 @@ main (int argc, char **argv)
 
 	    ptr += sprintf (ptr, "</default>");
 	}
+
+	initialPlugins = malloc (nPlugin * sizeof (char *));
+	memcpy (initialPlugins, plugin, nPlugin * sizeof (char *));
+	nInitialPlugins = nPlugin;
+
     }
 
     xmlInitParser ();
@@ -461,6 +469,9 @@ main (int argc, char **argv)
     compFiniMetadata (&coreMetadata);
 
     xmlCleanupParser ();
+
+    if (initialPlugins != NULL)
+        free (initialPlugins);
 
     if (restartSignal)
     {

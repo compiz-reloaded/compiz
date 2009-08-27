@@ -220,6 +220,9 @@ extern Bool       noDetection;
 extern Bool	  useDesktopHints;
 extern Bool       onlyCurrentScreen;
 
+extern char	**initialPlugins;
+extern int 	nInitialPlugins;
+
 extern int  defaultRefreshRate;
 extern char *defaultTextureFilter;
 
