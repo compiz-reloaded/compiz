@@ -219,8 +219,8 @@ extern Bool       useCow;
 extern Bool       noDetection;
 extern Bool	  useDesktopHints;
 extern Bool       onlyCurrentScreen;
-extern Bool       noWait;
-extern Bool       alwaysSwap;
+extern Bool       noWaitForVsync;
+extern Bool       alwaysSwapOnRepaint;
 
 extern char	**initialPlugins;
 extern int 	nInitialPlugins;

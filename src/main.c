@@ -66,8 +66,8 @@ Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
 Bool useDesktopHints = FALSE;
 Bool onlyCurrentScreen = FALSE;
-Bool noWait = FALSE;
-Bool alwaysSwap = FALSE;
+Bool noWaitForVsync = FALSE;
+Bool alwaysSwapOnRepaint = FALSE;
 static Bool debugOutput = FALSE;
 
 #ifdef USE_COW
@@ -92,7 +92,7 @@ usage (void)
 	    "[--sm-disable] "
 	    "[--sm-client-id ID] "
 	    "[--only-current-screen] "
- 	    "[--no-wait]\n       "
+ 	    "[--no-vsync-wait]\n       "
  	    "[--always-swap]"
 
 #ifdef USE_COW
@@ -380,13 +380,13 @@ main (int argc, char **argv)
 	    if (i + 1 < argc)
 		backgroundImage = argv[++i];
 	}
-	else if (!strcmp (argv[i], "--no-wait"))
+	else if (!strcmp (argv[i], "--no-vsync-wait"))
 	{
-	    noWait = TRUE;
+	    noWaitForVsync = TRUE;
 	}
 	else if (!strcmp (argv[i], "--always-swap"))
 	{
-	    alwaysSwap = TRUE;
+	    alwaysSwapOnRepaint = TRUE;
 	}
 	else if (*argv[i] == '-')
 	{
