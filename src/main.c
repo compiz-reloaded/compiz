@@ -41,7 +41,7 @@ char **programArgv;
 int  programArgc;
 
 char **initialPlugins = NULL;
-int nInitialPlugins = 0;
+int  nInitialPlugins = 0;
 
 char *backgroundImage = NULL;
 
@@ -418,9 +418,15 @@ main (int argc, char **argv)
 	}
 
 	initialPlugins = malloc (nPlugin * sizeof (char *));
-	memcpy (initialPlugins, plugin, nPlugin * sizeof (char *));
-	nInitialPlugins = nPlugin;
-
+	if (initialPlugins)
+	{
+	    memcpy (initialPlugins, plugin, nPlugin * sizeof (char *));
+	    nInitialPlugins = nPlugin;
+	}
+	else
+	{
+	    nInitialPlugins = 0;
+	}
     }
 
     xmlInitParser ();
@@ -470,7 +476,7 @@ main (int argc, char **argv)
 
     xmlCleanupParser ();
 
-    if (initialPlugins != NULL)
+    if (initialPlugins)
         free (initialPlugins);
 
     if (restartSignal)

@@ -673,27 +673,28 @@ setDisplayOption (CompPlugin	  *plugin,
 static void
 updatePlugins (CompDisplay *d)
 {
-    CompOption *o;
-    CompPlugin *p, **pop = 0;
-    int	       nPop, i, j, k, dupPluginCount;
+    CompOption      *o;
+    CompPlugin      *p, **pop = 0;
+    int	            nPop, i, j, k, dupPluginCount;
     CompOptionValue *pList;
-    int pList_count;
+    int             pListCount;
 
     d->dirtyPluginList = FALSE;
 
     o = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS];
 
-    /* Make sure the new plugin list always list core first, then the
+    /* Make sure the new plugin list always lists core first, then the
        initial plugins... */
     dupPluginCount = 0;
-    for (i = 0; i < o->value.list.nValue; i++)  {
+    for (i = 0; i < o->value.list.nValue; i++)
+    {
 	if (strcmp(o->value.list.value[i].s, "core") == 0)
 	{
 	    dupPluginCount++;
 	}
 	else
 	{
-	    for (j=0; j < nInitialPlugins; j++)
+	    for (j = 0; j < nInitialPlugins; j++)
 	    {
 		if (strcmp(o->value.list.value[i].s, initialPlugins[j]) == 0)
 		{
@@ -704,40 +705,47 @@ updatePlugins (CompDisplay *d)
 	}
     }
 
-    pList_count = 1 + nInitialPlugins+o->value.list.nValue - dupPluginCount;
+    /* dupPluginCount is now the number of plugins contained in both the
+       initial and the new plugin list */
+    pListCount = 1 + nInitialPlugins + o->value.list.nValue - dupPluginCount;
 
-    pList = malloc(sizeof(CompOptionValue) * pList_count);
-    if (!pList) {
+    pList = malloc (sizeof (CompOptionValue) * pListCount);
+    if (!pList)
+    {
 	(*core.setOptionForPlugin) (&d->base, "core", o->name, &d->plugin);
 	return;
     }
 
+    /* new plugin list needs core as first plugin */
     pList[0].s = "core";
+
+    /* afterwards, add the initial plugins */
     for (j = 0; j < nInitialPlugins; j++)
     {
-	pList[j+1].s = initialPlugins[j];
+	pList[j + 1].s = initialPlugins[j];
     }
     j++;
 
+    /* then add the plugins not in the initial plugin list */
     for (i = 0; i < o->value.list.nValue; i++)
     {
-	if (strcmp(o->value.list.value[i].s, "core") == 0)
+	if (strcmp (o->value.list.value[i].s, "core") == 0)
 	    continue;
 
 	for (k = 0; k < nInitialPlugins; k++)
 	{
-	    if (strcmp(o->value.list.value[i].s, initialPlugins[k]) == 0) 
+	    if (strcmp (o->value.list.value[i].s, initialPlugins[k]) == 0)
 		break;
 	}
 	
-	if(k == nInitialPlugins)
+	if (k == nInitialPlugins)
 	    pList[j++].s = o->value.list.value[i].s;
     }
 
-    assert(j == pList_count);
+    assert(j == pListCount);
 
     /* j is initialized to 1 to make sure we never pop the core plugin */
-    for (i = j = 1; j < d->plugin.list.nValue && i < pList_count; i++, j++)
+    for (i = j = 1; j < d->plugin.list.nValue && i < pListCount; i++, j++)
     {
 	if (strcmp (d->plugin.list.value[j].s, pList[i].s))
 	    break;
@@ -751,7 +759,7 @@ updatePlugins (CompDisplay *d)
 	if (!pop)
 	{
 	    (*core.setOptionForPlugin) (&d->base, "core", o->name, &d->plugin);
-	    free(pList);
+	    free (pList);
 	    return;
 	}
     }
@@ -763,13 +771,12 @@ updatePlugins (CompDisplay *d)
 	free (d->plugin.list.value[d->plugin.list.nValue].s);
     }
 
-    for (; i < pList_count; i++)
+    for (; i < pListCount; i++)
     {
 	p = 0;
 	for (j = 0; j < nPop; j++)
 	{
-	    if (pop[j] && strcmp (pop[j]->vTable->name,
-				  pList[i].s) == 0)
+	    if (pop[j] && strcmp (pop[j]->vTable->name, pList[i].s) == 0)
 	    {
 		if (pushPlugin (pop[j]))
 		{
@@ -823,9 +830,8 @@ updatePlugins (CompDisplay *d)
     if (nPop)
 	free (pop);
 
-    free(pList);
+    free (pList);
     (*core.setOptionForPlugin) (&d->base, "core", o->name, &d->plugin);
-
 }
 
 static void
