@@ -4087,8 +4087,9 @@ addWindowStackChanges (CompWindow     *w,
     {
 	CompWindow *prev = w->prev;
 
-	/* the frame window is always our next sibling window in the stack, although
-	   we're searching for the next 'real' sibling, so skip the frame window */
+	/* the frame window is always our next sibling window in the stack,
+	   although we're searching for the next 'real' sibling, so skip
+	   the frame window */
 	if (prev && prev->id == w->frame)
 		prev = prev->prev;
 
