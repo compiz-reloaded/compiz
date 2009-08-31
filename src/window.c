@@ -4202,11 +4202,11 @@ findValidStackSiblingBelow (CompWindow *w,
        finding the sibling above 'sibling' and checking whether we're
        allowed to stack under that - if not, there's no valid sibling
        under it */
-    for (p = sibling->next; p; p = p->next)
+    for (p = sibling; p; p = p->next)
     {
 	if (!avoidStackingRelativeTo (p))
 	{
-	    if (!validSiblingBelow (sibling, w))
+	    if (!validSiblingBelow (p, w))
 		return NULL;
 	    break;
 	}
