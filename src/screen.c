@@ -755,6 +755,7 @@ removeAllSequences (CompScreen *screen)
 
     for (s = screen->startupSequences; s; s = sNext)
     {
+	sNext = s->next;
 	sn_startup_sequence_unref (s->sequence);
 	free (s);
     }
