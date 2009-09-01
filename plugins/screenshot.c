@@ -90,7 +90,7 @@ shotInitiate (CompDisplay     *d,
     {
 	SHOT_SCREEN (s);
 
-	if (otherScreenGrabExist (s, "screenshot", 0))
+	if (otherScreenGrabExist (s, "screenshot", NULL))
 	    return FALSE;
 
 	if (!ss->grabIndex)

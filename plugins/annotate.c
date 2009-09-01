@@ -460,7 +460,7 @@ annoInitiate (CompDisplay     *d,
     {
 	ANNO_SCREEN (s);
 
-	if (otherScreenGrabExist (s, 0))
+	if (otherScreenGrabExist (s, NULL))
 	    return FALSE;
 
 	if (!as->grabIndex)
@@ -529,7 +529,7 @@ annoEraseInitiate (CompDisplay     *d,
     {
 	ANNO_SCREEN (s);
 
-	if (otherScreenGrabExist (s, 0))
+	if (otherScreenGrabExist (s, NULL))
 	    return FALSE;
 
 	if (!as->grabIndex)

@@ -464,7 +464,7 @@ cloneInitiate (CompDisplay     *d,
 
 	CLONE_SCREEN (s);
 
-	if (cs->grab || otherScreenGrabExist (s, "clone", 0))
+	if (cs->grab || otherScreenGrabExist (s, "clone", NULL))
 	    return FALSE;
 
 	if (!cs->grabIndex)

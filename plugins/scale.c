@@ -1162,7 +1162,7 @@ scaleInitiateCommon (CompScreen      *s,
     SCALE_DISPLAY (s->display);
     SCALE_SCREEN (s);
 
-    if (otherScreenGrabExist (s, "scale", 0))
+    if (otherScreenGrabExist (s, "scale", NULL))
 	return FALSE;
 
     ss->currentMatch = &ss->opt[SCALE_SCREEN_OPTION_WINDOW_MATCH].value.match;

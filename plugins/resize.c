@@ -370,7 +370,7 @@ resizeInitiate (CompDisplay     *d,
 		return TRUE;
 	}
 
-	if (otherScreenGrabExist (w->screen, "resize", 0))
+	if (otherScreenGrabExist (w->screen, "resize", NULL))
 	    return FALSE;
 
 	if (rd->w)

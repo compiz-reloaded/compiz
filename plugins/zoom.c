@@ -579,7 +579,7 @@ zoomInitiate (CompDisplay     *d,
 
 	ZOOM_SCREEN (s);
 
-	if (otherScreenGrabExist (s, "zoom", 0))
+	if (otherScreenGrabExist (s, "zoom", NULL))
 	    return FALSE;
 
 	if (!zs->grabIndex)
@@ -754,7 +754,7 @@ zoomInitiatePan (CompDisplay     *d,
 	if (!(zs->zoomed & (1 << output)))
 	    return FALSE;
 
-	if (otherScreenGrabExist (s, "zoom", 0))
+	if (otherScreenGrabExist (s, "zoom", NULL))
 	    return FALSE;
 
 	if (state & CompActionStateInitButton)
