@@ -720,11 +720,15 @@ updatePlugins (CompDisplay *d)
     pList[0].s = "core";
 
     /* afterwards, add the initial plugins */
-    for (j = 0; j < nInitialPlugins; j++)
+    for (j = 0, k = 1; j < nInitialPlugins; j++)
     {
-	pList[j + 1].s = initialPlugins[j];
+	/* avoid adding core twice */
+	if (strcmp (initialPlugins[j], "core") == 0)
+	    continue;
+	
+	pList[k++].s = initialPlugins[j];
     }
-    j++;
+    j = k;
 
     /* then add the plugins not in the initial plugin list */
     for (i = 0; i < o->value.list.nValue; i++)
