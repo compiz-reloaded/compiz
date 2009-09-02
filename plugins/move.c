@@ -140,7 +140,7 @@ moveInitiate (CompDisplay     *d,
 
 	button = getIntOptionNamed (option, nOption, "button", -1);
 
-	if (otherScreenGrabExist (w->screen, "move", 0))
+	if (otherScreenGrabExist (w->screen, "move", NULL))
 	    return FALSE;
 
 	if (md->w)
@@ -459,7 +459,7 @@ moveHandleMotionEvent (CompScreen *s,
 		{
 		    if (abs ((yRoot - workArea.y) - ms->snapOffY) >= SNAP_OFF)
 		    {
-			if (!otherScreenGrabExist (s, "move", 0))
+			if (!otherScreenGrabExist (s, "move", NULL))
 			{
 			    int width = w->serverWidth;
 
@@ -485,7 +485,7 @@ moveHandleMotionEvent (CompScreen *s,
 		{
 		    if (abs ((yRoot - workArea.y) - ms->snapBackY) < SNAP_BACK)
 		    {
-			if (!otherScreenGrabExist (s, "move", 0))
+			if (!otherScreenGrabExist (s, "move", NULL))
 			{
 			    int wy;
 

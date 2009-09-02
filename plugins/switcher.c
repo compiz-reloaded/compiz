@@ -590,7 +590,7 @@ switchInitiate (CompScreen            *s,
 
     SWITCH_SCREEN (s);
 
-    if (otherScreenGrabExist (s, "switcher", "scale", "cube", 0))
+    if (otherScreenGrabExist (s, "switcher", "scale", "cube", NULL))
 	return;
 
     ss->selection      = selection;

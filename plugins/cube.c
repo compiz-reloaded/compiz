@@ -1663,7 +1663,7 @@ cubeUnfold (CompDisplay     *d,
 	if (s->hsize * cs->nOutput < 4)
 	    return FALSE;
 
-	if (otherScreenGrabExist (s, "rotate", "switcher", "cube", 0))
+	if (otherScreenGrabExist (s, "rotate", "switcher", "cube", NULL))
 	    return FALSE;
 
 	if (!cs->grabIndex)

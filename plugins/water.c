@@ -1262,7 +1262,7 @@ waterInitiate (CompDisplay     *d,
     {
 	WATER_SCREEN (s);
 
-	if (otherScreenGrabExist (s, "water", 0))
+	if (otherScreenGrabExist (s, "water", NULL))
 	    continue;
 
 	if (!ws->grabIndex)
