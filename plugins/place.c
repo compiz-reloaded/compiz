@@ -43,7 +43,8 @@ typedef struct _PlaceDisplay {
 #define PLACE_MODE_SMART    2
 #define PLACE_MODE_MAXIMIZE 3
 #define PLACE_MODE_RANDOM   4
-#define PLACE_MODE_LAST     PLACE_MODE_RANDOM
+#define PLACE_MODE_POINTER  5
+#define PLACE_MODE_LAST     PLACE_MODE_POINTER
 
 #define PLACE_MOMODE_CURRENT    0
 #define PLACE_MOMODE_POINTER    1
@@ -267,6 +268,23 @@ placeSendWindowMaximizationRequest (CompWindow *w)
 
     XSendEvent (d->display, w->screen->root, FALSE,
 		SubstructureRedirectMask | SubstructureNotifyMask, &xev);
+}
+
+static Bool
+placeGetPointerPosition (CompScreen *s,
+			 int        *x,
+			 int        *y)
+{
+    Window       wDummy;
+    int          iDummy;
+    unsigned int uiDummy;
+
+    /* this means a server roundtrip, which kind of sucks; thus
+       this code should be removed as soon as we have software
+       cursor rendering and thus have a cached pointer coordinate */
+    return XQueryPointer (s->display->display, s->root,
+			  &wDummy, &wDummy, x, y,
+			  &iDummy, &iDummy, &uiDummy);
 }
 
 static Bool
@@ -759,6 +777,26 @@ placeRandom (CompWindow *w,
 	*y += rand () % remainY;
 }
 
+static void
+placePointer (CompWindow *w,
+	      XRectangle *workArea,
+	      int	 *x,
+	      int	 *y)
+{
+    int xPointer, yPointer;
+
+    if (placeGetPointerPosition (w->screen, &xPointer, &yPointer))
+    {
+	*x = xPointer - (w->serverWidth / 2);
+	*y = yPointer - (w->serverHeight / 2);
+    }
+    else
+    {
+	/* use centered as fallback */
+	placeCentered (w, workArea, x, y);
+    }
+}
+
 /* overlap types */
 #define NONE    0
 #define H_WRONG -1
@@ -1012,12 +1050,14 @@ placeGetStrategyForWindow (CompWindow *w)
 
 static CompOutput *
 placeGetPlacementOutput (CompWindow        *w,
+			 int               mode,
 			 PlacementStrategy strategy,
 			 int               x,
 			 int               y)
 {
     CompScreen *s = w->screen;
     int        output = -1;
+    int        multiMode;
 
     PLACE_SCREEN (s);
 
@@ -1049,25 +1089,21 @@ placeGetPlacementOutput (CompWindow        *w,
     if (output >= 0)
 	return &s->outputDev[output];
 
-    switch (ps->opt[PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i) {
+    multiMode = ps->opt[PLACE_SCREEN_OPTION_MULTIOUTPUT_MODE].value.i;
+    /* force 'output with pointer' mode for placement under pointer */
+    if (mode == PLACE_MODE_POINTER)
+	multiMode = PLACE_MOMODE_POINTER;
+
+    switch (multiMode) {
     case PLACE_MOMODE_CURRENT:
 	output = s->currentOutputDev;
 	break;
     case PLACE_MOMODE_POINTER:
 	{
-	    Window       wDummy;
-	    int          iDummy, xPointer, yPointer;
-	    unsigned int uiDummy;
+	    int xPointer, yPointer;
 
-	    /* this means a server roundtrip, which kind of sucks; thus
-	       this code should be replaced as soon as we have software
-	       cursor rendering and thus have a cached pointer coordinate */
-	    if (XQueryPointer (s->display->display, s->root,
-			       &wDummy, &wDummy, &xPointer, &yPointer,
-			       &iDummy, &iDummy, &uiDummy))
-	    {
+	    if (placeGetPointerPosition (s, &xPointer, &yPointer))
 		output = outputDeviceForPoint (s, xPointer, yPointer);
-	    }
 	}
 	break;
     case PLACE_MOMODE_ACTIVEWIN:
@@ -1159,6 +1195,7 @@ placeDoWindowPlacement (CompWindow *w,
     CompOutput        *output;
     PlacementStrategy strategy;
     Bool	      keepInWorkarea;
+    int               mode;
 
     PLACE_SCREEN (s);
 
@@ -1173,7 +1210,8 @@ placeDoWindowPlacement (CompWindow *w,
 	    return FALSE;
     }
 
-    output   = placeGetPlacementOutput (w, strategy, x, y);
+    mode     = placeGetPlacementMode (w);
+    output   = placeGetPlacementOutput (w, mode, strategy, x, y);
     workArea = output->workArea;
 
     targetVpX = w->initialViewportX;
@@ -1232,7 +1270,7 @@ placeDoWindowPlacement (CompWindow *w,
 
     if (strategy == PlaceOnly || strategy == PlaceAndConstrain)
     {
-	switch (placeGetPlacementMode (w)) {
+	switch (mode) {
 	case PLACE_MODE_CASCADE:
 	    placeCascade (w, &workArea, &x, &y);
 	    break;
@@ -1241,6 +1279,9 @@ placeDoWindowPlacement (CompWindow *w,
 	    break;
 	case PLACE_MODE_RANDOM:
 	    placeRandom (w, &workArea, &x, &y);
+	    break;
+	case PLACE_MODE_POINTER:
+	    placePointer (w, &workArea, &x, &y);
 	    break;
 	case PLACE_MODE_MAXIMIZE:
 	    placeSendWindowMaximizationRequest (w);
