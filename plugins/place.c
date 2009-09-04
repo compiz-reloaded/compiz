@@ -1021,6 +1021,11 @@ placeGetPlacementOutput (CompWindow        *w,
 
     PLACE_SCREEN (s);
 
+    /* short cut: it makes no sense to determine a placement
+       output if there is only one output */
+    if (s->nOutputDev == 1)
+	return &s->outputDev[0];
+
     switch (strategy) {
     case PlaceOverParent:
 	{
