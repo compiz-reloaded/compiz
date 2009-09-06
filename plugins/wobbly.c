@@ -253,6 +253,8 @@ findNextWestEdge (CompWindow *w,
     int e, end;
     int x;
     int output;
+    const XRectangle *workArea;
+    int workAreaEdge;
 
     start = -65535.0f;
     end   =  65535.0f;
@@ -263,12 +265,14 @@ findNextWestEdge (CompWindow *w,
     x = object->position.x + w->output.left - w->input.left;
 
     output = outputDeviceForPoint (w->screen, x, object->position.y);
+    workArea = &w->screen->outputDev[output].workArea;
+    workAreaEdge = workArea->x;
 
-    if (x >= w->screen->outputDev[output].region.extents.x1)
+    if (x >= workAreaEdge)
     {
 	CompWindow *p;
 
-	v1 = w->screen->outputDev[output].region.extents.x1;
+	v1 = workAreaEdge;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
@@ -330,7 +334,7 @@ findNextWestEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->outputDev[output].region.extents.x1;
+	v2 = workAreaEdge;
     }
 
     v1 = v1 - w->output.left + w->input.left;
@@ -358,6 +362,8 @@ findNextEastEdge (CompWindow *w,
     int e, end;
     int x;
     int output;
+    const XRectangle *workArea;
+    int workAreaEdge;
 
     start = -65535.0f;
     end   =  65535.0f;
@@ -368,12 +374,14 @@ findNextEastEdge (CompWindow *w,
     x = object->position.x - w->output.right + w->input.right;
 
     output = outputDeviceForPoint (w->screen, x, object->position.y);
+    workArea = &w->screen->outputDev[output].workArea;
+    workAreaEdge = workArea->x + workArea->width;
 
-    if (x <= w->screen->outputDev[output].region.extents.x2)
+    if (x <= workAreaEdge)
     {
 	CompWindow *p;
 
-	v1 = w->screen->outputDev[output].region.extents.x2;
+	v1 = workAreaEdge;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
@@ -435,7 +443,7 @@ findNextEastEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->outputDev[output].region.extents.x2;
+	v2 = workAreaEdge;
     }
 
     v1 = v1 + w->output.right - w->input.right;
@@ -463,6 +471,8 @@ findNextNorthEdge (CompWindow *w,
     int e, end;
     int y;
     int output;
+    const XRectangle *workArea;
+    int workAreaEdge;
 
     start = -65535.0f;
     end   =  65535.0f;
@@ -473,12 +483,14 @@ findNextNorthEdge (CompWindow *w,
     y = object->position.y + w->output.top - w->input.top;
 
     output = outputDeviceForPoint (w->screen, object->position.x, y);
+    workArea = &w->screen->outputDev[output].workArea;
+    workAreaEdge = workArea->y;
 
-    if (y >= w->screen->outputDev[output].region.extents.y1)
+    if (y >= workAreaEdge)
     {
 	CompWindow *p;
 
-	v1 = w->screen->outputDev[output].region.extents.y1;
+	v1 = workAreaEdge;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
@@ -538,7 +550,7 @@ findNextNorthEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->outputDev[output].region.extents.y1;
+	v2 = workAreaEdge;
     }
 
     v1 = v1 - w->output.top + w->input.top;
@@ -566,6 +578,8 @@ findNextSouthEdge (CompWindow *w,
     int e, end;
     int y;
     int output;
+    const XRectangle *workArea;
+    int workAreaEdge;
 
     start = -65535.0f;
     end   =  65535.0f;
@@ -576,12 +590,14 @@ findNextSouthEdge (CompWindow *w,
     y = object->position.y - w->output.bottom + w->input.bottom;
 
     output = outputDeviceForPoint (w->screen, object->position.x, y);
+    workArea = &w->screen->outputDev[output].workArea;
+    workAreaEdge = workArea->y + workArea->height;
 
-    if (y <= w->screen->outputDev[output].region.extents.y2)
+    if (y <= workAreaEdge)
     {
 	CompWindow *p;
 
-	v1 = w->screen->outputDev[output].region.extents.y2;
+	v1 = workAreaEdge;
 
 	for (p = w->screen->windows; p; p = p->next)
 	{
@@ -642,7 +658,7 @@ findNextSouthEdge (CompWindow *w,
     }
     else
     {
-	v2 = w->screen->outputDev[output].region.extents.y2;
+	v2 = workAreaEdge;
     }
 
     v1 = v1 + w->output.bottom - w->input.bottom;
