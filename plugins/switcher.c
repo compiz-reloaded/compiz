@@ -151,7 +151,8 @@ typedef struct {
 
 #define BOX_WIDTH 3
 
-#define ICON_SIZE 64
+#define ICON_SIZE 48
+#define MAX_ICON_SIZE 256
 
 static float _boxVertices[] =
 {
@@ -1527,13 +1528,24 @@ switchPaintThumb (CompWindow		  *w,
 
 	if (ss->opt[SWITCH_SCREEN_OPTION_ICON].value.b)
 	{
-	    icon = getWindowIcon (w, ICON_SIZE, ICON_SIZE);
+	    icon = getWindowIcon (w, MAX_ICON_SIZE, MAX_ICON_SIZE);
 	    if (icon)
 	    {
-		sAttrib.xScale = sAttrib.yScale = 1.0f;
+		sAttrib.xScale = (float) ICON_SIZE / icon->width;
+		sAttrib.yScale = (float) ICON_SIZE / icon->height;
+		/*
+		sAttrib.xScale =
+		    ((WIDTH - (SPACE << 1)) / 2.5f) / icon->width;
+		sAttrib.yScale =
+		    ((HEIGHT - (SPACE << 1)) / 2.5f) / icon->height;
+		*/
+		if (sAttrib.xScale < sAttrib.yScale)
+		    sAttrib.yScale = sAttrib.xScale;
+		else
+		    sAttrib.xScale = sAttrib.yScale;
 
-		wx = x + WIDTH  - icon->width  - SPACE;
-		wy = y + HEIGHT - icon->height - SPACE;
+		wx = x + WIDTH  - icon->width  * sAttrib.xScale - SPACE;
+		wy = y + HEIGHT - icon->height * sAttrib.yScale - SPACE;
 	    }
 	}
     }
@@ -1542,26 +1554,19 @@ switchPaintThumb (CompWindow		  *w,
 	width  = WIDTH  - (WIDTH  >> 2);
 	height = HEIGHT - (HEIGHT >> 2);
 
-	icon = getWindowIcon (w, width, height);
+	icon = getWindowIcon (w, MAX_ICON_SIZE, MAX_ICON_SIZE);
 	if (!icon)
 	    icon = w->screen->defaultIcon;
 
 	if (icon)
 	{
-	    int iw, ih;
+	    float iw, ih;
 
 	    iw = width  - SPACE;
 	    ih = height - SPACE;
 
-	    if (icon->width < (iw >> 1))
-		sAttrib.xScale = (iw / icon->width);
-	    else
-		sAttrib.xScale = 1.0f;
-
-	    if (icon->height < (ih >> 1))
-		sAttrib.yScale = (ih / icon->height);
-	    else
-		sAttrib.yScale = 1.0f;
+	    sAttrib.xScale = (iw / icon->width);
+	    sAttrib.yScale = (ih / icon->height);
 
 	    if (sAttrib.xScale < sAttrib.yScale)
 		sAttrib.yScale = sAttrib.xScale;
