@@ -1149,7 +1149,13 @@ KWD::Window::updateSelected (WId selectedId)
 void
 KWD::Window::updateWindowGeometry (void)
 {
+    KWD::trapXError ();
     KWindowInfo wInfo = KWindowSystem::windowInfo (mClientId, NET::WMGeometry);
+    KWD::popXError ();
+
+    if (!wInfo.valid ())
+	return;
+
     QRect	geometry = wInfo.geometry ();
     int         w, h;
 
