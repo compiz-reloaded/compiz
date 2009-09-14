@@ -1540,11 +1540,8 @@ scaleRelayoutSlots (CompDisplay     *d,
 
 static void
 scaleWindowRemove (CompDisplay *d,
-		   Window      id)
+		   CompWindow  *w)
 {
-    CompWindow *w;
-
-    w = findWindowAtDisplay (d, id);
     if (w)
     {
 	SCALE_SCREEN (w->screen);
@@ -1639,6 +1636,7 @@ scaleHandleEvent (CompDisplay *d,
 {
     CompScreen *s;
     Bool       consumeEvent = FALSE;
+    CompWindow *w = NULL;
 
     SCALE_DISPLAY (d);
 
@@ -1749,11 +1747,16 @@ scaleHandleEvent (CompDisplay *d,
 	    }
 	}
 	break;
+    case DestroyNotify:
+	/* We need to get the CompWindow * for event->xdestroywindow.window
+	   here because in the (*d->handleEvent) call below, that CompWindow's
+	   id will become 1, so findWindowAtDisplay won't be able to find the
+	   CompWindow after that. */
+	w = findWindowAtDisplay (d, event->xdestroywindow.window);
+	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->xdndPositionAtom)
 	{
-	    CompWindow *w;
-
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
@@ -1812,8 +1815,6 @@ scaleHandleEvent (CompDisplay *d,
 	else if (event->xclient.message_type == d->xdndDropAtom ||
 		 event->xclient.message_type == d->xdndLeaveAtom)
 	{
-	    CompWindow *w;
-
 	    w = findWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
@@ -1853,10 +1854,11 @@ scaleHandleEvent (CompDisplay *d,
 
     switch (event->type) {
     case UnmapNotify:
-	scaleWindowRemove (d, event->xunmap.window);
+	w = findWindowAtDisplay (d, event->xunmap.window);
+	scaleWindowRemove (d, w);
 	break;
     case DestroyNotify:
-	scaleWindowRemove (d, event->xdestroywindow.window);
+	scaleWindowRemove (d, w);
 	break;
     }
 
