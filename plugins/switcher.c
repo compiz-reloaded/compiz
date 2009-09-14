@@ -102,8 +102,8 @@ typedef struct _SwitchScreen {
 
     Window popupWindow;
 
-    Window	 selectedWindow;
-    Window	 zoomedWindow;
+    CompWindow	 *selectedWindow;
+    CompWindow	 *zoomedWindow;
     unsigned int lastActiveNum;
 
     float zoom;
@@ -251,15 +251,21 @@ setSelectedWindowHint (CompScreen *s)
     SWITCH_DISPLAY (s->display);
     SWITCH_SCREEN (s);
 
+    Window selectedWindowId =
+	ss->selectedWindow && !ss->selectedWindow->destroyed ?
+	ss->selectedWindow->id : None;
     XChangeProperty (s->display->display, ss->popupWindow, sd->selectWinAtom,
 		     XA_WINDOW, 32, PropModeReplace,
-		     (unsigned char *) &ss->selectedWindow, 1);
+		     (unsigned char *) &selectedWindowId, 1);
 }
 
 static Bool
 isSwitchWin (CompWindow *w)
 {
     SWITCH_SCREEN (w->screen);
+
+    if (w->destroyed)
+	return FALSE;
 
     if (!w->mapNum || w->attrib.map_state != IsViewable)
     {
@@ -391,7 +397,7 @@ switchUpdateWindowList (CompScreen *s,
     ss->pos  = ((count >> 1) - ss->nWindows) * WIDTH;
     ss->move = 0;
 
-    ss->selectedWindow = ss->windows[0]->id;
+    ss->selectedWindow = ss->windows[0];
 
     x = s->outputDev[s->currentOutputDev].region.extents.x1 +
 	s->outputDev[s->currentOutputDev].width / 2;
@@ -447,7 +453,7 @@ switchToWindow (CompScreen *s,
 
     for (cur = 0; cur < ss->nWindows; cur++)
     {
-	if (ss->windows[cur]->id == ss->selectedWindow)
+	if (ss->windows[cur] == ss->selectedWindow)
 	    break;
     }
 
@@ -461,7 +467,7 @@ switchToWindow (CompScreen *s,
 
     if (w)
     {
-	Window old = ss->selectedWindow;
+	CompWindow *old = ss->selectedWindow;
 
 	if (ss->selection == AllViewports &&
 	    ss->opt[SWITCH_SCREEN_OPTION_AUTO_ROTATE].value.b)
@@ -490,12 +496,12 @@ switchToWindow (CompScreen *s,
 	}
 
 	ss->lastActiveNum  = w->activeNum;
-	ss->selectedWindow = w->id;
+	ss->selectedWindow = w;
 
 	if (!ss->zoomedWindow)
 	    ss->zoomedWindow = ss->selectedWindow;
 
-	if (old != w->id)
+	if (old != w)
 	{
 	    if (toNext)
 		ss->move -= WIDTH;
@@ -518,12 +524,8 @@ switchToWindow (CompScreen *s,
 
 	addWindowDamage (w);
 
-	if (old)
-	{
-	    w = findWindowAtScreen (s, old);
-	    if (w)
-		addWindowDamage (w);
-	}
+	if (old && !old->destroyed)
+	    addWindowDamage (old);
     }
 }
 
@@ -595,7 +597,7 @@ switchInitiate (CompScreen            *s,
 	return;
 
     ss->selection      = selection;
-    ss->selectedWindow = None;
+    ss->selectedWindow = NULL;
 
     count = switchCountWindows (s);
     if (count < 1)
@@ -753,24 +755,20 @@ switchTerminate (CompDisplay     *d,
 
 	    if (state & CompActionStateCancel)
 	    {
-		ss->selectedWindow = None;
-		ss->zoomedWindow   = None;
+		ss->selectedWindow = NULL;
+		ss->zoomedWindow   = NULL;
 	    }
 
-	    if (state && ss->selectedWindow)
-	    {
-		w = findWindowAtScreen (s, ss->selectedWindow);
-		if (w)
-		    sendWindowActivationRequest (w->screen, w->id);
-	    }
+	    if (state && ss->selectedWindow && !ss->selectedWindow->destroyed)
+		sendWindowActivationRequest (w->screen, ss->selectedWindow->id);
 
 	    removeScreenGrab (s, ss->grabIndex, 0);
 	    ss->grabIndex = 0;
 
 	    if (!ss->zooming)
 	    {
-		ss->selectedWindow = None;
-		ss->zoomedWindow   = None;
+		ss->selectedWindow = NULL;
+		ss->zoomedWindow   = NULL;
 
 		switchActivateEvent (s, FALSE);
 	    }
@@ -779,7 +777,7 @@ switchTerminate (CompDisplay     *d,
 		ss->moreAdjust = 1;
 	    }
 
-	    ss->selectedWindow = None;
+	    ss->selectedWindow = NULL;
 	    setSelectedWindowHint (s);
 
 	    ss->lastActiveNum = 0;
@@ -923,16 +921,14 @@ switchPrevPanel (CompDisplay     *d,
 
 static void
 switchWindowRemove (CompDisplay *d,
-		    Window	id)
+		    CompWindow  *w)
 {
-    CompWindow *w;
-
-    w = findWindowAtDisplay (d, id);
     if (w)
     {
 	Bool   inList = FALSE;
 	int    count, j, i = 0;
-	Window selected, old;
+	CompWindow *selected;
+	CompWindow *old;
 
 	SWITCH_SCREEN (w->screen);
 
@@ -947,12 +943,12 @@ switchWindowRemove (CompDisplay *d,
 	    {
 		inList = TRUE;
 
-		if (w->id == selected)
+		if (w == selected)
 		{
 		    if (i + 1 < ss->nWindows)
-			selected = ss->windows[i + 1]->id;
+			selected = ss->windows[i + 1];
 		    else
-			selected = ss->windows[0]->id;
+			selected = ss->windows[0];
 		}
 
 		ss->nWindows--;
@@ -1003,7 +999,7 @@ switchWindowRemove (CompDisplay *d,
 
 	for (i = 0; i < ss->nWindows; i++)
 	{
-	    ss->selectedWindow = ss->windows[i]->id;
+	    ss->selectedWindow = ss->windows[i];
 
 	    if (ss->selectedWindow == selected)
 		break;
@@ -1026,13 +1022,13 @@ switchWindowRemove (CompDisplay *d,
 
 	if (old != ss->selectedWindow)
 	{
+	    ss->zoomedWindow = ss->selectedWindow;
+
+	    addWindowDamage (ss->selectedWindow);
 	    addWindowDamage (w);
 
-	    w = findWindowAtScreen (w->screen, old);
-	    if (w)
-		addWindowDamage (w);
-
-	    ss->moreAdjust = 1;
+	    if (old && !old->destroyed)
+		addWindowDamage (old);
 	}
     }
 }
@@ -1086,7 +1082,7 @@ static void
 switchHandleEvent (CompDisplay *d,
 		   XEvent      *event)
 {
-    CompWindow *w;
+    CompWindow *w = NULL;
     SWITCH_DISPLAY (d);
 
     switch (event->type) {
@@ -1105,6 +1101,13 @@ switchHandleEvent (CompDisplay *d,
 	    }
 	}
 	break;
+    case DestroyNotify:
+	/* We need to get the CompWindow * for event->xdestroywindow.window
+	   here because in the (*d->handleEvent) call below, that CompWindow's
+	   id will become 1, so findWindowAtDisplay won't be able to find the
+	   CompWindow after that. */
+	w = findWindowAtDisplay (d, event->xdestroywindow.window);
+	break;
     }
 
     UNWRAP (sd, d, handleEvent);
@@ -1113,10 +1116,11 @@ switchHandleEvent (CompDisplay *d,
 
     switch (event->type) {
     case UnmapNotify:
-	switchWindowRemove (d, event->xunmap.window);
+	w = findWindowAtDisplay (d, event->xunmap.window);
+	switchWindowRemove (d, w);
 	break;
     case DestroyNotify:
-	switchWindowRemove (d, event->xdestroywindow.window);
+	switchWindowRemove (d, w);
 	break;
     case PropertyNotify:
 	if (event->xproperty.atom == sd->selectFgColorAtom)
@@ -1247,8 +1251,8 @@ switchPreparePaintScreen (CompScreen *s,
 			ss->translate  = 0.0f;
 			ss->sTranslate = ss->zoom;
 
-			ss->selectedWindow = None;
-			ss->zoomedWindow   = None;
+			ss->selectedWindow = NULL;
+			ss->zoomedWindow   = NULL;
 
 			if (ss->grabIndex)
 			{
@@ -1333,12 +1337,13 @@ switchPaintOutput (CompScreen		   *s,
 
 	if (ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b)
 	{
-	    zoomed = findWindowAtScreen (s, ss->zoomedWindow);
-	    if (zoomed)
+	    zoomed = ss->zoomedWindow;
+	    if (zoomed && !zoomed->destroyed)
 	    {
 		CompWindow *w;
 
-		for (w = zoomed->prev; w && w->id <= 1; w = w->prev);
+		for (w = zoomed->prev; w && w->id <= 1; w = w->prev)
+		    ;
 		zoomedAbove = (w) ? w->id : None;
 
 		unhookWindowFromScreen (s, zoomed);
@@ -1717,7 +1722,7 @@ switchPaintWindow (CompWindow		   *w,
 	glDisable (GL_BLEND);
 	glEnableClientState (GL_TEXTURE_COORD_ARRAY);
     }
-    else if (w->id == ss->selectedWindow)
+    else if (w == ss->selectedWindow)
     {
 	if (ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b &&
 	    ss->selectedWindow == ss->zoomedWindow)
@@ -1752,7 +1757,7 @@ switchPaintWindow (CompWindow		   *w,
 	}
 
 	if (ss->opt[SWITCH_SCREEN_OPTION_BRINGTOFRONT].value.b &&
-	    w->id == ss->zoomedWindow)
+	    w == ss->zoomedWindow)
 	    zoomType = ZOOMED_WINDOW_MASK;
 
 	if (!(ss->zoomMask & zoomType))
@@ -1957,8 +1962,8 @@ switchInitScreen (CompPlugin *p,
 
     ss->popupWindow = None;
 
-    ss->selectedWindow = None;
-    ss->zoomedWindow   = None;
+    ss->selectedWindow = NULL;
+    ss->zoomedWindow   = NULL;
 
     ss->lastActiveNum  = 0;
 
