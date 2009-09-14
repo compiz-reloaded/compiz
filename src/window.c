@@ -4162,11 +4162,60 @@ raiseWindow (CompWindow *w)
 	configureXWindow (w, mask, &xwc);
 }
 
+static CompWindow *
+focusTopmostWindow (CompScreen *s)
+{
+    CompDisplay *d = s->display;
+    CompWindow  *w;
+    CompWindow  *focus = NULL;
+
+    for (w = s->reverseWindows; w; w = w->prev)
+    {
+	if (w->type & CompWindowTypeDockMask)
+	    continue;
+
+	if ((*s->focusWindow) (w))
+	{
+	    focus = w;
+	    break;
+	}
+    }
+
+    if (focus)
+    {
+	if (focus->id != d->activeWindow)
+	    moveInputFocusToWindow (focus);
+    }
+    else
+	XSetInputFocus (d->display, s->root, RevertToPointerRoot,
+			CurrentTime);
+    return focus;
+}
+
 void
 lowerWindow (CompWindow *w)
 {
     XWindowChanges xwc;
     int		   mask;
+    CompDisplay    *d = w->screen->display;
+
+    /* when lowering a window, focus the topmost window if
+       the click-to-focus option is on */
+    if (d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
+    {
+	Window aboveId = w->next ? w->next->id : None;
+	unhookWindowFromScreen (w->screen, w);
+	CompWindow *focusedWindow = focusTopmostWindow (w->screen);
+	insertWindowIntoScreen (w->screen, w, aboveId);
+
+	/* if the newly focused window is a desktop window,
+	   give the focus back to w */
+	if (focusedWindow &&
+	    focusedWindow->type & CompWindowTypeDesktopMask)
+	{
+	    moveInputFocusToWindow (w);
+	}
+    }
 
     mask = addWindowStackChanges (w, &xwc, findLowestSiblingBelow (w));
     if (mask)
