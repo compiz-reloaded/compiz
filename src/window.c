@@ -4200,8 +4200,11 @@ lowerWindow (CompWindow *w)
     int		   mask;
     CompDisplay    *d = w->screen->display;
 
-    /* when lowering a window, focus the topmost window if
-       the click-to-focus option is on */
+    mask = addWindowStackChanges (w, &xwc, findLowestSiblingBelow (w));
+    if (mask)
+	configureXWindow (w, mask, &xwc);
+
+    /* when lowering a window, focus the topmost window if the click-to-focus option is on */
     if (d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
     {
 	Window     aboveId = w->next ? w->next->id : None;
@@ -4216,10 +4219,6 @@ lowerWindow (CompWindow *w)
 	if (focusedWindow && focusedWindow->type & CompWindowTypeDesktopMask)
 	    moveInputFocusToWindow (w);
     }
-
-    mask = addWindowStackChanges (w, &xwc, findLowestSiblingBelow (w));
-    if (mask)
-	configureXWindow (w, mask, &xwc);
 }
 
 void
