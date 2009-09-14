@@ -4189,6 +4189,7 @@ focusTopmostWindow (CompScreen *s)
     else
 	XSetInputFocus (d->display, s->root, RevertToPointerRoot,
 			CurrentTime);
+
     return focus;
 }
 
@@ -4203,18 +4204,17 @@ lowerWindow (CompWindow *w)
        the click-to-focus option is on */
     if (d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
     {
-	Window aboveId = w->next ? w->next->id : None;
+	Window     aboveId = w->next ? w->next->id : None;
+	CompWindow *focusedWindow;
+
 	unhookWindowFromScreen (w->screen, w);
-	CompWindow *focusedWindow = focusTopmostWindow (w->screen);
+	focusedWindow = focusTopmostWindow (w->screen);
 	insertWindowIntoScreen (w->screen, w, aboveId);
 
 	/* if the newly focused window is a desktop window,
 	   give the focus back to w */
-	if (focusedWindow &&
-	    focusedWindow->type & CompWindowTypeDesktopMask)
-	{
+	if (focusedWindow && focusedWindow->type & CompWindowTypeDesktopMask)
 	    moveInputFocusToWindow (w);
-	}
     }
 
     mask = addWindowStackChanges (w, &xwc, findLowestSiblingBelow (w));
