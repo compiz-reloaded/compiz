@@ -4207,7 +4207,7 @@ lowerWindow (CompWindow *w)
     /* when lowering a window, focus the topmost window if the click-to-focus option is on */
     if (d->opt[COMP_DISPLAY_OPTION_CLICK_TO_FOCUS].value.b)
     {
-	Window     aboveId = w->next ? w->next->id : None;
+	Window     aboveId = w->prev ? w->prev->id : None;
 	CompWindow *focusedWindow;
 
 	unhookWindowFromScreen (w->screen, w);
