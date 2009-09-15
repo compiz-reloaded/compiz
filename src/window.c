@@ -4214,8 +4214,6 @@ lowerWindow (CompWindow *w)
 	focusedWindow = focusTopmostWindow (w->screen);
 	insertWindowIntoScreen (w->screen, w, aboveId);
 
-	updateClientListForScreen (w->screen);
-
 	/* if the newly focused window is a desktop window,
 	   give the focus back to w */
 	if (focusedWindow && focusedWindow->type & CompWindowTypeDesktopMask)
