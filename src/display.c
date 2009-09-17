@@ -688,7 +688,7 @@ updatePlugins (CompDisplay *d)
     dupPluginCount = 0;
     for (i = 0; i < o->value.list.nValue; i++)
     {
-	if (strcmp(o->value.list.value[i].s, "core") == 0)
+	if (strcmp (o->value.list.value[i].s, "core") == 0)
 	{
 	    dupPluginCount++;
 	}
@@ -696,7 +696,7 @@ updatePlugins (CompDisplay *d)
 	{
 	    for (j = 0; j < nInitialPlugins; j++)
 	    {
-		if (strcmp(o->value.list.value[i].s, initialPlugins[j]) == 0)
+		if (strcmp (o->value.list.value[i].s, initialPlugins[j]) == 0)
 		{
 		    dupPluginCount++;
 		    break;
@@ -746,7 +746,7 @@ updatePlugins (CompDisplay *d)
 	    pList[j++].s = o->value.list.value[i].s;
     }
 
-    assert(j == pListCount);
+    assert (j == pListCount);
 
     /* j is initialized to 1 to make sure we never pop the core plugin */
     for (i = j = 1; j < d->plugin.list.nValue && i < pListCount; i++, j++)
