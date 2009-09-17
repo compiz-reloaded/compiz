@@ -675,39 +675,35 @@ updatePlugins (CompDisplay *d)
 {
     CompOption      *o;
     CompPlugin      *p, **pop = 0;
-    int	            nPop, i, j, k, dupPluginCount;
+    int	            nPop, i, j, k;
     CompOptionValue *pList;
-    int             pListCount;
+    int             pListCount = 1;
 
     d->dirtyPluginList = FALSE;
 
     o = &d->opt[COMP_DISPLAY_OPTION_ACTIVE_PLUGINS];
 
-    /* Make sure the new plugin list always lists core first, then the
-       initial plugins... */
-    dupPluginCount = 0;
+    /* determine number of plugins, which is core + initial plugins +
+       plugins in option list additional to initial plugins */
+    for (i = 0; i < nInitialPlugins; i++)
+	if (strcmp (initialPlugins[i], "core") != 0)
+	    pListCount++;
+
     for (i = 0; i < o->value.list.nValue; i++)
     {
 	if (strcmp (o->value.list.value[i].s, "core") == 0)
-	{
-	    dupPluginCount++;
-	}
-	else
-	{
-	    for (j = 0; j < nInitialPlugins; j++)
-	    {
-		if (strcmp (o->value.list.value[i].s, initialPlugins[j]) == 0)
-		{
-		    dupPluginCount++;
-		    break;
-		}
-	    }
-	}
-    }
+	    continue;
 
-    /* dupPluginCount is now the number of plugins contained in both the
-       initial and the new plugin list */
-    pListCount = 1 + nInitialPlugins + o->value.list.nValue - dupPluginCount;
+	for (j = 0; j < nInitialPlugins; j++)
+	{
+	    if (strcmp (o->value.list.value[i].s, initialPlugins[j]) == 0)
+		break;
+	}
+
+	/* plugin is not in initial plugin list */
+	if (j == nInitialPlugins)
+	    pListCount++;
+    }
 
     pList = malloc (sizeof (CompOptionValue) * pListCount);
     if (!pList)
