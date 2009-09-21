@@ -248,12 +248,14 @@ switchSetScreenOption (CompPlugin      *plugin,
 static void
 setSelectedWindowHint (CompScreen *s)
 {
+    Window selectedWindowId = None;
+
     SWITCH_DISPLAY (s->display);
     SWITCH_SCREEN (s);
 
-    Window selectedWindowId =
-	ss->selectedWindow && !ss->selectedWindow->destroyed ?
-	ss->selectedWindow->id : None;
+    if (ss->selectedWindow && !ss->selectedWindow->destroyed)
+	selectedWindowId = ss->selectedWindow->id;
+
     XChangeProperty (s->display->display, ss->popupWindow, sd->selectWinAtom,
 		     XA_WINDOW, 32, PropModeReplace,
 		     (unsigned char *) &selectedWindowId, 1);
