@@ -99,6 +99,8 @@ typedef struct _ResizeDisplay {
     int		 pointerDx;
     int		 pointerDy;
     KeyCode	 key[NUM_KEYS];
+
+    Bool yConstrained;
 } ResizeDisplay;
 
 typedef struct _ResizeScreen {
@@ -119,6 +121,8 @@ typedef struct _ResizeScreen {
     Cursor downRightCursor;
     Cursor middleCursor;
     Cursor cursor[NUM_KEYS];
+
+    const XRectangle *grabWindowWorkArea;
 } ResizeScreen;
 
 #define GET_RESIZE_DISPLAY(d)					    \
@@ -457,6 +461,7 @@ resizeInitiate (CompDisplay     *d,
 	if (rs->grabIndex)
 	{
 	    BoxRec box;
+	    CompPlugin *pMove;
 
 	    rd->releaseButton = button;
 
@@ -481,6 +486,23 @@ resizeInitiate (CompDisplay     *d,
 		yRoot = w->serverY + (w->serverHeight / 2);
 
 		warpPointer (w->screen, xRoot - pointerX, yRoot - pointerY);
+	    }
+
+	    /* Update yConstrained and workArea at grab time */
+	    pMove = findActivePlugin ("move");
+	    if (pMove && pMove->vTable->getObjectOptions)
+	    {
+		int nOption = 0;
+		CompOption *moveOptions =
+		    (*pMove->vTable->getObjectOptions)
+		    (pMove, &core.displays->base, &nOption);
+		rd->yConstrained =
+		    getBoolOptionNamed (moveOptions, nOption,
+					"constrain_y", TRUE);
+		if (rd->yConstrained)
+		    rs->grabWindowWorkArea =
+			&w->screen->outputDev[outputDeviceForWindow (w)].
+			workArea;
 	    }
 	}
     }
@@ -776,6 +798,18 @@ resizeHandleMotionEvent (CompScreen *s,
 	    w = rd->w->serverWidth;
 
 	constrainNewWindowSize (rd->w, w, h, &w, &h);
+
+	if (rd->mask & ResizeUpMask && rd->yConstrained)
+	{
+	    int decorTop = rd->savedGeometry.y + rd->savedGeometry.height -
+		(h + rd->w->input.top);
+
+	    if (rs->grabWindowWorkArea->y > decorTop)
+	    {
+		/* constrain to work area */
+		h -= rs->grabWindowWorkArea->y - decorTop;
+	    }
+	}
 
 	if (rd->mode != RESIZE_MODE_NORMAL)
 	{
@@ -1290,6 +1324,8 @@ resizeInitDisplay (CompPlugin  *p,
 	rd->key[i] = XKeysymToKeycode (d->display,
 				       XStringToKeysym (rKeys[i].name));
 
+    rd->yConstrained = TRUE;
+
     WRAP (rd, d, handleEvent, resizeHandleEvent);
 
     d->base.privates[displayPrivateIndex].ptr = rd;
@@ -1346,6 +1382,8 @@ resizeInitScreen (CompPlugin *p,
     rs->cursor[1] = rs->rightCursor;
     rs->cursor[2] = rs->upCursor;
     rs->cursor[3] = rs->downCursor;
+
+    rs->grabWindowWorkArea = NULL;
 
     WRAP (rs, s, windowResizeNotify, resizeWindowResizeNotify);
     WRAP (rs, s, paintOutput, resizePaintOutput);

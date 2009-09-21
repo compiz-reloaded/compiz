@@ -124,6 +124,8 @@ typedef struct _WobblyDisplay {
     CompOption opt[WOBBLY_DISPLAY_OPTION_NUM];
 
     Bool snapping;
+
+    Bool yConstrained;
 } WobblyDisplay;
 
 #define WOBBLY_SCREEN_OPTION_FRICTION	        0
@@ -161,6 +163,8 @@ typedef struct _WobblyScreen {
     unsigned int grabMask;
     CompWindow	 *grabWindow;
     Bool         moveWindow;
+
+    const XRectangle *grabWindowWorkArea;
 } WobblyScreen;
 
 #define WobblyInitial  (1L << 0)
@@ -1695,12 +1699,41 @@ wobblyPreparePaintScreen (CompScreen *s,
 
 		    if (ww->wobbly)
 		    {
+			WOBBLY_DISPLAY (s->display);
+
 			/* snapped to more than one edge, we have to reduce
 			   edge escape velocity until only one edge is snapped */
 			if (ww->wobbly == WobblyForce && !ww->grabbed)
 			{
 			    modelReduceEdgeEscapeVelocity (ww->model);
 			    ww->wobbly |= WobblyInitial;
+			}
+
+			if (!ww->grabbed && wd->yConstrained)
+			{
+			    float bottommostYPos = MINSHORT;
+			    int i;
+
+			    /* find the bottommost top-row object */
+			    for (i = 0; i < GRID_WIDTH; i++)
+			    {
+				if (model->objects[i].position.y >
+				    bottommostYPos)
+				    bottommostYPos =
+					model->objects[i].position.y;
+			    }
+
+			    int decorTop = bottommostYPos +
+				w->output.top - w->input.top;
+
+			    if (ws->grabWindowWorkArea->y > decorTop)
+			    {
+				/* constrain to work area */
+				modelMove (model, 0,
+					   ws->grabWindowWorkArea->y -
+					   decorTop);
+				modelCalcBounds (model);
+			    }
 			}
 		    }
 		    else
@@ -2502,6 +2535,9 @@ wobblyWindowGrabNotify (CompWindow   *w,
 	{
 	    Spring *s;
 	    int	   i;
+	    CompPlugin *pMove;
+
+	    WOBBLY_DISPLAY (w->screen->display);
 
 	    if (ws->opt[WOBBLY_SCREEN_OPTION_MAXIMIZE_EFFECT].value.b)
 	    {
@@ -2532,10 +2568,25 @@ wobblyWindowGrabNotify (CompWindow   *w,
 
 	    ww->grabbed = TRUE;
 
+	    /* Update yConstrained and workArea at grab time */
+	    pMove = findActivePlugin ("move");
+	    if (pMove && pMove->vTable->getObjectOptions)
+	    {
+		int nOption = 0;
+		CompOption *moveOptions =
+		    (*pMove->vTable->getObjectOptions)
+		    (pMove, &core.displays->base, &nOption);
+		wd->yConstrained =
+		    getBoolOptionNamed (moveOptions, nOption,
+					"constrain_y", TRUE);
+		if (wd->yConstrained)
+		    ws->grabWindowWorkArea =
+			&w->screen->outputDev[outputDeviceForWindow (w)].
+			workArea;
+	    }
+
 	    if (mask & CompWindowGrabMoveMask)
 	    {
-		WOBBLY_DISPLAY (w->screen->display);
-
 		modelDisableSnapping (w, ww->model);
 		if (wd->snapping)
 		    modelUpdateSnapping (w, ww->model);
@@ -2722,6 +2773,7 @@ wobblyInitDisplay (CompPlugin  *p,
     WRAP (wd, d, handleEvent, wobblyHandleEvent);
 
     wd->snapping = FALSE;
+    wd->yConstrained = TRUE;
 
     d->base.privates[displayPrivateIndex].ptr = wd;
 
@@ -2778,6 +2830,8 @@ wobblyInitScreen (CompPlugin *p,
     ws->grabMask   = 0;
     ws->grabWindow = NULL;
     ws->moveWindow = FALSE;
+
+    ws->grabWindowWorkArea = NULL;
 
     WRAP (ws, s, preparePaintScreen, wobblyPreparePaintScreen);
     WRAP (ws, s, donePaintScreen, wobblyDonePaintScreen);
