@@ -2572,17 +2572,20 @@ wobblyWindowGrabNotify (CompWindow   *w,
 	    pMove = findActivePlugin ("move");
 	    if (pMove && pMove->vTable->getObjectOptions)
 	    {
-		int nOption = 0;
-		CompOption *moveOptions =
-		    (*pMove->vTable->getObjectOptions)
+		int        nOption = 0, output;
+		CompOption *moveOptions;
+
+		moveOptions = (*pMove->vTable->getObjectOptions)
 		    (pMove, &core.displays->base, &nOption);
-		wd->yConstrained =
-		    getBoolOptionNamed (moveOptions, nOption,
-					"constrain_y", TRUE);
+		wd->yConstrained = getBoolOptionNamed (moveOptions, nOption,
+						       "constrain_y", TRUE);
+
 		if (wd->yConstrained)
+		{
+		    output = outputDeviceForWindow (w);
 		    ws->grabWindowWorkArea =
-			&w->screen->outputDev[outputDeviceForWindow (w)].
-			workArea;
+			&w->screen->outputDev[output].workArea;
+		}
 	    }
 
 	    if (mask & CompWindowGrabMoveMask)
