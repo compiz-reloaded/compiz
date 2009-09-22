@@ -2773,7 +2773,7 @@ wobblyInitDisplay (CompPlugin  *p,
     WRAP (wd, d, handleEvent, wobblyHandleEvent);
 
     wd->snapping = FALSE;
-    wd->yConstrained = TRUE;
+    wd->yConstrained = FALSE;
 
     d->base.privates[displayPrivateIndex].ptr = wd;
 
