@@ -2055,6 +2055,10 @@ addScreen (CompDisplay *display,
 	strstr (glExtensions, "GL_SGIS_texture_border_clamp"))
 	s->textureBorderClamp = 1;
 
+    s->activeTexture       = NULL;
+    s->clientActiveTexture = NULL;
+    s->multiTexCoord2f     = NULL;
+
     s->maxTextureUnits = 1;
     if (strstr (glExtensions, "GL_ARB_multitexture"))
     {
@@ -2068,6 +2072,14 @@ addScreen (CompDisplay *display,
 	if (s->activeTexture && s->clientActiveTexture && s->multiTexCoord2f)
 	    glGetIntegerv (GL_MAX_TEXTURE_UNITS_ARB, &s->maxTextureUnits);
     }
+
+    s->genPrograms             = NULL;
+    s->deletePrograms          = NULL;
+    s->bindProgram             = NULL;
+    s->programString           = NULL;
+    s->programEnvParameter4f   = NULL;
+    s->programLocalParameter4f = NULL;
+    s->getProgramiv            = NULL;
 
     s->fragmentProgram = 0;
     if (strstr (glExtensions, "GL_ARB_fragment_program"))
@@ -2096,6 +2108,13 @@ addScreen (CompDisplay *display,
 	    s->getProgramiv)
 	    s->fragmentProgram = 1;
     }
+
+    s->genFramebuffers        = NULL;
+    s->deleteFramebuffers     = NULL;
+    s->bindFramebuffer        = NULL;
+    s->checkFramebufferStatus = NULL;
+    s->framebufferTexture2D   = NULL;
+    s->generateMipmap         = NULL;
 
     s->fbo = 0;
     if (strstr (glExtensions, "GL_EXT_framebuffer_object"))
