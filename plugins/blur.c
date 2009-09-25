@@ -2076,7 +2076,8 @@ blurUpdateDstTexture (CompWindow	  *w,
     case BLUR_FILTER_GAUSSIAN:
 	return fboUpdate (s, bs->tmpRegion->rects, bs->tmpRegion->numRects);
     case BLUR_FILTER_MIPMAP:
-	(*s->generateMipmap) (bs->target);
+	if (s->generateMipmap)
+	    (*s->generateMipmap) (bs->target);
 	break;
     case BLUR_FILTER_4X_BILINEAR:
 	break;
