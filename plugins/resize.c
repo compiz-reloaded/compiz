@@ -799,16 +799,48 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	constrainNewWindowSize (rd->w, w, h, &w, &h);
 
-	if (rd->mask & ResizeUpMask && rd->yConstrained)
+	if (rd->mask & ResizeUpMask)
 	{
 	    int decorTop = rd->savedGeometry.y + rd->savedGeometry.height -
 		(h + rd->w->input.top);
 
-	    if (rs->grabWindowWorkArea->y > decorTop)
+	    if (rd->yConstrained)
 	    {
-		/* constrain to work area */
-		h -= rs->grabWindowWorkArea->y - decorTop;
+		if (rs->grabWindowWorkArea->y > decorTop)
+		{
+		    /* constrain to work area */
+		    h -= rs->grabWindowWorkArea->y - decorTop;
+		}
 	    }
+	    else if (decorTop < 0)
+	    {
+		/* constrain to screen */
+		h += decorTop;
+	    }
+	}
+
+	/* constrain to screen */
+	if (rd->mask & ResizeDownMask)
+	{
+	    int decorBottom = rd->savedGeometry.y + h + rd->w->input.bottom;
+
+	    if (decorBottom > s->height)
+		h -= decorBottom - s->height;
+	}
+	if (rd->mask & ResizeLeftMask)
+	{
+	    int decorLeft = rd->savedGeometry.x + rd->savedGeometry.width -
+		(w + rd->w->input.left);
+
+	    if (decorLeft < 0)
+		w += decorLeft;
+	}
+	if (rd->mask & ResizeRightMask)
+	{
+	    int decorRight = rd->savedGeometry.x + w + rd->w->input.right;
+
+	    if (decorRight > s->width)
+		w -= decorRight - s->width;
 	}
 
 	if (rd->mode != RESIZE_MODE_NORMAL)
