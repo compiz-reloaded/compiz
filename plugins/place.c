@@ -1197,8 +1197,6 @@ placeDoWindowPlacement (CompWindow *w,
     Bool	      keepInWorkarea;
     int               mode;
 
-    PLACE_SCREEN (s);
-
     if (placeMatchPosition (w, &x, &y, &keepInWorkarea))
     {
 	strategy = keepInWorkarea ? ConstrainOnly : NoPlacement;
