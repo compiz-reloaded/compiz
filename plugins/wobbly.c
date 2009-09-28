@@ -2569,6 +2569,7 @@ wobblyWindowGrabNotify (CompWindow   *w,
 	    ww->grabbed = TRUE;
 
 	    /* Update yConstrained and workArea at grab time */
+	    wd->yConstrained = FALSE;
 	    if (mask & CompWindowGrabExternalAppMask)
 	    {
 		pMove = findActivePlugin ("move");
@@ -2583,10 +2584,6 @@ wobblyWindowGrabNotify (CompWindow   *w,
 		    wd->yConstrained = getBoolOptionNamed (moveOptions, nOption,
 							   "constrain_y", TRUE);
 		}
-	    }
-	    else
-	    {
-		wd->yConstrained = FALSE;
 	    }
 
 	    if (wd->yConstrained)

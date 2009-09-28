@@ -495,6 +495,7 @@ resizeInitiate (CompDisplay     *d,
 	    }
 
 	    /* Update yConstrained and workArea at grab time */
+	    rd->yConstrained = FALSE;
 	    if (sourceExternalApp)
 	    {
 		pMove = findActivePlugin ("move");
@@ -509,10 +510,6 @@ resizeInitiate (CompDisplay     *d,
 		    rd->yConstrained = getBoolOptionNamed (moveOptions, nOption,
 							   "constrain_y", TRUE);
 		}
-	    }
-	    else
-	    {
-		rd->yConstrained = FALSE;
 	    }
 
 	    if (rd->yConstrained)
