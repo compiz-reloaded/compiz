@@ -1855,10 +1855,10 @@ typedef void (*WindowMoveNotifyProc) (CompWindow *window,
 				      int	 dy,
 				      Bool	 immediate);
 
-#define CompWindowGrabKeyMask    (1 << 0)
-#define CompWindowGrabButtonMask (1 << 1)
-#define CompWindowGrabMoveMask   (1 << 2)
-#define CompWindowGrabResizeMask (1 << 3)
+#define CompWindowGrabKeyMask         (1 << 0)
+#define CompWindowGrabButtonMask      (1 << 1)
+#define CompWindowGrabMoveMask        (1 << 2)
+#define CompWindowGrabResizeMask      (1 << 3)
 #define CompWindowGrabExternalAppMask (1 << 4)
 
 typedef void (*WindowGrabNotifyProc) (CompWindow   *window,
