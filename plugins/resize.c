@@ -495,20 +495,30 @@ resizeInitiate (CompDisplay     *d,
 	    }
 
 	    /* Update yConstrained and workArea at grab time */
-	    pMove = findActivePlugin ("move");
-	    if (pMove && pMove->vTable->getObjectOptions && sourceExternalApp)
+	    if (sourceExternalApp)
 	    {
-		int nOption = 0;
-		CompOption *moveOptions =
-		    (*pMove->vTable->getObjectOptions)
-		    (pMove, &core.displays->base, &nOption);
+		pMove = findActivePlugin ("move");
+		if (pMove && pMove->vTable->getObjectOptions)
+		{
+		    int        nOption = 0;
+		    CompOption *moveOptions;
 
-		rd->yConstrained = getBoolOptionNamed (moveOptions, nOption,
-						       "constrain_y", TRUE);
-		if (rd->yConstrained)
-		    rs->grabWindowWorkArea =
-			&w->screen->outputDev[outputDeviceForWindow (w)].
-			workArea;
+		    moveOptions = (*pMove->vTable->getObjectOptions)
+			(pMove, &core.displays->base, &nOption);
+
+		    rd->yConstrained = getBoolOptionNamed (moveOptions, nOption,
+							   "constrain_y", TRUE);
+		}
+	    }
+	    else
+	    {
+		rd->yConstrained = FALSE;
+	    }
+
+	    if (rd->yConstrained)
+	    {
+		int output = outputDeviceForWindow (w);
+		rs->grabWindowWorkArea = &w->screen->outputDev[output].workArea;
 	    }
 	}
     }
