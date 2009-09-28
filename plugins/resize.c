@@ -460,14 +460,20 @@ resizeInitiate (CompDisplay     *d,
 
 	if (rs->grabIndex)
 	{
+	    unsigned int grabMask = CompWindowGrabResizeMask |
+				    CompWindowGrabButtonMask;
+	    Bool sourceExternalApp = getBoolOptionNamed (option, nOption,
+							 "external", FALSE);
+
+	    if (sourceExternalApp)
+		grabMask |= CompWindowGrabExternalAppMask;
+
 	    BoxRec box;
 	    CompPlugin *pMove;
 
 	    rd->releaseButton = button;
 
-	    (w->screen->windowGrabNotify) (w, x, y, state,
-					   CompWindowGrabResizeMask |
-					   CompWindowGrabButtonMask);
+	    (w->screen->windowGrabNotify) (w, x, y, state, grabMask);
 
 	    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
 		updateWindowAttributes (w,
@@ -490,15 +496,15 @@ resizeInitiate (CompDisplay     *d,
 
 	    /* Update yConstrained and workArea at grab time */
 	    pMove = findActivePlugin ("move");
-	    if (pMove && pMove->vTable->getObjectOptions)
+	    if (pMove && pMove->vTable->getObjectOptions && sourceExternalApp)
 	    {
 		int nOption = 0;
 		CompOption *moveOptions =
 		    (*pMove->vTable->getObjectOptions)
 		    (pMove, &core.displays->base, &nOption);
-		rd->yConstrained =
-		    getBoolOptionNamed (moveOptions, nOption,
-					"constrain_y", TRUE);
+
+		rd->yConstrained = getBoolOptionNamed (moveOptions, nOption,
+						       "constrain_y", TRUE);
 		if (rd->yConstrained)
 		    rs->grabWindowWorkArea =
 			&w->screen->outputDev[outputDeviceForWindow (w)].
@@ -937,12 +943,16 @@ resizeHandleEvent (CompDisplay *d,
 		w = findWindowAtDisplay (d, event->xclient.window);
 		if (w)
 		{
-		    CompOption o[6];
+		    CompOption o[7];
 		    int	       option;
 
 		    o[0].type    = CompOptionTypeInt;
 		    o[0].name    = "window";
 		    o[0].value.i = event->xclient.window;
+
+		    o[1].type    = CompOptionTypeBool;
+		    o[1].name    = "external";
+		    o[1].value.b = TRUE;
 
 		    if (event->xclient.data.l[2] == WmMoveResizeSizeKeyboard)
 		    {
@@ -950,7 +960,7 @@ resizeHandleEvent (CompDisplay *d,
 
 			resizeInitiate (d, &rd->opt[option].value.action,
 					CompActionStateInitKey,
-					o, 1);
+					o, 2);
 		    }
 		    else
 		    {
@@ -977,31 +987,31 @@ resizeHandleEvent (CompDisplay *d,
 			/* TODO: not only button 1 */
 			if (mods & Button1Mask)
 			{
-			    o[1].type	 = CompOptionTypeInt;
-			    o[1].name	 = "modifiers";
-			    o[1].value.i = mods;
-
 			    o[2].type	 = CompOptionTypeInt;
-			    o[2].name	 = "x";
-			    o[2].value.i = event->xclient.data.l[0];
+			    o[2].name	 = "modifiers";
+			    o[2].value.i = mods;
 
 			    o[3].type	 = CompOptionTypeInt;
-			    o[3].name	 = "y";
-			    o[3].value.i = event->xclient.data.l[1];
+			    o[3].name	 = "x";
+			    o[3].value.i = event->xclient.data.l[0];
 
 			    o[4].type	 = CompOptionTypeInt;
-			    o[4].name	 = "direction";
-			    o[4].value.i = mask[event->xclient.data.l[2]];
+			    o[4].name	 = "y";
+			    o[4].value.i = event->xclient.data.l[1];
 
 			    o[5].type	 = CompOptionTypeInt;
-			    o[5].name	 = "button";
-			    o[5].value.i = event->xclient.data.l[3] ?
+			    o[5].name	 = "direction";
+			    o[5].value.i = mask[event->xclient.data.l[2]];
+
+			    o[6].type	 = CompOptionTypeInt;
+			    o[6].name	 = "button";
+			    o[6].value.i = event->xclient.data.l[3] ?
 				event->xclient.data.l[3] : -1;
 
 			    resizeInitiate (d,
 					    &rd->opt[option].value.action,
 					    CompActionStateInitButton,
-					    o, 6);
+					    o, 7);
 
 			    resizeHandleMotionEvent (w->screen, xRoot, yRoot);
 			}

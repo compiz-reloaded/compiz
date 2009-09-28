@@ -74,6 +74,7 @@ typedef struct _MoveDisplay {
     int	       y;
     Region     region;
     int        status;
+    Bool       constrainY;
     KeyCode    key[NUM_KEYS];
 
     int releaseButton;
@@ -128,6 +129,7 @@ moveInitiate (CompDisplay     *d,
 	XRectangle   workArea;
 	unsigned int mods;
 	int          x, y, button;
+	Bool         sourceExternalApp;
 
 	MOVE_SCREEN (w->screen);
 
@@ -171,6 +173,11 @@ moveInitiate (CompDisplay     *d,
 	md->x = 0;
 	md->y = 0;
 
+	sourceExternalApp = getBoolOptionNamed (option, nOption, "external",
+						FALSE);
+	md->constrainY = sourceExternalApp &&
+			 md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y].value.b;
+
 	lastPointerX = x;
 	lastPointerY = y;
 
@@ -188,13 +195,17 @@ moveInitiate (CompDisplay     *d,
 
 	if (ms->grabIndex)
 	{
+	    unsigned int grabMask = CompWindowGrabMoveMask |
+				    CompWindowGrabButtonMask;
+
+	    if (sourceExternalApp)
+		grabMask |= CompWindowGrabExternalAppMask;
+
 	    md->w = w;
 
 	    md->releaseButton = button;
 
-	    (w->screen->windowGrabNotify) (w, x, y, mods,
-					   CompWindowGrabMoveMask |
-					   CompWindowGrabButtonMask);
+	    (w->screen->windowGrabNotify) (w, x, y, mods, grabMask);
 
 	    if (d->opt[COMP_DISPLAY_OPTION_RAISE_ON_CLICK].value.b)
 		updateWindowAttributes (w,
@@ -397,7 +408,7 @@ moveHandleMotionEvent (CompScreen *s,
 				  outputDeviceForWindow (w),
 				  &workArea);
 
-	    if (md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y].value.b)
+	    if (md->constrainY)
 	    {
 		if (!md->region)
 		    md->region = moveGetYConstrainRegion (s);
@@ -638,7 +649,7 @@ moveHandleEvent (CompDisplay *d,
 		w = findWindowAtDisplay (d, event->xclient.window);
 		if (w)
 		{
-		    CompOption o[5];
+		    CompOption o[6];
 		    int	       xRoot, yRoot;
 		    int	       option;
 
@@ -646,13 +657,17 @@ moveHandleEvent (CompDisplay *d,
 		    o[0].name    = "window";
 		    o[0].value.i = event->xclient.window;
 
+		    o[1].type    = CompOptionTypeBool;
+		    o[1].name    = "external";
+		    o[1].value.b = TRUE;
+
 		    if (event->xclient.data.l[2] == WmMoveResizeMoveKeyboard)
 		    {
 			option = MOVE_DISPLAY_OPTION_INITIATE_KEY;
 
 			moveInitiate (d, &md->opt[option].value.action,
 				      CompActionStateInitKey,
-				      o, 1);
+				      o, 2);
 		    }
 		    else
 		    {
@@ -669,27 +684,27 @@ moveHandleEvent (CompDisplay *d,
 			/* TODO: not only button 1 */
 			if (mods & Button1Mask)
 			{
-			    o[1].type	 = CompOptionTypeInt;
-			    o[1].name	 = "modifiers";
-			    o[1].value.i = mods;
-
 			    o[2].type	 = CompOptionTypeInt;
-			    o[2].name	 = "x";
-			    o[2].value.i = event->xclient.data.l[0];
+			    o[2].name	 = "modifiers";
+			    o[2].value.i = mods;
 
 			    o[3].type	 = CompOptionTypeInt;
-			    o[3].name	 = "y";
-			    o[3].value.i = event->xclient.data.l[1];
+			    o[3].name	 = "x";
+			    o[3].value.i = event->xclient.data.l[0];
 
-			    o[4].type    = CompOptionTypeInt;
-			    o[4].name    = "button";
-			    o[4].value.i = event->xclient.data.l[3] ?
+			    o[4].type	 = CompOptionTypeInt;
+			    o[4].name	 = "y";
+			    o[4].value.i = event->xclient.data.l[1];
+
+			    o[5].type    = CompOptionTypeInt;
+			    o[5].name    = "button";
+			    o[5].value.i = event->xclient.data.l[3] ?
 				           event->xclient.data.l[3] : -1;
 
 			    moveInitiate (d,
 					  &md->opt[option].value.action,
 					  CompActionStateInitButton,
-					  o, 5);
+					  o, 6);
 
 			    moveHandleMotionEvent (w->screen, xRoot, yRoot);
 			}
@@ -875,6 +890,7 @@ moveInitDisplay (CompPlugin  *p,
     md->region        = NULL;
     md->status        = RectangleOut;
     md->releaseButton = 0;
+    md->constrainY    = FALSE;
 
     for (i = 0; i < NUM_KEYS; i++)
 	md->key[i] = XKeysymToKeycode (d->display,
