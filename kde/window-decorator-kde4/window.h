@@ -111,6 +111,8 @@ class Window: public QObject, public KDecorationBridgeUnstable {
 
 	/* unstable API */
 	virtual bool compositingActive () const;
+	
+	virtual bool eventFilter (QObject* o, QEvent* e);
 
 	void handleActiveChange (void);
 	void updateFrame (WId frame);

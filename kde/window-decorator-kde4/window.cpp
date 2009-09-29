@@ -764,6 +764,8 @@ KWD::Window::createDecoration (void)
     decor->init ();
 
     mDecor = decor;
+    
+    mDecor->widget ()->installEventFilter (this);
 
     mPaintRedirector = new KWin::PaintRedirector (mDecor->widget ());
     connect (mPaintRedirector, SIGNAL (paintPending()),
@@ -1747,4 +1749,38 @@ KWD::Window::mapToChildAt (QPoint p) const
     if (childAt (p.x (), p.y ()) == decorWidget ())
 	return p + QPoint (mPadding.left, mPadding.right);
     return childAt (p.x (), p.y ())->mapFrom (decorWidget (), p + QPoint (mPadding.left, mPadding.right));
+}
+
+bool 
+KWD::Window::eventFilter (QObject* o, QEvent* e)
+{
+    if (mDecor == NULL || o != mDecor->widget ())
+	return false;
+    if (e->type() == QEvent::Resize)
+    {
+	QResizeEvent* ev = static_cast<QResizeEvent*> (e);
+	// Filter out resize events that inform about size different than frame size.
+	// This will ensure that mDecor->width() etc. and mDecor->widget()->width() will be in sync.
+	// These events only seem to be delayed events from initial resizing before show() was called
+	// on the decoration widget.
+	if (ev->size () != (mGeometry.size () + QSize (mExtents.left + mExtents.right, 
+						       mExtents.top + mExtents.bottom)))
+	{
+	    int w = mGeometry.width () + mExtents.left + mExtents.right;
+	    int h = mGeometry.height () + mExtents.top + mExtents.bottom;
+    
+	    mDecor->resize (QSize (w, h));
+	    return true;
+	}
+	// HACK: Avoid decoration redraw delays. On resize Qt sets WA_WStateConfigPending
+	// which delays all painting until a matching ConfigureNotify event comes.
+	// But this process itself is the window manager, so it's not needed
+	// to wait for that event, the geometry is known.
+	// Note that if Qt in the future changes how this flag is handled and what it
+	// triggers then this may potentionally break things. See mainly QETWidget::translateConfigEvent().
+	mDecor->widget()->setAttribute( Qt::WA_WState_ConfigPending, false );
+	mDecor->widget()->update();
+	return false;
+    }
+    return false;
 }
