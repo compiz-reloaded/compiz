@@ -255,6 +255,72 @@ setVirtualScreenSize (CompScreen *screen,
 		      int	 hsize,
 		      int	 vsize)
 {
+    /* if hsize or vsize is being reduced */
+    if (hsize < screen->hsize ||
+	vsize < screen->vsize)
+    {
+	CompWindow *w;
+	int        tx = 0;
+	int        ty = 0;
+
+	if (screen->x >= hsize)
+	    tx = screen->x - (hsize - 1);
+	if (screen->y >= vsize)
+	    ty = screen->y - (vsize - 1);
+
+	if (tx != 0 || ty != 0)
+	    moveScreenViewport (screen, tx, ty, TRUE);
+
+	/* Move windows that were in one of the deleted viewports into the
+	   closest viewport */
+	for (w = screen->windows; w; w = w->next)
+	{
+	    int moveX = 0;
+	    int moveY = 0;
+
+	    if (windowOnAllViewports (w))
+		continue;
+
+	    /* Find which viewport the (inner) window's top-left corner falls
+	       in, and check if it's outside the new viewport horizontal and
+	       vertical index range */
+	    if (hsize < screen->hsize)
+	    {
+		int vpX;   /* x index of a window's vp */
+
+		vpX = w->serverX / screen->width;
+		if (w->serverX < 0)
+		    vpX -= 1;
+
+		vpX += screen->x; /* Convert relative to absolute vp index */
+
+		/* Move windows too far right to left */
+		if (vpX >= hsize)
+		    moveX = ((hsize - 1) - vpX) * screen->width;
+	    }
+	    if (vsize < screen->vsize)
+	    {
+		int vpY;   /* y index of a window's vp */
+
+		vpY = w->serverY / screen->height;
+		if (w->serverY < 0)
+		    vpY -= 1;
+
+		vpY += screen->y; /* Convert relative to absolute vp index */
+
+		/* Move windows too far right to left */
+		if (vpY >= vsize)
+		    moveY = ((vsize - 1) - vpY) * screen->height;
+	    }
+
+	    if (moveX != 0 || moveY != 0)
+	    {
+		moveWindow (w, moveX, moveY, TRUE, TRUE);
+		syncWindowPosition (w);
+	    }
+	}
+    }
+
     screen->hsize = hsize;
     screen->vsize = vsize;
 
