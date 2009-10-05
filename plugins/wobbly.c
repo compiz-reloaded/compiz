@@ -2725,6 +2725,16 @@ wobblySetDisplayOption (CompPlugin      *plugin,
 	return FALSE;
 
     switch (index) {
+    case WOBBLY_DISPLAY_OPTION_SNAP_INVERTED:
+	if (compSetBoolOption (o, value))
+	{
+	    if (value->b)
+		wobblyEnableSnapping (display, NULL, 0, NULL, 0);
+	    else
+		wobblyDisableSnapping (display, NULL, 0, NULL, 0);
+	    return TRUE;
+	}
+	break;
     case WOBBLY_DISPLAY_OPTION_SNAP_KEY:
 	/* ignore the key */
 	value->action.key.keycode = 0;
