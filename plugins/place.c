@@ -68,12 +68,28 @@ typedef struct _PlaceDisplay {
 #define PLACE_SCREEN_OPTION_NUM                13
 
 typedef struct _PlaceScreen {
+    int	windowPrivateIndex;
+
     CompOption opt[PLACE_SCREEN_OPTION_NUM];
 
     AddSupportedAtomsProc           addSupportedAtoms;
     PlaceWindowProc                 placeWindow;
     ValidateWindowResizeRequestProc validateWindowResizeRequest;
+    WindowGrabNotifyProc            windowGrabNotify;
+
+    int               prevWidth;
+    int               prevHeight;
+    int               strutWindowCount;
+    CompTimeoutHandle resChangeFallbackHandle;
 } PlaceScreen;
+
+typedef struct _PlaceWindow {
+    Bool       savedOriginal;
+    XRectangle origVpRelRect; /* saved original window rectangle with position
+                                 relative to viewport */
+    int        prevServerX;
+    int        prevServerY;
+} PlaceWindow;
 
 #define GET_PLACE_DISPLAY(d)					   \
     ((PlaceDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
@@ -86,6 +102,14 @@ typedef struct _PlaceScreen {
 
 #define PLACE_SCREEN(s)							   \
     PlaceScreen *ps = GET_PLACE_SCREEN (s, GET_PLACE_DISPLAY (s->display))
+
+#define GET_PLACE_WINDOW(w, ps)					\
+    ((PlaceWindow *) (w)->base.privates[(ps)->windowPrivateIndex].ptr)
+
+#define PLACE_WINDOW(w)				         \
+    PlaceWindow *pw = GET_PLACE_WINDOW  (w,		         \
+		      GET_PLACE_SCREEN  (w->screen,	         \
+		      GET_PLACE_DISPLAY (w->screen->display)))
 
 #define NUM_OPTIONS(s) (sizeof ((s)->opt) / sizeof (CompOption))
 
@@ -196,6 +220,39 @@ placeMatchViewport (CompWindow *w,
     }
 
     return FALSE;
+}
+
+static void
+placeWindowGrabNotify (CompWindow   *w,
+		       int	     x,
+		       int	     y,
+		       unsigned int state,
+		       unsigned int mask)
+{
+    CompScreen *s = w->screen;
+
+    PLACE_SCREEN (s);
+    PLACE_WINDOW (w);
+
+    if (pw->savedOriginal)
+    {
+	int i;
+
+	/* look for move or resize grab */
+	for (i = 0; i < s->maxGrab; i++)
+	    if (s->grabs[i].active &&
+		(strcmp ("move", s->grabs[i].name) == 0 ||
+		 strcmp ("resize", s->grabs[i].name) == 0))
+		break;
+
+	/* only reset savedOriginal if move or resize is active */
+	if (i < s->maxGrab)
+	    pw->savedOriginal = FALSE;
+    }
+
+    UNWRAP (ps, w->screen, windowGrabNotify);
+    (*w->screen->windowGrabNotify) (w, x, y, state, mask);
+    WRAP (ps, w->screen, windowGrabNotify, placeWindowGrabNotify);
 }
 
 static CompOption *
@@ -1330,61 +1387,36 @@ placeDoWindowPlacement (CompWindow *w,
     return TRUE;
 }
 
-static void
-placeValidateWindowResizeRequest (CompWindow     *w,
-				  unsigned int   *mask,
-				  XWindowChanges *xwc,
-				  unsigned int   source)
+static XRectangle
+placeDoValidateWindowResizeRequest (CompWindow     *w,
+				    unsigned int   *mask,
+				    XWindowChanges *xwc,
+				    Bool           sizeOnly,
+				    Bool           clampToViewport)
 {
     CompScreen *s = w->screen;
     XRectangle workArea;
     int        x, y, left, right, top, bottom;
     int        output;
-    Bool       sizeOnly = FALSE;
 
-    PLACE_SCREEN (s);
-
-    UNWRAP (ps, s, validateWindowResizeRequest);
-    (*s->validateWindowResizeRequest) (w, mask, xwc, source);
-    WRAP (ps, s, validateWindowResizeRequest,
-	  placeValidateWindowResizeRequest);
-
-    if (*mask == 0)
-	return;
-
-    if (source == ClientTypePager)
-	return;
-
-    if (w->state & CompWindowStateFullscreenMask)
-	return;
-
-    if (w->wmType & (CompWindowTypeDockMask |
-		     CompWindowTypeDesktopMask))
-	return;
-
-    if (w->sizeHints.flags & USPosition)
+    if (clampToViewport)
     {
-	/* only respect USPosition on normal windows if
-	   workarounds are disabled, reason see above */
-	if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b ||
-	    (w->type & CompWindowTypeNormalMask))
-	{
-	    /* try to keep the window position intact for USPosition -
-	       obviously we can't do that if we need to change the size */
-	    sizeOnly = TRUE;
-	}
+	/* left, right, top, bottom target coordinates, clamped to viewport
+	   sizes as we don't need to validate movements to other viewports;
+	   we are only interested in inner-viewport movements */
+	x = xwc->x % s->width;
+	if ((x + xwc->width) < 0)
+	    x += s->width;
+
+	y = xwc->y % s->height;
+	if ((y + xwc->height) < 0)
+	    y += s->height;
     }
-
-    /* left, right, top, bottom target coordinates, clamped to viewport
-       sizes as we don't need to validate movements to other viewports;
-       we are only interested in inner-viewport movements */
-    x = xwc->x % s->width;
-    if ((x + xwc->width) < 0)
-	x += s->width;
-
-    y = xwc->y % s->height;
-    if ((y + xwc->height) < 0)
-	y += s->height;
+    else
+    {
+	x = xwc->x;
+	y = xwc->y;
+    }
 
     left   = x - w->input.left;
     right  = x + xwc->width + w->input.right;
@@ -1398,7 +1430,8 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 
     getWorkareaForOutput (s, output, &workArea);
 
-    if (xwc->width >= workArea.width &&
+    if (clampToViewport &&
+	xwc->width >= workArea.width &&
 	xwc->height >= workArea.height)
     {
 	if ((w->actions & MAXIMIZE_STATE) == MAXIMIZE_STATE &&
@@ -1483,6 +1516,53 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 	    *mask  |= CWY;
 	}
     }
+
+    return workArea;
+}
+
+static void
+placeValidateWindowResizeRequest (CompWindow     *w,
+				  unsigned int   *mask,
+				  XWindowChanges *xwc,
+				  unsigned int   source)
+{
+    CompScreen *s = w->screen;
+    Bool       sizeOnly = FALSE;
+
+    PLACE_SCREEN (s);
+
+    UNWRAP (ps, s, validateWindowResizeRequest);
+    (*s->validateWindowResizeRequest) (w, mask, xwc, source);
+    WRAP (ps, s, validateWindowResizeRequest,
+	  placeValidateWindowResizeRequest);
+
+    if (*mask == 0)
+	return;
+
+    if (source == ClientTypePager)
+	return;
+
+    if (w->state & CompWindowStateFullscreenMask)
+	return;
+
+    if (w->wmType & (CompWindowTypeDockMask |
+		     CompWindowTypeDesktopMask))
+	return;
+
+    if (w->sizeHints.flags & USPosition)
+    {
+	/* only respect USPosition on normal windows if
+	   workarounds are disabled, reason see above */
+	if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b ||
+	    (w->type & CompWindowTypeNormalMask))
+	{
+	    /* try to keep the window position intact for USPosition -
+	       obviously we can't do that if we need to change the size */
+	    sizeOnly = TRUE;
+	}
+    }
+
+    placeDoValidateWindowResizeRequest (w, mask, xwc, sizeOnly, TRUE);
 }
 
 static unsigned int
@@ -1552,64 +1632,323 @@ placePlaceWindow (CompWindow *w,
 }
 
 static void
-placeHandleScreenSizeChange (CompScreen *s,
-			     int        width,
-			     int        height)
+placeDoHandleScreenSizeChange (CompScreen *s,
+			       Bool firstPass)
 {
     CompWindow     *w;
-    int            vpX, vpY, shiftX, shiftY;
-    XRectangle     extents;
+    int            vpX, vpY;   /* holds x and y index of a window's target vp */
+    int            shiftX, shiftY;
+    XRectangle     vpRelRect;
+    XRectangle     winRect;
+    XRectangle     workArea;
+    int            pivotX, pivotY;
     unsigned int   mask;
     XWindowChanges xwc;
+    int            curVpOffsetX = s->x * s->width;
+    int            curVpOffsetY = s->y * s->height;
+
+    PLACE_SCREEN (s);
+
+    if (firstPass)
+	ps->strutWindowCount = 0;
+    else
+    {
+	if (ps->resChangeFallbackHandle)
+	{
+	    compRemoveTimeout (ps->resChangeFallbackHandle);
+	    ps->resChangeFallbackHandle = 0;
+	}
+    }
 
     for (w = s->windows; w; w = w->next)
     {
 	if (!w->managed)
 	    continue;
 
+	PLACE_WINDOW (w);
+
+	if (firstPass)
+	{
+	    /* count windows that have struts */
+	    if (w->struts)
+		ps->strutWindowCount++;
+
+	    /* for maximized/fullscreen windows, keep window coords before
+	       screen resize, as they are sometimes automatically changed
+	       before the 2nd pass */
+	    if (w->type & CompWindowTypeFullscreenMask ||
+		(w->state & (CompWindowStateMaximizedVertMask |
+			     CompWindowStateMaximizedHorzMask)))
+	    {
+		pw->prevServerX = w->serverX;
+		pw->prevServerY = w->serverY;
+	    }
+	}
+
 	if (w->wmType & (CompWindowTypeDockMask |
 			 CompWindowTypeDesktopMask))
 	    continue;
 
-	mask = 0;
-	getWindowExtentsRect (w, &extents);
+	/* Also in the first pass, we save the rectangle of those windows
+	   that don't already have a saved one. So, skip those that do. */
+	if (firstPass && pw->savedOriginal)
+	    continue;
 
-	vpX = extents.x / s->width;
-	if (extents.x < 0)
+	winRect.x      = w->serverX;
+	winRect.y      = w->serverY;
+	winRect.width  = w->serverWidth;
+	winRect.height = w->serverHeight;
+
+	pivotX = winRect.x;
+	pivotY = winRect.y;
+
+	if (w->type & CompWindowTypeFullscreenMask ||
+	    (w->state & (CompWindowStateMaximizedVertMask |
+			 CompWindowStateMaximizedHorzMask)))
+	{
+	    if (w->saveMask & CWX)
+		winRect.x = w->saveWc.x;
+	    if (w->saveMask & CWY)
+		winRect.y = w->saveWc.y;
+	    if (w->saveMask & CWWidth)
+		winRect.width = w->saveWc.width;
+	    if (w->saveMask & CWHeight)
+		winRect.height = w->saveWc.height;
+
+	    pivotX = pw->prevServerX;
+	    pivotY = pw->prevServerY;
+	}
+
+	/* calculate target vp x, y index for window's pivot point */
+	vpX = pivotX / ps->prevWidth;
+	if (pivotX < 0)
 	    vpX -= 1;
-	vpY = extents.y / s->height;
-	if (extents.y < 0)
+	vpY = pivotY / ps->prevHeight;
+	if (pivotY < 0)
 	    vpY -= 1;
 
-	shiftX = vpX * (width - s->width);
-	shiftY = vpY * (height - s->height);
+	/* if window's target vp is to the left of the leftmost viewport on that
+	   row, assign its target vp column as 0 (-s->x rel. to current vp) */
+	if (s->x + vpX < 0)
+	    vpX = -s->x;
 
-	extents.x = extents.x % s->width;
-	if (extents.x < 0)
-	    extents.x += s->width;
-	extents.y = extents.y % s->height;
-	if (extents.y < 0)
-	    extents.y += s->height;
+	/* if window's target vp is above the topmost viewport on that column,
+	   assign its target vp row as 0 (-s->y rel. to current vp) */
+	if (s->y + vpY < 0)
+	    vpY = -s->y;
 
-	if (extents.x + extents.width > width)
-	    shiftX += width - extents.x - extents.width;
-	if (extents.y + extents.height > height)
-	    shiftY += height - extents.y - extents.height;
-
-	if (shiftX)
+	if (pw->savedOriginal)
 	{
-	    mask |= CWX;
-	    xwc.x = w->serverX + shiftX;
+	    /* set position/size to saved original rectangle */
+	    vpRelRect = pw->origVpRelRect;
+
+	    xwc.x = pw->origVpRelRect.x + vpX * s->width;
+	    xwc.y = pw->origVpRelRect.y + vpY * s->height;
+	}
+	else
+	{
+	    /* set position/size to window's current rectangle
+	       (with position relative to target viewport) */
+	    vpRelRect.x = winRect.x - vpX * ps->prevWidth;
+	    vpRelRect.y = winRect.y - vpY * ps->prevHeight;
+	    vpRelRect.width  = winRect.width;
+	    vpRelRect.height = winRect.height;
+
+	    xwc.x = winRect.x;
+	    xwc.y = winRect.y;
+
+	    shiftX = vpX * (s->width  - ps->prevWidth);
+	    shiftY = vpY * (s->height - ps->prevHeight);
+
+	    /* if coords. relative to viewport are outside new viewport area,
+	       shift window left/up so that it falls inside */
+	    if (vpRelRect.x >= s->width)
+		shiftX -= vpRelRect.x - (s->width - 1);
+	    if (vpRelRect.y >= s->height)
+		shiftY -= vpRelRect.y - (s->height - 1);
+
+	    if (shiftX)
+		xwc.x += shiftX;
+
+	    if (shiftY)
+		xwc.y += shiftY;
 	}
 
-	if (shiftY)
+	mask       = CWX | CWY | CWWidth | CWHeight;
+	xwc.width  = vpRelRect.width;
+	xwc.height = vpRelRect.height;
+
+	/* Handle non-(0,0) current viewport by shifting by curVpOffsetX,Y,
+	   and bring window to (0,0) by shifting by minus its vp offset */
+
+	xwc.x += curVpOffsetX - (s->x + vpX) * s->width;
+	xwc.y += curVpOffsetY - (s->y + vpY) * s->height;
+
+	workArea =
+	    placeDoValidateWindowResizeRequest (w, &mask, &xwc, FALSE, FALSE);
+
+	xwc.x -= curVpOffsetX - (s->x + vpX) * s->width;
+	xwc.y -= curVpOffsetY - (s->y + vpY) * s->height;
+
+	/* Check if the new coordinates are different than current position and
+	   size. If not, we can clear the corresponding mask bits. */
+	if (xwc.x == winRect.x)
+	    mask &= ~CWX;
+
+	if (xwc.y == winRect.y)
+	    mask &= ~CWY;
+
+	if (xwc.width == winRect.width)
+	    mask &= ~CWWidth;
+
+	if (xwc.height == winRect.height)
+	    mask &= ~CWHeight;
+
+	if (!pw->savedOriginal)
 	{
-	    mask |= CWY;
-	    xwc.y = w->serverY + shiftY;
+	    if (mask)
+	    {
+		/* save window geometry (relative to viewport) so that it
+		can be restored later */
+		pw->savedOriginal = TRUE;
+		pw->origVpRelRect = vpRelRect;
+
+		if (firstPass)
+		{
+		    /* If first pass, store updated pos. */
+		    pw->origVpRelRect.x = xwc.x % s->width;
+		    if (pw->origVpRelRect.x < 0)
+			pw->origVpRelRect.x += s->width;
+		    pw->origVpRelRect.y = xwc.y % s->height;
+		    if (pw->origVpRelRect.y < 0)
+			pw->origVpRelRect.y += s->height;
+		}
+	    }
+	}
+	else if (pw->origVpRelRect.x + vpX * s->width == xwc.x &&
+		 pw->origVpRelRect.y + vpY * s->height == xwc.y &&
+		 pw->origVpRelRect.width  == xwc.width &&
+		 pw->origVpRelRect.height == xwc.height)
+	{
+	    /* if size and position is back to original, clear saved rect */
+	    pw->savedOriginal = FALSE;
 	}
 
+	if (firstPass) /* if first pass, don't actually move the window */
+	    continue;
+
+	/* for maximized/fullscreen windows, update saved pos/size */
+	if (w->type & CompWindowTypeFullscreenMask ||
+	    (w->state & (CompWindowStateMaximizedVertMask |
+			 CompWindowStateMaximizedHorzMask)))
+	{
+	    if (mask & CWX)
+	    {
+		w->saveWc.x = xwc.x;
+		w->saveMask |= CWX;
+	    }
+	    if (mask & CWY)
+	    {
+		w->saveWc.y = xwc.y;
+		w->saveMask |= CWY;
+	    }
+	    if (mask & CWWidth)
+	    {
+		w->saveWc.width = xwc.width;
+		w->saveMask |= CWWidth;
+	    }
+	    if (mask & CWHeight)
+	    {
+		w->saveWc.height = xwc.height;
+		w->saveMask |= CWHeight;
+	    }
+
+	    if (w->type & CompWindowTypeFullscreenMask)
+	    {
+		mask |= CWX | CWY | CWWidth | CWHeight;
+		xwc.x = vpX * s->width;
+		xwc.y = vpY * s->height;
+		xwc.width  = s->width;
+		xwc.height = s->height;
+	    }
+	    else
+	    {
+		if (w->state & CompWindowStateMaximizedHorzMask)
+		{
+		    mask |= CWX | CWWidth;
+		    xwc.x = vpX * s->width + workArea.x + w->input.left;
+		    xwc.width = workArea.width -
+			(2 * w->serverBorderWidth +
+			 w->input.left + w->input.right);
+		}
+		if (w->state & CompWindowStateMaximizedVertMask)
+		{
+		    mask |= CWY | CWHeight;
+		    xwc.y = vpY * s->height + workArea.y + w->input.top;
+		    xwc.height = workArea.height -
+			(2 * w->serverBorderWidth +
+			 w->input.top + w->input.bottom);
+		}
+	    }
+	}
 	if (mask)
+	{
+	    /* actually move/resize window in directions given by mask */
 	    configureXWindow (w, mask, &xwc);
+	}
+    }
+}
+
+static CompBool
+placeHandleScreenSizeChangeFallback (void *closure)
+{
+    CompScreen *s = (CompScreen *) closure;
+
+    PLACE_SCREEN (s);
+
+    ps->resChangeFallbackHandle = 0;
+
+    /* If countdown is not finished yet (i.e. at least one strut-window didn't
+       update its struts), reset the countdown and do the 2nd pass here. */
+    if (ps->strutWindowCount > 0) /* no windows with struts found */
+    {
+	ps->strutWindowCount = 0;
+	placeDoHandleScreenSizeChange (s, FALSE);
+    }
+
+    return FALSE;
+}
+
+static void
+placeHandleScreenSizeChange (CompScreen *s,
+			     int        width,
+			     int        height)
+{
+    PLACE_SCREEN (s);
+
+    if (s->width == width && s->height == height) /* No change in screen size */
+	return;
+
+    ps->prevWidth  = s->width;
+    ps->prevHeight = s->height;
+
+    if (ps->resChangeFallbackHandle)
+	compRemoveTimeout (ps->resChangeFallbackHandle);
+
+    placeDoHandleScreenSizeChange (s, TRUE); /* 1st pass */
+
+    if (ps->strutWindowCount == 0) /* no windows with struts found */
+    {
+	ps->resChangeFallbackHandle = 0;
+
+	/* do the 2nd pass right here instead of in placeHandleEvent */
+	placeDoHandleScreenSizeChange (s, FALSE);
+    }
+    else
+    {
+	/* Start a 4 second fallback timeout, just in case. */
+	ps->resChangeFallbackHandle =
+	    compAddTimeout (4000, 4500, placeHandleScreenSizeChangeFallback, s);
     }
 }
 
@@ -1629,6 +1968,33 @@ placeHandleEvent (CompDisplay *d,
 		placeHandleScreenSizeChange (s,
 					     event->xconfigure.width,
 					     event->xconfigure.height);
+	}
+	break;
+    case PropertyNotify:
+	if (event->xproperty.atom == d->wmStrutAtom ||
+	    event->xproperty.atom == d->wmStrutPartialAtom)
+	{
+	    CompWindow *w;
+
+	    w = findWindowAtDisplay (d, event->xproperty.window);
+	    if (w)
+	    {
+		PLACE_SCREEN (w->screen);
+
+		/* Only do when handling screen size change.
+		   ps->strutWindowCount is 0 at any other time */
+		if (ps->strutWindowCount > 0 &&
+		    updateWindowStruts (w))
+		{
+		    ps->strutWindowCount--;
+		    updateWorkareaForScreen (w->screen);
+
+		    /* if this was the last window with struts */
+		    if (!ps->strutWindowCount)
+			placeDoHandleScreenSizeChange (w->screen,
+						       FALSE); /* 2nd pass */
+		}
+	    }
 	}
 	break;
     default:
@@ -1724,10 +2090,25 @@ placeInitScreen (CompPlugin *p,
 	return FALSE;
     }
 
+    ps->windowPrivateIndex = allocateWindowPrivateIndex (s);
+    if (ps->windowPrivateIndex < 0)
+    {
+	compFiniScreenOptions (s, ps->opt, PLACE_SCREEN_OPTION_NUM);
+	free (ps);
+	return FALSE;
+    }
+
+    ps->prevWidth = s->width;
+    ps->prevHeight = s->height;
+
+    ps->strutWindowCount = 0;
+    ps->resChangeFallbackHandle = 0;
+
     WRAP (ps, s, placeWindow, placePlaceWindow);
     WRAP (ps, s, validateWindowResizeRequest,
 	  placeValidateWindowResizeRequest);
     WRAP (ps, s, addSupportedAtoms, placeAddSupportedAtoms);
+    WRAP (ps, s, windowGrabNotify, placeWindowGrabNotify);
 
     s->base.privates[pd->screenPrivateIndex].ptr = ps;
 
@@ -1742,15 +2123,47 @@ placeFiniScreen (CompPlugin *p,
 {
     PLACE_SCREEN (s);
 
+    if (ps->resChangeFallbackHandle)
+	compRemoveTimeout (ps->resChangeFallbackHandle);
+
     UNWRAP (ps, s, placeWindow);
     UNWRAP (ps, s, validateWindowResizeRequest);
     UNWRAP (ps, s, addSupportedAtoms);
+    UNWRAP (ps, s, windowGrabNotify);
 
     setSupportedWmHints (s);
 
     compFiniScreenOptions (s, ps->opt, PLACE_SCREEN_OPTION_NUM);
 
     free (ps);
+}
+
+static Bool
+placeInitWindow (CompPlugin *p,
+		 CompWindow *w)
+{
+    PlaceWindow *pw;
+
+    PLACE_SCREEN (w->screen);
+
+    pw = malloc (sizeof (PlaceWindow));
+    if (!pw)
+	return FALSE;
+
+    pw->savedOriginal = FALSE;
+
+    w->base.privates[ps->windowPrivateIndex].ptr = pw;
+
+    return TRUE;
+}
+
+static void
+placeFiniWindow (CompPlugin *p,
+		 CompWindow *w)
+{
+    PLACE_WINDOW (w);
+
+    free (pw);
 }
 
 static CompBool
@@ -1760,7 +2173,8 @@ placeInitObject (CompPlugin *p,
     static InitPluginObjectProc dispTab[] = {
 	(InitPluginObjectProc) 0, /* InitCore */
 	(InitPluginObjectProc) placeInitDisplay,
-	(InitPluginObjectProc) placeInitScreen
+	(InitPluginObjectProc) placeInitScreen,
+	(InitPluginObjectProc) placeInitWindow
     };
 
     RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
@@ -1773,7 +2187,8 @@ placeFiniObject (CompPlugin *p,
     static FiniPluginObjectProc dispTab[] = {
 	(FiniPluginObjectProc) 0, /* FiniCore */
 	(FiniPluginObjectProc) placeFiniDisplay,
-	(FiniPluginObjectProc) placeFiniScreen
+	(FiniPluginObjectProc) placeFiniScreen,
+	(FiniPluginObjectProc) placeFiniWindow
     };
 
     DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
