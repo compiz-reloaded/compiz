@@ -101,6 +101,7 @@ typedef struct _ResizeDisplay {
     KeyCode	 key[NUM_KEYS];
 
     Bool yConstrained;
+    Bool offScreenConstrained;
 } ResizeDisplay;
 
 typedef struct _ResizeScreen {
@@ -496,8 +497,15 @@ resizeInitiate (CompDisplay     *d,
 
 	    /* Update yConstrained and workArea at grab time */
 	    rd->yConstrained = FALSE;
+
+	    rd->offScreenConstrained = FALSE;
+
 	    if (sourceExternalApp)
 	    {
+		/* Prevent resizing beyond screen edges when resize is
+		   initiated externally (e.g. with key/button) */
+		rd->offScreenConstrained = TRUE;
+
 		pMove = findActivePlugin ("move");
 		if (pMove && pMove->vTable->getObjectOptions)
 		{
@@ -825,7 +833,7 @@ resizeHandleMotionEvent (CompScreen *s,
 		    h -= rs->grabWindowWorkArea->y - decorTop;
 		}
 	    }
-	    else if (decorTop < 0)
+	    else if (rd->offScreenConstrained && decorTop < 0)
 	    {
 		/* constrain to screen */
 		h += decorTop;
@@ -833,14 +841,14 @@ resizeHandleMotionEvent (CompScreen *s,
 	}
 
 	/* constrain to screen */
-	if (rd->mask & ResizeDownMask)
+	if (rd->offScreenConstrained && rd->mask & ResizeDownMask)
 	{
 	    int decorBottom = rd->savedGeometry.y + h + rd->w->input.bottom;
 
 	    if (decorBottom > s->height)
 		h -= decorBottom - s->height;
 	}
-	if (rd->mask & ResizeLeftMask)
+	if (rd->offScreenConstrained && rd->mask & ResizeLeftMask)
 	{
 	    int decorLeft = rd->savedGeometry.x + rd->savedGeometry.width -
 		(w + rd->w->input.left);
@@ -848,7 +856,7 @@ resizeHandleMotionEvent (CompScreen *s,
 	    if (decorLeft < 0)
 		w += decorLeft;
 	}
-	if (rd->mask & ResizeRightMask)
+	if (rd->offScreenConstrained && rd->mask & ResizeRightMask)
 	{
 	    int decorRight = rd->savedGeometry.x + w + rd->w->input.right;
 
@@ -1374,6 +1382,7 @@ resizeInitDisplay (CompPlugin  *p,
 				       XStringToKeysym (rKeys[i].name));
 
     rd->yConstrained = TRUE;
+    rd->offScreenConstrained = TRUE;
 
     WRAP (rd, d, handleEvent, resizeHandleEvent);
 
