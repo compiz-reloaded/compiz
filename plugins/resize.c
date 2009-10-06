@@ -100,8 +100,7 @@ typedef struct _ResizeDisplay {
     int		 pointerDy;
     KeyCode	 key[NUM_KEYS];
 
-    Bool yConstrained;
-    Bool offScreenConstrained;
+    Bool offWorkAreaConstrained;
 } ResizeDisplay;
 
 typedef struct _ResizeScreen {
@@ -470,7 +469,6 @@ resizeInitiate (CompDisplay     *d,
 		grabMask |= CompWindowGrabExternalAppMask;
 
 	    BoxRec box;
-	    CompPlugin *pMove;
 
 	    rd->releaseButton = button;
 
@@ -495,35 +493,18 @@ resizeInitiate (CompDisplay     *d,
 		warpPointer (w->screen, xRoot - pointerX, yRoot - pointerY);
 	    }
 
-	    /* Update yConstrained and workArea at grab time */
-	    rd->yConstrained = FALSE;
-
-	    rd->offScreenConstrained = FALSE;
-
+	    /* Update offWorkAreaConstrained and workArea at grab time */
+	    rd->offWorkAreaConstrained = FALSE;
 	    if (sourceExternalApp)
 	    {
-		/* Prevent resizing beyond screen edges when resize is
-		   initiated externally (e.g. with key/button) */
-		rd->offScreenConstrained = TRUE;
-
-		pMove = findActivePlugin ("move");
-		if (pMove && pMove->vTable->getObjectOptions)
-		{
-		    int        nOption = 0;
-		    CompOption *moveOptions;
-
-		    moveOptions = (*pMove->vTable->getObjectOptions)
-			(pMove, &core.displays->base, &nOption);
-
-		    rd->yConstrained = getBoolOptionNamed (moveOptions, nOption,
-							   "constrain_y", TRUE);
-		}
-	    }
-
-	    if (rd->yConstrained)
-	    {
 		int output = outputDeviceForWindow (w);
+
 		rs->grabWindowWorkArea = &w->screen->outputDev[output].workArea;
+
+		/* Prevent resizing beyond work area edges when resize is
+		   initiated externally (e.g. with window frame or menu)
+		   and not with a key (e.g. alt+button) */
+		rd->offWorkAreaConstrained = TRUE;
 	    }
 	}
     }
@@ -820,48 +801,43 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	constrainNewWindowSize (rd->w, w, h, &w, &h);
 
-	if (rd->mask & ResizeUpMask)
+	/* constrain to work area */
+	if (rd->offWorkAreaConstrained)
 	{
-	    int decorTop = rd->savedGeometry.y + rd->savedGeometry.height -
-		(h + rd->w->input.top);
-
-	    if (rd->yConstrained)
+	    if (rd->mask & ResizeUpMask)
 	    {
+		int decorTop = rd->savedGeometry.y + rd->savedGeometry.height -
+		    (h + rd->w->input.top);
+
 		if (rs->grabWindowWorkArea->y > decorTop)
-		{
-		    /* constrain to work area */
 		    h -= rs->grabWindowWorkArea->y - decorTop;
-		}
 	    }
-	    else if (rd->offScreenConstrained && decorTop < 0)
+	    if (rd->mask & ResizeDownMask)
 	    {
-		/* constrain to screen */
-		h += decorTop;
+		int decorBottom = rd->savedGeometry.y + h + rd->w->input.bottom;
+
+		if (decorBottom >
+		    rs->grabWindowWorkArea->y + rs->grabWindowWorkArea->height)
+		    h -= decorBottom - (rs->grabWindowWorkArea->y +
+					rs->grabWindowWorkArea->height);
 	    }
-	}
+	    if (rd->mask & ResizeLeftMask)
+	    {
+		int decorLeft = rd->savedGeometry.x + rd->savedGeometry.width -
+		    (w + rd->w->input.left);
 
-	/* constrain to screen */
-	if (rd->offScreenConstrained && rd->mask & ResizeDownMask)
-	{
-	    int decorBottom = rd->savedGeometry.y + h + rd->w->input.bottom;
+		if (rs->grabWindowWorkArea->x > decorLeft)
+		    w -= rs->grabWindowWorkArea->x - decorLeft;
+	    }
+	    if (rd->mask & ResizeRightMask)
+	    {
+		int decorRight = rd->savedGeometry.x + w + rd->w->input.right;
 
-	    if (decorBottom > s->height)
-		h -= decorBottom - s->height;
-	}
-	if (rd->offScreenConstrained && rd->mask & ResizeLeftMask)
-	{
-	    int decorLeft = rd->savedGeometry.x + rd->savedGeometry.width -
-		(w + rd->w->input.left);
-
-	    if (decorLeft < 0)
-		w += decorLeft;
-	}
-	if (rd->offScreenConstrained && rd->mask & ResizeRightMask)
-	{
-	    int decorRight = rd->savedGeometry.x + w + rd->w->input.right;
-
-	    if (decorRight > s->width)
-		w -= decorRight - s->width;
+		if (decorRight >
+		    rs->grabWindowWorkArea->x + rs->grabWindowWorkArea->width)
+		    w -= decorRight - (rs->grabWindowWorkArea->x +
+				       rs->grabWindowWorkArea->width);
+	    }
 	}
 
 	if (rd->mode != RESIZE_MODE_NORMAL)
@@ -1381,8 +1357,7 @@ resizeInitDisplay (CompPlugin  *p,
 	rd->key[i] = XKeysymToKeycode (d->display,
 				       XStringToKeysym (rKeys[i].name));
 
-    rd->yConstrained = TRUE;
-    rd->offScreenConstrained = TRUE;
+    rd->offWorkAreaConstrained = TRUE;
 
     WRAP (rd, d, handleEvent, resizeHandleEvent);
 
