@@ -165,8 +165,16 @@ shotFilter (const struct dirent *d)
     int number;
 
     if (sscanf (d->d_name, "screenshot%d.png", &number))
-	return 1;
+    {
+	int nDigits = 0;
 
+	for (; number > 0; number /= 10)
+	    nDigits++;
+
+	/* make sure there are no trailing characters in the name */
+	if (strlen (d->d_name) == 14 + nDigits)
+	    return 1;
+    }
     return 0;
 }
 
