@@ -2554,6 +2554,28 @@ unmapWindow (CompWindow *w)
     if (w->unmapRefCnt > 0)
 	return;
 
+    if (w->managed)
+    {
+	XWindowChanges xwc;
+	unsigned int   xwcm;
+	int            gravity = w->sizeHints.win_gravity;
+
+	/* revert gravity adjustment made at MapRequest time */
+	xwc.x      = w->serverX;
+	xwc.y      = w->serverY;
+	xwc.width  = w->serverWidth;
+	xwc.height = w->serverHeight;
+
+	xwcm = adjustConfigureRequestForGravity (w, &xwc,
+						 CWX | CWY,
+						 gravity, -1);
+
+	if (xwcm)
+	    configureXWindow (w, xwcm, &xwc);
+
+	w->managed = FALSE;
+    }
+
     if (w->struts)
 	updateWorkareaForScreen (w->screen);
 
