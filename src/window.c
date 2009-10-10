@@ -2554,7 +2554,7 @@ unmapWindow (CompWindow *w)
     if (w->unmapRefCnt > 0)
 	return;
 
-    if (w->managed)
+    if (w->managed && !w->placed) /* only for managed and closed windows */
     {
 	XWindowChanges xwc;
 	unsigned int   xwcm;
