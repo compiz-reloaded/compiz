@@ -1112,9 +1112,11 @@ rotateEdgeFlip (CompScreen      *s,
 	if (!rs->grabWindow)
 	    return;
 
-	/* bail out if window is horizontally maximized or fullscreen */
+	/* bail out if window is horizontally maximized, fullscreen,
+	   or sticky */
 	if (rs->grabWindow->state & (CompWindowStateMaximizedHorzMask |
-				     CompWindowStateFullscreenMask))
+				     CompWindowStateFullscreenMask |
+				     CompWindowStateStickyMask))
 	    return;
     }
     else if (otherScreenGrabExist (s, "rotate", NULL))
