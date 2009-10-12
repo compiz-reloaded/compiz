@@ -3056,6 +3056,26 @@ void
 windowStateChangeNotify (CompWindow   *w,
 			 unsigned int lastState)
 {
+    /* if being made sticky */
+    if (!(lastState & CompWindowStateStickyMask) &&
+	(w->state & CompWindowStateStickyMask))
+    {
+	CompScreen *s = w->screen;
+	int vpX;   /* x index of the window's vp */
+	int vpY;   /* y index of the window's vp */
+
+	/* Find which viewport the window falls in,
+	   and check if it's the current viewport */
+	defaultViewportForWindow (w, &vpX, &vpY);
+	if (s->x != vpX || s->y != vpY)
+	{
+	    int moveX = (s->x - vpX) * s->width;
+	    int moveY = (s->y - vpY) * s->height;
+
+	    moveWindow (w, moveX, moveY, TRUE, TRUE);
+	    syncWindowPosition (w);
+	}
+    }
 }
 
 static Bool
