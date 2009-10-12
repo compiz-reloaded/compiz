@@ -2993,13 +2993,21 @@ validateWindowResizeRequest (CompWindow     *w,
 	min = s->workArea.y + w->input.top;
 	max = s->workArea.y + s->workArea.height;
 
-	min -= s->y * s->height;
-	max += (s->vsize - s->y - 1) * s->height;
+	if (w->state & CompWindowStateStickyMask &&
+	    (xwc->y < min || xwc->y > max))
+	{
+	    xwc->y = w->serverY;
+	}
+	else
+	{
+	    min -= s->y * s->height;
+	    max += (s->vsize - s->y - 1) * s->height;
 
-	if (xwc->y < min)
-	    xwc->y = min;
-	else if (xwc->y > max)
-	    xwc->y = max;
+	    if (xwc->y < min)
+		xwc->y = min;
+	    else if (xwc->y > max)
+		xwc->y = max;
+	}
     }
 
     if (*mask & CWX)
@@ -3009,13 +3017,21 @@ validateWindowResizeRequest (CompWindow     *w,
 	min = s->workArea.x + w->input.left;
 	max = s->workArea.x + s->workArea.width;
 
-	min -= s->x * s->width;
-	max += (s->hsize - s->x - 1) * s->width;
+	if (w->state & CompWindowStateStickyMask &&
+	    (xwc->x < min || xwc->x > max))
+	{
+	    xwc->x = w->serverX;
+	}
+	else
+	{
+	    min -= s->x * s->width;
+	    max += (s->hsize - s->x - 1) * s->width;
 
-	if (xwc->x < min)
-	    xwc->x = min;
-	else if (xwc->x > max)
-	    xwc->x = max;
+	    if (xwc->x < min)
+		xwc->x = min;
+	    else if (xwc->x > max)
+		xwc->x = max;
+	}
     }
 }
 
