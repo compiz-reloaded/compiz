@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:09+0100\n"
-"PO-Revision-Date: 2009-02-04 23:43+0900\n"
+"POT-Creation-Date: 2009-03-24 08:13+0100\n"
+"PO-Revision-Date: 2009-05-10 21:42+0900\n"
 "Last-Translator: jiro kawada <jiro.kawada@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -28,17 +28,19 @@ msgstr "ウィンドウ管理"
 msgid "Compiz"
 msgstr "Compiz"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../gtk/gnome/compiz-window-manager.c:426
+#: ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "なし"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "シェード"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../gtk/gnome/compiz-window-manager.c:428
+#: ../metadata/place.xml.in.h:9
 msgid "Maximize"
 msgstr "最大化"
 
@@ -63,15 +65,14 @@ msgid "Lower"
 msgstr "最後面へ"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "ウィンドウメニュー"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:1
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr ""
-"ウィンドウのタイトルバー上でマウスホイールをスクロールさせたときのアクション"
+msgstr "ウィンドウのタイトルバー上でマウスホイールをスクロールさせたときのアクション"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -102,15 +103,11 @@ msgid "Opacity to use for metacity theme decorations"
 msgstr "Metacity テーマ装飾に使用する不透明度"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid ""
-"Shade active windows with metacity theme decorations from opaque to "
-"translucent"
-msgstr ""
-"Metacity テーマ装飾のアクティブ・ウィンドウを不透明から透明にシェードさせる"
+msgid "Shade active windows with metacity theme decorations from opaque to translucent"
+msgstr "Metacity テーマ装飾のアクティブ・ウィンドウを不透明から透明にシェードさせる"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid ""
-"Shade windows with metacity theme decorations from opaque to translucent"
+msgid "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr "Metacity テーマ装飾のウィンドウを不透明から透明にシェードさせる"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
@@ -129,58 +126,56 @@ msgstr "Metacity テーマを使用"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "ウィンドウ装飾を描画する際に Metacity テーマを使用"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "ウィンドウを閉じる"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "ウィンドウの最大化解除"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "ウィンドウを最大化"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "ウィンドウを最小化"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "最前面に表示"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "スティック"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "シェード解除"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "最前面表示解除"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "スティッキー解除"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "ウィンドウ \"%s\" は応答していません。"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
-msgid ""
-"Forcing this application to quit will cause you to lose any unsaved changes."
-msgstr ""
-"このアプリケーションを強制的に終了させると、未保存の変更はすべて失われます。"
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+msgid "Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr "このアプリケーションを強制的に終了させると、未保存の変更はすべて失われます。"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "強制終了(_F)"
 
@@ -216,9 +211,11 @@ msgstr "ツールを使用して描画"
 msgid "Fill color for annotations"
 msgstr "注釈線の塗り色"
 
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/annotate.xml.in.h:9
+#: ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:12
+#: ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "開始"
 
@@ -342,8 +339,10 @@ msgstr "ガウス強度"
 msgid "Independent texture fetch"
 msgstr "テクスチャの独立読み出し"
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
+#: ../metadata/blur.xml.in.h:23
+#: ../metadata/cube.xml.in.h:27
+#: ../metadata/decoration.xml.in.h:10
+#: ../metadata/switcher.xml.in.h:14
 msgid "Mipmap"
 msgstr "ミップマップ"
 
@@ -364,12 +363,8 @@ msgid "Pulse effect"
 msgstr "点滅効果"
 
 #: ../metadata/blur.xml.in.h:28
-msgid ""
-"Use the available texture units to do as many as possible independent "
-"texture fetches."
-msgstr ""
-"利用可能なテクスチャ・ユニットを使用してテクスチャを可能な限り多く独立読み出"
-"しさせる"
+msgid "Use the available texture units to do as many as possible independent texture fetches."
+msgstr "利用可能なテクスチャ・ユニットを使用してテクスチャを可能な限り多く独立読み出しさせる"
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
@@ -396,338 +391,172 @@ msgid "Output clone handler"
 msgstr "クローン出力ハンドラ"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command0"
-msgstr ""
-"呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するキー割り当て"
+msgid "A button binding that when invoked, will run the shell command identified by command0"
+msgstr "呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-"呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command1"
+msgstr "呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-"呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command10"
+msgstr "呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-"呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command11"
+msgstr "呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-"呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command2"
+msgstr "呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-"呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command3"
+msgstr "呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-"呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command4"
+msgstr "呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-"呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command5"
+msgstr "呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-"呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command6"
+msgstr "呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-"呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command7"
+msgstr "呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-"呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command8"
+msgstr "呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
-"呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A button binding that when invoked, will run the shell command identified by command9"
+msgstr "呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:13
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
-msgstr ""
-"呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するキー割り当て"
+msgid "A keybinding that when invoked, will run the shell command identified by command0"
+msgstr "呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:14
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-"呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command1"
+msgstr "呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:15
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-"呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command10"
+msgstr "呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:16
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-"呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command11"
+msgstr "呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:17
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-"呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command2"
+msgstr "呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:18
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-"呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command3"
+msgstr "呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:19
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-"呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command4"
+msgstr "呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:20
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-"呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command5"
+msgstr "呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:21
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-"呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command6"
+msgstr "呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:22
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-"呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command7"
+msgstr "呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:23
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-"呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command8"
+msgstr "呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:24
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
-"呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "A keybinding that when invoked, will run the shell command identified by command9"
+msgstr "呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するキー割り当て"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command0"
-msgstr ""
-"呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するキー割り当て"
+msgid "An edge binding that when invoked, will run the shell command identified by command0"
+msgstr "呼び出し時にコマンドライン 0 で指定したシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command1"
-msgstr ""
-"呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command1"
+msgstr "呼び出し時に コマンドライン 1 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command10"
-msgstr ""
-"呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command10"
+msgstr "呼び出し時に コマンドライン 10 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command11"
-msgstr ""
-"呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command11"
+msgstr "呼び出し時に コマンドライン 11 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command2"
-msgstr ""
-"呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command2"
+msgstr "呼び出し時に コマンドライン 2 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:30
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command3"
-msgstr ""
-"呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command3"
+msgstr "呼び出し時に コマンドライン 3 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:31
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command4"
-msgstr ""
-"呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command4"
+msgstr "呼び出し時に コマンドライン 4 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:32
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command5"
-msgstr ""
-"呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command5"
+msgstr "呼び出し時に コマンドライン 5 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:33
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command6"
-msgstr ""
-"呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command6"
+msgstr "呼び出し時に コマンドライン 6 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:34
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command7"
-msgstr ""
-"呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command7"
+msgstr "呼び出し時に コマンドライン 7 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:35
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command8"
-msgstr ""
-"呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command8"
+msgstr "呼び出し時に コマンドライン 8 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:36
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command9"
-msgstr ""
-"呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するキー割り当"
-"て"
+msgid "An edge binding that when invoked, will run the shell command identified by command9"
+msgstr "呼び出し時に コマンドライン 9 で指定されたシェルコマンドを実行するエッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "任意のコマンドにショートカットを割り当て"
 
 #: ../metadata/commands.xml.in.h:38
-#, fuzzy
 msgid "Button Bindings"
-msgstr "割り当て"
+msgstr "ボタン割り当て"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "コマンドライン 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "コマンドライン 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "コマンドライン 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "コマンドライン 11"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "コマンドライン 12"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -809,35 +638,34 @@ msgstr "コマンド 8 を実行 の呼び出し時にシェルで実行され�
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "コマンド 9 を実行 の呼び出し時にシェルで実行されるコマンドライン"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63
+#: ../metadata/gnomecompat.xml.in.h:1
 msgid "Commands"
 msgstr "コマンド"
 
 #: ../metadata/commands.xml.in.h:64
-#, fuzzy
 msgid "Edge Bindings"
-msgstr "割り当て"
+msgstr "エッジ割り当て"
 
 #: ../metadata/commands.xml.in.h:65
-#, fuzzy
 msgid "Key Bindings"
 msgstr "キー割り当て"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "コマンド 0 を実行"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "コマンド 1 を実行"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "コマンド 10 を実行"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "コマンド 11 を実行"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "コマンド 12 を実行"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -876,11 +704,8 @@ msgid "Active Plugins"
 msgstr "アクティブなプラグイン"
 
 #: ../metadata/core.xml.in.in.h:2
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-"オフスクリーン・ピクスマップにリダイレクトしない直接の全画面ウィンドウ描画を"
-"許可"
+msgid "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr "オフスクリーン・ピクスマップにリダイレクトしない直接の全画面ウィンドウ描画を許可"
 
 #: ../metadata/core.xml.in.in.h:3
 msgid "Audible Bell"
@@ -928,7 +753,7 @@ msgstr "デフォルトのアイコン"
 
 #: ../metadata/core.xml.in.in.h:15
 msgid "Default window icon image"
-msgstr "デフォルトのウィンドウアイコン画像"
+msgstr "アイコン未指定ウィンドウに適用するデフォルトのウィンドウアイコン画像"
 
 #: ../metadata/core.xml.in.in.h:16
 msgid "Desktop Size"
@@ -947,11 +772,8 @@ msgid "Display Settings"
 msgstr "ディスプレイ設定"
 
 #: ../metadata/core.xml.in.in.h:20
-msgid ""
-"Duration the pointer must rest in a screen edge before an edge action is "
-"taken."
-msgstr ""
-"エッジ・アクションの開始に必要なスクリーンエッジへのポインタ配置の継続時間"
+msgid "Duration the pointer must rest in a screen edge before an edge action is taken."
+msgstr "エッジ・アクションの開始までにポインタをスクリーンエッジに置き続ける必要がある時間"
 
 #: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
@@ -1003,9 +825,7 @@ msgstr "全ウィンドウを隠してデスクトップにフォーカス"
 
 #: ../metadata/core.xml.in.in.h:33
 msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-"\"デスクトップの表示\"モード移行時にタスクバーにないウィンドウ（ウィジェット"
-"等）を隠す"
+msgstr "\"デスクトップの表示\"モード移行時にタスクバーにないウィンドウ（ウィジェット等）を隠す"
 
 #: ../metadata/core.xml.in.in.h:34
 msgid "High"
@@ -1091,7 +911,8 @@ msgstr "アクティブなウィンドウを垂直方向に最大化"
 msgid "Minimize active window"
 msgstr "アクティブなウィンドウを最小化"
 
-#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "通常"
 
@@ -1117,11 +938,11 @@ msgstr "出力"
 
 #: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
-msgstr "重なった出力の取扱い"
+msgstr "マルチ出力で重なり部分がある場合の取扱い"
 
 #: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
-msgstr "出力デバイス同士に重なりがある場合でも、それぞれを別個に描画"
+msgstr "出力デバイス同士に重なり部分がある場合でも、それぞれを別個に描画"
 
 #: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
@@ -1257,7 +1078,7 @@ msgstr "非常に高"
 
 #: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
-msgstr "出力に重なり部分がある場合にどちらのデバイスが選好されるべきか"
+msgstr "マルチ出力で重なり部分がある場合にどちらのデバイスが選好されるべきか"
 
 #: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
@@ -1267,7 +1088,8 @@ msgstr "ウィンドウメニューのボタン割り当て"
 msgid "Window menu key binding"
 msgstr "ウィンドウメニューのキー割り当て"
 
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
+#: ../metadata/cube.xml.in.h:1
+#: ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
 msgstr "加速度"
 
@@ -1291,7 +1113,8 @@ msgstr "スカイドームをアニメーション化"
 msgid "Animate skydome when rotating cube"
 msgstr "キューブの回転時にスカイドームをアニメーション化"
 
-#: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
+#: ../metadata/cube.xml.in.h:7
+#: ../metadata/scale.xml.in.h:2
 msgid "Appearance"
 msgstr "外観"
 
@@ -1299,7 +1122,8 @@ msgstr "外観"
 msgid "Automatic"
 msgstr "自動調整"
 
-#: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
+#: ../metadata/cube.xml.in.h:9
+#: ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
 msgstr "動作"
 
@@ -1309,13 +1133,11 @@ msgstr "キューブの上部および下部の面のカラー"
 
 #: ../metadata/cube.xml.in.h:11
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr ""
-"スカイドームフォールバックグラデーションの下部カラーストップに使用する色"
+msgstr "スカイドームフォールバックグラデーションの下部カラーストップに使用する色"
 
 #: ../metadata/cube.xml.in.h:12
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr ""
-"スカイドームフォールバックグラデーションの上部カラーストップに使用する色"
+msgstr "スカイドームフォールバックグラデーションの上部カラーストップに使用する色"
 
 #: ../metadata/cube.xml.in.h:13
 msgid "Cube Caps"
@@ -1339,9 +1161,10 @@ msgstr "展開速度"
 
 #: ../metadata/cube.xml.in.h:18
 msgid "Fold Timestep"
-msgstr "展開描画の刻み時間"
+msgstr "展開描画の時間刻み"
 
-#: ../metadata/cube.xml.in.h:19 ../metadata/switcher.xml.in.h:11
+#: ../metadata/cube.xml.in.h:19
+#: ../metadata/switcher.xml.in.h:11
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "高品質スケーリングが可能な場合ミップマップを生成"
 
@@ -1373,7 +1196,8 @@ msgstr "キューブ内部"
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr "キューブの上面に描画するPNGおよびSVGファイルのリスト"
 
-#: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
+#: ../metadata/cube.xml.in.h:28
+#: ../metadata/place.xml.in.h:10
 #: ../metadata/scale.xml.in.h:24
 msgid "Multi Output Mode"
 msgstr "マルチ出力の形式"
@@ -1446,17 +1270,21 @@ msgstr "スカイドームグラデーション開始色"
 msgid "Skydome Image"
 msgstr "スカイドーム画像"
 
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/cube.xml.in.h:46
+#: ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:94
+#: ../metadata/scale.xml.in.h:39
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "速度"
 
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/cube.xml.in.h:47
+#: ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:97
+#: ../metadata/scale.xml.in.h:41
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
-msgstr "描画の刻み時間"
+msgstr "描画の時間刻み"
 
 #: ../metadata/cube.xml.in.h:48
 msgid "Transparency Only on Mouse Rotate"
@@ -1464,7 +1292,7 @@ msgstr "マウスによる回転時のみ透明化を使用"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr "透明なキューブ"
+msgstr "キューブの透明化"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1495,29 +1323,28 @@ msgid "Decoration windows"
 msgstr "装飾適用ウィンドウ"
 
 #: ../metadata/decoration.xml.in.h:4
-msgid ""
-"Decorator command line that is executed if no decorator is already running"
+msgid "Decorator command line that is executed if no decorator is already running"
 msgstr "デコレータ未動作の場合に実行されるデコレータ起動コマンドライン"
 
 #: ../metadata/decoration.xml.in.h:5
 msgid "Drop shadow X offset"
-msgstr "落とす影のオフセット X 座標"
+msgstr "影のオフセット X 座標"
 
 #: ../metadata/decoration.xml.in.h:6
 msgid "Drop shadow Y offset"
-msgstr "落とす影のオフセット Y 座標"
+msgstr "影のオフセット Y 座標"
 
 #: ../metadata/decoration.xml.in.h:7
 msgid "Drop shadow color"
-msgstr "落とす影の色"
+msgstr "影の色"
 
 #: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow opacity"
-msgstr "落とす影の不透明度"
+msgstr "影の不透明度"
 
 #: ../metadata/decoration.xml.in.h:9
 msgid "Drop shadow radius"
-msgstr "落とす影の半径"
+msgstr "影の半径"
 
 #: ../metadata/decoration.xml.in.h:11
 msgid "Shadow Color"
@@ -1541,7 +1368,7 @@ msgstr "影の半径"
 
 #: ../metadata/decoration.xml.in.h:16
 msgid "Shadow windows"
-msgstr "影付けウィンドウ"
+msgstr "影を付けるウィンドウ"
 
 #: ../metadata/decoration.xml.in.h:17
 msgid "Window Decoration"
@@ -1691,7 +1518,7 @@ msgstr "GLib main loop サポート"
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Gnome 互換性"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1699,7 +1526,7 @@ msgstr "端末を開く"
 
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
-msgstr ""
+msgstr "Compiz に Gnome デスクトップ環境との互換性を保たせるオプション"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
@@ -1779,7 +1606,7 @@ msgstr "最小化速度"
 
 #: ../metadata/minimize.xml.in.h:4
 msgid "Minimize timestep"
-msgstr "最小化の描画刻み時間"
+msgstr "最小化の描画時間刻み"
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
@@ -1825,8 +1652,10 @@ msgstr "ウィンドウの移動"
 msgid "Move window"
 msgstr "ウィンドウの移動"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
-#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8
+#: ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28
+#: ../metadata/switcher.xml.in.h:19
 msgid "Opacity"
 msgstr "不透明度"
 
@@ -1846,7 +1675,8 @@ msgstr "最大化したウィンドウのスナップ解除"
 msgid "Start moving window"
 msgstr "ウィンドウの移動を開始"
 
-#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+#: ../metadata/obs.xml.in.h:1
+#: ../metadata/switcher.xml.in.h:7
 msgid "Brightness"
 msgstr "明度"
 
@@ -1898,7 +1728,8 @@ msgstr "不透明度・明度・彩度"
 msgid "Opacity, Brightness and Saturation adjustments"
 msgstr "不透明度や明度、彩度の調節"
 
-#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+#: ../metadata/obs.xml.in.h:15
+#: ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "彩度"
 
@@ -1975,12 +1806,8 @@ msgid "Keep In Workarea"
 msgstr "ワークエリアに限定"
 
 #: ../metadata/place.xml.in.h:8
-msgid ""
-"Keep placed window in work area, even if that means that the position might "
-"differ from the specified position"
-msgstr ""
-"結果として指定位置とは異なってしまう場合でも、ウィンドウの配置位置をワークエ"
-"リア内に限定。"
+msgid "Keep placed window in work area, even if that means that the position might differ from the specified position"
+msgstr "結果として指定位置とは異なってしまう場合でも、ウィンドウの配置位置をワークエリア内に限定。"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2007,8 +1834,7 @@ msgid "Random"
 msgstr "ランダム"
 
 #: ../metadata/place.xml.in.h:17
-msgid ""
-"Selects how window placement should behave if multiple outputs are selected"
+msgid "Selects how window placement should behave if multiple outputs are selected"
 msgstr "マルチ出力が選択されている場合の、ウィンドウ配置の振る舞いの選択"
 
 #: ../metadata/place.xml.in.h:18
@@ -2048,12 +1874,8 @@ msgid "Windows that should be positioned in specific viewports by default"
 msgstr "デフォルトで特定ビューポートに配置するウィンドウ"
 
 #: ../metadata/place.xml.in.h:27
-msgid ""
-"Windows that should forcedly be placed, even if they indicate the window "
-"manager should avoid placing them."
-msgstr ""
-"強制的に配置させるウィンドウ。ウィンドウ・マネージャに配置の対象外とするよう"
-"にウィンドウが指示している場合でも配置します。"
+msgid "Windows that should forcedly be placed, even if they indicate the window manager should avoid placing them."
+msgstr "強制的に配置させるウィンドウ。ウィンドウ・マネージャに配置の対象外とするようにウィンドウが指示している場合でも配置します。"
 
 #: ../metadata/place.xml.in.h:28
 msgid "Windows with fixed positions"
@@ -2107,8 +1929,10 @@ msgstr "正規表現マッチング"
 msgid "Regex window matching"
 msgstr "正規表現による対象ウィンドウのマッチング"
 
-#: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
-#: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
+#: ../metadata/resize.xml.in.h:1
+#: ../metadata/rotate.xml.in.h:2
+#: ../metadata/scale.xml.in.h:5
+#: ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
 msgstr "割り当て"
 
@@ -2564,7 +2388,7 @@ msgstr "回転速度"
 
 #: ../metadata/rotate.xml.in.h:87
 msgid "Rotation Timestep"
-msgstr "回転の刻み時間"
+msgstr "回転の時間刻み"
 
 #: ../metadata/rotate.xml.in.h:88
 msgid "Rotation Zoom"
@@ -2598,11 +2422,13 @@ msgstr "回転の開始"
 msgid "Timeout before flipping viewport"
 msgstr "ビューポートのフリップ移動を開始する前のタイムアウト"
 
-#: ../metadata/rotate.xml.in.h:98 ../metadata/switcher.xml.in.h:42
+#: ../metadata/rotate.xml.in.h:98
+#: ../metadata/switcher.xml.in.h:42
 msgid "Zoom"
 msgstr "ズーム"
 
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+#: ../metadata/scale.xml.in.h:1
+#: ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
 msgstr "不透明度(%)"
 
@@ -2615,12 +2441,8 @@ msgid "Button Bindings Toggle Scale Mode"
 msgstr "ボタンによるスケール・モードのオンオフ"
 
 #: ../metadata/scale.xml.in.h:7
-msgid ""
-"Button bindings toggle scale mode instead of enabling it when pressed and "
-"disabling it when released."
-msgstr ""
-"ボタンを離すとスケール・モードが無効になる基本動作を、ボタンを押すたびにオン"
-"オフが切り替わる動作に代える"
+msgid "Button bindings toggle scale mode instead of enabling it when pressed and disabling it when released."
+msgstr "ボタンを離すとスケール・モードが無効になる基本動作を、ボタンを押すたびにオンオフが切り替わる動作に代える"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
@@ -2640,9 +2462,7 @@ msgstr "エンブレム"
 
 #: ../metadata/scale.xml.in.h:12
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr ""
-"スケール中にデスクトップがクリックされたとき\"デスクトップの表示\"モードに入"
-"る"
+msgstr "スケール中にデスクトップがクリックされたとき\"デスクトップの表示\"モードに入る"
 
 #: ../metadata/scale.xml.in.h:13
 msgid "Hover Time"
@@ -2669,12 +2489,8 @@ msgid "Key Bindings Toggle Scale Mode"
 msgstr "キーによるスケール・モードのオンオフ"
 
 #: ../metadata/scale.xml.in.h:19
-msgid ""
-"Key bindings toggle scale mode instead of enabling it when pressed and "
-"disabling it when released."
-msgstr ""
-"キーを離すとスケール・モードが無効になる基本動作を、キーを押すたびにオンオフ"
-"が切り替わる動作に代える。"
+msgid "Key bindings toggle scale mode instead of enabling it when pressed and disabling it when released."
+msgstr "キーを離すとスケール・モードが無効になる基本動作を、キーを押すたびにオンオフが切り替わる動作に代える。"
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -2722,7 +2538,7 @@ msgstr "スケール速度"
 
 #: ../metadata/scale.xml.in.h:34
 msgid "Scale timestep"
-msgstr "スケール位置算出の刻み時間"
+msgstr "スケール位置算出の時間刻み"
 
 #: ../metadata/scale.xml.in.h:35
 msgid "Scale windows"
@@ -2730,9 +2546,7 @@ msgstr "ウィンドウのスケール"
 
 #: ../metadata/scale.xml.in.h:36
 msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr ""
-"複数の出力デバイスを使用している場合に、ウィンドウをどこにスケールするかの選"
-"択"
+msgstr "複数の出力デバイスを使用している場合に、ウィンドウをどこにスケールするかの選択"
 
 #: ../metadata/scale.xml.in.h:37
 msgid "Space between windows"
@@ -2743,8 +2557,7 @@ msgid "Spacing"
 msgstr "間隔"
 
 #: ../metadata/scale.xml.in.h:40
-msgid ""
-"Time (in ms) before scale mode is terminated when hovering over a window"
+msgid "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr "ウィンドウ上でのホバー時に、スケールモードを終了するまでの時間(ミリ秒)"
 
 #: ../metadata/scale.xml.in.h:42
@@ -2845,20 +2658,15 @@ msgstr "スイッチャーが非表示の場合ポップアップして、次の
 
 #: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr ""
-"スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから次のウィン"
-"ドウを選択"
+msgstr "スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから次のウィンドウを選択"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Popup switcher if not visible and select previous window"
 msgstr "スイッチャーが非表示の場合ポップアップして、前のウィンドウを選択"
 
 #: ../metadata/switcher.xml.in.h:23
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr ""
-"スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから前のウィン"
-"ドウを選択"
+msgid "Popup switcher if not visible and select previous window out of all windows"
+msgstr "スイッチャーが非表示の場合ポップアップして、すべてのウィンドウから前のウィンドウを選択"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev Panel"
@@ -2910,7 +2718,7 @@ msgstr "スイッチャー速度"
 
 #: ../metadata/switcher.xml.in.h:38
 msgid "Switcher timestep"
-msgstr "スイッチャー描画の刻み時間"
+msgstr "スイッチャー描画の時間刻み"
 
 #: ../metadata/switcher.xml.in.h:39
 msgid "Switcher windows"
@@ -3030,7 +2838,7 @@ msgstr "グリッド解像度"
 
 #: ../metadata/wobbly.xml.in.h:7
 msgid "Inverted window snapping"
-msgstr "ウィンドウ・スナップの切り替え"
+msgstr "ウィンドウ・スナップの反転"
 
 #: ../metadata/wobbly.xml.in.h:8
 msgid "Make window shiver"
@@ -3071,7 +2879,7 @@ msgstr "震動"
 
 #: ../metadata/wobbly.xml.in.h:18
 msgid "Snap Inverted"
-msgstr "スナップの切り替え"
+msgstr "スナップの反転"
 
 #: ../metadata/wobbly.xml.in.h:19
 msgid "Snap windows"
@@ -3091,7 +2899,7 @@ msgstr "バネ定数"
 
 #: ../metadata/wobbly.xml.in.h:23
 msgid "Toggle window snapping"
-msgstr "ウィンドウスナップの切り替え"
+msgstr "ウィンドウ・スナップの切り替え"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
@@ -3125,72 +2933,42 @@ msgstr "ウィンドウの最大化および最大化解除時に揺れる効果
 msgid "Wobbly Windows"
 msgstr "揺れるウィンドウ"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "線形フィルタ"
-
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "ズームイン時に線形フィルタを使用"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "デスクトップのズーム"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "ズームイン"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "ズームアウト"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "ズーム域の移動"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "ズーム速度"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "ズーム描画刻み時間"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "デスクトップ・キューブのズームとズーム域移動"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "ズーム係数"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "ズーム域の移動"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "コマンドライン 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "コマンド 1 を実行"
-
+#~ msgid "Command line 0"
+#~ msgstr "コマンドライン 0"
+#~ msgid "Run command 0"
+#~ msgstr "コマンド 0 を実行"
 #~ msgid "Screenshot commands"
 #~ msgstr "スクリーンショットのコマンド"
-
 #~ msgid "Screenshot key bindings"
 #~ msgstr "スクリーンショットのキー割り当て"
-
+#~ msgid "Filter Linear"
+#~ msgstr "線形フィルタ"
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "ズームイン時に線形フィルタを使用"
+#~ msgid "Zoom Desktop"
+#~ msgstr "デスクトップのズーム"
+#~ msgid "Zoom In"
+#~ msgstr "ズームイン"
+#~ msgid "Zoom Out"
+#~ msgstr "ズームアウト"
+#~ msgid "Zoom Pan"
+#~ msgstr "ズーム域の移動"
+#~ msgid "Zoom Speed"
+#~ msgstr "ズーム速度"
+#~ msgid "Zoom Timestep"
+#~ msgstr "ズーム描画時間刻み"
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "デスクトップ・キューブのズームとズーム域移動"
+#~ msgid "Zoom factor"
+#~ msgstr "ズーム係数"
+#~ msgid "Zoom pan"
+#~ msgstr "ズーム域の移動"
 #~ msgid "Decrease window opacity"
 #~ msgstr "ウィンドウの不透明度を下げる"
-
 #~ msgid "Increase window opacity"
 #~ msgstr "ウィンドウの不透明度を上げる"
-
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr "デフォルトで半透明化の対象にするウィンドウの不透明度"
-
 #~ msgid "Opacity windows"
 #~ msgstr "半透明対象ウィンドウ"
+

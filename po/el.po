@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:08+0100\n"
-"PO-Revision-Date: 2008-09-03 05:45+0200\n"
+"POT-Creation-Date: 2009-03-24 08:12+0100\n"
+"PO-Revision-Date: 2009-03-30 10:16+0200\n"
 "Last-Translator: Jim Dusis <jimdusis@yahoo.gr>\n"
 "Language-Team: Greek <jimdusis@yahoo.gr>\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgid "None"
 msgstr "Κανένα"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Σκίαση"
 
@@ -46,32 +46,27 @@ msgid "Maximize"
 msgstr "Μεγιστοποίησε"
 
 #: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
 msgid "Maximize Horizontally"
-msgstr "Μεγιστοποίηση Παραθύρου Οριζόντια"
+msgstr "Μεγιστοποίηση Οριζόντια"
 
 #: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
 msgid "Maximize Vertically"
-msgstr "Μεγιστοποίηση Παραθύρου Κάθετα"
+msgstr "Μεγιστοποίηση Κάθετα"
 
 #: ../gtk/gnome/compiz-window-manager.c:431
-#, fuzzy
 msgid "Minimize"
-msgstr "Ελαχιστοποιημένο"
+msgstr "Ελαχιστοποίηση"
 
 #: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
 msgid "Raise"
-msgstr "Αυτόματη Ανύψωση"
+msgstr "Ανύψωση"
 
 #: ../gtk/gnome/compiz-window-manager.c:433
-#, fuzzy
 msgid "Lower"
-msgstr "Χαμηλό"
+msgstr "Χαμηλότερο"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Μενού Παραθύρου"
@@ -142,59 +137,59 @@ msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 "Χρήση θέματος του metacity όταν ζωγραφίζονται οι διακοσμήσεις παραθύρων"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Κλείσιμο Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Απομεγιστοποίηση Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Μεγιστοποίηση Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Ελαχιστοποίηση Παραθύρου"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Επικάλυψη"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Καρφίτσωμα"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Αποσκίαση"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Μη Επικάλυψη"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Ξεκαρφίτσωμα"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Το παράθυρο \"%s\" δεν ανταποκρίνεται."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Ο εξαναγκασμός αυτής της εφαρμογής να τερματιστεί θα προκαλέσει απώλεια των "
 "μη σωσμένων αλλαγών."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Εξαναγκασμός Τερματισμού"
 
@@ -232,7 +227,7 @@ msgstr "Γέμισμα χρώματος για επισημειώσεις"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Εκκίνηση"
 
@@ -411,7 +406,6 @@ msgid "Output clone handler"
 msgstr "Χειριστής αποτελέσματος εξόδου κλωνοποίησης"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
@@ -420,7 +414,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή0"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
@@ -429,7 +422,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή1"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
@@ -438,7 +430,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή10"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
@@ -447,7 +438,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή11"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
@@ -456,7 +446,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή2"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
@@ -465,7 +454,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή3"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
@@ -474,7 +462,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή4"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
@@ -483,7 +470,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή5"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
@@ -492,7 +478,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή6"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
@@ -501,7 +486,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή7"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
@@ -510,7 +494,6 @@ msgstr ""
 "αναγνωρισμένη ως εντολή8"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
@@ -615,136 +598,124 @@ msgstr ""
 "αναγνωρισμένη ως εντολή9"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή0"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή0"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή1"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή1"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή10"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή10"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή11"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή11"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή2"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή2"
 
 #: ../metadata/commands.xml.in.h:30
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή3"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή3"
 
 #: ../metadata/commands.xml.in.h:31
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή4"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή4"
 
 #: ../metadata/commands.xml.in.h:32
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή5"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή5"
 
 #: ../metadata/commands.xml.in.h:33
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή6"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή6"
 
 #: ../metadata/commands.xml.in.h:34
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή7"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή7"
 
 #: ../metadata/commands.xml.in.h:35
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή8"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή8"
 
 #: ../metadata/commands.xml.in.h:36
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Ένας συνδυασμός πλήκτρων που όταν επικαλεσθεί, θα τρέξει την εντολή κέλυφους "
-"αναγνωρισμένη ως εντολή9"
+"Ένας συνδυασμός άκρης οθόνης που όταν επικαλεσθεί, θα τρέξει την εντολή "
+"κέλυφους αναγνωρισμένη ως εντολή9"
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Ορίζει συνδυασμούς σε αυθαίρετες εντολές"
 
 #: ../metadata/commands.xml.in.h:38
 msgid "Button Bindings"
-msgstr ""
+msgstr "Συνδυασμοί Κουμπιών"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Γραμμή εντολών 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Γραμμή εντολών 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Γραμμή εντολών 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Γραμμή εντολών 11"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "Γραμμή εντολών 12"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -839,33 +810,32 @@ msgstr ""
 "Γραμμή εντολών για εκτέλεση σε κέλυφος όταν επικαλεσθεί το τρέξιμο_εντολής9"
 
 #: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
-#, fuzzy
 msgid "Commands"
-msgstr "Εντολή"
+msgstr "Εντολές"
 
 #: ../metadata/commands.xml.in.h:64
 msgid "Edge Bindings"
-msgstr ""
+msgstr "Συνδυασμοί Άκρων Οθόνης"
 
 #: ../metadata/commands.xml.in.h:65
 msgid "Key Bindings"
-msgstr ""
+msgstr "Συνδυασμοί Πλήκτρων"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Τρέξιμο εντολής 0"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Τρέξιμο εντολής 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Τρέξιμο εντολής 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Τρέξιμο εντολής 11"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "Τρέξιμο εντολής 12"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -959,9 +929,8 @@ msgid "Default window icon image"
 msgstr "Προεπιλεγμένη εικόνα εικονιδίου παραθύρου"
 
 #: ../metadata/core.xml.in.in.h:16
-#, fuzzy
 msgid "Desktop Size"
-msgstr "Κύβος Επιφάνειας Εργασίας"
+msgstr "Μέγεθος Επιφάνειας Εργασίας"
 
 #: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
@@ -973,7 +942,7 @@ msgstr "Ανίχνευση Ρυθμού Ανανέωσης"
 
 #: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
-msgstr ""
+msgstr "Ρυθμίσεις Οθόνης"
 
 #: ../metadata/core.xml.in.in.h:20
 msgid ""
@@ -994,7 +963,7 @@ msgstr "Γρήγορο"
 
 #: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "Εστιάση &amp; Συμπεριφορά Ανύψωσης"
 
 #: ../metadata/core.xml.in.in.h:24
 msgid "Focus Prevention Level"
@@ -1071,7 +1040,7 @@ msgstr "Διάστημα μεταξύ των μηνυμάτων ping"
 
 #: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
-msgstr ""
+msgstr "Συνδυασμοί πλήκτρων"
 
 #: ../metadata/core.xml.in.in.h:42
 msgid "Level of focus stealing prevention"
@@ -1153,11 +1122,11 @@ msgstr "Αποτελέσματα-Εξοδοι"
 
 #: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "Χειρισμός Επικάλλυψης Αποτύπωσης"
 
 #: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
+msgstr "Δούλεψε κάθε οθόνη ανεξάρτητα, ακόμα κ αν οι οθόνες επικαλύπτονται"
 
 #: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
@@ -1237,39 +1206,39 @@ msgstr "Ο ρυθμός κατα τον οποίο η οθόνη επανασχ�
 
 #: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
-msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου"
+msgstr "Εκκίνηση-Σταμάτημα Μεγιστοποίησης Παραθύρου"
 
 #: ../metadata/core.xml.in.in.h:85
 msgid "Toggle Window Maximized Horizontally"
-msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Οριζόντια"
+msgstr "Εκκίνηση-Σταμάτημα Μεγιστοποίησης Παραθύρου Οριζόντια"
 
 #: ../metadata/core.xml.in.in.h:86
 msgid "Toggle Window Maximized Vertically"
-msgstr "Εκκίνηση Μεγιστοποίησης Παραθύρου Κάθετα"
+msgstr "Εκκίνηση-Σταμάτημα Μεγιστοποίησης Παραθύρου Κάθετα"
 
 #: ../metadata/core.xml.in.in.h:87
 msgid "Toggle Window Shaded"
-msgstr "Εκκίνηση Σκίασης Παραθύρου"
+msgstr "Εκκίνηση-Σταμάτημα Σκίασης Παραθύρου"
 
 #: ../metadata/core.xml.in.in.h:88
 msgid "Toggle active window maximized"
-msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου"
+msgstr "Εκκίνηση-Σταμάτημα μεγιστοποίησης ενεργού παραθύρου"
 
 #: ../metadata/core.xml.in.in.h:89
 msgid "Toggle active window maximized horizontally"
-msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου οριζόντια"
+msgstr "Εκκίνηση-Σταμάτημα μεγιστοποίησης ενεργού παραθύρου οριζόντια"
 
 #: ../metadata/core.xml.in.in.h:90
 msgid "Toggle active window maximized vertically"
-msgstr "Εκκίνηση μεγιστοποίησης ενεργού παραθύρου κάθετα"
+msgstr "Εκκίνηση-Σταμάτημα μεγιστοποίησης ενεργού παραθύρου κάθετα"
 
 #: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
-msgstr "Εκκίνηση σκίασης ενεργού παραθύρου"
+msgstr "Εκκίνηση-Σταμάτημα σκίασης ενεργού παραθύρου"
 
 #: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
-msgstr "Εκκίνηση της χρήσης των αργών γραφικών απεικονίσεων"
+msgstr "Εκκίνηση-Σταμάτημα της χρήσης των αργών γραφικών απεικονίσεων"
 
 #: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
@@ -1293,7 +1262,7 @@ msgstr "Πολύ Υψηλό"
 
 #: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "Ποια απ τις επικαλλύπτουσες οθόνες πρέπει να προτιμηθεί"
 
 #: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
@@ -1329,7 +1298,7 @@ msgstr "Κίνηση skydome όταν περιστρέφεται ο κύβος"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "Εμφάνιση"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1337,7 +1306,7 @@ msgstr "Αυτόματα"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Συμπεριφορά"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1355,9 +1324,8 @@ msgstr ""
 "fallback"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "Χρώμα Κύβου"
+msgstr "Καπάκια Κύβου"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1426,7 +1394,7 @@ msgstr "Πολλαπλοί κύβοι"
 
 #: ../metadata/cube.xml.in.h:30
 msgid "Next Slide"
-msgstr "Απόμενο Σλάιντ"
+msgstr "Επόμενο Σλάιντ"
 
 #: ../metadata/cube.xml.in.h:31
 msgid "One big cube"
@@ -1492,13 +1460,13 @@ msgstr "Εικόνα Skydome"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Ταχύτητα"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Χρονικό Βήμα"
 
@@ -1508,7 +1476,7 @@ msgstr "Διαφάνεια Μόνο στην Περιστροφή με το Πο
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "Διάφανος Κύβος"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1742,7 +1710,7 @@ msgstr "Κύριος βρόγχος υποστήριξης GLib"
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Συμβατότητα με Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1751,15 +1719,16 @@ msgstr "Ανοιγμα ενός τερματικού"
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
 msgstr ""
+"Επιλογές που διατηρούν το Compiz συμβατό με το περιβάλλον επιφάνειας "
+"εργασίας Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Τρέξιμο Διαλόγου"
 
 #: ../metadata/gnomecompat.xml.in.h:6
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Γραμμή εντολών τερματικού"
+msgstr "Τρέξε εντολή τερματικού"
 
 #: ../metadata/gnomecompat.xml.in.h:7
 msgid "Screenshot command line"
@@ -1907,120 +1876,100 @@ msgid "Brightness"
 msgstr "Φωτεινότητα"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Φωτεινότητα"
+msgstr "Μείωση Φωτεινότητας"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Φωτεινότητα"
+msgstr "Αύξηση Φωτεινότητας"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Φωτεινότητα"
+msgstr "Βήμα Φωτεινότητας"
 
 #: ../metadata/obs.xml.in.h:5
-#, fuzzy
 msgid "Brightness values for windows"
-msgstr "Φωτεινότητα (σε %) των μη-ανταποκρινόμενων παραθύρων"
+msgstr "Τιμές φωτεινότητας παραθύρων"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "Μείωση Αδιαφάνειας"
+msgstr "Μείωση"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "Αύξηση Αδιαφάνειας"
+msgstr "Αύξηση"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Αλλαγή βήματος αδιαφάνειας"
+msgstr "Μείωση αδιαφάνειας"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Αλλαγή βήματος αδιαφάνειας"
+msgstr "Αύξηση αδιαφάνειας"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
 msgstr "Βήμα Αδιαφάνειας"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Επίπεδο αδιαφάνειας των παραθύρων που μετακινούνται"
+msgstr "Τιμές αδιαφάνειας παραθύρων"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "Αδιαφάνεια Kατα την Περιστροφή"
+msgstr "Αδιαφάνεια, Φωτεινότητα και Κορεσμός "
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Ρυθμίσεις Αδιαφάνειας, Φωτεινότητας και Κορεσμού"
 
 #: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "Κορεσμός"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Κορεσμός"
+msgstr "Μείωση Κορεσμού"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Κορεσμός"
+msgstr "Αύξηση Κορεσμού"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Κορεσμός"
+msgstr "Βήμα Κορεσμού"
 
 #: ../metadata/obs.xml.in.h:19
-#, fuzzy
 msgid "Saturation values for windows"
-msgstr "Κορεσμός (σε %) των μη-ανταποκρινόμενων παραθύρων"
+msgstr "Τιμές κορεσμού παραθύρων"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Βήμα"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "Διακοσμήσεις παραθύρου"
+msgstr "Συγκεκριμένες ρυθμίσεις παραθύρου"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "Τιμές αδιαφάνειας παραθύρων"
+msgstr "Τιμές παραθύρου"
 
 #: ../metadata/obs.xml.in.h:23
-#, fuzzy
 msgid "Windows"
-msgstr "Χαρτογράφηση Παραθύρων"
+msgstr "Παράθυρα"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "Παράθυρα που πρέπει να τοποθετηθούν εξ' ορισμού"
+msgstr "Παράθυρα που πρέπει να έχουν διαφορετική φωτεινότητα εξ' ορισμού"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "Παράθυρα που πρέπει να είναι διάφανα εξ' ορισμού"
+msgstr "Παράθυρα που πρέπει να έχουν διαφορετική διαφάνεια εξ' ορισμού"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "Παράθυρα που πρέπει να τοποθετηθούν εξ' ορισμού"
+msgstr "Παράθυρα που πρέπει να έχουν διαφορετικό κορεσμό εξ' ορισμού"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -2035,9 +1984,8 @@ msgid "Centered"
 msgstr "Στο Κέντρο"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Διαχείρηση Παραθύρου"
+msgstr "Σταθερή Τοποθέτηση Παραθύρου"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -2065,7 +2013,7 @@ msgstr "Τοποθέτηση Παραθύρων"
 
 #: ../metadata/place.xml.in.h:12
 msgid "Place across all outputs"
-msgstr ""
+msgstr "Τοποθέτηση σε όλες τις οθόνες"
 
 #: ../metadata/place.xml.in.h:13
 msgid "Place windows at appropriate positions when mapped"
@@ -2084,12 +2032,11 @@ msgid "Random"
 msgstr "Τυχαία"
 
 #: ../metadata/place.xml.in.h:17
-#, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
-"Επιλέγει το αν τα παράθυρα κλιμακωθούν αν γινει χρήση πολλαπλών συσκευών "
-"εξόδου."
+"Επιλέγει το πως η τοποθέτηση παραθύρων θα συμπεριφερθεί αν γινει χρήση "
+"πολλαπλών οθονών"
 
 #: ../metadata/place.xml.in.h:18
 msgid "Smart"
@@ -2138,13 +2085,12 @@ msgstr ""
 "στον διαχειριστή παραθύρων οτι πρέπει να αποφύγει να τα τοποθετήσει."
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Διακοσμήσεις παραθύρου"
+msgstr "Παράθυρα με σταθερές θέσεις"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "Παράθυρα με σταθερές εικονικές επιφάνειες εργασίας"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -2193,7 +2139,7 @@ msgstr "Ταίριαγμα παραθύρου regex"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "Συνδυασμοί"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2502,9 +2448,8 @@ msgid "Rotate To Face 9 with Window"
 msgstr "Περιστροφή Στην Όψη 9 με Παράθυρο"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
-msgstr "Περιστροφή Κύβου"
+msgstr "Περιστροφή του κύβου"
 
 #: ../metadata/rotate.xml.in.h:51
 msgid "Rotate desktop cube"
@@ -2527,14 +2472,12 @@ msgid "Rotate right and bring active window along"
 msgstr "Περιστροφή δεξιά και μεταφορά ενεργού παραθύρου κατα μήκος"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Περιστροφή στην όψη 1"
+msgstr "Περιστροφή του κύβου στην όψη 1"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Περιστροφή Στην Όψη 1 με Παράθυρο"
+msgstr "Περιστροφή του κύβου στην όψη 1 με παράθυρο"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2702,17 +2645,19 @@ msgstr "Μεγάλο"
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Συνδυασμοί Κουμπιών για Εκκίνηση-Σταμάτημα Κατάστασης Κλιμάκωσης"
 
 #: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Συνδυασμοί κουμπιών που αντιθέτως λειτουργούν ως διακόπτης για την κατάσταση "
+"κλιμάκωσης την ενεργοποιούν όταν πατηθούν και απενεργοποιούν όταν αφεθούν."
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
-msgstr "Κλικ στην Επιφάνεια Εργασίας για να Εμφανιστεί η Επιφάνεια Εργασίας"
+msgstr "Κλικ στην Επιφάνεια Εργασίας για Εμφάνιση Επιφάνειας Εργασίας"
 
 #: ../metadata/scale.xml.in.h:9
 msgid "Darken Background"
@@ -2754,13 +2699,16 @@ msgstr "Εκκίνηση Διαλογέα Παραθύρου Για Παράθυ
 
 #: ../metadata/scale.xml.in.h:18
 msgid "Key Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Συνδυασμοί Πλήκτρων για Εκκίνηση-Σταμάτημα Κατάστασης Κλιμάκωσης"
 
 #: ../metadata/scale.xml.in.h:19
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Συνδυασμοί πλήκτρων που αντιθέτως λειτουργούν ως διακόπτης για την κατάσταση "
+"κλιμάκωσης ενεργοποιόντας την όταν πατηθούν και απενεργοποιόντας την όταν "
+"αφεθούν. "
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -3071,19 +3019,19 @@ msgstr "Τίτλος κύματος"
 
 #: ../metadata/water.xml.in.h:12
 msgid "Toggle rain"
-msgstr "Εκκίνηση βροχής"
+msgstr "Εκκίνηση-Σταμάτημα βροχής"
 
 #: ../metadata/water.xml.in.h:13
 msgid "Toggle rain effect"
-msgstr "Εκκίνηση εφέ βροχής"
+msgstr "Εκκίνηση-Σταμάτημα εφέ βροχής"
 
 #: ../metadata/water.xml.in.h:14
 msgid "Toggle wiper"
-msgstr "Εκκίνηση γυαλοκαθαριστήρα"
+msgstr "Εκκίνηση-Σταμάτημα γυαλοκαθαριστήρα"
 
 #: ../metadata/water.xml.in.h:15
 msgid "Toggle wiper effect"
-msgstr "Εκκίνηση εφέ γυαλοκαθαριστήρα"
+msgstr "Εκκίνηση-Σταμάτημα εφέ γυαλοκαθαριστήρα"
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
@@ -3183,7 +3131,7 @@ msgstr "Σταθερά Ελατηρίου"
 
 #: ../metadata/wobbly.xml.in.h:23
 msgid "Toggle window snapping"
-msgstr "Εκκίνηση αρπάγματος παραθύρου"
+msgstr "Εκκίνηση-Σταμάτημα αρπάγματος παραθύρου"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
@@ -3217,57 +3165,11 @@ msgstr "Εφέ ταλάντευσης όταν μεγιστοποιούνται 
 msgid "Wobbly Windows"
 msgstr "Ταλαντευόμενα Παράθυρα"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Γραμμικό Φιλτράρισμα"
+#~ msgid "Command line 0"
+#~ msgstr "Γραμμή εντολών 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Χρήση γραμμικού φιλτραρίσματος όταν ζουμάρεται μέσα"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Ζουμάρισμα Επιφάνειας Εργασίας"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Ζουμ Μέσα"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Ζουμ Έξω"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Pan του Ζούμ"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Ταχύτητα Ζουμ"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Χρονικό Βήμα Ζουμ"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Pan και ζούμ του κύβου"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Παράγοντας ζουμ"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Pan του ζούμ"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Γραμμή εντολών 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Τρέξιμο εντολής 1"
+#~ msgid "Run command 0"
+#~ msgstr "Τρέξιμο εντολής 0"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
@@ -3276,6 +3178,39 @@ msgstr "Pan του ζούμ"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Γραμμή εντολών αρπαγής οθόνης"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Γραμμικό Φιλτράρισμα"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Χρήση γραμμικού φιλτραρίσματος όταν ζουμάρεται μέσα"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Ζουμάρισμα Επιφάνειας Εργασίας"
+
+#~ msgid "Zoom In"
+#~ msgstr "Ζουμ Μέσα"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Ζουμ Έξω"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Pan του Ζούμ"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Ταχύτητα Ζουμ"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Χρονικό Βήμα Ζουμ"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Pan και ζούμ του κύβου"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Παράγοντας ζουμ"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Pan του ζούμ"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Μείωση αδιαφάνειας παραθύρου"

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:07+0100\n"
-"PO-Revision-Date: 2008-12-25 18:14+0100\n"
-"Last-Translator: Dean Spirov <dean@spirov.com>\n"
+"POT-Creation-Date: 2009-03-24 08:12+0100\n"
+"PO-Revision-Date: 2009-05-20 00:43+0200\n"
+"Last-Translator: Svetoslav Stefanov <lfu.project@gmail.com>\n"
 "Language-Team: Bulgarian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,28 +31,28 @@ msgstr "Мениджър на прозорци"
 msgid "Compiz"
 msgstr "Compiz"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../gtk/gnome/compiz-window-manager.c:426
+#: ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Без избор"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Сянка"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../gtk/gnome/compiz-window-manager.c:428
+#: ../metadata/place.xml.in.h:9
 #, fuzzy
 msgid "Maximize"
 msgstr "Уголемяване"
 
 #: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
 msgid "Maximize Horizontally"
 msgstr "Хоризонтално максимизиране"
 
 #: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
 msgid "Maximize Vertically"
 msgstr "Вертикално максимизиране"
 
@@ -62,16 +62,15 @@ msgid "Minimize"
 msgstr "Намаляване"
 
 #: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
 msgid "Raise"
 msgstr "Издигане"
 
 #: ../gtk/gnome/compiz-window-manager.c:433
 msgid "Lower"
-msgstr ""
+msgstr "Снижаване"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Меню на прозорец"
@@ -91,9 +90,8 @@ msgid "Metacity theme active window opacity"
 msgstr "Прозрачност на активния прозорец при тема на Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
-#, fuzzy
 msgid "Metacity theme active window opacity shade"
-msgstr "&Изтриване изцяло на Windows"
+msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
@@ -139,62 +137,60 @@ msgstr "използвай темата на Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Използвай Metacity темата при рисуване на декорациите на прозорците"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Затваряне на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Демаксимизиране на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Максимизиране на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Минимизиране на прозорец"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Над другите"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 #, fuzzy
 msgid "Stick"
 msgstr "Лепкав"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
-#, fuzzy
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Изключи над другите"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Прозорецът \"%s\" не отговаря."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Ако принудително изключите приложението ще загубите всички промени, които не "
 "са запазени"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Принудително изключване"
 
@@ -233,9 +229,11 @@ msgid "Fill color for annotations"
 msgstr "Цвят за запълване на анотациите"
 
 # HT
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/annotate.xml.in.h:9
+#: ../metadata/clone.xml.in.h:2
+#: ../metadata/rotate.xml.in.h:12
+#: ../metadata/screenshot.xml.in.h:3
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Започни"
 
@@ -364,8 +362,10 @@ msgstr "Сила"
 msgid "Independent texture fetch"
 msgstr "Независимо получаване на текстурите"
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
+#: ../metadata/blur.xml.in.h:23
+#: ../metadata/cube.xml.in.h:27
+#: ../metadata/decoration.xml.in.h:10
+#: ../metadata/switcher.xml.in.h:14
 msgid "Mipmap"
 msgstr "Mipmap"
 
@@ -418,7 +418,6 @@ msgid "Output clone handler"
 msgstr "Обработчик за дублиране на изхода"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
@@ -427,7 +426,6 @@ msgstr ""
 "идентифицирана от команда0"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
@@ -436,7 +434,6 @@ msgstr ""
 "идентифицирана от команда1"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
@@ -445,7 +442,6 @@ msgstr ""
 "идентифицирана от команда10"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
@@ -454,7 +450,6 @@ msgstr ""
 "идентифицирана от команда11"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
@@ -463,7 +458,6 @@ msgstr ""
 "идентифицирана от команда12"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
@@ -472,7 +466,6 @@ msgstr ""
 "идентифицирана от команда3"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
@@ -481,7 +474,6 @@ msgstr ""
 "идентифицирана от команда4"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
@@ -490,7 +482,6 @@ msgstr ""
 "идентифицирана от команда5"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
@@ -499,7 +490,6 @@ msgstr ""
 "идентифицирана от команда6"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
@@ -508,7 +498,6 @@ msgstr ""
 "идентифицирана от команда7"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
@@ -517,7 +506,6 @@ msgstr ""
 "идентифицирана от команда8"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
@@ -622,25 +610,18 @@ msgstr ""
 "идентифицирана от команда9"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
-"идентифицирана от команда0"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
-"идентифицирана от команда1"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
@@ -649,22 +630,16 @@ msgstr ""
 "идентифицирана от команда10"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
-"идентифицирана от команда11"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Комбинация от клавиши, която при натискане ще стартира команда на обвивката, "
-"идентифицирана от команда12"
 
 #: ../metadata/commands.xml.in.h:30
 #, fuzzy
@@ -735,23 +710,24 @@ msgstr ""
 
 #: ../metadata/commands.xml.in.h:38
 msgid "Button Bindings"
-msgstr ""
+msgstr "Клавишни комбинации"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Команден ред 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Команден ред 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Команден ред 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Команден ред 11"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "Команден ред 1"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -857,7 +833,8 @@ msgstr ""
 "Команден ред, който ще бъде изпълнен в обвивката когато run_command9 е "
 "извикана"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63
+#: ../metadata/gnomecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "Команда: "
@@ -868,25 +845,25 @@ msgid "Edge Bindings"
 msgstr "Комбинации от клавиши"
 
 #: ../metadata/commands.xml.in.h:65
-#, fuzzy
 msgid "Key Bindings"
 msgstr "Комбинации от клавиши"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Изпълни команда 0"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Изпълни команда 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Изпълни команда 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Изпълни команда 11"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "Изпълни команда 1"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -931,12 +908,11 @@ msgstr ""
 
 #: ../metadata/core.xml.in.in.h:3
 msgid "Audible Bell"
-msgstr ""
+msgstr "Системнен звънец"
 
 #: ../metadata/core.xml.in.in.h:4
-#, fuzzy
 msgid "Audible system beep"
-msgstr "Файлова &система"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:5
 #, fuzzy
@@ -954,7 +930,7 @@ msgstr "Автоматично откриване"
 
 #: ../metadata/core.xml.in.in.h:8
 msgid "Automatic detection of refresh rate"
-msgstr ""
+msgstr "Автоматично засичане на скоростта на опресняване"
 
 #: ../metadata/core.xml.in.in.h:9
 #, fuzzy
@@ -1153,7 +1129,8 @@ msgstr "Вертикално максимизиране на активния п
 msgid "Minimize active window"
 msgstr "Минимизирай активния прозорец"
 
-#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.in.h:57
+#: ../metadata/resize.xml.in.h:13
 msgid "Normal"
 msgstr "Нормална"
 
@@ -1238,7 +1215,6 @@ msgid "Slow Animations"
 msgstr "Бавни анимации"
 
 #: ../metadata/core.xml.in.in.h:78
-#, fuzzy
 msgid "Smart mode"
 msgstr "Умен режим"
 
@@ -1335,14 +1311,15 @@ msgstr "Комбинация от клавиши за менюто на проз
 msgid "Window menu key binding"
 msgstr "Комбинация от клавиши за менюто на прозореца"
 
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
+#: ../metadata/cube.xml.in.h:1
+#: ../metadata/rotate.xml.in.h:1
 #, fuzzy
 msgid "Acceleration"
 msgstr "3D ускорение:"
 
 #: ../metadata/cube.xml.in.h:2
 msgid "Adjust Image"
-msgstr ""
+msgstr "Настройка на изображението"
 
 #: ../metadata/cube.xml.in.h:3
 msgid "Adjust top face image to rotation"
@@ -1362,15 +1339,17 @@ msgstr "Сидни"
 msgid "Animate skydome when rotating cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
+#: ../metadata/cube.xml.in.h:7
+#: ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "Външен вид"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
+#: ../metadata/cube.xml.in.h:9
+#: ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
 msgstr "Поведение"
 
@@ -1415,7 +1394,8 @@ msgstr "Скорост на сгъването"
 msgid "Fold Timestep"
 msgstr "Проба"
 
-#: ../metadata/cube.xml.in.h:19 ../metadata/switcher.xml.in.h:11
+#: ../metadata/cube.xml.in.h:19
+#: ../metadata/switcher.xml.in.h:11
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 
@@ -1450,7 +1430,8 @@ msgstr ""
 "Списък с PNG и SVG файлове, които да се рисуват върху горната повърхност на "
 "куба"
 
-#: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
+#: ../metadata/cube.xml.in.h:28
+#: ../metadata/place.xml.in.h:10
 #: ../metadata/scale.xml.in.h:24
 #, fuzzy
 msgid "Multi Output Mode"
@@ -1461,7 +1442,6 @@ msgid "Multiple cubes"
 msgstr "Много кубове"
 
 #: ../metadata/cube.xml.in.h:30
-#, fuzzy
 msgid "Next Slide"
 msgstr "Следващ слайд"
 
@@ -1487,12 +1467,10 @@ msgid "Opacity of desktop window when not rotating."
 msgstr "Прозрачност на работния плот когато куба не се върти"
 
 #: ../metadata/cube.xml.in.h:36
-#, fuzzy
 msgid "Place windows on cube"
 msgstr "Поставяне на прозорците върху куба"
 
 #: ../metadata/cube.xml.in.h:37
-#, fuzzy
 msgid "Prev Slide"
 msgstr "Предишен слайд"
 
@@ -1501,9 +1479,8 @@ msgid "Render skydome"
 msgstr "Изобразявай небето"
 
 #: ../metadata/cube.xml.in.h:39
-#, fuzzy
 msgid "Scale image"
-msgstr "местно време"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:40
 msgid "Scale images to cover top face of cube"
@@ -1529,18 +1506,21 @@ msgstr ""
 msgid "Skydome Image"
 msgstr "Иображение на небето"
 
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/cube.xml.in.h:46
+#: ../metadata/minimize.xml.in.h:7
+#: ../metadata/rotate.xml.in.h:94
+#: ../metadata/scale.xml.in.h:39
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Скорост"
 
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
-#, fuzzy
+#: ../metadata/cube.xml.in.h:47
+#: ../metadata/minimize.xml.in.h:8
+#: ../metadata/rotate.xml.in.h:97
+#: ../metadata/scale.xml.in.h:41
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
-msgstr "Проба"
+msgstr ""
 
 #: ../metadata/cube.xml.in.h:48
 msgid "Transparency Only on Mouse Rotate"
@@ -1575,7 +1555,6 @@ msgid "Command"
 msgstr "Команда"
 
 #: ../metadata/decoration.xml.in.h:3
-#, fuzzy
 msgid "Decoration windows"
 msgstr "Прозорци с декорация"
 
@@ -1631,7 +1610,6 @@ msgid "Shadow windows"
 msgstr "Прозорци с сянка"
 
 #: ../metadata/decoration.xml.in.h:17
-#, fuzzy
 msgid "Window Decoration"
 msgstr "Декорация на прозореца"
 
@@ -1713,9 +1691,8 @@ msgid "Fading Windows"
 msgstr "&Намаляване на Windows"
 
 #: ../metadata/fade.xml.in.h:16
-#, fuzzy
 msgid "Fullscreen Visual Bell"
-msgstr "Touchscreen"
+msgstr ""
 
 #: ../metadata/fade.xml.in.h:17
 msgid "Fullscreen fade effect on system beep"
@@ -1775,7 +1752,7 @@ msgstr ""
 
 #: ../metadata/gconf.xml.in.h:1
 msgid "GConf"
-msgstr ""
+msgstr "GConf"
 
 #: ../metadata/gconf.xml.in.h:2
 msgid "GConf Control Backend"
@@ -1783,7 +1760,7 @@ msgstr ""
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
-msgstr ""
+msgstr "GLib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
@@ -1862,7 +1839,7 @@ msgstr "Без записване"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
-msgstr ""
+msgstr "Kconfig"
 
 #: ../metadata/kconfig.xml.in.h:2
 msgid "Kconfig Control Backend"
@@ -1884,9 +1861,8 @@ msgid "Minimize speed"
 msgstr "&Намаляване на Windows"
 
 #: ../metadata/minimize.xml.in.h:4
-#, fuzzy
 msgid "Minimize timestep"
-msgstr "&Намаляване на Windows"
+msgstr ""
 
 #: ../metadata/minimize.xml.in.h:5
 msgid "Shade Resistance"
@@ -1905,9 +1881,8 @@ msgid "Windows that should be transformed when minimized"
 msgstr ""
 
 #: ../metadata/move.xml.in.h:1
-#, fuzzy
 msgid "Constrain Y"
-msgstr "Съдържа"
+msgstr ""
 
 #: ../metadata/move.xml.in.h:2
 msgid "Constrain Y coordinate to workspace area"
@@ -1937,8 +1912,10 @@ msgstr "&Надолу"
 msgid "Move window"
 msgstr "&Надолу"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
-#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:8
+#: ../metadata/obs.xml.in.h:8
+#: ../metadata/scale.xml.in.h:28
+#: ../metadata/switcher.xml.in.h:19
 #, fuzzy
 msgid "Opacity"
 msgstr "&Нисък капацитет"
@@ -1962,7 +1939,8 @@ msgstr "&Намаляване на Windows"
 msgid "Start moving window"
 msgstr "Промяната на размера е неуспешно."
 
-#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+#: ../metadata/obs.xml.in.h:1
+#: ../metadata/switcher.xml.in.h:7
 #, fuzzy
 msgid "Brightness"
 msgstr "Мост"
@@ -1994,12 +1972,11 @@ msgstr "Понижи непрозрачността"
 
 #: ../metadata/obs.xml.in.h:7
 msgid "Increase"
-msgstr ""
+msgstr "Увеличаване"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Окцитан (след 1500)"
+msgstr ""
 
 #: ../metadata/obs.xml.in.h:10
 #, fuzzy
@@ -2025,7 +2002,8 @@ msgstr "Прозрачност при въртене"
 msgid "Opacity, Brightness and Saturation adjustments"
 msgstr ""
 
-#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+#: ../metadata/obs.xml.in.h:15
+#: ../metadata/switcher.xml.in.h:29
 #, fuzzy
 msgid "Saturation"
 msgstr "Продължителност"
@@ -2041,9 +2019,8 @@ msgid "Saturation Increase"
 msgstr "Продължителност"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Продължителност"
+msgstr ""
 
 #: ../metadata/obs.xml.in.h:19
 msgid "Saturation values for windows"
@@ -2051,7 +2028,7 @@ msgstr ""
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Стъпка"
 
 #: ../metadata/obs.xml.in.h:21
 #, fuzzy
@@ -2088,15 +2065,15 @@ msgstr ""
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr ""
+msgstr "Алгоритъм, който да се използва при поставянето на прозорците"
 
 #: ../metadata/place.xml.in.h:2
 msgid "Cascade"
-msgstr ""
+msgstr "Каскадно подреждане"
 
 #: ../metadata/place.xml.in.h:3
 msgid "Centered"
-msgstr ""
+msgstr "Центрирано подреждане"
 
 #: ../metadata/place.xml.in.h:4
 #, fuzzy
@@ -2115,7 +2092,7 @@ msgstr "Виртуално устройство"
 
 #: ../metadata/place.xml.in.h:7
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "Запазване в работната площ"
 
 #: ../metadata/place.xml.in.h:8
 msgid ""
@@ -2147,7 +2124,7 @@ msgstr "Промяната на размера е неуспешно."
 
 #: ../metadata/place.xml.in.h:16
 msgid "Random"
-msgstr ""
+msgstr "Произволно"
 
 #: ../metadata/place.xml.in.h:17
 msgid ""
@@ -2243,11 +2220,11 @@ msgstr ""
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
-msgstr ""
+msgstr "Png"
 
 #: ../metadata/png.xml.in.h:2
 msgid "Png image loader"
-msgstr ""
+msgstr "Зареждане на PNG изображения"
 
 #: ../metadata/regex.xml.in.h:1
 msgid "Regex Matching"
@@ -2257,8 +2234,10 @@ msgstr ""
 msgid "Regex window matching"
 msgstr ""
 
-#: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
-#: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
+#: ../metadata/resize.xml.in.h:1
+#: ../metadata/rotate.xml.in.h:2
+#: ../metadata/scale.xml.in.h:5
+#: ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
 msgstr ""
 
@@ -2377,7 +2356,7 @@ msgstr "Промяната на размера е неуспешно."
 
 #: ../metadata/resize.xml.in.h:26
 msgid "Stretch"
-msgstr ""
+msgstr "Разтягане"
 
 #: ../metadata/resize.xml.in.h:27
 #, fuzzy
@@ -2831,11 +2810,13 @@ msgstr "Начало на откриването"
 msgid "Timeout before flipping viewport"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:98 ../metadata/switcher.xml.in.h:42
+#: ../metadata/rotate.xml.in.h:98
+#: ../metadata/switcher.xml.in.h:42
 msgid "Zoom"
 msgstr "Мащабиране"
 
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+#: ../metadata/scale.xml.in.h:1
+#: ../metadata/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
 msgstr ""
 
@@ -2867,7 +2848,7 @@ msgstr ""
 
 #: ../metadata/scale.xml.in.h:11
 msgid "Emblem"
-msgstr ""
+msgstr "Емблема"
 
 #: ../metadata/scale.xml.in.h:12
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
@@ -2998,9 +2979,8 @@ msgstr "Директория"
 
 # HT
 #: ../metadata/screenshot.xml.in.h:4
-#, fuzzy
 msgid "Initiate rectangle screenshot"
-msgstr "Хитите"
+msgstr ""
 
 #: ../metadata/screenshot.xml.in.h:5
 msgid "Launch Application"
@@ -3126,18 +3106,16 @@ msgid "Rotate to the selected window while switching"
 msgstr ""
 
 #: ../metadata/switcher.xml.in.h:30
-#, fuzzy
 msgid "Select next panel type window."
-msgstr "&Изтриване на Windows"
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:31
 msgid "Select next window without showing the popup window."
 msgstr ""
 
 #: ../metadata/switcher.xml.in.h:32
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "Промяната на размера е неуспешно."
+msgstr ""
 
 #: ../metadata/switcher.xml.in.h:33
 msgid "Select previous window without showing the popup window."
@@ -3169,7 +3147,7 @@ msgstr "&Изтриване на Windows"
 
 #: ../metadata/switcher.xml.in.h:41
 msgid "Windows that should be shown in switcher"
-msgstr ""
+msgstr "Прозорци, които трябва да бъдат показвани в превключвателя"
 
 #: ../metadata/video.xml.in.h:1
 msgid "Provide YV12 colorspace support"
@@ -3203,7 +3181,7 @@ msgstr ""
 
 #: ../metadata/water.xml.in.h:4
 msgid "Delay (in ms) between each rain-drop"
-msgstr ""
+msgstr "Закъснение (в милисекунди) между всяка дъждовна капка"
 
 #: ../metadata/water.xml.in.h:5
 msgid "Enable pointer water effects"
@@ -3402,68 +3380,51 @@ msgstr "Треперене при максимизиране и демаксим
 msgid "Wobbly Windows"
 msgstr "Треперещи прозорци"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Линеен филтър"
+#~ msgid "Command line 0"
+#~ msgstr "Команден ред 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Използвай линеен филтър при мащабиране"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Мащабиране на работния плот"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Увеличаване"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Намаляване"
-
-#: ../metadata/zoom.xml.in.h:9
-#, fuzzy
-msgid "Zoom Pan"
-msgstr "Излизане"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Скорост на мащабирането"
-
-#: ../metadata/zoom.xml.in.h:11
-#, fuzzy
-msgid "Zoom Timestep"
-msgstr "Проба"
-
-#: ../metadata/zoom.xml.in.h:12
-#, fuzzy
-msgid "Zoom and pan desktop cube"
-msgstr "Завъртане на екрана"
-
-#: ../metadata/zoom.xml.in.h:13
-#, fuzzy
-msgid "Zoom factor"
-msgstr "Излизане"
-
-#: ../metadata/zoom.xml.in.h:14
-#, fuzzy
-msgid "Zoom pan"
-msgstr "Излизане"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Команден ред 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Изпълни команда 1"
+#~ msgid "Run command 0"
+#~ msgstr "Изпълни команда 0"
 
 #~ msgid "Screenshot commands"
 #~ msgstr "Команди за заснемане на екрана"
 
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Ключови комбинации за заснемане на екрана"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Линеен филтър"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Използвай линеен филтър при мащабиране"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Мащабиране на работния плот"
+
+#~ msgid "Zoom In"
+#~ msgstr "Увеличаване"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Намаляване"
+
+#, fuzzy
+#~ msgid "Zoom Pan"
+#~ msgstr "Излизане"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Скорост на мащабирането"
+
+#, fuzzy
+#~ msgid "Zoom Timestep"
+#~ msgstr "Проба"
+
+#, fuzzy
+#~ msgid "Zoom factor"
+#~ msgstr "Излизане"
+
+#, fuzzy
+#~ msgid "Zoom pan"
+#~ msgstr "Излизане"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Понижи непрозрачността на прозореца"
@@ -3811,6 +3772,5 @@ msgstr "Излизане"
 #~ msgid "Corners"
 #~ msgstr "Корнски"
 
-#, fuzzy
 #~ msgid "Terminate"
 #~ msgstr "Терминали"

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:08+0100\n"
-"PO-Revision-Date: 2008-12-23 10:30+0100\n"
+"POT-Creation-Date: 2009-03-24 08:12+0100\n"
+"PO-Revision-Date: 2009-08-13 10:05+0200\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgid "None"
 msgstr "Ei mitään"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Näytä rullattuna"
 
@@ -69,7 +69,7 @@ msgid "Lower"
 msgstr "Laske"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Ikkunavalikko"
@@ -141,59 +141,59 @@ msgstr "Käytä Metacity-teemaa"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Käytä Metacity-teemaa ikkunoiden kehyksissä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Palauta suurennettu ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Suurenna ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Pienennä ikkuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Älä näytä rullattuna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Älä näytä päällimmäisenä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Älä näytä kaikilla työpöydillä"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Ikkuna \"%s\" ei vastaa."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Tämän sovelluksen sulkeminen väkisin saa tallentamattomat muutokset "
 "katoamaan."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "Sulje _väkisin"
 
@@ -231,7 +231,7 @@ msgstr "Piirroksen väri"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Aktivoi"
 
@@ -411,84 +411,72 @@ msgid "Output clone handler"
 msgstr "Ulostulon kloonauksen käsittelijä"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command0"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command1"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command10"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command11"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command2"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command3"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command4"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command5"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command6"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command7"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command8"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
@@ -567,113 +555,100 @@ msgid ""
 msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command9"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command0"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command0"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command1"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command1"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command10"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command10"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command11"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command11"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command2"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command2"
 
 #: ../metadata/commands.xml.in.h:30
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command3"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command3"
 
 #: ../metadata/commands.xml.in.h:31
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command4"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command4"
 
 #: ../metadata/commands.xml.in.h:32
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command5"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command5"
 
 #: ../metadata/commands.xml.in.h:33
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command6"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command6"
 
 #: ../metadata/commands.xml.in.h:34
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command7"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command7"
 
 #: ../metadata/commands.xml.in.h:35
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command8"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command8"
 
 #: ../metadata/commands.xml.in.h:36
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
-msgstr "Näppäinyhdistelmä, jota painettaessa ajetaan komento command9"
+msgstr "Reuna, johon siirryttäessä ajetaan komento command9"
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Luo sidoksia komentorivikomentoihin"
 
 #: ../metadata/commands.xml.in.h:38
-#, fuzzy
 msgid "Button Bindings"
-msgstr "Pikanäppäimet"
+msgstr "Näppäinsidokset"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Komentorivi 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Komentorivi 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Komentorivi 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Komentorivi 11"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "Komentorivi 12"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -760,30 +735,28 @@ msgid "Commands"
 msgstr "Komennot"
 
 #: ../metadata/commands.xml.in.h:64
-#, fuzzy
 msgid "Edge Bindings"
-msgstr "Pikanäppäimet"
+msgstr "Reunasidokset"
 
 #: ../metadata/commands.xml.in.h:65
-#, fuzzy
 msgid "Key Bindings"
-msgstr "Pikanäppäimet"
+msgstr "Näppäinsidokset"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Suorita komento 0"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Suorita komento 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Suorita komento 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Suorita komento 11"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "Suorita komento 12"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -1401,13 +1374,13 @@ msgstr "Taivaan kuva"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Nopeus"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Aikaviive"
 
@@ -1644,7 +1617,7 @@ msgstr "GLib-pääsilmukan tuki"
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Gnome-yhteensopivuus"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1653,6 +1626,8 @@ msgstr "Avaa pääte"
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
 msgstr ""
+"Valinnat, joilla Compiz pidetään yhteensopivana Gnome-työpöytäympäristön "
+"kanssa"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
@@ -1805,120 +1780,100 @@ msgid "Brightness"
 msgstr "Kirkkaus"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Kirkkaus"
+msgstr "Kirkkauden vähentäminen"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Kirkkaus"
+msgstr "Kirkkauden lisääminen"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Kirkkaus"
+msgstr "Kirkkauden säädön askel"
 
 #: ../metadata/obs.xml.in.h:5
-#, fuzzy
 msgid "Brightness values for windows"
-msgstr "Kirkkaus prosenteissa ikkunoille, jotka eivät vastaa"
+msgstr "Kirkkausarvot ikkunoille"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "Vähennä läpikuultavuutta"
+msgstr "Vähennä"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "Lisää läpikuultavuutta"
+msgstr "Lisää"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Peittävyyden muutoksen askelten suuruus"
+msgstr "Peittävyyden vähentäminen"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Peittävyyden muutoksen askelten suuruus"
+msgstr "Peittävyyden lisääminen"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
-msgstr "Läpinäkyvyyden muutos"
+msgstr "Peittävyyden säädön askel"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Liikkuvien ikkunoiden läpinäkyvyys"
+msgstr "Peittävyysarvot ikkunoille"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "Läpikuultavuus pyörityksen aikana"
+msgstr "Peittävyys, kirkkaus ja värikylläisyys"
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Peittävyyden, kirkkauden ja värikylläisyyden muuttaminen"
 
 #: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "Kylläisyys"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Kylläisyys"
+msgstr "Kylläisyyden vähentäminen"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Kylläisyys"
+msgstr "Kylläisyyden lisääminen"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Kylläisyys"
+msgstr "Kylläisyyden säädön askel"
 
 #: ../metadata/obs.xml.in.h:19
-#, fuzzy
 msgid "Saturation values for windows"
-msgstr "Värikylläisyys prosenteissa ikkunoille, jotka eivät vastaa"
+msgstr "Kylläisyysarvot ikkunoille"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Askel"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "Ikkunan kehyksen asetukset"
+msgstr "Ikkunakohtaiset asetukset"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "Ikkunatyypit"
+msgstr "Ikkunoiden arvot"
 
 #: ../metadata/obs.xml.in.h:23
-#, fuzzy
 msgid "Windows"
-msgstr "Ikkunatyypit, jotka huojuvat ilmestyessä"
+msgstr "Ikkunat"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "Ikkunatyypit, jotka tulisi sijoittaa oletuksena"
+msgstr "Ikkunat joilla tulisi oletuksena olla eriävä kirkkaus"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "Ikkunatyypit, jotka tulisi häivyttää"
+msgstr "Ikkunat joilla tulisi oletuksena olla eriävä peittävyys"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "Ikkunatyypit, jotka tulisi sijoittaa oletuksena"
+msgstr "Ikkunat joilla tulisi oletuksena olla eriävä värikylläisyys"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -3102,63 +3057,50 @@ msgstr "Huojumistehoste ikkuna suurentaessa ja pienentäessä"
 msgid "Wobbly Windows"
 msgstr "Huojuvat ikkunat"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Suodata lineaarisesti"
+#~ msgid "Command line 0"
+#~ msgstr "Komentorivi 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Käytä lineaarista suodatinta zoomin aikana"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Työpöydän zoomaus"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Lähennys"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Loitonnus"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Zoomin muutosarvo"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Zoomausnopeus"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Zoomausaikaväli"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Zoomaa ja panoroi työpöytää"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Suurennuskerroin"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Panorointi suurennettaessa"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Komentorivi 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Suorita komento 1"
+#~ msgid "Run command 0"
+#~ msgstr "Suorita komento 0"
 
 #~ msgid "Screenshot commands"
 #~ msgstr "Kuvakaappauksen komennot"
 
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Kuvakaappauksen pikanäppäimet"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Suodata lineaarisesti"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Käytä lineaarista suodatinta zoomin aikana"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Työpöydän zoomaus"
+
+#~ msgid "Zoom In"
+#~ msgstr "Lähennys"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Loitonnus"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Zoomin muutosarvo"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Zoomausnopeus"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Zoomausaikaväli"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Zoomaa ja panoroi työpöytää"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Suurennuskerroin"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Panorointi suurennettaessa"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Vähennä ikkunan läpikuultavuutta"

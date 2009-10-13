@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:09+0100\n"
-"PO-Revision-Date: 2009-01-06 05:35+0100\n"
+"POT-Creation-Date: 2009-03-24 08:13+0100\n"
+"PO-Revision-Date: 2009-09-30 15:52+0200\n"
 "Last-Translator: Lee June Hee <bugbear5@gmail.com>\n"
 "Language-Team: Korean <bugbear5@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgid "None"
 msgstr "없음"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "말아올리기"
 
@@ -62,12 +62,11 @@ msgid "Raise"
 msgstr "올림"
 
 #: ../gtk/gnome/compiz-window-manager.c:433
-#, fuzzy
 msgid "Lower"
-msgstr "낮음"
+msgstr "내림"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "창 메뉴"
@@ -131,57 +130,57 @@ msgstr "메타시티 테마를 사용합니다."
 msgid "Use metacity theme when drawing window decorations"
 msgstr "창 장식을 그릴 때 메타시티 테마를 사용합니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "창 최대화 취소"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "창 최대화"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "창 최소화"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "항상 위에"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "끈적이 창 설정"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "말아올리기 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "항상 위에 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "끈적이 창 해제"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "창 \"%s\"가 응답하지 않습니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr "이 응용프로그램을 강제로 종료하면 저장하지 않은 데이터는 손실됩니다."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_강제 종료"
 
@@ -219,7 +218,7 @@ msgstr "주석의 채우기 색"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "시작"
 
@@ -389,275 +388,251 @@ msgstr "화면 복제"
 
 #: ../metadata/clone.xml.in.h:3
 msgid "Initiate clone selection"
-msgstr "화면 복제 시작"
+msgstr "복제 화면 선택 시작"
 
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
-msgstr "출력 복제 처리기"
+msgstr "화면 복제 관리자"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
-msgstr "명령 0을 실행하는키 바인딩"
+msgstr "명령 0에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
-msgstr "명령 1을 실행하는키 바인딩"
+msgstr "명령 1에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
-msgstr "명령 10을 실행하는키 바인딩"
+msgstr "명령 10에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
-msgstr "명령 11을 실행하는키 바인딩"
+msgstr "명령 11에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
-msgstr "명령 2를 실행하는키 바인딩"
+msgstr "명령 2에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
-msgstr "명령 3을 실행하는키 바인딩"
+msgstr "명령 3에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
-msgstr "명령 4를 실행하는키 바인딩"
+msgstr "명령 4에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
-msgstr "명령 5를 실행하는키 바인딩"
+msgstr "명령 5에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
-msgstr "명령 6을 실행하는키 바인딩"
+msgstr "명령 6에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
-msgstr "명령 7을 실행하는키 바인딩"
+msgstr "명령 7에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
-msgstr "명령 8을 실행하는키 바인딩"
+msgstr "명령 8에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
-msgstr "명령 9를 실행하는키 바인딩"
+msgstr "명령 9에 지정된 명령을 실행할 버튼"
 
 #: ../metadata/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
-msgstr "명령 0을 실행하는키 바인딩"
+msgstr "명령 0에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
-msgstr "명령 1을 실행하는키 바인딩"
+msgstr "명령 1에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
-msgstr "명령 10을 실행하는키 바인딩"
+msgstr "명령 10에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
-msgstr "명령 11을 실행하는키 바인딩"
+msgstr "명령 11에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
-msgstr "명령 2를 실행하는키 바인딩"
+msgstr "명령 2에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
-msgstr "명령 3을 실행하는키 바인딩"
+msgstr "명령 3에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
-msgstr "명령 4를 실행하는키 바인딩"
+msgstr "명령 4에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
-msgstr "명령 5를 실행하는키 바인딩"
+msgstr "명령 5에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
-msgstr "명령 6을 실행하는키 바인딩"
+msgstr "명령 6에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
-msgstr "명령 7을 실행하는키 바인딩"
+msgstr "명령 7에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
-msgstr "명령 8을 실행하는키 바인딩"
+msgstr "명령 8에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
-msgstr "명령 9를 실행하는키 바인딩"
+msgstr "명령 9에 지정된 명령을 실행할 키"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
-msgstr "명령 0을 실행하는키 바인딩"
+msgstr "명령 0에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
-msgstr "명령 1을 실행하는키 바인딩"
+msgstr "명령 1에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
-msgstr "명령 10을 실행하는키 바인딩"
+msgstr "명령 10에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
-msgstr "명령 11을 실행하는키 바인딩"
+msgstr "명령 11에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
-msgstr "명령 2를 실행하는키 바인딩"
+msgstr "명령 2에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:30
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
-msgstr "명령 3을 실행하는키 바인딩"
+msgstr "명령 3에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:31
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
-msgstr "명령 4를 실행하는키 바인딩"
+msgstr "명령 4에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:32
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
-msgstr "명령 5를 실행하는키 바인딩"
+msgstr "명령 5에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:33
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
-msgstr "명령 6을 실행하는키 바인딩"
+msgstr "명령 6에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:34
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
-msgstr "명령 7을 실행하는키 바인딩"
+msgstr "명령 7에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:35
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
-msgstr "명령 8을 실행하는키 바인딩"
+msgstr "명령 8에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:36
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
-msgstr "명령 9를 실행하는키 바인딩"
+msgstr "명령 9에 지정된 명령을 실행할 모서리"
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "임의의 명령을 바로가기에 지정"
 
 #: ../metadata/commands.xml.in.h:38
 msgid "Button Bindings"
-msgstr ""
+msgstr "버튼 바로가기"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "명령 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "명령 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "명령 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "명령 11"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "명령 12"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -740,33 +715,32 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "명령 9를 선택했을 때 실행될 쉘 명령행"
 
 #: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
-#, fuzzy
 msgid "Commands"
 msgstr "명령"
 
 #: ../metadata/commands.xml.in.h:64
 msgid "Edge Bindings"
-msgstr ""
+msgstr "모서리 바로가기"
 
 #: ../metadata/commands.xml.in.h:65
 msgid "Key Bindings"
-msgstr ""
+msgstr "키 바로가기"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "명령 0 실행"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "명령 1 실행"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "명령 10 실행"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "명령 11 실행"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "명령 12 실행"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -812,11 +786,11 @@ msgstr ""
 
 #: ../metadata/core.xml.in.in.h:3
 msgid "Audible Bell"
-msgstr "들리는 삑소리"
+msgstr "경고음 소리 듣기"
 
 #: ../metadata/core.xml.in.in.h:4
 msgid "Audible system beep"
-msgstr "들을 수 있는 시스템 삑소리"
+msgstr "시스템 경고음 소리 듣기"
 
 #: ../metadata/core.xml.in.in.h:5
 msgid "Auto-Raise"
@@ -828,7 +802,7 @@ msgstr "자동으로 떠오르게 하는 지연 시간"
 
 #: ../metadata/core.xml.in.in.h:7
 msgid "Automatic detection of output devices"
-msgstr "출력 장치를 자동으로 감지"
+msgstr "모니터 자동 감지"
 
 #: ../metadata/core.xml.in.in.h:8
 msgid "Automatic detection of refresh rate"
@@ -859,13 +833,12 @@ msgid "Default window icon image"
 msgstr "기본 창 아이콘 그림"
 
 #: ../metadata/core.xml.in.in.h:16
-#, fuzzy
 msgid "Desktop Size"
-msgstr "데스크탑 큐브"
+msgstr "데스크탑 크기"
 
 #: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
-msgstr "출력 감지"
+msgstr "화면 감지"
 
 #: ../metadata/core.xml.in.in.h:18
 msgid "Detect Refresh Rate"
@@ -873,7 +846,7 @@ msgstr "갱신 주기 감지"
 
 #: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
-msgstr ""
+msgstr "디스플레이 설정"
 
 #: ../metadata/core.xml.in.in.h:20
 msgid ""
@@ -891,7 +864,7 @@ msgstr "빠름"
 
 #: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "초점 & 띄우기 동작"
 
 #: ../metadata/core.xml.in.in.h:24
 msgid "Focus Prevention Level"
@@ -907,7 +880,7 @@ msgstr "초점을 막을 창"
 
 #: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
-msgstr "강제로 독립된 출력을 그립니다."
+msgstr "독립된 화면 그리기 강제"
 
 #: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
@@ -963,7 +936,7 @@ msgstr "Ping 메시지들 사이의 간격"
 
 #: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
-msgstr ""
+msgstr "키 바로가기"
 
 #: ../metadata/core.xml.in.in.h:42
 msgid "Level of focus stealing prevention"
@@ -979,7 +952,7 @@ msgstr "현재 활성화된 플러그인의 목록"
 
 #: ../metadata/core.xml.in.in.h:45
 msgid "List of strings describing output devices"
-msgstr "출력 장치를 표현하는 문자열 목록"
+msgstr "설정된 모니터 목록"
 
 #: ../metadata/core.xml.in.in.h:46
 msgid "Low"
@@ -1035,20 +1008,19 @@ msgstr "끄기"
 
 #: ../metadata/core.xml.in.in.h:61
 msgid "Only perform screen updates during vertical blanking period"
-msgstr "수직 공백 기간에만 화면을 업데이트함"
+msgstr "수직 공백 주기로만 화면을 업데이트함"
 
 #: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
-msgstr "출력"
+msgstr "화면"
 
 #: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
-msgstr "출력 오버랩 조절"
+msgstr "화면 오버래핑 조절"
 
 #: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
-"출력 장치가 오버랩 되어있는 경우에도 각 출력 장치를 독립적으로 그립니다. "
+msgstr "모니터가 오버랩 되어있어도 각 모니터를 독립적으로 그립니다. "
 
 #: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
@@ -1056,11 +1028,11 @@ msgstr "Ping 지연"
 
 #: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
-msgstr "더 큰 출력을 선호함"
+msgstr "더 큰 화면을 선호함"
 
 #: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
-msgstr "더 작은 출력을 선호함"
+msgstr "더 작은 화면을 선호함"
 
 #: ../metadata/core.xml.in.in.h:68
 msgid "Raise On Click"
@@ -1184,15 +1156,15 @@ msgstr "매우 높음"
 
 #: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
-msgstr "오버래핑 출력 장치 중 선호하는 장치"
+msgstr "오버래핑 된 모니터 중 선호하는 모니터"
 
 #: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
-msgstr "창 메뉴 마우스 버튼"
+msgstr "창 메뉴 버튼"
 
 #: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
-msgstr "창 메뉴 단축키"
+msgstr "창 메뉴 키"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1220,7 +1192,7 @@ msgstr "큐브 회전시 스카이 돔 움직이기"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "모양"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1228,7 +1200,7 @@ msgstr "자동"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "동작"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1243,9 +1215,8 @@ msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "스카이 돔 그래디언트의 윗면 최종 색상"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "큐브 색상"
+msgstr "큐브 캡"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1302,7 +1273,7 @@ msgstr "큐브의 윗면에 그려질 PNG와 SVG 파일 목록"
 #: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
 #: ../metadata/scale.xml.in.h:24
 msgid "Multi Output Mode"
-msgstr "다중 출력 모드"
+msgstr "다중 화면 모드"
 
 #: ../metadata/cube.xml.in.h:29
 msgid "Multiple cubes"
@@ -1334,7 +1305,7 @@ msgstr "회전 안할 때 바탕 화면의 투명도"
 
 #: ../metadata/cube.xml.in.h:36
 msgid "Place windows on cube"
-msgstr "창을 큐브 위에 배치"
+msgstr "큐브 위에 창을 나타냅니다."
 
 #: ../metadata/cube.xml.in.h:37
 msgid "Prev Slide"
@@ -1354,7 +1325,7 @@ msgstr "큐브 윗면의 그림 크기 조정"
 
 #: ../metadata/cube.xml.in.h:41
 msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr "다중 출력 장치를 사용할 때 큐브가 표시되는 방법을 선택하세요."
+msgstr "다중 모니터를 사용할 때 큐브가 표시되는 방법을 선택하세요."
 
 #: ../metadata/cube.xml.in.h:42
 msgid "Skydome"
@@ -1374,13 +1345,13 @@ msgstr "스카이 돔 그림"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "속도"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "시간 간격"
 
@@ -1390,7 +1361,7 @@ msgstr "마우스 회전시에만 투명하게 함"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "투명 큐브"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1529,7 +1500,7 @@ msgstr "최소화/열기/닫기 창 이벤트 발생시 페이드 효과"
 
 #: ../metadata/fade.xml.in.h:12
 msgid "Fade effect on system beep"
-msgstr "시스템 삑소리에 대하여 페이드 효과"
+msgstr "시스템 경고음 대신 페이드 효과"
 
 #: ../metadata/fade.xml.in.h:13
 msgid "Fade in windows when mapped and fade out windows when unmapped"
@@ -1545,11 +1516,11 @@ msgstr "창 페이드 효과"
 
 #: ../metadata/fade.xml.in.h:16
 msgid "Fullscreen Visual Bell"
-msgstr "전체 화면 페이드 효과(눈에 보이는 삑소리)"
+msgstr "전체 화면 시각 경고음"
 
 #: ../metadata/fade.xml.in.h:17
 msgid "Fullscreen fade effect on system beep"
-msgstr "시스템 삑소리에 대한 전체 화면 페이드 효과"
+msgstr "시스템 경고음 대신 전체 화면 페이드 효과"
 
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
@@ -1566,7 +1537,7 @@ msgstr "응답하지 않는 창 채도"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
-msgstr "눈에 보이는 삑소리"
+msgstr "시각 경고음"
 
 #: ../metadata/fade.xml.in.h:23
 msgid "Window fade mode"
@@ -1618,7 +1589,7 @@ msgstr "GLib 메인 루프 지원"
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "그놈 호환성"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1626,16 +1597,15 @@ msgstr "터미널 열기"
 
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
-msgstr ""
+msgstr "Compiz가 그놈 데스크탑 환경에 호환될 수 있게 하는 옵션"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "프로그램 실행창"
 
 #: ../metadata/gnomecompat.xml.in.h:6
-#, fuzzy
 msgid "Run terminal command"
-msgstr "터미널 명령행"
+msgstr "터미널 실행 명령"
 
 #: ../metadata/gnomecompat.xml.in.h:7
 msgid "Screenshot command line"
@@ -1675,7 +1645,7 @@ msgstr "Ini"
 
 #: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
-msgstr "평범한 ini 파일 백엔드"
+msgstr "Ini 플랫 파일 백엔드"
 
 #: ../metadata/inotify.xml.in.h:1
 msgid "File change notification plugin"
@@ -1683,7 +1653,7 @@ msgstr "파일 변화 알림 플러그인"
 
 #: ../metadata/inotify.xml.in.h:2
 msgid "Inotify"
-msgstr "주석"
+msgstr "Inotify"
 
 #: ../metadata/kconfig.xml.in.h:1
 msgid "Kconfig"
@@ -1779,120 +1749,100 @@ msgid "Brightness"
 msgstr "밝기"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "밝기"
+msgstr "밝기 감소"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "밝기"
+msgstr "밝기 증가"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "밝기"
+msgstr "밝기 단계"
 
 #: ../metadata/obs.xml.in.h:5
-#, fuzzy
 msgid "Brightness values for windows"
-msgstr "반응하지 않는 창의 밝기(%)"
+msgstr "창의 밝은 정도"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "투명도 줄이기"
+msgstr "감소"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "투명도 증가"
+msgstr "증가"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "투명도 변화 단계"
+msgstr "투명도 감소"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "투명도 변화 단계"
+msgstr "투명도 증가"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
 msgstr "투명도 단계"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "움직이는 창의 투명 정도"
+msgstr "창이 투명한 정도"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "회전할 때의 투명도"
+msgstr "투명, 밝기, 채도"
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "투명, 밝기, 채도 조정"
 
 #: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "채도"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "채도"
+msgstr "채도 감소"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "채도"
+msgstr "채도 증가"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "채도"
+msgstr "채도 단계"
 
 #: ../metadata/obs.xml.in.h:19
-#, fuzzy
 msgid "Saturation values for windows"
-msgstr "응답하지 않는 창의 채도(%)"
+msgstr "창의 채도 정도"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "단계"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "창 장식"
+msgstr "특정한 창 설정"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "창 투명도 값"
+msgstr "정도"
 
 #: ../metadata/obs.xml.in.h:23
-#, fuzzy
 msgid "Windows"
-msgstr "적용되는 창"
+msgstr "창"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "기본적으로 배치되어야하는 창"
+msgstr "기본적으로 다른 밝기를 갖는 창"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "기본적으로 투명한 창들"
+msgstr "기본적으로 다른 투명도를 갖는 창"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "기본적으로 배치되어야하는 창"
+msgstr "기본적으로 다른 채도를 갖는 창"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1907,9 +1857,8 @@ msgid "Centered"
 msgstr "중앙"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "창 관리"
+msgstr "고정된 창 배치"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -1937,7 +1886,7 @@ msgstr "창 배치"
 
 #: ../metadata/place.xml.in.h:12
 msgid "Place across all outputs"
-msgstr "모든 출력에 위치 시킴"
+msgstr "모든 화면에 위치"
 
 #: ../metadata/place.xml.in.h:13
 msgid "Place windows at appropriate positions when mapped"
@@ -1958,8 +1907,7 @@ msgstr "무작위로"
 #: ../metadata/place.xml.in.h:17
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
-msgstr ""
-"다중 출력 장치가 선택되었을 때 창의 위치 선정을 어떻게 할지 선택하세요."
+msgstr "다중 화면 장치 옵션이 활성화 되었을 때 창의 배치를 어떻게 할지 선택하세요."
 
 #: ../metadata/place.xml.in.h:18
 msgid "Smart"
@@ -1967,15 +1915,15 @@ msgstr "똑똑하게"
 
 #: ../metadata/place.xml.in.h:19
 msgid "Use active output device"
-msgstr "활성된 출력 장치 사용"
+msgstr "활성화 되어있는 모니터 사용"
 
 #: ../metadata/place.xml.in.h:20
 msgid "Use output device of focussed window"
-msgstr "초점을 가진 창의 출력 장치 사용"
+msgstr "현재 사용 중인 창이 있는 모니터 사용"
 
 #: ../metadata/place.xml.in.h:21
 msgid "Use output device with pointer"
-msgstr "포인터가 있는 출력 장치 사용"
+msgstr "마우스 포인터가 있는 모니터 사용"
 
 #: ../metadata/place.xml.in.h:22
 msgid "Vertical viewport positions"
@@ -2006,13 +1954,12 @@ msgstr ""
 "니다."
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "창 장식"
+msgstr "고정된 위치를 갖는 창"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "고정된 작업 공간을 갖는 창"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -2061,7 +2008,7 @@ msgstr "정규표현식 창 매칭"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "바로가기"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2302,7 +2249,7 @@ msgstr "모든 창과 함께 12번 작업공간으로 회전"
 
 #: ../metadata/rotate.xml.in.h:34
 msgid "Rotate To Face 2"
-msgstr "12번 작업 공간으로 회전"
+msgstr "2번 작업 공간으로 회전"
 
 #: ../metadata/rotate.xml.in.h:35
 msgid "Rotate To Face 2 with Window"
@@ -2365,7 +2312,6 @@ msgid "Rotate To Face 9 with Window"
 msgstr "모든 창과 함께 9번 작업 공간으로 회전"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
 msgstr "큐브 회전"
 
@@ -2390,14 +2336,12 @@ msgid "Rotate right and bring active window along"
 msgstr "활성창과 함께 오른쪽으로 회전"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "1번 작업 공간으로 회전"
+msgstr "특정 큐브 면으로 회전"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "모든 창과 함께 1번 작업 공간으로 회전"
+msgstr "창과 함께 특정 큐브 면으로 회전"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2565,13 +2509,13 @@ msgstr "크게"
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "버튼으로 스케일 모드 활성화"
 
 #: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
-msgstr ""
+msgstr "버튼을 누르면 활성화되고 떼면 비활성화되는 대신 버튼으로 스케일 모드를 활성화합니다."
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
@@ -2611,17 +2555,17 @@ msgstr "창 그룹에 대하여 창 고르기를 시작"
 
 #: ../metadata/scale.xml.in.h:17
 msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "현재 작업 공간상의 창들에 대하여 창 고르기를 시작"
+msgstr "현재 화면의 창들에 대해 창 고르기를 시작"
 
 #: ../metadata/scale.xml.in.h:18
 msgid "Key Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "키로 스케일 모드 활성화"
 
 #: ../metadata/scale.xml.in.h:19
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
-msgstr ""
+msgstr "키를 누르면 활성화되고 떼면 비활성화되는 대신 키로 스케일 모드를 활성화합니다."
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -2637,15 +2581,15 @@ msgstr "창을 배치하고 변형함"
 
 #: ../metadata/scale.xml.in.h:23
 msgid "Layout and start transforming windows on current output"
-msgstr "현재 작업 공간상의 창들을 배치하고 변형함"
+msgstr "현재 화면의 창들을 배치하고 변형함"
 
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
-msgstr "모든 출력 장치에 대하여"
+msgstr "모든 모니터에 대하여"
 
 #: ../metadata/scale.xml.in.h:27
 msgid "On current output device"
-msgstr "현재 출력 장치에 대하여"
+msgstr "현재 모니터에 대하여"
 
 #: ../metadata/scale.xml.in.h:29
 msgid "Overlay Icon"
@@ -2677,7 +2621,7 @@ msgstr "스케일"
 
 #: ../metadata/scale.xml.in.h:36
 msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr "다중 출력 장치를 사용할 때 창들이 어디에 스케일될지 선택하세요."
+msgstr "다중 모니터를 사용할 때 창들이 어떤 모니터에 스케일 될지 선택하세요."
 
 #: ../metadata/scale.xml.in.h:37
 msgid "Space between windows"
@@ -3065,57 +3009,11 @@ msgstr "창을 최대화하거나 해제할 때 출렁거리는 효과"
 msgid "Wobbly Windows"
 msgstr "창 출렁거림"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "선형 필터"
+#~ msgid "Command line 0"
+#~ msgstr "명령 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "확대할 때 선형 필터 적용"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "데스크탑 확대"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "확대"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "축소"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "확대 이동"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "확대 속도"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "확대 시간 간격"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "데스크탑 큐브 확대 이동"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "확대율"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "확대 이동"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "명령 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "명령 1 실행"
+#~ msgid "Run command 0"
+#~ msgstr "명령 0 실행"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
@@ -3124,6 +3022,39 @@ msgstr "확대 이동"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "스크린샷 명령행"
+
+#~ msgid "Filter Linear"
+#~ msgstr "선형 필터"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "확대할 때 선형 필터 적용"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "데스크탑 확대"
+
+#~ msgid "Zoom In"
+#~ msgstr "확대"
+
+#~ msgid "Zoom Out"
+#~ msgstr "축소"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "확대 이동"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "확대 속도"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "확대 시간 간격"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "데스크탑 큐브 확대 이동"
+
+#~ msgid "Zoom factor"
+#~ msgstr "확대율"
+
+#~ msgid "Zoom pan"
+#~ msgstr "확대 이동"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "창 투명도 줄이기"

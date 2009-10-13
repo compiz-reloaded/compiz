@@ -1,14 +1,12 @@
 # Compiz Italian Translation
-# Copyright (C) 2007 compiz's COPYRIGHT HOLDER
+# Copyright (C) 2007, 2008, 2009 The Free Software Foundation, Inc.
 # This file is distributed under the same license as the Compiz package.
-# Milo Casagrande <milo@ubuntu.com>, 2007-2008
 #
 # **** Glossario ****
 #
 #
 # enable       -> usato sempre come 'abilitare'
-# viewport     -> area di lavoro (fino a quando non sia effettivamente una 
-#                 concezione diversa)
+# viewport     -> area visibile
 # bevel, to    -> smussare
 # workaround   -> alternativa
 # sticky       -> adesivo
@@ -26,10 +24,10 @@
 # blur         -> sfocato
 # hotkey       -> tasto di scelta rapida
 # flip         -> scorrere
-# Scale        -> Scala finestre (nome del plug-in), scala o scalare, ridimensionare
+# Scale        -> Scala finestre (nome del plugin), scala o scalare, ridimensionare
 #                 per immagini
 # glow         -> bagliore
-# Opacify      -> Opacizza (anche nome del plug-in); opacizzare
+# Opacify      -> Opacizza (anche nome del plugin); opacizzare
 # opacity      -> opacità (non è la trasparenza!)
 # tilt         -> inclinato/a, usato per la visualizzazione delle aree di lavoro
 # sloppy       -> lento (trovato solo una volta... ma potrebbe venir usato ancora)
@@ -38,12 +36,13 @@
 # outline      -> sagoma (nella modalità di ridimensionamento delle finestre)
 # blend        -> trasformazione/trasformare (ne ho parlato con un Flame Artist)
 #
+# Milo Casagrande <milo@ubuntu.com>, 2007-2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: compiz_0.7.6\n"
+"Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:09+0100\n"
-"PO-Revision-Date: 2008-12-30 22:18+0100\n"
+"POT-Creation-Date: 2009-08-15 18:06+0200\n"
+"PO-Revision-Date: 2009-08-15 18:27+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -66,17 +65,15 @@ msgstr "Gestione finestre"
 msgid "Compiz"
 msgstr "Compiz"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
-#: ../metadata/wobbly.xml.in.h:16
+#: ../plugins/scale/scale.xml.in.h:18
 msgid "None"
 msgstr "Niente"
 
-#: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4619
 msgid "Shade"
 msgstr "Sfuma"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../plugins/place/place.xml.in.h:9
 msgid "Maximize"
 msgstr "Massimizzato"
 
@@ -100,9 +97,8 @@ msgstr "Solleva"
 msgid "Lower"
 msgstr "Abbassa"
 
-#: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
-#: ../metadata/core.xml.in.in.h:100
+#: ../gtk/window-decorator/gtk-window-decorator.c:4600
+#: ../metadata/core.xml.in.h:75
 msgid "Window Menu"
 msgstr "Menù della finestra"
 
@@ -167,59 +163,59 @@ msgstr "Usa il tema Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Usa il tema Metacity per le decorazioni delle finestre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
-#: ../metadata/core.xml.in.in.h:12
+#: ../gtk/window-decorator/gtk-window-decorator.c:4408
+#: ../metadata/core.xml.in.h:9
 msgid "Close Window"
 msgstr "Chiude la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
-#: ../metadata/core.xml.in.in.h:93
+#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../metadata/core.xml.in.h:70
 msgid "Unmaximize Window"
 msgstr "Demassimizza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
-#: ../metadata/core.xml.in.in.h:49
+#: ../gtk/window-decorator/gtk-window-decorator.c:4433
+#: ../metadata/core.xml.in.h:36
 msgid "Maximize Window"
 msgstr "Massimizza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
-#: ../metadata/core.xml.in.in.h:55
+#: ../gtk/window-decorator/gtk-window-decorator.c:4475
+#: ../metadata/core.xml.in.h:42
 msgid "Minimize Window"
 msgstr "Minimizza la finestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4639
 msgid "Make Above"
 msgstr "Porta sopra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4665
 msgid "Stick"
 msgstr "Blocca"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4685
 msgid "Unshade"
 msgstr "De-sfuma"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4705
 msgid "Unmake Above"
 msgstr "Porta sotto"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4731
 msgid "Unstick"
 msgstr "Sblocca"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5067
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La finestra «%s» non risponde."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5076
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forzare la chiusura dell'applicazione comporta la perdita delle modifiche "
 "non salvate."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5091
 msgid "_Force Quit"
 msgstr "_Forza uscita"
 
@@ -237,7 +233,7 @@ msgstr "Colore tratto"
 
 #: ../metadata/annotate.xml.in.h:4
 msgid "Annotate plugin"
-msgstr "Plug-in per prendere annotazioni"
+msgstr "Plugin per prendere annotazioni"
 
 #: ../metadata/annotate.xml.in.h:5
 msgid "Clear"
@@ -255,9 +251,7 @@ msgstr "Disegna usando lo strumento"
 msgid "Fill color for annotations"
 msgstr "Colore riempimento per le annotazioni"
 
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../plugins/water/water.xml.in.h:6 ../plugins/zoom/zoom.xml.in.h:2
 msgid "Initiate"
 msgstr "Avvia"
 
@@ -293,129 +287,129 @@ msgstr "Larghezza tratto"
 msgid "Stroke width for annotations"
 msgstr "Larghezza tratto per le annotazioni"
 
-#: ../metadata/blur.xml.in.h:1
+#: ../plugins/blur/blur.xml.in.h:1
 msgid "4xBilinear"
 msgstr "4× bilineare"
 
-#: ../metadata/blur.xml.in.h:2
+#: ../plugins/blur/blur.xml.in.h:2
 msgid "Alpha Blur"
 msgstr "Sfocatura alpha"
 
-#: ../metadata/blur.xml.in.h:3
+#: ../plugins/blur/blur.xml.in.h:3
 msgid "Alpha blur windows"
 msgstr "Finestre in sfocatura"
 
-#: ../metadata/blur.xml.in.h:4
+#: ../plugins/blur/blur.xml.in.h:4
 msgid "Blur Filter"
 msgstr "Filtro sfocatura"
 
-#: ../metadata/blur.xml.in.h:5
+#: ../plugins/blur/blur.xml.in.h:5
 msgid "Blur Occlusion"
 msgstr "Sfocare le occlusioni"
 
-#: ../metadata/blur.xml.in.h:6
+#: ../plugins/blur/blur.xml.in.h:6
 msgid "Blur Saturation"
 msgstr "Saturazione sfocatura"
 
-#: ../metadata/blur.xml.in.h:7
+#: ../plugins/blur/blur.xml.in.h:7
 msgid "Blur Speed"
 msgstr "Velocità sfocatura"
 
-#: ../metadata/blur.xml.in.h:8
+#: ../plugins/blur/blur.xml.in.h:8
 msgid "Blur Windows"
 msgstr "Finestre sfocate"
 
-#: ../metadata/blur.xml.in.h:9
+#: ../plugins/blur/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
 msgstr "Sfocatura dietro la parte traslucida delle finestre"
 
-#: ../metadata/blur.xml.in.h:10
+#: ../plugins/blur/blur.xml.in.h:10
 msgid "Blur saturation"
 msgstr "Saturazione sfocatura"
 
-# (ndt) descrizione del plug-in
-#: ../metadata/blur.xml.in.h:11
+# (ndt) descrizione del plugin
+#: ../plugins/blur/blur.xml.in.h:11
 msgid "Blur windows"
 msgstr "Sfoca le finestre"
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:12
+#: ../plugins/blur/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
 msgstr "Sfoca le finestre che non hanno il focus"
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:13
+#: ../plugins/blur/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
 msgstr ""
 "Disabilita la sfocatura delle regioni dello schermo oscurate da altre "
 "finestre."
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:14
+#: ../plugins/blur/blur.xml.in.h:14
 msgid "Filter method used for blurring"
 msgstr "Filtro usato per la sfocatura"
 
 # (ndt) opzione
 # anche se non mi convince come traduzione
-#: ../metadata/blur.xml.in.h:15
+#: ../plugins/blur/blur.xml.in.h:15
 msgid "Focus Blur"
 msgstr "Sfocare al focus"
 
-#: ../metadata/blur.xml.in.h:16
+#: ../plugins/blur/blur.xml.in.h:16
 msgid "Focus blur windows"
 msgstr "Finestre da sfocare"
 
-#: ../metadata/blur.xml.in.h:17
+#: ../plugins/blur/blur.xml.in.h:17
 msgid "Gaussian"
 msgstr "Gaussiano"
 
-#: ../metadata/blur.xml.in.h:18
+#: ../plugins/blur/blur.xml.in.h:18
 msgid "Gaussian Radius"
 msgstr "Raggio gaussiano"
 
-#: ../metadata/blur.xml.in.h:19
+#: ../plugins/blur/blur.xml.in.h:19
 msgid "Gaussian Strength"
 msgstr "Resistenza gaussiana"
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:20
+#: ../plugins/blur/blur.xml.in.h:20
 msgid "Gaussian radius"
 msgstr "Il raggio gaussiano"
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:21
+#: ../plugins/blur/blur.xml.in.h:21
 msgid "Gaussian strength"
 msgstr "La resistenza gaussiana"
 
-#: ../metadata/blur.xml.in.h:22
+#: ../plugins/blur/blur.xml.in.h:22
 msgid "Independent texture fetch"
 msgstr "Recupero texture indipendente"
 
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
+#: ../plugins/blur/blur.xml.in.h:23 ../plugins/decor/decor.xml.in.h:10
+#: ../plugins/switcher/switcher.xml.in.h:13
 msgid "Mipmap"
 msgstr "Mipmap"
 
 # (ndt) preferisco mettere così... altrimenti
 # non si capisce subito
-#: ../metadata/blur.xml.in.h:24
+#: ../plugins/blur/blur.xml.in.h:24
 msgid "Mipmap LOD"
 msgstr "Livello dettaglio"
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:25
+#: ../plugins/blur/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
 msgstr "Livello dettaglio mipmap"
 
-#: ../metadata/blur.xml.in.h:26
+#: ../plugins/blur/blur.xml.in.h:26
 msgid "Pulse"
 msgstr "Pulsazione"
 
-#: ../metadata/blur.xml.in.h:27
+#: ../plugins/blur/blur.xml.in.h:27
 msgid "Pulse effect"
 msgstr "Effetto pulsazione"
 
-#: ../metadata/blur.xml.in.h:28
+#: ../plugins/blur/blur.xml.in.h:28
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
@@ -423,17 +417,17 @@ msgstr ""
 "Utilizza le unità texture disponibili per effettuare tutti i possibili "
 "recuperi texture indipendenti."
 
-#: ../metadata/blur.xml.in.h:29
+#: ../plugins/blur/blur.xml.in.h:29
 msgid "Window blur speed"
 msgstr "Velocità sfocatura finestra"
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:30
+#: ../plugins/blur/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
 msgstr "Tipi di finestre a cui applicare la sfocatura al focus"
 
 # (ndt) suggerimento
-#: ../metadata/blur.xml.in.h:31
+#: ../plugins/blur/blur.xml.in.h:31
 msgid "Windows that should be use alpha blur by default"
 msgstr ""
 "Tipi di finestre a cui applicare la sfocatura alpha in modo predefinito"
@@ -447,13 +441,12 @@ msgstr "Clona output"
 msgid "Initiate clone selection"
 msgstr "Avvia selezione clone"
 
-# (ndt) descrizione plug-in
+# (ndt) descrizione plugin
 #: ../metadata/clone.xml.in.h:4
 msgid "Output clone handler"
 msgstr "Gestore output clonato"
 
-#: ../metadata/commands.xml.in.h:1
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:1
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
@@ -461,8 +454,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command0"
 
-#: ../metadata/commands.xml.in.h:2
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:2
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
@@ -470,8 +462,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command1"
 
-#: ../metadata/commands.xml.in.h:3
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:3
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
@@ -479,8 +470,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command10"
 
-#: ../metadata/commands.xml.in.h:4
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:4
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
@@ -488,17 +478,15 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command11"
 
-#: ../metadata/commands.xml.in.h:5
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:5
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command2"
+"identificato da command12"
 
-#: ../metadata/commands.xml.in.h:6
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:6
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
@@ -506,8 +494,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command3"
 
-#: ../metadata/commands.xml.in.h:7
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:7
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
@@ -515,8 +502,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command4"
 
-#: ../metadata/commands.xml.in.h:8
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:8
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
@@ -524,8 +510,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command5"
 
-#: ../metadata/commands.xml.in.h:9
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:9
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
@@ -533,8 +518,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command6"
 
-#: ../metadata/commands.xml.in.h:10
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:10
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
@@ -542,8 +526,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command7"
 
-#: ../metadata/commands.xml.in.h:11
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:11
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
@@ -551,8 +534,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command8"
 
-#: ../metadata/commands.xml.in.h:12
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:12
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
@@ -560,7 +542,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command9"
 
-#: ../metadata/commands.xml.in.h:13
+#: ../plugins/commands/commands.xml.in.h:13
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
@@ -568,7 +550,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command0"
 
-#: ../metadata/commands.xml.in.h:14
+#: ../plugins/commands/commands.xml.in.h:14
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
@@ -576,7 +558,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command1"
 
-#: ../metadata/commands.xml.in.h:15
+#: ../plugins/commands/commands.xml.in.h:15
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
@@ -584,7 +566,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command10"
 
-#: ../metadata/commands.xml.in.h:16
+#: ../plugins/commands/commands.xml.in.h:16
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
@@ -592,7 +574,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command11"
 
-#: ../metadata/commands.xml.in.h:17
+#: ../plugins/commands/commands.xml.in.h:17
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
@@ -600,7 +582,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command2"
 
-#: ../metadata/commands.xml.in.h:18
+#: ../plugins/commands/commands.xml.in.h:18
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
@@ -608,7 +590,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command3"
 
-#: ../metadata/commands.xml.in.h:19
+#: ../plugins/commands/commands.xml.in.h:19
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
@@ -616,7 +598,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command4"
 
-#: ../metadata/commands.xml.in.h:20
+#: ../plugins/commands/commands.xml.in.h:20
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
@@ -624,7 +606,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command5"
 
-#: ../metadata/commands.xml.in.h:21
+#: ../plugins/commands/commands.xml.in.h:21
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
@@ -632,7 +614,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command6"
 
-#: ../metadata/commands.xml.in.h:22
+#: ../plugins/commands/commands.xml.in.h:22
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
@@ -640,7 +622,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command7"
 
-#: ../metadata/commands.xml.in.h:23
+#: ../plugins/commands/commands.xml.in.h:23
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
@@ -648,7 +630,7 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command8"
 
-#: ../metadata/commands.xml.in.h:24
+#: ../plugins/commands/commands.xml.in.h:24
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
@@ -656,356 +638,342 @@ msgstr ""
 "Un'associazione di tasti che, quando invocata, esegue il comando della shell "
 "identificato da command9"
 
-#: ../metadata/commands.xml.in.h:25
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:25
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command0"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command0"
 
-#: ../metadata/commands.xml.in.h:26
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:26
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command1"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command1"
 
-#: ../metadata/commands.xml.in.h:27
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:27
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command10"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command10"
 
-#: ../metadata/commands.xml.in.h:28
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:28
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command11"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command11"
 
-#: ../metadata/commands.xml.in.h:29
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:29
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command2"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command2"
 
-#: ../metadata/commands.xml.in.h:30
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:30
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command3"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command3"
 
-#: ../metadata/commands.xml.in.h:31
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:31
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command4"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command4"
 
-#: ../metadata/commands.xml.in.h:32
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:32
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command5"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command5"
 
-#: ../metadata/commands.xml.in.h:33
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:33
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command6"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command6"
 
-#: ../metadata/commands.xml.in.h:34
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:34
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command7"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command7"
 
-#: ../metadata/commands.xml.in.h:35
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:35
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command8"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command8"
 
-#: ../metadata/commands.xml.in.h:36
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:36
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Un'associazione di tasti che, quando invocata, esegue il comando della shell "
-"identificato da command9"
+"Un'associazione a un bordo che, quando invocata, esegue il comando della "
+"shell identificato da command9"
 
-#: ../metadata/commands.xml.in.h:37
+#: ../plugins/commands/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Assegna associazioni ai comandi"
 
-#: ../metadata/commands.xml.in.h:38
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:38
 msgid "Button Bindings"
 msgstr "Associazioni"
 
-#: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Riga di comando 0"
-
-#: ../metadata/commands.xml.in.h:40
+#: ../plugins/commands/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Riga di comando 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../plugins/commands/commands.xml.in.h:41
 msgid "Command line 10"
 msgstr "Riga di comando 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../plugins/commands/commands.xml.in.h:42
 msgid "Command line 11"
 msgstr "Riga di comando 11"
 
-#: ../metadata/commands.xml.in.h:43
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "Riga di comando 12"
+
+#: ../plugins/commands/commands.xml.in.h:43
 msgid "Command line 2"
 msgstr "Riga di comando 2"
 
-#: ../metadata/commands.xml.in.h:44
+#: ../plugins/commands/commands.xml.in.h:44
 msgid "Command line 3"
 msgstr "Riga di comando 3"
 
-#: ../metadata/commands.xml.in.h:45
+#: ../plugins/commands/commands.xml.in.h:45
 msgid "Command line 4"
 msgstr "Riga di comando 4"
 
-#: ../metadata/commands.xml.in.h:46
+#: ../plugins/commands/commands.xml.in.h:46
 msgid "Command line 5"
 msgstr "Riga di comando 5"
 
-#: ../metadata/commands.xml.in.h:47
+#: ../plugins/commands/commands.xml.in.h:47
 msgid "Command line 6"
 msgstr "Riga di comando 6"
 
-#: ../metadata/commands.xml.in.h:48
+#: ../plugins/commands/commands.xml.in.h:48
 msgid "Command line 7"
 msgstr "Riga di comando 7"
 
-#: ../metadata/commands.xml.in.h:49
+#: ../plugins/commands/commands.xml.in.h:49
 msgid "Command line 8"
 msgstr "Riga di comando 8"
 
-#: ../metadata/commands.xml.in.h:50
+#: ../plugins/commands/commands.xml.in.h:50
 msgid "Command line 9"
 msgstr "Riga di comando 9"
 
-#: ../metadata/commands.xml.in.h:51
+#: ../plugins/commands/commands.xml.in.h:51
 msgid "Command line to be executed in shell when run_command0 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command0"
 
-#: ../metadata/commands.xml.in.h:52
+#: ../plugins/commands/commands.xml.in.h:52
 msgid "Command line to be executed in shell when run_command1 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command1"
 
-#: ../metadata/commands.xml.in.h:53
+#: ../plugins/commands/commands.xml.in.h:53
 msgid "Command line to be executed in shell when run_command10 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command10"
 
-#: ../metadata/commands.xml.in.h:54
+#: ../plugins/commands/commands.xml.in.h:54
 msgid "Command line to be executed in shell when run_command11 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_comman11"
 
-#: ../metadata/commands.xml.in.h:55
+#: ../plugins/commands/commands.xml.in.h:55
 msgid "Command line to be executed in shell when run_command2 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command2"
 
-#: ../metadata/commands.xml.in.h:56
+#: ../plugins/commands/commands.xml.in.h:56
 msgid "Command line to be executed in shell when run_command3 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command3"
 
-#: ../metadata/commands.xml.in.h:57
+#: ../plugins/commands/commands.xml.in.h:57
 msgid "Command line to be executed in shell when run_command4 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command4"
 
-#: ../metadata/commands.xml.in.h:58
+#: ../plugins/commands/commands.xml.in.h:58
 msgid "Command line to be executed in shell when run_command5 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command5"
 
-#: ../metadata/commands.xml.in.h:59
+#: ../plugins/commands/commands.xml.in.h:59
 msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command6"
 
-#: ../metadata/commands.xml.in.h:60
+#: ../plugins/commands/commands.xml.in.h:60
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command7"
 
-#: ../metadata/commands.xml.in.h:61
+#: ../plugins/commands/commands.xml.in.h:61
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command8"
 
-#: ../metadata/commands.xml.in.h:62
+#: ../plugins/commands/commands.xml.in.h:62
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr ""
 "Riga di comando da eseguire nella shell quando viene invocato run_command9"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../plugins/commands/commands.xml.in.h:63
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:1
 msgid "Commands"
 msgstr "Comandi"
 
-#: ../metadata/commands.xml.in.h:64
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:64
 msgid "Edge Bindings"
-msgstr "Associazioni"
+msgstr "Associazioni ai bordi"
 
-#: ../metadata/commands.xml.in.h:65
-#, fuzzy
+#: ../plugins/commands/commands.xml.in.h:65
 msgid "Key Bindings"
 msgstr "Associazioni di tasti"
 
-#: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Esegui comando 0"
-
-#: ../metadata/commands.xml.in.h:67
+#: ../plugins/commands/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Esegui comando 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../plugins/commands/commands.xml.in.h:68
 msgid "Run command 10"
 msgstr "Esegui comando 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../plugins/commands/commands.xml.in.h:69
 msgid "Run command 11"
 msgstr "Esegui comando 11"
 
-#: ../metadata/commands.xml.in.h:70
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "Esegui comando 12"
+
+#: ../plugins/commands/commands.xml.in.h:70
 msgid "Run command 2"
 msgstr "Esegui comando 2"
 
-#: ../metadata/commands.xml.in.h:71
+#: ../plugins/commands/commands.xml.in.h:71
 msgid "Run command 3"
 msgstr "Esegui comando 3"
 
-#: ../metadata/commands.xml.in.h:72
+#: ../plugins/commands/commands.xml.in.h:72
 msgid "Run command 4"
 msgstr "Esegui comando 4"
 
-#: ../metadata/commands.xml.in.h:73
+#: ../plugins/commands/commands.xml.in.h:73
 msgid "Run command 5"
 msgstr "Esegui comando 5"
 
-#: ../metadata/commands.xml.in.h:74
+#: ../plugins/commands/commands.xml.in.h:74
 msgid "Run command 6"
 msgstr "Esegui comando 6"
 
-#: ../metadata/commands.xml.in.h:75
+#: ../plugins/commands/commands.xml.in.h:75
 msgid "Run command 7"
 msgstr "Esegui comando 7"
 
-#: ../metadata/commands.xml.in.h:76
+#: ../plugins/commands/commands.xml.in.h:76
 msgid "Run command 8"
 msgstr "Esegui comando 8"
 
-#: ../metadata/commands.xml.in.h:77
+#: ../plugins/commands/commands.xml.in.h:77
 msgid "Run command 9"
 msgstr "Esegui comando 9"
 
-#: ../metadata/core.xml.in.in.h:1
+#: ../metadata/core.xml.in.h:1
 msgid "Active Plugins"
-msgstr "Plug-in attivi"
+msgstr "Plugin attivi"
 
 # (ndt) io non la capisco come frase...
-#: ../metadata/core.xml.in.in.h:2
+#: ../plugins/composite/composite.xml.in.h:1
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
 "Consenti il disegno finestre a schermo intero di non essere reindirizzato a "
 "pixmap fuori schermo"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/core.xml.in.h:2
 msgid "Audible Bell"
 msgstr "Segnale acustico udibile"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/core.xml.in.h:3
 msgid "Audible system beep"
 msgstr "Suono di sistema udibile"
 
 # (ndt) non serve fare clic sulla finestra per sollevarla
 # non per darle il focus, solo per sollevarla
-#: ../metadata/core.xml.in.in.h:5
+#: ../metadata/core.xml.in.h:4
 msgid "Auto-Raise"
 msgstr "Sollevare automaticamente"
 
 # (ndt) non mi piace molto... ma andrebbe trovato anche di meglio
 # per quella sopra
-#: ../metadata/core.xml.in.in.h:6
+#: ../metadata/core.xml.in.h:5
 msgid "Auto-Raise Delay"
 msgstr "Ritardo solleva automaticamente"
 
-#: ../metadata/core.xml.in.in.h:7
+#: ../metadata/core.xml.in.h:6
 msgid "Automatic detection of output devices"
 msgstr "Rilevamento automatico dispositivi di output"
 
-#: ../metadata/core.xml.in.in.h:8
+#: ../plugins/composite/composite.xml.in.h:2
 msgid "Automatic detection of refresh rate"
 msgstr "Rilevamento automatico della frequenza di aggiornamento"
 
-#: ../metadata/core.xml.in.in.h:9
+#: ../plugins/opengl/opengl.xml.in.h:1
 msgid "Best"
 msgstr "Ottimo"
 
 # (ndt) opzione
-#: ../metadata/core.xml.in.in.h:10
+#: ../metadata/core.xml.in.h:7
 msgid "Click To Focus"
 msgstr "Fare clic per il focus"
 
-#: ../metadata/core.xml.in.in.h:11
+#: ../metadata/core.xml.in.h:8
 msgid "Click on window moves input focus to it"
 msgstr "Fare clic sulla finestra per spostare il focus su di essa"
 
-#: ../metadata/core.xml.in.in.h:13
+#: ../metadata/core.xml.in.h:10
 msgid "Close active window"
 msgstr "Chiude finestra attiva"
 
-#: ../metadata/core.xml.in.in.h:14
+#: ../metadata/core.xml.in.h:11
 msgid "Default Icon"
 msgstr "Icona predefinita"
 
 # (ndt) suggerimento
-#: ../metadata/core.xml.in.in.h:15
+#: ../metadata/core.xml.in.h:12
 msgid "Default window icon image"
 msgstr "Icona finestra predefinita"
 
@@ -1014,12 +982,12 @@ msgid "Desktop Size"
 msgstr "Dimensione desktop"
 
 # (ndt) opzione
-#: ../metadata/core.xml.in.in.h:17
+#: ../metadata/core.xml.in.h:13
 msgid "Detect Outputs"
 msgstr "Rilevare output"
 
 # (ndt) opzione
-#: ../metadata/core.xml.in.in.h:18
+#: ../plugins/composite/composite.xml.in.h:5
 msgid "Detect Refresh Rate"
 msgstr "Rilevare frequenza aggiornamento"
 
@@ -1029,7 +997,7 @@ msgstr "Rilevare frequenza aggiornamento"
 msgid "Display Settings"
 msgstr "Impostazioni visualizzazione"
 
-#: ../metadata/core.xml.in.in.h:20
+#: ../metadata/core.xml.in.h:14
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
@@ -1037,11 +1005,11 @@ msgstr ""
 "Tempo che il puntatore deve restare su un bordo dello schermo prima che "
 "venga eseguita un'azione."
 
-#: ../metadata/core.xml.in.in.h:21
+#: ../metadata/core.xml.in.h:15
 msgid "Edge Trigger Delay"
 msgstr "Ritardo azione bordo"
 
-#: ../metadata/core.xml.in.in.h:22
+#: ../plugins/opengl/opengl.xml.in.h:2
 msgid "Fast"
 msgstr "Veloce"
 
@@ -1050,78 +1018,79 @@ msgstr "Veloce"
 msgid "Focus &amp; Raise Behaviour"
 msgstr "Focus e comportamento sollevamento"
 
-#: ../metadata/core.xml.in.in.h:24
+#: ../metadata/core.xml.in.h:16
 msgid "Focus Prevention Level"
 msgstr "Livello di prevenzione del focus"
 
 # (ndt) non è molto chiara...
-#: ../metadata/core.xml.in.in.h:25
+#: ../metadata/core.xml.in.h:17
 msgid "Focus Prevention Windows"
 msgstr "Finestre che prevengono il focus"
 
-#: ../metadata/core.xml.in.in.h:26
+#: ../metadata/core.xml.in.h:18
 msgid "Focus prevention windows"
 msgstr "Tipi di finestre che prevengono il focus"
 
-#: ../metadata/core.xml.in.in.h:27
+# (ndt) è anche opzione
+#: ../plugins/composite/composite.xml.in.h:6
 msgid "Force independent output painting."
-msgstr "Forza la colorazione indipendente dell'output."
+msgstr "Forzare la colorazione indipendente dell'output"
 
-#: ../metadata/core.xml.in.in.h:28
+#: ../metadata/core.xml.in.h:19
 msgid "General Options"
 msgstr "Opzioni generali"
 
-#: ../metadata/core.xml.in.in.h:29
+#: ../metadata/core.xml.in.h:20
 msgid "General compiz options"
 msgstr "Opzioni generali di Compiz"
 
-#: ../metadata/core.xml.in.in.h:30
+#: ../plugins/opengl/opengl.xml.in.h:3
 msgid "Good"
 msgstr "Buono"
 
 # (ndt) originale poco chiara...
-#: ../metadata/core.xml.in.in.h:31
+#: ../metadata/core.xml.in.h:21
 msgid "Hide Skip Taskbar Windows"
 msgstr "Nascondi finestre della barra delle applicazioni di tralasciamento"
 
-#: ../metadata/core.xml.in.in.h:32
+#: ../metadata/core.xml.in.h:22
 msgid "Hide all windows and focus desktop"
 msgstr "Nasconde tutte le finestre e dà il focus alla scrivania"
 
-#: ../metadata/core.xml.in.in.h:33
+#: ../metadata/core.xml.in.h:23
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Nasconde le finestre non nella barra delle applicazioni durante "
 "l'attivazione della modalità di visualizzazione della scrivania"
 
-#: ../metadata/core.xml.in.in.h:34
+#: ../metadata/core.xml.in.h:24
 msgid "High"
 msgstr "Alto"
 
-#: ../metadata/core.xml.in.in.h:35
+#: ../metadata/core.xml.in.h:25
 msgid "Horizontal Virtual Size"
 msgstr "Dimensioni virtuali orizzontali"
 
-#: ../metadata/core.xml.in.in.h:36
+#: ../plugins/opengl/opengl.xml.in.h:4
 msgid "If available use compression for textures converted from images"
 msgstr ""
 "Se disponibile, usa la compressione per le texture convertite dalle immagini"
 
-#: ../metadata/core.xml.in.in.h:37
+#: ../metadata/core.xml.in.h:26
 msgid "Ignore Hints When Maximized"
 msgstr "Ignorare suggerimenti quando massimizzata"
 
-#: ../metadata/core.xml.in.in.h:38
+#: ../metadata/core.xml.in.h:27
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
 "Ignora i suggerimenti su aspetto e incremento dimensioni quando la finestra "
 "è massimizzata"
 
-#: ../metadata/core.xml.in.in.h:39
+#: ../metadata/core.xml.in.h:28
 msgid "Interval before raising selected windows"
 msgstr "Intervallo di tempo prima di sollevare le finestre selezionate"
 
-#: ../metadata/core.xml.in.in.h:40
+#: ../metadata/core.xml.in.h:29
 msgid "Interval between ping messages"
 msgstr "Intervallo tra i messaggi di ping"
 
@@ -1129,246 +1098,247 @@ msgstr "Intervallo tra i messaggi di ping"
 msgid "Key bindings"
 msgstr "Associazioni di tasti"
 
-#: ../metadata/core.xml.in.in.h:42
+#: ../metadata/core.xml.in.h:30
 msgid "Level of focus stealing prevention"
 msgstr "Livello di prevenzione del focus"
 
-#: ../metadata/core.xml.in.in.h:43
+#: ../plugins/opengl/opengl.xml.in.h:5
 msgid "Lighting"
 msgstr "Illuminazione"
 
-#: ../metadata/core.xml.in.in.h:44
+#: ../metadata/core.xml.in.h:31
 msgid "List of currently active plugins"
-msgstr "Elenco dei plug-in attualmente attivi"
+msgstr "Elenco dei plugin attualmente attivi"
 
-#: ../metadata/core.xml.in.in.h:45
+#: ../metadata/core.xml.in.h:32
 msgid "List of strings describing output devices"
 msgstr "Elenco di stringhe che descrivono i dispositivi di output"
 
-#: ../metadata/core.xml.in.in.h:46
+#: ../metadata/core.xml.in.h:33
 msgid "Low"
 msgstr "Basso"
 
-#: ../metadata/core.xml.in.in.h:47
+#: ../metadata/core.xml.in.h:34
 msgid "Lower Window"
 msgstr "Abbassa finestra"
 
-#: ../metadata/core.xml.in.in.h:48
+#: ../metadata/core.xml.in.h:35
 msgid "Lower window beneath other windows"
 msgstr "Abbassa la finestra sotto le altre"
 
-#: ../metadata/core.xml.in.in.h:50
+#: ../metadata/core.xml.in.h:37
 msgid "Maximize Window Horizontally"
 msgstr "Massimizza finestra in orizzontale"
 
-#: ../metadata/core.xml.in.in.h:51
+#: ../metadata/core.xml.in.h:38
 msgid "Maximize Window Vertically"
 msgstr "Massimizza finestra in verticale"
 
-#: ../metadata/core.xml.in.in.h:52
+#: ../metadata/core.xml.in.h:39
 msgid "Maximize active window"
 msgstr "Massimizza la finestra attiva"
 
-#: ../metadata/core.xml.in.in.h:53
+#: ../metadata/core.xml.in.h:40
 msgid "Maximize active window horizontally"
 msgstr "Massimizza la finestra attiva in orizzontale"
 
-#: ../metadata/core.xml.in.in.h:54
+#: ../metadata/core.xml.in.h:41
 msgid "Maximize active window vertically"
 msgstr "Massimizza la finestra attiva in verticale"
 
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.h:43
 msgid "Minimize active window"
 msgstr "Minimizza la finestra attiva"
 
-#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
+#: ../metadata/core.xml.in.h:44 ../plugins/resize/resize.xml.in.h:12
 msgid "Normal"
 msgstr "Normale"
 
 # (ndt) qui non scrivania perché si possono avere più scrivanie
 # intese come aree di lavoro su diversi desktop. Questo indica proprio
 # il numero di desktop virtuali
-#: ../metadata/core.xml.in.in.h:58
+#: ../metadata/core.xml.in.h:45
 msgid "Number of Desktops"
 msgstr "Numero di desktop"
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.h:46
 msgid "Number of virtual desktops"
 msgstr "Numero di desktop virtuali"
 
-#: ../metadata/core.xml.in.in.h:60
+#: ../metadata/core.xml.in.h:47
 msgid "Off"
 msgstr "Spento"
 
-#: ../metadata/core.xml.in.in.h:61
+#: ../plugins/opengl/opengl.xml.in.h:6
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Esegue aggiornamenti dello schermo solo durante periodo di cancellazione "
 "verticale"
 
-#: ../metadata/core.xml.in.in.h:62
+#: ../metadata/core.xml.in.h:48
 msgid "Outputs"
 msgstr "Output"
 
-#: ../metadata/core.xml.in.in.h:63
+#: ../metadata/core.xml.in.h:49
 msgid "Overlapping Output Handling"
 msgstr "Gestione output sovrapposto"
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../plugins/composite/composite.xml.in.h:7
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 "Colora ogni dispositivo di ouptut indipendentemente, anche se i dispositivi "
 "si sovrappongono"
 
-#: ../metadata/core.xml.in.in.h:65
+#: ../metadata/core.xml.in.h:50
 msgid "Ping Delay"
 msgstr "Ritardo ping"
 
-#: ../metadata/core.xml.in.in.h:66
+#: ../metadata/core.xml.in.h:51
 msgid "Prefer larger output"
 msgstr "Preferire output più grande"
 
-#: ../metadata/core.xml.in.in.h:67
+#: ../metadata/core.xml.in.h:52
 msgid "Prefer smaller output"
 msgstr "Preferire output più piccolo"
 
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.h:53
 msgid "Raise On Click"
 msgstr "Sollevare al clic"
 
-#: ../metadata/core.xml.in.in.h:69
+#: ../metadata/core.xml.in.h:54
 msgid "Raise Window"
 msgstr "Solleva finestra"
 
-#: ../metadata/core.xml.in.in.h:70
+#: ../metadata/core.xml.in.h:55
 msgid "Raise selected windows after interval"
 msgstr "Porta la finestra selezionata in primo piano dopo un intervallo"
 
-#: ../metadata/core.xml.in.in.h:71
+#: ../metadata/core.xml.in.h:56
 msgid "Raise window above other windows"
 msgstr "Solleva la finestra al di sopra delle altre finestre"
 
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.h:57
 msgid "Raise windows when clicked"
 msgstr "Solleva le finestre al clic"
 
-#: ../metadata/core.xml.in.in.h:73
+#: ../plugins/composite/composite.xml.in.h:8
 msgid "Refresh Rate"
 msgstr "Frequenza di aggiornamento"
 
 # (ndt) questo non è altro che un numero per indicare
 # quante aree di lavoro in orizzontale usare
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.h:58
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Moltiplicatore dimensione schermo per dimensioni virtuali orizzontali"
 
 # (ndt) questo invece indica quante aree di lavoro in verticale
 # usare: se il valore di prima è 4 e questo 2, si hanno in totale 8 aree di lavoro
 # su due file
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.h:59
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Moltiplicatore dimensione schermo per dimensioni virtuali verticali"
 
-#: ../metadata/core.xml.in.in.h:76
+#: ../metadata/core.xml.in.h:60
 msgid "Show Desktop"
 msgstr "Mostra scrivania"
 
-#: ../metadata/core.xml.in.in.h:77
+#: ../plugins/composite/composite.xml.in.h:9
 msgid "Slow Animations"
 msgstr "Animazioni lente"
 
-#: ../metadata/core.xml.in.in.h:78
+#: ../metadata/core.xml.in.h:61
 msgid "Smart mode"
 msgstr "Modalità intelligente"
 
-#: ../metadata/core.xml.in.in.h:79
+# (ndt) opzione in ccsm
+#: ../plugins/opengl/opengl.xml.in.h:9
 msgid "Sync To VBlank"
-msgstr "Sincronizza con VBlank"
+msgstr "Sincronizzare con VBlank"
 
-#: ../metadata/core.xml.in.in.h:80
+#: ../plugins/opengl/opengl.xml.in.h:10
 msgid "Texture Compression"
 msgstr "Compressione texture"
 
-#: ../metadata/core.xml.in.in.h:81
+#: ../plugins/opengl/opengl.xml.in.h:11
 msgid "Texture Filter"
 msgstr "Filtro texture"
 
 # (ndt) suggerimento della voce precedente
-#: ../metadata/core.xml.in.in.h:82
+#: ../plugins/opengl/opengl.xml.in.h:12
 msgid "Texture filtering"
 msgstr "Modalità di filtro texture"
 
-#: ../metadata/core.xml.in.in.h:83
+#: ../plugins/composite/composite.xml.in.h:10
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "La velocità di aggiornamento della schermata (volte/secondo)"
 
-#: ../metadata/core.xml.in.in.h:84
+#: ../metadata/core.xml.in.h:62
 msgid "Toggle Window Maximized"
 msgstr "Commuta finestra massimizzata"
 
-#: ../metadata/core.xml.in.in.h:85
+#: ../metadata/core.xml.in.h:63
 msgid "Toggle Window Maximized Horizontally"
 msgstr "Commuta finestra massimizzata in orizzontale"
 
-#: ../metadata/core.xml.in.in.h:86
+#: ../metadata/core.xml.in.h:64
 msgid "Toggle Window Maximized Vertically"
 msgstr "Commuta finestra massimizzata in verticale"
 
-#: ../metadata/core.xml.in.in.h:87
+#: ../metadata/core.xml.in.h:65
 msgid "Toggle Window Shaded"
 msgstr "Commuta finestra sfumata"
 
-#: ../metadata/core.xml.in.in.h:88
+#: ../metadata/core.xml.in.h:66
 msgid "Toggle active window maximized"
 msgstr "Commuta finestra attiva massimizzata"
 
-#: ../metadata/core.xml.in.in.h:89
+#: ../metadata/core.xml.in.h:67
 msgid "Toggle active window maximized horizontally"
 msgstr "Commuta finestra attiva massimizzata in orizzontale"
 
-#: ../metadata/core.xml.in.in.h:90
+#: ../metadata/core.xml.in.h:68
 msgid "Toggle active window maximized vertically"
 msgstr "Commuta finestra attiva massimizzata in verticale"
 
-#: ../metadata/core.xml.in.in.h:91
+#: ../metadata/core.xml.in.h:69
 msgid "Toggle active window shaded"
 msgstr "Commuta finestra attiva sfumata"
 
-#: ../metadata/core.xml.in.in.h:92
+#: ../plugins/composite/composite.xml.in.h:11
 msgid "Toggle use of slow animations"
 msgstr "Commuta l'uso di animazioni lente"
 
-#: ../metadata/core.xml.in.in.h:94
+#: ../metadata/core.xml.in.h:71
 msgid "Unmaximize active window"
 msgstr "Demassimizza finestra attiva"
 
 # (ndt) poco chiara
-#: ../metadata/core.xml.in.in.h:95
+#: ../plugins/composite/composite.xml.in.h:12
 msgid "Unredirect Fullscreen Windows"
 msgstr "Annullare re-indirizzamento finestre a schermo intero"
 
-#: ../metadata/core.xml.in.in.h:96
+#: ../plugins/opengl/opengl.xml.in.h:13
 msgid "Use diffuse light when screen is transformed"
 msgstr "Usa luce diffusa alla trasformazione della schermata"
 
 # (ndt) su quante righe mettere le aree di lavoro
-#: ../metadata/core.xml.in.in.h:97
+#: ../metadata/core.xml.in.h:72
 msgid "Vertical Virtual Size"
 msgstr "Dimensioni virtuali verticali"
 
-#: ../metadata/core.xml.in.in.h:98
+#: ../metadata/core.xml.in.h:73
 msgid "Very High"
 msgstr "Molto alto"
 
-#: ../metadata/core.xml.in.in.h:99
+#: ../metadata/core.xml.in.h:74
 msgid "Which one of overlapping output devices should be preferred"
 msgstr "Quale dei dispositivi di output sovrapposto deve essere preferito"
 
-#: ../metadata/core.xml.in.in.h:101
+#: ../metadata/core.xml.in.h:76
 msgid "Window menu button binding"
 msgstr "Associazione pulsante menù finestra"
 
-#: ../metadata/core.xml.in.in.h:102
+#: ../metadata/core.xml.in.h:77
 msgid "Window menu key binding"
 msgstr "Associazione tasto menù finestra"
 
@@ -1447,7 +1417,7 @@ msgstr "Velocità ripiegatura"
 msgid "Fold Timestep"
 msgstr "Intervallo ripiegatura"
 
-#: ../metadata/cube.xml.in.h:19 ../metadata/switcher.xml.in.h:11
+#: ../plugins/switcher/switcher.xml.in.h:10
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 "Genera mipmap quando possibile per migliorare la qualità di ridimensionamento"
@@ -1482,8 +1452,7 @@ msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
 "Elenco di file PNG e SVG da visualizzare sulla faccia superiore del cubo"
 
-#: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
-#: ../metadata/scale.xml.in.h:24
+#: ../plugins/place/place.xml.in.h:11 ../plugins/scale/scale.xml.in.h:17
 msgid "Multi Output Mode"
 msgstr "Modalità multi-output"
 
@@ -1559,15 +1528,13 @@ msgstr "Colore gradiente iniziale"
 msgid "Skydome Image"
 msgstr "Immagine volta del cielo"
 
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../plugins/scale/scale.xml.in.h:32 ../plugins/switcher/switcher.xml.in.h:35
+#: ../plugins/zoom/zoom.xml.in.h:3
 msgid "Speed"
 msgstr "Velocità"
 
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../plugins/scale/scale.xml.in.h:34 ../plugins/switcher/switcher.xml.in.h:39
+#: ../plugins/zoom/zoom.xml.in.h:4
 msgid "Timestep"
 msgstr "Intervallo"
 
@@ -1597,109 +1564,109 @@ msgstr "Dbus"
 msgid "Dbus Control Backend"
 msgstr "Backend controllo dbus"
 
-#: ../metadata/decoration.xml.in.h:1
+#: ../plugins/decor/decor.xml.in.h:1
 msgid "Allow mipmaps to be generated for decoration textures"
 msgstr "Consente la creazione di mipmap per le texture della decorazione"
 
-#: ../metadata/decoration.xml.in.h:2
+#: ../plugins/decor/decor.xml.in.h:2
 msgid "Command"
 msgstr "Comando"
 
-#: ../metadata/decoration.xml.in.h:3
+#: ../plugins/decor/decor.xml.in.h:3
 msgid "Decoration windows"
 msgstr "Finestre da decorare"
 
-#: ../metadata/decoration.xml.in.h:4
+#: ../plugins/decor/decor.xml.in.h:4
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 "Riga di comando strumento di decorazione eseguita se nessuna applicazione di "
 "decorazione è in esecuzione"
 
-#: ../metadata/decoration.xml.in.h:5
+#: ../plugins/decor/decor.xml.in.h:5
 msgid "Drop shadow X offset"
 msgstr "Offset X ombreggiatura esterna"
 
-#: ../metadata/decoration.xml.in.h:6
+#: ../plugins/decor/decor.xml.in.h:6
 msgid "Drop shadow Y offset"
 msgstr "Offset Y ombreggiatura esterna"
 
-#: ../metadata/decoration.xml.in.h:7
+#: ../plugins/decor/decor.xml.in.h:7
 msgid "Drop shadow color"
 msgstr "Colore ombreggiatura esterna"
 
-#: ../metadata/decoration.xml.in.h:8
+#: ../plugins/decor/decor.xml.in.h:8
 msgid "Drop shadow opacity"
 msgstr "Opacità ombreggiatura esterna"
 
-#: ../metadata/decoration.xml.in.h:9
+#: ../plugins/decor/decor.xml.in.h:9
 msgid "Drop shadow radius"
 msgstr "Raggio ombreggiatura esterna"
 
-#: ../metadata/decoration.xml.in.h:11
+#: ../plugins/decor/decor.xml.in.h:11
 msgid "Shadow Color"
 msgstr "Colore ombreggiatura"
 
-#: ../metadata/decoration.xml.in.h:12
+#: ../plugins/decor/decor.xml.in.h:12
 msgid "Shadow Offset X"
 msgstr "Offset X ombreggiatura"
 
-#: ../metadata/decoration.xml.in.h:13
+#: ../plugins/decor/decor.xml.in.h:13
 msgid "Shadow Offset Y"
 msgstr "Offset Y ombreggiatura"
 
-#: ../metadata/decoration.xml.in.h:14
+#: ../plugins/decor/decor.xml.in.h:14
 msgid "Shadow Opacity"
 msgstr "Opacità ombreggiatura"
 
-#: ../metadata/decoration.xml.in.h:15
+#: ../plugins/decor/decor.xml.in.h:15
 msgid "Shadow Radius"
 msgstr "Raggio ombreggiatura"
 
-#: ../metadata/decoration.xml.in.h:16
+#: ../plugins/decor/decor.xml.in.h:16
 msgid "Shadow windows"
 msgstr "Finestre con ombreggiatura"
 
-#: ../metadata/decoration.xml.in.h:17
+#: ../plugins/decor/decor.xml.in.h:17
 msgid "Window Decoration"
 msgstr "Decorazione finestra"
 
-#: ../metadata/decoration.xml.in.h:18
+#: ../plugins/decor/decor.xml.in.h:18
 msgid "Window decorations"
 msgstr "Decorazioni finestra"
 
-#: ../metadata/decoration.xml.in.h:19
+#: ../plugins/decor/decor.xml.in.h:19
 msgid "Windows that should be decorated"
 msgstr "Tipi di finestre da decorare"
 
-#: ../metadata/decoration.xml.in.h:20
+#: ../plugins/decor/decor.xml.in.h:20
 msgid "Windows that should have a shadow"
 msgstr "Tipi di finestre a cui applicare l'ombreggiatura"
 
-#: ../metadata/fade.xml.in.h:2
+#: ../plugins/fade/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Luminosità (in percentuale) delle finestre bloccate"
 
-#: ../metadata/fade.xml.in.h:3
+#: ../plugins/fade/fade.xml.in.h:3
 msgid "Constant speed"
 msgstr "Velocità costante"
 
-#: ../metadata/fade.xml.in.h:4
+#: ../plugins/fade/fade.xml.in.h:4
 msgid "Constant time"
 msgstr "Tempo costante"
 
-#: ../metadata/fade.xml.in.h:5
+#: ../plugins/fade/fade.xml.in.h:5
 msgid "Dim Unresponsive Windows"
 msgstr "Oscurare finestre bloccate"
 
-#: ../metadata/fade.xml.in.h:6
+#: ../plugins/fade/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
 "Oscurare le finestre che non rispondono alle richieste del gestore di "
 "finestre"
 
-#: ../metadata/fade.xml.in.h:7
+#: ../plugins/fade/fade.xml.in.h:7
 msgid "Fade Mode"
 msgstr "Modalità dissolvenza"
 
@@ -1707,11 +1674,11 @@ msgstr "Modalità dissolvenza"
 msgid "Fade On Minimize/Open/Close"
 msgstr "Dissolvere alla minimizzazione/apertura/chiusura"
 
-#: ../metadata/fade.xml.in.h:9
+#: ../plugins/fade/fade.xml.in.h:8
 msgid "Fade Speed"
 msgstr "Velocità dissolvenza"
 
-#: ../metadata/fade.xml.in.h:10
+#: ../plugins/fade/fade.xml.in.h:9
 msgid "Fade Time"
 msgstr "Tempo dissolvenza"
 
@@ -1721,50 +1688,50 @@ msgstr ""
 "Effetto dissolvenza agli eventi di minimizzazione/apertura/chiusura della "
 "finestra"
 
-#: ../metadata/fade.xml.in.h:12
+#: ../plugins/fade/fade.xml.in.h:10
 msgid "Fade effect on system beep"
 msgstr "Effetto dissolvenza al suono di sistema"
 
-#: ../metadata/fade.xml.in.h:13
+#: ../plugins/fade/fade.xml.in.h:11
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
 "Applica dissolvenza in entrata alle finestre quando associate e in uscita "
 "quando non associate"
 
-#: ../metadata/fade.xml.in.h:14
+#: ../plugins/fade/fade.xml.in.h:12
 msgid "Fade windows"
 msgstr "Finestre da dissolvere"
 
-#: ../metadata/fade.xml.in.h:15
+#: ../plugins/fade/fade.xml.in.h:13
 msgid "Fading Windows"
 msgstr "Finestre in dissolvenza"
 
-#: ../metadata/fade.xml.in.h:16
+#: ../plugins/fade/fade.xml.in.h:14
 msgid "Fullscreen Visual Bell"
 msgstr "Segnale visivo schermo intero"
 
-#: ../metadata/fade.xml.in.h:17
+#: ../plugins/fade/fade.xml.in.h:15
 msgid "Fullscreen fade effect on system beep"
 msgstr "Effetto dissolvenza schermo intero al suono di sistema"
 
-#: ../metadata/fade.xml.in.h:19
+#: ../plugins/fade/fade.xml.in.h:17
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Saturazione (in percentuale) delle finestre bloccate"
 
-#: ../metadata/fade.xml.in.h:20
+#: ../plugins/fade/fade.xml.in.h:18
 msgid "Unresponsive Window Brightness"
 msgstr "Luminosità finestre bloccate"
 
-#: ../metadata/fade.xml.in.h:21
+#: ../plugins/fade/fade.xml.in.h:19
 msgid "Unresponsive Window Saturation"
 msgstr "Saturazione finestre bloccate"
 
-#: ../metadata/fade.xml.in.h:22
+#: ../plugins/fade/fade.xml.in.h:20
 msgid "Visual Bell"
 msgstr "Segnale acustico visivo"
 
-#: ../metadata/fade.xml.in.h:23
+#: ../plugins/fade/fade.xml.in.h:21
 msgid "Window fade mode"
 msgstr "Modalità dissolvenza finestra"
 
@@ -1772,11 +1739,11 @@ msgstr "Modalità dissolvenza finestra"
 msgid "Window fade speed in \"Constant speed\" mode"
 msgstr "Velocità dissolvenza finestra nella modalità «Velocità costante»"
 
-#: ../metadata/fade.xml.in.h:25
+#: ../plugins/fade/fade.xml.in.h:23
 msgid "Window fade time (in ms) in \"Constant time\" mode"
 msgstr "Tempo (in ms) dissolvenza finestra nella modalità «Tempo costante»"
 
-#: ../metadata/fade.xml.in.h:26
+#: ../plugins/fade/fade.xml.in.h:24
 msgid "Windows that should be fading"
 msgstr "Tipi di finestre a cui applicare la dissolvenza"
 
@@ -1813,71 +1780,71 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "Supporto ciclo main GLib"
 
-#: ../metadata/gnomecompat.xml.in.h:2
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Compatibilità GNOME"
 
-#: ../metadata/gnomecompat.xml.in.h:3
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
 msgstr "Apre un terminale"
 
-#: ../metadata/gnomecompat.xml.in.h:4
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
-msgstr ""
+msgstr "Opzioni che mantengono Compiz compatibile con l'ambiente grafico GNOME"
 
-#: ../metadata/gnomecompat.xml.in.h:5
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Finestra di dialogo «Esegui applicazione»"
 
-#: ../metadata/gnomecompat.xml.in.h:6
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:6
 msgid "Run terminal command"
 msgstr "Comando esecuzione terminale"
 
-#: ../metadata/gnomecompat.xml.in.h:7
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:7
 msgid "Screenshot command line"
 msgstr "Riga di comando per cattura schermata"
 
-#: ../metadata/gnomecompat.xml.in.h:8
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:8
 msgid "Show Main Menu"
 msgstr "Mostra menù principale"
 
-#: ../metadata/gnomecompat.xml.in.h:9
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "Mostra finestra di dialogo «Esegui applicazione»"
 
-#: ../metadata/gnomecompat.xml.in.h:10
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:10
 msgid "Show the main menu"
 msgstr "Mostra il menù principale"
 
-#: ../metadata/gnomecompat.xml.in.h:11
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:11
 msgid "Take a screenshot"
 msgstr "Cattura schermata"
 
-#: ../metadata/gnomecompat.xml.in.h:12
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
 msgstr "Cattura un'istantanea di una finestra"
 
-#: ../metadata/gnomecompat.xml.in.h:13
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:13
 msgid "Terminal command line"
 msgstr "Riga di comando terminale"
 
-#: ../metadata/gnomecompat.xml.in.h:14
+#: ../plugins/gnomecompat/gnomecompat.xml.in.h:14
 msgid "Window screenshot command line"
 msgstr "Riga di comando cattura schermata finestra"
 
-#: ../metadata/ini.xml.in.h:1
+#: ../plugins/ini/ini.xml.in.h:1
 msgid "Ini"
 msgstr "Ini"
 
-#: ../metadata/ini.xml.in.h:2
+#: ../plugins/ini/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
 msgstr "Backend file ini"
 
-#: ../metadata/inotify.xml.in.h:1
+#: ../plugins/inotify/inotify.xml.in.h:1
 msgid "File change notification plugin"
-msgstr "Plug-in notifica cambiamento file"
+msgstr "Plugin notifica cambiamento file"
 
-#: ../metadata/inotify.xml.in.h:2
+#: ../plugins/inotify/inotify.xml.in.h:2
 msgid "Inotify"
 msgstr "Inotify"
 
@@ -1921,286 +1888,268 @@ msgstr "Trasforma le finestre quando vengono minimizzate e deminimizzate"
 msgid "Windows that should be transformed when minimized"
 msgstr "Tipi di finestre da trasformare quando minimizzate"
 
-#: ../metadata/move.xml.in.h:1
+#: ../plugins/move/move.xml.in.h:1
 msgid "Constrain Y"
 msgstr "Mantenere Y"
 
 # (ndt) suggerimento
-#: ../metadata/move.xml.in.h:2
+#: ../plugins/move/move.xml.in.h:2
 msgid "Constrain Y coordinate to workspace area"
 msgstr ""
 "Non consente di spostare le finestre oltre il bordo superiore e inferiore "
 "dello schermo "
 
-#: ../metadata/move.xml.in.h:3
+#: ../plugins/move/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Non aggiorna la posizione lato server delle finestre fino al termine del "
 "movimento"
 
-#: ../metadata/move.xml.in.h:4
+#: ../plugins/move/move.xml.in.h:4
 msgid "Initiate Window Move"
 msgstr "Inizializza muovi finestre"
 
-#: ../metadata/move.xml.in.h:5
+#: ../plugins/move/move.xml.in.h:5
 msgid "Lazy Positioning"
 msgstr "Posizionamento pigro"
 
-#: ../metadata/move.xml.in.h:6
+#: ../plugins/move/move.xml.in.h:6
 msgid "Move Window"
 msgstr "Muovi finestra"
 
-#: ../metadata/move.xml.in.h:7
+#: ../plugins/move/move.xml.in.h:7
 msgid "Move window"
 msgstr "Muove la finestra"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
-#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
+#: ../plugins/move/move.xml.in.h:8 ../plugins/scale/scale.xml.in.h:21
+#: ../plugins/switcher/switcher.xml.in.h:18
 msgid "Opacity"
 msgstr "Opacità"
 
-#: ../metadata/move.xml.in.h:9
+#: ../plugins/move/move.xml.in.h:9
 msgid "Opacity level of moving windows"
 msgstr "Livello di opacità delle finestre in movimento"
 
-#: ../metadata/move.xml.in.h:10
+#: ../plugins/move/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Sgancia e demassimizza le finestre massimizzate nel trascinamento"
 
-#: ../metadata/move.xml.in.h:11
+#: ../plugins/move/move.xml.in.h:11
 msgid "Snapoff maximized windows"
 msgstr "Sganciare finestre massimizzate"
 
-#: ../metadata/move.xml.in.h:12
+#: ../plugins/move/move.xml.in.h:12
 msgid "Start moving window"
 msgstr "Avvia finestra in movimento"
 
-#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
+#: ../plugins/switcher/switcher.xml.in.h:6
 msgid "Brightness"
 msgstr "Luminosità"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Luminosità"
+msgstr "Riduzione luminosità"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Luminosità"
+msgstr "Aumento luminosità"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Luminosità"
+msgstr "Passo luminosità"
 
 #: ../metadata/obs.xml.in.h:5
-#, fuzzy
 msgid "Brightness values for windows"
-msgstr "Luminosità (in percentuale) delle finestre bloccate"
+msgstr "Valori di luminosità per le finestre"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "Riduci opacità"
+msgstr "Riduci"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "Aumenta opacità"
+msgstr "Aumenta"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Passo di modifica dell'opacità"
+msgstr "Riduzione opacità"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Passo di modifica dell'opacità"
+msgstr "Aumento opacità"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
 msgstr "Passo opacità"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Livello di opacità delle finestre in movimento"
+msgstr "Valori di opacità per le finestre"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "Opacità durante la rotazione"
+msgstr "Opacità, luminosità e saturazione"
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Regolazioni di opacità, luminosità e saturazione"
 
-#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+#: ../plugins/switcher/switcher.xml.in.h:28
 msgid "Saturation"
 msgstr "Saturazione"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Saturazione"
+msgstr "Riduzione saturazione"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Saturazione"
+msgstr "Aumento saturazione"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Saturazione"
+msgstr "Passo saturazione"
 
 #: ../metadata/obs.xml.in.h:19
-#, fuzzy
 msgid "Saturation values for windows"
-msgstr "Saturazione (in percentuale) delle finestre bloccate"
+msgstr "Valori di saturazione per le finestre"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Passo"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "Decorazioni finestra"
+msgstr "Impostazioni specifiche della finestra"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "Valori opacità finestra"
+msgstr "Valori finestra"
 
-#: ../metadata/obs.xml.in.h:23
-#, fuzzy
+#: ../plugins/place/place.xml.in.h:27
 msgid "Windows"
-msgstr "Finestre da associare"
+msgstr "Finestre"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "Tipi di finestre da posizionare in modo predefinito"
+msgstr ""
+"Finestre che dovrebbero avere una luminosità diversa in modo predefinito"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "Finestre che dovrebbero essere traslucide in modo predefinito"
+msgstr "Finestre che dovrebbero avere una opacità diversa in modo predefinito"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "Tipi di finestre da posizionare in modo predefinito"
+msgstr ""
+"Finestre che dovrebbero avere una saturazione diversa in modo predefinito"
 
-#: ../metadata/place.xml.in.h:1
+#: ../plugins/place/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
 msgstr "Algoritmo da usare per il posizionamento della finestra"
 
-#: ../metadata/place.xml.in.h:2
+#: ../plugins/place/place.xml.in.h:2
 msgid "Cascade"
 msgstr "Cascata"
 
-#: ../metadata/place.xml.in.h:3
+#: ../plugins/place/place.xml.in.h:3
 msgid "Centered"
 msgstr "Centrato"
 
-#: ../metadata/place.xml.in.h:4
+#: ../plugins/place/place.xml.in.h:4
 msgid "Fixed Window Placement"
 msgstr "Posizionamento finestre fisso"
 
-#: ../metadata/place.xml.in.h:5
+#: ../plugins/place/place.xml.in.h:5
 msgid "Force Placement Windows"
 msgstr "Posizionamento finestre forzato"
 
-#: ../metadata/place.xml.in.h:6
+#: ../plugins/place/place.xml.in.h:6
 msgid "Horizontal viewport positions"
-msgstr "Posizioni orizzontali area di lavoro"
+msgstr "Posizioni orizzontali area visibile"
 
-#: ../metadata/place.xml.in.h:7
+#: ../plugins/place/place.xml.in.h:7
 msgid "Keep In Workarea"
-msgstr "Mantenere nell'area di lavoro"
+msgstr "Mantenere nello spazio di lavoro"
 
-#: ../metadata/place.xml.in.h:8
+#: ../plugins/place/place.xml.in.h:8
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-"Mantiene le finestre posizione nell'area di lavoro, anche se ciò significa "
-"che la posizione possa differire da quella specificata."
+"Mantiene le finestre in posizione nello spazio lavoro, anche se ciò "
+"significa che la posizione può differire da quella specificata."
 
-#: ../metadata/place.xml.in.h:11
+#: ../plugins/place/place.xml.in.h:12
 msgid "Place Windows"
 msgstr "Posiziona finestre"
 
-#: ../metadata/place.xml.in.h:12
+#: ../plugins/place/place.xml.in.h:13
 msgid "Place across all outputs"
 msgstr "Posizionare le finestre tra tutti gli output"
 
-#: ../metadata/place.xml.in.h:13
+#: ../plugins/place/place.xml.in.h:14
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Posiziona le finestre in maniera appropriata quando sono associate"
 
-#: ../metadata/place.xml.in.h:14
+#: ../plugins/place/place.xml.in.h:15
 msgid "Placement Mode"
 msgstr "Modalità di posizionamento"
 
-#: ../metadata/place.xml.in.h:15
+#: ../plugins/place/place.xml.in.h:16
 msgid "Positioned windows"
 msgstr "Finestre da posizionare"
 
-#: ../metadata/place.xml.in.h:16
+#: ../plugins/place/place.xml.in.h:18
 msgid "Random"
 msgstr "Casuale"
 
-#: ../metadata/place.xml.in.h:17
+#: ../plugins/place/place.xml.in.h:19
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 "Seleziona il comportamento del posizionamento delle finestre se sono "
 "selezionati molteplici output"
 
-#: ../metadata/place.xml.in.h:18
+#: ../plugins/place/place.xml.in.h:20
 msgid "Smart"
 msgstr "Intelligente"
 
-#: ../metadata/place.xml.in.h:19
+#: ../plugins/place/place.xml.in.h:21
 msgid "Use active output device"
 msgstr "Usare dispositivo di output attivo"
 
-#: ../metadata/place.xml.in.h:20
+#: ../plugins/place/place.xml.in.h:22
 msgid "Use output device of focussed window"
 msgstr "Usare dispositivo di output della finestra col focus"
 
-#: ../metadata/place.xml.in.h:21
+#: ../plugins/place/place.xml.in.h:23
 msgid "Use output device with pointer"
 msgstr "Usare dispositivo di output con puntatore"
 
-#: ../metadata/place.xml.in.h:22
+#: ../plugins/place/place.xml.in.h:24
 msgid "Vertical viewport positions"
-msgstr "Posizioni verticali area di lavoro"
+msgstr "Posizioni verticali area visibile"
 
-#: ../metadata/place.xml.in.h:23
+#: ../plugins/place/place.xml.in.h:25
 msgid "Viewport positioned windows"
-msgstr "Finestre posizionate in area di lavoro"
+msgstr "Finestre posizionate in area visibile"
 
-#: ../metadata/place.xml.in.h:24
+#: ../plugins/place/place.xml.in.h:26
 msgid "Window placement workarounds"
 msgstr "Alternative posizionamento finestre"
 
-#: ../metadata/place.xml.in.h:25
+#: ../plugins/place/place.xml.in.h:28
 msgid "Windows that should be positioned by default"
 msgstr "Tipi di finestre da posizionare in modo predefinito"
 
-#: ../metadata/place.xml.in.h:26
+#: ../plugins/place/place.xml.in.h:29
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
-"Tipi di finestre da posizionare in un'area di lavoro specifica in modo "
+"Tipi di finestre da posizionare in un'area visibile specifica in modo "
 "predefinito"
 
-#: ../metadata/place.xml.in.h:27
+#: ../plugins/place/place.xml.in.h:30
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
@@ -2212,52 +2161,52 @@ msgstr ""
 msgid "Windows with fixed positions"
 msgstr "Finestre con posizioni fisse"
 
-#: ../metadata/place.xml.in.h:29
+#: ../plugins/place/place.xml.in.h:34
 msgid "Windows with fixed viewport"
-msgstr "Finestre con area di lavoro fissa"
+msgstr "Finestre con area visibile fissa"
 
-#: ../metadata/place.xml.in.h:30
+#: ../plugins/place/place.xml.in.h:35
 msgid "Workarounds"
 msgstr "Alternative"
 
-#: ../metadata/place.xml.in.h:31
+#: ../plugins/place/place.xml.in.h:36
 msgid "X Positions"
 msgstr "Posizioni X"
 
-#: ../metadata/place.xml.in.h:32
+#: ../plugins/place/place.xml.in.h:37
 msgid "X Viewport Positions"
-msgstr "Posizioni X area di lavoro"
+msgstr "Posizioni X area visibile"
 
-#: ../metadata/place.xml.in.h:33
+#: ../plugins/place/place.xml.in.h:38
 msgid "X position values"
 msgstr "Valori posizione X"
 
-#: ../metadata/place.xml.in.h:34
+#: ../plugins/place/place.xml.in.h:39
 msgid "Y Positions"
 msgstr "Posizioni Y"
 
-#: ../metadata/place.xml.in.h:35
+#: ../plugins/place/place.xml.in.h:40
 msgid "Y Viewport Positions"
-msgstr "Posizioni Y area di lavoro"
+msgstr "Posizioni Y area visibile"
 
-#: ../metadata/place.xml.in.h:36
+#: ../plugins/place/place.xml.in.h:41
 msgid "Y position values"
 msgstr "Valori posizione Y"
 
 # (ndt) è più comune vedere PNG piuttosto che Png
-#: ../metadata/png.xml.in.h:1
+#: ../plugins/imgpng/imgpng.xml.in.h:1
 msgid "Png"
 msgstr "PNG"
 
-#: ../metadata/png.xml.in.h:2
+#: ../plugins/imgpng/imgpng.xml.in.h:2
 msgid "Png image loader"
 msgstr "Caricatore immagini PNG"
 
-#: ../metadata/regex.xml.in.h:1
+#: ../plugins/regex/regex.xml.in.h:1
 msgid "Regex Matching"
 msgstr "Corrispondenza espressione regolare"
 
-#: ../metadata/regex.xml.in.h:2
+#: ../plugins/regex/regex.xml.in.h:2
 msgid "Regex window matching"
 msgstr "Riconosce le finestre usando le espressioni regolari"
 
@@ -2266,120 +2215,120 @@ msgstr "Riconosce le finestre usando le espressioni regolari"
 msgid "Bindings"
 msgstr "Associazioni"
 
-#: ../metadata/resize.xml.in.h:2
+#: ../plugins/resize/resize.xml.in.h:1
 msgid "Border Color"
 msgstr "Colore bordo"
 
-#: ../metadata/resize.xml.in.h:3
+#: ../plugins/resize/resize.xml.in.h:2
 msgid "Border color used for outline and rectangle resize modes"
 msgstr ""
 "Colore bordo usato nelle modalità di ridimensionamento «Sagoma» e «Rettangolo»"
 
-#: ../metadata/resize.xml.in.h:4
+#: ../plugins/resize/resize.xml.in.h:3
 msgid "Default Resize Mode"
 msgstr "Modalità ridimensionamento predefinita"
 
-#: ../metadata/resize.xml.in.h:5
+#: ../plugins/resize/resize.xml.in.h:4
 msgid "Default mode used for window resizing"
 msgstr "Modalità predefinita per il ridimensionamento delle finestre"
 
-#: ../metadata/resize.xml.in.h:6
+#: ../plugins/resize/resize.xml.in.h:5
 msgid "Fill Color"
 msgstr "Colore riempimento"
 
-#: ../metadata/resize.xml.in.h:7
+#: ../plugins/resize/resize.xml.in.h:6
 msgid "Fill color used for rectangle resize mode"
 msgstr "Colore del riempimento nella modalità di ridimensionamento «Rettangolo»"
 
-#: ../metadata/resize.xml.in.h:8
+#: ../plugins/resize/resize.xml.in.h:7
 msgid "Initiate Normal Window Resize"
 msgstr "Inizializza ridimensionamento «Normale»"
 
-#: ../metadata/resize.xml.in.h:9
+#: ../plugins/resize/resize.xml.in.h:8
 msgid "Initiate Outline Window Resize"
 msgstr "Inizializza ridimensionamento «Sagoma»"
 
-#: ../metadata/resize.xml.in.h:10
+#: ../plugins/resize/resize.xml.in.h:9
 msgid "Initiate Rectangle Window Resize"
 msgstr "Inizializza ridimensionamento «Rettangolo»"
 
-#: ../metadata/resize.xml.in.h:11
+#: ../plugins/resize/resize.xml.in.h:10
 msgid "Initiate Stretch Window Resize"
 msgstr "Inizializza ridimensionamento «Elastico»"
 
-#: ../metadata/resize.xml.in.h:12
+#: ../plugins/resize/resize.xml.in.h:11
 msgid "Initiate Window Resize"
 msgstr "Inizializza ridimensionamento finestre"
 
-#: ../metadata/resize.xml.in.h:14
+#: ../plugins/resize/resize.xml.in.h:13
 msgid "Normal Resize Windows"
 msgstr "Ridimensionamento finestre normale"
 
-#: ../metadata/resize.xml.in.h:15
+#: ../plugins/resize/resize.xml.in.h:14
 msgid "Outline"
 msgstr "Sagoma"
 
-#: ../metadata/resize.xml.in.h:16
+#: ../plugins/resize/resize.xml.in.h:15
 msgid "Outline Resize Windows"
 msgstr "Ridimensionamento finestre sagoma"
 
-#: ../metadata/resize.xml.in.h:17
+#: ../plugins/resize/resize.xml.in.h:16
 msgid "Rectangle"
 msgstr "Rettangolo"
 
-#: ../metadata/resize.xml.in.h:18
+#: ../plugins/resize/resize.xml.in.h:17
 msgid "Rectangle Resize Windows"
 msgstr "Ridimensionamento finestre rettangolo"
 
-#: ../metadata/resize.xml.in.h:19
+#: ../plugins/resize/resize.xml.in.h:18
 msgid "Resize Window"
 msgstr "Ridimensiona finestre"
 
-#: ../metadata/resize.xml.in.h:20
+#: ../plugins/resize/resize.xml.in.h:19
 msgid "Resize window"
 msgstr "Ridimensiona le finestre"
 
-#: ../metadata/resize.xml.in.h:21
+#: ../plugins/resize/resize.xml.in.h:20
 msgid "Start resizing window"
 msgstr "Avvia il ridimensionamento della finestra"
 
-#: ../metadata/resize.xml.in.h:22
+#: ../plugins/resize/resize.xml.in.h:21
 msgid "Start resizing window by stretching it"
 msgstr "Avvia il ridimensionamento delle finestre stiracchiandole"
 
-#: ../metadata/resize.xml.in.h:23
+#: ../plugins/resize/resize.xml.in.h:22
 msgid "Start resizing window normally"
 msgstr "Avvia il ridimensionamento normale delle finestre"
 
-#: ../metadata/resize.xml.in.h:24
+#: ../plugins/resize/resize.xml.in.h:23
 msgid "Start resizing window with outline"
 msgstr "Avvia il ridimensionamento delle finestre attraverso la sagoma"
 
-#: ../metadata/resize.xml.in.h:25
+#: ../plugins/resize/resize.xml.in.h:24
 msgid "Start resizing window with rectangle"
 msgstr "Avvia il ridimensionamento delle finestre attraverso il rettangolo"
 
-#: ../metadata/resize.xml.in.h:26
+#: ../plugins/resize/resize.xml.in.h:25
 msgid "Stretch"
 msgstr "Elastico"
 
-#: ../metadata/resize.xml.in.h:27
+#: ../plugins/resize/resize.xml.in.h:26
 msgid "Stretch Resize Windows"
 msgstr "Ridimensionamento finestre elastico"
 
-#: ../metadata/resize.xml.in.h:28
+#: ../plugins/resize/resize.xml.in.h:27
 msgid "Windows that normal resize should be used for"
 msgstr "Tipi di finestre a cui applicare il ridimensionamento «Normale»"
 
-#: ../metadata/resize.xml.in.h:29
+#: ../plugins/resize/resize.xml.in.h:28
 msgid "Windows that outline resize should be used for"
 msgstr "Tipi di finestre a cui applicare il ridimensionamento «Sagoma»"
 
-#: ../metadata/resize.xml.in.h:30
+#: ../plugins/resize/resize.xml.in.h:29
 msgid "Windows that rectangle resize should be used for"
 msgstr "Tipi di finestre a cui applicare il ridimensionamento «Rettangolo»"
 
-#: ../metadata/resize.xml.in.h:31
+#: ../plugins/resize/resize.xml.in.h:30
 msgid "Windows that stretch resize should be used for"
 msgstr "Tipi di finestre a cui applicare il ridimensionamento «Elastico»"
 
@@ -2405,26 +2354,26 @@ msgstr "Tempo scorrimento"
 # (ndt) praticamente sposta il puntatore sul bordo di destra
 #: ../metadata/rotate.xml.in.h:7
 msgid "Flip to left viewport and warp pointer"
-msgstr "Ruota verso l'area di lavoro a sinistra e sposta il puntatore"
+msgstr "Ruota verso l'area visibile a sinistra e sposta il puntatore"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr ""
-"Ruota verso l'area di lavoro successiva trascinando un oggetto sul bordo"
+"Ruota verso l'area visibile successiva trascinando un oggetto sul bordo"
 
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
-"Ruota verso l'area di lavoro successiva spostando il puntatore sul bordo"
+"Ruota verso l'area visibile successiva spostando il puntatore sul bordo"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
-"Ruota verso l'area di lavoro successiva spostando una finestra sul bordo"
+"Ruota verso l'area visibile successiva spostando una finestra sul bordo"
 
 #: ../metadata/rotate.xml.in.h:11
 msgid "Flip to right viewport and warp pointer"
-msgstr "Ruota verso l'area di lavoro a destra e sposta il puntatore"
+msgstr "Ruota verso l'area visibile a destra e sposta il puntatore"
 
 #: ../metadata/rotate.xml.in.h:13
 msgid "Invert Y axis for pointer movement"
@@ -2705,7 +2654,7 @@ msgstr "Ruota verso la faccia 9 insieme alla finestra attiva"
 
 #: ../metadata/rotate.xml.in.h:82
 msgid "Rotate to viewport"
-msgstr "Ruota verso area di lavoro"
+msgstr "Ruota verso area visibile"
 
 #: ../metadata/rotate.xml.in.h:83
 msgid "Rotate window"
@@ -2757,17 +2706,17 @@ msgstr "Avvia rotazione"
 
 #: ../metadata/rotate.xml.in.h:96
 msgid "Timeout before flipping viewport"
-msgstr "Timeout prima di scorrere l'area di lavoro"
+msgstr "Tempo massimo prima di scorrere l'area visibile"
 
-#: ../metadata/rotate.xml.in.h:98 ../metadata/switcher.xml.in.h:42
+#: ../plugins/switcher/switcher.xml.in.h:41
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
+#: ../plugins/scale/scale.xml.in.h:1 ../plugins/switcher/switcher.xml.in.h:2
 msgid "Amount of opacity in percent"
 msgstr "Quantità di opacità in percentuale"
 
-#: ../metadata/scale.xml.in.h:4
+#: ../plugins/scale/scale.xml.in.h:2
 msgid "Big"
 msgstr "Grande"
 
@@ -2784,45 +2733,45 @@ msgstr ""
 "Associazioni pulsante per la commutazione della modalità «Scala finestre» "
 "invece di abilitarla quando premuto e disabilitarla quando rilasciato."
 
-#: ../metadata/scale.xml.in.h:8
+#: ../plugins/scale/scale.xml.in.h:3
 msgid "Click Desktop to Show Desktop"
 msgstr "Fare clic sulla scrivania per mostrarla"
 
-#: ../metadata/scale.xml.in.h:9
+#: ../plugins/scale/scale.xml.in.h:4
 msgid "Darken Background"
 msgstr "Scurire lo sfondo"
 
-#: ../metadata/scale.xml.in.h:10
+#: ../plugins/scale/scale.xml.in.h:5
 msgid "Darken background when scaling windows"
 msgstr "Scurisce lo sfondo durante il ridimensionamento delle finestre"
 
-#: ../metadata/scale.xml.in.h:11
+#: ../plugins/scale/scale.xml.in.h:6
 msgid "Emblem"
 msgstr "Simbolo"
 
-#: ../metadata/scale.xml.in.h:12
+#: ../plugins/scale/scale.xml.in.h:7
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
 "Entra nella modalità «Mostra scrivania» quando viene fatto clic sulla "
 "scrivania durante «Scala finestre»"
 
-#: ../metadata/scale.xml.in.h:13
+#: ../plugins/scale/scale.xml.in.h:8
 msgid "Hover Time"
 msgstr "Tempo passaggio del mouse"
 
-#: ../metadata/scale.xml.in.h:14
+#: ../plugins/scale/scale.xml.in.h:9
 msgid "Initiate Window Picker"
 msgstr "Avvia il selettore finestre"
 
-#: ../metadata/scale.xml.in.h:15
+#: ../plugins/scale/scale.xml.in.h:10
 msgid "Initiate Window Picker For All Windows"
 msgstr "Avvia selettore finestre per tutte le finestre"
 
-#: ../metadata/scale.xml.in.h:16
+#: ../plugins/scale/scale.xml.in.h:11
 msgid "Initiate Window Picker For Window Group"
 msgstr "Avvia selettore finestre per gruppo di finestre"
 
-#: ../metadata/scale.xml.in.h:17
+#: ../plugins/scale/scale.xml.in.h:12
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "Avvia selettore finestre per finestre in output corrente"
 
@@ -2838,79 +2787,79 @@ msgstr ""
 "Associazioni tasto per la commutazione della modalità «Scala finestre» invece "
 "di abilitarla quando premuto e disabilitarla quando rilasciato."
 
-#: ../metadata/scale.xml.in.h:20
+#: ../plugins/scale/scale.xml.in.h:13
 msgid "Layout and start transforming all windows"
 msgstr "Dispone e avvia la trasformazione di tutte le finestre"
 
-#: ../metadata/scale.xml.in.h:21
+#: ../plugins/scale/scale.xml.in.h:14
 msgid "Layout and start transforming window group"
 msgstr "Dispone e avvia la trasformazione del gruppo di finestre"
 
-#: ../metadata/scale.xml.in.h:22
+#: ../plugins/scale/scale.xml.in.h:15
 msgid "Layout and start transforming windows"
 msgstr "Dispone e avvia trasformazione finestre"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../plugins/scale/scale.xml.in.h:16
 msgid "Layout and start transforming windows on current output"
 msgstr "Dispone e avvia la trasformazione delle finestre nell'output corrente"
 
-#: ../metadata/scale.xml.in.h:26
+#: ../plugins/scale/scale.xml.in.h:19
 msgid "On all output devices"
 msgstr "Su tutti i dispositivi di output"
 
-#: ../metadata/scale.xml.in.h:27
+#: ../plugins/scale/scale.xml.in.h:20
 msgid "On current output device"
 msgstr "Sul dispositivo corrente"
 
-#: ../metadata/scale.xml.in.h:29
+#: ../plugins/scale/scale.xml.in.h:22
 msgid "Overlay Icon"
 msgstr "Icona di sovrapposizione"
 
-#: ../metadata/scale.xml.in.h:30
+#: ../plugins/scale/scale.xml.in.h:23
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "Sovrappone un'icona alle finestre dopo che sono state ridimensionate"
 
-#: ../metadata/scale.xml.in.h:31
+#: ../plugins/scale/scale.xml.in.h:24
 msgid "Scale"
 msgstr "Scala finestra"
 
-#: ../metadata/scale.xml.in.h:32
+#: ../plugins/scale/scale.xml.in.h:25
 msgid "Scale Windows"
 msgstr "Ridimensiona finestre"
 
-#: ../metadata/scale.xml.in.h:33
+#: ../plugins/scale/scale.xml.in.h:26
 msgid "Scale speed"
 msgstr "Velocità scala"
 
-#: ../metadata/scale.xml.in.h:34
+#: ../plugins/scale/scale.xml.in.h:27
 msgid "Scale timestep"
 msgstr "Intervallo scala"
 
-#: ../metadata/scale.xml.in.h:35
+#: ../plugins/scale/scale.xml.in.h:28
 msgid "Scale windows"
 msgstr "Ridimensiona le finestre"
 
-#: ../metadata/scale.xml.in.h:36
+#: ../plugins/scale/scale.xml.in.h:29
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "Indica dove scalare le finestre se sono utilizzati più dispositivi di output."
 
-#: ../metadata/scale.xml.in.h:37
+#: ../plugins/scale/scale.xml.in.h:30
 msgid "Space between windows"
 msgstr "Spazio tra le finestre"
 
-#: ../metadata/scale.xml.in.h:38
+#: ../plugins/scale/scale.xml.in.h:31
 msgid "Spacing"
 msgstr "Spaziatura"
 
-#: ../metadata/scale.xml.in.h:40
+#: ../plugins/scale/scale.xml.in.h:33
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Tempo (in ms) prima che la modalità di scala venga terminata al passaggio "
 "del mouse su una finestra"
 
-#: ../metadata/scale.xml.in.h:42
+#: ../plugins/scale/scale.xml.in.h:35
 msgid "Windows that should be scaled in scale mode"
 msgstr "Tipi di finestre da ridimensionare nella modalità «Scala finestra»"
 
@@ -2943,148 +2892,148 @@ msgstr "Cattura schermate"
 
 #: ../metadata/screenshot.xml.in.h:8
 msgid "Screenshot plugin"
-msgstr "Plug-in per catturare schermate"
+msgstr "Plugin per catturare schermate"
 
 # (ndt) anche qui... è più noto SVG che Svg
-#: ../metadata/svg.xml.in.h:1
+#: ../plugins/imgsvg/imgsvg.xml.in.h:3
 msgid "Svg"
 msgstr "SVG"
 
-#: ../metadata/svg.xml.in.h:2
+#: ../plugins/imgsvg/imgsvg.xml.in.h:4
 msgid "Svg image loader"
 msgstr "Caricatore immagini SVG"
 
-#: ../metadata/switcher.xml.in.h:1
+#: ../plugins/switcher/switcher.xml.in.h:1
 msgid "Amount of brightness in percent"
 msgstr "Quantità di luminosità in percentuale"
 
-#: ../metadata/switcher.xml.in.h:3
+#: ../plugins/switcher/switcher.xml.in.h:3
 msgid "Amount of saturation in percent"
 msgstr "Quantità di saturazione in percentuale"
 
-#: ../metadata/switcher.xml.in.h:4
+#: ../plugins/switcher/switcher.xml.in.h:4
 msgid "Application Switcher"
 msgstr "Selettore applicazioni"
 
-#: ../metadata/switcher.xml.in.h:5
+#: ../plugins/switcher/switcher.xml.in.h:5
 msgid "Auto Rotate"
 msgstr "Rotazione automatica"
 
-#: ../metadata/switcher.xml.in.h:8
+#: ../plugins/switcher/switcher.xml.in.h:7
 msgid "Bring To Front"
 msgstr "Portare in primo piano"
 
-#: ../metadata/switcher.xml.in.h:9
+#: ../plugins/switcher/switcher.xml.in.h:8
 msgid "Bring selected window to front"
 msgstr "Porta la finestra selezionata in primo piano"
 
 # (ndt) indica un fattore di rimpicciolimento
-#: ../metadata/switcher.xml.in.h:10
+#: ../plugins/switcher/switcher.xml.in.h:9
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr "Distanza a cui spostare il desktop durante la selezione delle finestre"
 
-#: ../metadata/switcher.xml.in.h:12
+#: ../plugins/switcher/switcher.xml.in.h:11
 msgid "Icon"
 msgstr "Icona"
 
-#: ../metadata/switcher.xml.in.h:13
+#: ../plugins/switcher/switcher.xml.in.h:12
 msgid "Minimized"
 msgstr "Minimizzare"
 
-#: ../metadata/switcher.xml.in.h:15
+#: ../plugins/switcher/switcher.xml.in.h:14
 msgid "Next Panel"
 msgstr "Pannello successivo"
 
-#: ../metadata/switcher.xml.in.h:16
+#: ../plugins/switcher/switcher.xml.in.h:15
 msgid "Next window"
 msgstr "Finestra successiva"
 
-#: ../metadata/switcher.xml.in.h:17
+#: ../plugins/switcher/switcher.xml.in.h:16
 msgid "Next window (All windows)"
 msgstr "Finestra successiva (tutte le finestre)"
 
-#: ../metadata/switcher.xml.in.h:18
+#: ../plugins/switcher/switcher.xml.in.h:17
 msgid "Next window (No popup)"
 msgstr "Finestra successiva (nessun pop-up)"
 
-#: ../metadata/switcher.xml.in.h:20
+#: ../plugins/switcher/switcher.xml.in.h:19
 msgid "Popup switcher if not visible and select next window"
 msgstr "Mostra il selettore se non visibile e seleziona la finestra successiva"
 
-#: ../metadata/switcher.xml.in.h:21
+#: ../plugins/switcher/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 "Mostra il selettore se non visibile e seleziona la finestra successiva tra "
 "tutte le altre finestre"
 
-#: ../metadata/switcher.xml.in.h:22
+#: ../plugins/switcher/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select previous window"
 msgstr "Mostra il selettore se non visibile e seleziona la finestra precedente"
 
-#: ../metadata/switcher.xml.in.h:23
+#: ../plugins/switcher/switcher.xml.in.h:22
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 "Mostra il selettore se non visibile e seleziona la finestra precedente tra "
 "tutte le altre finestre"
 
-#: ../metadata/switcher.xml.in.h:24
+#: ../plugins/switcher/switcher.xml.in.h:23
 msgid "Prev Panel"
 msgstr "Panello precedente"
 
-#: ../metadata/switcher.xml.in.h:25
+#: ../plugins/switcher/switcher.xml.in.h:24
 msgid "Prev window"
 msgstr "Finestra precedente"
 
-#: ../metadata/switcher.xml.in.h:26
+#: ../plugins/switcher/switcher.xml.in.h:25
 msgid "Prev window (All windows)"
 msgstr "Finestra precedente (tutte le finestre)"
 
-#: ../metadata/switcher.xml.in.h:27
+#: ../plugins/switcher/switcher.xml.in.h:26
 msgid "Prev window (No popup)"
 msgstr "Finestra precedente (nessun pop-up)"
 
-#: ../metadata/switcher.xml.in.h:28
+#: ../plugins/switcher/switcher.xml.in.h:27
 msgid "Rotate to the selected window while switching"
 msgstr "Ruota verso la finestra selezionata durante la selezione"
 
-#: ../metadata/switcher.xml.in.h:30
+#: ../plugins/switcher/switcher.xml.in.h:29
 msgid "Select next panel type window."
 msgstr "Seleziona il tipo di pannello di finestra successivo."
 
-#: ../metadata/switcher.xml.in.h:31
+#: ../plugins/switcher/switcher.xml.in.h:30
 msgid "Select next window without showing the popup window."
 msgstr "Seleziona la finestra successiva senza mostrare la finestra pop-up."
 
-#: ../metadata/switcher.xml.in.h:32
+#: ../plugins/switcher/switcher.xml.in.h:31
 msgid "Select previous panel type window."
 msgstr "Seleziona il tipo di pannello di finestra precedente"
 
-#: ../metadata/switcher.xml.in.h:33
+#: ../plugins/switcher/switcher.xml.in.h:32
 msgid "Select previous window without showing the popup window."
 msgstr "Seleziona la finestra precedente senza mostrare la finestra pop-up."
 
-#: ../metadata/switcher.xml.in.h:34
+#: ../plugins/switcher/switcher.xml.in.h:33
 msgid "Show icon next to thumbnail"
 msgstr "Mostra un'icona accanto all'anteprima"
 
-#: ../metadata/switcher.xml.in.h:35
+#: ../plugins/switcher/switcher.xml.in.h:34
 msgid "Show minimized windows"
 msgstr "Mostra le finestre minimizzate"
 
-#: ../metadata/switcher.xml.in.h:37
+#: ../plugins/switcher/switcher.xml.in.h:36
 msgid "Switcher speed"
 msgstr "Velocità selettore"
 
-#: ../metadata/switcher.xml.in.h:38
+#: ../plugins/switcher/switcher.xml.in.h:37
 msgid "Switcher timestep"
 msgstr "Intervallo selettore"
 
-#: ../metadata/switcher.xml.in.h:39
+#: ../plugins/switcher/switcher.xml.in.h:38
 msgid "Switcher windows"
 msgstr "Finestre da selezionare"
 
-#: ../metadata/switcher.xml.in.h:41
+#: ../plugins/switcher/switcher.xml.in.h:40
 msgid "Windows that should be shown in switcher"
 msgstr "Tipi di finestre da visualizzare nel selettore"
 
@@ -3104,71 +3053,71 @@ msgstr "Riproduzione video"
 msgid "YV12 colorspace"
 msgstr "Spazio colore YV12"
 
-#: ../metadata/water.xml.in.h:1
+#: ../plugins/water/water.xml.in.h:1
 msgid "Add line"
 msgstr "Aggiungi linea"
 
-#: ../metadata/water.xml.in.h:2
+#: ../plugins/water/water.xml.in.h:2
 msgid "Add point"
 msgstr "Aggiungi punto"
 
-#: ../metadata/water.xml.in.h:3
+#: ../plugins/water/water.xml.in.h:3
 msgid "Adds water effects to different desktop actions"
 msgstr "Aggiunge effetti acqua a diverse azioni del desktop"
 
-#: ../metadata/water.xml.in.h:4
+#: ../plugins/water/water.xml.in.h:4
 msgid "Delay (in ms) between each rain-drop"
 msgstr "Ritardo (in ms) tra le gocce di pioggia"
 
-#: ../metadata/water.xml.in.h:5
+#: ../plugins/water/water.xml.in.h:5
 msgid "Enable pointer water effects"
 msgstr "Abilita effetti acqua puntatore"
 
-#: ../metadata/water.xml.in.h:7
+#: ../plugins/water/water.xml.in.h:7
 msgid "Line"
 msgstr "Linea"
 
-#: ../metadata/water.xml.in.h:8
+#: ../plugins/water/water.xml.in.h:8
 msgid "Offset Scale"
 msgstr "Proporzioni"
 
-#: ../metadata/water.xml.in.h:9
+#: ../plugins/water/water.xml.in.h:9
 msgid "Point"
 msgstr "Punto"
 
-#: ../metadata/water.xml.in.h:10
+#: ../plugins/water/water.xml.in.h:10
 msgid "Rain Delay"
 msgstr "Ritardo pioggia"
 
-#: ../metadata/water.xml.in.h:11
+#: ../plugins/water/water.xml.in.h:11
 msgid "Title wave"
 msgstr "Onda sul titolo"
 
-#: ../metadata/water.xml.in.h:12
+#: ../plugins/water/water.xml.in.h:12
 msgid "Toggle rain"
 msgstr "Commuta pioggia"
 
-#: ../metadata/water.xml.in.h:13
+#: ../plugins/water/water.xml.in.h:13
 msgid "Toggle rain effect"
 msgstr "Commuta l'effetto pioggia"
 
-#: ../metadata/water.xml.in.h:14
+#: ../plugins/water/water.xml.in.h:14
 msgid "Toggle wiper"
 msgstr "Commuta tergicristallo"
 
-#: ../metadata/water.xml.in.h:15
+#: ../plugins/water/water.xml.in.h:15
 msgid "Toggle wiper effect"
 msgstr "Commuta il tergicristallo"
 
-#: ../metadata/water.xml.in.h:16
+#: ../plugins/water/water.xml.in.h:16
 msgid "Water Effect"
 msgstr "Effetto acqua"
 
-#: ../metadata/water.xml.in.h:17
+#: ../plugins/water/water.xml.in.h:17
 msgid "Water offset scale"
 msgstr "Offset scala acqua"
 
-#: ../metadata/water.xml.in.h:18
+#: ../plugins/water/water.xml.in.h:18
 msgid "Wave effect from window title"
 msgstr "Effetto onda dal titolo della finestra"
 
@@ -3296,65 +3245,52 @@ msgstr ""
 msgid "Wobbly Windows"
 msgstr "Finestre tremolanti"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtro lineare"
+#~ msgid "Command line 0"
+#~ msgstr "Riga di comando 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Usa il filtro lineare nell'ingrandimento"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Ingrandisci desktop"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Aumenta ingrandimento"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Riduci ingrandimento"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Panoramica"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Velocità zoom"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Intervallo zoom"
-
-# (ndt) non capisco cosa centri il cubo...
-# dovrebbe funzionare anche senza...
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Ingrandisce ed esegue panoramiche del desktop"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Fattore ingrandimento"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Ingrandisce panoramica"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Riga di comando 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Esegui comando 1"
+#~ msgid "Run command 0"
+#~ msgstr "Esegui comando 0"
 
 #~ msgid "Screenshot commands"
 #~ msgstr "Comandi cattura schermata"
 
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Associazioni tasti per cattura schermata"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Filtro lineare"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Usa il filtro lineare nell'ingrandimento"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Ingrandisci desktop"
+
+#~ msgid "Zoom In"
+#~ msgstr "Aumenta ingrandimento"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Riduci ingrandimento"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Panoramica"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Velocità zoom"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Intervallo zoom"
+
+# (ndt) non capisco cosa centri il cubo...
+# dovrebbe funzionare anche senza...
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Ingrandisce ed esegue panoramiche del desktop"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Fattore ingrandimento"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Ingrandisce panoramica"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Riduce l'opacità della finestra"
@@ -3475,5 +3411,26 @@ msgstr "Ingrandisce panoramica"
 #~ msgid "Plane to face 9"
 #~ msgstr "Va al piano 9"
 
+# (ndt) devo ancora capirne l'utilità...
+# (ndt) descrizione plugin
+# (ndt) è il nome di una scheda
+# meglio stare sul corto
+# (ndt) pure questa è il nome di una scheda...
+# (ndt) lo so... lo so... a molti non andrà a genio! :)
+# (ndt) ometto skydome, tanto sono presenti solo tra le sue opzioni
+# (ndt) l'opzione per aprire il cubo e vedere le sue facce
+# quella superiore e inferiore non vengono contate...
+# (ndt) o principale?
+# (ndt) il funzionamento è questo:
+# prendere un oggetto, non una finestra, e cercare
+# di spostarlo in un'altra area di lavoro per far ruotare il cubo
+# (ndt) praticamente sposta il puntatore sul bordo di destra
+# (ndt) riesco a capire cosa faccia...
+# (ndt) mah...
+# (ndt) non è molto chiara in inglese
+# dovrebbe indicare l'applicazione da usare
+# per visualizzare le schermate
+# (ndt) termine un po' così...
+# indica le finestre che dovrebbero essere tremolanti quando sono 'catturate'
 #~ msgid "Plane up"
 #~ msgstr "Va al piano superiore"

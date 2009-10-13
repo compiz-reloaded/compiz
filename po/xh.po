@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:10+0100\n"
+"POT-Creation-Date: 2009-03-24 08:14+0100\n"
 "PO-Revision-Date: 2006-11-03 14:26\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -32,7 +32,7 @@ msgid "None"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr ""
@@ -125,57 +125,57 @@ msgstr ""
 msgid "Use metacity theme when drawing window decorations"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr ""
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 #, fuzzy
 msgid "Initiate"
 msgstr "Kuyandululwa"
@@ -626,22 +626,22 @@ msgstr ""
 
 #: ../metadata/commands.xml.in.h:39
 #, fuzzy
-msgid "Command line 0"
+msgid "Command line 1"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:40
 #, fuzzy
-msgid "Command line 1"
+msgid "Command line 10"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:41
 #, fuzzy
-msgid "Command line 10"
+msgid "Command line 11"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:42
 #, fuzzy
-msgid "Command line 11"
+msgid "Command line 12"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:43
@@ -747,22 +747,22 @@ msgstr ""
 
 #: ../metadata/commands.xml.in.h:66
 #, fuzzy
-msgid "Run command 0"
+msgid "Run command 1"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:67
 #, fuzzy
-msgid "Run command 1"
+msgid "Run command 10"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:68
 #, fuzzy
-msgid "Run command 10"
+msgid "Run command 11"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:69
 #, fuzzy
-msgid "Run command 11"
+msgid "Run command 12"
 msgstr "Umyalelo '%1'"
 
 #: ../metadata/commands.xml.in.h:70
@@ -1379,13 +1379,13 @@ msgstr ""
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr ""
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr ""
 
@@ -3087,65 +3087,21 @@ msgstr ""
 msgid "Wobbly Windows"
 msgstr ""
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:6
 #, fuzzy
-msgid "Zoom Desktop"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#: ../metadata/zoom.xml.in.h:7
-#, fuzzy
-msgid "Zoom In"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#: ../metadata/zoom.xml.in.h:8
-#, fuzzy
-msgid "Zoom Out"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#: ../metadata/zoom.xml.in.h:9
-#, fuzzy
-msgid "Zoom Pan"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#: ../metadata/zoom.xml.in.h:10
-#, fuzzy
-msgid "Zoom Speed"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#: ../metadata/zoom.xml.in.h:11
-#, fuzzy
-msgid "Zoom Timestep"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr ""
-
-#: ../metadata/zoom.xml.in.h:13
-#, fuzzy
-msgid "Zoom factor"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#: ../metadata/zoom.xml.in.h:14
-#, fuzzy
-msgid "Zoom pan"
-msgstr "Kugqityiwe Ukuhlohla"
-
-#, fuzzy
-#~ msgid "Command line 12"
+#~ msgid "Command line 0"
 #~ msgstr "Umyalelo '%1'"
 
 #, fuzzy
-#~ msgid "Run command 12"
+#~ msgid "Run command 0"
 #~ msgstr "Umyalelo '%1'"
+
+#, fuzzy
+#~ msgid "Zoom Speed"
+#~ msgstr "Kugqityiwe Ukuhlohla"
+
+#, fuzzy
+#~ msgid "Zoom pan"
+#~ msgstr "Kugqityiwe Ukuhlohla"
 
 #~ msgid "Unknown"
 #~ msgstr "Akwaziwa"

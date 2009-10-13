@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:08+0100\n"
-"PO-Revision-Date: 2009-01-06 01:19+0100\n"
-"Last-Translator: Even myname <thispawn@gmail.com>\n"
+"POT-Creation-Date: 2009-03-24 08:13+0100\n"
+"PO-Revision-Date: 2009-06-24 17:17+0200\n"
+"Last-Translator: Alvin Meimoun <alvin.meimoun@laposte.net>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgid "None"
 msgstr "Aucun"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Ombrer"
 
@@ -47,32 +47,27 @@ msgid "Maximize"
 msgstr "Maximiser"
 
 #: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
 msgid "Maximize Horizontally"
-msgstr "Optimiser la fenêtre horizontalement"
+msgstr "Maximiser horizontalement"
 
 #: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
 msgid "Maximize Vertically"
-msgstr "Optimiser la fenêtre verticalement"
+msgstr "Maximiser verticalement"
 
 #: ../gtk/gnome/compiz-window-manager.c:431
-#, fuzzy
 msgid "Minimize"
 msgstr "Minimiser"
 
 #: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
 msgid "Raise"
-msgstr "Remonter"
+msgstr "Augmenter"
 
 #: ../gtk/gnome/compiz-window-manager.c:433
-#, fuzzy
 msgid "Lower"
-msgstr "Descendre"
+msgstr "Diminuer"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Menu de la fenêtre"
@@ -144,59 +139,59 @@ msgstr "Utiliser le thème Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Utiliser le thème Metacity pour dessiner les décorations de fenêtres"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Fermer la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Restaurer la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Optimiser la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Minimiser la fenêtre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Placer au dessus"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Coller"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Ne plus ombrer"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Ne plus placer au dessus"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Décoller"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La fenêtre \"%s\" ne répond pas."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forcer cette application à quitter causera la perte de tout changement non "
 "enregistré."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Forcer à quitter"
 
@@ -234,7 +229,7 @@ msgstr "Couleur de remplissage des annotations"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Lancer"
 
@@ -726,27 +721,27 @@ msgstr ""
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Assignation de commandes arbitraires"
 
 #: ../metadata/commands.xml.in.h:38
 msgid "Button Bindings"
-msgstr ""
+msgstr "Assignation des boutons"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Ligne de commande 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Ligne de commande 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Ligne de commande 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Ligne de commande 11"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "Ligne de commande 12"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -841,33 +836,32 @@ msgstr ""
 "Ligne de commande à exécuter dans le shell lorsque run_command9 est appelé"
 
 #: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
-#, fuzzy
 msgid "Commands"
-msgstr "Commande"
+msgstr "Commandes"
 
 #: ../metadata/commands.xml.in.h:64
 msgid "Edge Bindings"
-msgstr ""
+msgstr "Assignation des bords"
 
 #: ../metadata/commands.xml.in.h:65
 msgid "Key Bindings"
-msgstr ""
+msgstr "Assignation des touches"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Exécuter la commande 0"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Exécuter la commande 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Exécuter la commande 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Exécuter la commande 11"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "Exécuter la commande 12"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -961,9 +955,8 @@ msgid "Default window icon image"
 msgstr "Image de l'icône de la fenêtre par défaut"
 
 #: ../metadata/core.xml.in.in.h:16
-#, fuzzy
 msgid "Desktop Size"
-msgstr "Cube du Bureau"
+msgstr "Taille du bureau"
 
 #: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
@@ -975,7 +968,7 @@ msgstr "Détecter la fréquence de rafraîchissement"
 
 #: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
-msgstr ""
+msgstr "Paramètres d'affichage"
 
 #: ../metadata/core.xml.in.in.h:20
 msgid ""
@@ -995,7 +988,7 @@ msgstr "Rapide"
 
 #: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "Comportement de la prise de focus &amp; de l'augmentation"
 
 #: ../metadata/core.xml.in.in.h:24
 msgid "Focus Prevention Level"
@@ -1074,7 +1067,7 @@ msgstr "Intervalle entre les messages ping"
 
 #: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
-msgstr ""
+msgstr "Assignation des touches"
 
 # En français, on ne vole pas un focus mais je n'ai pas trouvé mieux.
 #: ../metadata/core.xml.in.in.h:42
@@ -1337,7 +1330,7 @@ msgstr "Animer le Skydome lors de la rotation de cube"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "Apparence"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1345,7 +1338,7 @@ msgstr "Automatique"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Comportement"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1364,9 +1357,8 @@ msgstr ""
 "de Skydome"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "Couleur du cube"
+msgstr "Habillage du cube"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1501,13 +1493,13 @@ msgstr "Image du Skydome"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Vitesse"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Intervalle"
 
@@ -1517,7 +1509,7 @@ msgstr "Transparence seulement si la souris contrôle la rotation"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "Cube transparent"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1749,7 +1741,7 @@ msgstr "Support de la boucle principale GLib"
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Compatibilité avec Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1758,15 +1750,15 @@ msgstr "Ouvrir un terminal"
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
 msgstr ""
+"Options qui rendent Compiz compatible avec l'environnement de bureau Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Boîte de dialogue d'exécution"
 
 #: ../metadata/gnomecompat.xml.in.h:6
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Commande à lancer pour le Terminal"
+msgstr "Commande pour lancer le Terminal"
 
 #: ../metadata/gnomecompat.xml.in.h:7
 msgid "Screenshot command line"
@@ -1914,120 +1906,100 @@ msgid "Brightness"
 msgstr "Luminosité"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Luminosité"
+msgstr "Réduire la luminosité"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Luminosité"
+msgstr "Augmenter la luminosité"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Luminosité"
+msgstr "Incrément de luminosité"
 
 #: ../metadata/obs.xml.in.h:5
-#, fuzzy
 msgid "Brightness values for windows"
-msgstr "Luminosité (en %) des fenêtres ne répondant pas"
+msgstr "Valeur de la luminosité des fenêtres"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "Réduire l'opacité"
+msgstr "Réduire"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "Augmenter l'opacité"
+msgstr "Augmenter"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Incrément de changement d'opacité"
+msgstr "Réduire l'opacité"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Incrément de changement d'opacité"
+msgstr "Augmenter l'opacité"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
 msgstr "Incrément d'opacité"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Niveau d'opacité pour déplacer des fenêtres"
+msgstr "Valeurs d'opacité des fenêtres"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "Opacité pendant la rotation"
+msgstr "Opacité, luminosité et saturation"
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Ajustement de l'opacité, de la luminosité et de la saturation"
 
 #: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "Saturation"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Saturation"
+msgstr "Réduire la saturation"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Saturation"
+msgstr "Augmenter la saturation"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Saturation"
+msgstr "Incrément de la saturation"
 
 #: ../metadata/obs.xml.in.h:19
-#, fuzzy
 msgid "Saturation values for windows"
-msgstr "Saturation (en %) des fenêtres ne répondant pas"
+msgstr "Valeurs de saturation des fenêtres"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Incrément"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "Décorations des fenêtres"
+msgstr "Réglages spécifiques des fenêtres"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "Valeur de l'opacité des fenêtres"
+msgstr "Valeurs des fenêtres"
 
 #: ../metadata/obs.xml.in.h:23
-#, fuzzy
 msgid "Windows"
-msgstr "Mapper les types de fenêtres"
+msgstr "Fenêtres"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "Fenêtres devant être positionnées par défaut"
+msgstr "Fenêtres devant avoir une luminosité différente par défaut"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "Fenêtres devant être transparentes par défaut"
+msgstr "Fenêtres devant avoir une opacité différente par défaut"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "Fenêtres devant être positionnées par défaut"
+msgstr "Fenêtres devant avoir une saturation différente par défaut"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -2042,9 +2014,8 @@ msgid "Centered"
 msgstr "Centré"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Gestion des Fenêtres"
+msgstr "Placement des fenêtres fixes"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -2144,13 +2115,12 @@ msgstr ""
 "le gestionnaire de fenêtre pourrait éviter de les situer."
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Décorations des fenêtres"
+msgstr "Fenêtres avec des positions fixes"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "Fenêtres avec un \"viewport\" fixe"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -2199,7 +2169,7 @@ msgstr "Correspondance Regex"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "Assignations"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2511,7 +2481,6 @@ msgid "Rotate To Face 9 with Window"
 msgstr "Rotation vers la face 9 avec la fenêtre"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
 msgstr "Rotation du Cube"
 
@@ -2536,14 +2505,12 @@ msgid "Rotate right and bring active window along"
 msgstr "Rotation à droite avec la fenêtre active"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Rotation vers la face 1"
+msgstr "Rotation vers la face du cube"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Rotation vers la face 1 avec la fenêtre"
+msgstr "Rotation vers la face du cube avec fenêtre"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2711,13 +2678,16 @@ msgstr "Grand"
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Assignation des boutons de bascule du mode échelle"
 
 #: ../metadata/scale.xml.in.h:7
+#, fuzzy
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Assignation des boutons de bascule du mode échelle au lieu de l'activer une "
+"fois pressé et de le désactiver une foi relâché"
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
@@ -2764,13 +2734,15 @@ msgstr ""
 
 #: ../metadata/scale.xml.in.h:18
 msgid "Key Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Assignation des touches de bascule du mode échelle"
 
 #: ../metadata/scale.xml.in.h:19
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Assignation des boutons de bascule du mode échelle au lieu de l'activer en "
+"pressant et le désactiver en relâchant."
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -3236,57 +3208,11 @@ msgstr ""
 msgid "Wobbly Windows"
 msgstr "Déformer les Fenêtres"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtre linéaire"
+#~ msgid "Command line 0"
+#~ msgstr "Ligne de commande 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Utiliser le filtre linéaire pour le zoom avant"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Zoom du Bureau"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Zoom avant"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Zoom arrière"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Zoom Panoramique"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Vitesse du zoom"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Intervalle du zoom"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Zoom et panoramique du cube du bureau"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Facteur de zoom"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Zoom panoramique"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Ligne de commande 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Exécuter la commande 1"
+#~ msgid "Run command 0"
+#~ msgstr "Exécuter la commande 0"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
@@ -3295,6 +3221,39 @@ msgstr "Zoom panoramique"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Ligne de commande de capture d'écran"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Filtre linéaire"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Utiliser le filtre linéaire pour le zoom avant"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Zoom du Bureau"
+
+#~ msgid "Zoom In"
+#~ msgstr "Zoom avant"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Zoom arrière"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Zoom Panoramique"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Vitesse du zoom"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Intervalle du zoom"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Zoom et panoramique du cube du bureau"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Facteur de zoom"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Zoom panoramique"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Réduire l'opacité de la fenêtre"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:09+0100\n"
+"POT-Creation-Date: 2009-03-24 08:13+0100\n"
 "PO-Revision-Date: 2008-04-03 23:15+0200\n"
 "Last-Translator: Ketil Wendelbo Aanensen <ketil.w.aanensen@gmail.com>\n"
 "Language-Team: Norwegian Bokmaal <ketil.w.aanensen@gmail.com>\n"
@@ -36,7 +36,7 @@ msgid "None"
 msgstr "Ingen"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Skyggelegg"
 
@@ -69,7 +69,7 @@ msgid "Lower"
 msgstr ""
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Vindusmeny"
@@ -138,59 +138,59 @@ msgstr "Bruk Metacity-tema"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Bruk Metacity-tema når vindusdekorasjoner tegnes"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Lukk vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Avmaksimer vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maksimer vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Minimer vindu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Hold over"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Klistre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Av-skyggelegg"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Ikke hold over"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Avklistre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "Vinduet \"%s\" svarer ikke."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Å tvinge denne applikasjonen til å avslutte vil gjøre at du mister alle "
 "endringer som ikke er lagret."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Tving avslutt"
 
@@ -228,7 +228,7 @@ msgstr "Fyllfarge for påførte elementer"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Begynn"
 
@@ -726,20 +726,21 @@ msgid "Button Bindings"
 msgstr ""
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Kommandolinje 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Kommandolinje 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Kommandolinje 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Kommandolinje 11"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line 12"
+msgstr "Kommandolinje 1"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -847,20 +848,21 @@ msgid "Key Bindings"
 msgstr ""
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Kjør kommando 0"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Kjør kommando 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Kjør kommando 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Kjør kommando 11"
+
+#: ../metadata/commands.xml.in.h:69
+#, fuzzy
+msgid "Run command 12"
+msgstr "Kjør kommando 1"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -1479,13 +1481,13 @@ msgstr "Bilde for himmelkuppel"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Hastighet"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Tidsskritt"
 
@@ -3187,57 +3189,11 @@ msgstr "Ustødighetseffekt når vinduer maksimeres og avmaksimeres"
 msgid "Wobbly Windows"
 msgstr "Ustødige vinduer"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtrer lineært"
+#~ msgid "Command line 0"
+#~ msgstr "Kommandolinje 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Bruk lineært filter når forstørret"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Forstørr skrivebord"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Forstørr"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Forminsk"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Panorer forstørrelse"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Forstørringshastighet"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Tidsskritt for forstørrelse"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Forstørr og panorer skrivebordskuben"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Forstørrelsesfaktor"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Forstørrelsespanorering"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Kommandolinje 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Kjør kommando 1"
+#~ msgid "Run command 0"
+#~ msgstr "Kjør kommando 0"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
@@ -3246,6 +3202,39 @@ msgstr "Forstørrelsespanorering"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Kommandolinje for skjermbilde"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Filtrer lineært"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Bruk lineært filter når forstørret"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Forstørr skrivebord"
+
+#~ msgid "Zoom In"
+#~ msgstr "Forstørr"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Forminsk"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Panorer forstørrelse"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Forstørringshastighet"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Tidsskritt for forstørrelse"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Forstørr og panorer skrivebordskuben"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Forstørrelsesfaktor"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Forstørrelsespanorering"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Reduser vinduets dekkevne"

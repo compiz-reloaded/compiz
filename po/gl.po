@@ -5,21 +5,22 @@
 # Copyright (C) 2002 SuSE Linux AG.
 # Copyright (C) 1999, 2000, 2001 SuSE GmbH.
 # This file is distributed under the same license as the Compiz package.
-# Fran Diéguez (GLUG) <fran dot dieguez at glug dot es>, 2007.
 #
 #
+# Fran Diéguez (GLUG) <fran dot dieguez at glug dot es>, 2007, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:08+0100\n"
-"PO-Revision-Date: 2009-02-01 17:23+0100\n"
-"Last-Translator: Fran Diéguez (GLUG) <fran.dieguez@glug.es>\n"
-"Language-Team: <gl@li.org> <trasno@ceu.fi.udc.es>\n"
+"POT-Creation-Date: 2009-03-24 08:13+0100\n"
+"PO-Revision-Date: 2009-03-29 23:01+0200\n"
+"Last-Translator: \n"
+"Language-Team: en_US <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 0.3\n"
 
 #: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
@@ -39,7 +40,7 @@ msgid "None"
 msgstr "Ningún"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Sombra"
 
@@ -68,7 +69,7 @@ msgid "Lower"
 msgstr "Baixar"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Menú da Fiestra"
@@ -77,7 +78,7 @@ msgstr "Menú da Fiestra"
 msgid "Action to take when scrolling the mouse wheel on a window title bar."
 msgstr ""
 "Acción a levar a cabo cando se fai acciona a roda do rato na barra de título "
-"da fiestra."
+"da xanela."
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
@@ -85,11 +86,11 @@ msgstr "Tipo de desenfoque"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Metacity theme active window opacity"
-msgstr "Opacidade da fiestra activa no tema metacity"
+msgstr "Opacidade da xanela activa no tema metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:4
 msgid "Metacity theme active window opacity shade"
-msgstr "Opacidade da sombra da fiestra activa no tema metacity"
+msgstr "Opacidade da sombra da xanela activa no tema metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:5
 msgid "Metacity theme opacity"
@@ -101,7 +102,7 @@ msgstr "Opacidade da sombra do tema Metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:7
 msgid "Opacity to use for active windows with metacity theme decorations"
-msgstr "Opacidade a empregar para fiestras activas con decoracións metacity"
+msgstr "Opacidade a empregar para xanelas activas con decoracións metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for metacity theme decorations"
@@ -112,14 +113,14 @@ msgid ""
 "Shade active windows with metacity theme decorations from opaque to "
 "translucent"
 msgstr ""
-"Escurecer decoración de fiestras activas con temas metacity de opaco cara "
+"Escurecer decoración de xanelas activas con temas metacity de opaco cara "
 "transparente"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:10
 msgid ""
 "Shade windows with metacity theme decorations from opaque to translucent"
 msgstr ""
-"Sombrear decoración de fiestras con temas metacity de opaco cara transparente"
+"Sombrear decoración de xanelas con temas metacity de opaco cara transparente"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
@@ -135,66 +136,66 @@ msgstr "Empregar tema metacity"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:14
 msgid "Use metacity theme when drawing window decorations"
-msgstr "Empregar tema metacity ao debuxar as decoracións das fiestras"
+msgstr "Empregar tema metacity ao debuxar as decoracións das xanelas"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Pechar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Demaximizar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maximizar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Minimizar Fiestra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Sempre en Primeiro Plano"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Fixar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Descurecer"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Desfacer Sempre en Primeiro Plano"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Desfixar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr "A fiestra \"%s\" non está respondendo."
+msgstr "A xanela \"%s\" non está respondendo."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Se forzar a saída desta aplicación causará a perda dos cambios non gardados."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Forzar Saída"
 
 #: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
-msgstr "Anotación"
+msgstr "Anotacións"
 
 #: ../metadata/annotate.xml.in.h:2
 msgid "Annotate Fill Color"
@@ -226,7 +227,7 @@ msgstr "Cor de recheo das anotacións"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Iniciar"
 
@@ -272,7 +273,7 @@ msgstr "Desenfoque Alfa"
 
 #: ../metadata/blur.xml.in.h:3
 msgid "Alpha blur windows"
-msgstr "Desenfoque alfa das fiestras"
+msgstr "Desenfoque alfa das xanelas"
 
 #: ../metadata/blur.xml.in.h:4
 msgid "Blur Filter"
@@ -292,11 +293,11 @@ msgstr "Velocidade de desenfoque"
 
 #: ../metadata/blur.xml.in.h:8
 msgid "Blur Windows"
-msgstr "Desenfocar fiestras"
+msgstr "Desenfoque de xanelas"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr "Desenfocar na parte traseira das fiestras"
+msgstr "Desenfocar na parte traseira das xanelas"
 
 #: ../metadata/blur.xml.in.h:10
 msgid "Blur saturation"
@@ -304,16 +305,16 @@ msgstr "Saturación do desenfoque"
 
 #: ../metadata/blur.xml.in.h:11
 msgid "Blur windows"
-msgstr "Desenfocar fiestras"
+msgstr "Desenfoca as xanelas"
 
 #: ../metadata/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
-msgstr "Desenfocar fiestras que non teñan foco"
+msgstr "Desenfocar as xanelas que non teñan foco"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
 msgstr ""
-"Desactivar desenfoque de rexións de pantalla escurecidas por outras fiestras."
+"Desactivar desenfoque de rexións de pantalla escurecidas por outras xanelas."
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
@@ -325,7 +326,7 @@ msgstr "Desenfocar segundo o foco"
 
 #: ../metadata/blur.xml.in.h:16
 msgid "Focus blur windows"
-msgstr "Desenfocar fiestras segundo o foco"
+msgstr "Desenfocar xanelas segundo o foco"
 
 #: ../metadata/blur.xml.in.h:17
 msgid "Gaussian"
@@ -384,7 +385,7 @@ msgstr ""
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
-msgstr "Velocidade de desenfoque das fiestras"
+msgstr "Velocidade de desenfoque das xanelas"
 
 #: ../metadata/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
@@ -396,7 +397,7 @@ msgstr "Fiestras que deben empregar o-desenfoque alfa por omisión"
 
 #: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
-msgstr "Saída Clonada"
+msgstr "Clonación da Saída"
 
 #: ../metadata/clone.xml.in.h:3
 msgid "Initiate clone selection"
@@ -407,111 +408,99 @@ msgid "Output clone handler"
 msgstr "Xestor de clonación de saída"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atallo que, cando é accionado, executa o comando de consola "
 "identificado polo comando0"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
+"Un botón de atallo que, cando é accionado, executa o comando de "
 "consolaidentificado polo comando1"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
+"Un botón de atallo que, cando é accionado, executa o comando de "
 "consolaidentificado polo comando10"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
+"Un botón de atallo que, cando é accionado, executa o comando de "
 "consolaidentificado polo comando11"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
+"Un botón de atallo que, cando é accionado, executa o comando de "
 "consolaidentificado polo comando2"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atallo que, cando é accionado, executa o comando de consola "
 "identificado polo comando3"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atallo que, cando é accionado, executa o comando de consola "
 "identificado polo comando4"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atallo que, cando é accionado, executa o comando de consola "
 "identificado polo comando5"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atalloque, cando é accionado, executa o comando de consola "
 "identificado polo comando6"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atallo que, cando é accionado, executa o comando de consola "
 "identificado polo comando7"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atallo que, cando é accionado, executa o comando de consola "
 "identificado polo comando8"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un botón de atallo que, cando é accionado, executa o comando de consola "
 "identificado polo comando9"
 
 #: ../metadata/commands.xml.in.h:13
@@ -611,137 +600,124 @@ msgstr ""
 "identificado polo comando9"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando0"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
-"consolaidentificado polo comando1"
+"Un atallo de borde que cando é invocado, executa o comando de consola "
+"identificado polo comando1"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
-"consolaidentificado polo comando10"
+"Un atallo de borde que cando é invocado, executa o comando de consola "
+"identificado polo comando10"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
-"consolaidentificado polo comando11"
+"Un atallo de borde que cando é invocado, executa o comando de consola "
+"identificado polo comando11"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de "
-"consolaidentificado polo comando2"
+"Un atallo de borde que cando é invocado, executa o comando de consola "
+"identificado polo comando2"
 
 #: ../metadata/commands.xml.in.h:30
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando3"
 
 #: ../metadata/commands.xml.in.h:31
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando4"
 
 #: ../metadata/commands.xml.in.h:32
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando5"
 
 #: ../metadata/commands.xml.in.h:33
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando6"
 
 #: ../metadata/commands.xml.in.h:34
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando7"
 
 #: ../metadata/commands.xml.in.h:35
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando8"
 
 #: ../metadata/commands.xml.in.h:36
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Un atallo de teclado que, cando é accionado, executa o comando de consola "
+"Un atallo de borde que cando é invocado, executa o comando de consola "
 "identificado polo comando9"
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Asigna atallos a comandos arbitrarios"
 
 #: ../metadata/commands.xml.in.h:38
-#, fuzzy
 msgid "Button Bindings"
-msgstr "Atallos de teclado"
+msgstr "Botóns de atallo"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Liña de comando 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Liña de comando 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Liña de comando 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Liña de comando 11"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "Liña de comando 12"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -852,30 +828,28 @@ msgid "Commands"
 msgstr "Comandos"
 
 #: ../metadata/commands.xml.in.h:64
-#, fuzzy
 msgid "Edge Bindings"
-msgstr "Atallos de teclado"
+msgstr "Atallos de Borde"
 
 #: ../metadata/commands.xml.in.h:65
-#, fuzzy
 msgid "Key Bindings"
-msgstr "Atallos de teclado"
+msgstr "Atallos de Teclado"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Executar comando 0"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Executar comando 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Executar comando 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Executar comando 11"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "Executar comando 12"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -917,7 +891,7 @@ msgstr "Complementos Activos"
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
-"Permitir que o renderizado das fiestras a pantalla completa non sexa "
+"Permitir que o renderizado das xanelas a pantalla completa non sexa "
 "redirixido a mapas de imaxe fora da pantalla"
 
 #: ../metadata/core.xml.in.in.h:3
@@ -954,11 +928,11 @@ msgstr "Faga Clic para Enfocar"
 
 #: ../metadata/core.xml.in.in.h:11
 msgid "Click on window moves input focus to it"
-msgstr "Ao facer clic na fiestra transfírese o foco cara ela"
+msgstr "Ao facer clic na xanela transfírese o foco cara ela"
 
 #: ../metadata/core.xml.in.in.h:13
 msgid "Close active window"
-msgstr "Pechar a fiestra activa"
+msgstr "Pechar a xanela activa"
 
 #: ../metadata/core.xml.in.in.h:14
 msgid "Default Icon"
@@ -966,7 +940,7 @@ msgstr "Icona por defecto"
 
 #: ../metadata/core.xml.in.in.h:15
 msgid "Default window icon image"
-msgstr "Imaxe da icona da fiestra por defecto"
+msgstr "Imaxe da icona da xanela por defecto"
 
 #: ../metadata/core.xml.in.in.h:16
 msgid "Desktop Size"
@@ -1014,7 +988,7 @@ msgstr "Prevención do Enfoque nas Fiestras"
 
 #: ../metadata/core.xml.in.in.h:26
 msgid "Focus prevention windows"
-msgstr "Prevención do enfoque nas fiestras"
+msgstr "Prevención do enfoque nas xanelas"
 
 #: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
@@ -1038,12 +1012,12 @@ msgstr "Ocultar Fiestras Ignorando a Barra de Tarefa"
 
 #: ../metadata/core.xml.in.in.h:32
 msgid "Hide all windows and focus desktop"
-msgstr "Ocultar todas as fiestras e enfocar o escritorio"
+msgstr "Ocultar todas as xanelas e enfocar o escritorio"
 
 #: ../metadata/core.xml.in.in.h:33
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
-"Agochar as fiestras que non están na barra de tarefas ao entrar no modo "
+"Agochar as xanelas que non están na barra de tarefas ao entrar no modo "
 "amosar escritorio"
 
 #: ../metadata/core.xml.in.in.h:34
@@ -1065,12 +1039,12 @@ msgstr "Ignorar os Consellos Cando Estea Maximizado"
 #: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
-"Ignorar incremento de tamaño e aspecto dos consellos cando a fiestra está "
+"Ignorar incremento de tamaño e aspecto dos consellos cando a xanela está "
 "maximizada"
 
 #: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
-msgstr "Intervalo antes da elevación das fiestras seleccionadas"
+msgstr "Intervalo antes da elevación das xanelas seleccionadas"
 
 #: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
@@ -1106,7 +1080,7 @@ msgstr "Fiestra Máis Baixa"
 
 #: ../metadata/core.xml.in.in.h:48
 msgid "Lower window beneath other windows"
-msgstr "Fiestra máis baixa por debaixo das outras fiestras"
+msgstr "Fiestra máis baixa por debaixo das outras xanelas"
 
 #: ../metadata/core.xml.in.in.h:50
 msgid "Maximize Window Horizontally"
@@ -1118,19 +1092,19 @@ msgstr "Maximizar a Fiestra Verticalmente"
 
 #: ../metadata/core.xml.in.in.h:52
 msgid "Maximize active window"
-msgstr "Maximiza a fiestra activa"
+msgstr "Maximiza a xanela activa"
 
 #: ../metadata/core.xml.in.in.h:53
 msgid "Maximize active window horizontally"
-msgstr "Maximiza horizontalmente a fiestra activa"
+msgstr "Maximiza horizontalmente a xanela activa"
 
 #: ../metadata/core.xml.in.in.h:54
 msgid "Maximize active window vertically"
-msgstr "Maximiza verticalmente a fiestra activa"
+msgstr "Maximiza verticalmente a xanela activa"
 
 #: ../metadata/core.xml.in.in.h:56
 msgid "Minimize active window"
-msgstr "Minimiza a fiestra activa"
+msgstr "Minimiza a xanela activa"
 
 #: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
 msgid "Normal"
@@ -1188,15 +1162,15 @@ msgstr "Elevar Fiestra"
 
 #: ../metadata/core.xml.in.in.h:70
 msgid "Raise selected windows after interval"
-msgstr "Elevar fiestras seleccionadas despois dun intervalo de tempo"
+msgstr "Elevar xanelas seleccionadas despois dun intervalo de tempo"
 
 #: ../metadata/core.xml.in.in.h:71
 msgid "Raise window above other windows"
-msgstr "Elevar fiestra por enriba das restantes"
+msgstr "Elevar xanela por enriba das restantes"
 
 #: ../metadata/core.xml.in.in.h:72
 msgid "Raise windows when clicked"
-msgstr "Elevar fiestras cando se faga clic nelas"
+msgstr "Elevar xanelas cando se faga clic nelas"
 
 #: ../metadata/core.xml.in.in.h:73
 msgid "Refresh Rate"
@@ -1272,7 +1246,7 @@ msgstr "Trocar Maximizado Vertical da Fiestra Activa"
 
 #: ../metadata/core.xml.in.in.h:91
 msgid "Toggle active window shaded"
-msgstr "Trocar escurecemento da fiestra activa"
+msgstr "Trocar escurecemento da xanela activa"
 
 #: ../metadata/core.xml.in.in.h:92
 msgid "Toggle use of slow animations"
@@ -1280,7 +1254,7 @@ msgstr "Trocar o uso de animacións lentas"
 
 #: ../metadata/core.xml.in.in.h:94
 msgid "Unmaximize active window"
-msgstr "Desmaximizar fiestra activa"
+msgstr "Desmaximizar xanela activa"
 
 #: ../metadata/core.xml.in.in.h:95
 msgid "Unredirect Fullscreen Windows"
@@ -1304,11 +1278,11 @@ msgstr "Cal dos dispositivos que se superpoñen debería ser o preferido"
 
 #: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
-msgstr "Botón de atallo para menú da fiestra"
+msgstr "Botón de atallo para menú da xanela"
 
 #: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
-msgstr "Tecla de atallo para menú da fiestra"
+msgstr "Tecla de atallo para menú da xanela"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1442,7 +1416,7 @@ msgstr "Opacidade Mentres Non se Roda"
 
 #: ../metadata/cube.xml.in.h:34
 msgid "Opacity of desktop window during rotation."
-msgstr "Opacidade da fiestra do escritorio ao rodar"
+msgstr "Opacidade da xanela do escritorio ao rodar"
 
 #: ../metadata/cube.xml.in.h:35
 msgid "Opacity of desktop window when not rotating."
@@ -1450,11 +1424,11 @@ msgstr "Opacidade do escritorio cando non está rotando"
 
 #: ../metadata/cube.xml.in.h:36
 msgid "Place windows on cube"
-msgstr "Colocar fiestras no cubo"
+msgstr "Dispón as xanelas nas caras dun cubo"
 
 #: ../metadata/cube.xml.in.h:37
 msgid "Prev Slide"
-msgstr "Anterior Cara"
+msgstr "Cara Anterior"
 
 #: ../metadata/cube.xml.in.h:38
 msgid "Render skydome"
@@ -1492,13 +1466,13 @@ msgstr "Imaxe do Skydome"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Velocidade"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Saltos do tempo"
 
@@ -1536,7 +1510,7 @@ msgstr "Comando"
 
 #: ../metadata/decoration.xml.in.h:3
 msgid "Decoration windows"
-msgstr "Decoración das fiestras"
+msgstr "Activa a xestión da decoración das xanelas"
 
 #: ../metadata/decoration.xml.in.h:4
 msgid ""
@@ -1593,7 +1567,7 @@ msgstr "Decoración da Fiestra"
 
 #: ../metadata/decoration.xml.in.h:18
 msgid "Window decorations"
-msgstr "Decoracións das fiestras"
+msgstr "Decoracións das xanelas"
 
 #: ../metadata/decoration.xml.in.h:19
 msgid "Windows that should be decorated"
@@ -1606,7 +1580,7 @@ msgstr "Fiestras que deben ter sombra"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr "Brillo (en %) das fiestras bloqueadas"
+msgstr "Brillo (en %) das xanelas bloqueadas"
 
 #: ../metadata/fade.xml.in.h:3
 msgid "Constant speed"
@@ -1623,7 +1597,7 @@ msgstr "Escurecer as Fiestras que non Responden"
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
-"Escurecer as fiestras que non están a responder ó que o xestor de fiestras "
+"Escurecer as xanelas que non están a responder ao que o xestor de xanelas "
 "require"
 
 #: ../metadata/fade.xml.in.h:7
@@ -1646,7 +1620,7 @@ msgstr "Tempo de desvanecemento"
 msgid "Fade effect on minimize/open/close window events"
 msgstr ""
 "Realizar Efecto de Desvanecemento cos eventos de minimizar/abrir/pechar "
-"fiestras"
+"xanelas"
 
 #: ../metadata/fade.xml.in.h:12
 msgid "Fade effect on system beep"
@@ -1655,11 +1629,11 @@ msgstr "Efecto de desvanecemento ao soar a campá do sistema"
 #: ../metadata/fade.xml.in.h:13
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
-"Amosar as fiestras cando haxa mapeado e desvanecelas cando sexan desmapeadas"
+"Amosar as xanelas cando haxa mapeado e desvanecelas cando sexan desmapeadas"
 
 #: ../metadata/fade.xml.in.h:14
 msgid "Fade windows"
-msgstr "Desvanecer fiestras"
+msgstr "Desvanecer xanelas"
 
 #: ../metadata/fade.xml.in.h:15
 msgid "Fading Windows"
@@ -1677,7 +1651,7 @@ msgstr ""
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr "Saturación das fiestras bloqueadas (en %)"
+msgstr "Saturación das xanelas bloqueadas (en %)"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
@@ -1693,7 +1667,7 @@ msgstr "Campá Visual"
 
 #: ../metadata/fade.xml.in.h:23
 msgid "Window fade mode"
-msgstr "Modo de desvanecemento das fiestras"
+msgstr "Modo de desvanecemento das xanelas"
 
 #: ../metadata/fade.xml.in.h:24
 msgid "Window fade speed in \"Constant speed\" mode"
@@ -1739,11 +1713,11 @@ msgstr "GLib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
-msgstr "Soporte ó bucle principal de GLib"
+msgstr "Soporte ao bucle principal de GLib"
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Compatibilidade con Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1752,6 +1726,8 @@ msgstr "Abrir unha terminal"
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
 msgstr ""
+"Opcións para manter a compatibilidade de Compiz co entorno de escritorio "
+"Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
@@ -1783,7 +1759,7 @@ msgstr "Facer unha capturar pantalla"
 
 #: ../metadata/gnomecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
-msgstr "Facer captura de pantalla dunha fiestra"
+msgstr "Facer captura de pantalla dunha xanela"
 
 #: ../metadata/gnomecompat.xml.in.h:13
 msgid "Terminal command line"
@@ -1791,7 +1767,7 @@ msgstr "Liña de comando do terminal"
 
 #: ../metadata/gnomecompat.xml.in.h:14
 msgid "Window screenshot command line"
-msgstr "Liña de comando para captura de pantalla de fiestras"
+msgstr "Liña de comando para captura de pantalla de xanelas"
 
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
@@ -1819,7 +1795,7 @@ msgstr "Xestor de Configuracións Kconfig"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
-msgstr "Efecto ó Minimizar"
+msgstr "Efecto ao Minimizar"
 
 #: ../metadata/minimize.xml.in.h:2
 msgid "Minimize Windows"
@@ -1839,11 +1815,11 @@ msgstr "Resistencia da Sombra"
 
 #: ../metadata/minimize.xml.in.h:6
 msgid "Shade resistance"
-msgstr "Resistencia que opón a sombra ó minimizar a súa fiestra"
+msgstr "Resistencia que opón a sombra ao minimizar a súa xanela"
 
 #: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
-msgstr "Transformar as fiestras cando son minimizadas e restauradas"
+msgstr "Transforma as xanelas cando son minimizadas e restauradas"
 
 #: ../metadata/minimize.xml.in.h:10
 msgid "Windows that should be transformed when minimized"
@@ -1860,7 +1836,7 @@ msgstr "Restrinxir a coordenada Y á area de traballo"
 #: ../metadata/move.xml.in.h:3
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
-"Non actualizar a posición das fiestras no servidor ata acabar o movemento"
+"Non actualizar a posición das xanelas no servidor ata acabar o movemento"
 
 #: ../metadata/move.xml.in.h:4
 msgid "Initiate Window Move"
@@ -1876,7 +1852,7 @@ msgstr "Mover Fiestra"
 
 #: ../metadata/move.xml.in.h:7
 msgid "Move window"
-msgstr "Atallos de teclado e rato para o movemento máis sinxelo das fiestras"
+msgstr "Atallos de teclado e rato para o movemento máis sinxelo das xanelas"
 
 #: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
 #: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
@@ -1885,143 +1861,123 @@ msgstr "Opacidade"
 
 #: ../metadata/move.xml.in.h:9
 msgid "Opacity level of moving windows"
-msgstr "Nivel de opacidade das fiestras en movemento"
+msgstr "Nivel de opacidade das xanelas en movemento"
 
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr "Separar e restaurar as fiestras maximizaas cando se arrastren"
+msgstr "Separar e restaurar as xanelas maximizaas cando se arrastren"
 
 #: ../metadata/move.xml.in.h:11
 msgid "Snapoff maximized windows"
-msgstr "Separar as fiestras maximizadas"
+msgstr "Separar as xanelas maximizadas"
 
 #: ../metadata/move.xml.in.h:12
 msgid "Start moving window"
-msgstr "Iniciar movemento da fiestra"
+msgstr "Iniciar movemento da xanela"
 
 #: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
 msgid "Brightness"
 msgstr "Brillo"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Brillo"
+msgstr "Decrementar Brillo"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Brillo"
+msgstr "Incrementar Brillo"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Brillo"
+msgstr "Salto no Brillo"
 
 #: ../metadata/obs.xml.in.h:5
-#, fuzzy
 msgid "Brightness values for windows"
-msgstr "Brillo (en %) das fiestras bloqueadas"
+msgstr "Valores de Brillo para as xanelas"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "Reducir Opacidade"
+msgstr "Decrementar"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "Aumentar Opacidade"
+msgstr "Incrementar"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Etapa de mudanza de opacidade"
+msgstr "Decrementar Opacidade"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Etapa de mudanza de opacidade"
+msgstr "Incrementar opacidade"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
 msgstr "Etapa de Opacidade"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Nivel de opacidade das fiestras en movemento"
+msgstr "Valores de opacidade para as xanelas"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "Opacidade Durante a Rotación"
+msgstr "Opacidade, Brillo e Saturación"
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Opacidade, Brillo e axustes de Saturación"
 
 #: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "Saturación"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Saturación"
+msgstr "Decremenar Saturación"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Saturación"
+msgstr "Incrementar Saturación"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Saturación"
+msgstr "Salto na Saturación"
 
 #: ../metadata/obs.xml.in.h:19
-#, fuzzy
 msgid "Saturation values for windows"
-msgstr "Saturación das fiestras bloqueadas (en %)"
+msgstr "Valores de saturación para as xanelas"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Salto"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "Decoracións das fiestras"
+msgstr "Opcións especificas para as xanelas"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "Valores de opacidade da fiestra"
+msgstr "Valores das xanelas"
 
 #: ../metadata/obs.xml.in.h:23
-#, fuzzy
 msgid "Windows"
-msgstr "Colocar Fiestras"
+msgstr "Fiestras"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "Fiestras que se deben ser colocadas por omisión"
+msgstr "Fiestras que deben ter un brillo diferente por omisión"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "Fiestras que deben ser translúcidas por omisión"
+msgstr "Fiestras que deben ter unha opacidade diferente por omisión"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "Fiestras que se deben ser colocadas por omisión"
+msgstr "Fiestras que deben ter unha saturación diferente por omisión"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr "Algoritmo a empregar para posicionar as fiestras"
+msgstr "Algoritmo a empregar para posicionar as xanelas"
 
 #: ../metadata/place.xml.in.h:2
 msgid "Cascade"
@@ -2037,7 +1993,7 @@ msgstr "Colocación de Fiestras Fixadas"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
-msgstr "Forzar o colocado das fiestras"
+msgstr "Forzar o colocado das xanelas"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Horizontal viewport positions"
@@ -2052,7 +2008,7 @@ msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
-"Manter as fiestras colocadas na área de traballo, aínda que isto signifique "
+"Manter as xanelas colocadas na área de traballo, aínda que isto signifique "
 "que a posición poida diferir da posición especificada"
 
 #: ../metadata/place.xml.in.h:11
@@ -2065,7 +2021,7 @@ msgstr "Colocar en tódalas saídas"
 
 #: ../metadata/place.xml.in.h:13
 msgid "Place windows at appropriate positions when mapped"
-msgstr "Coloca fiestras nas posicións axeitas cando sexan mapeadas"
+msgstr "Coloca xanelas nas posicións axeitas cando sexan mapeadas"
 
 #: ../metadata/place.xml.in.h:14
 msgid "Placement Mode"
@@ -2083,7 +2039,7 @@ msgstr "Aleatorio"
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
-"Selecciona como se debe comportar a colocación de fiestras cando se "
+"Selecciona como se debe comportar a colocación de xanelas cando se "
 "seleccionan saídas múltiples"
 
 #: ../metadata/place.xml.in.h:18
@@ -2096,7 +2052,7 @@ msgstr "Empregar o dispositivo de saída activo"
 
 #: ../metadata/place.xml.in.h:20
 msgid "Use output device of focussed window"
-msgstr "Empregar o dispositivo de saída da fiestra enfocada"
+msgstr "Empregar o dispositivo de saída da xanela enfocada"
 
 #: ../metadata/place.xml.in.h:21
 msgid "Use output device with pointer"
@@ -2112,7 +2068,7 @@ msgstr "Fiestras colocadas nas áreas de traballo"
 
 #: ../metadata/place.xml.in.h:24
 msgid "Window placement workarounds"
-msgstr "Entornos de colocación de fiestra"
+msgstr "Entornos de colocación de xanela"
 
 #: ../metadata/place.xml.in.h:25
 msgid "Windows that should be positioned by default"
@@ -2129,7 +2085,7 @@ msgid ""
 "manager should avoid placing them."
 msgstr ""
 "Fiestras que se deben colocar obrigatoriamente, aínda que se indique no "
-"xestor de fiestras que se deben evitar a súa colocación"
+"xestor de xanelas que se deben evitar a súa colocación"
 
 #: ../metadata/place.xml.in.h:28
 msgid "Windows with fixed positions"
@@ -2181,7 +2137,7 @@ msgstr "Coincidencia Regex"
 
 #: ../metadata/regex.xml.in.h:2
 msgid "Regex window matching"
-msgstr "Coincidencia Regex das fiestras"
+msgstr "Coincidencia Regex das xanelas"
 
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
@@ -2202,7 +2158,7 @@ msgstr "Modo de Dimensionado por Omisión"
 
 #: ../metadata/resize.xml.in.h:5
 msgid "Default mode used for window resizing"
-msgstr "Modo a empregar por omisión no dimensionado de fiestras"
+msgstr "Modo a empregar por omisión no dimensionado de xanelas"
 
 #: ../metadata/resize.xml.in.h:6
 msgid "Fill Color"
@@ -2258,27 +2214,27 @@ msgstr "Dimensionar Fiestra"
 
 #: ../metadata/resize.xml.in.h:20
 msgid "Resize window"
-msgstr "Dimensionar fiestra"
+msgstr "Dimensionar xanela"
 
 #: ../metadata/resize.xml.in.h:21
 msgid "Start resizing window"
-msgstr "Iniciar dimensionado de fiestra"
+msgstr "Iniciar dimensionado de xanela"
 
 #: ../metadata/resize.xml.in.h:22
 msgid "Start resizing window by stretching it"
-msgstr "Iniciar dimensionado de fiestras estirándoas"
+msgstr "Iniciar dimensionado de xanelas estirándoas"
 
 #: ../metadata/resize.xml.in.h:23
 msgid "Start resizing window normally"
-msgstr "Iniciar dimensionado normal da fiestra"
+msgstr "Iniciar dimensionado normal da xanela"
 
 #: ../metadata/resize.xml.in.h:24
 msgid "Start resizing window with outline"
-msgstr "Iniciar dimensionado de fiestra empregando o contorno"
+msgstr "Iniciar dimensionado de xanela empregando o contorno"
 
 #: ../metadata/resize.xml.in.h:25
 msgid "Start resizing window with rectangle"
-msgstr "Iniciar dimensionado da fiestra empregando un rectángulo"
+msgstr "Iniciar dimensionado da xanela empregando un rectángulo"
 
 #: ../metadata/resize.xml.in.h:26
 msgid "Stretch"
@@ -2333,13 +2289,13 @@ msgstr ""
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
-"Xirar á área de traballo seguinte ao mover o punteiro cara o borde da fiestra"
+"Xirar á área de traballo seguinte ao mover o punteiro cara o borde da xanela"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
-"Cambiar á área de traballo seguinte ao mover a fiestra cara o borde da "
-"fiestra"
+"Cambiar á área de traballo seguinte ao mover a xanela cara o borde da "
+"xanela"
 
 #: ../metadata/rotate.xml.in.h:11
 msgid "Flip to right viewport and warp pointer"
@@ -2363,11 +2319,11 @@ msgstr "Elevar ao accionar a roda do rato"
 
 #: ../metadata/rotate.xml.in.h:17
 msgid "Raise window when rotating"
-msgstr "Elevar fiestras ao accionar a roda do rato"
+msgstr "Elevar xanelas ao accionar a roda do rato"
 
 #: ../metadata/rotate.xml.in.h:18
 msgid "Rotate Cube"
-msgstr "Xiros no Cubo"
+msgstr "Cubo xiratorio"
 
 #: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Flip Left"
@@ -2499,7 +2455,7 @@ msgstr "Xirar Cubo"
 
 #: ../metadata/rotate.xml.in.h:51
 msgid "Rotate desktop cube"
-msgstr "Xirar cubo do escritorio"
+msgstr "Activa a rotación do cubo a través das áreas de traballo"
 
 #: ../metadata/rotate.xml.in.h:52
 msgid "Rotate left"
@@ -2507,7 +2463,7 @@ msgstr "Xirar á esquerda"
 
 #: ../metadata/rotate.xml.in.h:53
 msgid "Rotate left and bring active window along"
-msgstr "Xirar á esquerda e arrastrar a fiestra activa"
+msgstr "Xirar á esquerda e arrastrar a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:54
 msgid "Rotate right"
@@ -2515,7 +2471,7 @@ msgstr "Xirar á dereita"
 
 #: ../metadata/rotate.xml.in.h:55
 msgid "Rotate right and bring active window along"
-msgstr "Xirar á dereita e arrastrar a fiestra activa"
+msgstr "Xirar á dereita e arrastrar a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:56
 msgid "Rotate to cube face"
@@ -2523,7 +2479,7 @@ msgstr "Xirar á cara do cubo"
 
 #: ../metadata/rotate.xml.in.h:57
 msgid "Rotate to cube face with window"
-msgstr "Xirar á cara do cubo coa fiestra"
+msgstr "Xirar á cara do cubo coa xanela"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2531,7 +2487,7 @@ msgstr "Xirar á cara 1"
 
 #: ../metadata/rotate.xml.in.h:59
 msgid "Rotate to face 1 and bring active window along"
-msgstr "Xirar á cara 1 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 1 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:60
 msgid "Rotate to face 10"
@@ -2539,7 +2495,7 @@ msgstr "Xirar á cara 10"
 
 #: ../metadata/rotate.xml.in.h:61
 msgid "Rotate to face 10 and bring active window along"
-msgstr "Xirar á cara 10 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 10 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:62
 msgid "Rotate to face 11"
@@ -2547,7 +2503,7 @@ msgstr "Xirar á cara 11"
 
 #: ../metadata/rotate.xml.in.h:63
 msgid "Rotate to face 11 and bring active window along"
-msgstr "Xirar á cara 11 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 11 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:64
 msgid "Rotate to face 12"
@@ -2555,7 +2511,7 @@ msgstr "Xirar á cara 12"
 
 #: ../metadata/rotate.xml.in.h:65
 msgid "Rotate to face 12 and bring active window along"
-msgstr "Xirar á cara 12 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 12 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:66
 msgid "Rotate to face 2"
@@ -2563,7 +2519,7 @@ msgstr "Xirar á cara 2"
 
 #: ../metadata/rotate.xml.in.h:67
 msgid "Rotate to face 2 and bring active window along"
-msgstr "Xirar á cara 2 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 2 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:68
 msgid "Rotate to face 3"
@@ -2571,7 +2527,7 @@ msgstr "Xirar á cara 3"
 
 #: ../metadata/rotate.xml.in.h:69
 msgid "Rotate to face 3 and bring active window along"
-msgstr "Xirar á cara 3 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 3 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:70
 msgid "Rotate to face 4"
@@ -2579,7 +2535,7 @@ msgstr "Xirar á cara 4"
 
 #: ../metadata/rotate.xml.in.h:71
 msgid "Rotate to face 4 and bring active window along"
-msgstr "Xirar á cara 4 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 4 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:72
 msgid "Rotate to face 5"
@@ -2587,7 +2543,7 @@ msgstr "Xirar á cara 5"
 
 #: ../metadata/rotate.xml.in.h:73
 msgid "Rotate to face 5 and bring active window along"
-msgstr "Xirar á cara 5 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 5 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:74
 msgid "Rotate to face 6"
@@ -2595,7 +2551,7 @@ msgstr "Xirar á cara 6"
 
 #: ../metadata/rotate.xml.in.h:75
 msgid "Rotate to face 6 and bring active window along"
-msgstr "Xirar á cara 6 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 6 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:76
 msgid "Rotate to face 7"
@@ -2603,7 +2559,7 @@ msgstr "Xirar á cara 7"
 
 #: ../metadata/rotate.xml.in.h:77
 msgid "Rotate to face 7 and bring active window along"
-msgstr "Xirar á cara 7 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 7 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:78
 msgid "Rotate to face 8"
@@ -2611,7 +2567,7 @@ msgstr "Xirar á cara 8"
 
 #: ../metadata/rotate.xml.in.h:79
 msgid "Rotate to face 8 and bring active window along"
-msgstr "Xirar á cara 8 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 8 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:80
 msgid "Rotate to face 9"
@@ -2619,7 +2575,7 @@ msgstr "Xirar á cara 9"
 
 #: ../metadata/rotate.xml.in.h:81
 msgid "Rotate to face 9 and bring active window along"
-msgstr "Xirar á cara 9 e arrastrar tamén a fiestra activa"
+msgstr "Xirar á cara 9 e arrastrar tamén a xanela activa"
 
 #: ../metadata/rotate.xml.in.h:82
 msgid "Rotate to viewport"
@@ -2627,11 +2583,11 @@ msgstr "Xirar á área de traballo"
 
 #: ../metadata/rotate.xml.in.h:83
 msgid "Rotate window"
-msgstr "Xirar fiestra"
+msgstr "Xirar xanela"
 
 #: ../metadata/rotate.xml.in.h:84
 msgid "Rotate with window"
-msgstr "Xirar coa fiestra"
+msgstr "Xirar coa xanela"
 
 #: ../metadata/rotate.xml.in.h:85
 msgid "Rotation Acceleration"
@@ -2691,7 +2647,7 @@ msgstr "Grande"
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
-msgstr "Atallos para Trocar o Modo Escala"
+msgstr "Atallos para Trocar o Modo de Escala"
 
 #: ../metadata/scale.xml.in.h:7
 msgid ""
@@ -2711,7 +2667,7 @@ msgstr "Escurecer Fondo"
 
 #: ../metadata/scale.xml.in.h:10
 msgid "Darken background when scaling windows"
-msgstr "Escurecer fondo ao escalar fiestras"
+msgstr "Escurecer fondo ao escalar xanelas"
 
 #: ../metadata/scale.xml.in.h:11
 msgid "Emblem"
@@ -2733,7 +2689,7 @@ msgstr "Iniciar Selector de Fiestras"
 
 #: ../metadata/scale.xml.in.h:15
 msgid "Initiate Window Picker For All Windows"
-msgstr "Iniciar selector de fiestras Para Tódalas Fiestras"
+msgstr "Iniciar selector de xanelas Para Tódalas Fiestras"
 
 #: ../metadata/scale.xml.in.h:16
 msgid "Initiate Window Picker For Window Group"
@@ -2757,19 +2713,19 @@ msgstr ""
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
-msgstr "Dispor todas as fiestras e iniciar súa transformación"
+msgstr "Dispor todas as xanelas e iniciar súa transformación"
 
 #: ../metadata/scale.xml.in.h:21
 msgid "Layout and start transforming window group"
-msgstr "Dispor o grupo de fiestras e iniciar súa transformación"
+msgstr "Dispor o grupo de xanelas e iniciar súa transformación"
 
 #: ../metadata/scale.xml.in.h:22
 msgid "Layout and start transforming windows"
-msgstr "Dispor as fiestras e iniciar súa transformación"
+msgstr "Dispor as xanelas e iniciar súa transformación"
 
 #: ../metadata/scale.xml.in.h:23
 msgid "Layout and start transforming windows on current output"
-msgstr "Dispor as fiestras na saída actual e iniciar a súa transformación"
+msgstr "Dispor as xanelas na saída actual e iniciar a súa transformación"
 
 #: ../metadata/scale.xml.in.h:26
 msgid "On all output devices"
@@ -2785,7 +2741,7 @@ msgstr "Icona Superposta"
 
 #: ../metadata/scale.xml.in.h:30
 msgid "Overlay an icon on windows once they are scaled"
-msgstr "Superpor un icona nas fiestras cando sexan escaladas"
+msgstr "Superpor un icona nas xanelas cando sexan escaladas"
 
 #: ../metadata/scale.xml.in.h:31
 msgid "Scale"
@@ -2810,12 +2766,12 @@ msgstr "Escala de Fiestras"
 #: ../metadata/scale.xml.in.h:36
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
-"Selecciona cando son escaladasa fiestras se se empregan múltiples "
+"Selecciona cando son escaladasa xanelas se se empregan múltiples "
 "dispositivos de saída."
 
 #: ../metadata/scale.xml.in.h:37
 msgid "Space between windows"
-msgstr "Espazo entre fiestras"
+msgstr "Espazo entre xanelas"
 
 #: ../metadata/scale.xml.in.h:38
 msgid "Spacing"
@@ -2826,7 +2782,7 @@ msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Tempo (en ms) antes de que o modo de escalado se remate ao pasar sobre unha "
-"fiestra"
+"xanela"
 
 #: ../metadata/scale.xml.in.h:42
 msgid "Windows that should be scaled in scale mode"
@@ -2886,15 +2842,15 @@ msgstr "Xirar Automaticamente"
 
 #: ../metadata/switcher.xml.in.h:8
 msgid "Bring To Front"
-msgstr "Traer ó Frente"
+msgstr "Traer ao Frente"
 
 #: ../metadata/switcher.xml.in.h:9
 msgid "Bring selected window to front"
-msgstr "Coloca a fiestra seleccionada en primeiro plano"
+msgstr "Coloca a xanela seleccionada en primeiro plano"
 
 #: ../metadata/switcher.xml.in.h:10
 msgid "Distance desktop should be zoom out while switching windows"
-msgstr "Afastar o escritorio mentres se cambian as fiestras"
+msgstr "Afastar o escritorio mentres se cambian as xanelas"
 
 #: ../metadata/switcher.xml.in.h:12
 msgid "Icon"
@@ -2910,35 +2866,35 @@ msgstr "Seguinte Panel"
 
 #: ../metadata/switcher.xml.in.h:16
 msgid "Next window"
-msgstr "Seguinte fiestra"
+msgstr "Seguinte xanela"
 
 #: ../metadata/switcher.xml.in.h:17
 msgid "Next window (All windows)"
-msgstr "Seguinte Fiestra (Todas as fiestras)"
+msgstr "Seguinte Fiestra (Todas as xanelas)"
 
 #: ../metadata/switcher.xml.in.h:18
 msgid "Next window (No popup)"
-msgstr "Seguinte Fiestra (Sen fiestra sobresaínte)"
+msgstr "Seguinte Fiestra (Sen xanela sobresaínte)"
 
 #: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select next window"
-msgstr "Amosar trocador se non está visíbel e seleccionar seguinte fiestra"
+msgstr "Amosar trocador se non está visíbel e seleccionar seguinte xanela"
 
 #: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
-"Amosar trocador se non está visíbel e seleccionar a seguinte fiestra de "
-"tódalas fiestras"
+"Amosar trocador se non está visíbel e seleccionar a seguinte xanela de "
+"tódalas xanelas"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Popup switcher if not visible and select previous window"
-msgstr "Amosar trocador se non está visíbel e seleccionar a fiestra anterior"
+msgstr "Amosar trocador se non está visíbel e seleccionar a xanela anterior"
 
 #: ../metadata/switcher.xml.in.h:23
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
-"Amosar trocador se non está visíbel e seleccionar a fiestra anterior de todas"
+"Amosar trocador se non está visíbel e seleccionar a xanela anterior de todas"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev Panel"
@@ -2946,35 +2902,35 @@ msgstr "Ant. Panel"
 
 #: ../metadata/switcher.xml.in.h:25
 msgid "Prev window"
-msgstr "Ant. fiestra"
+msgstr "Ant. xanela"
 
 #: ../metadata/switcher.xml.in.h:26
 msgid "Prev window (All windows)"
-msgstr "Fiestra anterior (Todas as fiestras)"
+msgstr "Fiestra anterior (Todas as xanelas)"
 
 #: ../metadata/switcher.xml.in.h:27
 msgid "Prev window (No popup)"
-msgstr "Fiestra anterior (Sen fiestra sobresaínte)"
+msgstr "Fiestra anterior (Sen xanela sobresaínte)"
 
 #: ../metadata/switcher.xml.in.h:28
 msgid "Rotate to the selected window while switching"
-msgstr "Xirar á fiestra seleccionada mentres se cambia"
+msgstr "Xirar á xanela seleccionada mentres se cambia"
 
 #: ../metadata/switcher.xml.in.h:30
 msgid "Select next panel type window."
-msgstr "Seleccionar seguinte fiestra de tipo panel."
+msgstr "Seleccionar seguinte xanela de tipo panel."
 
 #: ../metadata/switcher.xml.in.h:31
 msgid "Select next window without showing the popup window."
-msgstr "Seleccionar seguinte fiestra sen amosar a fiestra sobresaínte"
+msgstr "Seleccionar seguinte xanela sen amosar a xanela sobresaínte"
 
 #: ../metadata/switcher.xml.in.h:32
 msgid "Select previous panel type window."
-msgstr "Seleccionar anterior fiestra de tipo panel."
+msgstr "Seleccionar anterior xanela de tipo panel."
 
 #: ../metadata/switcher.xml.in.h:33
 msgid "Select previous window without showing the popup window."
-msgstr "Seleccionar fiestra anterior sen amosar a fiestra sobresaínte."
+msgstr "Seleccionar xanela anterior sen amosar a xanela sobresaínte."
 
 #: ../metadata/switcher.xml.in.h:34
 msgid "Show icon next to thumbnail"
@@ -2982,7 +2938,7 @@ msgstr "Amosar icona ao lado da miniatura"
 
 #: ../metadata/switcher.xml.in.h:35
 msgid "Show minimized windows"
-msgstr "Amosar fiestras minimizadas"
+msgstr "Amosar xanelas minimizadas"
 
 #: ../metadata/switcher.xml.in.h:37
 msgid "Switcher speed"
@@ -2994,7 +2950,7 @@ msgstr "Salto do Cambiador"
 
 #: ../metadata/switcher.xml.in.h:39
 msgid "Switcher windows"
-msgstr "Cambiador de fiestras"
+msgstr "Cambiador de xanelas"
 
 #: ../metadata/switcher.xml.in.h:41
 msgid "Windows that should be shown in switcher"
@@ -3084,7 +3040,7 @@ msgstr "Espaciado entre as ondas de auga"
 
 #: ../metadata/water.xml.in.h:18
 msgid "Wave effect from window title"
-msgstr "Efecto de onda dende o título da fiestra"
+msgstr "Efecto de onda dende o título da xanela"
 
 #: ../metadata/wobbly.xml.in.h:1
 msgid "Focus Effect"
@@ -3104,7 +3060,7 @@ msgstr "Fricción"
 
 #: ../metadata/wobbly.xml.in.h:5
 msgid "Grab Windows"
-msgstr "Atracción das fiestras"
+msgstr "Atracción das xanelas"
 
 #: ../metadata/wobbly.xml.in.h:6
 msgid "Grid Resolution"
@@ -3112,19 +3068,19 @@ msgstr "Resolución da Grella"
 
 #: ../metadata/wobbly.xml.in.h:7
 msgid "Inverted window snapping"
-msgstr "Axuste de fiestras invertido"
+msgstr "Axuste de xanelas invertido"
 
 #: ../metadata/wobbly.xml.in.h:8
 msgid "Make window shiver"
-msgstr "Facer que as fiestras temblen"
+msgstr "Fai que as xanelas semellen xelatina"
 
 #: ../metadata/wobbly.xml.in.h:9
 msgid "Map Effect"
-msgstr "Efecto ó colocar"
+msgstr "Efecto ao colocar"
 
 #: ../metadata/wobbly.xml.in.h:10
 msgid "Map Window Effect"
-msgstr "Efecto da Fiestra ó Colocala"
+msgstr "Efecto da Fiestra ao Colocala"
 
 #: ../metadata/wobbly.xml.in.h:11
 msgid "Map Windows"
@@ -3132,7 +3088,7 @@ msgstr "Colocar Fiestras"
 
 #: ../metadata/wobbly.xml.in.h:12
 msgid "Maximize Effect"
-msgstr "Efecto ó Maximizar"
+msgstr "Efecto ao Maximizar"
 
 #: ../metadata/wobbly.xml.in.h:13
 msgid "Minimum Grid Size"
@@ -3156,27 +3112,27 @@ msgstr "Instantánea invertida"
 
 #: ../metadata/wobbly.xml.in.h:19
 msgid "Snap windows"
-msgstr "Axustar fiestras"
+msgstr "Axustar xanelas"
 
 #: ../metadata/wobbly.xml.in.h:20
 msgid "Spring Friction"
-msgstr "Fricción do muelle"
+msgstr "Fricción do mola"
 
 #: ../metadata/wobbly.xml.in.h:21
 msgid "Spring K"
-msgstr "K do muelle"
+msgstr "K do mola"
 
 #: ../metadata/wobbly.xml.in.h:22
 msgid "Spring Konstant"
-msgstr "Constante do muelle"
+msgstr "Constante do mola"
 
 #: ../metadata/wobbly.xml.in.h:23
 msgid "Toggle window snapping"
-msgstr "Trocar axuste de fiestras"
+msgstr "Trocar axuste de xanelas"
 
 #: ../metadata/wobbly.xml.in.h:24
 msgid "Use spring model for wobbly window effect"
-msgstr "Empregar modelo de mola para o efecto tremente da fiestra"
+msgstr "Empregar modelo de mola para simular o efecto xelatinoso nas xanelas"
 
 #: ../metadata/wobbly.xml.in.h:25
 msgid "Vertex Grid Resolution"
@@ -3184,79 +3140,33 @@ msgstr "Resolución da Grella Vertex"
 
 #: ../metadata/wobbly.xml.in.h:26
 msgid "Windows that should wobble when focused"
-msgstr "Fiestras que deben tremer cando son enfocadas"
+msgstr "Fiestras que deben semellar xelatina cando son enfocadas"
 
 #: ../metadata/wobbly.xml.in.h:27
 msgid "Windows that should wobble when grabbed"
-msgstr "Fiestras que deben tremer cando son agarradas"
+msgstr "Fiestras que deben semellar xelatina cando son agarradas"
 
 #: ../metadata/wobbly.xml.in.h:28
 msgid "Windows that should wobble when mapped"
-msgstr "Fiestras que deben tremer cando son colocadas"
+msgstr "Fiestras que deben semellar xelatina cando son colocadas"
 
 #: ../metadata/wobbly.xml.in.h:29
 msgid "Windows that should wobble when moved"
-msgstr "Fiestras que deben tremer cando son movidas"
+msgstr "Fiestras que deben semellar xelatina cando son movidas"
 
 #: ../metadata/wobbly.xml.in.h:30
 msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr "Activar o efecto tremer cando se maximizan ou minimizan as fiestras"
+msgstr "Activar o efecto semellante á xelatina cando se maximizan ou minimizan as xanelas"
 
 #: ../metadata/wobbly.xml.in.h:31
 msgid "Wobbly Windows"
-msgstr "Fiestras trementes"
+msgstr "Fiestras xelatinosas"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtro lineal"
+#~ msgid "Command line 0"
+#~ msgstr "Liña de comando 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Empregar o filtro lineal cando se fai zoom"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Zoom do escritorio"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Acercar"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Afastar"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Colocación do Zoom"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Velocidade de Zoom"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Salto de tempo do Zoom"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Afastar e mover cubo do escritorio"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Factor de zoom"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Colocación do Zoom"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Liña de comando 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Executar comando 1"
+#~ msgid "Run command 0"
+#~ msgstr "Executar comando 0"
 
 #~ msgid "Screenshot commands"
 #~ msgstr "Comandos de Captura de pantalla"
@@ -3264,18 +3174,51 @@ msgstr "Colocación do Zoom"
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Atallos de teclado para facer captura de pantalla"
 
+#~ msgid "Filter Linear"
+#~ msgstr "Filtro lineal"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Empregar o filtro lineal cando se fai zoom"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Zoom do escritorio"
+
+#~ msgid "Zoom In"
+#~ msgstr "Acercar"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Afastar"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Colocación do Zoom"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Velocidade de Zoom"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Salto de tempo do Zoom"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Afastar e mover cubo do escritorio"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Factor de zoom"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Colocación do Zoom"
+
 #~ msgid "Decrease window opacity"
-#~ msgstr "Reducir opacidade da fiestra"
+#~ msgstr "Reducir opacidade da xanela"
 
 #~ msgid "Increase window opacity"
-#~ msgstr "Aumentar opacidade da fiestra"
+#~ msgstr "Aumentar opacidade da xanela"
 
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr ""
-#~ "Valores de opacidade para fiestras que deben ser translúcidas por omisión"
+#~ "Valores de opacidade para xanelas que deben ser translúcidas por omisión"
 
 #~ msgid "Opacity windows"
-#~ msgstr "Opacidade de fiestras"
+#~ msgstr "Opacidade de xanelas"
 
 #~ msgid "Background Images"
 #~ msgstr "Imaxes de fondo"
@@ -3284,7 +3227,7 @@ msgstr "Colocación do Zoom"
 #~ msgstr "Imaxes de fondo"
 
 #~ msgid "Place windows on a plane"
-#~ msgstr "Colocar fiestras nun plano"
+#~ msgstr "Colocar xanelas nun plano"
 
 #~ msgid "Plane Down"
 #~ msgstr "Plano Abaixo"

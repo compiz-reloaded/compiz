@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:08+0100\n"
-"PO-Revision-Date: 2009-02-05 01:16+0100\n"
-"Last-Translator: Gabriel Ferreiro Blazetic <gbril9119@gmail.com>\n"
+"POT-Creation-Date: 2009-03-24 08:12+0100\n"
+"PO-Revision-Date: 2009-07-13 00:59+0200\n"
+"Last-Translator: Franco Guevara <francoa.bartalotta@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid "None"
 msgstr "Ninguno"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Tonalidad"
 
@@ -63,7 +63,7 @@ msgid "Lower"
 msgstr "Bajar"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Menú de ventanas"
@@ -133,59 +133,59 @@ msgstr "Usar el tema Metacity"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Usar el tema Metacity para dibujar las decoraciones de ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Cerrar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Desmaximizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maximizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Minimizar ventana"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Subir"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Adherir"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Anular sombra"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Desmarcar Sobre"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "Despegar"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "La ventana \"%s\" no responde."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Forzando la salida de la aplicación puede causar la pérdida de los datos que "
 "no haya guardado."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "Forzar salida"
 
@@ -226,7 +226,7 @@ msgstr "Color de relleno para anotaciones"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Iniciar"
 
@@ -406,112 +406,100 @@ msgid "Output clone handler"
 msgstr "Manejador de clonación de salida"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command0"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando0"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command1"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando1"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command10"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando10"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command11"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando11"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command2"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando2"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command3"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando3"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command4"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando4"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command5"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando5"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command6"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando6"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command7"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando7"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command8"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando8"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command9"
+"Combinación de botones que al utilizarse ejecutará el comando de shell "
+"identificado como el comando9"
 
 #: ../metadata/commands.xml.in.h:13
 msgid ""
@@ -519,7 +507,7 @@ msgid ""
 "command0"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command0"
+"identificado como el comando0"
 
 #: ../metadata/commands.xml.in.h:14
 msgid ""
@@ -527,7 +515,7 @@ msgid ""
 "command1"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command1"
+"identificado como el comando1"
 
 #: ../metadata/commands.xml.in.h:15
 msgid ""
@@ -535,7 +523,7 @@ msgid ""
 "command10"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command10"
+"identificado como el comando10"
 
 #: ../metadata/commands.xml.in.h:16
 msgid ""
@@ -543,7 +531,7 @@ msgid ""
 "command11"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command11"
+"identificado como el comando11"
 
 #: ../metadata/commands.xml.in.h:17
 msgid ""
@@ -551,7 +539,7 @@ msgid ""
 "command2"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command2"
+"identificado como el comando2"
 
 #: ../metadata/commands.xml.in.h:18
 msgid ""
@@ -559,7 +547,7 @@ msgid ""
 "command3"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command3"
+"identificado como el comando3"
 
 #: ../metadata/commands.xml.in.h:19
 msgid ""
@@ -567,7 +555,7 @@ msgid ""
 "command4"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command4"
+"identificado como el comando4"
 
 #: ../metadata/commands.xml.in.h:20
 msgid ""
@@ -575,7 +563,7 @@ msgid ""
 "command5"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command5"
+"identificado como el comando5"
 
 #: ../metadata/commands.xml.in.h:21
 msgid ""
@@ -583,7 +571,7 @@ msgid ""
 "command6"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command6"
+"identificado como el comando6"
 
 #: ../metadata/commands.xml.in.h:22
 msgid ""
@@ -591,7 +579,7 @@ msgid ""
 "command7"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command7"
+"identificado como el comando7"
 
 #: ../metadata/commands.xml.in.h:23
 msgid ""
@@ -599,7 +587,7 @@ msgid ""
 "command8"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command8"
+"identificado como el comando8"
 
 #: ../metadata/commands.xml.in.h:24
 msgid ""
@@ -607,139 +595,127 @@ msgid ""
 "command9"
 msgstr ""
 "Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command9"
+"identificado como el comando9"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command0"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando0"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command1"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando1"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command10"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando10"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command11"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando11"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command2"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando2"
 
 #: ../metadata/commands.xml.in.h:30
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command3"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando3"
 
 #: ../metadata/commands.xml.in.h:31
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command4"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando4"
 
 #: ../metadata/commands.xml.in.h:32
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command5"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando5"
 
 #: ../metadata/commands.xml.in.h:33
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command6"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando6"
 
 #: ../metadata/commands.xml.in.h:34
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command7"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando7"
 
 #: ../metadata/commands.xml.in.h:35
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command8"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando8"
 
 #: ../metadata/commands.xml.in.h:36
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Combinación de teclas que al utilizarse ejecutará el comando de shell "
-"identificado por command9"
+"Asociación de bordes que al utilizarse ejecutará el comando de shell "
+"identificado como el comando9"
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Asignar combinaciones a comandos arbitrarios"
 
 #: ../metadata/commands.xml.in.h:38
 msgid "Button Bindings"
-msgstr ""
+msgstr "Combinaciones de botones"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "Línea de comandos 0"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "Línea de comandos 1"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "Línea de comandos 10"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "Línea de comandos 11"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "Línea de comandos 12"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -838,30 +814,28 @@ msgid "Commands"
 msgstr "Comandos"
 
 #: ../metadata/commands.xml.in.h:64
-#, fuzzy
 msgid "Edge Bindings"
-msgstr "Combinaciones de Teclas"
+msgstr "Vinculaciones de bordes"
 
 #: ../metadata/commands.xml.in.h:65
-#, fuzzy
 msgid "Key Bindings"
-msgstr "Combinaciones de Teclas"
+msgstr "Combinaciones de teclas"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Ejecutar comando 0"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Ejecutar comando 1"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Ejecutar comando 10"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Ejecutar comando 11"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "Ejecutar comando 12"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -968,7 +942,7 @@ msgstr "Detectar frecuencia de actualización"
 
 #: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
-msgstr ""
+msgstr "Opciones de presentación"
 
 #: ../metadata/core.xml.in.in.h:20
 msgid ""
@@ -988,7 +962,7 @@ msgstr "Rápido"
 
 #: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "Enfocar y ampliar; Incrementar comportamiento"
 
 #: ../metadata/core.xml.in.in.h:24
 msgid "Focus Prevention Level"
@@ -1352,9 +1326,8 @@ msgstr ""
 "atrás de la cúpula"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "Color del cubo"
+msgstr "Capas del cubo"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1489,13 +1462,13 @@ msgstr "Imagen de cúpula"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Velocidad"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "Paso"
 
@@ -1605,26 +1578,25 @@ msgstr "Ventanas que deben tener sombra"
 #: ../metadata/fade.xml.in.h:2
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Brillo (en %) de las ventanas que no respondan"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
 msgid "Constant speed"
-msgstr "Velocidad de giro"
+msgstr "Velocidad constante"
 
 #: ../metadata/fade.xml.in.h:4
-#, fuzzy
 msgid "Constant time"
-msgstr "Limitar Y"
+msgstr "Tiempo constante"
 
 #: ../metadata/fade.xml.in.h:5
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "Cambiar Tamaño Ventanas Normal"
+msgstr "Atenuar las ventanas que no respondan"
 
 #: ../metadata/fade.xml.in.h:6
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
+"Atenuar las ventanas que no estén respondiendo las peticiones del gestor de "
+"ventanas"
 
 #: ../metadata/fade.xml.in.h:7
 msgid "Fade Mode"
@@ -1676,37 +1648,39 @@ msgstr ""
 #: ../metadata/fade.xml.in.h:19
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Saturación (en %) de las ventanas que no respondan"
 
 #: ../metadata/fade.xml.in.h:20
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Brillo de las ventanas que no respondan"
 
 #: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Saturación de las ventanas que no respondan"
 
 #: ../metadata/fade.xml.in.h:22
 msgid "Visual Bell"
 msgstr "Timbre visual"
 
 #: ../metadata/fade.xml.in.h:23
-#, fuzzy
 msgid "Window fade mode"
-msgstr "Velocidad de desvanecimiento de ventana"
+msgstr "Modo de desvanecimiento de ventana"
 
 #: ../metadata/fade.xml.in.h:24
-#, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Ventanas que se deben escalar en el modo de escala"
+msgstr ""
+"Velocidad de desvanecimiento de ventana cuando \"Velocidad constante\" está "
+"activado"
 
 #: ../metadata/fade.xml.in.h:25
 msgid "Window fade time (in ms) in \"Constant time\" mode"
 msgstr ""
+"Tiempo de desvanecimiento (en ms) de ventana cuando \"Tiempo constante\" está "
+"activado"
 
 #: ../metadata/fade.xml.in.h:26
 msgid "Windows that should be fading"
-msgstr "Ventana que deben desvanecerse"
+msgstr "Ventanas que deberían desvanecerse"
 
 #: ../metadata/fs.xml.in.h:1
 msgid "Mount Point"
@@ -1742,7 +1716,7 @@ msgstr "soporte de loop principal de GLib "
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Compatibilidad de Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1750,16 +1724,15 @@ msgstr "Abrir terminal"
 
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
-msgstr ""
+msgstr "Opciones que mantienen a Compiz compatible con Gnome"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Ejecutar diálogo"
 
 #: ../metadata/gnomecompat.xml.in.h:6
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Línea de comandos para abrir Terminal"
+msgstr "Ejecutar comando de terminal"
 
 #: ../metadata/gnomecompat.xml.in.h:7
 msgid "Screenshot command line"
@@ -1906,122 +1879,104 @@ msgid "Brightness"
 msgstr "Brillo"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Brillo"
+msgstr "Disminuir brillo"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Brillo"
+msgstr "Aumentar brillo"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Brillo"
+msgstr "Paso de brillo"
 
 #: ../metadata/obs.xml.in.h:5
 msgid "Brightness values for windows"
-msgstr ""
+msgstr "Brillo de las ventanas"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "Disminuir opacidad"
+msgstr "Disminuir"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "Aumentar opacidad"
+msgstr "Aumentar"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Paso de cambio de opacidad"
+msgstr "Disminuir opacidad"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Paso de cambio de opacidad"
+msgstr "Aumentar opacidad"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
 msgstr "Paso de opacidad"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Nivel de opacidad de las ventanas en movimiento"
+msgstr "Opacidad de las ventanas"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "Opacidad durante rotacion"
+msgstr "Opacidad, brillo y saturación"
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Ajustes de opacidad, brillo y saturación"
 
 #: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "Saturación"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Saturación"
+msgstr "Disminuir saturación"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Saturación"
+msgstr "Aumentar saturación"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Saturación"
+msgstr "Paso de saturación"
 
 #: ../metadata/obs.xml.in.h:19
 msgid "Saturation values for windows"
-msgstr ""
+msgstr "Saturación de las ventanas"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Paso"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "La decoración de las ventanas"
+msgstr "Opciones especifícas de la ventana"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "Tipos de ventana"
+msgstr "Valores de las ventanas"
 
 #: ../metadata/obs.xml.in.h:23
-#, fuzzy
 msgid "Windows"
-msgstr "Asignar ventanas"
+msgstr "Ventanas"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "Ventanas que deben posicionarse por defecto"
+msgstr "Ventanas que deberían tener un brillo diferente por defecto"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "Ventanas que deben ser translúcidas por defecto"
+msgstr "Ventanas que deberían tener una opacidad diferente por defecto"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "Ventanas que deben posicionarse por defecto"
+msgstr "Ventanas que deberían tener una saturación diferente por defecto"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
-msgstr "Algoritmo a usar para posicionamiento de ventanas"
+msgstr "Algoritmo a emplear para el posicionamiento de ventanas"
 
 #: ../metadata/place.xml.in.h:2
 msgid "Cascade"
@@ -2032,28 +1987,28 @@ msgid "Centered"
 msgstr "Centrado"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Ventana de Gestión"
+msgstr "Fijar el posicionamiento de ventanas"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
-msgstr "Forzar Ventanas de Ubicación"
+msgstr "Forzar el posicionamiento de las ventanas"
 
 #: ../metadata/place.xml.in.h:6
 msgid "Horizontal viewport positions"
-msgstr "Posiciones de viewport horizontales"
+msgstr "Posiciones de los puntos de vista horizontales"
 
 #: ../metadata/place.xml.in.h:7
-#, fuzzy
 msgid "Keep In Workarea"
-msgstr "Mantener en el Área de trabajo"
+msgstr "Mantener en el área de trabajo"
 
 #: ../metadata/place.xml.in.h:8
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"Mantener la ventana posicionada en el área de trabajo, inclusio si eso "
+"implicase que la posición difiera de la posición específica"
 
 #: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
@@ -2131,13 +2086,12 @@ msgstr ""
 "administrador de ventanas debe evitar colocarlas"
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Ventanas con posiciones arregladas"
+msgstr "Ventanas con posiciones fijas"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "Ventanas con punto de vista fijo"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -2153,7 +2107,7 @@ msgstr "Posiciones de Viewport X"
 
 #: ../metadata/place.xml.in.h:33
 msgid "X position values"
-msgstr "valores de posicion X"
+msgstr "Valores de posición X"
 
 #: ../metadata/place.xml.in.h:34
 msgid "Y Positions"
@@ -2165,7 +2119,7 @@ msgstr "Posiciones de Viewport Y"
 
 #: ../metadata/place.xml.in.h:36
 msgid "Y position values"
-msgstr "valores de posicion Y"
+msgstr "Valores de posición Y"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -2186,7 +2140,7 @@ msgstr "Regex coincidir ventanas"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "Vínculos"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2195,7 +2149,8 @@ msgstr "Color de borde"
 #: ../metadata/resize.xml.in.h:3
 msgid "Border color used for outline and rectangle resize modes"
 msgstr ""
-"Color de borde usado para modos de cambiar tamaño linea exterior y rectangulo"
+"Color de borde usado para modos de cambiar tamaño línea exterior y "
+"rectángulo"
 
 #: ../metadata/resize.xml.in.h:4
 msgid "Default Resize Mode"
@@ -2328,24 +2283,24 @@ msgstr "Invertir a viewport izquierdo y doblar puntero"
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr ""
-"Se invierte al viewport siguiente al arrastrar un objeto al borde de la "
-"pantalla"
+"Se invierte al punto de vista siguiente al arrastrar un objeto al borde de "
+"la pantalla"
 
 #: ../metadata/rotate.xml.in.h:9
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
-"Se invierte al viewport siguiente al arrastrar un puntero al borde de la "
-"pantalla"
+"Se invierte al punto de vista siguiente al arrastrar un puntero al borde de "
+"la pantalla"
 
 #: ../metadata/rotate.xml.in.h:10
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
-"Se invierte al viewport siguiente al mover una ventana al borde de la "
+"Se invierte al punto de vista siguiente al mover una ventana al borde de la "
 "pantalla"
 
 #: ../metadata/rotate.xml.in.h:11
 msgid "Flip to right viewport and warp pointer"
-msgstr "Invertir a viewport derecho y doblar puntero"
+msgstr "Invertir a punto de vista derecho y doblar puntero"
 
 #: ../metadata/rotate.xml.in.h:13
 msgid "Invert Y axis for pointer movement"
@@ -2524,9 +2479,8 @@ msgid "Rotate to cube face"
 msgstr "Girar a la cara del cubo"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Girar a la Cara 1 con Ventana"
+msgstr "Rotar la cara del cubo con la ventana"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -2694,13 +2648,15 @@ msgstr "Grande"
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Combinaciones de botones para alternar al modo escalado"
 
 #: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Combinaciones de botones para alternar al modo escalado en vez de "
+"habilitarlo cuando es presionado y deshabilitarlo cuando es liberado."
 
 #: ../metadata/scale.xml.in.h:8
 msgid "Click Desktop to Show Desktop"
@@ -2712,7 +2668,7 @@ msgstr "Oscurecer fondo"
 
 #: ../metadata/scale.xml.in.h:10
 msgid "Darken background when scaling windows"
-msgstr "Oscurece el fondo al escalar las ventanas"
+msgstr "Oscurecer el fondo al escalar las ventanas"
 
 #: ../metadata/scale.xml.in.h:11
 msgid "Emblem"
@@ -2745,13 +2701,15 @@ msgstr "Iniciar selector de ventanas para las ventanas de la salida actual"
 
 #: ../metadata/scale.xml.in.h:18
 msgid "Key Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Combinaciones de teclas para alternar al modo escalado"
 
 #: ../metadata/scale.xml.in.h:19
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Combinaciones de teclas para alternar al modo escalado en vez de habilitarlo "
+"cuando es presionado y deshabilitarlo cuando es liberado"
 
 #: ../metadata/scale.xml.in.h:20
 msgid "Layout and start transforming all windows"
@@ -3213,57 +3171,11 @@ msgstr "Efecto gelatinoso al maximizar o desmaximizar las ventanas"
 msgid "Wobbly Windows"
 msgstr "Ventanas Gelatinosas"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Filtro lineal"
+#~ msgid "Command line 0"
+#~ msgstr "Línea de comandos 0"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Usa el filtro lineal cuando se hace un acercamiento"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Zoom de Escritorio"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Ampliar"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Reducir"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Panoramico"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Velocidad de zoom"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Paso de zoom"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Zoom y panorámica del cubo de escritorio"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Factor de zoom"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Panorámica"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "Línea de comandos 1"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Ejecutar comando 1"
+#~ msgid "Run command 0"
+#~ msgstr "Ejecutar comando 0"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
@@ -3272,6 +3184,39 @@ msgstr "Panorámica"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Línea de comandos de captura de pantalla"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Filtro lineal"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Usa el filtro lineal cuando se hace un acercamiento"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Zoom de Escritorio"
+
+#~ msgid "Zoom In"
+#~ msgstr "Ampliar"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Reducir"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Panoramico"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Velocidad de zoom"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Paso de zoom"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Zoom y panorámica del cubo de escritorio"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Factor de zoom"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Panorámica"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Disminuye la opacidad de la ventana"

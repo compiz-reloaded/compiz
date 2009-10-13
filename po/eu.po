@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu-compiz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 09:08+0100\n"
-"PO-Revision-Date: 2008-08-25 10:20+0200\n"
+"POT-Creation-Date: 2009-03-24 08:12+0100\n"
+"PO-Revision-Date: 2009-06-23 15:38+0200\n"
 "Last-Translator: Ander Elortondo <ander.elor@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgid "None"
 msgstr "Bat ere ez"
 
 #: ../gtk/gnome/compiz-window-manager.c:427
-#: ../gtk/window-decorator/gtk-window-decorator.c:4616
+#: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Itzala"
 
@@ -44,24 +44,20 @@ msgid "Maximize"
 msgstr "Maximizatu"
 
 #: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
 msgid "Maximize Horizontally"
-msgstr "Horizontalki maximizatu leihoa"
+msgstr "Horizontalki maximizatu"
 
 #: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
 msgid "Maximize Vertically"
-msgstr "Bertikalki maximizatu leihoa"
+msgstr "Bertikalki maximizatu"
 
 #: ../gtk/gnome/compiz-window-manager.c:431
-#, fuzzy
 msgid "Minimize"
-msgstr "Ikonotua"
+msgstr "Ikonotu"
 
 #: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
 msgid "Raise"
-msgstr "Automatikoki goratu"
+msgstr "Goratu"
 
 #: ../gtk/gnome/compiz-window-manager.c:433
 #, fuzzy
@@ -69,7 +65,7 @@ msgid "Lower"
 msgstr "Azpian"
 
 #: ../gtk/gnome/compiz-window-manager.c:434
-#: ../gtk/window-decorator/gtk-window-decorator.c:4597
+#: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
 msgstr "Leiho Menua"
@@ -139,59 +135,59 @@ msgstr "Erabili metacity gaia"
 msgid "Use metacity theme when drawing window decorations"
 msgstr "Erabili metacity gaia leiho dekorazioa marraztean"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4405
+#: ../gtk/window-decorator/gtk-window-decorator.c:4414
 #: ../metadata/core.xml.in.in.h:12
 msgid "Close Window"
 msgstr "Itxi leihoa"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4427
+#: ../gtk/window-decorator/gtk-window-decorator.c:4436
 #: ../metadata/core.xml.in.in.h:93
 msgid "Unmaximize Window"
 msgstr "Leheneratu leihoa"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4430
+#: ../gtk/window-decorator/gtk-window-decorator.c:4439
 #: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window"
 msgstr "Maximizatu leihoa"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4472
+#: ../gtk/window-decorator/gtk-window-decorator.c:4481
 #: ../metadata/core.xml.in.in.h:55
 msgid "Minimize Window"
 msgstr "Leihoa Minimizatu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4636
+#: ../gtk/window-decorator/gtk-window-decorator.c:4645
 msgid "Make Above"
 msgstr "Ezarri gainean"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4662
+#: ../gtk/window-decorator/gtk-window-decorator.c:4671
 msgid "Stick"
 msgstr "Itsatsi"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4682
+#: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
 msgstr "Itzala kendu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4702
+#: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
 msgstr "Gainean ezartzea kendu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4728
+#: ../gtk/window-decorator/gtk-window-decorator.c:4737
 msgid "Unstick"
 msgstr "itsastea kendu"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5076
+#: ../gtk/window-decorator/gtk-window-decorator.c:5085
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "\"%s\" leihoak ez du erantzuten."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk/window-decorator/gtk-window-decorator.c:5094
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "Aplikazio honi irtetzera behartuz, gorde gabeko aldaketak galtzea ekar "
 "dezake."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5100
+#: ../gtk/window-decorator/gtk-window-decorator.c:5109
 msgid "_Force Quit"
 msgstr "_Irtetzera behartu"
 
@@ -229,7 +225,7 @@ msgstr "Betetze kolorea oharrentzat"
 
 #: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
 #: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6 ../metadata/zoom.xml.in.h:2
+#: ../metadata/water.xml.in.h:6
 msgid "Initiate"
 msgstr "Hasi"
 
@@ -407,84 +403,72 @@ msgid "Output clone handler"
 msgstr "Irteera klonatze kudeatzailea"
 
 #: ../metadata/commands.xml.in.h:1
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr "Shell command0 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:2
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr "Shell command1 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:3
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr "Shell command10 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:4
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr "Shell command11 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:5
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr "Shell command2 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:6
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr "Shell command3 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:7
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr "Shell command4 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:8
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr "Shell command5 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:9
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr "Shell command6 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:10
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr "Shell command7 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:11
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr "Shell command8 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:12
-#, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
@@ -563,84 +547,72 @@ msgid ""
 msgstr "Shell command9 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:25
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr "Shell command0 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:26
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr "Shell command1 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:27
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr "Shell command10 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:28
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr "Shell command11 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:29
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr "Shell command2 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:30
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr "Shell command3 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:31
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr "Shell command4 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:32
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr "Shell command5 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:33
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr "Shell command6 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:34
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr "Shell command7 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:35
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr "Shell command8 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:36
-#, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
@@ -648,27 +620,27 @@ msgstr "Shell command9 komandoa exekutatuko duen laster-tekla"
 
 #: ../metadata/commands.xml.in.h:37
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Esleitu laster-tekla hautazko komandori"
 
 #: ../metadata/commands.xml.in.h:38
 msgid "Button Bindings"
-msgstr ""
+msgstr "Botoi Laster-bideak"
 
 #: ../metadata/commands.xml.in.h:39
-msgid "Command line 0"
-msgstr "0 komando lerroa"
-
-#: ../metadata/commands.xml.in.h:40
 msgid "Command line 1"
 msgstr "1 komando lerroa"
 
-#: ../metadata/commands.xml.in.h:41
+#: ../metadata/commands.xml.in.h:40
 msgid "Command line 10"
 msgstr "10 komando lerroa"
 
-#: ../metadata/commands.xml.in.h:42
+#: ../metadata/commands.xml.in.h:41
 msgid "Command line 11"
 msgstr "11 komando lerroa"
+
+#: ../metadata/commands.xml.in.h:42
+msgid "Command line 12"
+msgstr "12 komando lerroa"
 
 #: ../metadata/commands.xml.in.h:43
 msgid "Command line 2"
@@ -763,33 +735,32 @@ msgstr ""
 "Shellean exekutatu beharreko komando lerroa exekutatu_9komandoa abiaraztean"
 
 #: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
-#, fuzzy
 msgid "Commands"
-msgstr "Komandoa"
+msgstr "Komandoak"
 
 #: ../metadata/commands.xml.in.h:64
 msgid "Edge Bindings"
-msgstr ""
+msgstr "Ertzetako laster-bideak"
 
 #: ../metadata/commands.xml.in.h:65
 msgid "Key Bindings"
-msgstr ""
+msgstr "Laster-teklak"
 
 #: ../metadata/commands.xml.in.h:66
-msgid "Run command 0"
-msgstr "Exekutatu 0 komandoa"
-
-#: ../metadata/commands.xml.in.h:67
 msgid "Run command 1"
 msgstr "Exekutatu 1 komandoa"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:67
 msgid "Run command 10"
 msgstr "Exekutatu 10 komandoa"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:68
 msgid "Run command 11"
 msgstr "Exekutatu 11 komandoa"
+
+#: ../metadata/commands.xml.in.h:69
+msgid "Run command 12"
+msgstr "Exekutatu 12 komandoa"
 
 #: ../metadata/commands.xml.in.h:70
 msgid "Run command 2"
@@ -882,9 +853,8 @@ msgid "Default window icon image"
 msgstr "Lehenetsitako leihoaren ikono irudia"
 
 #: ../metadata/core.xml.in.in.h:16
-#, fuzzy
 msgid "Desktop Size"
-msgstr "Mahaigain Kuboa"
+msgstr "Mahaigain tamaina"
 
 #: ../metadata/core.xml.in.in.h:17
 msgid "Detect Outputs"
@@ -896,7 +866,7 @@ msgstr "Freskatze-tasa detektatu"
 
 #: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
-msgstr ""
+msgstr "Erakutsi ezarpenak"
 
 #: ../metadata/core.xml.in.in.h:20
 msgid ""
@@ -991,7 +961,7 @@ msgstr "Ping mezuen arteko tartea"
 
 #: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
-msgstr ""
+msgstr "Laster-teklak"
 
 #: ../metadata/core.xml.in.in.h:42
 msgid "Level of focus stealing prevention"
@@ -1248,7 +1218,7 @@ msgstr "Animatu skydome kuboa biratzean"
 
 #: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
 msgid "Appearance"
-msgstr ""
+msgstr "Itxura"
 
 #: ../metadata/cube.xml.in.h:8
 msgid "Automatic"
@@ -1256,7 +1226,7 @@ msgstr "Automatiko"
 
 #: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Portaera"
 
 #: ../metadata/cube.xml.in.h:10
 msgid "Color of top and bottom sides of the cube"
@@ -1275,9 +1245,8 @@ msgstr ""
 "beharreko kolorea"
 
 #: ../metadata/cube.xml.in.h:13
-#, fuzzy
 msgid "Cube Caps"
-msgstr "Kubo kolorea"
+msgstr "Kubo estalkiak"
 
 #: ../metadata/cube.xml.in.h:14
 msgid "Cube Color"
@@ -1406,13 +1375,13 @@ msgstr "Skydome irudia"
 
 #: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
 #: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36 ../metadata/zoom.xml.in.h:3
+#: ../metadata/switcher.xml.in.h:36
 msgid "Speed"
 msgstr "Abiadura"
 
 #: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
 #: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40 ../metadata/zoom.xml.in.h:4
+#: ../metadata/switcher.xml.in.h:40
 msgid "Timestep"
 msgstr "denbora-pausoa"
 
@@ -1422,7 +1391,7 @@ msgstr "Gardentasuna saguaz biratzean bakarrik"
 
 #: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
-msgstr ""
+msgstr "Kubo gardena"
 
 #: ../metadata/cube.xml.in.h:50
 msgid "Unfold"
@@ -1653,7 +1622,7 @@ msgstr "GLib loop nagusiaren euskarria"
 
 #: ../metadata/gnomecompat.xml.in.h:2
 msgid "Gnome Compatibility"
-msgstr ""
+msgstr "Gnome bateragarritasuna"
 
 #: ../metadata/gnomecompat.xml.in.h:3
 msgid "Open a terminal"
@@ -1661,16 +1630,15 @@ msgstr "Terminala zabaldu"
 
 #: ../metadata/gnomecompat.xml.in.h:4
 msgid "Options that keep Compiz compatible to the Gnome desktop environment"
-msgstr ""
+msgstr "Compiz Gnome mahaigain inguruneaz bateragarriak egiten duten aukerak"
 
 #: ../metadata/gnomecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Exekuzio elkarrizketa"
 
 #: ../metadata/gnomecompat.xml.in.h:6
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Terminal komando lerroa"
+msgstr "Terminal komandoa exekutatu"
 
 #: ../metadata/gnomecompat.xml.in.h:7
 msgid "Screenshot command line"
@@ -1815,120 +1783,100 @@ msgid "Brightness"
 msgstr "Distira"
 
 #: ../metadata/obs.xml.in.h:2
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Distira"
+msgstr "Distira txikitu"
 
 #: ../metadata/obs.xml.in.h:3
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Distira"
+msgstr "Distira handitu"
 
 #: ../metadata/obs.xml.in.h:4
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Distira"
+msgstr "Distira pausoa"
 
 #: ../metadata/obs.xml.in.h:5
-#, fuzzy
 msgid "Brightness values for windows"
-msgstr "Distira (%tan) erantzuten ez duen leihoek"
+msgstr "Distira balioak leihoentzat"
 
 #: ../metadata/obs.xml.in.h:6
-#, fuzzy
 msgid "Decrease"
-msgstr "Txikitu opakutasuna"
+msgstr "Txikitu"
 
 #: ../metadata/obs.xml.in.h:7
-#, fuzzy
 msgid "Increase"
-msgstr "Handitu opakutasuna"
+msgstr "Handitu"
 
 #: ../metadata/obs.xml.in.h:9
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Opakutasun aldatze pausoa"
+msgstr "Opakutasuna txikitu"
 
 #: ../metadata/obs.xml.in.h:10
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Opakutasun aldatze pausoa"
+msgstr "Opakutasuna handitu"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
 msgstr "Opakotasun pausoa"
 
 #: ../metadata/obs.xml.in.h:12
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Mugitzen ari diren leihoaen opakutasuna"
+msgstr "Opakutasun balioa leihoentzat"
 
 #: ../metadata/obs.xml.in.h:13
-#, fuzzy
 msgid "Opacity, Brightness and Saturation"
-msgstr "Opakutasuna biratzean"
+msgstr "Opakutasuna, distira eta saturazioa"
 
 #: ../metadata/obs.xml.in.h:14
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Opakutasun, distira eta saturazio doitzeak"
 
 #: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
 msgid "Saturation"
 msgstr "Saturazioa"
 
 #: ../metadata/obs.xml.in.h:16
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Saturazioa"
+msgstr "Saturazioa txikitu"
 
 #: ../metadata/obs.xml.in.h:17
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Saturazioa"
+msgstr "Saturazioa handitu"
 
 #: ../metadata/obs.xml.in.h:18
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Saturazioa"
+msgstr "Saturazio pausoa"
 
 #: ../metadata/obs.xml.in.h:19
-#, fuzzy
 msgid "Saturation values for windows"
-msgstr "Erantzuten ez duten leihoen saturazioa (%tan)"
+msgstr "Saturazio balioa leihoentzat"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr ""
+msgstr "Pausoa"
 
 #: ../metadata/obs.xml.in.h:21
-#, fuzzy
 msgid "Window specific settings"
-msgstr "Leiho dekorazioak"
+msgstr "Leiho zehatz ezarpenak"
 
 #: ../metadata/obs.xml.in.h:22
-#, fuzzy
 msgid "Window values"
-msgstr "Leihoaren opakutasun balioak"
+msgstr "Leihoaren balioak"
 
 #: ../metadata/obs.xml.in.h:23
-#, fuzzy
 msgid "Windows"
-msgstr "Map leihoak"
+msgstr "Leihoak"
 
 #: ../metadata/obs.xml.in.h:24
-#, fuzzy
 msgid "Windows that should have a different brightness by default"
-msgstr "Berez kokatuko diren leihoak"
+msgstr "Distira lehenetsi ezberdina izan behar duten leihoak"
 
 #: ../metadata/obs.xml.in.h:25
-#, fuzzy
 msgid "Windows that should have a different opacity by default"
-msgstr "Lehenetsita transluzidoa izan behar duten leihoak"
+msgstr "Opakutasun lehenetsi ezberdina izan behar duten leihoak"
 
 #: ../metadata/obs.xml.in.h:26
-#, fuzzy
 msgid "Windows that should have a different saturation by default"
-msgstr "Berez kokatuko diren leihoak"
+msgstr "Saturazio lehenetsi ezberdina izan behar duten leihoak"
 
 #: ../metadata/place.xml.in.h:1
 msgid "Algorithm to use for window placement"
@@ -1943,9 +1891,8 @@ msgid "Centered"
 msgstr "Zentratua"
 
 #: ../metadata/place.xml.in.h:4
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Leiho kudeatzailea"
+msgstr "Leiho kokapen antolatua"
 
 #: ../metadata/place.xml.in.h:5
 msgid "Force Placement Windows"
@@ -2042,13 +1989,12 @@ msgstr ""
 "kokatzea saihestu "
 
 #: ../metadata/place.xml.in.h:28
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "Leiho dekorazioak"
+msgstr "Posizio zehaztuko leihoak"
 
 #: ../metadata/place.xml.in.h:29
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "Mahaigain aurkezpen zehaztuko leihoak"
 
 #: ../metadata/place.xml.in.h:30
 msgid "Workarounds"
@@ -2097,7 +2043,7 @@ msgstr "Regex leiho parekatzea"
 #: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
 #: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
 msgid "Bindings"
-msgstr ""
+msgstr "Laster-bideak"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
@@ -2404,7 +2350,6 @@ msgid "Rotate To Face 9 with Window"
 msgstr "9 Aurpegira Biratu Leihoaz"
 
 #: ../metadata/rotate.xml.in.h:50
-#, fuzzy
 msgid "Rotate cube"
 msgstr "Biratu kuboa"
 
@@ -2429,14 +2374,12 @@ msgid "Rotate right and bring active window along"
 msgstr "Eskumara biratu eta eraman leiho aktiboa"
 
 #: ../metadata/rotate.xml.in.h:56
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "1 aurpegira biratu"
+msgstr "Biratu kubo aurpegira"
 
 #: ../metadata/rotate.xml.in.h:57
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "1 Aurpegira Biratu Leihoaz"
+msgstr "Biratu leihoa duen aurpegira"
 
 #: ../metadata/rotate.xml.in.h:58
 msgid "Rotate to face 1"
@@ -3110,57 +3053,11 @@ msgstr "Dar-dar efektua leihoak maximizatzean eta maximizatzea kentzean"
 msgid "Wobbly Windows"
 msgstr "Dardara duten leihoak"
 
-#: ../metadata/zoom.xml.in.h:1
-msgid "Filter Linear"
-msgstr "Iragazki lineala"
+#~ msgid "Command line 0"
+#~ msgstr "0 komando lerroa"
 
-#: ../metadata/zoom.xml.in.h:5
-msgid "Use linear filter when zoomed in"
-msgstr "Erabili iragazki lineala zooma gerturatzean"
-
-#: ../metadata/zoom.xml.in.h:6
-msgid "Zoom Desktop"
-msgstr "Mahaigain zooma"
-
-#: ../metadata/zoom.xml.in.h:7
-msgid "Zoom In"
-msgstr "Zoom gerturatzea"
-
-#: ../metadata/zoom.xml.in.h:8
-msgid "Zoom Out"
-msgstr "Zoom urrundu"
-
-#: ../metadata/zoom.xml.in.h:9
-msgid "Zoom Pan"
-msgstr "Zoom pan"
-
-#: ../metadata/zoom.xml.in.h:10
-msgid "Zoom Speed"
-msgstr "Zoom abiadura"
-
-#: ../metadata/zoom.xml.in.h:11
-msgid "Zoom Timestep"
-msgstr "Zoom denbora-pausoa"
-
-#: ../metadata/zoom.xml.in.h:12
-msgid "Zoom and pan desktop cube"
-msgstr "Zoom eta pan mahaigain kuboa"
-
-#: ../metadata/zoom.xml.in.h:13
-msgid "Zoom factor"
-msgstr "Zoom faktorea"
-
-#: ../metadata/zoom.xml.in.h:14
-msgid "Zoom pan"
-msgstr "Zoom pan"
-
-#, fuzzy
-#~ msgid "Command line 12"
-#~ msgstr "1 komando lerroa"
-
-#, fuzzy
-#~ msgid "Run command 12"
-#~ msgstr "Exekutatu 1 komandoa"
+#~ msgid "Run command 0"
+#~ msgstr "Exekutatu 0 komandoa"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
@@ -3169,6 +3066,39 @@ msgstr "Zoom pan"
 #, fuzzy
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Pantaila-argazkia komando lerroa"
+
+#~ msgid "Filter Linear"
+#~ msgstr "Iragazki lineala"
+
+#~ msgid "Use linear filter when zoomed in"
+#~ msgstr "Erabili iragazki lineala zooma gerturatzean"
+
+#~ msgid "Zoom Desktop"
+#~ msgstr "Mahaigain zooma"
+
+#~ msgid "Zoom In"
+#~ msgstr "Zoom gerturatzea"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Zoom urrundu"
+
+#~ msgid "Zoom Pan"
+#~ msgstr "Zoom pan"
+
+#~ msgid "Zoom Speed"
+#~ msgstr "Zoom abiadura"
+
+#~ msgid "Zoom Timestep"
+#~ msgstr "Zoom denbora-pausoa"
+
+#~ msgid "Zoom and pan desktop cube"
+#~ msgstr "Zoom eta pan mahaigain kuboa"
+
+#~ msgid "Zoom factor"
+#~ msgstr "Zoom faktorea"
+
+#~ msgid "Zoom pan"
+#~ msgstr "Zoom pan"
 
 #~ msgid "Decrease window opacity"
 #~ msgstr "Txikitu leiho opakutasuna"
