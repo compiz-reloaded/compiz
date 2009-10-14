@@ -1,3 +1,37 @@
+Release 0.8.4 (2009-10-14 Erkin Bahceci <erkinbah@gmail.com>)
+=============================================================
+Maintenance release.
+
+Fixed many crashes (including doPoll/eventLoop ones).
+
+Various memory leak fixes.
+
+Fixed lost window issues with windows that are visible on all workspaces.
+
+Fixed lost window issue when reducing the number of workspaces.
+
+Fixed placing of dialogs (e.g. PolicyKit) behind currently focused window.
+
+Fixed placing of new windows behind fullscreen window.
+
+Fixed and improved screen resolution change handling (Compiz now remembers
+original window size and position).
+
+Lowering a window now activates the topmost window when click-to-focus is on.
+
+Fixed wobbly title bar hiding and bouncing near panel edges.
+
+Screenshot plugin now saves to the correct desktop directory by default.
+
+Fixed inconsistent icon sizes in switcher plugin.
+
+Improved constraining of window size and position in move, resize, and wobbly.
+
+Ported KDE4 window decorator to KDE 4.3.
+
+Added support for _NET_REQUEST_FRAME_EXTENTS and _NET_SUPPORT_FULL_PLACEMENT
+EWMH hints.
+
 Release 0.8.2 (2009-03-01 Danny Baumann <dannybaumann@web.de>)
 ==============================================================
 Maintenance release.
