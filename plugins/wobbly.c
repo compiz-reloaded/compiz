@@ -1709,22 +1709,20 @@ wobblyPreparePaintScreen (CompScreen *s,
 			    ww->wobbly |= WobblyInitial;
 			}
 
-			if (!ww->grabbed && wd->yConstrained)
+			if (!ww->grabbed && ws->grabWindowWorkArea)
 			{
 			    float bottommostYPos = MINSHORT;
-			    int i;
+			    int   i, decorTop;
 
 			    /* find the bottommost top-row object */
 			    for (i = 0; i < GRID_WIDTH; i++)
 			    {
-				if (model->objects[i].position.y >
-				    bottommostYPos)
-				    bottommostYPos =
-					model->objects[i].position.y;
+				int modelY = model->objects[i].position.y;
+				bottommostYPos = MAX (modelY, bottommostYPos);
 			    }
 
-			    int decorTop = bottommostYPos +
-				w->output.top - w->input.top;
+			    decorTop = bottommostYPos +
+				       w->output.top - w->input.top;
 
 			    if (ws->grabWindowWorkArea->y > decorTop)
 			    {
@@ -2640,8 +2638,9 @@ wobblyWindowUngrabNotify (CompWindow *w)
 
     if (w == ws->grabWindow)
     {
-	ws->grabMask   = 0;
-	ws->grabWindow = NULL;
+	ws->grabMask           = 0;
+	ws->grabWindow         = NULL;
+	ws->grabWindowWorkArea = NULL;
     }
 
     if (ww->grabbed)
