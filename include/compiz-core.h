@@ -28,7 +28,7 @@
 
 #include <compiz-plugin.h>
 
-#define CORE_ABIVERSION 20090619
+#define CORE_ABIVERSION 20091102
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -1028,6 +1028,7 @@ struct _CompDisplay {
     GLenum textureFilter;
 
     Window activeWindow;
+    Window nextActiveWindow;
 
     Window below;
     char   displayString[256];
@@ -2590,6 +2591,7 @@ struct _CompWindow {
     Bool	      damaged;
     Bool	      redirected;
     Bool	      managed;
+    Bool	      unmanaging;
     Bool	      bindFailed;
     Bool	      overlayWindow;
     int		      destroyRefCnt;

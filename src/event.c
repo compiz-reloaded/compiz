@@ -128,7 +128,7 @@ moveInputFocusToOtherWindow (CompWindow *w)
     CompDisplay *d = s->display;
     Bool        focussedAny = FALSE;
 
-    if (w->id != d->activeWindow)
+    if (w->id != d->activeWindow && w->id != d->nextActiveWindow)
 	return;
 
     if (w->transientFor && w->transientFor != s->root)
@@ -1380,7 +1380,9 @@ handleEvent (CompDisplay *d,
 		if (!w->attrib.override_redirect)
 		    setWmState (d, WithdrawnState, w->id);
 
-		w->placed  = FALSE;
+		w->placed     = FALSE;
+		w->managed    = FALSE;
+		w->unmanaging = TRUE;
 	    }
 
 	    unmapWindow (w);
@@ -2206,6 +2208,9 @@ handleEvent (CompDisplay *d,
 
 		state &= ~CompWindowStateDemandsAttentionMask;
 		changeWindowState (w, state);
+
+		if (d->nextActiveWindow == event->xfocus.window)
+		    d->nextActiveWindow = None;
 	    }
 	}
 	break;

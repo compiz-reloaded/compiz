@@ -2034,6 +2034,7 @@ addWindow (CompScreen *screen,
     w->damaged    = FALSE;
     w->redirected = TRUE;
     w->managed    = FALSE;
+    w->unmanaging = FALSE;
     w->bindFailed = FALSE;
 
     w->destroyRefCnt = 1;
@@ -2554,7 +2555,7 @@ unmapWindow (CompWindow *w)
     if (w->unmapRefCnt > 0)
 	return;
 
-    if (w->managed && !w->placed) /* only for managed and closed windows */
+    if (w->unmanaging)
     {
 	XWindowChanges xwc;
 	unsigned int   xwcm;
@@ -2573,7 +2574,7 @@ unmapWindow (CompWindow *w)
 	if (xwcm)
 	    configureXWindow (w, xwcm, &xwc);
 
-	w->managed = FALSE;
+	w->unmanaging = FALSE;
     }
 
     if (w->struts)
@@ -2945,7 +2946,10 @@ focusWindow (CompWindow *w)
     if (w->attrib.override_redirect)
 	return FALSE;
 
-    if (!w->managed)
+    if (!w->managed || w->unmanaging)
+	return FALSE;
+
+    if (w->destroyed)
 	return FALSE;
 
     if (!onCurrentDesktop (w))
@@ -3223,6 +3227,9 @@ moveInputFocusToWindow (CompWindow *w)
 
 	    setFocus = TRUE;
 	}
+
+	if (setFocus)
+	    d->nextActiveWindow = w->id;
 
 	if (!setFocus && !modalTransient)
 	{
