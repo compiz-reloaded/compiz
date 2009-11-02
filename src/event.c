@@ -124,61 +124,61 @@ handleSyncAlarm (CompWindow *w)
 static void
 moveInputFocusToOtherWindow (CompWindow *w)
 {
-    CompDisplay *display = w->screen->display;
+    CompScreen  *s = w->screen;
+    CompDisplay *d = s->display;
+    Bool        focussedAny = FALSE;
 
-    if (w->id == display->activeWindow)
+    if (w->id != d->activeWindow)
+	return;
+
+    if (w->transientFor && w->transientFor != s->root)
     {
-	CompWindow *ancestor;
-
-	if (w->transientFor && w->transientFor != w->screen->root)
+	CompWindow *ancestor = findWindowAtDisplay (d, w->transientFor);
+	if (ancestor && !(ancestor->type & (CompWindowTypeDesktopMask |
+					    CompWindowTypeDockMask)))
 	{
-	    ancestor = findWindowAtDisplay (display, w->transientFor);
-	    if (ancestor && !(ancestor->type & (CompWindowTypeDesktopMask |
-						CompWindowTypeDockMask)))
-	    {
-		moveInputFocusToWindow (ancestor);
-	    }
-	    else
-		focusDefaultWindow (w->screen);
+	    moveInputFocusToWindow (ancestor);
+	    focussedAny = TRUE;
 	}
-	else if (w->type & (CompWindowTypeDialogMask |
-			    CompWindowTypeModalDialogMask))
-	{
-	    CompWindow *a, *focus = NULL;
-
-	    for (a = w->screen->reverseWindows; a; a = a->prev)
-	    {
-		if (a->clientLeader == w->clientLeader)
-		{
-		    if ((*w->screen->focusWindow) (a))
-		    {
-			if (focus)
-			{
-			    if (a->type & (CompWindowTypeNormalMask |
-					   CompWindowTypeDialogMask |
-					   CompWindowTypeModalDialogMask))
-			    {
-				if (compareWindowActiveness (focus, a) < 0)
-				    focus = a;
-			    }
-			}
-			else
-			    focus = a;
-		    }
-		}
-	    }
-
-	    if (focus && !(focus->type & (CompWindowTypeDesktopMask |
-					  CompWindowTypeDockMask)))
-	    {
-		moveInputFocusToWindow (focus);
-	    }
-	    else
-		focusDefaultWindow (w->screen);
-	}
-	else
-	    focusDefaultWindow (w->screen);
     }
+    else if (w->type & (CompWindowTypeDialogMask |
+			CompWindowTypeModalDialogMask))
+    {
+	CompWindow *a, *focus = NULL;
+
+	for (a = s->reverseWindows; a; a = a->prev)
+	{
+	    if (a->clientLeader != w->clientLeader)
+		continue;
+
+	    if (!(*s->focusWindow) (a))
+		continue;
+
+	    if (!focus)
+	    {
+		focus = a;
+		continue;
+	    }
+
+	    if (a->type & (CompWindowTypeNormalMask |
+			   CompWindowTypeDialogMask |
+			   CompWindowTypeModalDialogMask))
+	    {
+		if (compareWindowActiveness (focus, a) < 0)
+		    focus = a;
+	    }
+	}
+
+	if (focus && !(focus->type & (CompWindowTypeDesktopMask |
+				      CompWindowTypeDockMask)))
+	{
+	    moveInputFocusToWindow (focus);
+	    focussedAny = TRUE;
+	}
+    }
+
+    if (!focussedAny)
+	focusDefaultWindow (s);
 }
 
 static Bool

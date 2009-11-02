@@ -2597,7 +2597,7 @@ focusDefaultWindow (CompScreen *s)
 	if (w && (*w->screen->focusWindow) (w))
 	{
 	    if (!(w->type & (CompWindowTypeDesktopMask |
-			    CompWindowTypeDockMask)))
+			     CompWindowTypeDockMask)))
 		focus = w;
 	}
 	else
@@ -2618,7 +2618,7 @@ focusDefaultWindow (CompScreen *s)
 	    {
 		w = findTopLevelWindowAtDisplay (d, childReturn);
 
-		if (w && (*w->screen->focusWindow) (w))
+		if (w && (*s->focusWindow) (w))
 		{
 		    if (!(w->type & (CompWindowTypeDesktopMask |
 				     CompWindowTypeDockMask)))
@@ -2635,19 +2635,20 @@ focusDefaultWindow (CompScreen *s)
 	    if (w->type & CompWindowTypeDockMask)
 		continue;
 
-	    if ((*s->focusWindow) (w))
+	    if (!(*s->focusWindow) (w))
+		continue;
+
+	    if (!focus)
 	    {
-		if (focus)
-		{
-		    if (w->type & (CompWindowTypeNormalMask |
-				   CompWindowTypeDialogMask |
-				   CompWindowTypeModalDialogMask))
-		    {
-			if (compareWindowActiveness (focus, w) < 0)
-			    focus = w;
-		    }
-		}
-		else
+		focus = w;
+		continue;
+	    }
+
+	    if (w->type & (CompWindowTypeNormalMask |
+			   CompWindowTypeDialogMask |
+			   CompWindowTypeModalDialogMask))
+	    {
+		if (compareWindowActiveness (focus, w) < 0)
 		    focus = w;
 	    }
 	}
