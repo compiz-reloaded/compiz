@@ -3941,23 +3941,26 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 	case WestGravity:
 	case SouthWestGravity:
 	    if (xwcm & CWX)
-		newX += w->input.left * direction;
+		newX += w->input.left;
 	    break;
 
 	case NorthGravity:
 	case CenterGravity:
 	case SouthGravity:
-	    if (!(xwcm & CWX))
-		newX += ((w->serverWidth - xwc->width) / 2) * direction;
+	    if (xwcm & CWX)
+		newX -= xwc->width / 2 - w->input.left +
+			(w->input.left + w->input.right) / 2;
+	    else
+		newX -= (xwc->width - w->serverWidth) / 2;
 	    break;
 
 	case NorthEastGravity:
 	case EastGravity:
 	case SouthEastGravity:
 	    if (xwcm & CWX)
-		newX -= w->input.right * direction;
+		newX -= xwc->width + w->input.right;
 	    else
-		newX += (w->serverWidth - xwc->width) * direction;
+		newX -= xwc->width - w->serverWidth;
 	    break;
 
 	case StaticGravity:
@@ -3973,23 +3976,26 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 	case NorthGravity:
 	case NorthEastGravity:
 	    if (xwcm & CWY)
-		newY += w->input.top * direction;
+		newY = xwc->y + w->input.top;
 	    break;
 
 	case WestGravity:
 	case CenterGravity:
 	case EastGravity:
-	    if (!(xwcm & CWY))
-		newY += ((w->serverHeight - xwc->height) / 2) * direction;
+	    if (xwcm & CWY)
+		newY -= xwc->height / 2 - w->input.top +
+			(w->input.top + w->input.bottom) / 2;
+	    else
+		newY -= (xwc->height - w->serverHeight) / 2;
 	    break;
 
 	case SouthWestGravity:
 	case SouthGravity:
 	case SouthEastGravity:
 	    if (xwcm & CWY)
-		newY -= w->input.bottom * direction;
+		newY -= xwc->height + w->input.bottom;
 	    else
-		newY += (w->serverHeight - xwc->height) * direction;
+		newY -= xwc->height - w->serverHeight;
 	    break;
 
 	case StaticGravity:
@@ -4000,13 +4006,13 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 
     if (newX != xwc->x)
     {
-	xwc->x = newX;
+	xwc->x += (newX - xwc->x) * direction;
 	mask |= CWX;
     }
 
     if (newY != xwc->y)
     {
-	xwc->y = newY;
+	xwc->y += (newY - xwc->y) * direction;
 	mask |= CWY;
     }
 
