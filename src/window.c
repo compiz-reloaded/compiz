@@ -3976,7 +3976,7 @@ adjustConfigureRequestForGravity (CompWindow     *w,
 	case NorthGravity:
 	case NorthEastGravity:
 	    if (xwcm & CWY)
-		newY = xwc->y + w->input.top;
+		newY += w->input.top;
 	    break;
 
 	case WestGravity:
