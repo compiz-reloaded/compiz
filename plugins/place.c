@@ -1549,6 +1549,15 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 		     CompWindowTypeDesktopMask))
 	return;
 
+    /* do nothing if the window was already (at least partially) offscreen */
+    if (w->serverX < 0                         ||
+	w->serverX + w->serverWidth > s->width ||
+	w->serverY < 0                         ||
+	w->serverY + w->serverHeight > s->height)
+    {
+	return;
+    }
+
     if (w->sizeHints.flags & USPosition)
     {
 	/* only respect USPosition on normal windows if
