@@ -703,6 +703,10 @@ switchInitiate (CompScreen            *s,
 		else
 		{
 		    XMapWindow (s->display->display, ss->popupWindow);
+		    /* we don't get a MapRequest for internal window
+		       creations, so we need to set the managed state
+		       ourselves */
+		    w->managed = TRUE;
 		}
 	    }
 
