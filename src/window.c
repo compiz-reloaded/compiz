@@ -5298,6 +5298,8 @@ readWindowIconHint (CompWindow *w)
 	{
 	    if (maskImage && !XGetPixel (maskImage, i, j))
 		*p++ = 0;
+	    else if (image->depth == 1)
+		*p++ = colors[k].pixel ? 0xffffffff : 0xff000000;
 	    else
 		*p++ = 0xff000000                             | /* alpha */
 		       (((colors[k].red >> 8) & 0xff) << 16)  | /* red */
