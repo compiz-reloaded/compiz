@@ -50,7 +50,7 @@ namespace KWin
 
 namespace KWD
 {
-class Window: public QObject, public KDecorationBridgeUnstable {
+class Window: public QObject, public KDecorationBridge {
     Q_OBJECT public:
 
 	enum Type
@@ -108,10 +108,8 @@ class Window: public QObject, public KDecorationBridgeUnstable {
 	virtual QWidget *initialParentWidget (void) const;
 	virtual Qt::WFlags initialWFlags (void) const;
 	virtual void grabXServer (bool grab);
+	virtual bool compositingActive() const;
 
-	/* unstable API */
-	virtual bool compositingActive () const;
-	
 	virtual bool eventFilter (QObject* o, QEvent* e);
 
 	void handleActiveChange (void);
