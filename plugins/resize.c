@@ -100,7 +100,6 @@ typedef struct _ResizeDisplay {
     int		 pointerDy;
     KeyCode	 key[NUM_KEYS];
 
-    Bool         offWorkAreaConstrained;
     Region       constraintRegion;
     int          inRegionStatus;
     int          lastGoodHotSpotY;
@@ -325,12 +324,10 @@ resizeGetConstraintRegion (CompScreen *s)
     if (!region)
 	return NULL;
 
-    XUnionRegion (&emptyRegion, &emptyRegion, region);
-
     for (i = 0; i < s->nOutputDev; i++)
     {
 	getWorkareaForOutput (s, i, &workArea);
-	XUnionRectWithRegion (&workArea, region, region);
+	XUnionRectWithRegion (&s->outputDev[i].workArea, region, region);
     }
 
     return region;
@@ -518,23 +515,24 @@ resizeInitiate (CompDisplay     *d,
 		warpPointer (w->screen, xRoot - pointerX, yRoot - pointerY);
 	    }
 
-	    /* Update offWorkAreaConstrained and workArea at grab time */
-	    rd->offWorkAreaConstrained = FALSE;
+	    if (rd->constraintRegion)
+		XDestroyRegion (rd->constraintRegion);
+
 	    if (sourceExternalApp)
 	    {
 		/* Prevent resizing beyond work area edges when resize is
 		   initiated externally (e.g. with window frame or menu)
 		   and not with a key (e.g. alt+button) */
-		rd->offWorkAreaConstrained = TRUE;
-
-		if (rd->constraintRegion)
-		    XDestroyRegion (rd->constraintRegion);
 
 		rd->inRegionStatus   = RectangleOut;
 		rd->lastGoodHotSpotY = -1;
 		rd->lastGoodWidth    = w->serverWidth;
 		rd->lastGoodHeight   = w->serverHeight;
 		rd->constraintRegion = resizeGetConstraintRegion (w->screen);
+	    }
+	    else
+	    {
+		rd->constraintRegion = NULL;
 	    }
 	}
     }
@@ -840,88 +838,85 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	if (rd->mask & ResizeLeftMask)
 	    wX = rd->savedGeometry.x + rd->savedGeometry.width -
-		(w + rd->w->input.left);
+		 (w + rd->w->input.left);
 	else
 	    wX = rd->savedGeometry.x - rd->w->input.left;
 
 	if (rd->mask & ResizeUpMask)
 	    wY = rd->savedGeometry.y + rd->savedGeometry.height -
-		(h + rd->w->input.top);
+		 (h + rd->w->input.top);
 	else
 	    wY = rd->savedGeometry.y - rd->w->input.top;
 
 	/* Check if resized edge(s) are near a work-area boundary */
 	for (i = 0; i < s->nOutputDev; i++)
 	{
-	    XRectangle workArea;
+	    const XRectangle *workArea = &s->outputDev[i].workArea;
 
-	    getWorkareaForOutput (s, i, &workArea);
-
-	    // if window and work-area intersect in x axis
-	    if (wX + wWidth > workArea.x &&
-		wX < workArea.x + workArea.width)
+	    /* if window and work-area intersect in x axis */
+	    if (wX + wWidth > workArea->x &&
+		wX < workArea->x + workArea->width)
 	    {
 		if (rd->mask & ResizeLeftMask)
 		{
-		    int dw = wX - workArea.x;
-    
+		    int dw = wX - workArea->x;
+
 		    if (abs (dw) < workAreaSnapDistance)
 		    {
-			w += dw;
+			w      += dw;
 			wWidth += dw;
-			wX -= dw;
+			wX     -= dw;
 		    }
 		}
 		else if (rd->mask & ResizeRightMask)
 		{
-		    int dw = workArea.x + workArea.width - (wX + wWidth);
+		    int dw = workArea->x + workArea->width - (wX + wWidth);
 
 		    if (abs (dw) < workAreaSnapDistance)
 		    {
-			w += dw;
+			w      += dw;
 			wWidth += dw;
 		    }
 		}
 	    }
 
-	    // if window and work-area intersect in y axis
-	    if (wY + wHeight > workArea.y &&
-		wY < workArea.y + workArea.height)
+	    /* if window and work-area intersect in y axis */
+	    if (wY + wHeight > workArea->y &&
+		wY < workArea->y + workArea->height)
 	    {
 		if (rd->mask & ResizeUpMask)
 		{
-		    int dh = wY - workArea.y;
-    
+		    int dh = wY - workArea->y;
+
 		    if (abs (dh) < workAreaSnapDistance)
 		    {
-			h += dh;
+			h       += dh;
 			wHeight += dh;
-			wY -= dh;
+			wY      -= dh;
 		    }
 		}
 		else if (rd->mask & ResizeDownMask)
 		{
-		    int dh = workArea.y + workArea.height - (wY + wHeight);
+		    int dh = workArea->y + workArea->height - (wY + wHeight);
 
 		    if (abs (dh) < workAreaSnapDistance)
 		    {
-			h += dh;
+			h       += dh;
 			wHeight += dh;
 		    }
 		}
 	    }
 	}
 
-	if (rd->offWorkAreaConstrained &&
-	    rd->constraintRegion)
+	if (rd->constraintRegion)
 	{
-	    int minWidth = 50;
+	    int minWidth  = 50;
 	    int minHeight = 50;
 
 	    /* rect. for a minimal height window + borders
 	       (used for the constraining in X axis) */
 	    int minimalInputHeight = minHeight +
-		rd->w->input.top + rd->w->input.bottom;
+		                     rd->w->input.top + rd->w->input.bottom;
 
 	    /* small hot-spot square (on window's corner or edge) that is to be
 	       constrained to the combined output work-area region */
@@ -1000,7 +995,8 @@ resizeHandleMotionEvent (CompScreen *s,
 		    while ((nw > minWidth) && xStatus != RectangleIn)
 		    {
 			xStatus = XRectInRegion (rd->constraintRegion,
-						 nx, yForXResize, width, height);
+						 nx, yForXResize,
+						 width, height);
 			if (xStatus != RectangleIn)
 			{
 			    nw--;
@@ -1585,8 +1581,7 @@ resizeInitDisplay (CompPlugin  *p,
 	rd->key[i] = XKeysymToKeycode (d->display,
 				       XStringToKeysym (rKeys[i].name));
 
-    rd->offWorkAreaConstrained = TRUE;
-    rd->constraintRegion       = NULL;
+    rd->constraintRegion = NULL;
 
     WRAP (rd, d, handleEvent, resizeHandleEvent);
 
