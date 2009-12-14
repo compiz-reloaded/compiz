@@ -703,10 +703,6 @@ switchInitiate (CompScreen            *s,
 		else
 		{
 		    XMapWindow (s->display->display, ss->popupWindow);
-		    /* we don't get a MapRequest for internal window
-		       creations, so we need to set the managed state
-		       ourselves */
-		    w->managed = TRUE;
 		}
 	    }
 
@@ -1100,7 +1096,11 @@ switchHandleEvent (CompDisplay *d,
 
 	    if (w->id == ss->popupWindow)
 	    {
-		w->wmType = getWindowType (d, w->id);
+		/* we don't get a MapRequest for internal window
+		   creations, so we need to update the internals
+		   ourselves */
+		w->wmType  = getWindowType (d, w->id);
+		w->managed = TRUE;
 		recalcWindowType (w);
 		recalcWindowActions (w);
 		updateWindowClassHints (w);
