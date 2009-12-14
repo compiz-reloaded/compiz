@@ -317,7 +317,6 @@ static Region
 resizeGetConstraintRegion (CompScreen *s)
 {
     Region       region;
-    XRectangle   workArea;
     int          i;
 
     region = XCreateRegion ();
@@ -325,10 +324,7 @@ resizeGetConstraintRegion (CompScreen *s)
 	return NULL;
 
     for (i = 0; i < s->nOutputDev; i++)
-    {
-	getWorkareaForOutput (s, i, &workArea);
 	XUnionRectWithRegion (&s->outputDev[i].workArea, region, region);
-    }
 
     return region;
 }
