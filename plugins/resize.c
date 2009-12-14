@@ -725,7 +725,7 @@ resizeHandleMotionEvent (CompScreen *s,
 	int    w, h;                    /* size of window contents */
 	int    wX, wY, wWidth, wHeight; /* rect. for window contents+borders */
 	int    i;
-	int    workAreaSnapDistance = 10;
+	int    workAreaSnapDistance = 15;
 
 	RESIZE_DISPLAY (s->display);
 
@@ -859,23 +859,23 @@ resizeHandleMotionEvent (CompScreen *s,
 	    {
 		if (rd->mask & ResizeLeftMask)
 		{
-		    int dw = wX - workArea->x;
+		    int dw = workArea->x - wX;
 
-		    if (abs (dw) < workAreaSnapDistance)
+		    if (0 < dw && dw < workAreaSnapDistance)
 		    {
-			w      += dw;
-			wWidth += dw;
-			wX     -= dw;
+			w      -= dw;
+			wWidth -= dw;
+			wX     += dw;
 		    }
 		}
 		else if (rd->mask & ResizeRightMask)
 		{
-		    int dw = workArea->x + workArea->width - (wX + wWidth);
+		    int dw = wX + wWidth - (workArea->x + workArea->width);
 
-		    if (abs (dw) < workAreaSnapDistance)
+		    if (0 < dw && dw < workAreaSnapDistance)
 		    {
-			w      += dw;
-			wWidth += dw;
+			w      -= dw;
+			wWidth -= dw;
 		    }
 		}
 	    }
@@ -886,23 +886,23 @@ resizeHandleMotionEvent (CompScreen *s,
 	    {
 		if (rd->mask & ResizeUpMask)
 		{
-		    int dh = wY - workArea->y;
+		    int dh = workArea->y - wY;
 
-		    if (abs (dh) < workAreaSnapDistance)
+		    if (0 < dh && dh < workAreaSnapDistance)
 		    {
-			h       += dh;
-			wHeight += dh;
-			wY      -= dh;
+			h       -= dh;
+			wHeight -= dh;
+			wY      += dh;
 		    }
 		}
 		else if (rd->mask & ResizeDownMask)
 		{
-		    int dh = workArea->y + workArea->height - (wY + wHeight);
+		    int dh = wY + wHeight - (workArea->y + workArea->height);
 
-		    if (abs (dh) < workAreaSnapDistance)
+		    if (0 < dh && dh < workAreaSnapDistance)
 		    {
-			h       += dh;
-			wHeight += dh;
+			h       -= dh;
+			wHeight -= dh;
 		    }
 		}
 	    }
