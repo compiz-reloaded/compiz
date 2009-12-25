@@ -1786,6 +1786,8 @@ wobblyPreparePaintScreen (CompScreen *s,
 		ws->wobblyWindows |= ww->wobbly;
 	    }
 	}
+	if (!ws->wobblyWindows)
+	    ws->grabWindowWorkArea = NULL;
     }
 
     UNWRAP (ws, s, preparePaintScreen);
@@ -2638,9 +2640,8 @@ wobblyWindowUngrabNotify (CompWindow *w)
 
     if (w == ws->grabWindow)
     {
-	ws->grabMask           = 0;
-	ws->grabWindow         = NULL;
-	ws->grabWindowWorkArea = NULL;
+	ws->grabMask   = 0;
+	ws->grabWindow = NULL;
     }
 
     if (ww->grabbed)
