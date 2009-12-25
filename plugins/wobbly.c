@@ -1699,8 +1699,6 @@ wobblyPreparePaintScreen (CompScreen *s,
 
 		    if (ww->wobbly)
 		    {
-			WOBBLY_DISPLAY (s->display);
-
 			/* snapped to more than one edge, we have to reduce
 			   edge escape velocity until only one edge is snapped */
 			if (ww->wobbly == WobblyForce && !ww->grabbed)
