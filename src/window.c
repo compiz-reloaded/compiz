@@ -1701,8 +1701,8 @@ updateWindowRegion (CompWindow *w)
     {
 	r.x      = -w->attrib.border_width;
 	r.y      = -w->attrib.border_width;
-	r.width  = w->width;
-	r.height = w->height;
+	r.width  = w->attrib.width + w->attrib.border_width;
+	r.height = w->attrib.height + w->attrib.border_width;
 
 	rects = &r;
 	n = 1;
@@ -1719,8 +1719,10 @@ updateWindowRegion (CompWindow *w)
     {
 	rect.extents.x1 = rects[i].x + w->attrib.border_width;
 	rect.extents.y1 = rects[i].y + w->attrib.border_width;
-	rect.extents.x2 = rect.extents.x1 + rects[i].width;
-	rect.extents.y2 = rect.extents.y1 + rects[i].height;
+	rect.extents.x2 = rect.extents.x1 + rects[i].width +
+			  w->attrib.border_width;
+	rect.extents.y2 = rect.extents.y1 + rects[i].height +
+			  w->attrib.border_width;
 
 	if (rect.extents.x1 < 0)
 	    rect.extents.x1 = 0;

@@ -1699,8 +1699,6 @@ wobblyPreparePaintScreen (CompScreen *s,
 
 		    if (ww->wobbly)
 		    {
-			WOBBLY_DISPLAY (s->display);
-
 			/* snapped to more than one edge, we have to reduce
 			   edge escape velocity until only one edge is snapped */
 			if (ww->wobbly == WobblyForce && !ww->grabbed)
@@ -1711,25 +1709,44 @@ wobblyPreparePaintScreen (CompScreen *s,
 
 			if (!ww->grabbed && ws->grabWindowWorkArea)
 			{
+			    float topmostYPos    = MAXSHORT;
 			    float bottommostYPos = MINSHORT;
-			    int   i, decorTop;
+			    int   decorTop;
+			    int   decorTitleBottom;
+			    int   i;
 
-			    /* find the bottommost top-row object */
 			    for (i = 0; i < GRID_WIDTH; i++)
 			    {
 				int modelY = model->objects[i].position.y;
+
+				/* find the bottommost top-row object */
 				bottommostYPos = MAX (modelY, bottommostYPos);
+
+				/* find the topmost top-row object */
+				topmostYPos = MIN (modelY, topmostYPos);
 			    }
 
 			    decorTop = bottommostYPos +
 				       w->output.top - w->input.top;
+			    decorTitleBottom = topmostYPos + w->output.top;
 
 			    if (ws->grabWindowWorkArea->y > decorTop)
 			    {
-				/* constrain to work area */
+				/* constrain to work area box top edge */
 				modelMove (model, 0,
 					   ws->grabWindowWorkArea->y -
 					   decorTop);
+				modelCalcBounds (model);
+			    }
+			    else if (ws->grabWindowWorkArea->y +
+			    	     ws->grabWindowWorkArea->height <
+			    	     decorTitleBottom)
+			    {
+				/* constrain to work area box bottom edge */
+				modelMove (model, 0,
+					   ws->grabWindowWorkArea->y +
+					   ws->grabWindowWorkArea->height -
+					   decorTitleBottom);
 				modelCalcBounds (model);
 			    }
 			}
@@ -1786,6 +1803,8 @@ wobblyPreparePaintScreen (CompScreen *s,
 		ws->wobblyWindows |= ww->wobbly;
 	    }
 	}
+	if (!ws->wobblyWindows)
+	    ws->grabWindowWorkArea = NULL;
     }
 
     UNWRAP (ws, s, preparePaintScreen);
@@ -2638,9 +2657,8 @@ wobblyWindowUngrabNotify (CompWindow *w)
 
     if (w == ws->grabWindow)
     {
-	ws->grabMask           = 0;
-	ws->grabWindow         = NULL;
-	ws->grabWindowWorkArea = NULL;
+	ws->grabMask   = 0;
+	ws->grabWindow = NULL;
     }
 
     if (ww->grabbed)
