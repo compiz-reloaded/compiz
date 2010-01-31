@@ -847,8 +847,8 @@ placePointer (CompWindow *w,
 
     if (placeGetPointerPosition (w->screen, &xPointer, &yPointer))
     {
-	*x = xPointer - (w->serverWidth / 2);
-	*y = yPointer - (w->serverHeight / 2);
+	*x = xPointer - (w->serverWidth / 2) - w->serverBorderWidth;
+	*y = yPointer - (w->serverHeight / 2) - w->serverBorderWidth;
     }
     else
     {
