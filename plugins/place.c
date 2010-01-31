@@ -139,7 +139,7 @@ typedef enum {
 #define WIN_FULL_X(w) ((w)->serverX - (w)->input.left)
 #define WIN_FULL_Y(w) ((w)->serverY - (w)->input.top)
 #define WIN_FULL_W(w) ((w)->serverWidth + BORDER_WIDTH (w))
-#define WIN_FULL_H(w) ((w)->serverHeight + BORDER_WIDTH (w))
+#define WIN_FULL_H(w) ((w)->serverHeight + BORDER_HEIGHT (w))
 
 static Bool
 placeMatchXYValue (CompWindow *w,
