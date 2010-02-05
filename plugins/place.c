@@ -131,12 +131,15 @@ typedef enum {
 
 /* helper macros to get the full dimensions of a window,
    including decorations */
+#define BORDER_WIDTH(w)  ((w)->input.left + (w)->input.right + \
+			  2 * (w)->serverBorderWidth)
+#define BORDER_HEIGHT(w) ((w)->input.top + (w)->input.bottom + \
+			  2 * (w)->serverBorderWidth)
+
 #define WIN_FULL_X(w) ((w)->serverX - (w)->input.left)
 #define WIN_FULL_Y(w) ((w)->serverY - (w)->input.top)
-#define WIN_FULL_W(w) ((w)->serverWidth + 2 * (w)->serverBorderWidth + \
-		       (w)->input.left + (w)->input.right)
-#define WIN_FULL_H(w) ((w)->serverHeight + 2 * (w)->serverBorderWidth + \
-		       (w)->input.top + (w)->input.bottom)
+#define WIN_FULL_W(w) ((w)->serverWidth + BORDER_WIDTH (w))
+#define WIN_FULL_H(w) ((w)->serverHeight + BORDER_HEIGHT (w))
 
 static Bool
 placeMatchXYValue (CompWindow *w,
@@ -844,8 +847,8 @@ placePointer (CompWindow *w,
 
     if (placeGetPointerPosition (w->screen, &xPointer, &yPointer))
     {
-	*x = xPointer - (w->serverWidth / 2);
-	*y = yPointer - (w->serverHeight / 2);
+	*x = xPointer - (w->serverWidth / 2) - w->serverBorderWidth;
+	*y = yPointer - (w->serverHeight / 2) - w->serverBorderWidth;
     }
     else
     {
@@ -1216,8 +1219,8 @@ placeConstrainToWorkarea (CompWindow *w,
 
     extents.left   = *x - w->input.left;
     extents.top    = *y - w->input.top;
-    extents.right  = *x + w->serverWidth + w->input.right;
-    extents.bottom = *y + w->serverHeight + w->input.bottom;
+    extents.right  = extents.left + WIN_FULL_W (w);
+    extents.bottom = extents.top + WIN_FULL_H (w);
 
     delta = workArea->x + workArea->width - extents.right;
     if (delta < 0)
@@ -1419,9 +1422,9 @@ placeDoValidateWindowResizeRequest (CompWindow     *w,
     }
 
     left   = x - w->input.left;
-    right  = x + xwc->width + w->input.right;
+    right  = left + xwc->width + BORDER_WIDTH (w);
     top    = y - w->input.top;
-    bottom = y + xwc->height + w->input.bottom;
+    bottom = top + xwc->height + BORDER_HEIGHT (w);
 
     output = outputDeviceForGeometry (s,
 				      xwc->x, xwc->y,
@@ -1484,9 +1487,9 @@ placeDoValidateWindowResizeRequest (CompWindow     *w,
 
     /* bring left/right/top/bottom to actual window coordinates */
     left   += w->input.left;
-    right  -= w->input.right;
+    right  -= w->input.right + 2 * w->serverBorderWidth;
     top    += w->input.top;
-    bottom -= w->input.bottom;
+    bottom -= w->input.bottom + 2 * w->serverBorderWidth;
 
     if ((right - left) != xwc->width)
     {
@@ -1886,17 +1889,13 @@ placeDoHandleScreenSizeChange (CompScreen *s,
 		{
 		    mask |= CWX | CWWidth;
 		    xwc.x = vpX * s->width + workArea.x + w->input.left;
-		    xwc.width = workArea.width -
-			(2 * w->serverBorderWidth +
-			 w->input.left + w->input.right);
+		    xwc.width = workArea.width - BORDER_WIDTH (w);
 		}
 		if (w->state & CompWindowStateMaximizedVertMask)
 		{
 		    mask |= CWY | CWHeight;
 		    xwc.y = vpY * s->height + workArea.y + w->input.top;
-		    xwc.height = workArea.height -
-			(2 * w->serverBorderWidth +
-			 w->input.top + w->input.bottom);
+		    xwc.height = workArea.height - BORDER_HEIGHT (w);
 		}
 	    }
 	}

@@ -88,6 +88,8 @@ typedef struct _ObsWindow
 {
     int customFactor[MODIFIER_COUNT];
     int matchFactor[MODIFIER_COUNT];
+
+    CompTimeoutHandle updateHandle;
 } ObsWindow;
 
 #define GET_OBS_DISPLAY(d) \
@@ -321,6 +323,22 @@ obsMatchPropertyChanged (CompDisplay *d,
     UNWRAP (od, d, matchPropertyChanged);
     (*d->matchPropertyChanged) (d, w);
     WRAP (od, d, matchPropertyChanged, obsMatchPropertyChanged);
+}
+
+static Bool
+obsUpdateWindow (void *closure)
+{
+    CompWindow *w = (CompWindow *) closure;
+    int        i;
+
+    OBS_WINDOW (w);
+
+    for (i = 0; i < MODIFIER_COUNT; i++)
+	updatePaintModifier (w, i);
+
+    ow->updateHandle = 0;
+
+    return FALSE;
 }
 
 static CompOption *
@@ -628,8 +646,8 @@ static CompBool
 obsInitWindow (CompPlugin *p,
 	       CompWindow *w)
 {
-    ObsWindow    *ow;
-    int          i;
+    ObsWindow *ow;
+    int       i;
 
     OBS_SCREEN (w->screen);
 
@@ -643,10 +661,11 @@ obsInitWindow (CompPlugin *p,
 	ow->matchFactor[i]  = 100;
     }
 
-    w->base.privates[os->windowPrivateIndex].ptr = ow;
+    /* defer initializing the factors from window matches as match evalution
+       means wrapped function calls */
+    ow->updateHandle = compAddTimeout (0, 0, obsUpdateWindow, w);
 
-    for (i = 0; i < MODIFIER_COUNT; i++)
-	updatePaintModifier (w, i);
+    w->base.privates[os->windowPrivateIndex].ptr = ow;
 
     return TRUE;
 }
@@ -656,6 +675,9 @@ obsFiniWindow (CompPlugin *p,
 	       CompWindow *w)
 {
     OBS_WINDOW (w);
+
+    if (ow->updateHandle)
+	compRemoveTimeout (ow->updateHandle);
 
     free (ow);
 }
