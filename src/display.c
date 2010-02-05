@@ -1799,6 +1799,46 @@ freeDisplay (CompDisplay *d)
     free (d);
 }
 
+static Bool
+aquireSelection (CompDisplay *d,
+		 int         screen,
+		 const char  *name,
+		 Atom        selection,
+		 Window      owner,
+		 Time        timestamp)
+{
+    Display *dpy = d->display;
+    Window  root = XRootWindow (dpy, screen);
+    XEvent  event;
+
+    XSetSelectionOwner (dpy, selection, owner, timestamp);
+
+    if (XGetSelectionOwner (dpy, selection) != owner)
+    {
+	compLogMessage ("core", CompLogLevelError,
+			"Could not acquire %s manager "
+			"selection on screen %d display \"%s\"",
+			name, screen, DisplayString (dpy));
+
+	return FALSE;
+    }
+
+    /* Send client message indicating that we are now the manager */
+    event.xclient.type         = ClientMessage;
+    event.xclient.window       = root;
+    event.xclient.message_type = d->managerAtom;
+    event.xclient.format       = 32;
+    event.xclient.data.l[0]    = timestamp;
+    event.xclient.data.l[1]    = selection;
+    event.xclient.data.l[2]    = 0;
+    event.xclient.data.l[3]    = 0;
+    event.xclient.data.l[4]    = 0;
+
+    XSendEvent (dpy, root, FALSE, StructureNotifyMask, &event);
+
+    return TRUE;
+}
+
 Bool
 addDisplay (const char *name)
 {
@@ -2276,33 +2316,13 @@ addDisplay (const char *name)
 
 	wmSnTimestamp = event.xproperty.time;
 
-	XSetSelectionOwner (dpy, wmSnAtom, newWmSnOwner, wmSnTimestamp);
-
-	if (XGetSelectionOwner (dpy, wmSnAtom) != newWmSnOwner)
+	if (!aquireSelection (d, i, "window", wmSnAtom, newWmSnOwner,
+			      wmSnTimestamp))
 	{
-	    compLogMessage ("core", CompLogLevelError,
-			    "Could not acquire window manager "
-			    "selection on screen %d display \"%s\"",
-			    i, DisplayString (dpy));
-
 	    XDestroyWindow (dpy, newWmSnOwner);
 
 	    continue;
 	}
-
-	/* Send client message indicating that we are now the WM */
-	event.xclient.type	   = ClientMessage;
-	event.xclient.window       = XRootWindow (dpy, i);
-	event.xclient.message_type = d->managerAtom;
-	event.xclient.format       = 32;
-	event.xclient.data.l[0]    = wmSnTimestamp;
-	event.xclient.data.l[1]    = wmSnAtom;
-	event.xclient.data.l[2]    = 0;
-	event.xclient.data.l[3]    = 0;
-	event.xclient.data.l[4]    = 0;
-
-	XSendEvent (dpy, XRootWindow (dpy, i), FALSE,
-		    StructureNotifyMask, &event);
 
 	/* Wait for old window manager to go away */
 	if (currentWmSnOwner != None)
@@ -2327,15 +2347,9 @@ addDisplay (const char *name)
 	    continue;
 	}
 
-	XSetSelectionOwner (dpy, cmSnAtom, newCmSnOwner, wmSnTimestamp);
-
-	if (XGetSelectionOwner (dpy, cmSnAtom) != newCmSnOwner)
+	if (!aquireSelection (d, i, "compositing", cmSnAtom,
+			      newCmSnOwner, wmSnTimestamp))
 	{
-	    compLogMessage ("core", CompLogLevelError,
-			    "Could not acquire compositing manager "
-			    "selection on screen %d display \"%s\"",
-			    i, DisplayString (dpy));
-
 	    continue;
 	}
 
