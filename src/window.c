@@ -4028,9 +4028,13 @@ moveResizeWindow (CompWindow     *w,
 		  int            gravity,
 		  unsigned int   source)
 {
-    Bool placed = xwcm & (CWX | CWY);
+    Bool placed = FALSE;
 
     xwcm &= (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+
+    if (xwcm & (CWX | CWY))
+	if (w->sizeHints.flags & (USPosition | PPosition))
+	    placed = TRUE;
 
     if (gravity == 0)
 	gravity = w->sizeHints.win_gravity;
