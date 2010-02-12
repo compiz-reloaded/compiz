@@ -159,6 +159,10 @@ KWD::Decorator::Decorator () :
 				      CopyFromParent,
 				      CopyFromParent,
 				      CWOverrideRedirect, &attr);
+				      
+    long data = 1;
+    XChangeProperty (QX11Info::display(), mCompositeWindow, Atoms::enlightmentDesktop,
+		      XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &data, 1);
 
     XCompositeRedirectSubwindows (QX11Info::display(), mCompositeWindow,
 				  CompositeRedirectManual);
