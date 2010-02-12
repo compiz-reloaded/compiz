@@ -486,30 +486,38 @@ KWD::Window::showWindowMenu (const QRect &pos)
     showWindowMenu (pos.bottomLeft ());
 }
 
-void
-KWD::Window::processMousePressEvent (QMouseEvent *qme)
+KWD::Options::MouseCommand
+KWD::Window::buttonToCommand (Qt::MouseButtons button)
 {
     Options::MouseCommand com = Options::MouseNothing;
-    bool		  active = isActive ();
+    bool                  active = isActive ();
 
     if (!mSupportTakeFocus)
-	active = TRUE;
+	active = true;
 
-    switch (qme->button ()) {
+    switch (button) {
     case Qt::LeftButton:
 	com = active ? Decorator::options ()->commandActiveTitlebar1 () :
-	Decorator::options()->commandInactiveTitlebar1 ();
+	               Decorator::options()->commandInactiveTitlebar1 ();
 	break;
     case Qt::MidButton:
 	com = active ? Decorator::options ()->commandActiveTitlebar2 () :
-	Decorator::options()->commandInactiveTitlebar2 ();
+	               Decorator::options()->commandInactiveTitlebar2 ();
 	break;
     case Qt::RightButton:
 	com = active ? Decorator::options ()->commandActiveTitlebar3 () :
-	Decorator::options()->commandInactiveTitlebar3 ();
+	               Decorator::options()->commandInactiveTitlebar3 ();
     default:
 	break;
     }
+
+    return com;
+}
+
+void
+KWD::Window::processMousePressEvent (QMouseEvent *qme)
+{
+    Options::MouseCommand com = buttonToCommand (qme->button ());
 
     if (qme->button () == Qt::LeftButton)
     {
@@ -751,6 +759,96 @@ KWD::Window::compositingActive (void) const
 {
     return true;
 }
+
+#if KDE_IS_VERSION(4,3,90)
+
+QRect
+KWD::Window::transparentRect () const
+{
+    return QRect ();
+}
+
+bool
+KWD::Window::isClientGroupActive ()
+{
+    return false;
+}
+
+QList<ClientGroupItem>
+KWD::Window::clientGroupItems () const
+{
+    QList<ClientGroupItem> items;
+
+    QIcon icon (mIcon);
+    icon.addPixmap (mMiniIcon);
+
+    items.append (ClientGroupItem (mName, icon));
+
+    return items;
+}
+
+long
+KWD::Window::itemId (int index)
+{
+    return (long) mClientId;
+}
+
+int
+KWD::Window::visibleClientGroupItem ()
+{
+    return 0;
+}
+
+void
+KWD::Window::setVisibleClientGroupItem (int index)
+{
+}
+
+void
+KWD::Window::moveItemInClientGroup (int index, int before)
+{
+}
+
+void
+KWD::Window::moveItemToClientGroup (long itemId, int before)
+{
+}
+
+void
+KWD::Window::removeFromClientGroup (int index, const QRect& newGeom)
+{
+}
+
+void
+KWD::Window::closeClientGroupItem (int index)
+{
+    closeWindow ();
+}
+
+void
+KWD::Window::closeAllInClientGroup ()
+{
+    closeWindow ();
+}
+
+void
+KWD::Window::displayClientMenu (int index, const QPoint& pos)
+{
+    showWindowMenu (pos);
+}
+
+KDecorationDefines::WindowOperation
+KWD::Window::buttonToWindowOperation(Qt::MouseButtons button)
+{
+    Options::MouseCommand com = buttonToCommand (button);
+
+    if (com == Options::MouseOperationsMenu)
+	return KDecorationDefines::OperationsOp;
+
+    return KDecorationDefines::NoOp;
+}
+
+#endif
 
 void
 KWD::Window::createDecoration (void)
@@ -1466,7 +1564,7 @@ KWD::Window::moveWindow (QMouseEvent *qme)
     NET::Direction direction;
 
     direction = positionToDirection (mDecor->mousePosition (qme->pos ()));
-    
+
     QPoint p (mGeometry.x () - mExtents.left, mGeometry.y () - mExtents.top);
     p += qme->pos ();
 
@@ -1476,7 +1574,7 @@ KWD::Window::moveWindow (QMouseEvent *qme)
     Decorator::rootInfo ()->restackRequest (mClientId, NET::FromApplication,
 			 		    None, Above,
 					    QX11Info::appTime());
-					    
+
     Decorator::rootInfo ()->moveResizeRequest (mClientId,
 					       p.x (),
 					       p.y (),

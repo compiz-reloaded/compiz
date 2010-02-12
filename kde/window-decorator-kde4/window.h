@@ -26,6 +26,7 @@
 
 #include <kdecorationbridge.h>
 #include <KDE/KActionCollection>
+#include <kdeversion.h>
 
 #include <qpixmap.h>
 #include <qwidget.h>
@@ -111,7 +112,24 @@ class Window: public QObject, public KDecorationBridgeUnstable {
 
 	/* unstable API */
 	virtual bool compositingActive () const;
-	
+#if KDE_IS_VERSION(4,3,90)
+	virtual QRect transparentRect () const;
+
+	virtual bool isClientGroupActive ();
+	virtual QList<ClientGroupItem> clientGroupItems () const;
+	virtual long itemId (int index);
+	virtual int visibleClientGroupItem ();
+	virtual void setVisibleClientGroupItem (int index);
+	virtual void moveItemInClientGroup (int index, int before);
+	virtual void moveItemToClientGroup (long itemId, int before);
+	virtual void removeFromClientGroup (int index, const QRect& newGeom);
+	virtual void closeClientGroupItem (int index);
+	virtual void closeAllInClientGroup ();
+	virtual void displayClientMenu (int index, const QPoint& pos);
+
+	virtual WindowOperation
+	    buttonToWindowOperation(Qt::MouseButtons button);
+#endif
 	virtual bool eventFilter (QObject* o, QEvent* e);
 
 	void handleActiveChange (void);
@@ -191,8 +209,10 @@ class Window: public QObject, public KDecorationBridgeUnstable {
 				 int rightOffset);
 	void updateProperty (void);
 	void getWindowProtocols (void);
+
+	Options::MouseCommand buttonToCommand (Qt::MouseButtons button);
 	void performMouseCommand (KWD::Options::MouseCommand command,
-				  QMouseEvent		     *qme);
+				  QMouseEvent                *qme);
 	NET::Direction positionToDirection (int pos);
 	Cursor positionToCursor (QPoint pos);
 
