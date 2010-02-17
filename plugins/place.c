@@ -1491,6 +1491,11 @@ placeDoValidateWindowResizeRequest (CompWindow     *w,
     top    += w->input.top;
     bottom -= w->input.bottom + 2 * w->serverBorderWidth;
 
+    /* always validate position if the application changed only its size,
+       as it might become partially offscreen because of that */
+    if (!(*mask & (CWX | CWY)) && (*mask & (CWWidth | CWHeight)))
+	sizeOnly = FALSE;
+
     if ((right - left) != xwc->width)
     {
 	xwc->width = right - left;
