@@ -12,7 +12,7 @@ kde4_window_decorator_DEPENDENCIES = \
 	$(top_builddir)/libdecoration/libdecoration.la
 kde4_window_decorator_LDADD   =			       \
 	$(top_builddir)/libdecoration/libdecoration.la \
-	@KDE4_WINDOW_DECORATOR_LIBS@ @KDE4_LIBS@
+	@KDE4_WINDOW_DECORATOR_LIBS@ @KDE4_LIBS@ -ldl
 
 nodist_kde4_window_decorator_SOURCES = \
 	$(BUILDSOURCES)

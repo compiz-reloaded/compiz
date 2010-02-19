@@ -118,7 +118,9 @@ AC_SUBST(imagedir)
 metadatadir=$datadir/compiz
 AC_SUBST(metadatadir)
 
-COMPIZ_REQUIRES="xcomposite \
+COMPIZ_REQUIRES="x11        \
+		 xcomposite \
+		 xext       \
 		 xfixes	    \
 		 xdamage    \
 		 xrandr	    \
@@ -513,11 +515,11 @@ if test "x$use_kde4" = "xyes"; then
 
   if test -d "$kde4libs"; then
     PKG_CHECK_MODULES(KDE4_WINDOW_DECORATOR,
-		      dbus-1 xdamage xcomposite QtCore >= 4.5.0 QtGui QtDBus,
+		      dbus-1 xdamage xext xcomposite QtCore >= 4.5.0 QtGui QtDBus,
 			[use_kde4=yes], [use_kde4=no])
 
     KDE4_CFLAGS="-I$kde4incs"
-    KDE4_LIBS="-L$kde4libs -lkdecore -lkdecorations -lplasma"
+    KDE4_LIBS="-L$kde4libs -lkdecore -lkdecorations -lkdeui -lplasma"
 
     QT4_MOC=`pkg-config QtGui --variable=moc_location`
     QDBUSXML2CPP=`pkg-config QtGui --variable=exec_prefix`"/bin/qdbusxml2cpp"

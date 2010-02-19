@@ -9,7 +9,7 @@ INCLUDES =			     \
 
 bin_PROGRAMS = compiz
 
-compiz_LDADD = @COMPIZ_LIBS@ @GL_LIBS@ -lm
+compiz_LDADD = @COMPIZ_LIBS@ @GL_LIBS@ -lm -ldl
 compiz_LDFLAGS = -export-dynamic -pthread
 compiz_SOURCES =   \
 	main.c	   \
