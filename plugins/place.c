@@ -1067,10 +1067,6 @@ placeGetStrategyForWindow (CompWindow *w)
 	return NoPlacement;
     }
 
-    /* no placement for unmovable windows */
-    if (!(w->actions & CompWindowActionMoveMask))
-	return NoPlacement;
-
     match = &ps->opt[PLACE_SCREEN_OPTION_FORCE_PLACEMENT].value.match;
     if (!matchEval (match, w))
     {
