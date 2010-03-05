@@ -2683,12 +2683,23 @@ resizeWindow (CompWindow *w,
 	w->attrib.height       = height;
 	w->attrib.border_width = borderWidth;
 
-	w->width  = pw;
-	w->height = ph;
+	if (!w->mapNum && w->unmapRefCnt > 0 &&
+	    w->attrib.map_state == IsViewable)
+	{
+	    /* keep old pixmap for windows that are unmapped on the client side,
+	     * but not yet on our side as it's pretty likely that plugins are
+	     * currently using it for animations
+	     */
+	}
+	else
+	{
+	    w->width  = pw;
+	    w->height = ph;
 
-	releaseWindow (w);
+	    releaseWindow (w);
 
-	w->pixmap = pixmap;
+	    w->pixmap = pixmap;
+	}
 
 	if (w->mapNum)
 	    updateWindowRegion (w);
