@@ -1446,6 +1446,8 @@ bindWindow (CompWindow *w)
 	}
 
 	w->pixmap = XCompositeNameWindowPixmap (dpy, w->id);
+	w->width  = attr.width;
+	w->height = attr.height;
 
 	XUngrabServer (dpy);
     }
