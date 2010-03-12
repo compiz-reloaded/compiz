@@ -4233,7 +4233,7 @@ show_tooltip (const char *text)
 static void
 hide_tooltip (void)
 {
-    if (GTK_WIDGET_VISIBLE (tip_window))
+    if (gtk_widget_get_visible (tip_window))
 	g_get_current_time (&tooltip_last_popdown);
 
     gtk_widget_hide (tip_window);
