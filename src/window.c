@@ -5361,18 +5361,22 @@ getWindowIcon (CompWindow *w,
 
 	if (result == Success && data)
 	{
-	    CARD32   *p;
-	    CARD32   alpha, red, green, blue;
-	    int      iw, ih, j;
+	    CARD32        *p;
+	    CARD32        alpha, red, green, blue;
+	    unsigned long iw, ih;
 
 	    for (i = 0; i + 2 < n; i += iw * ih + 2)
 	    {
 		unsigned long *idata = (unsigned long *) data;
+		unsigned long j;
 
 		iw  = idata[i];
 		ih = idata[i + 1];
 
-		if (iw * ih + 2 > n - i)
+		/* iw * ih may be larger than the value range of unsigned
+		   long, so better do some checking for extremely weird
+		   icon sizes first */
+		if (iw > 2048 || ih > 2048 || iw * ih + 2 > n - i)
 		    break;
 
 		if (iw && ih)
