@@ -36,9 +36,9 @@ pkgconfig_DATA =	\
 # or		make release-publish
 
 RELEASE_UPLOAD_HOST =   releases.compiz.org
-RELEASE_UPLOAD_BASE =	/home/releases/core
+RELEASE_UPLOAD_BASE =	/home/releases
 RELEASE_UPLOAD_DIR =	$(RELEASE_UPLOAD_BASE)/$(VERSION)
-RELEASE_URL_BASE = 	http://releases.compiz.org/core/$(VERSION)
+RELEASE_URL_BASE = 	http://releases.compiz.org/$(VERSION)
 RELEASE_ANNOUNCE_LIST = compiz@list.freedesktop.org
 
 tar_file  = $(PACKAGE)-$(VERSION).tar.gz
@@ -78,7 +78,7 @@ release-upload: release-check $(tar_file) $(sha1_file) $(gpg_file)
 	mkdir -p releases
 	scp $(tar_file) $(sha1_file) $(gpg_file) $(RELEASE_UPLOAD_HOST):$(RELEASE_UPLOAD_DIR)
 	mv $(tar_file) $(sha1_file) $(gpg_file) releases
-	git-tag -s -m "compiz $(COMPIZ_VERSION_MAJOR).$(COMPIZ_VERSION_MINOR).$(COMPIZ_VERSION_MICRO) release" compiz-$(COMPIZ_VERSION_MAJOR).$(COMPIZ_VERSION_MINOR).$(COMPIZ_VERSION_MICRO)
+	git tag -s -m "compiz $(COMPIZ_VERSION_MAJOR).$(COMPIZ_VERSION_MINOR).$(COMPIZ_VERSION_MICRO) release" compiz-$(COMPIZ_VERSION_MAJOR).$(COMPIZ_VERSION_MINOR).$(COMPIZ_VERSION_MICRO)
 
 release-publish-message: releases/$(sha1_file)
 	@echo "Please follow the instructions in RELEASING to push stuff out and"
