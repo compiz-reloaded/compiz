@@ -5370,7 +5370,7 @@ getWindowIcon (CompWindow *w,
 		unsigned long *idata = (unsigned long *) data;
 		unsigned long j;
 
-		iw  = idata[i];
+		iw = idata[i];
 		ih = idata[i + 1];
 
 		/* iw * ih may be larger than the value range of unsigned
