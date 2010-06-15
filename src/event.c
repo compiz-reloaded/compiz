@@ -2042,11 +2042,11 @@ handleEvent (CompDisplay *d,
 		    XWindowChanges xwc;
 		    unsigned int   xwcm, source;
 
-		    /* adjust for gravity */
+		    /* adjust for gravity, but only for frame size */
 		    xwc.x      = w->serverX;
 		    xwc.y      = w->serverY;
-		    xwc.width  = w->serverWidth;
-		    xwc.height = w->serverHeight;
+		    xwc.width  = 0;
+		    xwc.height = 0;
 
 		    xwcm = adjustConfigureRequestForGravity (w, &xwc,
 							     CWX | CWY,

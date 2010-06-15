@@ -2568,8 +2568,8 @@ unmapWindow (CompWindow *w)
 	/* revert gravity adjustment made at MapRequest time */
 	xwc.x      = w->serverX;
 	xwc.y      = w->serverY;
-	xwc.width  = w->serverWidth;
-	xwc.height = w->serverHeight;
+	xwc.width  = 0;
+	xwc.height = 0;
 
 	xwcm = adjustConfigureRequestForGravity (w, &xwc,
 						 CWX | CWY,
