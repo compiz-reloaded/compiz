@@ -4447,8 +4447,8 @@ updateWindowAttributes (CompWindow             *w,
 		if (p->id == w->screen->display->activeWindow)
 		    break;
 
-	    /* window is above active window so we should lower it, assuming
-	     * that is allowed (if, for example, our window has the "above" state,
+	    /* window is above active window so we should lower it, assuming that
+	     * is allowed (if, for example, our window has the "above" state,
 	     * then lowering beneath the active window may not be allowed.)
 	     */
 	    if (p && validSiblingBelow (p, w))
@@ -4458,7 +4458,7 @@ updateWindowAttributes (CompWindow             *w,
 		/* if we found a valid sibling under the active window, it's
 		   our new sibling we want to stack above */
 		if (p)
-		  sibling = p;
+		    sibling = p;
 	    }
 	}
 
