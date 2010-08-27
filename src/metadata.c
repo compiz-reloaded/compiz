@@ -478,8 +478,7 @@ initFloatValue (CompOptionValue	      *v,
     if (!doc)
 	return;
 
-    loc = setlocale (LC_NUMERIC, NULL);
-    setlocale (LC_NUMERIC, "C");
+    loc = setlocale (LC_NUMERIC, "C");
     value = xmlNodeListGetString (doc, node->xmlChildrenNode, 1);
     if (value)
     {
@@ -877,8 +876,7 @@ initFloatRestriction (CompMetadata	    *metadata,
     r->f.max	   = MAXSHORT;
     r->f.precision = 0.1f;
 
-    loc = setlocale (LC_NUMERIC, NULL);
-    setlocale (LC_NUMERIC, "C");
+    loc = setlocale (LC_NUMERIC, "C");
     value = stringFromMetadataPathElement (metadata, path, "min");
     if (value)
     {
