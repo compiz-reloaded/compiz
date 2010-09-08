@@ -1045,11 +1045,38 @@ placeSmart (CompWindow *w,
     *y = yOptimal + w->input.top;
 }
 
-static PlacementStrategy
-placeGetStrategyForWindow (CompWindow *w)
+static Bool
+placeWindowHasUserDefinedPosition (CompWindow *w,
+				   Bool       acceptPPosition)
 {
     CompMatch *match;
 
+    PLACE_SCREEN (w->screen);
+
+    match = &ps->opt[PLACE_SCREEN_OPTION_FORCE_PLACEMENT].value.match;
+    if (matchEval (match, w))
+	return FALSE;
+
+    if (acceptPPosition && (w->sizeHints.flags & PPosition))
+	return TRUE;
+
+    if ((w->type & CompWindowTypeNormalMask) ||
+	ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
+    {
+	/* Only accept USPosition on non-normal windows if workarounds are
+	 * enabled because apps claiming the user set -geometry for a
+	 * dialog or dock are most likely wrong
+	 */
+	if (w->sizeHints.flags & USPosition)
+	    return TRUE;
+    }
+
+    return FALSE;
+}
+
+static PlacementStrategy
+placeGetStrategyForWindow (CompWindow *w)
+{
     PLACE_SCREEN (w->screen);
 
     if (w->type & (CompWindowTypeDockMask | CompWindowTypeDesktopMask    |
@@ -1067,25 +1094,10 @@ placeGetStrategyForWindow (CompWindow *w)
 	return NoPlacement;
     }
 
-    match = &ps->opt[PLACE_SCREEN_OPTION_FORCE_PLACEMENT].value.match;
-    if (!matchEval (match, w))
-    {
-	if ((w->type & CompWindowTypeNormalMask) ||
-	    ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b)
-	{
-	    /* Only accept USPosition on non-normal windows if workarounds are
-	     * enabled because apps claiming the user set -geometry for a
-	     * dialog or dock are most likely wrong
-	     */
-	    if (w->sizeHints.flags & USPosition)
-		return ConstrainOnly;
-	}
+    if (placeWindowHasUserDefinedPosition (w, TRUE))
+	return ConstrainOnly;
 
-	if (w->sizeHints.flags & PPosition)
-	    return ConstrainOnly;
-    }
-
-   if (w->transientFor &&
+    if (w->transientFor &&
 	(w->type & (CompWindowTypeDialogMask |
 		    CompWindowTypeModalDialogMask)))
     {
@@ -1562,17 +1574,11 @@ placeValidateWindowResizeRequest (CompWindow     *w,
 	return;
     }
 
-    if (w->sizeHints.flags & USPosition)
+    if (placeWindowHasUserDefinedPosition (w, FALSE))
     {
-	/* only respect USPosition on normal windows if
-	   workarounds are disabled, reason see above */
-	if (ps->opt[PLACE_SCREEN_OPTION_WORKAROUND].value.b ||
-	    (w->type & CompWindowTypeNormalMask))
-	{
-	    /* try to keep the window position intact for USPosition -
-	       obviously we can't do that if we need to change the size */
-	    sizeOnly = TRUE;
-	}
+	/* try to keep the window position intact for USPosition -
+	   obviously we can't do that if we need to change the size */
+	sizeOnly = TRUE;
     }
 
     placeDoValidateWindowResizeRequest (w, mask, xwc, sizeOnly, TRUE);
