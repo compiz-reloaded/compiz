@@ -1077,8 +1077,6 @@ placeWindowHasUserDefinedPosition (CompWindow *w,
 static PlacementStrategy
 placeGetStrategyForWindow (CompWindow *w)
 {
-    PLACE_SCREEN (w->screen);
-
     if (w->type & (CompWindowTypeDockMask | CompWindowTypeDesktopMask    |
 		   CompWindowTypeUtilMask | CompWindowTypeToolbarMask    |
 		   CompWindowTypeMenuMask | CompWindowTypeFullscreenMask |
