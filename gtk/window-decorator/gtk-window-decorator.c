@@ -2635,6 +2635,7 @@ get_window_prop (Window xwindow,
 		 Atom   atom,
 		 Window *val)
 {
+    Display *dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     Atom   type;
     int	   format;
     gulong nitems;
@@ -2647,7 +2648,7 @@ get_window_prop (Window xwindow,
     gdk_error_trap_push ();
 
     type = None;
-    result = XGetWindowProperty (gdk_display,
+    result = XGetWindowProperty (dpy,
 				 xwindow,
 				 atom,
 				 0, G_MAXLONG,
@@ -4940,7 +4941,7 @@ force_quit_dialog_realize (GtkWidget *dialog,
     WnckWindow *win = data;
 
     gdk_error_trap_push ();
-    XSetTransientForHint (gdk_display,
+    XSetTransientForHint (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
 			  GDK_WINDOW_XID (dialog->window),
 			  wnck_window_get_xid (win));
     gdk_display_sync (gdk_display_get_default ());
@@ -4950,17 +4951,18 @@ force_quit_dialog_realize (GtkWidget *dialog,
 static char *
 get_client_machine (Window xwindow)
 {
-    Atom   atom, type;
-    gulong nitems, bytes_after;
-    guchar *str = NULL;
-    int    format, result;
-    char   *retval;
+    Display *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    Atom    atom, type;
+    gulong  nitems, bytes_after;
+    guchar  *str = NULL;
+    int     format, result;
+    char    *retval;
 
-    atom = XInternAtom (gdk_display, "WM_CLIENT_MACHINE", FALSE);
+    atom = XInternAtom (xdisplay, "WM_CLIENT_MACHINE", FALSE);
 
     gdk_error_trap_push ();
 
-    result = XGetWindowProperty (gdk_display,
+    result = XGetWindowProperty (xdisplay,
 				 xwindow, atom,
 				 0, G_MAXLONG,
 				 FALSE, XA_STRING, &type, &format, &nitems,
@@ -4987,6 +4989,8 @@ get_client_machine (Window xwindow)
 static void
 kill_window (WnckWindow *win)
 {
+    GdkDisplay      *gdk_display = gdk_display_get_default ();
+    Display         *xdisplay    = GDK_DISPLAY_XDISPLAY (gdk_display);
     WnckApplication *app;
 
     app = wnck_window_get_application (win);
@@ -5012,8 +5016,8 @@ kill_window (WnckWindow *win)
     }
 
     gdk_error_trap_push ();
-    XKillClient (gdk_display, wnck_window_get_xid (win));
-    gdk_display_sync (gdk_display_get_default ());
+    XKillClient (xdisplay, wnck_window_get_xid (win));
+    gdk_display_sync (gdk_display);
     gdk_error_trap_pop ();
 }
 
@@ -5597,9 +5601,9 @@ static int
 update_shadow (void)
 {
     decor_shadow_options_t opt;
-    Display		   *xdisplay = gdk_display;
-    GdkDisplay		   *display = gdk_display_get_default ();
-    GdkScreen		   *screen = gdk_display_get_default_screen (display);
+    GdkDisplay		   *display  = gdk_display_get_default ();
+    Display		   *xdisplay = GDK_DISPLAY_XDISPLAY (display);
+    GdkScreen		   *screen   = gdk_display_get_default_screen (display);
 
     opt.shadow_radius  = shadow_radius;
     opt.shadow_opacity = shadow_opacity;
