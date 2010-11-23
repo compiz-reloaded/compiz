@@ -156,6 +156,7 @@ KWD::Switcher::redrawPixmap ()
     mBackground->resizeFrame (QSizeF (contentWidth, contentHeight));
     mBackground->paintFrame (&p, QRect (0, 0, contentWidth, contentHeight));
 
+    bp.setCompositionMode (QPainter::CompositionMode_Source);
     bp.drawPixmap (0, 0, mPixmap, mBorder.left, mBorder.top,
 		   mGeometry.width (), mGeometry.height ());
 
