@@ -764,7 +764,8 @@ KWD::Decorator::handleWindowChanged (WId		 id,
 
     if (mSwitcher && mSwitcher->xid () == id)
     {
-	mSwitcher->updateGeometry ();
+	if (properties[0] & NET::WMGeometry)
+	    mSwitcher->updateGeometry ();
 	return;
     }
 
