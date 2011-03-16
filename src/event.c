@@ -2212,6 +2212,20 @@ handleEvent (CompDisplay *d,
 		if (d->nextActiveWindow == event->xfocus.window)
 		    d->nextActiveWindow = None;
 	    }
+	    else
+	    {
+		CompScreen *s = findScreenAtDisplay (d, event->xfocus.window);
+		if (s)
+		{
+		    if (event->xfocus.detail == NotifyDetailNone ||
+			(event->xfocus.mode == NotifyNormal &&
+			 event->xfocus.detail == NotifyInferior))
+		    {
+			/* we don't want the root window to get focus */
+			focusDefaultWindow (s);
+		    }
+		}
+	    }
 	}
 	break;
     case EnterNotify:
