@@ -2212,7 +2212,11 @@ handleEvent (CompDisplay *d,
 	    }
 	    else
 	    {
-		CompScreen *s = findScreenAtDisplay (d, event->xfocus.window);
+		CompScreen *s;
+		
+		d->activeWindow = None;
+
+		s = findScreenAtDisplay (d, event->xfocus.window);
 		if (s)
 		{
 		    if (event->xfocus.detail == NotifyDetailNone ||
@@ -2223,8 +2227,6 @@ handleEvent (CompDisplay *d,
 			focusDefaultWindow (s);
 		    }
 		}
-
-		d->activeWindow = None;
 	    }
 
 	    if (d->nextActiveWindow == event->xfocus.window)
