@@ -129,7 +129,8 @@ moveInputFocusToOtherWindow (CompWindow *w)
     Bool        focussedAny = FALSE;
 
     if (w->id != d->activeWindow && w->id != d->nextActiveWindow)
-	return;
+	if (d->activeWindow != None)
+	    return;
 
     if (w->transientFor && w->transientFor != s->root)
     {
@@ -2208,9 +2209,6 @@ handleEvent (CompDisplay *d,
 
 		state &= ~CompWindowStateDemandsAttentionMask;
 		changeWindowState (w, state);
-
-		if (d->nextActiveWindow == event->xfocus.window)
-		    d->nextActiveWindow = None;
 	    }
 	    else
 	    {
@@ -2225,7 +2223,12 @@ handleEvent (CompDisplay *d,
 			focusDefaultWindow (s);
 		    }
 		}
+
+		d->activeWindow = None;
 	    }
+
+	    if (d->nextActiveWindow == event->xfocus.window)
+		d->nextActiveWindow = None;
 	}
 	break;
     case EnterNotify:
