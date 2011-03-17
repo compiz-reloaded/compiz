@@ -1692,7 +1692,7 @@ handleEvent (CompDisplay *d,
     case ClientMessage:
 	if (event->xclient.message_type == d->winActiveAtom)
 	{
-	    w = findWindowAtDisplay (d, event->xclient.window);
+	    w = findTopLevelWindowAtDisplay (d, event->xclient.window);
 	    if (w)
 	    {
 		CompFocusResult focus = CompFocusAllowed;
