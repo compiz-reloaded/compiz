@@ -2213,7 +2213,7 @@ handleEvent (CompDisplay *d,
 	    else
 	    {
 		CompScreen *s;
-		
+
 		d->activeWindow = None;
 
 		s = findScreenAtDisplay (d, event->xfocus.window);
