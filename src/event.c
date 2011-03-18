@@ -1644,6 +1644,8 @@ handleEvent (CompDisplay *d,
 	    w = findWindowAtDisplay (d, event->xproperty.window);
 	    if (w)
 	    {
+		s = w->screen;
+
 		if (w->startupId)
 		    free (w->startupId);
 		
@@ -1653,11 +1655,10 @@ handleEvent (CompDisplay *d,
 		{
 		    Time            timestamp = 0;
 		    int             vx, vy, x, y;
-		    CompScreen      *s = w->screen;
 		    CompFocusResult focus;
 
 		    w->initialTimestampSet = FALSE;
-		    applyStartupProperties (w->screen, w);
+		    applyStartupProperties (s, w);
 
 		    if (w->initialTimestampSet)
 			timestamp = w->initialTimestamp;
@@ -1677,7 +1678,7 @@ handleEvent (CompDisplay *d,
 					      timestamp);
 
 		    if (focus == CompFocusAllowed)
-			(*w->screen->activateWindow) (w);
+			(*s->activateWindow) (w);
 		}
 	    }
 	}
@@ -2212,8 +2213,6 @@ handleEvent (CompDisplay *d,
 	    }
 	    else
 	    {
-		CompScreen *s;
-
 		d->activeWindow = None;
 
 		s = findScreenAtDisplay (d, event->xfocus.window);
