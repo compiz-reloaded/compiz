@@ -1382,8 +1382,8 @@ handleEvent (CompDisplay *d,
 		    setWmState (d, WithdrawnState, w->id);
 
 		w->placed     = FALSE;
+		w->unmanaging = w->managed;
 		w->managed    = FALSE;
-		w->unmanaging = TRUE;
 	    }
 
 	    unmapWindow (w);
