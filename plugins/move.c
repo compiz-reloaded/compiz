@@ -250,10 +250,10 @@ moveTerminate (CompDisplay     *d,
 
 	syncWindowPosition (md->w);
 
-	/* update window attributes as window constraints may have
+	/* update window size as window constraints may have
 	   changed - needed e.g. if a maximized window was moved
 	   to another output device */
-	updateWindowAttributes (md->w, CompStackingUpdateModeNone);
+	updateWindowSize (md->w);
 
 	(md->w->screen->windowUngrabNotify) (md->w);
 
