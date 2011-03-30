@@ -2518,6 +2518,17 @@ wobblyWindowMoveNotify (CompWindow *w,
     UNWRAP (ws, w->screen, windowMoveNotify);
     (*w->screen->windowMoveNotify) (w, dx, dy, immediate);
     WRAP (ws, w->screen, windowMoveNotify, wobblyWindowMoveNotify);
+
+    if (ww->model && ww->grabbed)
+    {
+	WOBBLY_DISPLAY (w->screen->display);
+
+	if (wd->yConstrained)
+	{
+	    int output = outputDeviceForWindow (w);
+	    ws->grabWindowWorkArea = &w->screen->outputDev[output].workArea;
+	}
+    }
 }
 
 static void
