@@ -2036,6 +2036,7 @@ handleEvent (CompDisplay *d,
 	    {
 		CompFocusResult        focus;
 		CompStackingUpdateMode stackingMode;
+		Bool                   initiallyMinimized;
 
 		if (!w->placed)
 		{
@@ -2082,19 +2083,31 @@ handleEvent (CompDisplay *d,
 
 		updateWindowAttributes (w, stackingMode);
 
-		if (w->minimized)
+		initiallyMinimized = w->hints &&
+		                     w->hints->initial_state == IconicState;
+
+		if (w->minimized && !initiallyMinimized)
 		    unminimizeWindow (w);
 
 		(*w->screen->leaveShowDesktopMode) (w->screen, w);
 
-		if (focus == CompFocusAllowed && !onCurrentDesktop (w))
-		    setCurrentDesktop (w->screen, w->desktop);
+		if (!initiallyMinimized)
+		{
+		    if (focus == CompFocusAllowed && !onCurrentDesktop (w))
+			setCurrentDesktop (w->screen, w->desktop);
 
-		if (!(w->state & CompWindowStateHiddenMask))
-		    showWindow (w);
+		    if (!(w->state & CompWindowStateHiddenMask))
+			showWindow (w);
 
-		if (focus == CompFocusAllowed)
-		    moveInputFocusToWindow (w);
+		    if (focus == CompFocusAllowed)
+			moveInputFocusToWindow (w);
+		}
+		else
+		{
+		    minimizeWindow (w);
+		    changeWindowState (w, w->state | CompWindowStateHiddenMask);
+		    updateClientListForScreen (w->screen);
+		}
 	    }
 
 	    setWindowProp (d, w->id, d->winDesktopAtom, w->desktop);
