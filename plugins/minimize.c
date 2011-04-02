@@ -666,6 +666,19 @@ minHandleEvent (CompDisplay *d,
     UNWRAP (md, d, handleEvent);
     (*d->handleEvent) (d, event);
     WRAP (md, d, handleEvent, minHandleEvent);
+
+    switch (event->type) {
+    case MapRequest:
+	w = findWindowAtDisplay (d, event->xmaprequest.window);
+	if (w && w->hints && w->hints->initial_state == IconicState)
+	{
+	    MIN_WINDOW (w);
+	    mw->newState = mw->state = IconicState;
+	}
+	break;
+    default:
+	break;
+    }
 }
 
 static Bool
