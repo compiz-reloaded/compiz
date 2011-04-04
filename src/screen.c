@@ -1002,6 +1002,12 @@ reshape (CompScreen *s,
     s->fullscreenOutput.workArea.width   = w;
     s->fullscreenOutput.workArea.height  = h;
 
+    if (w > s->maxTextureSize || h > s->maxTextureSize)
+	compLogMessage ("core", CompLogLevelWarn,
+	                "Screen size %d x %d exceeds maximum texture size (%d),"
+			" expect rendering problems of e.g. desktop windows.",
+			w, h, s->maxTextureSize);
+
     updateScreenEdges (s);
 }
 
