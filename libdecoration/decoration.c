@@ -46,6 +46,8 @@ decor_version (void)
 
   data[1] = decoration type
 
+  data[2] = number of decorations specified in property
+
   WINDOW_DECORATION_TYPE_WINDOW property
   --------------------------------------
   data[3] = input left
@@ -61,11 +63,18 @@ decor_version (void)
   data[11] = min width
   data[12] = min height
 
+  fields 13 to 15 are only used by the default
+  decorations on the root window
+
+  data[13] = frame state
+  data[14] = frame type
+  data[15] = frame actions
+
 
   WINDOW_DECORATION_TYPE_PIXMAP property
   --------------------------------------
 
-  data[2] = pixmap
+  data[3] = pixmap
 
   extents
 
@@ -73,26 +82,35 @@ decor_version (void)
   the frame window which the client will be
   reparented into, border is used for positioning
 
-  data[3]  = frame left
-  data[4]  = frame right
-  data[5]  = frame top
-  data[6]  = frame bottom
-  data[7]  = border left
-  data[8]  = border right
-  data[9]  = border top
-  data[10] = border bottom
+  data[4]  = frame left
+  data[5]  = frame right
+  data[6]  = frame top
+  data[7]  = frame bottom
+  data[8]  = border left
+  data[9]  = border right
+  data[10]  = border top
+  data[11] = border bottom
 
-  data[11] = frame left when maximized
-  data[12] = frame right when maximized
-  data[13] = frame top when maximized
-  data[14] = frame bottom when maximized
-  data[15] = border left when maximized
-  data[16] = border right when maximized
-  data[17] = border top when maximized
-  data[18] = border bottom when maximized
+  data[12] = frame left when maximized
+  data[13] = frame right when maximized
+  data[14] = frame top when maximized
+  data[15] = frame bottom when maximized
+  data[16] = border left when maximized
+  data[17] = border right when maximized
+  data[18] = border top when maximized
+  data[19] = border bottom when maximized
 
-  data[19] = min width
-  data[20] = min height
+  data[20] = min width
+  data[21] = min height
+
+  fields 22 to 24 are only used by the default
+  decorations on the root window
+
+  data[22] = frame state
+  data[23] = frame type
+  data[24] = frame actions
+
+  data[25] = num quads
 
   flags
 
@@ -100,18 +118,44 @@ decor_version (void)
   9rd and 10th bit alignment, 11rd and 12th bit clamp,
   13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
 
-  data[18 + n * 9 + 1] = flags
-  data[18 + n * 9 + 2] = p1 x
-  data[18 + n * 9 + 3] = p1 y
-  data[18 + n * 9 + 4] = p2 x
-  data[18 + n * 9 + 5] = p2 y
-  data[18 + n * 9 + 6] = widthMax
-  data[18 + n * 9 + 7] = heightMax
-  data[18 + n * 9 + 8] = x0
-  data[18 + n * 9 + 9] = y0
+  data[26 + n * 9 + 1] = flags
+  data[26 + n * 9 + 2] = p1 x
+  data[26 + n * 9 + 3] = p1 y
+  data[26 + n * 9 + 4] = p2 x
+  data[26 + n * 9 + 5] = p2 y
+  data[26 + n * 9 + 6] = widthMax
+  data[26 + n * 9 + 7] = heightMax
+  data[26 + n * 9 + 8] = x0
+  data[26 + n * 9 + 9] = y0
  */
+
+long *
+decor_alloc_property (unsigned int n,
+		      unsigned int type)
+{
+    unsigned int  propSize;
+    long	  *data;
+
+    if (type == WINDOW_DECORATION_TYPE_WINDOW)
+	propSize = WINDOW_PROP_SIZE;
+    else if (type == WINDOW_DECORATION_TYPE_PIXMAP)
+	propSize = BASE_PROP_SIZE + N_QUADS_MAX * QUAD_PROP_SIZE;
+
+    propSize *= n;
+    propSize += PROP_HEADER_SIZE;
+
+    data = calloc (propSize, sizeof (long));
+
+    data[0]  = DECOR_INTERFACE_VERSION;
+    data[1]  = type;
+    data[2]  = n;
+
+    return data;
+}
+
 void
 decor_quads_to_property (long		 *data,
+			 unsigned int    n,
 			 Pixmap		 pixmap,
 			 decor_extents_t *frame,
 			 decor_extents_t *border,
@@ -120,10 +164,14 @@ decor_quads_to_property (long		 *data,
 			 int		 min_width,
 			 int		 min_height,
 			 decor_quad_t    *quad,
-			 int		 nQuad)
+			 int		 nQuad,
+			 unsigned int	 frame_type,
+			 unsigned int	 frame_state,
+			 unsigned int	 frame_actions)
 {
-    *data++ = DECOR_INTERFACE_VERSION;
-    *data++ = WINDOW_DECORATION_TYPE_PIXMAP;
+    /* FIXME: Allocating for N_QUAD_MAX is slightly inefficient, but there
+     * isn't really a better way to do this at the moment */
+    data += PROP_HEADER_SIZE + n * (BASE_PROP_SIZE + QUAD_PROP_SIZE * N_QUADS_MAX);
 
     memcpy (data++, &pixmap, sizeof (Pixmap));
 
@@ -147,6 +195,12 @@ decor_quads_to_property (long		 *data,
 
     *data++ = min_width;
     *data++ = min_height;
+
+    *data++ = frame_type;
+    *data++ = frame_state;
+    *data++ = frame_actions;
+
+    *data++ = nQuad;
 
     while (nQuad--)
     {
@@ -176,13 +230,16 @@ decor_quads_to_property (long		 *data,
 
 void
 decor_gen_window_property (long		   *data,
+			   unsigned int	   n,
 			   decor_extents_t *input,
 			   decor_extents_t *max_input,
 			   int		   min_width,
-			   int		   min_height)
+			   int		   min_height,
+			   unsigned int	   frame_type,
+			   unsigned int	   frame_state,
+			   unsigned int	   frame_actions)
 {
-    *data++ = DECOR_INTERFACE_VERSION;
-    *data++ = WINDOW_DECORATION_TYPE_WINDOW;
+    data += PROP_HEADER_SIZE + n * WINDOW_PROP_SIZE;
 
     *data++ = input->left;
     *data++ = input->right;
@@ -196,6 +253,10 @@ decor_gen_window_property (long		   *data,
 
     *data++ = min_width;
     *data++ = min_height;
+
+    *data++ = frame_type;
+    *data++ = frame_state;
+    *data++ = frame_actions;
 }
 
 int
@@ -211,7 +272,14 @@ decor_property_get_type (long *data)
 }
 
 int
+decor_property_get_num (long *data)
+{
+    return (int) data[2];
+}
+
+int
 decor_pixmap_property_to_quads (long		*data,
+				unsigned int	nOffset,
 				int		size,
 				Pixmap		*pixmap,
 				decor_extents_t *frame,
@@ -220,11 +288,15 @@ decor_pixmap_property_to_quads (long		*data,
 				decor_extents_t *max_border,
 				int		*min_width,
 				int		*min_height,
+				unsigned int	*frame_type,
+				unsigned int	*frame_state,
+				unsigned int	*frame_actions,
 				decor_quad_t    *quad)
 {
     int i, n, flags;
 
-    if (size < BASE_PROP_SIZE + QUAD_PROP_SIZE)
+    if (size < PROP_HEADER_SIZE + nOffset *
+	       (BASE_PROP_SIZE + QUAD_PROP_SIZE + N_QUADS_MAX))
 	return 0;
 
     if (decor_property_get_version (data) != decor_version ())
@@ -233,8 +305,8 @@ decor_pixmap_property_to_quads (long		*data,
     if (decor_property_get_type (data) != WINDOW_DECORATION_TYPE_PIXMAP)
 	return 0;
 
-    data++;
-    data++;
+    data += PROP_HEADER_SIZE + nOffset *
+	    (BASE_PROP_SIZE + N_QUADS_MAX * QUAD_PROP_SIZE);
 
     memcpy (pixmap, data++, sizeof (Pixmap));
 
@@ -259,7 +331,11 @@ decor_pixmap_property_to_quads (long		*data,
     *min_width  = *data++;
     *min_height = *data++;
 
-    n = (size - BASE_PROP_SIZE) / QUAD_PROP_SIZE;
+    *frame_type = *data++;
+    *frame_state = *data++;
+    *frame_actions = *data++;
+
+    n = *data++;
 
     for (i = 0; i < n; i++)
     {
@@ -296,23 +372,26 @@ decor_pixmap_property_to_quads (long		*data,
 
 int
 decor_window_property (long	       *data,
+		       unsigned int    n,
 		       int	       size,
 		       decor_extents_t *input,
 		       decor_extents_t *max_input,
 		       int	       *min_width,
-		       int	       *min_height)
+		       int	       *min_height,
+		       unsigned int    *frame_type,
+		       unsigned int    *frame_state,
+		       unsigned int    *frame_actions)
 {
-    if (size < WINDOW_PROP_SIZE)
-	return 0;
-
     if (decor_property_get_version (data) != decor_version ())
 	return 0;
 
     if (decor_property_get_type (data) != WINDOW_DECORATION_TYPE_WINDOW)
 	return 0;
 
-    data++;
-    data++;
+    if (size < PROP_HEADER_SIZE + n * WINDOW_PROP_SIZE)
+	return 0;
+
+    data += PROP_HEADER_SIZE + n * WINDOW_PROP_SIZE;
 
     input->left   = *data++;
     input->right  = *data++;
@@ -326,6 +405,10 @@ decor_window_property (long	       *data,
 
     *min_width  = *data++;
     *min_height = *data++;
+
+    *frame_type = *data++;
+    *frame_state = *data++;
+    *frame_actions = *data++;
 
     return 1;
 }
@@ -1678,6 +1761,8 @@ decor_get_best_layout (decor_context_t *c,
 	}
 	else
 	{
+	    layout->rotation   = 0;
+
 	    layout->top.pad    = 0;
 	    layout->bottom.pad = 0;
 	    layout->left.pad   = 0;
