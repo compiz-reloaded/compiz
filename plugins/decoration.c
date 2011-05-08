@@ -49,9 +49,8 @@ typedef struct _Vector {
 } Vector;
 
 #define DECOR_BARE   0
-#define DECOR_NORMAL 1
-#define DECOR_ACTIVE 2
-#define DECOR_NUM    3
+#define DECOR_ACTIVE 1
+#define DECOR_NUM    2
 
 typedef struct _DecorTexture {
     struct _DecorTexture *next;
@@ -71,6 +70,9 @@ typedef struct _Decoration {
     CompWindowExtents maxBorder;
     int		      minWidth;
     int		      minHeight;
+    unsigned int      frameType;
+    unsigned int      frameState;
+    unsigned int      frameActions;
     decor_quad_t      *quad;
     int		      nQuad;
 } Decoration;
@@ -469,6 +471,7 @@ decorCreateDecoration (CompScreen *screen,
     unsigned long   n, nleft;
     unsigned char   *data;
     long	    *prop;
+    unsigned int    frameType, frameState, frameActions;
     Pixmap	    pixmap;
     decor_extents_t frame, border;
     decor_extents_t maxFrame, maxBorder;
@@ -516,6 +519,7 @@ decorCreateDecoration (CompScreen *screen,
     }
 
     nQuad = decor_pixmap_property_to_quads (prop,
+					    0,
 					    n,
 					    &pixmap,
 					    &frame,
@@ -524,6 +528,9 @@ decorCreateDecoration (CompScreen *screen,
 					    &maxBorder,
 					    &minWidth,
 					    &minHeight,
+					    &frameType,
+					    &frameState,
+					    &frameActions,
 					    quad);
 
     XFree (data);
@@ -604,6 +611,11 @@ decorCreateDecoration (CompScreen *screen,
     decoration->maxBorder.right  = maxBorder.right;
     decoration->maxBorder.top    = maxBorder.top;
     decoration->maxBorder.bottom = maxBorder.bottom;
+
+    /* Decoration info */
+    decoration->frameType    = frameType;
+    decoration->frameState   = frameState;
+    decoration->frameActions = frameActions;
 
     decoration->refCount = 1;
 
@@ -970,10 +982,7 @@ decorWindowUpdate (CompWindow *w,
 	}
 	else
 	{
-	    if (w->id == w->screen->display->activeWindow)
-		decor = ds->decor[DECOR_ACTIVE];
-	    else
-		decor = ds->decor[DECOR_NORMAL];
+	    decor = ds->decor[DECOR_ACTIVE];
 	}
     }
     else
@@ -1769,8 +1778,6 @@ decorInitDisplay (CompPlugin  *p,
 	XInternAtom (d->display, DECOR_WINDOW_ATOM_NAME, 0);
     dd->decorAtom[DECOR_BARE] =
 	XInternAtom (d->display, DECOR_BARE_ATOM_NAME, 0);
-    dd->decorAtom[DECOR_NORMAL] =
-	XInternAtom (d->display, DECOR_NORMAL_ATOM_NAME, 0);
     dd->decorAtom[DECOR_ACTIVE] =
 	XInternAtom (d->display, DECOR_ACTIVE_ATOM_NAME, 0);
     dd->inputFrameAtom =
