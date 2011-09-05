@@ -931,6 +931,9 @@ KWD::Window::resizeDecoration (bool force)
 {
     int w, h;
 
+    if (KDecorationUnstable *deco2 = dynamic_cast<KDecorationUnstable*>(mDecor))
+	deco2->padding (mPadding.left, mPadding.right, mPadding.top, mPadding.bottom);
+
     mDecor->borders (mBorder.left, mBorder.right, mBorder.top, mBorder.bottom);
     
     mExtents.left   = mBorder.left + mPadding.left;
