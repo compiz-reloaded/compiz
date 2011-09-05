@@ -5173,15 +5173,15 @@ unredirectWindow (CompWindow *w)
 
     releaseWindow (w);
 
-    XCompositeUnredirectWindow (w->screen->display->display, w->id,
-				CompositeRedirectManual);
-
     w->redirected   = FALSE;
     w->overlayWindow = TRUE;
     w->screen->overlayWindowCount++;
 
     if (w->screen->overlayWindowCount > 0)
 	updateOutputWindow (w->screen);
+
+    XCompositeUnredirectWindow (w->screen->display->display, w->id,
+				CompositeRedirectManual);
 }
 
 void
