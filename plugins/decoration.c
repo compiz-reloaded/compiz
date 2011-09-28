@@ -1896,6 +1896,10 @@ decorWindowStateChangeNotify (CompWindow   *w,
     {
 	if (dw->wd && dw->wd->decor)
 	{
+	    int oldShiftX = decorWindowShiftX (w);
+	    int oldShiftY = decorWindowShiftY (w);
+	    int moveDx, moveDy;
+
 	    if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
 	    {
 		setWindowFrameExtents (w, &dw->wd->decor->maxFrame);
@@ -1906,6 +1910,21 @@ decorWindowStateChangeNotify (CompWindow   *w,
 		setWindowFrameExtents (w, &dw->wd->decor->frame);
 		setWindowFrameExtents (w, &dw->wd->decor->border);
 	    }
+
+	    /* since we immediately update the frame extents, we must
+	       also update the stored saved window geometry in order
+	       to prevent the window from shifting back too far once
+	       unmaximized */
+
+	    moveDx = decorWindowShiftX (w) - oldShiftX;
+	    moveDy = decorWindowShiftY (w) - oldShiftY;
+
+	    if (w->saveMask & CWX)
+	        w->saveWc.x += moveDx;
+
+	    if (w->saveMask & CWY)
+	        w->saveWc.y += moveDy;
+
 	    decorWindowUpdateFrame (w);
 	}
     }
