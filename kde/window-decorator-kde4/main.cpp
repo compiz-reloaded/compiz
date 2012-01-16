@@ -42,7 +42,6 @@
 int
 main (int argc, char **argv)
 {
-    KWD::Decorator  *app;
     KCmdLineArgs    *args;
     KCmdLineOptions options;
     int		    status;
@@ -75,10 +74,11 @@ main (int argc, char **argv)
 	    blurType = BLUR_TYPE_ALL;
     }
 
-    app = new KWD::Decorator ();
+    QApplication::setGraphicsSystem("native");
+    KWD::Decorator app;
 
     if (args->isSet ("sm-disable"))
-	app->disableSessionManagement ();
+	app.disableSessionManagement ();
 
     status = decor_acquire_dm_session (QX11Info::display(),
 				       QX11Info::appScreen (),
@@ -110,7 +110,7 @@ main (int argc, char **argv)
 
     decor_set_dm_check_hint (QX11Info::display(), QX11Info::appScreen ());
 
-    if (!app->enableDecorations (timestamp))
+    if (!app.enableDecorations (timestamp))
     {
 	fprintf (stderr,
 		 "%s: Could not enable decorations on display \"%s\"\n",
@@ -127,9 +127,5 @@ main (int argc, char **argv)
     QDBusConnection::sessionBus ().interface ()->registerService
 	(appname, QDBusConnectionInterface::DontQueueService);
 
-    status = app->exec ();
-
-    delete app;
-
-    return status;
+    return app.exec ();
 }
