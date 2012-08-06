@@ -768,6 +768,22 @@ KWD::Window::transparentRect () const
     return QRect ();
 }
 
+KDecorationDefines::WindowOperation
+KWD::Window::buttonToWindowOperation(Qt::MouseButtons button)
+{
+    Options::MouseCommand com = buttonToCommand (button);
+
+    if (com == Options::MouseOperationsMenu)
+	return KDecorationDefines::OperationsOp;
+
+    return KDecorationDefines::NoOp;
+}
+
+
+#endif
+
+#if KDE_IS_VERSION(4,3,90) && !KDE_IS_VERSION(4, 8, 80)
+
 bool
 KWD::Window::isClientGroupActive ()
 {
@@ -837,18 +853,81 @@ KWD::Window::displayClientMenu (int index, const QPoint& pos)
     showWindowMenu (pos);
 }
 
-KDecorationDefines::WindowOperation
-KWD::Window::buttonToWindowOperation(Qt::MouseButtons button)
+#endif
+
+#if KDE_IS_VERSION(4,8,80)
+QString 
+KWD::Window::caption(int idx) const
 {
-    Options::MouseCommand com = buttonToCommand (button);
+    return mName;
+}
 
-    if (com == Options::MouseOperationsMenu)
-	return KDecorationDefines::OperationsOp;
+void
+KWD::Window::closeTab(long id)
+{
+    closeWindow ();
+}
 
-    return KDecorationDefines::NoOp;
+void
+KWD::Window::closeTabGroup()
+{
+    closeWindow ();
+}
+
+long
+KWD::Window::currentTabId() const
+{
+     return (long) mClientId;
+}
+
+QIcon
+KWD::Window::icon(int idx) const
+{
+    QIcon icon (mIcon);
+    icon.addPixmap (mMiniIcon);
+    return icon;
+}
+
+void
+KWD::Window::setCurrentTab(long id)
+{
+}
+
+void
+KWD::Window::showWindowMenu(const QPoint& pos, long id)
+{
+  showWindowMenu (pos);
+}
+
+void
+KWD::Window::tab_A_before_B(long A, long B)
+{
+}
+
+void
+KWD::Window::tab_A_behind_B(long A, long B)
+{
+}
+
+int
+KWD::Window::tabCount() const
+{
+    return 1;
+}
+
+long
+KWD::Window::tabId(int idx) const
+{
+    return (long) mClientId;
+}
+
+void
+KWD::Window::untab(long id, const QRect& newGeom)
+{
 }
 
 #endif
+
 
 void
 KWD::Window::createDecoration (void)
@@ -987,14 +1066,14 @@ KWD::Window::updateBlurProperty (int topOffset,
 				 int leftOffset,
 				 int rightOffset)
 {
-    Atom    atom = Atoms::compizWindowBlurDecor;
-    QRegion topQRegion, bottomQRegion, leftQRegion, rightQRegion;
-    Region  topRegion = NULL;
-    Region  bottomRegion = NULL;
-    Region  leftRegion = NULL;
-    Region  rightRegion = NULL;
-    int     size = 0;
-    int     w, h;
+    Atom      atom = Atoms::compizWindowBlurDecor;
+    QRegion   topQRegion, bottomQRegion, leftQRegion, rightQRegion;
+    _XRegion *topRegion = NULL;
+    _XRegion *bottomRegion = NULL;
+    _XRegion *leftRegion = NULL;
+    _XRegion *rightRegion = NULL;
+    int       size = 0;
+    int       w, h;
 
     w = mGeometry.width () + mBorder.left + mBorder.right;
     h = mGeometry.height () + mBorder.top + mBorder.bottom;
