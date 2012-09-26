@@ -129,7 +129,6 @@ class Window: public QObject, public KDecorationBridgeUnstable {
 	virtual void closeClientGroupItem (int index);
 	virtual void closeAllInClientGroup ();
 	virtual void displayClientMenu (int index, const QPoint& pos);
-	
 #endif
 #if KDE_IS_VERSION(4,8,80)
 	using KDecorationBridge::caption;
@@ -148,7 +147,6 @@ class Window: public QObject, public KDecorationBridgeUnstable {
 	virtual long tabId(int idx) const;
 	virtual void untab(long id, const QRect& newGeom);
 #endif
-	
 
 	virtual bool eventFilter (QObject* o, QEvent* e);
 

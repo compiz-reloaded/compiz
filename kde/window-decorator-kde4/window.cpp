@@ -857,7 +857,7 @@ KWD::Window::displayClientMenu (int index, const QPoint& pos)
 #endif
 
 #if KDE_IS_VERSION(4,8,80)
-QString 
+QString
 KWD::Window::caption(int idx) const
 {
     return mName;
