@@ -245,11 +245,9 @@ KWD::Switcher::updateBlurProperty (int topOffset,
     Region  bottomRegion = NULL;
     Region  leftRegion = NULL;
     Region  rightRegion = NULL;
-    int     size = 0;
-    int     w, h;
+    int     w, size = 0;
 
     w = mGeometry.width () + mContext.extents.left + mContext.extents.right;
-    h = mGeometry.height () + mContext.extents.top + mContext.extents.bottom;
 
     if (blurType != BLUR_TYPE_NONE)
     {

@@ -31,6 +31,7 @@
 #include <X11/extensions/Xcomposite.h>
 #include <X11/Xregion.h>
 
+#include <unistd.h>
 #include <fixx11h.h>
 
 #include <KDE/KGlobal>
@@ -1338,11 +1339,7 @@ KWD::Window::updateWindowGeometry (void)
     if (!wInfo.valid ())
 	return;
 
-    QRect	geometry = wInfo.geometry ();
-    int         w, h;
-
-    w = mGeometry.width () + mBorder.left + mBorder.right;
-    h = mGeometry.height () + mBorder.top + mBorder.bottom;
+    QRect geometry = wInfo.geometry ();
 
     if (mGeometry.width ()  != geometry.width () ||
 	mGeometry.height () != geometry.height ())
