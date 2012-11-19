@@ -94,14 +94,15 @@ typedef struct _RotateDisplay {
 } RotateDisplay;
 
 #define ROTATE_SCREEN_OPTION_POINTER_INVERT_Y	 0
-#define ROTATE_SCREEN_OPTION_POINTER_SENSITIVITY 1
-#define ROTATE_SCREEN_OPTION_ACCELERATION        2
-#define ROTATE_SCREEN_OPTION_SNAP_TOP		 3
-#define ROTATE_SCREEN_OPTION_SNAP_BOTTOM	 4
-#define ROTATE_SCREEN_OPTION_SPEED		 5
-#define ROTATE_SCREEN_OPTION_TIMESTEP		 6
-#define ROTATE_SCREEN_OPTION_ZOOM		 7
-#define ROTATE_SCREEN_OPTION_NUM		 8
+#define ROTATE_SCREEN_OPTION_POINTER_INVERT_X	 1
+#define ROTATE_SCREEN_OPTION_POINTER_SENSITIVITY 2
+#define ROTATE_SCREEN_OPTION_ACCELERATION        3
+#define ROTATE_SCREEN_OPTION_SNAP_TOP		 4
+#define ROTATE_SCREEN_OPTION_SNAP_BOTTOM	 5
+#define ROTATE_SCREEN_OPTION_SPEED		 6
+#define ROTATE_SCREEN_OPTION_TIMESTEP		 7
+#define ROTATE_SCREEN_OPTION_ZOOM		 8
+#define ROTATE_SCREEN_OPTION_NUM		 9
 
 typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
@@ -1499,6 +1500,9 @@ rotateHandleEvent (CompDisplay *d,
 		    if (rs->opt[ROTATE_SCREEN_OPTION_POINTER_INVERT_Y].value.b)
 			pointerDy = -pointerDy;
 
+		    if (rs->opt[ROTATE_SCREEN_OPTION_POINTER_INVERT_X].value.b)
+			pointerDx = -pointerDx;
+
 		    rs->xVelocity += pointerDx * rs->pointerSensitivity *
 			cs->invert;
 		    rs->yVelocity += pointerDy * rs->pointerSensitivity;
@@ -1805,6 +1809,7 @@ rotateFiniDisplay (CompPlugin  *p,
 
 static const CompMetadataOptionInfo rotateScreenOptionInfo[] = {
     { "invert_y", "bool", 0, 0, 0 },
+    { "invert_x", "bool", 0, 0, 0 },
     { "sensitivity", "float", 0, 0, 0 },
     { "acceleration", "float", "<min>1.0</min>", 0, 0 },
     { "snap_top", "bool", 0, 0, 0 },
