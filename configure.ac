@@ -485,7 +485,7 @@ AC_ARG_ENABLE(kde4,
 if test "x$use_kde4" = "xyes"; then
   
   kde4dir=`kde4-config --prefix --expandvars 2>/dev/null`
-  kde4libs=`kde4-config --install lib --expandvars 2>/dev/null`
+  kde4libs=/usr/lib64/kde4/devel #`kde4-config --install lib --expandvars 2>/dev/null`
   kde4incs=`kde4-config --install include --expandvars 2>/dev/null`
 
   kde4_test_includes="kdecoration.h kcommondecoration.h kdecorationbridge.h plasma/framesvg.h"

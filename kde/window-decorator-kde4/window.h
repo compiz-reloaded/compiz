@@ -147,6 +147,10 @@ class Window: public QObject, public KDecorationBridgeUnstable {
 	virtual long tabId(int idx) const;
 	virtual void untab(long id, const QRect& newGeom);
 #endif
+#if KDE_IS_VERSION(4,9,80)
+	virtual void showApplicationMenu(const QPoint& position);
+	virtual bool menuAvailable() const;
+#endif
 
 	virtual bool eventFilter (QObject* o, QEvent* e);
 

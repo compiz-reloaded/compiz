@@ -929,6 +929,19 @@ KWD::Window::untab(long id, const QRect& newGeom)
 
 #endif
 
+#if KDE_IS_VERSION(4,9,80)
+void
+KWD::Window::showApplicationMenu(const QPoint& position)
+{
+}
+
+bool
+KWD::Window::menuAvailable() const
+{
+    return false;
+}
+
+#endif
 
 void
 KWD::Window::createDecoration (void)
