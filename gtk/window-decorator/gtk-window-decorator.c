@@ -7449,6 +7449,13 @@ main (int argc, char *argv[])
     xdisplay   = gdk_x11_display_get_xdisplay (gdkdisplay);
     gdkscreen  = gdk_display_get_default_screen (gdkdisplay);
 
+#if GTK_CHECK_VERSION(3, 10, 0)
+    /* We need to be able to fully trust that the window and monitor sizes
+     * that GDK reports corresponds to the X ones, so we disable the automatic
+     * scale handling */
+    gdk_x11_display_set_window_scale(gdkdisplay, 1);
+#endif
+
     frame_window_atom	= XInternAtom (xdisplay, "_NET_FRAME_WINDOW", FALSE);
     win_decor_atom	= XInternAtom (xdisplay, DECOR_WINDOW_ATOM_NAME, FALSE);
     win_blur_decor_atom	= XInternAtom (xdisplay, DECOR_BLUR_ATOM_NAME, FALSE);
