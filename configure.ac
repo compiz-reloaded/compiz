@@ -312,7 +312,7 @@ if test "x$use_gtk" = "xyes"; then
     LIBS="$LIBS $GTK_WINDOW_DECORATOR_LIBS"
     AC_CHECK_FUNCS(wnck_window_has_name)
     CFLAGS="$save_CFLAGS"
-    LIBS="$save_LIBS"
+    LIBS="$save_LIBS -lm -ldl"
 
     PKG_CHECK_EXISTS(libwnck-1.0 >= 2.18.1,
 		     [have_libwnck_2_18_1=yes], [have_libwnck_2_18_1=no])
