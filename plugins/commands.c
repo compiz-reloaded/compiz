@@ -41,43 +41,95 @@ static int displayPrivateIndex;
 #define COMMANDS_DISPLAY_OPTION_COMMAND9              9
 #define COMMANDS_DISPLAY_OPTION_COMMAND10            10
 #define COMMANDS_DISPLAY_OPTION_COMMAND11            11
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_KEY     12
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND1_KEY     13
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND2_KEY     14
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND3_KEY     15
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND4_KEY     16
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND5_KEY     17
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND6_KEY     18
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND7_KEY     19
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND8_KEY     20
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND9_KEY     21
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND10_KEY    22
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND11_KEY    23
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_BUTTON  24
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND1_BUTTON  25
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND2_BUTTON  26
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND3_BUTTON  27
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND4_BUTTON  28
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND5_BUTTON  29
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND6_BUTTON  30
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND7_BUTTON  31
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND8_BUTTON  32
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND9_BUTTON  33
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND10_BUTTON 34
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND11_BUTTON 35
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_EDGE    36
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND1_EDGE    37
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND2_EDGE    38
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND3_EDGE    39
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND4_EDGE    40
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND5_EDGE    41
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND6_EDGE    42
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND7_EDGE    43
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND8_EDGE    44
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND9_EDGE    45
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND10_EDGE   46
-#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND11_EDGE   47
-#define COMMANDS_DISPLAY_OPTION_NUM                  48
+#define COMMANDS_DISPLAY_OPTION_COMMAND12            12
+#define COMMANDS_DISPLAY_OPTION_COMMAND13            13
+#define COMMANDS_DISPLAY_OPTION_COMMAND14            14
+#define COMMANDS_DISPLAY_OPTION_COMMAND15            15
+#define COMMANDS_DISPLAY_OPTION_COMMAND16            16
+#define COMMANDS_DISPLAY_OPTION_COMMAND17            17
+#define COMMANDS_DISPLAY_OPTION_COMMAND18            18
+#define COMMANDS_DISPLAY_OPTION_COMMAND19            19
+#define COMMANDS_DISPLAY_OPTION_COMMAND20            20
+#define COMMANDS_DISPLAY_OPTION_COMMAND21            21
+#define COMMANDS_DISPLAY_OPTION_COMMAND22            22
+#define COMMANDS_DISPLAY_OPTION_COMMAND23            23
+#define COMMANDS_DISPLAY_OPTION_COMMAND24            24
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_KEY     25
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND1_KEY     26
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND2_KEY     27
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND3_KEY     28
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND4_KEY     29
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND5_KEY     30
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND6_KEY     31
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND7_KEY     32
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND8_KEY     33
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND9_KEY     34
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND10_KEY    35
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND11_KEY    36
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND12_KEY    37
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND13_KEY    38
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND14_KEY    39
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND15_KEY    40
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND16_KEY    41
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND17_KEY    42
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND18_KEY    43
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND19_KEY    44
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND20_KEY    45
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND21_KEY    46
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND22_KEY    47
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND23_KEY    48
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND24_KEY    49
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_BUTTON  50
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND1_BUTTON  51
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND2_BUTTON  52
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND3_BUTTON  53
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND4_BUTTON  54
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND5_BUTTON  55
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND6_BUTTON  56
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND7_BUTTON  57
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND8_BUTTON  58
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND9_BUTTON  59
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND10_BUTTON 60
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND11_BUTTON 61
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND12_BUTTON 62
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND13_BUTTON 63
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND14_BUTTON 64
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND15_BUTTON 65
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND16_BUTTON 66
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND17_BUTTON 67
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND18_BUTTON 68
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND19_BUTTON 69
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND20_BUTTON 70
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND21_BUTTON 71
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND22_BUTTON 72
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND23_BUTTON 73
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND24_BUTTON 74
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_EDGE    75
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND1_EDGE    76
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND2_EDGE    77
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND3_EDGE    78
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND4_EDGE    79
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND5_EDGE    80
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND6_EDGE    81
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND7_EDGE    82
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND8_EDGE    83
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND9_EDGE    84
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND10_EDGE   85
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND11_EDGE   86
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND12_EDGE   87
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND13_EDGE   88
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND14_EDGE   89
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND15_EDGE   90
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND16_EDGE   91
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND17_EDGE   92
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND18_EDGE   93
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND19_EDGE   94
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND20_EDGE   95
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND21_EDGE   96
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND22_EDGE   97
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND23_EDGE   98
+#define COMMANDS_DISPLAY_OPTION_RUN_COMMAND24_EDGE   99
+#define COMMANDS_DISPLAY_OPTION_NUM                 100
 
 typedef struct _CommandsDisplay {
     CompOption opt[COMMANDS_DISPLAY_OPTION_NUM];
@@ -128,6 +180,19 @@ static const CompMetadataOptionInfo commandsDisplayOptionInfo[] = {
     { "command9", "string", 0, 0, 0 },
     { "command10", "string", 0, 0, 0 },
     { "command11", "string", 0, 0, 0 },
+    { "command12", "string", 0, 0, 0 },
+    { "command13", "string", 0, 0, 0 },
+    { "command14", "string", 0, 0, 0 },
+    { "command15", "string", 0, 0, 0 },
+    { "command16", "string", 0, 0, 0 },
+    { "command17", "string", 0, 0, 0 },
+    { "command18", "string", 0, 0, 0 },
+    { "command19", "string", 0, 0, 0 },
+    { "command20", "string", 0, 0, 0 },
+    { "command21", "string", 0, 0, 0 },
+    { "command22", "string", 0, 0, 0 },
+    { "command23", "string", 0, 0, 0 },
+    { "command24", "string", 0, 0, 0 },
     { "run_command0_key", "key", 0, runCommandDispatch, 0 },
     { "run_command1_key", "key", 0, runCommandDispatch, 0 },
     { "run_command2_key", "key", 0, runCommandDispatch, 0 },
@@ -140,6 +205,19 @@ static const CompMetadataOptionInfo commandsDisplayOptionInfo[] = {
     { "run_command9_key", "key", 0, runCommandDispatch, 0 },
     { "run_command10_key", "key", 0, runCommandDispatch, 0 },
     { "run_command11_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command12_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command13_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command14_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command15_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command16_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command17_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command18_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command19_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command20_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command21_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command22_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command23_key", "key", 0, runCommandDispatch, 0 },
+    { "run_command24_key", "key", 0, runCommandDispatch, 0 },
     { "run_command0_button", "button", 0, runCommandDispatch, 0 },
     { "run_command1_button", "button", 0, runCommandDispatch, 0 },
     { "run_command2_button", "button", 0, runCommandDispatch, 0 },
@@ -152,6 +230,19 @@ static const CompMetadataOptionInfo commandsDisplayOptionInfo[] = {
     { "run_command9_button", "button", 0, runCommandDispatch, 0 },
     { "run_command10_button", "button", 0, runCommandDispatch, 0 },
     { "run_command11_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command12_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command13_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command14_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command15_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command16_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command17_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command18_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command19_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command20_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command21_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command22_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command23_button", "button", 0, runCommandDispatch, 0 },
+    { "run_command24_button", "button", 0, runCommandDispatch, 0 },
     { "run_command0_edge", "edge", 0, runCommandDispatch, 0 },
     { "run_command1_edge", "edge", 0, runCommandDispatch, 0 },
     { "run_command2_edge", "edge", 0, runCommandDispatch, 0 },
@@ -163,7 +254,20 @@ static const CompMetadataOptionInfo commandsDisplayOptionInfo[] = {
     { "run_command8_edge", "edge", 0, runCommandDispatch, 0 },
     { "run_command9_edge", "edge", 0, runCommandDispatch, 0 },
     { "run_command10_edge", "edge", 0, runCommandDispatch, 0 },
-    { "run_command11_edge", "edge", 0, runCommandDispatch, 0 }
+    { "run_command11_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command12_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command13_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command14_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command15_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command16_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command17_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command18_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command19_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command20_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command21_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command22_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command23_edge", "edge", 0, runCommandDispatch, 0 },
+    { "run_command24_edge", "edge", 0, runCommandDispatch, 0 }
 };
 
 static CompBool
@@ -190,7 +294,7 @@ commandsInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    for (i = 0; i < 12; i++)
+    for (i = 0; i < 25; i++)
     {
 	int opt;
 	

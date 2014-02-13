@@ -66,6 +66,71 @@
 		    <_long>Command line to be executed in shell when run_command11 is invoked</_long>
 		    <default></default>
 		</option>
+		<option name="command12" type="string">
+		    <_short>Command line 12</_short>
+		    <_long>Command line to be executed in shell when run_command12 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command13" type="string">
+		    <_short>Command line 13</_short>
+		    <_long>Command line to be executed in shell when run_command13 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command14" type="string">
+		    <_short>Command line 14</_short>
+		    <_long>Command line to be executed in shell when run_command14 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command15" type="string">
+		    <_short>Command line 15</_short>
+		    <_long>Command line to be executed in shell when run_command15 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command16" type="string">
+		    <_short>Command line 16</_short>
+		    <_long>Command line to be executed in shell when run_command16 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command17" type="string">
+		    <_short>Command line 17</_short>
+		    <_long>Command line to be executed in shell when run_command17 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command18" type="string">
+		    <_short>Command line 18</_short>
+		    <_long>Command line to be executed in shell when run_command18 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command19" type="string">
+		    <_short>Command line 19</_short>
+		    <_long>Command line to be executed in shell when run_command19 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command20" type="string">
+		    <_short>Command line 20</_short>
+		    <_long>Command line to be executed in shell when run_command20 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command21" type="string">
+		    <_short>Command line 21</_short>
+		    <_long>Command line to be executed in shell when run_command21 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command22" type="string">
+		    <_short>Command line 22</_short>
+		    <_long>Command line to be executed in shell when run_command22 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command23" type="string">
+		    <_short>Command line 23</_short>
+		    <_long>Command line to be executed in shell when run_command23 is invoked</_long>
+		    <default></default>
+		</option>
+		<option name="command24" type="string">
+		    <_short>Command line 24</_short>
+		    <_long>Command line to be executed in shell when run_command24 is invoked</_long>
+		    <default></default>
+		</option>
 	    </group>
 	    <group>
 		<_short>Key Bindings</_short>
@@ -116,6 +181,58 @@
 		<option name="run_command11_key" type="key">
 		    <_short>Run command 11</_short>
 		    <_long>A keybinding that when invoked, will run the shell command identified by command11</_long>
+		</option>
+		<option name="run_command12_key" type="key">
+		    <_short>Run command 12</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command12</_long>
+		</option>
+		<option name="run_command13_key" type="key">
+		    <_short>Run command 13</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command13</_long>
+		</option>
+		<option name="run_command14_key" type="key">
+		    <_short>Run command 14</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command14</_long>
+		</option>
+		<option name="run_command15_key" type="key">
+		    <_short>Run command 15</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command15</_long>
+		</option>
+		<option name="run_command16_key" type="key">
+		    <_short>Run command 16</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command16</_long>
+		</option>
+		<option name="run_command17_key" type="key">
+		    <_short>Run command 17</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command17</_long>
+		</option>
+		<option name="run_command18_key" type="key">
+		    <_short>Run command 18</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command18</_long>
+		</option>
+		<option name="run_command19_key" type="key">
+		    <_short>Run command 19</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command19</_long>
+		</option>
+		<option name="run_command20_key" type="key">
+		    <_short>Run command 20</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command20</_long>
+		</option>
+		<option name="run_command21_key" type="key">
+		    <_short>Run command 21</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command21</_long>
+		</option>
+		<option name="run_command22_key" type="key">
+		    <_short>Run command 22</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command22</_long>
+		</option>
+		<option name="run_command23_key" type="key">
+		    <_short>Run command 23</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command23</_long>
+		</option>
+		<option name="run_command24_key" type="key">
+		    <_short>Run command 24</_short>
+		    <_long>A keybinding that when invoked, will run the shell command identified by command24</_long>
 		</option>
 	    </group>
 	    <group>
@@ -168,6 +285,58 @@
 		    <_short>Run command 11</_short>
 		    <_long>A button binding that when invoked, will run the shell command identified by command11</_long>
 		</option>
+		<option name="run_command12_button" type="button">
+		    <_short>Run command 12</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command12</_long>
+		</option>
+		<option name="run_command13_button" type="button">
+		    <_short>Run command 13</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command13</_long>
+		</option>
+		<option name="run_command14_button" type="button">
+		    <_short>Run command 14</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command14</_long>
+		</option>
+		<option name="run_command15_button" type="button">
+		    <_short>Run command 15</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command15</_long>
+		</option>
+		<option name="run_command16_button" type="button">
+		    <_short>Run command 16</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command16</_long>
+		</option>
+		<option name="run_command17_button" type="button">
+		    <_short>Run command 17</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command17</_long>
+		</option>
+		<option name="run_command18_button" type="button">
+		    <_short>Run command 18</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command18</_long>
+		</option>
+		<option name="run_command19_button" type="button">
+		    <_short>Run command 19</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command19</_long>
+		</option>
+		<option name="run_command20_button" type="button">
+		    <_short>Run command 20</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command20</_long>
+		</option>
+		<option name="run_command21_button" type="button">
+		    <_short>Run command 21</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command21</_long>
+		</option>
+		<option name="run_command22_button" type="button">
+		    <_short>Run command 22</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command22</_long>
+		</option>
+		<option name="run_command23_button" type="button">
+		    <_short>Run command 23</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command23</_long>
+		</option>
+		<option name="run_command24_button" type="button">
+		    <_short>Run command 24</_short>
+		    <_long>A button binding that when invoked, will run the shell command identified by command24</_long>
+		</option>
 	    </group>
 	    <group>
 		<_short>Edge Bindings</_short>
@@ -218,6 +387,58 @@
 		<option name="run_command11_edge" type="edge">
 		    <_short>Run command 11</_short>
 		    <_long>An edge binding that when invoked, will run the shell command identified by command11</_long>
+		</option>
+		<option name="run_command12_edge" type="edge">
+		    <_short>Run command 12</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command12</_long>
+		</option>
+		<option name="run_command13_edge" type="edge">
+		    <_short>Run command 13</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command13</_long>
+		</option>
+		<option name="run_command14_edge" type="edge">
+		    <_short>Run command 14</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command14</_long>
+		</option>
+		<option name="run_command15_edge" type="edge">
+		    <_short>Run command 15</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command15</_long>
+		</option>
+		<option name="run_command16_edge" type="edge">
+		    <_short>Run command 16</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command16</_long>
+		</option>
+		<option name="run_command17_edge" type="edge">
+		    <_short>Run command 17</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command17</_long>
+		</option>
+		<option name="run_command18_edge" type="edge">
+		    <_short>Run command 18</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command18</_long>
+		</option>
+		<option name="run_command19_edge" type="edge">
+		    <_short>Run command 19</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command19</_long>
+		</option>
+		<option name="run_command20_edge" type="edge">
+		    <_short>Run command 20</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command20</_long>
+		</option>
+		<option name="run_command21_edge" type="edge">
+		    <_short>Run command 21</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command21</_long>
+		</option>
+		<option name="run_command22_edge" type="edge">
+		    <_short>Run command 22</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command22</_long>
+		</option>
+		<option name="run_command23_edge" type="edge">
+		    <_short>Run command 23</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command23</_long>
+		</option>
+		<option name="run_command24_edge" type="edge">
+		    <_short>Run command 24</_short>
+		    <_long>An edge binding that when invoked, will run the shell command identified by command24</_long>
 		</option>
 	    </group>
 	</display>
