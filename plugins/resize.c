@@ -303,12 +303,21 @@ static void
 resizeFinishResizing (CompDisplay *d)
 {
     RESIZE_DISPLAY (d);
+    BoxRec box;
 
     (*rd->w->screen->windowUngrabNotify) (rd->w);
 
     XDeleteProperty (d->display,
 		     rd->w->id,
 		     rd->resizeInformationAtom);
+
+    if (rd->mode != RESIZE_MODE_NORMAL) {
+	if (rd->mode == RESIZE_MODE_STRETCH)
+	    resizeGetStretchRectangle (d, &box);
+	else
+	    resizeGetPaintRectangle (d, &box);
+	resizeDamageRectangle (rd->w->screen, &box);
+    }
 
     rd->w = NULL;
 }
@@ -574,18 +583,7 @@ resizeTerminate (CompDisplay	 *d,
 	    else
 		geometry = rd->geometry;
 
-	    if (memcmp (&geometry, &rd->savedGeometry, sizeof (geometry)) == 0)
-	    {
-		BoxRec box;
-
-		if (rd->mode == RESIZE_MODE_STRETCH)
-		    resizeGetStretchRectangle (d, &box);
-		else
-		    resizeGetPaintRectangle (d, &box);
-
-		resizeDamageRectangle (w->screen, &box);
-	    }
-	    else
+	    if (!memcmp (&geometry, &rd->savedGeometry, sizeof (geometry)) == 0)
 	    {
 		xwc.x      = geometry.x;
 		xwc.y      = geometry.y;
@@ -610,6 +608,20 @@ resizeTerminate (CompDisplay	 *d,
 	    configureXWindow (w, mask, &xwc);
 	}
 
+	/*
+	 * XXX: This is just wacko. Only terminate if we DIDN'T change,
+	 * because if we did change, we'll shortly get a ResizeNotify about
+	 * it at which point we WILL terminate. Weird and buggy.
+	 *
+	 * It actually means we might paint resize-logic AFTER terminating
+	 * the resize, since we could get a paint-event before we get the
+	 * resize-one.
+	 *
+	 * I don't currently know why it was done like this and I'm
+	 * reluctant to just remove the if() clause until I do.
+	 *
+	 * - Kristian
+	 */
 	if (!(mask & (CWWidth | CWHeight)))
 	    resizeFinishResizing (d);
 
