@@ -603,11 +603,18 @@ keyBindingToString (CompDisplay    *d,
 
     if (key->keycode != 0)
     {
-	KeySym keysym;
+	KeySym *keysym;
 	char   *keyname;
+	int keysymsPerKeycode = 0;
 
-	keysym  = XKeycodeToKeysym (d->display, key->keycode, 0);
-	keyname = XKeysymToString (keysym);
+	/* convert keycode to keysym */
+	keysym = XGetKeyboardMapping (d->display,
+				      key->keycode, 1,
+				      &keysymsPerKeycode);
+
+	keyname = XKeysymToString (keysym[0]);
+
+	XFree (keysym);
 
 	if (keyname)
 	{
