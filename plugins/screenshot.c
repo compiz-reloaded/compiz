@@ -179,11 +179,9 @@ shotFilter (const struct dirent *d)
 }
 
 static int
-shotSort (const void *_a,
-	  const void *_b)
+shotSort (const struct dirent **a,
+	  const struct dirent **b)
 {
-    struct dirent **a = (struct dirent **) _a;
-    struct dirent **b = (struct dirent **) _b;
     int		  al = strlen ((*a)->d_name);
     int		  bl = strlen ((*b)->d_name);
 
