@@ -555,6 +555,9 @@ iniLoadOptionsFromFile (FILE       *optionFile,
 							 plugin,
 							 optionName,
 							 &value);
+		    if (!status)
+			    compLogMessage ("ini", CompLogLevelWarn,
+			    "Failed setting option %s for plugin %s", optionName, plugin);
 
 		    if (o->type == CompOptionTypeMatch)
 		    {
@@ -649,10 +652,9 @@ iniSaveOptions (CompObject *object,
 
     fileData->blockReads = TRUE;
 
-    Bool status, firstInList;
+    Bool firstInList;
     while (nOption--)
     {
-	status = FALSE;
 	int i;
 
 	switch (option->type)
