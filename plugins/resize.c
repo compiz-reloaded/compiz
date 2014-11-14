@@ -954,7 +954,7 @@ resizeHandleMotionEvent (CompScreen *s,
 	    /* only constrain movement if previous position was valid */
 	    if (rd->inRegionStatus == RectangleIn)
 	    {
-		int xStatus, yForXResize;
+		int xStatus=-1, yForXResize;
 		int nx = x;
 		int nw = w;
 		int nh = h;
@@ -979,42 +979,42 @@ resizeHandleMotionEvent (CompScreen *s,
 			else
 			    yForXResize = y;
 		    }
-		}
-		if (rd->mask & ResizeLeftMask)
-		{
-		    while ((nw > minWidth) && xStatus != RectangleIn)
+		    if (rd->mask & ResizeLeftMask)
 		    {
-			xStatus = XRectInRegion (rd->constraintRegion,
-						 nx, yForXResize, width, height);
-			if (xStatus != RectangleIn)
+			while ((nw > minWidth) && xStatus != RectangleIn)
 			{
-			    nw--;
-			    nx++;
+			    xStatus = XRectInRegion (rd->constraintRegion,
+						     nx, yForXResize, width, height);
+			    if (xStatus != RectangleIn)
+			    {
+				nw--;
+				nx++;
+			    }
+			}
+			if (nw > minWidth)
+			{
+			    x = nx;
+			    w = nw;
 			}
 		    }
-		    if (nw > minWidth)
+		    else if (rd->mask & ResizeRightMask)
 		    {
-			x = nx;
-			w = nw;
-		    }
-		}
-		else if (rd->mask & ResizeRightMask)
-		{
-		    while ((nw > minWidth) && xStatus != RectangleIn)
-		    {
-			xStatus = XRectInRegion (rd->constraintRegion,
-						 nx, yForXResize,
-						 width, height);
-			if (xStatus != RectangleIn)
+			while ((nw > minWidth) && xStatus != RectangleIn)
 			{
-			    nw--;
-			    nx--;
+			    xStatus = XRectInRegion (rd->constraintRegion,
+						     nx, yForXResize,
+						     width, height);
+			    if (xStatus != RectangleIn)
+			    {
+				nw--;
+				nx--;
+			    }
 			}
-		    }
-		    if (nw > minWidth)
-		    {
-			x = nx;
-			w = nw;
+			if (nw > minWidth)
+			{
+			    x = nx;
+			    w = nw;
+			}
 		    }
 		}
 
