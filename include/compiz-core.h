@@ -2639,6 +2639,7 @@ struct _CompWindow {
 
     CompWindowExtents input;
     CompWindowExtents output;
+    CompWindowExtents clientFrame;
 
     CompStruts *struts;
 
@@ -2814,6 +2815,9 @@ updateTransientHint (CompWindow *w);
 
 void
 updateIconGeometry (CompWindow *w);
+
+void
+updateClientFrame (CompWindow *w);
 
 Window
 getClientLeader (CompWindow *w);
