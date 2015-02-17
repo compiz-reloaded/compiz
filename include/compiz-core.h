@@ -979,6 +979,7 @@ struct _CompDisplay {
     Atom clientListStackingAtom;
 
     Atom frameExtentsAtom;
+    Atom frameGtkExtentsAtom;
     Atom frameWindowAtom;
 
     Atom wmStateAtom;
