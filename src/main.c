@@ -66,6 +66,7 @@ Bool strictBinding = TRUE;
 Bool noDetection = FALSE;
 Bool useDesktopHints = FALSE;
 Bool onlyCurrentScreen = FALSE;
+Bool noFBO = FALSE;
 static Bool debugOutput = FALSE;
 
 #ifdef USE_COW
@@ -87,6 +88,7 @@ usage (void)
 	    "[--keep-desktop-hints] "
 	    "[--loose-binding] "
 	    "[--replace]\n       "
+	    "[--no-fbo] "
 	    "[--sm-disable] "
 	    "[--sm-client-id ID] "
 	    "[--only-current-screen]\n      "
@@ -345,6 +347,10 @@ main (int argc, char **argv)
 	else if (!strcmp (argv[i], "--only-current-screen"))
 	{
 	    onlyCurrentScreen = TRUE;
+	}
+	else if (!strcmp (argv[i], "--no-fbo"))
+	{
+		noFBO = TRUE;
 	}
 
 #ifdef USE_COW

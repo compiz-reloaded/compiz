@@ -2189,7 +2189,7 @@ addScreen (CompDisplay *display,
     s->generateMipmap         = NULL;
 
     s->fbo = 0;
-    if (strstr (glExtensions, "GL_EXT_framebuffer_object"))
+    if (!noFBO && strstr (glExtensions, "GL_EXT_framebuffer_object"))
     {
 	s->genFramebuffers = (GLGenFramebuffersProc)
 	    getProcAddress (s, "glGenFramebuffersEXT");
