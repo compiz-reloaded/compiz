@@ -317,15 +317,8 @@ if test "x$use_gtk" = "xyes"; then
     save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $GTK_WINDOW_DECORATOR_CFLAGS"
     LIBS="$LIBS $GTK_WINDOW_DECORATOR_LIBS"
-    AC_CHECK_FUNCS(wnck_window_has_name)
     CFLAGS="$save_CFLAGS"
     LIBS="$save_LIBS -lm -ldl"
-
-    PKG_CHECK_EXISTS(libwnck-1.0 >= 2.18.1,
-		     [have_libwnck_2_18_1=yes], [have_libwnck_2_18_1=no])
-
-	PKG_CHECK_EXISTS(libwnck-1.0 >= 2.19.4,
-		     [have_libwnck_2_19_4=yes], [have_libwnck_2_19_4=no])
 
     if test "x$use_metacity" = "xyes"; then
       PKG_CHECK_MODULES(METACITY, libmetacity-private,
@@ -362,14 +355,6 @@ AC_SUBST(keybindingsdir)
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
 if test "$use_gtk" = yes; then
   AC_DEFINE(USE_GTK, 1, [Build gtk window decorator])
-  if test "$have_libwnck_2_18_1" = yes; then
-    AC_DEFINE(HAVE_LIBWNCK_2_18_1, 1,
-	      [Define to 1 if libwnck version >= 2_18_1])
-  fi
-  if test "$have_libwnck_2_19_4" = yes; then
-    AC_DEFINE(HAVE_LIBWNCK_2_19_4, 1,
-	      [Define to 1 if libwnck version >= 2_19_4])
-  fi
 fi
 
 AM_CONDITIONAL(USE_METACITY, test "x$use_metacity" = "xyes")

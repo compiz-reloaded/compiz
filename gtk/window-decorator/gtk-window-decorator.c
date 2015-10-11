@@ -49,10 +49,6 @@
 #include <libwnck/libwnck.h>
 #include <libwnck/window-action-menu.h>
 
-#ifndef HAVE_LIBWNCK_2_19_4
-#define wnck_window_get_client_window_geometry wnck_window_get_geometry
-#endif
-
 #include <cairo.h>
 #include <cairo-xlib.h>
 
@@ -3067,21 +3063,11 @@ update_event_windows (WnckWindow *win)
 	    WNCK_WINDOW_ACTION_MINIMIZE,
 	    0,
 	    WNCK_WINDOW_ACTION_SHADE,
-
-#ifdef HAVE_LIBWNCK_2_18_1
 	    WNCK_WINDOW_ACTION_ABOVE,
 	    WNCK_WINDOW_ACTION_STICK,
 	    WNCK_WINDOW_ACTION_UNSHADE,
 	    WNCK_WINDOW_ACTION_ABOVE,
 	    WNCK_WINDOW_ACTION_UNSTICK
-#else
-	    0,
-	    0,
-	    0,
-	    0,
-	    0
-#endif
-
 	};
 
 	if (button_actions[i] && !(actions & button_actions[i]))
@@ -3105,14 +3091,12 @@ update_event_windows (WnckWindow *win)
     gdk_error_trap_pop ();
 }
 
-#ifdef HAVE_WNCK_WINDOW_HAS_NAME
 static const char *
 wnck_window_get_real_name (WnckWindow *win)
 {
     return wnck_window_has_name (win) ? wnck_window_get_name (win) : NULL;
 }
 #define wnck_window_get_name wnck_window_get_real_name
-#endif
 
 static gint
 max_window_name_width (WnckWindow *win)
@@ -4477,11 +4461,6 @@ action_menu_map (WnckWindow *win,
 	return;
     case WNCK_WINDOW_NORMAL:
     case WNCK_WINDOW_DIALOG:
-
-#ifndef HAVE_LIBWNCK_2_19_4
-    case WNCK_WINDOW_MODAL_DIALOG:
-#endif
-
     case WNCK_WINDOW_TOOLBAR:
     case WNCK_WINDOW_MENU:
     case WNCK_WINDOW_UTILITY:
@@ -4570,13 +4549,7 @@ above_button_event (WnckWindow *win,
 	if (xevent->xbutton.button == 1)
 	{
 	    if (state == BUTTON_EVENT_ACTION_STATE)
-	    {
-
-#ifdef HAVE_LIBWNCK_2_18_1
 		wnck_window_make_above (win);
-#endif
-
-	    }
 	}
 	break;
     }
@@ -4636,13 +4609,7 @@ unabove_button_event (WnckWindow *win,
 	if (xevent->xbutton.button == 1)
 	{
 	    if (state == BUTTON_EVENT_ACTION_STATE)
-	    {
-
-#ifdef HAVE_LIBWNCK_2_18_1
 		wnck_window_unmake_above (win);
-#endif
-
-	    }
 	}
 	break;
     }
