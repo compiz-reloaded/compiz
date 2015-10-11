@@ -105,13 +105,6 @@ libgconf_la_SOURCES = gconf.c
 libgconf_module = libgconf.la
 endif
 
-if USE_KCONFIG
-libkconfig_la_LDFLAGS = -module -avoid-version -no-undefined
-libkconfig_la_LIBADD = @KCONFIG_LIBS@
-libkconfig_la_SOURCES = kconfig.cpp
-libkconfig_module = libkconfig.la
-endif
-
 if DBUS_PLUGIN
 libdbus_la_LDFLAGS = -module -avoid-version -no-undefined
 libdbus_la_LIBADD = @DBUS_LIBS@
@@ -138,7 +131,6 @@ INCLUDES =					\
 	@LIBRSVG_CFLAGS@			\
 	@ANNOTATE_CFLAGS@			\
 	@GCONF_CFLAGS@				\
-	@KCONFIG_CFLAGS@			\
 	@DBUS_CFLAGS@				\
 	@GLIB_CFLAGS@				\
 	@FUSE_CFLAGS@				\
@@ -156,7 +148,6 @@ moduledir = $(plugindir)
 module_LTLIBRARIES =		\
 	$(libglib_module)	\
 	$(libgconf_module)	\
-	$(libkconfig_module)	\
 	libdecoration.la	\
 	libwobbly.la		\
 	libfade.la		\

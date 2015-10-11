@@ -1,4 +1,4 @@
-SUBDIRS = include src libdecoration plugins images gtk kde po metadata
+SUBDIRS = include src libdecoration plugins images gtk po metadata
 
 EXTRA_DIST =		    \
 	COPYING		    \
@@ -18,17 +18,12 @@ if USE_GCONF
 gconfdata = compiz-gconf.pc
 endif
 
-if USE_KCONFIG
-kconfigdata = compiz-kconfig.pc
-endif
-
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA =	\
 	compiz.pc	\
 	compiz-cube.pc	\
 	compiz-scale.pc \
-	$(gconfdata)	\
-	$(kconfigdata)
+	$(gconfdata)
 
 # Some custom targets to make it easier to release things.
 # Use either:

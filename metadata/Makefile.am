@@ -15,7 +15,6 @@ xml_in_files =		   \
 	gnomecompat.xml.in \
 	ini.xml.in	   \
 	inotify.xml.in	   \
-	kconfig.xml.in	   \
 	minimize.xml.in	   \
 	move.xml.in	   \
 	obs.xml.in	   \
@@ -56,30 +55,6 @@ schemas_stylesheets = schemas.xslt
 
 endif
 
-if USE_KCONFIG
-kde_kcfgdir    = $(DESTDIR)$(KDE_KCFG_DIR)
-kde_kcfg_files = $(patsubst %.xml.in,compiz-%.kcfg,$(xml_in_files))
-
-kde_kcfg_stylesheets = kcfg.xslt
-
-%.kcfg: $(xml_files)
-	xsltproc -o $@ $(srcdir)/kcfg.xslt $(subst compiz-,,$*).xml;
-
-kde_configdir    = $(DESTDIR)$(KDE_KCONFIG_DIR)
-kde_config_files = compizrc
-
-compizrc: $(kde_kcfg_files)
-	xsltproc --stringparam screen 0 $(srcdir)/kconfig.xslt \
-	$(kde_kcfg_files) > $@;
-
-kde_config_stylesheets = kconfig.xslt
-
-endif
-
-noinst_DATA =		  \
-	$(kde_kcfg_files) \
-	$(kde_config_files)
-
 install-data-local:
 if USE_GCONF
 if GCONF_SCHEMAS_INSTALL
@@ -88,38 +63,11 @@ if GCONF_SCHEMAS_INSTALL
         fi
 endif
 endif
-if USE_KCONFIG
-	if mkdir -p $(kde_kcfgdir) && test -w $(kde_kcfgdir); then ( \
-		$(INSTALL) -m 644 $(kde_kcfg_files) $(kde_kcfgdir) \
-		); \
-	fi
-	if mkdir -p $(kde_configdir) && test -w $(kde_configdir); then ( \
-		$(INSTALL) -m 644 $(kde_config_files) $(kde_configdir) \
-		); \
-	fi
-endif
-
-uninstall-local:
-if USE_KCONFIG
-	if test -w $(kde_kcfgdir); then ( \
-		for file in $(kde_kcfg_files); do \
-			rm -f $(kde_kcfgdir)/$$file; \
-		done \
-		); \
-	fi
-	if test -w $(kde_configdir); then ( \
-		for file in $(kde_config_files); do \
-			rm -f $(kde_configdir)/$$file; \
-		done \
-		); \
-	fi
-endif
 
 xsltdir    = $(stylesheetdir)
 xslt_files =		       	  \
-	$(schemas_stylesheets)	  \
-	$(kde_kcfg_stylesheets)	  \
-	$(kde_config_stylesheets)
+	$(schemas_stylesheets)
+
 xslt_DATA  = $(xslt_files)
 
 EXTRA_DIST =		    \
@@ -130,6 +78,5 @@ EXTRA_DIST =		    \
 DISTCLEANFILES =	    \
 	$(xml_files)        \
 	core.xml.in         \
-	$(schema_files)     \
-	$(kde_kcfg_files)   \
-	$(kde_config_files)
+	$(schema_files)
+

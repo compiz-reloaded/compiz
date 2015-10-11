@@ -398,174 +398,6 @@ if test "$use_gnome_keybindings" = yes; then
   AC_DEFINE(USE_GNOME_KEYBINDINGS, 1, [Install custom keybindings])
 fi
 
-AC_ARG_ENABLE(kde,
-  [  --disable-kde           Disable kde window decorator],
-  [use_kde=$enableval], [use_kde=yes])
-
-if test "x$use_kde" = "xyes"; then
-  qt_incdirs="$QTINC /usr/local/qt/include /usr/include/qt /usr/include /usr/X11R6/include/X11/qt /usr/X11R6/include/qt /usr/lib/qt3/include /usr/lib/qt/include /usr/share/qt3/include"
-  qt_libdirs="$QTLIB /usr/local/qt/lib /usr/lib/qt /usr/lib /usr/X11R6/lib/X11/qt /usr/X11R6/lib/qt /usr/lib/qt3/lib /usr/lib/qt/lib /usr/share/qt3/lib"
-
-  if test -n "$QTDIR" ; then
-    qt_incdirs="$QTDIR/include $qt_incdirs"
-    qt_libdirs="$QTDIR/lib $qt_libdirs"
-  fi
-
-  qt_test_include="qstyle.h"
-  qt_test_library="libqt-mt.so"
-
-  dnl Check for Qt headers
-  AC_MSG_CHECKING([for Qt headers])
-  qt_incdir="no"
-  for it in $qt_incdirs ; do
-    if test -r "$it/$qt_test_include" ; then
-      qt_incdir="$it"
-      break
-    fi
-  done
-  AC_MSG_RESULT([$qt_incdir])
-
-  dnl Check for Qt libraries
-  AC_MSG_CHECKING([for Qt libraries])
-  qt_libdir="no"
-  for qt_check in $qt_libdirs ; do
-    if test -r "$qt_check/$qt_test_library" ; then
-      qt_libdir="$qt_check"
-      break
-    fi
-  done
-  AC_MSG_RESULT([$qt_libdir])
-
-  use_kde=no;
-  if test "x$qt_libdir" != "xno" ; then
-    if test "x$qt_incdir" != "xno" ; then
-      use_kde=yes;
-    fi
-  fi
-
-  QT_CXXFLAGS="-I$qt_incdir"
-  QT_LIBS="-L$qt_libdir"
-
-  if test "x$use_kde" = xyes; then
-    kdedir=`kde-config --prefix --expandvars 2>/dev/null`
-    kdelibs=`kde-config --install lib --expandvars 2>/dev/null`
-    kdeincs=`kde-config --install include --expandvars 2>/dev/null`
-    if test -d "$kdelibs"; then
-      PKG_CHECK_MODULES(KDE_WINDOW_DECORATOR,
-			dbus-1 xdamage xcomposite,
-			[use_kde=yes], [use_kde=no])
-
-      KDE_CFLAGS="$QT_CXXFLAGS -I$kdeincs"
-      KDE_LIBS="$QT_LIBS -L$kdelibs -lkdecore -lkdecorations -ldbus-qt-1"
-
-      QT_MOC=$QTDIR/bin/moc
-      DCOPIDL=$kdedir/bin/dcopidl
-      DCOPIDL2CPP=$kdedir/bin/dcopidl2cpp
-    else
-      use_kde=no;
-    fi
-  fi
-fi
-
-AM_CONDITIONAL(USE_KDE, test "x$use_kde" = "xyes")
-if test "$use_kde" = yes; then
-  AC_DEFINE(USE_KDE, 1, [Build kde window decorator])
-fi
-
-AC_SUBST(KDE_CFLAGS)
-AC_SUBST(KDE_LIBS)
-AC_SUBST(QT_MOC)
-AC_SUBST(DCOPIDL)
-AC_SUBST(DCOPIDL2CPP)
-
-AC_ARG_ENABLE(kde4,
-  [  --disable-kde4          Disable kde4 window decorator],
-  [use_kde4=$enableval], [use_kde4=yes])
-
-if test "x$use_kde4" = "xyes"; then
-  
-  kde4dir=`kde4-config --prefix --expandvars 2>/dev/null`
-  kde4libs=/usr/lib64/kde4/devel #`kde4-config --install lib --expandvars 2>/dev/null`
-  kde4incs=`kde4-config --install include --expandvars 2>/dev/null`
-
-  kde4_test_includes="kdecoration.h kcommondecoration.h kdecorationbridge.h plasma/framesvg.h"
-
-  dnl Check for KWin headers
-  AC_MSG_CHECKING([for KWin headers])
-
-  kde4_notfound=""
-  for file in $kde4_test_includes ; do
-    status=" $file"
-    for it in $kde4incs ; do
-      if test -r "$it/$file" ; then
-        status=""
-        break;
-      fi
-    done
-    kde4_notfound="$kde4_notfound$status"
-  done
-  if test -z "$kde4_notfound" ; then
-      kde4_notfound="yes"
-  else
-      kde4_notfound="$kde4_notfound not found"
-      kde4libs=""
-  fi
-
-  AC_MSG_RESULT([$kde4_notfound])
-
-  if test -d "$kde4libs"; then
-    PKG_CHECK_MODULES(KDE4_WINDOW_DECORATOR,
-		      dbus-1 xdamage xext xcomposite QtCore >= 4.5.0 QtGui QtDBus,
-			[use_kde4=yes], [use_kde4=no])
-
-    KDE4_CFLAGS="-I$kde4incs"
-    KDE4_LIBS="-L$kde4libs -lkdecore -lkdecorations -lkdeui -lplasma"
-
-    QT4_MOC=`pkg-config QtGui --variable=moc_location`
-    QDBUSXML2CPP=`pkg-config QtGui --variable=exec_prefix`"/bin/qdbusxml2cpp"
-  else
-    use_kde4=no;
-  fi
-fi
-
-AM_CONDITIONAL(USE_KDE4, test "x$use_kde4" = "xyes")
-if test "$use_kde4" = yes; then
-  AC_DEFINE(USE_KDE4, 1, [Build kde4 window decorator])
-fi
-
-AC_SUBST(KDE4_CFLAGS)
-AC_SUBST(KDE4_LIBS)
-AC_SUBST(QT4_MOC)
-AC_SUBST(QDBUSXML2CPP)
-
-AC_ARG_ENABLE(kconfig,
-  [  --disable-kconfig       Disable kconfig plugin],
-  [use_kconfig=$enableval], [use_kconfig=yes])
-
-if test "x$use_kde" != "xyes"; then
-  use_kconfig=no;
-fi
-
-if test "x$use_kconfig" = "xyes"; then
-  KCONFIG_CFLAGS=$KDE_CFLAGS
-  KCONFIG_LIBS=$KDE_LIBS
-  KDE_KCFG_DIR=`kde-config --install kcfg --expandvars 2>/dev/null`
-  KDE_KCONFIG_DIR=`kde-config --install config --expandvars 2>/dev/null`
-fi
-
-AM_CONDITIONAL(USE_KCONFIG, test "x$use_kconfig" = "xyes")
-if test "$use_kconfig" = yes; then
-  AC_DEFINE(USE_KCONFIG, 1, [Build kconfig plugin])
-fi
-
-AC_SUBST(KCONFIG_CFLAGS)
-AC_SUBST(KCONFIG_LIBS)
-AC_SUBST(KDE_KCFG_DIR)
-AC_SUBST(KDE_KCONFIG_DIR)
-
-kcfgdir=$KDE_KCFG_DIR
-AC_SUBST(kcfgdir)
-
 AC_ARG_WITH(max-desktops,
   [  --with-max-desktops     Max reasonable desktops],
   [MAX_DESKTOPS=$withval],
@@ -618,7 +450,6 @@ compiz.pc
 compiz-cube.pc
 compiz-scale.pc
 compiz-gconf.pc
-compiz-kconfig.pc
 Makefile
 src/Makefile
 libdecoration/Makefile
@@ -629,9 +460,6 @@ images/Makefile
 gtk/Makefile
 gtk/window-decorator/Makefile
 gtk/gnome/Makefile
-kde/Makefile
-kde/window-decorator/Makefile
-kde/window-decorator-kde4/Makefile
 po/Makefile.in
 metadata/Makefile
 ])
@@ -640,7 +468,6 @@ echo ""
 echo "the following optional plugins will be compiled:"
 echo "  glib:     $use_glib"
 echo "  gconf:    $use_gconf"
-echo "  kconfig:  $use_kconfig"
 echo "  dbus:     $use_dbus"
 echo "  annotate: $use_annotate"
 echo "  svg:      $use_librsvg"
@@ -651,6 +478,4 @@ echo "and the following optional features will be compiled:"
 echo "  gtk:      $use_gtk"
 echo "  metacity: $use_metacity"
 echo "  gnome:    $use_gnome"
-echo "  kde:      $use_kde"
-echo "  kde4:     $use_kde4"
 echo ""
