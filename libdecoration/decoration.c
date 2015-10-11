@@ -1243,7 +1243,9 @@ decor_shadow_create (Display		    *xdisplay,
     }
 
     /* create pixmap for temporary decorations */
-    d_pixmap = XCreatePixmap (xdisplay, xroot, d_width, d_height, 32);
+    d_pixmap = XCreatePixmap (xdisplay, xroot,
+                              (d_width % 32) ? d_width : d_width + 1,
+                              d_height, 32);
     if (!d_pixmap)
     {
 	XFreePixmap (xdisplay, pixmap);
