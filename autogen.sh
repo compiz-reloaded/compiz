@@ -1,15 +1,23 @@
 #!/bin/sh
+# Run this to generate all the initial makefiles, etc.
 
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-ORIGDIR=`pwd`
-cd $srcdir
+PKG_NAME="compiz"
 
-autoreconf -v --install || exit 1
-glib-gettextize --copy --force || exit 1
-intltoolize --copy --force --automake || exit 1
+(test -f $srcdir/configure.ac) || {
+    echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
+    echo " top-level $PKG_NAME directory"
+    exit 1
+}
 
-cd $ORIGDIR || exit $?
+which mate-autogen || {
+    echo "You need to install mate-common from the MATE Git"
+    exit 1
+}
 
-$srcdir/configure --enable-maintainer-mode "$@"
+REQUIRED_AUTOMAKE_VERSION=1.9
+USE_MATE2_MACROS=1
+
+. mate-autogen
