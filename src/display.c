@@ -1495,6 +1495,8 @@ eventLoop (void)
 			    timeDiff = 0;
 
 			makeScreenCurrent (s);
+			/* make sure X is ready for us to draw */
+			glXWaitX ();
 
 			if (s->slowAnimations)
 			{
