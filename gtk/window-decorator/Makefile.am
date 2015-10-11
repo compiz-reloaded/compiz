@@ -32,7 +32,7 @@ install-data-local:
 	fi
 endif
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir)/include            \
 	@GTK_WINDOW_DECORATOR_CFLAGS@      \
 	@METACITY_CFLAGS@                  \

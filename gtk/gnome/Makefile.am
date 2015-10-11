@@ -76,7 +76,7 @@ if USE_GNOME_KEYBINDINGS
 endif
 endif
 
-INCLUDES = @GNOME_WINDOW_SETTINGS_CFLAGS@			   \
+AM_CPPFLAGS = @GNOME_WINDOW_SETTINGS_CFLAGS@			   \
 	-DMETACITY_THEME_DIR=\""$(windowsettingsdatadir)/themes"\" \
 	-DLOCALEDIR="\"@datadir@/locale"\"
 

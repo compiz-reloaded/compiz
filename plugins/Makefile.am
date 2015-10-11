@@ -125,7 +125,7 @@ libfs_la_SOURCES = fuse.c
 libfs_module = libfs.la
 endif
 
-INCLUDES =					\
+AM_CPPFLAGS =					\
 	@COMPIZ_CFLAGS@				\
 	@LIBPNG_CFLAGS@				\
 	@LIBRSVG_CFLAGS@			\

@@ -1,4 +1,4 @@
-INCLUDES =			     \
+AM_CPPFLAGS =			     \
 	@COMPIZ_CFLAGS@		     \
 	@GL_CFLAGS@		     \
 	-I$(top_srcdir)/include	     \
