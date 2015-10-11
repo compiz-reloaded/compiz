@@ -35,17 +35,17 @@ struct _Modifier {
     char *name;
     int  modifier;
 } modifiers[] = {
-    { "<Shift>",      ShiftMask		 },
-    { "<Control>",    ControlMask	 },
-    { "<Mod1>",	      Mod1Mask		 },
-    { "<Mod2>",	      Mod2Mask		 },
-    { "<Mod3>",	      Mod3Mask		 },
-    { "<Mod4>",	      Mod4Mask		 },
-    { "<Mod5>",	      Mod5Mask		 },
-    { "<Alt>",	      CompAltMask        },
-    { "<Meta>",	      CompMetaMask       },
+    { "<Shift>",      ShiftMask          },
+    { "<Primary>",    ControlMask        },
+    { "<Mod1>",       Mod1Mask           },
+    { "<Mod2>",       Mod2Mask           },
+    { "<Mod3>",       Mod3Mask           },
+    { "<Mod4>",       Mod4Mask           },
+    { "<Mod5>",       Mod5Mask           },
+    { "<Alt>",        CompAltMask        },
+    { "<Meta>",       CompMetaMask       },
     { "<Super>",      CompSuperMask      },
-    { "<Hyper>",      CompHyperMask	 },
+    { "<Hyper>",      CompHyperMask      },
     { "<ModeSwitch>", CompModeSwitchMask }
 };
 
