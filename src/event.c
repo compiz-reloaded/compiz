@@ -2328,32 +2328,50 @@ handleEvent (CompDisplay *d,
 
 	    if (w)
 	    {
+		XserverRegion parts = XFixesCreateRegion(de->display, NULL, 0);
+		XRectangle *rects;
+		int nRects;
+
 		w->texture->oldMipmaps = TRUE;
+
+		// Get the damage region
+		XDamageSubtract(de->display, de->damage, None, parts);
+		rects = XFixesFetchRegion(de->display, parts, &nRects);
+		XFixesDestroyRegion(de->display, parts);
 
 		if (w->syncWait)
 		{
-		    if (w->nDamage == w->sizeDamage)
+		    int i;
+
+		    if (w->nDamage + nRects - 1 >= w->sizeDamage)
 		    {
 			w->damageRects = realloc (w->damageRects,
-						  (w->sizeDamage + 1) *
+						  (w->sizeDamage + nRects) *
 						  sizeof (XRectangle));
-			w->sizeDamage += 1;
+			w->sizeDamage += nRects;
 		    }
 
-		    w->damageRects[w->nDamage].x      = de->area.x;
-		    w->damageRects[w->nDamage].y      = de->area.y;
-		    w->damageRects[w->nDamage].width  = de->area.width;
-		    w->damageRects[w->nDamage].height = de->area.height;
-		    w->nDamage++;
+		    for (i = 0; i < nRects; i++)
+		    {
+			w->damageRects[w->nDamage] = rects[i];
+			w->nDamage++;
+		    }
 		}
 		else
 		{
-		    handleWindowDamageRect (w,
-					    de->area.x,
-					    de->area.y,
-					    de->area.width,
-					    de->area.height);
+		    int i;
+
+		    for (i = 0; i < nRects; i++)
+		    {
+			handleWindowDamageRect (w,
+						rects[i].x,
+						rects[i].y,
+						rects[i].width,
+						rects[i].height);
+		    }
 		}
+
+		XFree(rects);
 	    }
 	}
 	else if (d->shapeExtension &&

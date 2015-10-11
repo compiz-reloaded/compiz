@@ -2207,7 +2207,7 @@ addWindow (CompScreen *screen,
 	XUnionRegion (&rect, w->region, w->region);
 
 	w->damage = XDamageCreate (d->display, id,
-				   XDamageReportRawRectangles);
+				   XDamageReportNonEmpty);
 
 	/* need to check for DisplayModal state on all windows */
 	w->state = getWindowState (d, w->id);
