@@ -1195,11 +1195,27 @@ cubePaintTop (CompScreen	      *s,
 
     if (cs->invert == 1 && size == 4 && cs->texture.name)
     {
+	glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+
+	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_INTERPOLATE);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE0);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PRIMARY_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE2_RGB, GL_TEXTURE0);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND2_RGB, GL_SRC_ALPHA);
+
+	glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
+	glTexEnvf (GL_TEXTURE_ENV, GL_SOURCE0_ALPHA, GL_PREVIOUS);
+	glTexEnvf (GL_TEXTURE_ENV, GL_OPERAND0_ALPHA, GL_SRC_ALPHA);
+
 	enableTexture (s, &cs->texture, COMP_TEXTURE_FILTER_GOOD);
 	glTexCoordPointer (2, GL_FLOAT, 0, cs->tc);
 	glDrawArrays (GL_TRIANGLE_FAN, 0, cs->nVertices >> 1);
 	disableTexture (s, &cs->texture);
 	glDisableClientState (GL_TEXTURE_COORD_ARRAY);
+
+	glTexEnvi (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     }
     else
     {
