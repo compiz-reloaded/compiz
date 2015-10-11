@@ -1542,7 +1542,6 @@ wallPaintTransformedOutput (CompScreen              *s,
 	CompTransform        sTransform = *transform;
 	float                xTranslate, yTranslate;
 	float                px, py;
-	int                  tx, ty;
 	Bool                 movingX, movingY;
 
 	if (clear)
@@ -1559,14 +1558,12 @@ wallPaintTransformedOutput (CompScreen              *s,
 
 	if (movingY)
 	{
-	    ty = ceil (py) - s->y;
 	    yTranslate = fmod (py, 1) - 1;
 
 	    matrixTranslate (&sTransform, 0.0f, yTranslate, 0.0f);
 
 	    if (movingX)
 	    {
-		tx = ceil (px) - s->x;
 		xTranslate = 1 - fmod (px, 1);
 
 		setWindowPaintOffset (s, (s->x - ceil(px)) * s->width,
@@ -1580,7 +1577,6 @@ wallPaintTransformedOutput (CompScreen              *s,
 		matrixTranslate (&sTransform, -xTranslate, 0.0f, 0.0f);
 	    }
 
-	    tx = floor (px) - s->x;
 	    xTranslate = -fmod (px, 1);
 
 	    setWindowPaintOffset (s, (s->x - floor(px)) * s->width,
@@ -1593,14 +1589,12 @@ wallPaintTransformedOutput (CompScreen              *s,
 	    matrixTranslate (&sTransform, -xTranslate, -yTranslate, 0.0f);
 	}
 
-	ty = floor (py) - s->y;
 	yTranslate = fmod (py, 1);
 
 	matrixTranslate (&sTransform, 0.0f, yTranslate, 0.0f);
 
 	if (movingX)
 	{
-	    tx = ceil (px) - s->x;
 	    xTranslate = 1 - fmod (px, 1);
 
 	    setWindowPaintOffset (s, (s->x - ceil(px)) * s->width,
@@ -1614,7 +1608,6 @@ wallPaintTransformedOutput (CompScreen              *s,
 	    matrixTranslate (&sTransform, -xTranslate, 0.0f, 0.0f);
 	}
 
-	tx = floor (px) - s->x;
 	xTranslate = -fmod (px, 1);
 
 	setWindowPaintOffset (s, (s->x - floor(px)) * s->width,
