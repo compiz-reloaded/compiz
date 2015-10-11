@@ -190,6 +190,11 @@ decorDrawWindow (CompWindow	      *w,
     status = (*w->screen->drawWindow) (w, transform, attrib, region, mask);
     WRAP (ds, w->screen, drawWindow, decorDrawWindow);
 
+    /* we wait to draw dock shadows until we get to the lowest
+       desktop window in the stack */
+    if (w->type & CompWindowTypeDockMask)
+	return status;
+
     if (mask & PAINT_WINDOW_TRANSFORMED_MASK)
 	region = &infiniteRegion;
 
@@ -224,6 +229,65 @@ decorDrawWindow (CompWindow	      *w,
 	    (*w->screen->drawWindowTexture) (w,
 					     &wd->decor->texture->texture,
 					     attrib, mask);
+    }
+
+    if (w->type & CompWindowTypeDesktopMask)
+    {
+	/* we only want to draw on the lowest desktop window, find it and see
+	   if we the window we have is it */
+	CompWindow *window = w->screen->windows;
+	for (window = w->screen->windows; window; window = window->next)
+	{
+	    if (window->type & CompWindowTypeDesktopMask)
+	    {
+		if (window == w)
+		    break;
+		else
+		    return status;
+	    }
+	}
+
+	/* drawing dock shadows now */
+	for (window = w->screen->windows; window; window = window->next)
+	{
+	    if (window->type & CompWindowTypeDockMask && !window->destroyed && !window->invisible)
+	    {
+		DECOR_WINDOW (window);
+
+		if (dw->wd && region->numRects)
+		{
+		    WindowDecoration *wd = dw->wd;
+		    REGION	     box;
+		    int		     i;
+
+		    mask |= PAINT_WINDOW_BLEND_MASK;
+
+		    box.rects	 = &box.extents;
+		    box.numRects = 1;
+
+		    window->vCount = window->indexCount = 0;
+
+		    for (i = 0; i < wd->nQuad; i++)
+		    {
+			box.extents = wd->quad[i].box;
+
+			if (box.extents.x1 < box.extents.x2 &&
+			    box.extents.y1 < box.extents.y2)
+			{
+			    (*window->screen->addWindowGeometry) (window,
+								  &wd->quad[i].matrix, 1,
+								  &box,
+								  region);
+			}
+		    }
+
+		    if (window->vCount)
+			(*window->screen->drawWindowTexture) (window,
+							      &wd->decor->texture->texture,
+							      attrib, mask);
+		}
+	    }
+	}
     }
 
     return status;
