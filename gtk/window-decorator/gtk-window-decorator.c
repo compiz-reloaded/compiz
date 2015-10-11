@@ -31,14 +31,6 @@
 #include <X11/extensions/Xrender.h>
 #include <X11/Xregion.h>
 
-#ifndef GDK_DISABLE_DEPRECATED
-#define GDK_DISABLE_DEPRECATED
-#endif
-
-#ifndef GTK_DISABLE_DEPRECATED
-#define GTK_DISABLE_DEPRECATED
-#endif
-
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
