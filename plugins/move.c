@@ -124,6 +124,11 @@ moveInitiate (CompDisplay     *d,
     xid = getIntOptionNamed (option, nOption, "window", 0);
 
     w = findWindowAtDisplay (d, xid);
+
+    /* make window stay above fullscreen windows while moving */
+    if (w)
+	updateWindowAttributes (w, CompStackingUpdateModeAboveFullscreen);
+
     if (w && (w->actions & CompWindowActionMoveMask))
     {
 	XRectangle   workArea;
