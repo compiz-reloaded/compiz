@@ -2076,7 +2076,7 @@ handleEvent (CompDisplay *d,
 		focus = allowWindowFocus (w, NO_FOCUS_MASK,
 					  w->screen->x, w->screen->y, 0);
 
-		if (focus == CompFocusDenied)
+		if ((focus == CompFocusDenied || focus == CompFocusPrevent) && (w->type & ~NO_FOCUS_MASK))
 		    stackingMode = CompStackingUpdateModeInitialMapDeniedFocus;
 		else
 		    stackingMode = CompStackingUpdateModeInitialMap;
