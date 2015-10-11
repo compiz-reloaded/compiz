@@ -394,6 +394,11 @@ main (int argc, char **argv)
 	}
     }
 
+    if (!clientId)
+    {
+      clientId = getenv ("DESKTOP_AUTOSTART_ID");
+    }
+
     if (refreshRateArg)
     {
 	ctx.refreshRateData = malloc (strlen (refreshRateArg) + 256);
