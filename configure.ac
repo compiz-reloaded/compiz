@@ -170,6 +170,12 @@ fi
 
 PKG_CHECK_MODULES(LIBPNG, libpng)
 
+dnl Check for jpeglib.h, required for jpeg.c
+AC_CHECK_HEADERS([jpeglib.h], [] ,AC_MSG_ERROR(jpeglib.h not found --- aborting))
+
+dnl Check for GL/glu.h, required for plugin blur
+AC_CHECK_HEADERS([GL/glu.h], [] ,AC_MSG_ERROR(GL/glu.h not found --- aborting))
+
 AC_ARG_ENABLE(glib,
   [  --disable-glib          Disable glib plugin],
   [use_glib=$enableval], [use_glib=yes])
