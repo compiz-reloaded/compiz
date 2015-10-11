@@ -262,6 +262,7 @@ paintOutputRegion (CompScreen	       *screen,
     CompTransform vTransform;
     int           offX, offY;
     Region        clip = region;
+    int           dontcare;
 
     if (!tmpRegion)
     {
@@ -341,8 +342,14 @@ paintOutputRegion (CompScreen	       *screen,
 		    XSubtractRegion (tmpRegion, w->region, tmpRegion);
 
 		/* unredirect top most fullscreen windows. */
+		/* if the fullscreen window is mate-screensaver and we're
+		   on nvidia we want to always unredirect even if this
+		   option is disabled to work around LP #160264 */
 		if (count == 0 &&
-		    screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b)
+		    (screen->opt[COMP_SCREEN_OPTION_UNREDIRECT_FS].value.b ||
+		    (w->resName && !strcmp(w->resName, "mate-screensaver") &&
+		    XQueryExtension (screen->display->display, "NV-GLX",
+				     &dontcare, &dontcare, &dontcare))))
 		{
 		    if (XEqualRegion (w->region, &screen->region) &&
 			!REGION_NOT_EMPTY (tmpRegion))
