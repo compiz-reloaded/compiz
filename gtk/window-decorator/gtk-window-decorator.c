@@ -1896,10 +1896,8 @@ meta_draw_window_decoration (decor_t *d)
 
     size = MAX (fgeom.top_height, fgeom.bottom_height);
 
-    if (rect.width && size)
+    if (rect.width && size && (pixmap = create_pixmap (rect.width, size)))
     {
-	pixmap = create_pixmap (rect.width, size);
-
 	cr = gdk_cairo_create (GDK_DRAWABLE (pixmap));
 	gdk_cairo_set_source_color_alpha (cr, &bg_color, bg_alpha);
 	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
@@ -1998,10 +1996,8 @@ meta_draw_window_decoration (decor_t *d)
 
     size = MAX (fgeom.left_width, fgeom.right_width);
 
-    if (size && rect.height)
+    if (size && rect.height && (pixmap = create_pixmap (size, rect.height)))
     {
-	pixmap = create_pixmap (size, rect.height);
-
 	cr = gdk_cairo_create (GDK_DRAWABLE (pixmap));
 	gdk_cairo_set_source_color_alpha (cr, &bg_color, bg_alpha);
 	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
@@ -3273,9 +3269,12 @@ update_window_decoration_icon (WnckWindow *win)
 	g_object_ref (G_OBJECT (d->icon_pixbuf));
 
 	d->icon_pixmap = pixmap_new_from_pixbuf (d->icon_pixbuf);
-	cr = gdk_cairo_create (GDK_DRAWABLE (d->icon_pixmap));
-	d->icon = cairo_pattern_create_for_surface (cairo_get_target (cr));
-	cairo_destroy (cr);
+	if (d->icon_pixmap)
+	{
+	    cr = gdk_cairo_create (GDK_DRAWABLE (d->icon_pixmap));
+	    d->icon = cairo_pattern_create_for_surface (cairo_get_target (cr));
+	    cairo_destroy (cr);
+	}
     }
 }
 
