@@ -27,6 +27,7 @@
 #define _COMPIZ_CORE_H
 
 #include <compiz-plugin.h>
+#include <dlfcn.h>
 
 #define CORE_ABIVERSION 20091102
 
