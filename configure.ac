@@ -293,9 +293,9 @@ AC_ARG_ENABLE(gtk,
   [  --disable-gtk           Disable gtk window decorator],
   [use_gtk=$enableval], [use_gtk=yes])
 
-AC_ARG_ENABLE(metacity,
-  [  --disable-metacity      Disable metacity theme support],
-  [use_metacity=$enableval], [use_metacity=yes])
+AC_ARG_ENABLE(marco,
+  [  --disable-marco      Disable marco theme support],
+  [use_marco=$enableval], [use_marco=yes])
 
 AC_ARG_ENABLE(gnome,
   [  --disable-gnome         Disable gnome settings module],
@@ -320,9 +320,9 @@ if test "x$use_gtk" = "xyes"; then
     CFLAGS="$save_CFLAGS"
     LIBS="$save_LIBS -lm -ldl"
 
-    if test "x$use_metacity" = "xyes"; then
-      PKG_CHECK_MODULES(METACITY, libmetacity-private,
-			[use_metacity=yes], [use_metacity=no])
+    if test "x$use_marco" = "xyes"; then
+      PKG_CHECK_MODULES(MARCO, libmarco-private,
+			[use_marco=yes], [use_marco=no])
     fi
 
     if test "x$use_gnome" = "xyes"; then
@@ -340,11 +340,11 @@ if test "x$use_gtk" = "xyes"; then
     windowsettingsdatadir=`pkg-config --variable=prefix gnome-window-settings-2.0`/share
     windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`    keybindingsdir=`pkg-config --variable=keysdir gnome-keybindings`
   else
-    use_metacity="no"
+    use_marco="no"
     use_gnome="no"
   fi
 else
-  use_metacity="no"
+  use_marco="no"
   use_gnome="no"
 fi
 
@@ -357,9 +357,9 @@ if test "$use_gtk" = yes; then
   AC_DEFINE(USE_GTK, 1, [Build gtk window decorator])
 fi
 
-AM_CONDITIONAL(USE_METACITY, test "x$use_metacity" = "xyes")
-if test "$use_metacity" = yes; then
-  AC_DEFINE(USE_METACITY, 1, [Build metacity theme support])
+AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
+if test "$use_marco" = yes; then
+  AC_DEFINE(USE_MARCO, 1, [Build marco theme support])
 fi
 
 AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")
@@ -450,6 +450,6 @@ echo "  fuse:     $use_fuse"
 echo ""
 echo "and the following optional features will be compiled:"
 echo "  gtk:      $use_gtk"
-echo "  metacity: $use_metacity"
+echo "  marco:    $use_marco"
 echo "  gnome:    $use_gnome"
 echo ""

@@ -67,26 +67,26 @@
 #include <sys/types.h>
 #include <signal.h>
 
-#ifdef USE_METACITY
-#include <metacity-private/theme.h>
+#ifdef USE_MARCO
+#include <marco-private/theme.h>
 #endif
 
-#define METACITY_GCONF_DIR "/apps/metacity/general"
+#define MARCO_GCONF_DIR "/apps/marco/general"
 
 #define COMPIZ_USE_SYSTEM_FONT_KEY		    \
-    METACITY_GCONF_DIR "/titlebar_uses_system_font"
+    MARCO_GCONF_DIR "/titlebar_uses_system_font"
 
 #define COMPIZ_TITLEBAR_FONT_KEY	\
-    METACITY_GCONF_DIR "/titlebar_font"
+    MARCO_GCONF_DIR "/titlebar_font"
 
 #define COMPIZ_DOUBLE_CLICK_TITLEBAR_KEY	       \
-    METACITY_GCONF_DIR "/action_double_click_titlebar"
+    MARCO_GCONF_DIR "/action_double_click_titlebar"
 
 #define COMPIZ_MIDDLE_CLICK_TITLEBAR_KEY	       \
-    METACITY_GCONF_DIR "/action_middle_click_titlebar"
+    MARCO_GCONF_DIR "/action_middle_click_titlebar"
 
 #define COMPIZ_RIGHT_CLICK_TITLEBAR_KEY	       \
-    METACITY_GCONF_DIR "/action_right_click_titlebar"
+    MARCO_GCONF_DIR "/action_right_click_titlebar"
 
 #define COMPIZ_GCONF_DIR1 "/apps/compiz/plugins/decoration/allscreens/options"
 
@@ -106,27 +106,27 @@
     COMPIZ_GCONF_DIR1 "/shadow_y_offset"
 
 #define META_THEME_KEY		\
-    METACITY_GCONF_DIR "/theme"
+    MARCO_GCONF_DIR "/theme"
 
 #define META_BUTTON_LAYOUT_KEY		\
-    METACITY_GCONF_DIR "/button_layout"
+    MARCO_GCONF_DIR "/button_layout"
 
 #define GCONF_DIR "/apps/gwd"
 
 #define USE_META_THEME_KEY	    \
-    GCONF_DIR "/use_metacity_theme"
+    GCONF_DIR "/use_marco_theme"
 
 #define META_THEME_OPACITY_KEY	        \
-    GCONF_DIR "/metacity_theme_opacity"
+    GCONF_DIR "/marco_theme_opacity"
 
 #define META_THEME_SHADE_OPACITY_KEY	      \
-    GCONF_DIR "/metacity_theme_shade_opacity"
+    GCONF_DIR "/marco_theme_shade_opacity"
 
 #define META_THEME_ACTIVE_OPACITY_KEY	       \
-    GCONF_DIR "/metacity_theme_active_opacity"
+    GCONF_DIR "/marco_theme_active_opacity"
 
 #define META_THEME_ACTIVE_SHADE_OPACITY_KEY          \
-    GCONF_DIR "/metacity_theme_active_shade_opacity"
+    GCONF_DIR "/marco_theme_active_shade_opacity"
 
 #define BLUR_TYPE_KEY	   \
     GCONF_DIR "/blur_type"
@@ -271,7 +271,7 @@ static gushort shadow_color[3] = {
 static gint    shadow_offset_x = SHADOW_OFFSET_X;
 static gint    shadow_offset_y = SHADOW_OFFSET_Y;
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 static double   meta_opacity              = META_OPACITY;
 static gboolean meta_shade_opacity        = META_SHADE_OPACITY;
 static double   meta_active_opacity       = META_ACTIVE_OPACITY;
@@ -1306,7 +1306,7 @@ draw_window_decoration (decor_t *d)
     }
 }
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 static void
 decor_update_meta_window_property (decor_t	  *d,
 				   MetaTheme	  *theme,
@@ -2737,7 +2737,7 @@ get_button_position (decor_t *d,
     return TRUE;
 }
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 
 #define TOP_RESIZE_HEIGHT 2
 #define RESIZE_EXTENDS 15
@@ -3305,7 +3305,7 @@ calc_decoration_size (decor_t *d,
     return FALSE;
 }
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 
 static void
 meta_calc_button_size (decor_t *d)
@@ -5751,7 +5751,7 @@ wheel_action_changed (GConfClient *client)
 }
 #endif
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 static MetaButtonFunction
 meta_button_function_from_string (const char *str)
 {
@@ -5980,7 +5980,7 @@ update_border_extents (gint text_height)
 	(text_height < 17) ? 17 : text_height;
 }
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 static void
 meta_update_border_extents (gint text_height)
 {
@@ -6075,7 +6075,7 @@ decorations_changed (WnckScreen *screen)
 	if (d->decorated)
 	{
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 	    if (d->draw == draw_window_decoration ||
 		d->draw == meta_draw_window_decoration)
 		d->draw = theme_draw_window_decoration;
@@ -6215,7 +6215,7 @@ static gboolean
 theme_changed (GConfClient *client)
 {
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
     gboolean use_meta_theme;
 
     if (cmdline_options & CMDLINE_THEME)
@@ -6281,7 +6281,7 @@ static gboolean
 theme_opacity_changed (GConfClient *client)
 {
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
     gboolean shade_opacity, changed = FALSE;
     gdouble  opacity;
 
@@ -6347,7 +6347,7 @@ static gboolean
 button_layout_changed (GConfClient *client)
 {
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
     gchar *button_layout;
 
     button_layout = gconf_client_get_string (client,
@@ -6611,7 +6611,7 @@ init_settings (WnckScreen *screen)
 			  NULL);
 
     gconf_client_add_dir (gconf,
-			  METACITY_GCONF_DIR,
+			  MARCO_GCONF_DIR,
 			  GCONF_CLIENT_PRELOAD_ONELEVEL,
 			  NULL);
 
@@ -6796,7 +6796,7 @@ main (int argc, char *argv[])
     gint       i, j, status;
     gboolean   replace = FALSE;
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
     char       *meta_theme = NULL;
 #endif
 
@@ -6830,7 +6830,7 @@ main (int argc, char *argv[])
 	    cmdline_options |= CMDLINE_BLUR;
 	}
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 	else if (strcmp (argv[i], "--opacity") == 0)
 	{
 	    if (argc > ++i)
@@ -6853,7 +6853,7 @@ main (int argc, char *argv[])
 	    meta_active_shade_opacity = FALSE;
 	    cmdline_options |= CMDLINE_ACTIVE_OPACITY_SHADE;
 	}
-	else if (strcmp (argv[i], "--metacity-theme") == 0)
+	else if (strcmp (argv[i], "--marco-theme") == 0)
 	{
 	    if (argc > ++i)
 		meta_theme = argv[i];
@@ -6868,12 +6868,12 @@ main (int argc, char *argv[])
 		     "[--replace] "
 		     "[--blur none|titlebar|all] "
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
 		     "[--opacity OPACITY] "
 		     "[--no-opacity-shade] "
 		     "[--active-opacity OPACITY] "
 		     "[--no-active-opacity-shade] "
-		     "[--metacity-theme THEME] "
+		     "[--marco-theme THEME] "
 #endif
 
 		     "[--help]"
@@ -6889,7 +6889,7 @@ main (int argc, char *argv[])
     theme_get_event_window_position = get_event_window_position;
     theme_get_button_position       = get_button_position;
 
-#ifdef USE_METACITY
+#ifdef USE_MARCO
     if (meta_theme)
     {
 	meta_theme_set_current (meta_theme, TRUE);

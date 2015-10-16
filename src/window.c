@@ -4996,7 +4996,7 @@ setWindowUserTime (CompWindow *w,
 }
 
 /*
- * Macros from metacity
+ * Macros from marco
  *
  * Xserver time can wraparound, thus comparing two timestamps needs to
  * take this into account.  Here's a little macro to help out.  If no

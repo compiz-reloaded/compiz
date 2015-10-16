@@ -1,7 +1,7 @@
 if USE_GTK
 
-if USE_METACITY
-metacitylibs = @METACITY_LIBS@
+if USE_MARCO
+marcolibs = @MARCO_LIBS@
 endif
 
 gtk_window_decorator_DEPENDENCIES = \
@@ -11,7 +11,7 @@ gtk_window_decorator_LDADD	  =		       \
 	@GTK_WINDOW_DECORATOR_LIBS@		       \
 	@GCONF_LIBS@				       \
 	@DBUS_GLIB_LIBS@			       \
-	$(metacitylibs)
+	$(marcolibs)
 
 gtk_window_decorator_SOURCES	  = \
 	gtk-window-decorator.c
@@ -35,7 +35,7 @@ endif
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/include            \
 	@GTK_WINDOW_DECORATOR_CFLAGS@      \
-	@METACITY_CFLAGS@                  \
+	@MARCO_CFLAGS@                     \
 	@GCONF_CFLAGS@                     \
 	@DBUS_GLIB_CFLAGS@                 \
 	-DALL_LINGUAS="\"@ALL_LINGUAS@\""  \
