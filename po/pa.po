@@ -19,61 +19,25 @@ msgstr ""
 "Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KAider 0.1\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-#, fuzzy
-msgid "Desktop"
-msgstr "ਵੇਹੜਾ"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
-msgid "Window Management"
-msgstr "ਝਰੋਖਾ ਪਰਬੰਧਕ"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
+#: ../gtk/mate/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "ਕੰਮਪਿਜ਼"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ../gtk/gnome/compiz-window-manager.c:427
 #: ../gtk/window-decorator/gtk-window-decorator.c:4625
 #, fuzzy
 msgid "Shade"
 msgstr "ਸੰਭਾਲੋ"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:9
 #, fuzzy
 msgid "Maximize"
 msgstr "Window&s ਸਮੇਟੋ"
 
-#: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
-msgid "Maximize Horizontally"
-msgstr "Window&s ਸਮੇਟੋ"
-
-#: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
-msgid "Maximize Vertically"
-msgstr "Window&s ਸਮੇਟੋ"
-
-#: ../gtk/gnome/compiz-window-manager.c:431
-#, fuzzy
-msgid "Minimize"
-msgstr "Window&s ਸਮੇਟੋ"
-
-#: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
-msgid "Raise"
-msgstr "ਸਵੈ-ਚਾਲਤ"
-
-#: ../gtk/gnome/compiz-window-manager.c:433
-msgid "Lower"
-msgstr ""
-
-#: ../gtk/gnome/compiz-window-manager.c:434
 #: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 #, fuzzy
@@ -834,7 +798,7 @@ msgstr "ਜਦੋਂ run_command8 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱ�
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "ਜਦੋਂ run_command9 ਹੋਵੇ ਤਾਂ ਸ਼ੈਲ ਵਿੱਚ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "ਕਮਾਂਡ: "
@@ -1794,61 +1758,61 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "GLib ਮੇਨ ਲੂਪ ਸਹਿਯੋਗ"
 
-#: ../metadata/gnomecompat.xml.in.h:2
-msgid "Gnome Compatibility"
+#: ../metadata/matecompat.xml.in.h:2
+msgid "MATE Compatibility"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:3
+#: ../metadata/matecompat.xml.in.h:3
 msgid "Open a terminal"
 msgstr "ਇੱਕ ਟਰਮੀਨਲ ਖੋਲ੍ਹੋ"
 
-#: ../metadata/gnomecompat.xml.in.h:4
-msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:5
+#: ../metadata/matecompat.xml.in.h:5
 #, fuzzy
 msgid "Run Dialog"
 msgstr "ਟੋਨ ਡਾਇਲ(&T)"
 
-#: ../metadata/gnomecompat.xml.in.h:6
+#: ../metadata/matecompat.xml.in.h:6
 #, fuzzy
 msgid "Run terminal command"
 msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
 
-#: ../metadata/gnomecompat.xml.in.h:7
+#: ../metadata/matecompat.xml.in.h:7
 #, fuzzy
 msgid "Screenshot command line"
 msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
 
-#: ../metadata/gnomecompat.xml.in.h:8
+#: ../metadata/matecompat.xml.in.h:8
 #, fuzzy
 msgid "Show Main Menu"
 msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
 
-#: ../metadata/gnomecompat.xml.in.h:9
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਓ ਡਾਈਲਾਗ ਵੇਖੋ"
 
-#: ../metadata/gnomecompat.xml.in.h:10
+#: ../metadata/matecompat.xml.in.h:10
 #, fuzzy
 msgid "Show the main menu"
 msgstr "ਬੂਟ ਸੂਚੀ ਵੇਖਾਓ(&S)"
 
-#: ../metadata/gnomecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot"
 msgstr "ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
 
-#: ../metadata/gnomecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
 msgstr "ਇੱਕ ਵਿੰਡੋ ਦਾ ਇੱਕ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਵੋ"
 
-#: ../metadata/gnomecompat.xml.in.h:13
+#: ../metadata/matecompat.xml.in.h:13
 #, fuzzy
 msgid "Terminal command line"
 msgstr "ਕਮਾਂਡ ਲਾਇਨ ਨੂੰ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ।"
 
-#: ../metadata/gnomecompat.xml.in.h:14
+#: ../metadata/matecompat.xml.in.h:14
 msgid "Window screenshot command line"
 msgstr "ਵਿੰਡੋ ਸਕਰੀਨ-ਸ਼ਾਟ ਕਮਾਂਡ ਲਾਈਨ"
 

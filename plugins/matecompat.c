@@ -25,32 +25,32 @@
 
 #include <compiz-core.h>
 
-static CompMetadata gnomeMetadata;
+static CompMetadata mateMetadata;
 
 static int displayPrivateIndex;
 
-#define GNOME_DISPLAY_OPTION_MAIN_MENU_KEY              0
-#define GNOME_DISPLAY_OPTION_RUN_DIALOG_KEY             1
-#define GNOME_DISPLAY_OPTION_SCREENSHOT_CMD             2
-#define GNOME_DISPLAY_OPTION_RUN_SCREENSHOT_KEY         3
-#define GNOME_DISPLAY_OPTION_WINDOW_SCREENSHOT_CMD      4
-#define GNOME_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT_KEY  5
-#define GNOME_DISPLAY_OPTION_TERMINAL_CMD               6
-#define GNOME_DISPLAY_OPTION_RUN_TERMINAL_KEY           7
-#define GNOME_DISPLAY_OPTION_NUM                        8
+#define MATE_DISPLAY_OPTION_MAIN_MENU_KEY              0
+#define MATE_DISPLAY_OPTION_RUN_DIALOG_KEY             1
+#define MATE_DISPLAY_OPTION_SCREENSHOT_CMD             2
+#define MATE_DISPLAY_OPTION_RUN_SCREENSHOT_KEY         3
+#define MATE_DISPLAY_OPTION_WINDOW_SCREENSHOT_CMD      4
+#define MATE_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT_KEY  5
+#define MATE_DISPLAY_OPTION_TERMINAL_CMD               6
+#define MATE_DISPLAY_OPTION_RUN_TERMINAL_KEY           7
+#define MATE_DISPLAY_OPTION_NUM                        8
 
-typedef struct _GnomeDisplay {
-    CompOption opt[GNOME_DISPLAY_OPTION_NUM];
+typedef struct _MateDisplay {
+    CompOption opt[MATE_DISPLAY_OPTION_NUM];
 
     Atom panelActionAtom;
     Atom panelMainMenuAtom;
     Atom panelRunDialogAtom;
-} GnomeDisplay;
+} MateDisplay;
 
-#define GET_GNOME_DISPLAY(d)                                       \
-    ((GnomeDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
-#define GNOME_DISPLAY(d)                                           \
-    GnomeDisplay *gd = GET_GNOME_DISPLAY (d)
+#define GET_MATE_DISPLAY(d)                                       \
+    ((MateDisplay *) (d)->base.privates[displayPrivateIndex].ptr)
+#define MATE_DISPLAY(d)                                           \
+    MateDisplay *gd = GET_MATE_DISPLAY (d)
 
 #define NUM_OPTIONS(d) (sizeof ((d)->opt) / sizeof (CompOption))
 
@@ -69,7 +69,7 @@ runDispatch (CompDisplay     *d,
 
     if (s)
     {
-	GNOME_DISPLAY (d);
+	MATE_DISPLAY (d);
 
 	runCommand (s, gd->opt[action->priv.val].value.s);
     }
@@ -88,7 +88,7 @@ panelAction (CompDisplay *d,
     XEvent     event;
     Time       time;
 
-    GNOME_DISPLAY (d);
+    MATE_DISPLAY (d);
 
     xid = getIntOptionNamed (option, nOption, "root", 0);
     s   = findScreenAtDisplay (d, xid);
@@ -122,7 +122,7 @@ showMainMenu (CompDisplay     *d,
 	      CompOption      *option,
 	      int             nOption)
 {
-    GNOME_DISPLAY (d);
+    MATE_DISPLAY (d);
 
     panelAction (d, option, nOption, gd->panelMainMenuAtom);
 
@@ -136,13 +136,13 @@ showRunDialog (CompDisplay     *d,
 	       CompOption      *option,
 	       int             nOption)
 {
-    GNOME_DISPLAY (d);
+    MATE_DISPLAY (d);
 
     panelAction (d, option, nOption, gd->panelRunDialogAtom);
 
     return TRUE;
 }
-static const CompMetadataOptionInfo gnomeDisplayOptionInfo[] = {
+static const CompMetadataOptionInfo mateDisplayOptionInfo[] = {
     { "main_menu_key", "key", 0, showMainMenu, 0 },
     { "run_key", "key", 0, showRunDialog, 0 },
     { "command_screenshot", "string", 0, 0, 0 },
@@ -154,45 +154,45 @@ static const CompMetadataOptionInfo gnomeDisplayOptionInfo[] = {
 };
 
 static CompBool
-gnomeInitDisplay (CompPlugin  *p,
+mateInitDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
-    GnomeDisplay *gd;
+    MateDisplay *gd;
     int          opt, index;
 
     if (!checkPluginABI ("core", CORE_ABIVERSION))
 	return FALSE;
 
-    gd = malloc (sizeof (GnomeDisplay));
+    gd = malloc (sizeof (MateDisplay));
     if (!gd)
 	return FALSE;
 
     if (!compInitDisplayOptionsFromMetadata (d,
-					     &gnomeMetadata,
-					     gnomeDisplayOptionInfo,
+					     &mateMetadata,
+					     mateDisplayOptionInfo,
 					     gd->opt,
-					     GNOME_DISPLAY_OPTION_NUM))
+					     MATE_DISPLAY_OPTION_NUM))
     {
 	free (gd);
 	return FALSE;
     }
 
-    opt = GNOME_DISPLAY_OPTION_RUN_SCREENSHOT_KEY;
-    gd->opt[opt].value.action.priv.val = GNOME_DISPLAY_OPTION_SCREENSHOT_CMD;
+    opt = MATE_DISPLAY_OPTION_RUN_SCREENSHOT_KEY;
+    gd->opt[opt].value.action.priv.val = MATE_DISPLAY_OPTION_SCREENSHOT_CMD;
 
-    opt   = GNOME_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT_KEY;
-    index = GNOME_DISPLAY_OPTION_WINDOW_SCREENSHOT_CMD;
+    opt   = MATE_DISPLAY_OPTION_RUN_WINDOW_SCREENSHOT_KEY;
+    index = MATE_DISPLAY_OPTION_WINDOW_SCREENSHOT_CMD;
     gd->opt[opt].value.action.priv.val = index;
 
-    opt = GNOME_DISPLAY_OPTION_RUN_TERMINAL_KEY;
-    gd->opt[opt].value.action.priv.val = GNOME_DISPLAY_OPTION_TERMINAL_CMD;
+    opt = MATE_DISPLAY_OPTION_RUN_TERMINAL_KEY;
+    gd->opt[opt].value.action.priv.val = MATE_DISPLAY_OPTION_TERMINAL_CMD;
 
     gd->panelActionAtom =
-	XInternAtom (d->display, "_GNOME_PANEL_ACTION", FALSE);
+	XInternAtom (d->display, "_MATE_PANEL_ACTION", FALSE);
     gd->panelMainMenuAtom =
-	XInternAtom (d->display, "_GNOME_PANEL_ACTION_MAIN_MENU", FALSE);
+	XInternAtom (d->display, "_MATE_PANEL_ACTION_MAIN_MENU", FALSE);
     gd->panelRunDialogAtom =
-	XInternAtom (d->display, "_GNOME_PANEL_ACTION_RUN_DIALOG", FALSE);
+	XInternAtom (d->display, "_MATE_PANEL_ACTION_RUN_DIALOG", FALSE);
 
     d->base.privates[displayPrivateIndex].ptr = gd;
 
@@ -200,36 +200,36 @@ gnomeInitDisplay (CompPlugin  *p,
 }
 
 static void
-gnomeFiniDisplay (CompPlugin  *p,
+mateFiniDisplay (CompPlugin  *p,
 		  CompDisplay *d)
 {
-    GNOME_DISPLAY (d);
+    MATE_DISPLAY (d);
 
-    compFiniDisplayOptions (d, gd->opt, GNOME_DISPLAY_OPTION_NUM);
+    compFiniDisplayOptions (d, gd->opt, MATE_DISPLAY_OPTION_NUM);
 
     free (gd);
 }
 
 static CompOption *
-gnomeGetDisplayOptions (CompPlugin  *p,
+mateGetDisplayOptions (CompPlugin  *p,
 			CompDisplay *d,
 			int         *count)
 {
-    GNOME_DISPLAY (d);
+    MATE_DISPLAY (d);
 
     *count = NUM_OPTIONS (gd);
     return gd->opt;
 }
 
 static CompBool
-gnomeSetDisplayOption (CompPlugin      *p,
+mateSetDisplayOption (CompPlugin      *p,
 		       CompDisplay     *d,
 		       const char      *name,
 		       CompOptionValue *value)
 {
     CompOption *o;
 
-    GNOME_DISPLAY (d);
+    MATE_DISPLAY (d);
 
     o = compFindOption (gd->opt, NUM_OPTIONS (gd), name, NULL);
     if (!o)
@@ -239,37 +239,37 @@ gnomeSetDisplayOption (CompPlugin      *p,
 }
 
 static CompBool
-gnomeInitObject (CompPlugin *p,
+mateInitObject (CompPlugin *p,
 		 CompObject *o)
 {
     static InitPluginObjectProc dispTab[] = {
 	(InitPluginObjectProc) 0, /* InitCore */
-	(InitPluginObjectProc) gnomeInitDisplay
+	(InitPluginObjectProc) mateInitDisplay
     };
 
     RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), TRUE, (p, o));
 }
 
 static void
-gnomeFiniObject (CompPlugin *p,
+mateFiniObject (CompPlugin *p,
 		 CompObject *o)
 {
     static FiniPluginObjectProc dispTab[] = {
 	(FiniPluginObjectProc) 0, /* FiniCore */
-	(FiniPluginObjectProc) gnomeFiniDisplay
+	(FiniPluginObjectProc) mateFiniDisplay
     };
 
     DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), (p, o));
 }
 
 static CompOption *
-gnomeGetObjectOptions (CompPlugin *p,
+mateGetObjectOptions (CompPlugin *p,
 		       CompObject *o,
 		       int        *count)
 {
     static GetPluginObjectOptionsProc dispTab[] = {
 	(GetPluginObjectOptionsProc) 0, /* GetCoreOptions */
-	(GetPluginObjectOptionsProc) gnomeGetDisplayOptions
+	(GetPluginObjectOptionsProc) mateGetDisplayOptions
     };
 
     *count = 0;
@@ -278,14 +278,14 @@ gnomeGetObjectOptions (CompPlugin *p,
 }
 
 static CompBool
-gnomeSetObjectOption (CompPlugin      *p,
+mateSetObjectOption (CompPlugin      *p,
 		      CompObject      *o,
 		      const char      *name,
 		      CompOptionValue *value)
 {
     static SetPluginObjectOptionProc dispTab[] = {
 	(SetPluginObjectOptionProc) 0, /* SetCoreOption */
-	(SetPluginObjectOptionProc) gnomeSetDisplayOption,
+	(SetPluginObjectOptionProc) mateSetDisplayOption,
     };
 
     RETURN_DISPATCH (o, dispTab, ARRAY_SIZE (dispTab), FALSE,
@@ -293,52 +293,52 @@ gnomeSetObjectOption (CompPlugin      *p,
 }
 
 static Bool
-gnomeInit (CompPlugin *p)
+mateInit (CompPlugin *p)
 {
-    if (!compInitPluginMetadataFromInfo (&gnomeMetadata,
+    if (!compInitPluginMetadataFromInfo (&mateMetadata,
 					 p->vTable->name,
-					 gnomeDisplayOptionInfo,
-					 GNOME_DISPLAY_OPTION_NUM, 0, 0))
+					 mateDisplayOptionInfo,
+					 MATE_DISPLAY_OPTION_NUM, 0, 0))
 	return FALSE;
 
     displayPrivateIndex = allocateDisplayPrivateIndex ();
     if (displayPrivateIndex < 0)
     {
-	compFiniMetadata (&gnomeMetadata);
+	compFiniMetadata (&mateMetadata);
 	return FALSE;
     }
 
-    compAddMetadataFromFile (&gnomeMetadata, p->vTable->name);
+    compAddMetadataFromFile (&mateMetadata, p->vTable->name);
 
     return TRUE;
 }
 
 static void
-gnomeFini (CompPlugin *p)
+mateFini (CompPlugin *p)
 {
     freeDisplayPrivateIndex (displayPrivateIndex);
-    compFiniMetadata (&gnomeMetadata);
+    compFiniMetadata (&mateMetadata);
 }
 
 static CompMetadata *
-gnomeGetMetadata (CompPlugin *p)
+mateGetMetadata (CompPlugin *p)
 {
-    return &gnomeMetadata;
+    return &mateMetadata;
 }
 
-static CompPluginVTable gnomeVTable = {
-    "gnomecompat",
-    gnomeGetMetadata,
-    gnomeInit,
-    gnomeFini,
-    gnomeInitObject,
-    gnomeFiniObject,
-    gnomeGetObjectOptions,
-    gnomeSetObjectOption
+static CompPluginVTable mateVTable = {
+    "matecompat",
+    mateGetMetadata,
+    mateInit,
+    mateFini,
+    mateInitObject,
+    mateFiniObject,
+    mateGetObjectOptions,
+    mateSetObjectOption
 };
 
 CompPluginVTable *
 getCompPluginInfo20070830 (void)
 {
-    return &gnomeVTable;
+    return &mateVTable;
 }

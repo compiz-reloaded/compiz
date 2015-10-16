@@ -18,60 +18,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 1.1.0\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "Escriptori"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-#, fuzzy
-msgid "Window Management"
-msgstr "Menú de la finestra"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
+#: ../gtk/mate/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Cap"
 
-#: ../gtk/gnome/compiz-window-manager.c:427
 #: ../gtk/window-decorator/gtk-window-decorator.c:4625
 #, fuzzy
 msgid "Shade"
 msgstr "Canvia la mida"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:9
 #, fuzzy
 msgid "Maximize"
 msgstr "Minimitzades"
 
-#: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
-msgid "Maximize Horizontally"
-msgstr "Maximitza la finestra horitzontalment"
-
-#: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
-msgid "Maximize Vertically"
-msgstr "Maximitza la finestra verticalment"
-
-#: ../gtk/gnome/compiz-window-manager.c:431
-#, fuzzy
-msgid "Minimize"
-msgstr "Minimitzades"
-
-#: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
-msgid "Raise"
-msgstr "Elevació automàtica"
-
-#: ../gtk/gnome/compiz-window-manager.c:433
-msgid "Lower"
-msgstr ""
-
-#: ../gtk/gnome/compiz-window-manager.c:434
 #: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
@@ -916,7 +881,7 @@ msgstr ""
 "Línia d'ordres que s'executarà a l'intèrpret d'ordres en invocar run_command%"
 "d"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "Ordre"
@@ -1858,57 +1823,57 @@ msgstr ""
 msgid "GLib main loop support"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:2
-msgid "Gnome Compatibility"
+#: ../metadata/matecompat.xml.in.h:2
+msgid "MATE Compatibility"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:3
+#: ../metadata/matecompat.xml.in.h:3
 msgid "Open a terminal"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:4
-msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:5
+#: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Diàleg d'execució"
 
-#: ../metadata/gnomecompat.xml.in.h:6
+#: ../metadata/matecompat.xml.in.h:6
 #, fuzzy
 msgid "Run terminal command"
 msgstr "Línia d'ordres de captura de pantalla"
 
-#: ../metadata/gnomecompat.xml.in.h:7
+#: ../metadata/matecompat.xml.in.h:7
 msgid "Screenshot command line"
 msgstr "Línia d'ordres de captura de pantalla"
 
-#: ../metadata/gnomecompat.xml.in.h:8
+#: ../metadata/matecompat.xml.in.h:8
 msgid "Show Main Menu"
 msgstr "Mostra el menú principal"
 
-#: ../metadata/gnomecompat.xml.in.h:9
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "Mostra el diàleg d'execució de l'aplicació"
 
-#: ../metadata/gnomecompat.xml.in.h:10
+#: ../metadata/matecompat.xml.in.h:10
 msgid "Show the main menu"
 msgstr "Mostra el menú principal"
 
-#: ../metadata/gnomecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot"
 msgstr "Fes una captura de pantalla"
 
-#: ../metadata/gnomecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
 msgstr "Fes una captura de pantalla d'una finestra"
 
-#: ../metadata/gnomecompat.xml.in.h:13
+#: ../metadata/matecompat.xml.in.h:13
 #, fuzzy
 msgid "Terminal command line"
 msgstr "Línia d'ordres de captura de pantalla"
 
-#: ../metadata/gnomecompat.xml.in.h:14
+#: ../metadata/matecompat.xml.in.h:14
 msgid "Window screenshot command line"
 msgstr "Línia d'ordres de captura de pantalla de finestra"
 

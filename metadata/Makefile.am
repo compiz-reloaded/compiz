@@ -12,7 +12,7 @@ xml_in_files =		   \
 	fs.xml.in	   \
 	gconf.xml.in	   \
 	glib.xml.in	   \
-	gnomecompat.xml.in \
+	matecompat.xml.in \
 	ini.xml.in	   \
 	inotify.xml.in	   \
 	minimize.xml.in	   \

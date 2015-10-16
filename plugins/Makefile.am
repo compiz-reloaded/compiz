@@ -71,8 +71,8 @@ libobs_la_SOURCES = obs.c
 libcommands_la_LDFLAGS = -module -avoid-version -no-undefined
 libcommands_la_SOURCES = commands.c
 
-libgnomecompat_la_LDFLAGS = -module -avoid-version -no-undefined
-libgnomecompat_la_SOURCES = gnomecompat.c
+libmatecompat_la_LDFLAGS = -module -avoid-version -no-undefined
+libmatecompat_la_SOURCES = matecompat.c
 
 libwall_la_LDFLAGS = -module -avoid-version -no-undefined `pkg-config --libs cairo`
 libwall_la_SOURCES = wall.c wall_options.c wall_options.h
@@ -175,7 +175,7 @@ module_LTLIBRARIES =		\
 	libini.la		\
 	libobs.la		\
 	libcommands.la		\
-	libgnomecompat.la	\
+	libmatecompat.la	\
 	libwall.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\

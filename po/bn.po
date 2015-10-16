@@ -16,59 +16,24 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "ডেস্কটপ"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-msgid "Window Management"
-msgstr "উইন্ডো পরিচালনা"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
+#: ../gtk/mate/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "কমপিজ"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "কিছু না"
 
-#: ../gtk/gnome/compiz-window-manager.c:427
 #: ../gtk/window-decorator/gtk-window-decorator.c:4625
 #, fuzzy
 msgid "Shade"
 msgstr "স্ক্যানার"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:9
 msgid "Maximize"
 msgstr "বড় করা"
 
-#: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
-msgid "Maximize Horizontally"
-msgstr "উইন্ডোটিকে অনুভূমিকভাবে বড় করা"
-
-#: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
-msgid "Maximize Vertically"
-msgstr "উইন্ডোটিকে উল্লম্বভাবে বড় করা"
-
-#: ../gtk/gnome/compiz-window-manager.c:431
-#, fuzzy
-msgid "Minimize"
-msgstr "ছোট করা হয়েছে"
-
-# স্বয়ংক্রীয়
-#: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
-msgid "Raise"
-msgstr "স্বয়ংক্রীয় আপডেট"
-
-#: ../gtk/gnome/compiz-window-manager.c:433
-msgid "Lower"
-msgstr ""
-
-#: ../gtk/gnome/compiz-window-manager.c:434
 #: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
@@ -817,7 +782,7 @@ msgstr "যখন run_command8 চাওয়া হবে তখন শেলে 
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "যখন run_command9 চাওয়া হবে তখন শেলে নির্দেশ লাইনটি সম্পাদন করা হবে"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "কমান্ড '%1'"
@@ -1766,58 +1731,58 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "GLib প্রধান লুপ সমর্থন"
 
-#: ../metadata/gnomecompat.xml.in.h:2
-msgid "Gnome Compatibility"
+#: ../metadata/matecompat.xml.in.h:2
+msgid "MATE Compatibility"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:3
+#: ../metadata/matecompat.xml.in.h:3
 msgid "Open a terminal"
 msgstr "একটি টার্মিনাল খুলুন"
 
-#: ../metadata/gnomecompat.xml.in.h:4
-msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:5
+#: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "ডায়ালগ চালনা করা"
 
-#: ../metadata/gnomecompat.xml.in.h:6
+#: ../metadata/matecompat.xml.in.h:6
 #, fuzzy
 msgid "Run terminal command"
 msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
 
-#: ../metadata/gnomecompat.xml.in.h:7
+#: ../metadata/matecompat.xml.in.h:7
 #, fuzzy
 msgid "Screenshot command line"
 msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
 
-#: ../metadata/gnomecompat.xml.in.h:8
+#: ../metadata/matecompat.xml.in.h:8
 msgid "Show Main Menu"
 msgstr "প্রধান মেনু প্রদর্শন করা"
 
-#: ../metadata/gnomecompat.xml.in.h:9
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "চালনা করার অনুপ্রয়োগ ডায়ালগ প্রদর্শন করা"
 
-#: ../metadata/gnomecompat.xml.in.h:10
+#: ../metadata/matecompat.xml.in.h:10
 msgid "Show the main menu"
 msgstr "প্রধান তালিকা প্রদর্শন"
 
-#: ../metadata/gnomecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot"
 msgstr "একটি স্ক্রিনশট নিন"
 
-#: ../metadata/gnomecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
 msgstr "উইন্ডোর একটি স্ক্রিনশট নিন"
 
-#: ../metadata/gnomecompat.xml.in.h:13
+#: ../metadata/matecompat.xml.in.h:13
 #, fuzzy
 msgid "Terminal command line"
 msgstr "কমান্ড লাইন পার্স করতে সমস্যা।"
 
-#: ../metadata/gnomecompat.xml.in.h:14
+#: ../metadata/matecompat.xml.in.h:14
 msgid "Window screenshot command line"
 msgstr "উইন্ডো স্ক্রিনশট নির্দেশ লাইন"
 

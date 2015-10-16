@@ -24,59 +24,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 1.1.0\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
+#: ../gtk/mate/50-compiz-desktop-key.xml.in.h:1
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
+#: ../gtk/mate/50-compiz-key.xml.in.h:1
 msgid "Window Management"
 msgstr "Venster Beheer"
 
-#: ../gtk/gnome/compiz.desktop.in.h:1
+#: ../gtk/mate/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../gtk/mate/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Geen"
 
-#: ../gtk/gnome/compiz-window-manager.c:427
+#: ../gtk/mate/compiz-window-manager.c:427
 #: ../gtk/window-decorator/gtk-window-decorator.c:4625
 #, fuzzy
 msgid "Shade"
 msgstr "Schaal"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../gtk/mate/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
 msgid "Maximize"
 msgstr "Maximaliseer"
 
-#: ../gtk/gnome/compiz-window-manager.c:429
+#: ../gtk/mate/compiz-window-manager.c:429
 #, fuzzy
 msgid "Maximize Horizontally"
 msgstr "Maximaliseer venster horizontaal"
 
-#: ../gtk/gnome/compiz-window-manager.c:430
+#: ../gtk/mate/compiz-window-manager.c:430
 #, fuzzy
 msgid "Maximize Vertically"
 msgstr "Maximaliseer venster verticaal"
 
-#: ../gtk/gnome/compiz-window-manager.c:431
+#: ../gtk/mate/compiz-window-manager.c:431
 #, fuzzy
 msgid "Minimize"
 msgstr "Geminimaliseerd"
 
 # /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:80
-#: ../gtk/gnome/compiz-window-manager.c:432
+#: ../gtk/mate/compiz-window-manager.c:432
 #, fuzzy
 msgid "Raise"
 msgstr "Automatisch naar de voorgrond"
 
-#: ../gtk/gnome/compiz-window-manager.c:433
+#: ../gtk/mate/compiz-window-manager.c:433
 msgid "Lower"
 msgstr ""
 
-#: ../gtk/gnome/compiz-window-manager.c:434
+#: ../gtk/mate/compiz-window-manager.c:434
 #: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
@@ -371,13 +371,13 @@ msgstr "Gaussische sterkte"
 msgid "Independent texture fetch"
 msgstr ""
 
-# ../../db/printers.ycp.noloc:1400
+#: ../../db/printers.ycp.noloc:1400
 #: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
 #: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
 msgid "Mipmap"
 msgstr "Mipmap"
 
-# ../../db/printers.ycp.noloc:1400
+#: ../../db/printers.ycp.noloc:1400
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
 msgstr "Mipmap LOD"
@@ -855,7 +855,7 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr ""
 "Command regel die uitgevoerd moet worden als start_command9 aangeroepen wordt"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "Opdracht"
@@ -1772,57 +1772,57 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "GLib main loop ondersteuning"
 
-#: ../metadata/gnomecompat.xml.in.h:2
-msgid "Gnome Compatibility"
+#: ../metadata/matecompat.xml.in.h:2
+msgid "MATE Compatibility"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:3
+#: ../metadata/matecompat.xml.in.h:3
 msgid "Open a terminal"
 msgstr "Een terminal openen"
 
-#: ../metadata/gnomecompat.xml.in.h:4
-msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
 
 # /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:336
-#: ../metadata/gnomecompat.xml.in.h:5
+#: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Uitvoeren dialoog"
 
-#: ../metadata/gnomecompat.xml.in.h:6
+#: ../metadata/matecompat.xml.in.h:6
 #, fuzzy
 msgid "Run terminal command"
 msgstr "Terminal commando regel"
 
-#: ../metadata/gnomecompat.xml.in.h:7
+#: ../metadata/matecompat.xml.in.h:7
 msgid "Screenshot command line"
 msgstr "Schermafdruk commodo regel"
 
-#: ../metadata/gnomecompat.xml.in.h:8
+#: ../metadata/matecompat.xml.in.h:8
 msgid "Show Main Menu"
 msgstr "Toon Hoofdmenu"
 
-#: ../metadata/gnomecompat.xml.in.h:9
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "Toon start applicatie dialoog venster"
 
-#: ../metadata/gnomecompat.xml.in.h:10
+#: ../metadata/matecompat.xml.in.h:10
 msgid "Show the main menu"
 msgstr "Toon hoofdmenu"
 
-#: ../metadata/gnomecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot"
 msgstr "Maak een schermafdruk"
 
-#: ../metadata/gnomecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
 msgstr "Maak een schermafdruk van een venster"
 
-#: ../metadata/gnomecompat.xml.in.h:13
+#: ../metadata/matecompat.xml.in.h:13
 msgid "Terminal command line"
 msgstr "Terminal commando regel"
 
-#: ../metadata/gnomecompat.xml.in.h:14
+#: ../metadata/matecompat.xml.in.h:14
 msgid "Window screenshot command line"
 msgstr "Venster schermafdruk commando"
 

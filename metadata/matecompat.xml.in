@@ -1,7 +1,7 @@
 <compiz>
-    <plugin name="gnomecompat">
-	<_short>Gnome Compatibility</_short>
-	<_long>Options that keep Compiz compatible to the Gnome desktop environment</_long>
+    <plugin name="matecompat">
+	<_short>MATE Compatibility</_short>
+	<_long>Options that keep Compiz compatible to the MATE desktop environment</_long>
 	<category>General</category>
 	<display>
 	    <option name="main_menu_key" type="key">
@@ -19,7 +19,7 @@
 		<option name="command_screenshot" type="string">
 		    <_short>Screenshot command line</_short>
 		    <_long>Screenshot command line</_long>
-		    <default>gnome-screenshot</default>
+		    <default>mate-screenshot</default>
 		</option>
 		<option name="run_command_screenshot_key" type="key">
 		    <_short>Take a screenshot</_short>
@@ -29,7 +29,7 @@
 		<option name="command_window_screenshot" type="string">
 		    <_short>Window screenshot command line</_short>
 		    <_long>Window screenshot command line</_long>
-		    <default>gnome-screenshot --window</default>
+		    <default>mate-screenshot --window</default>
 		</option>
 		<option name="run_command_window_screenshot_key" type="key">
 		    <_short>Take a screenshot of a window</_short>
@@ -40,7 +40,7 @@
 		<option name="command_terminal" type="string">
 		    <_short>Terminal command line</_short>
 		    <_long>Terminal command line</_long>
-		    <default>gnome-terminal</default>
+		    <default>mate-terminal</default>
 		</option>
 		<option name="run_command_terminal_key" type="key">
 		    <_short>Open a terminal</_short>

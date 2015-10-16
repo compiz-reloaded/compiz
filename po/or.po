@@ -17,58 +17,24 @@ msgstr ""
 "X-Poedit-Language: Oriya\n"
 "X-Poedit-Country: India\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "ଡେସ୍କଟପ"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-msgid "Window Management"
-msgstr "ଉଇଣ୍ଡୋ ପ୍ରବନ୍ଧନ"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
+#: ../gtk/mate/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "କମ୍ପିଜ"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "କିଛିନାହିଁ"
 
-#: ../gtk/gnome/compiz-window-manager.c:427
 #: ../gtk/window-decorator/gtk-window-decorator.c:4625
 #, fuzzy
 msgid "Shade"
 msgstr "ମାପକ"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:9
 msgid "Maximize"
 msgstr "ସର୍ବାଧିକ କର"
 
-#: ../gtk/gnome/compiz-window-manager.c:429
-#, fuzzy
-msgid "Maximize Horizontally"
-msgstr "ଉଇଣ୍ଡୋକୁ ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ କର"
-
-#: ../gtk/gnome/compiz-window-manager.c:430
-#, fuzzy
-msgid "Maximize Vertically"
-msgstr "ଦଣ୍ଡରୁପରେ ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
-
-#: ../gtk/gnome/compiz-window-manager.c:431
-#, fuzzy
-msgid "Minimize"
-msgstr "ନ୍ଯୁନତମହୋଇଥିବା"
-
-#: ../gtk/gnome/compiz-window-manager.c:432
-#, fuzzy
-msgid "Raise"
-msgstr "ସ୍ବତଃ-ଉତ୍ଥାନ"
-
-#: ../gtk/gnome/compiz-window-manager.c:433
-msgid "Lower"
-msgstr ""
-
-#: ../gtk/gnome/compiz-window-manager.c:434
 #: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
@@ -777,7 +743,7 @@ msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥ
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୯ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
 #, fuzzy
 msgid "Commands"
 msgstr "ଆଦେଶ"
@@ -1663,56 +1629,56 @@ msgstr "ଜିଲିବ୍"
 msgid "GLib main loop support"
 msgstr "ଜିଲିବ୍ ମୂଖ୍ଯ ଲୁପ ସମର୍ଥନ"
 
-#: ../metadata/gnomecompat.xml.in.h:2
-msgid "Gnome Compatibility"
+#: ../metadata/matecompat.xml.in.h:2
+msgid "MATE Compatibility"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:3
+#: ../metadata/matecompat.xml.in.h:3
 msgid "Open a terminal"
 msgstr "ଗୋଟିଏ ଟର୍ମିନାଲ ଖୋଲ"
 
-#: ../metadata/gnomecompat.xml.in.h:4
-msgid "Options that keep Compiz compatible to the Gnome desktop environment"
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
 
-#: ../metadata/gnomecompat.xml.in.h:5
+#: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "ଚଳାଅ ଡାଏଲଗ"
 
-#: ../metadata/gnomecompat.xml.in.h:6
+#: ../metadata/matecompat.xml.in.h:6
 #, fuzzy
 msgid "Run terminal command"
 msgstr "ଟର୍ମିନାଲ ଆଦେଶ ରେଖା"
 
-#: ../metadata/gnomecompat.xml.in.h:7
+#: ../metadata/matecompat.xml.in.h:7
 msgid "Screenshot command line"
 msgstr "ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 
-#: ../metadata/gnomecompat.xml.in.h:8
+#: ../metadata/matecompat.xml.in.h:8
 msgid "Show Main Menu"
 msgstr "ମୂଖ୍ଯ ମେନୁ ଦେଖାଅ"
 
-#: ../metadata/gnomecompat.xml.in.h:9
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "ଚାଳାଅ ପ୍ରଯୋଗ ଡାଏଲଗକୁ ଦେଖାଅ"
 
-#: ../metadata/gnomecompat.xml.in.h:10
+#: ../metadata/matecompat.xml.in.h:10
 msgid "Show the main menu"
 msgstr "ମୂଖ୍ଯ ମେନୁକୁ ଦେଖାଅ"
 
-#: ../metadata/gnomecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot"
 msgstr "ଗୋଟିଏ ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/gnomecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
 msgstr "ଗୋଟିଏ ଉଇଣ୍ଡୋର ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/gnomecompat.xml.in.h:13
+#: ../metadata/matecompat.xml.in.h:13
 msgid "Terminal command line"
 msgstr "ଟର୍ମିନାଲ ଆଦେଶ ରେଖା"
 
-#: ../metadata/gnomecompat.xml.in.h:14
+#: ../metadata/matecompat.xml.in.h:14
 msgid "Window screenshot command line"
 msgstr "ଉଇଣ୍ଡୋ ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 

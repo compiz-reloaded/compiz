@@ -16,53 +16,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.1.0\n"
 
-#: ../gtk/gnome/50-compiz-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "Escritorio"
-
-#: ../gtk/gnome/50-compiz-key.xml.in.h:1
-msgid "Window Management"
-msgstr "Ventana de Gestión"
-
-#: ../gtk/gnome/compiz.desktop.in.h:1
+#: ../gtk/mate/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "Compiz"
 
-#: ../gtk/gnome/compiz-window-manager.c:426 ../metadata/scale.xml.in.h:25
+#: ../metadata/scale.xml.in.h:25
 #: ../metadata/wobbly.xml.in.h:16
 msgid "None"
 msgstr "Ninguno"
 
-#: ../gtk/gnome/compiz-window-manager.c:427
 #: ../gtk/window-decorator/gtk-window-decorator.c:4625
 msgid "Shade"
 msgstr "Tonalidad"
 
-#: ../gtk/gnome/compiz-window-manager.c:428 ../metadata/place.xml.in.h:9
+#: ../metadata/place.xml.in.h:9
 msgid "Maximize"
 msgstr "Maximizada"
 
-#: ../gtk/gnome/compiz-window-manager.c:429
-msgid "Maximize Horizontally"
-msgstr "Maximizar ventana horizontalmente"
-
-#: ../gtk/gnome/compiz-window-manager.c:430
-msgid "Maximize Vertically"
-msgstr "Maximizar ventana verticalmente"
-
-#: ../gtk/gnome/compiz-window-manager.c:431
-msgid "Minimize"
-msgstr "Minimizar"
-
-#: ../gtk/gnome/compiz-window-manager.c:432
-msgid "Raise"
-msgstr "Elevación automática"
-
-#: ../gtk/gnome/compiz-window-manager.c:433
-msgid "Lower"
-msgstr "Bajar"
-
-#: ../gtk/gnome/compiz-window-manager.c:434
 #: ../gtk/window-decorator/gtk-window-decorator.c:4606
 #: ../metadata/core.xml.in.in.h:100
 msgid "Window Menu"
@@ -809,7 +779,7 @@ msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr ""
 "Línea de comandos que se ejecuta en el shell cuando run_command9 es invocado"
 
-#: ../metadata/commands.xml.in.h:63 ../metadata/gnomecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
 msgid "Commands"
 msgstr "Comandos"
 
@@ -1714,55 +1684,55 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "soporte de loop principal de GLib "
 
-#: ../metadata/gnomecompat.xml.in.h:2
-msgid "Gnome Compatibility"
-msgstr "Compatibilidad de Gnome"
+#: ../metadata/matecompat.xml.in.h:2
+msgid "MATE Compatibility"
+msgstr "Compatibilidad de MATE"
 
-#: ../metadata/gnomecompat.xml.in.h:3
+#: ../metadata/matecompat.xml.in.h:3
 msgid "Open a terminal"
 msgstr "Abrir terminal"
 
-#: ../metadata/gnomecompat.xml.in.h:4
-msgid "Options that keep Compiz compatible to the Gnome desktop environment"
-msgstr "Opciones que mantienen a Compiz compatible con Gnome"
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Options that keep Compiz compatible to the MATE desktop environment"
+msgstr "Opciones que mantienen a Compiz compatible con MATE"
 
-#: ../metadata/gnomecompat.xml.in.h:5
+#: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Ejecutar diálogo"
 
-#: ../metadata/gnomecompat.xml.in.h:6
+#: ../metadata/matecompat.xml.in.h:6
 msgid "Run terminal command"
 msgstr "Ejecutar comando de terminal"
 
-#: ../metadata/gnomecompat.xml.in.h:7
+#: ../metadata/matecompat.xml.in.h:7
 msgid "Screenshot command line"
 msgstr "Línea de comandos de captura de pantalla"
 
-#: ../metadata/gnomecompat.xml.in.h:8
+#: ../metadata/matecompat.xml.in.h:8
 msgid "Show Main Menu"
 msgstr "Mostrar menú principal"
 
-#: ../metadata/gnomecompat.xml.in.h:9
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "Mostrar el cuadro de diálogo de ejecución de aplicación"
 
-#: ../metadata/gnomecompat.xml.in.h:10
+#: ../metadata/matecompat.xml.in.h:10
 msgid "Show the main menu"
 msgstr "Muestra el menú principal"
 
-#: ../metadata/gnomecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot"
 msgstr "Capturar la pantalla"
 
-#: ../metadata/gnomecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:12
 msgid "Take a screenshot of a window"
 msgstr "Toma una captura de pantalla de una ventana"
 
-#: ../metadata/gnomecompat.xml.in.h:13
+#: ../metadata/matecompat.xml.in.h:13
 msgid "Terminal command line"
 msgstr "Línea de comandos para abrir Terminal"
 
-#: ../metadata/gnomecompat.xml.in.h:14
+#: ../metadata/matecompat.xml.in.h:14
 msgid "Window screenshot command line"
 msgstr "Línea de comandos de captura de ventana"
 
