@@ -770,7 +770,7 @@ fadeInitDisplay (CompPlugin  *p,
     matchInit (&fd->alwaysFadeWindowMatch);
     matchAddExp (&fd->alwaysFadeWindowMatch, 0, "title=gksu");
     matchAddExp (&fd->alwaysFadeWindowMatch, 0, "title=x-session-manager");
-    matchAddExp (&fd->alwaysFadeWindowMatch, 0, "title=gnome-session");
+    matchAddExp (&fd->alwaysFadeWindowMatch, 0, "title=mate-session");
     matchUpdate (d, &fd->alwaysFadeWindowMatch);
 
     WRAP (fd, d, handleEvent, fadeHandleEvent);
