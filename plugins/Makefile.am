@@ -101,13 +101,6 @@ libglib_la_SOURCES = glib.c
 libglib_module = libglib.la
 endif
 
-if USE_GCONF
-libgconf_la_LDFLAGS = -module -avoid-version -no-undefined
-libgconf_la_LIBADD = @GCONF_LIBS@
-libgconf_la_SOURCES = gconf.c
-libgconf_module = libgconf.la
-endif
-
 if DBUS_PLUGIN
 libdbus_la_LDFLAGS = -module -avoid-version -no-undefined
 libdbus_la_LIBADD = @DBUS_LIBS@
@@ -133,7 +126,6 @@ AM_CPPFLAGS =					\
 	@LIBPNG_CFLAGS@				\
 	@LIBRSVG_CFLAGS@			\
 	@ANNOTATE_CFLAGS@			\
-	@GCONF_CFLAGS@				\
 	@DBUS_CFLAGS@				\
 	@GLIB_CFLAGS@				\
 	@FUSE_CFLAGS@				\
@@ -151,7 +143,6 @@ moduledir = $(plugindir)
 
 module_LTLIBRARIES =		\
 	$(libglib_module)	\
-	$(libgconf_module)	\
 	libdecoration.la	\
 	libwobbly.la		\
 	libfade.la		\

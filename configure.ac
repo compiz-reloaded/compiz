@@ -130,7 +130,6 @@ COMPIZ_REQUIRES="x11        \
 		 ice	    \
 		 sm	    \
 		 libxml-2.0 \
-		 libxslt    \
 		 libstartup-notification-1.0 >= 0.7"
 
 PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)
@@ -189,29 +188,6 @@ AM_CONDITIONAL(USE_GLIB, test "x$use_glib" = "xyes")
 if test "$use_glib" = yes; then
   AC_DEFINE(USE_GLIB, 1, [Build glib plugin])
 fi
-
-AC_ARG_ENABLE(gconf,
-  [  --disable-gconf         Disable gconf plugin],
-  [use_gconf=$enableval], [use_gconf=yes])
-
-if test "x$use_gconf" = "xyes"; then
-  PKG_CHECK_MODULES(GCONF, gconf-2.0)
-
-  AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
-  if test x"$GCONFTOOL" = xno; then
-    AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
-  fi
-fi
-
-AM_GCONF_SOURCE_2
-
-AM_CONDITIONAL(USE_GCONF, test "x$use_gconf" = "xyes")
-if test "$use_gconf" = yes; then
-  AC_DEFINE(USE_GCONF, 1, [Build gconf plugin])
-fi
-
-stylesheetdir=$datadir/compiz
-AC_SUBST(stylesheetdir)
 
 AC_ARG_ENABLE(dbus,
   [  --disable-dbus          Disable dbus plugin],
@@ -299,12 +275,8 @@ AC_ARG_ENABLE(marco,
   [use_marco=$enableval], [use_marco=yes])
 
 AC_ARG_ENABLE(gnome,
-  [  --disable-gnome         Disable gnome settings module],
+  [  --disable-gnome         Disable gnome compatibility plugin],
   [use_gnome=$enableval], [use_gnome=yes])
-
-AC_ARG_ENABLE(gnome-keybindings,
-  [  --disable-gnome-keybindings Disable gnome keybindings],
-  [use_gnome_keybindings=$enableval], [use_gnome_keybindings=yes])
 
 if test "x$use_gtk" = "xyes"; then
   PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
@@ -326,21 +298,6 @@ if test "x$use_gtk" = "xyes"; then
       PKG_CHECK_MODULES(MARCO, libmarco-private,
 			[use_marco=yes], [use_marco=no])
     fi
-
-    if test "x$use_gnome" = "xyes"; then
-      PKG_CHECK_MODULES(GNOME_WINDOW_SETTINGS,
-			gnome-window-settings-2.0 gnome-desktop-2.0 gconf-2.0,
-			[use_gnome=yes], [use_gnome=no])
-    fi
-
-    if test "x$use_gnome_keybindings" = "xyes"; then
-      PKG_CHECK_MODULES(GNOME_KEY_BINDINGS,
-			gnome-keybindings,
-			[use_gnome_keybindings=yes], [use_gnome_keybindings=no])
-    fi
-
-    windowsettingsdatadir=`pkg-config --variable=prefix gnome-window-settings-2.0`/share
-    windowsettingslibdir=`pkg-config --variable=libdir gnome-window-settings-2.0`    keybindingsdir=`pkg-config --variable=keysdir gnome-keybindings`
   else
     use_marco="no"
     use_gnome="no"
@@ -349,10 +306,6 @@ else
   use_marco="no"
   use_gnome="no"
 fi
-
-AC_SUBST(windowsettingsdatadir)
-AC_SUBST(windowsettingslibdir)
-AC_SUBST(keybindingsdir)
 
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
 if test "$use_gtk" = yes; then
@@ -366,12 +319,7 @@ fi
 
 AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")
 if test "$use_gnome" = yes; then
-  AC_DEFINE(USE_GNOME, 1, [Build gnome settings module])
-fi
-
-AM_CONDITIONAL(USE_GNOME_KEYBINDINGS, test "x$use_gnome_keybindings" = "xyes")
-if test "$use_gnome_keybindings" = yes; then
-  AC_DEFINE(USE_GNOME_KEYBINDINGS, 1, [Install custom keybindings])
+  AC_DEFINE(USE_GNOME, 1, [Build gnome compatibility plugin])
 fi
 
 AC_ARG_WITH(max-desktops,
@@ -425,7 +373,6 @@ AC_OUTPUT([
 compiz.pc
 compiz-cube.pc
 compiz-scale.pc
-compiz-gconf.pc
 Makefile
 src/Makefile
 libdecoration/Makefile
@@ -443,7 +390,6 @@ metadata/Makefile
 echo ""
 echo "the following optional plugins will be compiled:"
 echo "  glib:     $use_glib"
-echo "  gconf:    $use_gconf"
 echo "  dbus:     $use_dbus"
 echo "  annotate: $use_annotate"
 echo "  svg:      $use_librsvg"

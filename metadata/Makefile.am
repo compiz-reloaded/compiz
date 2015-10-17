@@ -10,7 +10,6 @@ xml_in_files =		   \
 	decoration.xml.in  \
 	fade.xml.in	   \
 	fs.xml.in	   \
-	gconf.xml.in	   \
 	glib.xml.in	   \
 	matecompat.xml.in \
 	ini.xml.in	   \
@@ -43,41 +42,11 @@ core.xml.in: core.xml.in.in Makefile
 
 @INTLTOOL_XML_RULE@
 
-if USE_GCONF
-schemadir    = $(GCONF_SCHEMA_FILE_DIR)
-schema_files = $(patsubst %.xml.in,compiz-%.schemas,$(xml_in_files))
-schema_DATA  = $(schema_files)
-
-%.schemas: $(xml_files)
-	xsltproc -o $@ --param defaultPlugins "'$(default_plugins)'" \
-		$(srcdir)/schemas.xslt $(subst compiz-,,$*).xml
-
-schemas_stylesheets = schemas.xslt
-
-endif
-
-install-data-local:
-if USE_GCONF
-if GCONF_SCHEMAS_INSTALL
-	if test -z "$(DESTDIR)" ; then \
-		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA); \
-        fi
-endif
-endif
-
-xsltdir    = $(stylesheetdir)
-xslt_files =		       	  \
-	$(schemas_stylesheets)
-
-xslt_DATA  = $(xslt_files)
-
 EXTRA_DIST =		    \
 	$(xml_in_files)     \
-	core.xml.in.in      \
-	$(xslt_files)
+	core.xml.in.in
 
 DISTCLEANFILES =	    \
 	$(xml_files)        \
-	core.xml.in         \
-	$(schema_files)
+	core.xml.in
 
