@@ -30,6 +30,7 @@
 #include <X11/cursorfont.h>
 #include <X11/extensions/Xrender.h>
 #include <X11/Xregion.h>
+#include <X11/Xcursor/Xcursor.h>
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -70,6 +71,14 @@
 #ifdef USE_MARCO
 #include <marco-private/theme.h>
 #endif
+
+#define MATE_MOUSE_DIR "/desktop/mate/peripherals/mouse"
+
+#define MATE_CURSOR_THEME_KEY		\
+    MATE_MOUSE_DIR "/cursor_theme"
+
+#define MATE_CURSOR_SIZE_KEY		\
+    MATE_MOUSE_DIR "/cursor_size"
 
 #define MARCO_GCONF_DIR "/apps/marco/general"
 
@@ -133,6 +142,13 @@
 
 #define WHEEL_ACTION_KEY   \
     GCONF_DIR "/mouse_wheel_action"
+
+#define COMPIZ_GCONF_DIR2 "/apps/compiz/general/allscreens/options"
+#define COMPIZ_CURSOR_THEME_KEY          \
+    COMPIZ_GCONF_DIR2 "/cursor_theme"
+
+#define COMPIZ_CURSOR_SIZE_KEY           \
+    COMPIZ_GCONF_DIR2 "/cursor_size"
 
 #define DBUS_DEST       "org.freedesktop.compiz"
 #define DBUS_PATH       "/org/freedesktop/compiz/decoration/allscreens"
@@ -6376,6 +6392,44 @@ button_layout_changed (GConfClient *client)
 }
 
 static void
+cursor_theme_changed (GConfClient *client)
+{
+    gchar *theme;
+    gint size;
+
+    theme = gconf_client_get_string(client, MATE_CURSOR_THEME_KEY, NULL);
+    size = gconf_client_get_int(client, MATE_CURSOR_SIZE_KEY, NULL);
+
+    gconf_client_set_string(client, COMPIZ_CURSOR_THEME_KEY, theme, NULL);
+
+    gconf_client_set_int(client, COMPIZ_CURSOR_SIZE_KEY, size, NULL);
+
+    if (theme && strlen(theme))
+    {
+	gint i, j;
+	GdkDisplay *gdkdisplay = gdk_display_get_default ();
+	Display *xdisplay   = gdk_x11_display_get_xdisplay (gdkdisplay);
+
+
+	XcursorSetTheme (xdisplay, theme);
+	XcursorSetDefaultSize (xdisplay, size);
+
+	for (i = 0; i < 3; i++)
+	{
+	    for (j = 0; j < 3; j++)
+	    {
+		if (cursor[i][j].shape != XC_left_ptr)
+		{
+		    XFreeCursor (xdisplay, cursor[i][j].cursor);
+		    cursor[i][j].cursor =
+			XCreateFontCursor (xdisplay, cursor[i][j].shape);
+		}
+	    }
+	}
+    }
+}
+
+static void
 value_changed (GConfClient *client,
 	       const gchar *key,
 	       GConfValue  *value,
@@ -6452,6 +6506,11 @@ value_changed (GConfClient *client,
     {
 	if (theme_opacity_changed (client))
 	    changed = TRUE;
+    }
+    else if (strcmp (key, MATE_CURSOR_THEME_KEY) == 0 ||
+	     strcmp (key, MATE_CURSOR_SIZE_KEY) == 0)
+    {
+	cursor_theme_changed (client);
     }
 
     if (changed)
@@ -6616,6 +6675,11 @@ init_settings (WnckScreen *screen)
 			  NULL);
 
     gconf_client_add_dir (gconf,
+			  MATE_MOUSE_DIR,
+			  GCONF_CLIENT_PRELOAD_ONELEVEL,
+			  NULL);
+
+    gconf_client_add_dir (gconf,
 			  COMPIZ_GCONF_DIR1,
 			  GCONF_CLIENT_PRELOAD_ONELEVEL,
 			  NULL);
@@ -6624,6 +6688,9 @@ init_settings (WnckScreen *screen)
 		      "value_changed",
 		      G_CALLBACK (value_changed),
 		      screen);
+
+    cursor_theme_changed(gconf);
+
 #elif USE_DBUS_GLIB
     DBusConnection *connection;
     DBusMessage	   *reply;
