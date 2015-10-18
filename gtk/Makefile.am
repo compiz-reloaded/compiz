@@ -1,1 +1,1 @@
-SUBDIRS = window-decorator gnome
+SUBDIRS = window-decorator

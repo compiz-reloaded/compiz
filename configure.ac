@@ -274,10 +274,6 @@ AC_ARG_ENABLE(marco,
   [  --disable-marco      Disable marco theme support],
   [use_marco=$enableval], [use_marco=yes])
 
-AC_ARG_ENABLE(gnome,
-  [  --disable-gnome         Disable gnome compatibility plugin],
-  [use_gnome=$enableval], [use_gnome=yes])
-
 if test "x$use_gtk" = "xyes"; then
   PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		    xrender >= 0.8.4  \
@@ -300,11 +296,9 @@ if test "x$use_gtk" = "xyes"; then
     fi
   else
     use_marco="no"
-    use_gnome="no"
   fi
 else
   use_marco="no"
-  use_gnome="no"
 fi
 
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
@@ -315,11 +309,6 @@ fi
 AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
 if test "$use_marco" = yes; then
   AC_DEFINE(USE_MARCO, 1, [Build marco theme support])
-fi
-
-AM_CONDITIONAL(USE_GNOME, test "x$use_gnome" = "xyes")
-if test "$use_gnome" = yes; then
-  AC_DEFINE(USE_GNOME, 1, [Build gnome compatibility plugin])
 fi
 
 AC_ARG_WITH(max-desktops,
@@ -382,7 +371,6 @@ plugins/Makefile
 images/Makefile
 gtk/Makefile
 gtk/window-decorator/Makefile
-gtk/gnome/Makefile
 po/Makefile.in
 metadata/Makefile
 scripts/Makefile
@@ -400,5 +388,4 @@ echo ""
 echo "and the following optional features will be compiled:"
 echo "  gtk:      $use_gtk"
 echo "  marco:    $use_marco"
-echo "  gnome:    $use_gnome"
 echo ""
