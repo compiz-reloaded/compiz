@@ -1,8 +1,54 @@
+NULL =
+
 imagesdir = $(imagedir)
-images_DATA =	       \
-	icon.png       \
+images_DATA =       \
+	icon.png        \
 	freedesktop.png
 
-EXTRA_DIST =	       \
-	icon.png       \
-	freedesktop.png
+public_icons_themes = \
+	hicolor	\
+	$(NULL)
+
+public_icons = \
+	hicolor_apps_16x16_compiz-mate-gtk.png \
+	hicolor_apps_22x22_compiz-mate-gtk.png \
+	hicolor_apps_24x24_compiz-mate-gtk.png \
+	hicolor_apps_32x32_compiz-mate-gtk.png \
+	hicolor_apps_scalable_compiz-mate-gtk.svg \
+	hicolor_apps_16x16_gtk-decorator.png \
+	hicolor_apps_22x22_gtk-decorator.png \
+	hicolor_apps_24x24_gtk-decorator.png \
+	hicolor_apps_32x32_gtk-decorator.png \
+	hicolor_apps_48x48_gtk-decorator.png \
+	hicolor_apps_scalable_gtk-decorator.svg
+
+noinst_DATA = \
+	$(NULL)
+
+EXTRA_DIST = \
+	$(images_DATA) \
+	$(public_icons) \
+	$(NULL)
+
+install-icons:
+	for icon in $(public_icons); do \
+		THEME=`echo $$icon | cut -d_ -f1`; \
+		CONTEXT=`echo $$icon | cut -d_ -f2`; \
+		SIZE=`echo $$icon | cut -d_ -f3`; \
+		ICONFILE=`echo $$icon | cut -d_ -f4`; \
+		mkdir -p $(DESTDIR)$(datadir)/icons/$$THEME/$$SIZE/$$CONTEXT; \
+		$(INSTALL_DATA) $(srcdir)/$$icon $(DESTDIR)$(datadir)/icons/$$THEME/$$SIZE/$$CONTEXT/$$ICONFILE; \
+	done
+
+uninstall-icons:
+	-for icon in $(public_icons); do \
+		THEME=`echo $$icon | cut -d_ -f1`; \
+		CONTEXT=`echo $$icon | cut -d_ -f2`; \
+		SIZE=`echo $$icon | cut -d_ -f3`; \
+		ICONFILE=`echo $$icon | cut -d_ -f4`; \
+		rm -f $(DESTDIR)$(datadir)/icons/$$THEME/$$SIZE/$$CONTEXT/$$ICONFILE; \
+	done
+
+install-data-local: install-icons
+
+uninstall-local: uninstall-icons

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+_Name=Compiz GTK Decorator
+Comment=switch to GTK windows-decorator if compiz is running
+TryExec=compiz-decorator-gtk
+Exec=compiz-decorator-gtk
+Icon=gtk-decorator
+NoDisplay=false
+StartupNotify=true
+Categories=Utility;Application;
+OnlyShowIn=MATE;

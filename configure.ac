@@ -385,6 +385,7 @@ gtk/window-decorator/Makefile
 gtk/gnome/Makefile
 po/Makefile.in
 metadata/Makefile
+scripts/Makefile
 ])
 
 echo ""

@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+_Name=Compiz MATE GTK
+Comment=start or restart Compiz Fusion with GTK windows-decorator
+TryExec=compiz-mate-gtk
+Exec=compiz-mate-gtk
+NoDisplay=false
+StartupNotify=true
+Icon=compiz-mate-gtk
+Terminal=false
+Categories=Utility;Application;
+OnlyShowIn=MATE;
+# autostart phase
+X-MATE-Autostart-Phase=WindowManager
+X-MATE-Provides=windowmanager
+# name we put on the WM spec check window
+X-MATE-WMName=compiz-mate-gtk
