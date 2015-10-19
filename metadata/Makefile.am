@@ -6,11 +6,9 @@ xml_in_files =		   \
 	clone.xml.in	   \
 	commands.xml.in	   \
 	cube.xml.in	   \
-	dbus.xml.in	   \
 	decoration.xml.in  \
 	fade.xml.in	   \
 	fs.xml.in	   \
-	glib.xml.in	   \
 	matecompat.xml.in \
 	ini.xml.in	   \
 	inotify.xml.in	   \
