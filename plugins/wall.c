@@ -111,6 +111,8 @@ typedef struct _WallScreen
     WindowUngrabNotifyProc       windowUngrabNotify;
     ActivateWindowProc           activateWindow;
 
+    int grabCount;
+
     Bool moving; /* Used to track miniview movement */
     Bool showPreview;
 
@@ -176,6 +178,38 @@ typedef struct _WallWindow
 #define sigmoidProgress(x) ((sigmoid (x) - sigmoid (0)) / \
 			    (sigmoid (1) - sigmoid (0)))
 
+
+static void
+wallScreenOptionChangeNotify (CompScreen *s, CompOption *opt,
+			      WallScreenOptions num)
+{
+    WALL_SCREEN (s);
+
+    if (ws->grabCount == -1 || ws->grabCount > 0)
+    {
+	removeScreenAction (s, wallGetFlipLeftEdge(s->display));
+	removeScreenAction (s, wallGetFlipRightEdge(s->display));
+	removeScreenAction (s, wallGetFlipUpEdge(s->display));
+	removeScreenAction (s, wallGetFlipDownEdge(s->display));
+    }
+
+    if (wallGetEdgeflipPointer (s) || wallGetEdgeflipMove (s) ||
+	wallGetEdgeflipDnd (s))
+    {
+	if (!wallGetEdgeflipPointer (s) && !wallGetEdgeflipDnd (s))
+	    ws->grabCount = 0;
+	else
+	{
+	    ws->grabCount = -1;
+	    addScreenAction (s, wallGetFlipLeftEdge(s->display));
+	    addScreenAction (s, wallGetFlipRightEdge(s->display));
+	    addScreenAction (s, wallGetFlipUpEdge(s->display));
+	    addScreenAction (s, wallGetFlipDownEdge(s->display));
+	}
+    }
+    else
+	ws->grabCount = -2;
+}
 
 static void
 wallClearCairoLayer (cairo_t *cr)
@@ -1896,10 +1930,24 @@ wallWindowGrabNotify (CompWindow   *w,
 		      unsigned int state,
 		      unsigned int mask)
 {
-    WALL_SCREEN (w->screen);
+    CompScreen *s = w->screen;
+    WALL_SCREEN (s);
 
     if (!ws->grabWindow)
 	ws->grabWindow = w;
+
+    if (ws->grabCount >= 0)
+    {
+	if (!ws->grabCount)
+	{
+	    addScreenAction (s, wallGetFlipLeftEdge(s->display));
+	    addScreenAction (s, wallGetFlipRightEdge(s->display));
+	    addScreenAction (s, wallGetFlipUpEdge(s->display));
+	    addScreenAction (s, wallGetFlipDownEdge(s->display));
+	}
+
+	ws->grabCount++;
+    }
 
     UNWRAP (ws, w->screen, windowGrabNotify);
     (*w->screen->windowGrabNotify) (w, x, y, state, mask);
@@ -1909,10 +1957,24 @@ wallWindowGrabNotify (CompWindow   *w,
 static void
 wallWindowUngrabNotify (CompWindow *w)
 {
-    WALL_SCREEN (w->screen);
+    CompScreen *s = w->screen;
+    WALL_SCREEN (s);
 
     if (w == ws->grabWindow)
 	ws->grabWindow = NULL;
+
+    if (ws->grabCount >= 0)
+    {
+	ws->grabCount--;
+
+	if (!ws->grabCount)
+	{
+	    removeScreenAction (s, wallGetFlipLeftEdge(s->display));
+	    removeScreenAction (s, wallGetFlipRightEdge(s->display));
+	    removeScreenAction (s, wallGetFlipUpEdge(s->display));
+	    removeScreenAction (s, wallGetFlipDownEdge(s->display));
+	}
+    }
 
     UNWRAP (ws, w->screen, windowUngrabNotify);
     (*w->screen->windowUngrabNotify) (w);
@@ -2115,6 +2177,8 @@ wallInitScreen (CompPlugin *p,
     ws->transform  = NoTransformation;
     ws->direction  = -1;
 
+    ws->grabCount = 0;
+
     memset (&ws->switcherContext, 0, sizeof (WallCairoContext));
     memset (&ws->thumbContext, 0, sizeof (WallCairoContext));
     memset (&ws->highlightContext, 0, sizeof (WallCairoContext));
@@ -2129,6 +2193,27 @@ wallInitScreen (CompPlugin *p,
     WRAP (ws, s, windowGrabNotify, wallWindowGrabNotify);
     WRAP (ws, s, windowUngrabNotify, wallWindowUngrabNotify);
     WRAP (ws, s, activateWindow, wallActivateWindow);
+
+    wallSetEdgeflipPointerNotify (s, wallScreenOptionChangeNotify);
+    wallSetEdgeflipMoveNotify (s, wallScreenOptionChangeNotify);
+    wallSetEdgeflipDndNotify (s, wallScreenOptionChangeNotify);
+
+    if (wallGetEdgeflipPointer (s) || wallGetEdgeflipMove (s) ||
+	wallGetEdgeflipDnd (s))
+    {
+	if (!wallGetEdgeflipPointer (s) && !wallGetEdgeflipDnd (s))
+	    ws->grabCount = 0;
+	else
+	{
+	    ws->grabCount = -1;
+	    addScreenAction (s, wallGetFlipLeftEdge(s->display));
+	    addScreenAction (s, wallGetFlipRightEdge(s->display));
+	    addScreenAction (s, wallGetFlipUpEdge(s->display));
+	    addScreenAction (s, wallGetFlipDownEdge(s->display));
+	}
+    }
+    else
+	ws->grabCount = -2;
 
     s->base.privates[wd->screenPrivateIndex].ptr = ws;
 
@@ -2162,6 +2247,14 @@ wallFiniScreen (CompPlugin *p,
     UNWRAP (ws, s, activateWindow);
     
     freeWindowPrivateIndex (s, ws->windowPrivateIndex);
+
+    if (ws->grabCount > 0 || ws->grabCount == -1)
+    {
+	removeScreenAction (s, wallGetFlipLeftEdge(s->display));
+	removeScreenAction (s, wallGetFlipRightEdge(s->display));
+	removeScreenAction (s, wallGetFlipUpEdge(s->display));
+	removeScreenAction (s, wallGetFlipDownEdge(s->display));
+    }
 
     free(ws);
 }

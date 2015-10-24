@@ -280,6 +280,7 @@
 						<_short>Flip Left</_short>
 						<_long>Flip left</_long>
 						<nodelay>true</nodelay>
+						<passive_grab>false</passive_grab>
 						<default>
 							<edge name="Left"/>
 						</default>
@@ -289,6 +290,7 @@
 						<_short>Flip Right</_short>
 						<_long>Flip right</_long>
 						<nodelay>true</nodelay>
+						<passive_grab>false</passive_grab>
 						<default>
 							<edge name="Right"/>
 						</default>
@@ -298,6 +300,7 @@
 						<_short>Flip Up</_short>
 						<_long>Flip up</_long>
 						<nodelay>true</nodelay>
+						<passive_grab>false</passive_grab>
 						<default>
 							<edge name="Top"/>
 						</default>
@@ -307,6 +310,7 @@
 						<_short>Flip Down</_short>
 						<_long>Flip down</_long>
 						<nodelay>true</nodelay>
+						<passive_grab>false</passive_grab>
 						<default>
 							<edge name="Bottom"/>
 						</default>
