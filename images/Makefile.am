@@ -20,7 +20,8 @@ public_icons = \
 	hicolor_apps_24x24_gtk-decorator.png \
 	hicolor_apps_32x32_gtk-decorator.png \
 	hicolor_apps_48x48_gtk-decorator.png \
-	hicolor_apps_scalable_gtk-decorator.svg
+	hicolor_apps_scalable_gtk-decorator.svg \
+	hicolor_apps_scalable_plugin-matecompat.svg
 
 noinst_DATA = \
 	$(NULL)
