@@ -1728,7 +1728,7 @@ addScreen (CompDisplay *display,
     Window		 *children;
     unsigned int	 nchildren;
     int			 defaultDepth, nvisinfo, nElements, value, i;
-    const char		 *glxExtensions, *glExtensions;
+    const char		 *glxExtensions, *glExtensions, *glRenderer;
     XSetWindowAttributes attrib;
     GLfloat		 globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 0.1f };
     GLfloat		 ambientLight[]   = { 0.0f, 0.0f,  0.0f, 0.0f };
@@ -1995,6 +1995,34 @@ addScreen (CompDisplay *display,
     glxExtensions = glXQueryExtensionsString (dpy, screenNum);
     if (!strstr (glxExtensions, "GLX_EXT_texture_from_pixmap"))
     {
+	/* try again with indirect rendering */
+	if (!indirectRendering)
+	{
+	    char **copy;
+
+	    copy = (char **)malloc ((programArgc + 2) * sizeof (char *));
+	    for (i = 0; i < programArgc; i++)
+	    {
+		copy[i] = strdup (programArgv[i]);
+	    }
+	    copy[i++] = "--indirect-rendering";
+	    copy[i] = NULL;
+	    execvp (programName, copy);
+
+	    /* if we made it here execvp failed */
+	    for (i = 0; copy[i] != NULL; i++)
+	    {
+		free (copy[i]);
+	    }
+	    free (copy);
+
+	    compLogMessage ("core", CompLogLevelFatal,
+			    "Failed to launch with --indirect-rendering");
+	    XFree (visinfo);
+
+	    return FALSE;
+	}
+
 	compLogMessage ("core", CompLogLevelFatal,
 			"GLX_EXT_texture_from_pixmap is missing");
 	XFree (visinfo);
@@ -2078,6 +2106,19 @@ addScreen (CompDisplay *display,
 	compLogMessage ("core", CompLogLevelFatal,
 			"No valid GL extensions string found.");
 	return FALSE;
+    }
+
+    if (getenv ("SKIP_CHECKS") != NULL)
+    {
+	glRenderer = (const char *) glGetString (GL_RENDERER);
+	if (glRenderer != NULL &&
+	(strcmp (glRenderer, "Software Rasterizer") == 0 ||
+		strcmp (glRenderer, "Mesa X11") == 0))
+	{
+	    compLogMessage ("core", CompLogLevelFatal,
+	                    "Software rendering detected.");
+	    return FALSE;
+        }
     }
 
     s->textureNonPowerOfTwo = 0;

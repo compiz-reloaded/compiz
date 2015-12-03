@@ -159,6 +159,30 @@ logLevelToString (CompLogLevel level)
     return "Unknown";
 }
 
+void
+launchFallbackWM (void)
+{
+    char *fallback = NULL;
+
+    if (strcmp (getenv ("XDG_CURRENT_DESKTOP"), "MATE") == 0)
+	fallback = "marco";
+    else if (strcmp (getenv ("XDG_CURRENT_DESKTOP"), "GNOME") == 0 || strcmp (getenv ("XDG_CURRENT_DESKTOP"), "GNOME") == 0)
+	fallback = "metacity";
+    else if (access ("/usr/bin/xfwm4", F_OK) == 0)
+	fallback = "xfwm4";
+    else if (access ("/usr/bin/icewm", F_OK) == 0)
+	fallback = "icewm";
+
+    printf ("\nLaunching fallback window manager\n");
+    if (fallback != NULL)
+	execlp (fallback, fallback, "--replace", (char *)NULL);
+    else
+	execlp ("xterm", "xterm", (char *)NULL);
+
+    /* we should never get here but if we do just exit */
+    exit (EXIT_FAILURE);
+}
+
 static void
 signalHandler (int sig)
 {
@@ -167,6 +191,9 @@ signalHandler (int sig)
     switch (sig) {
     case SIGCHLD:
 	waitpid (-1, &status, WNOHANG | WUNTRACED);
+	break;
+    case SIGSEGV:
+	launchFallbackWM ();
 	break;
     case SIGHUP:
 	restartSignal = TRUE;
@@ -270,6 +297,7 @@ main (int argc, char **argv)
     signal (SIGCHLD, signalHandler);
     signal (SIGINT, signalHandler);
     signal (SIGTERM, signalHandler);
+    signal (SIGSEGV, signalHandler);
 
     emptyRegion.rects = &emptyRegion.extents;
     emptyRegion.numRects = 0;
@@ -287,6 +315,13 @@ main (int argc, char **argv)
     infiniteRegion.extents.y2 = MAXSHORT;
 
     memset (&ctx, 0, sizeof (ctx));
+
+    /* if no options are passed run with defaults */
+    if (argc == 1)
+    {
+	useDesktopHints = FALSE;
+	replaceCurrentWm = TRUE;
+    }
 
     for (i = 1; i < argc; i++)
     {
@@ -399,6 +434,16 @@ main (int argc, char **argv)
       clientId = getenv ("DESKTOP_AUTOSTART_ID");
     }
 
+    /* add in default plugins if none are given */
+    if (nPlugin == 0)
+    {
+        plugin[nPlugin++] = "ccp";
+        plugin[nPlugin++] = "move";
+        plugin[nPlugin++] = "resize";
+        plugin[nPlugin++] = "place";
+        plugin[nPlugin++] = "decoration";
+    }
+
     if (refreshRateArg)
     {
 	ctx.refreshRateData = malloc (strlen (refreshRateArg) + 256);
@@ -470,10 +515,20 @@ main (int argc, char **argv)
     coreInitialized = TRUE;
 
     if (!disableSm)
+    {
+	if (clientId == NULL)
+	{
+	    char *desktop_autostart_id = getenv ("DESKTOP_AUTOSTART_ID");
+	    if (desktop_autostart_id != NULL)
+		clientId = strdup (desktop_autostart_id);
+	    unsetenv ("DESKTOP_AUTOSTART_ID");
+	}
+
 	initSession (clientId);
+    }
 
     if (!addDisplay (displayName))
-	return 1;
+	launchFallbackWM ();
 
     eventLoop ();
 

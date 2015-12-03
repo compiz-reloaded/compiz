@@ -1126,6 +1126,9 @@ logMessage (const char   *componentName,
 const char *
 logLevelToString (CompLogLevel level);
 
+void
+launchFallbackWM (void);
+
 int
 compCheckForError (Display *dpy);
 
