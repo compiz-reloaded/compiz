@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+# Copyright (c) 2015 Sorokin Alexei <sor.alexei@meowr.ru>
+# Copyright (c) 2007 CyberOrg <cyberorg@cyberorg.info>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License.
+#
+# Contributions by: crdlb
+#
+
+
+# Prints the arguments if verbose.
+verbose() {
+    if [[ "$VERBOSE" == 'yes' ]]; then
+        printf "$*" >&2
+    fi
+}
+
+# Create env variables if empty.
+if [ ! -z "$XDG_CONFIG_DIRS" ]; then
+    XDG_CONFIG_DIRS="/etc/xdg"
+fi
+if [ ! -z "$XDG_CONFIG_HOME" ]; then
+    XDG_CONFIG_HOME="$HOME/.config"
+fi
+
+# Set to yes to enable verbose.
+VERBOSE="no"
+DECORATOR=""
+
+# Read configuration from XDG paths.
+if [ -r "$XDG_CONFIG_DIRS/compiz/compiz-manager" ]; then
+    . "$XDG_CONFIG_DIRS/compiz/compiz-manager"
+fi
+if [ -r "$XDG_CONFIG_HOME/compiz/compiz-manager" ]; then
+    .  "$XDG_CONFIG_HOME/compiz/compiz-manager"
+fi
+
+# Find a decorator.
+if [ -z "$DECORATOR" ] || [ ! -x "$(which "$DECORATOR" 2> /dev/null)" ]; then
+    for DECORATOR in mate-window-decorator gtk-window-decorator emerald; do
+        if [ -x "$(which "$DECORATOR" 2> /dev/null)" ]; then
+            verbose "Found $DECORATOR decorator.\n"
+            break
+        fi
+    done
+fi
+
+# Start the decorator.
+if [ ! -z "$DECORATOR" ] && [ -x "$(which "$DECORATOR" 2> /dev/null)" ]; then
+    verbose "Starting $DECORATOR\n"
+    exec "$DECORATOR" "$@"
+else
+    verbose "Found no decorator to start\n"
+    exit 1
+fi
+

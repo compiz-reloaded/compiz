@@ -33,6 +33,8 @@ libdecoration_la_LDFLAGS = -module -avoid-version -no-undefined
 libdecoration_la_LIBADD = $(top_builddir)/libdecoration/libdecoration.la
 libdecoration_la_SOURCES = decoration.c
 
+bin_SCRIPTS = compiz-decorator
+
 libswitcher_la_LDFLAGS = -module -avoid-version -no-undefined
 libswitcher_la_SOURCES = switcher.c
 
@@ -155,3 +157,5 @@ module_LTLIBRARIES =		\
 	$(libinotify_module)	\
 	$(libfs_module)
 
+EXTRA_DIST =			 \
+	compiz-decorator
