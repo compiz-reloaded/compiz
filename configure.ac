@@ -333,6 +333,7 @@ plugins/Makefile
 images/Makefile
 gtk/Makefile
 gtk/window-decorator/Makefile
+gtk/mate/Makefile
 po/Makefile.in
 metadata/Makefile
 scripts/Makefile
