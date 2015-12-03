@@ -236,6 +236,10 @@ AC_ARG_ENABLE(marco,
   [  --disable-marco      Disable marco theme support],
   [use_marco=$enableval], [use_marco=yes])
 
+AC_ARG_ENABLE(mwd,
+  [  --disable-mwd       Disable mate-window-decorator (requires Python 3.3+, GLib and Gio 2.40+)],
+  [use_mwd=$enableval], [use_mwd=yes])
+
 if test "x$use_gtk" = "xyes"; then
   PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		    xrender >= 0.8.4  \
@@ -255,12 +259,27 @@ if test "x$use_gtk" = "xyes"; then
     if test "x$use_marco" = "xyes"; then
       PKG_CHECK_MODULES(MARCO, libmarco-private,
 			[use_marco=yes], [use_marco=no])
+
+      if test "x$use_mwd" = "xyes"; then
+        AM_PATH_PYTHON([3.3], [use_mwd=yes], [use_mwd=no])
+        if test "x$use_mwd" = "xyes"; then
+          PKG_CHECK_MODULES(MWD,
+                            glib-2.0 >= 2.40          \
+                            gio-2.0 >= 2.40           \
+                            gobject-introspection-1.0,
+                            [use_mwd=yes], [use_mwd=no])
+        fi
+      else
+        use_mwd="no"
+      fi 
     fi
   else
     use_marco="no"
+    use_mwd="no"
   fi
 else
   use_marco="no"
+  use_mwd="no"
 fi
 
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
@@ -271,6 +290,11 @@ fi
 AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
 if test "$use_marco" = yes; then
   AC_DEFINE(USE_MARCO, 1, [Build marco theme support])
+fi
+
+AM_CONDITIONAL(USE_MWD, test "x$use_mwd" = "xyes")
+if test "$use_mwd" = yes; then
+  AC_DEFINE(USE_MWD, 1, [Enable mate-window-decorator])
 fi
 
 AC_ARG_WITH(max-desktops,
@@ -341,12 +365,13 @@ scripts/Makefile
 
 echo ""
 echo "the following optional plugins will be compiled:"
-echo "  annotate: $use_annotate"
-echo "  svg:      $use_librsvg"
-echo "  inotify:  $use_inotify"
-echo "  fuse:     $use_fuse"
+echo "  annotate:              $use_annotate"
+echo "  svg:                   $use_librsvg"
+echo "  inotify:               $use_inotify"
+echo "  fuse:                  $use_fuse"
 echo ""
 echo "and the following optional features will be compiled:"
-echo "  gtk:      $use_gtk"
-echo "  marco:    $use_marco"
+echo "  gtk:                   $use_gtk"
+echo "  marco:                 $use_marco"
+echo "  mate-window-decorator: $use_mwd"
 echo ""

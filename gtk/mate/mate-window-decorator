@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2015 Sorokin Alexei <sor.alexei@meowr.ru>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License.
+#
+
+
+global keyValueList, gwdProcess, gwdProcessOld
+
+def which(file):
+    for path in os.getenv("PATH", "").split(os.pathsep):
+        if os.path.exists(os.path.join(path, file)):
+                return os.path.join(path, file)
+    return None
+
+def execv_gwd():
+    os.execv(which("gtk-window-decorator"), sys.argv[:])
+
+def self_killed():
+    global gwdProcess
+    gwdProcess.force_exit()
+
+def gwd_killed(proc, result):
+    global gwdProcess
+
+    # Make false alarms impossible to happen.
+    if (proc == gwdProcess) and (proc != gwdProcessOld):
+        # Somebody killed decorator, dying as well…
+        if (proc.get_if_exited()):
+            sys.exit(proc.get_exit_status())
+        else:
+            sys.exit(1)
+    else:
+        # Killed process is not the last started, why care?
+        return 0
+
+def on_gschema_changed(gsettings, key, gschemaSource, init=False):
+    global keyValueList, gwdProcess, gwdProcessOld
+
+    # All tracked keys. Check whether user has overriden them.
+    keyList = []
+    if ("--marco-theme" not in sys.argv[1:]):
+        keyList.append("theme")
+    if ("--button-layout" not in sys.argv[1:]):
+        keyList.append("button-layout")
+    if ("--titlebar-font" not in sys.argv[1:]):
+        keyList.extend(["titlebar-font", "titlebar-uses-system-font"])
+
+    # There is nothing to track at all, hence start gwd and die honourably.
+    if (keyList == []):
+        execv_gwd()
+
+    # Check all keys at initialisation.
+    if (init or key == ""):
+        keys = keyList
+    else:
+        keys = [key]
+
+    for key in keys:
+        # Check that key is in list to prevent useless restartings and
+        #  avoid possible crashes by checking that key actually exists.
+        if (key in keyList and key in gschemaSource.list_keys()):
+            keyType = gschemaSource.get_key(key).get_value_type().dup_string()
+            oldValue = keyValueList.get(key)
+            if (keyType == "s"):
+                keyValueList[key] = gsettings.get_string(key)
+            elif (keyType == "b"):
+                keyValueList[key] = gsettings.get_boolean(key)
+            else:
+                print("We got a GSettings key of unexpected type.", file=sys.stderr)
+                keyValueList[key] = None
+            # Why bother restarting decorator if nothing actually changed?
+            if (not init) and (keyValueList.get(key) == oldValue):
+                return 0
+        else:
+            return 1
+
+    gwdProcessString = [which("gtk-window-decorator")]
+
+    if ("--marco-theme" not in sys.argv[1:]) and (keyValueList["theme"] != None) and (keyValueList["theme"] != ""):
+        gwdProcessString.extend(["--marco-theme", keyValueList["theme"]])
+
+    if ("--button-layout" not in sys.argv[1:]) and (keyValueList["button-layout"] != None) and \
+      (keyValueList["button-layout"] != ""):
+        gwdProcessString.extend(["--button-layout", keyValueList["button-layout"]])
+
+    if ("--titlebar-font" not in sys.argv[1:]) and (keyValueList["titlebar-uses-system-font"] == False) and \
+      (keyValueList["titlebar-font"] != None) and (keyValueList["titlebar-font"] != ""):
+        gwdProcessString.extend(["--titlebar-font", keyValueList["titlebar-font"]])
+
+    # Transparency is not desired.
+    if ("--opacity" not in sys.argv[1:]):
+        gwdProcessString.extend(["--opacity", "1"])
+
+    # Always at the end as this options can override already set ones.
+    gwdProcessString.extend(sys.argv[1:])
+
+    if (not init):
+        if ("--replace" not in gwdProcessString):
+            gwdProcessString.append("--replace")
+
+    gwdProcessOld = gwdProcess
+    gwdProcess = Gio.Subprocess.new(gwdProcessString, Gio.SubprocessFlags.NONE)
+
+    gwdProcess.wait_async(None, gwd_killed)
+
+import sys, os, atexit
+from gi.repository import GLib, Gio
+
+# Global variables.
+keyValueList = {}
+gwdProcess = None
+gwdProcessOld = None
+
+if (which("gtk-window-decorator") is None):
+    print("gtk-window-decorator was not found, exiting...", file=sys.stderr)
+    sys.exit(1)
+
+# Allow --metacity-theme option usage.
+while ("--metacity-theme" in sys.argv[1:]):
+    sys.argv[sys.argv[1:].index("--metacity-theme") + 1] = "--marco-theme"
+
+if ("--disable-marco-theme" in sys.argv[1:]) or ("--disable-metacity-theme" in sys.argv[1:]):
+    execv_gwd()
+    sys.exit(1)
+
+gschema = ""
+gschemaSourceDefault = Gio.SettingsSchemaSource.get_default()
+gsettings = None
+
+# Looking up for gschema, GNOME's or Marco's.
+if ("org.gnome.desktop.wm.preferences" in Gio.Settings.list_schemas()):
+    gschema = "org.gnome.desktop.wm.preferences"
+
+if (os.getenv("XDG_CURRENT_DESKTOP") == "MATE" or \
+  os.getenv("MATE_DESKTOP_SESSION_ID") is not None or gschema == "") and \
+  (gschemaSourceDefault.lookup("org.mate.Marco.general", False) is not None):
+    gschema = "org.mate.Marco.general"
+
+if (gschema != ""):
+    gsettings = Gio.Settings.new(gschema)
+
+if (gsettings is None):
+    print("No decoration theme was found, falling back to plain gtk-window-decorator.", file=sys.stderr)
+    execv_gwd()
+
+gschemaSource = gschemaSourceDefault.lookup(gschema, False)
+
+try:
+    gschemaSource.list_keys()
+except AttributeError:
+    # SettingsSchema.list_keys() is only available since GLib 2.46.
+    gschemaSource.list_keys = gsettings.list_keys
+
+# Poking on_gschema_changed() to start gwd.
+on_gschema_changed(gsettings, None, gschemaSource, True)
+
+# Kill decorator at exit.
+atexit.register(self_killed)
+
+# Checking for gschemas changes.
+gsettings.connect("changed", on_gschema_changed, gschemaSource)
+
+# Endless event loop.
+GLib.MainLoop().run()

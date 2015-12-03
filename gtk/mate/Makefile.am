@@ -1,4 +1,11 @@
 if USE_GTK
+
+if USE_MARCO
+if USE_MWD
+bin_SCRIPTS = mate-window-decorator
+endif
+endif
+
 desktopfilesdir	      = $(DESTDIR)$(datadir)/applications
 desktopfiles_in_files = compiz.desktop.in
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
@@ -23,7 +30,8 @@ noinst_DATA =		      \
 	$(desktopfiles_files)
 
 EXTRA_DIST =			 \
-	$(desktopfiles_in_files)
+	$(desktopfiles_in_files) \
+	mate-window-decorator
 
 DISTCLEANFILES = \
 	$(noinst_DATA)
