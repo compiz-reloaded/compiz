@@ -977,8 +977,7 @@ reshape (CompScreen *s,
     perspective (s->projection, 60.0f, 1.0f, 0.1f, 100.0f);
 
     glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-    glMultMatrixf (s->projection);
+    glLoadMatrixf (s->projection);
     glMatrixMode (GL_MODELVIEW);
 
     s->region.rects = &s->region.extents;
