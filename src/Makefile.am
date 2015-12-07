@@ -30,3 +30,30 @@ compiz_SOURCES =   \
 	cursor.c   \
 	match.c    \
 	metadata.c
+
+if USE_MENU_ENTRIES
+desktopfilesdir       = $(DESTDIR)$(datadir)/applications
+desktopfiles_in_files = compiz-start.desktop.in
+desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
+
+@INTLTOOL_DESKTOP_RULE@
+
+install-data-local:
+	if mkdir -p $(desktopfilesdir) && test -w $(desktopfilesdir); then ( \
+		$(INSTALL) -m 0644 $(desktopfiles_files) \
+		$(desktopfilesdir) \
+	); \
+	fi
+
+uninstall-local:
+	if test -w $(desktopfilesdir); then ( \
+		rm -f $(desktopfilesdir)/compiz-start.desktop \
+		); \
+	fi
+
+noinst_DATA =                 \
+	$(desktopfiles_files)
+
+EXTRA_DIST =                     \
+	$(desktopfiles_in_files)
+endif

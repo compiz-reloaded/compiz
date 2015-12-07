@@ -228,16 +228,25 @@ if test "$use_librsvg" = yes; then
   AC_DEFINE(USE_LIBRSVG, 1, [librsvg for SVG support])
 fi
 
+AC_ARG_ENABLE(menu-entries,
+  [  --enable-menu-entries   Enable desktop menu entries],
+  [use_menu_entries=$enableval], [use_menu_entries=no])
+
+AM_CONDITIONAL(USE_MENU_ENTRIES, test "x$use_menu_entries" = "xyes")
+if test "$use_menu_entries" = yes; then
+  AC_DEFINE(USE_MENU_ENTRIES, 1, [Enable desktop menu entries])
+fi
+
 AC_ARG_ENABLE(gtk,
   [  --disable-gtk           Disable gtk window decorator],
   [use_gtk=$enableval], [use_gtk=yes])
 
 AC_ARG_ENABLE(marco,
-  [  --disable-marco      Disable marco theme support],
+  [  --disable-marco         Disable marco theme support],
   [use_marco=$enableval], [use_marco=yes])
 
 AC_ARG_ENABLE(mwd,
-  [  --disable-mwd       Disable mate-window-decorator (requires Python 3.3+, GLib and Gio 2.40+)],
+  [  --disable-mwd           Disable mate-window-decorator (requires Python 3.3+, GLib and Gio 2.40+)],
   [use_mwd=$enableval], [use_mwd=yes])
 
 if test "x$use_gtk" = "xyes"; then
@@ -360,7 +369,6 @@ gtk/window-decorator/Makefile
 gtk/mate/Makefile
 po/Makefile.in
 metadata/Makefile
-scripts/Makefile
 ])
 
 echo ""
@@ -370,8 +378,9 @@ echo "  svg:                   $use_librsvg"
 echo "  inotify:               $use_inotify"
 echo "  fuse:                  $use_fuse"
 echo ""
-echo "and the following optional features will be compiled:"
+echo "and the following optional features will be used:"
 echo "  gtk:                   $use_gtk"
 echo "  marco:                 $use_marco"
 echo "  mate-window-decorator: $use_mwd"
+echo "  desktop menu entries:  $use_menu_entries"
 echo ""

@@ -1,20 +1,23 @@
 if USE_GTK
 
-if USE_MARCO
 if USE_MWD
 bin_SCRIPTS = mate-window-decorator
-endif
 endif
 
 desktopfilesdir	      = $(DESTDIR)$(datadir)/applications
 desktopfiles_in_files = compiz.desktop.in
+if USE_MENU_ENTRIES
+if USE_MWD
+desktopfiles_in_files += mate-window-decorator.desktop.in
+endif
+endif
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
 
 install-data-local:
 	if mkdir -p $(desktopfilesdir) && test -w $(desktopfilesdir); then ( \
-		$(INSTALL) -m 644 $(desktopfiles_files) \
+		$(INSTALL) -m 0644 $(desktopfiles_files) \
 		$(desktopfilesdir) \
 		); \
 	fi

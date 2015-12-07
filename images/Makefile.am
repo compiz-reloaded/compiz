@@ -10,11 +10,11 @@ public_icons_themes = \
 	$(NULL)
 
 public_icons = \
-	hicolor_apps_16x16_compiz-mate-gtk.png \
-	hicolor_apps_22x22_compiz-mate-gtk.png \
-	hicolor_apps_24x24_compiz-mate-gtk.png \
-	hicolor_apps_32x32_compiz-mate-gtk.png \
-	hicolor_apps_scalable_compiz-mate-gtk.svg \
+	hicolor_apps_16x16_compiz.png \
+	hicolor_apps_22x22_compiz.png \
+	hicolor_apps_24x24_compiz.png \
+	hicolor_apps_32x32_compiz.png \
+	hicolor_apps_scalable_compiz.svg \
 	hicolor_apps_16x16_gtk-decorator.png \
 	hicolor_apps_22x22_gtk-decorator.png \
 	hicolor_apps_24x24_gtk-decorator.png \

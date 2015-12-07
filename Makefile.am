@@ -1,4 +1,4 @@
-SUBDIRS = include src libdecoration plugins images gtk po metadata scripts
+SUBDIRS = include src libdecoration plugins images gtk po metadata
 
 EXTRA_DIST =		    \
 	COPYING		    \
