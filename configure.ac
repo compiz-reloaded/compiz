@@ -242,10 +242,10 @@ AC_ARG_ENABLE(mwd,
 
 if test "x$use_gtk" = "xyes"; then
   PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
-		    xrender >= 0.8.4  \
-		    xcursor           \
-		    gtk+-2.0 >= 2.8.0 \
-		    libwnck-1.0	      \
+		    xrender >= 0.8.4    \
+		    xcursor             \
+		    gtk+-2.0 >= 2.10.0  \
+		    libwnck-1.0	>= 2.22 \
 		    pangocairo,
 		    [use_gtk=yes], [use_gtk=no])
   if test "x$use_gtk" = "xyes"; then
