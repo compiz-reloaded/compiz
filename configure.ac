@@ -241,6 +241,18 @@ AC_ARG_ENABLE(gtk,
   [  --disable-gtk           Disable gtk window decorator],
   [use_gtk=$enableval], [use_gtk=yes])
 
+AC_MSG_CHECKING([which gtk+ version to compile against])
+AC_ARG_WITH([gtk],
+  [AS_HELP_STRING([--with-gtk=2.0|3.0], [Which gtk+ version to compile against (default: 2.0)])],
+  [
+      case "$with_gtk" in
+          2.0|3.0) ;;
+          *) AC_MSG_ERROR([invalid gtk version specified]) ;;
+      esac
+  ],
+  [with_gtk=2.0])
+AC_MSG_RESULT([$with_gtk])
+
 AC_ARG_ENABLE(marco,
   [  --disable-marco         Disable marco theme support],
   [use_marco=$enableval], [use_marco=yes])
@@ -250,13 +262,23 @@ AC_ARG_ENABLE(mwd,
   [use_mwd=$enableval], [use_mwd=yes])
 
 if test "x$use_gtk" = "xyes"; then
-  PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
-		    xrender >= 0.8.4    \
-		    xcursor             \
-		    gtk+-2.0 >= 2.10.0  \
-		    libwnck-1.0	>= 2.22 \
-		    pangocairo,
-		    [use_gtk=yes], [use_gtk=no])
+  if test "x$with_gtk" != "x2.0"; then
+    PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
+		      xrender >= 0.8.4  \
+		      xcursor           \
+		      gtk+-3.0          \
+		      libwnck-3.0	\
+		      pangocairo,
+		      [use_gtk=yes], [use_gtk=no])
+  else
+    PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
+		      xrender >= 0.8.4   \
+		      xcursor            \
+		      gtk+-2.0 >= 2.10.0 \
+		      libwnck-1.0	 \
+		      pangocairo,
+		      [use_gtk=yes], [use_gtk=no])
+  fi
   if test "x$use_gtk" = "xyes"; then
     save_CFLAGS="$CFLAGS"
     save_LIBS="$LIBS"
@@ -278,9 +300,9 @@ if test "x$use_gtk" = "xyes"; then
                             gobject-introspection-1.0,
                             [use_mwd=yes], [use_mwd=no])
         fi
-      else
-        use_mwd="no"
-      fi 
+      fi
+    else
+      use_mwd="no"
     fi
   else
     use_marco="no"
@@ -294,6 +316,11 @@ fi
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
 if test "$use_gtk" = yes; then
   AC_DEFINE(USE_GTK, 1, [Build gtk window decorator])
+fi
+
+AM_CONDITIONAL(WITH_GTK, test "x$with_gtk" != "x")
+if test "$with_gtk" != ""; then
+  AC_DEFINE(WITH_GTK, 1, [Build with Gtk $with_gtk])
 fi
 
 AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
@@ -379,7 +406,7 @@ echo "  inotify:               $use_inotify"
 echo "  fuse:                  $use_fuse"
 echo ""
 echo "and the following optional features will be used:"
-echo "  gtk:                   $use_gtk"
+echo "  gtk:                   $use_gtk ($with_gtk)"
 echo "  marco:                 $use_marco"
 echo "  mate-window-decorator: $use_mwd"
 echo "  desktop menu entries:  $use_menu_entries"
