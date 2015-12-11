@@ -256,8 +256,8 @@ AC_ARG_ENABLE(marco,
   [use_marco=$enableval], [use_marco=yes])
 
 AC_ARG_ENABLE(mwd,
-  [  --disable-mwd           Disable mate-window-decorator (requires Python 3.3+, GLib and Gio 2.40+)],
-  [use_mwd=$enableval], [use_mwd=yes])
+  [  --enable-mwd            Enable mate-window-decorator (requires Python 3.3+, PyGObject 3, GLib and Gio 2.40+)],
+  [use_mwd=$enableval], [use_mwd=no])
 
 if test "x$use_gtk" = "xyes"; then
   if test "x$with_gtk" != "x2.0"; then
@@ -292,11 +292,7 @@ if test "x$use_gtk" = "xyes"; then
       if test "x$use_mwd" = "xyes"; then
         AM_PATH_PYTHON([3.3], [use_mwd=yes], [use_mwd=no])
         if test "x$use_mwd" = "xyes"; then
-          PKG_CHECK_MODULES(MWD,
-                            glib-2.0 >= 2.40          \
-                            gio-2.0 >= 2.40           \
-                            gobject-introspection-1.0,
-                            [use_mwd=yes], [use_mwd=no])
+	  AC_MSG_NOTICE([Notice that mate-window-decorator requires Python 3.3+, PyGObject 3, GLib and Gio 2.40+ at runtime.])
         fi
       fi
     else
