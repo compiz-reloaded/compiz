@@ -6104,7 +6104,7 @@ update_titlebar_font (void)
 #if GTK_CHECK_VERSION (3, 0, 0)
 	GtkCssProvider *provider = gtk_css_provider_get_default ();
 	GtkStyleContext *context = gtk_style_context_new ();
-	GdkWidgetPath *path = gtk_widget_path_new ();
+	GtkWidgetPath *path = gtk_widget_path_new ();
 
 	gtk_widget_path_prepend_type (path, GTK_TYPE_WIDGET);
 	gtk_style_context_set_path (context, path);
