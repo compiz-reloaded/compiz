@@ -26,6 +26,7 @@ def which(file):
 
 def execv_gwd():
     os.execv(which("gtk-window-decorator"), sys.argv[:])
+    sys.exit(1)
 
 def self_killed():
     global gwdProcess
@@ -127,13 +128,8 @@ if (which("gtk-window-decorator") is None):
     print("gtk-window-decorator was not found, exiting...", file=sys.stderr)
     sys.exit(1)
 
-# Allow --metacity-theme option usage.
-while ("--metacity-theme" in sys.argv[1:]):
-    sys.argv[sys.argv[1:].index("--metacity-theme") + 1] = "--marco-theme"
-
 if ("--disable-marco-theme" in sys.argv[1:]) or ("--disable-metacity-theme" in sys.argv[1:]):
     execv_gwd()
-    sys.exit(1)
 
 gschema = ""
 gschemaSourceDefault = Gio.SettingsSchemaSource.get_default()
@@ -145,17 +141,16 @@ if ("org.gnome.desktop.wm.preferences" in Gio.Settings.list_schemas()):
 
 if (os.getenv("XDG_CURRENT_DESKTOP") == "MATE" or \
   os.getenv("MATE_DESKTOP_SESSION_ID") is not None or gschema == "") and \
-  (gschemaSourceDefault.lookup("org.mate.Marco.general", False) is not None):
+  (gschemaSourceDefault.lookup("org.mate.Marco.general", True) is not None):
     gschema = "org.mate.Marco.general"
 
 if (gschema != ""):
     gsettings = Gio.Settings.new(gschema)
+    gschemaSource = gschemaSourceDefault.lookup(gschema, True)
 
-if (gsettings is None):
+if (gsettings is None or gschemaSource is None):
     print("No decoration theme was found, falling back to plain gtk-window-decorator.", file=sys.stderr)
     execv_gwd()
-
-gschemaSource = gschemaSourceDefault.lookup(gschema, False)
 
 try:
     gschemaSource.list_keys()
@@ -163,14 +158,14 @@ except AttributeError:
     # SettingsSchema.list_keys() is only available since GLib 2.46.
     gschemaSource.list_keys = gsettings.list_keys
 
-# Poking on_gschema_changed() to start gwd.
-on_gschema_changed(gsettings, None, gschemaSource, True)
-
 # Kill decorator at exit.
 atexit.register(self_killed)
 
 # Checking for gschemas changes.
 gsettings.connect("changed", on_gschema_changed, gschemaSource)
+
+# Poking on_gschema_changed() to start gwd.
+on_gschema_changed(gsettings, None, gschemaSource, True)
 
 # Endless event loop.
 GLib.MainLoop().run()

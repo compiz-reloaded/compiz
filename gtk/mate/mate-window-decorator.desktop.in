@@ -5,6 +5,6 @@ _GenericName=GTK+ Window Decorator for Compiz on MATE
 _Comment=Switch to MATE (GTK+) Window Decorator if Compiz is running
 Exec=mate-window-decorator --replace
 Icon=gtk-decorator
-StartupNotify=true
+StartupNotify=false
 Categories=Utility;
 OnlyShowIn=MATE;
