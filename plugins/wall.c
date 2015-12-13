@@ -322,6 +322,7 @@ wallDrawThumb (CompScreen *s)
     width  = ws->thumbContext.width - outline;
     height = ws->thumbContext.height - outline;
 
+    cairo_save(cr);
     cairo_translate (cr, outline / 2.0f, outline / 2.0f);
 
     pattern = cairo_pattern_create_linear (0, 0, width, height);
@@ -363,6 +364,7 @@ wallDrawHighlight(CompScreen *s)
     width  = ws->highlightContext.width - outline;
     height = ws->highlightContext.height - outline;
 
+    cairo_save(cr);
     cairo_translate (cr, outline / 2.0f, outline / 2.0f);
 
     pattern = cairo_pattern_create_linear (0, 0, width, height);
@@ -398,6 +400,7 @@ wallDrawArrow (CompScreen *s)
     cr = ws->arrowContext.cr;
     wallClearCairoLayer (cr);
 
+    cairo_save (cr);
     cairo_translate (cr, outline / 2.0f, outline / 2.0f);
 
     /* apply the pattern for thumb background */
@@ -1804,6 +1807,7 @@ wallDisplayOptionChanged (CompDisplay        *display,
 	    wallDrawSwitcherBackground (s);
 	    wallDrawHighlight (s);
 	    wallDrawThumb (s);
+	    wallDrawArrow (s);
 	}
 	break;
 
