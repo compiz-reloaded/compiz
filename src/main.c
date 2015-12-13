@@ -316,13 +316,6 @@ main (int argc, char **argv)
 
     memset (&ctx, 0, sizeof (ctx));
 
-    /* if no options are passed run with defaults */
-    if (argc == 1)
-    {
-	useDesktopHints = FALSE;
-	replaceCurrentWm = TRUE;
-    }
-
     for (i = 1; i < argc; i++)
     {
 	if (!strcmp (argv[i], "--help"))
