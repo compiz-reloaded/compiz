@@ -6,11 +6,6 @@ endif
 
 desktopfilesdir	      = $(DESTDIR)$(datadir)/applications
 desktopfiles_in_files = compiz.desktop.in
-if USE_MENU_ENTRIES
-if USE_MWD
-desktopfiles_in_files += mate-window-decorator.desktop.in
-endif
-endif
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
