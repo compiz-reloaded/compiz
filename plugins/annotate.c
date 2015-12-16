@@ -36,17 +36,44 @@ static int displayPrivateIndex;
 
 static int annoLastPointerX = 0;
 static int annoLastPointerY = 0;
+static int annoInitialPointerX = 0;
+static int annoInitialPointerY = 0;
 
-#define ANNO_DISPLAY_OPTION_INITIATE_BUTTON 0
-#define ANNO_DISPLAY_OPTION_DRAW_BUTTON	    1
-#define ANNO_DISPLAY_OPTION_ERASE_BUTTON    2
-#define ANNO_DISPLAY_OPTION_CLEAR_KEY       3
-#define ANNO_DISPLAY_OPTION_CLEAR_BUTTON    4
-#define ANNO_DISPLAY_OPTION_FILL_COLOR      5
-#define ANNO_DISPLAY_OPTION_STROKE_COLOR    6
-#define ANNO_DISPLAY_OPTION_LINE_WIDTH      7
-#define ANNO_DISPLAY_OPTION_STROKE_WIDTH    8
-#define ANNO_DISPLAY_OPTION_NUM	            9
+#define ANNO_DISPLAY_OPTION_FREEDRAW_BUTTON  0
+#define ANNO_DISPLAY_OPTION_LINE_BUTTON      1
+#define ANNO_DISPLAY_OPTION_RECTANGLE_BUTTON 2
+#define ANNO_DISPLAY_OPTION_ELLIPSE_BUTTON   3
+#define ANNO_DISPLAY_OPTION_TEXT_BUTTON      4
+#define ANNO_DISPLAY_OPTION_ERASE_BUTTON     5
+#define ANNO_DISPLAY_OPTION_CLEAR_KEY        6
+#define ANNO_DISPLAY_OPTION_CLEAR_BUTTON     7
+#define ANNO_DISPLAY_OPTION_CENTER_KEY       8
+#define ANNO_DISPLAY_OPTION_FILL_COLOR       9
+#define ANNO_DISPLAY_OPTION_STROKE_COLOR     10
+#define ANNO_DISPLAY_OPTION_STROKE_WIDTH     11
+#define ANNO_DISPLAY_OPTION_NUM              12
+
+typedef struct _Ellipse {
+	int centerX;
+	int centerY;
+	double radiusX;
+	double radiusY;
+} Ellipse;
+
+typedef struct _Point {
+	int x;
+	int y;
+} Point;
+
+typedef enum _AnnoMode {
+	NoMode,
+	FreeDrawMode,
+	EraseMode,
+	LineMode,
+	RectangleMode,
+	EllipseMode,
+	TextMode
+} AnnoToolType;
 
 typedef struct _AnnoDisplay {
     int		    screenPrivateIndex;
@@ -64,8 +91,15 @@ typedef struct _AnnoScreen {
     cairo_surface_t *surface;
     cairo_t	    *cairo;
     Bool            content;
+    Bool            drawFromCenter;
 
-    Bool eraseMode;
+    Damage damage;
+    AnnoToolType drawMode;
+    Ellipse      ellipse;
+    Point        lineEndPoint;
+    // declarations of these come from X11/XRegion.h
+    Box          rectangle;
+    Box          lastRectangle;
 } AnnoScreen;
 
 #define GET_ANNO_DISPLAY(d)					  \
@@ -131,6 +165,8 @@ annoCairoContext (CompScreen *s)
 	    return NULL;
 	}
 
+	as->damage = XDamageCreate(s->display->display, as->pixmap, XDamageReportRawRectangles);
+
 	as->surface =
 	    cairo_xlib_surface_create_with_xrender_format (s->display->display,
 							   as->pixmap, screen,
@@ -156,15 +192,15 @@ annoSetSourceColor (cairo_t	   *cr,
 }
 
 static void
-annoDrawCircle (CompScreen     *s,
+annoDrawEllipse (CompScreen     *s,
 		double	       xc,
 		double	       yc,
-		double	       radius,
+		double	       radiusX,
+		double	       radiusY,
 		unsigned short *fillColor,
 		unsigned short *strokeColor,
 		double	       strokeWidth)
 {
-    REGION  reg;
     cairo_t *cr;
 
     ANNO_SCREEN (s);
@@ -172,26 +208,28 @@ annoDrawCircle (CompScreen     *s,
     cr = annoCairoContext (s);
     if (cr)
     {
-	double  ex1, ey1, ex2, ey2;
-
 	annoSetSourceColor (cr, fillColor);
-	cairo_arc (cr, xc, yc, radius, 0, 2 * M_PI);
+	cairo_save(cr);
+	cairo_translate(cr, xc, yc);
+
+	if (radiusX > radiusY)
+	{
+		cairo_scale (cr, 1.0, radiusY/radiusX);
+		cairo_arc (cr, 0, 0, radiusX, 0, 2 * M_PI);
+	}
+	else
+	{
+		cairo_scale (cr,  radiusX/radiusY, 1.0);
+		cairo_arc (cr, 0, 0, radiusY, 0, 2 * M_PI);
+	}
+
 	cairo_fill_preserve (cr);
 	cairo_set_line_width (cr, strokeWidth);
-	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
 	annoSetSourceColor (cr, strokeColor);
 	cairo_stroke (cr);
-
-	reg.rects    = &reg.extents;
-	reg.numRects = 1;
-
-	reg.extents.x1 = ex1;
-	reg.extents.y1 = ey1;
-	reg.extents.x2 = ex2;
-	reg.extents.y2 = ey2;
+	cairo_restore (cr);
 
 	as->content = TRUE;
-	damageScreenRegion (s, &reg);
     }
 }
 
@@ -205,7 +243,6 @@ annoDrawRectangle (CompScreen	  *s,
 		   unsigned short *strokeColor,
 		   double	  strokeWidth)
 {
-    REGION reg;
     cairo_t *cr;
 
     ANNO_SCREEN (s);
@@ -213,26 +250,16 @@ annoDrawRectangle (CompScreen	  *s,
     cr = annoCairoContext (s);
     if (cr)
     {
-	double  ex1, ey1, ex2, ey2;
-
+	cairo_save(cr);
 	annoSetSourceColor (cr, fillColor);
 	cairo_rectangle (cr, x, y, w, h);
 	cairo_fill_preserve (cr);
 	cairo_set_line_width (cr, strokeWidth);
-	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
 	annoSetSourceColor (cr, strokeColor);
 	cairo_stroke (cr);
-
-	reg.rects    = &reg.extents;
-	reg.numRects = 1;
-
-	reg.extents.x1 = ex1;
-	reg.extents.y1 = ey1;
-	reg.extents.x2 = ex2 + 2.0;
-	reg.extents.y2 = ey2 + 2.0;
+	cairo_restore(cr);
 
 	as->content = TRUE;
-	damageScreenRegion (s, &reg);
     }
 }
 
@@ -245,7 +272,6 @@ annoDrawLine (CompScreen     *s,
 	      double	     width,
 	      unsigned short *color)
 {
-    REGION reg;
     cairo_t *cr;
 
     ANNO_SCREEN (s);
@@ -253,26 +279,16 @@ annoDrawLine (CompScreen     *s,
     cr = annoCairoContext (s);
     if (cr)
     {
-	double ex1, ey1, ex2, ey2;
-
+	cairo_save(cr);
 	cairo_set_line_width (cr, width);
 	cairo_move_to (cr, x1, y1);
 	cairo_line_to (cr, x2, y2);
-	cairo_stroke_extents (cr, &ex1, &ey1, &ex2, &ey2);
 	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 	annoSetSourceColor (cr, color);
 	cairo_stroke (cr);
-
-	reg.rects    = &reg.extents;
-	reg.numRects = 1;
-
-	reg.extents.x1 = ex1;
-	reg.extents.y1 = ey1;
-	reg.extents.x2 = ex2;
-	reg.extents.y2 = ey2;
+	cairo_restore(cr);
 
 	as->content = TRUE;
-	damageScreenRegion (s, &reg);
     }
 }
 
@@ -289,7 +305,6 @@ annoDrawText (CompScreen     *s,
 	      unsigned short *strokeColor,
 	      double	     strokeWidth)
 {
-    REGION  reg;
     cairo_t *cr;
 
     ANNO_SCREEN (s);
@@ -297,13 +312,11 @@ annoDrawText (CompScreen     *s,
     cr = annoCairoContext (s);
     if (cr)
     {
-	cairo_text_extents_t extents;
-
+	cairo_save(cr);
 	cairo_set_line_width (cr, strokeWidth);
 	annoSetSourceColor (cr, fillColor);
 	cairo_select_font_face (cr, fontFamily, fontSlant, fontWeight);
 	cairo_set_font_size (cr, fontSize);
-	cairo_text_extents (cr, text, &extents);
 	cairo_save (cr);
 	cairo_move_to (cr, x, y);
 	cairo_text_path (cr, text);
@@ -312,16 +325,7 @@ annoDrawText (CompScreen     *s,
 	cairo_stroke (cr);
 	cairo_restore (cr);
 
-	reg.rects    = &reg.extents;
-	reg.numRects = 1;
-
-	reg.extents.x1 = x;
-	reg.extents.y1 = y + extents.y_bearing - 2.0;
-	reg.extents.x2 = x + extents.width + 20.0;
-	reg.extents.y2 = y + extents.height;
-
 	as->content = TRUE;
-	damageScreenRegion (s, &reg);
     }
 }
 
@@ -347,7 +351,7 @@ annoDraw (CompDisplay     *d,
 	{
 	    char	   *tool;
 	    unsigned short *fillColor, *strokeColor;
-	    double	   lineWidth, strokeWidth;
+	    double	   strokeWidth;
 
 	    ANNO_DISPLAY (d);
 
@@ -368,10 +372,6 @@ annoDraw (CompDisplay     *d,
 	    strokeWidth = getFloatOptionNamed (option, nOption, "stroke_width",
 					       strokeWidth);
 
-	    lineWidth = ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH].value.f;
-	    lineWidth = getFloatOptionNamed (option, nOption, "line_width",
-					     lineWidth);
-
 	    if (strcasecmp (tool, "rectangle") == 0)
 	    {
 		double x, y, w, h;
@@ -384,15 +384,16 @@ annoDraw (CompDisplay     *d,
 		annoDrawRectangle (s, x, y, w, h, fillColor, strokeColor,
 				   strokeWidth);
 	    }
-	    else if (strcasecmp (tool, "circle") == 0)
+	    else if (strcasecmp (tool, "ellipse") == 0)
 	    {
-		double xc, yc, r;
+		double xc, yc, xr, yr;
 
 		xc = getFloatOptionNamed (option, nOption, "xc", 0);
 		yc = getFloatOptionNamed (option, nOption, "yc", 0);
-		r  = getFloatOptionNamed (option, nOption, "radius", 100);
+		xr = getFloatOptionNamed (option, nOption, "radiusX", 100);
+		yr = getFloatOptionNamed (option, nOption, "radiusY", 100);
 
-		annoDrawCircle (s, xc, yc, r, fillColor, strokeColor,
+		annoDrawEllipse (s, xc, yc, xr, yr, fillColor, strokeColor,
 				strokeWidth);
 	    }
 	    else if (strcasecmp (tool, "line") == 0)
@@ -404,7 +405,7 @@ annoDraw (CompDisplay     *d,
 		x2 = getFloatOptionNamed (option, nOption, "x2", 100);
 		y2 = getFloatOptionNamed (option, nOption, "y2", 100);
 
-		annoDrawLine (s, x1, y1, x2, y2, lineWidth, fillColor);
+		annoDrawLine (s, x1, y1, x2, y2, strokeWidth, fillColor);
 	    }
 	    else if (strcasecmp (tool, "text") == 0)
 	    {
@@ -431,7 +432,7 @@ annoDraw (CompDisplay     *d,
 		y      = getFloatOptionNamed (option, nOption, "y", 0);
 		text   = getStringOptionNamed (option, nOption, "text", "");
 		family = getStringOptionNamed (option, nOption, "family",
-					       "Sans");
+						   "Sans");
 		size   = getFloatOptionNamed (option, nOption, "size", 36.0);
 
 		annoDrawText (s, x, y, text, family, size, slant, weight,
@@ -444,7 +445,7 @@ annoDraw (CompDisplay     *d,
 }
 
 static Bool
-annoInitiate (CompDisplay     *d,
+annoFreeDrawInitiate (CompDisplay     *d,
 	      CompAction      *action,
 	      CompActionState state,
 	      CompOption      *option,
@@ -475,7 +476,135 @@ annoInitiate (CompDisplay     *d,
 	annoLastPointerX = pointerX;
 	annoLastPointerY = pointerY;
 
-	as->eraseMode = FALSE;
+	as->drawMode = FreeDrawMode;
+    }
+
+    return TRUE;
+}
+
+static Bool
+annoLineInitiate (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+		ANNO_SCREEN (s);
+
+		if (otherScreenGrabExist (s, NULL))
+			return FALSE;
+
+		if (!as->grabIndex)
+			as->grabIndex = pushScreenGrab (s, None, "annotate");
+
+		if (state & CompActionStateInitButton)
+			action->state |= CompActionStateTermButton;
+
+		if (state & CompActionStateInitKey)
+			action->state |= CompActionStateTermKey;
+
+		annoInitialPointerX = pointerX;
+		annoInitialPointerY = pointerY;
+
+		as->drawMode = LineMode;
+    }
+
+    return TRUE;
+}
+
+static Bool
+annoRectangleInitiate (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+		ANNO_SCREEN (s);
+
+		if (otherScreenGrabExist (s, NULL))
+			return FALSE;
+
+		if (!as->grabIndex)
+			as->grabIndex = pushScreenGrab (s, None, "annotate");
+
+		if (state & CompActionStateInitButton)
+			action->state |= CompActionStateTermButton;
+
+		if (state & CompActionStateInitKey)
+			action->state |= CompActionStateTermKey;
+
+		annoInitialPointerX = pointerX;
+		annoInitialPointerY = pointerY;
+
+		as->rectangle.x1 = annoInitialPointerX;
+		as->rectangle.y1 = annoInitialPointerY;
+		as->rectangle.x2 = 0;
+		as->rectangle.y2 = 0;
+		as->lastRectangle = as->rectangle;
+
+		as->drawMode = RectangleMode;
+    }
+
+    return TRUE;
+}
+
+static Bool
+annoEllipseInitiate (CompDisplay     *d,
+	      CompAction      *action,
+	      CompActionState state,
+	      CompOption      *option,
+	      int	      nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+		ANNO_SCREEN (s);
+
+		if (otherScreenGrabExist (s, NULL))
+			return FALSE;
+
+		if (!as->grabIndex)
+			as->grabIndex = pushScreenGrab (s, None, "annotate");
+
+		if (state & CompActionStateInitButton)
+			action->state |= CompActionStateTermButton;
+
+		if (state & CompActionStateInitKey)
+			action->state |= CompActionStateTermKey;
+
+		annoInitialPointerX = pointerX;
+		annoInitialPointerY = pointerY;
+
+		as->ellipse.radiusX = 0;
+		as->ellipse.radiusY = 0;
+
+		as->lastRectangle.x1 = annoInitialPointerX;
+		as->lastRectangle.y1 = annoInitialPointerY;
+		as->lastRectangle.x2 = 0;
+		as->lastRectangle.y2 = 0;
+
+		as->drawMode = EllipseMode;
     }
 
     return TRUE;
@@ -491,11 +620,15 @@ annoTerminate (CompDisplay     *d,
     CompScreen *s;
     Window     xid;
 
+	unsigned short *fillColor, *strokeColor;
+	double strokeWidth;
+
     xid = getIntOptionNamed (option, nOption, "root", 0);
 
     for (s = d->screens; s; s = s->next)
     {
 	ANNO_SCREEN (s);
+	ANNO_DISPLAY (s->display);
 
 	if (xid && s->root != xid)
 	    continue;
@@ -505,6 +638,37 @@ annoTerminate (CompDisplay     *d,
 	    removeScreenGrab (s, as->grabIndex, NULL);
 	    as->grabIndex = 0;
 	}
+
+	fillColor = ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c;
+	fillColor = getColorOptionNamed (option, nOption, "fill_color",
+				     fillColor);
+
+	strokeColor = ad->opt[ANNO_DISPLAY_OPTION_STROKE_COLOR].value.c;
+	strokeColor = getColorOptionNamed (option, nOption,
+				       "stroke_color", strokeColor);
+
+	strokeWidth = ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH].value.f;
+	strokeWidth = getFloatOptionNamed (option, nOption, "stroke_width",
+			       strokeWidth);
+
+	if (as->drawMode == LineMode) {
+		annoDrawLine(s, annoInitialPointerX, annoInitialPointerY,
+		             as->lineEndPoint.x, as->lineEndPoint.y,
+		             strokeWidth, strokeColor);
+	}
+	else if (as->drawMode == RectangleMode) {
+		annoDrawRectangle(s, as->rectangle.x1, as->rectangle.y1,
+		                  as->rectangle.x2 - as->rectangle.x1,
+		                  as->rectangle.y2 - as->rectangle.y1,
+		                  fillColor, strokeColor, strokeWidth);
+	}
+	else if (as->drawMode == EllipseMode) {
+		annoDrawEllipse(s, as->ellipse.centerX, as->ellipse.centerY,
+		                as->ellipse.radiusX, as->ellipse.radiusY,
+		                fillColor, strokeColor, strokeWidth);
+	}
+
+	as->drawMode = NoMode;
     }
 
     action->state &= ~(CompActionStateTermKey | CompActionStateTermButton);
@@ -544,7 +708,7 @@ annoEraseInitiate (CompDisplay     *d,
 	annoLastPointerX = pointerX;
 	annoLastPointerY = pointerY;
 
-	as->eraseMode = TRUE;
+	as->drawMode = EraseMode;
     }
 
     return FALSE;
@@ -585,6 +749,29 @@ annoClear (CompDisplay     *d,
 }
 
 static Bool
+annoToggleCenter (CompDisplay     *d,
+	   CompAction      *action,
+	   CompActionState state,
+	   CompOption      *option,
+	   int             nOption)
+{
+    CompScreen *s;
+    Window     xid;
+
+    xid = getIntOptionNamed (option, nOption, "root", 0);
+
+    s = findScreenAtDisplay (d, xid);
+    if (s)
+    {
+		ANNO_SCREEN (s);
+		as->drawFromCenter = !(as->drawFromCenter);
+		return TRUE;
+    }
+
+    return FALSE;
+}
+
+static Bool
 annoPaintOutput (CompScreen		 *s,
 		 const ScreenPaintAttrib *sAttrib,
 		 const CompTransform	 *transform,
@@ -595,6 +782,7 @@ annoPaintOutput (CompScreen		 *s,
     Bool status;
 
     ANNO_SCREEN (s);
+    ANNO_DISPLAY (s->display);
 
     UNWRAP (as, s, paintOutput);
     status = (*s->paintOutput) (s, sAttrib, transform, region, output, mask);
@@ -624,13 +812,13 @@ annoPaintOutput (CompScreen		 *s,
 	    glTexCoord2f (COMP_TEX_COORD_X (&as->texture.matrix, pBox->x1),
 			  COMP_TEX_COORD_Y (&as->texture.matrix, pBox->y2));
 	    glVertex2i (pBox->x1, pBox->y2);
-	    glTexCoord2f (COMP_TEX_COORD_X (&as->texture.matrix, pBox->x2),
+		glTexCoord2f (COMP_TEX_COORD_X (&as->texture.matrix, pBox->x2),
 			  COMP_TEX_COORD_Y (&as->texture.matrix, pBox->y2));
 	    glVertex2i (pBox->x2, pBox->y2);
-	    glTexCoord2f (COMP_TEX_COORD_X (&as->texture.matrix, pBox->x2),
+		glTexCoord2f (COMP_TEX_COORD_X (&as->texture.matrix, pBox->x2),
 			  COMP_TEX_COORD_Y (&as->texture.matrix, pBox->y1));
 	    glVertex2i (pBox->x2, pBox->y1);
-	    glTexCoord2f (COMP_TEX_COORD_X (&as->texture.matrix, pBox->x1),
+		glTexCoord2f (COMP_TEX_COORD_X (&as->texture.matrix, pBox->x1),
 			  COMP_TEX_COORD_Y (&as->texture.matrix, pBox->y1));
 	    glVertex2i (pBox->x1, pBox->y1);
 
@@ -641,6 +829,99 @@ annoPaintOutput (CompScreen		 *s,
 
 	disableTexture (s, &as->texture);
 
+	unsigned short *fillColor, *strokeColor;
+	double strokeWidth, offset;
+	int angle;
+	double vectorX, vectorY;
+
+	fillColor   = ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c;
+	strokeColor = ad->opt[ANNO_DISPLAY_OPTION_STROKE_COLOR].value.c;
+
+	strokeWidth = ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH].value.f;
+	offset = strokeWidth / 2;
+
+	//put draw code here
+	switch(as->drawMode) {
+		case LineMode:
+			glColor4usv (strokeColor);
+			glLineWidth (strokeWidth);
+			glBegin (GL_LINES);
+			glVertex2i (annoInitialPointerX, annoInitialPointerY);
+			glVertex2i (as->lineEndPoint.x, as->lineEndPoint.y);
+			glEnd ();
+			break;
+
+		case RectangleMode:
+			/* fill rectangle */
+			glColor4usv (fillColor);
+			glRecti (as->rectangle.x1, as->rectangle.y1,
+			         as->rectangle.x2, as->rectangle.y2);
+
+			/* draw rectangle outline */
+			glColor4usv (strokeColor);
+			//left edge
+			glRecti (as->rectangle.x1 - offset, as->rectangle.y2,
+			         as->rectangle.x1 + offset, as->rectangle.y1);
+			//right edge
+			glRecti (as->rectangle.x2 - offset, as->rectangle.y2,
+			         as->rectangle.x2 + offset, as->rectangle.y1);
+			//top left, top right, top
+			glRecti (as->rectangle.x1 - offset, as->rectangle.y1 + offset,
+			         as->rectangle.x2 + offset, as->rectangle.y1 - offset);
+			//bottom left, bottom right, bottom
+			glRecti (as->rectangle.x1 - offset, as->rectangle.y2 + offset,
+			         as->rectangle.x2 + offset, as->rectangle.y2 - offset);
+			break;
+
+		case EllipseMode:
+			/* fill ellipse */
+			glColor4usv (fillColor);
+
+			glBegin (GL_TRIANGLE_FAN);
+			glVertex2d (as->ellipse.centerX, as->ellipse.centerY);
+			for (angle = 0; angle <= 360; angle += 1)
+			{
+			    vectorX = as->ellipse.centerX +
+			             (as->ellipse.radiusX * sinf (angle * DEG2RAD));
+			    vectorY = as->ellipse.centerY +
+			             (as->ellipse.radiusY * cosf (angle * DEG2RAD));
+			    glVertex2d (vectorX, vectorY);
+			}
+			glVertex2d (as->ellipse.centerX, as->ellipse.centerY +
+			            as->ellipse.radiusY);
+			glEnd();
+
+			/* draw ellipse outline */
+			glColor4usv (strokeColor);
+			glLineWidth (strokeWidth);
+
+			glBegin (GL_TRIANGLE_STRIP);
+			glVertex2d (as->ellipse.centerX, as->ellipse.centerY +
+			            as->ellipse.radiusY - offset);
+			for (angle = 360; angle >= 0; angle -= 1)
+			{
+			    vectorX = as->ellipse.centerX + ((as->ellipse.radiusX -
+			              offset) * sinf (angle * DEG2RAD));
+			    vectorY = as->ellipse.centerY + ((as->ellipse.radiusY -
+			              offset) * cosf (angle * DEG2RAD));
+			    glVertex2d (vectorX, vectorY);
+			    vectorX = as->ellipse.centerX + ((as->ellipse.radiusX +
+			              offset) * sinf (angle * DEG2RAD));
+			    vectorY = as->ellipse.centerY + ((as->ellipse.radiusY +
+			              offset) * cosf (angle * DEG2RAD));
+			    glVertex2d (vectorX, vectorY);
+			}
+			glVertex2d (as->ellipse.centerX, as->ellipse.centerY +
+			            as->ellipse.radiusY + offset);
+			glEnd();
+			break;
+
+		default:
+			break;
+	}
+
+	/* clean up */
+	glColor4usv (defaultColor);
 	glDisable (GL_BLEND);
 	glEnableClientState (GL_TEXTURE_COORD_ARRAY);
 
@@ -657,9 +938,11 @@ annoHandleMotionEvent (CompScreen *s,
 {
     ANNO_SCREEN (s);
 
+    REGION  damageReg;
+
     if (as->grabIndex)
     {
-	if (as->eraseMode)
+	if (as->drawMode == EraseMode)
 	{
 	    static unsigned short color[] = { 0, 0, 0, 0 };
 
@@ -668,15 +951,100 @@ annoHandleMotionEvent (CompScreen *s,
 			  xRoot, yRoot,
 			  20.0, color);
 	}
-	else
+	else if (as->drawMode == FreeDrawMode)
 	{
 	    ANNO_DISPLAY(s->display);
 
 	    annoDrawLine (s,
 			  annoLastPointerX, annoLastPointerY,
 			  xRoot, yRoot,
-			  ad->opt[ANNO_DISPLAY_OPTION_LINE_WIDTH].value.f,
+			  ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH].value.f,
 			  ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c);
+	}
+	else if (as->drawMode == LineMode)
+	{
+		as->lineEndPoint.x = xRoot;
+		as->lineEndPoint.y = yRoot;
+
+		damageReg.rects = &damageReg.extents;
+		damageReg.numRects = 1;
+		damageReg.extents.x1 = MIN(annoInitialPointerX, as->lineEndPoint.x);
+		damageReg.extents.y1 = MIN(annoInitialPointerX, as->lineEndPoint.y);
+		damageReg.extents.x2 = damageReg.extents.x1 + abs(as->lineEndPoint.x - annoInitialPointerX);
+		damageReg.extents.y2 = damageReg.extents.y1 + abs(as->lineEndPoint.y - annoInitialPointerY);
+	}
+	else if (as->drawMode == RectangleMode)
+	{
+		//save the results of the distance between xDist and yDist
+		//to avoid recalculating it
+		int xDist = abs(xRoot - annoInitialPointerX);
+		int yDist = abs(yRoot - annoInitialPointerY);
+
+		if (as->drawFromCenter)
+		{
+			as->rectangle.x1 = annoInitialPointerX - xDist;
+			as->rectangle.y1 = annoInitialPointerY - yDist;
+			as->rectangle.x2 = as->rectangle.x1 + xDist * 2;
+			as->rectangle.y2 = as->rectangle.y1 + yDist * 2;
+		}
+		else {
+			as->rectangle.x1 = MIN(xRoot, annoInitialPointerX);
+			as->rectangle.y1 = MIN(yRoot, annoInitialPointerY);
+			as->rectangle.x2 = as->rectangle.x1 + xDist;
+			as->rectangle.y2 = as->rectangle.y1 + yDist;
+		}
+
+		damageReg.rects = &damageReg.extents;
+		damageReg.numRects = 1;
+		damageReg.extents = as->rectangle;
+	}
+	else if (as->drawMode == EllipseMode)
+	{
+		if (as->drawFromCenter) {
+			as->ellipse.centerX = annoInitialPointerX;
+			as->ellipse.centerY = annoInitialPointerY;
+		}
+		else {
+			int xDist = xRoot - annoInitialPointerX;
+			int yDist = yRoot - annoInitialPointerY;
+			as->ellipse.centerX = annoInitialPointerX + xDist / 2;
+			as->ellipse.centerY = annoInitialPointerY + yDist / 2;
+		}
+
+		as->ellipse.radiusX = abs(as->ellipse.centerX - xRoot);
+		as->ellipse.radiusY = abs(as->ellipse.centerY - yRoot);
+
+		damageReg.rects = &damageReg.extents;
+		damageReg.numRects = 1;
+		damageReg.extents.x1 = as->ellipse.centerX - as->ellipse.radiusX;
+		damageReg.extents.y1 = as->ellipse.centerY - as->ellipse.radiusY;
+		damageReg.extents.x2 = damageReg.extents.x1 + as->ellipse.radiusX * 2;
+		damageReg.extents.y2 = damageReg.extents.y1 + as->ellipse.radiusY * 2;
+	}
+
+	if (s && (as->drawMode == LineMode ||
+	          as->drawMode == RectangleMode ||
+	          as->drawMode == EllipseMode))
+	{
+		ANNO_DISPLAY(s->display);
+		double strokeWidth = ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH].value.f;
+
+		damageReg.extents.x1 -= (strokeWidth / 2);
+		damageReg.extents.y1 -= (strokeWidth / 2);
+		damageReg.extents.x2 += (strokeWidth + 1);
+		damageReg.extents.y2 += (strokeWidth + 1);
+
+		//copy last rectangle into a tmp damage region
+		REGION lastRectangleDamageReg;
+		lastRectangleDamageReg.rects = &lastRectangleDamageReg.extents;
+		lastRectangleDamageReg.numRects = 1;
+		lastRectangleDamageReg.extents = as->lastRectangle;
+
+		//update the screen after movement to show WIP
+		damageScreenRegion(s, &damageReg);
+		damageScreenRegion(s, &lastRectangleDamageReg);
+
+		as->lastRectangle = *damageReg.rects;
 	}
 
 	annoLastPointerX = xRoot;
@@ -703,7 +1071,39 @@ annoHandleEvent (CompDisplay *d,
 	s = findScreenAtDisplay (d, event->xcrossing.root);
 	if (s)
 	    annoHandleMotionEvent (s, pointerX, pointerY);
+	break;
     default:
+	if (event->type == d->damageEvent + XDamageNotify)
+	{
+		XDamageNotifyEvent *de = (XDamageNotifyEvent *) event;
+		int firstScreen, lastScreen;
+		if (onlyCurrentScreen) {
+			firstScreen = DefaultScreen (d->display);
+			lastScreen  = DefaultScreen (d->display);
+		}
+		else
+		{
+			firstScreen = 0;
+			lastScreen  = ScreenCount (d->display) - 1;
+		}
+
+		for (int i = firstScreen; i <= lastScreen; i++)
+		{
+			s = findScreenAtDisplay (d, XRootWindow (d->display, i));
+			ANNO_SCREEN(s);
+			if (as->pixmap == de->drawable) {
+				REGION reg;
+				reg.rects    = &reg.extents;
+				reg.numRects = 1;
+				reg.extents.x1 = de->area.x;
+				reg.extents.y1 = de->area.y;
+				reg.extents.x2 = de->area.x + de->area.width;
+				reg.extents.y2 = de->area.y + de->area.height;
+
+				damageScreenRegion(s, &reg);
+			}
+		}
+	}
 	break;
     }
 
@@ -740,12 +1140,17 @@ annoSetDisplayOption (CompPlugin      *plugin,
     return compSetDisplayOption (display, o, value);
 }
 
+// Make this a lot more readable
 static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
-    { "initiate_button", "button", 0, annoInitiate, annoTerminate },
+    { "initiate_free_draw_button", "button", 0, annoFreeDrawInitiate, annoTerminate },
+    { "initiate_line_button", "button", 0, annoLineInitiate, annoTerminate },
+    { "initiate_rectangle_button", "button", 0, annoRectangleInitiate, annoTerminate },
+    { "initiate_ellipse_button", "button", 0, annoEllipseInitiate, annoTerminate },
     { "draw", "action", 0, annoDraw, 0 },
     { "erase_button", "button", 0, annoEraseInitiate, annoTerminate },
     { "clear_key", "key", 0, annoClear, 0 },
     { "clear_button", "button", 0, annoClear, 0 },
+    { "center_key", "key", 0, annoToggleCenter, 0 },
     { "fill_color", "color", 0, 0, 0 },
     { "stroke_color", "color", 0, 0, 0 },
     { "line_width", "float", 0, 0, 0 },
@@ -848,6 +1253,9 @@ annoFiniScreen (CompPlugin *p,
 
     if (as->pixmap)
 	XFreePixmap (s->display->display, as->pixmap);
+
+    if (as->damage)
+	XDamageDestroy(s->display->display, as->damage);
 
     UNWRAP (as, s, paintOutput);
 

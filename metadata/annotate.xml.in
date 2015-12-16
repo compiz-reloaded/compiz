@@ -4,10 +4,25 @@
 	<_long>Annotate plugin</_long>
 	<category>Extras</category>
 	<display>
-	    <option name="initiate_button" type="button">
-		<_short>Initiate</_short>
-		<_long>Initiate annotate drawing</_long>
+	    <option name="initiate_free_draw_button" type="button">
+		<_short>Initiate Free Draw</_short>
+		<_long>Initiate freehand drawing</_long>
 		<default>&lt;Super&gt;&lt;Alt&gt;Button1</default>
+	    </option>
+	    <option name="initiate_line_button" type="button">
+		<_short>Initiate Line</_short>
+		<_long>Initiate line drawing</_long>
+		<default>&lt;Super&gt;&lt;Alt&gt;Button2</default>
+	    </option>
+	    <option name="initiate_rectangle_button" type="button">
+		<_short>Initiate Rectangle</_short>
+		<_long>Initiate rectangle drawing</_long>
+		<default>&lt;Super&gt;&lt;Alt&gt;&lt;Shift&gt;Button1</default>
+	    </option>
+	    <option name="initiate_ellipse_button" type="button">
+		<_short>Initiate Ellipse</_short>
+		<_long>Initiate ellipse drawing</_long>
+		<default>&lt;Super&gt;&lt;Alt&gt;&lt;Shift&gt;Button2</default>
 	    </option>
 	    <option name="draw" type="action">
 		<_short>Draw</_short>
@@ -28,6 +43,11 @@
 		<_short>Clear</_short>
 		<_long>Clear</_long>
 	    </option>
+	    <option name="center_key" type="key">
+		<_short>Toggle center shape</_short>
+		<_long>Toggle whether the current shape is drawn using the center of your initial click</_long>
+		<default>&lt;Super&gt;&lt;Alt&gt;c</default>
+	    </option>
 	    <option name="fill_color" type="color">
 		<_short>Annotate Fill Color</_short>
 		<_long>Fill color for annotations</_long>
@@ -41,14 +61,6 @@
 		<default>
 		    <green>0xffff</green>
 		</default>
-	    </option>
-	    <option name="line_width" type="float">
-		<_short>Line width</_short>
-		<_long>Line width for annotations</_long>
-		<default>3.0</default>
-		<min>0.1</min>
-		<max>100.0</max>
-		<precision>0.1</precision>
 	    </option>
 	    <option name="stroke_width" type="float">
 		<_short>Stroke width</_short>
