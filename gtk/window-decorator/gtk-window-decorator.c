@@ -356,7 +356,6 @@ static gint	     double_click_timeout = 250;
 
 static GtkWidget     *tip_window;
 static GtkWidget     *tip_label;
-static GTimeVal	     tooltip_last_popdown = { 0, 0 };
 static gint	     tooltip_timer_tag = 0;
 
 static GSList *draw_list = NULL;
@@ -4152,13 +4151,7 @@ restack_window (WnckWindow *win,
 
 /* stolen from gtktooltip.c */
 
-#define DEFAULT_DELAY 500           /* Default delay in ms */
-#define STICKY_DELAY 0              /* Delay before popping up next tip
-				     * if we're sticky
-				     */
-#define STICKY_REVERT_DELAY 1000    /* Delay before sticky tooltips revert
-				     * to normal
-				     */
+#define TOOLTIP_DEFAULT_DELAY 400 /* Default delay in ms */
 
 static void
 show_tooltip (const char *text)
@@ -4166,27 +4159,18 @@ show_tooltip (const char *text)
 #if GTK_CHECK_VERSION (3, 0, 0)
     GdkDeviceManager *device_manager;
     GdkDevice	     *pointer;
-#else
-    GdkDisplay	     *gdkdisplay;
 #endif
-    GtkRequisition   requisition;
     gint	     x, y, w, h;
     GdkScreen	     *screen;
     gint	     monitor_num;
     GdkRectangle     monitor;
 
-    gtk_label_set_text (GTK_LABEL (tip_label), text);
+    screen = gdk_screen_get_default ();
 
-#if GTK_CHECK_VERSION (3, 0, 0)
-    gtk_widget_get_preferred_size (tip_window, &requisition, NULL);
-#else
-    gdkdisplay = gdk_display_get_default ();
+    gtk_label_set_markup (GTK_LABEL (tip_label), text);
+    gtk_widget_queue_resize (tip_window);
 
-    gtk_widget_size_request (tip_window, &requisition);
-#endif
-
-    w = requisition.width;
-    h = requisition.height;
+    gtk_window_get_size (GTK_WINDOW (tip_window), &w, &h);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
     device_manager = gdk_display_get_device_manager (gdk_display_get_default ());
@@ -4194,7 +4178,7 @@ show_tooltip (const char *text)
 
     gdk_device_get_position (pointer, &screen, &x, &y);
 #else
-    gdk_display_get_pointer (gdkdisplay, &screen, &x, &y, NULL);
+    gdk_display_get_pointer (gdk_display_get_default (), &screen, &x, &y, NULL);
 #endif
 
     x -= (w / 2 + 4);
@@ -4219,33 +4203,13 @@ show_tooltip (const char *text)
 static void
 hide_tooltip (void)
 {
-    if (gtk_widget_get_visible (tip_window))
-	g_get_current_time (&tooltip_last_popdown);
-
     gtk_widget_hide (tip_window);
 
-    if (tooltip_timer_tag)
+    if (tooltip_timer_tag != 0)
     {
 	g_source_remove (tooltip_timer_tag);
 	tooltip_timer_tag = 0;
     }
-}
-
-static gboolean
-tooltip_recently_shown (void)
-{
-    GTimeVal now;
-    glong    msec;
-
-    g_get_current_time (&now);
-
-    msec = now.tv_sec - tooltip_last_popdown.tv_sec;
-    if (msec > STICKY_REVERT_DELAY / 1000)
-	return FALSE;
-
-    msec = msec * 1000 + (now.tv_usec - tooltip_last_popdown.tv_usec) / 1000;
-
-    return (msec < STICKY_REVERT_DELAY);
 }
 
 static gint
@@ -4261,35 +4225,37 @@ tooltip_timeout (gpointer data)
 static void
 tooltip_start_delay (const char *text)
 {
-    guint delay = DEFAULT_DELAY;
-
-    if (tooltip_timer_tag)
+    if (tooltip_timer_tag != 0)
 	return;
 
-    if (tooltip_recently_shown ())
-	delay = STICKY_DELAY;
-
-    tooltip_timer_tag = g_timeout_add (delay,
+    tooltip_timer_tag = g_timeout_add (TOOLTIP_DEFAULT_DELAY,
 				       tooltip_timeout,
 				       (gpointer) text);
 }
 
-static gint
+static gboolean
 tooltip_paint_window (GtkWidget *tooltip,
-                      cairo_t   *cr)
+		      cairo_t   *cr)
 {
     GtkRequisition req;
 
+    if (tooltip == NULL)
+	return FALSE;
+
 #if GTK_CHECK_VERSION (3, 0, 0)
-    gtk_widget_get_preferred_size (tip_window, &req, NULL);
-    gtk_render_background (gtk_widget_get_style_context (tip_window),
-                           cr, 0, 0, req.width, req.height);
+    req.width = gtk_widget_get_allocated_width (tooltip);
+    req.height = gtk_widget_get_allocated_height (tooltip);
+
+    gtk_render_background (gtk_widget_get_style_context (tooltip),
+			   cr, 0, 0, req.width, req.height);
+    gtk_render_frame (gtk_widget_get_style_context (tooltip),
+		      cr, 0, 0, req.width, req.height);
 #else
-    gtk_widget_size_request (tip_window, &req);
-    gtk_paint_flat_box (gtk_widget_get_style (tip_window),
-			gtk_widget_get_window (tip_window),
+    gtk_widget_size_request (tooltip, &req);
+    gtk_paint_flat_box (gtk_widget_get_style (tooltip),
+			gtk_widget_get_window (tooltip),
 			GTK_STATE_NORMAL, GTK_SHADOW_OUT,
-			NULL, GTK_WIDGET (tip_window), "tooltip",
+			NULL, GTK_WIDGET (tooltip), "tooltip",
 			0, 0, req.width, req.height);
 #endif
 
@@ -4299,31 +4265,60 @@ tooltip_paint_window (GtkWidget *tooltip,
 static gboolean
 create_tooltip_window (void)
 {
+    GdkScreen *screen;
+#if GTK_CHECK_VERSION (3, 0, 0)
+    GdkVisual *visual;
+#else
+    GdkColormap *colormap;
+#endif
+
+    screen = gdk_screen_get_default ();
+
     tip_window = gtk_window_new (GTK_WINDOW_POPUP);
 
     gtk_widget_set_app_paintable (tip_window, TRUE);
     gtk_window_set_resizable (GTK_WINDOW (tip_window), FALSE);
+    gtk_widget_set_redraw_on_allocate (tip_window, TRUE);
+#if GTK_CHECK_VERSION (3, 0, 0)
+    gtk_style_context_add_class (gtk_widget_get_style_context (tip_window),
+				     GTK_STYLE_CLASS_TOOLTIP);
+#else
     gtk_widget_set_name (tip_window, "gtk-tooltips");
+#endif
     gtk_container_set_border_width (GTK_CONTAINER (tip_window), 4);
-
     gtk_window_set_type_hint (GTK_WINDOW (tip_window),
 			      GDK_WINDOW_TYPE_HINT_TOOLTIP);
 
+    gtk_window_set_screen (GTK_WINDOW (tip_window), screen);
+
 #if GTK_CHECK_VERSION (3, 0, 0)
-    g_signal_connect_swapped (tip_window,
-			      "draw",
-			      G_CALLBACK (tooltip_paint_window),
-			      0);
+    visual = gdk_screen_get_rgba_visual (screen);
+    if (visual != NULL)
+	gtk_widget_set_visual (tip_window, visual);
+
+    g_signal_connect (G_OBJECT (tip_window),
+		      "draw",
+		      G_CALLBACK (tooltip_paint_window),
+		      NULL);
 #else
-    g_signal_connect_swapped (tip_window,
+    colormap = gdk_screen_get_rgba_colormap (screen);
+    if (colormap != NULL)
+	gtk_widget_set_colormap (tip_window, colormap);
+
+    g_signal_connect_swapped (G_OBJECT (tip_window),
 			      "expose_event",
 			      G_CALLBACK (tooltip_paint_window),
-			      0);
+			      NULL);
 #endif
 
     tip_label = gtk_label_new (NULL);
     gtk_label_set_line_wrap (GTK_LABEL (tip_label), TRUE);
+#if GTK_CHECK_VERSION (3, 0, 0)
+    gtk_widget_set_halign (tip_label, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign (tip_label, GTK_ALIGN_CENTER);
+#else
     gtk_misc_set_alignment (GTK_MISC (tip_label), 0.5, 0.5);
+#endif
     gtk_widget_show (tip_label);
 
     gtk_container_add (GTK_CONTAINER (tip_window), tip_label);
@@ -4339,7 +4334,7 @@ static void
 handle_tooltip_event (WnckWindow *win,
 		      XEvent     *xevent,
 		      guint	 state,
-		      const char *tip)
+		      const char *tip_text)
 {
     switch (xevent->type) {
     case ButtonPress:
@@ -4351,7 +4346,7 @@ handle_tooltip_event (WnckWindow *win,
 	if (!(state & PRESSED_EVENT_WINDOW))
 	{
 	    if (wnck_window_is_active (win))
-		tooltip_start_delay (tip);
+		tooltip_start_delay (tip_text);
 	}
 	break;
     case LeaveNotify:
