@@ -404,7 +404,7 @@ annoDraw (CompDisplay     *d,
 				x2 = getFloatOptionNamed (option, nOption, "x2", 100);
 				y2 = getFloatOptionNamed (option, nOption, "y2", 100);
 
-				annoDrawLine (s, x1, y1, x2, y2, strokeWidth, fillColor);
+				annoDrawLine (s, x1, y1, x2, y2, strokeWidth, strokeColor);
 			}
 			else if (strcasecmp (tool, "text") == 0)
 			{
@@ -964,7 +964,7 @@ annoHandleMotionEvent (CompScreen *s,
 			      annoLastPointerX, annoLastPointerY,
 			      xRoot, yRoot,
 			      ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH].value.f,
-			      ad->opt[ANNO_DISPLAY_OPTION_FILL_COLOR].value.c);
+			      ad->opt[ANNO_DISPLAY_OPTION_STROKE_COLOR].value.c);
 		}
 		else if (as->drawMode == LineMode)
 		{
