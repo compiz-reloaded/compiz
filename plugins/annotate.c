@@ -317,7 +317,6 @@ annoDrawText (CompScreen     *s,
 		annoSetSourceColor (cr, fillColor);
 		cairo_select_font_face (cr, fontFamily, fontSlant, fontWeight);
 		cairo_set_font_size (cr, fontSize);
-		cairo_save (cr);
 		cairo_move_to (cr, x, y);
 		cairo_text_path (cr, text);
 		cairo_fill_preserve (cr);
@@ -854,8 +853,12 @@ annoPaintOutput (CompScreen              *s,
 			case RectangleMode:
 				/* fill rectangle */
 				glColor4usv (fillColor);
-				glRecti (as->rectangle.x1, as->rectangle.y1,
-				         as->rectangle.x2, as->rectangle.y2);
+				// normally this would be glRecti(x1, y1, x2, y2), but this would render
+				// the rectangle with a winding opposite to what's on screen.
+				// That would undo setting the fill. Instead, specify the coordinates in the order
+				// glRecti(x1, y1, x2, y2) to make sure that it has the proper winding
+				glRecti (as->rectangle.x1, as->rectangle.y2,
+				         as->rectangle.x2, as->rectangle.y1);
 
 				/* draw rectangle outline */
 				glColor4usv (strokeColor);
@@ -942,6 +945,8 @@ annoHandleMotionEvent (CompScreen *s,
 
 	if (as->grabIndex)
 	{
+		cairo_t *cr;
+
 		if (as->drawMode == EraseMode)
 		{
 			static unsigned short color[] = { 0, 0, 0, 0 };
@@ -969,9 +974,18 @@ annoHandleMotionEvent (CompScreen *s,
 			damageReg.rects = &damageReg.extents;
 			damageReg.numRects = 1;
 			damageReg.extents.x1 = MIN(annoInitialPointerX, as->lineEndPoint.x);
-			damageReg.extents.y1 = MIN(annoInitialPointerX, as->lineEndPoint.y);
+			damageReg.extents.y1 = MIN(annoInitialPointerY, as->lineEndPoint.y);
 			damageReg.extents.x2 = damageReg.extents.x1 + abs(as->lineEndPoint.x - annoInitialPointerX);
 			damageReg.extents.y2 = damageReg.extents.y1 + abs(as->lineEndPoint.y - annoInitialPointerY);
+
+			//manually set that we have content so the user can see it drawing the first time
+			//we also need to properly initialize the cairo context before manually flagging it
+			if (!as->content) {
+				cr = annoCairoContext(s);
+				if (cr) {
+					as->content = TRUE;
+				}
+			}
 		}
 		else if (as->drawMode == RectangleMode)
 		{
@@ -997,6 +1011,15 @@ annoHandleMotionEvent (CompScreen *s,
 			damageReg.rects = &damageReg.extents;
 			damageReg.numRects = 1;
 			damageReg.extents = as->rectangle;
+
+			//manually set that we have content so the user can see it drawing the first time
+			//we also need to properly initialize the cairo context before manually flagging it
+			if (!as->content) {
+				cr = annoCairoContext(s);
+				if (cr) {
+					as->content = TRUE;
+				}
+			}
 		}
 		else if (as->drawMode == EllipseMode)
 		{
@@ -1020,6 +1043,15 @@ annoHandleMotionEvent (CompScreen *s,
 			damageReg.extents.y1 = as->ellipse.centerY - as->ellipse.radiusY;
 			damageReg.extents.x2 = damageReg.extents.x1 + as->ellipse.radiusX * 2;
 			damageReg.extents.y2 = damageReg.extents.y1 + as->ellipse.radiusY * 2;
+
+			//manually set that we have content so the user can see it drawing the first time
+			//we also need to properly initialize the cairo context before manually flagging it
+			if (!as->content) {
+				cr = annoCairoContext(s);
+				if (cr) {
+					as->content = TRUE;
+				}
+			}
 		}
 
 		if (s && (as->drawMode == LineMode ||
