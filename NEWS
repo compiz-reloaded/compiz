@@ -5,6 +5,17 @@ Release 0.8.9 (2015-11-01 Wolfgang Ulbrich <chat-to-me@raveit.de>)
 ==============================================================
 Maintenance release.
 
+compiz-reload
+full support of MATE desktop
+remove kde-decorator support, does not work anymore with kde5
+Wall plugin is moved to compiz-core
+Replace gnomecompat plugin with matecompat
+Add command line options for button layout and titlebar font
+Remove GConf support as it's obsolete
+Add scripts to start Compiz and GTK+ decorator + desktop files
+many more bug fixes and improvements, see git log
+
+
 Release 0.8.8 (2011-03-30 Danny Baumann <dannybaumann@web.de>)
 ==============================================================
 Maintenance release.
