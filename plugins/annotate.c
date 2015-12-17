@@ -97,7 +97,6 @@ typedef struct _AnnoScreen {
 	AnnoToolType    drawMode;
 	Ellipse         ellipse;
 	Point           lineEndPoint;
-	// declarations of these come from X11/XRegion.h
 	Box             rectangle;
 	Box             lastRectangle;
 } AnnoScreen;
@@ -839,7 +838,6 @@ annoPaintOutput (CompScreen              *s,
 		strokeWidth = ad->opt[ANNO_DISPLAY_OPTION_STROKE_WIDTH].value.f;
 		offset = strokeWidth / 2;
 
-		//put draw code here
 		switch(as->drawMode) {
 			case LineMode:
 				glColor4usv (strokeColor);
@@ -853,25 +851,21 @@ annoPaintOutput (CompScreen              *s,
 			case RectangleMode:
 				/* fill rectangle */
 				glColor4usv (fillColor);
-				// normally this would be glRecti(x1, y1, x2, y2), but this would render
-				// the rectangle with a winding opposite to what's on screen.
-				// That would undo setting the fill. Instead, specify the coordinates in the order
-				// glRecti(x1, y1, x2, y2) to make sure that it has the proper winding
 				glRecti (as->rectangle.x1, as->rectangle.y2,
 				         as->rectangle.x2, as->rectangle.y1);
 
 				/* draw rectangle outline */
 				glColor4usv (strokeColor);
-				//left edge
+				/* left */
 				glRecti (as->rectangle.x1 - offset, as->rectangle.y2,
 				         as->rectangle.x1 + offset, as->rectangle.y1);
-				//right edge
+				/* right */
 				glRecti (as->rectangle.x2 - offset, as->rectangle.y2,
 				         as->rectangle.x2 + offset, as->rectangle.y1);
-				//top left, top right, top
+				/* top */
 				glRecti (as->rectangle.x1 - offset, as->rectangle.y1 + offset,
 				         as->rectangle.x2 + offset, as->rectangle.y1 - offset);
-				//bottom left, bottom right, bottom
+				/* bottom */
 				glRecti (as->rectangle.x1 - offset, as->rectangle.y2 + offset,
 				         as->rectangle.x2 + offset, as->rectangle.y2 - offset);
 				break;
@@ -978,8 +972,6 @@ annoHandleMotionEvent (CompScreen *s,
 			damageReg.extents.x2 = damageReg.extents.x1 + abs(as->lineEndPoint.x - annoInitialPointerX);
 			damageReg.extents.y2 = damageReg.extents.y1 + abs(as->lineEndPoint.y - annoInitialPointerY);
 
-			//manually set that we have content so the user can see it drawing the first time
-			//we also need to properly initialize the cairo context before manually flagging it
 			if (!as->content) {
 				cr = annoCairoContext(s);
 				if (cr) {
@@ -989,8 +981,6 @@ annoHandleMotionEvent (CompScreen *s,
 		}
 		else if (as->drawMode == RectangleMode)
 		{
-			//save the results of the distance between xDist and yDist
-			//to avoid recalculating it
 			int xDist = abs(xRoot - annoInitialPointerX);
 			int yDist = abs(yRoot - annoInitialPointerY);
 
@@ -1012,8 +1002,6 @@ annoHandleMotionEvent (CompScreen *s,
 			damageReg.numRects = 1;
 			damageReg.extents = as->rectangle;
 
-			//manually set that we have content so the user can see it drawing the first time
-			//we also need to properly initialize the cairo context before manually flagging it
 			if (!as->content) {
 				cr = annoCairoContext(s);
 				if (cr) {
@@ -1044,8 +1032,6 @@ annoHandleMotionEvent (CompScreen *s,
 			damageReg.extents.x2 = damageReg.extents.x1 + as->ellipse.radiusX * 2;
 			damageReg.extents.y2 = damageReg.extents.y1 + as->ellipse.radiusY * 2;
 
-			//manually set that we have content so the user can see it drawing the first time
-			//we also need to properly initialize the cairo context before manually flagging it
 			if (!as->content) {
 				cr = annoCairoContext(s);
 				if (cr) {
@@ -1066,13 +1052,12 @@ annoHandleMotionEvent (CompScreen *s,
 			damageReg.extents.x2 += (strokeWidth + 1);
 			damageReg.extents.y2 += (strokeWidth + 1);
 
-			//copy last rectangle into a tmp damage region
 			REGION lastRectangleDamageReg;
 			lastRectangleDamageReg.rects = &lastRectangleDamageReg.extents;
 			lastRectangleDamageReg.numRects = 1;
 			lastRectangleDamageReg.extents = as->lastRectangle;
 
-			//update the screen after movement to show WIP
+			/* Damage the region to show rendering in progress */
 			damageScreenRegion(s, &damageReg);
 			damageScreenRegion(s, &lastRectangleDamageReg);
 
@@ -1172,7 +1157,6 @@ annoSetDisplayOption (CompPlugin      *plugin,
 	return compSetDisplayOption (display, o, value);
 }
 
-// Make this a lot more readable
 static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
 	{ "initiate_free_draw_button", "button", 0, annoFreeDrawInitiate,  annoTerminate },
 	{ "initiate_line_button"     , "button", 0, annoLineInitiate,      annoTerminate },
