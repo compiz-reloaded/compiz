@@ -1169,7 +1169,6 @@ static const CompMetadataOptionInfo annoDisplayOptionInfo[] = {
 	{ "center_key"               , "key"   , 0, annoToggleCenter,      0 },
 	{ "fill_color"               , "color" , 0, 0,                     0 },
 	{ "stroke_color"             , "color" , 0, 0,                     0 },
-	{ "line_width"               , "float" , 0, 0,                     0 },
 	{ "stroke_width"             , "float" , 0, 0,                     0 }
 };
 
