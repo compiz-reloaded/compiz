@@ -647,6 +647,38 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
     return TRUE;
 }
 
+static CompOptionType
+dbusGuessStringType(char **path, char *name)
+{
+	CompObject *object;
+	CompOption *option;
+	int nOption;
+
+	option = dbusGetOptionsFromPath(path, &object, NULL, &nOption);
+	if (!option) {
+		/* if no plugin found for this path, assume this is a string option */
+		return CompOptionTypeString;
+	}
+	else {
+		/* attempt to talk to the plugin at path for the correct type */
+		while(nOption--)
+		{
+			/* If there's a pre-existing option with this name, break out of the loop
+			 * so the type can be returned to the caller */
+			if (strcmp(option->name, name) == 0)
+				break;
+			option++;
+		}
+
+		if (nOption == -1) {
+			return CompOptionTypeString;
+		}
+		else {
+			return option->type;
+		}
+	}
+}
+
 
 /*
  * Activate can be used to trigger any existing action. Arguments
@@ -772,25 +804,29 @@ dbusHandleActionMessage (DBusConnection *connection,
 			    break;
 			case DBUS_TYPE_STRING:
 			    hasValue = TRUE;
-
-			    /* XXX: use match option type if name is "match" */
-			    if (name && strcmp (name, "match") == 0)
-			    {
 				char *s;
+				CompOptionType trueOptionType = dbusGuessStringType(path, name);
+				switch(trueOptionType) {
+					case CompOptionTypeMatch:
+						type = CompOptionTypeMatch;
+						dbus_message_iter_get_basic (&iter, &s);
 
-				type = CompOptionTypeMatch;
+						matchInit (&value.match);
+						matchAddFromString (&value.match, s);
+						break;
+					case CompOptionTypeColor:
+						type = CompOptionTypeColor;
+						dbus_message_iter_get_basic (&iter, &s);
 
-				dbus_message_iter_get_basic (&iter, &s);
-
-				matchInit (&value.match);
-				matchAddFromString (&value.match, s);
-			    }
-			    else
-			    {
-				type = CompOptionTypeString;
-
-				dbus_message_iter_get_basic (&iter, &value.s);
-			    }
+						stringToColor(s, value.c);
+						break;
+					case CompOptionTypeString:
+					default:
+						type = CompOptionTypeString;
+						dbus_message_iter_get_basic(&iter, &value.s);
+						break;
+				}
+				break;
 			default:
 			    break;
 			}
