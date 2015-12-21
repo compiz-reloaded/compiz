@@ -797,6 +797,7 @@ annoPaintOutput (CompScreen              *s,
 
 		glDisableClientState (GL_TEXTURE_COORD_ARRAY);
 		glEnable (GL_BLEND);
+		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		enableTexture (s, &as->texture, COMP_TEXTURE_FILTER_FAST);
 
@@ -857,11 +858,11 @@ annoPaintOutput (CompScreen              *s,
 				/* draw rectangle outline */
 				glColor4usv (strokeColor);
 				/* left */
-				glRecti (as->rectangle.x1 - offset, as->rectangle.y2,
-				         as->rectangle.x1 + offset, as->rectangle.y1);
+				glRecti (as->rectangle.x1 - offset, as->rectangle.y2 - offset,
+				         as->rectangle.x1 + offset, as->rectangle.y1 + offset);
 				/* right */
-				glRecti (as->rectangle.x2 - offset, as->rectangle.y2,
-				         as->rectangle.x2 + offset, as->rectangle.y1);
+				glRecti (as->rectangle.x2 - offset, as->rectangle.y2 - offset,
+				         as->rectangle.x2 + offset, as->rectangle.y1 + offset);
 				/* top */
 				glRecti (as->rectangle.x1 - offset, as->rectangle.y1 + offset,
 				         as->rectangle.x2 + offset, as->rectangle.y1 - offset);
