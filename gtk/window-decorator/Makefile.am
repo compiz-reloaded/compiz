@@ -9,6 +9,7 @@ gtk_window_decorator_DEPENDENCIES = \
 gtk_window_decorator_LDADD	  =		       \
 	$(top_builddir)/libdecoration/libdecoration.la \
 	@GTK_WINDOW_DECORATOR_LIBS@		       \
+	@DBUS_GLIB_LIBS@			       \
 	$(marcolibs)
 
 gtk_window_decorator_SOURCES	  = \
@@ -20,6 +21,7 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/include            \
 	@GTK_WINDOW_DECORATOR_CFLAGS@      \
 	@MARCO_CFLAGS@                     \
+	@DBUS_GLIB_CFLAGS@                 \
 	-DALL_LINGUAS="\"@ALL_LINGUAS@\""  \
 	-DLOCALEDIR="\"@datadir@/locale"\"
 
