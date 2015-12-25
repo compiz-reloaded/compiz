@@ -297,10 +297,6 @@ AC_ARG_ENABLE(gsettings,
   [  --disable-gsettings     Disable gsettings gwd support],
   [use_gsettings=$enableval], [use_gsettings=yes])
 
-AC_ARG_ENABLE(mwd,
-  [  --enable-mwd            Enable mate-window-decorator (requires Python 3.3+, PyGObject 3, GLib and Gio 2.40+)],
-  [use_mwd=$enableval], [use_mwd=no])
-
 if test "x$use_gtk" = "xyes"; then
   if test "x$with_gtk" != "x2.0"; then
     PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
@@ -336,25 +332,14 @@ if test "x$use_gtk" = "xyes"; then
     if test "x$use_marco" = "xyes"; then
       PKG_CHECK_MODULES(MARCO, libmarco-private,
 			[use_marco=yes], [use_marco=no])
-
-      if test "x$use_mwd" = "xyes"; then
-        AM_PATH_PYTHON([3.3], [use_mwd=yes], [use_mwd=no])
-        if test "x$use_mwd" = "xyes"; then
-	  AC_MSG_NOTICE([Notice that mate-window-decorator requires Python 3.3+, PyGObject 3, GLib and Gio 2.40+ at runtime.])
-        fi
-      fi
-    else
-      use_mwd="no"
     fi
   else
     use_marco="no"
     use_gsettings="no"
-    use_mwd="no"
   fi
 else
   use_marco="no"
   use_gsettings="no"
-  use_mwd="no"
 fi
 
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
@@ -375,11 +360,6 @@ fi
 AM_CONDITIONAL(USE_GSETTINGS, test "x$use_gsettings" = "xyes")
 if test "$use_gsettings" = yes; then
   AC_DEFINE(USE_GSETTINGS, 1, [Build gsettings support in gtk-window-decorator])
-fi
-
-AM_CONDITIONAL(USE_MWD, test "x$use_mwd" = "xyes")
-if test "$use_mwd" = yes; then
-  AC_DEFINE(USE_MWD, 1, [Enable mate-window-decorator])
 fi
 
 AC_ARG_WITH(max-desktops,
@@ -460,6 +440,5 @@ echo "and the following optional features will be used:"
 echo "  gtk:                       $use_gtk ($with_gtk)"
 echo "  marco:                     $use_marco"
 echo "  gwd gsettings support:     $use_gsettings"
-echo "  mate-window-decorator:     $use_mwd"
 echo "  desktop menu entries:      $use_menu_entries"
 echo ""

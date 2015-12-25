@@ -48,7 +48,7 @@ fi
 
 # Find a decorator.
 if [ -z "$DECORATOR" ] || [ ! -x "$(which "$DECORATOR" 2> /dev/null)" ]; then
-    for DECORATOR in mate-window-decorator gtk-window-decorator emerald; do
+    for DECORATOR in gtk-window-decorator emerald; do
         if [ -x "$(which "$DECORATOR" 2> /dev/null)" ]; then
             verbose "Found $DECORATOR decorator.\n"
             break
