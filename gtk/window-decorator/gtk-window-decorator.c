@@ -36,6 +36,10 @@
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
 
+#ifdef USE_GSETTINGS
+#include <gio/gio.h>
+#endif
+
 #ifdef USE_DBUS_GLIB
 #define DBUS_API_SUBJECT_TO_CHANGE
 #include <dbus/dbus.h>
@@ -66,6 +70,40 @@
 #ifdef USE_MARCO
 #include <marco-private/theme.h>
 #endif
+
+#define GSCHEMA_KEY_GNOME_WM "org.gnome.desktop.wm.preferences"
+
+#define GSCHEMA_KEY_MARCO "org.mate.Marco.general"
+
+#define META_USE_SYSTEM_FONT_KEY "titlebar-uses-system-font"
+
+#define META_TITLEBAR_FONT_KEY "titlebar-font"
+
+#define META_DOUBLE_CLICK_TITLEBAR_KEY "action-double-click-titlebar"
+
+#define META_MIDDLE_CLICK_TITLEBAR_KEY "action-middle-click-titlebar"
+
+#define META_RIGHT_CLICK_TITLEBAR_KEY "action-right-click-titlebar"
+
+#define META_THEME_KEY "theme"
+
+#define META_BUTTON_LAYOUT_KEY "button-layout"
+
+#define GSCHEMA_KEY_GWD "org.compiz-0.gwd"
+
+#define GWD_USE_META_THEME_KEY "use-marco-theme"
+
+#define GWD_META_THEME_OPACITY_KEY "marco-theme-opacity"
+
+#define GWD_META_THEME_SHADE_OPACITY_KEY "marco-theme-shade-opacity"
+
+#define GWD_META_THEME_ACTIVE_OPACITY_KEY "marco-theme-active-opacity"
+
+#define GWD_META_THEME_ACTIVE_SHADE_OPACITY_KEY "marco-theme-active-shade-opacity"
+
+#define GWD_BLUR_TYPE_KEY "blur-type"
+
+#define GWD_WHEEL_ACTION_KEY "mouse-wheel-action"
 
 #define DBUS_DEST       "org.freedesktop.compiz"
 #define DBUS_PATH       "/org/freedesktop/compiz/decoration/allscreens"
@@ -98,7 +136,7 @@
 #define SHADOW_COLOR_GREEN 0x0000
 #define SHADOW_COLOR_BLUE  0x0000
 
-#define META_OPACITY              0.75
+#define META_OPACITY              1.0
 #define META_SHADE_OPACITY        TRUE
 #define META_ACTIVE_OPACITY       1.0
 #define META_ACTIVE_SHADE_OPACITY TRUE
@@ -4250,7 +4288,7 @@ tooltip_paint_window (GtkWidget *tooltip,
 {
     GtkRequisition req;
 
-    if (tooltip == NULL)
+    if (!tooltip)
 	return FALSE;
 
 #if GTK_CHECK_VERSION (3, 0, 0)
@@ -5819,6 +5857,90 @@ get_titlebar_font (void)
 	return titlebar_font;
 }
 
+#ifdef USE_GSETTINGS
+static void
+titlebar_font_changed (GSettings *settings_marco)
+{
+    if (!settings_marco)
+	return;
+
+    gchar *str;
+
+    str = g_settings_get_string (settings_marco,
+				 META_TITLEBAR_FONT_KEY);
+    if (!str)
+	str = g_strdup ("Sans Bold 12");
+
+    if (titlebar_font)
+	pango_font_description_free (titlebar_font);
+
+    titlebar_font = pango_font_description_from_string (str);
+
+    g_free (str);
+}
+
+static void
+titlebar_click_action_changed (GSettings   *settings_marco,
+			       const gchar *key,
+			       int         *action_value,
+			       int          default_value)
+{
+    if (!settings_marco)
+	return;
+
+    gchar *action;
+
+    *action_value = default_value;
+
+    action = g_settings_get_string (settings_marco, key);
+    if (action)
+    {
+	if (strcmp (action, "toggle_shade") == 0)
+	    *action_value = CLICK_ACTION_SHADE;
+	else if (strcmp (action, "toggle_maximize") == 0)
+	    *action_value = CLICK_ACTION_MAXIMIZE;
+	else if (strcmp (action, "toggle_maximize_horizontally") == 0)
+	    *action_value = CLICK_ACTION_MAXIMIZE_HORZ;
+	else if (strcmp (action, "toggle_maximize_vertically") == 0)
+	    *action_value = CLICK_ACTION_MAXIMIZE_VERT;
+	else if (strcmp (action, "minimize") == 0)
+	    *action_value = CLICK_ACTION_MINIMIZE;
+	else if (strcmp (action, "raise") == 0)
+	    *action_value = CLICK_ACTION_RAISE;
+	else if (strcmp (action, "lower") == 0)
+	    *action_value = CLICK_ACTION_LOWER;
+	else if (strcmp (action, "menu") == 0)
+	    *action_value = CLICK_ACTION_MENU;
+	else if (strcmp (action, "none") == 0)
+	    *action_value = CLICK_ACTION_NONE;
+
+	g_free (action);
+    }
+}
+
+static void
+wheel_action_changed (GSettings *settings)
+{
+    if (!settings)
+	return;
+
+    gchar *action;
+
+    wheel_action = WHEEL_ACTION_DEFAULT;
+
+    action = g_settings_get_string (settings, GWD_WHEEL_ACTION_KEY);
+    if (action)
+    {
+	if (strcmp (action, "shade") == 0)
+	    wheel_action = WHEEL_ACTION_SHADE;
+	else if (strcmp (action, "none") == 0)
+	    wheel_action = WHEEL_ACTION_NONE;
+
+	g_free (action);
+    }
+}
+#endif
+
 #ifdef USE_MARCO
 static MetaButtonFunction
 meta_button_function_from_string (const char *str)
@@ -6206,7 +6328,299 @@ style_changed (GtkWidget *widget,
     decorations_changed (screen);
 }
 
-#if USE_DBUS_GLIB
+#ifdef USE_GSETTINGS
+static gboolean
+blur_settings_changed (GSettings *settings)
+{
+    if (!settings)
+	return FALSE;
+
+    gchar *type;
+    int   new_type = blur_type;
+
+    if (cmdline_options & CMDLINE_BLUR)
+	return FALSE;
+
+    type = g_settings_get_string (settings,
+				  GWD_BLUR_TYPE_KEY);
+
+    if (type)
+    {
+	if (strcmp (type, "titlebar") == 0)
+	    new_type = BLUR_TYPE_TITLEBAR;
+	else if (strcmp (type, "all") == 0)
+	    new_type = BLUR_TYPE_ALL;
+	else if (strcmp (type, "none") == 0)
+	    new_type = BLUR_TYPE_NONE;
+
+	g_free (type);
+    }
+
+    if (new_type != blur_type)
+    {
+	blur_type = new_type;
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+static gboolean
+theme_changed (GSettings *settings, GSettings *settings_marco)
+{
+#ifdef USE_MARCO
+    gboolean use_meta_theme = TRUE;
+
+    if (!settings || !settings_marco)
+	return FALSE;
+
+    if (cmdline_options & CMDLINE_THEME)
+	return FALSE;
+
+    use_meta_theme = g_settings_get_boolean (settings,
+					     GWD_USE_META_THEME_KEY);
+
+    if (use_meta_theme)
+    {
+	gchar *theme;
+
+	theme = g_settings_get_string (settings_marco,
+				       META_THEME_KEY);
+
+	if (theme)
+	{
+	    meta_theme_set_current (theme, TRUE);
+	    if (!meta_theme_get_current ())
+		use_meta_theme = FALSE;
+
+	    g_free (theme);
+	}
+	else
+	{
+	    use_meta_theme = FALSE;
+	}
+
+	theme_draw_window_decoration	= meta_draw_window_decoration;
+	theme_calc_decoration_size	= meta_calc_decoration_size;
+	theme_update_border_extents	= meta_update_border_extents;
+	theme_get_event_window_position = meta_get_event_window_position;
+	theme_get_button_position	= meta_get_button_position;
+    }
+    else
+    {
+	theme_draw_window_decoration	= draw_window_decoration;
+	theme_calc_decoration_size	= calc_decoration_size;
+	theme_update_border_extents	= update_border_extents;
+	theme_get_event_window_position = get_event_window_position;
+	theme_get_button_position	= get_button_position;
+    }
+
+    return TRUE;
+#else
+    theme_draw_window_decoration    = draw_window_decoration;
+    theme_calc_decoration_size	    = calc_decoration_size;
+    theme_update_border_extents	    = update_border_extents;
+    theme_get_event_window_position = get_event_window_position;
+    theme_get_button_position	    = get_button_position;
+
+    return FALSE;
+#endif
+
+}
+
+static gboolean
+theme_opacity_changed (GSettings *settings)
+{
+    if (!settings)
+	return FALSE;
+
+#ifdef USE_MARCO
+    gboolean shade_opacity, changed = FALSE;
+    gdouble  opacity;
+
+    opacity = g_settings_get_double (settings,
+				     GWD_META_THEME_OPACITY_KEY);
+
+    if (!(cmdline_options & CMDLINE_OPACITY) &&
+	opacity != meta_opacity)
+    {
+	meta_opacity = opacity;
+	changed = TRUE;
+    }
+
+    if (opacity < 1.0)
+    {
+	shade_opacity = g_settings_get_boolean (settings,
+						GWD_META_THEME_SHADE_OPACITY_KEY);
+
+	if (!(cmdline_options & CMDLINE_OPACITY_SHADE) &&
+	    shade_opacity != meta_shade_opacity)
+	{
+	    meta_shade_opacity = shade_opacity;
+	    changed = TRUE;
+	}
+    }
+
+    opacity = g_settings_get_double (settings,
+				     GWD_META_THEME_ACTIVE_OPACITY_KEY);
+
+    if (!(cmdline_options & CMDLINE_ACTIVE_OPACITY) &&
+	opacity != meta_active_opacity)
+    {
+	meta_active_opacity = opacity;
+	changed = TRUE;
+    }
+
+    if (opacity < 1.0)
+    {
+	shade_opacity =
+	    g_settings_get_boolean (settings,
+				    GWD_META_THEME_ACTIVE_SHADE_OPACITY_KEY);
+
+	if (!(cmdline_options & CMDLINE_ACTIVE_OPACITY_SHADE) &&
+	    shade_opacity != meta_active_shade_opacity)
+	{
+	    meta_active_shade_opacity = shade_opacity;
+	    changed = TRUE;
+	}
+    }
+
+    return changed;
+#else
+    return FALSE;
+#endif
+
+}
+
+static gboolean
+button_layout_changed (GSettings *settings_marco)
+{
+    if (!settings_marco)
+	return FALSE;
+
+#ifdef USE_MARCO
+    gchar *button_layout;
+
+    button_layout = g_settings_get_string (settings_marco,
+					   META_BUTTON_LAYOUT_KEY);
+
+    if (button_layout)
+    {
+	meta_update_button_layout (button_layout);
+
+	meta_button_layout_set = TRUE;
+
+	g_free (button_layout);
+
+	return TRUE;
+    }
+
+    if (meta_button_layout_set)
+    {
+	meta_button_layout_set = FALSE;
+	return TRUE;
+    }
+#endif
+
+    return FALSE;
+}
+
+static void
+gsettings_value_changed (GSettings   *settings,
+		         const gchar *key,
+		         WnckScreen  *screen)
+{
+    gboolean changed = FALSE;
+
+    if (!settings)
+	return;
+
+    GSettings *settings_gwd = NULL, *settings_marco = NULL;
+    gchar     *settings_gschema_id;
+
+    g_object_get (G_OBJECT (settings), "schema-id", &settings_gschema_id, NULL);
+    if (strcmp (settings_gschema_id, GSCHEMA_KEY_GWD) == 0)
+    {
+	settings_gwd   = settings;
+	settings_marco = g_object_get_data (G_OBJECT (settings), "gsettings_marco");
+    }
+    else
+    {
+	settings_gwd   = g_object_get_data (G_OBJECT (settings), "gsettings");
+	settings_marco = settings;
+    }
+    g_free (settings_gschema_id);
+
+    if (!settings_gwd || !settings_marco)
+	return;
+
+    if (strcmp (key, META_USE_SYSTEM_FONT_KEY) == 0)
+    {
+	if (g_settings_get_boolean (settings_marco,
+				    META_USE_SYSTEM_FONT_KEY)
+				    != use_system_font)
+	{
+	    use_system_font = !use_system_font;
+	    changed = TRUE;
+	}
+    }
+    else if (strcmp (key, META_TITLEBAR_FONT_KEY) == 0)
+    {
+	titlebar_font_changed (settings_marco);
+	changed = !use_system_font;
+    }
+    else if (strcmp (key, META_DOUBLE_CLICK_TITLEBAR_KEY) == 0)
+    {
+	titlebar_click_action_changed (settings_marco, key,
+				       &double_click_action,
+				       DOUBLE_CLICK_ACTION_DEFAULT);
+    }
+    else if (strcmp (key, META_MIDDLE_CLICK_TITLEBAR_KEY) == 0)
+    {
+	titlebar_click_action_changed (settings_marco, key,
+				       &middle_click_action,
+				       MIDDLE_CLICK_ACTION_DEFAULT);
+    }
+    else if (strcmp (key, META_RIGHT_CLICK_TITLEBAR_KEY) == 0)
+    {
+	titlebar_click_action_changed (settings_marco, key,
+				       &right_click_action,
+				       RIGHT_CLICK_ACTION_DEFAULT);
+    }
+    else if (strcmp (key, GWD_WHEEL_ACTION_KEY) == 0)
+    {
+	wheel_action_changed (settings_gwd);
+    }
+    else if (strcmp (key, GWD_BLUR_TYPE_KEY) == 0)
+    {
+	if (blur_settings_changed (settings_gwd))
+	    changed = TRUE;
+    }
+    else if (strcmp (key, GWD_USE_META_THEME_KEY) == 0 ||
+	     strcmp (key, META_THEME_KEY) == 0)
+    {
+	if (theme_changed (settings_gwd, settings_marco))
+	    changed = TRUE;
+    }
+    else if (strcmp (key, META_BUTTON_LAYOUT_KEY) == 0)
+    {
+	if (button_layout_changed (settings_marco))
+	    changed = TRUE;
+    }
+    else if (strcmp (key, GWD_META_THEME_OPACITY_KEY)	       == 0 ||
+	     strcmp (key, GWD_META_THEME_SHADE_OPACITY_KEY)	       == 0 ||
+	     strcmp (key, GWD_META_THEME_ACTIVE_OPACITY_KEY)       == 0 ||
+	     strcmp (key, GWD_META_THEME_ACTIVE_SHADE_OPACITY_KEY) == 0)
+    {
+	if (theme_opacity_changed (settings_gwd))
+	    changed = TRUE;
+    }
+
+    if (changed)
+	decorations_changed (screen);
+}
+
+#elif USE_DBUS_GLIB
 
 static DBusHandlerResult
 dbus_handle_message (DBusConnection *connection,
@@ -6352,7 +6766,71 @@ init_settings (WnckScreen *screen)
 #endif
     AtkObject	   *switcher_label_obj;
 
-#if USE_DBUS_GLIB
+#ifdef USE_GSETTINGS
+    const gchar	    *session;
+    GSettings	    *gsettings = NULL, *gsettings_marco = NULL;
+    GSettingsSchema *gsettings_schema = NULL;
+
+    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
+							GSCHEMA_KEY_GWD,
+							TRUE);
+    if (gsettings_schema)
+    {
+	g_settings_schema_unref (gsettings_schema);
+	gsettings_schema = NULL;
+	gsettings = g_settings_new (GSCHEMA_KEY_GWD);
+    }
+
+    /* Prioritise GNOME settings in general and Marco settings in MATE */
+    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
+							GSCHEMA_KEY_GNOME_WM,
+							TRUE);
+    if (gsettings_schema)
+    {
+	g_settings_schema_unref (gsettings_schema);
+	gsettings_schema = NULL;
+	gsettings_marco = g_settings_new (GSCHEMA_KEY_GNOME_WM);
+    }
+
+    session = g_getenv ("XDG_CURRENT_DESKTOP");
+    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
+							GSCHEMA_KEY_MARCO,
+							TRUE);
+    if (gsettings_schema)
+    {
+	g_settings_schema_unref (gsettings_schema);
+	gsettings_schema = NULL;
+	if (session && strlen (session) && strcasecmp (session, "MATE") == 0)
+	{
+	    g_object_unref (G_OBJECT (gsettings_marco));
+	    gsettings_marco = NULL;
+	}
+	if (!gsettings_marco)
+	    gsettings_marco = g_settings_new (GSCHEMA_KEY_MARCO);
+    }
+
+    /* theme_changed() needs both thus sending second object as data */
+    if (gsettings)
+    {
+	g_object_set_data (G_OBJECT (gsettings), "gsettings_marco", gsettings_marco);
+	g_signal_connect_data (gsettings,
+			       "changed",
+			       G_CALLBACK (gsettings_value_changed),
+			       (gpointer) screen,
+			       0, 0);
+    }
+
+    if (gsettings_marco)
+    {
+	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings", gsettings);
+	g_signal_connect_data (gsettings_marco,
+			       "changed",
+			       G_CALLBACK (gsettings_value_changed),
+			       (gpointer) screen,
+			       0, 0);
+    }
+
+#elif USE_DBUS_GLIB
     DBusConnection *connection;
     DBusMessage	   *reply;
     DBusError	   error;
@@ -6483,9 +6961,38 @@ init_settings (WnckScreen *screen)
     g_object_get (G_OBJECT (settings), "gtk-double-click-time",
 		  &double_click_timeout, NULL);
 
+#ifdef USE_GSETTINGS
+    use_system_font = g_settings_get_boolean (gsettings_marco,
+					      META_USE_SYSTEM_FONT_KEY);
+    theme_changed (gsettings, gsettings_marco);
+    theme_opacity_changed (gsettings);
+    button_layout_changed (gsettings_marco);
+#endif
+
     update_style (style_window);
 
+#ifdef USE_GSETTINGS
+    titlebar_font_changed (gsettings_marco);
+#endif
+
     update_titlebar_font ();
+
+#ifdef USE_GSETTINGS
+    titlebar_click_action_changed (gsettings_marco,
+				   META_DOUBLE_CLICK_TITLEBAR_KEY,
+				   &double_click_action,
+				   DOUBLE_CLICK_ACTION_DEFAULT);
+    titlebar_click_action_changed (gsettings_marco,
+				   META_MIDDLE_CLICK_TITLEBAR_KEY,
+				   &middle_click_action,
+				   MIDDLE_CLICK_ACTION_DEFAULT);
+    titlebar_click_action_changed (gsettings_marco,
+				   META_RIGHT_CLICK_TITLEBAR_KEY,
+				   &right_click_action,
+				   RIGHT_CLICK_ACTION_DEFAULT);
+    wheel_action_changed (gsettings);
+    blur_settings_changed (gsettings);
+#endif
 
     (*theme_update_border_extents) (text_height);
 

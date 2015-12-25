@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<schemalist>
+  <schema id="org.compiz-0.gwd" path="/org/compiz-0/gwd/" gettext-domain="compiz">
+    <key type="s" name="blur-type">
+      <default>'all'</default>
+      <summary>Blur Type</summary>
+      <description>Blur to use on titlebars - "all" for the entire frame, "titlebar" for just the titlebar and "none" for no blur</description>
+    </key>
+    <key type="d" name="marco-theme-opacity">
+      <default>1.0</default>
+      <range min="0.0" max="1.0"/>
+      <summary>Marco theme opacity</summary>
+      <description>Opacity to use for marco theme decorations</description>
+    </key>
+    <key type="d" name="marco-theme-active-opacity">
+      <default>1.0</default>
+      <range min="0.0" max="1.0"/>
+      <summary>Marco theme active window opacity</summary>
+      <description>Opacity to use for active windows with marco theme decorations</description>
+    </key>
+    <key type="b" name="marco-theme-shade-opacity">
+      <default>true</default>
+      <summary>Marco theme opacity shade</summary>
+      <description>Shade windows with marco theme decorations from opaque to translucent</description>
+    </key>
+    <key type="b" name="marco-theme-active-shade-opacity">
+      <default>true</default>
+      <summary>Marco theme active window opacity shade</summary>
+      <description>Shade active windows with marco theme decorations from opaque to translucent</description>
+    </key>
+    <key type="s" name="mouse-wheel-action">
+      <default>'none'</default>
+      <summary>Action to take on scrolling a titlebar</summary>
+      <description>Action to take on scrolling a titlebar - "none" for no action, "shade" to shade the window</description>
+    </key>
+    <key type="b" name="use-marco-theme">
+      <default>true</default>
+      <summary>Use marco theme</summary>
+      <description>Use marco theme when drawing window decorations</description>
+    </key>
+  </schema>
+</schemalist>

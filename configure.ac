@@ -179,7 +179,7 @@ AC_ARG_ENABLE(glib,
   [use_glib=$enableval], [use_glib=yes])
 
 if test "x$use_glib" = "xyes"; then
-  PKG_CHECK_MODULES(GLIB, glib-2.0)
+  PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.32)
 fi
 
 AM_CONDITIONAL(USE_GLIB, test "x$use_glib" = "xyes")
@@ -208,7 +208,7 @@ if test "x$use_dbus_glib" = "xyes"; then
   PKG_CHECK_MODULES(DBUS_GLIB, dbus-glib-1, [use_dbus_glib=yes], [use_dbus_glib=no])
 fi
 
-if test "$use_dbus" = yes; then
+if test "$use_dbus_glib" = "xyes"; then
   AC_DEFINE(USE_DBUS_GLIB, 1, [Build dbus glib support])
 fi
 
@@ -293,6 +293,10 @@ AC_ARG_ENABLE(marco,
   [  --disable-marco         Disable marco theme support],
   [use_marco=$enableval], [use_marco=yes])
 
+AC_ARG_ENABLE(gsettings,
+  [  --disable-gsettings     Disable gsettings gwd support],
+  [use_gsettings=$enableval], [use_gsettings=yes])
+
 AC_ARG_ENABLE(mwd,
   [  --enable-mwd            Enable mate-window-decorator (requires Python 3.3+, PyGObject 3, GLib and Gio 2.40+)],
   [use_mwd=$enableval], [use_mwd=no])
@@ -323,6 +327,12 @@ if test "x$use_gtk" = "xyes"; then
     CFLAGS="$save_CFLAGS"
     LIBS="$save_LIBS -lm -ldl"
 
+    if test "x$use_gsettings" = "xyes"; then
+      PKG_CHECK_MODULES(GSETTINGS, gio-2.0 >= 2.25.0)
+
+      GLIB_GSETTINGS
+    fi
+
     if test "x$use_marco" = "xyes"; then
       PKG_CHECK_MODULES(MARCO, libmarco-private,
 			[use_marco=yes], [use_marco=no])
@@ -338,10 +348,12 @@ if test "x$use_gtk" = "xyes"; then
     fi
   else
     use_marco="no"
+    use_gsettings="no"
     use_mwd="no"
   fi
 else
   use_marco="no"
+  use_gsettings="no"
   use_mwd="no"
 fi
 
@@ -358,6 +370,11 @@ fi
 AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
 if test "$use_marco" = yes; then
   AC_DEFINE(USE_MARCO, 1, [Build marco theme support])
+fi
+
+AM_CONDITIONAL(USE_GSETTINGS, test "x$use_gsettings" = "xyes")
+if test "$use_gsettings" = yes; then
+  AC_DEFINE(USE_GSETTINGS, 1, [Build gsettings support in gtk-window-decorator])
 fi
 
 AM_CONDITIONAL(USE_MWD, test "x$use_mwd" = "xyes")
@@ -432,16 +449,17 @@ metadata/Makefile
 
 echo ""
 echo "the following optional plugins will be compiled:"
-echo "  glib:                  $use_glib"
-echo "  dbus:                  $use_dbus"
-echo "  annotate:              $use_annotate"
-echo "  svg:                   $use_librsvg"
-echo "  inotify:               $use_inotify"
-echo "  fuse:                  $use_fuse"
+echo "  glib:                      $use_glib"
+echo "  dbus:                      $use_dbus"
+echo "  annotate:                  $use_annotate"
+echo "  svg:                       $use_librsvg"
+echo "  inotify:                   $use_inotify"
+echo "  fuse:                      $use_fuse"
 echo ""
 echo "and the following optional features will be used:"
-echo "  gtk:                   $use_gtk ($with_gtk)"
-echo "  marco:                 $use_marco"
-echo "  mate-window-decorator: $use_mwd"
-echo "  desktop menu entries:  $use_menu_entries"
+echo "  gtk:                       $use_gtk ($with_gtk)"
+echo "  marco:                     $use_marco"
+echo "  gwd gsettings support:     $use_gsettings"
+echo "  mate-window-decorator:     $use_mwd"
+echo "  desktop menu entries:      $use_menu_entries"
 echo ""
