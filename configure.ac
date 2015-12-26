@@ -6,17 +6,20 @@ dnl An even micro number indicates a released version.
 m4_define(compiz_version_major, 0)
 m4_define(compiz_version_minor, 8)
 m4_define(compiz_version_micro, 10)
+m4_define(compiz_version_nano, 1)
 
 AC_INIT([compiz],
-	[compiz_version_major().compiz_version_minor().compiz_version_micro()],
+	[compiz_version_major().compiz_version_minor().compiz_version_micro().compiz_version_nano()],
 	[davidr@novell.com])
 
 COMPIZ_VERSION_MAJOR=compiz_version_major()
 COMPIZ_VERSION_MINOR=compiz_version_minor()
 COMPIZ_VERSION_MICRO=compiz_version_micro()
+COMPIZ_VERSION_NANO=compiz_version_nano()
 AC_SUBST(COMPIZ_VERSION_MAJOR)
 AC_SUBST(COMPIZ_VERSION_MINOR)
 AC_SUBST(COMPIZ_VERSION_MICRO)
+AC_SUBST(COMPIZ_VERSION_NANO)
 
 AM_INIT_AUTOMAKE([1.9 foreign dist-xz no-dist-gzip check-news])
 AC_CONFIG_HEADER([config.h])
