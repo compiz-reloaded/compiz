@@ -297,6 +297,10 @@ AC_ARG_ENABLE(gsettings,
   [  --disable-gsettings     Disable gsettings gwd support],
   [use_gsettings=$enableval], [use_gsettings=yes])
 
+AC_ARG_ENABLE(compizconfig,
+  [  --disable-compizconfig  Disable compizconfig support in gtk-window-decorator],
+  [use_compizconfig=$enableval], [use_compizconfig=yes])
+
 if test "x$use_gtk" = "xyes"; then
   if test "x$with_gtk" != "x2.0"; then
     PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
@@ -333,6 +337,10 @@ if test "x$use_gtk" = "xyes"; then
       PKG_CHECK_MODULES(MARCO, libmarco-private,
 			[use_marco=yes], [use_marco=no])
     fi
+
+    if test "x$use_compizconfig" = "xyes"; then
+      PKG_CHECK_MODULES(COMPIZCONFIG, [libcompizconfig >= 0.8 libcompizconfig < 0.9], [use_compizconfig=yes], [use_compizconfig=no])
+    fi
   else
     use_marco="no"
     use_gsettings="no"
@@ -360,6 +368,11 @@ fi
 AM_CONDITIONAL(USE_GSETTINGS, test "x$use_gsettings" = "xyes")
 if test "$use_gsettings" = yes; then
   AC_DEFINE(USE_GSETTINGS, 1, [Build gsettings support in gtk-window-decorator])
+fi
+
+AM_CONDITIONAL(USE_COMPIZCONFIG, test "x$use_compizconfig" = "xyes")
+if test "$use_compizconfig" = yes; then
+  AC_DEFINE(USE_COMPIZCONFIG, 1, [Build compizconfig support in gtk-window-decorator])
 fi
 
 AC_ARG_WITH(max-desktops,
@@ -440,5 +453,6 @@ echo "and the following optional features will be used:"
 echo "  gtk:                       $use_gtk ($with_gtk)"
 echo "  marco:                     $use_marco"
 echo "  gwd gsettings support:     $use_gsettings"
+echo "  gwd compizconfig support:  $use_compizconfig"
 echo "  desktop menu entries:      $use_menu_entries"
 echo ""

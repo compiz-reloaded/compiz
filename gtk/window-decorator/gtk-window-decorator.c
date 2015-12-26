@@ -36,6 +36,10 @@
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
 
+#ifdef USE_COMPIZCONFIG
+#include <ccs.h>
+#endif
+
 #ifdef USE_GSETTINGS
 #include <gio/gio.h>
 #endif
@@ -104,6 +108,20 @@
 #define GWD_BLUR_TYPE_KEY "blur-type"
 
 #define GWD_WHEEL_ACTION_KEY "mouse-wheel-action"
+
+
+#define COMPIZCONFIG_DECOR_OPTION "decoration"
+
+#define COMPIZCONFIG_SHADOW_RADIUS_OPTION "shadow_radius"
+
+#define COMPIZCONFIG_SHADOW_OPACITY_OPTION "shadow_opacity"
+
+#define COMPIZCONFIG_SHADOW_COLOR_OPTION "shadow_color"
+
+#define COMPIZCONFIG_SHADOW_OFFSET_X_OPTION "shadow_x_offset"
+
+#define COMPIZCONFIG_SHADOW_OFFSET_Y_OPTION "shadow_y_offset"
+
 
 #define DBUS_DEST       "org.freedesktop.compiz"
 #define DBUS_PATH       "/org/freedesktop/compiz/decoration/allscreens"
@@ -6754,6 +6772,107 @@ send_and_block_for_shadow_option_reply (DBusConnection *connection,
 
 #endif
 
+#ifdef USE_COMPIZCONFIG
+static gboolean
+shadow_settings_changed (CCSContext *context)
+{
+    CCSPlugin		 *decor_plugin;
+    CCSSetting		 *plugin_setting;
+    float		 radius = 0.0, opacity = 0.0;
+    int			 offset = 0;
+    CCSSettingColorValue color;
+
+    gboolean changed = FALSE;
+
+    if (!(context && ccsPluginIsActive (context, COMPIZCONFIG_DECOR_OPTION)))
+	return FALSE;
+
+    /* Note that ccsFindPlugin and ccsFindSetting are not really allocating anything */
+    decor_plugin = ccsFindPlugin (context, COMPIZCONFIG_DECOR_OPTION);
+    if (!decor_plugin)
+	return FALSE;
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_RADIUS_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetFloat (plugin_setting, &radius);
+    radius = MAX (0.0, MIN (radius, 48.0));
+    if (shadow_radius != radius)
+    {
+	shadow_radius = radius;
+	changed = TRUE;
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OPACITY_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetFloat (plugin_setting, &opacity);
+    opacity = MAX (0.0, MIN (opacity, 6.0));
+    if (shadow_opacity != opacity)
+    {
+	shadow_opacity = opacity;
+	changed = TRUE;
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_COLOR_OPTION, 0, 0);
+    if (plugin_setting)
+    {
+	ccsGetColor (plugin_setting, &color);
+	if (shadow_color[0] != color.array.array[0] ||
+	    shadow_color[1] != color.array.array[1] ||
+	    shadow_color[2] != color.array.array[2])
+	{
+	    shadow_color[0] = color.array.array[0];
+	    shadow_color[1] = color.array.array[1];
+	    shadow_color[2] = color.array.array[2];
+	    changed = TRUE;
+	}
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OFFSET_X_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetInt (plugin_setting, &offset);
+    offset = MAX (-16, MIN (offset, 16));
+    if (shadow_offset_x != offset)
+    {
+	shadow_offset_x = offset;
+	changed = TRUE;
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OFFSET_Y_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetInt (plugin_setting, &offset);
+    offset = MAX (-16, MIN (offset, 16));
+    if (shadow_offset_y != offset)
+    {
+	shadow_offset_y = offset;
+	changed = TRUE;
+    }
+
+    return changed;
+}
+
+static gboolean
+compizconfig_value_changed (gpointer *data)
+{
+    gboolean changed = FALSE;
+
+    WnckScreen *screen  = (WnckScreen *) data[0];
+    CCSContext *context = (CCSContext *) data[1];
+
+    if (!context)
+	return FALSE;
+
+    ccsProcessEvents (context, ProcessEventsNoGlibMainLoopMask);
+
+    if (shadow_settings_changed (context))
+	changed = TRUE;
+
+    if (changed)
+	decorations_changed (screen);
+
+    return TRUE;
+}
+#endif
+
 static gboolean
 init_settings (WnckScreen *screen)
 {
@@ -6921,6 +7040,19 @@ init_settings (WnckScreen *screen)
     }
 #endif
 
+#ifdef USE_COMPIZCONFIG
+    gpointer *compizconfig_value_data = malloc (sizeof (WnckScreen *) + sizeof (CCSContext *));
+    CCSContext *ccs_context = ccsContextNew (NULL, 0);
+
+    compizconfig_value_data[0] = (gpointer) screen;
+    compizconfig_value_data[1] = (gpointer) ccs_context;
+
+    /* Check settings every second */
+    g_timeout_add_seconds (1,
+			   (GSourceFunc) compizconfig_value_changed,
+			   (gpointer) compizconfig_value_data);
+#endif
+
     style_window = gtk_window_new (GTK_WINDOW_POPUP);
 
     gdkscreen = gdk_screen_get_default ();
@@ -6976,6 +7108,10 @@ init_settings (WnckScreen *screen)
 #endif
 
     update_titlebar_font ();
+
+#ifdef USE_COMPIZCONFIG
+    shadow_settings_changed (ccs_context);
+#endif
 
 #ifdef USE_GSETTINGS
     titlebar_click_action_changed (gsettings_marco,

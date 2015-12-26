@@ -10,6 +10,7 @@ gtk_window_decorator_LDADD	  =		       \
 	$(top_builddir)/libdecoration/libdecoration.la \
 	@GTK_WINDOW_DECORATOR_LIBS@		       \
 	@GSETTINGS_LIBS@			       \
+	@COMPIZCONFIG_LIBS@			       \
 	@DBUS_GLIB_LIBS@			       \
 	$(marcolibs)
 
@@ -32,6 +33,7 @@ AM_CPPFLAGS = \
 	@GTK_WINDOW_DECORATOR_CFLAGS@      \
 	@MARCO_CFLAGS@                     \
 	@GSETTINGS_CFLAGS@                 \
+	@COMPIZCONFIG_CFLAGS@              \
 	@DBUS_GLIB_CFLAGS@                 \
 	-DALL_LINGUAS="\"@ALL_LINGUAS@\""  \
 	-DLOCALEDIR="\"@datadir@/locale"\"
