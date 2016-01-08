@@ -777,9 +777,7 @@ removeFileWatch (CompFileWatchHandle handle);
 #define COMP_DISPLAY_OPTION_IGNORE_HINTS_WHEN_MAXIMIZED      31
 #define COMP_DISPLAY_OPTION_PING_DELAY                       32
 #define COMP_DISPLAY_OPTION_EDGE_DELAY                       33
-#define COMP_DISPLAY_OPTION_CURSOR_THEME                     34
-#define COMP_DISPLAY_OPTION_CURSOR_SIZE                      35
-#define COMP_DISPLAY_OPTION_NUM                              36
+#define COMP_DISPLAY_OPTION_NUM                              34
 
 typedef void (*HandleEventProc) (CompDisplay *display,
 				 XEvent	     *event);
