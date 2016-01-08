@@ -1012,6 +1012,10 @@ svgInit (CompPlugin *p)
 	return FALSE;
     }
 
+#if !LIBRSVG_CHECK_VERSION (2, 36, 0)
+    rsvg_init ();
+#endif
+
     compAddMetadataFromFile (&svgMetadata, p->vTable->name);
 
     return TRUE;
@@ -1022,6 +1026,10 @@ svgFini (CompPlugin *p)
 {
     freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&svgMetadata);
+
+#if !LIBRSVG_CHECK_VERSION (2, 36, 0)
+    rsvg_term ();
+#endif
 }
 
 static CompMetadata *
