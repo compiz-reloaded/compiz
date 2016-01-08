@@ -619,17 +619,6 @@ gdk_cairo_set_source_color_alpha (cairo_t  *cr,
 			   color->blue  / 65535.0,
 			   alpha);
 }
-
-static GdkPixmap *
-create_pixmap (int w,
-	       int h)
-{
-    if (w == 0 || h ==0)
-	abort ();
-
-    return gdk_pixmap_new (GDK_DRAWABLE (gtk_widget_get_window (style_window)),
-			   w, h, 32);
-}
 #endif
 
 static cairo_surface_t *
@@ -2036,124 +2025,129 @@ meta_draw_window_decoration (decor_t *d)
 
     cairo_destroy (cr);
 
+    if (clip.width != 0 && clip.height != 0 &&
 #if GTK_CHECK_VERSION (3, 0, 0)
-    surface = create_surface (clip.width, clip.height);
-    cr = cairo_create (surface);
-    gdk_cairo_set_source_rgba (cr, &bg);
+	(surface = create_surface (clip.width, clip.height)))
+    {
+	cr = cairo_create (surface);
+	gdk_cairo_set_source_rgba (cr, &bg);
 #else
-    pixmap = create_pixmap (clip.width, clip.height);
-    cr = gdk_cairo_create (GDK_DRAWABLE (pixmap));
-    gdk_cairo_set_source_color_alpha (cr, &bg_color, bg_alpha);
+	(pixmap = gdk_pixmap_new (GDK_DRAWABLE (gtk_widget_get_window (style_window)),
+				  clip.width, clip.height, -1)))
+    {
+	cr = gdk_cairo_create (GDK_DRAWABLE (pixmap));
+	gdk_cairo_set_source_color_alpha (cr, &bg_color, bg_alpha);
 #endif
-    cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+	cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
 
-    src = XRenderCreatePicture (xdisplay,
+	src = XRenderCreatePicture (xdisplay,
 #if GTK_CHECK_VERSION (3, 0, 0)
-				cairo_xlib_surface_get_drawable (surface),
+				    cairo_xlib_surface_get_drawable (surface),
 #else
-				GDK_PIXMAP_XID (pixmap),
+				    GDK_PIXMAP_XID (pixmap),
 #endif
-				xformat, 0, NULL);
+				    xformat, 0, NULL);
 
-    cairo_paint (cr);
+	cairo_paint (cr);
 
-    meta_theme_draw_frame (theme,
-			   style_window,
+	meta_theme_draw_frame (theme,
+			       style_window,
 #if GTK_CHECK_VERSION (3, 0, 0)
-			   cr,
+			       cr,
 #else
-			   pixmap,
-			   NULL,
-			   0, 0,
+			       pixmap,
+			       NULL,
+			       0, 0,
 #endif
-			   META_FRAME_TYPE_NORMAL,
-			   flags,
-			   clip.width - fgeom.left_width - fgeom.right_width,
-			   clip.height - fgeom.top_height - fgeom.bottom_height,
-			   d->layout,
-			   text_height,
-			   &button_layout,
-			   button_states,
-			   d->icon_pixbuf,
-			   NULL);
+			       META_FRAME_TYPE_NORMAL,
+			       flags,
+			       clip.width - fgeom.left_width - fgeom.right_width,
+			       clip.height - fgeom.top_height - fgeom.bottom_height,
+			       d->layout,
+			       text_height,
+			       &button_layout,
+			       button_states,
+			       d->icon_pixbuf,
+			       NULL);
 
-    if (fgeom.top_height)
-    {
-	top_region = meta_get_top_border_region (&fgeom, clip.width);
+	if (fgeom.top_height)
+	{
+	    top_region = meta_get_top_border_region (&fgeom, clip.width);
 
-	decor_blend_border_picture (xdisplay,
-				    d->context,
-				    src,
-				    0, 0,
-				    d->picture,
-				    &d->border_layout,
-				    BORDER_TOP,
-				    top_region,
-				    alpha * 0xffff,
-				    shade_alpha,
-				    0);
-    }
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					0, 0,
+					d->picture,
+					&d->border_layout,
+					BORDER_TOP,
+					top_region,
+					alpha * 0xffff,
+					shade_alpha,
+					0);
+	}
 
-    if (fgeom.bottom_height)
-    {
-	bottom_region = meta_get_bottom_border_region (&fgeom, clip.width);
+	if (fgeom.bottom_height)
+	{
+	    bottom_region = meta_get_bottom_border_region (&fgeom, clip.width);
 
-	decor_blend_border_picture (xdisplay,
-				    d->context,
-				    src,
-				    0, clip.height - fgeom.bottom_height,
-				    d->picture,
-				    &d->border_layout,
-				    BORDER_BOTTOM,
-				    bottom_region,
-				    alpha * 0xffff,
-				    shade_alpha,
-				    0);
-    }
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					0, clip.height - fgeom.bottom_height,
+					d->picture,
+					&d->border_layout,
+					BORDER_BOTTOM,
+					bottom_region,
+					alpha * 0xffff,
+					shade_alpha,
+					0);
+	}
 
-    if (fgeom.left_width)
-    {
-	left_region = meta_get_left_border_region (&fgeom, clip.height);
+	if (fgeom.left_width)
+	{
+	    left_region = meta_get_left_border_region (&fgeom, clip.height);
 
-	decor_blend_border_picture (xdisplay,
-				    d->context,
-				    src,
-				    0, fgeom.top_height,
-				    d->picture,
-				    &d->border_layout,
-				    BORDER_LEFT,
-				    left_region,
-				    alpha * 0xffff,
-				    shade_alpha,
-				    0);
-    }
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					0, fgeom.top_height,
+					d->picture,
+					&d->border_layout,
+					BORDER_LEFT,
+					left_region,
+					alpha * 0xffff,
+					shade_alpha,
+					0);
+	}
 
-    if (fgeom.right_width)
-    {
-	right_region = meta_get_right_border_region (&fgeom, clip.height);
+	if (fgeom.right_width)
+	{
+	    right_region = meta_get_right_border_region (&fgeom, clip.height);
 
-	decor_blend_border_picture (xdisplay,
-				    d->context,
-				    src,
-				    clip.width - fgeom.right_width, fgeom.top_height,
-				    d->picture,
-				    &d->border_layout,
-				    BORDER_RIGHT,
-				    right_region,
-				    alpha * 0xffff,
-				    shade_alpha,
-				    0);
-    }
+	    decor_blend_border_picture (xdisplay,
+					d->context,
+					src,
+					clip.width - fgeom.right_width, fgeom.top_height,
+					d->picture,
+					&d->border_layout,
+					BORDER_RIGHT,
+					right_region,
+					alpha * 0xffff,
+					shade_alpha,
+					0);
+	}
 
-    cairo_destroy (cr);
+	cairo_destroy (cr);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
-    cairo_surface_destroy (surface);
+	cairo_surface_destroy (surface);
 #else
-    g_object_unref (G_OBJECT (pixmap));
+	g_object_unref (G_OBJECT (pixmap));
 #endif
 
-    XRenderFreePicture (xdisplay, src);
+	XRenderFreePicture (xdisplay, src);
+    }
 
     copy_to_front_buffer (d);
 
