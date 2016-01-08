@@ -2107,7 +2107,7 @@ addScreen (CompDisplay *display,
 	return FALSE;
     }
 
-    if (getenv ("SKIP_CHECKS") != NULL)
+    if (!getenv ("SKIP_CHECKS") || strcmp (getenv ("SKIP_CHECKS"), "yes") != 0)
     {
 	glRenderer = (const char *) glGetString (GL_RENDERER);
 	if (glRenderer != NULL &&

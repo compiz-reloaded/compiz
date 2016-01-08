@@ -422,11 +422,6 @@ main (int argc, char **argv)
 	}
     }
 
-    if (!clientId)
-    {
-      clientId = getenv ("DESKTOP_AUTOSTART_ID");
-    }
-
     /* add in default plugins if none are given */
     if (nPlugin == 0)
     {

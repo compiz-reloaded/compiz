@@ -244,7 +244,8 @@ bindPixmapToTexture (CompScreen  *screen,
     CompFBConfig *config = &screen->glxPixmapFBConfigs[depth];
     int          attribs[7], i = 0;
 
-    if (getenv ("SKIP_CHECKS") != NULL && (width > screen->maxTextureSize || height > screen->maxTextureSize))
+    if ((!getenv ("SKIP_CHECKS") || strcmp (getenv ("SKIP_CHECKS"), "yes") != 0)
+	&& (width > screen->maxTextureSize || height > screen->maxTextureSize))
     {
 	compLogMessage ("core", CompLogLevelWarn,
 			"Exceeded max texture size");
