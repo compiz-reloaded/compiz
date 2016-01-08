@@ -296,6 +296,10 @@ AC_ARG_ENABLE(marco,
   [  --disable-marco         Disable marco theme support],
   [use_marco=$enableval], [use_marco=yes])
 
+AC_ARG_ENABLE(mate,
+  [  --disable-mate          Disable mate basic support],
+  [use_mate=$enableval], [use_mate=yes])
+
 AC_ARG_ENABLE(gsettings,
   [  --disable-gsettings     Disable gsettings gwd support],
   [use_gsettings=$enableval], [use_gsettings=yes])
@@ -347,10 +351,12 @@ if test "x$use_gtk" = "xyes"; then
   else
     use_marco="no"
     use_gsettings="no"
+    use_compizconfig="no"
   fi
 else
   use_marco="no"
   use_gsettings="no"
+  use_compizconfig="no"
 fi
 
 AM_CONDITIONAL(USE_GTK, test "x$use_gtk" = "xyes")
@@ -366,6 +372,11 @@ fi
 AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
 if test "$use_marco" = yes; then
   AC_DEFINE(USE_MARCO, 1, [Build marco theme support])
+fi
+
+AM_CONDITIONAL(USE_MATE, test "x$use_mate" = "xyes")
+if test "$use_mate" = yes; then
+  AC_DEFINE(USE_MATE, 1, [Build mate basic support])
 fi
 
 AM_CONDITIONAL(USE_GSETTINGS, test "x$use_gsettings" = "xyes")
@@ -455,6 +466,7 @@ echo ""
 echo "and the following optional features will be used:"
 echo "  gtk:                       $use_gtk ($with_gtk)"
 echo "  marco:                     $use_marco"
+echo "  mate:                      $use_mate"
 echo "  gwd gsettings support:     $use_gsettings"
 echo "  gwd compizconfig support:  $use_compizconfig"
 echo "  desktop menu entries:      $use_menu_entries"
