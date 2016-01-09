@@ -516,7 +516,7 @@ main (int argc, char **argv)
     }
 
     if (!addDisplay (displayName))
-	launchFallbackWM ();
+	return 1;
 
     eventLoop ();
 
