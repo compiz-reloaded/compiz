@@ -1,8 +1,6 @@
 AC_PREREQ(2.57)
 
 dnl compiz package version number
-dnl An odd micro number indicates in-progress development.
-dnl An even micro number indicates a released version.
 m4_define(compiz_version_major, 0)
 m4_define(compiz_version_minor, 8)
 m4_define(compiz_version_micro, 10)
@@ -418,8 +416,9 @@ AC_CONFIG_COMMANDS([include/compiz-common.h],
 #define COMPIZ_VERSION_MAJOR $COMPIZ_VERSION_MAJOR
 #define COMPIZ_VERSION_MINOR $COMPIZ_VERSION_MINOR
 #define COMPIZ_VERSION_MICRO $COMPIZ_VERSION_MICRO
+#define COMPIZ_VERSION_NANO $COMPIZ_VERSION_NANO
 
-#define COMPIZ_VERSION_STRING "$COMPIZ_VERSION_MAJOR.$COMPIZ_VERSION_MINOR.$COMPIZ_VERSION_MICRO"
+#define COMPIZ_VERSION_STRING "$COMPIZ_VERSION_MAJOR.$COMPIZ_VERSION_MINOR.$COMPIZ_VERSION_MICRO.$COMPIZ_VERSION_NANO"
 
 _EOF
 	echo '#endif' >> $outfile
@@ -434,6 +433,7 @@ _EOF
 	COMPIZ_VERSION_MAJOR=$COMPIZ_VERSION_MAJOR
 	COMPIZ_VERSION_MINOR=$COMPIZ_VERSION_MINOR
 	COMPIZ_VERSION_MICRO=$COMPIZ_VERSION_MICRO
+	COMPIZ_VERSION_NANO=$COMPIZ_VERSION_NANO
 ])
 
 AC_OUTPUT([
