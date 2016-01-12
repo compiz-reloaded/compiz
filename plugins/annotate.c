@@ -1094,7 +1094,7 @@ annoHandleEvent (CompDisplay *d,
 			if (event->type == d->damageEvent + XDamageNotify)
 			{
 				XDamageNotifyEvent *de = (XDamageNotifyEvent *) event;
-				int firstScreen, lastScreen;
+				int i, firstScreen, lastScreen;
 				if (onlyCurrentScreen) {
 					firstScreen = DefaultScreen (d->display);
 					lastScreen  = DefaultScreen (d->display);
@@ -1105,7 +1105,7 @@ annoHandleEvent (CompDisplay *d,
 					lastScreen  = ScreenCount (d->display) - 1;
 				}
 
-				for (int i = firstScreen; i <= lastScreen; i++)
+				for (i = firstScreen; i <= lastScreen; i++)
 				{
 					s = findScreenAtDisplay (d, XRootWindow (d->display, i));
 					ANNO_SCREEN(s);
