@@ -5146,9 +5146,10 @@ static void
 show_force_quit_dialog (WnckWindow *win,
 			Time        timestamp)
 {
-    decor_t   *d = g_object_get_data (G_OBJECT (win), "decor");
-    GtkWidget *dialog;
-    gchar     *str, *tmp, *message;
+    decor_t     *d = g_object_get_data (G_OBJECT (win), "decor");
+    GtkWidget   *dialog;
+    gchar       *str, *tmp
+    const gchar *message;
 
     if (d->force_quit_dialog)
 	return;
@@ -5166,7 +5167,6 @@ show_force_quit_dialog (WnckWindow *win,
 						 str,
 						 message);
     g_free (str);
-    g_free (message);
 
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "force-quit");
 
