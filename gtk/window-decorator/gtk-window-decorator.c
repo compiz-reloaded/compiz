@@ -5148,7 +5148,7 @@ show_force_quit_dialog (WnckWindow *win,
 {
     decor_t     *d = g_object_get_data (G_OBJECT (win), "decor");
     GtkWidget   *dialog;
-    gchar       *str, *tmp
+    gchar       *str, *tmp;
     const gchar *message;
 
     if (d->force_quit_dialog)
