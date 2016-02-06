@@ -41,6 +41,8 @@
 #include <X11/extensions/Xcomposite.h>
 #include <X11/extensions/Xrandr.h>
 #include <X11/extensions/shape.h>
+#include <X11/Xcursor/Xcursor.h>
+#include <X11/cursorfont.h>
 
 #include <compiz-core.h>
 
@@ -474,6 +476,32 @@ shade (CompDisplay     *d,
     return TRUE;
 }
 
+static void
+compDisplaySetCursorTheme (CompDisplay *display)
+{
+    char *theme = display->opt[COMP_DISPLAY_OPTION_CURSOR_THEME].value.s;
+    int size = display->opt[COMP_DISPLAY_OPTION_CURSOR_SIZE].value.i;
+
+    if (theme && strlen(theme))
+    {
+	CompScreen *s;
+
+	XcursorSetTheme (display->display, theme);
+	XcursorSetDefaultSize (display->display, size);
+	for (s = display->screens; s; s = s->next)
+	{
+	    XFreeCursor (display->display, s->normalCursor);
+	    s->busyCursor = XCreateFontCursor (display->display, XC_watch);
+	    XFlush (display->display);
+
+	    XFreeCursor (display->display, s->normalCursor);
+	    s->normalCursor = XCreateFontCursor (display->display, XC_left_ptr);
+	    XDefineCursor (display->display, s->root, s->normalCursor);
+	    XFlush (display->display);
+	}
+    }
+}
+
 const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "abi", "int", 0, 0, 0 },
     { "active_plugins", "list", "<type>string</type>", 0, 0 },
@@ -510,7 +538,9 @@ const CompMetadataOptionInfo coreDisplayOptionInfo[COMP_DISPLAY_OPTION_NUM] = {
     { "toggle_window_shaded_key", "key", 0, shade, 0 },
     { "ignore_hints_when_maximized", "bool", 0, 0, 0 },
     { "ping_delay", "int", "<min>1000</min>", 0, 0 },
-    { "edge_delay", "int", "<min>0</min>", 0, 0 }
+    { "edge_delay", "int", "<min>0</min>", 0, 0 },
+    { "cursor_theme", "string", 0, 0, 0 },
+    { "cursor_size", "int", 0, 0, 0 }
 };
 
 CompOption *
@@ -658,6 +688,20 @@ setDisplayOption (CompPlugin	  *plugin,
 	if (compSetBoolOption (o, value))
 	{
 	    setAudibleBell (display, o->value.b);
+	    return TRUE;
+	}
+	break;
+    case COMP_DISPLAY_OPTION_CURSOR_THEME:
+	if (compSetStringOption(o, value))
+	{
+	    compDisplaySetCursorTheme(display);
+	    return TRUE;
+	}
+	break;
+    case COMP_DISPLAY_OPTION_CURSOR_SIZE:
+	if (compSetIntOption(o, value))
+	{
+	    compDisplaySetCursorTheme(display);
 	    return TRUE;
 	}
 	break;

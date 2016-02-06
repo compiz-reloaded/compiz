@@ -110,6 +110,15 @@
 #define GWD_WHEEL_ACTION_KEY "mouse-wheel-action"
 
 
+#define GSCHEMA_KEY_GNOME_INTERFACE "org.gnome.desktop.interface"
+
+#define GSCHEMA_KEY_MATE_MOUSE "org.mate.peripherals-mouse"
+
+#define MATE_CURSOR_THEME_KEY "cursor-theme"
+
+#define MATE_CURSOR_SIZE_KEY "cursor-size"
+
+
 #define COMPIZCONFIG_DECOR_OPTION "decoration"
 
 #define COMPIZCONFIG_SHADOW_RADIUS_OPTION "shadow_radius"
@@ -121,6 +130,13 @@
 #define COMPIZCONFIG_SHADOW_OFFSET_X_OPTION "shadow_x_offset"
 
 #define COMPIZCONFIG_SHADOW_OFFSET_Y_OPTION "shadow_y_offset"
+
+
+#define COMPIZCONFIG_CORE_OPTION "core"
+
+#define COMPIZCONFIG_CURSOR_THEME_OPTION "cursor_theme"
+
+#define COMPIZCONFIG_CURSOR_SIZE_OPTION "cursor_size"
 
 
 #define DBUS_DEST       "org.freedesktop.compiz"
@@ -6537,31 +6553,82 @@ button_layout_changed (GSettings *settings_marco)
     return FALSE;
 }
 
+#ifdef USE_COMPIZCONFIG
+static void
+cursor_theme_changed (GSettings *settings_mouse, CCSContext *ccs_context)
+{
+    CCSPlugin *core_plugin;
+    CCSSetting *plugin_setting;
+    gchar *theme;
+    gint size;
+
+    if (!(ccs_context && ccsPluginIsActive (ccs_context, COMPIZCONFIG_CORE_OPTION)))
+	return;
+
+    /* Note that ccsFindPlugin and ccsFindSetting are not really allocating anything */
+    core_plugin = ccsFindPlugin (ccs_context, COMPIZCONFIG_CORE_OPTION);
+    if (!core_plugin)
+	return;
+
+    theme = g_settings_get_string (settings_mouse, MATE_CURSOR_THEME_KEY);
+    size = g_settings_get_int (settings_mouse, MATE_CURSOR_SIZE_KEY);
+
+    plugin_setting = ccsFindSetting (core_plugin, COMPIZCONFIG_CURSOR_THEME_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsSetString (plugin_setting, theme);
+
+    plugin_setting = ccsFindSetting (core_plugin, COMPIZCONFIG_CURSOR_SIZE_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsSetInt (plugin_setting, size);
+
+    ccsWriteChangedSettings (ccs_context);
+
+    if (theme && strlen (theme))
+    {
+	int i = 0, j = 0;
+	GdkDisplay *gdkdisplay = gdk_display_get_default ();
+	Display *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
+
+	XcursorSetTheme (xdisplay, theme);
+	XcursorSetDefaultSize (xdisplay, size);
+
+	for (i = 0; i < 3; i++)
+	{
+	    for (j = 0; j < 3; j++)
+	    {
+		if (cursor[i][j].shape != XC_left_ptr)
+		{
+		    XFreeCursor (xdisplay, cursor[i][j].cursor);
+		    cursor[i][j].cursor = XCreateFontCursor (xdisplay, cursor[i][j].shape);
+		}
+	    }
+	}
+	free (theme);
+    }
+}
+#endif
+
 static void
 gsettings_value_changed (GSettings   *settings,
 		         const gchar *key,
 		         WnckScreen  *screen)
 {
-    gboolean changed = FALSE;
+    GSettings  *settings_gwd = NULL, *settings_marco = NULL;
+#ifdef USE_COMPIZCONFIG
+    GSettings  *settings_mouse = NULL;
+    CCSContext *ccs_context = NULL;
+#endif
+    gboolean   changed = FALSE;
 
     if (!settings)
 	return;
 
-    GSettings *settings_gwd = NULL, *settings_marco = NULL;
-    gchar     *settings_gschema_id;
-
-    g_object_get (G_OBJECT (settings), "schema-id", &settings_gschema_id, NULL);
-    if (strcmp (settings_gschema_id, GSCHEMA_KEY_GWD) == 0)
-    {
-	settings_gwd   = settings;
-	settings_marco = g_object_get_data (G_OBJECT (settings), "gsettings_marco");
-    }
-    else
-    {
-	settings_gwd   = g_object_get_data (G_OBJECT (settings), "gsettings");
-	settings_marco = settings;
-    }
-    g_free (settings_gschema_id);
+    settings_gwd   = g_object_get_data (G_OBJECT (settings), "gsettings_gwd");
+    settings_marco = g_object_get_data (G_OBJECT (settings), "gsettings_marco");
+#ifdef USE_COMPIZCONFIG
+    settings_mouse = g_object_get_data (G_OBJECT (settings), "gsettings_mouse");
+    ccs_context    = g_object_get_data (G_OBJECT (settings), "ccs_context");
+#endif
 
     if (!settings_gwd || !settings_marco)
 	return;
@@ -6627,6 +6694,16 @@ gsettings_value_changed (GSettings   *settings,
 	if (theme_opacity_changed (settings_gwd))
 	    changed = TRUE;
     }
+#ifdef USE_COMPIZCONFIG
+    else if (settings_mouse && ccs_context)
+    {
+	if (strcmp (key, MATE_CURSOR_THEME_KEY) == 0 ||
+	    strcmp (key, MATE_CURSOR_SIZE_KEY) == 0)
+	{
+	    cursor_theme_changed (settings_mouse, ccs_context);
+	}
+    }
+#endif
 
     if (changed)
 	decorations_changed (screen);
@@ -6879,9 +6956,22 @@ init_settings (WnckScreen *screen)
 #endif
     AtkObject	   *switcher_label_obj;
 
+#ifdef USE_COMPIZCONFIG
+    gpointer *compizconfig_value_data = malloc (sizeof (WnckScreen *) + sizeof (CCSContext *));
+    CCSContext *ccs_context = ccsContextNew (NULL, 0);
+
+    compizconfig_value_data[0] = (gpointer) screen;
+    compizconfig_value_data[1] = (gpointer) ccs_context;
+
+    /* Check settings every second */
+    g_timeout_add_seconds (1,
+			   (GSourceFunc) compizconfig_value_changed,
+			   (gpointer) compizconfig_value_data);
+#endif
+
 #ifdef USE_GSETTINGS
-    const gchar	    *session;
-    GSettings	    *gsettings = NULL, *gsettings_marco = NULL;
+    const gchar	    *session = g_getenv ("XDG_CURRENT_DESKTOP");
+    GSettings	    *gsettings = NULL, *gsettings_marco = NULL, *gsettings_mouse = NULL;
     GSettingsSchema *gsettings_schema = NULL;
 
     gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
@@ -6905,7 +6995,6 @@ init_settings (WnckScreen *screen)
 	gsettings_marco = g_settings_new (GSCHEMA_KEY_GNOME_WM);
     }
 
-    session = g_getenv ("XDG_CURRENT_DESKTOP");
     gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
 							GSCHEMA_KEY_MARCO,
 							TRUE);
@@ -6913,7 +7002,7 @@ init_settings (WnckScreen *screen)
     {
 	g_settings_schema_unref (gsettings_schema);
 	gsettings_schema = NULL;
-	if (session && strlen (session) && strcasecmp (session, "MATE") == 0)
+	if (session && strcasecmp (session, "MATE") == 0)
 	{
 	    g_object_unref (G_OBJECT (gsettings_marco));
 	    gsettings_marco = NULL;
@@ -6922,10 +7011,44 @@ init_settings (WnckScreen *screen)
 	    gsettings_marco = g_settings_new (GSCHEMA_KEY_MARCO);
     }
 
+#ifdef USE_COMPIZCONFIG
+    /* Prioritise GNOME settings in general and MATE settings in, well, MATE */
+    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
+							GSCHEMA_KEY_GNOME_INTERFACE,
+							TRUE);
+    if (gsettings_schema)
+    {
+	g_settings_schema_unref (gsettings_schema);
+	gsettings_schema = NULL;
+	gsettings_mouse = g_settings_new (GSCHEMA_KEY_GNOME_INTERFACE);
+    }
+
+    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
+							GSCHEMA_KEY_MATE_MOUSE,
+							TRUE);
+    if (gsettings_schema)
+    {
+	g_settings_schema_unref (gsettings_schema);
+	gsettings_schema = NULL;
+	if (session && strcasecmp (session, "MATE") == 0)
+	{
+	    g_object_unref (G_OBJECT (gsettings_mouse));
+	    gsettings_mouse = NULL;
+	}
+	if (!gsettings_mouse)
+	    gsettings_mouse = g_settings_new (GSCHEMA_KEY_MATE_MOUSE);
+    }
+#endif
+
     /* theme_changed() needs both thus sending second object as data */
     if (gsettings)
     {
+	g_object_set_data (G_OBJECT (gsettings), "gsettings_gwd", gsettings);
 	g_object_set_data (G_OBJECT (gsettings), "gsettings_marco", gsettings_marco);
+#ifdef USE_COMPIZCONFIG
+	g_object_set_data (G_OBJECT (gsettings), "gsettings_mouse", gsettings_mouse);
+	g_object_set_data (G_OBJECT (gsettings), "ccs_context", ccs_context);
+#endif
 	g_signal_connect_data (gsettings,
 			       "changed",
 			       G_CALLBACK (gsettings_value_changed),
@@ -6935,13 +7058,37 @@ init_settings (WnckScreen *screen)
 
     if (gsettings_marco)
     {
-	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings", gsettings);
+	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings_gwd", gsettings);
+	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings_marco", gsettings_marco);
+#ifdef USE_COMPIZCONFIG
+	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings_mouse", gsettings_mouse);
+	g_object_set_data (G_OBJECT (gsettings_marco), "ccs_context", ccs_context);
+#endif
 	g_signal_connect_data (gsettings_marco,
 			       "changed",
 			       G_CALLBACK (gsettings_value_changed),
 			       (gpointer) screen,
 			       0, 0);
     }
+
+    if (gsettings_mouse)
+    {
+	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_gwd", gsettings);
+	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_marco", gsettings_marco);
+#ifdef USE_COMPIZCONFIG
+	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_mouse", gsettings_mouse);
+	g_object_set_data (G_OBJECT (gsettings_mouse), "ccs_context", ccs_context);
+#endif
+	g_signal_connect_data (gsettings_mouse,
+			       "changed",
+			       G_CALLBACK (gsettings_value_changed),
+			       (gpointer) screen,
+			       0, 0);
+    }
+
+#ifdef USE_COMPIZCONFIG
+    cursor_theme_changed(gsettings_mouse, ccs_context);
+#endif
 
 #elif USE_DBUS_GLIB
     DBusConnection *connection;
@@ -7032,19 +7179,6 @@ init_settings (WnckScreen *screen)
 			       DBUS_TYPE_INVALID);
 	dbus_message_unref (reply);
     }
-#endif
-
-#ifdef USE_COMPIZCONFIG
-    gpointer *compizconfig_value_data = malloc (sizeof (WnckScreen *) + sizeof (CCSContext *));
-    CCSContext *ccs_context = ccsContextNew (NULL, 0);
-
-    compizconfig_value_data[0] = (gpointer) screen;
-    compizconfig_value_data[1] = (gpointer) ccs_context;
-
-    /* Check settings every second */
-    g_timeout_add_seconds (1,
-			   (GSourceFunc) compizconfig_value_changed,
-			   (gpointer) compizconfig_value_data);
 #endif
 
     style_window = gtk_window_new (GTK_WINDOW_POPUP);
