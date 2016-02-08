@@ -6573,17 +6573,7 @@ cursor_theme_changed (GSettings *settings_mouse, CCSContext *ccs_context)
     theme = g_settings_get_string (settings_mouse, MATE_CURSOR_THEME_KEY);
     size = g_settings_get_int (settings_mouse, MATE_CURSOR_SIZE_KEY);
 
-    plugin_setting = ccsFindSetting (core_plugin, COMPIZCONFIG_CURSOR_THEME_OPTION, 0, 0);
-    if (plugin_setting)
-	ccsSetString (plugin_setting, theme);
-
-    plugin_setting = ccsFindSetting (core_plugin, COMPIZCONFIG_CURSOR_SIZE_OPTION, 0, 0);
-    if (plugin_setting)
-	ccsSetInt (plugin_setting, size);
-
-    ccsWriteChangedSettings (ccs_context);
-
-    if (theme && strlen (theme))
+    if (theme && strlen (theme) > 0)
     {
 	int i = 0, j = 0;
 	GdkDisplay *gdkdisplay = gdk_display_get_default ();
@@ -6603,7 +6593,18 @@ cursor_theme_changed (GSettings *settings_mouse, CCSContext *ccs_context)
 		}
 	    }
 	}
-	free (theme);
+
+	plugin_setting = ccsFindSetting (core_plugin, COMPIZCONFIG_CURSOR_THEME_OPTION, 0, 0);
+	if (plugin_setting)
+	    ccsSetString (plugin_setting, theme);
+
+	plugin_setting = ccsFindSetting (core_plugin, COMPIZCONFIG_CURSOR_SIZE_OPTION, 0, 0);
+	if (plugin_setting)
+	    ccsSetInt (plugin_setting, size);
+
+	ccsWriteChangedSettings (ccs_context);
+
+	g_free (theme);
     }
 }
 #endif
