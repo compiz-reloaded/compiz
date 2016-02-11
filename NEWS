@@ -1,30 +1,40 @@
-Release 0.8.10.1
-==============================================================
+Release 0.8.12
+================================================================
 
-Release 0.8.10
-==============================================================
+Release 0.8.10 (2015-12-18 Wolfgang Ulbrich <chat-to-me@raveit.de>)
+===================================================================
 COMPIZ-RELOADED
 
-Add mate-window-decorator: Marco native settings monitor for gwd
-Add all relevant checks from compiz-manager
-Remove scripts, modify desktop menu entries and disable by default
-gtk-window-decorator: Make it possible to build with Gtk3
-Add a compiz-decorator script that tries to detect the best suitable decorator
+Add mate-window-decorator: Marco native settings monitor for gwd.
+
+Add all relevant checks from compiz-manager.
+
+Remove scripts, modify desktop menu entries and disable by default.
+
+gtk-window-decorator: Make it possible to build with Gtk3.
+
+Add a compiz-decorator script that tries to detect the best
+suitable decorator.
 
 Release 0.8.9 (2015-11-01 Wolfgang Ulbrich <chat-to-me@raveit.de>)
-==============================================================
-Maintenance release.
+==================================================================
+COMPIZ-RELOADED
 
-compiz-reload
-full support of MATE desktop
-remove kde-decorator support, does not work anymore with kde5
-Wall plugin is moved to compiz-core
-Replace gnomecompat plugin with matecompat
-Add command line options for button layout and titlebar font
-Remove GConf support as it's obsolete
-Add scripts to start Compiz and GTK+ decorator + desktop files
-many more bug fixes and improvements, see git log
+Full support of MATE desktop.
 
+Remove kde-decorator support, does not work anymore with Plasma5.
+
+Desktop Wall plugin is moved to compiz-core.
+
+Replace gnomecompat plugin with matecompat.
+
+Add command line options for button layout and titlebar font.
+
+Remove GConf support as it's obsolete.
+
+Add scripts to start Compiz and GTK+ decorator + desktop files.
+
+Many more bug fixes and improvements, see git log
 
 Release 0.8.8 (2011-03-30 Danny Baumann <dannybaumann@web.de>)
 ==============================================================

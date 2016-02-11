@@ -3,8 +3,8 @@ AC_PREREQ(2.57)
 dnl compiz package version number
 m4_define(compiz_version_major, 0)
 m4_define(compiz_version_minor, 8)
-m4_define(compiz_version_micro, 10)
-m4_define(compiz_version_nano, 1)
+m4_define(compiz_version_micro, 12)
+m4_define(compiz_version_nano, 0)
 
 AC_INIT([compiz],
 	[compiz_version_major().compiz_version_minor().compiz_version_micro().compiz_version_nano()],
