@@ -4,20 +4,17 @@ dnl compiz package version number
 m4_define(compiz_version_major, 0)
 m4_define(compiz_version_minor, 8)
 m4_define(compiz_version_micro, 12)
-m4_define(compiz_version_nano, 0)
 
 AC_INIT([compiz],
-	[compiz_version_major().compiz_version_minor().compiz_version_micro().compiz_version_nano()],
+	[compiz_version_major().compiz_version_minor().compiz_version_micro()],
 	[davidr@novell.com])
 
 COMPIZ_VERSION_MAJOR=compiz_version_major()
 COMPIZ_VERSION_MINOR=compiz_version_minor()
 COMPIZ_VERSION_MICRO=compiz_version_micro()
-COMPIZ_VERSION_NANO=compiz_version_nano()
 AC_SUBST(COMPIZ_VERSION_MAJOR)
 AC_SUBST(COMPIZ_VERSION_MINOR)
 AC_SUBST(COMPIZ_VERSION_MICRO)
-AC_SUBST(COMPIZ_VERSION_NANO)
 
 AM_INIT_AUTOMAKE([1.9 foreign dist-xz no-dist-gzip check-news])
 AC_CONFIG_HEADER([config.h])
@@ -416,9 +413,8 @@ AC_CONFIG_COMMANDS([include/compiz-common.h],
 #define COMPIZ_VERSION_MAJOR $COMPIZ_VERSION_MAJOR
 #define COMPIZ_VERSION_MINOR $COMPIZ_VERSION_MINOR
 #define COMPIZ_VERSION_MICRO $COMPIZ_VERSION_MICRO
-#define COMPIZ_VERSION_NANO $COMPIZ_VERSION_NANO
 
-#define COMPIZ_VERSION_STRING "$COMPIZ_VERSION_MAJOR.$COMPIZ_VERSION_MINOR.$COMPIZ_VERSION_MICRO.$COMPIZ_VERSION_NANO"
+#define COMPIZ_VERSION_STRING "$COMPIZ_VERSION_MAJOR.$COMPIZ_VERSION_MINOR.$COMPIZ_VERSION_MICRO"
 
 _EOF
 	echo '#endif' >> $outfile
@@ -433,7 +429,6 @@ _EOF
 	COMPIZ_VERSION_MAJOR=$COMPIZ_VERSION_MAJOR
 	COMPIZ_VERSION_MINOR=$COMPIZ_VERSION_MINOR
 	COMPIZ_VERSION_MICRO=$COMPIZ_VERSION_MICRO
-	COMPIZ_VERSION_NANO=$COMPIZ_VERSION_NANO
 ])
 
 AC_OUTPUT([

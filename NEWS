@@ -1,5 +1,33 @@
-Release 0.8.12.0
-==================================================================
+Release 0.8.12 (2016-02-12 Sorokin Alexei <sor.alexei@meowr.ru>)
+================================================================
+COMPIZ-RELOADED
+
+Re-introduce D-Bus and GLib plugins.
+
+Move mate-window-decorator.py into gtk-window-decorator.
+
+Add an optional libcompizconfig build dependency that makes it so
+gtk-window-decorator honors ccsm shadow settings and MATE or
+GNOME Flashback cursor theme settings.
+
+annotate plugin changes:
+ - Implement shape drawing.
+ - Fix shape drawing code to always call cairo_save before drawing
+   and cairo_restore after drawing.
+ - Implement centered shape drawing with a toggle keybinding.
+ - Unify stroke and line width options.
+ - Fix longstanding damage bugs.
+ - Use stroke color for freedraw mode.
+ - Improve transparent colors rendering.
+ - Change default stroke width to 3.0.
+
+Move plugin-matecompat image to ccsm project.
+
+Add Desktop Wall plugin from compiz-plugins-main project.
+
+Fix Desktop Wall arrow and gradient thumbs colors settings.
+
+Fix gtk-window-decorator crash when a window is hanged.
 
 Release 0.8.10 (2015-12-18 Wolfgang Ulbrich <chat-to-me@raveit.de>)
 ===================================================================
