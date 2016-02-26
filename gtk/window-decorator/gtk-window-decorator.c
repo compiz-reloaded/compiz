@@ -918,7 +918,10 @@ button_state_paint (cairo_t	    *cr,
 #if GTK_CHECK_VERSION (3, 0, 0)
     GdkRGBA fg;
 
-    gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg);
+    gtk_style_context_save (context);
+    gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
+    gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
+    gtk_style_context_restore (context);
 #endif
 
     if ((state & IN_STATE) == IN_STATE)
@@ -998,8 +1001,12 @@ draw_window_decoration (decor_t *d)
 
 #if GTK_CHECK_VERSION (3, 0, 0)
     context = gtk_widget_get_style_context (style_window);
-    gtk_style_context_get_background_color (context, GTK_STATE_FLAG_NORMAL, &bg);
-    gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg);
+
+    gtk_style_context_save (context);
+    gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
+    gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &bg);
+    gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
+    gtk_style_context_restore (context);
 #else
     style = gtk_widget_get_style (style_window);
 #endif
@@ -1947,6 +1954,7 @@ meta_draw_window_decoration (decor_t *d)
 	GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 #if GTK_CHECK_VERSION (3, 0, 0)
     cairo_surface_t   *surface;
+    GtkStyleContext   *context;
 #else
     GdkPixmap	      *pixmap;
     GtkStyle	      *style;
@@ -1981,7 +1989,9 @@ meta_draw_window_decoration (decor_t *d)
     if (decoration_alpha == 1.0)
 	alpha = 1.0;
 
-#if !GTK_CHECK_VERSION (3, 0, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
+    context = gtk_widget_get_style_context (style_window);
+#else
     style = gtk_widget_get_style (style_window);
 #endif
 
@@ -2007,8 +2017,11 @@ meta_draw_window_decoration (decor_t *d)
 					      flags);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
-    gtk_style_context_get_background_color (gtk_widget_get_style_context (style_window),
-					    GTK_STATE_FLAG_NORMAL, &bg);
+    gtk_style_context_save (context);
+    gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
+    gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &bg);
+    gtk_style_context_restore (context);
+
     bg.alpha = 1.0;
 #else
     bg_color = style->bg[GTK_STATE_NORMAL];
@@ -2227,7 +2240,11 @@ decor_update_switcher_property (decor_t *d)
 
 #if GTK_CHECK_VERSION (3, 0, 0)
     context = gtk_widget_get_style_context (style_window);
-    gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg);
+
+    gtk_style_context_save (context);
+    gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
+    gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
+    gtk_style_context_restore (context);
 
     fgColor[0] = fg.red;
     fgColor[1] = fg.green;
@@ -2280,8 +2297,12 @@ draw_switcher_background (decor_t *d)
 
 #if GTK_CHECK_VERSION (3, 0, 0)
     context = gtk_widget_get_style_context (style_window);
-    gtk_style_context_get_background_color (context, GTK_STATE_FLAG_NORMAL, &bg);
-    gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg);
+
+    gtk_style_context_save (context);
+    gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
+    gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &bg);
+    gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
+    gtk_style_context_restore (context);
 
     color.r = bg.red;
     color.g = bg.green;
@@ -2505,8 +2526,12 @@ draw_switcher_foreground (decor_t *d)
 
 #if GTK_CHECK_VERSION (3, 0, 0)
     context = gtk_widget_get_style_context (style_window);
-    gtk_style_context_get_background_color (context, GTK_STATE_FLAG_NORMAL, &bg);
-    gtk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg);
+
+    gtk_style_context_save (context);
+    gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
+    gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &bg);
+    gtk_style_context_get_color (context, gtk_style_context_get_state (context), &fg);
+    gtk_style_context_restore (context);
 #else
     style = gtk_widget_get_style (style_window);
 #endif
@@ -5644,7 +5669,11 @@ update_style (GtkWidget *widget)
     GdkRGBA bg;
 
     context = gtk_widget_get_style_context (widget);
-    gtk_style_context_get_background_color (context, GTK_STATE_FLAG_SELECTED, &bg);
+
+    gtk_style_context_save (context);
+    gtk_style_context_set_state (context, GTK_STATE_FLAG_SELECTED);
+    gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &bg);
+    gtk_style_context_restore (context);
 
     spot_color.r = bg.red;
     spot_color.g = bg.green;
@@ -6267,7 +6296,11 @@ update_titlebar_font (void)
 
 	gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (provider), GTK_STYLE_PROVIDER_PRIORITY_FALLBACK);
 
-	gtk_style_context_get (context, GTK_STATE_FLAG_NORMAL, "font", &free_font_desc, NULL);
+	gtk_style_context_save (context);
+	gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
+	gtk_style_context_get (context, gtk_style_context_get_state (context), "font", &free_font_desc, NULL);
+	gtk_style_context_restore (context);
+
 	font_desc = (const PangoFontDescription *) free_font_desc;
 
 	gtk_widget_path_free (path);
