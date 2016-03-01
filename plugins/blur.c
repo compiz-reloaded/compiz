@@ -2878,7 +2878,7 @@ static const CompMetadataOptionInfo blurScreenOptionInfo[] = {
     { "filter", "int", RESTOSTRING (0, BLUR_FILTER_LAST), 0, 0 },
     { "gaussian_radius", "int", "<min>1</min><max>15</max>", 0, 0 },
     { "gaussian_strength", "float", "<min>0.0</min><max>1.0</max>", 0, 0 },
-    { "mipmap_lod", "float", "<min>0.1</min><max>5.0</max>", 0, 0 },
+    { "mipmap_lod", "float", "<min>0.1</min><max>8.0</max>", 0, 0 },
     { "saturation", "int", "<min>0</min><max>100</max>", 0, 0 },
     { "occlusion", "bool", 0, 0, 0 },
     { "independent_tex", "bool", 0, 0, 0 }
