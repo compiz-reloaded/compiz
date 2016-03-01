@@ -1,10 +1,14 @@
 SUBDIRS = include src libdecoration plugins images gtk po metadata
 
 EXTRA_DIST =		    \
+	AUTHORS		    \
 	COPYING		    \
 	COPYING.GPL	    \
 	COPYING.LGPL	    \
 	COPYING.MIT	    \
+	NEWS		    \
+	README.md	    \
+	autogen.sh	    \
 	compiz.pc.in	    \
 	compiz-cube.pc.in   \
 	compiz-scale.pc.in
