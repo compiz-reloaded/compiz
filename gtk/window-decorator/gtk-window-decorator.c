@@ -6742,9 +6742,108 @@ gsettings_value_changed (GSettings   *settings,
     if (changed)
 	decorations_changed (screen);
 }
+#endif
 
+#ifdef USE_COMPIZCONFIG
+static gboolean
+shadow_settings_changed (CCSContext *context)
+{
+    CCSPlugin		 *decor_plugin;
+    CCSSetting		 *plugin_setting;
+    float		 radius = 0.0, opacity = 0.0;
+    int			 offset = 0;
+    CCSSettingColorValue color;
+
+    gboolean changed = FALSE;
+
+    if (!(context && ccsPluginIsActive (context, COMPIZCONFIG_DECOR_OPTION)))
+	return FALSE;
+
+    /* Note that ccsFindPlugin and ccsFindSetting are not really allocating anything */
+    decor_plugin = ccsFindPlugin (context, COMPIZCONFIG_DECOR_OPTION);
+    if (!decor_plugin)
+	return FALSE;
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_RADIUS_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetFloat (plugin_setting, &radius);
+    radius = MAX (0.0, MIN (radius, 48.0));
+    if (shadow_radius != radius)
+    {
+	shadow_radius = radius;
+	changed = TRUE;
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OPACITY_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetFloat (plugin_setting, &opacity);
+    opacity = MAX (0.0, MIN (opacity, 6.0));
+    if (shadow_opacity != opacity)
+    {
+	shadow_opacity = opacity;
+	changed = TRUE;
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_COLOR_OPTION, 0, 0);
+    if (plugin_setting)
+    {
+	ccsGetColor (plugin_setting, &color);
+	if (shadow_color[0] != color.array.array[0] ||
+	    shadow_color[1] != color.array.array[1] ||
+	    shadow_color[2] != color.array.array[2])
+	{
+	    shadow_color[0] = color.array.array[0];
+	    shadow_color[1] = color.array.array[1];
+	    shadow_color[2] = color.array.array[2];
+	    changed = TRUE;
+	}
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OFFSET_X_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetInt (plugin_setting, &offset);
+    offset = MAX (-16, MIN (offset, 16));
+    if (shadow_offset_x != offset)
+    {
+	shadow_offset_x = offset;
+	changed = TRUE;
+    }
+
+    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OFFSET_Y_OPTION, 0, 0);
+    if (plugin_setting)
+	ccsGetInt (plugin_setting, &offset);
+    offset = MAX (-16, MIN (offset, 16));
+    if (shadow_offset_y != offset)
+    {
+	shadow_offset_y = offset;
+	changed = TRUE;
+    }
+
+    return changed;
+}
+
+static gboolean
+compizconfig_value_changed (gpointer *data)
+{
+    gboolean changed = FALSE;
+
+    WnckScreen *screen  = (WnckScreen *) data[0];
+    CCSContext *context = (CCSContext *) data[1];
+
+    if (!context)
+	return FALSE;
+
+    ccsProcessEvents (context, ProcessEventsNoGlibMainLoopMask);
+
+    if (shadow_settings_changed (context))
+	changed = TRUE;
+
+    if (changed)
+	decorations_changed (screen);
+
+    return TRUE;
+}
 #elif USE_DBUS_GLIB
-
 static DBusHandlerResult
 dbus_handle_message (DBusConnection *connection,
 		     DBusMessage    *message,
@@ -6874,108 +6973,6 @@ send_and_block_for_shadow_option_reply (DBusConnection *connection,
 
     return NULL;
 }
-
-#endif
-
-#ifdef USE_COMPIZCONFIG
-static gboolean
-shadow_settings_changed (CCSContext *context)
-{
-    CCSPlugin		 *decor_plugin;
-    CCSSetting		 *plugin_setting;
-    float		 radius = 0.0, opacity = 0.0;
-    int			 offset = 0;
-    CCSSettingColorValue color;
-
-    gboolean changed = FALSE;
-
-    if (!(context && ccsPluginIsActive (context, COMPIZCONFIG_DECOR_OPTION)))
-	return FALSE;
-
-    /* Note that ccsFindPlugin and ccsFindSetting are not really allocating anything */
-    decor_plugin = ccsFindPlugin (context, COMPIZCONFIG_DECOR_OPTION);
-    if (!decor_plugin)
-	return FALSE;
-
-    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_RADIUS_OPTION, 0, 0);
-    if (plugin_setting)
-	ccsGetFloat (plugin_setting, &radius);
-    radius = MAX (0.0, MIN (radius, 48.0));
-    if (shadow_radius != radius)
-    {
-	shadow_radius = radius;
-	changed = TRUE;
-    }
-
-    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OPACITY_OPTION, 0, 0);
-    if (plugin_setting)
-	ccsGetFloat (plugin_setting, &opacity);
-    opacity = MAX (0.0, MIN (opacity, 6.0));
-    if (shadow_opacity != opacity)
-    {
-	shadow_opacity = opacity;
-	changed = TRUE;
-    }
-
-    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_COLOR_OPTION, 0, 0);
-    if (plugin_setting)
-    {
-	ccsGetColor (plugin_setting, &color);
-	if (shadow_color[0] != color.array.array[0] ||
-	    shadow_color[1] != color.array.array[1] ||
-	    shadow_color[2] != color.array.array[2])
-	{
-	    shadow_color[0] = color.array.array[0];
-	    shadow_color[1] = color.array.array[1];
-	    shadow_color[2] = color.array.array[2];
-	    changed = TRUE;
-	}
-    }
-
-    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OFFSET_X_OPTION, 0, 0);
-    if (plugin_setting)
-	ccsGetInt (plugin_setting, &offset);
-    offset = MAX (-16, MIN (offset, 16));
-    if (shadow_offset_x != offset)
-    {
-	shadow_offset_x = offset;
-	changed = TRUE;
-    }
-
-    plugin_setting = ccsFindSetting (decor_plugin, COMPIZCONFIG_SHADOW_OFFSET_Y_OPTION, 0, 0);
-    if (plugin_setting)
-	ccsGetInt (plugin_setting, &offset);
-    offset = MAX (-16, MIN (offset, 16));
-    if (shadow_offset_y != offset)
-    {
-	shadow_offset_y = offset;
-	changed = TRUE;
-    }
-
-    return changed;
-}
-
-static gboolean
-compizconfig_value_changed (gpointer *data)
-{
-    gboolean changed = FALSE;
-
-    WnckScreen *screen  = (WnckScreen *) data[0];
-    CCSContext *context = (CCSContext *) data[1];
-
-    if (!context)
-	return FALSE;
-
-    ccsProcessEvents (context, ProcessEventsNoGlibMainLoopMask);
-
-    if (shadow_settings_changed (context))
-	changed = TRUE;
-
-    if (changed)
-	decorations_changed (screen);
-
-    return TRUE;
-}
 #endif
 
 static gboolean
@@ -7001,6 +6998,95 @@ init_settings (WnckScreen *screen)
     g_timeout_add_seconds (1,
 			   (GSourceFunc) compizconfig_value_changed,
 			   (gpointer) compizconfig_value_data);
+#elif USE_DBUS_GLIB
+    DBusConnection *connection;
+    DBusMessage	   *reply;
+    DBusError	   error;
+
+    dbus_error_init (&error);
+
+    connection = dbus_bus_get (DBUS_BUS_SESSION, &error);
+    if (!dbus_error_is_set (&error))
+    {
+	dbus_bus_add_match (connection, "type='signal'", &error);
+
+	dbus_connection_add_filter (connection,
+				    dbus_handle_message,
+				    screen, NULL);
+
+	dbus_connection_setup_with_g_main (connection, NULL);
+    }
+
+    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
+						    "/shadow_radius");
+    if (reply)
+    {
+	dbus_message_get_args (reply, NULL,
+			       DBUS_TYPE_DOUBLE, &shadow_radius,
+			       DBUS_TYPE_INVALID);
+
+	dbus_message_unref (reply);
+    }
+
+    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
+						    "/shadow_opacity");
+    if (reply)
+    {
+	dbus_message_get_args (reply, NULL,
+			       DBUS_TYPE_DOUBLE, &shadow_opacity,
+			       DBUS_TYPE_INVALID);
+	dbus_message_unref (reply);
+    }
+
+    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
+						    "/shadow_color");
+    if (reply)
+    {
+	DBusError error;
+	char      *str;
+
+	dbus_error_init (&error);
+
+	dbus_message_get_args (reply, &error,
+			       DBUS_TYPE_STRING, &str,
+			       DBUS_TYPE_INVALID);
+
+	if (!dbus_error_is_set (&error))
+	{
+	    int c[4];
+
+	    if (sscanf (str, "#%2x%2x%2x%2x", &c[0], &c[1], &c[2], &c[3]) == 4)
+	    {
+		shadow_color[0] = c[0] << 8 | c[0];
+		shadow_color[1] = c[1] << 8 | c[1];
+		shadow_color[2] = c[2] << 8 | c[2];
+	    }
+	}
+
+	dbus_error_free (&error);
+
+	dbus_message_unref (reply);
+    }
+
+    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
+						    "/shadow_x_offset");
+    if (reply)
+    {
+	dbus_message_get_args (reply, NULL,
+			       DBUS_TYPE_INT32, &shadow_offset_x,
+			       DBUS_TYPE_INVALID);
+	dbus_message_unref (reply);
+    }
+
+    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
+						    "/shadow_y_offset");
+    if (reply)
+    {
+	dbus_message_get_args (reply, NULL,
+			       DBUS_TYPE_INT32, &shadow_offset_y,
+			       DBUS_TYPE_INVALID);
+	dbus_message_unref (reply);
+    }
 #endif
 
 #ifdef USE_GSETTINGS
@@ -7131,95 +7217,6 @@ init_settings (WnckScreen *screen)
     cursor_theme_changed(gsettings_mouse, ccs_context);
 #endif
 
-#elif USE_DBUS_GLIB
-    DBusConnection *connection;
-    DBusMessage	   *reply;
-    DBusError	   error;
-
-    dbus_error_init (&error);
-
-    connection = dbus_bus_get (DBUS_BUS_SESSION, &error);
-    if (!dbus_error_is_set (&error))
-    {
-	dbus_bus_add_match (connection, "type='signal'", &error);
-
-	dbus_connection_add_filter (connection,
-				    dbus_handle_message,
-				    screen, NULL);
-
-	dbus_connection_setup_with_g_main (connection, NULL);
-    }
-
-    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_radius");
-    if (reply)
-    {
-	dbus_message_get_args (reply, NULL,
-			       DBUS_TYPE_DOUBLE, &shadow_radius,
-			       DBUS_TYPE_INVALID);
-
-	dbus_message_unref (reply);
-    }
-
-    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_opacity");
-    if (reply)
-    {
-	dbus_message_get_args (reply, NULL,
-			       DBUS_TYPE_DOUBLE, &shadow_opacity,
-			       DBUS_TYPE_INVALID);
-	dbus_message_unref (reply);
-    }
-
-    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_color");
-    if (reply)
-    {
-	DBusError error;
-	char      *str;
-
-	dbus_error_init (&error);
-
-	dbus_message_get_args (reply, &error,
-			       DBUS_TYPE_STRING, &str,
-			       DBUS_TYPE_INVALID);
-
-	if (!dbus_error_is_set (&error))
-	{
-	    int c[4];
-
-	    if (sscanf (str, "#%2x%2x%2x%2x", &c[0], &c[1], &c[2], &c[3]) == 4)
-	    {
-		shadow_color[0] = c[0] << 8 | c[0];
-		shadow_color[1] = c[1] << 8 | c[1];
-		shadow_color[2] = c[2] << 8 | c[2];
-	    }
-	}
-
-	dbus_error_free (&error);
-
-	dbus_message_unref (reply);
-    }
-
-    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_x_offset");
-    if (reply)
-    {
-	dbus_message_get_args (reply, NULL,
-			       DBUS_TYPE_INT32, &shadow_offset_x,
-			       DBUS_TYPE_INVALID);
-	dbus_message_unref (reply);
-    }
-
-    reply = send_and_block_for_shadow_option_reply (connection, DBUS_PATH
-						    "/shadow_y_offset");
-    if (reply)
-    {
-	dbus_message_get_args (reply, NULL,
-			       DBUS_TYPE_INT32, &shadow_offset_y,
-			       DBUS_TYPE_INVALID);
-	dbus_message_unref (reply);
-    }
 #endif
 
     style_window = gtk_window_new (GTK_WINDOW_POPUP);
