@@ -4383,7 +4383,7 @@ create_tooltip_window (void)
     gtk_widget_set_redraw_on_allocate (tip_window, TRUE);
 #if GTK_CHECK_VERSION (3, 0, 0)
     gtk_style_context_add_class (gtk_widget_get_style_context (tip_window),
-				     GTK_STYLE_CLASS_TOOLTIP);
+				 GTK_STYLE_CLASS_TOOLTIP);
 #else
     gtk_widget_set_name (tip_window, "gtk-tooltips");
 #endif
@@ -7007,6 +7007,13 @@ init_settings (WnckScreen *screen)
     const gchar	    *session = g_getenv ("XDG_CURRENT_DESKTOP");
     GSettings	    *gsettings = NULL, *gsettings_marco = NULL, *gsettings_mouse = NULL;
     GSettingsSchema *gsettings_schema = NULL;
+    gboolean	     is_mate_desktop;
+
+    if ((strlen (session) >= 4 && g_strcmp0 (session, "MATE") == 0) ||
+	(strlen (session) > 5 && g_strcmp0 (session + strlen (session) - 5, ":MATE") == 0))
+	is_mate_desktop = TRUE;
+    else
+	is_mate_desktop = FALSE;
 
     gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
 							GSCHEMA_KEY_GWD,
@@ -7018,7 +7025,7 @@ init_settings (WnckScreen *screen)
 	gsettings = g_settings_new (GSCHEMA_KEY_GWD);
     }
 
-    /* Prioritise GNOME settings in general and Marco settings in MATE */
+    /* In general prioritise GNOME settings but Marco settings in MATE */
     gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
 							GSCHEMA_KEY_GNOME_WM,
 							TRUE);
@@ -7036,7 +7043,7 @@ init_settings (WnckScreen *screen)
     {
 	g_settings_schema_unref (gsettings_schema);
 	gsettings_schema = NULL;
-	if (session && strcasecmp (session, "MATE") == 0)
+	if (is_mate_desktop)
 	{
 	    g_object_unref (G_OBJECT (gsettings_marco));
 	    gsettings_marco = NULL;
@@ -7064,7 +7071,7 @@ init_settings (WnckScreen *screen)
     {
 	g_settings_schema_unref (gsettings_schema);
 	gsettings_schema = NULL;
-	if (session && strcasecmp (session, "MATE") == 0)
+	if (is_mate_desktop)
 	{
 	    g_object_unref (G_OBJECT (gsettings_mouse));
 	    gsettings_mouse = NULL;
