@@ -3235,6 +3235,8 @@ update_event_windows (WnckWindow *win)
 
 	    if (w != 0 && h != 0)
 	    {
+		if (d->state & WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY)
+		    y = 0;
 		XMapWindow (xdisplay, d->event_windows[i][j]);
 		XMoveResizeWindow (xdisplay, d->event_windows[i][j],
 				   x, y, w, h);
@@ -3273,6 +3275,8 @@ update_event_windows (WnckWindow *win)
 
 	if ((*theme_get_button_position) (d, i, width, height, &x, &y, &w, &h))
 	{
+	    if (d->state & WNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY)
+		y = 0;
 	    XMapWindow (xdisplay, d->button_windows[i]);
 	    XMoveResizeWindow (xdisplay, d->button_windows[i], x, y, w, h);
 	}
