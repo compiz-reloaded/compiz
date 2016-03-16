@@ -648,28 +648,6 @@ create_surface (int w,
 					      CAIRO_CONTENT_COLOR_ALPHA, w, h);
 }
 
-static cairo_surface_t *
-create_native_surface_and_wrap (int w,
-                                int h)
-{
-    GdkWindow       *window;
-    GdkVisual       *visual;
-    cairo_surface_t *surface;
-    Display         *display;
-    Pixmap           pixmap;
-
-    if (w <= 0 || h <= 0)
-	abort ();
-
-    display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-    window = gtk_widget_get_window (style_window);
-    visual = gdk_window_get_visual (window);
-    pixmap = XCreatePixmap (display, GDK_WINDOW_XID (window), w, h, gdk_visual_get_depth (visual));
-    surface = cairo_xlib_surface_create (display, pixmap, GDK_VISUAL_XVISUAL (visual), w, h);
-
-    return surface;
-}
-
 #define CORNER_TOPLEFT     (1 << 0)
 #define CORNER_TOPRIGHT    (1 << 1)
 #define CORNER_BOTTOMRIGHT (1 << 2)
@@ -3828,7 +3806,7 @@ update_switcher_window (WnckWindow *win,
 	switcher_selected_window = selected;
     }
 
-    surface = create_native_surface_and_wrap (width, height);
+    surface = create_surface (width, height);
     if (!surface)
 	return FALSE;
 
