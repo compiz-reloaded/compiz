@@ -641,11 +641,29 @@ static cairo_surface_t *
 create_surface (int w,
 	        int h)
 {
+    cairo_surface_t *surface;
+
     if (w == 0 || h ==0)
 	abort ();
 
-    return gdk_window_create_similar_surface (gtk_widget_get_window (style_window),
-					      CAIRO_CONTENT_COLOR_ALPHA, w, h);
+    surface = gdk_window_create_similar_surface (gtk_widget_get_window (style_window),
+						 CAIRO_CONTENT_COLOR_ALPHA, w, h);
+
+    if (surface && cairo_surface_get_reference_count (surface) > 0)
+	return surface;
+    else
+	return NULL;
+}
+
+static gboolean
+destroy_surface_idled (gpointer data)
+{
+    cairo_surface_t *surface = (cairo_surface_t *) data;
+
+    if (surface && cairo_surface_get_reference_count (surface) > 0)
+	cairo_surface_destroy (surface);
+
+    return FALSE;
 }
 
 #define CORNER_TOPLEFT     (1 << 0)
@@ -3603,8 +3621,9 @@ update_window_decoration_size (WnckWindow *win)
     picture = XRenderCreatePicture (xdisplay, cairo_xlib_surface_get_drawable (buffer_surface),
 				    xformat, 0, NULL);
 
-    if (d->surface)
-	cairo_surface_destroy (d->surface);
+    /* wait until old surfaces are not used for sure,
+       one second should be enough */
+    g_timeout_add_seconds (1, destroy_surface_idled, d->surface);
 
     if (d->buffer_surface)
 	cairo_surface_destroy (d->buffer_surface);
