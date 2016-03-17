@@ -1,3 +1,17 @@
+Release 0.8.12.1 (2016-03-17 Sorokin Alexei <sor.alexei@meowr.ru>)
+==================================================================
+COMPIZ-RELOADED
+
+Increase maximum Mipmap LOD for Blur plugin.
+
+Probably fix "white glitches" that happen on resize in
+gtk-window-decorator.
+
+Fix right click near top edge of maximized windows in
+gtk-window-decorator.
+
+Fix a X11 Drawable leakage in gtk-window-decorator.
+
 Release 0.8.12 (2016-02-12 Sorokin Alexei <sor.alexei@meowr.ru>)
 ================================================================
 COMPIZ-RELOADED
@@ -6,9 +20,10 @@ Re-introduce D-Bus and GLib plugins.
 
 Move mate-window-decorator.py into gtk-window-decorator.
 
-Add an optional libcompizconfig build dependency that makes it so
-gtk-window-decorator honors ccsm shadow settings and MATE or
-GNOME Flashback cursor theme settings.
+Add an optional libcompizconfig build dependency that makes it
+so gtk-window-decorator can honor MATE or GNOME Flashback cursor
+theme settings, and also read shadow settings without D-Bus
+plugin from CCSM.
 
 annotate plugin changes:
  - Implement shape drawing.
