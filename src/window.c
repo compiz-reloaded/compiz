@@ -460,31 +460,29 @@ updateClientFrame (CompWindow *w)
     unsigned long n, left;
     unsigned char *data;
 
+    w->clientFrame.left   = 0;
+    w->clientFrame.right  = 0;
+    w->clientFrame.top    = 0;
+    w->clientFrame.bottom = 0;
+
     result = XGetWindowProperty (w->screen->display->display, w->id,
 				 w->screen->display->frameGtkExtentsAtom,
-				 0L, 65536, False, XA_CARDINAL,
+				 0L, 65536L, False, XA_CARDINAL,
 				 &actual, &format, &n, &left, &data);
 
-    if (result == Success && actual == XA_CARDINAL && data)
+    if (result == Success && data)
     {
-	if (n == 4)
+	if (n == 4 && actual == XA_CARDINAL)
 	{
 	    unsigned long *extents = *(unsigned long **) &data;
 
-	    w->clientFrame.left = extents[0];
-	    w->clientFrame.right = extents[1];
-	    w->clientFrame.top = extents[2];
+	    w->clientFrame.left   = extents[0];
+	    w->clientFrame.right  = extents[1];
+	    w->clientFrame.top    = extents[2];
 	    w->clientFrame.bottom = extents[3];
 	}
 
 	XFree (data);
-    }
-    else
-    {
-        w->clientFrame.left = 0;
-        w->clientFrame.right = 0;
-        w->clientFrame.top = 0;
-        w->clientFrame.bottom = 0;
     }
 }
 

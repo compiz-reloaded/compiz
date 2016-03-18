@@ -2639,7 +2639,8 @@ struct _CompWindow {
 
     CompWindowExtents input;
     CompWindowExtents output;
-    CompWindowExtents clientFrame;
+    /* was placed below for ABI compat reasons */
+    /* CompWindowExtents clientFrame; */
 
     CompStruts *struts;
 
@@ -2687,6 +2688,9 @@ struct _CompWindow {
 
     /* must be set by addWindowGeometry */
     DrawWindowGeometryProc drawWindowGeometry;
+
+    /* was placed here and not above for ABI compat reasons */
+    CompWindowExtents clientFrame;
 
     void *reserved;
 };
