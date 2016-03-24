@@ -1,3 +1,6 @@
+EXTRA_DIST =		  \
+	compiz.desktop.in
+
 if USE_MATE
 desktopfilesdir	      = $(DESTDIR)$(datadir)/applications
 desktopfiles_in_files = compiz.desktop.in
@@ -22,7 +25,5 @@ endif
 noinst_DATA =		      \
 	$(desktopfiles_files)
 
-EXTRA_DIST =			 \
-	$(desktopfiles_in_files)
 DISTCLEANFILES = \
 	$(noinst_DATA)

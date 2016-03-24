@@ -31,6 +31,9 @@ compiz_SOURCES =   \
 	match.c    \
 	metadata.c
 
+EXTRA_DIST =                     \
+	compiz-start.desktop.in
+
 if USE_MENU_ENTRIES
 desktopfilesdir       = $(DESTDIR)$(datadir)/applications
 desktopfiles_in_files = compiz-start.desktop.in
@@ -53,7 +56,4 @@ uninstall-local:
 
 noinst_DATA =                 \
 	$(desktopfiles_files)
-
-EXTRA_DIST =                     \
-	$(desktopfiles_in_files)
 endif

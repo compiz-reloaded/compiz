@@ -23,10 +23,10 @@ if USE_GSETTINGS
 gsettings_SCHEMAS = org.compiz-0.gwd.gschema.xml
 
 @GSETTINGS_RULES@
-
-EXTRA_DIST = \
-	$(gsettings_SCHEMAS)
 endif
+
+EXTRA_DIST =			     \
+	org.compiz-0.gwd.gschema.xml
 
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/include            \
