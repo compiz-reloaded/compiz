@@ -2114,9 +2114,8 @@ addDisplay (const char *name)
     d->clientListStackingAtom =
 	XInternAtom (dpy, "_NET_CLIENT_LIST_STACKING", 0);
 
-    d->frameExtentsAtom    = XInternAtom (dpy, "_NET_FRAME_EXTENTS", 0);
-    d->frameGtkExtentsAtom = XInternAtom (dpy, "_GTK_FRAME_EXTENTS", 0);
-    d->frameWindowAtom     = XInternAtom (dpy, "_NET_FRAME_WINDOW", 0);
+    d->frameExtentsAtom = XInternAtom (dpy, "_NET_FRAME_EXTENTS", 0);
+    d->frameWindowAtom  = XInternAtom (dpy, "_NET_FRAME_WINDOW", 0);
 
     d->wmStateAtom	  = XInternAtom (dpy, "WM_STATE", 0);
     d->wmChangeStateAtom  = XInternAtom (dpy, "WM_CHANGE_STATE", 0);

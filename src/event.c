@@ -1544,12 +1544,6 @@ handleEvent (CompDisplay *d,
 	    if (w)
 		updateIconGeometry (w);
 	}
-	else if (event->xproperty.atom == d->frameGtkExtentsAtom)
-	{
-	    w = findWindowAtDisplay (d, event->xproperty.window);
-	    if (w)
-		updateClientFrame (w);
-	}
 	else if (event->xproperty.atom == d->winOpacityAtom)
 	{
 	    w = findWindowAtDisplay (d, event->xproperty.window);
