@@ -25,7 +25,7 @@ AC_DEFINE(DECOR_INTERFACE_VERSION, 20080529, [Decorator interface version])
 
 AC_ISC_POSIX
 AC_PROG_CC
-AC_PROG_LIBTOOL
+LT_INIT
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 
