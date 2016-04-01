@@ -316,6 +316,7 @@ if test "x$use_gtk" = "xyes"; then
 		      xcursor            \
 		      gtk+-2.0 >= 2.10.0 \
 		      libwnck-1.0	 \
+		      cairo >= 1.4	 \
 		      pangocairo,
 		      [use_gtk=yes], [use_gtk=no])
   fi
