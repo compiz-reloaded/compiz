@@ -643,16 +643,25 @@ create_surface (int w,
 {
     cairo_surface_t *surface;
 
-    if (w == 0 || h ==0)
+    if (w < 0 || h < 0)
 	abort ();
+    if (w == 0 || h == 0)
+	return NULL;
 
-    surface = gdk_window_create_similar_surface (gtk_widget_get_window (style_window),
-						 CAIRO_CONTENT_COLOR_ALPHA, w, h);
+    surface =
+      gdk_window_create_similar_surface (gtk_widget_get_window (style_window),
+					 CAIRO_CONTENT_COLOR_ALPHA, w, h);
 
-    if (surface && cairo_surface_get_reference_count (surface) > 0)
+    if (!surface || cairo_surface_get_reference_count (surface) <= 0)
+	return NULL;
+
+    if (cairo_surface_status (surface) == CAIRO_STATUS_SUCCESS)
 	return surface;
     else
+    {
+	cairo_surface_destroy (surface);
 	return NULL;
+    }
 }
 
 static gboolean
