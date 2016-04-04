@@ -664,6 +664,32 @@ create_surface (int w,
     }
 }
 
+static cairo_surface_t *
+new_surface_from_pixbuf (GdkPixbuf *src)
+{
+    cairo_surface_t *surface;
+    guint width, height;
+    cairo_t *cr;
+
+    if (!src)
+	return NULL;
+
+    width = gdk_pixbuf_get_width (src);
+    height = gdk_pixbuf_get_height (src);
+
+    surface = create_surface (width, height);
+    if (!surface || cairo_surface_get_reference_count (surface) <= 0)
+	return NULL;
+
+    cr = cairo_create (surface);
+    gdk_cairo_set_source_pixbuf (cr, src, 0, 0);
+    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+    cairo_paint (cr);
+    cairo_destroy (cr);
+
+    return surface;
+}
+
 static gboolean
 destroy_surface_idled (gpointer data)
 {
@@ -2631,30 +2657,6 @@ queue_decor_draw (decor_t *d)
 	draw_idle_id = g_idle_add (draw_decor_list, NULL);
 }
 
-static cairo_surface_t *
-surface_new_from_pixbuf (GdkPixbuf *pixbuf)
-{
-    cairo_surface_t *surface;
-    guint     width, height;
-    cairo_t   *cr;
-
-    width  = gdk_pixbuf_get_width (pixbuf);
-    height = gdk_pixbuf_get_height (pixbuf);
-
-    surface = create_surface (width, height);
-    if (!surface)
-	return NULL;
-
-    cr = cairo_create (surface);
-
-    gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-    cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-    cairo_paint (cr);
-    cairo_destroy (cr);
-
-    return surface;
-}
-
 static void
 update_default_decorations (GdkScreen *screen)
 {
@@ -3424,7 +3426,7 @@ update_window_decoration_icon (WnckWindow *win)
 
 	g_object_ref (G_OBJECT (d->icon_pixbuf));
 
-	d->icon_surface = surface_new_from_pixbuf (d->icon_pixbuf);
+	d->icon_surface = new_surface_from_pixbuf (d->icon_pixbuf);
 	if (d->icon_surface)
 	{
 	    cr = cairo_create (d->icon_surface);
