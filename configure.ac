@@ -175,7 +175,7 @@ AC_ARG_ENABLE(glib,
   [use_glib=$enableval], [use_glib=yes])
 
 if test "x$use_glib" = "xyes"; then
-  PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.32)
+  PKG_CHECK_MODULES(GLIB, glib-2.0)
 fi
 
 AM_CONDITIONAL(USE_GLIB, test "x$use_glib" = "xyes")
@@ -304,19 +304,20 @@ AC_ARG_ENABLE(compizconfig,
 if test "x$use_gtk" = "xyes"; then
   if test "x$with_gtk" != "x2.0"; then
     PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
-		      xrender >= 0.8.4  \
-		      xcursor           \
-		      gtk+-3.0          \
-		      libwnck-3.0	\
+		      xrender >= 0.8.4      \
+		      xcursor               \
+		      gtk+-3.0              \
+		      libwnck-3.0	    \
+		      cairo >= 1.4	    \
 		      pangocairo,
 		      [use_gtk=yes], [use_gtk=no])
   else
     PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
-		      xrender >= 0.8.4   \
-		      xcursor            \
-		      gtk+-2.0 >= 2.10.0 \
-		      libwnck-1.0	 \
-		      cairo >= 1.4	 \
+		      xrender >= 0.8.4      \
+		      xcursor               \
+		      gtk+-2.0 >= 2.22.0    \
+		      libwnck-1.0 >= 2.22.0 \
+		      cairo >= 1.4	    \
 		      pangocairo,
 		      [use_gtk=yes], [use_gtk=no])
   fi
@@ -329,7 +330,7 @@ if test "x$use_gtk" = "xyes"; then
     LIBS="$save_LIBS -lm -ldl"
 
     if test "x$use_gsettings" = "xyes"; then
-      PKG_CHECK_MODULES(GSETTINGS, gio-2.0 >= 2.25.0)
+      PKG_CHECK_MODULES(GSETTINGS, glib-2.0 >= 2.32 gio-2.0 >= 2.25.0)
 
       GLIB_GSETTINGS
     fi

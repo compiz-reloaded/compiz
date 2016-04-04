@@ -28,6 +28,12 @@
 
 #include <cairo/cairo-xlib.h>
 #include <librsvg/rsvg.h>
+#ifndef RSVG_CAIRO_H
+#include <librsvg/rsvg-cairo.h>
+#endif
+#ifndef LIBRSVG_FEATURES_H
+#include <librsvg/librsvg-features.h>
+#endif
 
 #include <X11/Xatom.h>
 #include <X11/extensions/shape.h>
