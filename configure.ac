@@ -119,6 +119,7 @@ COMPIZ_REQUIRES="x11        \
 		 xfixes	    \
 		 xdamage    \
 		 xrandr	    \
+		 xi         \
 		 xinerama   \
 		 xcursor    \
 		 ice	    \
@@ -140,6 +141,14 @@ PKG_CHECK_EXISTS(xrender >= 0.9.3,
 if test "$have_xrender_0_9_3" = yes; then
   AC_DEFINE(HAVE_XRENDER_0_9_3, 1,
 	    [Define to 1 if xrender version >= 0.9.3])
+fi
+
+AC_CHECK_HEADER([X11/extensions/XInput2.h],
+		 [have_xinput2=yes], [have_xinput2=no])
+
+if test "$have_xinput2" = yes; then
+  AC_DEFINE(HAVE_XINPUT2, 1,
+	    [Define to 1 if xinput2 is available])
 fi
 
 AC_MSG_CHECKING(for GL_CFLAGS)
@@ -305,7 +314,7 @@ if test "x$use_gtk" = "xyes"; then
   if test "x$with_gtk" != "x2.0"; then
     PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		      xrender >= 0.8.4      \
-		      xcursor               \
+		      xi                    \
 		      gtk+-3.0              \
 		      libwnck-3.0	    \
 		      cairo >= 1.4	    \
@@ -314,7 +323,7 @@ if test "x$use_gtk" = "xyes"; then
   else
     PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
 		      xrender >= 0.8.4      \
-		      xcursor               \
+		      xi                    \
 		      gtk+-2.0 >= 2.22.0    \
 		      libwnck-1.0 >= 2.22.0 \
 		      cairo >= 1.4	    \

@@ -41,6 +41,9 @@
 #include <X11/extensions/Xcomposite.h>
 #include <X11/extensions/Xrandr.h>
 #include <X11/extensions/shape.h>
+#ifdef HAVE_XINPUT2
+#include <X11/extensions/XInput2.h>
+#endif
 #include <X11/Xcursor/Xcursor.h>
 #include <X11/cursorfont.h>
 
@@ -479,24 +482,35 @@ shade (CompDisplay     *d,
 static void
 compDisplaySetCursorTheme (CompDisplay *display)
 {
-    char *theme = display->opt[COMP_DISPLAY_OPTION_CURSOR_THEME].value.s;
+    const char *theme = display->opt[COMP_DISPLAY_OPTION_CURSOR_THEME].value.s;
     int size = display->opt[COMP_DISPLAY_OPTION_CURSOR_SIZE].value.i;
 
     if (theme && strlen(theme))
     {
 	CompScreen *s;
+#ifdef HAVE_XINPUT2
+	int clientPointer;
+
+	XIGetClientPointer (display->display, None, &clientPointer);
+#endif
 
 	XcursorSetTheme (display->display, theme);
-	XcursorSetDefaultSize (display->display, size);
+	if (size > 0)
+	    XcursorSetDefaultSize (display->display, size);
+
 	for (s = display->screens; s; s = s->next)
 	{
-	    XFreeCursor (display->display, s->normalCursor);
+	    XFreeCursor (display->display, s->busyCursor);
 	    s->busyCursor = XCreateFontCursor (display->display, XC_watch);
-	    XFlush (display->display);
 
 	    XFreeCursor (display->display, s->normalCursor);
 	    s->normalCursor = XCreateFontCursor (display->display, XC_left_ptr);
+#ifdef HAVE_XINPUT2
+	    XIDefineCursor (display->display, clientPointer,
+			    s->root, s->normalCursor);
+#else
 	    XDefineCursor (display->display, s->root, s->normalCursor);
+#endif
 	    XFlush (display->display);
 	}
     }
@@ -692,16 +706,16 @@ setDisplayOption (CompPlugin	  *plugin,
 	}
 	break;
     case COMP_DISPLAY_OPTION_CURSOR_THEME:
-	if (compSetStringOption(o, value))
+	if (compSetStringOption (o, value))
 	{
-	    compDisplaySetCursorTheme(display);
+	    compDisplaySetCursorTheme (display);
 	    return TRUE;
 	}
 	break;
     case COMP_DISPLAY_OPTION_CURSOR_SIZE:
-	if (compSetIntOption(o, value))
+	if (compSetIntOption (o, value))
 	{
-	    compDisplaySetCursorTheme(display);
+	    compDisplaySetCursorTheme (display);
 	    return TRUE;
 	}
 	break;

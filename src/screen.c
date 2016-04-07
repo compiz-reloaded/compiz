@@ -43,6 +43,9 @@
 #include <X11/Xproto.h>
 #include <X11/extensions/Xrandr.h>
 #include <X11/extensions/shape.h>
+#ifdef HAVE_XINPUT2
+#include <X11/extensions/XInput2.h>
+#endif
 #include <X11/cursorfont.h>
 
 #include <compiz-core.h>
@@ -716,6 +719,23 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
 static void
 updateStartupFeedback (CompScreen *s)
 {
+#ifdef HAVE_XINPUT2
+    int clientPointer;
+
+    XIGetClientPointer (s->display->display, None, &clientPointer);
+
+    if (s->startupSequences)
+    {
+	XIDefineCursor (s->display->display, clientPointer,
+			s->root, s->busyCursor);
+    }
+    else
+    {
+	XIDefineCursor (s->display->display, clientPointer,
+			s->root, s->normalCursor);
+    }
+#endif
+
     if (s->startupSequences)
 	XDefineCursor (s->display->display, s->root, s->busyCursor);
     else
@@ -1727,6 +1747,9 @@ addScreen (CompDisplay *display,
     Window		 *children;
     unsigned int	 nchildren;
     int			 defaultDepth, nvisinfo, nElements, value, i;
+#ifdef HAVE_XINPUT2
+    int clientPointer;
+#endif
     const char		 *glxExtensions, *glExtensions, *glRenderer;
     XSetWindowAttributes attrib;
     GLfloat		 globalAmbient[]  = { 0.1f, 0.1f,  0.1f, 0.1f };
@@ -2525,7 +2548,13 @@ addScreen (CompDisplay *display,
     s->normalCursor = XCreateFontCursor (dpy, XC_left_ptr);
     s->busyCursor   = XCreateFontCursor (dpy, XC_watch);
 
+#ifdef HAVE_XINPUT2
+    XIGetClientPointer (dpy, None, &clientPointer);
+
+    XIDefineCursor (dpy, clientPointer, s->root, s->normalCursor);
+#else
     XDefineCursor (dpy, s->root, s->normalCursor);
+#endif
 
     s->filter[NOTHING_TRANS_FILTER] = COMP_TEXTURE_FILTER_FAST;
     s->filter[SCREEN_TRANS_FILTER]  = COMP_TEXTURE_FILTER_GOOD;

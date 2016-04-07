@@ -29,8 +29,10 @@
 #include <X11/Xatom.h>
 #include <X11/cursorfont.h>
 #include <X11/extensions/Xrender.h>
+#ifdef HAVE_XINPUT2
+#include <X11/extensions/XInput2.h>
+#endif
 #include <X11/Xregion.h>
-#include <X11/Xcursor/Xcursor.h>
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
@@ -3694,8 +3696,18 @@ add_frame_window (WnckWindow *win,
 			       CWOverrideRedirect | CWEventMask, &attr);
 
 	    if (cursor[i][j].cursor)
+	    {
+#ifdef HAVE_XINPUT2
+		int clientPointer;
+
+		XIGetClientPointer (xdisplay, None, &clientPointer);
+		XIDefineCursor (xdisplay, clientPointer, d->event_windows[i][j],
+				cursor[i][j].cursor);
+#else
 		XDefineCursor (xdisplay, d->event_windows[i][j],
 			       cursor[i][j].cursor);
+#endif
+	    }
 	}
     }
 
@@ -6623,9 +6635,6 @@ cursor_theme_changed (GSettings *settings_mouse, CCSContext *ccs_context)
 	int i = 0, j = 0;
 	GdkDisplay *gdkdisplay = gdk_display_get_default ();
 	Display *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
-
-	XcursorSetTheme (xdisplay, theme);
-	XcursorSetDefaultSize (xdisplay, size);
 
 	for (i = 0; i < 3; i++)
 	{
