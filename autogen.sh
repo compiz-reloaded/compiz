@@ -15,9 +15,8 @@ fi
 
 mkdir -p m4
 aclocal -I . --install || exit 1
-glib-gettextize --copy --force || exit 1
-intltoolize --copy --force --automake || exit 1
 autoreconf --verbose --force --install || exit 1
+intltoolize --copy --force --automake || exit 1
 
 cd "$OLDPWD" || exit $?
 if [ -z "$NOCONFIGURE" ]; then
