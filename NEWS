@@ -1,3 +1,18 @@
+Release 0.8.12.3 (2016-04-10 Sorokin Alexei <sor.alexei@meowr.ru>)
+==================================================================
+COMPIZ-RELOADED
+
+Drop glib-gettext dependency.
+This this usage of autogen.sh with newer glib.
+
+Change default Blue filter to Gaussian.
+
+Fix broken appearance on HiDPI with GTK+ 3.10+ (if scaling is on).
+For now scaling is just disabled completely.
+
+Fix for some cases when cursor settings were ignored by
+applications.
+
 Release 0.8.12.2 (2016-03-24 Sorokin Alexei <sor.alexei@meowr.ru>)
 ==================================================================
 COMPIZ-RELOADED
