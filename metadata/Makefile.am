@@ -26,7 +26,6 @@ xml_in_files =		   \
 	screenshot.xml.in  \
 	svg.xml.in         \
 	switcher.xml.in    \
-	video.xml.in       \
 	water.xml.in       \
 	wobbly.xml.in      \
 	wall.xml.in        \
