@@ -4198,8 +4198,6 @@ move_resize_window (WnckWindow *win,
     if (action_menu_mapped)
     {
 	gtk_widget_destroy (action_menu);
-	action_menu_mapped = FALSE;
-	action_menu = NULL;
 	return;
     }
 
@@ -4247,8 +4245,6 @@ restack_window (WnckWindow *win,
     if (action_menu_mapped)
     {
 	gtk_widget_destroy (action_menu);
-	action_menu_mapped = FALSE;
-	action_menu = NULL;
 	return;
     }
 
@@ -4673,8 +4669,6 @@ action_menu_map (WnckWindow *win,
 	if (action_menu_mapped)
 	{
 	    gtk_widget_destroy (action_menu);
-	    action_menu_mapped = FALSE;
-	    action_menu = NULL;
 	    return;
 	}
 	else
