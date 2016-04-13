@@ -648,34 +648,38 @@ dbusHandleOptionIntrospectMessage (DBusConnection *connection,
 }
 
 static CompOptionType
-dbusGuessStringType(char **path, char *name)
+dbusGuessStringType (char **path, char *name)
 {
 	CompObject *object;
 	CompOption *option;
 	int nOption;
 
-	option = dbusGetOptionsFromPath(path, &object, NULL, &nOption);
-	if (!option) {
+	/* XXX: use match option type if name is "match" */
+	if (name && strcmp (name, "match") == 0)
+		return CompOptionTypeMatch;
+
+	option = dbusGetOptionsFromPath (path, &object, NULL, &nOption);
+	if (!option)
+	{
 		/* if no plugin found for this path, assume this is a string option */
 		return CompOptionTypeString;
 	}
-	else {
+	else
+	{
 		/* attempt to talk to the plugin at path for the correct type */
-		while(nOption--)
+		while (nOption--)
 		{
 			/* If there's a pre-existing option with this name, break out of the loop
 			 * so the type can be returned to the caller */
-			if (strcmp(option->name, name) == 0)
+			if (name && strcmp (option->name, name) == 0)
 				break;
 			option++;
 		}
 
-		if (nOption == -1) {
+		if (nOption == -1)
 			return CompOptionTypeString;
-		}
-		else {
+		else
 			return option->type;
-		}
 	}
 }
 
@@ -805,7 +809,7 @@ dbusHandleActionMessage (DBusConnection *connection,
 			case DBUS_TYPE_STRING:
 			    hasValue = TRUE;
 				char *s;
-				CompOptionType trueOptionType = dbusGuessStringType(path, name);
+				CompOptionType trueOptionType = dbusGuessStringType (path, name);
 				switch(trueOptionType) {
 					case CompOptionTypeMatch:
 						type = CompOptionTypeMatch;
@@ -818,12 +822,12 @@ dbusHandleActionMessage (DBusConnection *connection,
 						type = CompOptionTypeColor;
 						dbus_message_iter_get_basic (&iter, &s);
 
-						stringToColor(s, value.c);
+						stringToColor (s, value.c);
 						break;
 					case CompOptionTypeString:
 					default:
 						type = CompOptionTypeString;
-						dbus_message_iter_get_basic(&iter, &value.s);
+						dbus_message_iter_get_basic (&iter, &value.s);
 						break;
 				}
 				break;
