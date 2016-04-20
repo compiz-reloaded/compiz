@@ -21,6 +21,10 @@ if USE_LIBRSVG
 svg_in = svg.xml.in
 endif
 
+if USE_MATE
+matecompat_in = matecompat.xml.in
+endif
+
 if DBUS_PLUGIN
 dbus_in = dbus.xml.in
 endif
@@ -37,7 +41,7 @@ xml_in_files =		   \
 	fade.xml.in	   \
 	$(fs_in)	   \
 	$(glib_in)	   \
-	matecompat.xml.in  \
+	$(matecompat_in)   \
 	ini.xml.in	   \
 	$(inotify_in)	   \
 	minimize.xml.in	   \

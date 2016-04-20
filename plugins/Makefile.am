@@ -68,9 +68,6 @@ libobs_la_SOURCES = obs.c
 libcommands_la_LDFLAGS = -module -avoid-version -no-undefined
 libcommands_la_SOURCES = commands.c
 
-libmatecompat_la_LDFLAGS = -module -avoid-version -no-undefined
-libmatecompat_la_SOURCES = matecompat.c
-
 libwall_la_LDFLAGS = -module -avoid-version -no-undefined `pkg-config --libs cairo`
 libwall_la_SOURCES = wall.c wall_options.c wall_options.h
 
@@ -118,6 +115,12 @@ libfs_la_SOURCES = fuse.c
 libfs_module = libfs.la
 endif
 
+if USE_MATE
+libmatecompat_la_LDFLAGS = -module -avoid-version -no-undefined
+libmatecompat_la_SOURCES = matecompat.c
+libmatecompat_module = libmatecompat.la
+endif
+
 AM_CPPFLAGS =					\
 	@COMPIZ_CFLAGS@				\
 	@LIBPNG_CFLAGS@				\
@@ -162,7 +165,7 @@ module_LTLIBRARIES =		\
 	libini.la		\
 	libobs.la		\
 	libcommands.la		\
-	libmatecompat.la	\
+	$(libmatecompat_module)	\
 	libwall.la		\
 	$(libsvg_module)	\
 	$(libannotate_module)	\
