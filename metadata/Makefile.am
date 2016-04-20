@@ -1,19 +1,45 @@
 xmldir       = $(metadatadir)
+
+
+if ANNOTATE_PLUGIN
+annotate_in = annotate.xml.in
+endif
+
+if FUSE_PLUGIN
+fs_in = fs.xml.in
+endif
+
+if INOTIFY_PLUGIN
+inotify_in = inotify.xml.in
+endif
+
+if USE_GLIB
+glib_in = glib.xml.in
+endif
+
+if USE_LIBRSVG
+svg_in = svg.xml.in
+endif
+
+if DBUS_PLUGIN
+dbus_in = dbus.xml.in
+endif
+
 xml_in_files =		   \
 	core.xml.in	   \
-	annotate.xml.in    \
+	$(annotate_in)	   \
 	blur.xml.in	   \
 	clone.xml.in	   \
 	commands.xml.in	   \
 	cube.xml.in	   \
-	dbus.xml.in	   \
+	$(dbus_in)	   \
 	decoration.xml.in  \
 	fade.xml.in	   \
-	fs.xml.in	   \
-	glib.xml.in	   \
-	matecompat.xml.in \
+	$(fs_in)	   \
+	$(glib_in)	   \
+	matecompat.xml.in  \
 	ini.xml.in	   \
-	inotify.xml.in	   \
+	$(inotify_in)	   \
 	minimize.xml.in	   \
 	move.xml.in	   \
 	obs.xml.in	   \
@@ -24,7 +50,7 @@ xml_in_files =		   \
 	rotate.xml.in      \
 	scale.xml.in       \
 	screenshot.xml.in  \
-	svg.xml.in         \
+	$(svg_in)          \
 	switcher.xml.in    \
 	water.xml.in       \
 	wobbly.xml.in      \
