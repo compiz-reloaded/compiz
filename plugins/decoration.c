@@ -65,8 +65,10 @@ typedef struct _Decoration {
     int		      refCount;
     DecorTexture      *texture;
     CompWindowExtents output;
-    CompWindowExtents input;
-    CompWindowExtents maxInput;
+    CompWindowExtents frame;
+    CompWindowExtents border;
+    CompWindowExtents maxFrame;
+    CompWindowExtents maxBorder;
     int		      minWidth;
     int		      minHeight;
     decor_quad_t      *quad;
@@ -468,8 +470,8 @@ decorCreateDecoration (CompScreen *screen,
     unsigned char   *data;
     long	    *prop;
     Pixmap	    pixmap;
-    decor_extents_t input;
-    decor_extents_t maxInput;
+    decor_extents_t frame, border;
+    decor_extents_t maxFrame, maxBorder;
     decor_quad_t    *quad;
     int		    nQuad;
     int		    minWidth;
@@ -516,8 +518,10 @@ decorCreateDecoration (CompScreen *screen,
     nQuad = decor_pixmap_property_to_quads (prop,
 					    n,
 					    &pixmap,
-					    &input,
-					    &maxInput,
+					    &frame,
+					    &border,
+					    &maxFrame,
+					    &maxBorder,
 					    &minWidth,
 					    &minHeight,
 					    quad);
@@ -577,15 +581,29 @@ decorCreateDecoration (CompScreen *screen,
     decoration->output.top    = -top;
     decoration->output.bottom = bottom - minHeight;
 
-    decoration->input.left   = input.left;
-    decoration->input.right  = input.right;
-    decoration->input.top    = input.top;
-    decoration->input.bottom = input.bottom;
+    /* Extents of actual frame window */
+    decoration->frame.left   = frame.left;
+    decoration->frame.right  = frame.right;
+    decoration->frame.top    = frame.top;
+    decoration->frame.bottom = frame.bottom;
 
-    decoration->maxInput.left   = maxInput.left;
-    decoration->maxInput.right  = maxInput.right;
-    decoration->maxInput.top    = maxInput.top;
-    decoration->maxInput.bottom = maxInput.bottom;
+    /* Border extents */
+    decoration->border.left   = border.left;
+    decoration->border.right  = border.right;
+    decoration->border.top    = border.top;
+    decoration->border.bottom = border.bottom;
+
+    /* Extents of actual frame window */
+    decoration->maxFrame.left   = maxFrame.left;
+    decoration->maxFrame.right  = maxFrame.right;
+    decoration->maxFrame.top    = maxFrame.top;
+    decoration->maxFrame.bottom = maxFrame.bottom;
+
+    /* Border extents */
+    decoration->maxBorder.left   = maxBorder.left;
+    decoration->maxBorder.right  = maxBorder.right;
+    decoration->maxBorder.top    = maxBorder.top;
+    decoration->maxBorder.bottom = maxBorder.bottom;
 
     decoration->refCount = 1;
 
@@ -804,20 +822,26 @@ decorWindowUpdateFrame (CompWindow *w)
 	int	             x, y, width, height;
 	int	             i = 0;
 	int                  bw = w->serverBorderWidth * 2;
-	CompWindowExtents    input;
+	CompWindowExtents    frame, border;
 
 	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	    input = wd->decor->maxInput;
+	{
+	    frame = wd->decor->maxFrame;
+	    border = wd->decor->maxBorder;
+	}
 	else
-	    input = wd->decor->input;
+	{
+	    frame = wd->decor->frame;
+	    border = wd->decor->border;
+	}
 
-	x      = w->input.left - input.left;
-	y      = w->input.top - input.top;
-	width  = w->serverWidth + input.left + input.right + bw;
-	height = w->serverHeight + input.top  + input.bottom + bw;
+	x      = w->input.left - border.left;
+	y      = w->input.top - border.top;
+	width  = w->serverWidth + frame.left + frame.right + bw;
+	height = w->serverHeight + frame.top  + frame.bottom + bw;
 
 	if (w->shaded)
-	    height = input.top + input.bottom;
+	    height = frame.top + frame.bottom;
 
 	if (!dw->inputFrame)
 	{
@@ -850,31 +874,31 @@ decorWindowUpdateFrame (CompWindow *w)
 	rects[i].x	= 0;
 	rects[i].y	= 0;
 	rects[i].width  = width;
-	rects[i].height = input.top;
+	rects[i].height = frame.top;
 
 	if (rects[i].width && rects[i].height)
 	    i++;
 
 	rects[i].x	= 0;
-	rects[i].y	= input.top;
-	rects[i].width  = input.left;
-	rects[i].height = height - input.top - input.bottom;
+	rects[i].y	= frame.top;
+	rects[i].width  = frame.left;
+	rects[i].height = height - frame.top - frame.bottom;
 
 	if (rects[i].width && rects[i].height)
 	    i++;
 
-	rects[i].x	= width - input.right;
-	rects[i].y	= input.top;
-	rects[i].width  = input.right;
-	rects[i].height = height - input.top - input.bottom;
+	rects[i].x	= width - frame.right;
+	rects[i].y	= frame.top;
+	rects[i].width  = frame.right;
+	rects[i].height = height - frame.top - frame.bottom;
 
 	if (rects[i].width && rects[i].height)
 	    i++;
 
 	rects[i].x	= 0;
-	rects[i].y	= height - input.bottom;
+	rects[i].y	= height - frame.bottom;
 	rects[i].width  = width;
-	rects[i].height = input.bottom;
+	rects[i].height = frame.bottom;
 
 	if (rects[i].width && rects[i].height)
 	    i++;
@@ -991,9 +1015,15 @@ decorWindowUpdate (CompWindow *w,
 	    return FALSE;
 
 	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	    setWindowFrameExtents (w, &decor->maxInput);
+	{
+	    setWindowFrameExtents (w, &decor->maxFrame);
+	    setWindowBorderExtents (w, &decor->maxBorder);
+	}
 	else
-	    setWindowFrameExtents (w, &decor->input);
+	{
+	    setWindowFrameExtents (w, &decor->frame);
+	    setWindowBorderExtents (w, &decor->border);
+	}
 
 	moveDx = decorWindowShiftX (w) - oldShiftX;
 	moveDy = decorWindowShiftY (w) - oldShiftY;
@@ -1562,9 +1592,15 @@ decorWindowStateChangeNotify (CompWindow   *w,
 	if (dw->wd && dw->wd->decor)
 	{
 	    if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-		setWindowFrameExtents (w, &dw->wd->decor->maxInput);
+	    {
+		setWindowFrameExtents (w, &dw->wd->decor->maxFrame);
+		setWindowFrameExtents (w, &dw->wd->decor->maxBorder);
+	    }
 	    else
-		setWindowFrameExtents (w, &dw->wd->decor->input);
+	    {
+		setWindowFrameExtents (w, &dw->wd->decor->frame);
+		setWindowFrameExtents (w, &dw->wd->decor->border);
+	    }
 	    decorWindowUpdateFrame (w);
 	}
     }

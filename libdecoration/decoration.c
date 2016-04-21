@@ -67,18 +67,32 @@ decor_version (void)
 
   data[2] = pixmap
 
-  data[3] = input left
-  data[4] = input right
-  data[5] = input top
-  data[6] = input bottom
+  extents
 
-  data[7]  = input left when maximized
-  data[8]  = input right when maximized
-  data[9]  = input top when maximized
-  data[10] = input bottom when maximized
+  frame input is used for creating the input area of
+  the frame window which the client will be
+  reparented into, border is used for positioning
 
-  data[11] = min width
-  data[12] = min height
+  data[3]  = frame left
+  data[4]  = frame right
+  data[5]  = frame top
+  data[6]  = frame bottom
+  data[7]  = border left
+  data[8]  = border right
+  data[9]  = border top
+  data[10] = border bottom
+
+  data[11] = frame left when maximized
+  data[12] = frame right when maximized
+  data[13] = frame top when maximized
+  data[14] = frame bottom when maximized
+  data[15] = border left when maximized
+  data[16] = border right when maximized
+  data[17] = border top when maximized
+  data[18] = border bottom when maximized
+
+  data[19] = min width
+  data[20] = min height
 
   flags
 
@@ -86,21 +100,23 @@ decor_version (void)
   9rd and 10th bit alignment, 11rd and 12th bit clamp,
   13th bit XX, 14th bit XY, 15th bit YX, 16th bit YY.
 
-  data[12 + n * 9 + 1] = flags
-  data[12 + n * 9 + 2] = p1 x
-  data[12 + n * 9 + 3] = p1 y
-  data[12 + n * 9 + 4] = p2 x
-  data[12 + n * 9 + 5] = p2 y
-  data[12 + n * 9 + 6] = widthMax
-  data[12 + n * 9 + 7] = heightMax
-  data[12 + n * 9 + 8] = x0
-  data[12 + n * 9 + 9] = y0
+  data[18 + n * 9 + 1] = flags
+  data[18 + n * 9 + 2] = p1 x
+  data[18 + n * 9 + 3] = p1 y
+  data[18 + n * 9 + 4] = p2 x
+  data[18 + n * 9 + 5] = p2 y
+  data[18 + n * 9 + 6] = widthMax
+  data[18 + n * 9 + 7] = heightMax
+  data[18 + n * 9 + 8] = x0
+  data[18 + n * 9 + 9] = y0
  */
 void
 decor_quads_to_property (long		 *data,
 			 Pixmap		 pixmap,
-			 decor_extents_t *input,
-			 decor_extents_t *max_input,
+			 decor_extents_t *frame,
+			 decor_extents_t *border,
+			 decor_extents_t *max_frame,
+			 decor_extents_t *max_border,
 			 int		 min_width,
 			 int		 min_height,
 			 decor_quad_t    *quad,
@@ -111,15 +127,23 @@ decor_quads_to_property (long		 *data,
 
     memcpy (data++, &pixmap, sizeof (Pixmap));
 
-    *data++ = input->left;
-    *data++ = input->right;
-    *data++ = input->top;
-    *data++ = input->bottom;
+    *data++ = frame->left;
+    *data++ = frame->right;
+    *data++ = frame->top;
+    *data++ = frame->bottom;
+    *data++ = border->left;
+    *data++ = border->right;
+    *data++ = border->top;
+    *data++ = border->bottom;
 
-    *data++ = max_input->left;
-    *data++ = max_input->right;
-    *data++ = max_input->top;
-    *data++ = max_input->bottom;
+    *data++ = max_frame->left;
+    *data++ = max_frame->right;
+    *data++ = max_frame->top;
+    *data++ = max_frame->bottom;
+    *data++ = max_border->left;
+    *data++ = max_border->right;
+    *data++ = max_border->top;
+    *data++ = max_border->bottom;
 
     *data++ = min_width;
     *data++ = min_height;
@@ -190,8 +214,10 @@ int
 decor_pixmap_property_to_quads (long		*data,
 				int		size,
 				Pixmap		*pixmap,
-				decor_extents_t *input,
-				decor_extents_t *max_input,
+				decor_extents_t *frame,
+				decor_extents_t *border,
+				decor_extents_t *max_frame,
+				decor_extents_t *max_border,
 				int		*min_width,
 				int		*min_height,
 				decor_quad_t    *quad)
@@ -212,15 +238,23 @@ decor_pixmap_property_to_quads (long		*data,
 
     memcpy (pixmap, data++, sizeof (Pixmap));
 
-    input->left   = *data++;
-    input->right  = *data++;
-    input->top    = *data++;
-    input->bottom = *data++;
+    frame->left    = *data++;
+    frame->right   = *data++;
+    frame->top     = *data++;
+    frame->bottom  = *data++;
+    border->left   = *data++;
+    border->right  = *data++;
+    border->top    = *data++;
+    border->bottom = *data++;
 
-    max_input->left   = *data++;
-    max_input->right  = *data++;
-    max_input->top    = *data++;
-    max_input->bottom = *data++;
+    max_frame->left    = *data++;
+    max_frame->right   = *data++;
+    max_frame->top     = *data++;
+    max_frame->bottom  = *data++;
+    max_border->left   = *data++;
+    max_border->right  = *data++;
+    max_border->top    = *data++;
+    max_border->bottom = *data++;
 
     *min_width  = *data++;
     *min_height = *data++;

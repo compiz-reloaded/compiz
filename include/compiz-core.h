@@ -2686,6 +2686,9 @@ struct _CompWindow {
     /* must be set by addWindowGeometry */
     DrawWindowGeometryProc drawWindowGeometry;
 
+    /* placed here to preserve ABI compat */
+    CompWindowExtents serverInput;
+
     void *reserved;
 };
 
@@ -2836,6 +2839,10 @@ setWindowFullscreenMonitors (CompWindow               *w,
 void
 setWindowFrameExtents (CompWindow	 *w,
 		       CompWindowExtents *input);
+
+void
+setWindowBorderExtents (CompWindow	  *w,
+			CompWindowExtents *input);
 
 void
 updateWindowOutputExtents (CompWindow *w);

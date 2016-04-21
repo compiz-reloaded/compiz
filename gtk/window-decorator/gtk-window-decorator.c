@@ -567,10 +567,9 @@ decor_update_window_property (decor_t *d)
     extents.top += titlebar_height;
 
     decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d->surface),
-			     &extents, &extents,
+			     &extents, &extents, &extents, &extents,
 			     ICON_SPACE + d->button_width,
-			     0,
-			     quads, nQuad);
+			     0, quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
@@ -1545,10 +1544,9 @@ decor_update_meta_window_property (decor_t	  *d,
     max_extents.top += max_titlebar_height;
 
     decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d->surface),
-			     &extents, &max_extents,
+			     &extents, &extents, &max_extents, &max_extents,
 			     ICON_SPACE + d->button_width,
-			     0,
-			     quads, nQuad);
+			     0, quads, nQuad);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
@@ -2269,6 +2267,7 @@ decor_update_switcher_property (decor_t *d)
 
     decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d->surface),
 			     &_switcher_extents, &_switcher_extents,
+			     &_switcher_extents, &_switcher_extents,
 			     0, 0, quads, nQuad);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
@@ -2689,6 +2688,7 @@ update_default_decorations (GdkScreen *screen)
 
 	decor_quads_to_property (data, no_border_shadow->pixmap,
 				 &_shadow_extents, &_shadow_extents,
+				 &_shadow_extents, &_shadow_extents,
 				 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
@@ -2760,7 +2760,8 @@ update_default_decorations (GdkScreen *screen)
 	XRenderFreePicture (xdisplay, d.picture);
 
 	decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d.surface),
-				 &extents, &extents, 0, 0, quads, nQuad);
+				 &extents, &extents, &extents, &extents,
+				 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 normalAtom,
@@ -2786,7 +2787,8 @@ update_default_decorations (GdkScreen *screen)
 	XRenderFreePicture (xdisplay, d.picture);
 
 	decor_quads_to_property (data, cairo_xlib_surface_get_drawable(d.surface),
-				 &extents, &extents, 0, 0, quads, nQuad);
+				 &extents, &extents, &extents, &extents,
+				 0, 0, quads, nQuad);
 
 	XChangeProperty (xdisplay, xroot,
 			 activeAtom,

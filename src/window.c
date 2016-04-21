@@ -1310,13 +1310,19 @@ void
 setWindowFrameExtents (CompWindow	 *w,
 		       CompWindowExtents *input)
 {
-    if (input->left   != w->input.left  ||
-	input->right  != w->input.right ||
-	input->top    != w->input.top   ||
-	input->bottom != w->input.bottom)
+    /* w->input extents are for border size, w->serverInput extents for placement;
+       this function sets both to the same value for compatibility reasons,
+       use setWindowBorderExtents() to set border size after if needed.
+     */
+
+    if (input->left   != w->serverInput.left  ||
+	input->right  != w->serverInput.right ||
+	input->top    != w->serverInput.top   ||
+	input->bottom != w->serverInput.bottom)
     {
 	unsigned long data[4];
 
+	w->serverInput = *input;
 	w->input = *input;
 
 	data[0] = input->left;
@@ -1324,14 +1330,31 @@ setWindowFrameExtents (CompWindow	 *w,
 	data[2] = input->top;
 	data[3] = input->bottom;
 
-	updateWindowSize (w);
-	updateFrameWindow (w);
 	recalcWindowActions (w);
 
 	XChangeProperty (w->screen->display->display, w->id,
 			 w->screen->display->frameExtentsAtom,
 			 XA_CARDINAL, 32, PropModeReplace,
 			 (unsigned char *) data, 4);
+	updateWindowSize (w);
+	updateFrameWindow (w);
+    }
+}
+
+void
+setWindowBorderExtents (CompWindow	  *w,
+			CompWindowExtents *input)
+{
+    if (input->left   != w->input.left   ||
+	input->right  != w->input.right  ||
+	input->top    != w->input.top    ||
+	input->bottom != w->input.bottom)
+    {
+	w->input = *input;
+
+	recalcWindowActions (w);
+	updateWindowSize (w);
+	updateFrameWindow (w);
     }
 }
 
