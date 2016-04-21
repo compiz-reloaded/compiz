@@ -540,7 +540,8 @@ decor_update_blur_property (decor_t *d,
 static void
 decor_update_window_property (decor_t *d)
 {
-    long	    data[256];
+    long	    *data = NULL;
+    unsigned int    n = 1, frame_type = 0, frame_state = 0, frame_actions = 0;
     Display	    *xdisplay =
 	GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     decor_extents_t extents = _win_extents;
@@ -566,17 +567,20 @@ decor_update_window_property (decor_t *d)
 
     extents.top += titlebar_height;
 
-    decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d->surface),
+    data = decor_alloc_property(n, WINDOW_DECORATION_TYPE_PIXMAP);
+    decor_quads_to_property (data, n - 1,
+			     cairo_xlib_surface_get_drawable (d->surface),
 			     &extents, &extents, &extents, &extents,
-			     ICON_SPACE + d->button_width,
-			     0, quads, nQuad);
+			     ICON_SPACE + d->button_width, 0, quads, nQuad,
+			     frame_type, frame_state, frame_actions);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
 		     win_decor_atom,
 		     XA_INTEGER,
 		     32, PropModeReplace, (guchar *) data,
-		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+		     PROP_HEADER_SIZE + BASE_PROP_SIZE +
+		       QUAD_PROP_SIZE * N_QUADS_MAX);
     gdk_display_sync (gdk_display_get_default ());
 #if GTK_CHECK_VERSION (3, 0, 0)
     gdk_error_trap_pop_ignored ();
@@ -622,6 +626,9 @@ decor_update_window_property (decor_t *d)
 				&bottom, w / 2,
 				&left, h / 2,
 				&right, h / 2);
+
+    if (data)
+	free (data);
 }
 
 #if !GTK_CHECK_VERSION (3, 0, 0)
@@ -1497,7 +1504,8 @@ decor_update_meta_window_property (decor_t	  *d,
 				   Region	  left,
 				   Region	  right)
 {
-    long	    data[256];
+    long	    *data = NULL;
+    unsigned int    n = 1, frame_type = 0, frame_state = 0, frame_actions = 0;
     Display	    *xdisplay =
 	GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     gint	    nQuad;
@@ -1543,17 +1551,20 @@ decor_update_meta_window_property (decor_t	  *d,
     extents.top += titlebar_height;
     max_extents.top += max_titlebar_height;
 
-    decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d->surface),
+    data = decor_alloc_property (n, WINDOW_DECORATION_TYPE_PIXMAP);
+    decor_quads_to_property (data, n - 1,
+			     cairo_xlib_surface_get_drawable (d->surface),
 			     &extents, &extents, &max_extents, &max_extents,
-			     ICON_SPACE + d->button_width,
-			     0, quads, nQuad);
+			     ICON_SPACE + d->button_width, 0, quads, nQuad,
+			     frame_type, frame_state, frame_actions);
 
     gdk_error_trap_push ();
     XChangeProperty (xdisplay, d->prop_xid,
 		     win_decor_atom,
 		     XA_INTEGER,
 		     32, PropModeReplace, (guchar *) data,
-		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+		     PROP_HEADER_SIZE + BASE_PROP_SIZE +
+		       QUAD_PROP_SIZE * N_QUADS_MAX);
     gdk_display_sync (gdk_display_get_default ());
 #if GTK_CHECK_VERSION (3, 0, 0)
     gdk_error_trap_pop_ignored ();
@@ -1567,6 +1578,9 @@ decor_update_meta_window_property (decor_t	  *d,
 				bottom, bottom_stretch_offset,
 				left, left_stretch_offset,
 				right, right_stretch_offset);
+
+    if (data)
+	free (data);
 }
 
 static void
@@ -2245,7 +2259,8 @@ meta_draw_window_decoration (decor_t *d)
 static void
 decor_update_switcher_property (decor_t *d)
 {
-    long	    data[256];
+    long	    *data = NULL;
+    unsigned int    n = 1, frame_type = 0, frame_state = 0, frame_actions = 0;
     Display	    *xdisplay = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     gint	    nQuad;
     decor_quad_t    quads[N_QUADS_MAX];
@@ -2265,10 +2280,13 @@ decor_update_switcher_property (decor_t *d)
 					     switcher_context.extents.right -
 					     32);
 
-    decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d->surface),
+    data = decor_alloc_property (n, WINDOW_DECORATION_TYPE_PIXMAP);
+    decor_quads_to_property (data, n - 1,
+			     cairo_xlib_surface_get_drawable (d->surface),
 			     &_switcher_extents, &_switcher_extents,
 			     &_switcher_extents, &_switcher_extents,
-			     0, 0, quads, nQuad);
+			     0, 0, quads, nQuad,
+			     frame_type, frame_state, frame_actions);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
     context = gtk_widget_get_style_context (style_window);
@@ -2295,7 +2313,8 @@ decor_update_switcher_property (decor_t *d)
 		     win_decor_atom,
 		     XA_INTEGER,
 		     32, PropModeReplace, (guchar *) data,
-		     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+		     PROP_HEADER_SIZE + BASE_PROP_SIZE +
+		       QUAD_PROP_SIZE * N_QUADS_MAX);
     XChangeProperty (xdisplay, d->prop_xid, switcher_fg_atom,
 		     XA_INTEGER, 32, PropModeReplace, (guchar *) fgColor, 4);
     gdk_display_sync (gdk_display_get_default ());
@@ -2304,6 +2323,9 @@ decor_update_switcher_property (decor_t *d)
 #else
     gdk_error_trap_pop ();
 #endif
+
+    if (data)
+	free (data);
 }
 
 static void
@@ -2661,11 +2683,12 @@ queue_decor_draw (decor_t *d)
 static void
 update_default_decorations (GdkScreen *screen)
 {
-    long	    data[256];
+    long	    *data = NULL;
+    unsigned int    n = 1, frame_type = 0, frame_state = 0, frame_actions = 0;
     Window	    xroot;
     GdkDisplay	    *gdkdisplay = gdk_display_get_default ();
     Display	    *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
-    Atom	    bareAtom, normalAtom, activeAtom;
+    Atom	    bareAtom, activeAtom;
     decor_t	    d;
     gint	    nQuad;
     decor_quad_t    quads[N_QUADS_MAX];
@@ -2674,8 +2697,9 @@ update_default_decorations (GdkScreen *screen)
     xroot = RootWindowOfScreen (gdk_x11_screen_get_xscreen (screen));
 
     bareAtom   = XInternAtom (xdisplay, DECOR_BARE_ATOM_NAME, FALSE);
-    normalAtom = XInternAtom (xdisplay, DECOR_NORMAL_ATOM_NAME, FALSE);
     activeAtom = XInternAtom (xdisplay, DECOR_ACTIVE_ATOM_NAME, FALSE);
+
+    data = decor_alloc_property (n, WINDOW_DECORATION_TYPE_PIXMAP);
 
     if (no_border_shadow)
     {
@@ -2686,29 +2710,27 @@ update_default_decorations (GdkScreen *screen)
 	nQuad = decor_set_lSrStSbS_window_quads (quads, &shadow_context,
 						 &layout);
 
-	decor_quads_to_property (data, no_border_shadow->pixmap,
+	decor_quads_to_property (data, n - 1, no_border_shadow->pixmap,
 				 &_shadow_extents, &_shadow_extents,
 				 &_shadow_extents, &_shadow_extents,
-				 0, 0, quads, nQuad);
+				 0, 0, quads, nQuad,
+				 frame_type, frame_state, frame_actions);
 
 	XChangeProperty (xdisplay, xroot,
 			 bareAtom,
 			 XA_INTEGER,
 			 32, PropModeReplace, (guchar *) data,
-			 BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+			 PROP_HEADER_SIZE + BASE_PROP_SIZE +
+			   QUAD_PROP_SIZE * N_QUADS_MAX);
 
 	if (minimal)
 	{
 	    XChangeProperty (xdisplay, xroot,
-			     normalAtom,
-			     XA_INTEGER,
-			     32, PropModeReplace, (guchar *) data,
-			     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
-	    XChangeProperty (xdisplay, xroot,
 			     activeAtom,
 			     XA_INTEGER,
 			     32, PropModeReplace, (guchar *) data,
-			     BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+			     PROP_HEADER_SIZE + BASE_PROP_SIZE +
+			       QUAD_PROP_SIZE * N_QUADS_MAX);
 	}
     }
     else
@@ -2716,10 +2738,7 @@ update_default_decorations (GdkScreen *screen)
 	XDeleteProperty (xdisplay, xroot, bareAtom);
 
 	if (minimal)
-	{
-	    XDeleteProperty (xdisplay, xroot, normalAtom);
 	    XDeleteProperty (xdisplay, xroot, activeAtom);
-	}
     }
 
     if (minimal)
@@ -2759,15 +2778,12 @@ update_default_decorations (GdkScreen *screen)
 
 	XRenderFreePicture (xdisplay, d.picture);
 
-	decor_quads_to_property (data, cairo_xlib_surface_get_drawable (d.surface),
+	data = decor_alloc_property (n, WINDOW_DECORATION_TYPE_PIXMAP);
+	decor_quads_to_property (data, n - 1,
+				 cairo_xlib_surface_get_drawable (d.surface),
 				 &extents, &extents, &extents, &extents,
-				 0, 0, quads, nQuad);
-
-	XChangeProperty (xdisplay, xroot,
-			 normalAtom,
-			 XA_INTEGER,
-			 32, PropModeReplace, (guchar *) data,
-			 BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+				 0, 0, quads, nQuad,
+				 frame_type, frame_state, frame_actions);
     }
 
     if (decor_active_surface)
@@ -2786,19 +2802,25 @@ update_default_decorations (GdkScreen *screen)
 
 	XRenderFreePicture (xdisplay, d.picture);
 
-	decor_quads_to_property (data, cairo_xlib_surface_get_drawable(d.surface),
+	decor_quads_to_property (data, n - 1,
+				 cairo_xlib_surface_get_drawable(d.surface),
 				 &extents, &extents, &extents, &extents,
-				 0, 0, quads, nQuad);
+				 0, 0, quads, nQuad,
+				 frame_type, frame_state, frame_actions);
 
 	XChangeProperty (xdisplay, xroot,
 			 activeAtom,
 			 XA_INTEGER,
 			 32, PropModeReplace, (guchar *) data,
-			 BASE_PROP_SIZE + QUAD_PROP_SIZE * nQuad);
+			 PROP_HEADER_SIZE + BASE_PROP_SIZE +
+			   QUAD_PROP_SIZE * N_QUADS_MAX);
     }
 
     if (d.layout)
 	g_object_unref (G_OBJECT (d.layout));
+
+    if (data)
+	free (data);
 }
 
 static gboolean
