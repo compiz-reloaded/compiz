@@ -50,6 +50,10 @@ extern "C" {
 #define DECOR_TYPE_PIXMAP_ATOM_NAME             "_COMPIZ_WINDOW_DECOR_TYPE_PIXMAP"
 #define DECOR_TYPE_WINDOW_ATOM_NAME             "_COMPIZ_WINDOW_DECOR_TYPE_WINDOW"
 
+#define DECOR_REQUEST_PIXMAP_ATOM_NAME          "_COMPIZ_DECOR_REQUEST"
+#define DECOR_PIXMAP_PENDING_ATOM_NAME          "_COMPIZ_DECOR_PENDING"
+#define DECOR_DELETE_PIXMAP_ATOM_NAME           "_COMPIZ_DECOR_DELETE_PIXMAP"
+
 #define WINDOW_DECORATION_TYPE_PIXMAP (1 << 0)
 #define WINDOW_DECORATION_TYPE_WINDOW (1 << 1)
 
@@ -267,6 +271,30 @@ decor_pixmap_property_to_quads (long		 *data,
 				decor_quad_t    *quad);
 
 int
+decor_shadow_options_cmp (const decor_shadow_options_t *a,
+			  const decor_shadow_options_t *b);
+
+int
+decor_extents_cmp (const decor_extents_t *a,
+		   const decor_extents_t *b);
+
+int
+decor_match_pixmap (long	     *data,
+		    int		     size,
+		    Pixmap	     *pixmap,
+		    decor_extents_t  *frame,
+		    decor_extents_t  *border,
+		    decor_extents_t  *max_frame,
+		    decor_extents_t  *max_border,
+		    int		     min_width,
+		    int		     min_height,
+		    unsigned int     frame_type,
+		    unsigned int     frame_state,
+		    unsigned int     frame_actions,
+		    decor_quad_t     *quad,
+		    unsigned int     n_quad);
+
+int
 decor_window_property (long	       *data,
 		       unsigned int    n,
 		       int	       size,
@@ -475,6 +503,25 @@ void
 decor_handle_selection_request (Display *xdisplay,
 				XEvent  *event,
 				Time    dm_sn_timestamp);
+
+int
+decor_post_pending (Display	 *xdisplay,
+		    Window	 client,
+		    unsigned int frame_type,
+		    unsigned int frame_state,
+		    unsigned int frame_actions);
+
+int
+decor_post_generate_request (Display	  *xdisplay,
+			     Window	  client,
+			     unsigned int frame_type,
+			     unsigned int frame_state,
+			     unsigned int frame_actions);
+
+int
+decor_post_delete_pixmap (Display *xdisplay,
+			  Window  window,
+			  Pixmap  pixmap);
 
 #ifdef  __cplusplus
 }

@@ -133,7 +133,7 @@ long *
 decor_alloc_property (unsigned int n,
 		      unsigned int type)
 {
-    unsigned int  propSize;
+    unsigned int  propSize = 0;
     long	  *data;
 
     if (type == WINDOW_DECORATION_TYPE_WINDOW)
@@ -368,6 +368,142 @@ decor_pixmap_property_to_quads (long		*data,
     }
 
     return n;
+}
+
+static int
+decor_point_cmp (const decor_point_t *a,
+		 const decor_point_t *b)
+{
+    /* use binary | to avoid branch prediction slow-downs */
+    return (a->x - b->x) | (a->y - b->y) | (a->gravity - b->gravity);
+}
+
+int
+decor_shadow_options_cmp (const decor_shadow_options_t *a,
+			  const decor_shadow_options_t *b)
+{
+    return (a->shadow_radius != b->shadow_radius) ||
+	   (a->shadow_opacity != b->shadow_opacity) ||
+	   (a->shadow_offset_x != b->shadow_offset_x) ||
+	   (a->shadow_offset_y != b->shadow_offset_y) ||
+	   memcmp (a->shadow_color, b->shadow_color, sizeof (unsigned short) * 3);
+}
+
+static int
+decor_matrix_cmp (const decor_matrix_t *a,
+		  const decor_matrix_t *b)
+{
+    return (a->xx != b->xx) ||
+	   (a->yx != b->yx) ||
+	   (a->xy != b->xy) ||
+	   (a->yy != b->yy) ||
+	   (a->x0 != b->x0) ||
+	   (a->y0 != b->y0);
+}
+
+static int
+decor_quad_cmp (const decor_quad_t *a,
+		const decor_quad_t *b)
+{
+    return decor_point_cmp (&a->p1, &b->p1) ||
+	   decor_point_cmp (&a->p2, &b->p2) ||
+	   decor_matrix_cmp (&a->m, &b->m)  ||
+	   (
+		(a->max_width  - b->max_width)  |
+		(a->max_height - b->max_height) |
+		(a->align      - b->align)      |
+		(a->clamp      - b->clamp)      |
+		(a->stretch    - b->stretch)
+           );
+}
+
+int
+decor_extents_cmp (const decor_extents_t *a,
+		   const decor_extents_t *b)
+{
+    /* use binary | to avoid branch prediction slow-downs */
+    return (a->left   - b->left)  |
+	   (a->right  - b->right) |
+	   (a->top    - b->top)   |
+	   (a->bottom - b->bottom);
+}
+
+/* returns n for a match, returns -1 for no match */
+
+int
+decor_match_pixmap (long	     *data,
+		    int		     size,
+		    Pixmap	     *pixmap,
+		    decor_extents_t  *frame,
+		    decor_extents_t  *border,
+		    decor_extents_t  *max_frame,
+		    decor_extents_t  *max_border,
+		    int		     min_width,
+		    int		     min_height,
+		    unsigned int     frame_type,
+		    unsigned int     frame_state,
+		    unsigned int     frame_actions,
+		    decor_quad_t     *quad,
+		    unsigned int     n_quad)
+{
+    int n = decor_property_get_num (data);
+    unsigned int i = 0;
+
+    for (; i < n; i++)
+    {
+	Pixmap cPixmap;
+	decor_extents_t cFrame, cBorder, cMax_frame, cMax_border;
+	int cMin_width, cMin_height;
+	int q;
+	unsigned int cFrame_type, cFrame_state, cFrame_actions, cNQuad;
+	decor_quad_t cQuad[N_QUADS_MAX];
+
+	cNQuad =
+	  decor_pixmap_property_to_quads (data,
+					  i,
+					  size,
+					  &cPixmap,
+					  &cFrame,
+					  &cBorder,
+					  &cMax_frame,
+					  &cMax_border,
+					  &cMin_width,
+					  &cMin_height,
+					  &cFrame_type,
+					  &cFrame_state,
+					  &cFrame_actions,
+					  cQuad);
+
+	if (cPixmap != *pixmap)
+	    continue;
+
+	if (decor_extents_cmp (&cFrame, frame) ||
+	    decor_extents_cmp (&cBorder, border) ||
+	    decor_extents_cmp (&cMax_frame, max_frame) ||
+	    decor_extents_cmp (&cMax_border, max_border))
+	    continue;
+
+	if (cFrame_type != frame_type ||
+	    cFrame_state != frame_state ||
+	    cFrame_actions != frame_actions ||
+	    cMin_width != min_width ||
+	    cMin_height != min_height)
+	    continue;
+
+	if (cNQuad != n_quad)
+	    continue;
+
+	q = 0;
+	while (q < n_quad && !decor_quad_cmp (&cQuad[q], &quad[q]))
+	    q++;
+
+	if (q < n_quad)
+	    continue;
+
+	return n;
+    }
+
+    return -1;
 }
 
 int
@@ -2769,6 +2905,109 @@ decor_blend_border_picture (Display	    *xdisplay,
     default:
 	break;
     }
+}
+
+int
+decor_post_pending (Display	 *xdisplay,
+		    Window	 client,
+		    unsigned int frame_type,
+		    unsigned int frame_state,
+		    unsigned int frame_actions)
+{
+    XEvent event;
+
+    Atom decor_pending  = XInternAtom (xdisplay,
+				       DECOR_PIXMAP_PENDING_ATOM_NAME,
+				       FALSE);
+
+    /* send a client message indicating that a new
+     * decoration can be generated for this window
+     */
+    event.xclient.type	       = ClientMessage;
+    event.xclient.window       = client;
+    event.xclient.message_type = decor_pending;
+    event.xclient.format       = 32;
+    event.xclient.data.l[0]    = frame_type;
+    event.xclient.data.l[1]    = frame_state;
+    event.xclient.data.l[2]    = frame_actions;
+    event.xclient.data.l[3]    = 0;
+    event.xclient.data.l[4]    = 0;
+
+    XSendEvent (xdisplay,
+		DefaultRootWindow (xdisplay),
+		0,
+		StructureNotifyMask,
+		&event);
+
+    return 1;
+}
+
+int
+decor_post_generate_request (Display	  *xdisplay,
+			     Window	  client,
+			     unsigned int frame_type,
+			     unsigned int frame_state,
+			     unsigned int frame_actions)
+{
+    XEvent event;
+
+    Atom decor_request  = XInternAtom (xdisplay,
+				       DECOR_REQUEST_PIXMAP_ATOM_NAME,
+				       FALSE);
+
+    /* send a client message indicating that a new
+     * decoration can be generated for this window
+     */
+    event.xclient.type	       = ClientMessage;
+    event.xclient.window       = client;
+    event.xclient.message_type = decor_request;
+    event.xclient.format       = 32;
+    event.xclient.data.l[0]    = frame_type;
+    event.xclient.data.l[1]    = frame_state;
+    event.xclient.data.l[2]    = frame_actions;
+    event.xclient.data.l[3]    = 0;
+    event.xclient.data.l[4]    = 0;
+
+    XSendEvent (xdisplay,
+		DefaultRootWindow (xdisplay),
+		0,
+		StructureNotifyMask,
+		&event);
+
+    return 1;
+}
+
+int
+decor_post_delete_pixmap (Display *xdisplay,
+			  Window  window,
+			  Pixmap  pixmap)
+{
+    XEvent event;
+
+    Atom   decor_delete_pixmap  = XInternAtom (xdisplay,
+					       DECOR_DELETE_PIXMAP_ATOM_NAME,
+					       FALSE);
+
+    /* send a client message indicating that this
+     * pixmap is no longer in use and can be removed
+     */
+    event.xclient.type	       = ClientMessage;
+    event.xclient.window       = window;
+    event.xclient.message_type = decor_delete_pixmap;
+    event.xclient.format       = 32;
+    event.xclient.data.l[0]    = pixmap;
+    event.xclient.data.l[1]    = 0;
+    event.xclient.data.l[2]    = 0;
+    event.xclient.data.l[3]    = 0;
+    event.xclient.data.l[4]    = 0;
+
+    XSendEvent (xdisplay,
+		DefaultRootWindow (xdisplay),
+		0,
+		StructureNotifyMask,
+		&event);
+
+    return 1;
 }
 
 int
