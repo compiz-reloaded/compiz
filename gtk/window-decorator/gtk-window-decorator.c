@@ -7134,8 +7134,8 @@ init_settings (WnckScreen *screen)
     GSettingsSchema *gsettings_schema = NULL;
     gboolean	     is_mate_desktop;
 
-    if ((strlen (session) >= 4 && g_strcmp0 (session, "MATE") == 0) ||
-	(strlen (session) > 5 && g_strcmp0 (session + strlen (session) - 5, ":MATE") == 0))
+    if (session != NULL && ((strlen (session) >= 4 && g_strcmp0 (session, "MATE") == 0) ||
+	(strlen (session) > 5 && g_strcmp0 (session + strlen (session) - 5, ":MATE") == 0)))
 	is_mate_desktop = TRUE;
     else
 	is_mate_desktop = FALSE;
