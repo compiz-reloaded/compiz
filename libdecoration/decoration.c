@@ -133,7 +133,7 @@ long *
 decor_alloc_property (unsigned int n,
 		      unsigned int type)
 {
-    unsigned int  propSize;
+    unsigned int  propSize = 0;
     long	  *data;
 
     if (type == WINDOW_DECORATION_TYPE_WINDOW)
