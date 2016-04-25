@@ -2687,7 +2687,7 @@ struct _CompWindow {
     DrawWindowGeometryProc drawWindowGeometry;
 
     /* placed here to preserve ABI compat */
-    CompWindowExtents serverInput;
+    CompWindowExtents frameInput;
 
     void *reserved;
 };

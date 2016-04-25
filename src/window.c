@@ -1310,19 +1310,18 @@ void
 setWindowFrameExtents (CompWindow	 *w,
 		       CompWindowExtents *input)
 {
-    /* w->input extents are for border size, w->serverInput extents for placement;
+    /* w->input extents are for border size, w->frameInput extents for placement;
        this function sets both to the same value for compatibility reasons,
-       use setWindowBorderExtents() to set border size after if needed.
-     */
+       use setWindowBorderExtents() afterwards to set border size if needed. */
 
-    if (input->left   != w->serverInput.left  ||
-	input->right  != w->serverInput.right ||
-	input->top    != w->serverInput.top   ||
-	input->bottom != w->serverInput.bottom)
+    if (input->left   != w->frameInput.left   ||
+	input->right  != w->frameInput.right  ||
+	input->top    != w->frameInput.top    ||
+	input->bottom != w->frameInput.bottom)
     {
 	unsigned long data[4];
 
-	w->serverInput = *input;
+	w->frameInput = *input;
 	w->input = *input;
 
 	data[0] = input->left;
@@ -1336,6 +1335,7 @@ setWindowFrameExtents (CompWindow	 *w,
 			 w->screen->display->frameExtentsAtom,
 			 XA_CARDINAL, 32, PropModeReplace,
 			 (unsigned char *) data, 4);
+
 	updateWindowSize (w);
 	updateFrameWindow (w);
     }
@@ -1345,14 +1345,27 @@ void
 setWindowBorderExtents (CompWindow	  *w,
 			CompWindowExtents *input)
 {
-    if (input->left   != w->input.left   ||
-	input->right  != w->input.right  ||
-	input->top    != w->input.top    ||
+    if (input->left   != w->input.left    ||
+	input->right  != w->input.right   ||
+	input->top    != w->input.top     ||
 	input->bottom != w->input.bottom)
     {
+	unsigned long data[4];
+
 	w->input = *input;
 
+	data[0] = input->left;
+	data[1] = input->right;
+	data[2] = input->top;
+	data[3] = input->bottom;
+
 	recalcWindowActions (w);
+
+	XChangeProperty (w->screen->display->display, w->id,
+			 w->screen->display->frameExtentsAtom,
+			 XA_CARDINAL, 32, PropModeReplace,
+			 (unsigned char *) data, 4);
+
 	updateWindowSize (w);
 	updateFrameWindow (w);
     }
@@ -2100,6 +2113,11 @@ addWindow (CompScreen *screen,
     w->input.right  = 0;
     w->input.top    = 0;
     w->input.bottom = 0;
+
+    w->frameInput.left   = 0;
+    w->frameInput.right  = 0;
+    w->frameInput.top    = 0;
+    w->frameInput.bottom = 0;
 
     w->output.left   = 0;
     w->output.right  = 0;

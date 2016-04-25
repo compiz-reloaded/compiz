@@ -934,8 +934,9 @@ decorWindowUpdateFrame (CompWindow *w)
 
     wd = dw->wd;
 
-    if (wd && (w->input.left || w->input.right ||
-	w->input.top || w->input.bottom))
+    if (wd && (w->frameInput.left || w->frameInput.right ||
+	w->frameInput.top || w->frameInput.bottom ||
+	w->input.left || w->input.right || w->input.top || w->input.bottom))
     {
 	XRectangle           rects[4];
 	int	             x, y, width, height;
@@ -954,8 +955,8 @@ decorWindowUpdateFrame (CompWindow *w)
 	    border = wd->decor->border;
 	}
 
-	x      = w->input.left - border.left;
-	y      = w->input.top - border.top;
+	x      = w->frameInput.left - frame.left;
+	y      = w->frameInput.top - frame.top;
 	width  = w->serverWidth + frame.left + frame.right + bw;
 	height = w->serverHeight + frame.top  + frame.bottom + bw;
 
