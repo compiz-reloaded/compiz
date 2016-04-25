@@ -620,18 +620,18 @@ decorReleaseDecorations (CompScreen   *screen,
 {
     int i;
 
-    if (decors)
+    if (decorNum && *decorNum > 0)
     {
-	if (decorNum && *decorNum > 0)
+	if (decors)
 	{
 	    for (i = 0; i < *decorNum; i++)
 	    {
 		if (decors[i])
 		    decorReleaseDecoration (screen, decors[i]);
 	    }
-	    *decorNum = 0;
+	    free (decors);
 	}
-	free (decors);
+	*decorNum = 0;
     }
 }
 
@@ -657,7 +657,7 @@ decorUpdateDecorations (CompScreen   *screen,
     /* FIXME: should really check the property to see
        if the decoration changed, and /then/ release
        and re-update it, but for now just releasing all */
-    if (decors)
+    if (decors && *decorNum > 0)
 	decorReleaseDecorations (screen, decors, decorNum);
     decors = NULL;
     *decorNum = 0;
@@ -1436,7 +1436,7 @@ decorCheckForDmOnScreen (CompScreen *s,
 	    /* no decorator active, destroy all decorations */
 	    for (i = 0; i < DECOR_NUM; i++)
 	    {
-		if (ds->decors[i])
+		if (ds->decors[i] && ds->decorNum[i] > 0)
 		    decorReleaseDecorations (s, ds->decors[i], &ds->decorNum[i]);
 		ds->decors[i] = NULL;
 	    }
@@ -1445,7 +1445,7 @@ decorCheckForDmOnScreen (CompScreen *s,
 	    {
 		DECOR_WINDOW (w);
 
-		if (dw->decors)
+		if (dw->decors && dw->decorNum > 0)
 		    decorReleaseDecorations (s, dw->decors, &dw->decorNum);
 		dw->decors = NULL;
 	    }
@@ -1585,7 +1585,7 @@ decorHandleEvent (CompDisplay *d,
 			{
 			    DECOR_SCREEN (s);
 
-			    if (ds->decors[i])
+			    if (ds->decors[i] && ds->decorNum[i] > 0)
 				decorReleaseDecorations (s,
 							 ds->decors[i],
 							 &ds->decorNum[i]);
@@ -2184,7 +2184,7 @@ decorFiniScreen (CompPlugin *p,
 
     for (i = 0; i < DECOR_NUM; i++)
     {
-	if (ds->decors[i])
+	if (ds->decors[i] && ds->decorNum[i] > 0)
 	    decorReleaseDecorations (s, ds->decors[i], &ds->decorNum[i]);
     }
 
@@ -2251,7 +2251,7 @@ decorFiniWindow (CompPlugin *p,
     if (dw->wd)
 	destroyWindowDecoration (w->screen, dw->wd);
 
-    if (dw->decors)
+    if (dw->decors && dw->decorNum > 0)
 	decorReleaseDecorations (w->screen, dw->decors, &dw->decorNum);
 
     free (dw);
