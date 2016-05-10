@@ -100,6 +100,7 @@ typedef struct _CompWalker        CompWalker;
 #define CompModeSwitchMask (1 << 20)
 #define CompNumLockMask    (1 << 21)
 #define CompScrollLockMask (1 << 22)
+#define CompClickOnDesktopMask (1 << 23)
 
 #define CompNoMask         (1 << 25)
 

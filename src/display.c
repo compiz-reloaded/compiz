@@ -1224,7 +1224,8 @@ updateModifierMappings (CompDisplay *d)
 
 	    d->ignoredModMask = LockMask |
 		(modMask[CompModNumLock]    & ~CompNoMask) |
-		(modMask[CompModScrollLock] & ~CompNoMask);
+		(modMask[CompModScrollLock] & ~CompNoMask) |
+                (CompClickOnDesktopMask & ~CompNoMask);
 
 	    for (s = d->screens; s; s = s->next)
 		updatePassiveGrabs (s);

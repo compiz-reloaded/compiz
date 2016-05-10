@@ -253,6 +253,30 @@ isTerminateBinding (CompOption	    *option,
     return TRUE;
 }
 
+static Bool eventHitDesktop(CompDisplay *d,
+                            XButtonEvent *event)
+{
+    CompWindow *w = findWindowAtDisplay(d, event->window);
+    CompScreen *s = findScreenAtDisplay(d, event->root);
+    Window xid;
+
+    if (!s) {
+        return FALSE;
+    }
+
+    if (w) {
+        xid = w->id;
+        if (w->id == s->grabWindow) {
+            xid = d->below;
+            w = findWindowAtDisplay(d, xid);
+        }
+        return ((w->type & CompWindowTypeDesktopMask) == 1) && (w->id == s->root);
+    }
+    else {
+        return TRUE;
+    }
+}
+
 static Bool
 triggerButtonPressBindings (CompDisplay  *d,
 			    CompOption   *option,
@@ -299,6 +323,9 @@ triggerButtonPressBindings (CompDisplay  *d,
 	{
 	    if (action->button.button == event->button)
 	    {
+		    if (action->button.modifiers & CompClickOnDesktopMask)
+			    if (!eventHitDesktop(d, event))
+				    continue;
 		bindMods = virtualToRealModMask (d, action->button.modifiers);
 
 		if ((bindMods & modMask) == (event->state & modMask))
@@ -316,6 +343,9 @@ triggerButtonPressBindings (CompDisplay  *d,
 		if ((action->button.button == event->button) &&
 		    (action->edgeMask & edge))
 		{
+		    if (action->button.modifiers & CompClickOnDesktopMask)
+			    if (!eventHitDesktop(d, event))
+				    continue;
 		    bindMods = virtualToRealModMask (d,
 						     action->button.modifiers);
 

@@ -46,7 +46,8 @@ struct _Modifier {
     { "<Meta>",       CompMetaMask       },
     { "<Super>",      CompSuperMask      },
     { "<Hyper>",      CompHyperMask      },
-    { "<ModeSwitch>", CompModeSwitchMask }
+    { "<ModeSwitch>", CompModeSwitchMask },
+    { "<ClickOnDesktop>", CompClickOnDesktopMask }
 };
 
 #define N_MODIFIERS (sizeof (modifiers) / sizeof (struct _Modifier))
