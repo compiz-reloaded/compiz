@@ -323,12 +323,13 @@ triggerButtonPressBindings (CompDisplay  *d,
 	{
 	    if (action->button.button == event->button)
 	    {
+		    Bool collisionCheck = TRUE;
 		    if (action->button.modifiers & CompClickOnDesktopMask)
-			    if (!eventHitDesktop(d, event))
-				    continue;
+			    collisionCheck = eventHitDesktop(d, event);
+
 		bindMods = virtualToRealModMask (d, action->button.modifiers);
 
-		if ((bindMods & modMask) == (event->state & modMask))
+		if ((bindMods & modMask) == (event->state & modMask) && collisionCheck)
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
@@ -343,13 +344,14 @@ triggerButtonPressBindings (CompDisplay  *d,
 		if ((action->button.button == event->button) &&
 		    (action->edgeMask & edge))
 		{
+		    Bool collisionCheck = TRUE;
 		    if (action->button.modifiers & CompClickOnDesktopMask)
-			    if (!eventHitDesktop(d, event))
-				    continue;
+			    collisionCheck = eventHitDesktop(d, event);
+
 		    bindMods = virtualToRealModMask (d,
 						     action->button.modifiers);
 
-		    if ((bindMods & modMask) == (event->state & modMask))
+		    if ((bindMods & modMask) == (event->state & modMask) && collisionCheck)
 			if ((*action->initiate) (d, action, state |
 						 CompActionStateInitEdge,
 						 argument, nArgument))
