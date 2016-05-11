@@ -275,7 +275,12 @@ static Bool eventHitDesktop(CompDisplay *d,
             return FALSE;
     }
     else {
-        return TRUE;
+        int isRootWindow = (event->window == s->root);
+
+        if (isRootWindow)
+            return TRUE;
+        else
+            return FALSE;
     }
 }
 
