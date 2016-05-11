@@ -258,19 +258,21 @@ static Bool eventHitDesktop(CompDisplay *d,
 {
     CompWindow *w = findWindowAtDisplay(d, event->window);
     CompScreen *s = findScreenAtDisplay(d, event->root);
-    Window xid;
 
-    if (!s) {
+    if (!s)
         return FALSE;
-    }
 
     if (w) {
-        xid = w->id;
-        if (w->id == s->grabWindow) {
-            xid = d->below;
-            w = findWindowAtDisplay(d, xid);
-        }
-        return ((w->type & CompWindowTypeDesktopMask) == 1) && (w->id == s->root);
+        if (w->id == s->grabWindow)
+            w = findWindowAtDisplay(d, d->below);
+
+        int typeCheck = (w->type & CompWindowTypeDesktopMask) == CompWindowTypeDesktopMask;
+        int isRootWindow = (w->id == s->root);
+
+        if (typeCheck && isRootWindow)
+            return TRUE;
+        else
+            return FALSE;
     }
     else {
         return TRUE;
