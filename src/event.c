@@ -341,9 +341,9 @@ triggerButtonPressBindings (CompDisplay  *d,
 		if ((bindMods & modMask) == (event->state & modMask) && (!needsDesktop || hitDesktop))
 		{
 				if (hitDesktop) {
-				    if (needsDesktop)
+				    if (needsDesktop && desktopAction == NULL)
 					    desktopAction = action;
-					else
+					else if (!needsDesktop && globalAction == NULL)
 					    globalAction = action;
 				}
 			else {
@@ -371,9 +371,9 @@ triggerButtonPressBindings (CompDisplay  *d,
 		    if ((bindMods & modMask) == (event->state & modMask) && (!needsDesktop || hitDesktop))
 			{
 				if (hitDesktop) {
-				    if (needsDesktop)
+				    if (needsDesktop && desktopAction == NULL)
 					    desktopAction = action;
-					else
+					else if (!needsDesktop && globalAction == NULL)
 					    globalAction = action;
 				}
 				else {
