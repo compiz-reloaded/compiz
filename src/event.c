@@ -297,6 +297,10 @@ triggerButtonPressBindings (CompDisplay  *d,
     unsigned int    modMask = REAL_MOD_MASK & ~d->ignoredModMask;
     unsigned int    bindMods;
     unsigned int    edge = 0;
+    Bool hitDesktop = eventHitDesktop(d, event);
+    Bool needsDesktop = FALSE;
+
+    CompAction *globalAction = NULL, *desktopAction = NULL;
 
     if (edgeWindow)
     {
@@ -330,16 +334,24 @@ triggerButtonPressBindings (CompDisplay  *d,
 	{
 	    if (action->button.button == event->button)
 	    {
-		    Bool collisionCheck = TRUE;
-		    if (action->button.modifiers & CompClickOnDesktopMask)
-			    collisionCheck = eventHitDesktop(d, event);
+		    needsDesktop = action->button.modifiers & CompClickOnDesktopMask ? TRUE : FALSE;
 
 		bindMods = virtualToRealModMask (d, action->button.modifiers);
 
-		if ((bindMods & modMask) == (event->state & modMask) && collisionCheck)
-		    if ((*action->initiate) (d, action, state,
-					     argument, nArgument))
-			return TRUE;
+		if ((bindMods & modMask) == (event->state & modMask) && (!needsDesktop || hitDesktop))
+		{
+				if (hitDesktop) {
+				    if (!needsDesktop)
+					    desktopAction = action;
+					else
+					    globalAction = action;
+				}
+			else {
+				    if ((*action->initiate) (d, action, state,
+							     argument, nArgument))
+					return TRUE;
+				}
+			}
 	    }
 	}
 
@@ -351,24 +363,61 @@ triggerButtonPressBindings (CompDisplay  *d,
 		if ((action->button.button == event->button) &&
 		    (action->edgeMask & edge))
 		{
-		    Bool collisionCheck = TRUE;
-		    if (action->button.modifiers & CompClickOnDesktopMask)
-			    collisionCheck = eventHitDesktop(d, event);
+		    needsDesktop = action->button.modifiers & CompClickOnDesktopMask ? TRUE : FALSE;
 
 		    bindMods = virtualToRealModMask (d,
 						     action->button.modifiers);
 
-		    if ((bindMods & modMask) == (event->state & modMask) && collisionCheck)
-			if ((*action->initiate) (d, action, state |
-						 CompActionStateInitEdge,
-						 argument, nArgument))
-			    return TRUE;
+		    if ((bindMods & modMask) == (event->state & modMask) && (!needsDesktop || hitDesktop))
+			{
+				if (hitDesktop) {
+				    if (!needsDesktop)
+					    desktopAction = action;
+					else
+					    globalAction = action;
+				}
+				else {
+					if ((*action->initiate) (d, action, state |
+							     CompActionStateInitEdge,
+							     argument, nArgument))
+					    return TRUE;
+				}
+			}
 		}
 	    }
 	}
 
 	option++;
+	if (globalAction != NULL && desktopAction != NULL)
+	    break;
     }
+
+	if (edge) {
+		if (desktopAction != NULL) {
+			if ((*desktopAction->initiate) (d, desktopAction, state |
+					     CompActionStateInitEdge,
+					     argument, nArgument))
+				return TRUE;
+		}
+		else if (globalAction != NULL) {
+			if ((*globalAction->initiate) (d, globalAction, state |
+					     CompActionStateInitEdge,
+					     argument, nArgument))
+				return TRUE;
+		}
+	}
+	else {
+		if (desktopAction != NULL) {
+			if ((*desktopAction->initiate) (d, desktopAction, state,
+					     argument, nArgument))
+				return TRUE;
+		}
+		else if (globalAction != NULL) {
+			if ((*globalAction->initiate) (d, globalAction, state,
+					     argument, nArgument))
+				return TRUE;
+		}
+	}
 
     return FALSE;
 }
