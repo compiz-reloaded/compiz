@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-24 08:12+0100\n"
-"PO-Revision-Date: 2016-05-17 16:46+0200\n"
+"PO-Revision-Date: 2016-05-18 20:49+0200\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:8
 msgid "Opacity to use for marco theme decorations"
-msgstr "L'opacitat a utilitzar per  a les decoracions del tema Marco"
+msgstr "L'opacitat a utilitzar per a les decoracions del tema Marco"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:9
 msgid ""
@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:11
 msgid "Title bar mouse wheel action"
-msgstr "Acció de la la roda del ratolí a la barra de títol"
+msgstr "Acció de la roda del ratolí a la barra de títol"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
@@ -176,7 +176,7 @@ msgstr "Color del traç de l'anotació"
 
 #: ../metadata/annotate.xml.in.h:4
 msgid "Annotate plugin"
-msgstr "Connector d'annotació"
+msgstr "Connector d'anotació"
 
 #: ../metadata/annotate.xml.in.h:5
 msgid "Clear"
@@ -283,11 +283,12 @@ msgstr "Difuminat de les finestres que no tenen l'enfocament"
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
 msgstr ""
-"Desactiva la mida de les regions de pantalla fetes per altres finestres."
+"Inhabilita el desenfocament de les regions de pantalla enfosquides per "
+"altres finestres."
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
-msgstr "Filtra un metód utilitzat per mida"
+msgstr "Filtra el mètode utilitzat per al desenfocament"
 
 #: ../metadata/blur.xml.in.h:15
 msgid "Focus Blur"
@@ -332,7 +333,7 @@ msgstr "LOD del Mipmap"
 
 #: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
-msgstr "Mimal nivel-de-detalls"
+msgstr "Mipmap nivell-del-detall"
 
 #: ../metadata/blur.xml.in.h:26
 msgid "Pulse"
@@ -572,7 +573,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command0"
 
 #: ../metadata/commands.xml.in.h:26
@@ -580,7 +581,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command1"
 
 #: ../metadata/commands.xml.in.h:27
@@ -588,7 +589,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command10"
 
 #: ../metadata/commands.xml.in.h:28
@@ -596,7 +597,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command11"
 
 #: ../metadata/commands.xml.in.h:29
@@ -604,7 +605,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command2"
 
 #: ../metadata/commands.xml.in.h:30
@@ -612,7 +613,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command3"
 
 #: ../metadata/commands.xml.in.h:31
@@ -620,7 +621,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command4"
 
 #: ../metadata/commands.xml.in.h:32
@@ -628,7 +629,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command5"
 
 #: ../metadata/commands.xml.in.h:33
@@ -636,7 +637,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command6"
 
 #: ../metadata/commands.xml.in.h:34
@@ -644,7 +645,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command7"
 
 #: ../metadata/commands.xml.in.h:35
@@ -652,7 +653,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command8"
 
 #: ../metadata/commands.xml.in.h:36
@@ -660,7 +661,7 @@ msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
-"Una assignació de cantonades que quan s'invoqui executarà l'ordre del shell "
+"Una assignació de la vora que quan s'invoqui executarà l'ordre del shell "
 "identificada amb command9"
 
 #: ../metadata/commands.xml.in.h:37
@@ -773,7 +774,7 @@ msgstr "Ordres"
 
 #: ../metadata/commands.xml.in.h:64
 msgid "Edge Bindings"
-msgstr "Vinculació de les cantonades"
+msgstr "Vinculació de les vores"
 
 #: ../metadata/commands.xml.in.h:65
 msgid "Key Bindings"
@@ -868,7 +869,7 @@ msgstr "Millor"
 
 #: ../metadata/core.xml.in.in.h:10
 msgid "Click To Focus"
-msgstr "Feu clic per a passar el focus"
+msgstr "En fer clic es passa el focus"
 
 #: ../metadata/core.xml.in.in.h:11
 msgid "Click on window moves input focus to it"
@@ -910,7 +911,7 @@ msgstr ""
 
 #: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Retard d'activació de la vora"
 
 #: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
@@ -918,23 +919,23 @@ msgstr "Ràpid"
 
 #: ../metadata/core.xml.in.in.h:23
 msgid "Focus &amp; Raise Behaviour"
-msgstr ""
+msgstr "Comportament del focus i de l'elevació"
 
 #: ../metadata/core.xml.in.in.h:24
 msgid "Focus Prevention Level"
-msgstr ""
+msgstr "Nivell de la prevenció del focus"
 
 #: ../metadata/core.xml.in.in.h:25
 msgid "Focus Prevention Windows"
-msgstr ""
+msgstr "Finestres de la prevenció del focus"
 
 #: ../metadata/core.xml.in.in.h:26
 msgid "Focus prevention windows"
-msgstr ""
+msgstr "Finestres de la prevenció del focus"
 
 #: ../metadata/core.xml.in.in.h:27
 msgid "Force independent output painting."
-msgstr ""
+msgstr "Força el dibuix independentment de la sortida."
 
 #: ../metadata/core.xml.in.in.h:28
 msgid "General Options"
@@ -960,7 +961,7 @@ msgstr "Oculta totes les finestres i passa el focus a l'escriptori"
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
 "Oculta les finestres que no estiguin a la barra de tasques quan s'accedeixi "
-"al mode d'escriptori de visualització"
+"al mode de mostra l'escriptori"
 
 #: ../metadata/core.xml.in.in.h:34
 msgid "High"
@@ -973,20 +974,22 @@ msgstr "Mida virtual horitzontal"
 #: ../metadata/core.xml.in.in.h:36
 msgid "If available use compression for textures converted from images"
 msgstr ""
+"Si estigués disponible, utilitza la compressió per a les textures que es "
+"converteixin des d'imatges."
 
 #: ../metadata/core.xml.in.in.h:37
 msgid "Ignore Hints When Maximized"
-msgstr "Ignora els suggeriments quan està maximitzada"
+msgstr "Ignora els suggeriments amb la maximització"
 
 #: ../metadata/core.xml.in.in.h:38
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr ""
-"Ignora els suggeriments d'increment de mida i aspecte quan la finestra es "
-"troba maximitzada"
+"Ignora els suggeriments de l'increment de mida i de l'aspecte quan la "
+"finestra estigui maximitzada"
 
 #: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
-msgstr ""
+msgstr "Interval abans d'elevar les finestres seleccionades"
 
 #: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
@@ -1084,7 +1087,7 @@ msgstr ""
 # SH
 #: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
-msgstr ""
+msgstr "Retard del ping"
 
 #: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
@@ -1149,7 +1152,7 @@ msgstr "Compressió de la textura"
 
 #: ../metadata/core.xml.in.in.h:81
 msgid "Texture Filter"
-msgstr "Filtre de textura"
+msgstr "Filtre de la textura"
 
 #: ../metadata/core.xml.in.in.h:82
 msgid "Texture filtering"
@@ -1663,7 +1666,7 @@ msgstr "GLib"
 
 #: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
-msgstr ""
+msgstr "Compatibilitat amb el bucle principal de GLib"
 
 #: ../metadata/matecompat.xml.in.h:2
 msgid "MATE Compatibility"
@@ -1687,7 +1690,7 @@ msgstr "Executa la línia d'ordres"
 
 #: ../metadata/matecompat.xml.in.h:7
 msgid "Screenshot command line"
-msgstr "Línia d'ordres de captura de pantalla"
+msgstr "Línia d'ordres de la captura de pantalla"
 
 #: ../metadata/matecompat.xml.in.h:8
 msgid "Show Main Menu"
@@ -1715,7 +1718,7 @@ msgstr "Línia d'ordres del terminal"
 
 #: ../metadata/matecompat.xml.in.h:14
 msgid "Window screenshot command line"
-msgstr "Línia d'ordres de captura de pantalla de finestra"
+msgstr "Línia d'ordres de la captura de pantalla de la finestra"
 
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
@@ -1771,7 +1774,7 @@ msgstr "Transforma les finestres quan es minimitzen i es maximitzen"
 
 #: ../metadata/minimize.xml.in.h:10
 msgid "Windows that should be transformed when minimized"
-msgstr ""
+msgstr "Finestres que s'han de transformar quan es minimitzin"
 
 #: ../metadata/move.xml.in.h:1
 msgid "Constrain Y"
@@ -2217,7 +2220,7 @@ msgstr ""
 
 #: ../metadata/rotate.xml.in.h:3
 msgid "Edge Flip DnD"
-msgstr "DnD d'inversió de la cantonada"
+msgstr "DnD d'inversió de la vora"
 
 #: ../metadata/rotate.xml.in.h:4
 msgid "Edge Flip Move"
@@ -2271,11 +2274,11 @@ msgstr "Sensibilitat del punter"
 
 #: ../metadata/rotate.xml.in.h:16
 msgid "Raise on rotate"
-msgstr ""
+msgstr "Eleva en girar"
 
 #: ../metadata/rotate.xml.in.h:17
 msgid "Raise window when rotating"
-msgstr ""
+msgstr "Eleva la finestra quan es giri"
 
 #: ../metadata/rotate.xml.in.h:18
 msgid "Rotate Cube"
