@@ -1,1 +1,0 @@
-SUBDIRS = window-decorator mate

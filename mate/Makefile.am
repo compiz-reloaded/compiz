@@ -1,7 +1,6 @@
 EXTRA_DIST =		  \
 	compiz.desktop.in
 
-if USE_MATE
 desktopfilesdir	      = $(DESTDIR)$(datadir)/applications
 desktopfiles_in_files = compiz.desktop.in
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
@@ -20,7 +19,6 @@ uninstall-local:
 		rm -f $(desktopfilesdir)/compiz.desktop \
 		); \
 	fi
-endif
 
 noinst_DATA =		      \
 	$(desktopfiles_files)

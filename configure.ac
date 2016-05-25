@@ -300,7 +300,7 @@ AC_ARG_ENABLE(marco,
   [use_marco=$enableval], [use_marco=yes])
 
 AC_ARG_ENABLE(mate,
-  [  --disable-mate          Disable mate basic support],
+  [  --disable-mate          Disable basic mate compatibility],
   [use_mate=$enableval], [use_mate=yes])
 
 AC_ARG_ENABLE(gsettings,
@@ -381,7 +381,7 @@ fi
 
 AM_CONDITIONAL(USE_MATE, test "x$use_mate" = "xyes")
 if test "$use_mate" = yes; then
-  AC_DEFINE(USE_MATE, 1, [Build mate basic support])
+  AC_DEFINE(USE_MATE, 1, [Build basic mate compatibility])
 fi
 
 AM_CONDITIONAL(USE_GSETTINGS, test "x$use_gsettings" = "xyes")
@@ -452,10 +452,9 @@ libdecoration/libdecoration.pc
 include/Makefile
 plugins/Makefile
 images/Makefile
-gtk/Makefile
-gtk/window-decorator/Makefile
-gtk/mate/Makefile
+gtk-window-decorator/Makefile
 po/Makefile.in
+mate/Makefile
 metadata/Makefile
 ])
 
@@ -467,11 +466,11 @@ echo "  annotate:                  $use_annotate"
 echo "  svg:                       $use_librsvg"
 echo "  inotify:                   $use_inotify"
 echo "  fuse:                      $use_fuse"
+echo "  matecompat:                $use_mate"
 echo ""
 echo "and the following optional features will be used:"
 echo "  gtk:                       $use_gtk ($with_gtk)"
 echo "  marco:                     $use_marco"
-echo "  mate:                      $use_mate"
 echo "  gwd gsettings support:     $use_gsettings"
 echo "  desktop menu entries:      $use_menu_entries"
 echo ""

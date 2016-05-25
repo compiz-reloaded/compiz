@@ -1,4 +1,4 @@
-SUBDIRS = include src libdecoration plugins images gtk po metadata
+SUBDIRS = include src libdecoration plugins images gtk-window-decorator po mate metadata
 
 EXTRA_DIST =		   \
 	AUTHORS		    \
