@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-24 08:12+0100\n"
-"PO-Revision-Date: 2016-05-18 20:49+0200\n"
+"PO-Revision-Date: 2016-05-31 13:48+0200\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:2
 msgid "Blur type"
-msgstr "Tipus de difuminat"
+msgstr "Tipus de desenfocament"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:3
 msgid "Marco theme active window opacity"
@@ -96,7 +96,7 @@ msgstr "Acció de la roda del ratolí a la barra de títol"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:12
 msgid "Type of blur used for window decorations"
-msgstr "Tipus de difuminat que s'utilitza per a la decoració de finestres"
+msgstr "Tipus de desenfocament que s'utilitza per a la decoració de finestres"
 
 #: ../gtk/window-decorator/gwd.schemas.in.h:13
 msgid "Use marco theme"
@@ -136,7 +136,7 @@ msgstr "Pal"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4691
 msgid "Unshade"
-msgstr "Sense esvaïment"
+msgstr "Sense ombreig"
 
 #: ../gtk/window-decorator/gtk-window-decorator.c:4711
 msgid "Unmake Above"
@@ -238,47 +238,47 @@ msgstr "4xBilinear"
 
 #: ../metadata/blur.xml.in.h:2
 msgid "Alpha Blur"
-msgstr "Difuminat alfa"
+msgstr "Desenfocament alfa"
 
 #: ../metadata/blur.xml.in.h:3
 msgid "Alpha blur windows"
-msgstr "Difuminat alfa de les finestres"
+msgstr "Desenfocament alfa de les finestres"
 
 #: ../metadata/blur.xml.in.h:4
 msgid "Blur Filter"
-msgstr "Filtre de difuminat"
+msgstr "Filtre de desenfocament"
 
 #: ../metadata/blur.xml.in.h:5
 msgid "Blur Occlusion"
-msgstr ""
+msgstr "Oclusió del desenfocament"
 
 #: ../metadata/blur.xml.in.h:6
 msgid "Blur Saturation"
-msgstr "Saturació del difuminat"
+msgstr "Saturació del desenfocament"
 
 #: ../metadata/blur.xml.in.h:7
 msgid "Blur Speed"
-msgstr "Velocitat del difuminat"
+msgstr "Velocitat del desenfocament"
 
 #: ../metadata/blur.xml.in.h:8
 msgid "Blur Windows"
-msgstr "Difumina les finestres"
+msgstr "Desenfoca les finestres"
 
 #: ../metadata/blur.xml.in.h:9
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "Desenfoca les parts translúcides darrere de les finestres"
 
 #: ../metadata/blur.xml.in.h:10
 msgid "Blur saturation"
-msgstr "Saturació del difuminat"
+msgstr "Saturació del desenfocament"
 
 #: ../metadata/blur.xml.in.h:11
 msgid "Blur windows"
-msgstr "Difumina les finestres"
+msgstr "Desenfoca les finestres"
 
 #: ../metadata/blur.xml.in.h:12
 msgid "Blur windows that doesn't have focus"
-msgstr "Difuminat de les finestres que no tenen l'enfocament"
+msgstr "Desenfoca les finestres que no tenen el focus"
 
 #: ../metadata/blur.xml.in.h:13
 msgid "Disable blurring of screen regions obscured by other windows."
@@ -288,15 +288,15 @@ msgstr ""
 
 #: ../metadata/blur.xml.in.h:14
 msgid "Filter method used for blurring"
-msgstr "Filtra el mètode utilitzat per al desenfocament"
+msgstr "Mètode de filtrat utilitzat per al desenfocament"
 
 #: ../metadata/blur.xml.in.h:15
 msgid "Focus Blur"
-msgstr "Difuminat de l'enfocament"
+msgstr "Desenfocament del focus"
 
 #: ../metadata/blur.xml.in.h:16
 msgid "Focus blur windows"
-msgstr "Enfocament de les finestres difuminades"
+msgstr "Focus de les finestres desenfocades"
 
 #: ../metadata/blur.xml.in.h:17
 msgid "Gaussian"
@@ -353,16 +353,16 @@ msgstr ""
 
 #: ../metadata/blur.xml.in.h:29
 msgid "Window blur speed"
-msgstr "Velocitat del difuminat de les finestres"
+msgstr "Velocitat de desenfocament de les finestres"
 
 #: ../metadata/blur.xml.in.h:30
 msgid "Windows that should be affected by focus blur"
-msgstr "Finestres que es veuen afectades amb el difuminat de l'enfocament"
+msgstr "Finestres que es veuen afectades amb el desenfocament del focus"
 
 #: ../metadata/blur.xml.in.h:31
 msgid "Windows that should be use alpha blur by default"
 msgstr ""
-"Finestres que han d'utilitzar el difuminat alfa de manera predeterminada"
+"Finestres que han d'utilitzar el desenfocament alfa de manera predeterminada"
 
 #: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
@@ -845,7 +845,7 @@ msgstr "Avís sonor"
 
 #: ../metadata/core.xml.in.in.h:4
 msgid "Audible system beep"
-msgstr "So d'avís del sistema audible"
+msgstr "So d'avís audible del sistema"
 
 #: ../metadata/core.xml.in.in.h:5
 msgid "Auto-Raise"
@@ -908,6 +908,8 @@ msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
+"El temps que el punter ha de descansar en una vora de la pantalla abans que "
+"es realitzi una acció de vora."
 
 #: ../metadata/core.xml.in.in.h:21
 msgid "Edge Trigger Delay"
@@ -993,7 +995,7 @@ msgstr "Interval abans d'elevar les finestres seleccionades"
 
 #: ../metadata/core.xml.in.in.h:40
 msgid "Interval between ping messages"
-msgstr ""
+msgstr "Interval entre missatges de ping"
 
 #: ../metadata/core.xml.in.in.h:41
 msgid "Key bindings"
@@ -1001,7 +1003,7 @@ msgstr "Vinculació de les tecles"
 
 #: ../metadata/core.xml.in.in.h:42
 msgid "Level of focus stealing prevention"
-msgstr ""
+msgstr "Nivell de prevenció del robatori del focus"
 
 #: ../metadata/core.xml.in.in.h:43
 msgid "Lighting"
@@ -1074,32 +1076,33 @@ msgstr ""
 
 #: ../metadata/core.xml.in.in.h:62
 msgid "Outputs"
-msgstr "Sortides"
+msgstr "Sortida"
 
 #: ../metadata/core.xml.in.in.h:63
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "Gestió de la superposició de la sortida"
 
 #: ../metadata/core.xml.in.in.h:64
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Dibuixa cada dispositiu de sortida de manera independent, fins i tot si es "
+"solapen els dispositius de sortida"
 
-# SH
 #: ../metadata/core.xml.in.in.h:65
 msgid "Ping Delay"
 msgstr "Retard del ping"
 
 #: ../metadata/core.xml.in.in.h:66
 msgid "Prefer larger output"
-msgstr ""
+msgstr "Es prefereix una sortida més gran"
 
 #: ../metadata/core.xml.in.in.h:67
 msgid "Prefer smaller output"
-msgstr ""
+msgstr "Es prefereix una sortida més petita"
 
 #: ../metadata/core.xml.in.in.h:68
 msgid "Raise On Click"
-msgstr "Eleva en fer clic"
+msgstr "Elevació en fer clic"
 
 #: ../metadata/core.xml.in.in.h:69
 msgid "Raise Window"
@@ -1160,7 +1163,7 @@ msgstr "Filtració de la textura"
 
 #: ../metadata/core.xml.in.in.h:83
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr ""
+msgstr "La velocitat a la qual es torna a dibuixar la pantalla (vegades/segon)"
 
 #: ../metadata/core.xml.in.in.h:84
 msgid "Toggle Window Maximized"
@@ -1220,15 +1223,15 @@ msgstr "Molt alt"
 
 #: ../metadata/core.xml.in.in.h:99
 msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "Quin dels dispositius de sortida es prefereix per a la superposició"
 
 #: ../metadata/core.xml.in.in.h:101
 msgid "Window menu button binding"
-msgstr ""
+msgstr "Vinculació del botó del menú de la finestra"
 
 #: ../metadata/core.xml.in.in.h:102
 msgid "Window menu key binding"
-msgstr ""
+msgstr "Vinculació de la tecla del menú de la finestra"
 
 #: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
 msgid "Acceleration"
@@ -1520,7 +1523,6 @@ msgstr "Ombra de les finestres"
 msgid "Window Decoration"
 msgstr "Decoració de la finestra"
 
-# RU
 #: ../metadata/decoration.xml.in.h:18
 msgid "Window decorations"
 msgstr "Decoracions de finestres"
@@ -1698,7 +1700,7 @@ msgstr "Mostra el menú principal"
 
 #: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
-msgstr "Mostra el diàleg d'execució de l'aplicació"
+msgstr "Mostra el diàleg d'execució d'aplicacions"
 
 #: ../metadata/matecompat.xml.in.h:10
 msgid "Show the main menu"
@@ -1839,7 +1841,7 @@ msgstr "Increment de la brillantor"
 
 #: ../metadata/obs.xml.in.h:4
 msgid "Brightness Step"
-msgstr "Pas de la brillantor"
+msgstr "Brillantor gradual"
 
 #: ../metadata/obs.xml.in.h:5
 msgid "Brightness values for windows"
@@ -1863,7 +1865,7 @@ msgstr "Increment de l'opacitat"
 
 #: ../metadata/obs.xml.in.h:11
 msgid "Opacity Step"
-msgstr "Pas de l'opacitat"
+msgstr "Opacitat gradual"
 
 #: ../metadata/obs.xml.in.h:12
 msgid "Opacity values for windows"
@@ -1883,15 +1885,15 @@ msgstr "Saturació"
 
 #: ../metadata/obs.xml.in.h:16
 msgid "Saturation Decrease"
-msgstr "Decrement del difuminat"
+msgstr "Decrement de la saturació"
 
 #: ../metadata/obs.xml.in.h:17
 msgid "Saturation Increase"
-msgstr "Increment del difuminat"
+msgstr "Increment de la saturació"
 
 #: ../metadata/obs.xml.in.h:18
 msgid "Saturation Step"
-msgstr "Pas del difuminat"
+msgstr "Saturació gradual"
 
 #: ../metadata/obs.xml.in.h:19
 msgid "Saturation values for windows"
@@ -1899,9 +1901,8 @@ msgstr "Valors de la saturació per a les finestres"
 
 #: ../metadata/obs.xml.in.h:20
 msgid "Step"
-msgstr "Pas"
+msgstr "Etapa"
 
-# RU
 #: ../metadata/obs.xml.in.h:21
 msgid "Window specific settings"
 msgstr "Ajusts específics de la finestra"
@@ -2006,7 +2007,7 @@ msgstr "Utilitza el dispositiu de sortida actiu"
 
 #: ../metadata/place.xml.in.h:20
 msgid "Use output device of focussed window"
-msgstr "Utilitza el dispositiu de sortida de la finestra amb enfocament"
+msgstr "Utilitza el dispositiu de sortida de la finestra amb focus"
 
 #: ../metadata/place.xml.in.h:21
 msgid "Use output device with pointer"
@@ -2022,7 +2023,7 @@ msgstr "Finestres posicionades a l'àrea de visualització"
 
 #: ../metadata/place.xml.in.h:24
 msgid "Window placement workarounds"
-msgstr "Solucions alternatives de disposició de finestres"
+msgstr "Solucions alternatives per al posicionament de les finestres"
 
 #: ../metadata/place.xml.in.h:25
 msgid "Windows that should be positioned by default"
@@ -2042,7 +2043,6 @@ msgstr ""
 "Finestres que s'han de posicionar forçosament, fins i tot si indiquessin que "
 "el gestor de finestres hauria d'evitar posicionar-les."
 
-# RU
 #: ../metadata/place.xml.in.h:28
 msgid "Windows with fixed positions"
 msgstr "Finestres amb posicions fixes"
@@ -2102,7 +2102,7 @@ msgstr "Vinculacions"
 
 #: ../metadata/resize.xml.in.h:2
 msgid "Border Color"
-msgstr ""
+msgstr "Color del contorn"
 
 #: ../metadata/resize.xml.in.h:3
 msgid "Border color used for outline and rectangle resize modes"
@@ -2548,7 +2548,6 @@ msgstr "Gira la finestra"
 msgid "Rotate with window"
 msgstr "Gira amb la finestra"
 
-# RU
 #: ../metadata/rotate.xml.in.h:85
 msgid "Rotation Acceleration"
 msgstr "Acceleració del gir"
@@ -2727,7 +2726,6 @@ msgstr ""
 msgid "Space between windows"
 msgstr "Espai entre les finestres"
 
-# ES
 #: ../metadata/scale.xml.in.h:38
 msgid "Spacing"
 msgstr "Espaiat"
@@ -2789,7 +2787,7 @@ msgstr "Quantitat de saturació en percentatge"
 
 #: ../metadata/switcher.xml.in.h:4
 msgid "Application Switcher"
-msgstr "Canviador d'aplicacions"
+msgstr "Commutador d'aplicacions"
 
 #: ../metadata/switcher.xml.in.h:5
 msgid "Auto Rotate"
@@ -2836,25 +2834,27 @@ msgstr "Finestra següent (no emergent)"
 #: ../metadata/switcher.xml.in.h:20
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
-"Fa sortir el canviador si no està visible i selecciona la finestra següent"
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra següent"
 
 #: ../metadata/switcher.xml.in.h:21
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
-"Fes sortir el canviador si no està visible i selecciona la següent de totes "
-"les finestres"
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra següent de totes les finestres"
 
 #: ../metadata/switcher.xml.in.h:22
 msgid "Popup switcher if not visible and select previous window"
 msgstr ""
-"Fes sortir el canviador si no està visible i selecciona la finestra anterior"
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra anterior"
 
 #: ../metadata/switcher.xml.in.h:23
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
-"Fes sortir el canviador si no està visible i selecciona l'anterior de totes "
-"les finestres"
+"Fes que aparegui el commutador si aquest no estigués visible i selecciona la "
+"finestra anterior de totes les finestres"
 
 #: ../metadata/switcher.xml.in.h:24
 msgid "Prev Panel"
@@ -2902,19 +2902,19 @@ msgstr "Mostra les finestres minimitzades"
 
 #: ../metadata/switcher.xml.in.h:37
 msgid "Switcher speed"
-msgstr "Velocitat del canviador"
+msgstr "Velocitat del commutador"
 
 #: ../metadata/switcher.xml.in.h:38
 msgid "Switcher timestep"
-msgstr "Canviador gradual"
+msgstr "Commutador gradual"
 
 #: ../metadata/switcher.xml.in.h:39
 msgid "Switcher windows"
-msgstr "Canviador de finestres"
+msgstr "Commutador de finestres"
 
 #: ../metadata/switcher.xml.in.h:41
 msgid "Windows that should be shown in switcher"
-msgstr "Finestres que s'han de mostrar al canviador"
+msgstr "Finestres que s'han de mostrar al commutador"
 
 #: ../metadata/water.xml.in.h:1
 msgid "Add line"
@@ -2948,10 +2948,9 @@ msgstr "Escala del desplaçament"
 msgid "Point"
 msgstr "Punt"
 
-# SH
 #: ../metadata/water.xml.in.h:10
 msgid "Rain Delay"
-msgstr "Retard de pluja"
+msgstr "Retard de la pluja"
 
 #: ../metadata/water.xml.in.h:11
 msgid "Title wave"
@@ -2967,11 +2966,11 @@ msgstr "Commuta l'efecte de pluja"
 
 #: ../metadata/water.xml.in.h:14
 msgid "Toggle wiper"
-msgstr "Commuta l'eixugaparabrises"
+msgstr "Commuta l'eixugaparabrisa"
 
 #: ../metadata/water.xml.in.h:15
 msgid "Toggle wiper effect"
-msgstr "Commuta l'efecte d'eixugaparabrises"
+msgstr "Commuta l'efecte d'eixugaparabrisa"
 
 #: ../metadata/water.xml.in.h:16
 msgid "Water Effect"
@@ -2987,15 +2986,15 @@ msgstr "Efecte d'ona des del títol de la finestra"
 
 #: ../metadata/wobbly.xml.in.h:1
 msgid "Focus Effect"
-msgstr "Enfocament de l'efecte"
+msgstr "Efecte del focus"
 
 #: ../metadata/wobbly.xml.in.h:2
 msgid "Focus Window Effect"
-msgstr "Enfocament de l'efecte de la finestra"
+msgstr "Efecte de la finestra amb focus"
 
 #: ../metadata/wobbly.xml.in.h:3
 msgid "Focus Windows"
-msgstr "Enfocament de les finestres"
+msgstr "Finestres amb focus"
 
 #: ../metadata/wobbly.xml.in.h:4
 msgid "Friction"
@@ -3083,7 +3082,7 @@ msgstr "Resolució de la quadrícula del vèrtex"
 
 #: ../metadata/wobbly.xml.in.h:26
 msgid "Windows that should wobble when focused"
-msgstr "Finestres que han d'oscil·lar quan s'enfoquin"
+msgstr "Finestres que han d'oscil·lar quan rebin el focus"
 
 #: ../metadata/wobbly.xml.in.h:27
 msgid "Windows that should wobble when grabbed"
