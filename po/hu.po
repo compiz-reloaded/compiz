@@ -9,10 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_compiz-hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-24 08:13+0100\n"
+"POT-Creation-Date: 2016-05-31 20:08+0200\n"
 "PO-Revision-Date: 2009-03-25 09:09+0100\n"
 "Last-Translator: KAMI <kamihir@freemail.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,139 +21,71 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-04 10:00+0000\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,-1,-1,-1,490,-1\n"
 
-#: ../gtk/mate/compiz.desktop.in.h:1
-msgid "Compiz"
-msgstr "Compiz"
-
-#: ../metadata/scale.xml.in.h:25
-#: ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Egyik sem"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
-msgid "Shade"
-msgstr "Felgördítés"
-
-#: ../metadata/place.xml.in.h:9
-msgid "Maximize"
-msgstr "Maximalizálás"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
-#: ../metadata/core.xml.in.in.h:100
-msgid "Window Menu"
-msgstr "Ablak menü"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:1
-msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "Az ablak címsorán történő egérgörgő-használat hatása."
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:2
-msgid "Blur type"
-msgstr "Elmosás típusa"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:3
-msgid "Marco theme active window opacity"
-msgstr "Aktív ablak átlátszatlansága"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:4
-msgid "Marco theme active window opacity shade"
-msgstr "Felgördített aktív ablak átlátszatlansága"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:5
-msgid "Marco theme opacity"
-msgstr "Ablak átlátszatlansága"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:6
-msgid "Marco theme opacity shade"
-msgstr "Felgördített ablak átlátszatlansága"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:7
-msgid "Opacity to use for active windows with marco theme decorations"
-msgstr "Az aktív ablak átlátszatlansága a díszítő elemekhez"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:8
-msgid "Opacity to use for marco theme decorations"
-msgstr "Az ablak átlátszatlansága a díszítő elemekhez"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid ""
-"Shade active windows with marco theme decorations from opaque to "
-"translucent"
-msgstr "Felgördített aktív ablak átlátszatlansága a díszítő elemeknél"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid ""
-"Shade windows with marco theme decorations from opaque to translucent"
-msgstr "Felgördített ablak átlátszatlansága a díszítő elemeknél"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:11
-msgid "Title bar mouse wheel action"
-msgstr "Egérgörgő esemény a címsoron"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:12
-msgid "Type of blur used for window decorations"
-msgstr "Az elmosás típusa a díszítő elemekhez"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:13
-msgid "Use marco theme"
-msgstr "Marco téma alkalmazása"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:14
-msgid "Use marco theme when drawing window decorations"
-msgstr "Marco téma alkalmazása az ablakdíszítések rajzolásakor"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.in.h:12
+#: ../gtk-window-decorator/gtk-window-decorator.c:4546
+#: ../metadata/core.xml.in.in.h:35
 msgid "Close Window"
 msgstr "Ablak bezárása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
-#: ../metadata/core.xml.in.in.h:93
+#: ../gtk-window-decorator/gtk-window-decorator.c:4568
+#: ../metadata/core.xml.in.in.h:41
 msgid "Unmaximize Window"
 msgstr "Ablak visszaállítása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
-#: ../metadata/core.xml.in.in.h:49
+#: ../gtk-window-decorator/gtk-window-decorator.c:4571
+#: ../metadata/core.xml.in.in.h:45
 msgid "Maximize Window"
 msgstr "Ablak maximalizálása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
-#: ../metadata/core.xml.in.in.h:55
+#: ../gtk-window-decorator/gtk-window-decorator.c:4613
+#: ../metadata/core.xml.in.in.h:43
 msgid "Minimize Window"
 msgstr "Ablak minimalizálása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk-window-decorator/gtk-window-decorator.c:4758
+#: ../metadata/core.xml.in.in.h:51
+msgid "Window Menu"
+msgstr "Ablak menü"
+
+#: ../gtk-window-decorator/gtk-window-decorator.c:4777
+msgid "Shade"
+msgstr "Felgördítés"
+
+#: ../gtk-window-decorator/gtk-window-decorator.c:4797
 msgid "Make Above"
 msgstr "Előrehozás"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk-window-decorator/gtk-window-decorator.c:4817
 msgid "Stick"
 msgstr "Rögzítés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk-window-decorator/gtk-window-decorator.c:4837
 msgid "Unshade"
 msgstr "Legördítés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk-window-decorator/gtk-window-decorator.c:4857
 msgid "Unmake Above"
 msgstr "Hátraküldés"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk-window-decorator/gtk-window-decorator.c:4877
 msgid "Unstick"
 msgstr "Rögzítés feloldása"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk-window-decorator/gtk-window-decorator.c:5241
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr "A(z) „%s” ablak nem válaszol."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk-window-decorator/gtk-window-decorator.c:5245
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 "A kilépés kényszerítésének hatására minden el nem mentett adat el fog veszni."
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk-window-decorator/gtk-window-decorator.c:5257
+msgid "_Cancel"
+msgstr ""
+
+#: ../gtk-window-decorator/gtk-window-decorator.c:5259
 msgid "_Force Quit"
 msgstr "_Kilépés kényszerítése"
 
@@ -161,165 +94,198 @@ msgid "Annotate"
 msgstr "Feljegyzés"
 
 #: ../metadata/annotate.xml.in.h:2
-msgid "Annotate Fill Color"
-msgstr "Feljegyzés kitöltő színe"
-
-#: ../metadata/annotate.xml.in.h:3
-msgid "Annotate Stroke Color"
-msgstr "Feljegyzés körvonalszíne"
-
-#: ../metadata/annotate.xml.in.h:4
 msgid "Annotate plugin"
 msgstr "Feljegyzés bővítmény"
 
+#: ../metadata/annotate.xml.in.h:3
+#, fuzzy
+msgid "Initiate Free Draw"
+msgstr "Törlés indítása"
+
+#: ../metadata/annotate.xml.in.h:4
+#, fuzzy
+msgid "Initiate freehand drawing"
+msgstr "Feljegyzésrajzolás indítása"
+
 #: ../metadata/annotate.xml.in.h:5
-msgid "Clear"
-msgstr "Törlés"
+#, fuzzy
+msgid "Initiate Line"
+msgstr "Indítás"
 
 #: ../metadata/annotate.xml.in.h:6
+#, fuzzy
+msgid "Initiate line drawing"
+msgstr "Feljegyzésrajzolás indítása"
+
+#: ../metadata/annotate.xml.in.h:7
+#, fuzzy
+msgid "Initiate Rectangle"
+msgstr "Törlés indítása"
+
+#: ../metadata/annotate.xml.in.h:8
+#, fuzzy
+msgid "Initiate rectangle drawing"
+msgstr "Feljegyzésrajzolás indítása"
+
+#: ../metadata/annotate.xml.in.h:9
+#, fuzzy
+msgid "Initiate Ellipse"
+msgstr "Törlés indítása"
+
+#: ../metadata/annotate.xml.in.h:10
+#, fuzzy
+msgid "Initiate ellipse drawing"
+msgstr "Feljegyzésrajzolás indítása"
+
+#: ../metadata/annotate.xml.in.h:11
 msgid "Draw"
 msgstr "Rajzolás"
 
 # 58721 AttribValues/label
-#: ../metadata/annotate.xml.in.h:7
+#: ../metadata/annotate.xml.in.h:12
 msgid "Draw using tool"
 msgstr "Rajzolás eszközzel"
 
-#: ../metadata/annotate.xml.in.h:8
-msgid "Fill color for annotations"
-msgstr "Feljegyzések kitöltő színe"
-
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
-msgid "Initiate"
-msgstr "Indítás"
-
-#: ../metadata/annotate.xml.in.h:10
-msgid "Initiate annotate drawing"
-msgstr "Feljegyzésrajzolás indítása"
-
-#: ../metadata/annotate.xml.in.h:11
-msgid "Initiate annotate erasing"
-msgstr "Feljegyzéstörlés indítása"
-
-#: ../metadata/annotate.xml.in.h:12
+#: ../metadata/annotate.xml.in.h:13
 msgid "Initiate erase"
 msgstr "Törlés indítása"
 
-#: ../metadata/annotate.xml.in.h:13
-msgid "Line width"
-msgstr "Vonalvastagság"
-
 #: ../metadata/annotate.xml.in.h:14
-msgid "Line width for annotations"
-msgstr "Feljegyzések vonalvastagsága"
+msgid "Initiate annotate erasing"
+msgstr "Feljegyzéstörlés indítása"
 
 #: ../metadata/annotate.xml.in.h:15
+msgid "Clear"
+msgstr "Törlés"
+
+#: ../metadata/annotate.xml.in.h:16
+#, fuzzy
+msgid "Toggle center shape"
+msgstr "Aktív ablak felgördítése"
+
+#: ../metadata/annotate.xml.in.h:17
+msgid ""
+"Toggle whether the current shape is drawn using the center of your initial "
+"click"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:18
+msgid "Annotate Fill Color"
+msgstr "Feljegyzés kitöltő színe"
+
+#: ../metadata/annotate.xml.in.h:19
+msgid "Fill color for annotations"
+msgstr "Feljegyzések kitöltő színe"
+
+#: ../metadata/annotate.xml.in.h:20
+msgid "Annotate Stroke Color"
+msgstr "Feljegyzés körvonalszíne"
+
+#: ../metadata/annotate.xml.in.h:21
 msgid "Stroke color for annotations"
 msgstr "Feljegyzések körvonalának színe"
 
-#: ../metadata/annotate.xml.in.h:16
+#: ../metadata/annotate.xml.in.h:22
 msgid "Stroke width"
 msgstr "Körvonal vastagsága"
 
-#: ../metadata/annotate.xml.in.h:17
+#: ../metadata/annotate.xml.in.h:23
 msgid "Stroke width for annotations"
 msgstr "Feljegyzések körvonal-vastagsága"
 
 #: ../metadata/blur.xml.in.h:1
-msgid "4xBilinear"
-msgstr "4x bilineáris"
-
-#: ../metadata/blur.xml.in.h:2
-msgid "Alpha Blur"
-msgstr "Alfa elmosás"
-
-#: ../metadata/blur.xml.in.h:3
-msgid "Alpha blur windows"
-msgstr "Ablakok elmosása"
-
-#: ../metadata/blur.xml.in.h:4
-msgid "Blur Filter"
-msgstr "Elmosásszűrő"
-
-#: ../metadata/blur.xml.in.h:5
-msgid "Blur Occlusion"
-msgstr "Elmosás levágás"
-
-#: ../metadata/blur.xml.in.h:6
-msgid "Blur Saturation"
-msgstr "Elmosás telítettség"
-
-#: ../metadata/blur.xml.in.h:7
-msgid "Blur Speed"
-msgstr "Elmosás sebessége"
-
-#: ../metadata/blur.xml.in.h:8
 msgid "Blur Windows"
 msgstr "Ablak elmosása"
 
-#: ../metadata/blur.xml.in.h:9
-msgid "Blur behind translucent parts of windows"
-msgstr "Elmosás az ablakok áttetsző részei mögött"
-
-#: ../metadata/blur.xml.in.h:10
-msgid "Blur saturation"
-msgstr "Elmosás telítettség"
-
-#: ../metadata/blur.xml.in.h:11
+#: ../metadata/blur.xml.in.h:2
 msgid "Blur windows"
 msgstr "Ablakok elmosása"
 
-#: ../metadata/blur.xml.in.h:12
-msgid "Blur windows that doesn't have focus"
-msgstr "Fókusszal nem rendelkező ablakok elmosása"
+#: ../metadata/blur.xml.in.h:3
+msgid "Pulse"
+msgstr "Impulzus"
 
-#: ../metadata/blur.xml.in.h:13
-msgid "Disable blurring of screen regions obscured by other windows."
-msgstr "Elmosás kikapcsolása a képernyő más ablakok által kitakart részein."
+#: ../metadata/blur.xml.in.h:4
+msgid "Pulse effect"
+msgstr "Impulzus effektus"
 
-#: ../metadata/blur.xml.in.h:14
-msgid "Filter method used for blurring"
-msgstr "Az elmosáshoz használt szűrőmódszer"
+#: ../metadata/blur.xml.in.h:5
+msgid "Blur Speed"
+msgstr "Elmosás sebessége"
 
-#: ../metadata/blur.xml.in.h:15
-msgid "Focus Blur"
-msgstr "Fókuszelmosás"
+#: ../metadata/blur.xml.in.h:6
+msgid "Window blur speed"
+msgstr "Ablak elmosásának sebessége"
 
-#: ../metadata/blur.xml.in.h:16
+#: ../metadata/blur.xml.in.h:7
 msgid "Focus blur windows"
 msgstr "Ablakok elmosása"
 
+#: ../metadata/blur.xml.in.h:8
+msgid "Windows that should be affected by focus blur"
+msgstr "Fókuszelmosással elmosandó ablaktípusok"
+
+#: ../metadata/blur.xml.in.h:9
+msgid "Focus Blur"
+msgstr "Fókuszelmosás"
+
+#: ../metadata/blur.xml.in.h:10
+msgid "Blur windows that doesn't have focus"
+msgstr "Fókusszal nem rendelkező ablakok elmosása"
+
+#: ../metadata/blur.xml.in.h:11
+msgid "Alpha blur windows"
+msgstr "Ablakok elmosása"
+
+#: ../metadata/blur.xml.in.h:12
+msgid "Windows that should be use alpha blur by default"
+msgstr "Alfaelmosással elmosandó ablaktípusok"
+
+#: ../metadata/blur.xml.in.h:13
+msgid "Alpha Blur"
+msgstr "Alfa elmosás"
+
+#: ../metadata/blur.xml.in.h:14
+msgid "Blur behind translucent parts of windows"
+msgstr "Elmosás az ablakok áttetsző részei mögött"
+
+#: ../metadata/blur.xml.in.h:15
+msgid "Blur Filter"
+msgstr "Elmosásszűrő"
+
+#: ../metadata/blur.xml.in.h:16
+msgid "Filter method used for blurring"
+msgstr "Az elmosáshoz használt szűrőmódszer"
+
 #: ../metadata/blur.xml.in.h:17
+msgid "4xBilinear"
+msgstr "4x bilineáris"
+
+#: ../metadata/blur.xml.in.h:18
 msgid "Gaussian"
 msgstr "Gauss"
 
-#: ../metadata/blur.xml.in.h:18
+#: ../metadata/blur.xml.in.h:19 ../metadata/cube.xml.in.h:9
+#: ../metadata/decoration.xml.in.h:15 ../metadata/switcher.xml.in.h:25
+msgid "Mipmap"
+msgstr "MIP térkép"
+
+#: ../metadata/blur.xml.in.h:20
 msgid "Gaussian Radius"
 msgstr "Gauss-sugár"
 
-#: ../metadata/blur.xml.in.h:19
-msgid "Gaussian Strength"
-msgstr "Gauss erőssége"
-
 # RU
-#: ../metadata/blur.xml.in.h:20
+#: ../metadata/blur.xml.in.h:21
 msgid "Gaussian radius"
 msgstr "Gauss-sugár"
 
-#: ../metadata/blur.xml.in.h:21
-msgid "Gaussian strength"
+#: ../metadata/blur.xml.in.h:22
+msgid "Gaussian Strength"
 msgstr "Gauss erőssége"
 
-#: ../metadata/blur.xml.in.h:22
-msgid "Independent texture fetch"
-msgstr "Független textúra lekérés"
-
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
-msgid "Mipmap"
-msgstr "MIP térkép"
+#: ../metadata/blur.xml.in.h:23
+msgid "Gaussian strength"
+msgstr "Gauss erőssége"
 
 #: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
@@ -330,14 +296,26 @@ msgid "Mipmap level-of-detail"
 msgstr "MIP térkép részletesség szintje"
 
 #: ../metadata/blur.xml.in.h:26
-msgid "Pulse"
-msgstr "Impulzus"
+msgid "Blur Saturation"
+msgstr "Elmosás telítettség"
 
 #: ../metadata/blur.xml.in.h:27
-msgid "Pulse effect"
-msgstr "Impulzus effektus"
+msgid "Blur saturation"
+msgstr "Elmosás telítettség"
 
 #: ../metadata/blur.xml.in.h:28
+msgid "Blur Occlusion"
+msgstr "Elmosás levágás"
+
+#: ../metadata/blur.xml.in.h:29
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr "Elmosás kikapcsolása a képernyő más ablakok által kitakart részein."
+
+#: ../metadata/blur.xml.in.h:30
+msgid "Independent texture fetch"
+msgstr "Független textúra lekérés"
+
+#: ../metadata/blur.xml.in.h:31
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
@@ -345,486 +323,920 @@ msgstr ""
 "Független textúra lekérések számának növelése az éppen nem használt "
 "textúrázó egységek használatával."
 
-#: ../metadata/blur.xml.in.h:29
-msgid "Window blur speed"
-msgstr "Ablak elmosásának sebessége"
-
-#: ../metadata/blur.xml.in.h:30
-msgid "Windows that should be affected by focus blur"
-msgstr "Fókuszelmosással elmosandó ablaktípusok"
-
-#: ../metadata/blur.xml.in.h:31
-msgid "Windows that should be use alpha blur by default"
-msgstr "Alfaelmosással elmosandó ablaktípusok"
-
 #: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
 msgstr "Kimenet klónozása"
 
-# /tmp/xapi:301
-#: ../metadata/clone.xml.in.h:3
-msgid "Initiate clone selection"
-msgstr "Klónkiválasztás indítása"
-
-#: ../metadata/clone.xml.in.h:4
+#: ../metadata/clone.xml.in.h:2
 msgid "Output clone handler"
 msgstr "Kimenet klónkezelője"
 
-#: ../metadata/commands.xml.in.h:1
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command0"
-msgstr "A command0 parancs futtatására használt billentyűzetkombináció"
+#: ../metadata/clone.xml.in.h:3 ../metadata/rotate.xml.in.h:15
+#: ../metadata/screenshot.xml.in.h:3 ../metadata/water.xml.in.h:3
+#: ../metadata/zoom.xml.in.h:3
+msgid "Initiate"
+msgstr "Indítás"
+
+# /tmp/xapi:301
+#: ../metadata/clone.xml.in.h:4
+msgid "Initiate clone selection"
+msgstr "Klónkiválasztás indítása"
+
+#: ../metadata/commands.xml.in.h:1 ../metadata/matecompat.xml.in.h:7
+msgid "Commands"
+msgstr "Parancs"
 
 #: ../metadata/commands.xml.in.h:2
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command1"
-msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+msgid "Assigns bindings to arbitrary commands"
+msgstr "Parancsok hozzárendelése billentyűzetkombinációkhoz"
 
 #: ../metadata/commands.xml.in.h:3
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command10"
-msgstr "A command10 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line 0"
+msgstr "0. parancssor"
 
 #: ../metadata/commands.xml.in.h:4
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command11"
-msgstr "A command11 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "A run_command0 által elindított parancs"
 
 #: ../metadata/commands.xml.in.h:5
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command2"
-msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line 1"
+msgstr "1. parancssor"
 
 #: ../metadata/commands.xml.in.h:6
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command3"
-msgstr "A command3 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "A run_command1 által elindított parancs"
 
 #: ../metadata/commands.xml.in.h:7
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command4"
-msgstr "A command4 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line 2"
+msgstr "2. parancssor"
 
 #: ../metadata/commands.xml.in.h:8
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command5"
-msgstr "A command5 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "A run_command2 által elindított parancs"
 
 #: ../metadata/commands.xml.in.h:9
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command6"
-msgstr "A command6 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line 3"
+msgstr "3. parancssor"
 
 #: ../metadata/commands.xml.in.h:10
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command7"
-msgstr "A command7 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "A run_command3 által elindított parancs"
 
 #: ../metadata/commands.xml.in.h:11
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command8"
-msgstr "A command8 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line 4"
+msgstr "4. parancssor"
 
 #: ../metadata/commands.xml.in.h:12
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command9"
-msgstr "A command9 parancs futtatására használt billentyűzetkombináció"
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "A run_command4 által elindított parancs"
 
 #: ../metadata/commands.xml.in.h:13
+msgid "Command line 5"
+msgstr "5. parancssor"
+
+#: ../metadata/commands.xml.in.h:14
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "A run_command5 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:15
+msgid "Command line 6"
+msgstr "6. parancssor"
+
+#: ../metadata/commands.xml.in.h:16
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "A run_command6 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:17
+msgid "Command line 7"
+msgstr "7. parancssor"
+
+#: ../metadata/commands.xml.in.h:18
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "A run_command7 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:19
+msgid "Command line 8"
+msgstr "8. parancssor"
+
+#: ../metadata/commands.xml.in.h:20
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "A run_command8 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:21
+msgid "Command line 9"
+msgstr "9. parancssor"
+
+#: ../metadata/commands.xml.in.h:22
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "A run_command9 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:23
+msgid "Command line 10"
+msgstr "10. parancssor"
+
+#: ../metadata/commands.xml.in.h:24
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "A run_command10 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:25
+msgid "Command line 11"
+msgstr "11. parancssor"
+
+#: ../metadata/commands.xml.in.h:26
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "A run_command11 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:27
+msgid "Command line 12"
+msgstr "12. parancssor"
+
+#: ../metadata/commands.xml.in.h:28
+#, fuzzy
+msgid "Command line to be executed in shell when run_command12 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid "Command line 13"
+msgstr "1. parancssor"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid "Command line to be executed in shell when run_command13 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid "Command line 14"
+msgstr "1. parancssor"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid "Command line to be executed in shell when run_command14 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid "Command line 15"
+msgstr "1. parancssor"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid "Command line to be executed in shell when run_command15 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid "Command line 16"
+msgstr "1. parancssor"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid "Command line to be executed in shell when run_command16 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:37
+#, fuzzy
+msgid "Command line 17"
+msgstr "1. parancssor"
+
+#: ../metadata/commands.xml.in.h:38
+#, fuzzy
+msgid "Command line to be executed in shell when run_command17 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:39
+#, fuzzy
+msgid "Command line 18"
+msgstr "1. parancssor"
+
+#: ../metadata/commands.xml.in.h:40
+#, fuzzy
+msgid "Command line to be executed in shell when run_command18 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:41
+#, fuzzy
+msgid "Command line 19"
+msgstr "1. parancssor"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line to be executed in shell when run_command19 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:43
+#, fuzzy
+msgid "Command line 20"
+msgstr "2. parancssor"
+
+#: ../metadata/commands.xml.in.h:44
+#, fuzzy
+msgid "Command line to be executed in shell when run_command20 is invoked"
+msgstr "A run_command0 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:45
+#, fuzzy
+msgid "Command line 21"
+msgstr "2. parancssor"
+
+#: ../metadata/commands.xml.in.h:46
+#, fuzzy
+msgid "Command line to be executed in shell when run_command21 is invoked"
+msgstr "A run_command1 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:47
+#, fuzzy
+msgid "Command line 22"
+msgstr "2. parancssor"
+
+#: ../metadata/commands.xml.in.h:48
+#, fuzzy
+msgid "Command line to be executed in shell when run_command22 is invoked"
+msgstr "A run_command2 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:49
+#, fuzzy
+msgid "Command line 23"
+msgstr "2. parancssor"
+
+#: ../metadata/commands.xml.in.h:50
+#, fuzzy
+msgid "Command line to be executed in shell when run_command23 is invoked"
+msgstr "A run_command2 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:51
+#, fuzzy
+msgid "Command line 24"
+msgstr "2. parancssor"
+
+#: ../metadata/commands.xml.in.h:52
+#, fuzzy
+msgid "Command line to be executed in shell when run_command24 is invoked"
+msgstr "A run_command2 által elindított parancs"
+
+#: ../metadata/commands.xml.in.h:53
+msgid "Key Bindings"
+msgstr "Gyorsbillentyűk"
+
+#: ../metadata/commands.xml.in.h:54
+msgid "Run command 0"
+msgstr "0. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:55
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr "A command0 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:14
+#: ../metadata/commands.xml.in.h:56
+msgid "Run command 1"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:57
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:15
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr "A command10 parancs futtatására használt billentyűzetkombináció"
+#: ../metadata/commands.xml.in.h:58
+msgid "Run command 2"
+msgstr "2. parancs futtatása"
 
-#: ../metadata/commands.xml.in.h:16
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr "A command11 parancs futtatására használt billentyűzetkombináció"
-
-#: ../metadata/commands.xml.in.h:17
+#: ../metadata/commands.xml.in.h:59
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:18
+#: ../metadata/commands.xml.in.h:60
+msgid "Run command 3"
+msgstr "3. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:61
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr "A command3 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:19
+#: ../metadata/commands.xml.in.h:62
+msgid "Run command 4"
+msgstr "4. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:63
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr "A command4 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:20
+#: ../metadata/commands.xml.in.h:64
+msgid "Run command 5"
+msgstr "5. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:65
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr "A command5 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:21
+#: ../metadata/commands.xml.in.h:66
+msgid "Run command 6"
+msgstr "6. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:67
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr "A command6 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:22
+#: ../metadata/commands.xml.in.h:68
+msgid "Run command 7"
+msgstr "7. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:69
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr "A command7 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:23
+#: ../metadata/commands.xml.in.h:70
+msgid "Run command 8"
+msgstr "8. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:71
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr "A command8 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:24
+#: ../metadata/commands.xml.in.h:72
+msgid "Run command 9"
+msgstr "9. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:73
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr "A command9 parancs futtatására használt billentyűzetkombináció"
 
-#: ../metadata/commands.xml.in.h:25
+#: ../metadata/commands.xml.in.h:74
+msgid "Run command 10"
+msgstr "10. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:75
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "A command10 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:76
+msgid "Run command 11"
+msgstr "11. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:77
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "A command11 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:78
+msgid "Run command 12"
+msgstr "12. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:79
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command12"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:80
+#, fuzzy
+msgid "Run command 13"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:81
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command13"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:82
+#, fuzzy
+msgid "Run command 14"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:83
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command14"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:84
+#, fuzzy
+msgid "Run command 15"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:85
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command15"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:86
+#, fuzzy
+msgid "Run command 16"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:87
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command16"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:88
+#, fuzzy
+msgid "Run command 17"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:89
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command17"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:90
+#, fuzzy
+msgid "Run command 18"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:91
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command18"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:92
+#, fuzzy
+msgid "Run command 19"
+msgstr "1. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:93
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command19"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:94
+#, fuzzy
+msgid "Run command 20"
+msgstr "2. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:95
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command20"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:96
+#, fuzzy
+msgid "Run command 21"
+msgstr "2. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:97
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command21"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:98
+#, fuzzy
+msgid "Run command 22"
+msgstr "2. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:99
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command22"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:100
+#, fuzzy
+msgid "Run command 23"
+msgstr "2. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:101
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command23"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:102
+#, fuzzy
+msgid "Run command 24"
+msgstr "2. parancs futtatása"
+
+#: ../metadata/commands.xml.in.h:103
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command24"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:104
+msgid "Button Bindings"
+msgstr "Gyorsbillentyűk"
+
+#: ../metadata/commands.xml.in.h:105
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "A command0 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:106
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:107
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:108
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "A command3 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:109
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "A command4 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:110
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "A command5 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:111
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "A command6 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:112
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "A command7 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:113
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "A command8 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:114
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "A command9 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:115
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "A command10 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:116
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "A command11 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:117
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command12"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:118
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command13"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:119
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command14"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:120
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command15"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:121
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command16"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:122
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command17"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:123
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command18"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:124
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command19"
+msgstr "A command1 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:125
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command20"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:126
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command21"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:127
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command22"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:128
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command23"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:129
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command24"
+msgstr "A command2 parancs futtatására használt billentyűzetkombináció"
+
+#: ../metadata/commands.xml.in.h:130
+msgid "Edge Bindings"
+msgstr "Szegély"
+
+#: ../metadata/commands.xml.in.h:131
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr "A command0 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:26
+#: ../metadata/commands.xml.in.h:132
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:27
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command10"
-msgstr "A command10 parancs futtatására használt szegély"
-
-#: ../metadata/commands.xml.in.h:28
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command11"
-msgstr "A command11 parancs futtatására használt szegély"
-
-#: ../metadata/commands.xml.in.h:29
+#: ../metadata/commands.xml.in.h:133
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr "A command2 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:30
+#: ../metadata/commands.xml.in.h:134
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr "A command3 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:31
+#: ../metadata/commands.xml.in.h:135
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr "A command4 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:32
+#: ../metadata/commands.xml.in.h:136
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr "A command5 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:33
+#: ../metadata/commands.xml.in.h:137
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr "A command6 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:34
+#: ../metadata/commands.xml.in.h:138
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr "A command7 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:35
+#: ../metadata/commands.xml.in.h:139
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr "A command8 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:36
+#: ../metadata/commands.xml.in.h:140
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr "A command9 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:37
-msgid "Assigns bindings to arbitrary commands"
-msgstr "Parancsok hozzárendelése billentyűzetkombinációkhoz"
+#: ../metadata/commands.xml.in.h:141
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "A command10 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:38
-msgid "Button Bindings"
-msgstr "Gyorsbillentyűk"
+#: ../metadata/commands.xml.in.h:142
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "A command11 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:39
-msgid "Command line 1"
-msgstr "1. parancssor"
+#: ../metadata/commands.xml.in.h:143
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command12"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:40
-msgid "Command line 10"
-msgstr "10. parancssor"
+#: ../metadata/commands.xml.in.h:144
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command13"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:41
-msgid "Command line 11"
-msgstr "11. parancssor"
+#: ../metadata/commands.xml.in.h:145
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command14"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:42
-msgid "Command line 12"
-msgstr "12. parancssor"
+#: ../metadata/commands.xml.in.h:146
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command15"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:43
-msgid "Command line 2"
-msgstr "2. parancssor"
+#: ../metadata/commands.xml.in.h:147
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command16"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:44
-msgid "Command line 3"
-msgstr "3. parancssor"
+#: ../metadata/commands.xml.in.h:148
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command17"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:45
-msgid "Command line 4"
-msgstr "4. parancssor"
+#: ../metadata/commands.xml.in.h:149
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command18"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:46
-msgid "Command line 5"
-msgstr "5. parancssor"
+#: ../metadata/commands.xml.in.h:150
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command19"
+msgstr "A command1 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:47
-msgid "Command line 6"
-msgstr "6. parancssor"
+#: ../metadata/commands.xml.in.h:151
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command20"
+msgstr "A command2 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:48
-msgid "Command line 7"
-msgstr "7. parancssor"
+#: ../metadata/commands.xml.in.h:152
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command21"
+msgstr "A command2 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:49
-msgid "Command line 8"
-msgstr "8. parancssor"
+#: ../metadata/commands.xml.in.h:153
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command22"
+msgstr "A command2 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:50
-msgid "Command line 9"
-msgstr "9. parancssor"
+#: ../metadata/commands.xml.in.h:154
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command23"
+msgstr "A command2 parancs futtatására használt szegély"
 
-#: ../metadata/commands.xml.in.h:51
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "A run_command0 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:52
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "A run_command1 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:53
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "A run_command10 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:54
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "A run_command11 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:55
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "A run_command2 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:56
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "A run_command3 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:57
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "A run_command4 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:58
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "A run_command5 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:59
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "A run_command6 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:60
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "A run_command7 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:61
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "A run_command8 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:62
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "A run_command9 által elindított parancs"
-
-#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
-msgid "Commands"
-msgstr "Parancs"
-
-#: ../metadata/commands.xml.in.h:64
-msgid "Edge Bindings"
-msgstr "Szegély"
-
-#: ../metadata/commands.xml.in.h:65
-msgid "Key Bindings"
-msgstr "Gyorsbillentyűk"
-
-#: ../metadata/commands.xml.in.h:66
-msgid "Run command 1"
-msgstr "1. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:67
-msgid "Run command 10"
-msgstr "10. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:68
-msgid "Run command 11"
-msgstr "11. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:69
-msgid "Run command 12"
-msgstr "12. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:70
-msgid "Run command 2"
-msgstr "2. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:71
-msgid "Run command 3"
-msgstr "3. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:72
-msgid "Run command 4"
-msgstr "4. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:73
-msgid "Run command 5"
-msgstr "5. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:74
-msgid "Run command 6"
-msgstr "6. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:75
-msgid "Run command 7"
-msgstr "7. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:76
-msgid "Run command 8"
-msgstr "8. parancs futtatása"
-
-#: ../metadata/commands.xml.in.h:77
-msgid "Run command 9"
-msgstr "9. parancs futtatása"
+#: ../metadata/commands.xml.in.h:155
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command24"
+msgstr "A command2 parancs futtatására használt szegély"
 
 #: ../metadata/core.xml.in.in.h:1
+msgid "General Options"
+msgstr "Általános beállítások"
+
+#: ../metadata/core.xml.in.in.h:2
+msgid "General compiz options"
+msgstr "A Compiz általános beállításai"
+
+#: ../metadata/core.xml.in.in.h:3
 msgid "Active Plugins"
 msgstr "Aktív bővítmények"
 
-#: ../metadata/core.xml.in.in.h:2
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-"A teljes méretű ablakok nem irányíthatók át képen kívüli pixeltérképekre"
+#: ../metadata/core.xml.in.in.h:4
+msgid "List of currently active plugins"
+msgstr "Az aktuális bővítmények listája"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/core.xml.in.in.h:5
 msgid "Audible Bell"
 msgstr "Hallható csengő"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/core.xml.in.in.h:6
 msgid "Audible system beep"
 msgstr "Hallható rendszercsengő"
 
-#: ../metadata/core.xml.in.in.h:5
-msgid "Auto-Raise"
-msgstr "Automatikus megnyitás"
-
-#: ../metadata/core.xml.in.in.h:6
-msgid "Auto-Raise Delay"
-msgstr "Automatikus megnyitás késleltetése"
-
 #: ../metadata/core.xml.in.in.h:7
-msgid "Automatic detection of output devices"
-msgstr "Kimeneti eszközök automatikus érzékelése"
+msgid "Ignore Hints When Maximized"
+msgstr "Maximális méretben tanácsok figyelmen kívül hagyása"
 
 #: ../metadata/core.xml.in.in.h:8
-msgid "Automatic detection of refresh rate"
-msgstr "Frissítési frekvencia automatikus érzékelése"
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"Méretnövelési és méretezési tanácsok figyelmen kívül hagyása ha az ablak "
+"maximális méretű"
 
 #: ../metadata/core.xml.in.in.h:9
-msgid "Best"
-msgstr "Legjobb"
+msgid "Hide Skip Taskbar Windows"
+msgstr "Kihagyott tálcaablakok elrejtése"
 
 #: ../metadata/core.xml.in.in.h:10
-msgid "Click To Focus"
-msgstr "Kattintson a fókuszáláshoz"
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"Az asztal megjelenítése módba kapcsoláskor a tálcán nem lévő ablakok "
+"elrejtése"
 
 #: ../metadata/core.xml.in.in.h:11
-msgid "Click on window moves input focus to it"
-msgstr "Az ablakra kattintással az ablakra irányítja a fókuszt"
+msgid "Edge Trigger Delay"
+msgstr "Képernyő szélével indított műveletek indításának késleltetése"
 
-#: ../metadata/core.xml.in.in.h:13
-msgid "Close active window"
-msgstr "Aktív ablak bezárása"
-
-#: ../metadata/core.xml.in.in.h:14
-msgid "Default Icon"
-msgstr "Alapértelmezett ikon"
-
-#: ../metadata/core.xml.in.in.h:15
-msgid "Default window icon image"
-msgstr "Alapértelmezett ikon képe"
-
-#: ../metadata/core.xml.in.in.h:16
-msgid "Desktop Size"
-msgstr "Munkaasztal mérete"
-
-#: ../metadata/core.xml.in.in.h:17
-msgid "Detect Outputs"
-msgstr "Kimenetek észlelése"
-
-#: ../metadata/core.xml.in.in.h:18
-msgid "Detect Refresh Rate"
-msgstr "Frissítési frekvencia felismerése"
-
-#: ../metadata/core.xml.in.in.h:19
-msgid "Display Settings"
-msgstr "Kijelző beállítások"
-
-#: ../metadata/core.xml.in.in.h:20
+#: ../metadata/core.xml.in.in.h:12
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
@@ -832,532 +1244,574 @@ msgstr ""
 "Az az időtartam, ameddig az egérmutatónak a képernyőn szélén kell állnia "
 "ahhoz, hogy a képernyő széléhez társított művelet elinduljon."
 
+#: ../metadata/core.xml.in.in.h:13
+msgid "Cursor theme"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:14
+msgid "Cursor theme name"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:15
+msgid "Cursor size"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:16
+msgid "Size of the cursor"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:17
+msgid "Ping Delay"
+msgstr "Ping késleltetése"
+
+#: ../metadata/core.xml.in.in.h:18
+msgid "Interval between ping messages"
+msgstr "Ping üzenetek közti időköz"
+
+#: ../metadata/core.xml.in.in.h:19
+msgid "Display Settings"
+msgstr "Kijelző beállítások"
+
+#: ../metadata/core.xml.in.in.h:20
+msgid "Texture Filter"
+msgstr "Textúraszűrő"
+
 #: ../metadata/core.xml.in.in.h:21
-msgid "Edge Trigger Delay"
-msgstr "Képernyő szélével indított műveletek indításának késleltetése"
+msgid "Texture filtering"
+msgstr "Textúraszűrés"
 
 #: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "Gyors"
 
 #: ../metadata/core.xml.in.in.h:23
-msgid "Focus &amp; Raise Behaviour"
-msgstr "Fókusz és növelés viselkedése"
-
-#: ../metadata/core.xml.in.in.h:24
-msgid "Focus Prevention Level"
-msgstr "Fókuszmegelőzés szintje"
-
-#: ../metadata/core.xml.in.in.h:25
-msgid "Focus Prevention Windows"
-msgstr "Fókuszmegelőzés"
-
-#: ../metadata/core.xml.in.in.h:26
-msgid "Focus prevention windows"
-msgstr "Fókuszmegelőzés"
-
-#: ../metadata/core.xml.in.in.h:27
-msgid "Force independent output painting."
-msgstr "Független kimenethasználat erőltetése"
-
-#: ../metadata/core.xml.in.in.h:28
-msgid "General Options"
-msgstr "Általános beállítások"
-
-#: ../metadata/core.xml.in.in.h:29
-msgid "General compiz options"
-msgstr "A Compiz általános beállításai"
-
-#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "Jó"
 
+#: ../metadata/core.xml.in.in.h:24
+msgid "Best"
+msgstr "Legjobb"
+
+#: ../metadata/core.xml.in.in.h:25
+msgid "Focus &amp; Raise Behaviour"
+msgstr "Fókusz és növelés viselkedése"
+
+#: ../metadata/core.xml.in.in.h:26
+msgid "Click To Focus"
+msgstr "Kattintson a fókuszáláshoz"
+
+#: ../metadata/core.xml.in.in.h:27
+msgid "Click on window moves input focus to it"
+msgstr "Az ablakra kattintással az ablakra irányítja a fókuszt"
+
+#: ../metadata/core.xml.in.in.h:28
+msgid "Raise On Click"
+msgstr "Kattintás esetén megnyitás"
+
+#: ../metadata/core.xml.in.in.h:29
+msgid "Raise windows when clicked"
+msgstr "Ablakok megnyitása kattintás esetén"
+
+#: ../metadata/core.xml.in.in.h:30
+msgid "Auto-Raise"
+msgstr "Automatikus megnyitás"
+
 #: ../metadata/core.xml.in.in.h:31
-msgid "Hide Skip Taskbar Windows"
-msgstr "Kihagyott tálcaablakok elrejtése"
+msgid "Raise selected windows after interval"
+msgstr "A kijelölt ablak megnyitása ennyi idő után"
 
 #: ../metadata/core.xml.in.in.h:32
-msgid "Hide all windows and focus desktop"
-msgstr "Összes ablak elrejtése és fókuszálás a munkaasztalra"
+msgid "Auto-Raise Delay"
+msgstr "Automatikus megnyitás késleltetése"
 
 #: ../metadata/core.xml.in.in.h:33
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-"Az asztal megjelenítése módba kapcsoláskor a tálcán nem lévő ablakok "
-"elrejtése"
-
-#: ../metadata/core.xml.in.in.h:34
-msgid "High"
-msgstr "Magas"
-
-#: ../metadata/core.xml.in.in.h:35
-msgid "Horizontal Virtual Size"
-msgstr "Vízszintes virtuális méret"
-
-#: ../metadata/core.xml.in.in.h:36
-msgid "If available use compression for textures converted from images"
-msgstr "Képekből konvertált textúrák tömörítése, amennyiben az lehetséges"
-
-#: ../metadata/core.xml.in.in.h:37
-msgid "Ignore Hints When Maximized"
-msgstr "Maximális méretben tanácsok figyelmen kívül hagyása"
-
-#: ../metadata/core.xml.in.in.h:38
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
-"Méretnövelési és méretezési tanácsok figyelmen kívül hagyása ha az ablak "
-"maximális méretű"
-
-#: ../metadata/core.xml.in.in.h:39
 msgid "Interval before raising selected windows"
 msgstr "A kiválasztott ablakok megnyitását megelőző intervallum"
 
-#: ../metadata/core.xml.in.in.h:40
-msgid "Interval between ping messages"
-msgstr "Ping üzenetek közti időköz"
-
-#: ../metadata/core.xml.in.in.h:41
+#: ../metadata/core.xml.in.in.h:34
 msgid "Key bindings"
 msgstr "Gyorsbillentyűk"
 
-#: ../metadata/core.xml.in.in.h:42
-msgid "Level of focus stealing prevention"
-msgstr "Fókuszmegelőzés szintje"
+#: ../metadata/core.xml.in.in.h:36
+msgid "Close active window"
+msgstr "Aktív ablak bezárása"
 
-#: ../metadata/core.xml.in.in.h:43
-msgid "Lighting"
-msgstr "Világosítás"
+#: ../metadata/core.xml.in.in.h:37
+msgid "Raise Window"
+msgstr "Ablak előtérbe hozása"
 
-#: ../metadata/core.xml.in.in.h:44
-msgid "List of currently active plugins"
-msgstr "Az aktuális bővítmények listája"
+#: ../metadata/core.xml.in.in.h:38
+msgid "Raise window above other windows"
+msgstr "Ablak másik ablakok fölé hozása"
 
-#: ../metadata/core.xml.in.in.h:45
-msgid "List of strings describing output devices"
-msgstr "Kimeneti eszközöket leíró karakterláncok listája"
-
-#: ../metadata/core.xml.in.in.h:46
-msgid "Low"
-msgstr "Alacsony"
-
-#: ../metadata/core.xml.in.in.h:47
+#: ../metadata/core.xml.in.in.h:39
 msgid "Lower Window"
 msgstr "Alacsonyabb ablak"
 
-#: ../metadata/core.xml.in.in.h:48
+#: ../metadata/core.xml.in.in.h:40
 msgid "Lower window beneath other windows"
 msgstr "Alacsonyabb ablak egy másik ablak alatt"
 
-#: ../metadata/core.xml.in.in.h:50
-msgid "Maximize Window Horizontally"
-msgstr "Ablak maximalizálása vízszintesen"
+#: ../metadata/core.xml.in.in.h:42
+msgid "Unmaximize active window"
+msgstr "Aktív ablak visszaállítása"
 
-#: ../metadata/core.xml.in.in.h:51
-msgid "Maximize Window Vertically"
-msgstr "Ablak maximalizálása függőlegesen"
-
-#: ../metadata/core.xml.in.in.h:52
-msgid "Maximize active window"
-msgstr "Aktív ablak maximalizálása"
-
-#: ../metadata/core.xml.in.in.h:53
-msgid "Maximize active window horizontally"
-msgstr "Aktív ablak maximalizálása vízszintesen"
-
-#: ../metadata/core.xml.in.in.h:54
-msgid "Maximize active window vertically"
-msgstr "Aktív ablak maximalizálása függőlegesen"
-
-#: ../metadata/core.xml.in.in.h:56
+#: ../metadata/core.xml.in.in.h:44
 msgid "Minimize active window"
 msgstr "Aktív ablak minimalizálása"
 
-#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
-msgid "Normal"
-msgstr "Szokványos"
+#: ../metadata/core.xml.in.in.h:46
+msgid "Maximize active window"
+msgstr "Aktív ablak maximalizálása"
+
+#: ../metadata/core.xml.in.in.h:47
+msgid "Maximize Window Horizontally"
+msgstr "Ablak maximalizálása vízszintesen"
+
+#: ../metadata/core.xml.in.in.h:48
+msgid "Maximize active window horizontally"
+msgstr "Aktív ablak maximalizálása vízszintesen"
+
+#: ../metadata/core.xml.in.in.h:49
+msgid "Maximize Window Vertically"
+msgstr "Ablak maximalizálása függőlegesen"
+
+#: ../metadata/core.xml.in.in.h:50
+msgid "Maximize active window vertically"
+msgstr "Aktív ablak maximalizálása függőlegesen"
+
+#: ../metadata/core.xml.in.in.h:52
+msgid "Window menu button binding"
+msgstr "Window menü billentyűzetkombinációi"
+
+#: ../metadata/core.xml.in.in.h:53
+msgid "Window menu key binding"
+msgstr "Window menü billentyűzetkombinációi"
+
+#: ../metadata/core.xml.in.in.h:54
+msgid "Show Desktop"
+msgstr "Munkaasztal megjelenítése"
+
+#: ../metadata/core.xml.in.in.h:55
+msgid "Hide all windows and focus desktop"
+msgstr "Összes ablak elrejtése és fókuszálás a munkaasztalra"
+
+#: ../metadata/core.xml.in.in.h:56
+msgid "Toggle Window Maximized"
+msgstr "Ablak maximális méret átkapcsolása"
+
+#: ../metadata/core.xml.in.in.h:57
+msgid "Toggle active window maximized"
+msgstr "Aktív ablak maximális méret átkapcsolása"
 
 #: ../metadata/core.xml.in.in.h:58
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Ablak vízszintes maximális méret átkapcsolása"
+
+#: ../metadata/core.xml.in.in.h:59
+msgid "Toggle active window maximized horizontally"
+msgstr "Aktív ablak vízszintes maximális méret átkapcsolása"
+
+#: ../metadata/core.xml.in.in.h:60
+msgid "Toggle Window Maximized Vertically"
+msgstr "Ablak függőleges maximális méret átkapcsolása"
+
+#: ../metadata/core.xml.in.in.h:61
+msgid "Toggle active window maximized vertically"
+msgstr "Aktív ablak függőleges maximális méret átkapcsolása"
+
+#: ../metadata/core.xml.in.in.h:62
+msgid "Toggle Window Shaded"
+msgstr "Ablak felgördítése"
+
+#: ../metadata/core.xml.in.in.h:63
+msgid "Toggle active window shaded"
+msgstr "Aktív ablak felgördítése"
+
+#: ../metadata/core.xml.in.in.h:64
+msgid "Slow Animations"
+msgstr "Lassú animációk"
+
+#: ../metadata/core.xml.in.in.h:65
+msgid "Toggle use of slow animations"
+msgstr "„Lassú animációk” effektus kapcsoló"
+
+#: ../metadata/core.xml.in.in.h:66
+msgid "Desktop Size"
+msgstr "Munkaasztal mérete"
+
+#: ../metadata/core.xml.in.in.h:67
+msgid "Horizontal Virtual Size"
+msgstr "Vízszintes virtuális méret"
+
+#: ../metadata/core.xml.in.in.h:68
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "Képernyőméret-szorzó a vízszintes virtuális mérethez"
+
+#: ../metadata/core.xml.in.in.h:69
+msgid "Vertical Virtual Size"
+msgstr "Függőleges virtuális méret"
+
+#: ../metadata/core.xml.in.in.h:70
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "Képernyőméret-szorzó a virtuális mérethez"
+
+#: ../metadata/core.xml.in.in.h:71
 msgid "Number of Desktops"
 msgstr "Munkaasztalok száma"
 
-#: ../metadata/core.xml.in.in.h:59
+#: ../metadata/core.xml.in.in.h:72
 msgid "Number of virtual desktops"
 msgstr "Virtuális munkaasztalok száma"
 
-#: ../metadata/core.xml.in.in.h:60
-msgid "Off"
-msgstr "Kikapcsolva"
+#: ../metadata/core.xml.in.in.h:73
+msgid "Lighting"
+msgstr "Világosítás"
 
-#: ../metadata/core.xml.in.in.h:61
+#: ../metadata/core.xml.in.in.h:74
+msgid "Use diffuse light when screen is transformed"
+msgstr "Szórt fény használata képernyő-transzformációnál"
+
+#: ../metadata/core.xml.in.in.h:75
+msgid "Detect Refresh Rate"
+msgstr "Frissítési frekvencia felismerése"
+
+#: ../metadata/core.xml.in.in.h:76
+msgid "Automatic detection of refresh rate"
+msgstr "Frissítési frekvencia automatikus érzékelése"
+
+#: ../metadata/core.xml.in.in.h:77
+msgid "Refresh Rate"
+msgstr "Frissítési frekvencia"
+
+#: ../metadata/core.xml.in.in.h:78
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "A képernyő-újrarajzolás gyakorisága (alkalom/másodperc)"
+
+#: ../metadata/core.xml.in.in.h:79
+msgid "Detect Outputs"
+msgstr "Kimenetek észlelése"
+
+#: ../metadata/core.xml.in.in.h:80
+msgid "Automatic detection of output devices"
+msgstr "Kimeneti eszközök automatikus érzékelése"
+
+#: ../metadata/core.xml.in.in.h:81
+msgid "Overlapping Output Handling"
+msgstr "Átfedő kimenetek kezelése"
+
+#: ../metadata/core.xml.in.in.h:82
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
+"Adja meg, hogy melyik átfedő kimeneti eszköz legyen előnyben részesítve."
+
+#: ../metadata/core.xml.in.in.h:83
+msgid "Smart mode"
+msgstr "Intelligens üzemmód"
+
+#: ../metadata/core.xml.in.in.h:84
+msgid "Prefer larger output"
+msgstr "Nagyméretű kimenet használata"
+
+#: ../metadata/core.xml.in.in.h:85
+msgid "Prefer smaller output"
+msgstr "Kisméretű kimenet használata"
+
+#: ../metadata/core.xml.in.in.h:86
+msgid "Outputs"
+msgstr "Kimenetek"
+
+#: ../metadata/core.xml.in.in.h:87
+msgid "List of strings describing output devices"
+msgstr "Kimeneti eszközöket leíró karakterláncok listája"
+
+#: ../metadata/core.xml.in.in.h:88
+msgid "Sync To VBlank"
+msgstr "Szinkronizálás VBlank jelre"
+
+#: ../metadata/core.xml.in.in.h:89
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "A képernyő-frissítések végrehajtása csak a függőleges törlési periódusban"
 
-#: ../metadata/core.xml.in.in.h:62
-msgid "Outputs"
-msgstr "Kimenetek"
+#: ../metadata/core.xml.in.in.h:90
+msgid "Focus Prevention Level"
+msgstr "Fókuszmegelőzés szintje"
 
-#: ../metadata/core.xml.in.in.h:63
-msgid "Overlapping Output Handling"
-msgstr "Átfedő kimenetek kezelése"
+#: ../metadata/core.xml.in.in.h:91
+msgid "Level of focus stealing prevention"
+msgstr "Fókuszmegelőzés szintje"
 
-#: ../metadata/core.xml.in.in.h:64
+#: ../metadata/core.xml.in.in.h:92
+msgid "Off"
+msgstr "Kikapcsolva"
+
+#: ../metadata/core.xml.in.in.h:93
+msgid "Low"
+msgstr "Alacsony"
+
+#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:16
+msgid "Normal"
+msgstr "Szokványos"
+
+#: ../metadata/core.xml.in.in.h:95
+msgid "High"
+msgstr "Magas"
+
+#: ../metadata/core.xml.in.in.h:96
+msgid "Very High"
+msgstr "Nagyon magas"
+
+#: ../metadata/core.xml.in.in.h:97
+msgid "Focus Prevention Windows"
+msgstr "Fókuszmegelőzés"
+
+#: ../metadata/core.xml.in.in.h:98
+msgid "Focus prevention windows"
+msgstr "Fókuszmegelőzés"
+
+#: ../metadata/core.xml.in.in.h:99
+msgid "Unredirect Fullscreen Windows"
+msgstr "Teljes méretű ablakok visszairányítása"
+
+#: ../metadata/core.xml.in.in.h:100
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"A teljes méretű ablakok nem irányíthatók át képen kívüli pixeltérképekre"
+
+#: ../metadata/core.xml.in.in.h:101
+msgid "Default Icon"
+msgstr "Alapértelmezett ikon"
+
+#: ../metadata/core.xml.in.in.h:102
+msgid "Default window icon image"
+msgstr "Alapértelmezett ikon képe"
+
+#: ../metadata/core.xml.in.in.h:103
+msgid "Force independent output painting."
+msgstr "Független kimenethasználat erőltetése"
+
+#: ../metadata/core.xml.in.in.h:104
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 "Összes kimenet független használata, még akkor is, ha a kimenetek átfedik "
 "egymást"
 
-#: ../metadata/core.xml.in.in.h:65
-msgid "Ping Delay"
-msgstr "Ping késleltetése"
-
-#: ../metadata/core.xml.in.in.h:66
-msgid "Prefer larger output"
-msgstr "Nagyméretű kimenet használata"
-
-#: ../metadata/core.xml.in.in.h:67
-msgid "Prefer smaller output"
-msgstr "Kisméretű kimenet használata"
-
-#: ../metadata/core.xml.in.in.h:68
-msgid "Raise On Click"
-msgstr "Kattintás esetén megnyitás"
-
-#: ../metadata/core.xml.in.in.h:69
-msgid "Raise Window"
-msgstr "Ablak előtérbe hozása"
-
-#: ../metadata/core.xml.in.in.h:70
-msgid "Raise selected windows after interval"
-msgstr "A kijelölt ablak megnyitása ennyi idő után"
-
-#: ../metadata/core.xml.in.in.h:71
-msgid "Raise window above other windows"
-msgstr "Ablak másik ablakok fölé hozása"
-
-#: ../metadata/core.xml.in.in.h:72
-msgid "Raise windows when clicked"
-msgstr "Ablakok megnyitása kattintás esetén"
-
-#: ../metadata/core.xml.in.in.h:73
-msgid "Refresh Rate"
-msgstr "Frissítési frekvencia"
-
-#: ../metadata/core.xml.in.in.h:74
-msgid "Screen size multiplier for horizontal virtual size"
-msgstr "Képernyőméret-szorzó a vízszintes virtuális mérethez"
-
-#: ../metadata/core.xml.in.in.h:75
-msgid "Screen size multiplier for vertical virtual size"
-msgstr "Képernyőméret-szorzó a virtuális mérethez"
-
-#: ../metadata/core.xml.in.in.h:76
-msgid "Show Desktop"
-msgstr "Munkaasztal megjelenítése"
-
-#: ../metadata/core.xml.in.in.h:77
-msgid "Slow Animations"
-msgstr "Lassú animációk"
-
-#: ../metadata/core.xml.in.in.h:78
-msgid "Smart mode"
-msgstr "Intelligens üzemmód"
-
-#: ../metadata/core.xml.in.in.h:79
-msgid "Sync To VBlank"
-msgstr "Szinkronizálás VBlank jelre"
-
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:105
 msgid "Texture Compression"
 msgstr "Textúratömörítés"
 
-#: ../metadata/core.xml.in.in.h:81
-msgid "Texture Filter"
-msgstr "Textúraszűrő"
+#: ../metadata/core.xml.in.in.h:106
+msgid "If available use compression for textures converted from images"
+msgstr "Képekből konvertált textúrák tömörítése, amennyiben az lehetséges"
 
-#: ../metadata/core.xml.in.in.h:82
-msgid "Texture filtering"
-msgstr "Textúraszűrés"
-
-#: ../metadata/core.xml.in.in.h:83
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "A képernyő-újrarajzolás gyakorisága (alkalom/másodperc)"
-
-#: ../metadata/core.xml.in.in.h:84
-msgid "Toggle Window Maximized"
-msgstr "Ablak maximális méret átkapcsolása"
-
-#: ../metadata/core.xml.in.in.h:85
-msgid "Toggle Window Maximized Horizontally"
-msgstr "Ablak vízszintes maximális méret átkapcsolása"
-
-#: ../metadata/core.xml.in.in.h:86
-msgid "Toggle Window Maximized Vertically"
-msgstr "Ablak függőleges maximális méret átkapcsolása"
-
-#: ../metadata/core.xml.in.in.h:87
-msgid "Toggle Window Shaded"
-msgstr "Ablak felgördítése"
-
-#: ../metadata/core.xml.in.in.h:88
-msgid "Toggle active window maximized"
-msgstr "Aktív ablak maximális méret átkapcsolása"
-
-#: ../metadata/core.xml.in.in.h:89
-msgid "Toggle active window maximized horizontally"
-msgstr "Aktív ablak vízszintes maximális méret átkapcsolása"
-
-#: ../metadata/core.xml.in.in.h:90
-msgid "Toggle active window maximized vertically"
-msgstr "Aktív ablak függőleges maximális méret átkapcsolása"
-
-#: ../metadata/core.xml.in.in.h:91
-msgid "Toggle active window shaded"
-msgstr "Aktív ablak felgördítése"
-
-#: ../metadata/core.xml.in.in.h:92
-msgid "Toggle use of slow animations"
-msgstr "„Lassú animációk” effektus kapcsoló"
-
-#: ../metadata/core.xml.in.in.h:94
-msgid "Unmaximize active window"
-msgstr "Aktív ablak visszaállítása"
-
-#: ../metadata/core.xml.in.in.h:95
-msgid "Unredirect Fullscreen Windows"
-msgstr "Teljes méretű ablakok visszairányítása"
-
-#: ../metadata/core.xml.in.in.h:96
-msgid "Use diffuse light when screen is transformed"
-msgstr "Szórt fény használata képernyő-transzformációnál"
-
-#: ../metadata/core.xml.in.in.h:97
-msgid "Vertical Virtual Size"
-msgstr "Függőleges virtuális méret"
-
-#: ../metadata/core.xml.in.in.h:98
-msgid "Very High"
-msgstr "Nagyon magas"
-
-#: ../metadata/core.xml.in.in.h:99
-msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
-"Adja meg, hogy melyik átfedő kimeneti eszköz legyen előnyben részesítve."
-
-#: ../metadata/core.xml.in.in.h:101
-msgid "Window menu button binding"
-msgstr "Window menü billentyűzetkombinációi"
-
-#: ../metadata/core.xml.in.in.h:102
-msgid "Window menu key binding"
-msgstr "Window menü billentyűzetkombinációi"
-
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
-msgid "Acceleration"
-msgstr "Gyorsítás"
-
-#: ../metadata/cube.xml.in.h:2
-msgid "Adjust Image"
-msgstr "Kép igazítása"
-
-#: ../metadata/cube.xml.in.h:3
-msgid "Adjust top face image to rotation"
-msgstr "Kép igazítása forgatáshoz"
-
-#: ../metadata/cube.xml.in.h:4
-msgid "Advance to next slide"
-msgstr "Továbblépés a következő diára"
-
-#: ../metadata/cube.xml.in.h:5
-msgid "Animate Skydome"
-msgstr "Kupola animálása"
-
-#: ../metadata/cube.xml.in.h:6
-msgid "Animate skydome when rotating cube"
-msgstr "Kupola animálása a kocka forgatásánál"
-
-#: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
-msgid "Appearance"
-msgstr "Megjelenés"
-
-#: ../metadata/cube.xml.in.h:8
-msgid "Automatic"
-msgstr "Automatikus"
-
-#: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
-msgid "Behaviour"
-msgstr "Viselkedés"
-
-#: ../metadata/cube.xml.in.h:10
-msgid "Color of top and bottom sides of the cube"
-msgstr "A kocka alsó és felső oldalának színe"
-
-#: ../metadata/cube.xml.in.h:11
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "A kupola tartalék színátmenet alsó színállomásához használandó szín"
-
-#: ../metadata/cube.xml.in.h:12
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr "A kupola tartalék színátmenet felső színállomásához használandó szín"
-
-#: ../metadata/cube.xml.in.h:13
-msgid "Cube Caps"
-msgstr "Kocka fedőlapok"
-
-#: ../metadata/cube.xml.in.h:14
-msgid "Cube Color"
-msgstr "Kocka színe"
-
-#: ../metadata/cube.xml.in.h:15
+#: ../metadata/cube.xml.in.h:1
 msgid "Desktop Cube"
 msgstr "Munkaasztal kocka"
 
-#: ../metadata/cube.xml.in.h:16
-msgid "Fold Acceleration"
-msgstr "Hajtás gyorsulása"
+#: ../metadata/cube.xml.in.h:2
+msgid "Place windows on cube"
+msgstr "Ablakok elhelyezése a kockán"
 
-#: ../metadata/cube.xml.in.h:17
-msgid "Fold Speed"
-msgstr "Hajtás sebessége"
+#: ../metadata/cube.xml.in.h:3
+msgid "Unfold"
+msgstr "Kibontás"
 
-#: ../metadata/cube.xml.in.h:18
-msgid "Fold Timestep"
-msgstr "Hajtás időköz"
+#: ../metadata/cube.xml.in.h:4
+msgid "Unfold cube"
+msgstr "Kocka kibontása"
 
-#: ../metadata/cube.xml.in.h:19 ../metadata/switcher.xml.in.h:11
+#: ../metadata/cube.xml.in.h:5
+msgid "Next Slide"
+msgstr "Következő dia"
+
+#: ../metadata/cube.xml.in.h:6
+msgid "Advance to next slide"
+msgstr "Továbblépés a következő diára"
+
+#: ../metadata/cube.xml.in.h:7
+msgid "Prev Slide"
+msgstr "Előző dia"
+
+#: ../metadata/cube.xml.in.h:8
+msgid "Go back to previous slide"
+msgstr "Visszatérés az előző diára"
+
+#: ../metadata/cube.xml.in.h:10 ../metadata/switcher.xml.in.h:26
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr ""
 "MIP térképek készítése, hacsak lehetséges, a jobb minőségű átméretezés "
 "érdekében"
 
-#: ../metadata/cube.xml.in.h:20
-msgid "Go back to previous slide"
-msgstr "Visszatérés az előző diára"
-
-#: ../metadata/cube.xml.in.h:21
-msgid "Image files"
-msgstr "Képfájlok"
-
-#: ../metadata/cube.xml.in.h:22
-msgid "Image to use as texture for the skydome"
-msgstr "A kupola textúrájaként használt kép"
-
-#: ../metadata/cube.xml.in.h:23
-msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr "A kocka csak egérrel történő forgatáskor válik átlátszóvá."
-
-#: ../metadata/cube.xml.in.h:24
-msgid "Inside Cube"
-msgstr "A kocka belseje"
-
-#: ../metadata/cube.xml.in.h:25
-msgid "Inside cube"
-msgstr "A kocka belseje"
-
-#: ../metadata/cube.xml.in.h:26
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "A kocka tetejére kerülő PNG és SVG fájlok listája"
-
-#: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
-#: ../metadata/scale.xml.in.h:24
+#: ../metadata/cube.xml.in.h:11 ../metadata/place.xml.in.h:13
+#: ../metadata/scale.xml.in.h:39
 msgid "Multi Output Mode"
 msgstr "Többkimenetes üzemmód"
 
-#: ../metadata/cube.xml.in.h:29
-msgid "Multiple cubes"
-msgstr "Több kocka"
-
-#: ../metadata/cube.xml.in.h:30
-msgid "Next Slide"
-msgstr "Következő dia"
-
-#: ../metadata/cube.xml.in.h:31
-msgid "One big cube"
-msgstr "Egy nagy kocka"
-
-#: ../metadata/cube.xml.in.h:32
-msgid "Opacity During Rotation"
-msgstr "Átlátszatlanság forgatás közben"
-
-#: ../metadata/cube.xml.in.h:33
-msgid "Opacity When Not Rotating"
-msgstr "Átlátszatlanság alapállapotban"
-
-#: ../metadata/cube.xml.in.h:34
-msgid "Opacity of desktop window during rotation."
-msgstr "Ablakok átlátszatlansága forgatás közben"
-
-#: ../metadata/cube.xml.in.h:35
-msgid "Opacity of desktop window when not rotating."
-msgstr "Ablakok átlátszatlansága alapállapotban"
-
-#: ../metadata/cube.xml.in.h:36
-msgid "Place windows on cube"
-msgstr "Ablakok elhelyezése a kockán"
-
-#: ../metadata/cube.xml.in.h:37
-msgid "Prev Slide"
-msgstr "Előző dia"
-
-#: ../metadata/cube.xml.in.h:38
-msgid "Render skydome"
-msgstr "Kupola leképzése"
-
-#: ../metadata/cube.xml.in.h:39
-msgid "Scale image"
-msgstr "Kép méretezése"
-
-#: ../metadata/cube.xml.in.h:40
-msgid "Scale images to cover top face of cube"
-msgstr "Kép méretezése a kocka tetejének lefedésére"
-
-#: ../metadata/cube.xml.in.h:41
+#: ../metadata/cube.xml.in.h:12
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr "A kocka megjelenítésének módja több kimeneti eszköz használata esetén."
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:13
+msgid "Automatic"
+msgstr "Automatikus"
+
+#: ../metadata/cube.xml.in.h:14
+msgid "Multiple cubes"
+msgstr "Több kocka"
+
+#: ../metadata/cube.xml.in.h:15
+msgid "One big cube"
+msgstr "Egy nagy kocka"
+
+#: ../metadata/cube.xml.in.h:16 ../metadata/scale.xml.in.h:16
+msgid "Behaviour"
+msgstr "Viselkedés"
+
+#: ../metadata/cube.xml.in.h:17
+msgid "Inside Cube"
+msgstr "A kocka belseje"
+
+#: ../metadata/cube.xml.in.h:18
+msgid "Inside cube"
+msgstr "A kocka belseje"
+
+#: ../metadata/cube.xml.in.h:19 ../metadata/rotate.xml.in.h:89
+msgid "Acceleration"
+msgstr "Gyorsítás"
+
+#: ../metadata/cube.xml.in.h:20
+msgid "Fold Acceleration"
+msgstr "Hajtás gyorsulása"
+
+#: ../metadata/cube.xml.in.h:21 ../metadata/minimize.xml.in.h:3
+#: ../metadata/rotate.xml.in.h:95 ../metadata/scale.xml.in.h:22
+#: ../metadata/switcher.xml.in.h:19 ../metadata/zoom.xml.in.h:8
+msgid "Speed"
+msgstr "Sebesség"
+
+#: ../metadata/cube.xml.in.h:22
+msgid "Fold Speed"
+msgstr "Hajtás sebessége"
+
+#: ../metadata/cube.xml.in.h:23 ../metadata/minimize.xml.in.h:5
+#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:24
+#: ../metadata/switcher.xml.in.h:21 ../metadata/zoom.xml.in.h:10
+msgid "Timestep"
+msgstr "Időköz"
+
+#: ../metadata/cube.xml.in.h:24
+msgid "Fold Timestep"
+msgstr "Hajtás időköz"
+
+#: ../metadata/cube.xml.in.h:25 ../metadata/scale.xml.in.h:19
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: ../metadata/cube.xml.in.h:26
+msgid "Cube Color"
+msgstr "Kocka színe"
+
+#: ../metadata/cube.xml.in.h:27
+msgid "Color of top and bottom sides of the cube"
+msgstr "A kocka alsó és felső oldalának színe"
+
+#: ../metadata/cube.xml.in.h:28
+msgid "Cube Caps"
+msgstr "Kocka fedőlapok"
+
+#: ../metadata/cube.xml.in.h:29
+msgid "Scale image"
+msgstr "Kép méretezése"
+
+#: ../metadata/cube.xml.in.h:30
+msgid "Scale images to cover top face of cube"
+msgstr "Kép méretezése a kocka tetejének lefedésére"
+
+#: ../metadata/cube.xml.in.h:31
+msgid "Image files"
+msgstr "Képfájlok"
+
+#: ../metadata/cube.xml.in.h:32
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "A kocka tetejére kerülő PNG és SVG fájlok listája"
+
+#: ../metadata/cube.xml.in.h:33
+msgid "Adjust Image"
+msgstr "Kép igazítása"
+
+#: ../metadata/cube.xml.in.h:34
+msgid "Adjust top face image to rotation"
+msgstr "Kép igazítása forgatáshoz"
+
+#: ../metadata/cube.xml.in.h:35
 msgid "Skydome"
 msgstr "Kupola"
+
+#: ../metadata/cube.xml.in.h:36
+msgid "Render skydome"
+msgstr "Kupola leképzése"
+
+#: ../metadata/cube.xml.in.h:37
+msgid "Skydome Image"
+msgstr "Kupola képe"
+
+#: ../metadata/cube.xml.in.h:38
+msgid "Image to use as texture for the skydome"
+msgstr "A kupola textúrájaként használt kép"
+
+#: ../metadata/cube.xml.in.h:39
+msgid "Animate Skydome"
+msgstr "Kupola animálása"
+
+#: ../metadata/cube.xml.in.h:40
+msgid "Animate skydome when rotating cube"
+msgstr "Kupola animálása a kocka forgatásánál"
+
+#: ../metadata/cube.xml.in.h:41
+msgid "Skydome Gradient Start Color"
+msgstr "Kupola színátmenetének induló színe"
+
+#: ../metadata/cube.xml.in.h:42
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr "A kupola tartalék színátmenet felső színállomásához használandó szín"
 
 #: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient End Color"
 msgstr "Kupola színátmenetének záró színe"
 
 #: ../metadata/cube.xml.in.h:44
-msgid "Skydome Gradient Start Color"
-msgstr "Kupola színátmenetének induló színe"
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "A kupola tartalék színátmenet alsó színállomásához használandó szín"
 
 #: ../metadata/cube.xml.in.h:45
-msgid "Skydome Image"
-msgstr "Kupola képe"
-
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
-msgid "Speed"
-msgstr "Sebesség"
-
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
-msgid "Timestep"
-msgstr "Időköz"
-
-#: ../metadata/cube.xml.in.h:48
-msgid "Transparency Only on Mouse Rotate"
-msgstr "Átlátszóság csak egérrel forgatáskor"
-
-#: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
 msgstr "Áttetsző kocka"
 
+#: ../metadata/cube.xml.in.h:46
+msgid "Opacity During Rotation"
+msgstr "Átlátszatlanság forgatás közben"
+
+#: ../metadata/cube.xml.in.h:47
+msgid "Opacity of desktop window during rotation."
+msgstr "Ablakok átlátszatlansága forgatás közben"
+
+#: ../metadata/cube.xml.in.h:48
+msgid "Opacity When Not Rotating"
+msgstr "Átlátszatlanság alapállapotban"
+
+#: ../metadata/cube.xml.in.h:49
+msgid "Opacity of desktop window when not rotating."
+msgstr "Ablakok átlátszatlansága alapállapotban"
+
 #: ../metadata/cube.xml.in.h:50
-msgid "Unfold"
-msgstr "Kibontás"
+msgid "Transparency Only on Mouse Rotate"
+msgstr "Átlátszóság csak egérrel forgatáskor"
 
 #: ../metadata/cube.xml.in.h:51
-msgid "Unfold cube"
-msgstr "Kocka kibontása"
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr "A kocka csak egérrel történő forgatáskor válik átlátszóvá."
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
@@ -1368,207 +1822,199 @@ msgid "Dbus Control Backend"
 msgstr "Dbus vezérlés kiszolgálója"
 
 #: ../metadata/decoration.xml.in.h:1
-msgid "Allow mipmaps to be generated for decoration textures"
-msgstr "MIP térképek létrehozása a díszítő textúrákhoz"
+msgid "Window Decoration"
+msgstr "Ablakdíszítés"
 
 #: ../metadata/decoration.xml.in.h:2
+msgid "Window decorations"
+msgstr "Ablakdíszítések"
+
+#: ../metadata/decoration.xml.in.h:3
+msgid "Shadow Radius"
+msgstr "Árnyék átmérője"
+
+#: ../metadata/decoration.xml.in.h:4
+msgid "Drop shadow radius"
+msgstr "Árnyék átmérője"
+
+#: ../metadata/decoration.xml.in.h:5
+msgid "Shadow Opacity"
+msgstr "Árnyék átlátszatlansága"
+
+#: ../metadata/decoration.xml.in.h:6
+msgid "Drop shadow opacity"
+msgstr "Árnyék átlátszatlansága"
+
+#: ../metadata/decoration.xml.in.h:7 ../metadata/wall.xml.in.h:24
+msgid "Shadow Color"
+msgstr "Árnyék színe"
+
+#: ../metadata/decoration.xml.in.h:8
+msgid "Drop shadow color"
+msgstr "Árnyék színe"
+
+#: ../metadata/decoration.xml.in.h:9
+msgid "Shadow Offset X"
+msgstr "Árnyék X eltolása"
+
+#: ../metadata/decoration.xml.in.h:10
+msgid "Drop shadow X offset"
+msgstr "Árnyék X eltolása"
+
+#: ../metadata/decoration.xml.in.h:11
+msgid "Shadow Offset Y"
+msgstr "Árnyék Y eltolása"
+
+#: ../metadata/decoration.xml.in.h:12
+msgid "Drop shadow Y offset"
+msgstr "Árnyék Y eltolása"
+
+#: ../metadata/decoration.xml.in.h:13
 msgid "Command"
 msgstr "Parancs"
 
-#: ../metadata/decoration.xml.in.h:3
-msgid "Decoration windows"
-msgstr "Ablakok díszítése"
-
-#: ../metadata/decoration.xml.in.h:4
+#: ../metadata/decoration.xml.in.h:14
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 "Díszítő parancs, amely akkor kerül végrehajtásra, ha még nem fut díszítő"
 
-#: ../metadata/decoration.xml.in.h:5
-msgid "Drop shadow X offset"
-msgstr "Árnyék X eltolása"
-
-#: ../metadata/decoration.xml.in.h:6
-msgid "Drop shadow Y offset"
-msgstr "Árnyék Y eltolása"
-
-#: ../metadata/decoration.xml.in.h:7
-msgid "Drop shadow color"
-msgstr "Árnyék színe"
-
-#: ../metadata/decoration.xml.in.h:8
-msgid "Drop shadow opacity"
-msgstr "Árnyék átlátszatlansága"
-
-#: ../metadata/decoration.xml.in.h:9
-msgid "Drop shadow radius"
-msgstr "Árnyék átmérője"
-
-#: ../metadata/decoration.xml.in.h:11
-msgid "Shadow Color"
-msgstr "Árnyék színe"
-
-#: ../metadata/decoration.xml.in.h:12
-msgid "Shadow Offset X"
-msgstr "Árnyék X eltolása"
-
-#: ../metadata/decoration.xml.in.h:13
-msgid "Shadow Offset Y"
-msgstr "Árnyék Y eltolása"
-
-#: ../metadata/decoration.xml.in.h:14
-msgid "Shadow Opacity"
-msgstr "Árnyék átlátszatlansága"
-
-#: ../metadata/decoration.xml.in.h:15
-msgid "Shadow Radius"
-msgstr "Árnyék átmérője"
-
 #: ../metadata/decoration.xml.in.h:16
-msgid "Shadow windows"
-msgstr "Ablakok árnyékolása"
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr "MIP térképek létrehozása a díszítő textúrákhoz"
 
 #: ../metadata/decoration.xml.in.h:17
-msgid "Window Decoration"
-msgstr "Ablakdíszítés"
+msgid "Decoration windows"
+msgstr "Ablakok díszítése"
 
 #: ../metadata/decoration.xml.in.h:18
-msgid "Window decorations"
-msgstr "Ablakdíszítések"
-
-#: ../metadata/decoration.xml.in.h:19
 msgid "Windows that should be decorated"
 msgstr "Díszítendő ablakok"
+
+#: ../metadata/decoration.xml.in.h:19
+msgid "Shadow windows"
+msgstr "Ablakok árnyékolása"
 
 #: ../metadata/decoration.xml.in.h:20
 msgid "Windows that should have a shadow"
 msgstr "Árnyékolandó ablakok"
 
+#: ../metadata/fade.xml.in.h:1
+msgid "Fading Windows"
+msgstr "Ablakok elhalványítása"
+
 #: ../metadata/fade.xml.in.h:2
-#, no-c-format
-msgid "Brightness (in %) of unresponsive windows"
-msgstr "Nem válaszoló ablak fényerőssége (százalékban megadva)"
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr "Leképezés esetén az ablak erősítése, lecsatolás esetén elhalványítása"
 
 #: ../metadata/fade.xml.in.h:3
-msgid "Constant speed"
-msgstr "Állandó sebesség"
-
-#: ../metadata/fade.xml.in.h:4
-msgid "Constant time"
-msgstr "Állandó útidő"
-
-#: ../metadata/fade.xml.in.h:5
-msgid "Dim Unresponsive Windows"
-msgstr "Nem válaszoló ablak elhalványítása"
-
-#: ../metadata/fade.xml.in.h:6
-msgid "Dim windows that are not responding to window manager requests"
-msgstr ""
-"Azon ablakok elhalványítása, amelyek nem válaszolnak az ablakkezelő kéréseire"
-
-#: ../metadata/fade.xml.in.h:7
 msgid "Fade Mode"
 msgstr "Elhalványítási üzemmód"
 
-#: ../metadata/fade.xml.in.h:8
-msgid "Fade On Minimize/Open/Close"
-msgstr "Ablakelhalványítás minimalizáláskor, megnyitáskor és bezáráskor"
+#: ../metadata/fade.xml.in.h:4
+msgid "Window fade mode"
+msgstr "Ablak elhalványulásának üzemmódja"
 
-#: ../metadata/fade.xml.in.h:9
+#: ../metadata/fade.xml.in.h:5
+msgid "Constant speed"
+msgstr "Állandó sebesség"
+
+#: ../metadata/fade.xml.in.h:6
+msgid "Constant time"
+msgstr "Állandó útidő"
+
+#: ../metadata/fade.xml.in.h:7
 msgid "Fade Speed"
 msgstr "Elhalványulás sebessége"
 
-#: ../metadata/fade.xml.in.h:10
+#: ../metadata/fade.xml.in.h:8
+msgid "Window fade speed in \"Constant speed\" mode"
+msgstr "Ablak elhalványulásának sebessége „Állandó sebesség” módban"
+
+#: ../metadata/fade.xml.in.h:9
 msgid "Fade Time"
 msgstr "Elhalványítási idő"
 
+#: ../metadata/fade.xml.in.h:10
+msgid "Window fade time (in ms) in \"Constant time\" mode"
+msgstr "Ablak elhalványulásának sebessége „Állandó útidő” módban"
+
 #: ../metadata/fade.xml.in.h:11
+msgid "Fade windows"
+msgstr "Ablak elhalványítása"
+
+#: ../metadata/fade.xml.in.h:12
+msgid "Windows that should be fading"
+msgstr "Ablaktípusok, amelyek elhalványulhatnak"
+
+#: ../metadata/fade.xml.in.h:13
+msgid "Visual Bell"
+msgstr "Vizuális csengő"
+
+#: ../metadata/fade.xml.in.h:14
+msgid "Fade effect on system beep"
+msgstr "Elhalványulás effektus rendszerhang esetén"
+
+#: ../metadata/fade.xml.in.h:15
+msgid "Fullscreen Visual Bell"
+msgstr "Teljes képernyő vizuális csengő"
+
+#: ../metadata/fade.xml.in.h:16
+msgid "Fullscreen fade effect on system beep"
+msgstr "Teljes képernyő halványuló effektus rendszercsengő esetén"
+
+#: ../metadata/fade.xml.in.h:17
+msgid "Fade On Minimize/Open/Close"
+msgstr "Ablakelhalványítás minimalizáláskor, megnyitáskor és bezáráskor"
+
+#: ../metadata/fade.xml.in.h:18
 msgid "Fade effect on minimize/open/close window events"
 msgstr ""
 "Ablakelhalványítási effektus alkalmazása minimalizáláskor, megnyitáskor és "
 "bezáráskor"
 
-#: ../metadata/fade.xml.in.h:12
-msgid "Fade effect on system beep"
-msgstr "Elhalványulás effektus rendszerhang esetén"
-
-#: ../metadata/fade.xml.in.h:13
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "Leképezés esetén az ablak erősítése, lecsatolás esetén elhalványítása"
-
-#: ../metadata/fade.xml.in.h:14
-msgid "Fade windows"
-msgstr "Ablak elhalványítása"
-
-#: ../metadata/fade.xml.in.h:15
-msgid "Fading Windows"
-msgstr "Ablakok elhalványítása"
-
-#: ../metadata/fade.xml.in.h:16
-msgid "Fullscreen Visual Bell"
-msgstr "Teljes képernyő vizuális csengő"
-
-#: ../metadata/fade.xml.in.h:17
-msgid "Fullscreen fade effect on system beep"
-msgstr "Teljes képernyő halványuló effektus rendszercsengő esetén"
-
 #: ../metadata/fade.xml.in.h:19
+msgid "Dim Unresponsive Windows"
+msgstr "Nem válaszoló ablak elhalványítása"
+
+#: ../metadata/fade.xml.in.h:20
+msgid "Dim windows that are not responding to window manager requests"
+msgstr ""
+"Azon ablakok elhalványítása, amelyek nem válaszolnak az ablakkezelő kéréseire"
+
+#: ../metadata/fade.xml.in.h:21
+msgid "Unresponsive Window Brightness"
+msgstr "Nem válaszoló ablak fényerőssége"
+
+#: ../metadata/fade.xml.in.h:23
+#, no-c-format
+msgid "Brightness (in %) of unresponsive windows"
+msgstr "Nem válaszoló ablak fényerőssége (százalékban megadva)"
+
+#: ../metadata/fade.xml.in.h:24
+msgid "Unresponsive Window Saturation"
+msgstr "Nem válaszoló ablak telítettsége"
+
+#: ../metadata/fade.xml.in.h:26
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Nem válaszoló ablak telítettsége (százalékban megadva)"
 
-#: ../metadata/fade.xml.in.h:20
-msgid "Unresponsive Window Brightness"
-msgstr "Nem válaszoló ablak fényerőssége"
-
-#: ../metadata/fade.xml.in.h:21
-msgid "Unresponsive Window Saturation"
-msgstr "Nem válaszoló ablak telítettsége"
-
-#: ../metadata/fade.xml.in.h:22
-msgid "Visual Bell"
-msgstr "Vizuális csengő"
-
-#: ../metadata/fade.xml.in.h:23
-msgid "Window fade mode"
-msgstr "Ablak elhalványulásának üzemmódja"
-
-#: ../metadata/fade.xml.in.h:24
-msgid "Window fade speed in \"Constant speed\" mode"
-msgstr "Ablak elhalványulásának sebessége „Állandó sebesség” módban"
-
-#: ../metadata/fade.xml.in.h:25
-msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr "Ablak elhalványulásának sebessége „Állandó útidő” módban"
-
-#: ../metadata/fade.xml.in.h:26
-msgid "Windows that should be fading"
-msgstr "Ablaktípusok, amelyek elhalványulhatnak"
-
 #: ../metadata/fs.xml.in.h:1
-msgid "Mount Point"
-msgstr "Csatolási pont"
-
-#: ../metadata/fs.xml.in.h:2
-msgid "Mount point"
-msgstr "Csatolási pont"
-
-#: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
 msgstr "Felhasználói módú fájlrendszer"
 
-#: ../metadata/fs.xml.in.h:4
+#: ../metadata/fs.xml.in.h:2
 msgid "Userspace file system"
 msgstr "Felhasználói módú fájlrendszer"
 
-#: ../metadata/gconf.xml.in.h:1
-msgid "GConf"
-msgstr "GConf"
+#: ../metadata/fs.xml.in.h:3
+msgid "Mount Point"
+msgstr "Csatolási pont"
 
-#: ../metadata/gconf.xml.in.h:2
-msgid "GConf Control Backend"
-msgstr "GConf vezérlés kiszolgálója"
+#: ../metadata/fs.xml.in.h:4
+msgid "Mount point"
+msgstr "Csatolási pont"
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
@@ -1578,58 +2024,58 @@ msgstr "Glib"
 msgid "GLib main loop support"
 msgstr "Glib főciklus támogatása"
 
-#: ../metadata/matecompat.xml.in.h:2
+#: ../metadata/matecompat.xml.in.h:1
 msgid "MATE Compatibility"
 msgstr "MATE kompatibilitás"
 
-#: ../metadata/matecompat.xml.in.h:3
-msgid "Open a terminal"
-msgstr "Terminál megnyitása"
-
-#: ../metadata/matecompat.xml.in.h:4
+#: ../metadata/matecompat.xml.in.h:2
 msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
 "Beállítás, amely a Compizt kompatibilissá teszi a MATE asztali környezettel"
+
+#: ../metadata/matecompat.xml.in.h:3
+msgid "Show Main Menu"
+msgstr "Főmenü megjelenítése"
+
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Show the main menu"
+msgstr "Főmenü megjelenítése"
 
 #: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Párbeszéd futtatása"
 
 #: ../metadata/matecompat.xml.in.h:6
-msgid "Run terminal command"
-msgstr "Parancs futtatása terminálban"
-
-#: ../metadata/matecompat.xml.in.h:7
-msgid "Screenshot command line"
-msgstr "Képernyőkép parancssor"
-
-#: ../metadata/matecompat.xml.in.h:8
-msgid "Show Main Menu"
-msgstr "Főmenü megjelenítése"
-
-#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "„Alkalmazás futtatása” párbeszédablak megjelenítése"
 
-#: ../metadata/matecompat.xml.in.h:10
-msgid "Show the main menu"
-msgstr "Főmenü megjelenítése"
+#: ../metadata/matecompat.xml.in.h:8
+msgid "Screenshot command line"
+msgstr "Képernyőkép parancssor"
 
-#: ../metadata/matecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Take a screenshot"
 msgstr "Képernyőkép készítése"
 
-#: ../metadata/matecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:10
+msgid "Window screenshot command line"
+msgstr "Ablak képernyőkép parancssor"
+
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot of a window"
 msgstr "Képernyőkép készítése az ablakról"
+
+#: ../metadata/matecompat.xml.in.h:12
+msgid "Run terminal command"
+msgstr "Parancs futtatása terminálban"
 
 #: ../metadata/matecompat.xml.in.h:13
 msgid "Terminal command line"
 msgstr "Terminál parancssor"
 
 #: ../metadata/matecompat.xml.in.h:14
-msgid "Window screenshot command line"
-msgstr "Ablak képernyőkép parancssor"
+msgid "Open a terminal"
+msgstr "Terminál megnyitása"
 
 #: ../metadata/ini.xml.in.h:1
 msgid "Ini"
@@ -1640,306 +2086,293 @@ msgid "Ini Flat File Backend"
 msgstr "INI szövegfájl"
 
 #: ../metadata/inotify.xml.in.h:1
-msgid "File change notification plugin"
-msgstr "Fájlváltozásról értesítő bővítmény"
-
-#: ../metadata/inotify.xml.in.h:2
 msgid "Inotify"
 msgstr "Inotify"
 
-#: ../metadata/kconfig.xml.in.h:1
-msgid "Kconfig"
-msgstr "Kconfig"
-
-#: ../metadata/kconfig.xml.in.h:2
-msgid "Kconfig Control Backend"
-msgstr "Kconfig vezérlés kiszolgálója"
+#: ../metadata/inotify.xml.in.h:2
+msgid "File change notification plugin"
+msgstr "Fájlváltozásról értesítő bővítmény"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
 msgstr "Minimalizálás effektus"
 
 #: ../metadata/minimize.xml.in.h:2
-msgid "Minimize Windows"
-msgstr "Ablak minimalizálása"
-
-#: ../metadata/minimize.xml.in.h:3
-msgid "Minimize speed"
-msgstr "Minimalizálás sebessége"
-
-#: ../metadata/minimize.xml.in.h:4
-msgid "Minimize timestep"
-msgstr "Minimalizálási időköz"
-
-#: ../metadata/minimize.xml.in.h:5
-msgid "Shade Resistance"
-msgstr "Felgördítés ellenállása"
-
-#: ../metadata/minimize.xml.in.h:6
-msgid "Shade resistance"
-msgstr "Felgördítés ellenállása"
-
-#: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "Ablakok átalakítása minimalizáláskor és visszaállításkor"
 
-#: ../metadata/minimize.xml.in.h:10
+#: ../metadata/minimize.xml.in.h:4
+msgid "Minimize speed"
+msgstr "Minimalizálás sebessége"
+
+#: ../metadata/minimize.xml.in.h:6
+msgid "Minimize timestep"
+msgstr "Minimalizálási időköz"
+
+#: ../metadata/minimize.xml.in.h:7
+msgid "Minimize Windows"
+msgstr "Ablak minimalizálása"
+
+#: ../metadata/minimize.xml.in.h:8
 msgid "Windows that should be transformed when minimized"
 msgstr "Minimalizált állapotban átalakítandó ablaktípusok"
 
+#: ../metadata/minimize.xml.in.h:9
+msgid "Shade Resistance"
+msgstr "Felgördítés ellenállása"
+
+#: ../metadata/minimize.xml.in.h:10
+msgid "Shade resistance"
+msgstr "Felgördítés ellenállása"
+
 #: ../metadata/move.xml.in.h:1
-msgid "Constrain Y"
-msgstr "Y megszorítás"
-
-#: ../metadata/move.xml.in.h:2
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Y koordináta-megszorítás a munkafelületre"
-
-#: ../metadata/move.xml.in.h:3
-msgid "Do not update the server-side position of windows until finished moving"
-msgstr ""
-"Csak az ablakáthelyezés befejeztével frissítse az ablakpozíciót a kiszolgálón"
-
-#: ../metadata/move.xml.in.h:4
-msgid "Initiate Window Move"
-msgstr "Ablakáthelyezés indítása"
-
-#: ../metadata/move.xml.in.h:5
-msgid "Lazy Positioning"
-msgstr "Lusta elhelyezés"
-
-#: ../metadata/move.xml.in.h:6
 msgid "Move Window"
 msgstr "Ablak áthelyezése"
 
-#: ../metadata/move.xml.in.h:7
+#: ../metadata/move.xml.in.h:2
 msgid "Move window"
 msgstr "Ablak áthelyezése"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
-#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:3
+msgid "Initiate Window Move"
+msgstr "Ablakáthelyezés indítása"
+
+#: ../metadata/move.xml.in.h:4
+msgid "Start moving window"
+msgstr "Ablakáthelyezés megkezdése"
+
+#: ../metadata/move.xml.in.h:5 ../metadata/obs.xml.in.h:3
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:31
 msgid "Opacity"
 msgstr "Átlátszatlanság"
 
-#: ../metadata/move.xml.in.h:9
+#: ../metadata/move.xml.in.h:6
 msgid "Opacity level of moving windows"
 msgstr "Ablakáthelyezés átlátszatlanságának szintje"
+
+#: ../metadata/move.xml.in.h:7
+msgid "Constrain Y"
+msgstr "Y megszorítás"
+
+#: ../metadata/move.xml.in.h:8
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Y koordináta-megszorítás a munkafelületre"
+
+#: ../metadata/move.xml.in.h:9
+msgid "Snapoff maximized windows"
+msgstr "Maximalizált ablakok azonnali visszaállítása"
 
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Áthelyezéskor az ablakok azonnali, automatikus visszaállítása"
 
 #: ../metadata/move.xml.in.h:11
-msgid "Snapoff maximized windows"
-msgstr "Maximalizált ablakok azonnali visszaállítása"
+msgid "Lazy Positioning"
+msgstr "Lusta elhelyezés"
 
 #: ../metadata/move.xml.in.h:12
-msgid "Start moving window"
-msgstr "Ablakáthelyezés megkezdése"
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+"Csak az ablakáthelyezés befejeztével frissítse az ablakpozíciót a kiszolgálón"
 
-#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
-msgid "Brightness"
-msgstr "Fényerő"
-
-#: ../metadata/obs.xml.in.h:2
-msgid "Brightness Decrease"
-msgstr "Fényerő csökkentése"
-
-#: ../metadata/obs.xml.in.h:3
-msgid "Brightness Increase"
-msgstr "Fényerő növelése"
-
-#: ../metadata/obs.xml.in.h:4
-msgid "Brightness Step"
-msgstr "Fényerő lépésköz"
-
-#: ../metadata/obs.xml.in.h:5
-msgid "Brightness values for windows"
-msgstr "Fényerő értéke ablakokhoz"
-
-#: ../metadata/obs.xml.in.h:6
-msgid "Decrease"
-msgstr "Csökkentés"
-
-#: ../metadata/obs.xml.in.h:7
-msgid "Increase"
-msgstr "Növelés"
-
-#: ../metadata/obs.xml.in.h:9
-msgid "Opacity Decrease"
-msgstr "Átlátszatlanság csökkentése"
-
-#: ../metadata/obs.xml.in.h:10
-msgid "Opacity Increase"
-msgstr "Átlátszatlanság növelése"
-
-#: ../metadata/obs.xml.in.h:11
-msgid "Opacity Step"
-msgstr "Átlátszatlanság mértéke"
-
-#: ../metadata/obs.xml.in.h:12
-msgid "Opacity values for windows"
-msgstr "Ablakok átlátszatlansága"
-
-#: ../metadata/obs.xml.in.h:13
+#: ../metadata/obs.xml.in.h:1
 msgid "Opacity, Brightness and Saturation"
 msgstr "Átlátszatlanság, fényerő, telítettség"
 
-#: ../metadata/obs.xml.in.h:14
+#: ../metadata/obs.xml.in.h:2
 msgid "Opacity, Brightness and Saturation adjustments"
 msgstr "Átlátszatlanság, fényerő, telítettség beállítások"
 
-#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Increase Opacity"
+msgstr "Ablak átlátszatlanság növelése"
+
+#: ../metadata/obs.xml.in.h:5
+msgid "Opacity Increase"
+msgstr "Átlátszatlanság növelése"
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease Opacity"
+msgstr "Ablak átlátszatlanságának csökkentése"
+
+#: ../metadata/obs.xml.in.h:7
+msgid "Opacity Decrease"
+msgstr "Átlátszatlanság csökkentése"
+
+#: ../metadata/obs.xml.in.h:8 ../metadata/switcher.xml.in.h:29
+msgid "Brightness"
+msgstr "Fényerő"
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Increase Brightness"
+msgstr "Fényerő"
+
+#: ../metadata/obs.xml.in.h:10
+msgid "Brightness Increase"
+msgstr "Fényerő növelése"
+
+#: ../metadata/obs.xml.in.h:11
+#, fuzzy
+msgid "Decrease Brightness"
+msgstr "Fényerő"
+
+#: ../metadata/obs.xml.in.h:12
+msgid "Brightness Decrease"
+msgstr "Fényerő csökkentése"
+
+#: ../metadata/obs.xml.in.h:13 ../metadata/switcher.xml.in.h:27
 msgid "Saturation"
 msgstr "Telítettség"
 
-#: ../metadata/obs.xml.in.h:16
-msgid "Saturation Decrease"
-msgstr "Színtelítettség csökkentése"
+#: ../metadata/obs.xml.in.h:14
+#, fuzzy
+msgid "Increase Saturation"
+msgstr "Elmosás telítettség"
 
-#: ../metadata/obs.xml.in.h:17
+#: ../metadata/obs.xml.in.h:15
 msgid "Saturation Increase"
 msgstr "Színtelítettség növelése"
 
+#: ../metadata/obs.xml.in.h:16
+#, fuzzy
+msgid "Decrease Saturation"
+msgstr "Elmosás telítettség"
+
+#: ../metadata/obs.xml.in.h:17
+msgid "Saturation Decrease"
+msgstr "Színtelítettség csökkentése"
+
 #: ../metadata/obs.xml.in.h:18
-msgid "Saturation Step"
-msgstr "Telítettség változásának lépésköze"
-
-#: ../metadata/obs.xml.in.h:19
-msgid "Saturation values for windows"
-msgstr "Ablakok színtelítettsége"
-
-#: ../metadata/obs.xml.in.h:20
 msgid "Step"
 msgstr "Lépésköz"
 
-#: ../metadata/obs.xml.in.h:21
+#: ../metadata/obs.xml.in.h:19
+msgid "Opacity Step"
+msgstr "Átlátszatlanság mértéke"
+
+#: ../metadata/obs.xml.in.h:20
 msgid "Window specific settings"
 msgstr "Ablak beállítások"
 
-#: ../metadata/obs.xml.in.h:22
-msgid "Window values"
-msgstr "Ablak tulajdonságok"
-
-#: ../metadata/obs.xml.in.h:23
+#: ../metadata/obs.xml.in.h:21 ../metadata/place.xml.in.h:32
 msgid "Windows"
 msgstr "Ablakok"
 
-#: ../metadata/obs.xml.in.h:24
-msgid "Windows that should have a different brightness by default"
-msgstr "Alapértelmezettől eltérő fényerővel rendelkező ablakok"
-
-#: ../metadata/obs.xml.in.h:25
+#: ../metadata/obs.xml.in.h:22
 msgid "Windows that should have a different opacity by default"
 msgstr "Alapértelmezettől eltérő átlátszatlansággal rendelkező ablakok"
 
+#: ../metadata/obs.xml.in.h:23
+msgid "Window values"
+msgstr "Ablak tulajdonságok"
+
+#: ../metadata/obs.xml.in.h:24
+msgid "Opacity values for windows"
+msgstr "Ablakok átlátszatlansága"
+
+#: ../metadata/obs.xml.in.h:25
+msgid "Brightness Step"
+msgstr "Fényerő lépésköz"
+
 #: ../metadata/obs.xml.in.h:26
+msgid "Windows that should have a different brightness by default"
+msgstr "Alapértelmezettől eltérő fényerővel rendelkező ablakok"
+
+#: ../metadata/obs.xml.in.h:27
+msgid "Brightness values for windows"
+msgstr "Fényerő értéke ablakokhoz"
+
+#: ../metadata/obs.xml.in.h:28
+msgid "Saturation Step"
+msgstr "Telítettség változásának lépésköze"
+
+#: ../metadata/obs.xml.in.h:29
 msgid "Windows that should have a different saturation by default"
 msgstr "Alapértelmezettől eltérő színtelítettséggel rendelkező ablakok"
 
+#: ../metadata/obs.xml.in.h:30
+msgid "Saturation values for windows"
+msgstr "Ablakok színtelítettsége"
+
 #: ../metadata/place.xml.in.h:1
-msgid "Algorithm to use for window placement"
-msgstr "Az ablakok elhelyezésére használt algoritmus"
-
-#: ../metadata/place.xml.in.h:2
-msgid "Cascade"
-msgstr "Lépcsőzetes"
-
-#: ../metadata/place.xml.in.h:3
-msgid "Centered"
-msgstr "Középre"
-
-#: ../metadata/place.xml.in.h:4
-msgid "Fixed Window Placement"
-msgstr "Fix ablakelhelyezések"
-
-#: ../metadata/place.xml.in.h:5
-msgid "Force Placement Windows"
-msgstr "Ablakelhelyezés erőltetése"
-
-#: ../metadata/place.xml.in.h:6
-msgid "Horizontal viewport positions"
-msgstr "Vízszintes munkalap pozíció"
-
-#: ../metadata/place.xml.in.h:7
-msgid "Keep In Workarea"
-msgstr "Munkaasztalon tartás"
-
-#: ../metadata/place.xml.in.h:8
-msgid ""
-"Keep placed window in work area, even if that means that the position might "
-"differ from the specified position"
-msgstr ""
-"Ablakelhelyezés erőltetésének felülbírálása úgy, hogy az ablak minden "
-"esetben a munkaasztalon maradjon"
-
-#: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
 msgstr "Ablakok elhelyezése"
 
-#: ../metadata/place.xml.in.h:12
-msgid "Place across all outputs"
-msgstr "Összes kimenet használata"
-
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:2
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Térképezés esetén az ablakok elhelyezése a megfelelő pozícióba"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:3
+msgid "Workarounds"
+msgstr "Kerülő megoldások"
+
+#: ../metadata/place.xml.in.h:4
+msgid "Window placement workarounds"
+msgstr "Kerülőmegoldások az ablak elhelyezésére"
+
+#: ../metadata/place.xml.in.h:5
 msgid "Placement Mode"
 msgstr "Elhelyezés módja"
 
-#: ../metadata/place.xml.in.h:15
-msgid "Positioned windows"
-msgstr "Pozicionált ablakok"
+#: ../metadata/place.xml.in.h:6
+msgid "Algorithm to use for window placement"
+msgstr "Az ablakok elhelyezésére használt algoritmus"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:7
+msgid "Cascade"
+msgstr "Lépcsőzetes"
+
+#: ../metadata/place.xml.in.h:8
+msgid "Centered"
+msgstr "Középre"
+
+#: ../metadata/place.xml.in.h:9
+msgid "Smart"
+msgstr "Intelligens"
+
+#: ../metadata/place.xml.in.h:10
+msgid "Maximize"
+msgstr "Maximalizálás"
+
+#: ../metadata/place.xml.in.h:11
 msgid "Random"
 msgstr "Véletlen"
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:12
+#, fuzzy
+msgid "Under pointer"
+msgstr "Élforgatás mutató"
+
+#: ../metadata/place.xml.in.h:14
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 "Megadja, hogy több kimeneti eszköz esetén, az ablakelhelyezés viselkedését"
 
-#: ../metadata/place.xml.in.h:18
-msgid "Smart"
-msgstr "Intelligens"
-
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:15
 msgid "Use active output device"
 msgstr "Aktív kimeneti eszköz használata"
 
-#: ../metadata/place.xml.in.h:20
-msgid "Use output device of focussed window"
-msgstr "Fókuszált ablakot megjelenítő eszköz használata"
-
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:16
 msgid "Use output device with pointer"
 msgstr "Egérmutatót megjelenítő eszköz használata"
 
-#: ../metadata/place.xml.in.h:22
-msgid "Vertical viewport positions"
-msgstr "Függőleges munkalap pozíció"
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr "Fókuszált ablakot megjelenítő eszköz használata"
 
-#: ../metadata/place.xml.in.h:23
-msgid "Viewport positioned windows"
-msgstr "Munkaterületen elhelyezett ablakok"
+#: ../metadata/place.xml.in.h:18
+msgid "Place across all outputs"
+msgstr "Összes kimenet használata"
 
-#: ../metadata/place.xml.in.h:24
-msgid "Window placement workarounds"
-msgstr "Kerülőmegoldások az ablak elhelyezésére"
+#: ../metadata/place.xml.in.h:19
+msgid "Force Placement Windows"
+msgstr "Ablakelhelyezés erőltetése"
 
-#: ../metadata/place.xml.in.h:25
-msgid "Windows that should be positioned by default"
-msgstr "Alapértelmezés szerint pozicionálandó ablakok"
-
-#: ../metadata/place.xml.in.h:26
-msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Alapértelmezés szerint megadott munkalapra pozicionálandó ablakok"
-
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:20
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
@@ -1948,41 +2381,97 @@ msgstr ""
 "ablakkezelő úgy jelzi, hogy az adott ablakok elhelyezését nem szabad "
 "szabályozni."
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:21
+msgid "Fixed Window Placement"
+msgstr "Fix ablakelhelyezések"
+
+#: ../metadata/place.xml.in.h:22
 msgid "Windows with fixed positions"
 msgstr "Ablakok rögzített pozicióval"
 
-#: ../metadata/place.xml.in.h:29
-msgid "Windows with fixed viewport"
-msgstr "Ablakok rögzített nézőponttal"
+#: ../metadata/place.xml.in.h:23
+msgid "Positioned windows"
+msgstr "Pozicionált ablakok"
 
-#: ../metadata/place.xml.in.h:30
-msgid "Workarounds"
-msgstr "Kerülő megoldások"
+#: ../metadata/place.xml.in.h:24
+msgid "Windows that should be positioned by default"
+msgstr "Alapértelmezés szerint pozicionálandó ablakok"
 
-#: ../metadata/place.xml.in.h:31
+#: ../metadata/place.xml.in.h:25
 msgid "X Positions"
 msgstr "Vízszintes pozíció"
 
-#: ../metadata/place.xml.in.h:32
-msgid "X Viewport Positions"
-msgstr "Vízszintes munkalap pozíció"
-
-#: ../metadata/place.xml.in.h:33
+#: ../metadata/place.xml.in.h:26
 msgid "X position values"
 msgstr "Vízszintes pozíció"
 
-#: ../metadata/place.xml.in.h:34
+#: ../metadata/place.xml.in.h:27
 msgid "Y Positions"
 msgstr "Függőleges pozíció"
 
+#: ../metadata/place.xml.in.h:28
+msgid "Y position values"
+msgstr "Függőleges pozíció"
+
+#: ../metadata/place.xml.in.h:29
+msgid "Keep In Workarea"
+msgstr "Munkaasztalon tartás"
+
+#: ../metadata/place.xml.in.h:30
+msgid ""
+"Keep placed window in work area, even if that means that the position might "
+"differ from the specified position"
+msgstr ""
+"Ablakelhelyezés erőltetésének felülbírálása úgy, hogy az ablak minden "
+"esetben a munkaasztalon maradjon"
+
+#: ../metadata/place.xml.in.h:31
+#, fuzzy
+msgid "Windows with fixed placement mode"
+msgstr "Ablakok rögzített pozicióval"
+
+#: ../metadata/place.xml.in.h:33
+#, fuzzy
+msgid "Windows that should have a certain positioning mode"
+msgstr "Alapértelmezettől eltérő színtelítettséggel rendelkező ablakok"
+
+#: ../metadata/place.xml.in.h:34
+#, fuzzy
+msgid "Mode"
+msgstr "Elhalványítási üzemmód"
+
 #: ../metadata/place.xml.in.h:35
+#, fuzzy
+msgid "Positioning modes"
+msgstr "Pozicionált ablakok"
+
+#: ../metadata/place.xml.in.h:36
+msgid "Windows with fixed viewport"
+msgstr "Ablakok rögzített nézőponttal"
+
+#: ../metadata/place.xml.in.h:37
+msgid "Viewport positioned windows"
+msgstr "Munkaterületen elhelyezett ablakok"
+
+#: ../metadata/place.xml.in.h:38
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr "Alapértelmezés szerint megadott munkalapra pozicionálandó ablakok"
+
+#: ../metadata/place.xml.in.h:39
+msgid "X Viewport Positions"
+msgstr "Vízszintes munkalap pozíció"
+
+#: ../metadata/place.xml.in.h:40
+msgid "Horizontal viewport positions"
+msgstr "Vízszintes munkalap pozíció"
+
+#: ../metadata/place.xml.in.h:41
 msgid "Y Viewport Positions"
 msgstr "Függőleges munkalap pozíció"
 
-#: ../metadata/place.xml.in.h:36
-msgid "Y position values"
-msgstr "Függőleges pozíció"
+#: ../metadata/place.xml.in.h:42
+msgid "Vertical viewport positions"
+msgstr "Függőleges munkalap pozíció"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -2000,506 +2489,529 @@ msgstr "Reguláris kifejezés egyeztetés"
 msgid "Regex window matching"
 msgstr "Reguláris kifejezéssel ablakegyeztetés"
 
-#: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
-#: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
+#: ../metadata/resize.xml.in.h:1
+msgid "Resize Window"
+msgstr "Ablak átméretezése"
+
+#: ../metadata/resize.xml.in.h:2
+msgid "Resize window"
+msgstr "Ablak átméretezése"
+
+#: ../metadata/resize.xml.in.h:3 ../metadata/rotate.xml.in.h:13
+#: ../metadata/scale.xml.in.h:3 ../metadata/switcher.xml.in.h:2
+#: ../metadata/wall.xml.in.h:42
 msgid "Bindings"
 msgstr "Gyorsbillentyűk"
 
-#: ../metadata/resize.xml.in.h:2
-msgid "Border Color"
-msgstr "Kocka színe"
-
-#: ../metadata/resize.xml.in.h:3
-msgid "Border color used for outline and rectangle resize modes"
-msgstr "Az átméretezéshez használt körvonal és téglalap színe "
-
 #: ../metadata/resize.xml.in.h:4
-msgid "Default Resize Mode"
-msgstr "Alapértelmezett átméretezési mód"
-
-#: ../metadata/resize.xml.in.h:5
-msgid "Default mode used for window resizing"
-msgstr "Alapértelmezett ablakátméretezési mód"
-
-#: ../metadata/resize.xml.in.h:6
-msgid "Fill Color"
-msgstr "Kitöltőszín"
-
-#: ../metadata/resize.xml.in.h:7
-msgid "Fill color used for rectangle resize mode"
-msgstr "Téglalap átméretezés kitöltő színe"
-
-#: ../metadata/resize.xml.in.h:8
 msgid "Initiate Normal Window Resize"
 msgstr "Hagyományos ablakátméretezés indítása"
 
-#: ../metadata/resize.xml.in.h:9
+#: ../metadata/resize.xml.in.h:5
+msgid "Start resizing window normally"
+msgstr "Hagyományos ablakátméretezés indítása"
+
+#: ../metadata/resize.xml.in.h:6
 msgid "Initiate Outline Window Resize"
 msgstr "Körvonalas ablakátméretezés indítása"
 
-#: ../metadata/resize.xml.in.h:10
+#: ../metadata/resize.xml.in.h:7
+msgid "Start resizing window with outline"
+msgstr "Körvonalas ablakátméretezés indítása"
+
+#: ../metadata/resize.xml.in.h:8
 msgid "Initiate Rectangle Window Resize"
 msgstr "Téglalap ablakátméretezés indítása"
 
-#: ../metadata/resize.xml.in.h:11
+#: ../metadata/resize.xml.in.h:9
+msgid "Start resizing window with rectangle"
+msgstr "Téglalap ablakátméretezés indítása"
+
+#: ../metadata/resize.xml.in.h:10
 msgid "Initiate Stretch Window Resize"
+msgstr "Nyújtásos ablakátméretezés indítása"
+
+#: ../metadata/resize.xml.in.h:11
+msgid "Start resizing window by stretching it"
 msgstr "Nyújtásos ablakátméretezés indítása"
 
 #: ../metadata/resize.xml.in.h:12
 msgid "Initiate Window Resize"
 msgstr "Ablakátméretezés indítása"
 
-#: ../metadata/resize.xml.in.h:14
-msgid "Normal Resize Windows"
-msgstr "Hagyományos ablakátméretezés"
-
-#: ../metadata/resize.xml.in.h:15
-msgid "Outline"
-msgstr "Körvonal"
-
-#: ../metadata/resize.xml.in.h:16
-msgid "Outline Resize Windows"
-msgstr "Átméretezés az ablak körvonalával"
-
-#: ../metadata/resize.xml.in.h:17
-msgid "Rectangle"
-msgstr "Téglalap"
-
-#: ../metadata/resize.xml.in.h:18
-msgid "Rectangle Resize Windows"
-msgstr "Téglalap ablakátméretezés"
-
-#: ../metadata/resize.xml.in.h:19
-msgid "Resize Window"
-msgstr "Ablak átméretezése"
-
-#: ../metadata/resize.xml.in.h:20
-msgid "Resize window"
-msgstr "Ablak átméretezése"
-
-#: ../metadata/resize.xml.in.h:21
+#: ../metadata/resize.xml.in.h:13
 msgid "Start resizing window"
 msgstr "Ablak átméretezésének indítása"
 
-#: ../metadata/resize.xml.in.h:22
-msgid "Start resizing window by stretching it"
-msgstr "Nyújtásos ablakátméretezés indítása"
+#: ../metadata/resize.xml.in.h:14
+msgid "Default Resize Mode"
+msgstr "Alapértelmezett átméretezési mód"
 
-#: ../metadata/resize.xml.in.h:23
-msgid "Start resizing window normally"
-msgstr "Hagyományos ablakátméretezés indítása"
+#: ../metadata/resize.xml.in.h:15
+msgid "Default mode used for window resizing"
+msgstr "Alapértelmezett ablakátméretezési mód"
 
-#: ../metadata/resize.xml.in.h:24
-msgid "Start resizing window with outline"
-msgstr "Körvonalas ablakátméretezés indítása"
+#: ../metadata/resize.xml.in.h:17
+msgid "Outline"
+msgstr "Körvonal"
 
-#: ../metadata/resize.xml.in.h:25
-msgid "Start resizing window with rectangle"
-msgstr "Téglalap ablakátméretezés indítása"
+#: ../metadata/resize.xml.in.h:18
+msgid "Rectangle"
+msgstr "Téglalap"
 
-#: ../metadata/resize.xml.in.h:26
+#: ../metadata/resize.xml.in.h:19
 msgid "Stretch"
 msgstr "Nyújtás"
 
-#: ../metadata/resize.xml.in.h:27
-msgid "Stretch Resize Windows"
-msgstr "Átméretezés az ablak nyújtásával"
+#: ../metadata/resize.xml.in.h:20
+msgid "Border Color"
+msgstr "Kocka színe"
 
-#: ../metadata/resize.xml.in.h:28
+#: ../metadata/resize.xml.in.h:21
+msgid "Border color used for outline and rectangle resize modes"
+msgstr "Az átméretezéshez használt körvonal és téglalap színe "
+
+#: ../metadata/resize.xml.in.h:22
+msgid "Fill Color"
+msgstr "Kitöltőszín"
+
+#: ../metadata/resize.xml.in.h:23
+msgid "Fill color used for rectangle resize mode"
+msgstr "Téglalap átméretezés kitöltő színe"
+
+#: ../metadata/resize.xml.in.h:24
+msgid "Normal Resize Windows"
+msgstr "Hagyományos ablakátméretezés"
+
+#: ../metadata/resize.xml.in.h:25
 msgid "Windows that normal resize should be used for"
 msgstr "Hagyományos ablakátméretezést használó ablakok"
 
-#: ../metadata/resize.xml.in.h:29
+#: ../metadata/resize.xml.in.h:26
+msgid "Outline Resize Windows"
+msgstr "Átméretezés az ablak körvonalával"
+
+#: ../metadata/resize.xml.in.h:27
 msgid "Windows that outline resize should be used for"
 msgstr "Körvonalas ablakátméretezést használó ablakok"
 
-#: ../metadata/resize.xml.in.h:30
+#: ../metadata/resize.xml.in.h:28
+msgid "Rectangle Resize Windows"
+msgstr "Téglalap ablakátméretezés"
+
+#: ../metadata/resize.xml.in.h:29
 msgid "Windows that rectangle resize should be used for"
 msgstr "Téglalap ablakátméretezést használó ablakok"
+
+#: ../metadata/resize.xml.in.h:30
+msgid "Stretch Resize Windows"
+msgstr "Átméretezés az ablak nyújtásával"
 
 #: ../metadata/resize.xml.in.h:31
 msgid "Windows that stretch resize should be used for"
 msgstr "Nyújtásos ablakátméretezést használó ablakok"
 
-#: ../metadata/rotate.xml.in.h:3
-msgid "Edge Flip DnD"
-msgstr "Élforgatás egérművelet"
+#: ../metadata/rotate.xml.in.h:1
+msgid "Rotate Cube"
+msgstr "Kocka forgatása"
 
-#: ../metadata/rotate.xml.in.h:4
-msgid "Edge Flip Move"
-msgstr "Élforgatás áthelyezés"
+#: ../metadata/rotate.xml.in.h:2
+msgid "Rotate desktop cube"
+msgstr "A munkaasztalkocka forgatása"
 
-#: ../metadata/rotate.xml.in.h:5
+#: ../metadata/rotate.xml.in.h:3 ../metadata/wall.xml.in.h:79
 msgid "Edge Flip Pointer"
 msgstr "Élforgatás mutató"
 
-#: ../metadata/rotate.xml.in.h:6
-msgid "Flip Time"
-msgstr "Forgatási idő"
+#: ../metadata/rotate.xml.in.h:4
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr "Mutató kép szélére húzása esetén forgatás a következő nézőpontig"
 
-#: ../metadata/rotate.xml.in.h:7
-msgid "Flip to left viewport and warp pointer"
-msgstr "Forgatás a bal oldali nézőpontig és mutató léptetése"
+#: ../metadata/rotate.xml.in.h:5 ../metadata/wall.xml.in.h:81
+msgid "Edge Flip Move"
+msgstr "Élforgatás áthelyezés"
+
+#: ../metadata/rotate.xml.in.h:6
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr "Egy ablak kép szélére húzása esetén forgatás a következő nézőpontig"
+
+#: ../metadata/rotate.xml.in.h:7 ../metadata/wall.xml.in.h:83
+msgid "Edge Flip DnD"
+msgstr "Élforgatás egérművelet"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr "Objektum kép szélére húzása esetén forgatás a következő nézőpontig"
 
 #: ../metadata/rotate.xml.in.h:9
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr "Mutató kép szélére húzása esetén forgatás a következő nézőpontig"
+msgid "Flip Time"
+msgstr "Forgatási idő"
 
 #: ../metadata/rotate.xml.in.h:10
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr "Egy ablak kép szélére húzása esetén forgatás a következő nézőpontig"
+msgid "Timeout before flipping viewport"
+msgstr "A nézőpont váltása előtti időkorlát"
 
 #: ../metadata/rotate.xml.in.h:11
-msgid "Flip to right viewport and warp pointer"
-msgstr "Forgatás a jobb oldali nézőpontig és mutató léptetése"
-
-#: ../metadata/rotate.xml.in.h:13
-msgid "Invert Y axis for pointer movement"
-msgstr "Y tengely átalakítása a mutató mozgásához"
-
-#: ../metadata/rotate.xml.in.h:14
-msgid "Pointer Invert Y"
-msgstr "Y mutató invertálása"
-
-#: ../metadata/rotate.xml.in.h:15
-msgid "Pointer Sensitivity"
-msgstr "Mutató érzékenysége"
-
-#: ../metadata/rotate.xml.in.h:16
 msgid "Raise on rotate"
 msgstr "Kiemelés forgatáskor"
 
-#: ../metadata/rotate.xml.in.h:17
+#: ../metadata/rotate.xml.in.h:12
 msgid "Raise window when rotating"
 msgstr "Ablakok megnyitása kattintás esetén"
 
-#: ../metadata/rotate.xml.in.h:18
-msgid "Rotate Cube"
+#: ../metadata/rotate.xml.in.h:14
+msgid "Rotate cube"
 msgstr "Kocka forgatása"
 
-#: ../metadata/rotate.xml.in.h:19
-msgid "Rotate Flip Left"
-msgstr "Forgatás balra"
+#: ../metadata/rotate.xml.in.h:16
+msgid "Start Rotation"
+msgstr "Forgatás indítása"
 
-#: ../metadata/rotate.xml.in.h:20
-msgid "Rotate Flip Right"
-msgstr "Forgatás jobbra"
-
-#: ../metadata/rotate.xml.in.h:21
+#: ../metadata/rotate.xml.in.h:17
 msgid "Rotate Left"
 msgstr "Forgatás balra"
 
-#: ../metadata/rotate.xml.in.h:22
-msgid "Rotate Left with Window"
-msgstr "Forgatás balra az ablakkal együtt"
+#: ../metadata/rotate.xml.in.h:18
+msgid "Rotate left"
+msgstr "Balra forgatás"
 
-#: ../metadata/rotate.xml.in.h:23
+#: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Right"
 msgstr "Forgatás jobbra"
 
-#: ../metadata/rotate.xml.in.h:24
+#: ../metadata/rotate.xml.in.h:20
+msgid "Rotate right"
+msgstr "Jobbra forgatás"
+
+#: ../metadata/rotate.xml.in.h:21
+msgid "Rotate Left with Window"
+msgstr "Forgatás balra az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:22
+msgid "Rotate left and bring active window along"
+msgstr "Balra forgatás az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:23
 msgid "Rotate Right with Window"
 msgstr "Forgatás jobbra az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:24
+msgid "Rotate right and bring active window along"
+msgstr "Jobbra forgatás az aktív ablakkal együtt"
 
 #: ../metadata/rotate.xml.in.h:25
 msgid "Rotate To"
 msgstr "Forgatás"
 
 #: ../metadata/rotate.xml.in.h:26
-msgid "Rotate To Face 1"
-msgstr "Forgatás az 1. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:27
-msgid "Rotate To Face 1 with Window"
-msgstr "Forgatás az 1. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:28
-msgid "Rotate To Face 10"
-msgstr "Forgatás a 10. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:29
-msgid "Rotate To Face 10 with Window"
-msgstr "Forgatás a 10. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:30
-msgid "Rotate To Face 11"
-msgstr "Forgatás a 11. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:31
-msgid "Rotate To Face 11 with Window"
-msgstr "Forgatás a 11. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:32
-msgid "Rotate To Face 12"
-msgstr "Forgatás a 12. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:33
-msgid "Rotate To Face 12 with Window"
-msgstr "Forgatás a 12. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:34
-msgid "Rotate To Face 2"
-msgstr "Forgatás a 2. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:35
-msgid "Rotate To Face 2 with Window"
-msgstr "Forgatás a 2. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:36
-msgid "Rotate To Face 3"
-msgstr "Forgatás a 3. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:37
-msgid "Rotate To Face 3 with Window"
-msgstr "Forgatás a 3. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:38
-msgid "Rotate To Face 4"
-msgstr "Forgatás a 4. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:39
-msgid "Rotate To Face 4 with Window"
-msgstr "Forgatás a 4. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:40
-msgid "Rotate To Face 5"
-msgstr "Forgatás az 5. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:41
-msgid "Rotate To Face 5 with Window"
-msgstr "Forgatás az 5. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:42
-msgid "Rotate To Face 6"
-msgstr "Forgatás a 6. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:43
-msgid "Rotate To Face 6 with Window"
-msgstr "Forgatás a 6. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:44
-msgid "Rotate To Face 7"
-msgstr "Forgatás a 7. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:45
-msgid "Rotate To Face 7 with Window"
-msgstr "Forgatás a 7. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:46
-msgid "Rotate To Face 8"
-msgstr "Forgatás a 8. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:47
-msgid "Rotate To Face 8 with Window"
-msgstr "Forgatás a 8. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:48
-msgid "Rotate To Face 9"
-msgstr "Forgatás a 9. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:49
-msgid "Rotate To Face 9 with Window"
-msgstr "Forgatás a 9. előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:50
-msgid "Rotate cube"
-msgstr "Kocka forgatása"
-
-#: ../metadata/rotate.xml.in.h:51
-msgid "Rotate desktop cube"
-msgstr "A munkaasztalkocka forgatása"
-
-#: ../metadata/rotate.xml.in.h:52
-msgid "Rotate left"
-msgstr "Balra forgatás"
-
-#: ../metadata/rotate.xml.in.h:53
-msgid "Rotate left and bring active window along"
-msgstr "Balra forgatás az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:54
-msgid "Rotate right"
-msgstr "Jobbra forgatás"
-
-#: ../metadata/rotate.xml.in.h:55
-msgid "Rotate right and bring active window along"
-msgstr "Jobbra forgatás az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:56
-msgid "Rotate to cube face"
-msgstr "Forgatás a kocka előlap felé"
-
-#: ../metadata/rotate.xml.in.h:57
-msgid "Rotate to cube face with window"
-msgstr "Forgatás a kocka előlap felé az ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:58
-msgid "Rotate to face 1"
-msgstr "Forgatás az 1. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:59
-msgid "Rotate to face 1 and bring active window along"
-msgstr "Forgatás az 1. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:60
-msgid "Rotate to face 10"
-msgstr "Forgatás a 10. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:61
-msgid "Rotate to face 10 and bring active window along"
-msgstr "Forgatás a 10. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:62
-msgid "Rotate to face 11"
-msgstr "Forgatás a 11. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:63
-msgid "Rotate to face 11 and bring active window along"
-msgstr "Forgatás a 11. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:64
-msgid "Rotate to face 12"
-msgstr "Forgatás a 12. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:65
-msgid "Rotate to face 12 and bring active window along"
-msgstr "Forgatás a 12. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:66
-msgid "Rotate to face 2"
-msgstr "Forgatás a 2. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:67
-msgid "Rotate to face 2 and bring active window along"
-msgstr "Forgatás a 2. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:68
-msgid "Rotate to face 3"
-msgstr "Forgatás a 3. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:69
-msgid "Rotate to face 3 and bring active window along"
-msgstr "Forgatás a 3. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:70
-msgid "Rotate to face 4"
-msgstr "Forgatás a 4. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:71
-msgid "Rotate to face 4 and bring active window along"
-msgstr "Forgatás a 4. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:72
-msgid "Rotate to face 5"
-msgstr "Forgatás az 5. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:73
-msgid "Rotate to face 5 and bring active window along"
-msgstr "Forgatás az 5. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:74
-msgid "Rotate to face 6"
-msgstr "Forgatás a 6. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:75
-msgid "Rotate to face 6 and bring active window along"
-msgstr "Forgatás a 6. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:76
-msgid "Rotate to face 7"
-msgstr "Forgatás a 7. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:77
-msgid "Rotate to face 7 and bring active window along"
-msgstr "Forgatás a 7. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:78
-msgid "Rotate to face 8"
-msgstr "Forgatás a 8. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:79
-msgid "Rotate to face 8 and bring active window along"
-msgstr "Forgatás a 8. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:80
-msgid "Rotate to face 9"
-msgstr "Forgatás a 9. előlap felé"
-
-#: ../metadata/rotate.xml.in.h:81
-msgid "Rotate to face 9 and bring active window along"
-msgstr "Forgatás a 9. előlap felé az aktív ablakkal együtt"
-
-#: ../metadata/rotate.xml.in.h:82
 msgid "Rotate to viewport"
 msgstr "Forgatás munkalapra"
 
-#: ../metadata/rotate.xml.in.h:83
+#: ../metadata/rotate.xml.in.h:27
 msgid "Rotate window"
 msgstr "Ablak forgatása"
 
-#: ../metadata/rotate.xml.in.h:84
+#: ../metadata/rotate.xml.in.h:28
 msgid "Rotate with window"
 msgstr "Forgatás az ablakkal együtt"
 
+#: ../metadata/rotate.xml.in.h:29
+msgid "Rotate Flip Left"
+msgstr "Forgatás balra"
+
+#: ../metadata/rotate.xml.in.h:30
+msgid "Flip to left viewport and warp pointer"
+msgstr "Forgatás a bal oldali nézőpontig és mutató léptetése"
+
+#: ../metadata/rotate.xml.in.h:31
+msgid "Rotate Flip Right"
+msgstr "Forgatás jobbra"
+
+#: ../metadata/rotate.xml.in.h:32
+msgid "Flip to right viewport and warp pointer"
+msgstr "Forgatás a jobb oldali nézőpontig és mutató léptetése"
+
+#: ../metadata/rotate.xml.in.h:33
+msgid "Rotate to cube face"
+msgstr "Forgatás a kocka előlap felé"
+
+#: ../metadata/rotate.xml.in.h:34
+msgid "Rotate To Face 1"
+msgstr "Forgatás az 1. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:35
+msgid "Rotate to face 1"
+msgstr "Forgatás az 1. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:36
+msgid "Rotate To Face 2"
+msgstr "Forgatás a 2. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:37
+msgid "Rotate to face 2"
+msgstr "Forgatás a 2. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:38
+msgid "Rotate To Face 3"
+msgstr "Forgatás a 3. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:39
+msgid "Rotate to face 3"
+msgstr "Forgatás a 3. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:40
+msgid "Rotate To Face 4"
+msgstr "Forgatás a 4. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:41
+msgid "Rotate to face 4"
+msgstr "Forgatás a 4. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:42
+msgid "Rotate To Face 5"
+msgstr "Forgatás az 5. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:43
+msgid "Rotate to face 5"
+msgstr "Forgatás az 5. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:44
+msgid "Rotate To Face 6"
+msgstr "Forgatás a 6. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:45
+msgid "Rotate to face 6"
+msgstr "Forgatás a 6. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:46
+msgid "Rotate To Face 7"
+msgstr "Forgatás a 7. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:47
+msgid "Rotate to face 7"
+msgstr "Forgatás a 7. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:48
+msgid "Rotate To Face 8"
+msgstr "Forgatás a 8. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:49
+msgid "Rotate to face 8"
+msgstr "Forgatás a 8. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:50
+msgid "Rotate To Face 9"
+msgstr "Forgatás a 9. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:51
+msgid "Rotate to face 9"
+msgstr "Forgatás a 9. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:52
+msgid "Rotate To Face 10"
+msgstr "Forgatás a 10. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:53
+msgid "Rotate to face 10"
+msgstr "Forgatás a 10. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:54
+msgid "Rotate To Face 11"
+msgstr "Forgatás a 11. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:55
+msgid "Rotate to face 11"
+msgstr "Forgatás a 11. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:56
+msgid "Rotate To Face 12"
+msgstr "Forgatás a 12. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:57
+msgid "Rotate to face 12"
+msgstr "Forgatás a 12. előlap felé"
+
+#: ../metadata/rotate.xml.in.h:58
+msgid "Rotate to cube face with window"
+msgstr "Forgatás a kocka előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:59
+msgid "Rotate To Face 1 with Window"
+msgstr "Forgatás az 1. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:60
+msgid "Rotate to face 1 and bring active window along"
+msgstr "Forgatás az 1. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:61
+msgid "Rotate To Face 2 with Window"
+msgstr "Forgatás a 2. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:62
+msgid "Rotate to face 2 and bring active window along"
+msgstr "Forgatás a 2. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:63
+msgid "Rotate To Face 3 with Window"
+msgstr "Forgatás a 3. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:64
+msgid "Rotate to face 3 and bring active window along"
+msgstr "Forgatás a 3. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:65
+msgid "Rotate To Face 4 with Window"
+msgstr "Forgatás a 4. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:66
+msgid "Rotate to face 4 and bring active window along"
+msgstr "Forgatás a 4. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:67
+msgid "Rotate To Face 5 with Window"
+msgstr "Forgatás az 5. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:68
+msgid "Rotate to face 5 and bring active window along"
+msgstr "Forgatás az 5. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:69
+msgid "Rotate To Face 6 with Window"
+msgstr "Forgatás a 6. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:70
+msgid "Rotate to face 6 and bring active window along"
+msgstr "Forgatás a 6. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:71
+msgid "Rotate To Face 7 with Window"
+msgstr "Forgatás a 7. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:72
+msgid "Rotate to face 7 and bring active window along"
+msgstr "Forgatás a 7. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:73
+msgid "Rotate To Face 8 with Window"
+msgstr "Forgatás a 8. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:74
+msgid "Rotate to face 8 and bring active window along"
+msgstr "Forgatás a 8. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:75
+msgid "Rotate To Face 9 with Window"
+msgstr "Forgatás a 9. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:76
+msgid "Rotate to face 9 and bring active window along"
+msgstr "Forgatás a 9. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:77
+msgid "Rotate To Face 10 with Window"
+msgstr "Forgatás a 10. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:78
+msgid "Rotate to face 10 and bring active window along"
+msgstr "Forgatás a 10. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:79
+msgid "Rotate To Face 11 with Window"
+msgstr "Forgatás a 11. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:80
+msgid "Rotate to face 11 and bring active window along"
+msgstr "Forgatás a 11. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:81
+msgid "Rotate To Face 12 with Window"
+msgstr "Forgatás a 12. előlap felé az ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:82
+msgid "Rotate to face 12 and bring active window along"
+msgstr "Forgatás a 12. előlap felé az aktív ablakkal együtt"
+
+#: ../metadata/rotate.xml.in.h:83
+msgid "Pointer Invert Y"
+msgstr "Y mutató invertálása"
+
+#: ../metadata/rotate.xml.in.h:84
+msgid "Invert Y axis for pointer movement"
+msgstr "Y tengely átalakítása a mutató mozgásához"
+
 #: ../metadata/rotate.xml.in.h:85
-msgid "Rotation Acceleration"
-msgstr "Forgatás gyorsulása"
+#, fuzzy
+msgid "Pointer Invert X"
+msgstr "Y mutató invertálása"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Rotation Speed"
-msgstr "Forgatás sebessége"
+#, fuzzy
+msgid "Invert X axis for pointer movement"
+msgstr "Y tengely átalakítása a mutató mozgásához"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Rotation Timestep"
-msgstr "Forgatás időköze"
+msgid "Pointer Sensitivity"
+msgstr "Mutató érzékenysége"
 
 #: ../metadata/rotate.xml.in.h:88
-msgid "Rotation Zoom"
-msgstr "Forgatási nagyítás"
-
-#: ../metadata/rotate.xml.in.h:89
 msgid "Sensitivity of pointer movement"
 msgstr "Mutatómozgatás érzékenysége"
 
 #: ../metadata/rotate.xml.in.h:90
-msgid "Snap Cube Rotation to Bottom Face"
-msgstr "Hirtelen kockaforgatás a also oldalra"
+msgid "Rotation Acceleration"
+msgstr "Forgatás gyorsulása"
 
 #: ../metadata/rotate.xml.in.h:91
-msgid "Snap Cube Rotation to Top Face"
-msgstr "Hirtelen kockaforgatás a felső oldalra"
-
-#: ../metadata/rotate.xml.in.h:92
-msgid "Snap To Bottom Face"
-msgstr "Alsó oldalhoz ugrás"
-
-#: ../metadata/rotate.xml.in.h:93
 msgid "Snap To Top Face"
 msgstr "Felső oldalhoz ugrás"
 
-#: ../metadata/rotate.xml.in.h:95
-msgid "Start Rotation"
-msgstr "Forgatás indítása"
+#: ../metadata/rotate.xml.in.h:92
+msgid "Snap Cube Rotation to Top Face"
+msgstr "Hirtelen kockaforgatás a felső oldalra"
+
+#: ../metadata/rotate.xml.in.h:93
+msgid "Snap To Bottom Face"
+msgstr "Alsó oldalhoz ugrás"
+
+#: ../metadata/rotate.xml.in.h:94
+msgid "Snap Cube Rotation to Bottom Face"
+msgstr "Hirtelen kockaforgatás a also oldalra"
 
 #: ../metadata/rotate.xml.in.h:96
-msgid "Timeout before flipping viewport"
-msgstr "A nézőpont váltása előtti időkorlát"
+msgid "Rotation Speed"
+msgstr "Forgatás sebessége"
 
-#: ../metadata/rotate.xml.in.h:98 ../metadata/switcher.xml.in.h:42
+#: ../metadata/rotate.xml.in.h:98
+msgid "Rotation Timestep"
+msgstr "Forgatás időköze"
+
+#: ../metadata/rotate.xml.in.h:99 ../metadata/switcher.xml.in.h:35
 msgid "Zoom"
 msgstr "Nagyítás"
 
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
-msgid "Amount of opacity in percent"
-msgstr "Átlátszatlanság (0-100%)"
+#: ../metadata/rotate.xml.in.h:100
+msgid "Rotation Zoom"
+msgstr "Forgatási nagyítás"
+
+#: ../metadata/scale.xml.in.h:1
+msgid "Scale"
+msgstr "Áttekintő nézet"
+
+#: ../metadata/scale.xml.in.h:2
+msgid "Scale windows"
+msgstr "Ablakok áttekintése"
 
 #: ../metadata/scale.xml.in.h:4
-msgid "Big"
-msgstr "Nagy"
+msgid "Key Bindings Toggle Scale Mode"
+msgstr "Áttekintő üzemmódban marad"
+
+#: ../metadata/scale.xml.in.h:5
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+"Átváltás áttekintő üzemmódba ahelyett, hogy a gomb megnyomásakor átváltana, "
+"majd elengedésekor vissza."
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
@@ -2514,162 +3026,157 @@ msgstr ""
 "majd elengedésekor vissza."
 
 #: ../metadata/scale.xml.in.h:8
-msgid "Click Desktop to Show Desktop"
-msgstr "Asztalra kattintva az asztal megjelenítése"
-
-#: ../metadata/scale.xml.in.h:9
-msgid "Darken Background"
-msgstr "Sötétülő háttér"
-
-#: ../metadata/scale.xml.in.h:10
-msgid "Darken background when scaling windows"
-msgstr "Sötétülő háttér az ablakok átméretezésekor"
-
-#: ../metadata/scale.xml.in.h:11
-msgid "Emblem"
-msgstr "Embléma"
-
-#: ../metadata/scale.xml.in.h:12
-msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr "Asztalra kattintás esetén az asztal megjelenítése áttekintő nézetben"
-
-#: ../metadata/scale.xml.in.h:13
-msgid "Hover Time"
-msgstr "Mutatás ideje"
-
-#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker"
 msgstr "Ablakválasztó indítása"
 
-#: ../metadata/scale.xml.in.h:15
-msgid "Initiate Window Picker For All Windows"
-msgstr "Ablakválasztó indítása minden ablakhoz"
-
-#: ../metadata/scale.xml.in.h:16
-msgid "Initiate Window Picker For Window Group"
-msgstr "Ablakválasztó indítása ablakcsoporthoz"
-
-#: ../metadata/scale.xml.in.h:17
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Ablakválasztó indítása a jelenlegi kimenet ablakain"
-
-#: ../metadata/scale.xml.in.h:18
-msgid "Key Bindings Toggle Scale Mode"
-msgstr "Áttekintő üzemmódban marad"
-
-#: ../metadata/scale.xml.in.h:19
-msgid ""
-"Key bindings toggle scale mode instead of enabling it when pressed and "
-"disabling it when released."
-msgstr ""
-"Átváltás áttekintő üzemmódba ahelyett, hogy a gomb megnyomásakor átváltana, "
-"majd elengedésekor vissza."
-
-#: ../metadata/scale.xml.in.h:20
-msgid "Layout and start transforming all windows"
-msgstr "Elrendezés és ablaktranszformáció indítása"
-
-#: ../metadata/scale.xml.in.h:21
-msgid "Layout and start transforming window group"
-msgstr "Elrendezés és ablakcsoport-transzformáció indítása"
-
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:9
 msgid "Layout and start transforming windows"
 msgstr "Ablaktranszformáció és elrendezés indítása"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:10
+msgid "Initiate Window Picker For All Windows"
+msgstr "Ablakválasztó indítása minden ablakhoz"
+
+#: ../metadata/scale.xml.in.h:11
+msgid "Layout and start transforming all windows"
+msgstr "Elrendezés és ablaktranszformáció indítása"
+
+#: ../metadata/scale.xml.in.h:12
+msgid "Initiate Window Picker For Window Group"
+msgstr "Ablakválasztó indítása ablakcsoporthoz"
+
+#: ../metadata/scale.xml.in.h:13
+msgid "Layout and start transforming window group"
+msgstr "Elrendezés és ablakcsoport-transzformáció indítása"
+
+#: ../metadata/scale.xml.in.h:14
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Ablakválasztó indítása a jelenlegi kimenet ablakain"
+
+#: ../metadata/scale.xml.in.h:15
 msgid "Layout and start transforming windows on current output"
 msgstr "Elrendezés és a jelenlegi kimenet ablakai transzformációjának indítása"
 
-#: ../metadata/scale.xml.in.h:26
-msgid "On all output devices"
-msgstr "Az összes kimeneti eszközön"
+#: ../metadata/scale.xml.in.h:17
+msgid "Click Desktop to Show Desktop"
+msgstr "Asztalra kattintva az asztal megjelenítése"
 
-#: ../metadata/scale.xml.in.h:27
-msgid "On current output device"
-msgstr "A jelenlegi kimeneti eszközön"
+#: ../metadata/scale.xml.in.h:18
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr "Asztalra kattintás esetén az asztal megjelenítése áttekintő nézetben"
 
-#: ../metadata/scale.xml.in.h:29
-msgid "Overlay Icon"
-msgstr "Átfedő ikon"
-
-#: ../metadata/scale.xml.in.h:30
-msgid "Overlay an icon on windows once they are scaled"
-msgstr "Ikon átfedése az ablakon átméretezéskor"
-
-#: ../metadata/scale.xml.in.h:31
-msgid "Scale"
-msgstr "Áttekintő nézet"
-
-#: ../metadata/scale.xml.in.h:32
-msgid "Scale Windows"
-msgstr "Ablakok áttekintő nézete"
-
-#: ../metadata/scale.xml.in.h:33
-msgid "Scale speed"
-msgstr "Áttekintés sebessége"
-
-#: ../metadata/scale.xml.in.h:34
-msgid "Scale timestep"
-msgstr "Áttekintés időköze"
-
-#: ../metadata/scale.xml.in.h:35
-msgid "Scale windows"
-msgstr "Ablakok áttekintése"
-
-#: ../metadata/scale.xml.in.h:36
-msgid "Selects where windows are scaled if multiple output devices are used."
-msgstr ""
-"Megadja, hogy több kimeneti eszköz esetén melyik eszköz jelenítse meg az "
-"ablakok áttekintő nézetét."
-
-#: ../metadata/scale.xml.in.h:37
-msgid "Space between windows"
-msgstr "Ablakok közti távolság"
-
-#: ../metadata/scale.xml.in.h:38
+#: ../metadata/scale.xml.in.h:20
 msgid "Spacing"
 msgstr "Távolság"
 
-#: ../metadata/scale.xml.in.h:40
+#: ../metadata/scale.xml.in.h:21
+msgid "Space between windows"
+msgstr "Ablakok közti távolság"
+
+#: ../metadata/scale.xml.in.h:23
+msgid "Scale speed"
+msgstr "Áttekintés sebessége"
+
+#: ../metadata/scale.xml.in.h:25
+msgid "Scale timestep"
+msgstr "Áttekintés időköze"
+
+#: ../metadata/scale.xml.in.h:26
+msgid "Darken Background"
+msgstr "Sötétülő háttér"
+
+#: ../metadata/scale.xml.in.h:27
+msgid "Darken background when scaling windows"
+msgstr "Sötétülő háttér az ablakok átméretezésekor"
+
+#: ../metadata/scale.xml.in.h:29 ../metadata/switcher.xml.in.h:32
+msgid "Amount of opacity in percent"
+msgstr "Átlátszatlanság (0-100%)"
+
+#: ../metadata/scale.xml.in.h:30
+msgid "Overlay Icon"
+msgstr "Átfedő ikon"
+
+#: ../metadata/scale.xml.in.h:31
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Ikon átfedése az ablakon átméretezéskor"
+
+#: ../metadata/scale.xml.in.h:32 ../metadata/wobbly.xml.in.h:19
+msgid "None"
+msgstr "Egyik sem"
+
+#: ../metadata/scale.xml.in.h:33
+msgid "Emblem"
+msgstr "Embléma"
+
+#: ../metadata/scale.xml.in.h:34
+msgid "Big"
+msgstr "Nagy"
+
+#: ../metadata/scale.xml.in.h:35
+msgid "Scale Windows"
+msgstr "Ablakok áttekintő nézete"
+
+#: ../metadata/scale.xml.in.h:36
+msgid "Windows that should be scaled in scale mode"
+msgstr "Ablaktípusok, amelyek áttekintő nézetben megjelennek"
+
+#: ../metadata/scale.xml.in.h:37
+msgid "Hover Time"
+msgstr "Mutatás ideje"
+
+#: ../metadata/scale.xml.in.h:38
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Az áttekintő nézetből való kilépés előtt eltöltött idő (ezredmásodpercben) "
 "az ablakra mutatáskor"
 
-#: ../metadata/scale.xml.in.h:42
-msgid "Windows that should be scaled in scale mode"
-msgstr "Ablaktípusok, amelyek áttekintő nézetben megjelennek"
+#: ../metadata/scale.xml.in.h:40
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+"Megadja, hogy több kimeneti eszköz esetén melyik eszköz jelenítse meg az "
+"ablakok áttekintő nézetét."
 
+#: ../metadata/scale.xml.in.h:41
+msgid "On current output device"
+msgstr "A jelenlegi kimeneti eszközön"
+
+#: ../metadata/scale.xml.in.h:42
+msgid "On all output devices"
+msgstr "Az összes kimeneti eszközön"
+
+# /tmp/intro:67 /tmp/xapi:379
 #: ../metadata/screenshot.xml.in.h:1
-msgid "Automatically open screenshot in this application"
-msgstr "A automatikus indítása bejelentkezéskor"
+msgid "Screenshot"
+msgstr "Képernyőkép"
 
 #: ../metadata/screenshot.xml.in.h:2
-msgid "Directory"
-msgstr "Könyvtár"
+msgid "Screenshot plugin"
+msgstr "Képernyőkép bővítmény"
 
 #: ../metadata/screenshot.xml.in.h:4
 msgid "Initiate rectangle screenshot"
 msgstr "Téglalap képernyőkép készítése"
 
 #: ../metadata/screenshot.xml.in.h:5
+msgid "Directory"
+msgstr "Könyvtár"
+
+#: ../metadata/screenshot.xml.in.h:6
+#, fuzzy
+msgid ""
+"Put screenshot images in this directory. If empty, the desktop directory "
+"will be used."
+msgstr "Képernyőképek elhelyezése ebbe a könyvtárba"
+
+#: ../metadata/screenshot.xml.in.h:7
 msgid "Launch Application"
 msgstr "Alkalmazás indítása"
 
-#: ../metadata/screenshot.xml.in.h:6
-msgid "Put screenshot images in this directory"
-msgstr "Képernyőképek elhelyezése ebbe a könyvtárba"
-
-# /tmp/intro:67 /tmp/xapi:379
-#: ../metadata/screenshot.xml.in.h:7
-msgid "Screenshot"
-msgstr "Képernyőkép"
-
 #: ../metadata/screenshot.xml.in.h:8
-msgid "Screenshot plugin"
-msgstr "Képernyőkép bővítmény"
+msgid "Automatically open screenshot in this application"
+msgstr "A automatikus indítása bejelentkezéskor"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
@@ -2680,334 +3187,810 @@ msgid "Svg image loader"
 msgstr "SVG képbetöltő"
 
 #: ../metadata/switcher.xml.in.h:1
-msgid "Amount of brightness in percent"
-msgstr "Fényerősség (0-100%)"
-
-#: ../metadata/switcher.xml.in.h:3
-msgid "Amount of saturation in percent"
-msgstr "Telítettség (0-100%)"
-
-#: ../metadata/switcher.xml.in.h:4
 msgid "Application Switcher"
 msgstr "Alkalmazásváltó"
 
-#: ../metadata/switcher.xml.in.h:5
-msgid "Auto Rotate"
-msgstr "Automatikus forgatás"
-
-#: ../metadata/switcher.xml.in.h:8
-msgid "Bring To Front"
-msgstr "Előrehozás"
-
-#: ../metadata/switcher.xml.in.h:9
-msgid "Bring selected window to front"
-msgstr "A kijelölt ablak az előtérbe hozása"
-
-#: ../metadata/switcher.xml.in.h:10
-msgid "Distance desktop should be zoom out while switching windows"
-msgstr "A munkaasztal kinagyításának mértéke ablakváltás során"
-
-#: ../metadata/switcher.xml.in.h:12
-msgid "Icon"
-msgstr "Ikon"
-
-#: ../metadata/switcher.xml.in.h:13
-msgid "Minimized"
-msgstr "Minimalizálva"
-
-#: ../metadata/switcher.xml.in.h:15
-msgid "Next Panel"
-msgstr "Következő panel"
-
-#: ../metadata/switcher.xml.in.h:16
+#: ../metadata/switcher.xml.in.h:3
 msgid "Next window"
 msgstr "Következő ablak"
 
-#: ../metadata/switcher.xml.in.h:17
-msgid "Next window (All windows)"
-msgstr "Következő ablak (minden ablak)"
-
-#: ../metadata/switcher.xml.in.h:18
-msgid "Next window (No popup)"
-msgstr "Következő ablak (nincs előugró ablak)"
-
-#: ../metadata/switcher.xml.in.h:20
+#: ../metadata/switcher.xml.in.h:4
 msgid "Popup switcher if not visible and select next window"
 msgstr ""
 "Ablakváltó megjelenítése ha nem látható és a következő ablak kiválasztása"
 
-#: ../metadata/switcher.xml.in.h:21
+#: ../metadata/switcher.xml.in.h:5
+msgid "Prev window"
+msgstr "Előző ablak"
+
+#: ../metadata/switcher.xml.in.h:6
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Ablakváltó megjelenítése ha nem látható és az előző ablak kiválasztása"
+
+#: ../metadata/switcher.xml.in.h:7
+msgid "Next window (All windows)"
+msgstr "Következő ablak (minden ablak)"
+
+#: ../metadata/switcher.xml.in.h:8
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 "Ablakváltó megjelenítése ha nem látható és az összes ablak közül a következő "
 "kiválasztása"
 
-#: ../metadata/switcher.xml.in.h:22
-msgid "Popup switcher if not visible and select previous window"
-msgstr "Ablakváltó megjelenítése ha nem látható és az előző ablak kiválasztása"
+#: ../metadata/switcher.xml.in.h:9
+msgid "Prev window (All windows)"
+msgstr "Előző ablak (minden ablak)"
 
-#: ../metadata/switcher.xml.in.h:23
+#: ../metadata/switcher.xml.in.h:10
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 "Ablakváltó megjelenítése ha nem látható és az összes ablak közül az előző "
 "kiválasztása"
 
-#: ../metadata/switcher.xml.in.h:24
-msgid "Prev Panel"
-msgstr "Előző panel"
+#: ../metadata/switcher.xml.in.h:11
+msgid "Next window (No popup)"
+msgstr "Következő ablak (nincs előugró ablak)"
 
-#: ../metadata/switcher.xml.in.h:25
-msgid "Prev window"
-msgstr "Előző ablak"
-
-#: ../metadata/switcher.xml.in.h:26
-msgid "Prev window (All windows)"
-msgstr "Előző ablak (minden ablak)"
-
-#: ../metadata/switcher.xml.in.h:27
-msgid "Prev window (No popup)"
-msgstr "Előző ablak (nincs előugró ablak)"
-
-#: ../metadata/switcher.xml.in.h:28
-msgid "Rotate to the selected window while switching"
-msgstr "Forgatás a kiválasztott ablakra váltás közben"
-
-#: ../metadata/switcher.xml.in.h:30
-msgid "Select next panel type window."
-msgstr "Válassza ki a következő paneltípus-ablakot."
-
-#: ../metadata/switcher.xml.in.h:31
+#: ../metadata/switcher.xml.in.h:12
 msgid "Select next window without showing the popup window."
 msgstr "Következő ablak kiválasztása a felbukkanó ablak nélkül."
 
-#: ../metadata/switcher.xml.in.h:32
-msgid "Select previous panel type window."
-msgstr "Válassza ki az előző paneltípus-ablakot."
+#: ../metadata/switcher.xml.in.h:13
+msgid "Prev window (No popup)"
+msgstr "Előző ablak (nincs előugró ablak)"
 
-#: ../metadata/switcher.xml.in.h:33
+#: ../metadata/switcher.xml.in.h:14
 msgid "Select previous window without showing the popup window."
 msgstr "Előző ablak kiválasztása a felbukkanó ablak nélkül."
 
-#: ../metadata/switcher.xml.in.h:34
-msgid "Show icon next to thumbnail"
-msgstr "Ikon megjelenítése a miniatűr mellett"
+#: ../metadata/switcher.xml.in.h:15
+msgid "Next Panel"
+msgstr "Következő panel"
 
-#: ../metadata/switcher.xml.in.h:35
-msgid "Show minimized windows"
-msgstr "Ikonizált ablakok megjelenítése"
+#: ../metadata/switcher.xml.in.h:16
+msgid "Select next panel type window."
+msgstr "Válassza ki a következő paneltípus-ablakot."
 
-#: ../metadata/switcher.xml.in.h:37
+#: ../metadata/switcher.xml.in.h:17
+msgid "Prev Panel"
+msgstr "Előző panel"
+
+#: ../metadata/switcher.xml.in.h:18
+msgid "Select previous panel type window."
+msgstr "Válassza ki az előző paneltípus-ablakot."
+
+#: ../metadata/switcher.xml.in.h:20
 msgid "Switcher speed"
 msgstr "Váltás sebessége"
 
-#: ../metadata/switcher.xml.in.h:38
+#: ../metadata/switcher.xml.in.h:22
 msgid "Switcher timestep"
 msgstr "Váltás időköz"
 
-#: ../metadata/switcher.xml.in.h:39
+#: ../metadata/switcher.xml.in.h:23
 msgid "Switcher windows"
 msgstr "Ablakváltó ablak"
 
-#: ../metadata/switcher.xml.in.h:41
+#: ../metadata/switcher.xml.in.h:24
 msgid "Windows that should be shown in switcher"
 msgstr "Az ablakválasztóban megjelenítendő ablaktípusok"
 
+#: ../metadata/switcher.xml.in.h:28
+msgid "Amount of saturation in percent"
+msgstr "Telítettség (0-100%)"
+
+#: ../metadata/switcher.xml.in.h:30
+msgid "Amount of brightness in percent"
+msgstr "Fényerősség (0-100%)"
+
+#: ../metadata/switcher.xml.in.h:33
+msgid "Bring To Front"
+msgstr "Előrehozás"
+
+#: ../metadata/switcher.xml.in.h:34
+msgid "Bring selected window to front"
+msgstr "A kijelölt ablak az előtérbe hozása"
+
+#: ../metadata/switcher.xml.in.h:36
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr "A munkaasztal kinagyításának mértéke ablakváltás során"
+
+#: ../metadata/switcher.xml.in.h:37
+msgid "Icon"
+msgstr "Ikon"
+
+#: ../metadata/switcher.xml.in.h:38
+msgid "Show icon next to thumbnail"
+msgstr "Ikon megjelenítése a miniatűr mellett"
+
+#: ../metadata/switcher.xml.in.h:39
+msgid "Minimized"
+msgstr "Minimalizálva"
+
+#: ../metadata/switcher.xml.in.h:40
+msgid "Show minimized windows"
+msgstr "Ikonizált ablakok megjelenítése"
+
+#: ../metadata/switcher.xml.in.h:41
+msgid "Auto Rotate"
+msgstr "Automatikus forgatás"
+
+#: ../metadata/switcher.xml.in.h:42
+msgid "Rotate to the selected window while switching"
+msgstr "Forgatás a kiválasztott ablakra váltás közben"
+
+#: ../metadata/wall.xml.in.h:1
+#, fuzzy
+msgid "Desktop Wall"
+msgstr "Munkaasztal mérete"
+
+#: ../metadata/wall.xml.in.h:2
+msgid "Desktop Wall Plugin"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:3
+msgid "Viewport Switch Preview"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:4
+msgid "Show Viewport Switcher Preview"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:5
+#, fuzzy
+msgid "Show switcher window while switching viewports"
+msgstr "Forgatás a kiválasztott ablakra váltás közben"
+
+#: ../metadata/wall.xml.in.h:6
+msgid "Show Live Viewport Previews"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:7
+msgid "Show live viewport previews in switcher window"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:8
+msgid "Switch Target Preview Visibility Time"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:9
+msgid ""
+"Duration (in s) the switch target preview should remain visible after "
+"switching ends."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:10
+#, fuzzy
+msgid "Preview Scale"
+msgstr "Előző dia"
+
+#: ../metadata/wall.xml.in.h:12
+#, no-c-format
+msgid "Size of the preview in %"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:13
+#, fuzzy
+msgid "Edge Radius"
+msgstr "Árnyék átmérője"
+
+#: ../metadata/wall.xml.in.h:14
+msgid "Radius of the rounded edge"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:15
+msgid "Border Width"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:16
+msgid "Width of the border between the previews"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:17
+#, fuzzy
+msgid "Outline Color"
+msgstr "Körvonal"
+
+#: ../metadata/wall.xml.in.h:18
+#, fuzzy
+msgid "Outline color of the switcher window."
+msgstr "Átméretezés az ablak körvonalával"
+
+#: ../metadata/wall.xml.in.h:19
+#, fuzzy
+msgid "Background Gradient"
+msgstr "Háttérképek"
+
+#: ../metadata/wall.xml.in.h:20
+#, fuzzy
+msgid "Base Color"
+msgstr "Kocka színe"
+
+#: ../metadata/wall.xml.in.h:21
+msgid "First color for the background gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:22
+#, fuzzy
+msgid "Highlight Color"
+msgstr "Kitöltőszín"
+
+#: ../metadata/wall.xml.in.h:23
+msgid "Second color for the background gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:25
+msgid "Third color for the background gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:26
+msgid "Thumb Gradient"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:27
+msgid "First color for the thumb gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:28
+msgid "Second color for the thumb gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:29
+msgid "Highlight Gradient"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:30
+msgid "First color for the thumb highlight gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:31
+msgid "Second color for the thumb highlight gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:32
+#, fuzzy
+msgid "Arrow Colors"
+msgstr "Árnyék színe"
+
+#: ../metadata/wall.xml.in.h:33
+msgid "First color of the arrow of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:34
+msgid "Second color of the arrow of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:35
+#, fuzzy
+msgid "Viewport Switching"
+msgstr "Vízszintes munkalap pozíció"
+
+#: ../metadata/wall.xml.in.h:36
+msgid "Allow Wrap-Around"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:37
+msgid "Allow wrap-around when moving the wall up/down/left/right"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:38
+msgid "Wall Sliding Duration"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:39
+msgid "Duration (in s) for wall sliding viewport switching animation"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:40
+#, fuzzy
+msgid "Non Sliding Windows"
+msgstr "Ablakok elhalványítása"
+
+#: ../metadata/wall.xml.in.h:41
+#, fuzzy
+msgid "Windows that should not slide during the slide animation"
+msgstr "Ablaktípusok, amelyek áttekintő nézetben megjelennek"
+
+#: ../metadata/wall.xml.in.h:43
+#, fuzzy
+msgid "Move within wall"
+msgstr "Ablak áthelyezése"
+
+#: ../metadata/wall.xml.in.h:44
+#, fuzzy
+msgid "Move Left"
+msgstr "Forgatás balra"
+
+#: ../metadata/wall.xml.in.h:45
+msgid "Move along the wall to the left"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:46
+#, fuzzy
+msgid "Move Right"
+msgstr "Forgatás jobbra"
+
+#: ../metadata/wall.xml.in.h:47
+msgid "Move along the wall to the right"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:48
+msgid "Move Up"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:49
+msgid "Move along the wall up"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:50
+#, fuzzy
+msgid "Move Down"
+msgstr "Ablak áthelyezése"
+
+#: ../metadata/wall.xml.in.h:51
+msgid "Move along the wall down"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:52
+msgid "Move Next"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:53
+msgid "Move along the wall to the next viewport"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:54
+msgid "Move Prev"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:55
+msgid "Move along the wall to the previous viewport"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:56
+#, fuzzy
+msgid "Move with window within wall"
+msgstr "Forgatás az ablakkal együtt"
+
+#: ../metadata/wall.xml.in.h:57
+#, fuzzy
+msgid "Move Left With Window"
+msgstr "Forgatás balra az ablakkal együtt"
+
+#: ../metadata/wall.xml.in.h:58
+msgid "Move with window along the wall to the left"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:59
+#, fuzzy
+msgid "Move Right With Window"
+msgstr "Forgatás jobbra az ablakkal együtt"
+
+#: ../metadata/wall.xml.in.h:60
+msgid "Move with window along the wall to the right"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:61
+#, fuzzy
+msgid "Move Up With Window"
+msgstr "Ablak áthelyezése"
+
+#: ../metadata/wall.xml.in.h:62
+msgid "Move with window along the wall up"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:63
+#, fuzzy
+msgid "Move Down With Window"
+msgstr "Ablak áthelyezése"
+
+#: ../metadata/wall.xml.in.h:64
+msgid "Move with window along the wall down"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:65
+#, fuzzy
+msgid "Edge flipping"
+msgstr "Szegély"
+
+#: ../metadata/wall.xml.in.h:66
+#, fuzzy
+msgid "Flip Left"
+msgstr "Forgatás balra"
+
+#: ../metadata/wall.xml.in.h:67
+#, fuzzy
+msgid "Flip left"
+msgstr "Forgatási idő"
+
+#: ../metadata/wall.xml.in.h:68
+#, fuzzy
+msgid "Flip Right"
+msgstr "Forgatás jobbra"
+
+#: ../metadata/wall.xml.in.h:69
+#, fuzzy
+msgid "Flip right"
+msgstr "Forgatás jobbra"
+
+#: ../metadata/wall.xml.in.h:70
+#, fuzzy
+msgid "Flip Up"
+msgstr "Forgatási idő"
+
+#: ../metadata/wall.xml.in.h:71
+#, fuzzy
+msgid "Flip up"
+msgstr "Forgatási idő"
+
+#: ../metadata/wall.xml.in.h:72
+#, fuzzy
+msgid "Flip Down"
+msgstr "Élforgatás egérművelet"
+
+#: ../metadata/wall.xml.in.h:73
+#, fuzzy
+msgid "Flip down"
+msgstr "Gördítés le"
+
+#: ../metadata/wall.xml.in.h:74
+msgid "Multimonitor behavior"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:75
+msgid "How should a multimonitor configuration be handled"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:76
+msgid "Switch all"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:77
+#, fuzzy
+msgid "Switch separately"
+msgstr "Váltás sebessége"
+
+#: ../metadata/wall.xml.in.h:78
+#, fuzzy
+msgid "Edge Flipping"
+msgstr "Élforgatás egérművelet"
+
+#: ../metadata/wall.xml.in.h:80
+#, fuzzy
+msgid "Flip viewport when moving the pointer to a screen edge"
+msgstr "Mutató kép szélére húzása esetén forgatás a következő nézőpontig"
+
+#: ../metadata/wall.xml.in.h:82
+#, fuzzy
+msgid "Flip viewport when moving a window to a screen edge"
+msgstr "Egy ablak kép szélére húzása esetén forgatás a következő nézőpontig"
+
+#: ../metadata/wall.xml.in.h:84
+#, fuzzy
+msgid "Flip viewport when dragging an object to a screen edge"
+msgstr "Objektum kép szélére húzása esetén forgatás a következő nézőpontig"
+
 #: ../metadata/water.xml.in.h:1
-msgid "Add line"
-msgstr "Vonal hozzáadása"
+msgid "Water Effect"
+msgstr "Víz effektus"
 
 #: ../metadata/water.xml.in.h:2
-msgid "Add point"
-msgstr "Pont hozzáadása"
-
-#: ../metadata/water.xml.in.h:3
 msgid "Adds water effects to different desktop actions"
 msgstr "Víz effektus hozzáadása a különböző munkaasztal-műveletekhez"
 
 #: ../metadata/water.xml.in.h:4
-msgid "Delay (in ms) between each rain-drop"
-msgstr "Esőcseppek közötti késleltetés (ms)"
-
-#: ../metadata/water.xml.in.h:5
 msgid "Enable pointer water effects"
 msgstr "Mutató víz effektus bekapcsolása"
 
-#: ../metadata/water.xml.in.h:7
-msgid "Line"
-msgstr "Vonal"
-
-#: ../metadata/water.xml.in.h:8
-msgid "Offset Scale"
-msgstr "Eltolás skálája"
-
-#: ../metadata/water.xml.in.h:9
-msgid "Point"
-msgstr "Pont"
-
-#: ../metadata/water.xml.in.h:10
-msgid "Rain Delay"
-msgstr "Eső késleltetése"
-
-#: ../metadata/water.xml.in.h:11
-msgid "Title wave"
-msgstr "Címhullám"
-
-#: ../metadata/water.xml.in.h:12
+#: ../metadata/water.xml.in.h:5
 msgid "Toggle rain"
 msgstr "„Eső” kapcsoló"
 
-#: ../metadata/water.xml.in.h:13
+#: ../metadata/water.xml.in.h:6
 msgid "Toggle rain effect"
 msgstr "„Eső” effektus kapcsoló"
 
-#: ../metadata/water.xml.in.h:14
+#: ../metadata/water.xml.in.h:7
 msgid "Toggle wiper"
 msgstr "„Ablaktörlő” kapcsoló"
 
-#: ../metadata/water.xml.in.h:15
+#: ../metadata/water.xml.in.h:8
 msgid "Toggle wiper effect"
 msgstr "„Ablaktörlő” effektus kapcsoló"
 
-#: ../metadata/water.xml.in.h:16
-msgid "Water Effect"
-msgstr "Víz effektus"
+#: ../metadata/water.xml.in.h:9
+msgid "Offset Scale"
+msgstr "Eltolás skálája"
 
-#: ../metadata/water.xml.in.h:17
+#: ../metadata/water.xml.in.h:10
 msgid "Water offset scale"
 msgstr "Víz eltolás mértéke"
 
-#: ../metadata/water.xml.in.h:18
+#: ../metadata/water.xml.in.h:11
+msgid "Rain Delay"
+msgstr "Eső késleltetése"
+
+#: ../metadata/water.xml.in.h:12
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Esőcseppek közötti késleltetés (ms)"
+
+#: ../metadata/water.xml.in.h:13
+msgid "Title wave"
+msgstr "Címhullám"
+
+#: ../metadata/water.xml.in.h:14
 msgid "Wave effect from window title"
 msgstr "Hullám effektus az ablakcímből"
 
+#: ../metadata/water.xml.in.h:15
+msgid "Point"
+msgstr "Pont"
+
+#: ../metadata/water.xml.in.h:16
+msgid "Add point"
+msgstr "Pont hozzáadása"
+
+#: ../metadata/water.xml.in.h:17
+msgid "Line"
+msgstr "Vonal"
+
+#: ../metadata/water.xml.in.h:18
+msgid "Add line"
+msgstr "Vonal hozzáadása"
+
 #: ../metadata/wobbly.xml.in.h:1
-msgid "Focus Effect"
-msgstr "Fókusz effektus"
+msgid "Wobbly Windows"
+msgstr "Imbolygó ablakok"
 
 #: ../metadata/wobbly.xml.in.h:2
-msgid "Focus Window Effect"
-msgstr "Ablakfókusz-effektus"
+msgid "Use spring model for wobbly window effect"
+msgstr "Rugómodell használata az imbolygó ablakeffektusnál"
 
 #: ../metadata/wobbly.xml.in.h:3
-msgid "Focus Windows"
-msgstr "Ablakfókusz-típusok"
+msgid "Snap windows"
+msgstr "Ablakok illesztése"
 
 #: ../metadata/wobbly.xml.in.h:4
-msgid "Friction"
-msgstr "Súrlódás"
+msgid "Toggle window snapping"
+msgstr "„Ablakok illesztése” effektus kapcsoló"
 
+# 52895 AttribValues/label
 #: ../metadata/wobbly.xml.in.h:5
-msgid "Grab Windows"
-msgstr "Ablaktípusok érzékelése"
+msgid "Snap Inverted"
+msgstr "Illesztés fordítva"
 
 #: ../metadata/wobbly.xml.in.h:6
-msgid "Grid Resolution"
-msgstr "Rács felbontása"
-
-#: ../metadata/wobbly.xml.in.h:7
 msgid "Inverted window snapping"
 msgstr "Ablakok illesztése fordítva"
+
+# 'driver' as in '(hardware) driver update'
+#: ../metadata/wobbly.xml.in.h:7
+msgid "Shiver"
+msgstr "Összetörés"
 
 #: ../metadata/wobbly.xml.in.h:8
 msgid "Make window shiver"
 msgstr "Ablak összetörése"
 
 #: ../metadata/wobbly.xml.in.h:9
-msgid "Map Effect"
-msgstr "Térkép effektus"
+msgid "Friction"
+msgstr "Súrlódás"
 
 #: ../metadata/wobbly.xml.in.h:10
-msgid "Map Window Effect"
-msgstr "Ablaktérkép-effektus"
-
-#: ../metadata/wobbly.xml.in.h:11
-msgid "Map Windows"
-msgstr "Ablaktérkép-típusok"
-
-#: ../metadata/wobbly.xml.in.h:12
-msgid "Maximize Effect"
-msgstr "Maximalizálás effektus"
-
-#: ../metadata/wobbly.xml.in.h:13
-msgid "Minimum Grid Size"
-msgstr "Rács minimális mérete"
-
-#: ../metadata/wobbly.xml.in.h:14
-msgid "Minimum Vertex Grid Size"
-msgstr "Minimum csúcs-rácspont mérete"
-
-#: ../metadata/wobbly.xml.in.h:15
-msgid "Move Windows"
-msgstr "Ablak áthelyezése"
-
-# 'driver' as in '(hardware) driver update'
-#: ../metadata/wobbly.xml.in.h:17
-msgid "Shiver"
-msgstr "Összetörés"
-
-# 52895 AttribValues/label
-#: ../metadata/wobbly.xml.in.h:18
-msgid "Snap Inverted"
-msgstr "Illesztés fordítva"
-
-#: ../metadata/wobbly.xml.in.h:19
-msgid "Snap windows"
-msgstr "Ablakok illesztése"
-
-#: ../metadata/wobbly.xml.in.h:20
 msgid "Spring Friction"
 msgstr "Rugó súrlódása"
 
-#: ../metadata/wobbly.xml.in.h:21
+#: ../metadata/wobbly.xml.in.h:11
 msgid "Spring K"
 msgstr "Rugóállandó (K)"
 
-#: ../metadata/wobbly.xml.in.h:22
+#: ../metadata/wobbly.xml.in.h:12
 msgid "Spring Konstant"
 msgstr "Rugóállandó (K)"
 
-#: ../metadata/wobbly.xml.in.h:23
-msgid "Toggle window snapping"
-msgstr "„Ablakok illesztése” effektus kapcsoló"
+#: ../metadata/wobbly.xml.in.h:13
+msgid "Grid Resolution"
+msgstr "Rács felbontása"
 
-#: ../metadata/wobbly.xml.in.h:24
-msgid "Use spring model for wobbly window effect"
-msgstr "Rugómodell használata az imbolygó ablakeffektusnál"
-
-#: ../metadata/wobbly.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:14
 msgid "Vertex Grid Resolution"
 msgstr "Csúcspontrács felbontása"
 
-#: ../metadata/wobbly.xml.in.h:26
+#: ../metadata/wobbly.xml.in.h:15
+msgid "Minimum Grid Size"
+msgstr "Rács minimális mérete"
+
+#: ../metadata/wobbly.xml.in.h:16
+msgid "Minimum Vertex Grid Size"
+msgstr "Minimum csúcs-rácspont mérete"
+
+#: ../metadata/wobbly.xml.in.h:17
+msgid "Map Effect"
+msgstr "Térkép effektus"
+
+#: ../metadata/wobbly.xml.in.h:18
+msgid "Map Window Effect"
+msgstr "Ablaktérkép-effektus"
+
+#: ../metadata/wobbly.xml.in.h:20
+msgid "Focus Effect"
+msgstr "Fókusz effektus"
+
+#: ../metadata/wobbly.xml.in.h:21
+msgid "Focus Window Effect"
+msgstr "Ablakfókusz-effektus"
+
+#: ../metadata/wobbly.xml.in.h:22
+msgid "Map Windows"
+msgstr "Ablaktérkép-típusok"
+
+#: ../metadata/wobbly.xml.in.h:23
+msgid "Windows that should wobble when mapped"
+msgstr "Ablaktípusok, amelyek imbolyoghatnak, amikor térképezettek"
+
+#: ../metadata/wobbly.xml.in.h:24
+msgid "Focus Windows"
+msgstr "Ablakfókusz-típusok"
+
+#: ../metadata/wobbly.xml.in.h:25
 msgid "Windows that should wobble when focused"
 msgstr "Ablaktípusok, amelyek imbolyoghatnak fókuszáláskor"
+
+#: ../metadata/wobbly.xml.in.h:26
+msgid "Grab Windows"
+msgstr "Ablaktípusok érzékelése"
 
 #: ../metadata/wobbly.xml.in.h:27
 msgid "Windows that should wobble when grabbed"
 msgstr "Ablaktípusok, amelyek imbolyoghatnak megfogáskor"
 
 #: ../metadata/wobbly.xml.in.h:28
-msgid "Windows that should wobble when mapped"
-msgstr "Ablaktípusok, amelyek imbolyoghatnak, amikor térképezettek"
+msgid "Move Windows"
+msgstr "Ablak áthelyezése"
 
 #: ../metadata/wobbly.xml.in.h:29
 msgid "Windows that should wobble when moved"
 msgstr "Ablaktípusok, amelyek imbolyoghatnak áthelyezéskor"
 
 #: ../metadata/wobbly.xml.in.h:30
+msgid "Maximize Effect"
+msgstr "Maximalizálás effektus"
+
+#: ../metadata/wobbly.xml.in.h:31
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "Imbolygás ablakok maximalizálásakor és visszaállításakor"
 
-#: ../metadata/wobbly.xml.in.h:31
-msgid "Wobbly Windows"
-msgstr "Imbolygó ablakok"
+#: ../metadata/zoom.xml.in.h:1
+msgid "Zoom Desktop"
+msgstr "Munkaasztal nagyítása"
 
-#~ msgid "Command line 0"
-#~ msgstr "0. parancssor"
+#: ../metadata/zoom.xml.in.h:2
+msgid "Zoom and pan desktop cube"
+msgstr "A munkaasztalkocka nagyítása és pásztázása"
 
-#~ msgid "Run command 0"
-#~ msgstr "0. parancs futtatása"
+#: ../metadata/zoom.xml.in.h:4
+msgid "Zoom In"
+msgstr "Nagyítás"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Zoom Out"
+msgstr "Kicsinyítés"
+
+#: ../metadata/zoom.xml.in.h:6
+msgid "Zoom Pan"
+msgstr "Nagyítás"
+
+#: ../metadata/zoom.xml.in.h:7
+msgid "Zoom pan"
+msgstr "Nagyítás"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Speed"
+msgstr "Nagyítás sebessége"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Nagyítás időköz"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom factor"
+msgstr "Nagyítási arány"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Filter Linear"
+msgstr "Lineáris szűrő"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Use linear filter when zoomed in"
+msgstr "Lineáris szűrő használata nagyításnál"
+
+#: ../mate/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr "Compiz"
+
+#: ../src/compiz-start.desktop.in.h:1
+#, fuzzy
+msgid "Compiz Start"
+msgstr "Compiz"
+
+#: ../src/compiz-start.desktop.in.h:2
+#, fuzzy
+msgid "Start Compiz"
+msgstr "Compiz"
+
+#: ../src/compiz-start.desktop.in.h:3
+msgid "Start or restart Compiz"
+msgstr ""
+
+#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
+#~ msgstr "Az ablak címsorán történő egérgörgő-használat hatása."
+
+#~ msgid "Blur type"
+#~ msgstr "Elmosás típusa"
+
+#~ msgid "Marco theme active window opacity"
+#~ msgstr "Aktív ablak átlátszatlansága"
+
+#~ msgid "Marco theme active window opacity shade"
+#~ msgstr "Felgördített aktív ablak átlátszatlansága"
+
+#~ msgid "Marco theme opacity"
+#~ msgstr "Ablak átlátszatlansága"
+
+#~ msgid "Marco theme opacity shade"
+#~ msgstr "Felgördített ablak átlátszatlansága"
+
+#~ msgid "Opacity to use for active windows with marco theme decorations"
+#~ msgstr "Az aktív ablak átlátszatlansága a díszítő elemekhez"
+
+#~ msgid "Opacity to use for marco theme decorations"
+#~ msgstr "Az ablak átlátszatlansága a díszítő elemekhez"
+
+#~ msgid ""
+#~ "Shade active windows with marco theme decorations from opaque to "
+#~ "translucent"
+#~ msgstr "Felgördített aktív ablak átlátszatlansága a díszítő elemeknél"
+
+#~ msgid ""
+#~ "Shade windows with marco theme decorations from opaque to translucent"
+#~ msgstr "Felgördített ablak átlátszatlansága a díszítő elemeknél"
+
+#~ msgid "Title bar mouse wheel action"
+#~ msgstr "Egérgörgő esemény a címsoron"
+
+#~ msgid "Type of blur used for window decorations"
+#~ msgstr "Az elmosás típusa a díszítő elemekhez"
+
+#~ msgid "Use marco theme"
+#~ msgstr "Marco téma alkalmazása"
+
+#~ msgid "Use marco theme when drawing window decorations"
+#~ msgstr "Marco téma alkalmazása az ablakdíszítések rajzolásakor"
+
+#~ msgid "Line width"
+#~ msgstr "Vonalvastagság"
+
+#~ msgid "Line width for annotations"
+#~ msgstr "Feljegyzések vonalvastagsága"
+
+#~ msgid "GConf"
+#~ msgstr "GConf"
+
+#~ msgid "GConf Control Backend"
+#~ msgstr "GConf vezérlés kiszolgálója"
+
+#~ msgid "Kconfig"
+#~ msgstr "Kconfig"
+
+#~ msgid "Kconfig Control Backend"
+#~ msgstr "Kconfig vezérlés kiszolgálója"
+
+#~ msgid "Decrease"
+#~ msgstr "Csökkentés"
+
+#~ msgid "Increase"
+#~ msgstr "Növelés"
 
 #~ msgid "Screenshot commands"
 #~ msgstr "Képernyőkép parancsok"
@@ -3015,53 +3998,11 @@ msgstr "Imbolygó ablakok"
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Képernyőkép gyorsbillentyű"
 
-#~ msgid "Filter Linear"
-#~ msgstr "Lineáris szűrő"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Lineáris szűrő használata nagyításnál"
-
-#~ msgid "Zoom Desktop"
-#~ msgstr "Munkaasztal nagyítása"
-
-#~ msgid "Zoom In"
-#~ msgstr "Nagyítás"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Kicsinyítés"
-
-#~ msgid "Zoom Pan"
-#~ msgstr "Nagyítás"
-
-#~ msgid "Zoom Speed"
-#~ msgstr "Nagyítás sebessége"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Nagyítás időköz"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "A munkaasztalkocka nagyítása és pásztázása"
-
-#~ msgid "Zoom factor"
-#~ msgstr "Nagyítási arány"
-
-#~ msgid "Zoom pan"
-#~ msgstr "Nagyítás"
-
-#~ msgid "Decrease window opacity"
-#~ msgstr "Ablak átlátszatlanságának csökkentése"
-
-#~ msgid "Increase window opacity"
-#~ msgstr "Ablak átlátszatlanság növelése"
-
 #~ msgid "Opacity values for windows that should be translucent by default"
 #~ msgstr "Átlátszatlansági értékek az alapértelmezésként átlátszó ablakokhoz"
 
 #~ msgid "Opacity windows"
 #~ msgstr "Ablakok átlátszatlansága"
-
-#~ msgid "Background Images"
-#~ msgstr "Háttérképek"
 
 #~ msgid "Background images"
 #~ msgstr "Háttérképek"
@@ -3116,9 +4057,6 @@ msgstr "Imbolygó ablakok"
 
 #~ msgid "Plane Up"
 #~ msgstr "Gördítés fel"
-
-#~ msgid "Plane down"
-#~ msgstr "Gördítés le"
 
 #~ msgid "Plane left"
 #~ msgstr "Gördítés balra"
