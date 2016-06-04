@@ -10,6 +10,11 @@
 		<plugin>switcher</plugin>
 		<plugin>scale</plugin>
 	    </relation>
+	    <relation type="after">
+		<plugin>svg</plugin>
+		<plugin>png</plugin>
+		<plugin>imgjpeg</plugin>
+	    </relation>
 	</deps>
 	<display>
 	    <option name="abi" type="int" read_only="true"/>
