@@ -247,10 +247,8 @@ bindPixmapToTexture (CompScreen  *screen,
     if ((!getenv ("SKIP_CHECKS") || strcmp (getenv ("SKIP_CHECKS"), "yes") != 0)
 	&& (width > screen->maxTextureSize || height > screen->maxTextureSize))
     {
-	compLogMessage ("core", CompLogLevelFatal,
+	compLogMessage ("core", CompLogLevelError,
 			"Exceeded max texture size");
-
-	launchFallbackWM ();
     }
 
     if (!config->fbConfig)
