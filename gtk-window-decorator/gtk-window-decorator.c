@@ -79,6 +79,10 @@
 
 #define GSCHEMA_KEY_GNOME_WM "org.gnome.desktop.wm.preferences"
 
+#define GSCHEMA_KEY_METACITY "org.gnome.metacity"
+
+#define GSCHEMA_KEY_METACITY_THEME "org.gnome.metacity.theme"
+
 #define GSCHEMA_KEY_MARCO "org.mate.Marco.general"
 
 #define META_USE_SYSTEM_FONT_KEY "titlebar-uses-system-font"
@@ -91,7 +95,9 @@
 
 #define META_RIGHT_CLICK_TITLEBAR_KEY "action-right-click-titlebar"
 
-#define META_THEME_KEY "theme"
+#define META_THEME_KEY_METACITY "name"
+
+#define META_THEME_KEY_MARCO "theme"
 
 #define META_BUTTON_LAYOUT_KEY "button-layout"
 
@@ -6469,16 +6475,19 @@ blur_settings_changed (GSettings *settings)
 }
 
 static gboolean
-theme_changed (GSettings *settings, GSettings *settings_wm)
+theme_changed (GSettings *settings, GSettings *settings_wm_theme)
 {
 #ifdef USE_MARCO
-    gboolean use_meta_theme = TRUE;
+    gboolean  use_meta_theme = TRUE;
+    gchar    *wm_schema;
 
-    if (!settings || !settings_wm)
+    if (!settings || !settings_wm_theme)
 	return FALSE;
 
     if (cmdline_options & CMDLINE_THEME)
 	return FALSE;
+
+    g_object_get (G_OBJECT (settings_wm_theme), "schema-id", &wm_schema, NULL);
 
     use_meta_theme = g_settings_get_boolean (settings,
 					     GWD_USE_META_THEME_KEY);
@@ -6487,8 +6496,22 @@ theme_changed (GSettings *settings, GSettings *settings_wm)
     {
 	gchar *theme;
 
-	theme = g_settings_get_string (settings_wm,
-				       META_THEME_KEY);
+	if (g_strcmp0 (wm_schema, GSCHEMA_KEY_METACITY_THEME) != 0)
+	{
+	    theme = g_settings_get_string (settings_wm_theme,
+	                                   META_THEME_KEY_MARCO);
+	}
+	else
+	{
+	    theme = g_settings_get_string (settings_wm_theme,
+	                                   META_THEME_KEY_METACITY);
+	}
+
+	if (theme && strlen (theme) <= 0)
+	{
+	    g_free (theme);
+	    theme = NULL;
+	}
 
 	if (theme)
 	{
@@ -6499,10 +6522,11 @@ theme_changed (GSettings *settings, GSettings *settings_wm)
 	    g_free (theme);
 	}
 	else
-	{
 	    use_meta_theme = FALSE;
-	}
+    }
 
+    if (use_meta_theme)
+    {
 	theme_draw_window_decoration	= meta_draw_window_decoration;
 	theme_calc_decoration_size	= meta_calc_decoration_size;
 	theme_update_border_extents	= meta_update_border_extents;
@@ -6517,6 +6541,8 @@ theme_changed (GSettings *settings, GSettings *settings_wm)
 	theme_get_event_window_position = get_event_window_position;
 	theme_get_button_position	= get_button_position;
     }
+
+    g_free (wm_schema);
 
     return TRUE;
 #else
@@ -6686,7 +6712,8 @@ gsettings_value_changed (GSettings   *settings,
 		         const gchar *key,
 		         WnckScreen  *screen)
 {
-    GSettings  *settings_gwd = NULL, *settings_wm = NULL;
+    GSettings  *settings_gwd = NULL;
+    GSettings  *settings_wm = NULL, *settings_wm_theme = NULL;
 #ifdef USE_COMPIZCONFIG
     GSettings  *settings_mouse = NULL;
     CCSContext *ccs_context = NULL;
@@ -6696,14 +6723,15 @@ gsettings_value_changed (GSettings   *settings,
     if (!settings)
 	return;
 
-    settings_gwd   = g_object_get_data (G_OBJECT (settings), "gsettings_gwd");
-    settings_wm    = g_object_get_data (G_OBJECT (settings), "gsettings_wm");
+    settings_gwd      = g_object_get_data (G_OBJECT (settings), "gsettings_gwd");
+    settings_wm       = g_object_get_data (G_OBJECT (settings), "gsettings_wm");
+    settings_wm_theme = g_object_get_data (G_OBJECT (settings), "gsettings_wm_theme");
 #ifdef USE_COMPIZCONFIG
-    settings_mouse = g_object_get_data (G_OBJECT (settings), "gsettings_mouse");
-    ccs_context    = g_object_get_data (G_OBJECT (settings), "ccs_context");
+    settings_mouse    = g_object_get_data (G_OBJECT (settings), "gsettings_mouse");
+    ccs_context       = g_object_get_data (G_OBJECT (settings), "ccs_context");
 #endif
 
-    if (!settings_gwd || !settings_wm)
+    if (!settings_gwd || !settings_wm || !settings_wm_theme)
 	return;
 
     if (strcmp (key, META_USE_SYSTEM_FONT_KEY) == 0)
@@ -6749,9 +6777,10 @@ gsettings_value_changed (GSettings   *settings,
 	    changed = TRUE;
     }
     else if (strcmp (key, GWD_USE_META_THEME_KEY) == 0 ||
-	     strcmp (key, META_THEME_KEY) == 0)
+	     strcmp (key, META_THEME_KEY_MARCO) == 0 ||
+	     strcmp (key, META_THEME_KEY_METACITY) == 0)
     {
-	if (theme_changed (settings_gwd, settings_wm))
+	if (theme_changed (settings_gwd, settings_wm_theme))
 	    changed = TRUE;
     }
     else if (strcmp (key, META_BUTTON_LAYOUT_KEY) == 0)
@@ -7059,8 +7088,8 @@ init_settings (WnckScreen *screen)
 
 #ifdef USE_GSETTINGS
     const gchar *session = g_getenv ("XDG_CURRENT_DESKTOP");
-    GSettings	*gsettings_gwd, *gsettings_wm;
-    GSettings	*gsettings_marco, *gsettings_gnome_wm;
+    GSettings	*gsettings_gwd, *gsettings_wm, *gsettings_wm_theme;
+    GSettings	*gsettings_marco, *gsettings_gnome_wm, *gsettings_metacity;
 #ifdef USE_COMPIZCONFIG
     GSettings	*gsettings_mouse, *gsettings_gnome;
 #endif
@@ -7187,9 +7216,13 @@ init_settings (WnckScreen *screen)
 
     gsettings_gwd = new_gsettings0 (GSCHEMA_KEY_GWD);
     gsettings_wm = NULL;
+    gsettings_wm_theme = NULL;
 
     gsettings_marco = new_gsettings0 (GSCHEMA_KEY_MARCO);
     gsettings_gnome_wm = new_gsettings0 (GSCHEMA_KEY_GNOME_WM);
+    gsettings_metacity = new_gsettings0 (GSCHEMA_KEY_METACITY_THEME);
+    if (!gsettings_metacity)
+	gsettings_metacity = new_gsettings0 (GSCHEMA_KEY_METACITY);
 
     /* in general prioritise GNOME settings but Marco settings in MATE */
     if (gsettings_marco && is_mate_desktop)
@@ -7199,12 +7232,24 @@ init_settings (WnckScreen *screen)
     else if (gsettings_marco)
 	gsettings_wm = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
 
+    /* in general prioritise Metacity settings but Marco settings in MATE */
+    if (gsettings_marco && is_mate_desktop)
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+    else if (gsettings_metacity)
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_metacity)));
+    else if (gsettings_marco)
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+
+    /* unreference all, good stuff was rereferenced above */
     if (gsettings_marco)
 	g_object_unref (G_OBJECT (gsettings_marco));
     gsettings_marco = NULL;
     if (gsettings_gnome_wm)
 	g_object_unref (G_OBJECT (gsettings_gnome_wm));
     gsettings_gnome_wm = NULL;
+    if (gsettings_metacity)
+	g_object_unref (G_OBJECT (gsettings_metacity));
+    gsettings_metacity = NULL;
 
 #ifdef USE_COMPIZCONFIG
     /* prioritise GNOME settings in general and MATE settings in, well, MATE */
@@ -7227,6 +7272,7 @@ init_settings (WnckScreen *screen)
     {
 	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_gwd", gsettings_gwd);
 	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_wm_theme", gsettings_wm_theme);
 #ifdef USE_COMPIZCONFIG
 	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_mouse", gsettings_mouse);
 	g_object_set_data (G_OBJECT (gsettings_gwd), "ccs_context", ccs_context);
@@ -7242,6 +7288,7 @@ init_settings (WnckScreen *screen)
     {
 	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_gwd", gsettings_gwd);
 	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_wm_theme", gsettings_wm_theme);
 #ifdef USE_COMPIZCONFIG
 	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_mouse", gsettings_mouse);
 	g_object_set_data (G_OBJECT (gsettings_wm), "ccs_context", ccs_context);
@@ -7253,11 +7300,28 @@ init_settings (WnckScreen *screen)
 			       0, 0);
     }
 
+    if (gsettings_wm_theme)
+    {
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_gwd", gsettings_gwd);
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_wm_theme", gsettings_wm_theme);
+#ifdef USE_COMPIZCONFIG
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_mouse", gsettings_mouse);
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "ccs_context", ccs_context);
+#endif
+	g_signal_connect_data (gsettings_wm_theme,
+			       "changed",
+			       G_CALLBACK (gsettings_value_changed),
+			       (gpointer) screen,
+			       0, 0);
+    }
+
 #ifdef USE_COMPIZCONFIG
     if (gsettings_mouse)
     {
 	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_gwd", gsettings_gwd);
 	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_wm_theme", gsettings_wm_theme);
 	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_mouse", gsettings_mouse);
 	g_object_set_data (G_OBJECT (gsettings_mouse), "ccs_context", ccs_context);
 	g_signal_connect_data (gsettings_mouse,
@@ -7315,7 +7379,7 @@ init_settings (WnckScreen *screen)
 #ifdef USE_GSETTINGS
     use_system_font = g_settings_get_boolean (gsettings_wm,
 					      META_USE_SYSTEM_FONT_KEY);
-    theme_changed (gsettings_gwd, gsettings_wm);
+    theme_changed (gsettings_gwd, gsettings_wm_theme);
     theme_opacity_changed (gsettings_gwd);
     button_layout_changed (gsettings_wm);
 #endif
