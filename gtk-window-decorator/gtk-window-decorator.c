@@ -6507,10 +6507,19 @@ theme_changed (GSettings *settings, GSettings *settings_wm_theme)
 	                                   META_THEME_KEY_METACITY);
 	}
 
+	/* if string is empty, release it */
 	if (theme && strlen (theme) <= 0)
 	{
 	    g_free (theme);
 	    theme = NULL;
+	}
+
+	/* if there's no theme defined, try using Gtk theme name,
+	   especially useful for Metacity */
+	if (!theme)
+	    g_object_get (G_OBJECT (gtk_settings_get_default ()),
+	                  "gtk-theme-name", &theme,
+	                  NULL);
 	}
 
 	if (theme)
