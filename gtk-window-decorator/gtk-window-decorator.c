@@ -6517,6 +6517,7 @@ theme_changed (GSettings *settings, GSettings *settings_wm_theme)
 	/* if there's no theme defined, try using Gtk theme name,
 	   especially useful for Metacity */
 	if (!theme)
+	{
 	    g_object_get (G_OBJECT (gtk_settings_get_default ()),
 	                  "gtk-theme-name", &theme,
 	                  NULL);
