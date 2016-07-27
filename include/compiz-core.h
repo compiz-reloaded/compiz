@@ -2688,8 +2688,6 @@ struct _CompWindow {
 
     /* placed here to preserve ABI compat */
     CompWindowExtents frameInput;
-
-    void *reserved;
 };
 
 #define GET_CORE_WINDOW(object) ((CompWindow *) (object))
