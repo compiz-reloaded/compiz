@@ -1950,20 +1950,6 @@ handleEvent (CompDisplay *d,
 		}
 	    }
 	}
-	else if (event->xclient.message_type == d->numberOfDesktopsAtom)
-	{
-	    s = findScreenAtDisplay (d, event->xclient.window);
-	    if (s)
-	    {
-		CompOptionValue value;
-
-		value.i = event->xclient.data.l[0];
-
-		(*core.setOptionForPlugin) (&s->base,
-					    "core", "number_of_desktops",
-					    &value);
-	    }
-	}
 	else if (event->xclient.message_type == d->currentDesktopAtom)
 	{
 	    s = findScreenAtDisplay (d, event->xclient.window);
