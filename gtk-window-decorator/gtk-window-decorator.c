@@ -1451,6 +1451,7 @@ draw_window_decoration (decor_t *d)
 					      STROKE_ALPHA);
 #endif
 
+	    pango_cairo_update_layout (cr, d->layout);
 	    pango_cairo_layout_path (cr, d->layout);
 	    cairo_stroke (cr);
 
