@@ -3824,30 +3824,28 @@ addWindowSizeChanges (CompWindow     *w,
 
 	if (w->state & CompWindowStateMaximizedVertMask)
 	{
-	    saveWindowGeometry (w, CWY | CWHeight);
+	    saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight);
 
 	    xwc->height = workArea.height - w->input.top -
 		w->input.bottom - oldBorderWidth * 2;
 
 	    mask |= CWHeight;
 	}
-	else
-	{
-	    mask |= restoreWindowGeometry (w, xwc, CWY | CWHeight);
-	}
 
 	if (w->state & CompWindowStateMaximizedHorzMask)
 	{
-	    saveWindowGeometry (w, CWX | CWWidth);
+	    saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight);
 
 	    xwc->width = workArea.width - w->input.left -
 		w->input.right - oldBorderWidth * 2;
 
 	    mask |= CWWidth;
 	}
-	else
+
+	if (!(w->state & CompWindowStateMaximizedVertMask) &&
+		!(w->state & CompWindowStateMaximizedHorzMask))
 	{
-	    mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
+	    mask |= restoreWindowGeometry (w, xwc, CWX | CWY | CWWidth | CWHeight);
 	}
 
 	/* constrain window width if smaller than minimum width */
