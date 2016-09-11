@@ -91,6 +91,8 @@ typedef struct _MoveScreen {
 
     unsigned int origState;
 
+    int	snapOffX;
+    int	snapBackX;
     int	snapOffY;
     int	snapBackY;
 } MoveScreen;
@@ -192,6 +194,8 @@ moveInitiate (CompDisplay     *d,
 			      outputDeviceForWindow (w),
 			      &workArea);
 
+	ms->snapBackX = w->serverX - workArea.x;
+	ms->snapOffX  = x - workArea.x;
 	ms->snapBackY = w->serverY - workArea.y;
 	ms->snapOffY  = y - workArea.y;
 
@@ -500,6 +504,56 @@ moveHandleMotionEvent (CompScreen *s,
 		else if (ms->origState & CompWindowStateMaximizedVertMask)
 		{
 		    if (abs ((yRoot - workArea.y) - ms->snapBackY) < SNAP_BACK)
+		    {
+			if (!otherScreenGrabExist (s, "move", NULL))
+			{
+			    int wy;
+
+			    /* update server position before maximizing
+			       window again so that it is maximized on
+			       correct output */
+			    syncWindowPosition (w);
+
+			    maximizeWindow (w, ms->origState);
+
+			    wy  = workArea.y + (w->input.top >> 1);
+			    wy += w->sizeHints.height_inc >> 1;
+
+			    warpPointer (s, 0, wy - pointerY);
+
+			    return;
+			}
+		    }
+		}
+		if (w->state & CompWindowStateMaximizedHorzMask)
+		{
+		    if (abs ((xRoot - workArea.x) - ms->snapOffX) >= SNAP_OFF)
+		    {
+			if (!otherScreenGrabExist (s, "move", NULL))
+			{
+			    int width = w->serverWidth;
+
+			    w->saveMask |= CWX | CWY;
+
+			    if (w->saveMask & CWWidth)
+				width = w->saveWc.width;
+
+			    w->saveWc.x = xRoot - (width >> 1);
+			    w->saveWc.y = yRoot + (w->input.top >> 1);
+
+			    md->x = md->y = 0;
+
+			    maximizeWindow (w, 0);
+
+			    ms->snapOffX = ms->snapBackX;
+
+			    return;
+			}
+		    }
+		}
+		else if (ms->origState & CompWindowStateMaximizedHorzMask)
+		{
+		    if (abs ((xRoot - workArea.x) - ms->snapBackX) < SNAP_BACK)
 		    {
 			if (!otherScreenGrabExist (s, "move", NULL))
 			{
