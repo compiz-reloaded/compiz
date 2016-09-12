@@ -742,16 +742,16 @@ resizeHandleMotionEvent (CompScreen *s,
 
 	if (!rd->mask)
 	{
-	    CompWindow *w = rd->w;
+	    CompWindow *cw = rd->w;
 	    int        xDist, yDist;
 	    int        minPointerOffsetX, minPointerOffsetY;
 
-	    xDist = xRoot - (w->serverX + (w->serverWidth / 2));
-	    yDist = yRoot - (w->serverY + (w->serverHeight / 2));
+	    xDist = xRoot - (cw->serverX + (cw->serverWidth / 2));
+	    yDist = yRoot - (cw->serverY + (cw->serverHeight / 2));
 
 	    /* decision threshold is 10% of window size */
-	    minPointerOffsetX = MIN (20, w->serverWidth / 10);
-	    minPointerOffsetY = MIN (20, w->serverHeight / 10);
+	    minPointerOffsetX = MIN (20, cw->serverWidth / 10);
+	    minPointerOffsetY = MIN (20, cw->serverHeight / 10);
 
 	    /* if we reached the threshold in one direction,
 	       make the threshold in the other direction smaller
@@ -796,16 +796,16 @@ resizeHandleMotionEvent (CompScreen *s,
 		action->state |= CompActionStateTermButton;
 
 		if (rd->mask & ResizeRightMask)
-			pointerAdjustX = w->serverX + w->serverWidth +
-					 w->input.right - xRoot;
+			pointerAdjustX = cw->serverX + cw->serverWidth +
+					 cw->input.right - xRoot;
 		else if (rd->mask & ResizeLeftMask)
-			pointerAdjustX = w->serverX - w->input.left - xRoot;
+			pointerAdjustX = cw->serverX - cw->input.left - xRoot;
 
 		if (rd->mask & ResizeDownMask)
-			pointerAdjustY = w->serverY + w->serverHeight +
-					 w->input.bottom - yRoot;
+			pointerAdjustY = cw->serverY + cw->serverHeight +
+					 cw->input.bottom - yRoot;
 		else if (rd->mask & ResizeUpMask)
-			pointerAdjustY = w->serverY - w->input.top - yRoot;
+			pointerAdjustY = cw->serverY - cw->input.top - yRoot;
 
 		warpPointer (s, pointerAdjustX, pointerAdjustY);
 
