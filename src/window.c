@@ -3113,6 +3113,11 @@ windowMoveNotify (CompWindow *w,
 		  int	     dy,
 		  Bool	     immediate)
 {
+	if (w->state & CompWindowStateMaximizedVertMask)
+		w->saveWc.x = w->attrib.x;
+
+	if (w->state & CompWindowStateMaximizedHorzMask)
+		w->saveWc.y = w->attrib.y;
 }
 
 void
