@@ -255,7 +255,9 @@ maximizeHorizontally (CompDisplay     *d,
 
     w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
-	maximizeWindow (w, w->state | CompWindowStateMaximizedHorzMask);
+	maximizeWindow (w, (w->state & CompWindowStateMaximizedHorzMask) ?
+					(w->state & ~CompWindowStateMaximizedHorzMask) :
+					(w->state | CompWindowStateMaximizedHorzMask));
 
     return TRUE;
 }
@@ -274,7 +276,9 @@ maximizeVertically (CompDisplay     *d,
 
     w = findTopLevelWindowAtDisplay (d, xid);
     if (w)
-	maximizeWindow (w, w->state | CompWindowStateMaximizedVertMask);
+	maximizeWindow (w, (w->state & CompWindowStateMaximizedVertMask) ?
+					(w->state & ~CompWindowStateMaximizedVertMask) :
+					(w->state | CompWindowStateMaximizedVertMask));
 
     return TRUE;
 }
