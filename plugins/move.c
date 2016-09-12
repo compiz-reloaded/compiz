@@ -90,6 +90,8 @@ typedef struct _MoveScreen {
     Cursor moveCursor;
 
     unsigned int origState;
+    unsigned int savedWidth;
+    unsigned int savedHeight;
 
     int	snapOffX;
     int	snapBackX;
@@ -189,6 +191,9 @@ moveInitiate (CompDisplay     *d,
 	lastPointerY = y;
 
 	ms->origState = w->state;
+
+	ms->savedWidth = 0;
+	ms->savedHeight = 0;
 
 	getWorkareaForOutput (w->screen,
 			      outputDeviceForWindow (w),
@@ -490,6 +495,8 @@ moveHandleMotionEvent (CompScreen *s,
 
 			    w->saveWc.x = xRoot - (width >> 1);
 			    w->saveWc.y = yRoot + (w->input.top >> 1);
+			    if (!ms->savedWidth)
+					ms->savedWidth = w->serverWidth;
 
 			    md->x = md->y = 0;
 
@@ -515,7 +522,12 @@ moveHandleMotionEvent (CompScreen *s,
 			    syncWindowPosition (w);
 
 			    maximizeWindow (w, ms->origState);
-
+			    XWindowChanges xwc;
+				xwc.x = xRoot - (ms->savedWidth >> 1);
+				xwc.width = ms->savedWidth;
+				ms->savedWidth = 0;
+					configureXWindow (w, CWX | CWWidth, &xwc);
+				
 			    wy  = workArea.y + (w->input.top >> 1);
 			    wy += w->sizeHints.height_inc >> 1;
 
