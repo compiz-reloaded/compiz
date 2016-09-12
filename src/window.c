@@ -3581,33 +3581,10 @@ restoreWindowGeometry (CompWindow     *w,
 	xwc->y = w->saveWc.y;
 
     if (m & CWWidth)
-    {
 	xwc->width = w->saveWc.width;
 
-	/* This is not perfect but it works OK for now. If the saved width is
-	   the same as the current width then make it a little be smaller so
-	   the user can see that it changed and it also makes sure that
-	   windowResizeNotify is called and plugins are notified. */
-	if (xwc->width == w->serverWidth)
-	{
-	    xwc->width -= 10;
-	    if (m & CWX)
-		xwc->x += 5;
-	}
-    }
-
     if (m & CWHeight)
-    {
 	xwc->height = w->saveWc.height;
-	/* As above, if the saved height is the same as the current height
-	   then make it a little be smaller. */
-	if (xwc->height == w->serverHeight)
-	{
-	    xwc->height -= 10;
-	    if (m & CWY)
-		xwc->y += 5;
-	}
-    }
 
     if (m & CWBorderWidth)
 	xwc->border_width = w->saveWc.border_width;
