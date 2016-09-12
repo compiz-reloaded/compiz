@@ -718,6 +718,9 @@ changeWindowState (CompWindow   *w,
     if (w->managed)
 	setWindowState (d, w->state, w->id);
 
+	w->state &= 0xFFFF;
+	w->state |= (oldState << 16);
+
     (*w->screen->windowStateChangeNotify) (w, oldState);
     (*d->matchPropertyChanged) (d, w);
 }
@@ -3596,7 +3599,6 @@ restoreWindowGeometry (CompWindow     *w,
     if (m & CWHeight)
     {
 	xwc->height = w->saveWc.height;
-
 	/* As above, if the saved height is the same as the current height
 	   then make it a little be smaller. */
 	if (xwc->height == w->serverHeight)
@@ -3822,6 +3824,8 @@ addWindowSizeChanges (CompWindow     *w,
     {
 	mask |= restoreWindowGeometry (w, xwc, CWBorderWidth);
 
+	int lastState = w->state >> 16;
+
 	if (w->state & CompWindowStateMaximizedVertMask)
 	{
 	    saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight);
@@ -3840,6 +3844,17 @@ addWindowSizeChanges (CompWindow     *w,
 		w->input.right - oldBorderWidth * 2;
 
 	    mask |= CWWidth;
+	}
+
+	if ((lastState & MAXIMIZE_STATE) == MAXIMIZE_STATE) {
+		if (!(w->state & CompWindowStateMaximizedVertMask) &&
+			 (w->state & CompWindowStateMaximizedHorzMask))
+			mask |= restoreWindowGeometry (w, xwc, CWY | CWHeight);
+
+		if (!(w->state & CompWindowStateMaximizedHorzMask) &&
+			 (w->state & CompWindowStateMaximizedVertMask))
+			mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
+		w->state &= 0xFFFF;
 	}
 
 	if (!(w->state & CompWindowStateMaximizedVertMask) &&
