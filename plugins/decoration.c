@@ -942,18 +942,12 @@ decorWindowUpdateFrame (CompWindow *w)
 	int	             x, y, width, height;
 	int	             i = 0;
 	int                  bw = w->serverBorderWidth * 2;
-	CompWindowExtents    frame, border;
+	CompWindowExtents    frame;
 
 	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
-	{
 	    frame = wd->decor->maxFrame;
-	    border = wd->decor->maxBorder;
-	}
 	else
-	{
 	    frame = wd->decor->frame;
-	    border = wd->decor->border;
-	}
 
 	x      = w->frameInput.left - frame.left;
 	y      = w->frameInput.top - frame.top;
