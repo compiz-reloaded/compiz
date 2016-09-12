@@ -551,30 +551,6 @@ moveHandleMotionEvent (CompScreen *s,
 			}
 		    }
 		}
-		else if (ms->origState & CompWindowStateMaximizedHorzMask)
-		{
-		    if (abs ((xRoot - workArea.x) - ms->snapBackX) < SNAP_BACK)
-		    {
-			if (!otherScreenGrabExist (s, "move", NULL))
-			{
-			    int wy;
-
-			    /* update server position before maximizing
-			       window again so that it is maximized on
-			       correct output */
-			    syncWindowPosition (w);
-
-			    maximizeWindow (w, ms->origState);
-
-			    wy  = workArea.y + (w->input.top >> 1);
-			    wy += w->sizeHints.height_inc >> 1;
-
-			    warpPointer (s, 0, wy - pointerY);
-
-			    return;
-			}
-		    }
-		}
 	    }
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
