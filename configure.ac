@@ -32,7 +32,7 @@ AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 ALL_LINGUAS="ar bg bn bn_IN ca cs da de el en_GB en_US es eu et fi fr gl gu he hi hr hu id it ja km ko lt mk mr nb nl or pa pl pt pt_BR ro ru sk sl sr sv ta tr uk vi zh_CN zh_TW"
 AC_SUBST(ALL_LINGUAS)
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.17])
+AM_GNU_GETTEXT_VERSION([0.19])
 GETTEXT_PACKAGE=compiz
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AC_SUBST(GETTEXT_PACKAGE)
