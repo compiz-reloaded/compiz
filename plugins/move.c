@@ -183,8 +183,7 @@ moveInitiate (CompDisplay     *d,
 
 	sourceExternalApp = getBoolOptionNamed (option, nOption, "external",
 						FALSE);
-	md->constrainY = sourceExternalApp &&
-			 md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y].value.b;
+	md->constrainY = md->opt[MOVE_DISPLAY_OPTION_CONSTRAIN_Y].value.b;
 
 	lastPointerX = x;
 	lastPointerY = y;
