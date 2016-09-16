@@ -1469,13 +1469,6 @@ eventLoop (void)
 			pointerX = event.xclient.data.l[2] >> 16;
 			pointerY = event.xclient.data.l[2] & 0xffff;
 		    }
-		    else
-		    /* whisker menu resize */
-		    if (event.xclient.message_type == 385)
-		    {
-		    lastPointerX = pointerX = event.xclient.data.l[0];
-		    lastPointerY = pointerY = event.xclient.data.l[1];
-		    }
 		default:
 		    break;
 		}
