@@ -431,8 +431,8 @@ resizeInitiate (CompDisplay     *d,
 
 	rd->geometry = rd->savedGeometry;
 
-	rd->pointerDx = 0;
-	rd->pointerDy = 0;
+	rd->pointerDx = x - pointerX;
+	rd->pointerDy = y - pointerY;
 
 	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
 	{
@@ -1149,6 +1149,12 @@ resizeHandleEvent (CompDisplay *d,
 	if (s)
 	    resizeHandleMotionEvent (s, pointerX, pointerY);
 	break;
+    case EnterNotify:
+    case LeaveNotify:
+	s = findScreenAtDisplay (d, event->xcrossing.root);
+	if (s)
+	    resizeHandleMotionEvent (s, pointerX, pointerY);
+	break;
     case ClientMessage:
 	if (event->xclient.message_type == d->wmMoveResizeAtom)
 	{
@@ -1229,6 +1235,8 @@ resizeHandleEvent (CompDisplay *d,
 					    &rd->opt[option].value.action,
 					    CompActionStateInitButton,
 					    o, 7);
+
+			    resizeHandleMotionEvent (w->screen, xRoot, yRoot);
 			}
 		    }
 		}
