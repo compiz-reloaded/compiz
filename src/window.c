@@ -398,8 +398,6 @@ updateTransientHint (CompWindow *w)
     Window transientFor;
     Status status;
 
-    w->transientFor = None;
-
     status = XGetTransientForHint (w->screen->display->display,
 				   w->id, &transientFor);
 
