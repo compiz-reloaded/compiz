@@ -716,8 +716,14 @@ changeWindowState (CompWindow   *w,
     if (w->managed)
 	setWindowState (d, w->state, w->id);
 
-	w->state &= 0xFFFF;
-	w->state |= (oldState << 16);
+    /* FIXME: Hack added by 1f853acf for grid to save
+     * window state before maximizing and restore window
+     * size correctly. We probably should implement fake
+     * maximize in grid so if the window is 'maximized'
+     * to a corner, it snaps off as it does with vert/horz
+     * maximized windows. */
+    w->state &= 0xFFFF;
+    w->state |= (oldState << 16);
 
     (*w->screen->windowStateChangeNotify) (w, oldState);
     (*d->matchPropertyChanged) (d, w);
