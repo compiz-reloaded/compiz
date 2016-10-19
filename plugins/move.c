@@ -433,7 +433,14 @@ handleMaximizedSnapping (CompScreen *s,
 			maximizeWindow (w, ms->origState);
 
 			XWindowChanges xwc;
-			xwc.x = xRoot - (ms->savedWidth >> 1);
+
+			if (ms->origState & CompWindowStateMaximizedHorzMask)
+				/* MAXIMIZE_STATE */
+				xwc.x = workArea.x;
+			else
+				/* CompWindowStateMaximizedVertMask */
+				xwc.x = xRoot - (ms->savedWidth >> 1);
+
 			xwc.width = ms->savedWidth;
 			ms->savedWidth = 0;
 			configureXWindow (w, CWX | CWWidth, &xwc);
