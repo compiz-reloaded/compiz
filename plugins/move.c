@@ -454,6 +454,12 @@ handleMaximizedSnapping (CompScreen *s,
 		}
 		}
 	}
+
+	/* Avoid handling CompWindowStateMaximizedVertMask and
+	 * CompWindowStateMaximizedHorzMask together */
+	if ((w->state & MAXIMIZE_STATE) == MAXIMIZE_STATE)
+		return FALSE;
+
 	if (w->state & CompWindowStateMaximizedHorzMask)
 	{
 		if (abs ((xRoot - workArea.x) - ms->snapOffX) >= SNAP_OFF)
