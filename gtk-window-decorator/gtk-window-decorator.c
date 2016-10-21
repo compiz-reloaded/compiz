@@ -79,6 +79,10 @@
 
 #define GSCHEMA_KEY_GNOME_WM "org.gnome.desktop.wm.preferences"
 
+#define GSCHEMA_KEY_METACITY "org.gnome.metacity"
+
+#define GSCHEMA_KEY_METACITY_THEME "org.gnome.metacity.theme"
+
 #define GSCHEMA_KEY_MARCO "org.mate.Marco.general"
 
 #define META_USE_SYSTEM_FONT_KEY "titlebar-uses-system-font"
@@ -91,7 +95,9 @@
 
 #define META_RIGHT_CLICK_TITLEBAR_KEY "action-right-click-titlebar"
 
-#define META_THEME_KEY "theme"
+#define META_THEME_KEY_METACITY "name"
+
+#define META_THEME_KEY_MARCO "theme"
 
 #define META_BUTTON_LAYOUT_KEY "button-layout"
 
@@ -1445,6 +1451,7 @@ draw_window_decoration (decor_t *d)
 					      STROKE_ALPHA);
 #endif
 
+	    pango_cairo_update_layout (cr, d->layout);
 	    pango_cairo_layout_path (cr, d->layout);
 	    cairo_stroke (cr);
 
@@ -5958,14 +5965,14 @@ get_titlebar_font (void)
 
 #ifdef USE_GSETTINGS
 static void
-titlebar_font_changed (GSettings *settings_marco)
+titlebar_font_changed (GSettings *settings_wm)
 {
-    if (!settings_marco)
+    if (!settings_wm)
 	return;
 
     gchar *str;
 
-    str = g_settings_get_string (settings_marco,
+    str = g_settings_get_string (settings_wm,
 				 META_TITLEBAR_FONT_KEY);
     if (!str)
 	str = g_strdup ("Sans Bold 12");
@@ -5979,19 +5986,19 @@ titlebar_font_changed (GSettings *settings_marco)
 }
 
 static void
-titlebar_click_action_changed (GSettings   *settings_marco,
+titlebar_click_action_changed (GSettings   *settings_wm,
 			       const gchar *key,
 			       int         *action_value,
 			       int          default_value)
 {
-    if (!settings_marco)
+    if (!settings_wm)
 	return;
 
     gchar *action;
 
     *action_value = default_value;
 
-    action = g_settings_get_string (settings_marco, key);
+    action = g_settings_get_string (settings_wm, key);
     if (action)
     {
 	if (strcmp (action, "toggle_shade") == 0)
@@ -6469,16 +6476,19 @@ blur_settings_changed (GSettings *settings)
 }
 
 static gboolean
-theme_changed (GSettings *settings, GSettings *settings_marco)
+theme_changed (GSettings *settings, GSettings *settings_wm_theme)
 {
 #ifdef USE_MARCO
-    gboolean use_meta_theme = TRUE;
+    gboolean  use_meta_theme = TRUE;
+    gchar    *wm_schema;
 
-    if (!settings || !settings_marco)
+    if (!settings || !settings_wm_theme)
 	return FALSE;
 
     if (cmdline_options & CMDLINE_THEME)
 	return FALSE;
+
+    g_object_get (G_OBJECT (settings_wm_theme), "schema-id", &wm_schema, NULL);
 
     use_meta_theme = g_settings_get_boolean (settings,
 					     GWD_USE_META_THEME_KEY);
@@ -6487,8 +6497,32 @@ theme_changed (GSettings *settings, GSettings *settings_marco)
     {
 	gchar *theme;
 
-	theme = g_settings_get_string (settings_marco,
-				       META_THEME_KEY);
+	if (g_strcmp0 (wm_schema, GSCHEMA_KEY_METACITY_THEME) != 0)
+	{
+	    theme = g_settings_get_string (settings_wm_theme,
+	                                   META_THEME_KEY_MARCO);
+	}
+	else
+	{
+	    theme = g_settings_get_string (settings_wm_theme,
+	                                   META_THEME_KEY_METACITY);
+	}
+
+	/* if string is empty, release it */
+	if (theme && strlen (theme) <= 0)
+	{
+	    g_free (theme);
+	    theme = NULL;
+	}
+
+	/* if there's no theme defined, try using Gtk theme name,
+	   especially useful for Metacity */
+	if (!theme)
+	{
+	    g_object_get (G_OBJECT (gtk_settings_get_default ()),
+	                  "gtk-theme-name", &theme,
+	                  NULL);
+	}
 
 	if (theme)
 	{
@@ -6499,10 +6533,11 @@ theme_changed (GSettings *settings, GSettings *settings_marco)
 	    g_free (theme);
 	}
 	else
-	{
 	    use_meta_theme = FALSE;
-	}
+    }
 
+    if (use_meta_theme)
+    {
 	theme_draw_window_decoration	= meta_draw_window_decoration;
 	theme_calc_decoration_size	= meta_calc_decoration_size;
 	theme_update_border_extents	= meta_update_border_extents;
@@ -6517,6 +6552,8 @@ theme_changed (GSettings *settings, GSettings *settings_marco)
 	theme_get_event_window_position = get_event_window_position;
 	theme_get_button_position	= get_button_position;
     }
+
+    g_free (wm_schema);
 
     return TRUE;
 #else
@@ -6596,15 +6633,15 @@ theme_opacity_changed (GSettings *settings)
 }
 
 static gboolean
-button_layout_changed (GSettings *settings_marco)
+button_layout_changed (GSettings *settings_wm)
 {
-    if (!settings_marco)
+    if (!settings_wm)
 	return FALSE;
 
 #ifdef USE_MARCO
     gchar *button_layout;
 
-    button_layout = g_settings_get_string (settings_marco,
+    button_layout = g_settings_get_string (settings_wm,
 					   META_BUTTON_LAYOUT_KEY);
 
     if (button_layout)
@@ -6686,7 +6723,8 @@ gsettings_value_changed (GSettings   *settings,
 		         const gchar *key,
 		         WnckScreen  *screen)
 {
-    GSettings  *settings_gwd = NULL, *settings_marco = NULL;
+    GSettings  *settings_gwd = NULL;
+    GSettings  *settings_wm = NULL, *settings_wm_theme = NULL;
 #ifdef USE_COMPIZCONFIG
     GSettings  *settings_mouse = NULL;
     CCSContext *ccs_context = NULL;
@@ -6696,19 +6734,20 @@ gsettings_value_changed (GSettings   *settings,
     if (!settings)
 	return;
 
-    settings_gwd   = g_object_get_data (G_OBJECT (settings), "gsettings_gwd");
-    settings_marco = g_object_get_data (G_OBJECT (settings), "gsettings_marco");
+    settings_gwd      = g_object_get_data (G_OBJECT (settings), "gsettings_gwd");
+    settings_wm       = g_object_get_data (G_OBJECT (settings), "gsettings_wm");
+    settings_wm_theme = g_object_get_data (G_OBJECT (settings), "gsettings_wm_theme");
 #ifdef USE_COMPIZCONFIG
-    settings_mouse = g_object_get_data (G_OBJECT (settings), "gsettings_mouse");
-    ccs_context    = g_object_get_data (G_OBJECT (settings), "ccs_context");
+    settings_mouse    = g_object_get_data (G_OBJECT (settings), "gsettings_mouse");
+    ccs_context       = g_object_get_data (G_OBJECT (settings), "ccs_context");
 #endif
 
-    if (!settings_gwd || !settings_marco)
+    if (!settings_gwd || !settings_wm || !settings_wm_theme)
 	return;
 
     if (strcmp (key, META_USE_SYSTEM_FONT_KEY) == 0)
     {
-	if (g_settings_get_boolean (settings_marco,
+	if (g_settings_get_boolean (settings_wm,
 				    META_USE_SYSTEM_FONT_KEY)
 				    != use_system_font)
 	{
@@ -6718,24 +6757,24 @@ gsettings_value_changed (GSettings   *settings,
     }
     else if (strcmp (key, META_TITLEBAR_FONT_KEY) == 0)
     {
-	titlebar_font_changed (settings_marco);
+	titlebar_font_changed (settings_wm);
 	changed = !use_system_font;
     }
     else if (strcmp (key, META_DOUBLE_CLICK_TITLEBAR_KEY) == 0)
     {
-	titlebar_click_action_changed (settings_marco, key,
+	titlebar_click_action_changed (settings_wm, key,
 				       &double_click_action,
 				       DOUBLE_CLICK_ACTION_DEFAULT);
     }
     else if (strcmp (key, META_MIDDLE_CLICK_TITLEBAR_KEY) == 0)
     {
-	titlebar_click_action_changed (settings_marco, key,
+	titlebar_click_action_changed (settings_wm, key,
 				       &middle_click_action,
 				       MIDDLE_CLICK_ACTION_DEFAULT);
     }
     else if (strcmp (key, META_RIGHT_CLICK_TITLEBAR_KEY) == 0)
     {
-	titlebar_click_action_changed (settings_marco, key,
+	titlebar_click_action_changed (settings_wm, key,
 				       &right_click_action,
 				       RIGHT_CLICK_ACTION_DEFAULT);
     }
@@ -6749,14 +6788,15 @@ gsettings_value_changed (GSettings   *settings,
 	    changed = TRUE;
     }
     else if (strcmp (key, GWD_USE_META_THEME_KEY) == 0 ||
-	     strcmp (key, META_THEME_KEY) == 0)
+	     strcmp (key, META_THEME_KEY_MARCO) == 0 ||
+	     strcmp (key, META_THEME_KEY_METACITY) == 0)
     {
-	if (theme_changed (settings_gwd, settings_marco))
+	if (theme_changed (settings_gwd, settings_wm_theme))
 	    changed = TRUE;
     }
     else if (strcmp (key, META_BUTTON_LAYOUT_KEY) == 0)
     {
-	if (button_layout_changed (settings_marco))
+	if (button_layout_changed (settings_wm))
 	    changed = TRUE;
     }
     else if (strcmp (key, GWD_META_THEME_OPACITY_KEY)	       == 0 ||
@@ -7014,6 +7054,28 @@ send_and_block_for_shadow_option_reply (DBusConnection *connection,
 }
 #endif
 
+#ifdef USE_GSETTINGS
+static GSettings *
+new_gsettings0 (const gchar *schema_id)
+{
+    GSettingsSchemaSource *schema_source;
+    GSettingsSchema       *schema;
+
+    schema_source = g_settings_schema_source_get_default ();
+    schema = g_settings_schema_source_lookup (schema_source,
+                                              schema_id,
+                                              TRUE);
+
+    if (schema)
+    {
+	g_settings_schema_unref (schema);
+	return g_settings_new (schema_id);
+    }
+    else
+	return NULL;
+}
+#endif
+
 static gboolean
 init_settings (WnckScreen *screen)
 {
@@ -7029,11 +7091,27 @@ init_settings (WnckScreen *screen)
 #ifdef USE_COMPIZCONFIG
     gpointer *compizconfig_value_data = malloc (sizeof (WnckScreen *) + sizeof (CCSContext *));
     CCSContext *ccs_context = ccsContextNew (NULL, 0);
+#elif USE_DBUS_GLIB
+    DBusConnection *connection;
+    DBusMessage	   *reply;
+    DBusError	   error;
+#endif
 
+#ifdef USE_GSETTINGS
+    const gchar *session = g_getenv ("XDG_CURRENT_DESKTOP");
+    GSettings	*gsettings_gwd, *gsettings_wm, *gsettings_wm_theme;
+    GSettings	*gsettings_marco, *gsettings_gnome_wm, *gsettings_metacity;
+#ifdef USE_COMPIZCONFIG
+    GSettings	*gsettings_mouse, *gsettings_gnome;
+#endif
+    gboolean	 is_mate_desktop;
+#endif
+
+#ifdef USE_COMPIZCONFIG
     compizconfig_value_data[0] = (gpointer) screen;
     compizconfig_value_data[1] = (gpointer) ccs_context;
 
-    /* Check settings every second */
+    /* check settings every second */
     g_timeout_add_seconds (1,
 			   (GSourceFunc) compizconfig_value_changed,
 			   (gpointer) compizconfig_value_data);
@@ -7129,122 +7207,134 @@ init_settings (WnckScreen *screen)
 #endif
 
 #ifdef USE_GSETTINGS
-    const gchar	    *session = g_getenv ("XDG_CURRENT_DESKTOP");
-    GSettings	    *gsettings = NULL, *gsettings_marco = NULL, *gsettings_mouse = NULL;
-    GSettingsSchema *gsettings_schema = NULL;
-    gboolean	     is_mate_desktop;
+    is_mate_desktop = FALSE;
+    if (session && strlen (session) > 0) {
+	int i = 0;
+	gchar **sessions = g_strsplit (session, ":", -1);
 
-    if (session != NULL && ((strlen (session) >= 4 && g_strcmp0 (session, "MATE") == 0) ||
-	(strlen (session) > 5 && g_strcmp0 (session + strlen (session) - 5, ":MATE") == 0)))
-	is_mate_desktop = TRUE;
-    else
-	is_mate_desktop = FALSE;
-
-    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
-							GSCHEMA_KEY_GWD,
-							TRUE);
-    if (gsettings_schema)
-    {
-	g_settings_schema_unref (gsettings_schema);
-	gsettings_schema = NULL;
-	gsettings = g_settings_new (GSCHEMA_KEY_GWD);
-    }
-
-    /* In general prioritise GNOME settings but Marco settings in MATE */
-    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
-							GSCHEMA_KEY_GNOME_WM,
-							TRUE);
-    if (gsettings_schema)
-    {
-	g_settings_schema_unref (gsettings_schema);
-	gsettings_schema = NULL;
-	gsettings_marco = g_settings_new (GSCHEMA_KEY_GNOME_WM);
-    }
-
-    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
-							GSCHEMA_KEY_MARCO,
-							TRUE);
-    if (gsettings_schema)
-    {
-	g_settings_schema_unref (gsettings_schema);
-	gsettings_schema = NULL;
-	if (is_mate_desktop)
+	while (sessions[i])
 	{
-	    g_object_unref (G_OBJECT (gsettings_marco));
-	    gsettings_marco = NULL;
+	    if (g_strcmp0 (sessions[i], "MATE") == 0)
+	    {
+		is_mate_desktop = TRUE;
+		break;
+	    }
+	    ++i;
 	}
-	if (!gsettings_marco)
-	    gsettings_marco = g_settings_new (GSCHEMA_KEY_MARCO);
+
+	g_strfreev (sessions);
     }
+
+    gsettings_gwd = new_gsettings0 (GSCHEMA_KEY_GWD);
+    gsettings_wm = NULL;
+    gsettings_wm_theme = NULL;
+
+    gsettings_marco = new_gsettings0 (GSCHEMA_KEY_MARCO);
+    gsettings_gnome_wm = new_gsettings0 (GSCHEMA_KEY_GNOME_WM);
+    gsettings_metacity = new_gsettings0 (GSCHEMA_KEY_METACITY_THEME);
+    if (!gsettings_metacity)
+	gsettings_metacity = new_gsettings0 (GSCHEMA_KEY_METACITY);
+
+    /* in general prioritise GNOME settings but Marco settings in MATE */
+    if (gsettings_marco && is_mate_desktop)
+	gsettings_wm = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+    else if (gsettings_gnome_wm)
+	gsettings_wm = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_gnome_wm)));
+    else if (gsettings_marco)
+	gsettings_wm = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+
+    /* in general prioritise Metacity settings but Marco settings in MATE */
+    if (gsettings_marco && is_mate_desktop)
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+    else if (gsettings_metacity)
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_metacity)));
+    else if (gsettings_marco)
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+
+    /* unreference all, good stuff was rereferenced above */
+    if (gsettings_marco)
+	g_object_unref (G_OBJECT (gsettings_marco));
+    gsettings_marco = NULL;
+    if (gsettings_gnome_wm)
+	g_object_unref (G_OBJECT (gsettings_gnome_wm));
+    gsettings_gnome_wm = NULL;
+    if (gsettings_metacity)
+	g_object_unref (G_OBJECT (gsettings_metacity));
+    gsettings_metacity = NULL;
 
 #ifdef USE_COMPIZCONFIG
-    /* Prioritise GNOME settings in general and MATE settings in, well, MATE */
-    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
-							GSCHEMA_KEY_GNOME_INTERFACE,
-							TRUE);
-    if (gsettings_schema)
-    {
-	g_settings_schema_unref (gsettings_schema);
-	gsettings_schema = NULL;
-	gsettings_mouse = g_settings_new (GSCHEMA_KEY_GNOME_INTERFACE);
-    }
+    /* prioritise GNOME settings in general and MATE settings in, well, MATE */
+    gsettings_mouse = new_gsettings0 (GSCHEMA_KEY_MATE_MOUSE);
+    gsettings_gnome = new_gsettings0 (GSCHEMA_KEY_GNOME_INTERFACE);
 
-    gsettings_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
-							GSCHEMA_KEY_MATE_MOUSE,
-							TRUE);
-    if (gsettings_schema)
+    if (!gsettings_mouse || !is_mate_desktop)
     {
-	g_settings_schema_unref (gsettings_schema);
-	gsettings_schema = NULL;
-	if (is_mate_desktop)
-	{
+	if (gsettings_mouse)
 	    g_object_unref (G_OBJECT (gsettings_mouse));
-	    gsettings_mouse = NULL;
-	}
-	if (!gsettings_mouse)
-	    gsettings_mouse = g_settings_new (GSCHEMA_KEY_MATE_MOUSE);
+	gsettings_mouse = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_gnome)));
     }
+    if (gsettings_gnome)
+	g_object_unref (G_OBJECT (gsettings_gnome));
+    gsettings_gnome = NULL;
 #endif
 
     /* theme_changed() needs both thus sending second object as data */
-    if (gsettings)
+    if (gsettings_gwd)
     {
-	g_object_set_data (G_OBJECT (gsettings), "gsettings_gwd", gsettings);
-	g_object_set_data (G_OBJECT (gsettings), "gsettings_marco", gsettings_marco);
+	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_gwd", gsettings_gwd);
+	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_wm_theme", gsettings_wm_theme);
 #ifdef USE_COMPIZCONFIG
-	g_object_set_data (G_OBJECT (gsettings), "gsettings_mouse", gsettings_mouse);
-	g_object_set_data (G_OBJECT (gsettings), "ccs_context", ccs_context);
+	g_object_set_data (G_OBJECT (gsettings_gwd), "gsettings_mouse", gsettings_mouse);
+	g_object_set_data (G_OBJECT (gsettings_gwd), "ccs_context", ccs_context);
 #endif
-	g_signal_connect_data (gsettings,
+	g_signal_connect_data (gsettings_gwd,
 			       "changed",
 			       G_CALLBACK (gsettings_value_changed),
 			       (gpointer) screen,
 			       0, 0);
     }
 
-    if (gsettings_marco)
+    if (gsettings_wm)
     {
-	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings_gwd", gsettings);
-	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings_marco", gsettings_marco);
+	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_gwd", gsettings_gwd);
+	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_wm_theme", gsettings_wm_theme);
 #ifdef USE_COMPIZCONFIG
-	g_object_set_data (G_OBJECT (gsettings_marco), "gsettings_mouse", gsettings_mouse);
-	g_object_set_data (G_OBJECT (gsettings_marco), "ccs_context", ccs_context);
+	g_object_set_data (G_OBJECT (gsettings_wm), "gsettings_mouse", gsettings_mouse);
+	g_object_set_data (G_OBJECT (gsettings_wm), "ccs_context", ccs_context);
 #endif
-	g_signal_connect_data (gsettings_marco,
+	g_signal_connect_data (gsettings_wm,
 			       "changed",
 			       G_CALLBACK (gsettings_value_changed),
 			       (gpointer) screen,
 			       0, 0);
     }
 
+    if (gsettings_wm_theme)
+    {
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_gwd", gsettings_gwd);
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_wm_theme", gsettings_wm_theme);
+#ifdef USE_COMPIZCONFIG
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "gsettings_mouse", gsettings_mouse);
+	g_object_set_data (G_OBJECT (gsettings_wm_theme), "ccs_context", ccs_context);
+#endif
+	g_signal_connect_data (gsettings_wm_theme,
+			       "changed",
+			       G_CALLBACK (gsettings_value_changed),
+			       (gpointer) screen,
+			       0, 0);
+    }
+
+#ifdef USE_COMPIZCONFIG
     if (gsettings_mouse)
     {
-	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_gwd", gsettings);
-	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_marco", gsettings_marco);
-#ifdef USE_COMPIZCONFIG
+	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_gwd", gsettings_gwd);
+	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_wm", gsettings_wm);
+	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_wm_theme", gsettings_wm_theme);
 	g_object_set_data (G_OBJECT (gsettings_mouse), "gsettings_mouse", gsettings_mouse);
 	g_object_set_data (G_OBJECT (gsettings_mouse), "ccs_context", ccs_context);
-#endif
 	g_signal_connect_data (gsettings_mouse,
 			       "changed",
 			       G_CALLBACK (gsettings_value_changed),
@@ -7252,7 +7342,6 @@ init_settings (WnckScreen *screen)
 			       0, 0);
     }
 
-#ifdef USE_COMPIZCONFIG
     cursor_theme_changed(gsettings_mouse, ccs_context);
 #endif
 
@@ -7299,17 +7388,17 @@ init_settings (WnckScreen *screen)
 		  &double_click_timeout, NULL);
 
 #ifdef USE_GSETTINGS
-    use_system_font = g_settings_get_boolean (gsettings_marco,
+    use_system_font = g_settings_get_boolean (gsettings_wm,
 					      META_USE_SYSTEM_FONT_KEY);
-    theme_changed (gsettings, gsettings_marco);
-    theme_opacity_changed (gsettings);
-    button_layout_changed (gsettings_marco);
+    theme_changed (gsettings_gwd, gsettings_wm_theme);
+    theme_opacity_changed (gsettings_gwd);
+    button_layout_changed (gsettings_wm);
 #endif
 
     update_style (style_window);
 
 #ifdef USE_GSETTINGS
-    titlebar_font_changed (gsettings_marco);
+    titlebar_font_changed (gsettings_wm);
 #endif
 
     update_titlebar_font ();
@@ -7319,20 +7408,20 @@ init_settings (WnckScreen *screen)
 #endif
 
 #ifdef USE_GSETTINGS
-    titlebar_click_action_changed (gsettings_marco,
+    titlebar_click_action_changed (gsettings_wm,
 				   META_DOUBLE_CLICK_TITLEBAR_KEY,
 				   &double_click_action,
 				   DOUBLE_CLICK_ACTION_DEFAULT);
-    titlebar_click_action_changed (gsettings_marco,
+    titlebar_click_action_changed (gsettings_wm,
 				   META_MIDDLE_CLICK_TITLEBAR_KEY,
 				   &middle_click_action,
 				   MIDDLE_CLICK_ACTION_DEFAULT);
-    titlebar_click_action_changed (gsettings_marco,
+    titlebar_click_action_changed (gsettings_wm,
 				   META_RIGHT_CLICK_TITLEBAR_KEY,
 				   &right_click_action,
 				   RIGHT_CLICK_ACTION_DEFAULT);
-    wheel_action_changed (gsettings);
-    blur_settings_changed (gsettings);
+    wheel_action_changed (gsettings_gwd);
+    blur_settings_changed (gsettings_gwd);
 #endif
 
     (*theme_update_border_extents) (text_height);

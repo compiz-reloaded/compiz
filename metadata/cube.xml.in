@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <compiz>
     <plugin name="cube">
 	<_short>Desktop Cube</_short>
@@ -8,6 +9,11 @@
 	    <relation type="before">
 		<plugin>switcher</plugin>
 		<plugin>scale</plugin>
+	    </relation>
+	    <relation type="after">
+		<plugin>svg</plugin>
+		<plugin>png</plugin>
+		<plugin>imgjpeg</plugin>
 	    </relation>
 	</deps>
 	<display>

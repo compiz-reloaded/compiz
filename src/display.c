@@ -1469,6 +1469,12 @@ eventLoop (void)
 			pointerX = event.xclient.data.l[2] >> 16;
 			pointerY = event.xclient.data.l[2] & 0xffff;
 		    }
+		    else
+		    if (event.xclient.message_type == d->wmMoveResizeAtom)
+		    {
+		    lastPointerX = pointerX = event.xclient.data.l[0];
+		    lastPointerY = pointerY = event.xclient.data.l[1];
+		    }
 		default:
 		    break;
 		}

@@ -1,4 +1,4 @@
-SUBDIRS = include src libdecoration plugins images gtk po metadata
+SUBDIRS = include src libdecoration plugins images gtk-window-decorator po mate metadata
 
 EXTRA_DIST =		   \
 	AUTHORS		    \
@@ -30,3 +30,13 @@ pkgconfig_DATA =	\
 	compiz.pc	 \
 	compiz-cube.pc	 \
 	compiz-scale.pc
+
+# Build ChangeLog from GIT  history
+ChangeLog:
+	$(AM_V_GEN) if test -d $(top_srcdir)/.git; then \
+		GIT_DIR="$(top_srcdir)/.git" git log --stat > $@; \
+	fi
+
+dist: ChangeLog
+
+.PHONY: ChangeLog

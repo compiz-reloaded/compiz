@@ -1686,7 +1686,7 @@ disableTexture (CompScreen  *screen,
 #define COMP_SCREEN_OPTION_UNREDIRECT_FS	  5
 #define COMP_SCREEN_OPTION_DEFAULT_ICON		  6
 #define COMP_SCREEN_OPTION_SYNC_TO_VBLANK	  7
-#define COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS	  8
+#define COMP_SCREEN_OPTION___PADDING__		  8
 #define COMP_SCREEN_OPTION_DETECT_OUTPUTS	  9
 #define COMP_SCREEN_OPTION_OUTPUTS		  10
 #define COMP_SCREEN_OPTION_OVERLAPPING_OUTPUTS	  11
@@ -2689,8 +2689,6 @@ struct _CompWindow {
 
     /* placed here to preserve ABI compat */
     CompWindowExtents frameInput;
-
-    void *reserved;
 };
 
 #define GET_CORE_WINDOW(object) ((CompWindow *) (object))

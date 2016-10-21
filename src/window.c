@@ -398,8 +398,6 @@ updateTransientHint (CompWindow *w)
     Window transientFor;
     Status status;
 
-    w->transientFor = None;
-
     status = XGetTransientForHint (w->screen->display->display,
 				   w->id, &transientFor);
 
@@ -717,6 +715,15 @@ changeWindowState (CompWindow   *w,
 
     if (w->managed)
 	setWindowState (d, w->state, w->id);
+
+    /* FIXME: Hack added by 1f853acf for grid to save
+     * window state before maximizing and restore window
+     * size correctly. We probably should implement fake
+     * maximize in grid so if the window is 'maximized'
+     * to a corner, it snaps off as it does with vert/horz
+     * maximized windows. */
+    w->state &= 0xFFFF;
+    w->state |= (oldState << 16);
 
     (*w->screen->windowStateChangeNotify) (w, oldState);
     (*d->matchPropertyChanged) (d, w);
@@ -3110,6 +3117,11 @@ windowMoveNotify (CompWindow *w,
 		  int	     dy,
 		  Bool	     immediate)
 {
+	if (w->state & CompWindowStateMaximizedVertMask)
+		w->saveWc.x = w->attrib.x;
+
+	if (w->state & CompWindowStateMaximizedHorzMask)
+		w->saveWc.y = w->attrib.y;
 }
 
 void
@@ -3578,34 +3590,10 @@ restoreWindowGeometry (CompWindow     *w,
 	xwc->y = w->saveWc.y;
 
     if (m & CWWidth)
-    {
 	xwc->width = w->saveWc.width;
 
-	/* This is not perfect but it works OK for now. If the saved width is
-	   the same as the current width then make it a little be smaller so
-	   the user can see that it changed and it also makes sure that
-	   windowResizeNotify is called and plugins are notified. */
-	if (xwc->width == w->serverWidth)
-	{
-	    xwc->width -= 10;
-	    if (m & CWX)
-		xwc->x += 5;
-	}
-    }
-
     if (m & CWHeight)
-    {
 	xwc->height = w->saveWc.height;
-
-	/* As above, if the saved height is the same as the current height
-	   then make it a little be smaller. */
-	if (xwc->height == w->serverHeight)
-	{
-	    xwc->height -= 10;
-	    if (m & CWY)
-		xwc->y += 5;
-	}
-    }
 
     if (m & CWBorderWidth)
 	xwc->border_width = w->saveWc.border_width;
@@ -3822,32 +3810,43 @@ addWindowSizeChanges (CompWindow     *w,
     {
 	mask |= restoreWindowGeometry (w, xwc, CWBorderWidth);
 
+	int lastState = w->state >> 16;
+
 	if (w->state & CompWindowStateMaximizedVertMask)
 	{
-	    saveWindowGeometry (w, CWY | CWHeight);
+	    saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight);
 
 	    xwc->height = workArea.height - w->input.top -
 		w->input.bottom - oldBorderWidth * 2;
 
 	    mask |= CWHeight;
 	}
-	else
-	{
-	    mask |= restoreWindowGeometry (w, xwc, CWY | CWHeight);
-	}
 
 	if (w->state & CompWindowStateMaximizedHorzMask)
 	{
-	    saveWindowGeometry (w, CWX | CWWidth);
+	    saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight);
 
 	    xwc->width = workArea.width - w->input.left -
 		w->input.right - oldBorderWidth * 2;
 
 	    mask |= CWWidth;
 	}
-	else
+
+	if ((lastState & MAXIMIZE_STATE) == MAXIMIZE_STATE) {
+		if (!(w->state & CompWindowStateMaximizedVertMask) &&
+			 (w->state & CompWindowStateMaximizedHorzMask))
+			mask |= restoreWindowGeometry (w, xwc, CWY | CWHeight);
+
+		if (!(w->state & CompWindowStateMaximizedHorzMask) &&
+			 (w->state & CompWindowStateMaximizedVertMask))
+			mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
+		w->state &= 0xFFFF;
+	}
+
+	if (!(w->state & CompWindowStateMaximizedVertMask) &&
+		!(w->state & CompWindowStateMaximizedHorzMask))
 	{
-	    mask |= restoreWindowGeometry (w, xwc, CWX | CWWidth);
+	    mask |= restoreWindowGeometry (w, xwc, CWX | CWY | CWWidth | CWHeight);
 	}
 
 	/* constrain window width if smaller than minimum width */

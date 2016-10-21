@@ -247,15 +247,13 @@ bindPixmapToTexture (CompScreen  *screen,
     if ((!getenv ("SKIP_CHECKS") || strcmp (getenv ("SKIP_CHECKS"), "yes") != 0)
 	&& (width > screen->maxTextureSize || height > screen->maxTextureSize))
     {
-	compLogMessage ("core", CompLogLevelWarn,
+	compLogMessage ("core", CompLogLevelError,
 			"Exceeded max texture size");
-
-	launchFallbackWM ();
     }
 
     if (!config->fbConfig)
     {
-	compLogMessage ("core", CompLogLevelWarn,
+	compLogMessage ("core", CompLogLevelFatal,
 			"No GLXFBConfig for depth %d",
 			depth);
 
@@ -301,7 +299,7 @@ bindPixmapToTexture (CompScreen  *screen,
 					       attribs);
     if (!texture->pixmap)
     {
-	compLogMessage ("core", CompLogLevelWarn,
+	compLogMessage ("core", CompLogLevelFatal,
 			"glXCreatePixmap failed");
 
 	launchFallbackWM ();
@@ -347,7 +345,7 @@ bindPixmapToTexture (CompScreen  *screen,
 	texture->mipmap = FALSE;
 	break;
     default:
-	compLogMessage ("core", CompLogLevelWarn,
+	compLogMessage ("core", CompLogLevelFatal,
 			"pixmap 0x%x can't be bound to texture",
 			(int) pixmap);
 

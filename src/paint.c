@@ -489,7 +489,11 @@ paintTransformedOutput (CompScreen		*screen,
 
     (*screen->applyScreenTransform) (screen, sAttrib, output, &sTransform);
 
-    if ((mask & CLIP_PLANE_MASK) == CLIP_PLANE_MASK)
+	/* This code causes glitches while rotating cube with certain plugins
+	 * enabled such as snow. I'm not sure what this block was designed to
+	 * do but it stands to be removed if doing so doesn't exhibit adverse
+	 * side effects. */
+    if (0)
     {
 	screen->enableOutputClipping (screen, &sTransform, region, output);
 

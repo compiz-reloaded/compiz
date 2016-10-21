@@ -11,145 +11,82 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-24 08:12+0100\n"
+"POT-Creation-Date: 2016-05-31 20:08+0200\n"
 "PO-Revision-Date: 2008-02-11 17:23+0100\n"
 "Last-Translator: Tomas Hejatko <hejda.cz@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: ../gtk/mate/compiz.desktop.in.h:1
-msgid "Compiz"
-msgstr "Compiz"
+#: ../gtk-window-decorator/gtk-window-decorator.c:4546
+#: ../metadata/core.xml.in.in.h:35
+msgid "Close Window"
+msgstr "Zavřít okno"
 
-#: ../metadata/scale.xml.in.h:25
-#: ../metadata/wobbly.xml.in.h:16
-msgid "None"
-msgstr "Nic"
+#: ../gtk-window-decorator/gtk-window-decorator.c:4568
+#: ../metadata/core.xml.in.in.h:41
+msgid "Unmaximize Window"
+msgstr "Zrušit maximalizaci okna"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4625
+#: ../gtk-window-decorator/gtk-window-decorator.c:4571
+#: ../metadata/core.xml.in.in.h:45
+msgid "Maximize Window"
+msgstr "Maximalizovat okno"
+
+#: ../gtk-window-decorator/gtk-window-decorator.c:4613
+#: ../metadata/core.xml.in.in.h:43
+msgid "Minimize Window"
+msgstr "Minimalizovat okno"
+
+#: ../gtk-window-decorator/gtk-window-decorator.c:4758
+#: ../metadata/core.xml.in.in.h:51
+msgid "Window Menu"
+msgstr "Nabídka okna"
+
+#: ../gtk-window-decorator/gtk-window-decorator.c:4777
 #, fuzzy
 msgid "Shade"
 msgstr "Měřítko"
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4606
-#: ../metadata/core.xml.in.in.h:100
-msgid "Window Menu"
-msgstr "Nabídka okna"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:1
-msgid "Action to take when scrolling the mouse wheel on a window title bar."
-msgstr "Událost při rolování nad titulkem okna"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:2
-msgid "Blur type"
-msgstr "Typ rozmazání"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:3
-msgid "Marco theme active window opacity"
-msgstr "Průhlednost aktivního okna"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:4
-msgid "Marco theme active window opacity shade"
-msgstr "Průhlednost stínu aktivního okna"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:5
-msgid "Marco theme opacity"
-msgstr "Průhlednost tématu marco"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:6
-msgid "Marco theme opacity shade"
-msgstr "Průhlednost stínu tématu marco"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:7
-msgid "Opacity to use for active windows with marco theme decorations"
-msgstr "Průhlednost pro aktivní okna s tématem marco"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:8
-msgid "Opacity to use for marco theme decorations"
-msgstr "Průhlednost pro témata marco"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:9
-msgid ""
-"Shade active windows with marco theme decorations from opaque to "
-"translucent"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:10
-msgid ""
-"Shade windows with marco theme decorations from opaque to translucent"
-msgstr ""
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:11
-msgid "Title bar mouse wheel action"
-msgstr "Událost při rolování nad titulkem okna"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:12
-msgid "Type of blur used for window decorations"
-msgstr "Typ rozmazání použitého pro dekoraci oken"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:13
-msgid "Use marco theme"
-msgstr "Použít téma marco"
-
-#: ../gtk/window-decorator/gwd.schemas.in.h:14
-msgid "Use marco theme when drawing window decorations"
-msgstr "Použít téma marco pro vykreslování dekorací oken"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4414
-#: ../metadata/core.xml.in.in.h:12
-msgid "Close Window"
-msgstr "Zavřít okno"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4436
-#: ../metadata/core.xml.in.in.h:93
-msgid "Unmaximize Window"
-msgstr "Zrušit maximalizaci okna"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4439
-#: ../metadata/core.xml.in.in.h:49
-msgid "Maximize Window"
-msgstr "Maximalizovat okno"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4481
-#: ../metadata/core.xml.in.in.h:55
-msgid "Minimize Window"
-msgstr "Minimalizovat okno"
-
-#: ../gtk/window-decorator/gtk-window-decorator.c:4645
+#: ../gtk-window-decorator/gtk-window-decorator.c:4797
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4671
+#: ../gtk-window-decorator/gtk-window-decorator.c:4817
 msgid "Stick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4691
+#: ../gtk-window-decorator/gtk-window-decorator.c:4837
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4711
+#: ../gtk-window-decorator/gtk-window-decorator.c:4857
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:4737
+#: ../gtk-window-decorator/gtk-window-decorator.c:4877
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5085
+#: ../gtk-window-decorator/gtk-window-decorator.c:5241
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5094
+#: ../gtk-window-decorator/gtk-window-decorator.c:5245
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk/window-decorator/gtk-window-decorator.c:5109
+#: ../gtk-window-decorator/gtk-window-decorator.c:5257
+msgid "_Cancel"
+msgstr ""
+
+#: ../gtk-window-decorator/gtk-window-decorator.c:5259
 msgid "_Force Quit"
 msgstr ""
 
@@ -159,180 +96,213 @@ msgid "Annotate"
 msgstr "Anotace"
 
 #: ../metadata/annotate.xml.in.h:2
-msgid "Annotate Fill Color"
-msgstr "Barva anotace"
-
-#: ../metadata/annotate.xml.in.h:3
-msgid "Annotate Stroke Color"
-msgstr ""
-
-#: ../metadata/annotate.xml.in.h:4
 #, fuzzy
 msgid "Annotate plugin"
 msgstr "Aktivní moduly"
 
+#: ../metadata/annotate.xml.in.h:3
+#, fuzzy
+msgid "Initiate Free Draw"
+msgstr "Iniciovat"
+
+#: ../metadata/annotate.xml.in.h:4
+#, fuzzy
+msgid "Initiate freehand drawing"
+msgstr "Iniciovat změnu velikosti okna"
+
 #: ../metadata/annotate.xml.in.h:5
-msgid "Clear"
-msgstr "Vymazat"
+#, fuzzy
+msgid "Initiate Line"
+msgstr "Iniciovat"
 
 #: ../metadata/annotate.xml.in.h:6
-msgid "Draw"
-msgstr "Vykreslit"
+#, fuzzy
+msgid "Initiate line drawing"
+msgstr "Iniciovat změnu velikosti okna"
 
 #: ../metadata/annotate.xml.in.h:7
-msgid "Draw using tool"
-msgstr "Vykreslit použitím nástroje"
+#, fuzzy
+msgid "Initiate Rectangle"
+msgstr "Iniciovat"
 
 #: ../metadata/annotate.xml.in.h:8
-msgid "Fill color for annotations"
-msgstr ""
+#, fuzzy
+msgid "Initiate rectangle drawing"
+msgstr "Iniciovat změnu velikosti okna"
 
-#: ../metadata/annotate.xml.in.h:9 ../metadata/clone.xml.in.h:2
-#: ../metadata/rotate.xml.in.h:12 ../metadata/screenshot.xml.in.h:3
-#: ../metadata/water.xml.in.h:6
-msgid "Initiate"
+#: ../metadata/annotate.xml.in.h:9
+#, fuzzy
+msgid "Initiate Ellipse"
 msgstr "Iniciovat"
 
 #: ../metadata/annotate.xml.in.h:10
 #, fuzzy
-msgid "Initiate annotate drawing"
+msgid "Initiate ellipse drawing"
 msgstr "Iniciovat změnu velikosti okna"
 
 #: ../metadata/annotate.xml.in.h:11
-#, fuzzy
-msgid "Initiate annotate erasing"
-msgstr "Iniciovat změnu velikosti okna"
+msgid "Draw"
+msgstr "Vykreslit"
 
 #: ../metadata/annotate.xml.in.h:12
+msgid "Draw using tool"
+msgstr "Vykreslit použitím nástroje"
+
+#: ../metadata/annotate.xml.in.h:13
 #, fuzzy
 msgid "Initiate erase"
 msgstr "Iniciovat"
 
-#: ../metadata/annotate.xml.in.h:13
-msgid "Line width"
-msgstr "Šířka linky"
-
 #: ../metadata/annotate.xml.in.h:14
-msgid "Line width for annotations"
-msgstr "Šířka linky pro anotaci"
+#, fuzzy
+msgid "Initiate annotate erasing"
+msgstr "Iniciovat změnu velikosti okna"
 
 #: ../metadata/annotate.xml.in.h:15
+msgid "Clear"
+msgstr "Vymazat"
+
+#: ../metadata/annotate.xml.in.h:16
+#, fuzzy
+msgid "Toggle center shape"
+msgstr "Přepnout stínování aktivního okna"
+
+#: ../metadata/annotate.xml.in.h:17
+msgid ""
+"Toggle whether the current shape is drawn using the center of your initial "
+"click"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:18
+msgid "Annotate Fill Color"
+msgstr "Barva anotace"
+
+#: ../metadata/annotate.xml.in.h:19
+msgid "Fill color for annotations"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:20
+msgid "Annotate Stroke Color"
+msgstr ""
+
+#: ../metadata/annotate.xml.in.h:21
 msgid "Stroke color for annotations"
 msgstr ""
 
-#: ../metadata/annotate.xml.in.h:16
+#: ../metadata/annotate.xml.in.h:22
 msgid "Stroke width"
 msgstr ""
 
-#: ../metadata/annotate.xml.in.h:17
+#: ../metadata/annotate.xml.in.h:23
 msgid "Stroke width for annotations"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:1
 #, fuzzy
-msgid "4xBilinear"
-msgstr "Lineární filtr"
-
-#: ../metadata/blur.xml.in.h:2
-#, fuzzy
-msgid "Alpha Blur"
-msgstr "Škálovat okna"
-
-#: ../metadata/blur.xml.in.h:3
-#, fuzzy
-msgid "Alpha blur windows"
-msgstr "Škálovat okna"
-
-#: ../metadata/blur.xml.in.h:4
-#, fuzzy
-msgid "Blur Filter"
-msgstr "Filtr textur"
-
-#: ../metadata/blur.xml.in.h:5
-#, fuzzy
-msgid "Blur Occlusion"
-msgstr "Sytost"
-
-#: ../metadata/blur.xml.in.h:6
-#, fuzzy
-msgid "Blur Saturation"
-msgstr "Sytost"
-
-#: ../metadata/blur.xml.in.h:7
-#, fuzzy
-msgid "Blur Speed"
-msgstr "Rychlost sbalení"
-
-#: ../metadata/blur.xml.in.h:8
-#, fuzzy
 msgid "Blur Windows"
 msgstr "Rozmístit okna"
 
-#: ../metadata/blur.xml.in.h:9
-msgid "Blur behind translucent parts of windows"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:10
-#, fuzzy
-msgid "Blur saturation"
-msgstr "Sytost"
-
-#: ../metadata/blur.xml.in.h:11
+#: ../metadata/blur.xml.in.h:2
 #, fuzzy
 msgid "Blur windows"
 msgstr "Škálovat okna"
 
-#: ../metadata/blur.xml.in.h:12
-#, fuzzy
-msgid "Blur windows that doesn't have focus"
-msgstr "Typy oken, která se mají rozhoupat při zaměření"
-
-#: ../metadata/blur.xml.in.h:13
-msgid "Disable blurring of screen regions obscured by other windows."
+#: ../metadata/blur.xml.in.h:3
+msgid "Pulse"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:14
-msgid "Filter method used for blurring"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:15
+#: ../metadata/blur.xml.in.h:4
 #, fuzzy
-msgid "Focus Blur"
-msgstr "Škálovat okna"
+msgid "Pulse effect"
+msgstr "Efekt zaměření"
 
-#: ../metadata/blur.xml.in.h:16
+#: ../metadata/blur.xml.in.h:5
+#, fuzzy
+msgid "Blur Speed"
+msgstr "Rychlost sbalení"
+
+#: ../metadata/blur.xml.in.h:6
+#, fuzzy
+msgid "Window blur speed"
+msgstr "Rychlost blednutí okna"
+
+#: ../metadata/blur.xml.in.h:7
 #, fuzzy
 msgid "Focus blur windows"
 msgstr "Škálovat okna"
 
+#: ../metadata/blur.xml.in.h:8
+#, fuzzy
+msgid "Windows that should be affected by focus blur"
+msgstr "Typy oken, která mohou blednout"
+
+#: ../metadata/blur.xml.in.h:9
+#, fuzzy
+msgid "Focus Blur"
+msgstr "Škálovat okna"
+
+#: ../metadata/blur.xml.in.h:10
+#, fuzzy
+msgid "Blur windows that doesn't have focus"
+msgstr "Typy oken, která se mají rozhoupat při zaměření"
+
+#: ../metadata/blur.xml.in.h:11
+#, fuzzy
+msgid "Alpha blur windows"
+msgstr "Škálovat okna"
+
+#: ../metadata/blur.xml.in.h:12
+#, fuzzy
+msgid "Windows that should be use alpha blur by default"
+msgstr "Typy oken, která mohou blednout"
+
+#: ../metadata/blur.xml.in.h:13
+#, fuzzy
+msgid "Alpha Blur"
+msgstr "Škálovat okna"
+
+#: ../metadata/blur.xml.in.h:14
+msgid "Blur behind translucent parts of windows"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:15
+#, fuzzy
+msgid "Blur Filter"
+msgstr "Filtr textur"
+
+#: ../metadata/blur.xml.in.h:16
+msgid "Filter method used for blurring"
+msgstr ""
+
 #: ../metadata/blur.xml.in.h:17
+#, fuzzy
+msgid "4xBilinear"
+msgstr "Lineární filtr"
+
+#: ../metadata/blur.xml.in.h:18
 msgid "Gaussian"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:18
+#: ../metadata/blur.xml.in.h:19 ../metadata/cube.xml.in.h:9
+#: ../metadata/decoration.xml.in.h:15 ../metadata/switcher.xml.in.h:25
+msgid "Mipmap"
+msgstr "Mipmap"
+
+#: ../metadata/blur.xml.in.h:20
 msgid "Gaussian Radius"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:19
-msgid "Gaussian Strength"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:20
+#: ../metadata/blur.xml.in.h:21
 msgid "Gaussian radius"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:21
+#: ../metadata/blur.xml.in.h:22
+msgid "Gaussian Strength"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:23
 msgid "Gaussian strength"
 msgstr ""
-
-#: ../metadata/blur.xml.in.h:22
-msgid "Independent texture fetch"
-msgstr ""
-
-#: ../metadata/blur.xml.in.h:23 ../metadata/cube.xml.in.h:27
-#: ../metadata/decoration.xml.in.h:10 ../metadata/switcher.xml.in.h:14
-msgid "Mipmap"
-msgstr "Mipmap"
 
 #: ../metadata/blur.xml.in.h:24
 #, fuzzy
@@ -344,1068 +314,1555 @@ msgid "Mipmap level-of-detail"
 msgstr ""
 
 #: ../metadata/blur.xml.in.h:26
-msgid "Pulse"
-msgstr ""
+#, fuzzy
+msgid "Blur Saturation"
+msgstr "Sytost"
 
 #: ../metadata/blur.xml.in.h:27
 #, fuzzy
-msgid "Pulse effect"
-msgstr "Efekt zaměření"
+msgid "Blur saturation"
+msgstr "Sytost"
 
 #: ../metadata/blur.xml.in.h:28
+#, fuzzy
+msgid "Blur Occlusion"
+msgstr "Sytost"
+
+#: ../metadata/blur.xml.in.h:29
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:30
+msgid "Independent texture fetch"
+msgstr ""
+
+#: ../metadata/blur.xml.in.h:31
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
-
-#: ../metadata/blur.xml.in.h:29
-#, fuzzy
-msgid "Window blur speed"
-msgstr "Rychlost blednutí okna"
-
-#: ../metadata/blur.xml.in.h:30
-#, fuzzy
-msgid "Windows that should be affected by focus blur"
-msgstr "Typy oken, která mohou blednout"
-
-#: ../metadata/blur.xml.in.h:31
-#, fuzzy
-msgid "Windows that should be use alpha blur by default"
-msgstr "Typy oken, která mohou blednout"
 
 #: ../metadata/clone.xml.in.h:1
 #, fuzzy
 msgid "Clone Output"
 msgstr "Výstupy"
 
-#: ../metadata/clone.xml.in.h:3
+#: ../metadata/clone.xml.in.h:2
+msgid "Output clone handler"
+msgstr ""
+
+#: ../metadata/clone.xml.in.h:3 ../metadata/rotate.xml.in.h:15
+#: ../metadata/screenshot.xml.in.h:3 ../metadata/water.xml.in.h:3
+#: ../metadata/zoom.xml.in.h:3
+msgid "Initiate"
+msgstr "Iniciovat"
+
+#: ../metadata/clone.xml.in.h:4
 #, fuzzy
 msgid "Initiate clone selection"
 msgstr "Pořídit snímek obrazovky"
 
-#: ../metadata/clone.xml.in.h:4
-msgid "Output clone handler"
-msgstr ""
-
-#: ../metadata/commands.xml.in.h:1
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command0"
-msgstr "Klávesové zkratky, které spustí příkaz určený command10"
-
-#: ../metadata/commands.xml.in.h:2
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command1"
-msgstr "Klávesové zkratky, které spustí příkaz určený command1"
-
-#: ../metadata/commands.xml.in.h:3
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command10"
-msgstr "Klávesové zkratky, které spustí příkaz určený command10"
-
-#: ../metadata/commands.xml.in.h:4
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command11"
-msgstr "Klávesové zkratky, které spustí příkaz určený command11"
-
-#: ../metadata/commands.xml.in.h:5
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command2"
-msgstr "Klávesové zkratky, které spustí příkaz určený command2"
-
-#: ../metadata/commands.xml.in.h:6
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command3"
-msgstr "Klávesové zkratky, které spustí příkaz určený command3"
-
-#: ../metadata/commands.xml.in.h:7
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command4"
-msgstr "Klávesové zkratky, které spustí příkaz určený command4"
-
-#: ../metadata/commands.xml.in.h:8
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command5"
-msgstr "Klávesové zkratky, které spustí příkaz určený command5"
-
-#: ../metadata/commands.xml.in.h:9
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command6"
-msgstr "Klávesové zkratky, které spustí příkaz určený command6"
-
-#: ../metadata/commands.xml.in.h:10
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command7"
-msgstr "Klávesové zkratky, které spustí příkaz určený command7"
-
-#: ../metadata/commands.xml.in.h:11
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command8"
-msgstr "Klávesové zkratky, které spustí příkaz určený command8"
-
-#: ../metadata/commands.xml.in.h:12
-#, fuzzy
-msgid ""
-"A button binding that when invoked, will run the shell command identified by "
-"command9"
-msgstr "Klávesové zkratky, které spustí příkaz určený command9"
-
-#: ../metadata/commands.xml.in.h:13
-#, fuzzy
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command0"
-msgstr "Klávesové zkratky, které spustí příkaz určený command10"
-
-#: ../metadata/commands.xml.in.h:14
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command1"
-msgstr "Klávesové zkratky, které spustí příkaz určený command1"
-
-#: ../metadata/commands.xml.in.h:15
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command10"
-msgstr "Klávesové zkratky, které spustí příkaz určený command10"
-
-#: ../metadata/commands.xml.in.h:16
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command11"
-msgstr "Klávesové zkratky, které spustí příkaz určený command11"
-
-#: ../metadata/commands.xml.in.h:17
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command2"
-msgstr "Klávesové zkratky, které spustí příkaz určený command2"
-
-#: ../metadata/commands.xml.in.h:18
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command3"
-msgstr "Klávesové zkratky, které spustí příkaz určený command3"
-
-#: ../metadata/commands.xml.in.h:19
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command4"
-msgstr "Klávesové zkratky, které spustí příkaz určený command4"
-
-#: ../metadata/commands.xml.in.h:20
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command5"
-msgstr "Klávesové zkratky, které spustí příkaz určený command5"
-
-#: ../metadata/commands.xml.in.h:21
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command6"
-msgstr "Klávesové zkratky, které spustí příkaz určený command6"
-
-#: ../metadata/commands.xml.in.h:22
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command7"
-msgstr "Klávesové zkratky, které spustí příkaz určený command7"
-
-#: ../metadata/commands.xml.in.h:23
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command8"
-msgstr "Klávesové zkratky, které spustí příkaz určený command8"
-
-#: ../metadata/commands.xml.in.h:24
-msgid ""
-"A keybinding that when invoked, will run the shell command identified by "
-"command9"
-msgstr "Klávesové zkratky, které spustí příkaz určený command9"
-
-#: ../metadata/commands.xml.in.h:25
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command0"
-msgstr "Klávesové zkratky, které spustí příkaz určený command10"
-
-#: ../metadata/commands.xml.in.h:26
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command1"
-msgstr "Klávesové zkratky, které spustí příkaz určený command1"
-
-#: ../metadata/commands.xml.in.h:27
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command10"
-msgstr "Klávesové zkratky, které spustí příkaz určený command10"
-
-#: ../metadata/commands.xml.in.h:28
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command11"
-msgstr "Klávesové zkratky, které spustí příkaz určený command11"
-
-#: ../metadata/commands.xml.in.h:29
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command2"
-msgstr "Klávesové zkratky, které spustí příkaz určený command2"
-
-#: ../metadata/commands.xml.in.h:30
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command3"
-msgstr "Klávesové zkratky, které spustí příkaz určený command3"
-
-#: ../metadata/commands.xml.in.h:31
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command4"
-msgstr "Klávesové zkratky, které spustí příkaz určený command4"
-
-#: ../metadata/commands.xml.in.h:32
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command5"
-msgstr "Klávesové zkratky, které spustí příkaz určený command5"
-
-#: ../metadata/commands.xml.in.h:33
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command6"
-msgstr "Klávesové zkratky, které spustí příkaz určený command6"
-
-#: ../metadata/commands.xml.in.h:34
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command7"
-msgstr "Klávesové zkratky, které spustí příkaz určený command7"
-
-#: ../metadata/commands.xml.in.h:35
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command8"
-msgstr "Klávesové zkratky, které spustí příkaz určený command8"
-
-#: ../metadata/commands.xml.in.h:36
-#, fuzzy
-msgid ""
-"An edge binding that when invoked, will run the shell command identified by "
-"command9"
-msgstr "Klávesové zkratky, které spustí příkaz určený command9"
-
-#: ../metadata/commands.xml.in.h:37
-msgid "Assigns bindings to arbitrary commands"
-msgstr ""
-
-#: ../metadata/commands.xml.in.h:38
-msgid "Button Bindings"
-msgstr ""
-
-#: ../metadata/commands.xml.in.h:39
-msgid "Command line 1"
-msgstr "Příkazová řádka 1"
-
-#: ../metadata/commands.xml.in.h:40
-msgid "Command line 10"
-msgstr "Příkazová řádka 10"
-
-#: ../metadata/commands.xml.in.h:41
-msgid "Command line 11"
-msgstr "Příkazová řádka 11"
-
-#: ../metadata/commands.xml.in.h:42
-#, fuzzy
-msgid "Command line 12"
-msgstr "Příkazová řádka 1"
-
-#: ../metadata/commands.xml.in.h:43
-msgid "Command line 2"
-msgstr "Příkazová řádka 2"
-
-#: ../metadata/commands.xml.in.h:44
-msgid "Command line 3"
-msgstr "Příkazový řádek 3"
-
-#: ../metadata/commands.xml.in.h:45
-msgid "Command line 4"
-msgstr "Příkazová řádka 3"
-
-#: ../metadata/commands.xml.in.h:46
-msgid "Command line 5"
-msgstr "Příkazová řádka 5"
-
-#: ../metadata/commands.xml.in.h:47
-msgid "Command line 6"
-msgstr "Příkazová řádka 6"
-
-#: ../metadata/commands.xml.in.h:48
-msgid "Command line 7"
-msgstr "Příkazová řádka 7"
-
-#: ../metadata/commands.xml.in.h:49
-msgid "Command line 8"
-msgstr "Příkazová řádka 8"
-
-#: ../metadata/commands.xml.in.h:50
-msgid "Command line 9"
-msgstr "Příkazová řádka 9"
-
-#: ../metadata/commands.xml.in.h:51
-msgid "Command line to be executed in shell when run_command0 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command0"
-
-#: ../metadata/commands.xml.in.h:52
-msgid "Command line to be executed in shell when run_command1 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
-
-#: ../metadata/commands.xml.in.h:53
-msgid "Command line to be executed in shell when run_command10 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command10"
-
-#: ../metadata/commands.xml.in.h:54
-msgid "Command line to be executed in shell when run_command11 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command11"
-
-#: ../metadata/commands.xml.in.h:55
-msgid "Command line to be executed in shell when run_command2 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command2"
-
-#: ../metadata/commands.xml.in.h:56
-msgid "Command line to be executed in shell when run_command3 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command3"
-
-#: ../metadata/commands.xml.in.h:57
-msgid "Command line to be executed in shell when run_command4 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command4"
-
-#: ../metadata/commands.xml.in.h:58
-msgid "Command line to be executed in shell when run_command5 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command5"
-
-#: ../metadata/commands.xml.in.h:59
-msgid "Command line to be executed in shell when run_command6 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command6"
-
-#: ../metadata/commands.xml.in.h:60
-msgid "Command line to be executed in shell when run_command7 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command7"
-
-#: ../metadata/commands.xml.in.h:61
-msgid "Command line to be executed in shell when run_command8 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command8"
-
-#: ../metadata/commands.xml.in.h:62
-msgid "Command line to be executed in shell when run_command9 is invoked"
-msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command9"
-
-#: ../metadata/commands.xml.in.h:63 ../metadata/matecompat.xml.in.h:1
+#: ../metadata/commands.xml.in.h:1 ../metadata/matecompat.xml.in.h:7
 #, fuzzy
 msgid "Commands"
 msgstr "Příkaz"
 
-#: ../metadata/commands.xml.in.h:64
-msgid "Edge Bindings"
+#: ../metadata/commands.xml.in.h:2
+msgid "Assigns bindings to arbitrary commands"
 msgstr ""
 
-#: ../metadata/commands.xml.in.h:65
+#: ../metadata/commands.xml.in.h:3
+msgid "Command line 0"
+msgstr "Příkazová řádka 0"
+
+#: ../metadata/commands.xml.in.h:4
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command0"
+
+#: ../metadata/commands.xml.in.h:5
+msgid "Command line 1"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:6
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:7
+msgid "Command line 2"
+msgstr "Příkazová řádka 2"
+
+#: ../metadata/commands.xml.in.h:8
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command2"
+
+#: ../metadata/commands.xml.in.h:9
+msgid "Command line 3"
+msgstr "Příkazový řádek 3"
+
+#: ../metadata/commands.xml.in.h:10
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command3"
+
+#: ../metadata/commands.xml.in.h:11
+msgid "Command line 4"
+msgstr "Příkazová řádka 3"
+
+#: ../metadata/commands.xml.in.h:12
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command4"
+
+#: ../metadata/commands.xml.in.h:13
+msgid "Command line 5"
+msgstr "Příkazová řádka 5"
+
+#: ../metadata/commands.xml.in.h:14
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command5"
+
+#: ../metadata/commands.xml.in.h:15
+msgid "Command line 6"
+msgstr "Příkazová řádka 6"
+
+#: ../metadata/commands.xml.in.h:16
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command6"
+
+#: ../metadata/commands.xml.in.h:17
+msgid "Command line 7"
+msgstr "Příkazová řádka 7"
+
+#: ../metadata/commands.xml.in.h:18
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command7"
+
+#: ../metadata/commands.xml.in.h:19
+msgid "Command line 8"
+msgstr "Příkazová řádka 8"
+
+#: ../metadata/commands.xml.in.h:20
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command8"
+
+#: ../metadata/commands.xml.in.h:21
+msgid "Command line 9"
+msgstr "Příkazová řádka 9"
+
+#: ../metadata/commands.xml.in.h:22
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command9"
+
+#: ../metadata/commands.xml.in.h:23
+msgid "Command line 10"
+msgstr "Příkazová řádka 10"
+
+#: ../metadata/commands.xml.in.h:24
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command10"
+
+#: ../metadata/commands.xml.in.h:25
+msgid "Command line 11"
+msgstr "Příkazová řádka 11"
+
+#: ../metadata/commands.xml.in.h:26
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command11"
+
+#: ../metadata/commands.xml.in.h:27
+#, fuzzy
+msgid "Command line 12"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:28
+#, fuzzy
+msgid "Command line to be executed in shell when run_command12 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:29
+#, fuzzy
+msgid "Command line 13"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:30
+#, fuzzy
+msgid "Command line to be executed in shell when run_command13 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:31
+#, fuzzy
+msgid "Command line 14"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:32
+#, fuzzy
+msgid "Command line to be executed in shell when run_command14 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:33
+#, fuzzy
+msgid "Command line 15"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:34
+#, fuzzy
+msgid "Command line to be executed in shell when run_command15 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:35
+#, fuzzy
+msgid "Command line 16"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:36
+#, fuzzy
+msgid "Command line to be executed in shell when run_command16 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:37
+#, fuzzy
+msgid "Command line 17"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:38
+#, fuzzy
+msgid "Command line to be executed in shell when run_command17 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:39
+#, fuzzy
+msgid "Command line 18"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:40
+#, fuzzy
+msgid "Command line to be executed in shell when run_command18 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:41
+#, fuzzy
+msgid "Command line 19"
+msgstr "Příkazová řádka 1"
+
+#: ../metadata/commands.xml.in.h:42
+#, fuzzy
+msgid "Command line to be executed in shell when run_command19 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:43
+#, fuzzy
+msgid "Command line 20"
+msgstr "Příkazová řádka 2"
+
+#: ../metadata/commands.xml.in.h:44
+#, fuzzy
+msgid "Command line to be executed in shell when run_command20 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command0"
+
+#: ../metadata/commands.xml.in.h:45
+#, fuzzy
+msgid "Command line 21"
+msgstr "Příkazová řádka 2"
+
+#: ../metadata/commands.xml.in.h:46
+#, fuzzy
+msgid "Command line to be executed in shell when run_command21 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command1"
+
+#: ../metadata/commands.xml.in.h:47
+#, fuzzy
+msgid "Command line 22"
+msgstr "Příkazová řádka 2"
+
+#: ../metadata/commands.xml.in.h:48
+#, fuzzy
+msgid "Command line to be executed in shell when run_command22 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command2"
+
+#: ../metadata/commands.xml.in.h:49
+#, fuzzy
+msgid "Command line 23"
+msgstr "Příkazová řádka 2"
+
+#: ../metadata/commands.xml.in.h:50
+#, fuzzy
+msgid "Command line to be executed in shell when run_command23 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command2"
+
+#: ../metadata/commands.xml.in.h:51
+#, fuzzy
+msgid "Command line 24"
+msgstr "Příkazová řádka 2"
+
+#: ../metadata/commands.xml.in.h:52
+#, fuzzy
+msgid "Command line to be executed in shell when run_command24 is invoked"
+msgstr "Příkaz, který se vykoná, pokud je v shellu volán run_command2"
+
+#: ../metadata/commands.xml.in.h:53
 msgid "Key Bindings"
 msgstr ""
 
-#: ../metadata/commands.xml.in.h:66
+#: ../metadata/commands.xml.in.h:54
+msgid "Run command 0"
+msgstr "Spustit příkaz 0"
+
+#: ../metadata/commands.xml.in.h:55
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "Klávesové zkratky, které spustí příkaz určený command10"
+
+#: ../metadata/commands.xml.in.h:56
 msgid "Run command 1"
 msgstr "Spustit příkaz 1"
 
+#: ../metadata/commands.xml.in.h:57
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:58
+msgid "Run command 2"
+msgstr "Spustit příkaz 2"
+
+#: ../metadata/commands.xml.in.h:59
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:60
+msgid "Run command 3"
+msgstr "Spustit příkaz 3"
+
+#: ../metadata/commands.xml.in.h:61
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "Klávesové zkratky, které spustí příkaz určený command3"
+
+#: ../metadata/commands.xml.in.h:62
+msgid "Run command 4"
+msgstr "Spustit příkaz 4"
+
+#: ../metadata/commands.xml.in.h:63
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "Klávesové zkratky, které spustí příkaz určený command4"
+
+#: ../metadata/commands.xml.in.h:64
+msgid "Run command 5"
+msgstr "Spustit příkaz 5"
+
+#: ../metadata/commands.xml.in.h:65
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "Klávesové zkratky, které spustí příkaz určený command5"
+
+#: ../metadata/commands.xml.in.h:66
+msgid "Run command 6"
+msgstr "Spustit příkaz 6"
+
 #: ../metadata/commands.xml.in.h:67
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "Klávesové zkratky, které spustí příkaz určený command6"
+
+#: ../metadata/commands.xml.in.h:68
+msgid "Run command 7"
+msgstr "Spustit příkaz 7"
+
+#: ../metadata/commands.xml.in.h:69
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "Klávesové zkratky, které spustí příkaz určený command7"
+
+#: ../metadata/commands.xml.in.h:70
+msgid "Run command 8"
+msgstr "Spustit příkaz 8"
+
+#: ../metadata/commands.xml.in.h:71
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "Klávesové zkratky, které spustí příkaz určený command8"
+
+#: ../metadata/commands.xml.in.h:72
+msgid "Run command 9"
+msgstr "Spustit příkaz 9"
+
+#: ../metadata/commands.xml.in.h:73
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "Klávesové zkratky, které spustí příkaz určený command9"
+
+#: ../metadata/commands.xml.in.h:74
 msgid "Run command 10"
 msgstr "Spustit příkaz 10"
 
-#: ../metadata/commands.xml.in.h:68
+#: ../metadata/commands.xml.in.h:75
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "Klávesové zkratky, které spustí příkaz určený command10"
+
+#: ../metadata/commands.xml.in.h:76
 msgid "Run command 11"
 msgstr "Spustit příkaz 11"
 
-#: ../metadata/commands.xml.in.h:69
+#: ../metadata/commands.xml.in.h:77
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "Klávesové zkratky, které spustí příkaz určený command11"
+
+#: ../metadata/commands.xml.in.h:78
 #, fuzzy
 msgid "Run command 12"
 msgstr "Spustit příkaz 1"
 
-#: ../metadata/commands.xml.in.h:70
-msgid "Run command 2"
+#: ../metadata/commands.xml.in.h:79
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command12"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:80
+#, fuzzy
+msgid "Run command 13"
+msgstr "Spustit příkaz 1"
+
+#: ../metadata/commands.xml.in.h:81
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command13"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:82
+#, fuzzy
+msgid "Run command 14"
+msgstr "Spustit příkaz 1"
+
+#: ../metadata/commands.xml.in.h:83
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command14"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:84
+#, fuzzy
+msgid "Run command 15"
+msgstr "Spustit příkaz 1"
+
+#: ../metadata/commands.xml.in.h:85
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command15"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:86
+#, fuzzy
+msgid "Run command 16"
+msgstr "Spustit příkaz 1"
+
+#: ../metadata/commands.xml.in.h:87
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command16"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:88
+#, fuzzy
+msgid "Run command 17"
+msgstr "Spustit příkaz 1"
+
+#: ../metadata/commands.xml.in.h:89
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command17"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:90
+#, fuzzy
+msgid "Run command 18"
+msgstr "Spustit příkaz 1"
+
+#: ../metadata/commands.xml.in.h:91
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command18"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:92
+#, fuzzy
+msgid "Run command 19"
+msgstr "Spustit příkaz 1"
+
+#: ../metadata/commands.xml.in.h:93
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command19"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:94
+#, fuzzy
+msgid "Run command 20"
 msgstr "Spustit příkaz 2"
 
-#: ../metadata/commands.xml.in.h:71
-msgid "Run command 3"
-msgstr "Spustit příkaz 3"
+#: ../metadata/commands.xml.in.h:95
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command20"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
 
-#: ../metadata/commands.xml.in.h:72
-msgid "Run command 4"
-msgstr "Spustit příkaz 4"
+#: ../metadata/commands.xml.in.h:96
+#, fuzzy
+msgid "Run command 21"
+msgstr "Spustit příkaz 2"
 
-#: ../metadata/commands.xml.in.h:73
-msgid "Run command 5"
-msgstr "Spustit příkaz 5"
+#: ../metadata/commands.xml.in.h:97
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command21"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
 
-#: ../metadata/commands.xml.in.h:74
-msgid "Run command 6"
-msgstr "Spustit příkaz 6"
+#: ../metadata/commands.xml.in.h:98
+#, fuzzy
+msgid "Run command 22"
+msgstr "Spustit příkaz 2"
 
-#: ../metadata/commands.xml.in.h:75
-msgid "Run command 7"
-msgstr "Spustit příkaz 7"
+#: ../metadata/commands.xml.in.h:99
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command22"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
 
-#: ../metadata/commands.xml.in.h:76
-msgid "Run command 8"
-msgstr "Spustit příkaz 8"
+#: ../metadata/commands.xml.in.h:100
+#, fuzzy
+msgid "Run command 23"
+msgstr "Spustit příkaz 2"
 
-#: ../metadata/commands.xml.in.h:77
-msgid "Run command 9"
-msgstr "Spustit příkaz 9"
+#: ../metadata/commands.xml.in.h:101
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command23"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:102
+#, fuzzy
+msgid "Run command 24"
+msgstr "Spustit příkaz 2"
+
+#: ../metadata/commands.xml.in.h:103
+#, fuzzy
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command24"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:104
+msgid "Button Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:105
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "Klávesové zkratky, které spustí příkaz určený command10"
+
+#: ../metadata/commands.xml.in.h:106
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:107
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:108
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "Klávesové zkratky, které spustí příkaz určený command3"
+
+#: ../metadata/commands.xml.in.h:109
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "Klávesové zkratky, které spustí příkaz určený command4"
+
+#: ../metadata/commands.xml.in.h:110
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "Klávesové zkratky, které spustí příkaz určený command5"
+
+#: ../metadata/commands.xml.in.h:111
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "Klávesové zkratky, které spustí příkaz určený command6"
+
+#: ../metadata/commands.xml.in.h:112
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "Klávesové zkratky, které spustí příkaz určený command7"
+
+#: ../metadata/commands.xml.in.h:113
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "Klávesové zkratky, které spustí příkaz určený command8"
+
+#: ../metadata/commands.xml.in.h:114
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "Klávesové zkratky, které spustí příkaz určený command9"
+
+#: ../metadata/commands.xml.in.h:115
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "Klávesové zkratky, které spustí příkaz určený command10"
+
+#: ../metadata/commands.xml.in.h:116
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "Klávesové zkratky, které spustí příkaz určený command11"
+
+#: ../metadata/commands.xml.in.h:117
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command12"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:118
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command13"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:119
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command14"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:120
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command15"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:121
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command16"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:122
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command17"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:123
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command18"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:124
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command19"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:125
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command20"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:126
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command21"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:127
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command22"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:128
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command23"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:129
+#, fuzzy
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command24"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:130
+msgid "Edge Bindings"
+msgstr ""
+
+#: ../metadata/commands.xml.in.h:131
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr "Klávesové zkratky, které spustí příkaz určený command10"
+
+#: ../metadata/commands.xml.in.h:132
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:133
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:134
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr "Klávesové zkratky, které spustí příkaz určený command3"
+
+#: ../metadata/commands.xml.in.h:135
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr "Klávesové zkratky, které spustí příkaz určený command4"
+
+#: ../metadata/commands.xml.in.h:136
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr "Klávesové zkratky, které spustí příkaz určený command5"
+
+#: ../metadata/commands.xml.in.h:137
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr "Klávesové zkratky, které spustí příkaz určený command6"
+
+#: ../metadata/commands.xml.in.h:138
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr "Klávesové zkratky, které spustí příkaz určený command7"
+
+#: ../metadata/commands.xml.in.h:139
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr "Klávesové zkratky, které spustí příkaz určený command8"
+
+#: ../metadata/commands.xml.in.h:140
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr "Klávesové zkratky, které spustí příkaz určený command9"
+
+#: ../metadata/commands.xml.in.h:141
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr "Klávesové zkratky, které spustí příkaz určený command10"
+
+#: ../metadata/commands.xml.in.h:142
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr "Klávesové zkratky, které spustí příkaz určený command11"
+
+#: ../metadata/commands.xml.in.h:143
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command12"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:144
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command13"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:145
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command14"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:146
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command15"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:147
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command16"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:148
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command17"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:149
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command18"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:150
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command19"
+msgstr "Klávesové zkratky, které spustí příkaz určený command1"
+
+#: ../metadata/commands.xml.in.h:151
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command20"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:152
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command21"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:153
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command22"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:154
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command23"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
+
+#: ../metadata/commands.xml.in.h:155
+#, fuzzy
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command24"
+msgstr "Klávesové zkratky, které spustí příkaz určený command2"
 
 #: ../metadata/core.xml.in.in.h:1
+msgid "General Options"
+msgstr "Hlavní nastavení"
+
+#: ../metadata/core.xml.in.in.h:2
+msgid "General compiz options"
+msgstr "Hlavní nastavení compizu"
+
+#: ../metadata/core.xml.in.in.h:3
 msgid "Active Plugins"
 msgstr "Aktivní moduly"
 
-#: ../metadata/core.xml.in.in.h:2
-msgid ""
-"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr ""
-"Povolit vykreslování celoobrazovkových oken bez přesměrování do "
-"mimoobrazovkových pixmap"
+#: ../metadata/core.xml.in.in.h:4
+msgid "List of currently active plugins"
+msgstr "Seznam právě aktivních modulů"
 
-#: ../metadata/core.xml.in.in.h:3
+#: ../metadata/core.xml.in.in.h:5
 msgid "Audible Bell"
 msgstr "Akustický zvonek"
 
-#: ../metadata/core.xml.in.in.h:4
+#: ../metadata/core.xml.in.in.h:6
 msgid "Audible system beep"
 msgstr "Slyšitelné systémové pípnutí"
 
-#: ../metadata/core.xml.in.in.h:5
-msgid "Auto-Raise"
-msgstr "Automaticky do popředí"
-
-#: ../metadata/core.xml.in.in.h:6
-msgid "Auto-Raise Delay"
-msgstr "Prodleva automatického přesunu do popředí"
-
 #: ../metadata/core.xml.in.in.h:7
-msgid "Automatic detection of output devices"
-msgstr "Automatická detekce výstupních zařízení"
+msgid "Ignore Hints When Maximized"
+msgstr "Při maximalizaci ignorovat tipy"
 
 #: ../metadata/core.xml.in.in.h:8
-msgid "Automatic detection of refresh rate"
-msgstr "Automatická detekce obnovovací frekvence"
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr "Při maximalizaci ignorovat tipy k přírůstku velikosti a poměru"
 
 #: ../metadata/core.xml.in.in.h:9
-msgid "Best"
-msgstr "Nejlepší"
+msgid "Hide Skip Taskbar Windows"
+msgstr "Skrýt okna nepřítomná v liště úloh"
 
 #: ../metadata/core.xml.in.in.h:10
-msgid "Click To Focus"
-msgstr "Kliknutí k zaměření"
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"Skrýt okna nepřítomná v liště úloh při vstupu do režimu zobrazení plochy"
 
 #: ../metadata/core.xml.in.in.h:11
-msgid "Click on window moves input focus to it"
-msgstr "Kliknutím na okno přesunout zaměření na okno"
+msgid "Edge Trigger Delay"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:12
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:13
-msgid "Close active window"
-msgstr "Zavřít aktivní okno"
+msgid "Cursor theme"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:14
-msgid "Default Icon"
-msgstr "Výchozí ikona"
+msgid "Cursor theme name"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:15
-msgid "Default window icon image"
-msgstr "Výchozí ikona okna"
+msgid "Cursor size"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:16
-#, fuzzy
-msgid "Desktop Size"
-msgstr "Kostka plochy"
+msgid "Size of the cursor"
+msgstr ""
 
 #: ../metadata/core.xml.in.in.h:17
-msgid "Detect Outputs"
-msgstr "Detekovat výstupy"
+#, fuzzy
+msgid "Ping Delay"
+msgstr "Prodleva pingu"
 
 #: ../metadata/core.xml.in.in.h:18
-msgid "Detect Refresh Rate"
-msgstr "Zjistit obnovovací frekvenci"
+msgid "Interval between ping messages"
+msgstr "Interval pro odeslání pingu"
 
 #: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
 msgstr ""
 
 #: ../metadata/core.xml.in.in.h:20
-msgid ""
-"Duration the pointer must rest in a screen edge before an edge action is "
-"taken."
-msgstr ""
+msgid "Texture Filter"
+msgstr "Filtr textur"
 
 #: ../metadata/core.xml.in.in.h:21
-msgid "Edge Trigger Delay"
-msgstr ""
+msgid "Texture filtering"
+msgstr "Filtrování textur"
 
 #: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "Rychlé"
 
 #: ../metadata/core.xml.in.in.h:23
-msgid "Focus &amp; Raise Behaviour"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:24
-#, fuzzy
-msgid "Focus Prevention Level"
-msgstr "Typy okna pro efekt při zaměření"
-
-#: ../metadata/core.xml.in.in.h:25
-#, fuzzy
-msgid "Focus Prevention Windows"
-msgstr "Typy okna pro efekt při zaměření"
-
-#: ../metadata/core.xml.in.in.h:26
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Typy okna pro efekt při zaměření"
-
-#: ../metadata/core.xml.in.in.h:27
-msgid "Force independent output painting."
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:28
-msgid "General Options"
-msgstr "Hlavní nastavení"
-
-#: ../metadata/core.xml.in.in.h:29
-msgid "General compiz options"
-msgstr "Hlavní nastavení compizu"
-
-#: ../metadata/core.xml.in.in.h:30
 msgid "Good"
 msgstr "Dobré"
 
-#: ../metadata/core.xml.in.in.h:31
-msgid "Hide Skip Taskbar Windows"
-msgstr "Skrýt okna nepřítomná v liště úloh"
+#: ../metadata/core.xml.in.in.h:24
+msgid "Best"
+msgstr "Nejlepší"
 
-#: ../metadata/core.xml.in.in.h:32
-msgid "Hide all windows and focus desktop"
-msgstr "Skrýt všechna okna a zaměřit na plochu"
-
-#: ../metadata/core.xml.in.in.h:33
-msgid "Hide windows not in taskbar when entering show desktop mode"
-msgstr ""
-"Skrýt okna nepřítomná v liště úloh při vstupu do režimu zobrazení plochy"
-
-#: ../metadata/core.xml.in.in.h:34
-msgid "High"
+#: ../metadata/core.xml.in.in.h:25
+msgid "Focus &amp; Raise Behaviour"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:35
-msgid "Horizontal Virtual Size"
-msgstr "Vodorovná virtuální velikost"
+#: ../metadata/core.xml.in.in.h:26
+msgid "Click To Focus"
+msgstr "Kliknutí k zaměření"
 
-#: ../metadata/core.xml.in.in.h:36
-msgid "If available use compression for textures converted from images"
-msgstr ""
+#: ../metadata/core.xml.in.in.h:27
+msgid "Click on window moves input focus to it"
+msgstr "Kliknutím na okno přesunout zaměření na okno"
 
-#: ../metadata/core.xml.in.in.h:37
-msgid "Ignore Hints When Maximized"
-msgstr "Při maximalizaci ignorovat tipy"
-
-#: ../metadata/core.xml.in.in.h:38
-msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr "Při maximalizaci ignorovat tipy k přírůstku velikosti a poměru"
-
-#: ../metadata/core.xml.in.in.h:39
-msgid "Interval before raising selected windows"
-msgstr "Interval před přenesením vybraných oken do popředí"
-
-#: ../metadata/core.xml.in.in.h:40
-msgid "Interval between ping messages"
-msgstr "Interval pro odeslání pingu"
-
-#: ../metadata/core.xml.in.in.h:41
-msgid "Key bindings"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:42
-msgid "Level of focus stealing prevention"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:43
-msgid "Lighting"
-msgstr "Světlo"
-
-#: ../metadata/core.xml.in.in.h:44
-msgid "List of currently active plugins"
-msgstr "Seznam právě aktivních modulů"
-
-#: ../metadata/core.xml.in.in.h:45
-msgid "List of strings describing output devices"
-msgstr "Seznam řetězců, které popisují výstupní zařízení"
-
-#: ../metadata/core.xml.in.in.h:46
-msgid "Low"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:47
-msgid "Lower Window"
-msgstr "Dát okno do pozadí"
-
-#: ../metadata/core.xml.in.in.h:48
-msgid "Lower window beneath other windows"
-msgstr "Přesunout okno do pozadí"
-
-#: ../metadata/core.xml.in.in.h:50
-msgid "Maximize Window Horizontally"
-msgstr "Maximalizovat okno horizontálně"
-
-#: ../metadata/core.xml.in.in.h:51
-msgid "Maximize Window Vertically"
-msgstr "Maximalizovat okno vertikálně"
-
-#: ../metadata/core.xml.in.in.h:52
-msgid "Maximize active window"
-msgstr "Maximalizovat aktivní okno"
-
-#: ../metadata/core.xml.in.in.h:53
-msgid "Maximize active window horizontally"
-msgstr "Maximalizovat aktivní okno horizontálně"
-
-#: ../metadata/core.xml.in.in.h:54
-msgid "Maximize active window vertically"
-msgstr "Maximalizovat aktivní okno vertikálně"
-
-#: ../metadata/core.xml.in.in.h:56
-msgid "Minimize active window"
-msgstr "Minimalizovat aktivní okno"
-
-#: ../metadata/core.xml.in.in.h:57 ../metadata/resize.xml.in.h:13
-msgid "Normal"
-msgstr "Běžná"
-
-#: ../metadata/core.xml.in.in.h:58
-msgid "Number of Desktops"
-msgstr "Počet ploch"
-
-#: ../metadata/core.xml.in.in.h:59
-msgid "Number of virtual desktops"
-msgstr "Počet virtuálních ploch"
-
-#: ../metadata/core.xml.in.in.h:60
-msgid "Off"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:61
-msgid "Only perform screen updates during vertical blanking period"
-msgstr ""
-"Provádět aktualizace obrazovky pouze během intervalu vertikálního zatemnění"
-
-#: ../metadata/core.xml.in.in.h:62
-msgid "Outputs"
-msgstr "Výstupy"
-
-#: ../metadata/core.xml.in.in.h:63
-msgid "Overlapping Output Handling"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:64
-msgid "Paint each output device independly, even if the output devices overlap"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:65
-#, fuzzy
-msgid "Ping Delay"
-msgstr "Prodleva pingu"
-
-#: ../metadata/core.xml.in.in.h:66
-msgid "Prefer larger output"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:67
-msgid "Prefer smaller output"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:68
+#: ../metadata/core.xml.in.in.h:28
 msgid "Raise On Click"
 msgstr "Dát do popředí při kliknutí"
 
-#: ../metadata/core.xml.in.in.h:69
-msgid "Raise Window"
-msgstr "Přenést okno do popředí"
-
-#: ../metadata/core.xml.in.in.h:70
-msgid "Raise selected windows after interval"
-msgstr "Dát vybraná okna do popředí po uplynutí intervalu"
-
-#: ../metadata/core.xml.in.in.h:71
-msgid "Raise window above other windows"
-msgstr "Přesunout okno nad ostatní okna"
-
-#: ../metadata/core.xml.in.in.h:72
+#: ../metadata/core.xml.in.in.h:29
 msgid "Raise windows when clicked"
 msgstr "Dát okna do popředí při kliknutí"
 
-#: ../metadata/core.xml.in.in.h:73
-msgid "Refresh Rate"
-msgstr "Obnovovací frekvence"
+#: ../metadata/core.xml.in.in.h:30
+msgid "Auto-Raise"
+msgstr "Automaticky do popředí"
 
-#: ../metadata/core.xml.in.in.h:74
+#: ../metadata/core.xml.in.in.h:31
+msgid "Raise selected windows after interval"
+msgstr "Dát vybraná okna do popředí po uplynutí intervalu"
+
+#: ../metadata/core.xml.in.in.h:32
+msgid "Auto-Raise Delay"
+msgstr "Prodleva automatického přesunu do popředí"
+
+#: ../metadata/core.xml.in.in.h:33
+msgid "Interval before raising selected windows"
+msgstr "Interval před přenesením vybraných oken do popředí"
+
+#: ../metadata/core.xml.in.in.h:34
+msgid "Key bindings"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:36
+msgid "Close active window"
+msgstr "Zavřít aktivní okno"
+
+#: ../metadata/core.xml.in.in.h:37
+msgid "Raise Window"
+msgstr "Přenést okno do popředí"
+
+#: ../metadata/core.xml.in.in.h:38
+msgid "Raise window above other windows"
+msgstr "Přesunout okno nad ostatní okna"
+
+#: ../metadata/core.xml.in.in.h:39
+msgid "Lower Window"
+msgstr "Dát okno do pozadí"
+
+#: ../metadata/core.xml.in.in.h:40
+msgid "Lower window beneath other windows"
+msgstr "Přesunout okno do pozadí"
+
+#: ../metadata/core.xml.in.in.h:42
+msgid "Unmaximize active window"
+msgstr "Zrušit maximalizaci aktivního okna"
+
+#: ../metadata/core.xml.in.in.h:44
+msgid "Minimize active window"
+msgstr "Minimalizovat aktivní okno"
+
+#: ../metadata/core.xml.in.in.h:46
+msgid "Maximize active window"
+msgstr "Maximalizovat aktivní okno"
+
+#: ../metadata/core.xml.in.in.h:47
+msgid "Maximize Window Horizontally"
+msgstr "Maximalizovat okno horizontálně"
+
+#: ../metadata/core.xml.in.in.h:48
+msgid "Maximize active window horizontally"
+msgstr "Maximalizovat aktivní okno horizontálně"
+
+#: ../metadata/core.xml.in.in.h:49
+msgid "Maximize Window Vertically"
+msgstr "Maximalizovat okno vertikálně"
+
+#: ../metadata/core.xml.in.in.h:50
+msgid "Maximize active window vertically"
+msgstr "Maximalizovat aktivní okno vertikálně"
+
+#: ../metadata/core.xml.in.in.h:52
+msgid "Window menu button binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:53
+msgid "Window menu key binding"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:54
+msgid "Show Desktop"
+msgstr "Zobrazit plochu"
+
+#: ../metadata/core.xml.in.in.h:55
+msgid "Hide all windows and focus desktop"
+msgstr "Skrýt všechna okna a zaměřit na plochu"
+
+#: ../metadata/core.xml.in.in.h:56
+msgid "Toggle Window Maximized"
+msgstr "Přepnout maximalizaci okna"
+
+#: ../metadata/core.xml.in.in.h:57
+msgid "Toggle active window maximized"
+msgstr "Přepnout maximalizaci aktivního okna"
+
+#: ../metadata/core.xml.in.in.h:58
+msgid "Toggle Window Maximized Horizontally"
+msgstr "Přepnout okno maximalizované horizontálně"
+
+#: ../metadata/core.xml.in.in.h:59
+msgid "Toggle active window maximized horizontally"
+msgstr "Přepnout horizontální maximalizaci aktivního okna"
+
+#: ../metadata/core.xml.in.in.h:60
+msgid "Toggle Window Maximized Vertically"
+msgstr "Přepnout okno maximalizované vertikálně"
+
+#: ../metadata/core.xml.in.in.h:61
+msgid "Toggle active window maximized vertically"
+msgstr "Přepnout vertikální maximalizaci aktivního okna"
+
+#: ../metadata/core.xml.in.in.h:62
+msgid "Toggle Window Shaded"
+msgstr "Přepnout stínování okna"
+
+#: ../metadata/core.xml.in.in.h:63
+msgid "Toggle active window shaded"
+msgstr "Přepnout stínování aktivního okna"
+
+#: ../metadata/core.xml.in.in.h:64
+msgid "Slow Animations"
+msgstr "Pomalé animace"
+
+#: ../metadata/core.xml.in.in.h:65
+msgid "Toggle use of slow animations"
+msgstr "Přepnout použití pomalých animací"
+
+#: ../metadata/core.xml.in.in.h:66
+#, fuzzy
+msgid "Desktop Size"
+msgstr "Kostka plochy"
+
+#: ../metadata/core.xml.in.in.h:67
+msgid "Horizontal Virtual Size"
+msgstr "Vodorovná virtuální velikost"
+
+#: ../metadata/core.xml.in.in.h:68
 #, fuzzy
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "Násobek vodorovné virtuální velikosti obrazovky"
 
-#: ../metadata/core.xml.in.in.h:75
+#: ../metadata/core.xml.in.in.h:69
+msgid "Vertical Virtual Size"
+msgstr "Svislá virtuální velikost"
+
+#: ../metadata/core.xml.in.in.h:70
 #, fuzzy
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "Násobek svislé virtuální velikosti obrazovky"
 
+#: ../metadata/core.xml.in.in.h:71
+msgid "Number of Desktops"
+msgstr "Počet ploch"
+
+#: ../metadata/core.xml.in.in.h:72
+msgid "Number of virtual desktops"
+msgstr "Počet virtuálních ploch"
+
+#: ../metadata/core.xml.in.in.h:73
+msgid "Lighting"
+msgstr "Světlo"
+
+#: ../metadata/core.xml.in.in.h:74
+msgid "Use diffuse light when screen is transformed"
+msgstr "Použít rozptýlené světlo při transformaci okna"
+
+#: ../metadata/core.xml.in.in.h:75
+msgid "Detect Refresh Rate"
+msgstr "Zjistit obnovovací frekvenci"
+
 #: ../metadata/core.xml.in.in.h:76
-msgid "Show Desktop"
-msgstr "Zobrazit plochu"
+msgid "Automatic detection of refresh rate"
+msgstr "Automatická detekce obnovovací frekvence"
 
 #: ../metadata/core.xml.in.in.h:77
-msgid "Slow Animations"
-msgstr "Pomalé animace"
+msgid "Refresh Rate"
+msgstr "Obnovovací frekvence"
 
 #: ../metadata/core.xml.in.in.h:78
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "Rychlost překreslování obrazovky (počet/s)"
+
+#: ../metadata/core.xml.in.in.h:79
+msgid "Detect Outputs"
+msgstr "Detekovat výstupy"
+
+#: ../metadata/core.xml.in.in.h:80
+msgid "Automatic detection of output devices"
+msgstr "Automatická detekce výstupních zařízení"
+
+#: ../metadata/core.xml.in.in.h:81
+msgid "Overlapping Output Handling"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:82
+msgid "Which one of overlapping output devices should be preferred"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:83
 #, fuzzy
 msgid "Smart mode"
 msgstr "Chytrý"
 
-#: ../metadata/core.xml.in.in.h:79
+#: ../metadata/core.xml.in.in.h:84
+msgid "Prefer larger output"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:85
+msgid "Prefer smaller output"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:86
+msgid "Outputs"
+msgstr "Výstupy"
+
+#: ../metadata/core.xml.in.in.h:87
+msgid "List of strings describing output devices"
+msgstr "Seznam řetězců, které popisují výstupní zařízení"
+
+#: ../metadata/core.xml.in.in.h:88
 msgid "Sync To VBlank"
 msgstr "Synchronizovat při VBlank "
 
-#: ../metadata/core.xml.in.in.h:80
+#: ../metadata/core.xml.in.in.h:89
+msgid "Only perform screen updates during vertical blanking period"
+msgstr ""
+"Provádět aktualizace obrazovky pouze během intervalu vertikálního zatemnění"
+
+#: ../metadata/core.xml.in.in.h:90
+#, fuzzy
+msgid "Focus Prevention Level"
+msgstr "Typy okna pro efekt při zaměření"
+
+#: ../metadata/core.xml.in.in.h:91
+msgid "Level of focus stealing prevention"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:92
+msgid "Off"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:93
+msgid "Low"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:16
+msgid "Normal"
+msgstr "Běžná"
+
+#: ../metadata/core.xml.in.in.h:95
+msgid "High"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:96
+msgid "Very High"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:97
+#, fuzzy
+msgid "Focus Prevention Windows"
+msgstr "Typy okna pro efekt při zaměření"
+
+#: ../metadata/core.xml.in.in.h:98
+#, fuzzy
+msgid "Focus prevention windows"
+msgstr "Typy okna pro efekt při zaměření"
+
+#: ../metadata/core.xml.in.in.h:99
+msgid "Unredirect Fullscreen Windows"
+msgstr "Unredirect Fullscreen Windows"
+
+#: ../metadata/core.xml.in.in.h:100
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Povolit vykreslování celoobrazovkových oken bez přesměrování do "
+"mimoobrazovkových pixmap"
+
+#: ../metadata/core.xml.in.in.h:101
+msgid "Default Icon"
+msgstr "Výchozí ikona"
+
+#: ../metadata/core.xml.in.in.h:102
+msgid "Default window icon image"
+msgstr "Výchozí ikona okna"
+
+#: ../metadata/core.xml.in.in.h:103
+msgid "Force independent output painting."
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:104
+msgid "Paint each output device independly, even if the output devices overlap"
+msgstr ""
+
+#: ../metadata/core.xml.in.in.h:105
 #, fuzzy
 msgid "Texture Compression"
 msgstr "Filtrování textur"
 
-#: ../metadata/core.xml.in.in.h:81
-msgid "Texture Filter"
-msgstr "Filtr textur"
-
-#: ../metadata/core.xml.in.in.h:82
-msgid "Texture filtering"
-msgstr "Filtrování textur"
-
-#: ../metadata/core.xml.in.in.h:83
-msgid "The rate at which the screen is redrawn (times/second)"
-msgstr "Rychlost překreslování obrazovky (počet/s)"
-
-#: ../metadata/core.xml.in.in.h:84
-msgid "Toggle Window Maximized"
-msgstr "Přepnout maximalizaci okna"
-
-#: ../metadata/core.xml.in.in.h:85
-msgid "Toggle Window Maximized Horizontally"
-msgstr "Přepnout okno maximalizované horizontálně"
-
-#: ../metadata/core.xml.in.in.h:86
-msgid "Toggle Window Maximized Vertically"
-msgstr "Přepnout okno maximalizované vertikálně"
-
-#: ../metadata/core.xml.in.in.h:87
-msgid "Toggle Window Shaded"
-msgstr "Přepnout stínování okna"
-
-#: ../metadata/core.xml.in.in.h:88
-msgid "Toggle active window maximized"
-msgstr "Přepnout maximalizaci aktivního okna"
-
-#: ../metadata/core.xml.in.in.h:89
-msgid "Toggle active window maximized horizontally"
-msgstr "Přepnout horizontální maximalizaci aktivního okna"
-
-#: ../metadata/core.xml.in.in.h:90
-msgid "Toggle active window maximized vertically"
-msgstr "Přepnout vertikální maximalizaci aktivního okna"
-
-#: ../metadata/core.xml.in.in.h:91
-msgid "Toggle active window shaded"
-msgstr "Přepnout stínování aktivního okna"
-
-#: ../metadata/core.xml.in.in.h:92
-msgid "Toggle use of slow animations"
-msgstr "Přepnout použití pomalých animací"
-
-#: ../metadata/core.xml.in.in.h:94
-msgid "Unmaximize active window"
-msgstr "Zrušit maximalizaci aktivního okna"
-
-#: ../metadata/core.xml.in.in.h:95
-msgid "Unredirect Fullscreen Windows"
-msgstr "Unredirect Fullscreen Windows"
-
-#: ../metadata/core.xml.in.in.h:96
-msgid "Use diffuse light when screen is transformed"
-msgstr "Použít rozptýlené světlo při transformaci okna"
-
-#: ../metadata/core.xml.in.in.h:97
-msgid "Vertical Virtual Size"
-msgstr "Svislá virtuální velikost"
-
-#: ../metadata/core.xml.in.in.h:98
-msgid "Very High"
+#: ../metadata/core.xml.in.in.h:106
+msgid "If available use compression for textures converted from images"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:99
-msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:101
-msgid "Window menu button binding"
-msgstr ""
-
-#: ../metadata/core.xml.in.in.h:102
-msgid "Window menu key binding"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:1 ../metadata/rotate.xml.in.h:1
-msgid "Acceleration"
-msgstr "Akcelerace"
+#: ../metadata/cube.xml.in.h:1
+msgid "Desktop Cube"
+msgstr "Kostka plochy"
 
 #: ../metadata/cube.xml.in.h:2
-msgid "Adjust Image"
-msgstr "Přizpůsobit obrázek"
+msgid "Place windows on cube"
+msgstr "Rozmístit okna na kostku"
 
 #: ../metadata/cube.xml.in.h:3
-msgid "Adjust top face image to rotation"
-msgstr "Přizpůsobit vrchní obrázek rotaci"
+msgid "Unfold"
+msgstr "Rozbalit"
 
 #: ../metadata/cube.xml.in.h:4
+msgid "Unfold cube"
+msgstr "Rozbalit kostku"
+
+#: ../metadata/cube.xml.in.h:5
+msgid "Next Slide"
+msgstr "Další snímek"
+
+#: ../metadata/cube.xml.in.h:6
 msgid "Advance to next slide"
 msgstr "Postoupit k dalšímu snímku"
 
-#: ../metadata/cube.xml.in.h:5
-msgid "Animate Skydome"
-msgstr "Animovat nebeskou báň"
-
-#: ../metadata/cube.xml.in.h:6
-msgid "Animate skydome when rotating cube"
-msgstr "Animovat nebeskou báň při rotaci kostky"
-
-#: ../metadata/cube.xml.in.h:7 ../metadata/scale.xml.in.h:2
-msgid "Appearance"
-msgstr ""
+#: ../metadata/cube.xml.in.h:7
+msgid "Prev Slide"
+msgstr "Předchozí snímek"
 
 #: ../metadata/cube.xml.in.h:8
+msgid "Go back to previous slide"
+msgstr "Jít zpět na předchozí snímek"
+
+#: ../metadata/cube.xml.in.h:10 ../metadata/switcher.xml.in.h:26
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr "Jeli to možné, vytvářet pro kvalitní škálování mipmapy"
+
+#: ../metadata/cube.xml.in.h:11 ../metadata/place.xml.in.h:13
+#: ../metadata/scale.xml.in.h:39
+msgid "Multi Output Mode"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:12
+msgid "Selects how the cube is displayed if multiple output devices are used."
+msgstr "Možnosti zobrazení kostky, pokud je použito víc výstupních zařízení."
+
+#: ../metadata/cube.xml.in.h:13
 #, fuzzy
 msgid "Automatic"
 msgstr "Automaticky do popředí"
 
-#: ../metadata/cube.xml.in.h:9 ../metadata/scale.xml.in.h:3
-msgid "Behaviour"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:10
-msgid "Color of top and bottom sides of the cube"
-msgstr "Barva vrchní a spodní strany kostky"
-
-#: ../metadata/cube.xml.in.h:11
-msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "Barva, která se použije na dolní část gradientu nebeské báně."
-
-#: ../metadata/cube.xml.in.h:12
-msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr "Barva, která se použije na horní část gradientu nebeské báně."
-
-#: ../metadata/cube.xml.in.h:13
-#, fuzzy
-msgid "Cube Caps"
-msgstr "Barva kostky"
-
 #: ../metadata/cube.xml.in.h:14
-msgid "Cube Color"
-msgstr "Barva kostky"
-
-#: ../metadata/cube.xml.in.h:15
-msgid "Desktop Cube"
-msgstr "Kostka plochy"
-
-#: ../metadata/cube.xml.in.h:16
-msgid "Fold Acceleration"
-msgstr "Zrychlení sbalení"
-
-#: ../metadata/cube.xml.in.h:17
-msgid "Fold Speed"
-msgstr "Rychlost sbalení"
-
-#: ../metadata/cube.xml.in.h:18
-msgid "Fold Timestep"
-msgstr "Časový krok sbalení"
-
-#: ../metadata/cube.xml.in.h:19 ../metadata/switcher.xml.in.h:11
-msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr "Jeli to možné, vytvářet pro kvalitní škálování mipmapy"
-
-#: ../metadata/cube.xml.in.h:20
-msgid "Go back to previous slide"
-msgstr "Jít zpět na předchozí snímek"
-
-#: ../metadata/cube.xml.in.h:21
-msgid "Image files"
-msgstr "Obrázkové soubory"
-
-#: ../metadata/cube.xml.in.h:22
-msgid "Image to use as texture for the skydome"
-msgstr "Obrázek pro texturu nebeské báně"
-
-#: ../metadata/cube.xml.in.h:23
-msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr "Iniciovat průhlednost kostky pouze pokud je rotace řízena myší"
-
-#: ../metadata/cube.xml.in.h:24
-msgid "Inside Cube"
-msgstr "Uvnitř kostky"
-
-#: ../metadata/cube.xml.in.h:25
-msgid "Inside cube"
-msgstr "V kostce"
-
-#: ../metadata/cube.xml.in.h:26
-msgid "List of PNG and SVG files that should be rendered on top face of cube"
-msgstr "Seznam PNG a SVG souborů, které mají být vykresleny na vrchu kostky"
-
-#: ../metadata/cube.xml.in.h:28 ../metadata/place.xml.in.h:10
-#: ../metadata/scale.xml.in.h:24
-msgid "Multi Output Mode"
-msgstr ""
-
-#: ../metadata/cube.xml.in.h:29
 msgid "Multiple cubes"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:30
-msgid "Next Slide"
-msgstr "Další snímek"
-
-#: ../metadata/cube.xml.in.h:31
+#: ../metadata/cube.xml.in.h:15
 #, fuzzy
 msgid "One big cube"
 msgstr "V kostce"
 
-#: ../metadata/cube.xml.in.h:32
-msgid "Opacity During Rotation"
-msgstr "Krytí během rotace"
+#: ../metadata/cube.xml.in.h:16 ../metadata/scale.xml.in.h:16
+msgid "Behaviour"
+msgstr ""
 
-#: ../metadata/cube.xml.in.h:33
-msgid "Opacity When Not Rotating"
-msgstr "Krytí bez rotace"
+#: ../metadata/cube.xml.in.h:17
+msgid "Inside Cube"
+msgstr "Uvnitř kostky"
 
-#: ../metadata/cube.xml.in.h:34
-msgid "Opacity of desktop window during rotation."
-msgstr "Krytí (neprůhlednost) ploch kostky během rotace."
+#: ../metadata/cube.xml.in.h:18
+msgid "Inside cube"
+msgstr "V kostce"
 
-#: ../metadata/cube.xml.in.h:35
-msgid "Opacity of desktop window when not rotating."
-msgstr "Krytí (neprůhlednost) ploch kostky."
+#: ../metadata/cube.xml.in.h:19 ../metadata/rotate.xml.in.h:89
+msgid "Acceleration"
+msgstr "Akcelerace"
 
-#: ../metadata/cube.xml.in.h:36
-msgid "Place windows on cube"
-msgstr "Rozmístit okna na kostku"
+#: ../metadata/cube.xml.in.h:20
+msgid "Fold Acceleration"
+msgstr "Zrychlení sbalení"
 
-#: ../metadata/cube.xml.in.h:37
-msgid "Prev Slide"
-msgstr "Předchozí snímek"
+#: ../metadata/cube.xml.in.h:21 ../metadata/minimize.xml.in.h:3
+#: ../metadata/rotate.xml.in.h:95 ../metadata/scale.xml.in.h:22
+#: ../metadata/switcher.xml.in.h:19 ../metadata/zoom.xml.in.h:8
+msgid "Speed"
+msgstr "Rychlost"
 
-#: ../metadata/cube.xml.in.h:38
-msgid "Render skydome"
-msgstr "Vykreslit nebeskou báň"
+#: ../metadata/cube.xml.in.h:22
+msgid "Fold Speed"
+msgstr "Rychlost sbalení"
 
-#: ../metadata/cube.xml.in.h:39
+#: ../metadata/cube.xml.in.h:23 ../metadata/minimize.xml.in.h:5
+#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:24
+#: ../metadata/switcher.xml.in.h:21 ../metadata/zoom.xml.in.h:10
+msgid "Timestep"
+msgstr "Časový krok"
+
+#: ../metadata/cube.xml.in.h:24
+msgid "Fold Timestep"
+msgstr "Časový krok sbalení"
+
+#: ../metadata/cube.xml.in.h:25 ../metadata/scale.xml.in.h:19
+msgid "Appearance"
+msgstr ""
+
+#: ../metadata/cube.xml.in.h:26
+msgid "Cube Color"
+msgstr "Barva kostky"
+
+#: ../metadata/cube.xml.in.h:27
+msgid "Color of top and bottom sides of the cube"
+msgstr "Barva vrchní a spodní strany kostky"
+
+#: ../metadata/cube.xml.in.h:28
+#, fuzzy
+msgid "Cube Caps"
+msgstr "Barva kostky"
+
+#: ../metadata/cube.xml.in.h:29
 msgid "Scale image"
 msgstr "Škálovat obrázek"
 
-#: ../metadata/cube.xml.in.h:40
+#: ../metadata/cube.xml.in.h:30
 msgid "Scale images to cover top face of cube"
 msgstr "Změnit velikost obrázků podle vrchu kostky"
 
-#: ../metadata/cube.xml.in.h:41
-msgid "Selects how the cube is displayed if multiple output devices are used."
-msgstr "Možnosti zobrazení kostky, pokud je použito víc výstupních zařízení."
+#: ../metadata/cube.xml.in.h:31
+msgid "Image files"
+msgstr "Obrázkové soubory"
 
-#: ../metadata/cube.xml.in.h:42
+#: ../metadata/cube.xml.in.h:32
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr "Seznam PNG a SVG souborů, které mají být vykresleny na vrchu kostky"
+
+#: ../metadata/cube.xml.in.h:33
+msgid "Adjust Image"
+msgstr "Přizpůsobit obrázek"
+
+#: ../metadata/cube.xml.in.h:34
+msgid "Adjust top face image to rotation"
+msgstr "Přizpůsobit vrchní obrázek rotaci"
+
+#: ../metadata/cube.xml.in.h:35
 msgid "Skydome"
 msgstr "Nebeská báň"
+
+#: ../metadata/cube.xml.in.h:36
+msgid "Render skydome"
+msgstr "Vykreslit nebeskou báň"
+
+#: ../metadata/cube.xml.in.h:37
+msgid "Skydome Image"
+msgstr "Obrázek nebeské báně"
+
+#: ../metadata/cube.xml.in.h:38
+msgid "Image to use as texture for the skydome"
+msgstr "Obrázek pro texturu nebeské báně"
+
+#: ../metadata/cube.xml.in.h:39
+msgid "Animate Skydome"
+msgstr "Animovat nebeskou báň"
+
+#: ../metadata/cube.xml.in.h:40
+msgid "Animate skydome when rotating cube"
+msgstr "Animovat nebeskou báň při rotaci kostky"
+
+#: ../metadata/cube.xml.in.h:41
+msgid "Skydome Gradient Start Color"
+msgstr "Počáteční barva gradientu nebeské báně"
+
+#: ../metadata/cube.xml.in.h:42
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr "Barva, která se použije na horní část gradientu nebeské báně."
 
 #: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient End Color"
 msgstr "Konečná barva gradientu nebeské báně"
 
 #: ../metadata/cube.xml.in.h:44
-msgid "Skydome Gradient Start Color"
-msgstr "Počáteční barva gradientu nebeské báně"
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr "Barva, která se použije na dolní část gradientu nebeské báně."
 
 #: ../metadata/cube.xml.in.h:45
-msgid "Skydome Image"
-msgstr "Obrázek nebeské báně"
-
-#: ../metadata/cube.xml.in.h:46 ../metadata/minimize.xml.in.h:7
-#: ../metadata/rotate.xml.in.h:94 ../metadata/scale.xml.in.h:39
-#: ../metadata/switcher.xml.in.h:36
-msgid "Speed"
-msgstr "Rychlost"
-
-#: ../metadata/cube.xml.in.h:47 ../metadata/minimize.xml.in.h:8
-#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:41
-#: ../metadata/switcher.xml.in.h:40
-msgid "Timestep"
-msgstr "Časový krok"
-
-#: ../metadata/cube.xml.in.h:48
-msgid "Transparency Only on Mouse Rotate"
-msgstr "Průhlednot pouze při rotování za pomoci myši"
-
-#: ../metadata/cube.xml.in.h:49
 msgid "Transparent Cube"
 msgstr ""
 
+#: ../metadata/cube.xml.in.h:46
+msgid "Opacity During Rotation"
+msgstr "Krytí během rotace"
+
+#: ../metadata/cube.xml.in.h:47
+msgid "Opacity of desktop window during rotation."
+msgstr "Krytí (neprůhlednost) ploch kostky během rotace."
+
+#: ../metadata/cube.xml.in.h:48
+msgid "Opacity When Not Rotating"
+msgstr "Krytí bez rotace"
+
+#: ../metadata/cube.xml.in.h:49
+msgid "Opacity of desktop window when not rotating."
+msgstr "Krytí (neprůhlednost) ploch kostky."
+
 #: ../metadata/cube.xml.in.h:50
-msgid "Unfold"
-msgstr "Rozbalit"
+msgid "Transparency Only on Mouse Rotate"
+msgstr "Průhlednot pouze při rotování za pomoci myši"
 
 #: ../metadata/cube.xml.in.h:51
-msgid "Unfold cube"
-msgstr "Rozbalit kostku"
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr "Iniciovat průhlednost kostky pouze pokud je rotace řízena myší"
 
 #: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
@@ -1416,211 +1873,203 @@ msgid "Dbus Control Backend"
 msgstr "Ovládací backend Dbus"
 
 #: ../metadata/decoration.xml.in.h:1
-msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
+msgid "Window Decoration"
+msgstr "Dekorace oken"
 
 #: ../metadata/decoration.xml.in.h:2
+msgid "Window decorations"
+msgstr "Dekorace oken"
+
+#: ../metadata/decoration.xml.in.h:3
+msgid "Shadow Radius"
+msgstr "Poloměr stínu"
+
+#: ../metadata/decoration.xml.in.h:4
+msgid "Drop shadow radius"
+msgstr "Poloměr vrženého stínu"
+
+#: ../metadata/decoration.xml.in.h:5
+msgid "Shadow Opacity"
+msgstr "Krytí stínu"
+
+#: ../metadata/decoration.xml.in.h:6
+msgid "Drop shadow opacity"
+msgstr "Krytí vrženého stínu"
+
+#: ../metadata/decoration.xml.in.h:7 ../metadata/wall.xml.in.h:24
+msgid "Shadow Color"
+msgstr "Barva stínu"
+
+#: ../metadata/decoration.xml.in.h:8
+msgid "Drop shadow color"
+msgstr "Barva vrženého stínu"
+
+#: ../metadata/decoration.xml.in.h:9
+msgid "Shadow Offset X"
+msgstr "Posun stínu X"
+
+#: ../metadata/decoration.xml.in.h:10
+msgid "Drop shadow X offset"
+msgstr "Posun vrženého stínu X"
+
+#: ../metadata/decoration.xml.in.h:11
+msgid "Shadow Offset Y"
+msgstr "Posun stínu Y"
+
+#: ../metadata/decoration.xml.in.h:12
+msgid "Drop shadow Y offset"
+msgstr "Posun vrženého stínu Y"
+
+#: ../metadata/decoration.xml.in.h:13
 msgid "Command"
 msgstr "Příkaz"
 
-#: ../metadata/decoration.xml.in.h:3
-msgid "Decoration windows"
-msgstr "Dekorovaná okna"
-
-#: ../metadata/decoration.xml.in.h:4
+#: ../metadata/decoration.xml.in.h:14
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr ""
 "Příkazová řádka programu pro dekorace, která je spuštěna, pokud ještě není "
 "spuštěn žádný program pro dekorace"
 
-#: ../metadata/decoration.xml.in.h:5
-msgid "Drop shadow X offset"
-msgstr "Posun vrženého stínu X"
-
-#: ../metadata/decoration.xml.in.h:6
-msgid "Drop shadow Y offset"
-msgstr "Posun vrženého stínu Y"
-
-#: ../metadata/decoration.xml.in.h:7
-msgid "Drop shadow color"
-msgstr "Barva vrženého stínu"
-
-#: ../metadata/decoration.xml.in.h:8
-msgid "Drop shadow opacity"
-msgstr "Krytí vrženého stínu"
-
-#: ../metadata/decoration.xml.in.h:9
-msgid "Drop shadow radius"
-msgstr "Poloměr vrženého stínu"
-
-#: ../metadata/decoration.xml.in.h:11
-msgid "Shadow Color"
-msgstr "Barva stínu"
-
-#: ../metadata/decoration.xml.in.h:12
-msgid "Shadow Offset X"
-msgstr "Posun stínu X"
-
-#: ../metadata/decoration.xml.in.h:13
-msgid "Shadow Offset Y"
-msgstr "Posun stínu Y"
-
-#: ../metadata/decoration.xml.in.h:14
-msgid "Shadow Opacity"
-msgstr "Krytí stínu"
-
-#: ../metadata/decoration.xml.in.h:15
-msgid "Shadow Radius"
-msgstr "Poloměr stínu"
-
 #: ../metadata/decoration.xml.in.h:16
-msgid "Shadow windows"
-msgstr "Stínované okna"
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr ""
 
 #: ../metadata/decoration.xml.in.h:17
-msgid "Window Decoration"
-msgstr "Dekorace oken"
+msgid "Decoration windows"
+msgstr "Dekorovaná okna"
 
 #: ../metadata/decoration.xml.in.h:18
-msgid "Window decorations"
-msgstr "Dekorace oken"
-
-#: ../metadata/decoration.xml.in.h:19
 msgid "Windows that should be decorated"
 msgstr "Typy oken, která mohou být dekorovány"
+
+#: ../metadata/decoration.xml.in.h:19
+msgid "Shadow windows"
+msgstr "Stínované okna"
 
 #: ../metadata/decoration.xml.in.h:20
 msgid "Windows that should have a shadow"
 msgstr "Typy oken, která mohou mít stín"
 
+#: ../metadata/fade.xml.in.h:1
+msgid "Fading Windows"
+msgstr "Slábnutí oken"
+
 #: ../metadata/fade.xml.in.h:2
-#, no-c-format
-msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr "Blednutí mapovaných oken a materializace oken nemapovaných"
 
 #: ../metadata/fade.xml.in.h:3
-#, fuzzy
-msgid "Constant speed"
-msgstr "Rychlost otáčení"
-
-#: ../metadata/fade.xml.in.h:4
-#, fuzzy
-msgid "Constant time"
-msgstr "Omezení Y"
-
-#: ../metadata/fade.xml.in.h:5
-#, fuzzy
-msgid "Dim Unresponsive Windows"
-msgstr "Normálně měněné okna"
-
-#: ../metadata/fade.xml.in.h:6
-msgid "Dim windows that are not responding to window manager requests"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:7
 #, fuzzy
 msgid "Fade Mode"
 msgstr "Doba zprůhlednění"
 
-#: ../metadata/fade.xml.in.h:8
-msgid "Fade On Minimize/Open/Close"
-msgstr "Slábnout pří minimalizaci/otevření/zavření"
-
-#: ../metadata/fade.xml.in.h:9
-msgid "Fade Speed"
-msgstr "Rychlost blednutí"
-
-#: ../metadata/fade.xml.in.h:10
-msgid "Fade Time"
-msgstr "Doba zprůhlednění"
-
-#: ../metadata/fade.xml.in.h:11
-msgid "Fade effect on minimize/open/close window events"
-msgstr "Efekt slábnutí okna pří událostech :  Minimalizace/Otevření/Zavření"
-
-#: ../metadata/fade.xml.in.h:12
-msgid "Fade effect on system beep"
-msgstr "Efekt blednutí při systémovém pípnutí"
-
-#: ../metadata/fade.xml.in.h:13
-msgid "Fade in windows when mapped and fade out windows when unmapped"
-msgstr "Blednutí mapovaných oken a materializace oken nemapovaných"
-
-#: ../metadata/fade.xml.in.h:14
-msgid "Fade windows"
-msgstr "Blednutí"
-
-#: ../metadata/fade.xml.in.h:15
-msgid "Fading Windows"
-msgstr "Slábnutí oken"
-
-#: ../metadata/fade.xml.in.h:16
-msgid "Fullscreen Visual Bell"
-msgstr "Celoobrazovkový vizuální zvonek"
-
-#: ../metadata/fade.xml.in.h:17
-msgid "Fullscreen fade effect on system beep"
-msgstr "Celoobrazovkový efekt slábnutí při systémovém pípnutí"
-
-#: ../metadata/fade.xml.in.h:19
-#, no-c-format
-msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:20
-msgid "Unresponsive Window Brightness"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:21
-msgid "Unresponsive Window Saturation"
-msgstr ""
-
-#: ../metadata/fade.xml.in.h:22
-msgid "Visual Bell"
-msgstr "Vizuální zvonek"
-
-#: ../metadata/fade.xml.in.h:23
+#: ../metadata/fade.xml.in.h:4
 #, fuzzy
 msgid "Window fade mode"
 msgstr "Rychlost blednutí okna"
 
-#: ../metadata/fade.xml.in.h:24
+#: ../metadata/fade.xml.in.h:5
+#, fuzzy
+msgid "Constant speed"
+msgstr "Rychlost otáčení"
+
+#: ../metadata/fade.xml.in.h:6
+#, fuzzy
+msgid "Constant time"
+msgstr "Omezení Y"
+
+#: ../metadata/fade.xml.in.h:7
+msgid "Fade Speed"
+msgstr "Rychlost blednutí"
+
+#: ../metadata/fade.xml.in.h:8
 #, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
 msgstr "Typy oken, které budou zobrazeny v režimu škálování"
 
-#: ../metadata/fade.xml.in.h:25
+#: ../metadata/fade.xml.in.h:9
+msgid "Fade Time"
+msgstr "Doba zprůhlednění"
+
+#: ../metadata/fade.xml.in.h:10
 msgid "Window fade time (in ms) in \"Constant time\" mode"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:26
+#: ../metadata/fade.xml.in.h:11
+msgid "Fade windows"
+msgstr "Blednutí"
+
+#: ../metadata/fade.xml.in.h:12
 msgid "Windows that should be fading"
 msgstr "Typy oken, která mohou blednout"
 
+#: ../metadata/fade.xml.in.h:13
+msgid "Visual Bell"
+msgstr "Vizuální zvonek"
+
+#: ../metadata/fade.xml.in.h:14
+msgid "Fade effect on system beep"
+msgstr "Efekt blednutí při systémovém pípnutí"
+
+#: ../metadata/fade.xml.in.h:15
+msgid "Fullscreen Visual Bell"
+msgstr "Celoobrazovkový vizuální zvonek"
+
+#: ../metadata/fade.xml.in.h:16
+msgid "Fullscreen fade effect on system beep"
+msgstr "Celoobrazovkový efekt slábnutí při systémovém pípnutí"
+
+#: ../metadata/fade.xml.in.h:17
+msgid "Fade On Minimize/Open/Close"
+msgstr "Slábnout pří minimalizaci/otevření/zavření"
+
+#: ../metadata/fade.xml.in.h:18
+msgid "Fade effect on minimize/open/close window events"
+msgstr "Efekt slábnutí okna pří událostech :  Minimalizace/Otevření/Zavření"
+
+#: ../metadata/fade.xml.in.h:19
+#, fuzzy
+msgid "Dim Unresponsive Windows"
+msgstr "Normálně měněné okna"
+
+#: ../metadata/fade.xml.in.h:20
+msgid "Dim windows that are not responding to window manager requests"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:21
+msgid "Unresponsive Window Brightness"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:23
+#, no-c-format
+msgid "Brightness (in %) of unresponsive windows"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:24
+msgid "Unresponsive Window Saturation"
+msgstr ""
+
+#: ../metadata/fade.xml.in.h:26
+#, no-c-format
+msgid "Saturation (in %) of unresponsive windows"
+msgstr ""
+
 #: ../metadata/fs.xml.in.h:1
-msgid "Mount Point"
-msgstr "Přípojný bod"
-
-#: ../metadata/fs.xml.in.h:2
-msgid "Mount point"
-msgstr "Přípojný bod"
-
-#: ../metadata/fs.xml.in.h:3
 msgid "Userspace File System"
 msgstr "Uživatelský souborový systém"
 
-#: ../metadata/fs.xml.in.h:4
+#: ../metadata/fs.xml.in.h:2
 msgid "Userspace file system"
 msgstr "Uživatelský souborový systém"
 
-#: ../metadata/gconf.xml.in.h:1
-msgid "GConf"
-msgstr "Gconf"
+#: ../metadata/fs.xml.in.h:3
+msgid "Mount Point"
+msgstr "Přípojný bod"
 
-#: ../metadata/gconf.xml.in.h:2
-msgid "GConf Control Backend"
-msgstr "Kontrolní backend GConf"
+#: ../metadata/fs.xml.in.h:4
+msgid "Mount point"
+msgstr "Přípojný bod"
 
 #: ../metadata/glib.xml.in.h:1
 msgid "GLib"
@@ -1630,58 +2079,58 @@ msgstr "GLib"
 msgid "GLib main loop support"
 msgstr "Podpora hlavního napojení na GLib"
 
-#: ../metadata/matecompat.xml.in.h:2
+#: ../metadata/matecompat.xml.in.h:1
 msgid "MATE Compatibility"
 msgstr ""
 
-#: ../metadata/matecompat.xml.in.h:3
-msgid "Open a terminal"
-msgstr "Otevřít terminál"
-
-#: ../metadata/matecompat.xml.in.h:4
+#: ../metadata/matecompat.xml.in.h:2
 msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
+
+#: ../metadata/matecompat.xml.in.h:3
+msgid "Show Main Menu"
+msgstr "Zobrazit hlavní nabídku"
+
+#: ../metadata/matecompat.xml.in.h:4
+msgid "Show the main menu"
+msgstr "Zobrazit hlavní nabídku"
 
 #: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "Spustit dialog"
 
 #: ../metadata/matecompat.xml.in.h:6
-#, fuzzy
-msgid "Run terminal command"
-msgstr "Příkaz pro otevření terminálu"
-
-#: ../metadata/matecompat.xml.in.h:7
-msgid "Screenshot command line"
-msgstr "Screenshot command line"
-
-#: ../metadata/matecompat.xml.in.h:8
-msgid "Show Main Menu"
-msgstr "Zobrazit hlavní nabídku"
-
-#: ../metadata/matecompat.xml.in.h:9
 msgid "Show Run Application dialog"
 msgstr "Zobrazit dialog spouštění aplikace"
 
-#: ../metadata/matecompat.xml.in.h:10
-msgid "Show the main menu"
-msgstr "Zobrazit hlavní nabídku"
+#: ../metadata/matecompat.xml.in.h:8
+msgid "Screenshot command line"
+msgstr "Screenshot command line"
 
-#: ../metadata/matecompat.xml.in.h:11
+#: ../metadata/matecompat.xml.in.h:9
 msgid "Take a screenshot"
 msgstr "Pořídit snímek obrazovky"
 
-#: ../metadata/matecompat.xml.in.h:12
+#: ../metadata/matecompat.xml.in.h:10
+msgid "Window screenshot command line"
+msgstr "Window screenshot command line"
+
+#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot of a window"
 msgstr "Pořídit snímek okna"
+
+#: ../metadata/matecompat.xml.in.h:12
+#, fuzzy
+msgid "Run terminal command"
+msgstr "Příkaz pro otevření terminálu"
 
 #: ../metadata/matecompat.xml.in.h:13
 msgid "Terminal command line"
 msgstr "Příkaz pro otevření terminálu"
 
 #: ../metadata/matecompat.xml.in.h:14
-msgid "Window screenshot command line"
-msgstr "Window screenshot command line"
+msgid "Open a terminal"
+msgstr "Otevřít terminál"
 
 #: ../metadata/ini.xml.in.h:1
 #, fuzzy
@@ -1693,369 +2142,411 @@ msgid "Ini Flat File Backend"
 msgstr ""
 
 #: ../metadata/inotify.xml.in.h:1
-msgid "File change notification plugin"
-msgstr "Modul upozornění změny soubou"
-
-#: ../metadata/inotify.xml.in.h:2
 msgid "Inotify"
 msgstr "Inotify"
 
-#: ../metadata/kconfig.xml.in.h:1
-msgid "Kconfig"
-msgstr "Kconfig"
-
-#: ../metadata/kconfig.xml.in.h:2
-msgid "Kconfig Control Backend"
-msgstr "Kontrolní backend Kconfig"
+#: ../metadata/inotify.xml.in.h:2
+msgid "File change notification plugin"
+msgstr "Modul upozornění změny soubou"
 
 #: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
 msgstr "Efekt minimalizace"
 
 #: ../metadata/minimize.xml.in.h:2
-msgid "Minimize Windows"
-msgstr "Minimalizovatelná okna"
-
-#: ../metadata/minimize.xml.in.h:3
-msgid "Minimize speed"
-msgstr "Rychlost minimalizace"
-
-#: ../metadata/minimize.xml.in.h:4
-msgid "Minimize timestep"
-msgstr "Časový krok minimalizace"
-
-#: ../metadata/minimize.xml.in.h:5
-msgid "Shade Resistance"
-msgstr "Stálost stínu"
-
-#: ../metadata/minimize.xml.in.h:6
-msgid "Shade resistance"
-msgstr "Stálost stínu"
-
-#: ../metadata/minimize.xml.in.h:9
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "Transformovat okna při jejich minimalizaci a zrušení minimalizace"
 
-#: ../metadata/minimize.xml.in.h:10
+#: ../metadata/minimize.xml.in.h:4
+msgid "Minimize speed"
+msgstr "Rychlost minimalizace"
+
+#: ../metadata/minimize.xml.in.h:6
+msgid "Minimize timestep"
+msgstr "Časový krok minimalizace"
+
+#: ../metadata/minimize.xml.in.h:7
+msgid "Minimize Windows"
+msgstr "Minimalizovatelná okna"
+
+#: ../metadata/minimize.xml.in.h:8
 msgid "Windows that should be transformed when minimized"
 msgstr "Typy oken, která se mají při minimalizaci transformovat"
 
+#: ../metadata/minimize.xml.in.h:9
+msgid "Shade Resistance"
+msgstr "Stálost stínu"
+
+#: ../metadata/minimize.xml.in.h:10
+msgid "Shade resistance"
+msgstr "Stálost stínu"
+
 #: ../metadata/move.xml.in.h:1
-msgid "Constrain Y"
-msgstr "Omezení Y"
-
-#: ../metadata/move.xml.in.h:2
-msgid "Constrain Y coordinate to workspace area"
-msgstr "Omezení Y souřadnice na pracovní prostor"
-
-#: ../metadata/move.xml.in.h:3
-msgid "Do not update the server-side position of windows until finished moving"
-msgstr "Aktualizovat pozici okna až při ukončení přesunu"
-
-#: ../metadata/move.xml.in.h:4
-msgid "Initiate Window Move"
-msgstr "Iniciovat přesun okna"
-
-#: ../metadata/move.xml.in.h:5
-msgid "Lazy Positioning"
-msgstr "\"Líné\" přesouvání"
-
-#: ../metadata/move.xml.in.h:6
 msgid "Move Window"
 msgstr "Přesunout okno"
 
-#: ../metadata/move.xml.in.h:7
+#: ../metadata/move.xml.in.h:2
 msgid "Move window"
 msgstr "Přesunout okno"
 
-#: ../metadata/move.xml.in.h:8 ../metadata/obs.xml.in.h:8
-#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:19
+#: ../metadata/move.xml.in.h:3
+msgid "Initiate Window Move"
+msgstr "Iniciovat přesun okna"
+
+#: ../metadata/move.xml.in.h:4
+msgid "Start moving window"
+msgstr "Zahájit pohyb okna"
+
+#: ../metadata/move.xml.in.h:5 ../metadata/obs.xml.in.h:3
+#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:31
 msgid "Opacity"
 msgstr "Krytí"
 
-#: ../metadata/move.xml.in.h:9
+#: ../metadata/move.xml.in.h:6
 msgid "Opacity level of moving windows"
 msgstr "Úroveň krytí přesouvaných oken"
+
+#: ../metadata/move.xml.in.h:7
+msgid "Constrain Y"
+msgstr "Omezení Y"
+
+#: ../metadata/move.xml.in.h:8
+msgid "Constrain Y coordinate to workspace area"
+msgstr "Omezení Y souřadnice na pracovní prostor"
+
+#: ../metadata/move.xml.in.h:9
+msgid "Snapoff maximized windows"
+msgstr "Odtrhávat maximalizovaná okna"
 
 #: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "Snapoff and auto unmaximized maximized windows when dragging"
 
 #: ../metadata/move.xml.in.h:11
-msgid "Snapoff maximized windows"
-msgstr "Odtrhávat maximalizovaná okna"
+msgid "Lazy Positioning"
+msgstr "\"Líné\" přesouvání"
 
 #: ../metadata/move.xml.in.h:12
-msgid "Start moving window"
-msgstr "Zahájit pohyb okna"
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr "Aktualizovat pozici okna až při ukončení přesunu"
 
-#: ../metadata/obs.xml.in.h:1 ../metadata/switcher.xml.in.h:7
-msgid "Brightness"
-msgstr "Jas"
-
-#: ../metadata/obs.xml.in.h:2
-#, fuzzy
-msgid "Brightness Decrease"
-msgstr "Jas"
-
-#: ../metadata/obs.xml.in.h:3
-#, fuzzy
-msgid "Brightness Increase"
-msgstr "Jas"
-
-#: ../metadata/obs.xml.in.h:4
-#, fuzzy
-msgid "Brightness Step"
-msgstr "Jas"
-
-#: ../metadata/obs.xml.in.h:5
-msgid "Brightness values for windows"
-msgstr ""
-
-#: ../metadata/obs.xml.in.h:6
-#, fuzzy
-msgid "Decrease"
-msgstr "Snížit krytí"
-
-#: ../metadata/obs.xml.in.h:7
-#, fuzzy
-msgid "Increase"
-msgstr "Zvýšit krytí"
-
-#: ../metadata/obs.xml.in.h:9
-#, fuzzy
-msgid "Opacity Decrease"
-msgstr "Krok změny krytí"
-
-#: ../metadata/obs.xml.in.h:10
-#, fuzzy
-msgid "Opacity Increase"
-msgstr "Krok změny krytí"
-
-#: ../metadata/obs.xml.in.h:11
-msgid "Opacity Step"
-msgstr "Krok krytí"
-
-#: ../metadata/obs.xml.in.h:12
-#, fuzzy
-msgid "Opacity values for windows"
-msgstr "Úroveň krytí přesouvaných oken"
-
-#: ../metadata/obs.xml.in.h:13
+#: ../metadata/obs.xml.in.h:1
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
 msgstr "Krytí během rotace"
 
-#: ../metadata/obs.xml.in.h:14
+#: ../metadata/obs.xml.in.h:2
 msgid "Opacity, Brightness and Saturation adjustments"
 msgstr ""
 
-#: ../metadata/obs.xml.in.h:15 ../metadata/switcher.xml.in.h:29
+#: ../metadata/obs.xml.in.h:4
+#, fuzzy
+msgid "Increase Opacity"
+msgstr "Zvýšit krytí okna"
+
+#: ../metadata/obs.xml.in.h:5
+#, fuzzy
+msgid "Opacity Increase"
+msgstr "Krok změny krytí"
+
+#: ../metadata/obs.xml.in.h:6
+#, fuzzy
+msgid "Decrease Opacity"
+msgstr "Snížit krytí oken"
+
+#: ../metadata/obs.xml.in.h:7
+#, fuzzy
+msgid "Opacity Decrease"
+msgstr "Krok změny krytí"
+
+#: ../metadata/obs.xml.in.h:8 ../metadata/switcher.xml.in.h:29
+msgid "Brightness"
+msgstr "Jas"
+
+#: ../metadata/obs.xml.in.h:9
+#, fuzzy
+msgid "Increase Brightness"
+msgstr "Jas"
+
+#: ../metadata/obs.xml.in.h:10
+#, fuzzy
+msgid "Brightness Increase"
+msgstr "Jas"
+
+#: ../metadata/obs.xml.in.h:11
+#, fuzzy
+msgid "Decrease Brightness"
+msgstr "Jas"
+
+#: ../metadata/obs.xml.in.h:12
+#, fuzzy
+msgid "Brightness Decrease"
+msgstr "Jas"
+
+#: ../metadata/obs.xml.in.h:13 ../metadata/switcher.xml.in.h:27
 msgid "Saturation"
 msgstr "Sytost"
 
-#: ../metadata/obs.xml.in.h:16
+#: ../metadata/obs.xml.in.h:14
 #, fuzzy
-msgid "Saturation Decrease"
+msgid "Increase Saturation"
 msgstr "Sytost"
 
-#: ../metadata/obs.xml.in.h:17
+#: ../metadata/obs.xml.in.h:15
 #, fuzzy
 msgid "Saturation Increase"
 msgstr "Sytost"
 
-#: ../metadata/obs.xml.in.h:18
+#: ../metadata/obs.xml.in.h:16
 #, fuzzy
-msgid "Saturation Step"
+msgid "Decrease Saturation"
 msgstr "Sytost"
 
-#: ../metadata/obs.xml.in.h:19
-msgid "Saturation values for windows"
-msgstr ""
+#: ../metadata/obs.xml.in.h:17
+#, fuzzy
+msgid "Saturation Decrease"
+msgstr "Sytost"
 
-#: ../metadata/obs.xml.in.h:20
+#: ../metadata/obs.xml.in.h:18
 msgid "Step"
 msgstr ""
 
-#: ../metadata/obs.xml.in.h:21
+#: ../metadata/obs.xml.in.h:19
+msgid "Opacity Step"
+msgstr "Krok krytí"
+
+#: ../metadata/obs.xml.in.h:20
 #, fuzzy
 msgid "Window specific settings"
 msgstr "Dekorace oken"
 
-#: ../metadata/obs.xml.in.h:22
-#, fuzzy
-msgid "Window values"
-msgstr "Typy oken"
-
-#: ../metadata/obs.xml.in.h:23
+#: ../metadata/obs.xml.in.h:21 ../metadata/place.xml.in.h:32
 #, fuzzy
 msgid "Windows"
 msgstr "Mapované"
 
-#: ../metadata/obs.xml.in.h:24
-#, fuzzy
-msgid "Windows that should have a different brightness by default"
-msgstr "Okna, které budou implicitně rozmístěny"
-
-#: ../metadata/obs.xml.in.h:25
+#: ../metadata/obs.xml.in.h:22
 #, fuzzy
 msgid "Windows that should have a different opacity by default"
 msgstr "Typy oken, která mohou blednout"
 
+#: ../metadata/obs.xml.in.h:23
+#, fuzzy
+msgid "Window values"
+msgstr "Typy oken"
+
+#: ../metadata/obs.xml.in.h:24
+#, fuzzy
+msgid "Opacity values for windows"
+msgstr "Úroveň krytí přesouvaných oken"
+
+#: ../metadata/obs.xml.in.h:25
+#, fuzzy
+msgid "Brightness Step"
+msgstr "Jas"
+
 #: ../metadata/obs.xml.in.h:26
+#, fuzzy
+msgid "Windows that should have a different brightness by default"
+msgstr "Okna, které budou implicitně rozmístěny"
+
+#: ../metadata/obs.xml.in.h:27
+msgid "Brightness values for windows"
+msgstr ""
+
+#: ../metadata/obs.xml.in.h:28
+#, fuzzy
+msgid "Saturation Step"
+msgstr "Sytost"
+
+#: ../metadata/obs.xml.in.h:29
 #, fuzzy
 msgid "Windows that should have a different saturation by default"
 msgstr "Okna, které budou implicitně rozmístěny"
 
+#: ../metadata/obs.xml.in.h:30
+msgid "Saturation values for windows"
+msgstr ""
+
 #: ../metadata/place.xml.in.h:1
-msgid "Algorithm to use for window placement"
-msgstr "Algoritmus použitý pro rozmístění oken"
-
-#: ../metadata/place.xml.in.h:2
-msgid "Cascade"
-msgstr "Kaskáda"
-
-#: ../metadata/place.xml.in.h:3
-msgid "Centered"
-msgstr "Centrovaný"
-
-#: ../metadata/place.xml.in.h:4
-#, fuzzy
-msgid "Fixed Window Placement"
-msgstr "Správce oken"
-
-#: ../metadata/place.xml.in.h:5
-#, fuzzy
-msgid "Force Placement Windows"
-msgstr "Typy okna pro efekt při zaměření"
-
-#: ../metadata/place.xml.in.h:6
-#, fuzzy
-msgid "Horizontal viewport positions"
-msgstr "Vodorovná virtuální velikost"
-
-#: ../metadata/place.xml.in.h:7
-msgid "Keep In Workarea"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:8
-msgid ""
-"Keep placed window in work area, even if that means that the position might "
-"differ from the specified position"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:11
 msgid "Place Windows"
 msgstr "Rozmístit okna"
 
-#: ../metadata/place.xml.in.h:12
-msgid "Place across all outputs"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:13
+#: ../metadata/place.xml.in.h:2
 msgid "Place windows at appropriate positions when mapped"
 msgstr "Umístit mapovaná okna na odpovídající pozice"
 
-#: ../metadata/place.xml.in.h:14
+#: ../metadata/place.xml.in.h:3
+msgid "Workarounds"
+msgstr "Řešení problémů"
+
+#: ../metadata/place.xml.in.h:4
+msgid "Window placement workarounds"
+msgstr "Nouzová řešení umístění oken"
+
+#: ../metadata/place.xml.in.h:5
 msgid "Placement Mode"
 msgstr "Rozmístění oken"
 
-#: ../metadata/place.xml.in.h:15
-msgid "Positioned windows"
-msgstr "Pozicované okna"
+#: ../metadata/place.xml.in.h:6
+msgid "Algorithm to use for window placement"
+msgstr "Algoritmus použitý pro rozmístění oken"
 
-#: ../metadata/place.xml.in.h:16
+#: ../metadata/place.xml.in.h:7
+msgid "Cascade"
+msgstr "Kaskáda"
+
+#: ../metadata/place.xml.in.h:8
+msgid "Centered"
+msgstr "Centrovaný"
+
+#: ../metadata/place.xml.in.h:9
+msgid "Smart"
+msgstr "Chytrý"
+
+#: ../metadata/place.xml.in.h:10
+#, fuzzy
+msgid "Maximize"
+msgstr "Minimalizované"
+
+#: ../metadata/place.xml.in.h:11
 msgid "Random"
 msgstr "Náhodný"
 
-#: ../metadata/place.xml.in.h:17
+#: ../metadata/place.xml.in.h:12
+#, fuzzy
+msgid "Under pointer"
+msgstr "Překlápění hran ukazatelem"
+
+#: ../metadata/place.xml.in.h:14
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 "Vyberte kde jsou okna zobrazeny, pokud je použito více výstupních zařízení"
 
-#: ../metadata/place.xml.in.h:18
-msgid "Smart"
-msgstr "Chytrý"
-
-#: ../metadata/place.xml.in.h:19
+#: ../metadata/place.xml.in.h:15
 #, fuzzy
 msgid "Use active output device"
 msgstr "Na všech výstupních výstupních zařízeních"
 
-#: ../metadata/place.xml.in.h:20
-msgid "Use output device of focussed window"
-msgstr ""
-
-#: ../metadata/place.xml.in.h:21
+#: ../metadata/place.xml.in.h:16
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:22
+#: ../metadata/place.xml.in.h:17
+msgid "Use output device of focussed window"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:18
+msgid "Place across all outputs"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:19
 #, fuzzy
-msgid "Vertical viewport positions"
-msgstr "Vodorovná virtuální velikost"
+msgid "Force Placement Windows"
+msgstr "Typy okna pro efekt při zaměření"
 
-#: ../metadata/place.xml.in.h:23
-#, fuzzy
-msgid "Viewport positioned windows"
-msgstr "Zobrazit minimalizovaná okna"
-
-#: ../metadata/place.xml.in.h:24
-msgid "Window placement workarounds"
-msgstr "Nouzová řešení umístění oken"
-
-#: ../metadata/place.xml.in.h:25
-msgid "Windows that should be positioned by default"
-msgstr "Okna, které budou implicitně rozmístěny"
-
-#: ../metadata/place.xml.in.h:26
-msgid "Windows that should be positioned in specific viewports by default"
-msgstr "Okna, které budou implicitně rozmístěny na určitou plochu"
-
-#: ../metadata/place.xml.in.h:27
+#: ../metadata/place.xml.in.h:20
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:28
+#: ../metadata/place.xml.in.h:21
+#, fuzzy
+msgid "Fixed Window Placement"
+msgstr "Správce oken"
+
+#: ../metadata/place.xml.in.h:22
 #, fuzzy
 msgid "Windows with fixed positions"
 msgstr "Dekorace oken"
 
-#: ../metadata/place.xml.in.h:29
-msgid "Windows with fixed viewport"
-msgstr ""
+#: ../metadata/place.xml.in.h:23
+msgid "Positioned windows"
+msgstr "Pozicované okna"
 
-#: ../metadata/place.xml.in.h:30
-msgid "Workarounds"
-msgstr "Řešení problémů"
+#: ../metadata/place.xml.in.h:24
+msgid "Windows that should be positioned by default"
+msgstr "Okna, které budou implicitně rozmístěny"
 
-#: ../metadata/place.xml.in.h:31
+#: ../metadata/place.xml.in.h:25
 msgid "X Positions"
 msgstr "Pozice X"
 
-#: ../metadata/place.xml.in.h:32
-msgid "X Viewport Positions"
-msgstr "Pozice plochy na ose X"
-
-#: ../metadata/place.xml.in.h:33
+#: ../metadata/place.xml.in.h:26
 msgid "X position values"
 msgstr "Hodnoty pozice na ose X"
 
-#: ../metadata/place.xml.in.h:34
+#: ../metadata/place.xml.in.h:27
 msgid "Y Positions"
 msgstr "Pozice Y"
 
+#: ../metadata/place.xml.in.h:28
+msgid "Y position values"
+msgstr "Hodnoty pozice na ose Y"
+
+#: ../metadata/place.xml.in.h:29
+msgid "Keep In Workarea"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:30
+msgid ""
+"Keep placed window in work area, even if that means that the position might "
+"differ from the specified position"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:31
+#, fuzzy
+msgid "Windows with fixed placement mode"
+msgstr "Dekorace oken"
+
+#: ../metadata/place.xml.in.h:33
+#, fuzzy
+msgid "Windows that should have a certain positioning mode"
+msgstr "Okna, které budou implicitně rozmístěny"
+
+#: ../metadata/place.xml.in.h:34
+#, fuzzy
+msgid "Mode"
+msgstr "Doba zprůhlednění"
+
 #: ../metadata/place.xml.in.h:35
+#, fuzzy
+msgid "Positioning modes"
+msgstr "Pozicované okna"
+
+#: ../metadata/place.xml.in.h:36
+msgid "Windows with fixed viewport"
+msgstr ""
+
+#: ../metadata/place.xml.in.h:37
+#, fuzzy
+msgid "Viewport positioned windows"
+msgstr "Zobrazit minimalizovaná okna"
+
+#: ../metadata/place.xml.in.h:38
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr "Okna, které budou implicitně rozmístěny na určitou plochu"
+
+#: ../metadata/place.xml.in.h:39
+msgid "X Viewport Positions"
+msgstr "Pozice plochy na ose X"
+
+#: ../metadata/place.xml.in.h:40
+#, fuzzy
+msgid "Horizontal viewport positions"
+msgstr "Vodorovná virtuální velikost"
+
+#: ../metadata/place.xml.in.h:41
 msgid "Y Viewport Positions"
 msgstr "Pozice plochy na ose Y"
 
-#: ../metadata/place.xml.in.h:36
-msgid "Y position values"
-msgstr "Hodnoty pozice na ose Y"
+#: ../metadata/place.xml.in.h:42
+#, fuzzy
+msgid "Vertical viewport positions"
+msgstr "Vodorovná virtuální velikost"
 
 #: ../metadata/png.xml.in.h:1
 msgid "Png"
@@ -2073,516 +2564,537 @@ msgstr "Regexpy"
 msgid "Regex window matching"
 msgstr "Podpora regulárních výrazů pro určení typu oken"
 
-#: ../metadata/resize.xml.in.h:1 ../metadata/rotate.xml.in.h:2
-#: ../metadata/scale.xml.in.h:5 ../metadata/switcher.xml.in.h:6
+#: ../metadata/resize.xml.in.h:1
+msgid "Resize Window"
+msgstr "Změnit velikost okna"
+
+#: ../metadata/resize.xml.in.h:2
+msgid "Resize window"
+msgstr "Změnit velikost okna"
+
+#: ../metadata/resize.xml.in.h:3 ../metadata/rotate.xml.in.h:13
+#: ../metadata/scale.xml.in.h:3 ../metadata/switcher.xml.in.h:2
+#: ../metadata/wall.xml.in.h:42
 msgid "Bindings"
 msgstr ""
 
-#: ../metadata/resize.xml.in.h:2
-msgid "Border Color"
-msgstr "Barva okraje"
-
-#: ../metadata/resize.xml.in.h:3
-msgid "Border color used for outline and rectangle resize modes"
-msgstr "Barva okraje použitá pro obrysové a překrývací typy změny velikosti"
-
 #: ../metadata/resize.xml.in.h:4
-msgid "Default Resize Mode"
-msgstr "Výchozí mód změny velikosti"
-
-#: ../metadata/resize.xml.in.h:5
-msgid "Default mode used for window resizing"
-msgstr "Vývhozí mód použití při změně velikosti oken"
-
-#: ../metadata/resize.xml.in.h:6
-msgid "Fill Color"
-msgstr "Výplňová barva"
-
-#: ../metadata/resize.xml.in.h:7
-msgid "Fill color used for rectangle resize mode"
-msgstr ""
-"Barva použitá pro překrytí plochy okna při použití obrysové změny velikosti "
-"okna"
-
-#: ../metadata/resize.xml.in.h:8
 msgid "Initiate Normal Window Resize"
 msgstr "Iniciovat normální změnu velikosti okna"
 
-#: ../metadata/resize.xml.in.h:9
+#: ../metadata/resize.xml.in.h:5
+msgid "Start resizing window normally"
+msgstr "Zahájit změnu velikosti okna normálně"
+
+#: ../metadata/resize.xml.in.h:6
 msgid "Initiate Outline Window Resize"
 msgstr "Iniciovat obrysovou změnu velikosti okna"
 
-#: ../metadata/resize.xml.in.h:10
+#: ../metadata/resize.xml.in.h:7
+msgid "Start resizing window with outline"
+msgstr "Zahájit změnu velikosti okna obrysem"
+
+#: ../metadata/resize.xml.in.h:8
 msgid "Initiate Rectangle Window Resize"
 msgstr "Iniciovat změnu velikosti okna překrytím"
 
-#: ../metadata/resize.xml.in.h:11
+#: ../metadata/resize.xml.in.h:9
+msgid "Start resizing window with rectangle"
+msgstr "Zahájit změnu velikosti okna překrytím"
+
+#: ../metadata/resize.xml.in.h:10
 msgid "Initiate Stretch Window Resize"
 msgstr "Iniciovat změnu velikosti okna rozpětím"
+
+#: ../metadata/resize.xml.in.h:11
+msgid "Start resizing window by stretching it"
+msgstr "Zahájit změnu velikosti okna rozpětím"
 
 #: ../metadata/resize.xml.in.h:12
 msgid "Initiate Window Resize"
 msgstr "Iniciovat změnu velikosti okna"
 
-#: ../metadata/resize.xml.in.h:14
-msgid "Normal Resize Windows"
-msgstr "Normálně měněné okna"
-
-#: ../metadata/resize.xml.in.h:15
-msgid "Outline"
-msgstr "Obrysové"
-
-#: ../metadata/resize.xml.in.h:16
-msgid "Outline Resize Windows"
-msgstr "Obrysová změna velikosti okna"
-
-#: ../metadata/resize.xml.in.h:17
-msgid "Rectangle"
-msgstr "Překrytí"
-
-#: ../metadata/resize.xml.in.h:18
-msgid "Rectangle Resize Windows"
-msgstr "Změnit velikost okna překrytím"
-
-#: ../metadata/resize.xml.in.h:19
-msgid "Resize Window"
-msgstr "Změnit velikost okna"
-
-#: ../metadata/resize.xml.in.h:20
-msgid "Resize window"
-msgstr "Změnit velikost okna"
-
-#: ../metadata/resize.xml.in.h:21
+#: ../metadata/resize.xml.in.h:13
 msgid "Start resizing window"
 msgstr "Zahájit změnu velikosti okna"
 
-#: ../metadata/resize.xml.in.h:22
-msgid "Start resizing window by stretching it"
-msgstr "Zahájit změnu velikosti okna rozpětím"
+#: ../metadata/resize.xml.in.h:14
+msgid "Default Resize Mode"
+msgstr "Výchozí mód změny velikosti"
 
-#: ../metadata/resize.xml.in.h:23
-msgid "Start resizing window normally"
-msgstr "Zahájit změnu velikosti okna normálně"
+#: ../metadata/resize.xml.in.h:15
+msgid "Default mode used for window resizing"
+msgstr "Vývhozí mód použití při změně velikosti oken"
 
-#: ../metadata/resize.xml.in.h:24
-msgid "Start resizing window with outline"
-msgstr "Zahájit změnu velikosti okna obrysem"
+#: ../metadata/resize.xml.in.h:17
+msgid "Outline"
+msgstr "Obrysové"
 
-#: ../metadata/resize.xml.in.h:25
-msgid "Start resizing window with rectangle"
-msgstr "Zahájit změnu velikosti okna překrytím"
+#: ../metadata/resize.xml.in.h:18
+msgid "Rectangle"
+msgstr "Překrytí"
 
-#: ../metadata/resize.xml.in.h:26
+#: ../metadata/resize.xml.in.h:19
 msgid "Stretch"
 msgstr "Rozpětí"
 
-#: ../metadata/resize.xml.in.h:27
-msgid "Stretch Resize Windows"
-msgstr "Rozpětím změnit velikost okna"
+#: ../metadata/resize.xml.in.h:20
+msgid "Border Color"
+msgstr "Barva okraje"
 
-#: ../metadata/resize.xml.in.h:28
+#: ../metadata/resize.xml.in.h:21
+msgid "Border color used for outline and rectangle resize modes"
+msgstr "Barva okraje použitá pro obrysové a překrývací typy změny velikosti"
+
+#: ../metadata/resize.xml.in.h:22
+msgid "Fill Color"
+msgstr "Výplňová barva"
+
+#: ../metadata/resize.xml.in.h:23
+msgid "Fill color used for rectangle resize mode"
+msgstr ""
+"Barva použitá pro překrytí plochy okna při použití obrysové změny velikosti "
+"okna"
+
+#: ../metadata/resize.xml.in.h:24
+msgid "Normal Resize Windows"
+msgstr "Normálně měněné okna"
+
+#: ../metadata/resize.xml.in.h:25
 msgid "Windows that normal resize should be used for"
 msgstr "Typy oken, která budou měnit velikost normálně"
 
-#: ../metadata/resize.xml.in.h:29
+#: ../metadata/resize.xml.in.h:26
+msgid "Outline Resize Windows"
+msgstr "Obrysová změna velikosti okna"
+
+#: ../metadata/resize.xml.in.h:27
 msgid "Windows that outline resize should be used for"
 msgstr "Typy oken, která budou měnit velikost s efektem obrysu"
 
-#: ../metadata/resize.xml.in.h:30
+#: ../metadata/resize.xml.in.h:28
+msgid "Rectangle Resize Windows"
+msgstr "Změnit velikost okna překrytím"
+
+#: ../metadata/resize.xml.in.h:29
 msgid "Windows that rectangle resize should be used for"
 msgstr "Typy oken, která budou měnit velikost s efektem překrytí"
+
+#: ../metadata/resize.xml.in.h:30
+msgid "Stretch Resize Windows"
+msgstr "Rozpětím změnit velikost okna"
 
 #: ../metadata/resize.xml.in.h:31
 msgid "Windows that stretch resize should be used for"
 msgstr "Typy oken, která budou měnit velikost s efektem rozpětí"
 
-#: ../metadata/rotate.xml.in.h:3
-msgid "Edge Flip DnD"
-msgstr "Překlápění hran DnD"
+#: ../metadata/rotate.xml.in.h:1
+msgid "Rotate Cube"
+msgstr "Otočit kostkou"
 
-#: ../metadata/rotate.xml.in.h:4
-msgid "Edge Flip Move"
-msgstr "Překlápění hran při přesunu"
+#: ../metadata/rotate.xml.in.h:2
+msgid "Rotate desktop cube"
+msgstr "Otočit kostkou ploch"
 
-#: ../metadata/rotate.xml.in.h:5
+#: ../metadata/rotate.xml.in.h:3 ../metadata/wall.xml.in.h:79
 msgid "Edge Flip Pointer"
 msgstr "Překlápění hran ukazatelem"
 
-#: ../metadata/rotate.xml.in.h:6
-msgid "Flip Time"
-msgstr "Doba překlopení"
+#: ../metadata/rotate.xml.in.h:4
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"Překlopit na další viewport při umístění ukazatele na hranici obrazovky"
 
-#: ../metadata/rotate.xml.in.h:7
-msgid "Flip to left viewport and warp pointer"
-msgstr "Překlopit na levé zorné pole a zdeformovat ukazatel"
+#: ../metadata/rotate.xml.in.h:5 ../metadata/wall.xml.in.h:81
+msgid "Edge Flip Move"
+msgstr "Překlápění hran při přesunu"
+
+#: ../metadata/rotate.xml.in.h:6
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr "Překlopit na další viewport při přesunu okna na hranici obrazovky"
+
+#: ../metadata/rotate.xml.in.h:7 ../metadata/wall.xml.in.h:83
+msgid "Edge Flip DnD"
+msgstr "Překlápění hran DnD"
 
 #: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr "Překlopit na další viewport při přetažení objektu na hranici obrazovky"
 
 #: ../metadata/rotate.xml.in.h:9
-msgid "Flip to next viewport when moving pointer to screen edge"
-msgstr ""
-"Překlopit na další viewport při umístění ukazatele na hranici obrazovky"
+msgid "Flip Time"
+msgstr "Doba překlopení"
 
 #: ../metadata/rotate.xml.in.h:10
-msgid "Flip to next viewport when moving window to screen edge"
-msgstr "Překlopit na další viewport při přesunu okna na hranici obrazovky"
+msgid "Timeout before flipping viewport"
+msgstr "Časový limit před překlopením zorného pole"
 
 #: ../metadata/rotate.xml.in.h:11
-msgid "Flip to right viewport and warp pointer"
-msgstr "Překlopit na pravé zorné pole a zdeformovat ukazatel"
-
-#: ../metadata/rotate.xml.in.h:13
-msgid "Invert Y axis for pointer movement"
-msgstr "Invertovat osu Y pro pohyb ukazatele"
-
-#: ../metadata/rotate.xml.in.h:14
-msgid "Pointer Invert Y"
-msgstr "Pointer Invert Y"
-
-#: ../metadata/rotate.xml.in.h:15
-msgid "Pointer Sensitivity"
-msgstr "Citlivost ukazatele"
-
-#: ../metadata/rotate.xml.in.h:16
 msgid "Raise on rotate"
 msgstr ""
 
-#: ../metadata/rotate.xml.in.h:17
+#: ../metadata/rotate.xml.in.h:12
 #, fuzzy
 msgid "Raise window when rotating"
 msgstr "Dát okna do popředí při kliknutí"
 
-#: ../metadata/rotate.xml.in.h:18
-msgid "Rotate Cube"
+#: ../metadata/rotate.xml.in.h:14
+#, fuzzy
+msgid "Rotate cube"
 msgstr "Otočit kostkou"
 
-#: ../metadata/rotate.xml.in.h:19
-msgid "Rotate Flip Left"
-msgstr "Otočit překlopením vlevo"
+#: ../metadata/rotate.xml.in.h:16
+msgid "Start Rotation"
+msgstr "Zahájit otáčení"
 
-#: ../metadata/rotate.xml.in.h:20
-msgid "Rotate Flip Right"
-msgstr "Otočit překlopením vpravo"
-
-#: ../metadata/rotate.xml.in.h:21
+#: ../metadata/rotate.xml.in.h:17
 msgid "Rotate Left"
 msgstr "Otočit vlevo"
 
-#: ../metadata/rotate.xml.in.h:22
-msgid "Rotate Left with Window"
-msgstr "Otočit vlevo s oknem"
+#: ../metadata/rotate.xml.in.h:18
+msgid "Rotate left"
+msgstr "Otočit vlevo"
 
-#: ../metadata/rotate.xml.in.h:23
+#: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Right"
 msgstr "Otočit vpravo"
 
-#: ../metadata/rotate.xml.in.h:24
+#: ../metadata/rotate.xml.in.h:20
+msgid "Rotate right"
+msgstr "Otočit vpravo"
+
+#: ../metadata/rotate.xml.in.h:21
+msgid "Rotate Left with Window"
+msgstr "Otočit vlevo s oknem"
+
+#: ../metadata/rotate.xml.in.h:22
+msgid "Rotate left and bring active window along"
+msgstr "Otočit vlevo a vzít aktivní okno s sebou"
+
+#: ../metadata/rotate.xml.in.h:23
 msgid "Rotate Right with Window"
 msgstr "Otočit vpravo s oknem"
+
+#: ../metadata/rotate.xml.in.h:24
+msgid "Rotate right and bring active window along"
+msgstr "Otočit vpravo a vzít aktivní okno s sebou"
 
 #: ../metadata/rotate.xml.in.h:25
 msgid "Rotate To"
 msgstr "Otočit na"
 
 #: ../metadata/rotate.xml.in.h:26
-msgid "Rotate To Face 1"
-msgstr "Otočit na stranu 1"
+msgid "Rotate to viewport"
+msgstr "Otočit na zorné pole"
 
 #: ../metadata/rotate.xml.in.h:27
-msgid "Rotate To Face 1 with Window"
-msgstr "Rotovat na stranu 1 s oknem"
+msgid "Rotate window"
+msgstr "Otočit okno"
 
 #: ../metadata/rotate.xml.in.h:28
-msgid "Rotate To Face 10"
-msgstr "Otočit na stranu 10"
+msgid "Rotate with window"
+msgstr "Otočit s oknem"
 
 #: ../metadata/rotate.xml.in.h:29
-msgid "Rotate To Face 10 with Window"
-msgstr "Rotovat na stranu 10 s oknem"
+msgid "Rotate Flip Left"
+msgstr "Otočit překlopením vlevo"
 
 #: ../metadata/rotate.xml.in.h:30
-msgid "Rotate To Face 11"
-msgstr "Otočit na stranu 11"
+msgid "Flip to left viewport and warp pointer"
+msgstr "Překlopit na levé zorné pole a zdeformovat ukazatel"
 
 #: ../metadata/rotate.xml.in.h:31
-msgid "Rotate To Face 11 with Window"
-msgstr "Otočit na stranu 11 s oknem"
+msgid "Rotate Flip Right"
+msgstr "Otočit překlopením vpravo"
 
 #: ../metadata/rotate.xml.in.h:32
-msgid "Rotate To Face 12"
-msgstr "Otočit na stranu 12"
+msgid "Flip to right viewport and warp pointer"
+msgstr "Překlopit na pravé zorné pole a zdeformovat ukazatel"
 
 #: ../metadata/rotate.xml.in.h:33
-msgid "Rotate To Face 12 with Window"
-msgstr "Otočit na stranu 12 s oknem"
-
-#: ../metadata/rotate.xml.in.h:34
-msgid "Rotate To Face 2"
-msgstr "Otočit na stranu 2"
-
-#: ../metadata/rotate.xml.in.h:35
-msgid "Rotate To Face 2 with Window"
-msgstr "Otočit na stranu 2 s oknem"
-
-#: ../metadata/rotate.xml.in.h:36
-msgid "Rotate To Face 3"
-msgstr "Otočit na stranu 3"
-
-#: ../metadata/rotate.xml.in.h:37
-msgid "Rotate To Face 3 with Window"
-msgstr "Otočit na stranu 3 s oknem"
-
-#: ../metadata/rotate.xml.in.h:38
-msgid "Rotate To Face 4"
-msgstr "Otočit na stranu 4"
-
-#: ../metadata/rotate.xml.in.h:39
-msgid "Rotate To Face 4 with Window"
-msgstr "Otočit na stranu 4 s oknem"
-
-#: ../metadata/rotate.xml.in.h:40
-msgid "Rotate To Face 5"
-msgstr "Otočit na stranu 5"
-
-#: ../metadata/rotate.xml.in.h:41
-msgid "Rotate To Face 5 with Window"
-msgstr "Otočit na stranu 5 s oknem"
-
-#: ../metadata/rotate.xml.in.h:42
-msgid "Rotate To Face 6"
-msgstr "Otočit na stranu 6"
-
-#: ../metadata/rotate.xml.in.h:43
-msgid "Rotate To Face 6 with Window"
-msgstr "Otočit na stranu 6 s oknem"
-
-#: ../metadata/rotate.xml.in.h:44
-msgid "Rotate To Face 7"
-msgstr "Otočit na stranu 7"
-
-#: ../metadata/rotate.xml.in.h:45
-msgid "Rotate To Face 7 with Window"
-msgstr "Otočit na stranu 7 s oknem"
-
-#: ../metadata/rotate.xml.in.h:46
-msgid "Rotate To Face 8"
-msgstr "Otočit na stranu 8"
-
-#: ../metadata/rotate.xml.in.h:47
-msgid "Rotate To Face 8 with Window"
-msgstr "Otočit na stranu 8 s oknem"
-
-#: ../metadata/rotate.xml.in.h:48
-msgid "Rotate To Face 9"
-msgstr "Otočit na stranu 9"
-
-#: ../metadata/rotate.xml.in.h:49
-msgid "Rotate To Face 9 with Window"
-msgstr "Otočit na stranu 9 s oknem"
-
-#: ../metadata/rotate.xml.in.h:50
-#, fuzzy
-msgid "Rotate cube"
-msgstr "Otočit kostkou"
-
-#: ../metadata/rotate.xml.in.h:51
-msgid "Rotate desktop cube"
-msgstr "Otočit kostkou ploch"
-
-#: ../metadata/rotate.xml.in.h:52
-msgid "Rotate left"
-msgstr "Otočit vlevo"
-
-#: ../metadata/rotate.xml.in.h:53
-msgid "Rotate left and bring active window along"
-msgstr "Otočit vlevo a vzít aktivní okno s sebou"
-
-#: ../metadata/rotate.xml.in.h:54
-msgid "Rotate right"
-msgstr "Otočit vpravo"
-
-#: ../metadata/rotate.xml.in.h:55
-msgid "Rotate right and bring active window along"
-msgstr "Otočit vpravo a vzít aktivní okno s sebou"
-
-#: ../metadata/rotate.xml.in.h:56
 #, fuzzy
 msgid "Rotate to cube face"
 msgstr "Otočit na stranu 1"
 
+#: ../metadata/rotate.xml.in.h:34
+msgid "Rotate To Face 1"
+msgstr "Otočit na stranu 1"
+
+#: ../metadata/rotate.xml.in.h:35
+msgid "Rotate to face 1"
+msgstr "Otočit na stranu 1"
+
+#: ../metadata/rotate.xml.in.h:36
+msgid "Rotate To Face 2"
+msgstr "Otočit na stranu 2"
+
+#: ../metadata/rotate.xml.in.h:37
+msgid "Rotate to face 2"
+msgstr "Otočit na stranu 2"
+
+#: ../metadata/rotate.xml.in.h:38
+msgid "Rotate To Face 3"
+msgstr "Otočit na stranu 3"
+
+#: ../metadata/rotate.xml.in.h:39
+msgid "Rotate to face 3"
+msgstr "Otočit na stranu 3"
+
+#: ../metadata/rotate.xml.in.h:40
+msgid "Rotate To Face 4"
+msgstr "Otočit na stranu 4"
+
+#: ../metadata/rotate.xml.in.h:41
+msgid "Rotate to face 4"
+msgstr "Otočit na stranu 4"
+
+#: ../metadata/rotate.xml.in.h:42
+msgid "Rotate To Face 5"
+msgstr "Otočit na stranu 5"
+
+#: ../metadata/rotate.xml.in.h:43
+msgid "Rotate to face 5"
+msgstr "Otočit na stranu 5"
+
+#: ../metadata/rotate.xml.in.h:44
+msgid "Rotate To Face 6"
+msgstr "Otočit na stranu 6"
+
+#: ../metadata/rotate.xml.in.h:45
+msgid "Rotate to face 6"
+msgstr "Otočit na stranu 6"
+
+#: ../metadata/rotate.xml.in.h:46
+msgid "Rotate To Face 7"
+msgstr "Otočit na stranu 7"
+
+#: ../metadata/rotate.xml.in.h:47
+msgid "Rotate to face 7"
+msgstr "Otočit na stranu 7"
+
+#: ../metadata/rotate.xml.in.h:48
+msgid "Rotate To Face 8"
+msgstr "Otočit na stranu 8"
+
+#: ../metadata/rotate.xml.in.h:49
+msgid "Rotate to face 8"
+msgstr "Otočit na stranu 8"
+
+#: ../metadata/rotate.xml.in.h:50
+msgid "Rotate To Face 9"
+msgstr "Otočit na stranu 9"
+
+#: ../metadata/rotate.xml.in.h:51
+msgid "Rotate to face 9"
+msgstr "Otočit na stranu 9"
+
+#: ../metadata/rotate.xml.in.h:52
+msgid "Rotate To Face 10"
+msgstr "Otočit na stranu 10"
+
+#: ../metadata/rotate.xml.in.h:53
+msgid "Rotate to face 10"
+msgstr "Otočit na stranu 10"
+
+#: ../metadata/rotate.xml.in.h:54
+msgid "Rotate To Face 11"
+msgstr "Otočit na stranu 11"
+
+#: ../metadata/rotate.xml.in.h:55
+msgid "Rotate to face 11"
+msgstr "Otočit na stranu 11"
+
+#: ../metadata/rotate.xml.in.h:56
+msgid "Rotate To Face 12"
+msgstr "Otočit na stranu 12"
+
 #: ../metadata/rotate.xml.in.h:57
+msgid "Rotate to face 12"
+msgstr "Otočit na stranu 12"
+
+#: ../metadata/rotate.xml.in.h:58
 #, fuzzy
 msgid "Rotate to cube face with window"
 msgstr "Rotovat na stranu 1 s oknem"
 
-#: ../metadata/rotate.xml.in.h:58
-msgid "Rotate to face 1"
-msgstr "Otočit na stranu 1"
-
 #: ../metadata/rotate.xml.in.h:59
+msgid "Rotate To Face 1 with Window"
+msgstr "Rotovat na stranu 1 s oknem"
+
+#: ../metadata/rotate.xml.in.h:60
 msgid "Rotate to face 1 and bring active window along"
 msgstr "Otočit na stranu 1 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:60
-msgid "Rotate to face 10"
-msgstr "Otočit na stranu 10"
-
 #: ../metadata/rotate.xml.in.h:61
-msgid "Rotate to face 10 and bring active window along"
-msgstr "Otočit na stranu 10 a vzít aktivní okno s sebou"
+msgid "Rotate To Face 2 with Window"
+msgstr "Otočit na stranu 2 s oknem"
 
 #: ../metadata/rotate.xml.in.h:62
-msgid "Rotate to face 11"
-msgstr "Otočit na stranu 11"
-
-#: ../metadata/rotate.xml.in.h:63
-msgid "Rotate to face 11 and bring active window along"
-msgstr "Otočit na stranu 11 a vzít aktivní okno s sebou"
-
-#: ../metadata/rotate.xml.in.h:64
-msgid "Rotate to face 12"
-msgstr "Otočit na stranu 12"
-
-#: ../metadata/rotate.xml.in.h:65
-msgid "Rotate to face 12 and bring active window along"
-msgstr "Otočit na stranu 12 a vzít aktivní okno s sebou"
-
-#: ../metadata/rotate.xml.in.h:66
-msgid "Rotate to face 2"
-msgstr "Otočit na stranu 2"
-
-#: ../metadata/rotate.xml.in.h:67
 msgid "Rotate to face 2 and bring active window along"
 msgstr "Otočit na stranu 2 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:68
-msgid "Rotate to face 3"
-msgstr "Otočit na stranu 3"
+#: ../metadata/rotate.xml.in.h:63
+msgid "Rotate To Face 3 with Window"
+msgstr "Otočit na stranu 3 s oknem"
 
-#: ../metadata/rotate.xml.in.h:69
+#: ../metadata/rotate.xml.in.h:64
 msgid "Rotate to face 3 and bring active window along"
 msgstr "Otočit na stranu 3 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:70
-msgid "Rotate to face 4"
-msgstr "Otočit na stranu 4"
+#: ../metadata/rotate.xml.in.h:65
+msgid "Rotate To Face 4 with Window"
+msgstr "Otočit na stranu 4 s oknem"
 
-#: ../metadata/rotate.xml.in.h:71
+#: ../metadata/rotate.xml.in.h:66
 msgid "Rotate to face 4 and bring active window along"
 msgstr "Otočit na stranu 4 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:72
-msgid "Rotate to face 5"
-msgstr "Otočit na stranu 5"
+#: ../metadata/rotate.xml.in.h:67
+msgid "Rotate To Face 5 with Window"
+msgstr "Otočit na stranu 5 s oknem"
 
-#: ../metadata/rotate.xml.in.h:73
+#: ../metadata/rotate.xml.in.h:68
 msgid "Rotate to face 5 and bring active window along"
 msgstr "Otočit na stranu 5 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:74
-msgid "Rotate to face 6"
-msgstr "Otočit na stranu 6"
+#: ../metadata/rotate.xml.in.h:69
+msgid "Rotate To Face 6 with Window"
+msgstr "Otočit na stranu 6 s oknem"
 
-#: ../metadata/rotate.xml.in.h:75
+#: ../metadata/rotate.xml.in.h:70
 msgid "Rotate to face 6 and bring active window along"
 msgstr "Otočit na stranu 6 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:76
-msgid "Rotate to face 7"
-msgstr "Otočit na stranu 7"
+#: ../metadata/rotate.xml.in.h:71
+msgid "Rotate To Face 7 with Window"
+msgstr "Otočit na stranu 7 s oknem"
 
-#: ../metadata/rotate.xml.in.h:77
+#: ../metadata/rotate.xml.in.h:72
 msgid "Rotate to face 7 and bring active window along"
 msgstr "Otočit na stranu 7 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:78
-msgid "Rotate to face 8"
-msgstr "Otočit na stranu 8"
+#: ../metadata/rotate.xml.in.h:73
+msgid "Rotate To Face 8 with Window"
+msgstr "Otočit na stranu 8 s oknem"
 
-#: ../metadata/rotate.xml.in.h:79
+#: ../metadata/rotate.xml.in.h:74
 msgid "Rotate to face 8 and bring active window along"
 msgstr "Otočit na stranu 8 a vzít aktivní okno s sebou"
 
-#: ../metadata/rotate.xml.in.h:80
-msgid "Rotate to face 9"
-msgstr "Otočit na stranu 9"
+#: ../metadata/rotate.xml.in.h:75
+msgid "Rotate To Face 9 with Window"
+msgstr "Otočit na stranu 9 s oknem"
 
-#: ../metadata/rotate.xml.in.h:81
+#: ../metadata/rotate.xml.in.h:76
 msgid "Rotate to face 9 and bring active window along"
 msgstr "Otočit na stranu 9 a vzít aktivní okno s sebou"
 
+#: ../metadata/rotate.xml.in.h:77
+msgid "Rotate To Face 10 with Window"
+msgstr "Rotovat na stranu 10 s oknem"
+
+#: ../metadata/rotate.xml.in.h:78
+msgid "Rotate to face 10 and bring active window along"
+msgstr "Otočit na stranu 10 a vzít aktivní okno s sebou"
+
+#: ../metadata/rotate.xml.in.h:79
+msgid "Rotate To Face 11 with Window"
+msgstr "Otočit na stranu 11 s oknem"
+
+#: ../metadata/rotate.xml.in.h:80
+msgid "Rotate to face 11 and bring active window along"
+msgstr "Otočit na stranu 11 a vzít aktivní okno s sebou"
+
+#: ../metadata/rotate.xml.in.h:81
+msgid "Rotate To Face 12 with Window"
+msgstr "Otočit na stranu 12 s oknem"
+
 #: ../metadata/rotate.xml.in.h:82
-msgid "Rotate to viewport"
-msgstr "Otočit na zorné pole"
+msgid "Rotate to face 12 and bring active window along"
+msgstr "Otočit na stranu 12 a vzít aktivní okno s sebou"
 
 #: ../metadata/rotate.xml.in.h:83
-msgid "Rotate window"
-msgstr "Otočit okno"
+msgid "Pointer Invert Y"
+msgstr "Pointer Invert Y"
 
 #: ../metadata/rotate.xml.in.h:84
-msgid "Rotate with window"
-msgstr "Otočit s oknem"
+msgid "Invert Y axis for pointer movement"
+msgstr "Invertovat osu Y pro pohyb ukazatele"
 
 #: ../metadata/rotate.xml.in.h:85
-msgid "Rotation Acceleration"
-msgstr "Zrychlení otáčení"
+#, fuzzy
+msgid "Pointer Invert X"
+msgstr "Pointer Invert Y"
 
 #: ../metadata/rotate.xml.in.h:86
-msgid "Rotation Speed"
-msgstr "Rychlost otáčení"
+#, fuzzy
+msgid "Invert X axis for pointer movement"
+msgstr "Invertovat osu Y pro pohyb ukazatele"
 
 #: ../metadata/rotate.xml.in.h:87
-msgid "Rotation Timestep"
-msgstr "Časový krok otáčení"
+msgid "Pointer Sensitivity"
+msgstr "Citlivost ukazatele"
 
 #: ../metadata/rotate.xml.in.h:88
-#, fuzzy
-msgid "Rotation Zoom"
-msgstr "Rychlost otáčení"
-
-#: ../metadata/rotate.xml.in.h:89
 msgid "Sensitivity of pointer movement"
 msgstr "Citlivost pohybu ukazatele"
 
 #: ../metadata/rotate.xml.in.h:90
-#, fuzzy
-msgid "Snap Cube Rotation to Bottom Face"
-msgstr "Přichytávat otáčející se kostku za horní stranu"
+msgid "Rotation Acceleration"
+msgstr "Zrychlení otáčení"
 
 #: ../metadata/rotate.xml.in.h:91
+msgid "Snap To Top Face"
+msgstr "Přichytávat k horní straně"
+
+#: ../metadata/rotate.xml.in.h:92
 msgid "Snap Cube Rotation to Top Face"
 msgstr "Přichytávat otáčející se kostku za horní stranu"
 
-#: ../metadata/rotate.xml.in.h:92
+#: ../metadata/rotate.xml.in.h:93
 #, fuzzy
 msgid "Snap To Bottom Face"
 msgstr "Přichytávat k horní straně"
 
-#: ../metadata/rotate.xml.in.h:93
-msgid "Snap To Top Face"
-msgstr "Přichytávat k horní straně"
-
-#: ../metadata/rotate.xml.in.h:95
-msgid "Start Rotation"
-msgstr "Zahájit otáčení"
+#: ../metadata/rotate.xml.in.h:94
+#, fuzzy
+msgid "Snap Cube Rotation to Bottom Face"
+msgstr "Přichytávat otáčející se kostku za horní stranu"
 
 #: ../metadata/rotate.xml.in.h:96
-msgid "Timeout before flipping viewport"
-msgstr "Časový limit před překlopením zorného pole"
+msgid "Rotation Speed"
+msgstr "Rychlost otáčení"
 
-#: ../metadata/rotate.xml.in.h:98 ../metadata/switcher.xml.in.h:42
+#: ../metadata/rotate.xml.in.h:98
+msgid "Rotation Timestep"
+msgstr "Časový krok otáčení"
+
+#: ../metadata/rotate.xml.in.h:99 ../metadata/switcher.xml.in.h:35
 msgid "Zoom"
 msgstr "Zvětšení"
 
-#: ../metadata/scale.xml.in.h:1 ../metadata/switcher.xml.in.h:2
-msgid "Amount of opacity in percent"
-msgstr "Hodnota krytí v procentech"
+#: ../metadata/rotate.xml.in.h:100
+#, fuzzy
+msgid "Rotation Zoom"
+msgstr "Rychlost otáčení"
+
+#: ../metadata/scale.xml.in.h:1
+msgid "Scale"
+msgstr "Měřítko"
+
+#: ../metadata/scale.xml.in.h:2
+msgid "Scale windows"
+msgstr "Škálovat okna"
 
 #: ../metadata/scale.xml.in.h:4
-msgid "Big"
-msgstr "Velká"
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+#: ../metadata/scale.xml.in.h:5
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
 
 #: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
@@ -2595,158 +3107,155 @@ msgid ""
 msgstr ""
 
 #: ../metadata/scale.xml.in.h:8
-msgid "Click Desktop to Show Desktop"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:9
-msgid "Darken Background"
-msgstr "Ztmavit pozadí"
-
-#: ../metadata/scale.xml.in.h:10
-msgid "Darken background when scaling windows"
-msgstr "Ztmavit pozadí při škálování oken"
-
-#: ../metadata/scale.xml.in.h:11
-msgid "Emblem"
-msgstr "Symbol"
-
-#: ../metadata/scale.xml.in.h:12
-msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:13
-msgid "Hover Time"
-msgstr "Čas vznášení"
-
-#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker"
 msgstr "Spustit výběr oken"
 
-#: ../metadata/scale.xml.in.h:15
-msgid "Initiate Window Picker For All Windows"
-msgstr "Spustit výběr oken pro všechna okna"
-
-#: ../metadata/scale.xml.in.h:16
-msgid "Initiate Window Picker For Window Group"
-msgstr "Spustit výběr oken pro skupinu oken"
-
-#: ../metadata/scale.xml.in.h:17
-msgid "Initiate Window Picker For Windows on Current Output"
-msgstr "Spustit výběr oken pro okna na aktuálním výstupu"
-
-#: ../metadata/scale.xml.in.h:18
-msgid "Key Bindings Toggle Scale Mode"
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:19
-msgid ""
-"Key bindings toggle scale mode instead of enabling it when pressed and "
-"disabling it when released."
-msgstr ""
-
-#: ../metadata/scale.xml.in.h:20
-msgid "Layout and start transforming all windows"
-msgstr "Rozvržení a počátek transformace všech oken"
-
-#: ../metadata/scale.xml.in.h:21
-msgid "Layout and start transforming window group"
-msgstr "Rozvržení a počátek transformace skupiny oken"
-
-#: ../metadata/scale.xml.in.h:22
+#: ../metadata/scale.xml.in.h:9
 msgid "Layout and start transforming windows"
 msgstr "Rozvržení a počátek transformace oken"
 
-#: ../metadata/scale.xml.in.h:23
+#: ../metadata/scale.xml.in.h:10
+msgid "Initiate Window Picker For All Windows"
+msgstr "Spustit výběr oken pro všechna okna"
+
+#: ../metadata/scale.xml.in.h:11
+msgid "Layout and start transforming all windows"
+msgstr "Rozvržení a počátek transformace všech oken"
+
+#: ../metadata/scale.xml.in.h:12
+msgid "Initiate Window Picker For Window Group"
+msgstr "Spustit výběr oken pro skupinu oken"
+
+#: ../metadata/scale.xml.in.h:13
+msgid "Layout and start transforming window group"
+msgstr "Rozvržení a počátek transformace skupiny oken"
+
+#: ../metadata/scale.xml.in.h:14
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr "Spustit výběr oken pro okna na aktuálním výstupu"
+
+#: ../metadata/scale.xml.in.h:15
 msgid "Layout and start transforming windows on current output"
 msgstr "Rozvržení a počátek transformace oken na aktuálním výstupu"
 
-#: ../metadata/scale.xml.in.h:26
-msgid "On all output devices"
-msgstr "Na všech výstupních výstupních zařízeních"
-
-#: ../metadata/scale.xml.in.h:27
-msgid "On current output device"
-msgstr "Na aktuálním výstupním zařízení"
-
-#: ../metadata/scale.xml.in.h:29
-msgid "Overlay Icon"
-msgstr "Překrýt ikonou"
-
-#: ../metadata/scale.xml.in.h:30
-msgid "Overlay an icon on windows once they are scaled"
-msgstr "Překrýt okna ikonou, pokud je změněna jejich velikost"
-
-#: ../metadata/scale.xml.in.h:31
-msgid "Scale"
-msgstr "Měřítko"
-
-#: ../metadata/scale.xml.in.h:32
-msgid "Scale Windows"
-msgstr "Škálovatelné okna"
-
-#: ../metadata/scale.xml.in.h:33
-msgid "Scale speed"
-msgstr "Rychlost změny velikosti"
-
-#: ../metadata/scale.xml.in.h:34
-msgid "Scale timestep"
-msgstr "Časový krok změny velikosti"
-
-#: ../metadata/scale.xml.in.h:35
-msgid "Scale windows"
-msgstr "Škálovat okna"
-
-#: ../metadata/scale.xml.in.h:36
-msgid "Selects where windows are scaled if multiple output devices are used."
+#: ../metadata/scale.xml.in.h:17
+msgid "Click Desktop to Show Desktop"
 msgstr ""
-"Vyberte kde jsou okna zobrazeny, pokud je použito více výstupních zařízení"
 
-#: ../metadata/scale.xml.in.h:37
-msgid "Space between windows"
-msgstr "Mezera mezi okny"
+#: ../metadata/scale.xml.in.h:18
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr ""
 
-#: ../metadata/scale.xml.in.h:38
+#: ../metadata/scale.xml.in.h:20
 msgid "Spacing"
 msgstr "Mezery"
 
-#: ../metadata/scale.xml.in.h:40
+#: ../metadata/scale.xml.in.h:21
+msgid "Space between windows"
+msgstr "Mezera mezi okny"
+
+#: ../metadata/scale.xml.in.h:23
+msgid "Scale speed"
+msgstr "Rychlost změny velikosti"
+
+#: ../metadata/scale.xml.in.h:25
+msgid "Scale timestep"
+msgstr "Časový krok změny velikosti"
+
+#: ../metadata/scale.xml.in.h:26
+msgid "Darken Background"
+msgstr "Ztmavit pozadí"
+
+#: ../metadata/scale.xml.in.h:27
+msgid "Darken background when scaling windows"
+msgstr "Ztmavit pozadí při škálování oken"
+
+#: ../metadata/scale.xml.in.h:29 ../metadata/switcher.xml.in.h:32
+msgid "Amount of opacity in percent"
+msgstr "Hodnota krytí v procentech"
+
+#: ../metadata/scale.xml.in.h:30
+msgid "Overlay Icon"
+msgstr "Překrýt ikonou"
+
+#: ../metadata/scale.xml.in.h:31
+msgid "Overlay an icon on windows once they are scaled"
+msgstr "Překrýt okna ikonou, pokud je změněna jejich velikost"
+
+#: ../metadata/scale.xml.in.h:32 ../metadata/wobbly.xml.in.h:19
+msgid "None"
+msgstr "Nic"
+
+#: ../metadata/scale.xml.in.h:33
+msgid "Emblem"
+msgstr "Symbol"
+
+#: ../metadata/scale.xml.in.h:34
+msgid "Big"
+msgstr "Velká"
+
+#: ../metadata/scale.xml.in.h:35
+msgid "Scale Windows"
+msgstr "Škálovatelné okna"
+
+#: ../metadata/scale.xml.in.h:36
+msgid "Windows that should be scaled in scale mode"
+msgstr "Typy oken, které budou zobrazeny v režimu škálování"
+
+#: ../metadata/scale.xml.in.h:37
+msgid "Hover Time"
+msgstr "Čas vznášení"
+
+#: ../metadata/scale.xml.in.h:38
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
 "Udává dobu (v ms) před ukončením režimu změny velikosti, pokud je ukazatel "
 "umístěn nad oknem"
 
+#: ../metadata/scale.xml.in.h:40
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+"Vyberte kde jsou okna zobrazeny, pokud je použito více výstupních zařízení"
+
+#: ../metadata/scale.xml.in.h:41
+msgid "On current output device"
+msgstr "Na aktuálním výstupním zařízení"
+
 #: ../metadata/scale.xml.in.h:42
-msgid "Windows that should be scaled in scale mode"
-msgstr "Typy oken, které budou zobrazeny v režimu škálování"
+msgid "On all output devices"
+msgstr "Na všech výstupních výstupních zařízeních"
 
 #: ../metadata/screenshot.xml.in.h:1
-msgid "Automatically open screenshot in this application"
-msgstr "Automaticky otevřít snímek v této aplikaci"
+msgid "Screenshot"
+msgstr "Snímek obrazovky"
 
 #: ../metadata/screenshot.xml.in.h:2
-msgid "Directory"
-msgstr "Adresář"
+msgid "Screenshot plugin"
+msgstr "Modul snímku obrazovky"
 
 #: ../metadata/screenshot.xml.in.h:4
 msgid "Initiate rectangle screenshot"
 msgstr "Pořídit snímek obrazovky"
 
 #: ../metadata/screenshot.xml.in.h:5
-msgid "Launch Application"
-msgstr "Spustit aplikaci : "
+msgid "Directory"
+msgstr "Adresář"
 
 #: ../metadata/screenshot.xml.in.h:6
-msgid "Put screenshot images in this directory"
+#, fuzzy
+msgid ""
+"Put screenshot images in this directory. If empty, the desktop directory "
+"will be used."
 msgstr "Uložit snímek obrazovky do této složky"
 
 #: ../metadata/screenshot.xml.in.h:7
-msgid "Screenshot"
-msgstr "Snímek obrazovky"
+msgid "Launch Application"
+msgstr "Spustit aplikaci : "
 
 #: ../metadata/screenshot.xml.in.h:8
-msgid "Screenshot plugin"
-msgstr "Modul snímku obrazovky"
+msgid "Automatically open screenshot in this application"
+msgstr "Automaticky otevřít snímek v této aplikaci"
 
 #: ../metadata/svg.xml.in.h:1
 msgid "Svg"
@@ -2757,40 +3266,60 @@ msgid "Svg image loader"
 msgstr "Podpora obrázkového formátu SVG"
 
 #: ../metadata/switcher.xml.in.h:1
-msgid "Amount of brightness in percent"
-msgstr "Hodnota jasu v procentech"
-
-#: ../metadata/switcher.xml.in.h:3
-msgid "Amount of saturation in percent"
-msgstr "Hodnota sytosti v procentech"
-
-#: ../metadata/switcher.xml.in.h:4
 msgid "Application Switcher"
 msgstr "Přepínač aplikací"
 
+#: ../metadata/switcher.xml.in.h:3
+msgid "Next window"
+msgstr "Další okno"
+
+#: ../metadata/switcher.xml.in.h:4
+msgid "Popup switcher if not visible and select next window"
+msgstr "Zobrazit přepínač, pokud není viditelný, a vybrat další okno"
+
 #: ../metadata/switcher.xml.in.h:5
-msgid "Auto Rotate"
-msgstr "Automaticky do popředí"
+msgid "Prev window"
+msgstr "Předchozí okno"
+
+#: ../metadata/switcher.xml.in.h:6
+msgid "Popup switcher if not visible and select previous window"
+msgstr "Zobrazit přepínač, pokud není viditelný, a vybrat předchozí okno"
+
+#: ../metadata/switcher.xml.in.h:7
+msgid "Next window (All windows)"
+msgstr "Další okno(všechna okna)"
 
 #: ../metadata/switcher.xml.in.h:8
-msgid "Bring To Front"
-msgstr "Přenést na popředí"
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Zobrazit přepínač, pokud není viditelný, a vybrat další okno ze všech oken"
 
 #: ../metadata/switcher.xml.in.h:9
-msgid "Bring selected window to front"
-msgstr "Přenést vybrané okno na popředí"
+msgid "Prev window (All windows)"
+msgstr "Předchozí okno(všechna okna)"
 
 #: ../metadata/switcher.xml.in.h:10
-msgid "Distance desktop should be zoom out while switching windows"
-msgstr "Vzdálená plocha může být při přepínání oken oddálena"
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+"Zobrazit přepínač, pokud není viditelný, a vybrat předchozí okno ze všech "
+"oken"
+
+#: ../metadata/switcher.xml.in.h:11
+msgid "Next window (No popup)"
+msgstr "Další okno (bez přepínače)"
 
 #: ../metadata/switcher.xml.in.h:12
-msgid "Icon"
-msgstr "Ikona"
+msgid "Select next window without showing the popup window."
+msgstr "Vybrat další okno bez zobrazení přepínače"
 
 #: ../metadata/switcher.xml.in.h:13
-msgid "Minimized"
-msgstr "Minimalizované"
+msgid "Prev window (No popup)"
+msgstr "Předchozí okno (bez přepínače)"
+
+#: ../metadata/switcher.xml.in.h:14
+msgid "Select previous window without showing the popup window."
+msgstr "Vybrat předchozí okno bez zobrazení přepínače"
 
 #: ../metadata/switcher.xml.in.h:15
 #, fuzzy
@@ -2798,297 +3327,749 @@ msgid "Next Panel"
 msgstr "Kostka plochy"
 
 #: ../metadata/switcher.xml.in.h:16
-msgid "Next window"
-msgstr "Další okno"
-
-#: ../metadata/switcher.xml.in.h:17
-msgid "Next window (All windows)"
-msgstr "Další okno(všechna okna)"
-
-#: ../metadata/switcher.xml.in.h:18
-msgid "Next window (No popup)"
-msgstr "Další okno (bez přepínače)"
-
-#: ../metadata/switcher.xml.in.h:20
-msgid "Popup switcher if not visible and select next window"
-msgstr "Zobrazit přepínač, pokud není viditelný, a vybrat další okno"
-
-#: ../metadata/switcher.xml.in.h:21
-msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr ""
-"Zobrazit přepínač, pokud není viditelný, a vybrat další okno ze všech oken"
-
-#: ../metadata/switcher.xml.in.h:22
-msgid "Popup switcher if not visible and select previous window"
-msgstr "Zobrazit přepínač, pokud není viditelný, a vybrat předchozí okno"
-
-#: ../metadata/switcher.xml.in.h:23
-msgid ""
-"Popup switcher if not visible and select previous window out of all windows"
-msgstr ""
-"Zobrazit přepínač, pokud není viditelný, a vybrat předchozí okno ze všech "
-"oken"
-
-#: ../metadata/switcher.xml.in.h:24
-#, fuzzy
-msgid "Prev Panel"
-msgstr "Předchozí snímek"
-
-#: ../metadata/switcher.xml.in.h:25
-msgid "Prev window"
-msgstr "Předchozí okno"
-
-#: ../metadata/switcher.xml.in.h:26
-msgid "Prev window (All windows)"
-msgstr "Předchozí okno(všechna okna)"
-
-#: ../metadata/switcher.xml.in.h:27
-msgid "Prev window (No popup)"
-msgstr "Předchozí okno (bez přepínače)"
-
-#: ../metadata/switcher.xml.in.h:28
-msgid "Rotate to the selected window while switching"
-msgstr "Zobrazovat vybrané okna při přepínání"
-
-#: ../metadata/switcher.xml.in.h:30
 #, fuzzy
 msgid "Select next panel type window."
 msgstr "Vybrat další okno"
 
-#: ../metadata/switcher.xml.in.h:31
-msgid "Select next window without showing the popup window."
-msgstr "Vybrat další okno bez zobrazení přepínače"
+#: ../metadata/switcher.xml.in.h:17
+#, fuzzy
+msgid "Prev Panel"
+msgstr "Předchozí snímek"
 
-#: ../metadata/switcher.xml.in.h:32
+#: ../metadata/switcher.xml.in.h:18
 #, fuzzy
 msgid "Select previous panel type window."
 msgstr "Vybrat předchozí okno"
 
-#: ../metadata/switcher.xml.in.h:33
-msgid "Select previous window without showing the popup window."
-msgstr "Vybrat předchozí okno bez zobrazení přepínače"
-
-#: ../metadata/switcher.xml.in.h:34
-msgid "Show icon next to thumbnail"
-msgstr "Zobrazit ikonu vedle náhledu"
-
-#: ../metadata/switcher.xml.in.h:35
-msgid "Show minimized windows"
-msgstr "Zobrazit minimalizovaná okna"
-
-#: ../metadata/switcher.xml.in.h:37
+#: ../metadata/switcher.xml.in.h:20
 msgid "Switcher speed"
 msgstr "Rychlost přepínače"
 
-#: ../metadata/switcher.xml.in.h:38
+#: ../metadata/switcher.xml.in.h:22
 msgid "Switcher timestep"
 msgstr "Časový krok přepínače"
 
-#: ../metadata/switcher.xml.in.h:39
+#: ../metadata/switcher.xml.in.h:23
 #, fuzzy
 msgid "Switcher windows"
 msgstr "Škálovat okna"
 
-#: ../metadata/switcher.xml.in.h:41
+#: ../metadata/switcher.xml.in.h:24
 #, fuzzy
 msgid "Windows that should be shown in switcher"
 msgstr "Typy oken, která mají být zobrazena v přepínači"
 
+#: ../metadata/switcher.xml.in.h:28
+msgid "Amount of saturation in percent"
+msgstr "Hodnota sytosti v procentech"
+
+#: ../metadata/switcher.xml.in.h:30
+msgid "Amount of brightness in percent"
+msgstr "Hodnota jasu v procentech"
+
+#: ../metadata/switcher.xml.in.h:33
+msgid "Bring To Front"
+msgstr "Přenést na popředí"
+
+#: ../metadata/switcher.xml.in.h:34
+msgid "Bring selected window to front"
+msgstr "Přenést vybrané okno na popředí"
+
+#: ../metadata/switcher.xml.in.h:36
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr "Vzdálená plocha může být při přepínání oken oddálena"
+
+#: ../metadata/switcher.xml.in.h:37
+msgid "Icon"
+msgstr "Ikona"
+
+#: ../metadata/switcher.xml.in.h:38
+msgid "Show icon next to thumbnail"
+msgstr "Zobrazit ikonu vedle náhledu"
+
+#: ../metadata/switcher.xml.in.h:39
+msgid "Minimized"
+msgstr "Minimalizované"
+
+#: ../metadata/switcher.xml.in.h:40
+msgid "Show minimized windows"
+msgstr "Zobrazit minimalizovaná okna"
+
+#: ../metadata/switcher.xml.in.h:41
+msgid "Auto Rotate"
+msgstr "Automaticky do popředí"
+
+#: ../metadata/switcher.xml.in.h:42
+msgid "Rotate to the selected window while switching"
+msgstr "Zobrazovat vybrané okna při přepínání"
+
+#: ../metadata/wall.xml.in.h:1
+#, fuzzy
+msgid "Desktop Wall"
+msgstr "Kostka plochy"
+
+#: ../metadata/wall.xml.in.h:2
+msgid "Desktop Wall Plugin"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:3
+msgid "Viewport Switch Preview"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:4
+msgid "Show Viewport Switcher Preview"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:5
+#, fuzzy
+msgid "Show switcher window while switching viewports"
+msgstr "Zobrazovat vybrané okna při přepínání"
+
+#: ../metadata/wall.xml.in.h:6
+msgid "Show Live Viewport Previews"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:7
+msgid "Show live viewport previews in switcher window"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:8
+msgid "Switch Target Preview Visibility Time"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:9
+msgid ""
+"Duration (in s) the switch target preview should remain visible after "
+"switching ends."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:10
+#, fuzzy
+msgid "Preview Scale"
+msgstr "Předchozí snímek"
+
+#: ../metadata/wall.xml.in.h:12
+#, no-c-format
+msgid "Size of the preview in %"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:13
+#, fuzzy
+msgid "Edge Radius"
+msgstr "Poloměr stínu"
+
+#: ../metadata/wall.xml.in.h:14
+msgid "Radius of the rounded edge"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:15
+msgid "Border Width"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:16
+msgid "Width of the border between the previews"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:17
+#, fuzzy
+msgid "Outline Color"
+msgstr "Obrysové"
+
+#: ../metadata/wall.xml.in.h:18
+#, fuzzy
+msgid "Outline color of the switcher window."
+msgstr "Obrysová změna velikosti okna"
+
+#: ../metadata/wall.xml.in.h:19
+#, fuzzy
+msgid "Background Gradient"
+msgstr "Obrázky pozadí"
+
+#: ../metadata/wall.xml.in.h:20
+#, fuzzy
+msgid "Base Color"
+msgstr "Barva okraje"
+
+#: ../metadata/wall.xml.in.h:21
+msgid "First color for the background gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:22
+#, fuzzy
+msgid "Highlight Color"
+msgstr "Výplňová barva"
+
+#: ../metadata/wall.xml.in.h:23
+msgid "Second color for the background gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:25
+msgid "Third color for the background gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:26
+msgid "Thumb Gradient"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:27
+msgid "First color for the thumb gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:28
+msgid "Second color for the thumb gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:29
+msgid "Highlight Gradient"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:30
+msgid "First color for the thumb highlight gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:31
+msgid "Second color for the thumb highlight gradient of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:32
+#, fuzzy
+msgid "Arrow Colors"
+msgstr "Barva stínu"
+
+#: ../metadata/wall.xml.in.h:33
+msgid "First color of the arrow of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:34
+msgid "Second color of the arrow of the switcher window."
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:35
+#, fuzzy
+msgid "Viewport Switching"
+msgstr "Pozice plochy na ose X"
+
+#: ../metadata/wall.xml.in.h:36
+msgid "Allow Wrap-Around"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:37
+msgid "Allow wrap-around when moving the wall up/down/left/right"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:38
+msgid "Wall Sliding Duration"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:39
+msgid "Duration (in s) for wall sliding viewport switching animation"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:40
+#, fuzzy
+msgid "Non Sliding Windows"
+msgstr "Slábnutí oken"
+
+#: ../metadata/wall.xml.in.h:41
+#, fuzzy
+msgid "Windows that should not slide during the slide animation"
+msgstr "Typy oken, které budou zobrazeny v režimu škálování"
+
+#: ../metadata/wall.xml.in.h:43
+#, fuzzy
+msgid "Move within wall"
+msgstr "Přesunout okno"
+
+#: ../metadata/wall.xml.in.h:44
+#, fuzzy
+msgid "Move Left"
+msgstr "Otočit vlevo"
+
+#: ../metadata/wall.xml.in.h:45
+msgid "Move along the wall to the left"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:46
+#, fuzzy
+msgid "Move Right"
+msgstr "Otočit vpravo"
+
+#: ../metadata/wall.xml.in.h:47
+msgid "Move along the wall to the right"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:48
+msgid "Move Up"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:49
+msgid "Move along the wall up"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:50
+#, fuzzy
+msgid "Move Down"
+msgstr "Přesunout okno"
+
+#: ../metadata/wall.xml.in.h:51
+msgid "Move along the wall down"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:52
+msgid "Move Next"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:53
+msgid "Move along the wall to the next viewport"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:54
+msgid "Move Prev"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:55
+msgid "Move along the wall to the previous viewport"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:56
+#, fuzzy
+msgid "Move with window within wall"
+msgstr "Otočit s oknem"
+
+#: ../metadata/wall.xml.in.h:57
+#, fuzzy
+msgid "Move Left With Window"
+msgstr "Otočit vlevo s oknem"
+
+#: ../metadata/wall.xml.in.h:58
+msgid "Move with window along the wall to the left"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:59
+#, fuzzy
+msgid "Move Right With Window"
+msgstr "Otočit vpravo s oknem"
+
+#: ../metadata/wall.xml.in.h:60
+msgid "Move with window along the wall to the right"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:61
+#, fuzzy
+msgid "Move Up With Window"
+msgstr "Přesunout okno"
+
+#: ../metadata/wall.xml.in.h:62
+msgid "Move with window along the wall up"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:63
+#, fuzzy
+msgid "Move Down With Window"
+msgstr "Přesunout okno"
+
+#: ../metadata/wall.xml.in.h:64
+msgid "Move with window along the wall down"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:65
+#, fuzzy
+msgid "Edge flipping"
+msgstr "Překlápění hran DnD"
+
+#: ../metadata/wall.xml.in.h:66
+#, fuzzy
+msgid "Flip Left"
+msgstr "Otočit překlopením vlevo"
+
+#: ../metadata/wall.xml.in.h:67
+#, fuzzy
+msgid "Flip left"
+msgstr "Doba překlopení"
+
+#: ../metadata/wall.xml.in.h:68
+#, fuzzy
+msgid "Flip Right"
+msgstr "Otočit překlopením vpravo"
+
+#: ../metadata/wall.xml.in.h:69
+#, fuzzy
+msgid "Flip right"
+msgstr "Otočit překlopením vpravo"
+
+#: ../metadata/wall.xml.in.h:70
+#, fuzzy
+msgid "Flip Up"
+msgstr "Doba překlopení"
+
+#: ../metadata/wall.xml.in.h:71
+#, fuzzy
+msgid "Flip up"
+msgstr "Doba překlopení"
+
+#: ../metadata/wall.xml.in.h:72
+#, fuzzy
+msgid "Flip Down"
+msgstr "Překlápění hran DnD"
+
+#: ../metadata/wall.xml.in.h:73
+#, fuzzy
+msgid "Flip down"
+msgstr "Rozmístit okna"
+
+#: ../metadata/wall.xml.in.h:74
+msgid "Multimonitor behavior"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:75
+msgid "How should a multimonitor configuration be handled"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:76
+msgid "Switch all"
+msgstr ""
+
+#: ../metadata/wall.xml.in.h:77
+#, fuzzy
+msgid "Switch separately"
+msgstr "Rychlost přepínače"
+
+#: ../metadata/wall.xml.in.h:78
+#, fuzzy
+msgid "Edge Flipping"
+msgstr "Překlápění hran DnD"
+
+#: ../metadata/wall.xml.in.h:80
+#, fuzzy
+msgid "Flip viewport when moving the pointer to a screen edge"
+msgstr ""
+"Překlopit na další viewport při umístění ukazatele na hranici obrazovky"
+
+#: ../metadata/wall.xml.in.h:82
+#, fuzzy
+msgid "Flip viewport when moving a window to a screen edge"
+msgstr "Překlopit na další viewport při přesunu okna na hranici obrazovky"
+
+#: ../metadata/wall.xml.in.h:84
+#, fuzzy
+msgid "Flip viewport when dragging an object to a screen edge"
+msgstr "Překlopit na další viewport při přetažení objektu na hranici obrazovky"
+
 #: ../metadata/water.xml.in.h:1
-msgid "Add line"
-msgstr "Přidat čáru"
+msgid "Water Effect"
+msgstr "Vodní efekt"
 
 #: ../metadata/water.xml.in.h:2
-msgid "Add point"
-msgstr "Přidat bod"
-
-#: ../metadata/water.xml.in.h:3
 msgid "Adds water effects to different desktop actions"
 msgstr "Do různých akcí plochy přidává efekt vody"
 
 #: ../metadata/water.xml.in.h:4
-msgid "Delay (in ms) between each rain-drop"
-msgstr "Zpoždění (v ms) mezi jednotlivými kapkami"
-
-#: ../metadata/water.xml.in.h:5
 msgid "Enable pointer water effects"
 msgstr "Povolit vodní efekty ukazatele"
 
-#: ../metadata/water.xml.in.h:7
-msgid "Line"
-msgstr "Čára"
-
-#: ../metadata/water.xml.in.h:8
-msgid "Offset Scale"
-msgstr "Offset Scale"
-
-#: ../metadata/water.xml.in.h:9
-msgid "Point"
-msgstr "Bod"
-
-#: ../metadata/water.xml.in.h:10
-msgid "Rain Delay"
-msgstr "Zpoždění deště"
-
-#: ../metadata/water.xml.in.h:11
-msgid "Title wave"
-msgstr "Vlna v nadpisu"
-
-#: ../metadata/water.xml.in.h:12
+#: ../metadata/water.xml.in.h:5
 msgid "Toggle rain"
 msgstr "Přepnout déšť"
 
-#: ../metadata/water.xml.in.h:13
+#: ../metadata/water.xml.in.h:6
 msgid "Toggle rain effect"
 msgstr "Přepnout efekt deště"
 
-#: ../metadata/water.xml.in.h:14
+#: ../metadata/water.xml.in.h:7
 msgid "Toggle wiper"
 msgstr "Přepnout stěrač"
 
-#: ../metadata/water.xml.in.h:15
+#: ../metadata/water.xml.in.h:8
 msgid "Toggle wiper effect"
 msgstr "Přepnout efekt stěrače"
 
-#: ../metadata/water.xml.in.h:16
-msgid "Water Effect"
-msgstr "Vodní efekt"
+#: ../metadata/water.xml.in.h:9
+msgid "Offset Scale"
+msgstr "Offset Scale"
 
-#: ../metadata/water.xml.in.h:17
+#: ../metadata/water.xml.in.h:10
 msgid "Water offset scale"
 msgstr "Měřítko odsazení vody"
 
-#: ../metadata/water.xml.in.h:18
+#: ../metadata/water.xml.in.h:11
+msgid "Rain Delay"
+msgstr "Zpoždění deště"
+
+#: ../metadata/water.xml.in.h:12
+msgid "Delay (in ms) between each rain-drop"
+msgstr "Zpoždění (v ms) mezi jednotlivými kapkami"
+
+#: ../metadata/water.xml.in.h:13
+msgid "Title wave"
+msgstr "Vlna v nadpisu"
+
+#: ../metadata/water.xml.in.h:14
 msgid "Wave effect from window title"
 msgstr "Efekt vlny v nadpisu okna"
 
+#: ../metadata/water.xml.in.h:15
+msgid "Point"
+msgstr "Bod"
+
+#: ../metadata/water.xml.in.h:16
+msgid "Add point"
+msgstr "Přidat bod"
+
+#: ../metadata/water.xml.in.h:17
+msgid "Line"
+msgstr "Čára"
+
+#: ../metadata/water.xml.in.h:18
+msgid "Add line"
+msgstr "Přidat čáru"
+
 #: ../metadata/wobbly.xml.in.h:1
-msgid "Focus Effect"
-msgstr "Efekt zaměření"
+msgid "Wobbly Windows"
+msgstr "Vlnící se okna"
 
 #: ../metadata/wobbly.xml.in.h:2
-msgid "Focus Window Effect"
-msgstr "Efekt zaměření oken"
+msgid "Use spring model for wobbly window effect"
+msgstr "Pro efekt rozhoupání okna použít pružinový model"
 
 #: ../metadata/wobbly.xml.in.h:3
-msgid "Focus Windows"
-msgstr "Typy oken pro efekt při zaměření"
+msgid "Snap windows"
+msgstr "Přichytávat okna"
 
 #: ../metadata/wobbly.xml.in.h:4
-msgid "Friction"
-msgstr "Tření"
+msgid "Toggle window snapping"
+msgstr "Přepnout přichytávání oken"
 
+# 52895 AttribValues/label
 #: ../metadata/wobbly.xml.in.h:5
-msgid "Grab Windows"
-msgstr "Typy oken pro efekt při uchopení"
+msgid "Snap Inverted"
+msgstr "Invertované přichytávání"
 
 #: ../metadata/wobbly.xml.in.h:6
-msgid "Grid Resolution"
-msgstr "Rozlišení mřížky"
-
-#: ../metadata/wobbly.xml.in.h:7
 msgid "Inverted window snapping"
 msgstr "Invertované přichytávání oken"
+
+# 'driver' as in '(hardware) driver update'
+#: ../metadata/wobbly.xml.in.h:7
+msgid "Shiver"
+msgstr "Chvění"
 
 #: ../metadata/wobbly.xml.in.h:8
 msgid "Make window shiver"
 msgstr "Rozechvět okno"
 
 #: ../metadata/wobbly.xml.in.h:9
-msgid "Map Effect"
-msgstr "Efekt mapování"
+msgid "Friction"
+msgstr "Tření"
 
 #: ../metadata/wobbly.xml.in.h:10
-msgid "Map Window Effect"
-msgstr "Efekt mapování oken"
-
-#: ../metadata/wobbly.xml.in.h:11
-msgid "Map Windows"
-msgstr "Mapované"
-
-#: ../metadata/wobbly.xml.in.h:12
-msgid "Maximize Effect"
-msgstr "Efekt maximalizace"
-
-#: ../metadata/wobbly.xml.in.h:13
-msgid "Minimum Grid Size"
-msgstr "Minimální velikost mřížky"
-
-#: ../metadata/wobbly.xml.in.h:14
-msgid "Minimum Vertex Grid Size"
-msgstr "Minimální velikost vrcholů mřížky"
-
-#: ../metadata/wobbly.xml.in.h:15
-msgid "Move Windows"
-msgstr "Přesunované"
-
-# 'driver' as in '(hardware) driver update'
-#: ../metadata/wobbly.xml.in.h:17
-msgid "Shiver"
-msgstr "Chvění"
-
-# 52895 AttribValues/label
-#: ../metadata/wobbly.xml.in.h:18
-msgid "Snap Inverted"
-msgstr "Invertované přichytávání"
-
-#: ../metadata/wobbly.xml.in.h:19
-msgid "Snap windows"
-msgstr "Přichytávat okna"
-
-#: ../metadata/wobbly.xml.in.h:20
 msgid "Spring Friction"
 msgstr "Tření pružiny"
 
-#: ../metadata/wobbly.xml.in.h:21
+#: ../metadata/wobbly.xml.in.h:11
 msgid "Spring K"
 msgstr "Pružina K"
 
-#: ../metadata/wobbly.xml.in.h:22
+#: ../metadata/wobbly.xml.in.h:12
 msgid "Spring Konstant"
 msgstr "Konstanta pružiny"
 
-#: ../metadata/wobbly.xml.in.h:23
-msgid "Toggle window snapping"
-msgstr "Přepnout přichytávání oken"
+#: ../metadata/wobbly.xml.in.h:13
+msgid "Grid Resolution"
+msgstr "Rozlišení mřížky"
 
-#: ../metadata/wobbly.xml.in.h:24
-msgid "Use spring model for wobbly window effect"
-msgstr "Pro efekt rozhoupání okna použít pružinový model"
-
-#: ../metadata/wobbly.xml.in.h:25
+#: ../metadata/wobbly.xml.in.h:14
 msgid "Vertex Grid Resolution"
 msgstr "Rozlišení vrcholů mřížky"
 
-#: ../metadata/wobbly.xml.in.h:26
+#: ../metadata/wobbly.xml.in.h:15
+msgid "Minimum Grid Size"
+msgstr "Minimální velikost mřížky"
+
+#: ../metadata/wobbly.xml.in.h:16
+msgid "Minimum Vertex Grid Size"
+msgstr "Minimální velikost vrcholů mřížky"
+
+#: ../metadata/wobbly.xml.in.h:17
+msgid "Map Effect"
+msgstr "Efekt mapování"
+
+#: ../metadata/wobbly.xml.in.h:18
+msgid "Map Window Effect"
+msgstr "Efekt mapování oken"
+
+#: ../metadata/wobbly.xml.in.h:20
+msgid "Focus Effect"
+msgstr "Efekt zaměření"
+
+#: ../metadata/wobbly.xml.in.h:21
+msgid "Focus Window Effect"
+msgstr "Efekt zaměření oken"
+
+#: ../metadata/wobbly.xml.in.h:22
+msgid "Map Windows"
+msgstr "Mapované"
+
+#: ../metadata/wobbly.xml.in.h:23
+msgid "Windows that should wobble when mapped"
+msgstr "Typy oken, která se mají rozhoupat při mapování"
+
+#: ../metadata/wobbly.xml.in.h:24
+msgid "Focus Windows"
+msgstr "Typy oken pro efekt při zaměření"
+
+#: ../metadata/wobbly.xml.in.h:25
 msgid "Windows that should wobble when focused"
 msgstr "Typy oken, která se mají rozhoupat při zaměření"
+
+#: ../metadata/wobbly.xml.in.h:26
+msgid "Grab Windows"
+msgstr "Typy oken pro efekt při uchopení"
 
 #: ../metadata/wobbly.xml.in.h:27
 msgid "Windows that should wobble when grabbed"
 msgstr "Typy oken, která se mají rozhoupat při uchopení"
 
 #: ../metadata/wobbly.xml.in.h:28
-msgid "Windows that should wobble when mapped"
-msgstr "Typy oken, která se mají rozhoupat při mapování"
+msgid "Move Windows"
+msgstr "Přesunované"
 
 #: ../metadata/wobbly.xml.in.h:29
 msgid "Windows that should wobble when moved"
 msgstr "Typy oken, která se mají rozhoupat při přesunu"
 
 #: ../metadata/wobbly.xml.in.h:30
+msgid "Maximize Effect"
+msgstr "Efekt maximalizace"
+
+#: ../metadata/wobbly.xml.in.h:31
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "Vlnivý efekt"
 
-#: ../metadata/wobbly.xml.in.h:31
-msgid "Wobbly Windows"
-msgstr "Vlnící se okna"
+#: ../metadata/zoom.xml.in.h:1
+msgid "Zoom Desktop"
+msgstr "Přiblížit plochu"
 
-#~ msgid "Command line 0"
-#~ msgstr "Příkazová řádka 0"
+#: ../metadata/zoom.xml.in.h:2
+msgid "Zoom and pan desktop cube"
+msgstr "Přiblížit a posunout kostku ploch"
 
-#~ msgid "Run command 0"
-#~ msgstr "Spustit příkaz 0"
+#: ../metadata/zoom.xml.in.h:4
+msgid "Zoom In"
+msgstr "Přiblížit"
+
+#: ../metadata/zoom.xml.in.h:5
+msgid "Zoom Out"
+msgstr "Oddálit"
+
+#: ../metadata/zoom.xml.in.h:6
+#, fuzzy
+msgid "Zoom Pan"
+msgstr "Přiblížit"
+
+#: ../metadata/zoom.xml.in.h:7
+#, fuzzy
+msgid "Zoom pan"
+msgstr "Přiblížit"
+
+#: ../metadata/zoom.xml.in.h:9
+msgid "Zoom Speed"
+msgstr "Rychlost přiblížení"
+
+#: ../metadata/zoom.xml.in.h:11
+msgid "Zoom Timestep"
+msgstr "Časový krok přiblížení"
+
+#: ../metadata/zoom.xml.in.h:12
+msgid "Zoom factor"
+msgstr "Násobek přiblížení"
+
+#: ../metadata/zoom.xml.in.h:13
+msgid "Filter Linear"
+msgstr "Lineární filtr"
+
+#: ../metadata/zoom.xml.in.h:14
+msgid "Use linear filter when zoomed in"
+msgstr "Při přiblížení používat lineární filtr"
+
+#: ../mate/compiz.desktop.in.h:1
+msgid "Compiz"
+msgstr "Compiz"
+
+#: ../src/compiz-start.desktop.in.h:1
+#, fuzzy
+msgid "Compiz Start"
+msgstr "Compiz"
+
+#: ../src/compiz-start.desktop.in.h:2
+#, fuzzy
+msgid "Start Compiz"
+msgstr "Compiz"
+
+#: ../src/compiz-start.desktop.in.h:3
+msgid "Start or restart Compiz"
+msgstr ""
+
+#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
+#~ msgstr "Událost při rolování nad titulkem okna"
+
+#~ msgid "Blur type"
+#~ msgstr "Typ rozmazání"
+
+#~ msgid "Marco theme active window opacity"
+#~ msgstr "Průhlednost aktivního okna"
+
+#~ msgid "Marco theme active window opacity shade"
+#~ msgstr "Průhlednost stínu aktivního okna"
+
+#~ msgid "Marco theme opacity"
+#~ msgstr "Průhlednost tématu marco"
+
+#~ msgid "Marco theme opacity shade"
+#~ msgstr "Průhlednost stínu tématu marco"
+
+#~ msgid "Opacity to use for active windows with marco theme decorations"
+#~ msgstr "Průhlednost pro aktivní okna s tématem marco"
+
+#~ msgid "Opacity to use for marco theme decorations"
+#~ msgstr "Průhlednost pro témata marco"
+
+#~ msgid "Title bar mouse wheel action"
+#~ msgstr "Událost při rolování nad titulkem okna"
+
+#~ msgid "Type of blur used for window decorations"
+#~ msgstr "Typ rozmazání použitého pro dekoraci oken"
+
+#~ msgid "Use marco theme"
+#~ msgstr "Použít téma marco"
+
+#~ msgid "Use marco theme when drawing window decorations"
+#~ msgstr "Použít téma marco pro vykreslování dekorací oken"
+
+#~ msgid "Line width"
+#~ msgstr "Šířka linky"
+
+#~ msgid "Line width for annotations"
+#~ msgstr "Šířka linky pro anotaci"
+
+#~ msgid "GConf"
+#~ msgstr "Gconf"
+
+#~ msgid "GConf Control Backend"
+#~ msgstr "Kontrolní backend GConf"
+
+#~ msgid "Kconfig"
+#~ msgstr "Kconfig"
+
+#~ msgid "Kconfig Control Backend"
+#~ msgstr "Kontrolní backend Kconfig"
+
+#, fuzzy
+#~ msgid "Decrease"
+#~ msgstr "Snížit krytí"
+
+#, fuzzy
+#~ msgid "Increase"
+#~ msgstr "Zvýšit krytí"
 
 #, fuzzy
 #~ msgid "Screenshot commands"
@@ -3098,55 +4079,11 @@ msgstr "Vlnící se okna"
 #~ msgid "Screenshot key bindings"
 #~ msgstr "Screenshot command line"
 
-#~ msgid "Filter Linear"
-#~ msgstr "Lineární filtr"
-
-#~ msgid "Use linear filter when zoomed in"
-#~ msgstr "Při přiblížení používat lineární filtr"
-
-#~ msgid "Zoom Desktop"
-#~ msgstr "Přiblížit plochu"
-
-#~ msgid "Zoom In"
-#~ msgstr "Přiblížit"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Oddálit"
-
-#, fuzzy
-#~ msgid "Zoom Pan"
-#~ msgstr "Přiblížit"
-
-#~ msgid "Zoom Speed"
-#~ msgstr "Rychlost přiblížení"
-
-#~ msgid "Zoom Timestep"
-#~ msgstr "Časový krok přiblížení"
-
-#~ msgid "Zoom and pan desktop cube"
-#~ msgstr "Přiblížit a posunout kostku ploch"
-
-#~ msgid "Zoom factor"
-#~ msgstr "Násobek přiblížení"
-
-#, fuzzy
-#~ msgid "Zoom pan"
-#~ msgstr "Přiblížit"
-
-#~ msgid "Decrease window opacity"
-#~ msgstr "Snížit krytí oken"
-
-#~ msgid "Increase window opacity"
-#~ msgstr "Zvýšit krytí okna"
-
 #~ msgid "Opacity window values"
 #~ msgstr "Hodnoty průhlednosti pro okna"
 
 #~ msgid "Opacity windows"
 #~ msgstr "Průhledné okna"
-
-#~ msgid "Background Images"
-#~ msgstr "Obrázky pozadí"
 
 #~ msgid "Background images"
 #~ msgstr "Obrázky na pozadí"
@@ -3217,10 +4154,6 @@ msgstr "Vlnící se okna"
 
 #, fuzzy
 #~ msgid "Plane Up"
-#~ msgstr "Rozmístit okna"
-
-#, fuzzy
-#~ msgid "Plane down"
 #~ msgstr "Rozmístit okna"
 
 #, fuzzy

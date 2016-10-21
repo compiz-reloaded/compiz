@@ -657,13 +657,6 @@ setScreenOption (CompPlugin	 *plugin,
 	    return TRUE;
 	}
 	break;
-    case COMP_SCREEN_OPTION_NUMBER_OF_DESKTOPS:
-	if (compSetIntOption (o, value))
-	{
-	    setNumberOfDesktops (screen, o->value.i);
-	    return TRUE;
-	}
-	break;
     case COMP_SCREEN_OPTION_DEFAULT_ICON:
 	if (compSetStringOption (o, value))
 	    return updateDefaultIcon (screen);
@@ -704,7 +697,7 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "unredirect_fullscreen_windows", "bool", 0, 0, 0 },
     { "default_icon", "string", 0, 0, 0 },
     { "sync_to_vblank", "bool", 0, 0, 0 },
-    { "number_of_desktops", "int", "<min>1</min>", 0, 0 },
+    { "__padding__", "bool", 0, 0, 0 },
     { "detect_outputs", "bool", 0, 0, 0 },
     { "outputs", "list", "<type>string</type>", 0, 0 },
     { "overlapping_outputs", "int",
@@ -4111,35 +4104,6 @@ getCurrentOutputExtents (CompScreen *s,
 
     if (y2)
 	*y2 = s->outputDev[s->currentOutputDev].region.extents.y2;
-}
-
-void
-setNumberOfDesktops (CompScreen   *s,
-		     unsigned int nDesktop)
-{
-    CompWindow *w;
-
-    if (nDesktop < 1 || nDesktop >= 0xffffffff)
-	return;
-
-    if (nDesktop == s->nDesktop)
-	return;
-
-    if (s->currentDesktop >= nDesktop)
-	s->currentDesktop = nDesktop - 1;
-
-    for (w = s->windows; w; w = w->next)
-    {
-	if (w->desktop == 0xffffffff)
-	    continue;
-
-	if (w->desktop >= nDesktop)
-	    setDesktopForWindow (w, nDesktop - 1);
-    }
-
-    s->nDesktop = nDesktop;
-
-    setDesktopHints (s);
 }
 
 void

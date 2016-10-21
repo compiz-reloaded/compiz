@@ -3,9 +3,9 @@ AC_PREREQ(2.57)
 dnl compiz package version number
 m4_define(compiz_version_major, 0)
 m4_define(compiz_version_minor, 8)
-m4_define(compiz_version_micro, 12)
+m4_define(compiz_version_micro, 13)
 
-AC_INIT([compiz], [0.8.12.3], [chat-to-me@raveit.de])
+AC_INIT([compiz], [0.8.13], [chat-to-me@raveit.de])
 
 COMPIZ_VERSION_MAJOR=compiz_version_major()
 COMPIZ_VERSION_MINOR=compiz_version_minor()
@@ -32,7 +32,7 @@ AC_CHECK_HEADERS([stdlib.h sys/time.h unistd.h])
 ALL_LINGUAS="ar bg bn bn_IN ca cs da de el en_GB en_US es eu et fi fr gl gu he hi hr hu id it ja km ko lt mk mr nb nl or pa pl pt pt_BR ro ru sk sl sr sv ta tr uk vi zh_CN zh_TW"
 AC_SUBST(ALL_LINGUAS)
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.17])
+AM_GNU_GETTEXT_VERSION([0.19])
 GETTEXT_PACKAGE=compiz
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AC_SUBST(GETTEXT_PACKAGE)
@@ -300,7 +300,7 @@ AC_ARG_ENABLE(marco,
   [use_marco=$enableval], [use_marco=yes])
 
 AC_ARG_ENABLE(mate,
-  [  --disable-mate          Disable mate basic support],
+  [  --disable-mate          Disable basic mate compatibility],
   [use_mate=$enableval], [use_mate=yes])
 
 AC_ARG_ENABLE(gsettings,
@@ -381,7 +381,7 @@ fi
 
 AM_CONDITIONAL(USE_MATE, test "x$use_mate" = "xyes")
 if test "$use_mate" = yes; then
-  AC_DEFINE(USE_MATE, 1, [Build mate basic support])
+  AC_DEFINE(USE_MATE, 1, [Build basic mate compatibility])
 fi
 
 AM_CONDITIONAL(USE_GSETTINGS, test "x$use_gsettings" = "xyes")
@@ -452,10 +452,9 @@ libdecoration/libdecoration.pc
 include/Makefile
 plugins/Makefile
 images/Makefile
-gtk/Makefile
-gtk/window-decorator/Makefile
-gtk/mate/Makefile
+gtk-window-decorator/Makefile
 po/Makefile.in
+mate/Makefile
 metadata/Makefile
 ])
 
@@ -467,11 +466,11 @@ echo "  annotate:                  $use_annotate"
 echo "  svg:                       $use_librsvg"
 echo "  inotify:                   $use_inotify"
 echo "  fuse:                      $use_fuse"
+echo "  matecompat:                $use_mate"
 echo ""
 echo "and the following optional features will be used:"
 echo "  gtk:                       $use_gtk ($with_gtk)"
 echo "  marco:                     $use_marco"
-echo "  mate:                      $use_mate"
 echo "  gwd gsettings support:     $use_gsettings"
 echo "  desktop menu entries:      $use_menu_entries"
 echo ""
