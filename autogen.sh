@@ -14,7 +14,7 @@ if [ ! -f "$srcdir/configure.ac" ]; then
 fi
 
 mkdir -p m4
-aclocal -I . --install || exit 1
+aclocal -I m4 --install || exit 1
 autoreconf --verbose --force --install || exit 1
 intltoolize --copy --force --automake || exit 1
 
