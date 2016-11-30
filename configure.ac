@@ -308,8 +308,8 @@ AC_ARG_ENABLE(gsettings,
   [use_gsettings=$enableval], [use_gsettings=yes])
 
 AC_ARG_ENABLE(compizconfig,
-  [  --disable-compizconfig  Disable compizconfig support in gtk-window-decorator],
-  [use_compizconfig=$enableval], [use_compizconfig=yes])
+  [  --enable-compizconfig   Enable compizconfig support in gtk-window-decorator],
+  [use_compizconfig=$enableval], [use_compizconfig=no])
 
 if test "x$use_gtk" = "xyes"; then
   if test "x$with_gtk" != "x2.0"; then
