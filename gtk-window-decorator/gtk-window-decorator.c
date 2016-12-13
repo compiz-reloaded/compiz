@@ -27,7 +27,6 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-#include <X11/cursorfont.h>
 #include <X11/extensions/Xrender.h>
 #ifdef HAVE_XINPUT2
 #include <X11/extensions/XInput2.h>
@@ -319,15 +318,15 @@ static Atom toolkit_action_force_quit_dialog_atom;
 
 static Time dm_sn_timestamp;
 
-#define C(name) { 0, XC_ ## name }
+#define C(name) { NULL, GDK_ ## name }
 
 static struct _cursor {
-    Cursor	 cursor;
-    unsigned int shape;
+    GdkCursor    *cursor;
+    GdkCursorType shape;
 } cursor[3][3] = {
-    { C (top_left_corner),    C (top_side),    C (top_right_corner)    },
-    { C (left_side),	      C (left_ptr),    C (right_side)	       },
-    { C (bottom_left_corner), C (bottom_side), C (bottom_right_corner) }
+    { C (TOP_LEFT_CORNER),    C (TOP_SIDE),    C (TOP_RIGHT_CORNER)    },
+    { C (LEFT_SIDE),	      C (LEFT_PTR),    C (RIGHT_SIDE)	       },
+    { C (BOTTOM_LEFT_CORNER), C (BOTTOM_SIDE), C (BOTTOM_RIGHT_CORNER) }
 };
 
 #define BUTTON_CLOSE   0
@@ -3726,17 +3725,17 @@ add_frame_window (WnckWindow *win,
 			       CopyFromParent, CopyFromParent, CopyFromParent,
 			       CWOverrideRedirect | CWEventMask, &attr);
 
-	    if (cursor[i][j].cursor)
+	    if (cursor[i][j].cursor != NULL)
 	    {
 #ifdef HAVE_XINPUT2
-		int clientPointer;
+		int client_pointer;
 
-		XIGetClientPointer (xdisplay, None, &clientPointer);
-		XIDefineCursor (xdisplay, clientPointer, d->event_windows[i][j],
-				cursor[i][j].cursor);
+		XIGetClientPointer (xdisplay, None, &client_pointer);
+		XIDefineCursor (xdisplay, client_pointer, d->event_windows[i][j],
+				GDK_CURSOR_XCURSOR(cursor[i][j].cursor));
 #else
 		XDefineCursor (xdisplay, d->event_windows[i][j],
-			       cursor[i][j].cursor);
+			       GDK_CURSOR_XCURSOR(cursor[i][j].cursor));
 #endif
 	    }
 	}
@@ -6687,22 +6686,6 @@ cursor_theme_changed (GSettings *settings_mouse, CCSContext *ccs_context)
 
     if (theme && strlen (theme) > 0)
     {
-	int i = 0, j = 0;
-	GdkDisplay *gdkdisplay = gdk_display_get_default ();
-	Display *xdisplay = gdk_x11_display_get_xdisplay (gdkdisplay);
-
-	for (i = 0; i < 3; i++)
-	{
-	    for (j = 0; j < 3; j++)
-	    {
-		if (cursor[i][j].shape != XC_left_ptr)
-		{
-		    XFreeCursor (xdisplay, cursor[i][j].cursor);
-		    cursor[i][j].cursor = XCreateFontCursor (xdisplay, cursor[i][j].shape);
-		}
-	    }
-	}
-
 	plugin_setting = ccsFindSetting (core_plugin, COMPIZCONFIG_CURSOR_THEME_OPTION, 0, 0);
 	if (plugin_setting)
 	    ccsSetString (plugin_setting, theme);
@@ -7625,9 +7608,11 @@ main (int argc, char *argv[])
     {
 	for (j = 0; j < 3; j++)
 	{
-	    if (cursor[i][j].shape != XC_left_ptr)
+	    if (cursor[i][j].shape != GDK_LEFT_PTR)
+	    {
 		cursor[i][j].cursor =
-		    XCreateFontCursor (xdisplay, cursor[i][j].shape);
+		  gdk_cursor_new_for_display (gdkdisplay, cursor[i][j].shape);
+	    }
 	}
     }
 
