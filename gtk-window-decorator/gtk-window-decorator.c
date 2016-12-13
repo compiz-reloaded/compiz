@@ -4313,11 +4313,17 @@ show_tooltip (const char *text)
     GdkDevice    *pointer;
 #endif
     gint	 x, y, w, h;
+    GdkDisplay   *display;
     GdkScreen	 *screen;
-    gint	 monitor_num;
-    GdkRectangle monitor;
+#if GTK_CHECK_VERSION (3, 22, 0)
+    GdkMonitor   *monitor;
+#else
+    gint          monitor;
+#endif
+    GdkRectangle  monitor_geom;
 
-    screen = gdk_screen_get_default ();
+    display = gdk_display_get_default ();
+    screen = gdk_display_get_default_screen (display);
 
     gtk_label_set_markup (GTK_LABEL (tip_label), text);
     gtk_widget_queue_resize (tip_window);
@@ -4325,25 +4331,30 @@ show_tooltip (const char *text)
     gtk_window_get_size (GTK_WINDOW (tip_window), &w, &h);
 
 #if GTK_CHECK_VERSION (3, 20, 0)
-    seat = gdk_display_get_default_seat (gdk_display_get_default ());
+    seat = gdk_display_get_default_seat (display);
     pointer = gdk_seat_get_pointer (seat);
 
     gdk_device_get_position (pointer, &screen, &x, &y);
 #else
-    gdk_display_get_pointer (gdk_display_get_default (), &screen, &x, &y, NULL);
+    gdk_display_get_pointer (display, &screen, &x, &y, NULL);
 #endif
 
     x -= (w / 2 + 4);
 
-    monitor_num = gdk_screen_get_monitor_at_point (screen, x, y);
-    gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
+#if GTK_CHECK_VERSION (3, 22, 0)
+    monitor = gdk_display_get_monitor_at_point (display, x, y);
+    gdk_monitor_get_geometry (monitor, &monitor_geom);
+#else
+    monitor = gdk_screen_get_monitor_at_point (screen, x, y);
+    gdk_screen_get_monitor_geometry (screen, monitor, &monitor_geom);
+#endif
 
-    if ((x + w) > monitor.x + monitor.width)
-	x -= (x + w) - (monitor.x + monitor.width);
-    else if (x < monitor.x)
-	x = monitor.x;
+    if ((x + w) > monitor_geom.x + monitor_geom.width)
+	x -= (x + w) - (monitor_geom.x + monitor_geom.width);
+    else if (x < monitor_geom.x)
+	x = monitor_geom.x;
 
-    if ((y + h + 16) > monitor.y + monitor.height)
+    if ((y + h + 16) > monitor_geom.y + monitor_geom.height)
 	y = y - h - 16;
     else
 	y = y + 16;
