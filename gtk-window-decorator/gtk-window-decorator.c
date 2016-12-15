@@ -64,7 +64,6 @@
 #include <pango/pango-context.h>
 #include <pango/pangocairo.h>
 
-#include <string.h>
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
@@ -504,9 +503,9 @@ decor_update_blur_property (decor_t *d,
 	size += right_region->numRects;
 
     if (size)
-	data = malloc (sizeof (long) * (2 + size * 6));
+	data = g_malloc0 (sizeof (long) * (2 + size * 6));
 
-    if (data)
+    if (data != NULL)
     {
 	decor_region_to_blur_property (data, 4, 0, width, height,
 				       top_region, top_offset,
@@ -527,7 +526,7 @@ decor_update_blur_property (decor_t *d,
 	gdk_error_trap_pop ();
 #endif
 
-	free (data);
+	g_free (data);
     }
     else
     {
@@ -7065,7 +7064,7 @@ init_settings (WnckScreen *screen)
     AtkObject	   *switcher_label_obj;
 
 #ifdef USE_COMPIZCONFIG
-    gpointer *compizconfig_value_data = malloc (sizeof (WnckScreen *) + sizeof (CCSContext *));
+    gpointer *compizconfig_value_data = g_malloc0 (sizeof (WnckScreen *) + sizeof (CCSContext *));
     CCSContext *ccs_context = ccsContextNew (NULL, 0);
 #elif USE_DBUS_GLIB
     DBusConnection *connection;
