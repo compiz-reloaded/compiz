@@ -1,716 +1,555 @@
-# Hindi message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Oriya translation for compiz
+# Copyright (C) 2007 SUSE LINUX GmbH, Nuernberg, Germany.
+# This file is distributed under the same license as the compiz package.
 # Prasanth Kurian <prasanth.kurian@agreeya.com>
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Oriya\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 20:08+0200\n"
+"Project-Id-Version: compiz\n"
+"Report-Msgid-Bugs-To: https://github.com/compiz-reloaded/compiz/issues\n"
+"POT-Creation-Date: 2017-01-12 18:19+0300\n"
 "PO-Revision-Date: 2007-12-16 01:13+0530\n"
 "Last-Translator: jayashree pujari <sspujari@hotmail.com>\n"
 "Language-Team: gisti <info.gist@cdac.in>\n"
-"Language: \n"
+"Language: or\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Poedit-Language: Oriya\n"
-"X-Poedit-Country: India\n"
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4546
-#: ../metadata/core.xml.in.in.h:35
 msgid "Close Window"
 msgstr "ଉଇଣ୍ଡୋ ବନ୍ଦକର"
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4568
-#: ../metadata/core.xml.in.in.h:41
 msgid "Unmaximize Window"
 msgstr "ଅଣ-ସର୍ବାଧିକ ଉଇଣ୍ଡୋ"
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4571
-#: ../metadata/core.xml.in.in.h:45
 msgid "Maximize Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4613
-#: ../metadata/core.xml.in.in.h:43
 msgid "Minimize Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ନ୍ଯୁନତମ କର"
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4758
-#: ../metadata/core.xml.in.in.h:51
 msgid "Window Menu"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ"
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4777
 #, fuzzy
 msgid "Shade"
 msgstr "ମାପକ"
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4797
 msgid "Make Above"
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4817
 msgid "Stick"
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4837
 msgid "Unshade"
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4857
 msgid "Unmake Above"
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:4877
 msgid "Unstick"
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:5241
 #, c-format
 msgid "The window \"%s\" is not responding."
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:5245
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:5257
 msgid "_Cancel"
 msgstr ""
 
-#: ../gtk-window-decorator/gtk-window-decorator.c:5259
 msgid "_Force Quit"
 msgstr ""
 
-#: ../metadata/annotate.xml.in.h:1
 msgid "Annotate"
 msgstr "ବ୍ଯାଖ୍ଯା କର"
 
-#: ../metadata/annotate.xml.in.h:2
 msgid "Annotate plugin"
 msgstr "ପ୍ଲଗଇନ ବ୍ଯାଖ୍ଯାକର"
 
-#: ../metadata/annotate.xml.in.h:3
 #, fuzzy
 msgid "Initiate Free Draw"
 msgstr "ଲିଭାଇବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/annotate.xml.in.h:4
 #, fuzzy
 msgid "Initiate freehand drawing"
 msgstr "ଚିତ୍ରାଙ୍କନ ବ୍ଯାଖ୍ଯା ପ୍ରାରମ୍ଭକର"
 
-#: ../metadata/annotate.xml.in.h:5
 #, fuzzy
 msgid "Initiate Line"
 msgstr "ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/annotate.xml.in.h:6
 #, fuzzy
 msgid "Initiate line drawing"
 msgstr "ଚିତ୍ରାଙ୍କନ ବ୍ଯାଖ୍ଯା ପ୍ରାରମ୍ଭକର"
 
-#: ../metadata/annotate.xml.in.h:7
 #, fuzzy
 msgid "Initiate Rectangle"
 msgstr "ଲିଭାଇବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/annotate.xml.in.h:8
 #, fuzzy
 msgid "Initiate rectangle drawing"
 msgstr "ଚିତ୍ରାଙ୍କନ ବ୍ଯାଖ୍ଯା ପ୍ରାରମ୍ଭକର"
 
-#: ../metadata/annotate.xml.in.h:9
 #, fuzzy
 msgid "Initiate Ellipse"
 msgstr "ଲିଭାଇବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/annotate.xml.in.h:10
 #, fuzzy
 msgid "Initiate ellipse drawing"
 msgstr "ଚିତ୍ରାଙ୍କନ ବ୍ଯାଖ୍ଯା ପ୍ରାରମ୍ଭକର"
 
-#: ../metadata/annotate.xml.in.h:11
 msgid "Draw"
 msgstr "ଅଂକନକର"
 
-#: ../metadata/annotate.xml.in.h:12
 msgid "Draw using tool"
 msgstr "ସାଧନ ଉପୟୋଗକରି ଅଂକନକର"
 
-#: ../metadata/annotate.xml.in.h:13
 msgid "Initiate erase"
 msgstr "ଲିଭାଇବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/annotate.xml.in.h:14
 msgid "Initiate annotate erasing"
 msgstr "ଲିଭାଇବା ବ୍ଯାଖ୍ଯା ଆରମ୍ଭକର"
 
-#: ../metadata/annotate.xml.in.h:15
 msgid "Clear"
 msgstr "ପରିଷ୍କାରକର"
 
-#: ../metadata/annotate.xml.in.h:16
 #, fuzzy
 msgid "Toggle center shape"
 msgstr "ଛାଯାୟୁକ୍ତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/annotate.xml.in.h:17
 msgid ""
 "Toggle whether the current shape is drawn using the center of your initial "
 "click"
 msgstr ""
 
-#: ../metadata/annotate.xml.in.h:18
 msgid "Annotate Fill Color"
 msgstr "ରଙ୍ଗ ପୁରଣ ବ୍ଯାଖ୍ଯାକର"
 
-#: ../metadata/annotate.xml.in.h:19
 msgid "Fill color for annotations"
 msgstr "ବ୍ଯାଖ୍ଯା ପାଇଁ ରଙ୍ଗ ପୁରଣକର"
 
-#: ../metadata/annotate.xml.in.h:20
 msgid "Annotate Stroke Color"
 msgstr "ଆଘାତ ରଙ୍ଗକୁ ବ୍ଯାଖ୍ଯା କର"
 
-#: ../metadata/annotate.xml.in.h:21
 msgid "Stroke color for annotations"
 msgstr "ବ୍ଯାଖ୍ଯାଗୁଡିକ ପାଇଁ ଆଘାତ ରଙ୍ଗ"
 
-#: ../metadata/annotate.xml.in.h:22
 msgid "Stroke width"
 msgstr "ଆଘାତ ଓସାର"
 
-#: ../metadata/annotate.xml.in.h:23
 msgid "Stroke width for annotations"
 msgstr "ବ୍ଯାଖ୍ଯାଗୁଡିକ ପାଇଁ ଆଘାତ ରଙ୍ଗ"
 
-#: ../metadata/blur.xml.in.h:1
 msgid "Blur Windows"
 msgstr "ଅସ୍ପଷ୍ଟ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/blur.xml.in.h:2
 msgid "Blur windows"
 msgstr "ଅସ୍ପଷ୍ଟ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/blur.xml.in.h:3
 msgid "Pulse"
 msgstr "ପଲ୍ସ(ଗତି)"
 
-#: ../metadata/blur.xml.in.h:4
 msgid "Pulse effect"
 msgstr "ପଲ୍ସ ପ୍ରଭାବ"
 
-#: ../metadata/blur.xml.in.h:5
 msgid "Blur Speed"
 msgstr "ଅସ୍ପଷ୍ଟ ଗତି"
 
-#: ../metadata/blur.xml.in.h:6
 msgid "Window blur speed"
 msgstr "ଉଇଣ୍ଡୋ ଅସ୍ପଷ୍ଟ ଗତି"
 
-#: ../metadata/blur.xml.in.h:7
 msgid "Focus blur windows"
 msgstr "ଲକ୍ଷ୍ଯ ଅସ୍ପଷ୍ଟ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/blur.xml.in.h:8
 msgid "Windows that should be affected by focus blur"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଲକ୍ଷ୍ଯ ଅସ୍ପଷ୍ଟ ଦ୍ବାରା ପ୍ରଭାବିତ ହେବା ଉଚିତ"
 
-#: ../metadata/blur.xml.in.h:9
 msgid "Focus Blur"
 msgstr "ଲକ୍ଷ୍ଯ ଅସ୍ପଷ୍ଟ"
 
-#: ../metadata/blur.xml.in.h:10
 msgid "Blur windows that doesn't have focus"
 msgstr "ଅସ୍ପଷ୍ଟ ଉଇଣ୍ଡୋ ୟାହାର ଲକ୍ଷ୍ଯ ନାହିଁ"
 
-#: ../metadata/blur.xml.in.h:11
 msgid "Alpha blur windows"
 msgstr "ଆଲ୍ଫା ଅସ୍ପଷ୍ଟ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/blur.xml.in.h:12
 msgid "Windows that should be use alpha blur by default"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଅଲ୍ଫା ଅସ୍ପଷ୍ଟତା ଡିଫଲ୍ଟରେ ଉପୟୋଗ କରିବା ଉଚିତ"
 
-#: ../metadata/blur.xml.in.h:13
 msgid "Alpha Blur"
 msgstr "ଆଲ୍ଫା ଅସ୍ଫଷ୍ଟ"
 
-#: ../metadata/blur.xml.in.h:14
 msgid "Blur behind translucent parts of windows"
 msgstr "ଉଇଣ୍ଡୋର ସ୍ବଚ୍ଛ ଅଂଶଗୁଡିକ ପଛର ଅସ୍ପଷ୍ଟତା"
 
-#: ../metadata/blur.xml.in.h:15
 msgid "Blur Filter"
 msgstr "ଅସ୍ପଷ୍ଟ ଫିଲ୍ଟର"
 
-#: ../metadata/blur.xml.in.h:16
 msgid "Filter method used for blurring"
 msgstr "ଅସ୍ପଷ୍ଟକରିବା ପାଇଁ ଉପୟୋଗ ହେଉଥିବା ଫିଲ୍ଟର ପଦ୍ଧତି "
 
-#: ../metadata/blur.xml.in.h:17
 msgid "4xBilinear"
 msgstr "4xଦ୍ବିରୈଖୀକ"
 
-#: ../metadata/blur.xml.in.h:18
 msgid "Gaussian"
 msgstr "ଗୌସିଆନ"
 
-#: ../metadata/blur.xml.in.h:19 ../metadata/cube.xml.in.h:9
-#: ../metadata/decoration.xml.in.h:15 ../metadata/switcher.xml.in.h:25
 msgid "Mipmap"
 msgstr "ମିପ୍ ମ୍ଯାପ"
 
-#: ../metadata/blur.xml.in.h:20
 msgid "Gaussian Radius"
 msgstr "ଗୌସିଆନ ବ୍ଯାସାର୍ଦ୍ଧ"
 
-#: ../metadata/blur.xml.in.h:21
 msgid "Gaussian radius"
 msgstr "ଗୌସିଆନ ବ୍ଯାସାର୍ଦ୍ଧ"
 
-#: ../metadata/blur.xml.in.h:22
 msgid "Gaussian Strength"
 msgstr "ଗୌସିଆନ ଶକ୍ତି"
 
-#: ../metadata/blur.xml.in.h:23
 msgid "Gaussian strength"
 msgstr "ଗୌସିଆନ ଶକ୍ତି"
 
-#: ../metadata/blur.xml.in.h:24
 msgid "Mipmap LOD"
 msgstr "ମିପ୍ ମ୍ଯାପ LOD"
 
-#: ../metadata/blur.xml.in.h:25
 msgid "Mipmap level-of-detail"
 msgstr "ମିପ୍‌ମ୍ଯାପ ବିବରଣୀର-ସ୍ତର"
 
-#: ../metadata/blur.xml.in.h:26
 msgid "Blur Saturation"
 msgstr "ଅସ୍ପଷ୍ଟ ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/blur.xml.in.h:27
 msgid "Blur saturation"
 msgstr "ଅସ୍ପଷ୍ଟ ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/blur.xml.in.h:28
 msgid "Blur Occlusion"
 msgstr "ଅସ୍ପଷ୍ଟ ଶୋଷଣ"
 
-#: ../metadata/blur.xml.in.h:29
 msgid "Disable blurring of screen regions obscured by other windows."
 msgstr "ଅନ୍ଯ ଉଇଣ୍ଡୋ ଦ୍ବାରା ଅନ୍ଧକାରମଯ କରାୟାଇଥିବା ସ୍କ୍ରିନ ଅଂଚଳଗୁଡିକର ଅସ୍ପଷ୍ଟ କରିବାକୁ ଅକ୍ଷମକର"
 
-#: ../metadata/blur.xml.in.h:30
 msgid "Independent texture fetch"
 msgstr ""
 
-#: ../metadata/blur.xml.in.h:31
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
 
-#: ../metadata/clone.xml.in.h:1
 msgid "Clone Output"
 msgstr "କ୍ଲୋନ ଆଉଟପୁଟ"
 
-#: ../metadata/clone.xml.in.h:2
 msgid "Output clone handler"
 msgstr "ଆଉଟପୁଟ କ୍ଲୋନ ପରିଚାଳକ"
 
-#: ../metadata/clone.xml.in.h:3 ../metadata/rotate.xml.in.h:15
-#: ../metadata/screenshot.xml.in.h:3 ../metadata/water.xml.in.h:3
-#: ../metadata/zoom.xml.in.h:3
 msgid "Initiate"
 msgstr "ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/clone.xml.in.h:4
 msgid "Initiate clone selection"
 msgstr "କ୍ଲୋନ ମନୋନଯନ ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/commands.xml.in.h:1 ../metadata/matecompat.xml.in.h:7
 #, fuzzy
 msgid "Commands"
 msgstr "ଆଦେଶ"
 
-#: ../metadata/commands.xml.in.h:2
 msgid "Assigns bindings to arbitrary commands"
 msgstr ""
 
-#: ../metadata/commands.xml.in.h:3
 msgid "Command line 0"
 msgstr "ଆଦେଶ ରେଖା ୦ "
 
-#: ../metadata/commands.xml.in.h:4
 msgid "Command line to be executed in shell when run_command0 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ 0 ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:5
 msgid "Command line 1"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:6
 msgid "Command line to be executed in shell when run_command1 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:7
 msgid "Command line 2"
 msgstr "ଆଦେଶ ରେଖା ୨"
 
-#: ../metadata/commands.xml.in.h:8
 msgid "Command line to be executed in shell when run_command2 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୨ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:9
 msgid "Command line 3"
 msgstr "ଆଦେଶ ରେଖା ୩"
 
-#: ../metadata/commands.xml.in.h:10
 msgid "Command line to be executed in shell when run_command3 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୩ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:11
 msgid "Command line 4"
 msgstr "ଆଦେଶ ରେଖା ୪"
 
-#: ../metadata/commands.xml.in.h:12
 msgid "Command line to be executed in shell when run_command4 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୪ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:13
 msgid "Command line 5"
 msgstr "ଆଦେଶ ରେଖା ୫"
 
-#: ../metadata/commands.xml.in.h:14
 msgid "Command line to be executed in shell when run_command5 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୫ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:15
 msgid "Command line 6"
 msgstr "ଆଦେଶ ରେଖା ୬ "
 
-#: ../metadata/commands.xml.in.h:16
 msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୬ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:17
 msgid "Command line 7"
 msgstr "ଆଦେଶ ରେଖା ୭"
 
-#: ../metadata/commands.xml.in.h:18
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୭ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:19
 msgid "Command line 8"
 msgstr "ଆଦେଶ ରେଖା ୮"
 
-#: ../metadata/commands.xml.in.h:20
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୮ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:21
 msgid "Command line 9"
 msgstr "ଆଦେଶ ରେଖା ୯ "
 
-#: ../metadata/commands.xml.in.h:22
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୯ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:23
 msgid "Command line 10"
 msgstr "ଆଦେଶ ରେଖା ୧୦ "
 
-#: ../metadata/commands.xml.in.h:24
 msgid "Command line to be executed in shell when run_command10 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ0୧୦ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:25
 msgid "Command line 11"
 msgstr "ଆଦେଶ ରେଖା ୧୧ "
 
-#: ../metadata/commands.xml.in.h:26
 msgid "Command line to be executed in shell when run_command11 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:27
 #, fuzzy
 msgid "Command line 12"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:28
 #, fuzzy
 msgid "Command line to be executed in shell when run_command12 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:29
 #, fuzzy
 msgid "Command line 13"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:30
 #, fuzzy
 msgid "Command line to be executed in shell when run_command13 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:31
 #, fuzzy
 msgid "Command line 14"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:32
 #, fuzzy
 msgid "Command line to be executed in shell when run_command14 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:33
 #, fuzzy
 msgid "Command line 15"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:34
 #, fuzzy
 msgid "Command line to be executed in shell when run_command15 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:35
 #, fuzzy
 msgid "Command line 16"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:36
 #, fuzzy
 msgid "Command line to be executed in shell when run_command16 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:37
 #, fuzzy
 msgid "Command line 17"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:38
 #, fuzzy
 msgid "Command line to be executed in shell when run_command17 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:39
 #, fuzzy
 msgid "Command line 18"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:40
 #, fuzzy
 msgid "Command line to be executed in shell when run_command18 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:41
 #, fuzzy
 msgid "Command line 19"
 msgstr "ଆଦେଶ ରେଖା ୧"
 
-#: ../metadata/commands.xml.in.h:42
 #, fuzzy
 msgid "Command line to be executed in shell when run_command19 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:43
 #, fuzzy
 msgid "Command line 20"
 msgstr "ଆଦେଶ ରେଖା ୨"
 
-#: ../metadata/commands.xml.in.h:44
 #, fuzzy
 msgid "Command line to be executed in shell when run_command20 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ 0 ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:45
 #, fuzzy
 msgid "Command line 21"
 msgstr "ଆଦେଶ ରେଖା ୨"
 
-#: ../metadata/commands.xml.in.h:46
 #, fuzzy
 msgid "Command line to be executed in shell when run_command21 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୧ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:47
 #, fuzzy
 msgid "Command line 22"
 msgstr "ଆଦେଶ ରେଖା ୨"
 
-#: ../metadata/commands.xml.in.h:48
 #, fuzzy
 msgid "Command line to be executed in shell when run_command22 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୨ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:49
 #, fuzzy
 msgid "Command line 23"
 msgstr "ଆଦେଶ ରେଖା ୨"
 
-#: ../metadata/commands.xml.in.h:50
 #, fuzzy
 msgid "Command line to be executed in shell when run_command23 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୨ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:51
 #, fuzzy
 msgid "Command line 24"
 msgstr "ଆଦେଶ ରେଖା ୨"
 
-#: ../metadata/commands.xml.in.h:52
 #, fuzzy
 msgid "Command line to be executed in shell when run_command24 is invoked"
 msgstr "ସେଲରେ କାର୍ୟ୍ଯକାରୀ ହେବାକୁ ଥିବା ଆଦେଶ ରେଖା ୟେବେ ଚଳାଅ_ଆଦେଶ୨ ଡକାୟାଇଥାଏ "
 
-#: ../metadata/commands.xml.in.h:53
 msgid "Key Bindings"
 msgstr ""
 
-#: ../metadata/commands.xml.in.h:54
 msgid "Run command 0"
 msgstr "ଚଳାଅ ଆଦେଶ ୦"
 
-#: ../metadata/commands.xml.in.h:55
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ 0 ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:56
 msgid "Run command 1"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:57
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:58
 msgid "Run command 2"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/commands.xml.in.h:59
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:60
 msgid "Run command 3"
 msgstr "ଚଳାଅ ଆଦେଶ ୩"
 
-#: ../metadata/commands.xml.in.h:61
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୩ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:62
 msgid "Run command 4"
 msgstr "ଚଳାଅ ଆଦେଶ ୪"
 
-#: ../metadata/commands.xml.in.h:63
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୪ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:64
 msgid "Run command 5"
 msgstr "ଚଳାଅ ଆଦେଶ ୫"
 
-#: ../metadata/commands.xml.in.h:65
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ୫ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:66
 msgid "Run command 6"
 msgstr "ଚଳାଅ ଆଦେଶ ୬"
 
-#: ../metadata/commands.xml.in.h:67
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୬ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:68
 msgid "Run command 7"
 msgstr "ଚଳାଅ ଆଦେଶ ୭"
 
-#: ../metadata/commands.xml.in.h:69
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୭ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:70
 msgid "Run command 8"
 msgstr "ଚଳାଅ ଆଦେଶ ୮"
 
-#: ../metadata/commands.xml.in.h:71
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୮ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:72
 msgid "Run command 9"
 msgstr "ଚଳାଅ ଆଦେଶ ୯"
 
-#: ../metadata/commands.xml.in.h:73
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୯ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:74
 msgid "Run command 10"
 msgstr "ଚଳାଅ ଆଦେଶ ୧୦"
 
-#: ../metadata/commands.xml.in.h:75
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧୦ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:76
 msgid "Run command 11"
 msgstr "ଚଳାଅ ଆଦେଶ ୧୧"
 
-#: ../metadata/commands.xml.in.h:77
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:78
 #, fuzzy
 msgid "Run command 12"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:79
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -718,12 +557,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:80
 #, fuzzy
 msgid "Run command 13"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:81
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -731,12 +568,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:82
 #, fuzzy
 msgid "Run command 14"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:83
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -744,12 +579,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:84
 #, fuzzy
 msgid "Run command 15"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:85
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -757,12 +590,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:86
 #, fuzzy
 msgid "Run command 16"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:87
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -770,12 +601,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:88
 #, fuzzy
 msgid "Run command 17"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:89
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -783,12 +612,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:90
 #, fuzzy
 msgid "Run command 18"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:91
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -796,12 +623,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:92
 #, fuzzy
 msgid "Run command 19"
 msgstr "ଚଳାଅ ଆଦେଶ ୧"
 
-#: ../metadata/commands.xml.in.h:93
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -809,12 +634,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:94
 #, fuzzy
 msgid "Run command 20"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/commands.xml.in.h:95
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -822,12 +645,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:96
 #, fuzzy
 msgid "Run command 21"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/commands.xml.in.h:97
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -835,12 +656,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:98
 #, fuzzy
 msgid "Run command 22"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/commands.xml.in.h:99
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -848,12 +667,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:100
 #, fuzzy
 msgid "Run command 23"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/commands.xml.in.h:101
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -861,12 +678,10 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:102
 #, fuzzy
 msgid "Run command 24"
 msgstr "ଚଳାଅ ଆଦେଶ ୨"
 
-#: ../metadata/commands.xml.in.h:103
 #, fuzzy
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
@@ -874,11 +689,9 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:104
 msgid "Button Bindings"
 msgstr ""
 
-#: ../metadata/commands.xml.in.h:105
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -886,7 +699,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ 0 ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:106
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -894,7 +706,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:107
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -902,7 +713,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:108
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -910,7 +720,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୩ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:109
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -918,7 +727,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୪ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:110
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -926,7 +734,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ୫ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:111
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -934,7 +741,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୬ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:112
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -942,7 +748,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୭ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:113
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -950,7 +755,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୮ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:114
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -958,7 +762,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୯ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:115
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -966,7 +769,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧୦ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:116
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -974,7 +776,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:117
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -982,7 +783,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:118
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -990,7 +790,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:119
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -998,7 +797,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:120
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1006,7 +804,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:121
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1014,7 +811,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:122
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1022,7 +818,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:123
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1030,7 +825,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:124
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1038,7 +832,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:125
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1046,7 +839,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:126
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1054,7 +846,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:127
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1062,7 +853,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:128
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1070,7 +860,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:129
 #, fuzzy
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
@@ -1078,11 +867,9 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:130
 msgid "Edge Bindings"
 msgstr ""
 
-#: ../metadata/commands.xml.in.h:131
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1090,7 +877,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ 0 ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:132
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1098,7 +884,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:133
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1106,7 +891,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:134
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1114,7 +898,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୩ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:135
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1122,7 +905,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୪ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:136
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1130,7 +912,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ୫ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:137
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1138,7 +919,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୬ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:138
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1146,7 +926,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୭ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:139
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1154,7 +933,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୮ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:140
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1162,7 +940,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୯ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:141
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1170,7 +947,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧୦ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:142
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1178,7 +954,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:143
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1186,7 +961,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:144
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1194,7 +968,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:145
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1202,7 +975,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:146
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1210,7 +982,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:147
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1218,7 +989,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:148
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1226,7 +996,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:149
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1234,7 +1003,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:150
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1242,7 +1010,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୧ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:151
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1250,7 +1017,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:152
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1258,7 +1024,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:153
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1266,7 +1031,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:154
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1274,7 +1038,6 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/commands.xml.in.h:155
 #, fuzzy
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
@@ -1282,2747 +1045,2086 @@ msgid ""
 msgstr ""
 "ଗୋଟିଏ କି-ବନ୍ଧନ ୟାହାକି ୟେବେ ଡକାୟାଏ, ଆଦେଶ ୨ ଦ୍ବାରା ଚିହ୍ନଟ ହୋଇଥିବା ସେଲ ଆଦେଶକୁ ଚଳାଇବ "
 
-#: ../metadata/core.xml.in.in.h:1
 msgid "General Options"
 msgstr "ସାଧାରଣ ବିକଳ୍ପଗୁଡିକ"
 
-#: ../metadata/core.xml.in.in.h:2
 msgid "General compiz options"
 msgstr "ସାଧାରଣ କମ୍ପିଜ ବିକଳ୍ପଗୁଡିକ"
 
-#: ../metadata/core.xml.in.in.h:3
 msgid "Active Plugins"
 msgstr "ସକ୍ରିଯ  ପ୍ଲଗଇନଗୁଡିକ"
 
-#: ../metadata/core.xml.in.in.h:4
 msgid "List of currently active plugins"
 msgstr "ବର୍ତ୍ତମାନ ସକ୍ରିଯ ଥିବା ପ୍ଲଗଇନଗୁଡିକର ତାଲିକା"
 
-#: ../metadata/core.xml.in.in.h:5
 msgid "Audible Bell"
 msgstr "ଶ୍ରବଣୟୋଗ୍ଯ ଘଣ୍ଟା"
 
-#: ../metadata/core.xml.in.in.h:6
 msgid "Audible system beep"
 msgstr "ଶ୍ରବଣୟୋଗ୍ଯ ସିଷ୍ଟମ ବିପ୍ ଶବ୍ଦ"
 
-#: ../metadata/core.xml.in.in.h:7
 msgid "Ignore Hints When Maximized"
 msgstr "ୟେବେ ସର୍ବାଧିକ ହୋଇଥାଏ, ସଂକେତସୂଚନାକୁ ଅବହେଳାକର"
 
-#: ../metadata/core.xml.in.in.h:8
 msgid "Ignore size increment and aspect hints when window is maximized"
 msgstr "ୟେବେ ଉଇଣ୍ଡୋ ସର୍ବାଧିକ ହୋଇଥାଏ ଆକାର ବୃଦ୍ଧିକରିବା ଏବଂ ଉଦ୍ଦେଶ୍ଯ ସଂକେତସୂଚନାକୁ ଅବହେଳାକର"
 
-#: ../metadata/core.xml.in.in.h:9
 msgid "Hide Skip Taskbar Windows"
 msgstr "ବାଦଦେବା ଟାସ୍କବାର ଉଇଣ୍ଡୋକୁ ଲୁଚାଅ"
 
-#: ../metadata/core.xml.in.in.h:10
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr "ଡେସ୍କଟପ ମୋଡକୁ ଦେଖାଅ କୁ ପ୍ରବେଶ କରିବା ବେଳେ ଉଇଣ୍ଡୋଗୁଡିକୁ ଲୁଚାଅ ଟାସ୍କବାରରେ ନୁହେଁ"
 
-#: ../metadata/core.xml.in.in.h:11
 msgid "Edge Trigger Delay"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:12
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:13
 msgid "Cursor theme"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:14
 msgid "Cursor theme name"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:15
 msgid "Cursor size"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:16
 msgid "Size of the cursor"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:17
 msgid "Ping Delay"
 msgstr "ପିଙ୍ଗ ବିଳମ୍ବ"
 
-#: ../metadata/core.xml.in.in.h:18
 msgid "Interval between ping messages"
 msgstr "ପିଙ୍ଗ ସଂଦେଶଗୁଡିକ ମଧ୍ଯରେ ବ୍ଯବଧାନ"
 
-#: ../metadata/core.xml.in.in.h:19
 msgid "Display Settings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:20
 msgid "Texture Filter"
 msgstr "ଟେକ୍ସଚର ଫିଲ୍ଟର"
 
-#: ../metadata/core.xml.in.in.h:21
 msgid "Texture filtering"
 msgstr "ଟେକ୍ସଟର ଫିଲ୍ଟର କରିବା"
 
-#: ../metadata/core.xml.in.in.h:22
 msgid "Fast"
 msgstr "ଶୀଘ୍ର"
 
-#: ../metadata/core.xml.in.in.h:23
 msgid "Good"
 msgstr "ଉତ୍ତମ"
 
-#: ../metadata/core.xml.in.in.h:24
 msgid "Best"
 msgstr "ଉତ୍ତମ"
 
-#: ../metadata/core.xml.in.in.h:25
-msgid "Focus &amp; Raise Behaviour"
+msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:26
 msgid "Click To Focus"
 msgstr "ଲକ୍ଷ୍ଯ କରିବା ପାଇଁ କ୍ଲିକକର"
 
-#: ../metadata/core.xml.in.in.h:27
 msgid "Click on window moves input focus to it"
 msgstr "ଉଇଣ୍ଡୋରେ କ୍ଲିକ, ଇନପୁଟ ଲକ୍ଷ୍ଯ ଏହାଉପରକୁ ଘୁଞ୍ଚାଏ ।"
 
-#: ../metadata/core.xml.in.in.h:28
 msgid "Raise On Click"
 msgstr "କ୍ଲିକରେ ଉତ୍ଥାନକର"
 
-#: ../metadata/core.xml.in.in.h:29
 msgid "Raise windows when clicked"
 msgstr "ୟେବେ କ୍ଲିକ ହୁଏ ଉଇଣ୍ଡୋକୁ ଉତ୍ଥାନକର"
 
-#: ../metadata/core.xml.in.in.h:30
 msgid "Auto-Raise"
 msgstr "ସ୍ବତଃ-ଉତ୍ଥାନ"
 
-#: ../metadata/core.xml.in.in.h:31
 msgid "Raise selected windows after interval"
 msgstr "ବ୍ଯବଧାନ ପରେ ମନୋନୀତ ଉଇଣ୍ଡୋକୁ ଉତ୍ଥାନ କର"
 
-#: ../metadata/core.xml.in.in.h:32
 msgid "Auto-Raise Delay"
 msgstr "ସ୍ବତଃ-ଉତ୍ଥାନ ବିଳମ୍ବ"
 
-#: ../metadata/core.xml.in.in.h:33
 msgid "Interval before raising selected windows"
 msgstr "ମନୋନୀତ ଉଇଣ୍ଡୋ ଉତ୍ଥାନ ପୂର୍ବରୁ ବ୍ଯବଧାନ"
 
-#: ../metadata/core.xml.in.in.h:34
 msgid "Key bindings"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:36
 msgid "Close active window"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ବନ୍ଦକର"
 
-#: ../metadata/core.xml.in.in.h:37
 msgid "Raise Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଉଠାଅ"
 
-#: ../metadata/core.xml.in.in.h:38
 msgid "Raise window above other windows"
 msgstr "ଅନ୍ଯ ଉଇଣ୍ଡୋ ଗୁଡିକ ଉପରକୁ ଉଠାଅ"
 
-#: ../metadata/core.xml.in.in.h:39
 msgid "Lower Window"
 msgstr "ନିମ୍ନତର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.in.h:40
 msgid "Lower window beneath other windows"
 msgstr "ଅନ୍ଯ ଉଇଣ୍ଡୋ ତଳକୁ ଉଇଣ୍ଡୋକୁ ନିମ୍ନତର କର"
 
-#: ../metadata/core.xml.in.in.h:42
 msgid "Unmaximize active window"
 msgstr "ଅଣ-ସର୍ବାଧିକ ସକ୍ରିଯ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.in.h:44
 msgid "Minimize active window"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ନ୍ଯୁନତମ କର"
 
-#: ../metadata/core.xml.in.in.h:46
 msgid "Maximize active window"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.in.h:47
 msgid "Maximize Window Horizontally"
 msgstr "ଉଇଣ୍ଡୋକୁ ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.in.h:48
 msgid "Maximize active window horizontally"
 msgstr "ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଦିଗବଳୀଯ ଭାବରେ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.in.h:49
 msgid "Maximize Window Vertically"
 msgstr "ଦଣ୍ଡରୁପରେ ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.in.h:50
 msgid "Maximize active window vertically"
 msgstr "ଦଣ୍ଡରୂପରେ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କର"
 
-#: ../metadata/core.xml.in.in.h:52
 msgid "Window menu button binding"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ ବଟନ ବନ୍ଧନ"
 
-#: ../metadata/core.xml.in.in.h:53
 msgid "Window menu key binding"
 msgstr "ଉଇଣ୍ଡୋ ମେନୁ କି ବନ୍ଧନ"
 
-#: ../metadata/core.xml.in.in.h:54
 msgid "Show Desktop"
 msgstr "ଡେସ୍କଟପ ଦେଖାଅ"
 
-#: ../metadata/core.xml.in.in.h:55
 msgid "Hide all windows and focus desktop"
 msgstr "ସବୁ ଉଇଣ୍ଡୋକୁ ଲୁଚାଅ ଏବଂ ଡେସ୍କଟପକୁ ଲକ୍ଷ୍ଯକର"
 
-#: ../metadata/core.xml.in.in.h:56
 msgid "Toggle Window Maximized"
 msgstr "ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:57
 msgid "Toggle active window maximized"
 msgstr "ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:58
 msgid "Toggle Window Maximized Horizontally"
 msgstr "ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:59
 msgid "Toggle active window maximized horizontally"
 msgstr "ଦିଗବଳୀଯଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:60
 msgid "Toggle Window Maximized Vertically"
 msgstr "ଦଣ୍ଡ ଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:61
 msgid "Toggle active window maximized vertically"
 msgstr "ଦଣ୍ଡ ଭାବରେ ସର୍ବାଧିକ ହୋଇଥିବା ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:62
 msgid "Toggle Window Shaded"
 msgstr "ଛାଯାୟୁକ୍ତ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:63
 msgid "Toggle active window shaded"
 msgstr "ଛାଯାୟୁକ୍ତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:64
 msgid "Slow Animations"
 msgstr "ଧୀର ଚଳଚ୍ଚିତ୍ର  "
 
-#: ../metadata/core.xml.in.in.h:65
 msgid "Toggle use of slow animations"
 msgstr "ଧୀର ଚଳଚିତ୍ରଗୁଡିକର ଉପୟୋଗକୁ ଟୋଗଲକର"
 
-#: ../metadata/core.xml.in.in.h:66
 #, fuzzy
 msgid "Desktop Size"
 msgstr "ଡେସ୍କଟପ ଘନକ୍ଷେତ୍ର"
 
-#: ../metadata/core.xml.in.in.h:67
 msgid "Horizontal Virtual Size"
 msgstr "ଦିଗବଳୀଯ କଳ୍ପିତ ଆକାର"
 
-#: ../metadata/core.xml.in.in.h:68
 msgid "Screen size multiplier for horizontal virtual size"
 msgstr "ଦିଗବଳୀଯ କଳ୍ପିତ ଆକାର ପାଇଁ ସ୍କ୍ରିନ ଆକାର ଗୁଣକ"
 
-#: ../metadata/core.xml.in.in.h:69
 msgid "Vertical Virtual Size"
 msgstr "ଦଣ୍ଡରୂପୀ କଳ୍ପିତ ଆକାର"
 
-#: ../metadata/core.xml.in.in.h:70
 msgid "Screen size multiplier for vertical virtual size"
 msgstr "ଦଣ୍ଡରୂପୀ କଳ୍ପିତ ଆକାର ପାଇଁ ସ୍କ୍ରିନ ଆକାର ଗୁଣକ"
 
-#: ../metadata/core.xml.in.in.h:71
-msgid "Number of Desktops"
-msgstr "ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
-
-#: ../metadata/core.xml.in.in.h:72
-msgid "Number of virtual desktops"
-msgstr "କଳ୍ପିତ ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
-
-#: ../metadata/core.xml.in.in.h:73
 msgid "Lighting"
 msgstr "ଆଲୋକିତକରିବା"
 
-#: ../metadata/core.xml.in.in.h:74
 msgid "Use diffuse light when screen is transformed"
 msgstr "ୟେବେ ସ୍କ୍ରିନ ରୂପାନ୍ତରିତ ହୋଇଥାଏ, ବିକ୍ଷିପ୍ତ ଆଲୋକ ଉପୟୋଗ କର"
 
-#: ../metadata/core.xml.in.in.h:75
 msgid "Detect Refresh Rate"
 msgstr "ରିଫ୍ରେସ ଦର ଚିହ୍ନଟକର"
 
-#: ../metadata/core.xml.in.in.h:76
 msgid "Automatic detection of refresh rate"
 msgstr "ରିଫ୍ରେସ ଦରର ସ୍ବଯଂଚାଳିତ ଚିହ୍ନଟକରଣ"
 
-#: ../metadata/core.xml.in.in.h:77
 msgid "Refresh Rate"
 msgstr "ରିଫ୍ରେସ ଦର"
 
-#: ../metadata/core.xml.in.in.h:78
 msgid "The rate at which the screen is redrawn (times/second)"
 msgstr "ଦର ୟେଉଁଥିରେ ସ୍କ୍ରିନ ପୁନଃଅଂକିତ ହୋଇଛି (ସମଯ/ସେକେଣ୍ଡ)"
 
-#: ../metadata/core.xml.in.in.h:79
 msgid "Detect Outputs"
 msgstr "ଆଉଟପୁଟଗୁଡିକୁ ଚିହ୍ନଟକର"
 
-#: ../metadata/core.xml.in.in.h:80
 msgid "Automatic detection of output devices"
 msgstr "ଆଉଟପୁଟ ଉପକରଣର ସ୍ବଯଂଚାଳିତ ଚିହ୍ନଟକରଣ"
 
-#: ../metadata/core.xml.in.in.h:81
 msgid "Overlapping Output Handling"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:82
 msgid "Which one of overlapping output devices should be preferred"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:83
 #, fuzzy
 msgid "Smart mode"
 msgstr "ସ୍ଫୁର୍ତ୍ତି"
 
-#: ../metadata/core.xml.in.in.h:84
 msgid "Prefer larger output"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:85
 msgid "Prefer smaller output"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:86
 msgid "Outputs"
 msgstr "ଆଉଟପୁଟଗୁଡିକ"
 
-#: ../metadata/core.xml.in.in.h:87
 msgid "List of strings describing output devices"
 msgstr "ଆଉଟପୁଟ ଉପକରଣଗୁଡିକୁ ବର୍ଣ୍ଣନା କରୁଥିବା ସ୍ଟ୍ରିଙ୍ଗଗୁଡିକର ତାଲିକା"
 
-#: ../metadata/core.xml.in.in.h:88
 msgid "Sync To VBlank"
 msgstr "ସିଙ୍କ Vଖାଲିକୁ"
 
-#: ../metadata/core.xml.in.in.h:89
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "ଦଣ୍ଡରୂପ ଖାଲିକରିବା ଅବଧି ସମଯରେ କେବଳ ସ୍କ୍ରିନ ଅପଡେଟଗୁଡିକୁ କର"
 
-#: ../metadata/core.xml.in.in.h:90
 #, fuzzy
 msgid "Focus Prevention Level"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.in.h:91
 msgid "Level of focus stealing prevention"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:92
 msgid "Off"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:93
 msgid "Low"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:94 ../metadata/resize.xml.in.h:16
 msgid "Normal"
 msgstr "ସାମାନ୍ଯ"
 
-#: ../metadata/core.xml.in.in.h:95
 msgid "High"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:96
 msgid "Very High"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:97
 msgid "Focus Prevention Windows"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.in.h:98
 msgid "Focus prevention windows"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.in.h:99
 msgid "Unredirect Fullscreen Windows"
 msgstr "ଅଣ-ପୁନଃନିର୍ଦ୍ଦେଶିତ ପୂର୍ଣ୍ଣ ସ୍କ୍ରିନ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/core.xml.in.in.h:100
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr "ପୂର୍ଣ୍ଣସ୍କ୍ରିନ ଉଇଣ୍ଡୋର ଅଂକନକୁ ସ୍ବୀକୃତି ଦିଅ, ଅଫ୍ସ୍କ୍ରିନ ପିକ୍ସମ୍ଯାପଗୁଡିକୁ ପୁନଃନିର୍ଦ୍ଦେଶିତ ହେବ ନାହିଁ"
 
-#: ../metadata/core.xml.in.in.h:101
 msgid "Default Icon"
 msgstr "ଡିଫଲ୍ଟ ଆଇକନ"
 
-#: ../metadata/core.xml.in.in.h:102
 msgid "Default window icon image"
 msgstr "ଡିଫଲ୍ଟ ଉଇଣ୍ଡୋ ଆଇକନ ଚିତ୍ର"
 
-#: ../metadata/core.xml.in.in.h:103
 msgid "Force independent output painting."
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:104
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
 
-#: ../metadata/core.xml.in.in.h:105
 #, fuzzy
 msgid "Texture Compression"
 msgstr "ଟେକ୍ସଟର ଫିଲ୍ଟର କରିବା"
 
-#: ../metadata/core.xml.in.in.h:106
 msgid "If available use compression for textures converted from images"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:1
 msgid "Desktop Cube"
 msgstr "ଡେସ୍କଟପ ଘନକ୍ଷେତ୍ର"
 
-#: ../metadata/cube.xml.in.h:2
 msgid "Place windows on cube"
 msgstr "ଘନକ୍ଷେତ୍ରରେ ଉଇଣ୍ଡୋକୁ ସ୍ଥାପିତ କର"
 
-#: ../metadata/cube.xml.in.h:3
 msgid "Unfold"
 msgstr "ଭାଙ୍ଗହୋଇନଥିବା"
 
-#: ../metadata/cube.xml.in.h:4
 msgid "Unfold cube"
 msgstr "ଭାଙ୍ଗହୋଇନଥିବା ଘନକ୍ଷେତ୍ର"
 
-#: ../metadata/cube.xml.in.h:5
 msgid "Next Slide"
 msgstr "ପରବର୍ତ୍ତୀ ସ୍ଲାଇଡ"
 
-#: ../metadata/cube.xml.in.h:6
 msgid "Advance to next slide"
 msgstr "ପରବର୍ତ୍ତୀ ସ୍ଲାଇଡକୁ ଅଗ୍ରସର ହୁଅ"
 
-#: ../metadata/cube.xml.in.h:7
 msgid "Prev Slide"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ସ୍ଲାଇଡ"
 
-#: ../metadata/cube.xml.in.h:8
 msgid "Go back to previous slide"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ସ୍ଲାଇଡକୁ ୟାଅ"
 
-#: ../metadata/cube.xml.in.h:10 ../metadata/switcher.xml.in.h:26
 msgid "Generate mipmaps when possible for higher quality scaling"
 msgstr "ଉଚ୍ଚତର ଗୁଣବତ୍ତା ମାପିବା ପାଇଁ ୟେବେ ସମ୍ଭବ ମିପ୍ ମ୍ଯାପଗୁଡିକୁ ଉତ୍ପାଦନକର"
 
-#: ../metadata/cube.xml.in.h:11 ../metadata/place.xml.in.h:13
-#: ../metadata/scale.xml.in.h:39
 msgid "Multi Output Mode"
 msgstr "ବହୁ-ଆଉଟପୁଟ ମୋଡ"
 
-#: ../metadata/cube.xml.in.h:12
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr "ୟଦି ବହୁବିଧ ଆଉଟପୁଟ ଉପକରଣଗୁଡିକ ଉପୟୋଗ ହୁଅନ୍ତି, ଘନକ୍ଷେତ୍ର କିପରି ପ୍ରଦର୍ଶିତ ହେବ ମନୋନୀତ କରେ ।"
 
-#: ../metadata/cube.xml.in.h:13
 msgid "Automatic"
 msgstr "ସ୍ବଯଂଚାଳିତ"
 
-#: ../metadata/cube.xml.in.h:14
 msgid "Multiple cubes"
 msgstr "ବହୁବିଧ ଘନକ୍ଷେତ୍ରଗୁଡିକ"
 
-#: ../metadata/cube.xml.in.h:15
 #, fuzzy
 msgid "One big cube"
 msgstr "ବଡ ଘନକ୍ଷେତ୍ରରେ"
 
-#: ../metadata/cube.xml.in.h:16 ../metadata/scale.xml.in.h:16
-msgid "Behaviour"
+msgid "Behavior"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:17
 msgid "Inside Cube"
 msgstr "ଘନକ୍ଷେତ୍ର ଭିତରେ"
 
-#: ../metadata/cube.xml.in.h:18
 msgid "Inside cube"
 msgstr "ଘନକ୍ଷେତ୍ର ଭିତରେ"
 
-#: ../metadata/cube.xml.in.h:19 ../metadata/rotate.xml.in.h:89
 msgid "Acceleration"
 msgstr "ବେଗବର୍ଦ୍ଧନ"
 
-#: ../metadata/cube.xml.in.h:20
 msgid "Fold Acceleration"
 msgstr "ବେଗବର୍ଦ୍ଧନ ଭାଙ୍ଗକର"
 
-#: ../metadata/cube.xml.in.h:21 ../metadata/minimize.xml.in.h:3
-#: ../metadata/rotate.xml.in.h:95 ../metadata/scale.xml.in.h:22
-#: ../metadata/switcher.xml.in.h:19 ../metadata/zoom.xml.in.h:8
 msgid "Speed"
 msgstr "ଗତି"
 
-#: ../metadata/cube.xml.in.h:22
 msgid "Fold Speed"
 msgstr "ଗତି ଭାଙ୍ଗକର"
 
-#: ../metadata/cube.xml.in.h:23 ../metadata/minimize.xml.in.h:5
-#: ../metadata/rotate.xml.in.h:97 ../metadata/scale.xml.in.h:24
-#: ../metadata/switcher.xml.in.h:21 ../metadata/zoom.xml.in.h:10
 msgid "Timestep"
 msgstr "ସମଯସୋପାନ"
 
-#: ../metadata/cube.xml.in.h:24
 msgid "Fold Timestep"
 msgstr "ସମଯସୋପାନ ଭାଙ୍ଗକର"
 
-#: ../metadata/cube.xml.in.h:25 ../metadata/scale.xml.in.h:19
 msgid "Appearance"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:26
 msgid "Cube Color"
 msgstr "ଘନକ୍ଷେତ୍ର ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:27
 msgid "Color of top and bottom sides of the cube"
 msgstr "ଘନକ୍ଷେତ୍ରର ଉପର ଏବଂ ତଳପାର୍ଶ୍ବର ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:28
 #, fuzzy
 msgid "Cube Caps"
 msgstr "ଘନକ୍ଷେତ୍ର ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:29
 msgid "Scale image"
 msgstr "ଚିତ୍ର ମାପ"
 
-#: ../metadata/cube.xml.in.h:30
 msgid "Scale images to cover top face of cube"
 msgstr "ଘନକ୍ଷେତ୍ରର ଉପ ମୂହଁକୁ ଆବୃତ କରିବା ପାଇଁ ଚିତ୍ରଗୁଡିକୁ ମାପ"
 
-#: ../metadata/cube.xml.in.h:31
 msgid "Image files"
 msgstr "ଚିତ୍ର ଫାଇଲଗୁଡିକ"
 
-#: ../metadata/cube.xml.in.h:32
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr " PNG ଏବଂ SVG ଫାଇଲଗୁଡିକର ତାଲିକା ୟାହାକି ଘନକ୍ଷେତ୍ରର ଉପର ମୁହଁରେ ପ୍ରଦାନ ହେବା ଉଚିତ"
 
-#: ../metadata/cube.xml.in.h:33
 msgid "Adjust Image"
 msgstr "ଚିତ୍ର ବ୍ଯବସ୍ଥାକର"
 
-#: ../metadata/cube.xml.in.h:34
 msgid "Adjust top face image to rotation"
 msgstr "ଘୂର୍ଣ୍ଣନକୁ ଉପର ମୂହଁ ଚିତ୍ରକୁ ବ୍ଯବସ୍ଥାକର"
 
-#: ../metadata/cube.xml.in.h:35
 msgid "Skydome"
 msgstr "ସ୍କାଇଡୋମ"
 
-#: ../metadata/cube.xml.in.h:36
 msgid "Render skydome"
 msgstr "ସ୍କାଇଡୋମ ପ୍ରଦାନକର"
 
-#: ../metadata/cube.xml.in.h:37
 msgid "Skydome Image"
 msgstr "ସ୍କାଇଡୋମ ଚିତ୍ର"
 
-#: ../metadata/cube.xml.in.h:38
 msgid "Image to use as texture for the skydome"
 msgstr "ସ୍କାଇଡୋମ ପାଇଁ ଟେକ୍ସଚର ପରି ଉପୟୋଗ ହେବାକୁ ଥିବା ଚିତ୍ର"
 
-#: ../metadata/cube.xml.in.h:39
 msgid "Animate Skydome"
 msgstr "ସ୍କାଇଡୋମ ଚଳନ୍ତିକର"
 
-#: ../metadata/cube.xml.in.h:40
 msgid "Animate skydome when rotating cube"
 msgstr "ଘନକ୍ଷେତ୍ରକୁ ଘୂର୍ଣ୍ଣନ କରିବା ବେଳେ ସ୍କାଇଡୋମ ଚଳନ୍ତିକର"
 
-#: ../metadata/cube.xml.in.h:41
 msgid "Skydome Gradient Start Color"
 msgstr "ସ୍କାଇଡୋମ କ୍ରମାବନତି ଆରମ୍ଭ ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:42
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
 msgstr "ସ୍କାଇଡୋମର ଉପର ରଙ୍ଗ-ସ୍ଥାନ ପାଇଁ - ପଶ୍ଚାତପତ୍ତନ କ୍ରମାବନତି ପାଇଁ ଉପୟୋଗ ହେବାକୁ ଥିବା ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:43
 msgid "Skydome Gradient End Color"
 msgstr "ସ୍କାଇଡୋମ କ୍ରମାବନତି ଶେଷ ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:44
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
 msgstr "ସ୍କାଇଡୋମର ତଳ ରଙ୍ଗ-ସ୍ଥାନ ପାଇଁ - ପଶ୍ଚାତପତ୍ତନ କ୍ରମାବନତି ପାଇଁ ଉପୟୋଗ ହେବାକୁ ଥିବା ରଙ୍ଗ"
 
-#: ../metadata/cube.xml.in.h:45
 msgid "Transparent Cube"
 msgstr ""
 
-#: ../metadata/cube.xml.in.h:46
 msgid "Opacity During Rotation"
 msgstr "ଘୁର୍ଣ୍ଣନ ସମଯରେ ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:47
 msgid "Opacity of desktop window during rotation."
 msgstr "ଘୂର୍ଣ୍ଣନ ସମଯରେ ଡେସ୍କଟପ ଉଇଣ୍ଡୋର ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:48
 msgid "Opacity When Not Rotating"
 msgstr "ଘୂରା ନୟିବା ବେଳେ ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:49
 msgid "Opacity of desktop window when not rotating."
 msgstr "ଘୁରା ନୟିବା ବେଳେ ଡେସ୍କଟପ ଉଇଣ୍ଡୋର ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:50
 msgid "Transparency Only on Mouse Rotate"
 msgstr "କେବଳ ମାଉସ ଘୁରାଇବାରେ ସ୍ବଚ୍ଛତା"
 
-#: ../metadata/cube.xml.in.h:51
 msgid "Initiates Cube transparency only if rotation is mouse driven."
 msgstr "ୟଦି ଘୂର୍ଣ୍ଣନ କେବଳ ମାଉସ ଦ୍ବାରା ଟଣାୟାଇଥାଏ ଘନକ୍ଷେତ୍ରର ସ୍ବଚ୍ଛତାକୁ ପ୍ରାରମ୍ଭ କରେ ।"
 
-#: ../metadata/dbus.xml.in.h:1
 msgid "Dbus"
 msgstr "ଡିବସ୍"
 
-#: ../metadata/dbus.xml.in.h:2
 msgid "Dbus Control Backend"
 msgstr "ଡିବସ ନିଯନ୍ତ୍ରଣ ବ୍ଯାକଏଣ୍ଡ"
 
-#: ../metadata/decoration.xml.in.h:1
 msgid "Window Decoration"
 msgstr "ଉଇଣ୍ଡୋ ଅଳଂକରଣ"
 
-#: ../metadata/decoration.xml.in.h:2
 msgid "Window decorations"
 msgstr "ଉଇଣ୍ଡୋ ଅଳଂକରଣଗୁଡିକ"
 
-#: ../metadata/decoration.xml.in.h:3
 msgid "Shadow Radius"
 msgstr "ଛାଯା ବ୍ଯାସାର୍ଦ୍ଧ"
 
-#: ../metadata/decoration.xml.in.h:4
 msgid "Drop shadow radius"
 msgstr "ଛାଯା ବ୍ଯାସାର୍ଦ୍ଧ ପକାଅ"
 
-#: ../metadata/decoration.xml.in.h:5
 msgid "Shadow Opacity"
 msgstr "ଛାଯା ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/decoration.xml.in.h:6
 msgid "Drop shadow opacity"
 msgstr "ଛାଯା ଅସ୍ବଚ୍ଛତା ପକାଅ"
 
-#: ../metadata/decoration.xml.in.h:7 ../metadata/wall.xml.in.h:24
 msgid "Shadow Color"
 msgstr "ଛାଯାରଙ୍ଗ"
 
-#: ../metadata/decoration.xml.in.h:8
 msgid "Drop shadow color"
 msgstr "ଛାଯା ରଙ୍ଗ ପକାଅ"
 
-#: ../metadata/decoration.xml.in.h:9
 msgid "Shadow Offset X"
 msgstr "ଛାଯା ଅଫ୍ ସେଟ X"
 
-#: ../metadata/decoration.xml.in.h:10
 msgid "Drop shadow X offset"
 msgstr "ଛାଯା X ଅଫ୍ସେଟ ପକାଅ"
 
-#: ../metadata/decoration.xml.in.h:11
 msgid "Shadow Offset Y"
 msgstr "ଛାଯା ଅଫ୍ ସେଟ Y"
 
-#: ../metadata/decoration.xml.in.h:12
 msgid "Drop shadow Y offset"
 msgstr "ଛାଯା Y ଅଫ୍ସେଟ ପକାଅ"
 
-#: ../metadata/decoration.xml.in.h:13
 msgid "Command"
 msgstr "ଆଦେଶ"
 
-#: ../metadata/decoration.xml.in.h:14
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
 msgstr "ଅଳଂକୃତକାରୀ ଆଦେଶ ରେଖା କାର୍ୟ୍ଯକାରୀ ହୋଇଥାଏ, ୟଦି କୌଣସି ଅଳଂକୃତକାରୀ ପୂର୍ବରୁ ଚାଲୁନଥାଏ "
 
-#: ../metadata/decoration.xml.in.h:16
 msgid "Allow mipmaps to be generated for decoration textures"
 msgstr "ଅଳଂକରଣ ଟେକ୍ସଟଚର ପାଇଁ ମିପ୍ ମ୍ଯାପଗୁଡିକୁ ଉତ୍ପାଦିତ ହେବା ସ୍ବୀକୃତିଦିଅ"
 
-#: ../metadata/decoration.xml.in.h:17
 msgid "Decoration windows"
 msgstr "ଅଳଂକରଣ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/decoration.xml.in.h:18
 msgid "Windows that should be decorated"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଅଳଂକୃତ ହେବା ଉଚିତ"
 
-#: ../metadata/decoration.xml.in.h:19
 msgid "Shadow windows"
 msgstr "ଛାଯା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/decoration.xml.in.h:20
 msgid "Windows that should have a shadow"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାର କି ଗୋଟିଏ ଛାଯା ରହିବା ଉଚିତ"
 
-#: ../metadata/fade.xml.in.h:1
 msgid "Fading Windows"
 msgstr "ଉଇଣ୍ଡୋ ଫିକାହେଉଛି"
 
-#: ../metadata/fade.xml.in.h:2
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
 "ଉଇଣ୍ଡୋ ଅଂକିତ ହେବା ସମଯରେ ରେ ଫିକ୍କା ହେବା ଏବଂ ଅଂକିତ ନହେବା ସମଯରେ ବାହାରେ ଫିକ୍କା ହେବା"
 
-#: ../metadata/fade.xml.in.h:3
 #, fuzzy
 msgid "Fade Mode"
 msgstr "ଫିକାହେବା ସମଯ"
 
-#: ../metadata/fade.xml.in.h:4
 #, fuzzy
 msgid "Window fade mode"
 msgstr "ଉଇଣ୍ଡୋ ଫିକା ହେବା ଗତି"
 
-#: ../metadata/fade.xml.in.h:5
 #, fuzzy
 msgid "Constant speed"
 msgstr "ଘୂର୍ଣ୍ଣନ ଗତି"
 
-#: ../metadata/fade.xml.in.h:6
 #, fuzzy
 msgid "Constant time"
 msgstr "ଅବରୂଦ୍ଧY"
 
-#: ../metadata/fade.xml.in.h:7
 msgid "Fade Speed"
 msgstr "ଫିକାହେବା ଗତି"
 
-#: ../metadata/fade.xml.in.h:8
 #, fuzzy
 msgid "Window fade speed in \"Constant speed\" mode"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ମାପ ମୋଡରେ ମାପ ହେବା ଉଚିତ"
 
-#: ../metadata/fade.xml.in.h:9
 msgid "Fade Time"
 msgstr "ଫିକାହେବା ସମଯ"
 
-#: ../metadata/fade.xml.in.h:10
 msgid "Window fade time (in ms) in \"Constant time\" mode"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:11
 msgid "Fade windows"
 msgstr "ଫିକା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/fade.xml.in.h:12
 msgid "Windows that should be fading"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଫିକ୍କା ହେବା ଉଚିତ"
 
-#: ../metadata/fade.xml.in.h:13
 msgid "Visual Bell"
 msgstr "ଦୃଶ୍ଯକ୍ଷମ ଘଣ୍ଟା"
 
-#: ../metadata/fade.xml.in.h:14
 msgid "Fade effect on system beep"
 msgstr "ସିଷ୍ଟମ ବିପ ଶବ୍ଦରେ ଫିକାହେବା ପ୍ରଭାବ"
 
-#: ../metadata/fade.xml.in.h:15
 msgid "Fullscreen Visual Bell"
 msgstr "ପୂର୍ଣ୍ଣ ସ୍କ୍ରିନ ଦୃଶ୍ଯକ୍ଷମ ଘଣ୍ଟା"
 
-#: ../metadata/fade.xml.in.h:16
 msgid "Fullscreen fade effect on system beep"
 msgstr "ସିଷ୍ଟମ ବିପ ଶବ୍ଦରେ ପୂର୍ଣ୍ଣ ସ୍କ୍ରିନ ଫିକ୍କା ପ୍ରଭାବ"
 
-#: ../metadata/fade.xml.in.h:17
 msgid "Fade On Minimize/Open/Close"
 msgstr "ନ୍ଯୁନତମହେବା/ଖୋଲିବା/ବନ୍ଦହେବା ରେ ଫିକା କର"
 
-#: ../metadata/fade.xml.in.h:18
 msgid "Fade effect on minimize/open/close window events"
 msgstr "ନ୍ଯୁନତମହେବା/ଖୋଲିବା/ବନ୍ଦହେବା ଉଇଣ୍ଡୋ ଘଟଣା ରେ ଫିକ୍କା ପ୍ରଭାବ"
 
-#: ../metadata/fade.xml.in.h:19
 #, fuzzy
 msgid "Dim Unresponsive Windows"
 msgstr "ସାମାନ୍ଯ ପୁନଃଆକାର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/fade.xml.in.h:20
 msgid "Dim windows that are not responding to window manager requests"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:21
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:23
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:24
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#: ../metadata/fade.xml.in.h:26
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
-#: ../metadata/fs.xml.in.h:1
 msgid "Userspace File System"
 msgstr "ଉପୟୋଗକର୍ତ୍ତାଅନ୍ତର ଫାଇଲ ସିଷ୍ଟମ"
 
-#: ../metadata/fs.xml.in.h:2
 msgid "Userspace file system"
 msgstr "ଉପୟୋଗକର୍ତ୍ତାଅନ୍ତର ଫାଇଲ ସିଷ୍ଟମ"
 
-#: ../metadata/fs.xml.in.h:3
 msgid "Mount Point"
 msgstr "ସ୍ଥାପନ ବିନ୍ଦୁ"
 
-#: ../metadata/fs.xml.in.h:4
 msgid "Mount point"
 msgstr "ସ୍ଥାପନ ବିନ୍ଦୁ"
 
-#: ../metadata/glib.xml.in.h:1
 msgid "GLib"
 msgstr "ଜିଲିବ୍"
 
-#: ../metadata/glib.xml.in.h:2
 msgid "GLib main loop support"
 msgstr "ଜିଲିବ୍ ମୂଖ୍ଯ ଲୁପ ସମର୍ଥନ"
 
-#: ../metadata/matecompat.xml.in.h:1
 msgid "MATE Compatibility"
 msgstr ""
 
-#: ../metadata/matecompat.xml.in.h:2
 msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
 
-#: ../metadata/matecompat.xml.in.h:3
 msgid "Show Main Menu"
 msgstr "ମୂଖ୍ଯ ମେନୁ ଦେଖାଅ"
 
-#: ../metadata/matecompat.xml.in.h:4
 msgid "Show the main menu"
 msgstr "ମୂଖ୍ଯ ମେନୁକୁ ଦେଖାଅ"
 
-#: ../metadata/matecompat.xml.in.h:5
 msgid "Run Dialog"
 msgstr "ଚଳାଅ ଡାଏଲଗ"
 
-#: ../metadata/matecompat.xml.in.h:6
 msgid "Show Run Application dialog"
 msgstr "ଚାଳାଅ ପ୍ରଯୋଗ ଡାଏଲଗକୁ ଦେଖାଅ"
 
-#: ../metadata/matecompat.xml.in.h:8
 msgid "Screenshot command line"
 msgstr "ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 
-#: ../metadata/matecompat.xml.in.h:9
 msgid "Take a screenshot"
 msgstr "ଗୋଟିଏ ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/matecompat.xml.in.h:10
 msgid "Window screenshot command line"
 msgstr "ଉଇଣ୍ଡୋ ସ୍କ୍ରିନସଟ ଆଦେଶ ରେଖା"
 
-#: ../metadata/matecompat.xml.in.h:11
 msgid "Take a screenshot of a window"
 msgstr "ଗୋଟିଏ ଉଇଣ୍ଡୋର ସ୍କ୍ରିନସଟ ନିଅ"
 
-#: ../metadata/matecompat.xml.in.h:12
 #, fuzzy
 msgid "Run terminal command"
 msgstr "ଟର୍ମିନାଲ ଆଦେଶ ରେଖା"
 
-#: ../metadata/matecompat.xml.in.h:13
 msgid "Terminal command line"
 msgstr "ଟର୍ମିନାଲ ଆଦେଶ ରେଖା"
 
-#: ../metadata/matecompat.xml.in.h:14
 msgid "Open a terminal"
 msgstr "ଗୋଟିଏ ଟର୍ମିନାଲ ଖୋଲ"
 
-#: ../metadata/ini.xml.in.h:1
 msgid "Ini"
 msgstr "Ini"
 
-#: ../metadata/ini.xml.in.h:2
 msgid "Ini Flat File Backend"
 msgstr "ଇନି ଫ୍ଲାଟ ଫାଇଲ ବ୍ଯାକଏଣ୍ଡ"
 
-#: ../metadata/inotify.xml.in.h:1
 msgid "Inotify"
 msgstr "Iବିଜ୍ଞାପ୍ତି"
 
-#: ../metadata/inotify.xml.in.h:2
 msgid "File change notification plugin"
 msgstr "ଫାଇଲ ପରିବର୍ତ୍ତନ ବିଜ୍ଞାପନ ପ୍ଲଗଇନ"
 
-#: ../metadata/minimize.xml.in.h:1
 msgid "Minimize Effect"
 msgstr "ନ୍ଯୁନତମ ପ୍ରଭାବ"
 
-#: ../metadata/minimize.xml.in.h:2
 msgid "Transform windows when they are minimized and unminimized"
 msgstr "ଉଇଣ୍ଡୋ ଗୁଡିକୁ ରୂପାନ୍ତର କର ୟେବେ ସେଗୁଡିକ ନ୍ଯୁନତମ କିମ୍ବା ଅଣ-ନ୍ଯୁନତମ ହୁଅନ୍ତି "
 
-#: ../metadata/minimize.xml.in.h:4
 msgid "Minimize speed"
 msgstr "ଗତିକୁ ନ୍ଯୁନତମକର"
 
-#: ../metadata/minimize.xml.in.h:6
 msgid "Minimize timestep"
 msgstr "ସମଯସୋପାନକୁ ନ୍ଯୁନତମକର"
 
-#: ../metadata/minimize.xml.in.h:7
 msgid "Minimize Windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ନ୍ଯୁନତମ କର"
 
-#: ../metadata/minimize.xml.in.h:8
 msgid "Windows that should be transformed when minimized"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ରୂପାନ୍ତରିତ ହେବା ଉଚିତ ୟେବେ ନ୍ଯୁନତମ ହୋଇଥାଏ"
 
-#: ../metadata/minimize.xml.in.h:9
 msgid "Shade Resistance"
 msgstr "ଛାଯା ପ୍ରତିରୋଧକ"
 
-#: ../metadata/minimize.xml.in.h:10
 msgid "Shade resistance"
 msgstr "ଛାଯା ପ୍ରତିରୋଧକ"
 
-#: ../metadata/move.xml.in.h:1
 msgid "Move Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/move.xml.in.h:2
 msgid "Move window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/move.xml.in.h:3
 msgid "Initiate Window Move"
 msgstr "ଉଇଣ୍ଡୋ ଘୁଞ୍ଚାଇବା ଆରମ୍ଭ କର"
 
-#: ../metadata/move.xml.in.h:4
 msgid "Start moving window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଇବା ଆରମ୍ଭକର"
 
-#: ../metadata/move.xml.in.h:5 ../metadata/obs.xml.in.h:3
-#: ../metadata/scale.xml.in.h:28 ../metadata/switcher.xml.in.h:31
 msgid "Opacity"
 msgstr "ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/move.xml.in.h:6
 msgid "Opacity level of moving windows"
 msgstr "ଘୁଞ୍ଚାୟାଉଥିବା ଉଇଣ୍ଡୋର ଅସ୍ବଚ୍ଛତା ସ୍ତର"
 
-#: ../metadata/move.xml.in.h:7
 msgid "Constrain Y"
 msgstr "ଅବରୂଦ୍ଧY"
 
-#: ../metadata/move.xml.in.h:8
 msgid "Constrain Y coordinate to workspace area"
 msgstr "Y ସହୟୋଗୀକୁ କାର୍ୟ୍ଯସ୍ଥାନ ଅଂଚଳକୁ ଅବରୁଦ୍ଧକର"
 
-#: ../metadata/move.xml.in.h:9
 msgid "Snapoff maximized windows"
 msgstr "ସର୍ବାଧିକ କରାୟାଇଥିବା ଉଇଣ୍ଡୋକୁ ଛିନ୍ନ କର"
 
-#: ../metadata/move.xml.in.h:10
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
 msgstr "ଟାଣିବା ବେଳେ ସର୍ବାଧିକ ଉଇଣ୍ଡୋକୁ ଛିନ୍ନକରିବା ବନ୍ଦକର ଏବଂ ସ୍ବତଃ ଅଣ-ସର୍ବାଧିକ କର "
 
-#: ../metadata/move.xml.in.h:11
 msgid "Lazy Positioning"
 msgstr "ଆଳସ୍ଯ ସ୍ଥାପନ କରିବା"
 
-#: ../metadata/move.xml.in.h:12
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "ଉଇଣ୍ଡୋର ସରଭର-ପଟ ସ୍ଥାନକୁ ଅପଡେଟ କର ନାହିଁ ୟେଉଁପର୍ୟ୍ଯନ୍ତ ଘୁଞ୍ଚାଇବା ଶେଷ ହୋଇ ନାହିଁ ।"
 
-#: ../metadata/obs.xml.in.h:1
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
 msgstr "ଘୁର୍ଣ୍ଣନ ସମଯରେ ଅସ୍ବଚ୍ଛତା"
 
-#: ../metadata/obs.xml.in.h:2
 msgid "Opacity, Brightness and Saturation adjustments"
 msgstr ""
 
-#: ../metadata/obs.xml.in.h:4
 #, fuzzy
 msgid "Increase Opacity"
 msgstr "ଉଇଣ୍ଡୋ ଅସ୍ବଚ୍ଛତା ବୃଦ୍ଧିକର"
 
-#: ../metadata/obs.xml.in.h:5
 #, fuzzy
 msgid "Opacity Increase"
 msgstr "ଅସ୍ବଚ୍ଛତା ପରିବର୍ତ୍ତନ ସୋପାନ"
 
-#: ../metadata/obs.xml.in.h:6
 #, fuzzy
 msgid "Decrease Opacity"
 msgstr "ଉଇଣ୍ଡୋ ଅସ୍ବଚ୍ଛତା ହ୍ରାସକର"
 
-#: ../metadata/obs.xml.in.h:7
 #, fuzzy
 msgid "Opacity Decrease"
 msgstr "ଅସ୍ବଚ୍ଛତା ପରିବର୍ତ୍ତନ ସୋପାନ"
 
-#: ../metadata/obs.xml.in.h:8 ../metadata/switcher.xml.in.h:29
 msgid "Brightness"
 msgstr "ଉଜ୍ବଳତା"
 
-#: ../metadata/obs.xml.in.h:9
 #, fuzzy
 msgid "Increase Brightness"
 msgstr "ଉଜ୍ବଳତା"
 
-#: ../metadata/obs.xml.in.h:10
 #, fuzzy
 msgid "Brightness Increase"
 msgstr "ଉଜ୍ବଳତା"
 
-#: ../metadata/obs.xml.in.h:11
 #, fuzzy
 msgid "Decrease Brightness"
 msgstr "ଉଜ୍ବଳତା"
 
-#: ../metadata/obs.xml.in.h:12
 #, fuzzy
 msgid "Brightness Decrease"
 msgstr "ଉଜ୍ବଳତା"
 
-#: ../metadata/obs.xml.in.h:13 ../metadata/switcher.xml.in.h:27
 msgid "Saturation"
 msgstr "ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/obs.xml.in.h:14
 #, fuzzy
 msgid "Increase Saturation"
 msgstr "ଅସ୍ପଷ୍ଟ ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/obs.xml.in.h:15
 #, fuzzy
 msgid "Saturation Increase"
 msgstr "ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/obs.xml.in.h:16
 #, fuzzy
 msgid "Decrease Saturation"
 msgstr "ଅସ୍ପଷ୍ଟ ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/obs.xml.in.h:17
 #, fuzzy
 msgid "Saturation Decrease"
 msgstr "ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/obs.xml.in.h:18
 msgid "Step"
 msgstr ""
 
-#: ../metadata/obs.xml.in.h:19
 msgid "Opacity Step"
 msgstr "ଅସ୍ବଚ୍ଛତା ସୋପାନ"
 
-#: ../metadata/obs.xml.in.h:20
 #, fuzzy
 msgid "Window specific settings"
 msgstr "ଉଇଣ୍ଡୋ ଅଳଂକରଣଗୁଡିକ"
 
-#: ../metadata/obs.xml.in.h:21 ../metadata/place.xml.in.h:32
 #, fuzzy
 msgid "Windows"
 msgstr "ଉଇଣ୍ଡୋ ଗୁଡିକୁ ଅଂକନକର"
 
-#: ../metadata/obs.xml.in.h:22
 #, fuzzy
 msgid "Windows that should have a different opacity by default"
 msgstr "ଉଇଣ୍ଡୋଗୁଡିକ ୟାହାକି ଡିଫଲ୍ଟରେ ସ୍ବଚ୍ଛ ହେବା ଉଚିତ"
 
-#: ../metadata/obs.xml.in.h:23
 #, fuzzy
 msgid "Window values"
 msgstr "windows"
 
-#: ../metadata/obs.xml.in.h:24
 #, fuzzy
 msgid "Opacity values for windows"
 msgstr "ଘୁଞ୍ଚାୟାଉଥିବା ଉଇଣ୍ଡୋର ଅସ୍ବଚ୍ଛତା ସ୍ତର"
 
-#: ../metadata/obs.xml.in.h:25
 #, fuzzy
 msgid "Brightness Step"
 msgstr "ଉଜ୍ବଳତା"
 
-#: ../metadata/obs.xml.in.h:26
 #, fuzzy
 msgid "Windows that should have a different brightness by default"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଡିଫଲ୍ଟରେ ସ୍ଥାପିତ ହେବା ଉଚିତ"
 
-#: ../metadata/obs.xml.in.h:27
 msgid "Brightness values for windows"
 msgstr ""
 
-#: ../metadata/obs.xml.in.h:28
 #, fuzzy
 msgid "Saturation Step"
 msgstr "ସଂପୂର୍ଣ୍ଣ ମିଶ୍ରଣ"
 
-#: ../metadata/obs.xml.in.h:29
 #, fuzzy
 msgid "Windows that should have a different saturation by default"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଡିଫଲ୍ଟରେ ସ୍ଥାପିତ ହେବା ଉଚିତ"
 
-#: ../metadata/obs.xml.in.h:30
 msgid "Saturation values for windows"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:1
 msgid "Place Windows"
 msgstr "ଉଇଣ୍ଡୋ ସ୍ଥାପିତକର"
 
-#: ../metadata/place.xml.in.h:2
 msgid "Place windows at appropriate positions when mapped"
 msgstr "ଅଂକନ କରିବା ସମଯରେ ଉଇଣ୍ଡୋକୁ ଗୋଟିଏ ଉପୟୁକ୍ତ ସ୍ଥାନରେ ସ୍ଥାପିତ କର"
 
-#: ../metadata/place.xml.in.h:3
 msgid "Workarounds"
 msgstr "ଚାରିପଟେକାମକରେ"
 
-#: ../metadata/place.xml.in.h:4
 msgid "Window placement workarounds"
 msgstr "ଉଇଣ୍ଡୋ ସ୍ଥାପନ ଚାରିପଟେକାମକରେ"
 
-#: ../metadata/place.xml.in.h:5
 msgid "Placement Mode"
 msgstr "ସ୍ଥାପନ ମୋଡ"
 
-#: ../metadata/place.xml.in.h:6
 msgid "Algorithm to use for window placement"
 msgstr "ଉଇଣ୍ଡୋ ସ୍ଥାପନ ପାଇଁ ଉପୟୋଗ ହେବାକୁ ଥିବା ଆଲଗୋରିଥମ"
 
-#: ../metadata/place.xml.in.h:7
 msgid "Cascade"
 msgstr "କ୍ଯାସକେଡ"
 
-#: ../metadata/place.xml.in.h:8
 msgid "Centered"
 msgstr "କେନ୍ଦ୍ରିତ"
 
-#: ../metadata/place.xml.in.h:9
 msgid "Smart"
 msgstr "ସ୍ଫୁର୍ତ୍ତି"
 
-#: ../metadata/place.xml.in.h:10
 msgid "Maximize"
 msgstr "ସର୍ବାଧିକ କର"
 
-#: ../metadata/place.xml.in.h:11
 msgid "Random"
 msgstr "କ୍ରମହୀନ"
 
-#: ../metadata/place.xml.in.h:12
 #, fuzzy
 msgid "Under pointer"
 msgstr "ଧାର ବଦଳ ପଏଣ୍ଟର"
 
-#: ../metadata/place.xml.in.h:14
 #, fuzzy
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
 "ଉଇଣ୍ଡୋ ଗୁଡିକ କେଉଁଠାରେ ମାପ ହେବେ ମନୋନୀତ କରେ ୟଦି ବହୁବିଧ ଆଉଟପୁଟ ଉପକରଣ ଉପୟୋଗ ହୋଇଥାଆନ୍ତି ।"
 
-#: ../metadata/place.xml.in.h:15
 #, fuzzy
 msgid "Use active output device"
 msgstr "ସବୁ ଆଉଟପୁଟ ଉପକରଣରେ"
 
-#: ../metadata/place.xml.in.h:16
 msgid "Use output device with pointer"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:17
-msgid "Use output device of focussed window"
+msgid "Use output device of focused window"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:18
 msgid "Place across all outputs"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:19
 #, fuzzy
 msgid "Force Placement Windows"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
-#: ../metadata/place.xml.in.h:20
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
 
-#: ../metadata/place.xml.in.h:21
 #, fuzzy
 msgid "Fixed Window Placement"
 msgstr "ଉଇଣ୍ଡୋ ପ୍ରବନ୍ଧନ"
 
-#: ../metadata/place.xml.in.h:22
 #, fuzzy
 msgid "Windows with fixed positions"
 msgstr "ଉଇଣ୍ଡୋ ଅଳଂକରଣଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:23
 msgid "Positioned windows"
 msgstr "ସ୍ଥାପିତ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/place.xml.in.h:24
 msgid "Windows that should be positioned by default"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଡିଫଲ୍ଟରେ ସ୍ଥାପିତ ହେବା ଉଚିତ"
 
-#: ../metadata/place.xml.in.h:25
 msgid "X Positions"
 msgstr "X ସ୍ଥାନଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:26
 msgid "X position values"
 msgstr "X ସ୍ଥାନ ମୂଲ୍ଯଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:27
 msgid "Y Positions"
 msgstr "Y ସ୍ଥାନଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:28
 msgid "Y position values"
 msgstr "Y ସ୍ଥାନ ମୂଲ୍ଯଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:29
 msgid "Keep In Workarea"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:30
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:31
 #, fuzzy
 msgid "Windows with fixed placement mode"
 msgstr "ଉଇଣ୍ଡୋ ଅଳଂକରଣଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:33
 #, fuzzy
 msgid "Windows that should have a certain positioning mode"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଡିଫଲ୍ଟରେ ସ୍ଥାପିତ ହେବା ଉଚିତ"
 
-#: ../metadata/place.xml.in.h:34
 #, fuzzy
 msgid "Mode"
 msgstr "ଫିକାହେବା ସମଯ"
 
-#: ../metadata/place.xml.in.h:35
 #, fuzzy
 msgid "Positioning modes"
 msgstr "ସ୍ଥାପିତ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/place.xml.in.h:36
 msgid "Windows with fixed viewport"
 msgstr ""
 
-#: ../metadata/place.xml.in.h:37
 msgid "Viewport positioned windows"
 msgstr "ଦୃଶ୍ଯପୋର୍ଟ ସ୍ଥାପିତ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/place.xml.in.h:38
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଡିଫଲ୍ଟରେ ଗୋଟିଏ ନିର୍ଦ୍ଦିଷ୍ଟ ଦୃଶ୍ଯପୋର୍ଟରେ ସ୍ଥାପିତ ହେବା ଉଚିତ"
 
-#: ../metadata/place.xml.in.h:39
 msgid "X Viewport Positions"
 msgstr "X ଦୃଶ୍ଯପୋର୍ଟ ସ୍ଥାନଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:40
 msgid "Horizontal viewport positions"
 msgstr "ଦିଗବଳାଯ ଦୃଶ୍ଯପୋର୍ଟ ସ୍ଥାନଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:41
 msgid "Y Viewport Positions"
 msgstr "Y ଦୃଶ୍ଯପୋର୍ଟ ସ୍ଥାନଗୁଡିକ"
 
-#: ../metadata/place.xml.in.h:42
 msgid "Vertical viewport positions"
 msgstr "ଦଣ୍ଡରୂପୀ ଦୃଶ୍ଯପୋର୍ଟ ସ୍ଥାନଗୁଡିକ"
 
-#: ../metadata/png.xml.in.h:1
 msgid "Png"
 msgstr "Png"
 
-#: ../metadata/png.xml.in.h:2
 msgid "Png image loader"
 msgstr "Png ଚିତ୍ର ଲୋଡ କାରୀ"
 
-#: ../metadata/regex.xml.in.h:1
 msgid "Regex Matching"
 msgstr "ରିଜେକ୍ସ ମେଳଖାଇବା"
 
-#: ../metadata/regex.xml.in.h:2
 msgid "Regex window matching"
 msgstr "ରିଜେକ୍ସ ଉଇଣ୍ଡୋ ମେଳଖାଇବା"
 
-#: ../metadata/resize.xml.in.h:1
 msgid "Resize Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ପୁନଃଆକାରଦିଅ"
 
-#: ../metadata/resize.xml.in.h:2
 msgid "Resize window"
 msgstr "ଉଇଣ୍ଡୋକୁ ପୁନଃଆକାରଦିଅ"
 
-#: ../metadata/resize.xml.in.h:3 ../metadata/rotate.xml.in.h:13
-#: ../metadata/scale.xml.in.h:3 ../metadata/switcher.xml.in.h:2
-#: ../metadata/wall.xml.in.h:42
 msgid "Bindings"
 msgstr ""
 
-#: ../metadata/resize.xml.in.h:4
 msgid "Initiate Normal Window Resize"
 msgstr "ସାମାନ୍ଯ ଉଇଣ୍ଡୋ ପୁନଃଆକାରଦେବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/resize.xml.in.h:5
 msgid "Start resizing window normally"
 msgstr "ସାମାନ୍ଯ ଭାବରେ ଉଇଣ୍ଡୋକୁ ପୁନଃଆକାର ଦେବା ଆରମ୍ଭକର"
 
-#: ../metadata/resize.xml.in.h:6
 msgid "Initiate Outline Window Resize"
 msgstr "ବାହ୍ଯରେଖା ଉଇଣ୍ଡୋ ପୁନଃଆକାରଦେବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/resize.xml.in.h:7
 msgid "Start resizing window with outline"
 msgstr "ବାହ୍ଯରେଖା ସହିତ ଉଇଣ୍ଡୋକୁ ପୁନଃଆକାର ଦେବା ଆରମ୍ଭକର"
 
-#: ../metadata/resize.xml.in.h:8
 msgid "Initiate Rectangle Window Resize"
 msgstr "ଆଯତକ୍ଷେତ୍ର ଉଇଣ୍ଡୋ ପୁନଃଆକାରଦେବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/resize.xml.in.h:9
 msgid "Start resizing window with rectangle"
 msgstr "ଆଯତାକାର ସହିତ ଉଇଣ୍ଡୋକୁ ପୁନଃଆକାର ଦେବା ଆରମ୍ଭକର"
 
-#: ../metadata/resize.xml.in.h:10
 msgid "Initiate Stretch Window Resize"
 msgstr "ବିସ୍ତାରିତ ଉଇଣ୍ଡୋ ପୁନଃଆକାରଦେବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/resize.xml.in.h:11
 msgid "Start resizing window by stretching it"
 msgstr "ଉଇଣ୍ଡୋକୁ ବିସ୍ତାର କରିବା ଦ୍ବାରା ଏହାକୁ ପୁନଃଆକାର ଦେବା ଆରମ୍ଭ କର"
 
-#: ../metadata/resize.xml.in.h:12
 msgid "Initiate Window Resize"
 msgstr "ଉଇଣ୍ଡୋ ପୁନଃଆକାରଦେବା ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/resize.xml.in.h:13
 msgid "Start resizing window"
 msgstr "ଉଇଣ୍ଡୋକୁ ପୁନଃଆକାର ଦେବା ଆରମ୍ଭକର"
 
-#: ../metadata/resize.xml.in.h:14
 msgid "Default Resize Mode"
 msgstr "ଡିଫଲ୍ଟ ପୁନଃଆକାର ମୋଡ"
 
-#: ../metadata/resize.xml.in.h:15
 msgid "Default mode used for window resizing"
 msgstr "ଡିଫଲ୍ଟ ମୋଡ ଉଇଣ୍ଡୋ ପୁନଃଆକାର ଦେବା ପାଇଁ ଉପୟୋଗ ହୋଇଥାଏ"
 
-#: ../metadata/resize.xml.in.h:17
 msgid "Outline"
 msgstr "ବାହ୍ଯରେଖା"
 
-#: ../metadata/resize.xml.in.h:18
 msgid "Rectangle"
 msgstr "ଆଯତାକାର"
 
-#: ../metadata/resize.xml.in.h:19
 msgid "Stretch"
 msgstr "ବିସ୍ତାରିତ"
 
-#: ../metadata/resize.xml.in.h:20
 msgid "Border Color"
 msgstr "ସୀମାନ୍ତ ରଙ୍ଗ"
 
-#: ../metadata/resize.xml.in.h:21
 msgid "Border color used for outline and rectangle resize modes"
 msgstr "ବୋର୍ଡର ରଙ୍ଗ ବାହ୍ଯରେଖା ଏବଂ ଆଯତାକାର ପୁନଃଆକାର ମୋଡଗୁଡିକ ପାଇଁ ଉପୟୋଗ ହୋଇଥାଏ "
 
-#: ../metadata/resize.xml.in.h:22
 msgid "Fill Color"
 msgstr "ରଙ୍ଗ ପୁରଣକର"
 
-#: ../metadata/resize.xml.in.h:23
 msgid "Fill color used for rectangle resize mode"
 msgstr "ଆଯତାକାର ପୁନଃଆକାର ମୋଡ ପାଇଁ ପୁରଣ ରଙ୍ଗ ଉପୟୋଗ ହୋଇଥାଏ"
 
-#: ../metadata/resize.xml.in.h:24
 msgid "Normal Resize Windows"
 msgstr "ସାମାନ୍ଯ ପୁନଃଆକାର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/resize.xml.in.h:25
 msgid "Windows that normal resize should be used for"
 msgstr "ଉଇଣ୍ଡୋ ୟାହା ପାଇଁ ସାମାନ୍ଯ ପୁନଃଆକାର ଉପୟୋଗ ହେବା ଉଚିତ"
 
-#: ../metadata/resize.xml.in.h:26
 msgid "Outline Resize Windows"
 msgstr "ବାହ୍ଯରେଖା ପୁନଃଆକାର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/resize.xml.in.h:27
 msgid "Windows that outline resize should be used for"
 msgstr "ଉଇଣ୍ଡୋ ୟାହା ପାଇଁ ବାହ୍ଯରେଖା ପୁନଃଆକାର ଉପୟୋଗ ହେବା ଉଚିତ"
 
-#: ../metadata/resize.xml.in.h:28
 msgid "Rectangle Resize Windows"
 msgstr "ଆଯତାକାର ପୁନଃଆକାର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/resize.xml.in.h:29
 msgid "Windows that rectangle resize should be used for"
 msgstr "ଉଇଣ୍ଡୋ ୟାହା ପାଇଁ  ଆଯତାକାର ପୁନଃଆକାର ଉପୟୋଗ ହେବା ଉଚିତ"
 
-#: ../metadata/resize.xml.in.h:30
 msgid "Stretch Resize Windows"
 msgstr "ପୁନଃଆକାର ଉଇଣ୍ଡୋଗୁଡିକୁ ଟାଣିଲମ୍ବାକର"
 
-#: ../metadata/resize.xml.in.h:31
 msgid "Windows that stretch resize should be used for"
 msgstr "ଉଇଣ୍ଡୋ ୟାହା ପାଇଁ ବିସ୍ତାରିତ ପୁନଃଆକାର ଉପୟୋଗ ହେବା ଉଚିତ"
 
-#: ../metadata/rotate.xml.in.h:1
 msgid "Rotate Cube"
 msgstr "ଘନକ୍ଷେତ୍ରକୁ ଘୁରାଅ "
 
-#: ../metadata/rotate.xml.in.h:2
 msgid "Rotate desktop cube"
 msgstr "ଡେସ୍କଟପ କ୍ଯୁବ୍କୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:3 ../metadata/wall.xml.in.h:79
 msgid "Edge Flip Pointer"
 msgstr "ଧାର ବଦଳ ପଏଣ୍ଟର"
 
-#: ../metadata/rotate.xml.in.h:4
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr "ସ୍କ୍ରିନର ଧାରକୁ ପଏଣ୍ଟରକୁ ଘୁଞ୍ଚାଇବା ବେଳେ ପରବର୍ତ୍ତୀ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର"
 
-#: ../metadata/rotate.xml.in.h:5 ../metadata/wall.xml.in.h:81
 msgid "Edge Flip Move"
 msgstr "ଧାର ବଦଳ ଘୁଞ୍ଚିବା"
 
-#: ../metadata/rotate.xml.in.h:6
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr "ଉଇଣ୍ଡୋକୁ ସ୍କ୍ରିନର ଧାରକୁ ଘୁଞ୍ଚାଇବା ବେଳେ ପରବର୍ତ୍ତୀ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର"
 
-#: ../metadata/rotate.xml.in.h:7 ../metadata/wall.xml.in.h:83
 msgid "Edge Flip DnD"
 msgstr "ଧାର ବଦଳ DnD"
 
-#: ../metadata/rotate.xml.in.h:8
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr "ସ୍କ୍ରିନର ଧାରକୁ ବସ୍ତୁକୁ ଟାଣିବା ବେଳେ ପରବର୍ତ୍ତୀ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର"
 
-#: ../metadata/rotate.xml.in.h:9
 msgid "Flip Time"
 msgstr "ସମଯ ବଦଳକର"
 
-#: ../metadata/rotate.xml.in.h:10
 msgid "Timeout before flipping viewport"
 msgstr "ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କରିବା ପୂର୍ବରୁ ସମଯଶେଷ"
 
-#: ../metadata/rotate.xml.in.h:11
 msgid "Raise on rotate"
 msgstr "ଘୁରାଇବାରେ ଉଠାଅ"
 
-#: ../metadata/rotate.xml.in.h:12
 msgid "Raise window when rotating"
 msgstr "ଘୁରାଇବା ବେଳେ ଉଇଣ୍ଡୋକୁ ଉତ୍ଥାନ କର"
 
-#: ../metadata/rotate.xml.in.h:14
 #, fuzzy
 msgid "Rotate cube"
 msgstr "ଘନକ୍ଷେତ୍ରକୁ ଘୁରାଅ "
 
-#: ../metadata/rotate.xml.in.h:16
 msgid "Start Rotation"
 msgstr "ଘୁର୍ଣ୍ଣନ ଆରମ୍ଭକର"
 
-#: ../metadata/rotate.xml.in.h:17
 msgid "Rotate Left"
 msgstr "ବାମକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:18
 msgid "Rotate left"
 msgstr "ବାମକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:19
 msgid "Rotate Right"
 msgstr "ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:20
 msgid "Rotate right"
 msgstr "ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:21
 msgid "Rotate Left with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ବାମକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:22
 msgid "Rotate left and bring active window along"
 msgstr "ବାମକୁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:23
 msgid "Rotate Right with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:24
 msgid "Rotate right and bring active window along"
 msgstr "ଡାହାଣକୁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:25
 msgid "Rotate To"
 msgstr "କୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:26
 msgid "Rotate to viewport"
 msgstr "ଦୃଶ୍ଯପୋର୍ଟକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:27
 msgid "Rotate window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:28
 msgid "Rotate with window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:29
 msgid "Rotate Flip Left"
 msgstr "ଫ୍ଲିପ ବାମକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:30
 msgid "Flip to left viewport and warp pointer"
 msgstr "ବାମ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର ଏବଂ ପଏଣ୍ଟରକୁ ବଙ୍କାକର"
 
-#: ../metadata/rotate.xml.in.h:31
 msgid "Rotate Flip Right"
 msgstr "ଫ୍ଲିପ ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:32
 msgid "Flip to right viewport and warp pointer"
 msgstr "ଡାହାଣ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର ଏବଂ ପଏଣ୍ଟରକୁ ବଙ୍କାକର"
 
-#: ../metadata/rotate.xml.in.h:33
 #, fuzzy
 msgid "Rotate to cube face"
 msgstr "୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ "
 
-#: ../metadata/rotate.xml.in.h:34
 msgid "Rotate To Face 1"
 msgstr "୧କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:35
 msgid "Rotate to face 1"
 msgstr "୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ "
 
-#: ../metadata/rotate.xml.in.h:36
 msgid "Rotate To Face 2"
 msgstr "୨କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:37
 msgid "Rotate to face 2"
 msgstr "୨କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:38
 msgid "Rotate To Face 3"
 msgstr "୩କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:39
 msgid "Rotate to face 3"
 msgstr "୩କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:40
 msgid "Rotate To Face 4"
 msgstr "୪କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:41
 msgid "Rotate to face 4"
 msgstr "୪କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:42
 msgid "Rotate To Face 5"
 msgstr "୫କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:43
 msgid "Rotate to face 5"
 msgstr "୫କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:44
 msgid "Rotate To Face 6"
 msgstr "୬କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:45
 msgid "Rotate to face 6"
 msgstr "୬କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:46
 msgid "Rotate To Face 7"
 msgstr "୭କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:47
 msgid "Rotate to face 7"
 msgstr "୭କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:48
 msgid "Rotate To Face 8"
 msgstr "୮କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:49
 msgid "Rotate to face 8"
 msgstr "୮କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:50
 msgid "Rotate To Face 9"
 msgstr "୯କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:51
 msgid "Rotate to face 9"
 msgstr "୯କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:52
 msgid "Rotate To Face 10"
 msgstr "୧୦କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:53
 msgid "Rotate to face 10"
 msgstr "୧୦କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ "
 
-#: ../metadata/rotate.xml.in.h:54
 msgid "Rotate To Face 11"
 msgstr "୧୧କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:55
 msgid "Rotate to face 11"
 msgstr "୧୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:56
 msgid "Rotate To Face 12"
 msgstr "୧୨କୁ ସମ୍ମୁଖୀନ ହେବାପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:57
 msgid "Rotate to face 12"
 msgstr "୧୨କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ "
 
-#: ../metadata/rotate.xml.in.h:58
 #, fuzzy
 msgid "Rotate to cube face with window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:59
 msgid "Rotate To Face 1 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:60
 msgid "Rotate to face 1 and bring active window along"
 msgstr "୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ  ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:61
 msgid "Rotate To Face 2 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୨କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:62
 msgid "Rotate to face 2 and bring active window along"
 msgstr "୨କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:63
 msgid "Rotate To Face 3 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୩କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:64
 msgid "Rotate to face 3 and bring active window along"
 msgstr "୩କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:65
 msgid "Rotate To Face 4 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୪କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:66
 msgid "Rotate to face 4 and bring active window along"
 msgstr "୪କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:67
 msgid "Rotate To Face 5 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୫କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:68
 msgid "Rotate to face 5 and bring active window along"
 msgstr "୫କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:69
 msgid "Rotate To Face 6 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୬କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:70
 msgid "Rotate to face 6 and bring active window along"
 msgstr "୬କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:71
 msgid "Rotate To Face 7 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୭କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:72
 msgid "Rotate to face 7 and bring active window along"
 msgstr "୭କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:73
 msgid "Rotate To Face 8 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୮କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:74
 msgid "Rotate to face 8 and bring active window along"
 msgstr "୮କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:75
 msgid "Rotate To Face 9 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୯କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:76
 msgid "Rotate to face 9 and bring active window along"
 msgstr "୯କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:77
 msgid "Rotate To Face 10 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୧୦କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:78
 msgid "Rotate to face 10 and bring active window along"
 msgstr "୧୦କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ  ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:79
 msgid "Rotate To Face 11 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୧୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:80
 msgid "Rotate to face 11 and bring active window along"
 msgstr "୧୧କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ  ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:81
 msgid "Rotate To Face 12 with Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ୧୨କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ"
 
-#: ../metadata/rotate.xml.in.h:82
 msgid "Rotate to face 12 and bring active window along"
 msgstr "୧୨କୁ ସମ୍ମୁଖୀନ ହେବା ପାଇଁ ଘୁରାଅ  ଏବଂ ସହିତ ସକ୍ରିଯ ଉଇଣ୍ଡୋକୁ ଆଣ "
 
-#: ../metadata/rotate.xml.in.h:83
 msgid "Pointer Invert Y"
 msgstr "ପଏଣ୍ଟର ଓଲଟାଅ Y"
 
-#: ../metadata/rotate.xml.in.h:84
 msgid "Invert Y axis for pointer movement"
 msgstr "ପଏଣ୍ଟର ଚଳପ୍ରଚଳ ପାଇଁ Y ଅକ୍ଷକୁ ଓଲଟାଅ"
 
-#: ../metadata/rotate.xml.in.h:85
 #, fuzzy
 msgid "Pointer Invert X"
 msgstr "ପଏଣ୍ଟର ଓଲଟାଅ Y"
 
-#: ../metadata/rotate.xml.in.h:86
 #, fuzzy
 msgid "Invert X axis for pointer movement"
 msgstr "ପଏଣ୍ଟର ଚଳପ୍ରଚଳ ପାଇଁ Y ଅକ୍ଷକୁ ଓଲଟାଅ"
 
-#: ../metadata/rotate.xml.in.h:87
 msgid "Pointer Sensitivity"
 msgstr "ପଏଣ୍ଟର ସଂବେଦନଶୀଳତା"
 
-#: ../metadata/rotate.xml.in.h:88
 msgid "Sensitivity of pointer movement"
 msgstr "ପଏଣ୍ଟର ଚାଳନା ର ସମ୍ବେଦନଶୀଳତା"
 
-#: ../metadata/rotate.xml.in.h:90
 msgid "Rotation Acceleration"
 msgstr "ଘୁର୍ଣ୍ଣନ ଗତିବର୍ଦ୍ଧନ"
 
-#: ../metadata/rotate.xml.in.h:91
 msgid "Snap To Top Face"
 msgstr "ଉପର ମୂହଁକୁ ଛିନ୍ନକର"
 
-#: ../metadata/rotate.xml.in.h:92
 msgid "Snap Cube Rotation to Top Face"
 msgstr "ଉପର ମୂହଁକୁ ଘନକ୍ଷେତ୍ରର ଘୁର୍ଣ୍ଣନ ଛିନ୍ନକର"
 
-#: ../metadata/rotate.xml.in.h:93
 #, fuzzy
 msgid "Snap To Bottom Face"
 msgstr "ଉପର ମୂହଁକୁ ଛିନ୍ନକର"
 
-#: ../metadata/rotate.xml.in.h:94
 #, fuzzy
 msgid "Snap Cube Rotation to Bottom Face"
 msgstr "ଉପର ମୂହଁକୁ ଘନକ୍ଷେତ୍ରର ଘୁର୍ଣ୍ଣନ ଛିନ୍ନକର"
 
-#: ../metadata/rotate.xml.in.h:96
 msgid "Rotation Speed"
 msgstr "ଘୂର୍ଣ୍ଣନ ଗତି"
 
-#: ../metadata/rotate.xml.in.h:98
 msgid "Rotation Timestep"
 msgstr "ଘୁର୍ଣ୍ଣନ ସମଯସୋପାନ"
 
-#: ../metadata/rotate.xml.in.h:99 ../metadata/switcher.xml.in.h:35
 msgid "Zoom"
 msgstr "ଜୁମକର(ବଡକର)"
 
-#: ../metadata/rotate.xml.in.h:100
 msgid "Rotation Zoom"
 msgstr "ଘୁର୍ଣ୍ଣନ ଜୁମ"
 
-#: ../metadata/scale.xml.in.h:1
 msgid "Scale"
 msgstr "ମାପକ"
 
-#: ../metadata/scale.xml.in.h:2
 msgid "Scale windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ମାପ"
 
-#: ../metadata/scale.xml.in.h:4
 msgid "Key Bindings Toggle Scale Mode"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:5
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:6
 msgid "Button Bindings Toggle Scale Mode"
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:7
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
 
-#: ../metadata/scale.xml.in.h:8
 msgid "Initiate Window Picker"
 msgstr "ଉଇଣ୍ଡୋ ଗୋଟାଇବାକୁ ଆରମ୍ଭକର"
 
-#: ../metadata/scale.xml.in.h:9
 msgid "Layout and start transforming windows"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ଉଇଣ୍ଡୋକୁ ରୂପାନ୍ତରିତ କରୁଛି"
 
-#: ../metadata/scale.xml.in.h:10
 msgid "Initiate Window Picker For All Windows"
 msgstr "ସବୁ ଉଇଣ୍ଡୋ ପାଇଁ ଉଇଣ୍ଡୋ ପିକ୍କର ପ୍ରାରମ୍ଭକର"
 
-#: ../metadata/scale.xml.in.h:11
 msgid "Layout and start transforming all windows"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ସବୁ ଉଇଣ୍ଡୋକୁ ରୂପାନ୍ତରିତକରୁଛି "
 
-#: ../metadata/scale.xml.in.h:12
 msgid "Initiate Window Picker For Window Group"
 msgstr "ଉଇଣ୍ଡୋ ସମୂହ ପାଇଁ ଉଇଣ୍ଡୋ ପିକ୍କର ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/scale.xml.in.h:13
 msgid "Layout and start transforming window group"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ଉଇଣ୍ଡୋ ସମୂହକୁ ରୂପାନ୍ତରିତ କରୁଛି"
 
-#: ../metadata/scale.xml.in.h:14
 msgid "Initiate Window Picker For Windows on Current Output"
 msgstr "ଚଳିତ ଆଉଟପୁଟରେ ଉଇଣ୍ଡୋ ପାଇଁ ଉଇଣ୍ଡୋ ପିକ୍କର ପ୍ରାରମ୍ଭ କର"
 
-#: ../metadata/scale.xml.in.h:15
 msgid "Layout and start transforming windows on current output"
 msgstr "ବିରଚନା ଏବଂ ଆରମ୍ଭ ଚଳିତ ଆଉଟପୁଟରେ ଉଇଣ୍ଡୋକୁ ରୂପାନ୍ତରିତ କରୁଛି"
 
-#: ../metadata/scale.xml.in.h:17
 msgid "Click Desktop to Show Desktop"
 msgstr "ଡେସ୍କଟପକୁ ଦେଖାଇବା ପାଇଁ ଡେସ୍କଟପକୁ କ୍ଲିକ କର"
 
-#: ../metadata/scale.xml.in.h:18
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr "ମାପ ବେଳେ ୟେବେ ଡେସ୍କଟପ କ୍ଲିକ ହୋଇଥାଏ ଡେସ୍କଟପ ଦେଖାଅ ମୋଡକୁ ପ୍ରବେଶ କର"
 
-#: ../metadata/scale.xml.in.h:20
 msgid "Spacing"
 msgstr "ଅନ୍ତରଦେବା"
 
-#: ../metadata/scale.xml.in.h:21
 msgid "Space between windows"
 msgstr "ଉଇଣ୍ଡୋଗୁଡିକ ମଧ୍ଯରେ ଅନ୍ତର"
 
-#: ../metadata/scale.xml.in.h:23
 msgid "Scale speed"
 msgstr "ଗତି ମାପ"
 
-#: ../metadata/scale.xml.in.h:25
 msgid "Scale timestep"
 msgstr "ସମଯସୋପାନକୁ ମାପ"
 
-#: ../metadata/scale.xml.in.h:26
 msgid "Darken Background"
 msgstr "ପୃଷ୍ଠଭୂମିକୁ ଗାଢକର"
 
-#: ../metadata/scale.xml.in.h:27
 msgid "Darken background when scaling windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ମାପିବା ବେଳେ ପୃଷ୍ଠଭୂମିକୁ ଗାଢ କର"
 
-#: ../metadata/scale.xml.in.h:29 ../metadata/switcher.xml.in.h:32
 msgid "Amount of opacity in percent"
 msgstr "ଶତକଡାରେ ଅସ୍ବଚ୍ଛତାର ପରିମାଣ"
 
-#: ../metadata/scale.xml.in.h:30
 msgid "Overlay Icon"
 msgstr "ବିସ୍ତୃତକରିବା ଆଇକନ"
 
-#: ../metadata/scale.xml.in.h:31
 msgid "Overlay an icon on windows once they are scaled"
 msgstr "ଥରେ ସେଗୁଡିକ ମାପ ହେବା ପରେ ଉଇଣ୍ଡୋରେ ଗୋଟିଏ ଆଇକନକୁ ବିସ୍ତୃତକର"
 
-#: ../metadata/scale.xml.in.h:32 ../metadata/wobbly.xml.in.h:19
 msgid "None"
 msgstr "କିଛିନାହିଁ"
 
-#: ../metadata/scale.xml.in.h:33
 msgid "Emblem"
 msgstr "ଚିହ୍ନ"
 
-#: ../metadata/scale.xml.in.h:34
 msgid "Big"
 msgstr "ବଡ"
 
-#: ../metadata/scale.xml.in.h:35
 msgid "Scale Windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ମାପ"
 
-#: ../metadata/scale.xml.in.h:36
 msgid "Windows that should be scaled in scale mode"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ମାପ ମୋଡରେ ମାପ ହେବା ଉଚିତ"
 
-#: ../metadata/scale.xml.in.h:37
 msgid "Hover Time"
 msgstr "ହୋଭର ସମଯ"
 
-#: ../metadata/scale.xml.in.h:38
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr "ସମଯ (in ms)ମାପ ମୋଡ ପୂର୍ବରୁ ନଷ୍ଟ ହୋଇଥାଏ ୟେବେ ଗୋଟିଏ ଉଇଣ୍ଡୋ ଉପରେ ଦୋଳାଯମାନ ହୁଏ "
 
-#: ../metadata/scale.xml.in.h:40
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
 "ଉଇଣ୍ଡୋ ଗୁଡିକ କେଉଁଠାରେ ମାପ ହେବେ ମନୋନୀତ କରେ ୟଦି ବହୁବିଧ ଆଉଟପୁଟ ଉପକରଣ ଉପୟୋଗ ହୋଇଥାଆନ୍ତି ।"
 
-#: ../metadata/scale.xml.in.h:41
 msgid "On current output device"
 msgstr "ଚଳିତ ଆଉଟପୁଟ ଉପକରଣରେ"
 
-#: ../metadata/scale.xml.in.h:42
 msgid "On all output devices"
 msgstr "ସବୁ ଆଉଟପୁଟ ଉପକରଣରେ"
 
-#: ../metadata/screenshot.xml.in.h:1
 msgid "Screenshot"
 msgstr "ସ୍କ୍ରିନ ସଟ"
 
-#: ../metadata/screenshot.xml.in.h:2
 msgid "Screenshot plugin"
 msgstr "ସ୍କ୍ରିନସଟ ପ୍ଲଗଇନ"
 
-#: ../metadata/screenshot.xml.in.h:4
 msgid "Initiate rectangle screenshot"
 msgstr "ଆଯତାକାର ସ୍କ୍ରିସଟକୁ ଆରମ୍ଭକର"
 
-#: ../metadata/screenshot.xml.in.h:5
 msgid "Directory"
 msgstr "ବିବରଣୀପଞ୍ଜିକା"
 
-#: ../metadata/screenshot.xml.in.h:6
 #, fuzzy
 msgid ""
 "Put screenshot images in this directory. If empty, the desktop directory "
 "will be used."
 msgstr "ଏହି ବିବରଣୀପଞ୍ଜିକାରେ ସ୍କ୍ରିନସଟ ଚିତ୍ରଗୁଡିକୁ ରଖ"
 
-#: ../metadata/screenshot.xml.in.h:7
 msgid "Launch Application"
 msgstr "ପ୍ରାରମ୍ଭକରିବା ପ୍ରଯୋଗ"
 
-#: ../metadata/screenshot.xml.in.h:8
 msgid "Automatically open screenshot in this application"
 msgstr "ଏହି ପ୍ରଯୋଗରେ ସ୍ବଯଂଚାଳିତଭାବରେ ସ୍କ୍ରିନସଟ ଖୋଲ"
 
-#: ../metadata/svg.xml.in.h:1
 msgid "Svg"
 msgstr "Svg"
 
-#: ../metadata/svg.xml.in.h:2
 msgid "Svg image loader"
 msgstr "Svg ଚିତ୍ର ଲୋଡକାରୀ"
 
-#: ../metadata/switcher.xml.in.h:1
 msgid "Application Switcher"
 msgstr "ପ୍ରଯୋଗ ଅଦଳବଦଳକାରୀ"
 
-#: ../metadata/switcher.xml.in.h:3
 msgid "Next window"
 msgstr "ପରବର୍ତ୍ତୀ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/switcher.xml.in.h:4
 msgid "Popup switcher if not visible and select next window"
 msgstr "ପପ୍ ଅପ ବଦଳକାରୀ ୟଦି ଦୃଶ୍ଯମାନ ନ ଥାଏ ଏବଂ ପରବର୍ତ୍ତୀ ଉଇଣ୍ଡୋକୁ ମନୋନୀତକର"
 
-#: ../metadata/switcher.xml.in.h:5
 msgid "Prev window"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/switcher.xml.in.h:6
 msgid "Popup switcher if not visible and select previous window"
 msgstr "ପପ୍ ଅପ ବଦଳକାରୀ ୟଦି ଦୃଶ୍ଯମାନ ନ ଥାଏ ଏବଂ ପୂର୍ବବର୍ତ୍ତୀ ଉଇଣ୍ଡୋକୁ ମନୋନୀତକର"
 
-#: ../metadata/switcher.xml.in.h:7
 msgid "Next window (All windows)"
 msgstr "ପରବର୍ତ୍ତୀ ଉଇଣ୍ଡୋ(ସବୁ ଉଇଣ୍ଡୋ)"
 
-#: ../metadata/switcher.xml.in.h:8
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
 "ପପ୍ ଅପ ବଦଳକାରୀ ୟଦି ଦୃଶ୍ଯମାନ ନ ଥାଏ ଏବଂ ସବୁ ଉଇଣ୍ଡୋ ମଧ୍ଯରୁ ପରବର୍ତ୍ତୀ ଉଇଣ୍ଡୋକୁ ମନୋନୀତକର"
 
-#: ../metadata/switcher.xml.in.h:9
 msgid "Prev window (All windows)"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ଉଇଣ୍ଡୋ( ସବୁ ଉଇଣ୍ଡୋ)"
 
-#: ../metadata/switcher.xml.in.h:10
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
 "ପପ୍ ଅପ ବଦଳକାରୀ ୟଦି ଦୃଶ୍ଯମାନ ନ ଥାଏ ଏବଂ ସବୁ ଉଇଣ୍ଡୋ ମଧ୍ଯରୁ ପୂର୍ବବର୍ତ୍ତୀ ଉଇଣ୍ଡୋକୁ ମନୋନୀତକର"
 
-#: ../metadata/switcher.xml.in.h:11
 msgid "Next window (No popup)"
 msgstr "ପରବର୍ତ୍ତୀ ଉଇଣ୍ଡୋ(ପପ୍ଅପ ନାହିଁ)"
 
-#: ../metadata/switcher.xml.in.h:12
 msgid "Select next window without showing the popup window."
 msgstr "ପପ୍ ଅପ ଉଇଣ୍ଡୋକୁ ବିନା ଦେଖାଇ ପରବର୍ତ୍ତୀ ଉଇଣ୍ଡୋକୁ ମନୋନୀତକର"
 
-#: ../metadata/switcher.xml.in.h:13
 msgid "Prev window (No popup)"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ଉଇଣ୍ଡୋ(ପପ୍ଅପ ନାହିଁ)"
 
-#: ../metadata/switcher.xml.in.h:14
 msgid "Select previous window without showing the popup window."
 msgstr "ପପ୍ ଅପ ଉଇଣ୍ଡୋକୁ ବିନା ଦେଖାଇ ପୂର୍ବବର୍ତ୍ତୀ ଉଇଣ୍ଡୋକୁ ମନୋନୀତକର"
 
-#: ../metadata/switcher.xml.in.h:15
 #, fuzzy
 msgid "Next Panel"
 msgstr "ଡେସ୍କଟପ ସମତଳ"
 
-#: ../metadata/switcher.xml.in.h:16
 #, fuzzy
 msgid "Select next panel type window."
 msgstr "windows"
 
-#: ../metadata/switcher.xml.in.h:17
 #, fuzzy
 msgid "Prev Panel"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ସ୍ଲାଇଡ"
 
-#: ../metadata/switcher.xml.in.h:18
 #, fuzzy
 msgid "Select previous panel type window."
 msgstr "डेइमण शुरू कर रहा हैं।"
 
-#: ../metadata/switcher.xml.in.h:20
 msgid "Switcher speed"
 msgstr "ଅଦଳବଦଳକାରୀ ଗତି"
 
-#: ../metadata/switcher.xml.in.h:22
 msgid "Switcher timestep"
 msgstr "ଅଦଳବଦଳକାରୀ ସମଯସୋପାନ"
 
-#: ../metadata/switcher.xml.in.h:23
 msgid "Switcher windows"
 msgstr "ଉଇଣ୍ଡୋ ଅଦଳବଦଳକାରୀ"
 
-#: ../metadata/switcher.xml.in.h:24
 msgid "Windows that should be shown in switcher"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ବଦଳକାରୀରେ ଦେଖାଇବା ଉଚିତ"
 
-#: ../metadata/switcher.xml.in.h:28
 msgid "Amount of saturation in percent"
 msgstr "ଶତକଡାରେ ସଂପୂର୍ଣ୍ଣମିଶ୍ରଣର ପରିମାଣ"
 
-#: ../metadata/switcher.xml.in.h:30
 msgid "Amount of brightness in percent"
 msgstr "ଶତକଡାରେ ଉଜ୍ବଳତାର ପରିମାଣ"
 
-#: ../metadata/switcher.xml.in.h:33
 msgid "Bring To Front"
 msgstr "ଆଗକୁ ଆଣ"
 
-#: ../metadata/switcher.xml.in.h:34
 msgid "Bring selected window to front"
 msgstr "ମନୋନୀତ ଉଇଣ୍ଡୋକୁ ଆଗକୁ ଆଣ"
 
-#: ../metadata/switcher.xml.in.h:36
 msgid "Distance desktop should be zoom out while switching windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ଅଦଳବଦଳ କରିବା ବେଳେ ଦୂରତା ଡେସ୍କଟପ ଜୁମ ଆଉଟ ହେବା ଉଚିତ"
 
-#: ../metadata/switcher.xml.in.h:37
 msgid "Icon"
 msgstr "ଆଇକନ"
 
-#: ../metadata/switcher.xml.in.h:38
 msgid "Show icon next to thumbnail"
 msgstr "ଥମନେଇଲ ନିକଟରେ ଥିବା ଆଇକନକୁ ଦେଖାଅ"
 
-#: ../metadata/switcher.xml.in.h:39
 msgid "Minimized"
 msgstr "ନ୍ଯୁନତମହୋଇଥିବା"
 
-#: ../metadata/switcher.xml.in.h:40
 msgid "Show minimized windows"
 msgstr "ନ୍ଯୁନତମ ହୋଇଥିବା ଉଇଣ୍ଡୋକୁ ଦେଖାଅ"
 
-#: ../metadata/switcher.xml.in.h:41
 msgid "Auto Rotate"
 msgstr "ସ୍ବତଃଘୁର୍ଣ୍ଣନ"
 
-#: ../metadata/switcher.xml.in.h:42
 msgid "Rotate to the selected window while switching"
 msgstr "ବଦଳ କରିବା ବେଳେ ମନୋନୀତ ଉଇଣ୍ଡୋକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:1
 #, fuzzy
 msgid "Desktop Wall"
 msgstr "ଡେସ୍କଟପ ଘନକ୍ଷେତ୍ର"
 
-#: ../metadata/wall.xml.in.h:2
 msgid "Desktop Wall Plugin"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:3
 msgid "Viewport Switch Preview"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:4
 msgid "Show Viewport Switcher Preview"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:5
 #, fuzzy
 msgid "Show switcher window while switching viewports"
 msgstr "ବଦଳ କରିବା ବେଳେ ମନୋନୀତ ଉଇଣ୍ଡୋକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:6
 msgid "Show Live Viewport Previews"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:7
 msgid "Show live viewport previews in switcher window"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:8
 msgid "Switch Target Preview Visibility Time"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:9
 msgid ""
 "Duration (in s) the switch target preview should remain visible after "
 "switching ends."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:10
 #, fuzzy
 msgid "Preview Scale"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ସ୍ଲାଇଡ"
 
-#: ../metadata/wall.xml.in.h:12
 #, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:13
 #, fuzzy
 msgid "Edge Radius"
 msgstr "ଛାଯା ବ୍ଯାସାର୍ଦ୍ଧ"
 
-#: ../metadata/wall.xml.in.h:14
 msgid "Radius of the rounded edge"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:15
 msgid "Border Width"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:16
 msgid "Width of the border between the previews"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:17
 #, fuzzy
 msgid "Outline Color"
 msgstr "ବାହ୍ଯରେଖା"
 
-#: ../metadata/wall.xml.in.h:18
 #, fuzzy
 msgid "Outline color of the switcher window."
 msgstr "ବାହ୍ଯରେଖା ପୁନଃଆକାର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/wall.xml.in.h:19
 #, fuzzy
 msgid "Background Gradient"
 msgstr "ପୃଷ୍ଠଭୂମି ଚିତ୍ରଗୁଡିକ"
 
-#: ../metadata/wall.xml.in.h:20
 #, fuzzy
 msgid "Base Color"
 msgstr "ସୀମାନ୍ତ ରଙ୍ଗ"
 
-#: ../metadata/wall.xml.in.h:21
 msgid "First color for the background gradient of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:22
 #, fuzzy
 msgid "Highlight Color"
 msgstr "ରଙ୍ଗ ପୁରଣକର"
 
-#: ../metadata/wall.xml.in.h:23
 msgid "Second color for the background gradient of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:25
 msgid "Third color for the background gradient of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:26
 msgid "Thumb Gradient"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:27
 msgid "First color for the thumb gradient of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:28
 msgid "Second color for the thumb gradient of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:29
 msgid "Highlight Gradient"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:30
 msgid "First color for the thumb highlight gradient of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:31
 msgid "Second color for the thumb highlight gradient of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:32
 #, fuzzy
 msgid "Arrow Colors"
 msgstr "ଛାଯାରଙ୍ଗ"
 
-#: ../metadata/wall.xml.in.h:33
 msgid "First color of the arrow of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:34
 msgid "Second color of the arrow of the switcher window."
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:35
 #, fuzzy
 msgid "Viewport Switching"
 msgstr "X ଦୃଶ୍ଯପୋର୍ଟ ସ୍ଥାନଗୁଡିକ"
 
-#: ../metadata/wall.xml.in.h:36
 msgid "Allow Wrap-Around"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:37
 msgid "Allow wrap-around when moving the wall up/down/left/right"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:38
 msgid "Wall Sliding Duration"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:39
 msgid "Duration (in s) for wall sliding viewport switching animation"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:40
 #, fuzzy
 msgid "Non Sliding Windows"
 msgstr "ଉଇଣ୍ଡୋ ଫିକାହେଉଛି"
 
-#: ../metadata/wall.xml.in.h:41
 #, fuzzy
 msgid "Windows that should not slide during the slide animation"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ମାପ ମୋଡରେ ମାପ ହେବା ଉଚିତ"
 
-#: ../metadata/wall.xml.in.h:43
 #, fuzzy
 msgid "Move within wall"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/wall.xml.in.h:44
 #, fuzzy
 msgid "Move Left"
 msgstr "ବାମକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:45
 msgid "Move along the wall to the left"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:46
 #, fuzzy
 msgid "Move Right"
 msgstr "ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:47
 msgid "Move along the wall to the right"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:48
 msgid "Move Up"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:49
 msgid "Move along the wall up"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:50
 #, fuzzy
 msgid "Move Down"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/wall.xml.in.h:51
 msgid "Move along the wall down"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:52
 msgid "Move Next"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:53
 msgid "Move along the wall to the next viewport"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:54
 msgid "Move Prev"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:55
 msgid "Move along the wall to the previous viewport"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:56
 #, fuzzy
 msgid "Move with window within wall"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:57
 #, fuzzy
 msgid "Move Left With Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ବାମକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:58
 msgid "Move with window along the wall to the left"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:59
 #, fuzzy
 msgid "Move Right With Window"
 msgstr "ଉଇଣ୍ଡୋ ସହିତ ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:60
 msgid "Move with window along the wall to the right"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:61
 #, fuzzy
 msgid "Move Up With Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/wall.xml.in.h:62
 msgid "Move with window along the wall up"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:63
 #, fuzzy
 msgid "Move Down With Window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/wall.xml.in.h:64
 msgid "Move with window along the wall down"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:65
 #, fuzzy
 msgid "Edge flipping"
 msgstr "ଧାର ବଦଳ DnD"
 
-#: ../metadata/wall.xml.in.h:66
 #, fuzzy
 msgid "Flip Left"
 msgstr "ଫ୍ଲିପ ବାମକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:67
 #, fuzzy
 msgid "Flip left"
 msgstr "ସମଯ ବଦଳକର"
 
-#: ../metadata/wall.xml.in.h:68
 #, fuzzy
 msgid "Flip Right"
 msgstr "ଫ୍ଲିପ ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:69
 #, fuzzy
 msgid "Flip right"
 msgstr "ଫ୍ଲିପ ଡାହାଣକୁ ଘୁରାଅ"
 
-#: ../metadata/wall.xml.in.h:70
 #, fuzzy
 msgid "Flip Up"
 msgstr "ସମଯ ବଦଳକର"
 
-#: ../metadata/wall.xml.in.h:71
 #, fuzzy
 msgid "Flip up"
 msgstr "ସମଯ ବଦଳକର"
 
-#: ../metadata/wall.xml.in.h:72
 #, fuzzy
 msgid "Flip Down"
 msgstr "ଧାର ବଦଳ DnD"
 
-#: ../metadata/wall.xml.in.h:73
 #, fuzzy
 msgid "Flip down"
 msgstr "ସମତଳ ତଳକୁ"
 
-#: ../metadata/wall.xml.in.h:74
 msgid "Multimonitor behavior"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:75
 msgid "How should a multimonitor configuration be handled"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:76
 msgid "Switch all"
 msgstr ""
 
-#: ../metadata/wall.xml.in.h:77
 #, fuzzy
 msgid "Switch separately"
 msgstr "ଅଦଳବଦଳକାରୀ ଗତି"
 
-#: ../metadata/wall.xml.in.h:78
 #, fuzzy
 msgid "Edge Flipping"
 msgstr "ଧାର ବଦଳ DnD"
 
-#: ../metadata/wall.xml.in.h:80
 #, fuzzy
 msgid "Flip viewport when moving the pointer to a screen edge"
 msgstr "ସ୍କ୍ରିନର ଧାରକୁ ପଏଣ୍ଟରକୁ ଘୁଞ୍ଚାଇବା ବେଳେ ପରବର୍ତ୍ତୀ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର"
 
-#: ../metadata/wall.xml.in.h:82
 #, fuzzy
 msgid "Flip viewport when moving a window to a screen edge"
 msgstr "ଉଇଣ୍ଡୋକୁ ସ୍କ୍ରିନର ଧାରକୁ ଘୁଞ୍ଚାଇବା ବେଳେ ପରବର୍ତ୍ତୀ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର"
 
-#: ../metadata/wall.xml.in.h:84
 #, fuzzy
 msgid "Flip viewport when dragging an object to a screen edge"
 msgstr "ସ୍କ୍ରିନର ଧାରକୁ ବସ୍ତୁକୁ ଟାଣିବା ବେଳେ ପରବର୍ତ୍ତୀ ଦୃଶ୍ଯପୋର୍ଟକୁ ବଦଳ କର"
 
-#: ../metadata/water.xml.in.h:1
 msgid "Water Effect"
 msgstr "ପାଣି ପ୍ରଭାବ"
 
-#: ../metadata/water.xml.in.h:2
 msgid "Adds water effects to different desktop actions"
 msgstr "ବିଭିନ୍ନ ଡେସ୍କଟପ କାର୍ୟ୍ଯକୁ ପାଣି ପ୍ରଭାବ ୟୋଗକର"
 
-#: ../metadata/water.xml.in.h:4
 msgid "Enable pointer water effects"
 msgstr "ପଏଣ୍ଟର ପାଣି ପ୍ରଭାବଗୁଡିକୁ ସକ୍ଷମ କର"
 
-#: ../metadata/water.xml.in.h:5
 msgid "Toggle rain"
 msgstr "ବର୍ଷାକୁ ଟେଗଲକର"
 
-#: ../metadata/water.xml.in.h:6
 msgid "Toggle rain effect"
 msgstr "ବର୍ଷା ପ୍ରଭାବକୁ ଟେଗଲକର"
 
-#: ../metadata/water.xml.in.h:7
 msgid "Toggle wiper"
 msgstr "ପୋଛିବା ଟୋଗଲକର"
 
-#: ../metadata/water.xml.in.h:8
 msgid "Toggle wiper effect"
 msgstr "ପୋଛିବା ପ୍ରଭାବକୁ ଟେଗଲକର"
 
-#: ../metadata/water.xml.in.h:9
 msgid "Offset Scale"
 msgstr "ଅଫ୍ ସେଟ ମାପକ"
 
-#: ../metadata/water.xml.in.h:10
 msgid "Water offset scale"
 msgstr "ପାଣି ଅଫ୍ସେଟ ମାପକ"
 
-#: ../metadata/water.xml.in.h:11
 msgid "Rain Delay"
 msgstr "ବର୍ଷା ବିଳମ୍ବ"
 
-#: ../metadata/water.xml.in.h:12
 msgid "Delay (in ms) between each rain-drop"
 msgstr "ପ୍ରତ୍ଯେକ ବର୍ଷା ବିନ୍ଦୁ ମଧ୍ଯରେ ବିଳମ୍ବ(in ms) "
 
-#: ../metadata/water.xml.in.h:13
 msgid "Title wave"
 msgstr "ଶୀର୍ଷକ ତରଙ୍ଗ"
 
-#: ../metadata/water.xml.in.h:14
 msgid "Wave effect from window title"
 msgstr "ଉଇଣ୍ଡୋ ଶୀର୍ଷକରୁ ତରଙ୍ଗ ପ୍ରଭାବ"
 
-#: ../metadata/water.xml.in.h:15
 msgid "Point"
 msgstr "ବିନ୍ଦୁ"
 
-#: ../metadata/water.xml.in.h:16
 msgid "Add point"
 msgstr "ବିନ୍ଦୁ ୟୋଗକର"
 
-#: ../metadata/water.xml.in.h:17
 msgid "Line"
 msgstr "ରେଖା"
 
-#: ../metadata/water.xml.in.h:18
 msgid "Add line"
 msgstr "ରେଖା ୟୋଗକର"
 
-#: ../metadata/wobbly.xml.in.h:1
 msgid "Wobbly Windows"
 msgstr "ଅସ୍ଥିର ଉଇଣ୍ଡୋ"
 
-#: ../metadata/wobbly.xml.in.h:2
 msgid "Use spring model for wobbly window effect"
 msgstr "ଅସ୍ଥିର ଉଇଣ୍ଡୋ ପ୍ରଭାବ ପାଇଁ ସ୍ପିଙ୍ଗ ମୋଡେଲ ଉପୟୋଗକର "
 
-#: ../metadata/wobbly.xml.in.h:3
 msgid "Snap windows"
 msgstr "ଛିନ୍ନ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/wobbly.xml.in.h:4
 msgid "Toggle window snapping"
 msgstr "ଉଇଣ୍ଡୋ ଛିନ୍ନକରିବାକୁ ଟେଗଲକର"
 
-#: ../metadata/wobbly.xml.in.h:5
 msgid "Snap Inverted"
 msgstr "ଛିନ୍ନକରିବା ଓଲଟାଗଲା"
 
-#: ../metadata/wobbly.xml.in.h:6
 msgid "Inverted window snapping"
 msgstr "ଓଲଟାହୋଇଥିବା ଉଇଣ୍ଡୋ ଛିନ୍ନକରିବା "
 
-#: ../metadata/wobbly.xml.in.h:7
 msgid "Shiver"
 msgstr "ଥରିବା"
 
-#: ../metadata/wobbly.xml.in.h:8
 msgid "Make window shiver"
 msgstr "ଉଇଣ୍ଡୋ ସିଭର କର"
 
-#: ../metadata/wobbly.xml.in.h:9
 msgid "Friction"
 msgstr "ଘର୍ଷଣ"
 
-#: ../metadata/wobbly.xml.in.h:10
 msgid "Spring Friction"
 msgstr "ସ୍ପ୍ରିଙ୍ଗ ଘର୍ଷଣ"
 
-#: ../metadata/wobbly.xml.in.h:11
 msgid "Spring K"
 msgstr "ସ୍ପ୍ରିଙ୍ଗ K"
 
-#: ../metadata/wobbly.xml.in.h:12
 msgid "Spring Konstant"
 msgstr "ସ୍ପ୍ରିଙ୍ଗ କନଷ୍ଟାଣ୍ଟ"
 
-#: ../metadata/wobbly.xml.in.h:13
 msgid "Grid Resolution"
 msgstr "ରିଜୋଲ୍ଯୁସନ"
 
-#: ../metadata/wobbly.xml.in.h:14
 msgid "Vertex Grid Resolution"
 msgstr "ଭର୍ଟେକ୍ସ ଗ୍ରୀଡ ରିଡୋଲ୍ଯୁସନ"
 
-#: ../metadata/wobbly.xml.in.h:15
 msgid "Minimum Grid Size"
 msgstr "ନ୍ଯୁନତମ ଗ୍ରୀଡ ଆକାର"
 
-#: ../metadata/wobbly.xml.in.h:16
 msgid "Minimum Vertex Grid Size"
 msgstr "ନ୍ଯୁନତମ ଭର୍ଟେକ୍ସ ଗ୍ରୀଡ ଆକାର"
 
-#: ../metadata/wobbly.xml.in.h:17
 msgid "Map Effect"
 msgstr "ପ୍ରଭାବକୁ ଅଂକନକର"
 
-#: ../metadata/wobbly.xml.in.h:18
 msgid "Map Window Effect"
 msgstr "ଉଇଣ୍ଡୋ ପ୍ରଭାବକୁ ଅଂକନକର"
 
-#: ../metadata/wobbly.xml.in.h:20
 msgid "Focus Effect"
 msgstr "ଲକ୍ଷ୍ଯ ପ୍ରଭାବ"
 
-#: ../metadata/wobbly.xml.in.h:21
 msgid "Focus Window Effect"
 msgstr "ଲକ୍ଷ୍ଯ ଉଇଣ୍ଡୋ ପ୍ରଭାବ"
 
-#: ../metadata/wobbly.xml.in.h:22
 msgid "Map Windows"
 msgstr "ଉଇଣ୍ଡୋ ଗୁଡିକୁ ଅଂକନକର"
 
-#: ../metadata/wobbly.xml.in.h:23
 msgid "Windows that should wobble when mapped"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଅଂକନ ହେବା ବେଳେ ଅସ୍ଥିର ହେବା ଉଚିତ"
 
-#: ../metadata/wobbly.xml.in.h:24
 msgid "Focus Windows"
 msgstr "ଲକ୍ଷ୍ଯ ଉଇଣ୍ଡୋ"
 
-#: ../metadata/wobbly.xml.in.h:25
 msgid "Windows that should wobble when focused"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଲକ୍ଷ୍ଯ କେନ୍ଦ୍ରିତ ହେବା ବେଳେ ଅସ୍ଥିର ହେବା ଉଚିତ"
 
-#: ../metadata/wobbly.xml.in.h:26
 msgid "Grab Windows"
 msgstr "ଉଇଣ୍ଡୋ ଟାଣିନିଅ"
 
-#: ../metadata/wobbly.xml.in.h:27
 msgid "Windows that should wobble when grabbed"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ୟେବେ ଟଣାୟାଏ ଅସ୍ଥିର ହେବା ଉଚିତ"
 
-#: ../metadata/wobbly.xml.in.h:28
 msgid "Move Windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
-#: ../metadata/wobbly.xml.in.h:29
 msgid "Windows that should wobble when moved"
 msgstr "ଉଇଣ୍ଡୋ ୟାହାକି ଘୁଞ୍ଚାଇବା ବେଳେ ଅସ୍ଥିର ହେବା ଉଚିତ"
 
-#: ../metadata/wobbly.xml.in.h:30
 msgid "Maximize Effect"
 msgstr "ପ୍ରଭାବକୁ ସର୍ବାଧିକ କର"
 
-#: ../metadata/wobbly.xml.in.h:31
 msgid "Wobble effect when maximizing and unmaximizing windows"
 msgstr "ଉଇଣ୍ଡୋକୁ ସର୍ବାଧିକ କିମ୍ବା ଅଣ-ସର୍ବାଧିକ କରିବା ବେଳେ ଅସ୍ଥିର ପ୍ରଭାବ"
 
-#: ../metadata/zoom.xml.in.h:1
 msgid "Zoom Desktop"
 msgstr "ଡେସ୍କଟପ ବଡକର"
 
-#: ../metadata/zoom.xml.in.h:2
 msgid "Zoom and pan desktop cube"
 msgstr "ଜୁମ ଏବଂ ପ୍ଯାନ ଡେସ୍କଟପ ଘନକ୍ଷେତ୍ର"
 
-#: ../metadata/zoom.xml.in.h:4
 msgid "Zoom In"
 msgstr "ବଡକର"
 
-#: ../metadata/zoom.xml.in.h:5
 msgid "Zoom Out"
 msgstr "ଛୋଟ କର"
 
-#: ../metadata/zoom.xml.in.h:6
 msgid "Zoom Pan"
 msgstr "ଜୁମ ପାନ"
 
-#: ../metadata/zoom.xml.in.h:7
 msgid "Zoom pan"
 msgstr "ଜୁମ ପାନ "
 
-#: ../metadata/zoom.xml.in.h:9
 msgid "Zoom Speed"
 msgstr "ଜୁମ ଗତି"
 
-#: ../metadata/zoom.xml.in.h:11
 msgid "Zoom Timestep"
 msgstr "ଜୁମ ସମଯସୋପାନ"
 
-#: ../metadata/zoom.xml.in.h:12
 msgid "Zoom factor"
 msgstr "ଜୁମ କାରଣ"
 
-#: ../metadata/zoom.xml.in.h:13
 msgid "Filter Linear"
 msgstr "ଫିଲ୍ଟର ରୌଖୀକ:"
 
-#: ../metadata/zoom.xml.in.h:14
 msgid "Use linear filter when zoomed in"
 msgstr "ୟେବେ ବଡ ହୋଇଥାଏ ରୈଖୀକ ଫିଲ୍ଟର ଉପୟୋଗକର"
 
-#: ../mate/compiz.desktop.in.h:1
 msgid "Compiz"
 msgstr "କମ୍ପିଜ"
 
-#: ../src/compiz-start.desktop.in.h:1
 #, fuzzy
 msgid "Compiz Start"
 msgstr "କମ୍ପିଜ"
 
-#: ../src/compiz-start.desktop.in.h:2
 #, fuzzy
 msgid "Start Compiz"
 msgstr "କମ୍ପିଜ"
 
-#: ../src/compiz-start.desktop.in.h:3
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Number of Desktops"
+#~ msgstr "ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
+
+#~ msgid "Number of virtual desktops"
+#~ msgstr "କଳ୍ପିତ ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"
 
 #~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
 #~ msgstr "ଗୋଟିଏ ଉଇଣ୍ଡୋ ଶୀର୍ଷକ ବାରରେ ମାଉସ ଚକ୍ରକୁ ଘୁରାଇବା ବେଳେ କରାୟିବାକୁ ଥିବା କାର୍ୟ୍ଯ"

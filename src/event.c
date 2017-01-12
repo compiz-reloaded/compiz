@@ -126,7 +126,7 @@ moveInputFocusToOtherWindow (CompWindow *w)
 {
     CompScreen  *s = w->screen;
     CompDisplay *d = s->display;
-    Bool        focussedAny = FALSE;
+    Bool        focusedAny = FALSE;
 
     if (w->id != d->activeWindow && w->id != d->nextActiveWindow)
 	if (d->activeWindow != None)
@@ -139,7 +139,7 @@ moveInputFocusToOtherWindow (CompWindow *w)
 					    CompWindowTypeDockMask)))
 	{
 	    moveInputFocusToWindow (ancestor);
-	    focussedAny = TRUE;
+	    focusedAny = TRUE;
 	}
     }
     else if (w->type & (CompWindowTypeDialogMask |
@@ -174,11 +174,11 @@ moveInputFocusToOtherWindow (CompWindow *w)
 				      CompWindowTypeDockMask)))
 	{
 	    moveInputFocusToWindow (focus);
-	    focussedAny = TRUE;
+	    focusedAny = TRUE;
 	}
     }
 
-    if (!focussedAny)
+    if (!focusedAny)
 	focusDefaultWindow (s);
 }
 
