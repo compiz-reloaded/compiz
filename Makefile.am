@@ -16,6 +16,8 @@ EXTRA_DIST =		   \
 	intltool-merge.in   \
 	intltool-update.in
 
+DISTCHECK_CONFIGURE_FLAGS = --with-gtk=$(GTK_API_VERSION)
+
 DISTCLEANFILES =		\
 	po/stamp-it		 \
 	intltool-extract	 \

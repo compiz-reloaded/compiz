@@ -293,6 +293,14 @@ AC_ARG_WITH([gtk],
   [with_gtk=2.0])
 AC_MSG_RESULT([$with_gtk])
 
+case "$with_gtk" in
+  2.0) GTK_API_VERSION=2.0
+       ;;
+  3.0) GTK_API_VERSION=3.0
+       ;;
+esac
+AC_SUBST([GTK_API_VERSION])
+
 AC_ARG_ENABLE(marco,
   [  --disable-marco         Disable marco theme support],
   [use_marco=$enableval], [use_marco=yes])
