@@ -7083,7 +7083,7 @@ init_settings (WnckScreen *screen)
 #ifdef USE_COMPIZCONFIG
     GSettings	*gsettings_mouse, *gsettings_gnome;
 #endif
-    gboolean	 is_mate_desktop;
+    gboolean	 is_gnome_desktop;
 #endif
 
 #ifdef USE_COMPIZCONFIG
@@ -7186,16 +7186,16 @@ init_settings (WnckScreen *screen)
 #endif
 
 #ifdef USE_GSETTINGS
-    is_mate_desktop = FALSE;
-    if (session && strlen (session) > 0) {
+    is_gnome_desktop = FALSE;
+    if (session != NULL && strlen (session) > 0) {
 	int i = 0;
 	gchar **sessions = g_strsplit (session, ":", -1);
 
-	while (sessions[i])
+	while (sessions[i] != NULL)
 	{
-	    if (g_strcmp0 (sessions[i], "MATE") == 0)
+	    if (g_strcmp0 (sessions[i], "GNOME") == 0)
 	    {
-		is_mate_desktop = TRUE;
+		is_gnome_desktop = TRUE;
 		break;
 	    }
 	    ++i;
@@ -7211,49 +7211,73 @@ init_settings (WnckScreen *screen)
     gsettings_marco = new_gsettings0 (GSCHEMA_KEY_MARCO);
     gsettings_gnome_wm = new_gsettings0 (GSCHEMA_KEY_GNOME_WM);
     gsettings_metacity = new_gsettings0 (GSCHEMA_KEY_METACITY_THEME);
-    if (!gsettings_metacity)
+    if (gsettings_metacity == NULL)
+    {
 	gsettings_metacity = new_gsettings0 (GSCHEMA_KEY_METACITY);
+    }
 
-    /* in general prioritise GNOME settings but Marco settings in MATE */
-    if (gsettings_marco && is_mate_desktop)
-	gsettings_wm = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
-    else if (gsettings_gnome_wm)
-	gsettings_wm = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_gnome_wm)));
-    else if (gsettings_marco)
-	gsettings_wm = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+    /* in general prioritize Marco settings but GNOME settings in GNOME */
+    if (gsettings_gnome_wm != NULL && is_gnome_desktop)
+    {
+	gsettings_wm = G_SETTINGS (g_object_ref (gsettings_gnome_wm));
+    }
+    else if (gsettings_marco != NULL)
+    {
+	gsettings_wm = G_SETTINGS (g_object_ref (gsettings_marco));
+    }
+    else if (gsettings_gnome_wm != NULL)
+    {
+	gsettings_wm = G_SETTINGS (g_object_ref (gsettings_gnome_wm));
+    }
 
-    /* in general prioritise Metacity settings but Marco settings in MATE */
-    if (gsettings_marco && is_mate_desktop)
-	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
-    else if (gsettings_metacity)
-	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_metacity)));
-    else if (gsettings_marco)
-	gsettings_wm_theme = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_marco)));
+    /* in general prioritize Marco settings but Metacity settings in GNOME */
+    if (gsettings_metacity != NULL && is_gnome_desktop)
+    {
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (gsettings_metacity));
+    }
+    else if (gsettings_marco != NULL)
+    {
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (gsettings_marco));
+    }
+    else if (gsettings_metacity != NULL)
+    {
+	gsettings_wm_theme = G_SETTINGS (g_object_ref (gsettings_metacity));
+    }
 
     /* unreference all, good stuff was rereferenced above */
-    if (gsettings_marco)
-	g_object_unref (G_OBJECT (gsettings_marco));
+    if (gsettings_marco != NULL)
+    {
+	g_object_unref (gsettings_marco);
+    }
     gsettings_marco = NULL;
-    if (gsettings_gnome_wm)
-	g_object_unref (G_OBJECT (gsettings_gnome_wm));
+    if (gsettings_gnome_wm != NULL)
+    {
+	g_object_unref (gsettings_gnome_wm);
+    }
     gsettings_gnome_wm = NULL;
-    if (gsettings_metacity)
-	g_object_unref (G_OBJECT (gsettings_metacity));
+    if (gsettings_metacity != NULL)
+    {
+	g_object_unref (gsettings_metacity);
+    }
     gsettings_metacity = NULL;
 
 #ifdef USE_COMPIZCONFIG
-    /* prioritise GNOME settings in general and MATE settings in, well, MATE */
+    /* prioritize MATE settings in general and GNOME settings in, well, GNOME */
     gsettings_mouse = new_gsettings0 (GSCHEMA_KEY_MATE_MOUSE);
     gsettings_gnome = new_gsettings0 (GSCHEMA_KEY_GNOME_INTERFACE);
 
-    if (!gsettings_mouse || !is_mate_desktop)
+    if (gsettings_mouse == NULL || is_gnome_desktop)
     {
-	if (gsettings_mouse)
-	    g_object_unref (G_OBJECT (gsettings_mouse));
-	gsettings_mouse = G_SETTINGS (g_object_ref (G_OBJECT (gsettings_gnome)));
+	if (gsettings_mouse != NULL)
+	{
+	    g_object_unref (gsettings_mouse);
+	}
+	gsettings_mouse = G_SETTINGS (g_object_ref (gsettings_gnome));
     }
-    if (gsettings_gnome)
-	g_object_unref (G_OBJECT (gsettings_gnome));
+    if (gsettings_gnome != NULL)
+    {
+	g_object_unref (gsettings_gnome);
+    }
     gsettings_gnome = NULL;
 #endif
 
