@@ -289,6 +289,7 @@ static double   meta_active_opacity       = META_ACTIVE_OPACITY;
 static gboolean meta_active_shade_opacity = META_ACTIVE_SHADE_OPACITY;
 
 static gboolean         meta_button_layout_set = FALSE;
+static gboolean         meta_button_layout_cmd_set = FALSE;
 static MetaButtonLayout meta_button_layout;
 #endif
 
@@ -6630,26 +6631,29 @@ button_layout_changed (GSettings *settings_wm)
 	return FALSE;
 
 #ifdef USE_MARCO
-    gchar *button_layout;
-
-    button_layout = g_settings_get_string (settings_wm,
-					   META_BUTTON_LAYOUT_KEY);
-
-    if (button_layout)
+    if (!meta_button_layout_cmd_set)
     {
-	meta_update_button_layout (button_layout);
+	gchar *button_layout;
 
-	meta_button_layout_set = TRUE;
+	button_layout = g_settings_get_string (settings_wm,
+	                                       META_BUTTON_LAYOUT_KEY);
 
-	g_free (button_layout);
+	if (button_layout != NULL)
+	{
+	    meta_update_button_layout (button_layout);
 
-	return TRUE;
-    }
+	    meta_button_layout_set = TRUE;
 
-    if (meta_button_layout_set)
-    {
-	meta_button_layout_set = FALSE;
-	return TRUE;
+	    g_free (button_layout);
+
+	    return TRUE;
+	}
+
+	if (meta_button_layout_set)
+	{
+	    meta_button_layout_set = FALSE;
+	    return TRUE;
+	}
     }
 #endif
 
@@ -7409,16 +7413,15 @@ init_settings (WnckScreen *screen)
 int
 main (int argc, char *argv[])
 {
-    GdkDisplay *gdkdisplay;
-    Display    *xdisplay;
-    GdkScreen  *gdkscreen;
-    WnckScreen *screen;
-    gint       i, j, status;
-    gboolean   replace = FALSE;
-
+    GdkDisplay  *gdkdisplay;
+    Display     *xdisplay;
+    GdkScreen   *gdkscreen;
+    WnckScreen  *screen;
+    gint         i, j, status;
+    gboolean     replace = FALSE;
 #ifdef USE_MARCO
-    char       *meta_theme = NULL;
-    char       *meta_button_layout_string = "menu:minimize,maximize,close";
+    const gchar *meta_theme = NULL;
+    const gchar *meta_button_layout_string = "menu:minimize,maximize,close";
 #endif
 
     program_name = argv[0];
@@ -7488,7 +7491,10 @@ main (int argc, char *argv[])
 	else if (strcmp (argv[i], "--button-layout") == 0)
 	{
 	    if (argc > ++i)
+	    {
 		meta_button_layout_string = argv[i];
+		meta_button_layout_cmd_set = TRUE;
+	    }
 	}
 #endif
 
@@ -7522,7 +7528,7 @@ main (int argc, char *argv[])
     theme_get_button_position       = get_button_position;
 
 #ifdef USE_MARCO
-    if (meta_theme)
+    if (meta_theme != NULL)
     {
 	meta_theme_set_current (meta_theme, TRUE);
 	if (meta_theme_get_current ())
@@ -7532,10 +7538,11 @@ main (int argc, char *argv[])
 	    theme_update_border_extents	    = meta_update_border_extents;
 	    theme_get_event_window_position = meta_get_event_window_position;
 	    theme_get_button_position	    = meta_get_button_position;
-	    meta_update_button_layout(meta_button_layout_string);
-	    meta_button_layout_set = TRUE;
 	}
     }
+
+    meta_update_button_layout (meta_button_layout_string);
+    meta_button_layout_set = TRUE;
 #endif
 
     gdkdisplay = gdk_display_get_default ();
