@@ -7577,7 +7577,7 @@ main (int argc, char *argv[])
 		     FALSE);
 
     status = decor_acquire_dm_session (xdisplay,
-				       gdk_screen_get_number (gdkscreen),
+				       GDK_SCREEN_XNUMBER (gdkscreen),
 				       "gwd", replace, &dm_sn_timestamp);
     if (status != DECOR_ACQUIRE_STATUS_SUCCESS)
     {
@@ -7586,7 +7586,7 @@ main (int argc, char *argv[])
 	    fprintf (stderr,
 		     "%s: Could not acquire decoration manager "
 		     "selection on screen %d display \"%s\"\n",
-		     program_name, gdk_screen_get_number (gdkscreen),
+		     program_name, GDK_SCREEN_XNUMBER (gdkscreen),
 		     DisplayString (xdisplay));
 	}
 	else if (status == DECOR_ACQUIRE_STATUS_OTHER_DM_RUNNING)
@@ -7596,7 +7596,7 @@ main (int argc, char *argv[])
 		     "has a decoration manager; try using the "
 		     "--replace option to replace the current "
 		     "decoration manager.\n",
-		     program_name, gdk_screen_get_number (gdkscreen),
+		     program_name, GDK_SCREEN_XNUMBER (gdkscreen),
 		     DisplayString (xdisplay));
 	}
 
@@ -7647,7 +7647,7 @@ main (int argc, char *argv[])
 	return 1;
     }
 
-    decor_set_dm_check_hint (xdisplay, gdk_screen_get_number (gdkscreen),
+    decor_set_dm_check_hint (xdisplay, GDK_SCREEN_XNUMBER (gdkscreen),
 			     WINDOW_DECORATION_TYPE_PIXMAP);
 
     update_default_decorations (gdkscreen);
