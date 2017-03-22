@@ -283,22 +283,17 @@ AC_ARG_ENABLE(gtk,
 
 AC_MSG_CHECKING([which gtk+ version to compile against])
 AC_ARG_WITH([gtk],
-  [AS_HELP_STRING([--with-gtk=2.0|3.0], [Which gtk+ version to compile against (default: 2.0)])],
+  [AS_HELP_STRING([--with-gtk=2.0|3.0], [Which gtk+ version to compile against (default: 3.0)])],
   [
       case "$with_gtk" in
-          2.0|3.0) ;;
+          2.0) GTK_API_VERSION=2.0 ;;
+          3.0) GTK_API_VERSION=3.0 ;;
           *) AC_MSG_ERROR([invalid gtk version specified]) ;;
       esac
   ],
-  [with_gtk=2.0])
+  [with_gtk=3.0])
 AC_MSG_RESULT([$with_gtk])
 
-case "$with_gtk" in
-  2.0) GTK_API_VERSION=2.0
-       ;;
-  3.0) GTK_API_VERSION=3.0
-       ;;
-esac
 AC_SUBST([GTK_API_VERSION])
 
 AC_ARG_ENABLE(marco,
