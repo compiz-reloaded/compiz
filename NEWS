@@ -1,3 +1,27 @@
+Release 0.8.14 (2017-04-18 Scott Moreau <oreaus@gmail.com>)
+==================================================================
+COMPIZ-RELOADED
+
+Handle _NET_WM_MOVERESIZE ClientMessages
+Fixes whisker menu resize bug
+
+Improve horizontal and vertical maximizing
+
+Remove 'Number of Desktops' option
+
+Fix crash when displaying special characters in gtk-window-decorator
+
+Update translations
+
+Set rotate and wall default flip bindings to None
+Fixes problem where edges of screen are unclickable by default
+
+Fix potential for skydome silently failing to render
+
+Don't fallback for exceeding max texture size
+
+Improved --button-layout behavior for gtk-window-decorator
+
 Release 0.8.12.3 (2016-04-10 Sorokin Alexei <sor.alexei@meowr.ru>)
 ==================================================================
 COMPIZ-RELOADED
