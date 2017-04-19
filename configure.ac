@@ -3,9 +3,9 @@ AC_PREREQ(2.57)
 dnl compiz package version number
 m4_define(compiz_version_major, 0)
 m4_define(compiz_version_minor, 8)
-m4_define(compiz_version_micro, 14)
+m4_define(compiz_version_micro, 15)
 
-AC_INIT([compiz], [0.8.14], [chat-to-me@raveit.de])
+AC_INIT([compiz], [0.8.15], [chat-to-me@raveit.de])
 
 COMPIZ_VERSION_MAJOR=compiz_version_major()
 COMPIZ_VERSION_MINOR=compiz_version_minor()
