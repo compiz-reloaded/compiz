@@ -2733,6 +2733,9 @@ resizeWindow (CompWindow *w,
 	w->attrib.height       = height;
 	w->attrib.border_width = borderWidth;
 
+	w->width  = pw;
+	w->height = ph;
+
 	if (!w->mapNum && w->unmapRefCnt > 0 &&
 	    w->attrib.map_state == IsViewable)
 	{
@@ -2743,9 +2746,6 @@ resizeWindow (CompWindow *w,
 	}
 	else
 	{
-	    w->width  = pw;
-	    w->height = ph;
-
 	    releaseWindow (w);
 
 	    w->pixmap = pixmap;
