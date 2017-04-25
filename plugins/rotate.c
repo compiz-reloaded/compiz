@@ -108,6 +108,7 @@ typedef struct _RotateScreen {
     PreparePaintScreenProc	 preparePaintScreen;
     DonePaintScreenProc		 donePaintScreen;
     PaintOutputProc		 paintOutput;
+    PaintWindowProc		 paintWindow;
     WindowGrabNotifyProc	 windowGrabNotify;
     WindowUngrabNotifyProc	 windowUngrabNotify;
     ActivateWindowProc           activateWindow;
@@ -583,6 +584,29 @@ rotatePaintOutput (CompScreen		   *s,
 	status = (*s->paintOutput) (s, sAttrib, transform, region,
 				    output, mask);
 	WRAP (rs, s, paintOutput, rotatePaintOutput);
+    }
+
+    return status;
+}
+
+static Bool
+rotatePaintWindow (CompWindow		*w,
+			const WindowPaintAttrib	*attrib,
+			const CompTransform		*transform,
+			Region					region,
+			unsigned int			mask)
+{
+	Bool       status;
+	CompScreen *s = w->screen;
+	ROTATE_SCREEN (s);
+
+    if (rs->grabbed && (w->type & CompWindowTypeTooltipMask))
+		return FALSE;
+    else
+    {
+		UNWRAP (rs, s, paintWindow);
+		status = (*s->paintWindow) (w, attrib, transform, region, mask);
+		WRAP (rs, s, paintWindow, rotatePaintWindow);
     }
 
     return status;
@@ -1882,6 +1906,7 @@ rotateInitScreen (CompPlugin *p,
     WRAP (rs, s, preparePaintScreen, rotatePreparePaintScreen);
     WRAP (rs, s, donePaintScreen, rotateDonePaintScreen);
     WRAP (rs, s, paintOutput, rotatePaintOutput);
+    WRAP (rs, s, paintWindow, rotatePaintWindow);
     WRAP (rs, s, windowGrabNotify, rotateWindowGrabNotify);
     WRAP (rs, s, windowUngrabNotify, rotateWindowUngrabNotify);
     WRAP (rs, s, activateWindow, rotateActivateWindow);
@@ -1908,6 +1933,7 @@ rotateFiniScreen (CompPlugin *p,
     UNWRAP (rs, s, preparePaintScreen);
     UNWRAP (rs, s, donePaintScreen);
     UNWRAP (rs, s, paintOutput);
+    UNWRAP (rs, s, paintWindow);
     UNWRAP (rs, s, windowGrabNotify);
     UNWRAP (rs, s, windowUngrabNotify);
     UNWRAP (rs, s, activateWindow);
