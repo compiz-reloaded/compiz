@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://github.com/compiz-reloaded/compiz/issues\n"
-"POT-Creation-Date: 2017-01-12 18:19+0300\n"
+"POT-Creation-Date: 2017-05-04 19:41+0300\n"
 "PO-Revision-Date: 2017-01-12 18:20+0300\n"
 "Last-Translator: Alexei Sorokin <sor.alexei@meowr.ru>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -252,7 +252,7 @@ msgstr "Commands"
 
 msgid "Assigns bindings to arbitrary commands"
 msgstr "Assigns bindings to arbitrary commands"
-	
+
 msgid "Command line 0"
 msgstr "Command line 0"
 
@@ -1294,8 +1294,9 @@ msgstr "Unredirect Full screen Windows"
 
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
-msgstr""
-"Allow drawing of full screen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"Allow drawing of full screen windows to not be redirected to offscreen "
+"pixmaps"
 
 msgid "Default Icon"
 msgstr "Default Icon"
@@ -1307,7 +1308,8 @@ msgid "Force independent output painting."
 msgstr "Force independent output painting."
 
 msgid "Paint each output device independly, even if the output devices overlap"
-msgstr "Paint each output device independly, even if the output devices overlap"
+msgstr ""
+"Paint each output device independly, even if the output devices overlap"
 
 msgid "Texture Compression"
 msgstr "Texture Compression"
@@ -1442,7 +1444,8 @@ msgid "Skydome Gradient End Color"
 msgstr "Skydome Gradient End Colour"
 
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr "Colour to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+"Colour to use for the bottom color-stop of the skydome-fallback gradient"
 
 msgid "Transparent Cube"
 msgstr "Transparent Cube"
@@ -1665,7 +1668,7 @@ msgid "Ini"
 msgstr "Ini"
 
 msgid "Ini Flat File Backend"
-msgstr"Ini Flat File Backend"
+msgstr "Ini Flat File Backend"
 
 msgid "Inotify"
 msgstr "Inotify"
@@ -1731,13 +1734,14 @@ msgid "Lazy Positioning"
 msgstr "Lazy Positioning"
 
 msgid "Do not update the server-side position of windows until finished moving"
-msgstr "Do not update the server-side position of windows until finished moving"
+msgstr ""
+"Do not update the server-side position of windows until finished moving"
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Opacity, Brightness and Saturation"
 
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr"Opacity, Brightness and Saturation adjustments"
+msgstr "Opacity, Brightness and Saturation adjustments"
 
 msgid "Increase Opacity"
 msgstr "Increase Opacity"
@@ -1806,7 +1810,7 @@ msgid "Brightness Step"
 msgstr "Brightness Step"
 
 msgid "Windows that should have a different brightness by default"
-msgstr  "Windows that should have a different brightness by default"
+msgstr "Windows that should have a different brightness by default"
 
 msgid "Brightness values for windows"
 msgstr "Brightness values for windows"
@@ -1987,7 +1991,7 @@ msgid "Initiate Rectangle Window Resize"
 msgstr "Initiate Rectangle Window Resize"
 
 msgid "Start resizing window with rectangle"
-msgstr  "Start resizing window with rectangle"
+msgstr "Start resizing window with rectangle"
 
 msgid "Initiate Stretch Window Resize"
 msgstr "Initiate Stretch Window Resize"
@@ -2502,7 +2506,8 @@ msgid "Next window (All windows)"
 msgstr "Next window (All windows)"
 
 msgid "Popup switcher if not visible and select next window out of all windows"
-msgstr "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+"Popup switcher if not visible and select next window out of all windows"
 
 msgid "Prev window (All windows)"
 msgstr "Prev window (All windows)"
@@ -2799,7 +2804,8 @@ msgstr "Flip down"
 msgid "Multimonitor behavior"
 msgstr "Multi monitor behaviour"
 
-msgid "How should a multi monitor configuration be handled"
+#, fuzzy
+msgid "How should a multimonitor configuration be handled"
 msgstr "How should a multi monitor configuration be handled"
 
 msgid "Switch all"
