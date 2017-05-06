@@ -6945,7 +6945,7 @@ dbus_handle_message (DBusConnection *connection,
 	!strcmp (path[1], "freedesktop") &&
 	!strcmp (path[2], "compiz")      &&
 	!strcmp (path[3], "decoration")  &&
-	!strcmp (path[4], "allscreens"))
+	!strcmp (path[4], "display"))
     {
 	result = DBUS_HANDLER_RESULT_HANDLED;
 
