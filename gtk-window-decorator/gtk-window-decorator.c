@@ -7076,10 +7076,6 @@ init_settings (WnckScreen *screen)
 #ifdef USE_COMPIZCONFIG
     gpointer *compizconfig_value_data = g_malloc0 (sizeof (WnckScreen *) + sizeof (CCSContext *));
     CCSContext *ccs_context = ccsContextNew (NULL, 0);
-#elif USE_DBUS_GLIB
-    DBusConnection *connection;
-    DBusMessage	   *reply;
-    DBusError	   error;
 #endif
 
 #ifdef USE_GSETTINGS
