@@ -212,7 +212,7 @@ if test "x$use_dbus_glib" = "xyes"; then
   PKG_CHECK_MODULES(DBUS_GLIB, dbus-glib-1, [use_dbus_glib=yes], [use_dbus_glib=no])
 fi
 
-if test "$use_dbus_glib" = "xyes"; then
+if test "x$use_dbus_glib" = "xyes"; then
   AC_DEFINE(USE_DBUS_GLIB, 1, [Build dbus glib support])
 fi
 
