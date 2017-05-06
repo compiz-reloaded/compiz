@@ -146,7 +146,7 @@
 
 
 #define DBUS_DEST       "org.freedesktop.compiz"
-#define DBUS_PATH       "/org/freedesktop/compiz/decoration/allscreens"
+#define DBUS_PATH       "/org/freedesktop/compiz/decoration/display"
 #define DBUS_INTERFACE  "org.freedesktop.compiz"
 #define DBUS_METHOD_GET "get"
 
@@ -6941,11 +6941,11 @@ dbus_handle_message (DBusConnection *connection,
 	return result;
     }
 
-    if (!strcmp (path[0], "org")	 &&
-	!strcmp (path[1], "freedesktop") &&
-	!strcmp (path[2], "compiz")      &&
-	!strcmp (path[3], "decoration")  &&
-	!strcmp (path[4], "allscreens"))
+    if (g_strcmp0 (path[0], "org") == 0         &&
+        g_strcmp0 (path[1], "freedesktop") == 0 &&
+        g_strcmp0 (path[2], "compiz") == 0      &&
+        g_strcmp0 (path[3], "decoration") == 0  &&
+        g_strcmp0 (path[4], "display") == 0)
     {
 	result = DBUS_HANDLER_RESULT_HANDLED;
 
