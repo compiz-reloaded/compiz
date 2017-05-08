@@ -319,7 +319,10 @@ if test "x$use_gtk" != "xno"; then
   fi
   if test "x$with_gtk" = "xauto"; then
     if test "x$use_marco" = "xno"; then
-      PKG_CHECK_EXISTS([$GWD_REQUIRE_GTK2], [with_gtk=2.0], [with_gtk=3.0])
+      # Try Gtk3 first, then Gtk2, then if none exist, ask for Gtk3.
+      PKG_CHECK_EXISTS([$GWD_REQUIRE_GTK3], [with_gtk=3.0],
+                       [PKG_CHECK_EXISTS([$GWD_REQUIRE_GTK2],
+                                         [with_gtk=2.0], [with_gtk=3.0])])
     else
       for i in $(pkg-config --print-requires libmarco-private); do
         if test "x$i" = "xgtk+-3.0"; then
