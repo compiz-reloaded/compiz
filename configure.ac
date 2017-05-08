@@ -112,27 +112,17 @@ AC_SUBST(imagedir)
 metadatadir=$datadir/compiz
 AC_SUBST(metadatadir)
 
-COMPIZ_REQUIRES="x11        \
-		 xcomposite \
-		 xext       \
-		 xfixes	    \
-		 xdamage    \
-		 xrandr	    \
-		 xi         \
-		 xinerama   \
-		 xcursor    \
-		 ice	    \
-		 sm	    \
-		 libxml-2.0 \
-		 libstartup-notification-1.0 >= 0.7"
+COMPIZ_REQUIRES="x11 xcomposite xext xfixes xdamage xrandr xi xinerama xcursor ice sm libxml-2.0 libstartup-notification-1.0 >= 0.7"
 
-PKG_CHECK_MODULES(COMPIZ, $COMPIZ_REQUIRES)
-AC_SUBST(COMPIZ_REQUIRES)
+PKG_CHECK_MODULES(COMPIZ, [$COMPIZ_REQUIRES])
+
+AC_SUBST([COMPIZ_REQUIRES])
+LIBS="$LIBS -lm -ldl"
 
 DECORATION_REQUIRES="xrender"
 
-PKG_CHECK_MODULES(DECORATION, $DECORATION_REQUIRES)
-AC_SUBST(DECORATION_REQUIRES)
+PKG_CHECK_MODULES(DECORATION, [$DECORATION_REQUIRES])
+AC_SUBST([DECORATION_REQUIRES])
 
 PKG_CHECK_EXISTS(xrender >= 0.9.3,
 		 [have_xrender_0_9_3=yes], [have_xrender_0_9_3=no])
@@ -170,7 +160,7 @@ if test -z "$XSLTPROC"; then
   AC_MSG_ERROR([Couldn't find xsltproc])
 fi
 
-PKG_CHECK_MODULES(LIBPNG, libpng)
+PKG_CHECK_MODULES(LIBPNG, [libpng])
 
 dnl Check for jpeglib.h, required for jpeg.c
 AC_CHECK_HEADERS([jpeglib.h], [] ,AC_MSG_ERROR(jpeglib.h not found --- aborting))
@@ -183,7 +173,7 @@ AC_ARG_ENABLE(glib,
   [use_glib=$enableval], [use_glib=yes])
 
 if test "x$use_glib" = "xyes"; then
-  PKG_CHECK_MODULES(GLIB, glib-2.0)
+  PKG_CHECK_MODULES(GLIB, [glib-2.0])
 fi
 
 AM_CONDITIONAL(USE_GLIB, test "x$use_glib" = "xyes")
@@ -196,7 +186,7 @@ AC_ARG_ENABLE(dbus,
   [use_dbus=$enableval], [use_dbus=yes])
 
 if test "x$use_dbus" = "xyes"; then
-  PKG_CHECK_MODULES(DBUS, dbus-1 libxml-2.0, [use_dbus=yes], [use_dbus=no])
+  PKG_CHECK_MODULES(DBUS, [dbus-1 libxml-2.0], [use_dbus=yes], [use_dbus=no])
 fi
 
 AM_CONDITIONAL(DBUS_PLUGIN, test "x$use_dbus" = "xyes")
@@ -209,7 +199,7 @@ AC_ARG_ENABLE(dbus-glib,
   [use_dbus_glib=$enableval], [use_dbus_glib=yes])
 
 if test "x$use_dbus_glib" = "xyes"; then
-  PKG_CHECK_MODULES(DBUS_GLIB, dbus-glib-1, [use_dbus_glib=yes], [use_dbus_glib=no])
+  PKG_CHECK_MODULES(DBUS_GLIB, [dbus-glib-1], [use_dbus_glib=yes], [use_dbus_glib=no])
 fi
 
 if test "x$use_dbus_glib" = "xyes"; then
@@ -234,7 +224,7 @@ AC_ARG_ENABLE(fuse,
   [use_fuse=$enableval], [use_fuse=yes])
 
 if test "x$use_fuse" = "xyes"; then
-  PKG_CHECK_MODULES(FUSE, fuse, [use_fuse=yes], [use_fuse=no])
+  PKG_CHECK_MODULES(FUSE, [fuse], [use_fuse=yes], [use_fuse=no])
 fi
 
 AM_CONDITIONAL(FUSE_PLUGIN, test "x$use_fuse" = "xyes")
@@ -247,7 +237,7 @@ AC_ARG_ENABLE(annotate,
   [use_annotate=$enableval], [use_annotate=yes])
 
 if test "x$use_annotate" = "xyes"; then
-  PKG_CHECK_MODULES(ANNOTATE, cairo-xlib-xrender, [use_annotate=yes], [use_annotate=no])
+  PKG_CHECK_MODULES(ANNOTATE, [cairo-xlib-xrender], [use_annotate=yes], [use_annotate=no])
 fi
 
 AM_CONDITIONAL(ANNOTATE_PLUGIN, test "x$use_annotate" = "xyes")
@@ -310,41 +300,32 @@ AC_ARG_ENABLE(gsettings,
 
 if test "x$use_gtk" = "xyes"; then
   if test "x$with_gtk" != "x2.0"; then
-    PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
-		      xrender >= 0.8.4      \
-		      xi                    \
-		      gtk+-3.0              \
-		      libwnck-3.0	    \
-		      cairo >= 1.4	    \
-		      pangocairo,
-		      [use_gtk=yes], [use_gtk=no])
+    GWD_REQUIRES="gtk+-3.0
+                  libwnck-3.0
+                  cairo >= 1.4
+                  pangocairo
+                  xrender >= 0.8.4
+                  xi"
   else
-    PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR,
-		      xrender >= 0.8.4      \
-		      xi                    \
-		      gtk+-2.0 >= 2.22.0    \
-		      libwnck-1.0 >= 2.22.0 \
-		      cairo >= 1.4	    \
-		      pangocairo,
-		      [use_gtk=yes], [use_gtk=no])
+    GWD_REQUIRES="gtk+-2.0 >= 2.22.0
+                  libwnck-1.0 >= 2.22.0
+                  cairo >= 1.4
+                  pangocairo
+                  xrender >= 0.8.4
+                  xi"
   fi
+  PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR, [$GWD_REQUIRES],
+                    [use_gtk=yes], [use_gtk=no])
   if test "x$use_gtk" = "xyes"; then
-    save_CFLAGS="$CFLAGS"
-    save_LIBS="$LIBS"
-    CFLAGS="$CFLAGS $GTK_WINDOW_DECORATOR_CFLAGS"
-    LIBS="$LIBS $GTK_WINDOW_DECORATOR_LIBS"
-    CFLAGS="$save_CFLAGS"
-    LIBS="$save_LIBS -lm -ldl"
-
     if test "x$use_gsettings" = "xyes"; then
-      PKG_CHECK_MODULES(GSETTINGS, glib-2.0 >= 2.32 gio-2.0 >= 2.25.0)
+      PKG_CHECK_MODULES(GSETTINGS, [glib-2.0 >= 2.32 gio-2.0 >= 2.25.0])
 
       GLIB_GSETTINGS
     fi
 
     if test "x$use_marco" = "xyes"; then
-      PKG_CHECK_MODULES(MARCO, libmarco-private,
-			[use_marco=yes], [use_marco=no])
+      PKG_CHECK_MODULES(MARCO, [libmarco-private],
+                               [use_marco=yes], [use_marco=no])
     fi
   else
     use_marco="no"
