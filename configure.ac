@@ -269,26 +269,25 @@ fi
 
 AC_ARG_ENABLE(gtk,
   [  --disable-gtk           Disable gtk window decorator],
-  [use_gtk=$enableval], [use_gtk=yes])
+  [use_gtk=$enableval], [use_gtk=auto])
 
 AC_MSG_CHECKING([which gtk+ version to compile against])
 AC_ARG_WITH([gtk],
-  [AS_HELP_STRING([--with-gtk=2.0|3.0], [Which gtk+ version to compile against (default: 3.0)])],
+  [AS_HELP_STRING([--with-gtk=2.0|3.0|auto], [Which gtk+ version to compile against (default: auto)])],
   [
       case "$with_gtk" in
-          2.0) GTK_API_VERSION=2.0 ;;
-          3.0) GTK_API_VERSION=3.0 ;;
-          *) AC_MSG_ERROR([invalid gtk version specified]) ;;
+          2.0|3.0|auto) ;;
+          *) AC_MSG_ERROR([invalid gtk+ version specified]) ;;
       esac
   ],
-  [with_gtk=3.0])
+  [with_gtk=auto])
 AC_MSG_RESULT([$with_gtk])
 
 AC_SUBST([GTK_API_VERSION])
 
 AC_ARG_ENABLE(marco,
   [  --disable-marco         Disable marco theme support],
-  [use_marco=$enableval], [use_marco=yes])
+  [use_marco=$enableval], [use_marco=auto])
 
 AC_ARG_ENABLE(mate,
   [  --disable-mate          Disable basic mate compatibility],
@@ -298,41 +297,66 @@ AC_ARG_ENABLE(gsettings,
   [  --disable-gsettings     Disable gsettings gwd support],
   [use_gsettings=$enableval], [use_gsettings=yes])
 
-if test "x$use_gtk" = "xyes"; then
-  if test "x$with_gtk" != "x2.0"; then
-    GWD_REQUIRES="gtk+-3.0
+GWD_REQUIRE_GTK3="gtk+-3.0
                   libwnck-3.0
                   cairo >= 1.4
                   pangocairo
                   xrender >= 0.8.4
                   xi"
-  else
-    GWD_REQUIRES="gtk+-2.0 >= 2.22.0
+GWD_REQUIRE_GTK2="gtk+-2.0 >= 2.22.0
                   libwnck-1.0 >= 2.22.0
                   cairo >= 1.4
                   pangocairo
                   xrender >= 0.8.4
                   xi"
+
+if test "x$use_gtk" != "xno"; then
+  if test "x$use_marco" = "xauto"; then
+    PKG_CHECK_MODULES(MARCO, libmarco-private,
+                      [use_marco=yes], [use_marco=no])
+  elif test "x$use_marco" = "xyes"; then
+    PKG_CHECK_MODULES(MARCO, libmarco-private)
   fi
-  PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR, [$GWD_REQUIRES],
-                    [use_gtk=yes], [use_gtk=no])
-  if test "x$use_gtk" = "xyes"; then
-    if test "x$use_gsettings" = "xyes"; then
-      PKG_CHECK_MODULES(GSETTINGS, [glib-2.0 >= 2.32 gio-2.0 >= 2.25.0])
-
-      GLIB_GSETTINGS
+  if test "x$with_gtk" = "xauto"; then
+    if test "x$use_marco" = "xno"; then
+      PKG_CHECK_EXISTS([$GWD_REQUIRE_GTK2], [with_gtk=2.0], [with_gtk=3.0])
+    else
+      for i in $(pkg-config --print-requires libmarco-private); do
+        if test "x$i" = "xgtk+-3.0"; then
+          with_gtk="3.0"
+          break
+        elif test "x$i" = "xgtk+-2.0"; then
+          with_gtk="2.0"
+          break
+        fi
+      done
+      if test "x$with_gtk" = "xauto"; then
+        AC_MSG_ERROR([marco is built with unknown gtk+])
+      fi
     fi
+  fi
 
-    if test "x$use_marco" = "xyes"; then
-      PKG_CHECK_MODULES(MARCO, [libmarco-private],
-                               [use_marco=yes], [use_marco=no])
-    fi
+  if test "x$with_gtk" = "x3.0"; then
+    GWD_REQUIRE="$GWD_REQUIRE_GTK3"
   else
-    use_marco="no"
-    use_gsettings="no"
+    GWD_REQUIRE="$GWD_REQUIRE_GTK2"
+  fi
+  if test "x$use_gtk" = "xauto"; then
+    PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR, [$GWD_REQUIRE],
+                      [use_gtk=yes], [use_gtk=no])
+  else
+    PKG_CHECK_MODULES(GTK_WINDOW_DECORATOR, [$GWD_REQUIRE])
   fi
 else
   use_marco="no"
+fi
+
+if test "x$use_gtk" = "xyes"; then
+  if test "x$use_gsettings" = "xyes"; then
+    PKG_CHECK_MODULES(GSETTINGS, [glib-2.0 >= 2.32 gio-2.0 >= 2.25.0])
+    GLIB_GSETTINGS
+  fi
+else
   use_gsettings="no"
 fi
 
@@ -344,6 +368,8 @@ fi
 AM_CONDITIONAL(WITH_GTK, test "x$with_gtk" != "x")
 if test "$with_gtk" != ""; then
   AC_DEFINE(WITH_GTK, 1, [Build with Gtk $with_gtk])
+  GTK_API_VERSION="$with_gtk"
+  AC_SUBST([GTK_API_VERSION])
 fi
 
 AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
