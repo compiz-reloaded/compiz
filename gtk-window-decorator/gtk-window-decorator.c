@@ -3633,7 +3633,8 @@ update_window_decoration_size (WnckWindow *win)
 
     /* wait until old surfaces are not used for sure,
        one second should be enough */
-    g_timeout_add_seconds (1, destroy_surface_idled, d->surface);
+    if (d->surface)
+	g_timeout_add_seconds (1, destroy_surface_idled, d->surface);
 
     if (d->buffer_surface)
 	cairo_surface_destroy (d->buffer_surface);
@@ -3856,8 +3857,9 @@ update_switcher_window (WnckWindow *win,
 	return FALSE;
     }
 
-    if (d->surface)
-	cairo_surface_destroy (d->surface);
+    /* wait until old surfaces are not used for sure,
+       one second should be enough */
+    g_timeout_add_seconds (1, destroy_surface_idled, d->surface);
 
     if (d->buffer_surface)
 	cairo_surface_destroy (d->buffer_surface);
