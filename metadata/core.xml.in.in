@@ -80,7 +80,7 @@
 	    <group>
 		<_short>Focus &amp; Raise Behavior</_short>
 		<option name="click_to_focus" type="bool">
-		    <_short>Click To Focus</_short>
+		    <_short>Click to Focus</_short>
 		    <_long>Click on window moves input focus to it</_long>
 		    <default>true</default>
 		</option>
@@ -276,7 +276,7 @@
 		    </default>
 		</option>
 		<option name="sync_to_vblank" type="bool">
-		    <_short>Sync To VBlank</_short>
+		    <_short>Sync to VBlank</_short>
 		    <_long>Only perform screen updates during vertical blanking period</_long>
 		    <default>true</default>
 		</option>
@@ -284,7 +284,7 @@
 	    <group>
 		<_short>Focus &amp; Raise Behavior</_short>
 		<option name="focus_prevention_level" type="int">
-		    <_short>Focus Prevention Level</_short>
+		    <_short>Focus-Stealing Prevention Level</_short>
 		    <_long>Level of focus stealing prevention</_long>
 		    <min>0</min>
 		    <max>4</max>
@@ -311,8 +311,8 @@
 		    </desc>
 		</option>
 		<option name="focus_prevention_match" type="match">
-		    <_short>Focus Prevention Windows</_short>
-		    <_long>Focus prevention windows</_long>
+		    <_short>Focus-Stealing Prevention Windows</_short>
+		    <_long>Windows to prevent grabbing keyboard focus</_long>
 		    <default>any</default>
 		</option>
 	    </group>
@@ -327,13 +327,13 @@
 		<default>icon</default>
 	    </option>
 	    <option name="force_independent_output_painting" type="bool">
-		<_short>Force independent output painting.</_short>
+		<_short>Force independent output painting</_short>
 		<_long>Paint each output device independly, even if the output devices overlap</_long>
 		<default>false</default>
 	    </option>
 	    <option name="texture_compression" type="bool">
 		<_short>Texture Compression</_short>
-		<_long>If available use compression for textures converted from images</_long>
+		<_long>If available, use compression for textures converted from images</_long>
 		<default>false</default>
 	    </option>
 	</screen>
