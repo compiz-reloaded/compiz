@@ -1589,7 +1589,8 @@ eventLoop (void)
 				break;
 			    }
 
-			    if (s->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK)
+			    if ((s->damageMask & COMP_SCREEN_DAMAGE_ALL_MASK) &&
+					s->nOutputDev == 1)
 			    {
 				s->damageMask &= ~COMP_SCREEN_DAMAGE_ALL_MASK;
 				s->damageMask |=
