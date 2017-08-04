@@ -1,3537 +1,3065 @@
-# Croatian translation for compiz
-# Copyright (C) 2007 SUSE LINUX GmbH, Nuernberg, Germany.
+# Croatian translation for compiz.
+# Copyright (C) 2017 github.com/compiz-reloaded
 # This file is distributed under the same license as the compiz package.
+# gogo <trebelnik2@gmail.com>, 2017
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: compiz\n"
+"Project-Id-Version: compiz 0.8.14\n"
 "Report-Msgid-Bugs-To: https://github.com/compiz-reloaded/compiz/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
-"PO-Revision-Date: 2007-12-22 13:42+0100\n"
-"Last-Translator: Matija Folnovic <matijafolnovic@gmail.com>\n"
-"Language-Team: Croatian <opensuse-translation@opensuse.org>\n"
+"POT-Creation-Date: 2017-08-06 15:20+0200\n"
+"PO-Revision-Date: 2017-08-06 20:34+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#, fuzzy
 msgid "Close Window"
 msgstr "Zatvori prozor"
 
 msgid "Unmaximize Window"
-msgstr ""
+msgstr "Poništi uvećanje prozora"
 
 msgid "Maximize Window"
-msgstr "Maksimiziraj prozor"
+msgstr "Povećaj prozor"
 
 msgid "Minimize Window"
-msgstr "Minimiziraj prozor"
+msgstr "Smanji prozor"
 
-#, fuzzy
 msgid "Window Menu"
-msgstr "Upravitelji Prozorima"
+msgstr "Izbornik prozora"
 
-#, fuzzy
 msgid "Shade"
-msgstr "Skener"
+msgstr "Sjenka"
 
 msgid "Make Above"
-msgstr ""
+msgstr "Pošalji iznad"
 
 msgid "Stick"
-msgstr ""
+msgstr "Pričvrsti"
 
 msgid "Unshade"
-msgstr ""
+msgstr "Odsjenčaj"
 
 msgid "Unmake Above"
-msgstr ""
+msgstr "Odpošalji iznad"
 
 msgid "Unstick"
-msgstr ""
+msgstr "Odlijepi"
 
 #, c-format
 msgid "The window \"%s\" is not responding."
-msgstr ""
+msgstr "Prozor \"%s\" ne reagira."
 
 msgid ""
 "Forcing this application to quit will cause you to lose any unsaved changes."
 msgstr ""
+"Prisilno završavanje rada ove aplikacije uzrokovat će gubitak svih "
+"nespremljenih promjena."
 
 msgid "_Cancel"
 msgstr "_Odustani"
 
 msgid "_Force Quit"
-msgstr ""
+msgstr "_Prisilan završetak"
 
-#, fuzzy
 msgid "Annotate"
-msgstr "Indija"
+msgstr "Obilježavanje"
 
-#, fuzzy
 msgid "Annotate plugin"
-msgstr "Postavke arhiva"
+msgstr "Priključak obilježavanja"
 
-#, fuzzy
 msgid "Initiate Free Draw"
-msgstr "Indija"
+msgstr "Pokreni slobodno crtanje"
 
-#, fuzzy
 msgid "Initiate freehand drawing"
-msgstr "Indija"
+msgstr "Pokreni slobodno ručno crtanje"
 
-#, fuzzy
 msgid "Initiate Line"
-msgstr "Aktiviraj"
+msgstr "Pokreni linijsko crtanje"
 
-#, fuzzy
 msgid "Initiate line drawing"
-msgstr "Indija"
+msgstr "Pokreni linijsko crtanje"
 
-#, fuzzy
 msgid "Initiate Rectangle"
-msgstr "Indija"
+msgstr "Pokreni pravokutnik"
 
-#, fuzzy
 msgid "Initiate rectangle drawing"
-msgstr "Indija"
+msgstr "Pokreni pravokutno crtanje"
 
-#, fuzzy
 msgid "Initiate Ellipse"
-msgstr "Indija"
+msgstr "Pokreni elipsu"
 
-#, fuzzy
 msgid "Initiate ellipse drawing"
-msgstr "Indija"
+msgstr "Pokreni elipsasto crtanje"
 
 msgid "Draw"
-msgstr "Nacrtaj"
+msgstr "Crtaj"
 
 msgid "Draw using tool"
-msgstr "Crtaj koristeci alat"
+msgstr "Crtaj upotrebom alata"
 
-#, fuzzy
 msgid "Initiate erase"
-msgstr "Indija"
+msgstr "Pokreni brisanje"
 
-#, fuzzy
 msgid "Initiate annotate erasing"
-msgstr "Indija"
+msgstr "Pokreni brisanje obilježavanja"
 
 msgid "Clear"
-msgstr "Izbrisi"
+msgstr "Obriši"
 
-#, fuzzy
 msgid "Toggle center shape"
-msgstr "&Promijeni status"
+msgstr "Uključi/Isključi središnje oblikovanje"
 
 msgid ""
 "Toggle whether the current shape is drawn using the center of your initial "
 "click"
 msgstr ""
+"Uključi/Isključi iscrtavanje trenutnog oblika koristeći sredinu vašeg "
+"početnog klika"
 
 msgid "Annotate Fill Color"
-msgstr ""
+msgstr "Boja ispune obilježavanja"
 
-#, fuzzy
 msgid "Fill color for annotations"
-msgstr "Naučite više iz dokumenatcije"
+msgstr "Boja ispune za obilježavanja"
 
 msgid "Annotate Stroke Color"
-msgstr ""
+msgstr "Boja poteza obilježavanja"
 
-#, fuzzy
 msgid "Stroke color for annotations"
-msgstr "Naučite više iz dokumenatcije"
+msgstr "Boja poteza za obilježavanje"
 
 msgid "Stroke width"
-msgstr ""
+msgstr "Širina poteza"
 
-#, fuzzy
 msgid "Stroke width for annotations"
-msgstr "Naučite više iz dokumenatcije"
+msgstr "Širina poteza za obilježavanje"
 
-#, fuzzy
 msgid "Blur Windows"
-msgstr "&Obriši Windowse"
+msgstr "Zamućivanje prozora"
 
-#, fuzzy
 msgid "Blur windows"
-msgstr "&Obriši Windowse"
+msgstr "Zamuti prozore"
 
 msgid "Pulse"
-msgstr ""
+msgstr "Pulsiranje"
 
 msgid "Pulse effect"
-msgstr ""
+msgstr "Efekt pulsiranja"
 
-#, fuzzy
 msgid "Blur Speed"
-msgstr "Trajanje mutnosti"
+msgstr "Brzina zamućivanja"
 
-#, fuzzy
 msgid "Window blur speed"
-msgstr "Windows slobodno (%1)"
+msgstr "Brzina zamućivanja prozora"
 
-#, fuzzy
 msgid "Focus blur windows"
-msgstr "&Obriši Windowse"
+msgstr "Zamuti prozore fokusom"
 
 msgid "Windows that should be affected by focus blur"
-msgstr ""
+msgstr "Prozori na koje bi trebalo utjecati zamućivanje fokusa"
 
-#, fuzzy
 msgid "Focus Blur"
-msgstr "&Obriši Windowse"
+msgstr "Zamućenje fokusa"
 
 msgid "Blur windows that doesn't have focus"
-msgstr ""
+msgstr "Zamuti prozore koji nemaju fokus"
 
-#, fuzzy
 msgid "Alpha blur windows"
-msgstr "&Obriši Windowse"
+msgstr "Alpha zamućenje prozora"
 
 msgid "Windows that should be use alpha blur by default"
-msgstr ""
+msgstr "Prozori koji bi početno trebali koristiti alpha-zamućivanje"
 
 msgid "Alpha Blur"
-msgstr "Alpha mutnost"
+msgstr "Alpha zamućenje"
 
 msgid "Blur behind translucent parts of windows"
-msgstr ""
+msgstr "Zamuti iza prozirnih dijelova prozora"
 
-#, fuzzy
 msgid "Blur Filter"
-msgstr "Brzina:"
+msgstr "Filter zamućenja"
 
 msgid "Filter method used for blurring"
-msgstr ""
+msgstr "Način filtriranja korišten za zamućivanje"
 
-#, fuzzy
 msgid "4xBilinear"
-msgstr "4xBilinear"
+msgstr "4xBilinearno"
 
-#, fuzzy
 msgid "Gaussian"
-msgstr "Ruski"
+msgstr "Gaussov"
 
-#, fuzzy
 msgid "Mipmap"
-msgstr "Lima"
+msgstr "Mipmapiranje"
 
-#, fuzzy
 msgid "Gaussian Radius"
-msgstr "Ruski"
+msgstr "Gaussov polumjer"
 
-#, fuzzy
 msgid "Gaussian radius"
-msgstr "Ruski"
+msgstr "Gaussov polumjer"
 
-#, fuzzy
 msgid "Gaussian Strength"
-msgstr "Ruski"
+msgstr "Gaussova snaga"
 
-#, fuzzy
 msgid "Gaussian strength"
-msgstr "Ruski"
+msgstr "Gaussova snaga"
 
-#, fuzzy
 msgid "Mipmap LOD"
-msgstr "Lima"
+msgstr "Opširnost mipmapiranja"
 
 msgid "Mipmap level-of-detail"
-msgstr ""
+msgstr "Razina pojedinosti mipmapiranja"
 
-#, fuzzy
 msgid "Blur Saturation"
-msgstr "Trajanje"
+msgstr "Zasićenost zamućenja"
 
-#, fuzzy
 msgid "Blur saturation"
-msgstr "Trajanje"
+msgstr "Zasićenje zamućenja"
 
-#, fuzzy
 msgid "Blur Occlusion"
-msgstr "Trajanje"
+msgstr "Zatvaranje zamućenja"
 
 msgid "Disable blurring of screen regions obscured by other windows."
-msgstr ""
+msgstr "Onemogući zamućivanje područja zaslona zaklonjenih drugim prozorima."
 
 msgid "Independent texture fetch"
-msgstr ""
+msgstr "Nezavisan dohvat tekstura"
 
 msgid ""
 "Use the available texture units to do as many as possible independent "
 "texture fetches."
 msgstr ""
+"Koristi dostupne teksturne jedinice kako bi se učinilo što više nezavisnih "
+"dohvata tekstura."
 
-#, fuzzy
 msgid "Clone Output"
-msgstr "Sažmi izlaz"
+msgstr "Klonirani izlaz"
 
 msgid "Output clone handler"
-msgstr ""
+msgstr "Rukovatelj izlaznim klonom"
 
-#, fuzzy
 msgid "Initiate"
-msgstr "Aktiviraj"
+msgstr "Pokreni"
 
-#, fuzzy
 msgid "Initiate clone selection"
-msgstr "Indija"
+msgstr "Pokreni odabir klona"
 
-#, fuzzy
 msgid "Commands"
-msgstr "Naredba: "
+msgstr "Naredbe"
 
 msgid "Assigns bindings to arbitrary commands"
-msgstr ""
+msgstr "Dodijeli prečac željenoj naredbi"
 
-#, fuzzy
 msgid "Command line 0"
-msgstr "Naredba 0"
+msgstr "Naredbeni redak 0"
 
 msgid "Command line to be executed in shell when run_command0 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command0"
 
-#, fuzzy
 msgid "Command line 1"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 1"
 
 msgid "Command line to be executed in shell when run_command1 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command1"
 
-#, fuzzy
 msgid "Command line 2"
-msgstr "Naredba 2 "
+msgstr "Naredbeni redak 2"
 
 msgid "Command line to be executed in shell when run_command2 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command2"
 
-#, fuzzy
 msgid "Command line 3"
-msgstr "Naredba 3 "
+msgstr "Naredbeni redak 3"
 
 msgid "Command line to be executed in shell when run_command3 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command3"
 
-#, fuzzy
 msgid "Command line 4"
-msgstr "Naredba 4 "
+msgstr "Naredbeni redak 4"
 
 msgid "Command line to be executed in shell when run_command4 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command4"
 
-#, fuzzy
 msgid "Command line 5"
-msgstr "Naredba 5"
+msgstr "Naredbeni redak 5"
 
 msgid "Command line to be executed in shell when run_command5 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command5"
 
-#, fuzzy
 msgid "Command line 6"
-msgstr "Naredba 6"
+msgstr "Naredbeni redak 6"
 
 msgid "Command line to be executed in shell when run_command6 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command6"
 
-#, fuzzy
 msgid "Command line 7"
-msgstr "Naredba 7 "
+msgstr "Naredbeni redak 7"
 
 msgid "Command line to be executed in shell when run_command7 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command7"
 
-#, fuzzy
 msgid "Command line 8"
-msgstr "Naredba 8 "
+msgstr "Naredbeni redak 8"
 
 msgid "Command line to be executed in shell when run_command8 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command8"
 
-#, fuzzy
 msgid "Command line 9"
-msgstr "Naredba 9 "
+msgstr "Naredbeni redak 9"
 
 msgid "Command line to be executed in shell when run_command9 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command9"
 
-#, fuzzy
 msgid "Command line 10"
-msgstr "Naredba 10 "
+msgstr "Naredbeni redak 10"
 
 msgid "Command line to be executed in shell when run_command10 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command10"
 
-#, fuzzy
 msgid "Command line 11"
-msgstr "Naredba 11 "
+msgstr "Naredbeni redak 11"
 
 msgid "Command line to be executed in shell when run_command11 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command11"
 
-#, fuzzy
 msgid "Command line 12"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 12"
 
 msgid "Command line to be executed in shell when run_command12 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command12"
 
-#, fuzzy
 msgid "Command line 13"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 13"
 
 msgid "Command line to be executed in shell when run_command13 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command13"
 
-#, fuzzy
 msgid "Command line 14"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 14"
 
 msgid "Command line to be executed in shell when run_command14 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command14"
 
-#, fuzzy
 msgid "Command line 15"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 15"
 
 msgid "Command line to be executed in shell when run_command15 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command15"
 
-#, fuzzy
 msgid "Command line 16"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 16"
 
 msgid "Command line to be executed in shell when run_command16 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command16"
 
-#, fuzzy
 msgid "Command line 17"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 17"
 
 msgid "Command line to be executed in shell when run_command17 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command17"
 
-#, fuzzy
 msgid "Command line 18"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 18"
 
 msgid "Command line to be executed in shell when run_command18 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command18"
 
-#, fuzzy
 msgid "Command line 19"
-msgstr "Naredba 1 "
+msgstr "Naredbeni redak 19"
 
 msgid "Command line to be executed in shell when run_command19 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command19"
 
-#, fuzzy
 msgid "Command line 20"
-msgstr "Naredba 2 "
+msgstr "Naredbeni redak 20"
 
 msgid "Command line to be executed in shell when run_command20 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command20"
 
-#, fuzzy
 msgid "Command line 21"
-msgstr "Naredba 2 "
+msgstr "Naredbeni redak 21"
 
 msgid "Command line to be executed in shell when run_command21 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command21"
 
-#, fuzzy
 msgid "Command line 22"
-msgstr "Naredba 2 "
+msgstr "Naredbeni redak 22"
 
 msgid "Command line to be executed in shell when run_command22 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command22"
 
-#, fuzzy
 msgid "Command line 23"
-msgstr "Naredba 2 "
+msgstr "Naredbeni redak 23"
 
 msgid "Command line to be executed in shell when run_command23 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command23"
 
-#, fuzzy
 msgid "Command line 24"
-msgstr "Naredba 2 "
+msgstr "Naredbeni redak 24"
 
 msgid "Command line to be executed in shell when run_command24 is invoked"
 msgstr ""
+"Naredbeni redak koji će se izvršiti u ljusci kada se pozove run_command24"
 
 msgid "Key Bindings"
-msgstr ""
+msgstr "Prečaci tipkovnice"
 
-#, fuzzy
 msgid "Run command 0"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 0"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command0"
 
-#, fuzzy
 msgid "Run command 1"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 1"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command1"
 
-#, fuzzy
 msgid "Run command 2"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 2"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command2"
 
-#, fuzzy
 msgid "Run command 3"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 3"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command3"
 
-#, fuzzy
 msgid "Run command 4"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 4"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command4"
 
-#, fuzzy
 msgid "Run command 5"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 5"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command5"
 
-#, fuzzy
 msgid "Run command 6"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 6"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command6"
 
-#, fuzzy
 msgid "Run command 7"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 7"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command7"
 
-#, fuzzy
 msgid "Run command 8"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 8"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command8"
 
-#, fuzzy
 msgid "Run command 9"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 9"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command9"
 
-#, fuzzy
 msgid "Run command 10"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 10"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command10"
 
-#, fuzzy
 msgid "Run command 11"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 11"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command11"
 
-#, fuzzy
 msgid "Run command 12"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 12"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command12"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command12"
 
-#, fuzzy
 msgid "Run command 13"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 13"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command13"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command13"
 
-#, fuzzy
 msgid "Run command 14"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 14"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command14"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command14"
 
-#, fuzzy
 msgid "Run command 15"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 15"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command15"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command15"
 
-#, fuzzy
 msgid "Run command 16"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 16"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command16"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command16"
 
-#, fuzzy
 msgid "Run command 17"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 17"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command17"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command17"
 
-#, fuzzy
 msgid "Run command 18"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 18"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command18"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command18"
 
-#, fuzzy
 msgid "Run command 19"
-msgstr "Naredba '%1'"
+msgstr "Pokreni naredbu 19"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command19"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command19"
 
-#, fuzzy
 msgid "Run command 20"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu 20"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command20"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command20"
 
-#, fuzzy
 msgid "Run command 21"
-msgstr "Naredba: "
+msgstr "Run command 21"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command21"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command21"
 
-#, fuzzy
 msgid "Run command 22"
-msgstr "Naredba: "
+msgstr "Run command 22"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command22"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command22"
 
-#, fuzzy
 msgid "Run command 23"
-msgstr "Naredba: "
+msgstr "Run command 23"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command23"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command23"
 
-#, fuzzy
 msgid "Run command 24"
-msgstr "Naredba: "
+msgstr "Run command 24"
 
 msgid ""
 "A keybinding that when invoked, will run the shell command identified by "
 "command24"
 msgstr ""
+"Prečac tipke tipkovnice koja će, pri pozivu, pokrenuti naredbu ljuske "
+"označenu s command24"
 
 msgid "Button Bindings"
-msgstr ""
+msgstr "Tipke prečaca"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command0"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command1"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command2"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command3"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command4"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command5"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command6"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command7"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command8"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command9"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command10"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command11"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command12"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command12"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command13"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command13"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command14"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command14"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command15"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command15"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command16"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command16"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command17"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command17"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command18"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command18"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command19"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command19"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command20"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command20"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command21"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command21"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command22"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command22"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command23"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command23"
 
 msgid ""
 "A button binding that when invoked, will run the shell command identified by "
 "command24"
 msgstr ""
+"Prečac tipke koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command24"
 
 msgid "Edge Bindings"
-msgstr ""
+msgstr "Prečaci rubova zaslona"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command0"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command0"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command1"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command1"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command2"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command2"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command3"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command3"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command4"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command4"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command5"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command5"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command6"
 msgstr ""
+"Veza s rubom ekrana koja će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command6"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command7"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command7"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command8"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command8"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command9"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command9"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command10"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command1o"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command11"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command11"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command12"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command12"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command13"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command13"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command14"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command14"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command15"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command15"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command16"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command16"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command17"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command17"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command18"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command18"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command19"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command19"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command20"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command20"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command21"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command21"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command22"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command22"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command23"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command23"
 
 msgid ""
 "An edge binding that when invoked, will run the shell command identified by "
 "command24"
 msgstr ""
+"Prečac ruba zaslona koji će, pri pozivu, pokrenuti naredbu ljuske označenu s "
+"command24"
 
 msgid "General Options"
-msgstr "Generalne opcije"
+msgstr "Opće mogućnosti"
 
 msgid "General compiz options"
-msgstr "Generalne compiz opcije"
+msgstr "Opće mogućnosti compiza"
 
-#, fuzzy
 msgid "Active Plugins"
-msgstr "Aktivni dodaci"
+msgstr "Aktivni priključci"
 
 msgid "List of currently active plugins"
-msgstr "Lista trenutno aktivnih prozora"
+msgstr "Popis trenutno aktivnih priključaka"
 
 msgid "Audible Bell"
-msgstr ""
+msgstr "Zvučni signal"
 
 msgid "Audible system beep"
-msgstr ""
+msgstr "Zvučni signal sustava"
 
 msgid "Ignore Hints When Maximized"
-msgstr ""
+msgstr "Zanemari savjete kada je prozor uvećan"
 
 msgid "Ignore size increment and aspect hints when window is maximized"
-msgstr ""
+msgstr "Zanemari savjete uvećanja i omjeru veličine kada je prozor uvećan"
 
 msgid "Hide Skip Taskbar Windows"
-msgstr ""
+msgstr "Sakrij \"Preskoči prozore u traci zadataka\""
 
 msgid "Hide windows not in taskbar when entering show desktop mode"
 msgstr ""
+"Sakrij prozore koji nisu u traci sa zadacima kada se ulazi u način "
+"prikazivanja radne površine"
 
 msgid "Edge Trigger Delay"
-msgstr ""
+msgstr "Odgoda do aktiviranja ruba"
 
 msgid ""
 "Duration the pointer must rest in a screen edge before an edge action is "
 "taken."
 msgstr ""
+"Koliko vremena pokazivač mora provesti na rubu zaslona prije nego što se "
+"poduzme radnja za rub."
 
 msgid "Cursor theme"
-msgstr ""
+msgstr "Teme pokazivača"
 
 msgid "Cursor theme name"
-msgstr ""
+msgstr "Naziv teme pokazivača"
 
 msgid "Cursor size"
-msgstr ""
+msgstr "Veličina pokazivača"
 
 msgid "Size of the cursor"
-msgstr ""
+msgstr "Veličina pokazivača"
 
-#, fuzzy
 msgid "Ping Delay"
-msgstr "Odgoda"
+msgstr "Odgoda pingova"
 
 msgid "Interval between ping messages"
-msgstr ""
+msgstr "Raspon između poruka za ping"
 
 msgid "Display Settings"
-msgstr ""
+msgstr "Postavke prikaza"
 
 msgid "Texture Filter"
-msgstr ""
+msgstr "Filter tekstura"
 
-#, fuzzy
 msgid "Texture filtering"
-msgstr "Postavi filter"
+msgstr "Filtriranje tekstura"
 
 msgid "Fast"
-msgstr "Brzina"
+msgstr "Brže"
 
 msgid "Good"
-msgstr "Dobro"
+msgstr "Bolje"
 
 msgid "Best"
-msgstr "Najbolji"
+msgstr "Najbolje"
 
 msgid "Focus &amp; Raise Behavior"
-msgstr ""
+msgstr "Fokus i ponašanje uzdizanja"
 
-msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Klikni za fokusiranje"
 
 msgid "Click on window moves input focus to it"
-msgstr ""
+msgstr "Klik na prozor premješta ulazni fokus na njega"
 
 msgid "Raise On Click"
-msgstr ""
+msgstr "Uzdigni pri kliku"
 
 msgid "Raise windows when clicked"
-msgstr ""
+msgstr "Uzdigni prozore pri kliku"
 
-#, fuzzy
 msgid "Auto-Raise"
-msgstr "Automatsko prikazivanje"
+msgstr "Automatsko uzdizanje"
 
 msgid "Raise selected windows after interval"
-msgstr ""
+msgstr "Uzdigni odabrane prozore nakon raspona"
 
 msgid "Auto-Raise Delay"
-msgstr ""
+msgstr "Odgoda automatskog uzdizanja"
 
 msgid "Interval before raising selected windows"
-msgstr "Vrijeme prije pojavljivanja selektiranog prozora"
+msgstr "Vrijeme prije podizanja odabranog prozora"
 
 msgid "Key bindings"
-msgstr ""
+msgstr "Prečaci tipkovnice"
 
 msgid "Close active window"
 msgstr "Zatvori aktivni prozor"
 
-#, fuzzy
 msgid "Raise Window"
-msgstr "&Obriši Windowse"
+msgstr "Uzdigni prozor"
 
 msgid "Raise window above other windows"
-msgstr ""
+msgstr "Uzdigni prozor iznad ostalih prozora"
 
 msgid "Lower Window"
 msgstr "Spusti prozor"
 
 msgid "Lower window beneath other windows"
-msgstr ""
+msgstr "Spusti prozor ispod ostalih prozora"
 
 msgid "Unmaximize active window"
-msgstr ""
+msgstr "Poništi uvećanje aktivnog prozora"
 
 msgid "Minimize active window"
-msgstr "Minimiziraj aktivni prozor"
+msgstr "Spusti aktivni prozor"
 
 msgid "Maximize active window"
-msgstr "Maksimiziraj aktivni prozor"
+msgstr "Povećaj aktivni prozor"
 
 msgid "Maximize Window Horizontally"
-msgstr "Maksimiziraj prozor horizontalno"
+msgstr "Povećaj prozor vodoravno"
 
 msgid "Maximize active window horizontally"
-msgstr "Maksimiziraj aktivni prozor horizontalno"
+msgstr "Povećaj aktivni prozor vodoravno"
 
 msgid "Maximize Window Vertically"
-msgstr "Maksimiziraj prozor vertikalno"
+msgstr "Povećaj prozor okomito"
 
 msgid "Maximize active window vertically"
-msgstr "Maksimiziraj prozor vertikalno"
+msgstr "Povećaj aktivni prozor okomito"
 
 msgid "Window menu button binding"
-msgstr ""
+msgstr "Prečac tipke za prozorski izbornik"
 
 msgid "Window menu key binding"
-msgstr ""
+msgstr "Veza s tipkom tipkovnice za prozorski izbornik"
 
-#, fuzzy
 msgid "Show Desktop"
-msgstr "Radne površine"
+msgstr "Prikaži radnu površinu"
 
 msgid "Hide all windows and focus desktop"
-msgstr "Sakrij sve prozore i fokusiraj radnu povrsinu"
+msgstr "Sakrij sve prozore i fokusiraj radnu površinu"
 
 msgid "Toggle Window Maximized"
-msgstr ""
+msgstr "Uključi/Isključi povećanje prozora"
 
 msgid "Toggle active window maximized"
-msgstr ""
+msgstr "Uključi/Isključi povećanje aktivnog prozora"
 
 msgid "Toggle Window Maximized Horizontally"
-msgstr ""
+msgstr "Uključi/Isključi vodoravno povećanje prozora"
 
 msgid "Toggle active window maximized horizontally"
-msgstr ""
+msgstr "Uključi/Isključi vodoravnu povećanje aktivnog prozora"
 
 msgid "Toggle Window Maximized Vertically"
-msgstr ""
+msgstr "Uključi/Isključi okomito povećanje prozora"
 
 msgid "Toggle active window maximized vertically"
-msgstr ""
+msgstr "Uključi/Isključi okomito povećanje aktivnog prozora"
 
 msgid "Toggle Window Shaded"
-msgstr ""
+msgstr "Uključi/Isključi zasjenjenost prozora"
 
 msgid "Toggle active window shaded"
-msgstr ""
+msgstr "Uključi/Isključi zasjenjenost aktivnog prozora"
 
-#, fuzzy
 msgid "Slow Animations"
-msgstr "Konfiguracije"
+msgstr "Spore animacije"
 
 msgid "Toggle use of slow animations"
-msgstr ""
+msgstr "Uključi/Isključi upotrebu sporih animacija"
 
-#, fuzzy
 msgid "Desktop Size"
-msgstr "Postavke okružja"
+msgstr "Veličina radne površine"
 
-#, fuzzy
 msgid "Horizontal Virtual Size"
-msgstr "Velicina virtualne horizontale"
+msgstr "Vodoravna virtualna veličina"
 
 msgid "Screen size multiplier for horizontal virtual size"
-msgstr ""
+msgstr "Množitelj veličine zaslona za vodoravnu virtualnu veličinu"
 
-#, fuzzy
 msgid "Vertical Virtual Size"
-msgstr "Virtualni Diskovi"
+msgstr "Okomita virtualna veličina"
 
 msgid "Screen size multiplier for vertical virtual size"
-msgstr ""
+msgstr "Množitelj veličine zaslona za okomitu virtualnu veličinu"
 
 msgid "Lighting"
-msgstr ""
+msgstr "Osvjetljenje"
 
 msgid "Use diffuse light when screen is transformed"
-msgstr ""
+msgstr "Koristi difuzno svjetlo kada se zaslon preoblikuje"
 
 msgid "Detect Refresh Rate"
-msgstr "Detektiraj osvjezavanje"
+msgstr "Otkrij frekvenciju osvježavanja"
 
 msgid "Automatic detection of refresh rate"
-msgstr "Automatska detekcija osvjezavanja"
+msgstr "Automatsko otkrivanje frekvencije osvježavanja"
 
-#, fuzzy
 msgid "Refresh Rate"
-msgstr "Ob&oviti"
+msgstr "Frekvencija osvježavanja"
 
 msgid "The rate at which the screen is redrawn (times/second)"
-msgstr ""
+msgstr "Frekvencija ponovnog iscrtavnja zaslona (puta/sekundi) Hz"
 
-#, fuzzy
 msgid "Detect Outputs"
-msgstr "Detektiraj izlaz"
+msgstr "Otkrij izlaze"
 
 msgid "Automatic detection of output devices"
-msgstr "Automatska detekcija output uredaja"
+msgstr "Automatsko otkrivanje izlaznih uređaja"
 
 msgid "Overlapping Output Handling"
-msgstr ""
+msgstr "Rukovanje preklapajućim izlazima"
 
 msgid "Which one of overlapping output devices should be preferred"
-msgstr ""
+msgstr "Koji se od preklapajućih izlaznih uređaja treba preferirati"
 
 msgid "Smart mode"
-msgstr ""
+msgstr "Pametan način"
 
 msgid "Prefer larger output"
-msgstr ""
+msgstr "Preferiraj veći izlaz"
 
 msgid "Prefer smaller output"
-msgstr ""
+msgstr "Preferiraj manji izlaz"
 
 msgid "Outputs"
-msgstr ""
+msgstr "Izlazi"
 
 msgid "List of strings describing output devices"
-msgstr ""
+msgstr "Popis znakovnih nizova koji opisuju izlazne uređaje"
 
-msgid "Sync To VBlank"
-msgstr ""
+msgid "Sync to VBlank"
+msgstr "Uskladi s VBlankom"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
+"Samo obavljaj obnavljanje zaslona tijekom okomitog razdoblja osvježavanja"
 
-#, fuzzy
-msgid "Focus Prevention Level"
-msgstr "Omogući ZEN particiju"
+msgid "Focus-Stealing Prevention Level"
+msgstr "Razina sprječavanja fokusa"
 
-#, fuzzy
 msgid "Level of focus stealing prevention"
-msgstr "Omogući ZEN particiju"
+msgstr "Razina sprječavanja krađe fokusa"
 
 msgid "Off"
-msgstr ""
+msgstr "Isključeno"
 
 msgid "Low"
-msgstr ""
+msgstr "Niska"
 
 msgid "Normal"
-msgstr ""
+msgstr "Normalna"
 
 msgid "High"
-msgstr ""
+msgstr "Visoka"
 
 msgid "Very High"
-msgstr ""
+msgstr "Vrlo visoka"
 
-msgid "Focus Prevention Windows"
-msgstr ""
+msgid "Focus-Stealing Prevention Windows"
+msgstr "Sprječavanje hvatanja fokusa prozora"
 
-msgid "Focus prevention windows"
-msgstr ""
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr "Sprječavanje prozora od hvatanja fokusa tipkovnice"
 
 msgid "Unredirect Fullscreen Windows"
-msgstr ""
+msgstr "Odpreusmjeri cjelozaslonske prozore"
 
 msgid ""
 "Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
 msgstr ""
+"Dopusti da se iscrtavanje cjelozaslonskih prozora ne preusmjerava u "
+"vanzaslonske pixmape"
 
-#, fuzzy
 msgid "Default Icon"
-msgstr "Osnovna ikona"
+msgstr "Uobičajena ikona"
 
 msgid "Default window icon image"
-msgstr ""
+msgstr "Uobičajena slika ikone prozora"
 
-msgid "Force independent output painting."
-msgstr ""
+msgid "Force independent output painting"
+msgstr "Prisili nezavisno crtanje izlaza"
 
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
+"Nacrtaj svaki izlazni uređaj nezavisno, čak i ako se izlazni uređaji "
+"preklapaju"
 
-#, fuzzy
 msgid "Texture Compression"
-msgstr "Postavi filter"
+msgstr "Sažimanje tekstura"
 
-msgid "If available use compression for textures converted from images"
-msgstr ""
+msgid "If available, use compression for textures converted from images"
+msgstr "Ako je dostupno koristi sažimanje za teksture pretvorene iz slika"
 
-#, fuzzy
 msgid "Desktop Cube"
-msgstr "Postavke okružja"
+msgstr "Kocka radne površine"
 
-#, fuzzy
 msgid "Place windows on cube"
-msgstr "&Obriši Windowse"
+msgstr "Smjesti prozore na kocku"
 
 msgid "Unfold"
-msgstr ""
+msgstr "Rasklopi"
 
 msgid "Unfold cube"
-msgstr ""
+msgstr "Rasklopi kocku"
 
-#, fuzzy
 msgid "Next Slide"
-msgstr "&Obriši Windowse"
+msgstr "Sljedeći slajd"
 
 msgid "Advance to next slide"
-msgstr ""
+msgstr "Naprijed na sljedeći slajd"
 
-#, fuzzy
 msgid "Prev Slide"
-msgstr "&Smanji Windowse"
+msgstr "Prijašnji slajd"
 
 msgid "Go back to previous slide"
-msgstr ""
+msgstr "Natrag na prijašnji slajd"
 
 msgid "Generate mipmaps when possible for higher quality scaling"
-msgstr ""
+msgstr "Stvori mipmape kada je moguće, za prilagodbu veličine veće kvalitete"
 
 msgid "Multi Output Mode"
-msgstr ""
+msgstr "Više izlazni način"
 
 msgid "Selects how the cube is displayed if multiple output devices are used."
 msgstr ""
+"Odaberite kako je kocka prikazana, ako se koristi više izlaznih uređaja."
 
-#, fuzzy
 msgid "Automatic"
 msgstr "Automatski"
 
 msgid "Multiple cubes"
-msgstr ""
+msgstr "Više kocki"
 
 msgid "One big cube"
-msgstr ""
+msgstr "Jedna velika kocka"
 
 msgid "Behavior"
-msgstr ""
+msgstr "Ponašanje"
 
 msgid "Inside Cube"
-msgstr ""
+msgstr "Unutar kocke"
 
 msgid "Inside cube"
-msgstr ""
+msgstr "Unutar kocke"
 
-#, fuzzy
 msgid "Acceleration"
-msgstr "Akcija"
+msgstr "Ubrzanje"
 
-#, fuzzy
 msgid "Fold Acceleration"
-msgstr "Akcija"
+msgstr "Ubrzanje sklapanja"
 
-#, fuzzy
 msgid "Speed"
-msgstr "Brzina:"
+msgstr "Brzina"
 
-#, fuzzy
 msgid "Fold Speed"
-msgstr "Brzina:"
+msgstr "Brzina sklapanja"
 
-#, fuzzy
 msgid "Timestep"
-msgstr "&Testiraj"
+msgstr "Vremenski korak"
 
-#, fuzzy
 msgid "Fold Timestep"
-msgstr "&Testiraj"
+msgstr "Vremenski korak sklapanja"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Izgled"
 
 msgid "Cube Color"
-msgstr ""
+msgstr "Boja kocke"
 
 msgid "Color of top and bottom sides of the cube"
-msgstr ""
+msgstr "Boja gornje i donje strane kocke"
 
 msgid "Cube Caps"
-msgstr ""
+msgstr "Vrh kocke"
 
-#, fuzzy
 msgid "Scale image"
-msgstr "lokalno vrijeme"
+msgstr "Prilagodba veličine slike"
 
 msgid "Scale images to cover top face of cube"
-msgstr ""
+msgstr "Prilagodi veličinu slike kako bi prekrila gornju stranu kocke"
 
-#, fuzzy
 msgid "Image files"
-msgstr "Instaliram presliku datoteke"
+msgstr "Datoteke slike"
 
 msgid "List of PNG and SVG files that should be rendered on top face of cube"
 msgstr ""
+"Popis PNG i SVG datoteka koje bi trebale biti prikazane na gornjoj strani "
+"kocke"
 
 msgid "Adjust Image"
-msgstr ""
+msgstr "Prilagodi sliku"
 
 msgid "Adjust top face image to rotation"
-msgstr ""
+msgstr "Prilagodi sliku gornje strane za okretanje"
 
-#, fuzzy
 msgid "Skydome"
-msgstr "Sydnej"
+msgstr "Svod"
 
 msgid "Render skydome"
-msgstr ""
+msgstr "Prikaz svoda"
 
-#, fuzzy
 msgid "Skydome Image"
-msgstr "Sydnej"
+msgstr "Slika svoda"
 
 msgid "Image to use as texture for the skydome"
-msgstr ""
+msgstr "Slika koja će se koristiti kao struktura svoda"
 
-#, fuzzy
 msgid "Animate Skydome"
-msgstr "Sydnej"
+msgstr "Animirani svod"
 
 msgid "Animate skydome when rotating cube"
-msgstr ""
+msgstr "Animiraj svod pri zakretanju kocke"
 
 msgid "Skydome Gradient Start Color"
-msgstr ""
+msgstr "Početna boja prijelaza svoda"
 
 msgid "Color to use for the top color-stop of the skydome-fallback gradient"
-msgstr ""
+msgstr "Boja koja će se koristiti na vrhu za završnu boju prijelaza svoda"
 
 msgid "Skydome Gradient End Color"
-msgstr ""
+msgstr "Završna boja prijelaza svoda"
 
 msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
-msgstr ""
+msgstr "Boja koja će se koristiti na dnu za završnu boju prijelaza svoda"
 
 msgid "Transparent Cube"
-msgstr ""
+msgstr "Prozirnost kocke"
 
 msgid "Opacity During Rotation"
-msgstr ""
+msgstr "Prozirnost tijekom zakretanja"
 
 msgid "Opacity of desktop window during rotation."
-msgstr ""
+msgstr "Prozirnost radne površine tijekom zakretanja."
 
 msgid "Opacity When Not Rotating"
-msgstr ""
+msgstr "Prozirnost tijekom nezakretanja"
 
 msgid "Opacity of desktop window when not rotating."
-msgstr ""
+msgstr "Prozirnost radne površine kada se kocka ne zakreće."
 
 msgid "Transparency Only on Mouse Rotate"
-msgstr ""
+msgstr "Prozirnost samo pri zakretanju mišem"
 
 msgid "Initiates Cube transparency only if rotation is mouse driven."
-msgstr ""
+msgstr "Pokreće samo prozirnost kocke, ako je zakretanje upravljano mišem."
 
 msgid "D-Bus"
-msgstr ""
+msgstr "D-Bus"
 
 msgid "D-Bus Control Backend"
-msgstr ""
+msgstr "D-Bus pozadinski program upravljanja"
 
-#, fuzzy
 msgid "Window Decoration"
-msgstr "Nema opisa"
+msgstr "Ukrašavanje prozora"
 
-#, fuzzy
 msgid "Window decorations"
-msgstr "ypbind opcije"
+msgstr "Ukrašavanja prozora"
 
-#, fuzzy
 msgid "Shadow Radius"
-msgstr "Prikaži &detalje"
+msgstr "Polumjer sjenke"
 
-#, fuzzy
 msgid "Drop shadow radius"
-msgstr "Prikaži &detalje"
+msgstr "Polumjer padajuće sjenke"
 
-#, fuzzy
 msgid "Shadow Opacity"
-msgstr "&Obriši Windows kompletno"
+msgstr "Neprozirnost sjenke"
 
-#, fuzzy
 msgid "Drop shadow opacity"
-msgstr "&Obriši Windows kompletno"
+msgstr "Neprozirnost padajuće sjenke"
 
-#, fuzzy
 msgid "Shadow Color"
-msgstr "&Smanji Windowse"
+msgstr "Boja sjenke"
 
-#, fuzzy
 msgid "Drop shadow color"
-msgstr "Prikaži &detalje"
+msgstr "Boja padajuće sjenke"
 
 msgid "Shadow Offset X"
-msgstr ""
+msgstr "X pomak sjenke"
 
-#, fuzzy
 msgid "Drop shadow X offset"
-msgstr "&Obriši Windows kompletno"
+msgstr "X pomak padajuće sjenke"
 
 msgid "Shadow Offset Y"
-msgstr ""
+msgstr "Y pomak sjenke"
 
-#, fuzzy
 msgid "Drop shadow Y offset"
-msgstr "&Obriši Windows kompletno"
+msgstr "Y pomak padajuće sjenke"
 
-#, fuzzy
 msgid "Command"
-msgstr "Naredba: "
+msgstr "Naredba"
 
 msgid ""
 "Decorator command line that is executed if no decorator is already running"
-msgstr ""
+msgstr "Naredba ukrašavanja koja će se izvršiti ako ukrašavanje nije pokrenuto"
 
 msgid "Allow mipmaps to be generated for decoration textures"
-msgstr ""
+msgstr "Dopusti stvaranje mipmapa za teksture ukrašavanja"
 
-#, fuzzy
 msgid "Decoration windows"
-msgstr "&Obriši Windowse"
+msgstr "Ukrašavanje prozora"
 
 msgid "Windows that should be decorated"
-msgstr ""
+msgstr "Prozori koji bi trebali biti ukrašeni"
 
-#, fuzzy
 msgid "Shadow windows"
-msgstr "&Smanji Windowse"
+msgstr "Zasjenjeni prozori"
 
 msgid "Windows that should have a shadow"
-msgstr ""
+msgstr "Prozori koji bi trebali imati sjenku"
 
-#, fuzzy
 msgid "Fading Windows"
-msgstr "&Smanji Windowse"
+msgstr "Izbljeđivanje prozora"
 
 msgid "Fade in windows when mapped and fade out windows when unmapped"
 msgstr ""
+"Izbljedi prozore kada su mapirani i prekini izbljeđivanje prozora kad nisu "
+"mapirani"
 
-#, fuzzy
 msgid "Fade Mode"
-msgstr "&Testiraj"
+msgstr "Način izbljeđivanja"
 
-#, fuzzy
 msgid "Window fade mode"
-msgstr "Windows slobodno (%1)"
+msgstr "Način izbljeđivanja prozora"
 
-#, fuzzy
 msgid "Constant speed"
-msgstr "&Testiraj"
+msgstr "Stalna brzina"
 
-#, fuzzy
 msgid "Constant time"
-msgstr "Mountain"
+msgstr "Stalno vrijeme"
 
-#, fuzzy
 msgid "Fade Speed"
-msgstr "Brzina:"
+msgstr "Brzina izbljeđivanja"
 
 msgid "Window fade speed in \"Constant speed\" mode"
-msgstr ""
+msgstr "Vrijeme izbljeđivanja prozora u načinu rada \"Stalno vrijeme\""
 
-#, fuzzy
 msgid "Fade Time"
-msgstr "&Testiraj"
+msgstr "Vrijeme izbljeđivanja"
 
 msgid "Window fade time (in ms) in \"Constant time\" mode"
-msgstr ""
+msgstr "Vrijeme izbljeđivanja prozora (u ms) u načinu rada \"Stalno vrijeme\""
 
-#, fuzzy
 msgid "Fade windows"
-msgstr "&Obriši Windowse"
+msgstr "Izbljedi prozore"
 
 msgid "Windows that should be fading"
-msgstr ""
+msgstr "Prozori koje se trebaju izbljediti"
 
 msgid "Visual Bell"
-msgstr ""
+msgstr "Vizualno zvono"
 
-#, fuzzy
 msgid "Fade effect on system beep"
-msgstr "Datotečni Sustav"
+msgstr "Efekt izbljeđivanja pri zvuku sustava (beep)"
 
 msgid "Fullscreen Visual Bell"
-msgstr ""
+msgstr "Cjelozaslonsko vizualno zvono"
 
 msgid "Fullscreen fade effect on system beep"
-msgstr ""
+msgstr "Cjelozaslonski efekt izbljeđivanja pri zvuku sustava (beep)"
 
 msgid "Fade On Minimize/Open/Close"
-msgstr ""
+msgstr "Izbljedi pri Uvećanju/Smanjenju/Zatvaranju"
 
 msgid "Fade effect on minimize/open/close window events"
-msgstr ""
+msgstr "Efekt izbljeđivanja pri Uvećanju/Smanjenju/Zatvaranju događaja prozora"
 
-#, fuzzy
 msgid "Dim Unresponsive Windows"
-msgstr "&Obriši Windowse"
+msgstr "Zatamni prozore koji ne reagiraju"
 
 msgid "Dim windows that are not responding to window manager requests"
-msgstr ""
+msgstr "Zatamni prozore koji ne reagiraju na zahtjev upravitelja prozorima"
 
 msgid "Unresponsive Window Brightness"
-msgstr ""
+msgstr "Svjetlina nereagirajućeg prozora"
 
 #, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
-msgstr ""
+msgstr "Svjetlina (u %) prozora koji ne reagiraju"
 
 msgid "Unresponsive Window Saturation"
-msgstr ""
+msgstr "Zasićenje nereagirajućeg prozora"
 
 #, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
-msgstr ""
+msgstr "Zasićenje (u %) prozora koji ne reagiraju"
 
 msgid "Userspace File System"
-msgstr ""
+msgstr "Datotečni sustav prostora korisnika"
 
 msgid "Userspace file system"
-msgstr ""
+msgstr "Datotečni sustav prostora korisnika"
 
-#, fuzzy
 msgid "Mount Point"
-msgstr "Dodaj točku provjere"
+msgstr "Točka montiranja"
 
-#, fuzzy
 msgid "Mount point"
-msgstr "Dodaj točku provjere"
+msgstr "Točka montiranja"
 
 msgid "GLib"
-msgstr ""
+msgstr "GLib"
 
 msgid "GLib main loop support"
-msgstr ""
+msgstr "Podrška glavne petlje GLiba"
 
 msgid "MATE Compatibility"
-msgstr ""
+msgstr "MATE kompatibilnost"
 
 msgid "Options that keep Compiz compatible to the MATE desktop environment"
 msgstr ""
+"Mogućnosti koje omogućuju Compizu kompatibilnost s MATE radnim okruženjem"
 
 msgid "Show Main Menu"
-msgstr ""
+msgstr "Prikaži glavni izbornik"
 
 msgid "Show the main menu"
-msgstr ""
+msgstr "Prikaži glavni izbornik"
 
 msgid "Run Dialog"
-msgstr ""
+msgstr "Pokreni dijalog"
 
 msgid "Show Run Application dialog"
-msgstr ""
+msgstr "Prikaži dijalog pokretanja aplikacija"
 
 msgid "Screenshot command line"
-msgstr ""
+msgstr "Naredba za slikanje slike zaslona"
 
 msgid "Take a screenshot"
-msgstr ""
+msgstr "Uslikaj zaslon"
 
 msgid "Window screenshot command line"
-msgstr ""
+msgstr "Naredba u terminalu za slikanje prozora"
 
 msgid "Take a screenshot of a window"
-msgstr ""
+msgstr "Uslikaj prozor"
 
-#, fuzzy
 msgid "Run terminal command"
-msgstr "Naredba: "
+msgstr "Pokreni naredbu u terminalu"
 
-#, fuzzy
 msgid "Terminal command line"
-msgstr "Naredba: "
+msgstr "Naredba u terminalu"
 
-#, fuzzy
 msgid "Open a terminal"
-msgstr "Pokreni u terminalu"
+msgstr "Otvori terminal"
 
 msgid "Ini"
-msgstr ""
+msgstr "Ini"
 
 msgid "Ini Flat File Backend"
-msgstr ""
+msgstr "Ini Flat pozadinska datoteka"
 
 msgid "Inotify"
-msgstr ""
+msgstr "Inotify"
 
 msgid "File change notification plugin"
-msgstr ""
+msgstr "Priključak za obavještavanje o promjeni datoteke"
 
-#, fuzzy
 msgid "Minimize Effect"
-msgstr "&Smanji Windowse"
+msgstr "Efekt smanjivanja"
 
 msgid "Transform windows when they are minimized and unminimized"
-msgstr ""
+msgstr "Preoblikuj prozore kada se smanje i uvećaju"
 
-#, fuzzy
 msgid "Minimize speed"
-msgstr "&Smanji Windowse"
+msgstr "Brzina smanjivanja"
 
-#, fuzzy
 msgid "Minimize timestep"
-msgstr "&Smanji Windowse"
+msgstr "Vremenski korak smanjivanja"
 
-#, fuzzy
 msgid "Minimize Windows"
-msgstr "&Smanji Windowse"
+msgstr "Smanjivanje prozora"
 
 msgid "Windows that should be transformed when minimized"
-msgstr ""
+msgstr "Prozori  koji trebaju biti preoblikovani pri smanjivanju"
 
 msgid "Shade Resistance"
-msgstr ""
+msgstr "Otpor sjenke"
 
 msgid "Shade resistance"
-msgstr ""
+msgstr "Otpor sjenke"
 
-#, fuzzy
 msgid "Move Window"
-msgstr "&Obriši Windowse"
+msgstr "Pomicanje prozora"
 
-#, fuzzy
 msgid "Move window"
-msgstr "&Obriši Windowse"
+msgstr "Pomakni prozor"
 
-#, fuzzy
 msgid "Initiate Window Move"
-msgstr "&Obriši Windowse"
+msgstr "Pokreni pomicanje prozora"
 
-#, fuzzy
 msgid "Start moving window"
-msgstr "Pokrećem servis."
+msgstr "Započni pomicanje prozora"
 
-#, fuzzy
 msgid "Opacity"
-msgstr "&Obriši Windowse"
+msgstr "Prozirnost"
 
-#, fuzzy
 msgid "Opacity level of moving windows"
-msgstr "Pokrećem servis."
+msgstr "Razina prozirnosti pomicanja prozora"
 
-#, fuzzy
 msgid "Constrain Y"
-msgstr "Mountain"
+msgstr "Ograniči Y"
 
 msgid "Constrain Y coordinate to workspace area"
-msgstr ""
+msgstr "Ograniči  koordinatu na područje radne površine"
 
-#, fuzzy
 msgid "Snapoff maximized windows"
-msgstr "&Smanji Windowse"
+msgstr "Poravnaj uvećane prozore"
 
 msgid "Snapoff and auto unmaximized maximized windows when dragging"
-msgstr ""
+msgstr "Poravnaj i automatski vrati uvećane prozore kada ih povlačite"
 
-#, fuzzy
 msgid "Lazy Positioning"
-msgstr "&Smanji Windowse"
+msgstr "Lijeno pozicioniranje"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
+"Ne ažuriraj položaj poslužene strane prozora dok se pomicanje ne završi"
 
 msgid "Opacity, Brightness and Saturation"
-msgstr ""
+msgstr "Prozirnost, svjetlina i zasićenje"
 
 msgid "Opacity, Brightness and Saturation adjustments"
-msgstr ""
+msgstr "Prilagodba prozirnosti, svjetline i zasićenja po prozoru"
 
-#, fuzzy
 msgid "Increase Opacity"
-msgstr "Povecaj transparentnost prozora"
+msgstr "Povećanje prozirnosti"
 
-#, fuzzy
 msgid "Opacity Increase"
-msgstr "Step mijenjanja transparentnosti"
+msgstr "Povećaj prozirnost"
 
-#, fuzzy
 msgid "Decrease Opacity"
-msgstr "Smanji transparentnost prozora"
+msgstr "Smanjenje prozirnosti"
 
-#, fuzzy
 msgid "Opacity Decrease"
-msgstr "Step mijenjanja transparentnosti"
+msgstr "Smanji prozirnost"
 
-#, fuzzy
 msgid "Brightness"
-msgstr "Most"
+msgstr "Svjetlina"
 
-#, fuzzy
 msgid "Increase Brightness"
-msgstr "Most"
+msgstr "Povećanje svjetline"
 
-#, fuzzy
 msgid "Brightness Increase"
-msgstr "Most"
+msgstr "Povećaj svjetlinu"
 
-#, fuzzy
 msgid "Decrease Brightness"
-msgstr "Most"
+msgstr "Smanjenje svjetline"
 
-#, fuzzy
 msgid "Brightness Decrease"
-msgstr "Most"
+msgstr "Smanji svjetlinu"
 
-#, fuzzy
 msgid "Saturation"
-msgstr "Trajanje"
+msgstr "Zasićenje"
 
-#, fuzzy
 msgid "Increase Saturation"
-msgstr "Trajanje"
+msgstr "Povećanje zasićenja"
 
-#, fuzzy
 msgid "Saturation Increase"
-msgstr "Trajanje"
+msgstr "Povećaj zasićenje"
 
-#, fuzzy
 msgid "Decrease Saturation"
-msgstr "Trajanje"
+msgstr "Smanjenje zasićenja"
 
-#, fuzzy
 msgid "Saturation Decrease"
-msgstr "Trajanje"
+msgstr "Smanji zasićenje"
 
 msgid "Step"
-msgstr ""
+msgstr "Korak"
 
 msgid "Opacity Step"
-msgstr "Broj virtualnih radnih povrsina"
+msgstr "Prozirnost koraka"
 
-#, fuzzy
-msgid "Window specific settings"
-msgstr "ypbind opcije"
+msgid "Window-specific settings"
+msgstr "Određene postavke prozora"
 
-#, fuzzy
 msgid "Windows"
-msgstr "&Smanji Windowse"
+msgstr "Prozori"
 
 msgid "Windows that should have a different opacity by default"
-msgstr ""
+msgstr "Prozori koji bi trebali imati drugačiju zadanu prozirnosti"
 
-#, fuzzy
 msgid "Window values"
-msgstr "Windows iskorišteno:"
+msgstr "Vrijednosti prozora"
 
-#, fuzzy
 msgid "Opacity values for windows"
-msgstr "Pokrećem servis."
+msgstr "Vrijednost prozirnosti za prozore"
 
-#, fuzzy
 msgid "Brightness Step"
-msgstr "Most"
+msgstr "Korak svjetline"
 
 msgid "Windows that should have a different brightness by default"
-msgstr ""
+msgstr "Prozori koji bi trebali imati drugačiju zadanu svjetlinu"
 
 msgid "Brightness values for windows"
-msgstr ""
+msgstr "Vrijednost svjetline za prozore"
 
-#, fuzzy
 msgid "Saturation Step"
-msgstr "Trajanje"
+msgstr "Korak zasićenja"
 
 msgid "Windows that should have a different saturation by default"
-msgstr ""
+msgstr "Prozori koji bi trebali imati drugačije zadano zasićenje"
 
 msgid "Saturation values for windows"
-msgstr ""
+msgstr "Vrijednost zasićenja za prozore"
 
-#, fuzzy
 msgid "Place Windows"
-msgstr "&Obriši Windowse"
+msgstr "Smještaj prozora"
 
 msgid "Place windows at appropriate positions when mapped"
-msgstr ""
+msgstr "Smjesti prozore na odgovarajuće položaje kada su mapirani"
 
 msgid "Workarounds"
-msgstr ""
+msgstr "Rješenja smještaja"
 
-#, fuzzy
 msgid "Window placement workarounds"
-msgstr "ypbind opcije"
+msgstr "Rješenja za smještaj prozora"
 
 msgid "Placement Mode"
-msgstr ""
+msgstr "Način smještaja"
 
 msgid "Algorithm to use for window placement"
-msgstr ""
+msgstr "Algoritam za korištenje smještaja prozora"
 
 msgid "Cascade"
-msgstr ""
+msgstr "Kaskadan"
 
 msgid "Centered"
-msgstr ""
+msgstr "Centriran"
 
 msgid "Smart"
-msgstr ""
+msgstr "Pametan"
 
-#, fuzzy
 msgid "Maximize"
-msgstr "&Smanji Windowse"
+msgstr "Povećaj"
 
 msgid "Random"
-msgstr ""
+msgstr "Naizmjeničan"
 
-#, fuzzy
 msgid "Under pointer"
-msgstr "Dodaj točku provjere"
+msgstr "Ispod pokazivača"
 
 msgid ""
 "Selects how window placement should behave if multiple outputs are selected"
 msgstr ""
+"Odabire kako se treba ponašati smještanje prozora ako je odabrano više izlaza"
 
 msgid "Use active output device"
-msgstr ""
+msgstr "Koristi uređaj s aktivnim izlazom"
 
 msgid "Use output device with pointer"
-msgstr ""
+msgstr "Koristi izlazni uređaj s pokazivačem"
 
 msgid "Use output device of focused window"
-msgstr ""
+msgstr "Koristi izlazni uređaj fokusiranog prozora"
 
 msgid "Place across all outputs"
-msgstr ""
+msgstr "Postavi preko svih izlaza"
 
-#, fuzzy
 msgid "Force Placement Windows"
-msgstr "&Obriši Windowse"
+msgstr "Prisili smještaj prozora"
 
 msgid ""
 "Windows that should forcedly be placed, even if they indicate the window "
 "manager should avoid placing them."
 msgstr ""
+"Prozori koji se prisilno trebaju smjestiti, čak i ako upravitelj prozorima "
+"treba izbjegavati njihovo smještanje."
 
-#, fuzzy
 msgid "Fixed Window Placement"
-msgstr "Upravitelj Prozora"
+msgstr "Nepromjenjivi smještaj prozora"
 
-#, fuzzy
 msgid "Windows with fixed positions"
-msgstr "ypbind opcije"
+msgstr "Prozori s nepromjenjivim položajima"
 
-#, fuzzy
 msgid "Positioned windows"
-msgstr "&Smanji Windowse"
+msgstr "Položeni prozori"
 
 msgid "Windows that should be positioned by default"
-msgstr ""
+msgstr "Prozori koji uobičajeno trebaju biti položeni"
 
-#, fuzzy
 msgid "X Positions"
-msgstr "&Smanji Windowse"
+msgstr "X položaji"
 
 msgid "X position values"
-msgstr ""
+msgstr "X položajne vrijednosti"
 
-#, fuzzy
 msgid "Y Positions"
-msgstr "&Smanji Windowse"
+msgstr "Y položaji"
 
 msgid "Y position values"
-msgstr ""
+msgstr "Y položajne vrijednosti"
 
 msgid "Keep In Workarea"
-msgstr ""
+msgstr "Zadrži u radnom području"
 
 msgid ""
 "Keep placed window in work area, even if that means that the position might "
 "differ from the specified position"
 msgstr ""
+"Zadrži postavljene prozore u radnom području, čak i ako to znači da se "
+"položaj razlikuje od već određenog položaja"
 
-#, fuzzy
 msgid "Windows with fixed placement mode"
-msgstr "ypbind opcije"
+msgstr "Prozori s nepromjenjivim načinom smještaja"
 
 msgid "Windows that should have a certain positioning mode"
-msgstr ""
+msgstr "Prozori koji trebaju imati određeni način smještanja"
 
-#, fuzzy
 msgid "Mode"
-msgstr "&Testiraj"
+msgstr "Način"
 
-#, fuzzy
 msgid "Positioning modes"
-msgstr "&Smanji Windowse"
+msgstr "Načini smještanja"
 
 msgid "Windows with fixed viewport"
-msgstr ""
+msgstr "Prozori s nepromjenjivim područjem prikaza"
 
-#, fuzzy
 msgid "Viewport positioned windows"
-msgstr "&Smanji Windowse"
+msgstr "Prozori smješteni u područje prikaza"
 
 msgid "Windows that should be positioned in specific viewports by default"
 msgstr ""
+"Prozori koji uobičajeno trebaju biti smješteni u određena područja prikaza"
 
-#, fuzzy
 msgid "X Viewport Positions"
-msgstr "Virtualni Diskovi"
+msgstr "X položaji područja prikaza"
 
-#, fuzzy
 msgid "Horizontal viewport positions"
-msgstr "Virtualni Diskovi"
+msgstr "Vodoravni položaji područja prikaza"
 
-#, fuzzy
 msgid "Y Viewport Positions"
-msgstr "Virtualni Diskovi"
+msgstr "Y položaji područja prikaza"
 
-#, fuzzy
 msgid "Vertical viewport positions"
-msgstr "Virtualni Diskovi"
+msgstr "Okomiti položaji područja prikaza"
 
 msgid "Png"
-msgstr ""
+msgstr "Png"
 
 msgid "Png image loader"
-msgstr ""
+msgstr "Učitač png slika"
 
 msgid "Regex Matching"
-msgstr ""
+msgstr "Regex podudaranje"
 
 msgid "Regex window matching"
-msgstr ""
+msgstr "Regex podudaranje prozora"
 
-#, fuzzy
 msgid "Resize Window"
-msgstr "&Obriši Windowse"
+msgstr "Promjena veličine prozora"
 
-#, fuzzy
 msgid "Resize window"
-msgstr "&Obriši Windowse"
+msgstr "Promijeni veličinu prozora"
 
 msgid "Bindings"
-msgstr ""
+msgstr "Prečaci tipkovnice"
 
-#, fuzzy
 msgid "Initiate Normal Window Resize"
-msgstr "Indija"
+msgstr "Pokretanje normalne promjene veličine prozora"
 
-#, fuzzy
 msgid "Start resizing window normally"
-msgstr "Pokrećem servis."
+msgstr "Započni normalnu promjenu veličine prozora"
 
-#, fuzzy
 msgid "Initiate Outline Window Resize"
-msgstr "Indija"
+msgstr "Pokretanje promjene veličine prozora izvan ruba"
 
-#, fuzzy
 msgid "Start resizing window with outline"
-msgstr "Pokrećem servis."
+msgstr "Započni pokretanje promjene veličine prozora izvan ruba"
 
-#, fuzzy
 msgid "Initiate Rectangle Window Resize"
-msgstr "Indija"
+msgstr "Pokretanje pravokutne promjene veličine prozora"
 
-#, fuzzy
 msgid "Start resizing window with rectangle"
-msgstr "Pokrećem servis."
+msgstr "Započni pokretanje pravokutne promjene veličine prozora"
 
-#, fuzzy
 msgid "Initiate Stretch Window Resize"
-msgstr "Indija"
+msgstr "Pokretanje promjene veličine rastezanjem prozora"
 
-#, fuzzy
 msgid "Start resizing window by stretching it"
-msgstr "Pokrećem servis."
+msgstr "Započni pokretanje promjene veličine rastezanjem prozora"
 
-#, fuzzy
 msgid "Initiate Window Resize"
-msgstr "Indija"
+msgstr "Pokreni promjenu veličine prozora"
 
-#, fuzzy
 msgid "Start resizing window"
-msgstr "Pokrećem servis."
+msgstr "Započni promjenu veličine prozora"
 
 msgid "Default Resize Mode"
-msgstr ""
+msgstr "Uobičajen način promjene veličine"
 
 msgid "Default mode used for window resizing"
-msgstr ""
+msgstr "Uobičajen način korišten za promjenu veličine prozora"
 
 msgid "Outline"
-msgstr ""
+msgstr "Obrub"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Pravokutnik"
 
 msgid "Stretch"
-msgstr ""
+msgstr "Rastegni"
 
 msgid "Border Color"
-msgstr ""
+msgstr "Boja ruba"
 
 msgid "Border color used for outline and rectangle resize modes"
-msgstr ""
+msgstr "Boja ruba koja se koristi za obrub i pravokutnu promjenu veličine"
 
 msgid "Fill Color"
-msgstr ""
+msgstr "Boja ispune"
 
 msgid "Fill color used for rectangle resize mode"
-msgstr ""
+msgstr "Boja ispune koja se koristi za pravokutnu promjenu veličine"
 
-#, fuzzy
 msgid "Normal Resize Windows"
-msgstr "&Obriši Windowse"
+msgstr "Prozori za normalnu promjenu veličine"
 
 msgid "Windows that normal resize should be used for"
-msgstr ""
+msgstr "Prozori koji koriste normalnu promjenu veličine"
 
-#, fuzzy
 msgid "Outline Resize Windows"
-msgstr "&Obriši Windowse"
+msgstr "Prozori za obrubnu promjenu veličine"
 
 msgid "Windows that outline resize should be used for"
-msgstr ""
+msgstr "Prozori koji koriste obrubnu promjenu veličine"
 
-#, fuzzy
 msgid "Rectangle Resize Windows"
-msgstr "&Obriši Windowse"
+msgstr "Prozori za pravokutnu promjenu veličine"
 
 msgid "Windows that rectangle resize should be used for"
-msgstr ""
+msgstr "Prozori koji koriste pravokutnu promjenu veličine"
 
-#, fuzzy
 msgid "Stretch Resize Windows"
-msgstr "&Obriši Windowse"
+msgstr "Prozori za promjenu veličine rastezanjem"
 
 msgid "Windows that stretch resize should be used for"
-msgstr ""
+msgstr "Prozori koji koriste promjenu veličine rastezanjem"
 
 msgid "Rotate Cube"
-msgstr ""
+msgstr "Okretanje kocke"
 
-#, fuzzy
 msgid "Rotate desktop cube"
-msgstr "Postavke okružja"
+msgstr "Okretanje kocke radne površine"
 
 msgid "Edge Flip Pointer"
-msgstr ""
+msgstr "Rubno prebacivanje pri pomicanju pokazivača"
 
 msgid "Flip to next viewport when moving pointer to screen edge"
 msgstr ""
+"Prebaci na sljedeće područje prikaza pri pomicanju pokazivača po rubu zaslona"
 
 msgid "Edge Flip Move"
-msgstr ""
+msgstr "Rubno prebacivanje pri pomicanju prozora"
 
 msgid "Flip to next viewport when moving window to screen edge"
 msgstr ""
+"Prebaci na sljedeće područje prikaza pri pomicanju prozora po rubu zaslona"
 
 msgid "Edge Flip DnD"
-msgstr ""
+msgstr "Rubno prebacivanje pri povlačenju i otpuštanju"
 
 msgid "Flip to next viewport when dragging object to screen edge"
 msgstr ""
+"Prebaci na sljedeće područje prikaza pri povlačenju objekta na rub zaslona"
 
-#, fuzzy
 msgid "Flip Time"
-msgstr "&Testiraj"
+msgstr "Vrijeme prebacivanja"
 
 msgid "Timeout before flipping viewport"
-msgstr ""
+msgstr "Vremenski istek prije prebacivanja područja prikaza"
 
 msgid "Raise on rotate"
-msgstr ""
+msgstr "Podigni pri okretanju"
 
 msgid "Raise window when rotating"
-msgstr ""
+msgstr "Podigni prozor pri okretanju"
 
-#, fuzzy
 msgid "Rotate cube"
-msgstr "Postavke okružja"
+msgstr "Okretanje kocke"
 
-#, fuzzy
 msgid "Start Rotation"
-msgstr "Pokrenuti servis"
+msgstr "Pokreni okretanje"
 
 msgid "Rotate Left"
-msgstr ""
+msgstr "Okreni ulijevo"
 
 msgid "Rotate left"
-msgstr ""
+msgstr "Okreni ulijevo"
 
-#, fuzzy
 msgid "Rotate Right"
-msgstr "&Obriši Windowse"
+msgstr "Okreni udesno"
 
-#, fuzzy
 msgid "Rotate right"
-msgstr "&Obriši Windowse"
+msgstr "Okreni udesno"
 
-#, fuzzy
 msgid "Rotate Left with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni ulijevo s prozorom"
 
-#, fuzzy
 msgid "Rotate left and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni ulijevo i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate Right with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni udesno s prozorom"
 
-#, fuzzy
 msgid "Rotate right and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni udesno i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To"
-msgstr "&Obriši Windowse"
+msgstr "Okreni na"
 
-#, fuzzy
 msgid "Rotate to viewport"
-msgstr "Pokrećem servis."
+msgstr "Okreni na područje prikaza"
 
-#, fuzzy
 msgid "Rotate window"
-msgstr "&Obriši Windowse"
+msgstr "Okreni prozor"
 
-#, fuzzy
 msgid "Rotate with window"
-msgstr "Pokrećem servis."
+msgstr "Okreni s prozorom"
 
 msgid "Rotate Flip Left"
-msgstr ""
+msgstr "Lijevo okretanje"
 
 msgid "Flip to left viewport and warp pointer"
-msgstr ""
+msgstr "Prebaci na lijevo područje prikaza i izobliči pokazivač"
 
 msgid "Rotate Flip Right"
-msgstr ""
+msgstr "Desno okretanje"
 
 msgid "Flip to right viewport and warp pointer"
-msgstr ""
+msgstr "Prebaci na desno područje prikaza i izobliči pokazivač"
 
-#, fuzzy
 msgid "Rotate to cube face"
-msgstr "Pokrećem servis."
+msgstr "Okretanje na plohu kocke"
 
-#, fuzzy
 msgid "Rotate To Face 1"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 1"
 
-#, fuzzy
 msgid "Rotate to face 1"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 1"
 
-#, fuzzy
 msgid "Rotate To Face 2"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 2"
 
-#, fuzzy
 msgid "Rotate to face 2"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 2"
 
-#, fuzzy
 msgid "Rotate To Face 3"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 3"
 
-#, fuzzy
 msgid "Rotate to face 3"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 3"
 
-#, fuzzy
 msgid "Rotate To Face 4"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 4"
 
-#, fuzzy
 msgid "Rotate to face 4"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 4"
 
-#, fuzzy
 msgid "Rotate To Face 5"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 5"
 
-#, fuzzy
 msgid "Rotate to face 5"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 5"
 
-#, fuzzy
 msgid "Rotate To Face 6"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 6"
 
-#, fuzzy
 msgid "Rotate to face 6"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 6"
 
-#, fuzzy
 msgid "Rotate To Face 7"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 7"
 
-#, fuzzy
 msgid "Rotate to face 7"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 7"
 
-#, fuzzy
 msgid "Rotate To Face 8"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 8"
 
-#, fuzzy
 msgid "Rotate to face 8"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 8"
 
-#, fuzzy
 msgid "Rotate To Face 9"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 9"
 
-#, fuzzy
 msgid "Rotate to face 9"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 9"
 
-#, fuzzy
 msgid "Rotate To Face 10"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 10"
 
-#, fuzzy
 msgid "Rotate to face 10"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 10"
 
-#, fuzzy
 msgid "Rotate To Face 11"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 11"
 
-#, fuzzy
 msgid "Rotate to face 11"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 11"
 
-#, fuzzy
 msgid "Rotate To Face 12"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 12"
 
-#, fuzzy
 msgid "Rotate to face 12"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 12"
 
-#, fuzzy
 msgid "Rotate to cube face with window"
-msgstr "Pokrećem servis."
+msgstr "Okretanje na plohu kocke s prozorom"
 
-#, fuzzy
 msgid "Rotate To Face 1 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 1 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 1 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 1 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 2 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 2 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 2 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 2 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 3 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 3 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 3 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 3 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 4 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 4 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 4 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 4 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 5 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 5 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 5 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 5 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 6 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 6 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 6 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 6 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 7 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 7 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 7 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 7 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 8 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 8 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 8 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 8 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 9 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 9 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 9 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 9 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 10 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 10 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 10 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 10 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 11 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 11 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 11 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 11 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Rotate To Face 12 with Window"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 12 s prozorom"
 
-#, fuzzy
 msgid "Rotate to face 12 and bring active window along"
-msgstr "Pokrećem servis."
+msgstr "Okreni na plohu 12 i istodobno prenesi aktivni prozor"
 
-#, fuzzy
 msgid "Pointer Invert Y"
-msgstr "Pokazivač na %1"
+msgstr "Obrnuta Y os pokazivača"
 
 msgid "Invert Y axis for pointer movement"
-msgstr ""
+msgstr "Obrni Y os za pomicanje pokazivača"
 
-#, fuzzy
 msgid "Pointer Invert X"
-msgstr "Pokazivač na %1"
+msgstr "Obrnuta X os pokazivača"
 
 msgid "Invert X axis for pointer movement"
-msgstr ""
+msgstr "Obrni X os za pomicanje pokazivača"
 
-#, fuzzy
 msgid "Pointer Sensitivity"
-msgstr "Pokazivač na %1"
+msgstr "Osjetljivost pokazivača"
 
 msgid "Sensitivity of pointer movement"
-msgstr ""
+msgstr "Osjetljivost kretanja pokazivača"
 
-#, fuzzy
 msgid "Rotation Acceleration"
-msgstr "Akcija"
+msgstr "Ubrzanje okreta"
 
 msgid "Snap To Top Face"
-msgstr ""
+msgstr "Poravnaj s gornjom plohom"
 
 msgid "Snap Cube Rotation to Top Face"
-msgstr ""
+msgstr "Poravnaj okret kocke s gornjom plohom"
 
 msgid "Snap To Bottom Face"
-msgstr ""
+msgstr "Poravnaj s donjom plohom"
 
 msgid "Snap Cube Rotation to Bottom Face"
-msgstr ""
+msgstr "Poravnaj okret kocke s donjom plohom"
 
-#, fuzzy
 msgid "Rotation Speed"
-msgstr "&Testiraj"
+msgstr "Brzina okreta"
 
-#, fuzzy
 msgid "Rotation Timestep"
-msgstr "&Testiraj"
+msgstr "Vremenski korak okreta"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Približi/Udalji"
 
-#, fuzzy
 msgid "Rotation Zoom"
-msgstr "&Testiraj"
+msgstr "Približavanje/Udaljavanje okreta"
 
-#, fuzzy
 msgid "Scale"
-msgstr "Skener"
+msgstr "Prilagodba veličine"
 
-#, fuzzy
 msgid "Scale windows"
-msgstr "&Obriši Windowse"
+msgstr "Prilagodi veličinu prozora"
 
 msgid "Key Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Prečaci tipkovnice uključuju/isključuju prilagodbu veličine"
 
 msgid ""
 "Key bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Prečaci tipkovnice uključuju/isključuju prilagodbu veličine umjesto da je "
+"omoguće pri pritisku i onemogućuju pri otpuštanju."
 
 msgid "Button Bindings Toggle Scale Mode"
-msgstr ""
+msgstr "Tipka prečaca uključuje/isključuje prilagodbu veličine"
 
 msgid ""
 "Button bindings toggle scale mode instead of enabling it when pressed and "
 "disabling it when released."
 msgstr ""
+"Tipka prečaca uključuje/isključuje prilagodbu veličine umjesto da ju omoguće "
+"pri pritisku i onemoguće pri otpuštanju."
 
-#, fuzzy
 msgid "Initiate Window Picker"
-msgstr "&Obriši Windowse"
+msgstr "Pokreni birač prozora"
 
 msgid "Layout and start transforming windows"
-msgstr ""
+msgstr "Rasporedi i započni pretvorbu prozora"
 
 msgid "Initiate Window Picker For All Windows"
-msgstr ""
+msgstr "Pokreni birač prozora za sve prozore"
 
 msgid "Layout and start transforming all windows"
-msgstr ""
+msgstr "Rasporedi i započni pretvorbu svih prozora"
 
 msgid "Initiate Window Picker For Window Group"
-msgstr ""
+msgstr "Pokreni birač prozora za grupu prozora"
 
 msgid "Layout and start transforming window group"
-msgstr ""
+msgstr "Rasporedi i započni pretvorbu grupe prozora"
 
 msgid "Initiate Window Picker For Windows on Current Output"
-msgstr ""
+msgstr "Pokreni birač prozora za prozore na trenutnom izlazu"
 
 msgid "Layout and start transforming windows on current output"
-msgstr ""
+msgstr "Rasporedi i započni pretvorbu prozora na trenutnom izlazu"
 
 msgid "Click Desktop to Show Desktop"
-msgstr ""
+msgstr "Klikni na radnu površinu za prikaz radne površine"
 
 msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
 msgstr ""
+"Pokreni način prikaza radne površine kada se klikne na radnu površinu "
+"tijekom prilagodbe veličine"
 
-#, fuzzy
 msgid "Spacing"
-msgstr "Tražim..."
+msgstr "Razmak"
 
-#, fuzzy
 msgid "Space between windows"
-msgstr "&Obriši Windowse"
+msgstr "Razmak između prozora"
 
-#, fuzzy
 msgid "Scale speed"
-msgstr "lokalno vrijeme"
+msgstr "Brzina prilagodbe veličine"
 
-#, fuzzy
 msgid "Scale timestep"
-msgstr "lokalno vrijeme"
+msgstr "Vremenski korak prilagodbe veličine"
 
 msgid "Darken Background"
-msgstr ""
+msgstr "Potamni pozadinu"
 
 msgid "Darken background when scaling windows"
-msgstr ""
+msgstr "Potamni pozadinu pri prilagodbe veličine prozora"
 
 msgid "Amount of opacity in percent"
-msgstr ""
+msgstr "Količina neprozirnosti u postotku"
 
 msgid "Overlay Icon"
-msgstr ""
+msgstr "Ikona prekrivanja"
 
 msgid "Overlay an icon on windows once they are scaled"
-msgstr ""
+msgstr "Prekrij ikonu na prozorima jednom kada im se prilagodi veličina"
 
 msgid "None"
-msgstr "Ništa"
+msgstr "Nijedna"
 
 msgid "Emblem"
-msgstr ""
+msgstr "Obilježje"
 
 msgid "Big"
-msgstr ""
+msgstr "Velika"
 
-#, fuzzy
 msgid "Scale Windows"
-msgstr "&Obriši Windowse"
+msgstr "Prilagodi veličinu prozora"
 
 msgid "Windows that should be scaled in scale mode"
-msgstr ""
+msgstr "Prozori kojima se prilagođava veličina u tom načinu rada"
 
 msgid "Hover Time"
-msgstr ""
+msgstr "Istek vremena lebdenja"
 
 msgid ""
 "Time (in ms) before scale mode is terminated when hovering over a window"
 msgstr ""
+"Vrijeme (u ms) prije nego što se način prilagodbe veličine prekine kada se "
+"lebdi pokazivačem iznad prozora"
 
 msgid "Selects where windows are scaled if multiple output devices are used."
 msgstr ""
+"Bira gdje se prilagođava veličina prozora ako se koristi više izlaznih "
+"uređaja."
 
 msgid "On current output device"
-msgstr ""
+msgstr "Na trenutni izlazni uređaj"
 
 msgid "On all output devices"
-msgstr ""
+msgstr "Na sve izlazne uređaje"
 
 msgid "Screenshot"
-msgstr ""
+msgstr "Snimka zaslona"
 
-#, fuzzy
 msgid "Screenshot plugin"
-msgstr "Postavke arhiva"
+msgstr "Priključak slike zaslona"
 
-#, fuzzy
 msgid "Initiate rectangle screenshot"
-msgstr "Indija"
+msgstr "Pokreni pravokutno slikanje zaslona"
 
-#, fuzzy
 msgid "Directory"
-msgstr "Direktorij\n"
+msgstr "Mapa"
 
-#, fuzzy
 msgid ""
 "Put screenshot images in this directory. If empty, the desktop directory "
 "will be used."
-msgstr "Rekurzija u direktorij"
+msgstr ""
+"Spremi snimak zaslona u ovu mapu. Ako je polje prazno, koristiti će se mapa "
+"radne površine."
 
-#, fuzzy
 msgid "Launch Application"
-msgstr "Aplikacija za zamjenu:"
+msgstr "Pokreni aplikaciju"
 
-#, fuzzy
 msgid "Automatically open screenshot in this application"
-msgstr "Automatski pokreni program prilikom prijave"
+msgstr "Automatski otvara snimak zaslona u ovoj aplikaciji"
 
 msgid "Svg"
-msgstr ""
+msgstr "Svg"
 
 msgid "Svg image loader"
-msgstr ""
+msgstr "Učitač svg slika"
 
 msgid "Application Switcher"
-msgstr ""
+msgstr "Mjenjač aplikacija"
 
-#, fuzzy
 msgid "Next window"
-msgstr "&Obriši Windowse"
+msgstr "Sljedeći prozor"
 
 msgid "Popup switcher if not visible and select next window"
-msgstr ""
+msgstr "Neka mjenjač iskoči ako nije vidljiv i odaberi sljedeći prozor"
 
-#, fuzzy
 msgid "Prev window"
-msgstr "&Smanji Windowse"
+msgstr "Prijašnji prozor"
 
 msgid "Popup switcher if not visible and select previous window"
-msgstr ""
+msgstr "Neka mjenjač iskoči ako nije vidljiv i odaberi prijašnji prozor"
 
-#, fuzzy
 msgid "Next window (All windows)"
-msgstr "&Obriši Windowse"
+msgstr "Sljedeći prozor (svi prozori)"
 
 msgid "Popup switcher if not visible and select next window out of all windows"
 msgstr ""
+"Neka mjenjač iskoči ako nije vidljiv i odaberi sljedeći prozor od svih "
+"prozora"
 
-#, fuzzy
 msgid "Prev window (All windows)"
-msgstr "&Smanji Windowse"
+msgstr "Prijašnji prozor (svi prozori)"
 
 msgid ""
 "Popup switcher if not visible and select previous window out of all windows"
 msgstr ""
+"Neka mjenjač iskoči ako nije vidljiv i odaberi prijašnji prozor od svih "
+"prozora"
 
-#, fuzzy
 msgid "Next window (No popup)"
-msgstr "&Obriši Windowse"
+msgstr "Sljedeći prozor (bez skočne obavijesti)"
 
 msgid "Select next window without showing the popup window."
-msgstr ""
+msgstr "Odaberi sljedeći prozor bez pokazivanja skočnog prozora."
 
-#, fuzzy
 msgid "Prev window (No popup)"
-msgstr "&Smanji Windowse"
+msgstr "Prijašnji prozor (bez skočne obavijesti)"
 
 msgid "Select previous window without showing the popup window."
-msgstr ""
+msgstr "Odaberi prijašnji prozor bez pokazivanja skočnog prozora."
 
-#, fuzzy
 msgid "Next Panel"
-msgstr "Postavke okružja"
+msgstr "Sljedeća ploha"
 
-#, fuzzy
 msgid "Select next panel type window."
-msgstr "&Obriši Windowse"
+msgstr "Odaberi sljedeći prozor na plohi."
 
-#, fuzzy
 msgid "Prev Panel"
-msgstr "&Smanji Windowse"
+msgstr "Prijašnja ploha"
 
-#, fuzzy
 msgid "Select previous panel type window."
-msgstr "Pokrećem servis."
+msgstr "Odaberi prijašnji prozor na plohi."
 
-#, fuzzy
 msgid "Switcher speed"
-msgstr "lokalno vrijeme"
+msgstr "Brzina mjenjača"
 
-#, fuzzy
 msgid "Switcher timestep"
-msgstr "lokalno vrijeme"
+msgstr "Vremenski korak mjenjača"
 
-#, fuzzy
 msgid "Switcher windows"
-msgstr "&Obriši Windowse"
+msgstr "Prozori mjenjača"
 
 msgid "Windows that should be shown in switcher"
-msgstr ""
+msgstr "Prozori koji se trebaju pokazivati u mjenjaču"
 
 msgid "Amount of saturation in percent"
-msgstr ""
+msgstr "Količina zasićenja u postotku"
 
 msgid "Amount of brightness in percent"
-msgstr ""
+msgstr "Količina osvjetljenja u postotku"
 
-#, fuzzy
 msgid "Bring To Front"
-msgstr "Akcija"
+msgstr "Postavi ispred"
 
 msgid "Bring selected window to front"
-msgstr ""
+msgstr "Postavi odabrani prozor ispred"
 
 msgid "Distance desktop should be zoom out while switching windows"
-msgstr ""
+msgstr "Udaljenje radne površine pri mjenjanju prozora"
 
-#, fuzzy
 msgid "Icon"
-msgstr "Akcija"
+msgstr "Ikona"
 
 msgid "Show icon next to thumbnail"
-msgstr ""
+msgstr "Pokaži ikonu pokraj umanjene sličice"
 
-#, fuzzy
 msgid "Minimized"
-msgstr "&Smanji Windowse"
+msgstr "Smanjeno"
 
-#, fuzzy
 msgid "Show minimized windows"
-msgstr "&Smanji Windowse"
+msgstr "Pokaži smanjene prozore"
 
-#, fuzzy
 msgid "Auto Rotate"
-msgstr "Automatski"
+msgstr "Automatski okreni"
 
 msgid "Rotate to the selected window while switching"
-msgstr ""
+msgstr "Okreni na odabrani prozor pri mjenjanju"
 
-#, fuzzy
 msgid "Desktop Wall"
-msgstr "Postavke okružja"
+msgstr "Zid radne površine"
 
 msgid "Desktop Wall Plugin"
-msgstr ""
+msgstr "Priključak zida radne površine"
 
 msgid "Viewport Switch Preview"
-msgstr ""
+msgstr "Pregled mijenjanja područja prikaza"
 
 msgid "Show Viewport Switcher Preview"
-msgstr ""
+msgstr "Prikaži pregled mjenjača područja prikaza"
 
 msgid "Show switcher window while switching viewports"
-msgstr ""
+msgstr "Prikazuje prozor mjenjača tijekom mijenjanja područja prikaza"
 
 msgid "Show Live Viewport Previews"
-msgstr ""
+msgstr "Prikaži pregled emitiranih područja prikaza"
 
 msgid "Show live viewport previews in switcher window"
-msgstr ""
+msgstr "Prikazuje pregled emitiranih područja prikaza u prozoru mjenjača"
 
 msgid "Switch Target Preview Visibility Time"
-msgstr ""
+msgstr "Vrijeme vidljivosti pregleda objekta mijenjanja"
 
 msgid ""
 "Duration (in s) the switch target preview should remain visible after "
 "switching ends."
 msgstr ""
+"Trajanje (u sek) pregleda objekta mijenjanja, koliko treba ostati vidljiv "
+"nakon što mijenjanje završi."
 
-#, fuzzy
 msgid "Preview Scale"
-msgstr "&Smanji Windowse"
+msgstr "Prilagodba veličine pregleda"
 
 #, no-c-format
 msgid "Size of the preview in %"
-msgstr ""
+msgstr "Veličina pregleda u %"
 
-#, fuzzy
 msgid "Edge Radius"
-msgstr "Prikaži &detalje"
+msgstr "Polumjer ruba"
 
 msgid "Radius of the rounded edge"
-msgstr ""
+msgstr "Polumjer zaobljenog ruba"
 
 msgid "Border Width"
-msgstr ""
+msgstr "Širina ruba"
 
 msgid "Width of the border between the previews"
-msgstr ""
+msgstr "Širina ruba između pregleda"
 
 msgid "Outline Color"
-msgstr ""
+msgstr "Boja obruba"
 
-#, fuzzy
 msgid "Outline color of the switcher window."
-msgstr "&Obriši Windowse"
+msgstr "Boja obruba prozora mijenjanja"
 
 msgid "Background Gradient"
-msgstr ""
+msgstr "Prijelaz pozadine"
 
-#, fuzzy
 msgid "Base Color"
-msgstr "&Smanji Windowse"
+msgstr "Osnovna boja"
 
 msgid "First color for the background gradient of the switcher window."
-msgstr ""
+msgstr "Prva boja prijelaza pozadine mjenjača prozora."
 
 msgid "Highlight Color"
-msgstr ""
+msgstr "Boja naglašavanja"
 
 msgid "Second color for the background gradient of the switcher window."
-msgstr ""
+msgstr "Druga boja prijelaza pozadine mjenjača prozora."
 
 msgid "Third color for the background gradient of the switcher window."
-msgstr ""
+msgstr "Treća boja prijelaza pozadine mjenjača prozora."
 
 msgid "Thumb Gradient"
-msgstr ""
+msgstr "Prijelaz minijature"
 
 msgid "First color for the thumb gradient of the switcher window."
-msgstr ""
+msgstr "Prva boja prijelaza minijature mjenjača prozora."
 
 msgid "Second color for the thumb gradient of the switcher window."
-msgstr ""
+msgstr "Druga boja prijelaza minijature mjenjača prozora."
 
 msgid "Highlight Gradient"
-msgstr ""
+msgstr "Prijelaz naglašavanja"
 
 msgid "First color for the thumb highlight gradient of the switcher window."
-msgstr ""
+msgstr "Prva boja prijelaza naglašavanja minijature mjenjača prozora."
 
 msgid "Second color for the thumb highlight gradient of the switcher window."
-msgstr ""
+msgstr "Druga boja prijelaza naglašavanja minijature mjenjača prozora."
 
-#, fuzzy
 msgid "Arrow Colors"
-msgstr "&Smanji Windowse"
+msgstr "Boje strelice"
 
 msgid "First color of the arrow of the switcher window."
-msgstr ""
+msgstr "Prva boja strelice mjenjača prozora."
 
 msgid "Second color of the arrow of the switcher window."
-msgstr ""
+msgstr "Druga boja strelice mjenjača prozora."
 
-#, fuzzy
 msgid "Viewport Switching"
-msgstr "Virtualni Diskovi"
+msgstr "Prebacivanje područja prikaza"
 
 msgid "Allow Wrap-Around"
-msgstr ""
+msgstr "Dopusti omotavanje"
 
 msgid "Allow wrap-around when moving the wall up/down/left/right"
-msgstr ""
+msgstr "Dopusti omotavanje tijekom pomicanja zida gore/dolje/lijevo/desno"
 
 msgid "Wall Sliding Duration"
-msgstr ""
+msgstr "Trajanje klizanja zida"
 
 msgid "Duration (in s) for wall sliding viewport switching animation"
-msgstr ""
+msgstr "Trajanje (u sek) animacije mijenjanja klizanja područja prikaza zida"
 
-#, fuzzy
 msgid "Non Sliding Windows"
-msgstr "&Smanji Windowse"
+msgstr "Neklizajući prozori"
 
 msgid "Windows that should not slide during the slide animation"
-msgstr ""
+msgstr "Prozori koji ne bi trebali klizati tijekom animacije klizanja"
 
-#, fuzzy
 msgid "Move within wall"
-msgstr "&Obriši Windowse"
+msgstr "Pomicanje sa zidom"
 
-#, fuzzy
 msgid "Move Left"
-msgstr "&Obriši Windowse"
+msgstr "Pomakni lijevo"
 
 msgid "Move along the wall to the left"
-msgstr ""
+msgstr "Pomakni lijevom stranom zida"
 
-#, fuzzy
 msgid "Move Right"
-msgstr "&Obriši Windowse"
+msgstr "Pomakni desno"
 
 msgid "Move along the wall to the right"
-msgstr ""
+msgstr "Pomakni desnom stranom zida"
 
 msgid "Move Up"
-msgstr ""
+msgstr "Pomakni gore"
 
 msgid "Move along the wall up"
-msgstr ""
+msgstr "Pomakni gornjom stranom zida"
 
-#, fuzzy
 msgid "Move Down"
-msgstr "&Obriši Windowse"
+msgstr "Pomakni dolje"
 
 msgid "Move along the wall down"
-msgstr ""
+msgstr "Pomakni donjom stranom zida"
 
 msgid "Move Next"
-msgstr ""
+msgstr "Pomakni sljedeće"
 
 msgid "Move along the wall to the next viewport"
-msgstr ""
+msgstr "Pomakni zid do sljedećeg područja prikaza"
 
 msgid "Move Prev"
-msgstr ""
+msgstr "Pomakni prijašnje"
 
 msgid "Move along the wall to the previous viewport"
-msgstr ""
+msgstr "Pomakni zid do prijašnjeg područja prikaza"
 
-#, fuzzy
 msgid "Move with window within wall"
-msgstr "Pokrećem servis."
+msgstr "Pomicanje s prozorom unutar zida"
 
-#, fuzzy
 msgid "Move Left With Window"
-msgstr "Pokrećem servis."
+msgstr "Pomakni lijevo s prozorom"
 
 msgid "Move with window along the wall to the left"
-msgstr ""
+msgstr "Pomakni s prozorom lijevom stranom zida"
 
-#, fuzzy
 msgid "Move Right With Window"
-msgstr "Pokrećem servis."
+msgstr "Pomakni desno s prozorom"
 
 msgid "Move with window along the wall to the right"
-msgstr ""
+msgstr "Pomakni s prozorom desnom stranom zida"
 
-#, fuzzy
 msgid "Move Up With Window"
-msgstr "&Obriši Windowse"
+msgstr "Pomakni gore s prozorom"
 
 msgid "Move with window along the wall up"
-msgstr ""
+msgstr "Pomakni s prozorom gornjom stranom zida"
 
-#, fuzzy
 msgid "Move Down With Window"
-msgstr "&Obriši Windowse"
+msgstr "Pomakni dolje s prozorom"
 
 msgid "Move with window along the wall down"
-msgstr ""
+msgstr "Pomakni s prozorom donjom stranom zida"
 
 msgid "Edge flipping"
-msgstr ""
+msgstr "Rubno prebacivanje"
 
-#, fuzzy
 msgid "Flip Left"
-msgstr "&Testiraj"
+msgstr "Prebaci lijevo"
 
-#, fuzzy
 msgid "Flip left"
-msgstr "&Testiraj"
+msgstr "Prebaci lijevo"
 
-#, fuzzy
 msgid "Flip Right"
-msgstr "&Obriši Windowse"
+msgstr "Prebaci desno"
 
-#, fuzzy
 msgid "Flip right"
-msgstr "&Obriši Windowse"
+msgstr "Prebaci desno"
 
-#, fuzzy
 msgid "Flip Up"
-msgstr "&Testiraj"
+msgstr "Prebaci gore"
 
-#, fuzzy
 msgid "Flip up"
-msgstr "&Testiraj"
+msgstr "Prebaci gore"
 
-#, fuzzy
 msgid "Flip Down"
-msgstr "&Obriši Windowse"
+msgstr "Prebaci dolje"
 
-#, fuzzy
 msgid "Flip down"
-msgstr "&Obriši Windowse"
+msgstr "Prebaci dolje"
 
 msgid "Multimonitor behavior"
-msgstr ""
+msgstr "Višezaslonsko ponašanje"
 
 msgid "How should a multimonitor configuration be handled"
-msgstr ""
+msgstr "Kako se treba rukovati višezaslonskim podešavanjem"
 
 msgid "Switch all"
-msgstr ""
+msgstr "Mijenjaj sve"
 
-#, fuzzy
 msgid "Switch separately"
-msgstr "lokalno vrijeme"
+msgstr "Mijenjaj zasebno"
 
 msgid "Edge Flipping"
-msgstr ""
+msgstr "Rubno prebacivanje"
 
 msgid "Flip viewport when moving the pointer to a screen edge"
 msgstr ""
+"Prebaci na sljedeće područje prikaza pri pomicanju pokazivača po rubu zaslona"
 
 msgid "Flip viewport when moving a window to a screen edge"
 msgstr ""
+"Prebaci na sljedeće područje prikaza pri pomicanju prozora po rubu zaslona"
 
 msgid "Flip viewport when dragging an object to a screen edge"
 msgstr ""
+"Prebaci na sljedeće područje prikaza pri povlačenju objekta na rub zaslona"
 
 msgid "Water Effect"
-msgstr ""
+msgstr "Vodeni efekt"
 
 msgid "Adds water effects to different desktop actions"
-msgstr ""
+msgstr "Dodaje efekte vode različitim radnjama na radnoj površini"
 
 msgid "Enable pointer water effects"
-msgstr ""
+msgstr "Omogući vodene efekte pokazivača"
 
-#, fuzzy
 msgid "Toggle rain"
-msgstr "&Promijeni status"
+msgstr "Uključi/Isključi kišu"
 
-#, fuzzy
 msgid "Toggle rain effect"
-msgstr "&Promijeni status"
+msgstr "Uključi/Isključi efekt kiše"
 
-#, fuzzy
 msgid "Toggle wiper"
-msgstr "&Promijeni status"
+msgstr "Uključi/Isključi brisač"
 
-#, fuzzy
 msgid "Toggle wiper effect"
-msgstr "&Promijeni status"
+msgstr "Uključi/Isključi efekt brisača"
 
 msgid "Offset Scale"
-msgstr ""
+msgstr "Veličina pomaka"
 
 msgid "Water offset scale"
-msgstr ""
+msgstr "Veličina vodenog pomaka"
 
-#, fuzzy
 msgid "Rain Delay"
-msgstr "Odgoda"
+msgstr "Odgoda kiše"
 
 msgid "Delay (in ms) between each rain-drop"
-msgstr ""
+msgstr "Odgoda (u ms) između svake kapi"
 
 msgid "Title wave"
-msgstr ""
+msgstr "Naslovni val"
 
 msgid "Wave effect from window title"
-msgstr ""
+msgstr "Valni efekt iz naslova prozora"
 
 msgid "Point"
-msgstr ""
+msgstr "Točka"
 
-#, fuzzy
 msgid "Add point"
-msgstr "Dodaj točku provjere"
+msgstr "Dodaj točku"
 
 msgid "Line"
-msgstr ""
+msgstr "Linija"
 
-#, fuzzy
 msgid "Add line"
-msgstr "Dodaj servis"
+msgstr "Dodaj liniju"
 
-#, fuzzy
 msgid "Wobbly Windows"
-msgstr "&Obriši Windowse"
+msgstr "Lelujavi prozori"
 
 msgid "Use spring model for wobbly window effect"
-msgstr ""
+msgstr "Koristi model opruge za efekt lelujavih prozora"
 
-#, fuzzy
 msgid "Snap windows"
-msgstr "&Smanji Windowse"
+msgstr "Uhvati rubove"
 
-#, fuzzy
 msgid "Toggle window snapping"
-msgstr "&Obriši Windowse"
+msgstr "Uključi/Isključi hvatanje prozora za rubove radne površine"
 
 msgid "Snap Inverted"
-msgstr ""
+msgstr "Obrni hvatanje rubova"
 
 msgid "Inverted window snapping"
-msgstr ""
+msgstr "Obrni hvatanje rubova radne površine"
 
-# 'driver' as in '(hardware) driver update'
-#, fuzzy
 msgid "Shiver"
-msgstr "Pogonski program"
+msgstr "Drhtanje"
 
-#, fuzzy
 msgid "Make window shiver"
-msgstr "&Obriši Windowse"
+msgstr "Učini da prozori drhte"
 
-#, fuzzy
 msgid "Friction"
-msgstr "Akcija"
+msgstr "Trenje"
 
-#, fuzzy
 msgid "Spring Friction"
-msgstr "Akcija"
+msgstr "Trenje opruge"
 
-#, fuzzy
 msgid "Spring K"
-msgstr "Preskačem %1"
+msgstr "K opruge"
 
-#, fuzzy
 msgid "Spring Konstant"
-msgstr "Preskačem %1"
+msgstr "Konstanta opruge"
 
-#, fuzzy
 msgid "Grid Resolution"
-msgstr "Rezolucija"
+msgstr "Razlučivost mreže"
 
-#, fuzzy
 msgid "Vertex Grid Resolution"
-msgstr "Rezolucija"
+msgstr "Razlučivost hvatišta mreže"
 
-#, fuzzy
 msgid "Minimum Grid Size"
-msgstr "Minimalni &GUID"
+msgstr "Najmanja veličina mreže"
 
-#, fuzzy
 msgid "Minimum Vertex Grid Size"
-msgstr "Minimalni &GUID"
+msgstr "Najmanja veličina hvatišta mreže"
 
 msgid "Map Effect"
-msgstr ""
+msgstr "Efekt mape"
 
-#, fuzzy
 msgid "Map Window Effect"
-msgstr "&Smanji Windowse"
+msgstr "Efekt mape prozora"
 
 msgid "Focus Effect"
-msgstr ""
+msgstr "Efekt fokusa"
 
-#, fuzzy
 msgid "Focus Window Effect"
-msgstr "&Obriši Windowse"
+msgstr "Efekt fokusa prozora"
 
-#, fuzzy
 msgid "Map Windows"
-msgstr "&Smanji Windowse"
+msgstr "Mapa prozora"
 
 msgid "Windows that should wobble when mapped"
-msgstr ""
+msgstr "Prozori koji trebaju lelujati kada se mapiraju"
 
-#, fuzzy
 msgid "Focus Windows"
-msgstr "&Obriši Windowse"
+msgstr "Fokusiraj prozore"
 
 msgid "Windows that should wobble when focused"
-msgstr ""
+msgstr "Prozori koji trebaju lelujati kada su fokusirani"
 
-#, fuzzy
 msgid "Grab Windows"
-msgstr "&Obriši Windowse"
+msgstr "Uhvati prozore"
 
 msgid "Windows that should wobble when grabbed"
-msgstr ""
+msgstr "Prozori koji trebaju lelujati kada se uhvate"
 
-#, fuzzy
 msgid "Move Windows"
-msgstr "&Obriši Windowse"
+msgstr "Pomakni prozore"
 
 msgid "Windows that should wobble when moved"
-msgstr ""
+msgstr "Prozori koji trebaju lelujati kada se pomaknu"
 
 msgid "Maximize Effect"
-msgstr ""
+msgstr "Efekt uvećanja"
 
 msgid "Wobble effect when maximizing and unmaximizing windows"
-msgstr ""
+msgstr "Efekt lelujavosti pri povećanju i smanjivanju prozora"
 
-#, fuzzy
 msgid "Zoom Desktop"
-msgstr "Radne površine"
+msgstr "Približi/Udalji radnu površinu"
 
-#, fuzzy
 msgid "Zoom and pan desktop cube"
-msgstr "Postavke okružja"
+msgstr "Približi/Udalji i obreži radnu površinu kocke"
 
-#, fuzzy
 msgid "Zoom In"
-msgstr "Brzina:"
+msgstr "Približi"
 
-#, fuzzy
 msgid "Zoom Out"
-msgstr "Brzina:"
+msgstr "Udalji"
 
-#, fuzzy
 msgid "Zoom Pan"
-msgstr "Brzina:"
+msgstr "Približi/Udalji i obreži"
 
-#, fuzzy
 msgid "Zoom pan"
-msgstr "Brzina:"
+msgstr "Približi/Udalji i obreži"
 
-#, fuzzy
 msgid "Zoom Speed"
-msgstr "Brzina:"
+msgstr "Brzina približavanja/udaljavanja"
 
-#, fuzzy
 msgid "Zoom Timestep"
-msgstr "&Testiraj"
+msgstr "Vremenski korak približavanja/udaljavanja"
 
-#, fuzzy
 msgid "Zoom factor"
-msgstr "Brzina:"
+msgstr "Faktor približavanja/udaljavanja"
 
-#, fuzzy
 msgid "Filter Linear"
-msgstr "Ime datoteke"
+msgstr "Linerani filter"
 
 msgid "Use linear filter when zoomed in"
-msgstr ""
+msgstr "Koristi linearni filter tijekom uvećanja"
 
 msgid "Compiz"
 msgstr "Compiz"
 
-#, fuzzy
 msgid "Compiz Start"
-msgstr "Compiz"
+msgstr "Pokretanje Compiza"
 
-#, fuzzy
 msgid "Start Compiz"
-msgstr "Compiz"
+msgstr "Pokreni Compiz"
 
 msgid "Start or restart Compiz"
-msgstr ""
+msgstr "Pokreni ili ponovno pokreni Compiz"
 
-#, fuzzy
-#~ msgid "Number of Desktops"
-#~ msgstr "Broj radnih povrsina"
-
-#, fuzzy
-#~ msgid "Number of virtual desktops"
-#~ msgstr "Radne površine"
-
-#~ msgid "Action to take when scrolling the mouse wheel on a window title bar."
-#~ msgstr ""
-#~ "Akcija koja ce se napraviti kada se scroll-a misem preko naslovne trake"
-
-#, fuzzy
-#~ msgid "Blur type"
-#~ msgstr "Brzina:"
-
-#, fuzzy
-#~ msgid "Marco theme active window opacity"
-#~ msgstr "Transparentnost Marco teme prozora"
-
-#, fuzzy
-#~ msgid "Marco theme active window opacity shade"
-#~ msgstr "&Obriši Windows kompletno"
-
-#~ msgid "Line width"
-#~ msgstr "Debljina linije"
-
-#, fuzzy
-#~ msgid "Line width for annotations"
-#~ msgstr "Naučite više iz dokumenatcije"
-
-#, fuzzy
-#~ msgid "Decrease"
-#~ msgstr "Smanji transparentnost"
-
-#, fuzzy
-#~ msgid "Increase"
-#~ msgstr "Povecaj transparentnost"
-
-#, fuzzy
-#~ msgid "Screenshot commands"
-#~ msgstr "Postavke arhiva"
-
-#, fuzzy
-#~ msgid "Screenshot key bindings"
-#~ msgstr "Postavke arhiva"
-
-#, fuzzy
-#~ msgid "Opacity windows"
-#~ msgstr "&Obriši Windowse"
-
-#, fuzzy
-#~ msgid "Place windows on a plane"
-#~ msgstr "&Obriši Windowse"
-
-#, fuzzy
-#~ msgid "Plane To Face 1"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 10"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 11"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 12"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 2"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 3"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 4"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 5"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 6"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 7"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 8"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane To Face 9"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane Up"
-#~ msgstr "&Obriši Windowse"
-
-#, fuzzy
-#~ msgid "Plane left"
-#~ msgstr "&Obriši Windowse"
-
-#, fuzzy
-#~ msgid "Plane to face 1"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 10"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 11"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 12"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 2"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 3"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 4"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 5"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 6"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 7"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 8"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane to face 9"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Plane up"
-#~ msgstr "&Obriši Windowse"
-
-#, fuzzy
-#~ msgid "Dialog"
-#~ msgstr "Katalog"
-
-#, fuzzy
-#~ msgid "DropdownMenu"
-#~ msgstr "Upravitelji Prozorima"
-
-#, fuzzy
-#~ msgid "Notification"
-#~ msgstr "Akcija"
-
-#~ msgid "Unknown"
-#~ msgstr "Nepoznato"
-
-#, fuzzy
-#~ msgid "Blur saturation (0-100)"
-#~ msgstr "Trajanje"
-
-#, fuzzy
-#~ msgid "Drop shadow opacity (0.01-6.00)"
-#~ msgstr "&Obriši Windows kompletno"
-
-#, fuzzy
-#~ msgid "Drop shadow radius (0.0-48.0)"
-#~ msgstr "Prikaži &detalje"
-
-#, fuzzy
-#~ msgid "Focus prevention windows (match)"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Fold Acceleration (1.0-20.0)"
-#~ msgstr "Akcija"
-
-#, fuzzy
-#~ msgid "Fold Speed (0.0-50.0)"
-#~ msgstr "Brzina:"
-
-#, fuzzy
-#~ msgid "Fold Timestep (0.0-50.0)"
-#~ msgstr "&Testiraj"
-
-#, fuzzy
-#~ msgid "Gaussian strength (0.00-1.00)"
-#~ msgstr "Ruski"
-
-#, fuzzy
-#~ msgid "Line width for annotations (0.0-100.0)"
-#~ msgstr "Naučite više iz dokumenatcije"
-
-#, fuzzy
-#~ msgid "Minimize speed (0.0-50.0)"
-#~ msgstr "&Smanji Windowse"
-
-#, fuzzy
-#~ msgid "Minimize timestep (0.0-50.0)"
-#~ msgstr "&Smanji Windowse"
-
-#, fuzzy
-#~ msgid "Minimum Vertex Grid Size (4-128)"
-#~ msgstr "Minimalni &GUID"
-
-#, fuzzy
-#~ msgid "Number of virtual desktops (1-36)"
-#~ msgstr "Radne površine"
-
-#, fuzzy
-#~ msgid "Opacity level of moving windows (1-100)"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Opacity level of resizing windows (1-100)"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Rotation Acceleration (1.0-20.0)"
-#~ msgstr "Akcija"
-
-#, fuzzy
-#~ msgid "Rotation Timestep (0.0-50.0)"
-#~ msgstr "&Testiraj"
-
-#, fuzzy
-#~ msgid "Scale speed (0.0-50.0)"
-#~ msgstr "lokalno vrijeme"
-
-#, fuzzy
-#~ msgid "Scale timestep (0.0-50.0)"
-#~ msgstr "lokalno vrijeme"
-
-#, fuzzy
-#~ msgid "Space between windows (0-250)"
-#~ msgstr "&Obriši Windowse"
-
-#, fuzzy
-#~ msgid "Spring Friction (0.0-10.0)"
-#~ msgstr "Akcija"
-
-#, fuzzy
-#~ msgid "Spring Konstant (0.0-10.0)"
-#~ msgstr "Preskačem %1"
-
-#, fuzzy
-#~ msgid "Texture filtering (Fast, Good, Best)"
-#~ msgstr "Postavi filter"
-
-#, fuzzy
-#~ msgid "Vertex Grid Resolution (1-64)"
-#~ msgstr "Rezolucija"
-
-#, fuzzy
-#~ msgid "Window blur speed (0.0-10.0)"
-#~ msgstr "Windows slobodno (%1)"
-
-#, fuzzy
-#~ msgid "Window fade speed (0.0-25.0)"
-#~ msgstr "Windows slobodno (%1)"
-
-#, fuzzy
-#~ msgid "Zoom Speed (0.0-50.0)"
-#~ msgstr "Brzina:"
-
-#, fuzzy
-#~ msgid "Zoom Timestep (0.0-50.0)"
-#~ msgstr "&Testiraj"
-
-#, fuzzy
-#~ msgid "Plane To Face %d with Window"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Command line %d"
-#~ msgstr "Naredba: "
-
-#, fuzzy
-#~ msgid "Run command %d"
-#~ msgstr "Naredba: "
-
-#, fuzzy
-#~ msgid "Corners"
-#~ msgstr "Pisači"
-
-#, fuzzy
-#~ msgid "Sloppy Focus"
-#~ msgstr "Floppy disk"
-
-#, fuzzy
-#~ msgid "Start moving window using keyboard"
-#~ msgstr "Pokrećem servis."
-
-#, fuzzy
-#~ msgid "Terminate"
-#~ msgstr "Pisač"
+#~ msgid "Focus prevention windows"
+#~ msgstr "Prozori za sprečavanje fokusa"
