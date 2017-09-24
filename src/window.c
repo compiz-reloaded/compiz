@@ -2909,8 +2909,15 @@ sendSyncRequest (CompWindow *w)
     w->syncHeight      = w->serverHeight;
     w->syncBorderWidth = w->serverBorderWidth;
 
-    if (!w->syncWaitHandle)
-	w->syncWaitHandle = compAddTimeout (1000, 1200, syncWaitTimeout, w);
+	if (w->attrib.override_redirect)
+	{
+		syncWaitTimeout(w);
+	}
+	else
+	{
+		if (!w->syncWaitHandle)
+			w->syncWaitHandle = compAddTimeout (1000, 1200, syncWaitTimeout, w);
+	}
 }
 
 void
