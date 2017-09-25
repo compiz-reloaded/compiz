@@ -2533,6 +2533,17 @@ sendConfigureNotify (CompWindow *w)
     }
 }
 
+static Bool
+syncWaitTimeout (void *closure)
+{
+    CompWindow *w = closure;
+
+    w->syncWaitHandle = 0;
+    handleSyncAlarm (w);
+
+    return FALSE;
+}
+
 void
 mapWindow (CompWindow *w)
 {
@@ -2590,6 +2601,8 @@ mapWindow (CompWindow *w)
 			  w->attrib.width, ++w->attrib.height - 1,
 			  w->attrib.border_width);
     }
+
+    syncWaitTimeout(w);
 }
 
 void
@@ -2866,17 +2879,6 @@ initializeSyncCounter (CompWindow *w)
     return FALSE;
 }
 
-static Bool
-syncWaitTimeout (void *closure)
-{
-    CompWindow *w = closure;
-
-    w->syncWaitHandle = 0;
-    handleSyncAlarm (w);
-
-    return FALSE;
-}
-
 void
 sendSyncRequest (CompWindow *w)
 {
@@ -2908,16 +2910,6 @@ sendSyncRequest (CompWindow *w)
     w->syncWidth       = w->serverWidth;
     w->syncHeight      = w->serverHeight;
     w->syncBorderWidth = w->serverBorderWidth;
-
-	if (w->attrib.override_redirect)
-	{
-		syncWaitTimeout(w);
-	}
-	else
-	{
-		if (!w->syncWaitHandle)
-			w->syncWaitHandle = compAddTimeout (1000, 1200, syncWaitTimeout, w);
-	}
 }
 
 void
