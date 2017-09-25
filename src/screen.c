@@ -697,7 +697,6 @@ const CompMetadataOptionInfo coreScreenOptionInfo[COMP_SCREEN_OPTION_NUM] = {
     { "unredirect_fullscreen_windows", "bool", 0, 0, 0 },
     { "default_icon", "string", 0, 0, 0 },
     { "sync_to_vblank", "bool", 0, 0, 0 },
-    { "__padding__", "bool", 0, 0, 0 },
     { "detect_outputs", "bool", 0, 0, 0 },
     { "outputs", "list", "<type>string</type>", 0, 0 },
     { "overlapping_outputs", "int",
