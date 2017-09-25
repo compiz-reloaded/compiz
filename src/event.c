@@ -83,11 +83,6 @@ handleSyncAlarm (CompWindow *w)
 {
     if (w->syncWait)
     {
-	if (w->syncWaitHandle)
-	{
-	    compRemoveTimeout (w->syncWaitHandle);
-	    w->syncWaitHandle = 0;
-	}
 
 	w->syncWait = FALSE;
 

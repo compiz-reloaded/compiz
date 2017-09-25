@@ -1538,9 +1538,6 @@ freeWindow (CompWindow *w)
     if (w->syncAlarm)
 	XSyncDestroyAlarm (w->screen->display->display, w->syncAlarm);
 
-    if (w->syncWaitHandle)
-	compRemoveTimeout (w->syncWaitHandle);
-
     destroyTexture (w->screen, w->texture);
 
     if (w->frame)
@@ -2143,7 +2140,6 @@ addWindow (CompScreen *screen,
 
     w->syncAlarm      = None;
     w->syncCounter    = 0;
-    w->syncWaitHandle = 0;
 
     w->closeRequests	    = 0;
     w->lastCloseRequestTime = 0;
@@ -2538,7 +2534,6 @@ syncWaitTimeout (void *closure)
 {
     CompWindow *w = closure;
 
-    w->syncWaitHandle = 0;
     handleSyncAlarm (w);
 
     return FALSE;

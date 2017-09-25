@@ -2656,7 +2656,6 @@ struct _CompWindow {
     XSyncValue	  syncValue;
     XSyncAlarm	  syncAlarm;
     unsigned long syncAlarmConnection;
-    unsigned int  syncWaitHandle;
 
     Bool syncWait;
     int	 syncX;
