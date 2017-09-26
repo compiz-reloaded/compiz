@@ -1246,6 +1246,7 @@ addSupportedAtoms (CompScreen   *s,
 
     atoms[count++] = d->wmUserTimeAtom;
     atoms[count++] = d->frameExtentsAtom;
+    atoms[count++] = d->gtkFrameExtentsAtom;
     atoms[count++] = d->frameWindowAtom;
 
     atoms[count++] = d->winStateAtom;
