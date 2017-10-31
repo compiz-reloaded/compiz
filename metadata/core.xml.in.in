@@ -315,6 +315,33 @@
 		    <_long>Windows to prevent grabbing keyboard focus</_long>
 		    <default>any</default>
 		</option>
+		<option name="inverted_focus_prevention_level" type="int">
+		    <_short>Non-matched Windows Focus-Stealing Prevention Level</_short>
+		    <_long>Level of focus stealing prevention for windows not matched by the focus stealing prevention match</_long>
+		    <min>0</min>
+		    <max>4</max>
+		    <default>4</default>
+		    <desc>
+			<value>0</value>
+			<_name>Off</_name>
+		    </desc>
+		    <desc>
+			<value>1</value>
+			<_name>Low</_name>
+		    </desc>
+		    <desc>
+			<value>2</value>
+			<_name>Normal</_name>
+		    </desc>
+		    <desc>
+			<value>3</value>
+			<_name>High</_name>
+		    </desc>
+		    <desc>
+			<value>4</value>
+			<_name>Very High</_name>
+		    </desc>
+		</option>
 	    </group>
 	    <option name="unredirect_fullscreen_windows" type="bool">
 		<_short>Unredirect Fullscreen Windows</_short>

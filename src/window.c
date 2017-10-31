@@ -5103,21 +5103,47 @@ isWindowFocusAllowed (CompWindow   *w,
     CompDisplay  *d = w->screen->display;
     CompScreen   *s = w->screen;
     CompWindow   *active;
-    Time	 aUserTime;
+    Time         aUserTime;
     CompMatch    *match;
-    int          level, vx, vy;
+    int          level, nonMatchedLevel, vx, vy;
+    Bool         matched, matchedNone, matchedNormal, matchedHigh,
+	matchedVeryHigh, nonMatchedNone, nonMatchedNormal, nonMatchedHigh,
+	nonMatchedVeryHigh;
 
     level = s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_LEVEL].value.i;
+    nonMatchedLevel =
+	s->opt[COMP_SCREEN_OPTION_INVERTED_FOCUS_PREVENTION_LEVEL].value.i;
 
-    if (level == FOCUS_PREVENTION_LEVEL_NONE)
-	return TRUE;
-
-    /* allow focus for excluded windows */
     match = &s->opt[COMP_SCREEN_OPTION_FOCUS_PREVENTION_MATCH].value.match;
-    if (!matchEval (match, w))
+    matched = matchEval (match, w);
+
+    /* These values indicate that the window was matched, and the
+	corresponding prevention level should apply to it. */
+    matchedNone = matched &&
+	(level == FOCUS_PREVENTION_LEVEL_NONE);
+    matchedNormal = matched &&
+	(level == FOCUS_PREVENTION_LEVEL_NORMAL);
+    matchedHigh = matched &&
+	(level == FOCUS_PREVENTION_LEVEL_HIGH);
+    matchedVeryHigh = matched &&
+	(level == FOCUS_PREVENTION_LEVEL_VERYHIGH);
+
+    /* These values indicate that the window wasn't matched, but
+	the corresponding prevention level should apply to it. */
+    nonMatchedNone = (!matched) &&
+	(nonMatchedLevel == FOCUS_PREVENTION_LEVEL_NONE);
+    nonMatchedNormal = (!matched) &&
+	(nonMatchedLevel == FOCUS_PREVENTION_LEVEL_NORMAL);
+    nonMatchedHigh = (!matched) &&
+	(nonMatchedLevel == FOCUS_PREVENTION_LEVEL_HIGH);
+    nonMatchedVeryHigh = (!matched) &&
+	(nonMatchedLevel == FOCUS_PREVENTION_LEVEL_VERYHIGH);
+
+    /* allow focus for excluded windows if nonMatchedLevel is none */
+    if (matchedNone || nonMatchedNone)
 	return TRUE;
 
-    if (level == FOCUS_PREVENTION_LEVEL_VERYHIGH)
+    if (matchedVeryHigh || nonMatchedVeryHigh)
 	return FALSE;
 
     active = findWindowAtDisplay (d, d->activeWindow);
@@ -5130,7 +5156,7 @@ isWindowFocusAllowed (CompWindow   *w,
     if (w->clientLeader == active->clientLeader)
 	return TRUE;
 
-    if (level == FOCUS_PREVENTION_LEVEL_HIGH)
+    if (matchedHigh || nonMatchedHigh)
 	return FALSE;
 
     /* not in current viewport or desktop */
@@ -5145,7 +5171,7 @@ isWindowFocusAllowed (CompWindow   *w,
     {
 	/* unsure as we have nothing to compare - allow focus in low level,
 	   don't allow in normal level */
-	if (level == FOCUS_PREVENTION_LEVEL_NORMAL)
+	if (matchedNormal || nonMatchedNormal)
 	    return FALSE;
 
 	return TRUE;
