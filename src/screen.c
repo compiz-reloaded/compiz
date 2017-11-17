@@ -4235,6 +4235,22 @@ viewportForGeometry (CompScreen *s,
 }
 
 static int
+centerDistance (BOX *rect1,
+		      BOX *rect2)
+{
+    int c1x, c1y, c2x, c2y;
+
+    /* calculate center points */
+    c1x = (rect1->x1 + rect1->x2) / 2;
+    c1y = (rect1->y1 + rect1->y2) / 2;
+    c2x = (rect2->x1 + rect2->x2) / 2;
+    c2y = (rect2->y1 + rect2->y2) / 2;
+
+	/* return distance */
+    return sqrt(pow((c1x - c2x), 2) + pow((c1y - c2y), 2));
+}
+
+static int
 rectangleOverlapArea (BOX *rect1,
 		      BOX *rect2)
 {
@@ -4295,9 +4311,29 @@ outputDeviceForGeometry (CompScreen *s,
     }
 
     /* get amount of overlap on all output devices */
-    for (i = 0; i < s->nOutputDev; i++)
+    highest = 0;
+    for (i = 0; i < s->nOutputDev; i++) {
 	overlapAreas[i] = rectangleOverlapArea (&s->outputDev[i].region.extents,
 						&geomRect);
+	highest += overlapAreas[i];
+	}
+
+	/* if did not overlap any outputs, choose output nearest to center */
+	if (highest == 0)
+	{
+		int dist, shortest = INT_MAX;
+		for (i = 0; i < s->nOutputDev; i++)
+		{
+			dist = centerDistance(&s->outputDev[i].region.extents, &geomRect);
+			if (dist < shortest)
+			{
+				shortest = dist;
+				highest = i;
+			}
+		}
+	}
+	else
+	{
 
     /* find output with largest overlap */
     for (i = 0, highest = 0, highestScore = 0; i < s->nOutputDev; i++)
@@ -4345,6 +4381,7 @@ outputDeviceForGeometry (CompScreen *s,
 		}
 	    }
     }
+	}
 
     return highest;
 }
