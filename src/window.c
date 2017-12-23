@@ -1046,7 +1046,7 @@ getMwmHints (CompDisplay  *display,
     *decor = MwmDecorAll;
 
     result = XGetWindowProperty (display->display, id, display->mwmHintsAtom,
-				 0L, 20L, FALSE, display->mwmHintsAtom,
+				 0L, 20L, FALSE, AnyPropertyType,
 				 &actual, &format, &n, &left, &data);
 
     if (result == Success && data)
