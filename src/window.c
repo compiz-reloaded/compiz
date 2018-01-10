@@ -3901,9 +3901,6 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
-
-		y = w->screen->y;
-
 		if (oldY < y + workArea.y + w->input.top)
 		{
 		    xwc->y = y + workArea.y + w->input.top;
@@ -3931,9 +3928,6 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
 	    {
-
-		x = w->screen->x;
-
 		if (oldX < x + workArea.x + w->input.left)
 		{
 		    xwc->x = x + workArea.x + w->input.left;
