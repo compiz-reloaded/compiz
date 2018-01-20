@@ -1328,6 +1328,7 @@ resizePaintRectangle (CompScreen              *s,
 {
     BoxRec        box;
     CompTransform sTransform = *transform;
+    GLint srcAlpha, dstAlpha;
 
     resizeGetPaintRectangle (s->display, &box);
 
@@ -1339,6 +1340,8 @@ resizePaintRectangle (CompScreen              *s,
 
     glDisableClientState (GL_TEXTURE_COORD_ARRAY);
     glEnable (GL_BLEND);
+    glGetIntegerv(GL_BLEND_SRC_ALPHA, &srcAlpha);
+    glGetIntegerv(GL_BLEND_DST_ALPHA, &dstAlpha);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     /* fill rectangle */
@@ -1360,6 +1363,7 @@ resizePaintRectangle (CompScreen              *s,
 
     /* clean up */
     glColor4usv (defaultColor);
+    glBlendFunc (srcAlpha, dstAlpha);
     glDisable (GL_BLEND);
     glEnableClientState (GL_TEXTURE_COORD_ARRAY);
     glPopMatrix ();
