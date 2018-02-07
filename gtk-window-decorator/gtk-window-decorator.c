@@ -7326,7 +7326,21 @@ main (int argc, char *argv[])
     gdk_x11_display_set_window_scale(gdkdisplay, 1);
 #endif
 
-    frame_window_atom	= XInternAtom (xdisplay, DECOR_INPUT_FRAME_ATOM_NAME, FALSE);
+    /* fix issue with window decoration update in build-in cairo theme,
+     * by using old window frame identifier */
+    frame_window_atom = XInternAtom (xdisplay, "_NET_FRAME_WINDOW", FALSE);
+    /* if meta_theme present use DECOR_INPUT_FRAME_ATOM_NAME */
+#ifdef USE_MARCO
+    if (meta_theme != NULL)
+    {
+	meta_theme_set_current (meta_theme, TRUE);
+	if (meta_theme_get_current ())
+	{
+            frame_window_atom = XInternAtom (xdisplay, DECOR_INPUT_FRAME_ATOM_NAME, FALSE);
+	}
+    }
+#endif
+
     win_decor_atom	= XInternAtom (xdisplay, DECOR_WINDOW_ATOM_NAME, FALSE);
     win_blur_decor_atom	= XInternAtom (xdisplay, DECOR_BLUR_ATOM_NAME, FALSE);
     wm_move_resize_atom = XInternAtom (xdisplay, "_NET_WM_MOVERESIZE", FALSE);
