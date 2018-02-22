@@ -143,6 +143,7 @@ typedef struct _CompWalker        CompWalker;
 #define CompWindowStateBelowMask	    (1 << 10)
 #define CompWindowStateDemandsAttentionMask (1 << 11)
 #define CompWindowStateDisplayModalMask	    (1 << 12)
+#define CompWindowStateFocusedMask	    (1 <<  13)
 
 #define MAXIMIZE_STATE (CompWindowStateMaximizedHorzMask | \
 			CompWindowStateMaximizedVertMask)
@@ -939,6 +940,7 @@ struct _CompDisplay {
 
     Atom winStateAtom;
     Atom winStateModalAtom;
+    Atom winStateFocusedAtom;
     Atom winStateStickyAtom;
     Atom winStateMaximizedVertAtom;
     Atom winStateMaximizedHorzAtom;
@@ -2597,6 +2599,7 @@ struct _CompWindow {
     Bool	      damaged;
     Bool	      redirected;
     Bool	      managed;
+    Bool	      focused;
     Bool	      unmanaging;
     Bool	      bindFailed;
     Bool	      overlayWindow;

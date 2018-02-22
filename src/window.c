@@ -595,6 +595,8 @@ windowStateMask (CompDisplay *display,
 	return CompWindowStateDemandsAttentionMask;
     else if (state == display->winStateDisplayModalAtom)
 	return CompWindowStateDisplayModalMask;
+    else if (state == display->winStateFocusedAtom)
+	return CompWindowStateFocusedMask;
 
     return 0;
 }
@@ -604,6 +606,8 @@ windowStateFromString (const char *str)
 {
     if (strcasecmp (str, "modal") == 0)
 	return CompWindowStateModalMask;
+    else if (strcasecmp (str, "focused") == 0)
+	return CompWindowStateFocusedMask;
     else if (strcasecmp (str, "sticky") == 0)
 	return CompWindowStateStickyMask;
     else if (strcasecmp (str, "maxvert") == 0)
@@ -667,6 +671,8 @@ setWindowState (CompDisplay  *display,
 
     if (state & CompWindowStateModalMask)
 	data[i++] = display->winStateModalAtom;
+    if (state & CompWindowStateFocusedMask)
+	data[i++] = display->winStateFocusedAtom;
     if (state & CompWindowStateStickyMask)
 	data[i++] = display->winStateStickyAtom;
     if (state & CompWindowStateMaximizedVertMask)
@@ -2078,6 +2084,7 @@ addWindow (CompScreen *screen,
     w->damaged    = FALSE;
     w->redirected = TRUE;
     w->managed    = FALSE;
+    w->focused    = FALSE;
     w->unmanaging = FALSE;
     w->bindFailed = FALSE;
 
