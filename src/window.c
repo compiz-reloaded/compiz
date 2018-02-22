@@ -2084,7 +2084,6 @@ addWindow (CompScreen *screen,
     w->damaged    = FALSE;
     w->redirected = TRUE;
     w->managed    = FALSE;
-    w->focused    = FALSE;
     w->unmanaging = FALSE;
     w->bindFailed = FALSE;
 

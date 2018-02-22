@@ -2599,7 +2599,6 @@ struct _CompWindow {
     Bool	      damaged;
     Bool	      redirected;
     Bool	      managed;
-    Bool	      focused;
     Bool	      unmanaging;
     Bool	      bindFailed;
     Bool	      overlayWindow;
