@@ -2226,6 +2226,7 @@ handleEvent (CompDisplay *d,
 		d->nextActiveWindow = None;
 	}
 
+
 	if (w)
 	{
 		CompWindow *tmp;
@@ -2235,8 +2236,8 @@ handleEvent (CompDisplay *d,
 			{
 				for (tmp = s->windows; tmp; tmp = tmp->next)
 				{
-					/* Unset focused bit for all windows */
-					if (tmp->state & CompWindowStateFocusedMask)
+					/* Unset focused bit for all windows except type dock and splash */
+					if ((tmp->state & CompWindowStateFocusedMask) && !(tmp->type & APPEAR_FOCUSED_MASK))
 						changeWindowState (tmp, tmp->state & ~CompWindowStateFocusedMask);
 				}
 			}
