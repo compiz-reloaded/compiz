@@ -323,7 +323,7 @@ resizeFinishResizing (CompDisplay *d)
 }
 
 static Region
-resizeGetConstraintRegion (CompScreen *s)
+resizeGetConstraintRegion (CompWindow *w, CompScreen *s)
 {
     Region       region;
     int          i;
@@ -332,9 +332,22 @@ resizeGetConstraintRegion (CompScreen *s)
     if (!region)
 	return NULL;
 
-    for (i = 0; i < s->nOutputDev; i++)
-	XUnionRectWithRegion (&s->outputDev[i].workArea, region, region);
-
+    for (i = 0; i < s->nOutputDev; i++){
+    if (w->clientFrame.left > 0){ /*ensure normal .ssd windows don't over-maximize with this check*/
+        if ((w->state & MAXIMIZE_STATE) != MAXIMIZE_STATE){
+            s->outputDev[i].workArea.x = s->outputDev[i].workArea.x - w->clientFrame.left;
+            s->outputDev[i].workArea.width = s->outputDev[i].workArea.width + (w->clientFrame.right * 2);
+            s->outputDev[i].workArea.y = s->outputDev[i].workArea.y - w->clientFrame.top;
+            s->outputDev[i].workArea.height = s->outputDev[i].workArea.height + (w->clientFrame.bottom);
+            }
+        else{
+            s->outputDev[i].workArea.x = s->outputDev[i].workArea.x + w->clientFrame.left;
+            s->outputDev[i].workArea.width = s->outputDev[i].workArea.width - (w->clientFrame.right * 2);
+            s->outputDev[i].workArea.y = s->outputDev[i].workArea.y + w->clientFrame.top;
+            s->outputDev[i].workArea.height = s->outputDev[i].workArea.height - (w->clientFrame.bottom * 2);
+            }
+        }
+    }
     return region;
 }
 
@@ -533,7 +546,7 @@ resizeInitiate (CompDisplay     *d,
 		rd->lastGoodHotSpotY = -1;
 		rd->lastGoodWidth    = w->serverWidth;
 		rd->lastGoodHeight   = w->serverHeight;
-		rd->constraintRegion = resizeGetConstraintRegion (w->screen);
+		rd->constraintRegion = resizeGetConstraintRegion (w, w->screen);
 	    }
 	    else
 	    {
