@@ -333,21 +333,13 @@ resizeGetConstraintRegion (CompWindow *w, CompScreen *s)
 	return NULL;
 
     for (i = 0; i < s->nOutputDev; i++){
-    if (w->clientFrame.left > 0){ /*ensure normal .ssd windows don't over-maximize with this check*/
-        if ((w->state & MAXIMIZE_STATE) != MAXIMIZE_STATE){
-            s->outputDev[i].workArea.x = s->outputDev[i].workArea.x - w->clientFrame.left;
-            s->outputDev[i].workArea.width = s->outputDev[i].workArea.width + (w->clientFrame.right * 2);
-            s->outputDev[i].workArea.y = s->outputDev[i].workArea.y - w->clientFrame.top;
-            s->outputDev[i].workArea.height = s->outputDev[i].workArea.height + (w->clientFrame.bottom);
-            }
-        else{
             s->outputDev[i].workArea.x = s->outputDev[i].workArea.x + w->clientFrame.left;
-            s->outputDev[i].workArea.width = s->outputDev[i].workArea.width - (w->clientFrame.right * 2);
+            s->outputDev[i].workArea.width = s->outputDev[i].workArea.width
+                                             - (w->clientFrame.left + w->clientFrame.right);
             s->outputDev[i].workArea.y = s->outputDev[i].workArea.y + w->clientFrame.top;
-            s->outputDev[i].workArea.height = s->outputDev[i].workArea.height - (w->clientFrame.bottom * 2);
+            s->outputDev[i].workArea.height = s->outputDev[i].workArea.height
+                                            - (w->clientFrame.top + w->clientFrame.bottom);
             }
-        }
-    }
     return region;
 }
 
