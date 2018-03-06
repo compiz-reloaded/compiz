@@ -2097,6 +2097,9 @@ handleEvent (CompDisplay *d,
 	{
 	    XMapWindow (d->display, event->xmaprequest.window);
 	}
+    /*Focus all docks and panels*/
+    if (w->type & APPEAR_FOCUSED_MASK)
+         changeWindowState (w, w->state | CompWindowStateFocusedMask);
 	break;
     case ConfigureRequest:
 	w = findWindowAtDisplay (d, event->xconfigurerequest.window);
