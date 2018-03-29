@@ -2652,6 +2652,10 @@ struct _CompWindow {
     XWindowChanges saveWc;
     int		   saveMask;
 
+    /* For saving changes before fullscreen */
+    XWindowChanges saveFFWc;
+    int		   savedFF;
+
     XSyncCounter  syncCounter;
     XSyncValue	  syncValue;
     XSyncAlarm	  syncAlarm;

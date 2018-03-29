@@ -2208,6 +2208,7 @@ addWindow (CompScreen *screen,
     w->syncBorderWidth = w->attrib.border_width;
 
     w->saveMask = 0;
+    w->savedFF = 0;
 
     XSelectInput (d->display, id,
 		  PropertyChangeMask |
@@ -3543,6 +3544,43 @@ validSiblingBelow (CompWindow *w,
 }
 
 static void
+saveWindowGeometryFF (CompWindow *w)
+{
+    if (w->savedFF)
+	return;
+
+    /* only save geometry if window has been placed */
+    if (!w->placed)
+	return;
+
+    w->saveFFWc.x = w->serverX;
+    w->saveFFWc.y = w->serverY;
+    w->saveFFWc.width = w->serverWidth;
+    w->saveFFWc.height = w->serverHeight;
+    w->saveFFWc.border_width = w->serverBorderWidth;
+
+    w->savedFF = 1;
+}
+
+static int
+restoreWindowGeometryFF (CompWindow     *w,
+		       XWindowChanges *xwc)
+{
+    if (!w->savedFF)
+	return 0;
+
+    xwc->x = w->saveFFWc.x;
+    xwc->y = w->saveFFWc.y;
+    xwc->width = w->saveFFWc.width;
+    xwc->height = w->saveFFWc.height;
+    xwc->border_width = w->saveFFWc.border_width;
+
+    w->savedFF = 0;
+
+    return CWX | CWY | CWWidth | CWHeight | CWBorderWidth;
+}
+
+static void
 saveWindowGeometry (CompWindow *w,
 		    int	       mask)
 {
@@ -3779,7 +3817,7 @@ addWindowSizeChanges (CompWindow     *w,
 
     if (w->type & CompWindowTypeFullscreenMask)
     {
-	saveWindowGeometry (w, CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+	saveWindowGeometryFF (w);
 
 	if (w->fullscreenMonitorsSet)
 	{
@@ -3802,9 +3840,9 @@ addWindowSizeChanges (CompWindow     *w,
     }
     else
     {
-	mask |= restoreWindowGeometry (w, xwc, CWBorderWidth);
-
 	int lastState = w->state >> 16;
+
+	mask |= restoreWindowGeometry (w, xwc, CWBorderWidth);
 
 	if (w->state & CompWindowStateMaximizedVertMask)
 	{
@@ -3841,6 +3879,11 @@ addWindowSizeChanges (CompWindow     *w,
 		!(w->state & CompWindowStateMaximizedHorzMask))
 	{
 	    mask |= restoreWindowGeometry (w, xwc, CWX | CWY | CWWidth | CWHeight);
+	}
+
+	if (lastState & CompWindowStateFullscreenMask)
+	{
+		mask |= restoreWindowGeometryFF (w, xwc);
 	}
 
 	/* constrain window width if smaller than minimum width */
