@@ -1250,6 +1250,7 @@ addSupportedAtoms (CompScreen   *s,
 
     atoms[count++] = d->winStateAtom;
     atoms[count++] = d->winStateModalAtom;
+    atoms[count++] = d->winStateFocusedAtom;
     atoms[count++] = d->winStateStickyAtom;
     atoms[count++] = d->winStateMaximizedVertAtom;
     atoms[count++] = d->winStateMaximizedHorzAtom;

@@ -129,7 +129,8 @@ typedef struct _CompWalker        CompWalker;
 #define NO_FOCUS_MASK (CompWindowTypeDesktopMask | \
 		       CompWindowTypeDockMask    | \
 		       CompWindowTypeSplashMask)
-
+#define APPEAR_FOCUSED_MASK (CompWindowTypeDockMask | \
+		       CompWindowTypeSplashMask)
 #define CompWindowStateModalMask	    (1 <<  0)
 #define CompWindowStateStickyMask	    (1 <<  1)
 #define CompWindowStateMaximizedVertMask    (1 <<  2)
@@ -143,6 +144,7 @@ typedef struct _CompWalker        CompWalker;
 #define CompWindowStateBelowMask	    (1 << 10)
 #define CompWindowStateDemandsAttentionMask (1 << 11)
 #define CompWindowStateDisplayModalMask	    (1 << 12)
+#define CompWindowStateFocusedMask	    (1 <<  13)
 
 #define MAXIMIZE_STATE (CompWindowStateMaximizedHorzMask | \
 			CompWindowStateMaximizedVertMask)
@@ -939,6 +941,7 @@ struct _CompDisplay {
 
     Atom winStateAtom;
     Atom winStateModalAtom;
+    Atom winStateFocusedAtom;
     Atom winStateStickyAtom;
     Atom winStateMaximizedVertAtom;
     Atom winStateMaximizedHorzAtom;

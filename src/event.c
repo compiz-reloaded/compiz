@@ -2097,6 +2097,9 @@ handleEvent (CompDisplay *d,
 	{
 	    XMapWindow (d->display, event->xmaprequest.window);
 	}
+    /*Focus all docks and panels*/
+    if (w->type & APPEAR_FOCUSED_MASK)
+         changeWindowState (w, w->state | CompWindowStateFocusedMask);
 	break;
     case ConfigureRequest:
 	w = findWindowAtDisplay (d, event->xconfigurerequest.window);
@@ -2182,9 +2185,9 @@ handleEvent (CompDisplay *d,
     case CirculateRequest:
 	break;
     case FocusIn:
+    w = findTopLevelWindowAtDisplay (d, event->xfocus.window);
 	if (event->xfocus.mode != NotifyGrab)
 	{
-	    w = findTopLevelWindowAtDisplay (d, event->xfocus.window);
 	    if (w && w->managed)
 	    {
 		unsigned int state = w->state;
@@ -2224,6 +2227,27 @@ handleEvent (CompDisplay *d,
 
 	    if (d->nextActiveWindow == event->xfocus.window)
 		d->nextActiveWindow = None;
+	}
+
+
+	if (w)
+	{
+		CompWindow *tmp;
+		for (s = d->screens; s; s = s->next)
+		{
+			if (s)
+			{
+				for (tmp = s->windows; tmp; tmp = tmp->next)
+				{
+					/* Unset focused bit for all windows except type dock and splash */
+					if ((tmp->state & CompWindowStateFocusedMask) && !(tmp->type & APPEAR_FOCUSED_MASK))
+						changeWindowState (tmp, tmp->state & ~CompWindowStateFocusedMask);
+				}
+			}
+		}
+
+		/* Set the focused window state atom */
+		changeWindowState (w, w->state | CompWindowStateFocusedMask);
 	}
 	break;
     case EnterNotify:
