@@ -4,11 +4,11 @@
  *
  * wall.c
  *
- * Copyright (c) 2006 Robert Carr <racarr@beryl-project.org>
+ * Copyright (c) 2006 Robert Carr <racarr@canonical.com>
  *
  * Authors:
- * Robert Carr <racarr@beryl-project.org>
- * Dennis Kasprzyk <onestone@opencompositing.org>
+ * Robert Carr <racarr@canonical.com>
+ * Dennis Kasprzyk <onestone@compiz.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
