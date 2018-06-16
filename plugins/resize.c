@@ -323,18 +323,36 @@ resizeFinishResizing (CompDisplay *d)
 }
 
 static Region
-resizeGetConstraintRegion (CompScreen *s)
+resizeGetConstraintRegion (CompWindow *w, CompScreen *s)
 {
     Region       region;
-    int          i;
+    int          i , TempX, TempY, TempWidth, TempHeight;
 
     region = XCreateRegion ();
     if (!region)
 	return NULL;
+    for (i = 0; i < s->nOutputDev; i++){
+        /*Save the original values here*/
+        TempX = s->outputDev[i].workArea.x;
+        TempY = s->outputDev[i].workArea.y;
+        TempWidth = s->outputDev[i].workArea.width;
+        TempHeight = s->outputDev[i].workArea.height;
+        /*Allow for GtkFrameExtents*/
+        s->outputDev[i].workArea.x = s->outputDev[i].workArea.x - w->clientFrame.left;
+        s->outputDev[i].workArea.width = s->outputDev[i].workArea.width
+                                         + (w->clientFrame.left + w->clientFrame.right);
+        s->outputDev[i].workArea.y = s->outputDev[i].workArea.y - w->clientFrame.top;
+        s->outputDev[i].workArea.height = s->outputDev[i].workArea.height
+                                        + (w->clientFrame.top + w->clientFrame.bottom);
 
-    for (i = 0; i < s->nOutputDev; i++)
-	XUnionRectWithRegion (&s->outputDev[i].workArea, region, region);
+	    XUnionRectWithRegion (&s->outputDev[i].workArea, region, region);
 
+         /*Reset original workarea values*/
+        s->outputDev[i].workArea.x = TempX;
+        s->outputDev[i].workArea.y = TempY;
+        s->outputDev[i].workArea.width = TempWidth;
+        s->outputDev[i].workArea.height = TempHeight;
+        }
     return region;
 }
 
@@ -533,7 +551,7 @@ resizeInitiate (CompDisplay     *d,
 		rd->lastGoodHotSpotY = -1;
 		rd->lastGoodWidth    = w->serverWidth;
 		rd->lastGoodHeight   = w->serverHeight;
-		rd->constraintRegion = resizeGetConstraintRegion (w->screen);
+		rd->constraintRegion = resizeGetConstraintRegion (w, w->screen);
 	    }
 	    else
 	    {

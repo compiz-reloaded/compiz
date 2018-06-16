@@ -979,6 +979,7 @@ struct _CompDisplay {
     Atom clientListStackingAtom;
 
     Atom frameExtentsAtom;
+    Atom gtkFrameExtentsAtom;
     Atom frameWindowAtom;
 
     Atom wmStateAtom;
@@ -2689,6 +2690,7 @@ struct _CompWindow {
     DrawWindowGeometryProc drawWindowGeometry;
 
     /* placed here to preserve ABI compat */
+    CompWindowExtents clientFrame;
     CompWindowExtents frameInput;
 };
 
@@ -2816,6 +2818,9 @@ updateTransientHint (CompWindow *w);
 
 void
 updateIconGeometry (CompWindow *w);
+
+void
+updateClientFrame (CompWindow *w);
 
 Window
 getClientLeader (CompWindow *w);

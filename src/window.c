@@ -450,6 +450,40 @@ updateIconGeometry (CompWindow *w)
     }
 }
 
+void
+updateClientFrame (CompWindow *w)
+{
+    Atom	  actual;
+    int		  result, format;
+    unsigned long n, left;
+    unsigned char *data;
+
+    w->clientFrame.left   = 0;
+    w->clientFrame.right  = 0;
+    w->clientFrame.top    = 0;
+    w->clientFrame.bottom = 0;
+
+    result = XGetWindowProperty (w->screen->display->display, w->id,
+				 w->screen->display->gtkFrameExtentsAtom,
+				 0L, 65536, False, XA_CARDINAL,
+				 &actual, &format, &n, &left, &data);
+
+     if (result == Success && data)
+    {
+	if (n == 4 && actual == XA_CARDINAL)
+	{
+	    unsigned long *extents = *(unsigned long **) &data;
+
+	    w->clientFrame.left   = extents[0];
+	    w->clientFrame.right  = extents[1];
+	    w->clientFrame.top    = extents[2];
+	    w->clientFrame.bottom = extents[3];
+	}
+
+	XFree (data);
+    }
+}
+
 static Window
 getClientLeaderOfAncestor (CompWindow *w)
 {
@@ -2392,6 +2426,7 @@ addWindow (CompScreen *screen,
 
     recalcWindowActions (w);
     updateIconGeometry (w);
+    updateClientFrame (w);
 
     if (w->shaded)
 	resizeWindow (w,
@@ -3814,6 +3849,30 @@ addWindowSizeChanges (CompWindow     *w,
 				      oldHeight,
 				      oldBorderWidth);
     getWorkareaForOutput (w->screen, output, &workArea);
+
+    /*Adjust for GtkFrameExtents when maximized one direction only
+     *                         ****
+	 *FIXME: if a theme author sets different shadow dimensions for
+     *the .tiled style class this will break and left/right tiled
+     *windows end up oversize. That is not normal theming practice
+     *but is a potential source of a bug. Fixing this right may require
+     *supporting _GTK_EDGE_CONSTRAINTS as in Mutter
+     */
+    if (!(w->state & CompWindowStateMaximizedVertMask) &&
+		(w->state & CompWindowStateMaximizedHorzMask)){
+        workArea.x = workArea.x - w ->clientFrame.left;
+        workArea.width = workArea.width +
+            w ->clientFrame.left + w ->clientFrame.right;
+
+	}
+
+    if ((w->state & CompWindowStateMaximizedVertMask) &&
+		!(w->state & CompWindowStateMaximizedHorzMask)){
+        workArea.y = workArea.y - w ->clientFrame.top;
+         workArea.height = workArea.height +
+            w ->clientFrame.top + w ->clientFrame.bottom;
+
+    }
 
     if (w->type & CompWindowTypeFullscreenMask)
     {

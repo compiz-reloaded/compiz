@@ -545,8 +545,8 @@ moveHandleMotionEvent (CompScreen *s,
 		    int x, y, width, height;
 		    int status;
 
-		    x	   = wX + dx - w->input.left;
-		    y	   = wY + dy - w->input.top;
+		    x	   = (wX + dx - w->input.left) + w->clientFrame.left;
+		    y	   = (wY + dy - w->input.top) + w->clientFrame.top;
 		    width  = wWidth + w->input.left + w->input.right;
 		    height = w->input.top ? w->input.top : 1;
 
