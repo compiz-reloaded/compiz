@@ -112,6 +112,9 @@ AC_SUBST(imagedir)
 metadatadir=$datadir/compiz
 AC_SUBST(metadatadir)
 
+pluginiconsdir=$datadir/compiz/icons/hicolor
+AC_SUBST(pluginiconsdir)
+
 COMPIZ_REQUIRES="x11 xcomposite xext xfixes xdamage xrandr xi xinerama xcursor ice sm libxml-2.0 libstartup-notification-1.0 >= 0.7"
 
 PKG_CHECK_MODULES(COMPIZ, [$COMPIZ_REQUIRES])
@@ -448,6 +451,7 @@ libdecoration/libdecoration.pc
 include/Makefile
 plugins/Makefile
 images/Makefile
+icons/Makefile
 gtk-window-decorator/Makefile
 po/Makefile.in
 mate/Makefile
