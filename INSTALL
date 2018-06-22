@@ -3,7 +3,7 @@ ftp://ftp.gnome.org/pub/GNOME/sources/startup-notification/
 
 compiz uses automake, in order to generate the Makefiles for compiz use:
 
-	$ autogen.sh
+	$ ./autogen.sh
 
 After that, standard build procedures apply:
 
