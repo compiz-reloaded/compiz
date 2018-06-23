@@ -32,4 +32,4 @@ icons_DATA =			\
 
 install-data-hook:
 	$(shell which gtk-update-icon-cache &> /dev/null &&	\
-	gtk-update-icon-cache -f -t $(pluginiconsdir))
+	gtk-update-icon-cache -f -t $(DESTDIR)$(pluginiconsdir))
