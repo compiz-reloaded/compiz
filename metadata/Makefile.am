@@ -1,6 +1,5 @@
 xmldir       = $(metadatadir)
 
-
 if ANNOTATE_PLUGIN
 annotate_in = annotate.xml.in
 endif
