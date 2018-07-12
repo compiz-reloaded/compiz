@@ -402,6 +402,8 @@ if test -n "$MAX_DESKTOPS"; then
   AC_DEFINE_UNQUOTED(MAX_DESKTOPS, $MAX_DESKTOPS, [Max reasonable desktops])
 fi
 
+AC_PATH_PROG(UPDATE_ICON_CACHE, gtk-update-icon-cache)
+
 AC_CONFIG_COMMANDS([include/compiz-common.h],
 [
 	commonfile=include/compiz-common.h
