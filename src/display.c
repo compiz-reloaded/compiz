@@ -1535,6 +1535,8 @@ eventLoop (void)
 	    time = timeToNextRedraw;
 	    if (time)
 		time = doPoll (time);
+	    else
+		doPoll (0);
 
 	    if (time == 0)
 	    {
