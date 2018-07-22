@@ -101,9 +101,23 @@ AC_C_BIGENDIAN
 plugindir=$libdir/compiz
 AC_SUBST(plugindir)
 
-AC_ARG_WITH(default-plugins, [  --with-default-plugins=PLUGINS ],
-		       [default_plugins="$withval"],
-		       [default_plugins=""])
+AC_MSG_CHECKING([which plugins to use by default])
+AC_ARG_WITH([default-plugins],
+  [AS_HELP_STRING([--with-default-plugins=PLUGINS], [Plugins to use by default, comma-separated [default=core]])],
+  [
+   case "$withval" in
+   yes|no)
+     default_plugins=core ;;
+   *)
+     if expr "x$withval" : "x[[[:alnum:]]][[[:alnum:]]]*\(,[[[:alnum:]]][[[:alnum:]]]*\)*$" 1> /dev/null; then
+       default_plugins="$withval"
+     else
+       AC_MSG_ERROR([["]$withval["] is not a comma-separated list of plugins])
+     fi ;;
+   esac
+  ],
+  [default_plugins=core])
+AC_MSG_RESULT($default_plugins)
 AC_SUBST(default_plugins)
 
 imagedir=$datadir/compiz
