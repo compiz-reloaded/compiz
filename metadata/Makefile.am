@@ -63,8 +63,8 @@ xml_files    = $(xml_in_files:.xml.in=.xml)
 xml_DATA     = $(xml_files)
 
 core.xml.in: core.xml.in.in Makefile
-	plugin_values=`echo $(default_plugins) | sed 's/\([a-zA-Z0-9]*\)/<value>\1<\/value>/g' | tr ',' '\n' | sed 's/^/\t\t    /g'`; \
-	$(AWK) -v aa="$$plugin_values" '{gsub("\t\t    <default_plugins/>", aa); print }' <$(srcdir)/core.xml.in.in >core.xml.in
+	plugin_values=`echo $(default_plugins) | sed 's/\([[:alnum:]]*\)/<value>\1<\/value>/g' | tr ',' '\n' | sed "s/^/$$(printf '%b' '\t')$$(printf '%b' '\t')    /g"`; \
+	$(AWK) 'BEGIN {repl=ARGV[1]; delete ARGV[1]}; {gsub("\t\t    <default_plugins/>", repl); print}' "$$plugin_values" <$(srcdir)/core.xml.in.in >core.xml.in
 
 @INTLTOOL_XML_RULE@
 
