@@ -4,6 +4,7 @@ desktopfiles_in_files =   \
 EXTRA_DIST =		         \
 	$(desktopfiles_in_files)
 
+if USE_MATE
 desktopfilesdir	      = $(DESTDIR)$(datadir)/applications
 desktopfiles_files    = $(desktopfiles_in_files:.desktop.in=.desktop)
 
@@ -27,3 +28,4 @@ noinst_DATA =		      \
 
 CLEANFILES = 		      \
 	$(desktopfiles_files)
+endif
