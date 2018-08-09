@@ -1,71 +1,71 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="annotate">
-	<_short>Annotate</_short>
-	<_long>Annotate plugin</_long>
+	<short>Annotate</short>
+	<long>Annotate plugin</long>
 	<category>Extras</category>
 	<display>
 	    <option name="initiate_free_draw_button" type="button">
-		<_short>Initiate Free Draw</_short>
-		<_long>Initiate freehand drawing</_long>
+		<short>Initiate Free Draw</short>
+		<long>Initiate freehand drawing</long>
 		<default>&lt;Super&gt;&lt;Alt&gt;Button1</default>
 	    </option>
 	    <option name="initiate_line_button" type="button">
-		<_short>Initiate Line</_short>
-		<_long>Initiate line drawing</_long>
+		<short>Initiate Line</short>
+		<long>Initiate line drawing</long>
 		<default>&lt;Super&gt;&lt;Alt&gt;Button2</default>
 	    </option>
 	    <option name="initiate_rectangle_button" type="button">
-		<_short>Initiate Rectangle</_short>
-		<_long>Initiate rectangle drawing</_long>
+		<short>Initiate Rectangle</short>
+		<long>Initiate rectangle drawing</long>
 		<default>&lt;Super&gt;&lt;Alt&gt;&lt;Shift&gt;Button1</default>
 	    </option>
 	    <option name="initiate_ellipse_button" type="button">
-		<_short>Initiate Ellipse</_short>
-		<_long>Initiate ellipse drawing</_long>
+		<short>Initiate Ellipse</short>
+		<long>Initiate ellipse drawing</long>
 		<default>&lt;Super&gt;&lt;Alt&gt;&lt;Shift&gt;Button2</default>
 	    </option>
 	    <option name="draw" type="action">
-		<_short>Draw</_short>
-		<_long>Draw using tool</_long>
+		<short>Draw</short>
+		<long>Draw using tool</long>
 		<allowed/>
 	    </option>
 	    <option name="erase_button" type="button">
-		<_short>Initiate erase</_short>
-		<_long>Initiate annotate erasing</_long>
+		<short>Initiate erase</short>
+		<long>Initiate annotate erasing</long>
 		<default>&lt;Super&gt;&lt;Alt&gt;Button3</default>
 	    </option>
 	    <option name="clear_key" type="key">
-		<_short>Clear</_short>
-		<_long>Clear</_long>
+		<short>Clear</short>
+		<long>Clear</long>
 		<default>&lt;Super&gt;&lt;Alt&gt;k</default>
 	    </option>
 	    <option name="clear_button" type="button">
-		<_short>Clear</_short>
-		<_long>Clear</_long>
+		<short>Clear</short>
+		<long>Clear</long>
 	    </option>
 	    <option name="center_key" type="key">
-		<_short>Toggle center shape</_short>
-		<_long>Toggle whether the current shape is drawn using the center of your initial click</_long>
+		<short>Toggle center shape</short>
+		<long>Toggle whether the current shape is drawn using the center of your initial click</long>
 		<default>&lt;Super&gt;&lt;Alt&gt;c</default>
 	    </option>
 	    <option name="fill_color" type="color">
-		<_short>Annotate Fill Color</_short>
-		<_long>Fill color for annotations</_long>
+		<short>Annotate Fill Color</short>
+		<long>Fill color for annotations</long>
 		<default>
 		    <red>0xffff</red>
 		</default>
 	    </option>
 	    <option name="stroke_color" type="color">
-		<_short>Annotate Stroke Color</_short>
-		<_long>Stroke color for annotations</_long>
+		<short>Annotate Stroke Color</short>
+		<long>Stroke color for annotations</long>
 		<default>
 		    <green>0xffff</green>
 		</default>
 	    </option>
 	    <option name="stroke_width" type="float">
-		<_short>Stroke width</_short>
-		<_long>Stroke width for annotations</_long>
+		<short>Stroke width</short>
+		<long>Stroke width for annotations</long>
 		<default>3.0</default>
 		<min>0.1</min>
 		<max>20.0</max>

@@ -66,13 +66,13 @@ core.xml.in: core.xml.in.in Makefile
 	plugin_values=`echo $(default_plugins) | sed 's/\([[:alnum:]]*\)/<value>\1<\/value>/g' | tr ',' '\n' | sed "s/^/$$(printf '%b' '\t')$$(printf '%b' '\t')    /g"`; \
 	$(AWK) 'BEGIN {repl=ARGV[1]; delete ARGV[1]}; {gsub("\t\t    <default_plugins/>", repl); print}' "$$plugin_values" <$(srcdir)/core.xml.in.in >core.xml.in
 
-@INTLTOOL_XML_RULE@
+%.xml: %.xml.in
+	GETTEXTDATADIR=$(top_srcdir)/gettext $(AM_V_GEN)$(MSGFMT) --xml --template $< -d $(top_srcdir)/po -o $@
 
 EXTRA_DIST =		    \
 	$(xml_in_files)     \
 	core.xml.in.in
 
-DISTCLEANFILES =	    \
-	$(xml_files)        \
+CLEANFILES =	     \
+	$(xml_files) \
 	core.xml.in
-

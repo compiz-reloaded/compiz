@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <compiz>
     <plugin name="obs">
-	<_short>Opacity, Brightness and Saturation</_short>
-	<_long>Opacity, Brightness and Saturation adjustments</_long>
+	<short>Opacity, Brightness and Saturation</short>
+	<long>Opacity, Brightness and Saturation adjustments</long>
 	<category>Accessibility</category>
     	<deps>
 	    <relation type="after">
@@ -12,96 +12,96 @@
 	</deps>
 	<display>
 	    <group>
-		<_short>Opacity</_short>
+		<short>Opacity</short>
 		<option name="opacity_increase_key" type="key">
-		    <_short>Increase Opacity</_short>
-		    <_long>Opacity Increase</_long>
+		    <short>Increase Opacity</short>
+		    <long>Opacity Increase</long>
 		    <default/>
 		</option>
 		<option name="opacity_increase_button" type="button">
-		    <_short>Increase Opacity</_short>
-		    <_long>Opacity Increase</_long>
+		    <short>Increase Opacity</short>
+		    <long>Opacity Increase</long>
 		    <default>&lt;Alt&gt;Button4</default>
 		</option>
 		<option name="opacity_decrease_key" type="key">
-		    <_short>Decrease Opacity</_short>
-		    <_long>Opacity Decrease</_long>
+		    <short>Decrease Opacity</short>
+		    <long>Opacity Decrease</long>
 		    <default/>
 		</option>
 		<option name="opacity_decrease_button" type="button">
-		    <_short>Decrease Opacity</_short>
-		    <_long>Opacity Decrease</_long>
+		    <short>Decrease Opacity</short>
+		    <long>Opacity Decrease</long>
 		    <default>&lt;Alt&gt;Button5</default>
 		</option>
 	    </group>
 	    <group>
-		<_short>Brightness</_short>
+		<short>Brightness</short>
 		<option name="brightness_increase_key" type="key">
-		    <_short>Increase Brightness</_short>
-		    <_long>Brightness Increase</_long>
+		    <short>Increase Brightness</short>
+		    <long>Brightness Increase</long>
 		    <default/>
 		</option>
 		<option name="brightness_increase_button" type="button">
-		    <_short>Increase Brightness</_short>
-		    <_long>Brightness Increase</_long>
+		    <short>Increase Brightness</short>
+		    <long>Brightness Increase</long>
 		    <default/>
 		</option>
 		<option name="brightness_decrease_key" type="key">
-		    <_short>Decrease Brightness</_short>
-		    <_long>Brightness Decrease</_long>
+		    <short>Decrease Brightness</short>
+		    <long>Brightness Decrease</long>
 		    <default/>
 		</option>
 		<option name="brightness_decrease_button" type="button">
-		    <_short>Decrease Brightness</_short>
-		    <_long>Brightness Decrease</_long>
+		    <short>Decrease Brightness</short>
+		    <long>Brightness Decrease</long>
 		    <default/>
 		</option>
 	    </group>
 	    <group>
-		<_short>Saturation</_short>
+		<short>Saturation</short>
 		<option name="saturation_increase_key" type="key">
-		    <_short>Increase Saturation</_short>
-		    <_long>Saturation Increase</_long>
+		    <short>Increase Saturation</short>
+		    <long>Saturation Increase</long>
 		    <default/>
 		</option>
 		<option name="saturation_increase_button" type="button">
-		    <_short>Increase Saturation</_short>
-		    <_long>Saturation Increase</_long>
+		    <short>Increase Saturation</short>
+		    <long>Saturation Increase</long>
 		    <default/>
 		</option>
 		<option name="saturation_decrease_key" type="key">
-		    <_short>Decrease Saturation</_short>
-		    <_long>Saturation Decrease</_long>
+		    <short>Decrease Saturation</short>
+		    <long>Saturation Decrease</long>
 		    <default/>
 		</option>
 		<option name="saturation_decrease_button" type="button">
-		    <_short>Decrease Saturation</_short>
-		    <_long>Saturation Decrease</_long>
+		    <short>Decrease Saturation</short>
+		    <long>Saturation Decrease</long>
 		    <default/>
 		</option>
 	    </group>
 	</display>
 	<screen>
 	    <group>
-		<_short>Opacity</_short>
+		<short>Opacity</short>
 		<option name="opacity_step" type="int">
-		    <_short>Step</_short>
-		    <_long>Opacity Step</_long>
+		    <short>Step</short>
+		    <long>Opacity Step</long>
 		    <min>1</min>
 		    <max>10</max>
 		    <default>5</default>
 		</option>
 		<subgroup>
-		    <_short>Window-specific settings</_short>
+		    <short>Window-specific settings</short>
 		    <option name="opacity_matches" type="list">
-			<_short>Windows</_short>
-			<_long>Windows that should have a different opacity by default</_long>
+			<short>Windows</short>
+			<long>Windows that should have a different opacity by default</long>
 			<type>match</type>
 			<default/>
 		    </option>
 		    <option name="opacity_values" type="list">
-			<_short>Window values</_short>
-			<_long>Opacity values for windows</_long>
+			<short>Window values</short>
+			<long>Opacity values for windows</long>
 			<type>int</type>
 			<default/>
 			<min>0</min>
@@ -110,25 +110,25 @@
 		</subgroup>
 	    </group>
 	    <group>
-		<_short>Brightness</_short>
+		<short>Brightness</short>
 		<option name="brightness_step" type="int">
-		    <_short>Step</_short>
-		    <_long>Brightness Step</_long>
+		    <short>Step</short>
+		    <long>Brightness Step</long>
 		    <min>1</min>
 		    <max>10</max>
 		    <default>5</default>
 		</option>
 		<subgroup>
-		    <_short>Window-specific settings</_short>
+		    <short>Window-specific settings</short>
 		    <option name="brightness_matches" type="list">
-			<_short>Windows</_short>
-			<_long>Windows that should have a different brightness by default</_long>
+			<short>Windows</short>
+			<long>Windows that should have a different brightness by default</long>
 			<type>match</type>
 			<default/>
 		    </option>
 		    <option name="brightness_values" type="list">
-			<_short>Window values</_short>
-			<_long>Brightness values for windows</_long>
+			<short>Window values</short>
+			<long>Brightness values for windows</long>
 			<type>int</type>
 			<default/>
 			<min>0</min>
@@ -137,25 +137,25 @@
 		</subgroup>
 	    </group>
 	    <group>
-		<_short>Saturation</_short>
+		<short>Saturation</short>
 		<option type="int" name="saturation_step">
-		    <_short>Step</_short>
-		    <_long>Saturation Step</_long>
+		    <short>Step</short>
+		    <long>Saturation Step</long>
 		    <min>1</min>
 		    <max>10</max>
 		    <default>5</default>
 		</option>
 		<subgroup>
-		    <_short>Window-specific settings</_short>
+		    <short>Window-specific settings</short>
 		    <option name="saturation_matches" type="list">
-			<_short>Windows</_short>
-			<_long>Windows that should have a different saturation by default</_long>
+			<short>Windows</short>
+			<long>Windows that should have a different saturation by default</long>
 			<type>match</type>
 			<default/>
 		    </option>
 		    <option name="saturation_values" type="list">
-			<_short>Window values</_short>
-			<_long>Saturation values for windows</_long>
+			<short>Window values</short>
+			<long>Saturation values for windows</long>
 			<type>int</type>
 			<default/>
 			<min>0</min>

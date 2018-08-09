@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="blur">
-	<_short>Blur Windows</_short>
-	<_long>Blur windows</_long>
+	<short>Blur Windows</short>
+	<long>Blur windows</long>
 	<category>Effects</category>
 	<feature>blur</feature>
 	<deps>
@@ -15,96 +15,96 @@
 	</deps>
 	<display>
 	    <option name="pulse" type="bell">
-		<_short>Pulse</_short>
-		<_long>Pulse effect</_long>
+		<short>Pulse</short>
+		<long>Pulse effect</long>
 	    </option>
 	</display>
 	<screen>
 	    <option name="blur_speed" type="float">
-		<_short>Blur Speed</_short>
-		<_long>Window blur speed</_long>
+		<short>Blur Speed</short>
+		<long>Window blur speed</long>
 		<default>3.5</default>
 		<min>0.1</min>
 		<max>10.0</max>
 		<precision>0.1</precision>
 	    </option>
 	    <option name="focus_blur_match" type="match">
-		<_short>Focus blur windows</_short>
-		<_long>Windows that should be affected by focus blur</_long>
+		<short>Focus blur windows</short>
+		<long>Windows that should be affected by focus blur</long>
 		<default>toolbar | menu | utility | normal | dialog | modaldialog</default>
 	    </option>
 	    <option name="focus_blur" type="bool">
-		<_short>Focus Blur</_short>
-		<_long>Blur windows that doesn't have focus</_long>
+		<short>Focus Blur</short>
+		<long>Blur windows that doesn't have focus</long>
 		<default>false</default>
 	    </option>
 	    <option name="alpha_blur_match" type="match">
-		<_short>Alpha blur windows</_short>
-		<_long>Windows that should be use alpha blur by default</_long>
+		<short>Alpha blur windows</short>
+		<long>Windows that should be use alpha blur by default</long>
 		<default>any</default>
 	    </option>
 	    <option name="alpha_blur" type="bool">
-		<_short>Alpha Blur</_short>
-		<_long>Blur behind translucent parts of windows</_long>
+		<short>Alpha Blur</short>
+		<long>Blur behind translucent parts of windows</long>
 		<default>true</default>
 	    </option>
 	    <option name="filter" type="int">
-		<_short>Blur Filter</_short>
-		<_long>Filter method used for blurring</_long>
+		<short>Blur Filter</short>
+		<long>Filter method used for blurring</long>
 		<default>1</default>
 		<min>0</min>
 		<max>2</max>
 		<desc>
 		    <value>0</value>
-		    <_name>4xBilinear</_name>
+		    <name>4xBilinear</name>
 		</desc>
 		<desc>
 		    <value>1</value>
-		    <_name>Gaussian</_name>
+		    <name>Gaussian</name>
 		</desc>
 		<desc>
 		    <value>2</value>
-		    <_name>Mipmap</_name>
+		    <name>Mipmap</name>
 		</desc>
 	    </option>
 	    <option name="gaussian_radius" type="int">
-		<_short>Gaussian Radius</_short>
-		<_long>Gaussian radius</_long>
+		<short>Gaussian Radius</short>
+		<long>Gaussian radius</long>
 		<default>3</default>
 		<min>1</min>
 		<max>15</max>
 	    </option>
 	    <option name="gaussian_strength" type="float">
-		<_short>Gaussian Strength</_short>
-		<_long>Gaussian strength</_long>
+		<short>Gaussian Strength</short>
+		<long>Gaussian strength</long>
 		<default>1.0</default>
 		<min>0.0</min>
 		<max>1.0</max>
 		<precision>0.1</precision>
 	    </option>
 	    <option name="mipmap_lod" type="float">
-		<_short>Mipmap LOD</_short>
-		<_long>Mipmap level-of-detail</_long>
+		<short>Mipmap LOD</short>
+		<long>Mipmap level-of-detail</long>
 		<default>2.5</default>
 		<min>0.1</min>
 		<max>8.0</max>
 		<precision>0.1</precision>
 	    </option>
 	    <option name="saturation" type="int">
-		<_short>Blur Saturation</_short>
-		<_long>Blur saturation</_long>
+		<short>Blur Saturation</short>
+		<long>Blur saturation</long>
 		<default>100</default>
 		<min>0</min>
 		<max>100</max>
 	    </option>
 	    <option name="occlusion" type="bool">
-		<_short>Blur Occlusion</_short>
-		<_long>Disable blurring of screen regions obscured by other windows.</_long>
+		<short>Blur Occlusion</short>
+		<long>Disable blurring of screen regions obscured by other windows.</long>
 		<default>true</default>
 	    </option>
 	    <option name="independent_tex" type="bool">
-		<_short>Independent texture fetch</_short>
-		<_long>Use the available texture units to do as many as possible independent texture fetches.</_long>
+		<short>Independent texture fetch</short>
+		<long>Use the available texture units to do as many as possible independent texture fetches.</long>
 		<default>false</default>
 	    </option>
 	</screen>

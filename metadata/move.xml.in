@@ -1,40 +1,40 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="move">
-	<_short>Move Window</_short>
-	<_long>Move window</_long>
+	<short>Move Window</short>
+	<long>Move window</long>
 	<category>Window Management</category>
 	<display>
 	    <option name="initiate_button" type="button">
-		<_short>Initiate Window Move</_short>
-		<_long>Start moving window</_long>
+		<short>Initiate Window Move</short>
+		<long>Start moving window</long>
 		<default>&lt;Alt&gt;Button1</default>
 	    </option>
 	    <option name="initiate_key" type="key">
-		<_short>Initiate Window Move</_short>
-		<_long>Start moving window</_long>
+		<short>Initiate Window Move</short>
+		<long>Start moving window</long>
 		<default>&lt;Alt&gt;F7</default>
 	    </option>
 	    <option name="opacity" type="int">
-		<_short>Opacity</_short>
-		<_long>Opacity level of moving windows</_long>
+		<short>Opacity</short>
+		<long>Opacity level of moving windows</long>
 		<default>100</default>
 		<min>1</min>
 		<max>100</max>
 	    </option>
 	    <option name="constrain_y" type="bool">
-		<_short>Constrain Y</_short>
-		<_long>Constrain Y coordinate to workspace area</_long>
+		<short>Constrain Y</short>
+		<long>Constrain Y coordinate to workspace area</long>
 		<default>true</default>
 	    </option>
 	    <option name="snapoff_maximized" type="bool">
-		<_short>Snapoff maximized windows</_short>
-		<_long>Snapoff and auto unmaximized maximized windows when dragging</_long>
+		<short>Snapoff maximized windows</short>
+		<long>Snapoff and auto unmaximized maximized windows when dragging</long>
 		<default>true</default>
 	    </option>
 	    <option name="lazy_positioning" type="bool">
-		<_short>Lazy Positioning</_short>
-		<_long>Do not update the server-side position of windows until finished moving</_long>
+		<short>Lazy Positioning</short>
+		<long>Do not update the server-side position of windows until finished moving</long>
 		<default>true</default>
 	    </option>
 	</display>
