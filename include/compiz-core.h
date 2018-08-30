@@ -3406,9 +3406,9 @@ matchPropertyChanged (CompDisplay *display,
 #define RESTOSTRING(min, max) MINTOSTRING (min) MAXTOSTRING (max)
 
 typedef struct _CompMetadataOptionInfo {
-    char		   *name;
-    char		   *type;
-    char		   *data;
+    const char		   *name;
+    const char		   *type;
+    const char		   *data;
     CompActionCallBackProc initiate;
     CompActionCallBackProc terminate;
 } CompMetadataOptionInfo;
