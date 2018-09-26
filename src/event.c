@@ -249,6 +249,30 @@ isTerminateBinding (CompOption	    *option,
 }
 
 static Bool
+shouldTriggerAction (CompDisplay *d, CompAction *action)
+{
+    CompScreen *s;
+
+    if (!d->grabbed)
+	/* No grab, no problem */
+	return TRUE;
+
+    for (s = d->screens; s; s = s->next)
+    {
+	if (otherScreenGrabExist (s, NULL))
+	    /* Our own grab */
+	    return TRUE;
+    }
+
+    if (action->ignoreGrabs)
+	/* Action should ignore grabs anyway */
+	return TRUE;
+
+    /* Not our grab, respect it */
+    return FALSE;
+}
+
+static Bool
 triggerButtonPressBindings (CompDisplay  *d,
 			    CompOption   *option,
 			    int		 nOption,
@@ -296,10 +320,13 @@ triggerButtonPressBindings (CompDisplay  *d,
 	    {
 		bindMods = virtualToRealModMask (d, action->button.modifiers);
 
-		if ((bindMods & modMask) == (event->state & modMask))
+		if ((bindMods & modMask) == (event->state & modMask) &&
+		    shouldTriggerAction (d, action))
+		{
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
+		}
 	    }
 	}
 
@@ -314,11 +341,14 @@ triggerButtonPressBindings (CompDisplay  *d,
 		    bindMods = virtualToRealModMask (d,
 						     action->button.modifiers);
 
-		    if ((bindMods & modMask) == (event->state & modMask))
+		    if ((bindMods & modMask) == (event->state & modMask) &&
+			shouldTriggerAction (d, action))
+		    {
 			if ((*action->initiate) (d, action, state |
 						 CompActionStateInitEdge,
 						 argument, nArgument))
 			    return TRUE;
+		    }
 		}
 	    }
 	}
@@ -345,7 +375,8 @@ triggerButtonReleaseBindings (CompDisplay  *d,
     {
 	if (isTerminateBinding (option, type, state, &action))
 	{
-	    if (action->button.button == event->button)
+	    if (action->button.button == event->button &&
+		shouldTriggerAction (d, action))
 	    {
 		if ((*action->terminate) (d, action, state,
 					  argument, nArgument))
@@ -407,17 +438,23 @@ triggerKeyPressBindings (CompDisplay *d,
 
 	    if (action->key.keycode == event->keycode)
 	    {
-		if ((bindMods & modMask) == (event->state & modMask))
+		if ((bindMods & modMask) == (event->state & modMask) &&
+		    shouldTriggerAction (d, action))
+		{
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
+		}
 	    }
 	    else if (!d->xkbEvent && action->key.keycode == 0)
 	    {
-		if (bindMods == (event->state & modMask))
+		if (bindMods == (event->state & modMask) &&
+		    shouldTriggerAction (d, action))
+		{
 		    if ((*action->initiate) (d, action, state,
 					     argument, nArgument))
 			return TRUE;
+		}
 	    }
 	}
 
@@ -453,7 +490,8 @@ triggerKeyReleaseBindings (CompDisplay *d,
 
 	    if ((bindMods & modMask) == 0)
 	    {
-		if (action->key.keycode == event->keycode)
+		if (action->key.keycode == event->keycode &&
+		    shouldTriggerAction (d, action))
 		{
 		    if ((*action->terminate) (d, action, state,
 					      argument, nArgument))
@@ -462,9 +500,12 @@ triggerKeyReleaseBindings (CompDisplay *d,
 	    }
 	    else if (!d->xkbEvent && ((mods & modMask & bindMods) != bindMods))
 	    {
-		if ((*action->terminate) (d, action, state,
-					  argument, nArgument))
-		    return TRUE;
+		if (shouldTriggerAction (d, action))
+		{
+		    if ((*action->terminate) (d, action, state,
+					      argument, nArgument))
+			return TRUE;
+		}
 	    }
 	}
 
@@ -1401,6 +1442,8 @@ handleEvent (CompDisplay *d,
 	       grabs. */
 	    XSelectInput (d->display, w->id, NoEventMask);
 	    XShapeSelectInput (d->display, w->id, NoEventMask);
+	    /* FIXME: should we also disable XI2 here?
+	    xi2DisableInput (d->display, w->id);*/
 	    XUngrabButton (d->display, AnyButton, AnyModifier, w->id);
 
 	    moveInputFocusToOtherWindow (w);
@@ -2189,7 +2232,11 @@ handleEvent (CompDisplay *d,
     case CirculateRequest:
 	break;
     case FocusIn:
-	if (event->xfocus.mode != NotifyGrab)
+	if (event->xfocus.mode == NotifyGrab)
+	    d->grabbed = TRUE;
+	else if (event->xfocus.mode == NotifyUngrab)
+	    d->grabbed = FALSE;
+	else
 	{
 	    w = findTopLevelWindowAtDisplay (d, event->xfocus.window);
 	    if (w && w->managed)
@@ -2232,6 +2279,14 @@ handleEvent (CompDisplay *d,
 	    if (d->nextActiveWindow == event->xfocus.window)
 		d->nextActiveWindow = None;
 	}
+	break;
+    case FocusOut:
+	if (event->xfocus.mode == NotifyUngrab)
+	    d->grabbed = FALSE;
+	else if (event->xfocus.mode == NotifyWhileGrabbed)
+	    d->grabbed = TRUE;
+	else if (event->xfocus.mode == NotifyGrab)
+	    d->grabbed = TRUE;
 	break;
     case EnterNotify:
 	s = findScreenAtDisplay (d, event->xcrossing.root);

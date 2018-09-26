@@ -448,6 +448,13 @@ struct _CompAction {
 
     unsigned int edgeMask;
 
+    /* When enabled, key events will be reported even while a keyboard grab
+     * is ongoing. This allows shortcuts to work while a menu is open, but
+     * also while xlock is running, so this should not be set lightly, and
+     * notably not in a plugin which could commands and thus override xlock.
+     */
+    Bool ignoreGrabs;
+
     CompPrivate priv;
 };
 
@@ -893,6 +900,9 @@ struct _CompDisplay {
     Bool xkbExtension;
     int  xkbEvent, xkbError;
 
+    Bool xi2Extension;
+    int  xi2Event, xi2Error;
+
     Bool xineramaExtension;
     int  xineramaEvent, xineramaError;
 
@@ -1066,6 +1076,8 @@ struct _CompDisplay {
     MatchPropertyChangedProc   matchPropertyChanged;
 
     LogMessageProc logMessage;
+
+    Bool grabbed;
 
     void *reserved;
 };

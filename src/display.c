@@ -1412,6 +1412,93 @@ paintScreen (CompScreen   *s,
     }
 }
 
+#ifdef HAVE_XINPUT2
+static unsigned int
+translateXI2State (const XIDeviceEvent *event)
+{
+    unsigned int state;
+
+    /* Keyboard Modifiers, bits 0 to 7 */
+    state = event->mods.effective & ((1 << 8) - 1);
+
+    /* We are only interested in the buttons numbered 1 to 5, which correspond
+     * to the core buttons, bits 8 to 12 */
+    int maxbits = MIN (5, event->buttons.mask_len - 1);
+    for (int i = 1; i <= maxbits; i++)
+    {
+	if (! XIMaskIsSet (event->buttons.mask, i))
+	    continue;
+
+	switch (i)
+	{
+	    case 1: state |= Button1Mask; break;
+	    case 2: state |= Button2Mask; break;
+	    case 3: state |= Button3Mask; break;
+	    case 4: state |= Button4Mask; break;
+	    case 5: state |= Button5Mask; break;
+	}
+    }
+
+    /* Keyboard groups, bits 13 to 15 */
+    state |= (event->group.effective & ((1 << 3) - 1)) << 13;
+
+    return state;
+}
+
+static void
+translateXiEvent (XEvent *event, XIDeviceEvent *xiDevEv)
+{
+    assert (event->type == GenericEvent);
+    assert (xiDevEv == (XIDeviceEvent *) event->xcookie.data);
+
+#define CONVERT_EVENT(member, t, customCode)				\
+    do {								\
+	XEvent fakeEvent;						\
+	fakeEvent.member.type = (t);					\
+	fakeEvent.member.serial = event->xcookie.serial;		\
+	fakeEvent.member.send_event = event->xcookie.send_event;	\
+	fakeEvent.member.display = event->xcookie.display;		\
+	fakeEvent.member.window = xiDevEv->event;			\
+	fakeEvent.member.root = xiDevEv->root;				\
+	fakeEvent.member.subwindow = xiDevEv->child;			\
+	fakeEvent.member.time = xiDevEv->time;				\
+	fakeEvent.member.x = (int) xiDevEv->event_x;			\
+	fakeEvent.member.y = (int) xiDevEv->event_y;			\
+	fakeEvent.member.x_root = (int) xiDevEv->root_x;		\
+	fakeEvent.member.y_root = (int) xiDevEv->root_y;		\
+	fakeEvent.member.state = translateXI2State (xiDevEv);		\
+	fakeEvent.member.same_screen = True;				\
+	do { customCode; } while (0);					\
+	XFreeEventData (event->xcookie.display, &event->xcookie);	\
+	event->member = fakeEvent.member;				\
+    } while (0)
+
+    switch (event->xcookie.evtype) {
+    case XI_ButtonPress:
+    case XI_ButtonRelease:
+	CONVERT_EVENT (xbutton, (event->xcookie.evtype == XI_ButtonPress ?
+				 ButtonPress : ButtonRelease),
+		       { fakeEvent.xbutton.button = xiDevEv->detail; });
+	break;
+    case XI_KeyPress:
+    case XI_KeyRelease:
+	CONVERT_EVENT (xkey, (event->xcookie.evtype == XI_KeyPress ?
+			      KeyPress : KeyRelease),
+		       { fakeEvent.xkey.keycode = xiDevEv->detail; });
+	break;
+    case XI_Motion:
+	CONVERT_EVENT (xmotion, MotionNotify,
+		       { fakeEvent.xmotion.is_hint = NotifyNormal; });
+	break;
+    default:
+	assert ("Unsupported type of event in event converter. "
+	        "This is a bug in the core." == NULL);
+    }
+
+#undef CONVERT_EVENT
+}
+#endif /* HAVE_XINPUT2 */
+
 void
 eventLoop (void)
 {
@@ -1442,6 +1529,55 @@ eventLoop (void)
 	    while (XPending (d->display))
 	    {
 		XNextEvent (d->display, &event);
+
+#ifdef HAVE_XINPUT2
+		if (d->xi2Extension)
+		{
+		    /* Using XI2 events, ignore any duplicate core events */
+		    switch (event.type) {
+		    case KeyPress:
+		    case KeyRelease:
+			XFlush (d->display);
+			continue;
+		    }
+		}
+
+		if (event.type == GenericEvent)
+		    XGetEventData (d->display, &event.xcookie);
+
+		if (event.type == GenericEvent
+		    && event.xcookie.extension == d->xi2Event)
+		{
+		    /* Convert XI2 events to core events */
+
+		    XIDeviceEvent *xiDevEv = (XIDeviceEvent *) event.xcookie.data;
+
+		    if (xiDevEv->deviceid != xiDevEv->sourceid)
+		    {
+			// Ignore Master Devices
+			XFreeEventData (d->display, &event.xcookie);
+			continue;
+		    }
+
+		    switch (event.xcookie.evtype) {
+		    case XI_ButtonPress:
+		    case XI_ButtonRelease:
+		    case XI_KeyPress:
+		    case XI_KeyRelease:
+		    case XI_Motion: /* TODO: mousepoll is probably useless with XI2.  */
+			translateXiEvent (&event, xiDevEv);
+			break;
+
+		    default:
+			/* Ignore other XI2 events */
+			XFreeEventData (d->display, &event.xcookie);
+			XFlush (d->display);
+			continue;
+		    }
+		}
+		else if (event.type == GenericEvent)
+		    XFreeEventData (d->display, &event.xcookie);
+#endif /* HAVE_XINPUT2 */
 
 		switch (event.type) {
 		case ButtonPress:
@@ -1759,6 +1895,81 @@ eventLoop (void)
 	compRemoveWatchFd (d->watchFdHandle);
 }
 
+static void
+xi2SelectInput (CompDisplay *d, Window id)
+{
+#ifdef HAVE_XINPUT2
+    if (!d->xi2Extension)
+	return;
+
+    XIEventMask eventmask;
+    unsigned char mask[XIMaskLen (XI_LASTEVENT)] = { 0 };
+
+    eventmask.deviceid = XIAllDevices;
+    eventmask.mask_len = sizeof (mask);
+    eventmask.mask = mask;
+
+    XISetMask (mask, XI_KeyPress);
+    XISetMask (mask, XI_KeyRelease);
+    XISetMask (mask, XI_ButtonPress);
+    XISetMask (mask, XI_ButtonRelease);
+    XISetMask (mask, XI_Motion);
+
+    XISelectEvents (d->display, id, &eventmask, 1);
+#endif /* HAVE_XINPUT2 */
+}
+
+#ifdef HAVE_XINPUT2
+// unused
+static XIEventMask *
+xi2DisableInput (CompDisplay *d, Window id, int *num_masks_return)
+{
+    if (!d->xi2Extension)
+	return NULL;
+
+    /* First get previous mask to be restored in xi2EnableInput */
+    XIEventMask *prevmask;
+    prevmask = XIGetSelectedEvents (d->display, id, num_masks_return);
+
+    /* Then disable everything */
+    XIEventMask eventmask;
+    unsigned char mask[1] = { 0 };
+
+    eventmask.deviceid = XIAllDevices;
+    eventmask.mask_len = sizeof (mask);
+    eventmask.mask = mask;
+
+    XISelectEvents (d->display, id, &eventmask, 1);
+
+    return prevmask;
+}
+
+// unused
+static void
+xi2EnableInput (CompDisplay *d, Window id, XIEventMask *masks, int num_masks)
+{
+    if (!d->xi2Extension)
+	return;
+
+    XISelectEvents (d->display, id, masks, num_masks);
+    XFree (masks);
+}
+#endif /* HAVE_XINPUT2 */
+
+static long
+xi2CoreMask (CompDisplay *d)
+{
+#ifdef HAVE_XINPUT2
+    if (d->xi2Extension)
+	return 0;
+#endif /* HAVE_XINPUT2 */
+
+    return KeyPressMask      |
+	   KeyReleaseMask    |
+	   ButtonPressMask   |
+	   ButtonReleaseMask;
+}
+
 static int errors = 0;
 
 static int
@@ -1910,6 +2121,27 @@ aquireSelection (CompDisplay *d,
     return TRUE;
 }
 
+#ifdef HAVE_XINPUT2
+static Bool
+XI2QueryExtension (Display *dpy, int *opcode, int *error)
+{
+    int event;
+
+    if (!XQueryExtension (dpy, "XInputExtension", opcode, &event, error))
+	return False;
+
+    /* we want 2.1 for DeviceEvent::sourceid */
+    int major = 2, minor = 1;
+
+    if (XIQueryVersion (dpy, &major, &minor) == BadRequest)
+	return False;
+    compLogMessage ("core", CompLogLevelDebug,
+		    "Got XI2 extension %d.%d", major, minor);
+
+    return True;
+}
+#endif
+
 Bool
 addDisplay (const char *name)
 {
@@ -1957,6 +2189,8 @@ addDisplay (const char *name)
 	d->modMask[i] = CompNoMask;
 
     d->ignoredModMask = LockMask;
+
+    d->grabbed = FALSE;
 
     compInitOptionValue (&d->plugin);
 
@@ -2275,6 +2509,16 @@ addDisplay (const char *name)
 	d->xkbEvent = d->xkbError = -1;
     }
 
+#ifdef HAVE_XINPUT2
+    d->xi2Extension = XI2QueryExtension (dpy,
+					 &d->xi2Event,
+					 &d->xi2Error);
+#else
+    d->xi2Extension = FALSE;
+#endif
+    if (!d->xi2Extension)
+	compLogMessage ("core", CompLogLevelWarn, "No XI2 extension");
+
     d->screenInfo  = NULL;
     d->nScreenInfo = 0;
 
@@ -2434,12 +2678,11 @@ addDisplay (const char *name)
 		      PropertyChangeMask       |
 		      LeaveWindowMask	       |
 		      EnterWindowMask	       |
-		      KeyPressMask	       |
-		      KeyReleaseMask	       |
-		      ButtonPressMask	       |
-		      ButtonReleaseMask	       |
+		      xi2CoreMask (d)	       |
 		      FocusChangeMask	       |
 		      ExposureMask);
+
+	xi2SelectInput (d, XRootWindow (dpy, i));
 
 	if (compCheckForError (dpy))
 	{
