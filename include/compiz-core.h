@@ -29,7 +29,7 @@
 #include <compiz-plugin.h>
 #include <dlfcn.h>
 
-#define CORE_ABIVERSION 20180616
+#define CORE_ABIVERSION 20180927
 
 #include <stdio.h>
 #include <sys/time.h>
