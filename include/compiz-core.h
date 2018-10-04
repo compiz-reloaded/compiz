@@ -1190,6 +1190,10 @@ void
 eventLoop (void);
 
 void
+xi2SelectNoInput (CompDisplay *d,
+		  Window       id);
+
+void
 handleSelectionRequest (CompDisplay *display,
 			XEvent      *event);
 

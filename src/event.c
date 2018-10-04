@@ -1440,10 +1440,9 @@ handleEvent (CompDisplay *d,
 	    /* This is the only case where a window is removed but not
 	       destroyed. We must remove our event mask and all passive
 	       grabs. */
+	    xi2SelectNoInput (d, w->id);
 	    XSelectInput (d->display, w->id, NoEventMask);
 	    XShapeSelectInput (d->display, w->id, NoEventMask);
-	    /* FIXME: should we also disable XI2 here?
-	    xi2DisableInput (d->display, w->id);*/
 	    XUngrabButton (d->display, AnyButton, AnyModifier, w->id);
 
 	    moveInputFocusToOtherWindow (w);

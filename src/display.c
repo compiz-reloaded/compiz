@@ -1919,19 +1919,14 @@ xi2SelectInput (CompDisplay *d, Window id)
 #endif /* HAVE_XINPUT2 */
 }
 
-#ifdef HAVE_XINPUT2
-// unused
-static XIEventMask *
-xi2DisableInput (CompDisplay *d, Window id, int *num_masks_return)
+void
+xi2SelectNoInput (CompDisplay *d,
+		  Window       id)
 {
+#ifdef HAVE_XINPUT2
     if (!d->xi2Extension)
-	return NULL;
+	return;
 
-    /* First get previous mask to be restored in xi2EnableInput */
-    XIEventMask *prevmask;
-    prevmask = XIGetSelectedEvents (d->display, id, num_masks_return);
-
-    /* Then disable everything */
     XIEventMask eventmask;
     unsigned char mask[1] = { 0 };
 
@@ -1940,21 +1935,8 @@ xi2DisableInput (CompDisplay *d, Window id, int *num_masks_return)
     eventmask.mask = mask;
 
     XISelectEvents (d->display, id, &eventmask, 1);
-
-    return prevmask;
-}
-
-// unused
-static void
-xi2EnableInput (CompDisplay *d, Window id, XIEventMask *masks, int num_masks)
-{
-    if (!d->xi2Extension)
-	return;
-
-    XISelectEvents (d->display, id, masks, num_masks);
-    XFree (masks);
-}
 #endif /* HAVE_XINPUT2 */
+}
 
 static long
 xi2CoreMask (CompDisplay *d)
