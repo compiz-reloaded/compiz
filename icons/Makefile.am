@@ -30,7 +30,15 @@ icons_DATA =			\
 	plugin-wall.svg		\
 	plugin-zoom.svg
 
+EXTRA_DIST = \
+	$(icons_DATA)
+
 install-data-hook:
 	if test x$(DESTDIR) = x; then \
 		$(UPDATE_ICON_CACHE) -f -t $(pluginiconsdir); \
+	fi
+
+uninstall-local:
+	if test x$(DESTDIR) = x; then \
+		rm $(pluginiconsdir)/icon-theme.cache; \
 	fi
