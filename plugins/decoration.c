@@ -1211,9 +1211,6 @@ decorWindowUpdate (CompWindow *w,
     Decoration	     *old = NULL, *decoration = NULL;
     Bool	     decorate = FALSE;
     CompMatch	     *match;
-    int		     moveDx, moveDy;
-    int		     oldShiftX = 0;
-    int		     oldShiftY = 0;
 
     DECOR_DISPLAY (w->screen->display);
     DECOR_SCREEN (w->screen);
@@ -1294,12 +1291,7 @@ decorWindowUpdate (CompWindow *w,
     damageWindowOutputExtents (w);
 
     if (old)
-    {
-	oldShiftX = decorWindowShiftX (w);
-	oldShiftY = decorWindowShiftY (w);
-
 	destroyWindowDecoration (w->screen, wd);
-    }
 
     if (decoration)
     {
@@ -1318,9 +1310,6 @@ decorWindowUpdate (CompWindow *w,
 	    setWindowBorderExtents (w, &decoration->border);
 	}
 
-	moveDx = decorWindowShiftX (w) - oldShiftX;
-	moveDy = decorWindowShiftY (w) - oldShiftY;
-
 	decorWindowUpdateFrame (w);
 	updateWindowOutputExtents (w);
 	damageWindowOutputExtents (w);
@@ -1335,37 +1324,7 @@ decorWindowUpdate (CompWindow *w,
 
 	dw->wd = NULL;
 
-	moveDx = -oldShiftX;
-	moveDy = -oldShiftY;
-
 	decorWindowUpdateFrame (w);
-    }
-
-    if (w->placed && !w->attrib.override_redirect && (moveDx || moveDy))
-    {
-	XWindowChanges xwc;
-	unsigned int   mask = CWX | CWY;
-
-	xwc.x = w->serverX + moveDx;
-	xwc.y = w->serverY + moveDy;
-
-	if (w->state & CompWindowStateFullscreenMask)
-	    mask &= ~(CWX | CWY);
-
-	if (w->state & CompWindowStateMaximizedHorzMask)
-	    mask &= ~CWX;
-
-	if (w->state & CompWindowStateMaximizedVertMask)
-	    mask &= ~CWY;
-
-	if (w->saveMask & CWX)
-	    w->saveWc.x += moveDx;
-
-	if (w->saveMask & CWY)
-	    w->saveWc.y += moveDy;
-
-	if (mask)
-	    configureXWindow (w, mask, &xwc);
     }
 
     return TRUE;
