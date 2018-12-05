@@ -279,6 +279,22 @@ maximizeVertically (CompDisplay     *d,
     return TRUE;
 }
 
+static void
+allWindowsInDesktopShowingMode (CompWindow  *w,
+				void        *closure)
+{
+    int *showingDesktop = closure;
+
+    /* see screen.c:enterShowDesktopMode() */
+    if ((w->screen->showingDesktopMask & w->wmType) &&
+	!(w->state & CompWindowStateSkipTaskbarMask) &&
+	!w->inShowDesktopMode && !w->grabbed &&
+	w->managed && (*w->screen->focusWindow) (w))
+    {
+	*showingDesktop = 0;
+    }
+}
+
 static Bool
 showDesktop (CompDisplay     *d,
 	     CompAction      *action,
@@ -294,7 +310,16 @@ showDesktop (CompDisplay     *d,
     s = findScreenAtDisplay (d, xid);
     if (s)
     {
-	if (s->showingDesktopMask == 0)
+	int isDesktopShowing = 0;
+
+	/* leave desktop mode if any relevant window is showing */
+	if (s->showingDesktopMask != 0)
+	{
+	    isDesktopShowing = 1;
+	    forEachWindowOnScreen (s, allWindowsInDesktopShowingMode, &isDesktopShowing);
+	}
+
+	if (! isDesktopShowing)
 	    (*s->enterShowDesktopMode) (s);
 	else
 	    (*s->leaveShowDesktopMode) (s, NULL);
