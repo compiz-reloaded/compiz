@@ -2239,7 +2239,7 @@ handleEvent (CompDisplay *d,
 	    d->grabbed = TRUE;
 	else if (event->xfocus.mode == NotifyUngrab)
 	    d->grabbed = FALSE;
-	else
+	if (event->xfocus.mode != NotifyGrab)
 	{
 	    w = findTopLevelWindowAtDisplay (d, event->xfocus.window);
 	    if (w && w->managed)
