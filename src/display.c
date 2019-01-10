@@ -1458,7 +1458,13 @@ translateXiEvent (XEvent *event, XIDeviceEvent *xiDevEv)
 	fakeEvent.member.serial = event->xcookie.serial;		\
 	fakeEvent.member.send_event = event->xcookie.send_event;	\
 	fakeEvent.member.display = event->xcookie.display;		\
-	fakeEvent.member.window = xiDevEv->event;			\
+	/* We get all the XI2 events from the root window we set up, so \
+	 * to get a meaningful window value try the child window (which \
+	 * is the source or source ancestor window) first */		\
+	if (xiDevEv->child != None)					\
+	    fakeEvent.member.window = xiDevEv->child;			\
+	else								\
+	    fakeEvent.member.window = xiDevEv->event;			\
 	fakeEvent.member.root = xiDevEv->root;				\
 	fakeEvent.member.subwindow = xiDevEv->child;			\
 	fakeEvent.member.time = xiDevEv->time;				\
