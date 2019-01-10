@@ -1535,6 +1535,8 @@ eventLoop (void)
 		{
 		    /* Using XI2 events, ignore any duplicate core events */
 		    switch (event.type) {
+		    case ButtonPress:
+		    case ButtonRelease:
 		    case KeyPress:
 		    case KeyRelease:
 			XFlush (d->display);
