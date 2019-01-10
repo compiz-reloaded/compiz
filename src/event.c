@@ -253,6 +253,10 @@ shouldTriggerAction (CompDisplay *d, CompAction *action)
 {
     CompScreen *s;
 
+    if (!d->xi2Extension)
+	/* No XI2, we don't get events during grabs anyway */
+	return TRUE;
+
     if (!d->grabbed)
 	/* No grab, no problem */
 	return TRUE;
