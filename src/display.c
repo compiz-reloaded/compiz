@@ -1542,43 +1542,43 @@ eventLoop (void)
 			XFlush (d->display);
 			continue;
 		    }
-		}
 
-		if (event.type == GenericEvent)
-		    XGetEventData (d->display, &event.xcookie);
+		    if (event.type == GenericEvent)
+			XGetEventData (d->display, &event.xcookie);
 
-		if (event.type == GenericEvent
-		    && event.xcookie.extension == d->xi2Event)
-		{
-		    /* Convert XI2 events to core events */
-
-		    XIDeviceEvent *xiDevEv = (XIDeviceEvent *) event.xcookie.data;
-
-		    if (xiDevEv->deviceid != xiDevEv->sourceid)
+		    if (event.type == GenericEvent
+			&& event.xcookie.extension == d->xi2Event)
 		    {
-			// Ignore Master Devices
-			XFreeEventData (d->display, &event.xcookie);
-			continue;
-		    }
+			/* Convert XI2 events to core events */
 
-		    switch (event.xcookie.evtype) {
-		    case XI_ButtonPress:
-		    case XI_ButtonRelease:
-		    case XI_KeyPress:
-		    case XI_KeyRelease:
-		    case XI_Motion: /* TODO: mousepoll is probably useless with XI2.  */
-			translateXiEvent (&event, xiDevEv);
-			break;
+			XIDeviceEvent *xiDevEv = (XIDeviceEvent *) event.xcookie.data;
 
-		    default:
-			/* Ignore other XI2 events */
-			XFreeEventData (d->display, &event.xcookie);
-			XFlush (d->display);
-			continue;
+			if (xiDevEv->deviceid != xiDevEv->sourceid)
+			{
+			    // Ignore Master Devices
+			    XFreeEventData (d->display, &event.xcookie);
+			    continue;
+			}
+
+			switch (event.xcookie.evtype) {
+			case XI_ButtonPress:
+			case XI_ButtonRelease:
+			case XI_KeyPress:
+			case XI_KeyRelease:
+			case XI_Motion: /* TODO: mousepoll is probably useless with XI2.  */
+			    translateXiEvent (&event, xiDevEv);
+			    break;
+
+			default:
+			    /* Ignore other XI2 events */
+			    XFreeEventData (d->display, &event.xcookie);
+			    XFlush (d->display);
+			    continue;
+			}
 		    }
+		    else if (event.type == GenericEvent)
+			XFreeEventData (d->display, &event.xcookie);
 		}
-		else if (event.type == GenericEvent)
-		    XFreeEventData (d->display, &event.xcookie);
 #endif /* HAVE_XINPUT2 */
 
 		switch (event.type) {
