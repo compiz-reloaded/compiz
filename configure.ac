@@ -171,6 +171,17 @@ AC_CHECK_HEADERS([jpeglib.h], [] ,AC_MSG_ERROR(jpeglib.h not found --- aborting)
 dnl Check for GL/glu.h, required for plugin blur
 AC_CHECK_HEADERS([GL/glu.h], [] ,AC_MSG_ERROR(GL/glu.h not found --- aborting))
 
+AC_ARG_ENABLE([xi2-events],
+  [AS_HELP_STRING([--disable-xi2-events], [Disable XInput2 events support])],
+  [use_xi2_events=$enableval
+   AS_IF([test "x$use_xi2_events" = xyes && \
+          test "x$have_xinput2" != xyes],
+         [AC_MSG_ERROR([XInput2 events support requires XInput2])])],
+  [use_xi2_events=$have_xinput2])
+
+AS_IF([test "x$use_xi2_events" = xyes],
+  [AC_DEFINE([USE_XI2_EVENTS], [1], [Whether to use XInput2 events])])
+
 AC_ARG_ENABLE(glib,
   [  --disable-glib          Disable glib plugin],
   [use_glib=$enableval], [use_glib=yes])
@@ -471,6 +482,7 @@ echo "  fuse:                      $use_fuse"
 echo "  matecompat:                $use_mate"
 echo ""
 echo "and the following optional features will be used:"
+echo "  XI2 events:                $use_xi2_events"
 echo "  gtk:                       $use_gtk ($with_gtk)"
 echo "  marco:                     $use_marco"
 echo "  gwd gsettings support:     $use_gsettings"

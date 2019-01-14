@@ -1412,7 +1412,7 @@ paintScreen (CompScreen   *s,
     }
 }
 
-#ifdef HAVE_XINPUT2
+#ifdef USE_XI2_EVENTS
 static unsigned int
 translateXI2State (const XIDeviceEvent *event)
 {
@@ -1503,7 +1503,7 @@ translateXiEvent (XEvent *event, XIDeviceEvent *xiDevEv)
 
 #undef CONVERT_EVENT
 }
-#endif /* HAVE_XINPUT2 */
+#endif /* USE_XI2_EVENTS */
 
 void
 eventLoop (void)
@@ -1536,7 +1536,7 @@ eventLoop (void)
 	    {
 		XNextEvent (d->display, &event);
 
-#ifdef HAVE_XINPUT2
+#ifdef USE_XI2_EVENTS
 		if (d->xi2Extension)
 		{
 		    /* Using XI2 events, ignore any duplicate core events */
@@ -1585,7 +1585,7 @@ eventLoop (void)
 		    else if (event.type == GenericEvent)
 			XFreeEventData (d->display, &event.xcookie);
 		}
-#endif /* HAVE_XINPUT2 */
+#endif /* USE_XI2_EVENTS */
 
 		switch (event.type) {
 		case ButtonPress:
@@ -1906,7 +1906,7 @@ eventLoop (void)
 static void
 xi2SelectInput (CompDisplay *d, Window id)
 {
-#ifdef HAVE_XINPUT2
+#ifdef USE_XI2_EVENTS
     if (!d->xi2Extension)
 	return;
 
@@ -1924,14 +1924,14 @@ xi2SelectInput (CompDisplay *d, Window id)
     XISetMask (mask, XI_Motion);
 
     XISelectEvents (d->display, id, &eventmask, 1);
-#endif /* HAVE_XINPUT2 */
+#endif /* USE_XI2_EVENTS */
 }
 
 void
 xi2SelectNoInput (CompDisplay *d,
 		  Window       id)
 {
-#ifdef HAVE_XINPUT2
+#ifdef USE_XI2_EVENTS
     if (!d->xi2Extension)
 	return;
 
@@ -1943,16 +1943,16 @@ xi2SelectNoInput (CompDisplay *d,
     eventmask.mask = mask;
 
     XISelectEvents (d->display, id, &eventmask, 1);
-#endif /* HAVE_XINPUT2 */
+#endif /* USE_XI2_EVENTS */
 }
 
 static long
 xi2CoreMask (CompDisplay *d)
 {
-#ifdef HAVE_XINPUT2
+#ifdef USE_XI2_EVENTS
     if (d->xi2Extension)
 	return 0;
-#endif /* HAVE_XINPUT2 */
+#endif /* USE_XI2_EVENTS */
 
     return KeyPressMask      |
 	   KeyReleaseMask    |
@@ -2111,7 +2111,7 @@ aquireSelection (CompDisplay *d,
     return TRUE;
 }
 
-#ifdef HAVE_XINPUT2
+#ifdef USE_XI2_EVENTS
 static Bool
 XI2QueryExtension (Display *dpy, int *opcode, int *error)
 {
@@ -2499,7 +2499,7 @@ addDisplay (const char *name)
 	d->xkbEvent = d->xkbError = -1;
     }
 
-#ifdef HAVE_XINPUT2
+#ifdef USE_XI2_EVENTS
     d->xi2Extension = XI2QueryExtension (dpy,
 					 &d->xi2Event,
 					 &d->xi2Error);
