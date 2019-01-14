@@ -2463,6 +2463,7 @@ removeWindow (CompWindow *w)
 	if (d->shapeExtension)
 	    XShapeSelectInput (d->display, w->id, NoEventMask);
 
+	xi2SelectNoInput (d, w->id);
 	XSelectInput (d->display, w->id, NoEventMask);
 
 	XUngrabButton (d->display, AnyButton, AnyModifier, w->id);

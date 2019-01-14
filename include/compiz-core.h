@@ -29,7 +29,7 @@
 #include <compiz-plugin.h>
 #include <dlfcn.h>
 
-#define CORE_ABIVERSION 20180616
+#define CORE_ABIVERSION 20180927
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -447,6 +447,13 @@ struct _CompAction {
     Bool bell;
 
     unsigned int edgeMask;
+
+    /* When enabled, key events will be reported even while a keyboard grab
+     * is ongoing. This allows shortcuts to work while a menu is open, but
+     * also while xlock is running, so this should not be set lightly, and
+     * notably not in a plugin which could commands and thus override xlock.
+     */
+    Bool ignoreGrabs;
 
     CompPrivate priv;
 };
@@ -893,6 +900,9 @@ struct _CompDisplay {
     Bool xkbExtension;
     int  xkbEvent, xkbError;
 
+    Bool xi2Extension;
+    int  xi2Event, xi2Error;
+
     Bool xineramaExtension;
     int  xineramaEvent, xineramaError;
 
@@ -1067,6 +1077,8 @@ struct _CompDisplay {
 
     LogMessageProc logMessage;
 
+    Bool grabbed;
+
     void *reserved;
 };
 
@@ -1176,6 +1188,10 @@ keycodeToModifiers (CompDisplay *d,
 
 void
 eventLoop (void);
+
+void
+xi2SelectNoInput (CompDisplay *d,
+		  Window       id);
 
 void
 handleSelectionRequest (CompDisplay *display,
