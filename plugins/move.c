@@ -53,13 +53,19 @@ struct _MoveKeys {
 
 static int displayPrivateIndex;
 
-#define MOVE_DISPLAY_OPTION_INITIATE_BUTTON   0
-#define MOVE_DISPLAY_OPTION_INITIATE_KEY      1
-#define MOVE_DISPLAY_OPTION_OPACITY	      2
-#define MOVE_DISPLAY_OPTION_CONSTRAIN_Y	      3
-#define MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED 4
-#define MOVE_DISPLAY_OPTION_LAZY_POSITIONING  5
-#define MOVE_DISPLAY_OPTION_NUM		      6
+#define MOVE_DISPLAY_OPTION_INITIATE_BUTTON           0
+#define MOVE_DISPLAY_OPTION_INITIATE_KEY              1
+#define MOVE_DISPLAY_OPTION_OPACITY	              2
+#define MOVE_DISPLAY_OPTION_CONSTRAIN_Y	              3
+#define MOVE_DISPLAY_OPTION_SNAPOFF_MAXIMIZED         4
+#define MOVE_DISPLAY_OPTION_LAZY_POSITIONING          5
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL          6
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_SPEED    7
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_DOWN     8
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_UP       9
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_RIGHT    10
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_LEFT     11
+#define MOVE_DISPLAY_OPTION_NUM		              12
 
 typedef struct _MoveDisplay {
     int		    screenPrivateIndex;
@@ -675,6 +681,92 @@ moveHandleEvent (CompDisplay *d,
 				   NULL, 0);
 		}
 	    }
+
+#define BUTTON_IS(direction) \
+	((event->xbutton.state & (ShiftMask|ControlMask|Mod1Mask)) == \
+	    md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_##direction] \
+	      .value.action.button.modifiers && \
+	  event->xbutton.button == \
+	    md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_##direction] \
+	      .value.action.button.button)
+
+	    /* Scrolling wheel immediately moves the window */
+	    if (md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL].value.b &&
+		(BUTTON_IS(DOWN) || BUTTON_IS(UP) ||
+		 BUTTON_IS(LEFT) || BUTTON_IS(RIGHT)))
+	    {
+		CompWindow *w;
+		w = findWindowAtDisplay (d, event->xbutton.window);
+		if (w && (w->actions & CompWindowActionMoveMask))
+		{
+		    int left, right, top, bottom;
+		    XRectangle workArea;
+
+		    int amount =
+			md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_SPEED]
+			  .value.i;
+		    int dx = 0, dy = 0;
+
+		    left   = (w->serverX - w->input.left) + w->clientFrame.left;
+		    top    = (w->serverY - w->input.top) + w->clientFrame.top;
+		    right  = left + w->serverWidth + w->serverBorderWidth * 2
+			       + w->input.left + w->input.right;
+		    bottom = top + w->serverHeight + w->serverBorderWidth * 2
+			       + w->input.top + w->input.bottom;
+
+		    getWorkareaForOutput (s,
+					  outputDeviceForWindow (w),
+					  &workArea);
+
+		    if (BUTTON_IS(DOWN))
+		    {
+			int screen_bottom = workArea.y + workArea.height;
+
+			if (bottom > screen_bottom)
+			{
+			    dy = -amount;
+			    if (bottom + dy < screen_bottom)
+				dy = screen_bottom - bottom;
+			}
+		    }
+		    else if (BUTTON_IS(UP))
+		    {
+			if (top < workArea.y)
+			{
+			    dy = amount;
+			    if (top + dy > workArea.y)
+				dy = workArea.y - top;
+			}
+		    }
+		    else if (BUTTON_IS(RIGHT))
+		    {
+			int screen_right = workArea.x + workArea.width;
+
+			if (right > screen_right)
+			{
+			    dx = -amount;
+			    if (right + dx < screen_right)
+				dx = screen_right - right;
+			}
+		    }
+		    else if (BUTTON_IS(LEFT))
+		    {
+			if (left < workArea.x)
+			{
+			    dx = amount;
+			    if (left + dx > workArea.x)
+				dx = workArea.x - left;
+			}
+		    }
+#undef BUTTON_IS
+
+		    if (dx != 0 || dy != 0)
+		    {
+			moveWindow(w, dx, dy, TRUE, TRUE);
+			syncWindowPosition (w);
+		    }
+		}
+	    }
 	}
 	break;
     case KeyPress:
@@ -921,7 +1013,13 @@ static const CompMetadataOptionInfo moveDisplayOptionInfo[] = {
     { "opacity", "int", "<min>0</min><max>100</max>", 0, 0 },
     { "constrain_y", "bool", 0, 0, 0 },
     { "snapoff_maximized", "bool", 0, 0, 0 },
-    { "lazy_positioning", "bool", 0, 0, 0 }
+    { "lazy_positioning", "bool", 0, 0, 0 },
+    { "offscreen_scroll", "bool", 0, 0, 0 },
+    { "offscreen_scroll_speed", "int", "<min>1</min><max>100</max>", 0, 0 },
+    { "offscreen_scroll_down", "button", 0, 0, 0 },
+    { "offscreen_scroll_up", "button", 0, 0, 0 },
+    { "offscreen_scroll_right", "button", 0, 0, 0 },
+    { "offscreen_scroll_left", "button", 0, 0, 0 },
 };
 
 static Bool
