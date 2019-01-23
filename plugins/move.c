@@ -65,7 +65,10 @@ static int displayPrivateIndex;
 #define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_UP       9
 #define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_RIGHT    10
 #define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_LEFT     11
-#define MOVE_DISPLAY_OPTION_NUM		              12
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_COLOR    12
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_WIDTH    13
+#define MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_GRADIENT 14
+#define MOVE_DISPLAY_OPTION_NUM		              15
 
 typedef struct _MoveDisplay {
     int		    screenPrivateIndex;
@@ -932,6 +935,23 @@ moveHandleEvent (CompDisplay *d,
     WRAP (md, d, handleEvent, moveHandleEvent);
 }
 
+static void
+drawRect (double x1, double y1, double x2, double y2,
+	  unsigned short *colorTL, unsigned short *colorTR,
+	  unsigned short *colorBL, unsigned short *colorBR)
+{
+    glBegin(GL_QUADS);
+    glColor4usv(colorTL);
+    glVertex3f(x1, y1, 0);
+    glColor4usv(colorBL);
+    glVertex3f(x1, y2, 0);
+    glColor4usv(colorBR);
+    glVertex3f(x2, y2, 0);
+    glColor4usv(colorTR);
+    glVertex3f(x2, y1, 0);
+    glEnd();
+}
+
 static Bool
 movePaintWindow (CompWindow		 *w,
 		 const WindowPaintAttrib *attrib,
@@ -942,13 +962,13 @@ movePaintWindow (CompWindow		 *w,
     WindowPaintAttrib sAttrib;
     CompScreen	      *s = w->screen;
     Bool	      status;
+    CompTransform     sTransform = *transform;
 
     MOVE_SCREEN (s);
+    MOVE_DISPLAY (s->display);
 
     if (ms->grabIndex)
     {
-	MOVE_DISPLAY (s->display);
-
 	if (md->w == w && md->moveOpacity != OPAQUE)
 	{
 	    /* modify opacity of windows that are not active */
@@ -962,6 +982,62 @@ movePaintWindow (CompWindow		 *w,
     UNWRAP (ms, s, paintWindow);
     status = (*s->paintWindow) (w, attrib, transform, region, mask);
     WRAP (ms, s, paintWindow, movePaintWindow);
+
+    if (md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL].value.b &&
+        w->actions & CompWindowActionMoveMask)
+    {
+	int left, right, top, bottom;
+	XRectangle workArea;
+
+	left   = (w->serverX - w->input.left) + w->clientFrame.left;
+	top    = (w->serverY - w->input.top) + w->clientFrame.top;
+	right  = left + w->serverWidth + w->serverBorderWidth * 2
+		      + w->input.left + w->input.right;
+	bottom = top + w->serverHeight + w->serverBorderWidth * 2
+		     + w->input.top + w->input.bottom;
+
+	getWorkareaForOutput (s, outputDeviceForWindow (w), &workArea);
+
+	int screen_top = workArea.y;
+	int screen_bottom = screen_top + workArea.height;
+	int screen_left = workArea.x;
+	int screen_right = screen_left + workArea.width;
+
+	if ( top < screen_top || bottom > screen_bottom ||
+	    left < screen_left || right > screen_right)
+	{
+	    glPushMatrix ();
+	    glLoadMatrixf (sTransform.m);
+
+	    Bool gradient =
+	      md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_GRADIENT].value.b;
+	    unsigned short *color =
+	      md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_COLOR].value.c;
+	    unsigned short colorT[4] = { color[0], color[1], color[2],
+					 gradient ? 0 : color[3] };
+	    unsigned width =
+	      md->opt[MOVE_DISPLAY_OPTION_OFFSCREEN_SCROLL_WIDTH].value.i;
+
+	    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	    glEnable (GL_BLEND);
+	    if (top < screen_top)
+		drawRect (left, screen_top, right, screen_top + width,
+			  color, color, colorT, colorT);
+	    if (bottom > screen_bottom)
+		drawRect (left, screen_bottom - width, right, screen_bottom,
+			  colorT, colorT, color, color);
+	    if (left < screen_left)
+		drawRect (screen_left, top, screen_left + width, bottom,
+			  color, colorT, color, colorT);
+	    if (right > screen_right)
+		drawRect (screen_right - width, top, screen_right, bottom,
+			  colorT, color, colorT, color);
+	    glDisable (GL_BLEND);
+
+	    glPopMatrix ();
+	    glColor4usv (defaultColor);
+	}
+    }
 
     return status;
 }
@@ -1020,6 +1096,9 @@ static const CompMetadataOptionInfo moveDisplayOptionInfo[] = {
     { "offscreen_scroll_up", "button", 0, 0, 0 },
     { "offscreen_scroll_right", "button", 0, 0, 0 },
     { "offscreen_scroll_left", "button", 0, 0, 0 },
+    { "offscreen_scroll_color", "color", 0, 0, 0 },
+    { "offscreen_scroll_width", "int", "<min>0</min><max>100</max>", 0, 0 },
+    { "offscreen_scroll_gradient", "bool", 0, 0, 0 },
 };
 
 static Bool
