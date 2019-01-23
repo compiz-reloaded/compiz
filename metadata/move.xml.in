@@ -69,6 +69,28 @@
 		<min>1</min>
 		<max>100</max>
 	    </option>
+	    <option name="offscreen_scroll_color" type="color">
+		<_short>Off-Screen window scrolling color</_short>
+		<_long>Color of the rectangle showing when one can scroll a window</_long>
+		<default>
+		    <red>0x0000</red>
+		    <green>0x0000</green>
+		    <blue>0x0000</blue>
+		    <alpha>0x8080</alpha>
+		</default>
+	    </option>
+	    <option name="offscreen_scroll_width" type="int">
+		<_short>Off-Screen window scrolling width</_short>
+		<_long>Width of the rectangle showing when one can scroll a window</_long>
+		<default>20</default>
+		<min>0</min>
+		<max>100</max>
+	    </option>
+	    <option name="offscreen_scroll_gradient" type="bool">
+		<_short>Off-screen window scrolling gradient</_short>
+		<_long>Enable gradient of rectangle showing when one can scroll a window</_long>
+		<default>true</default>
+	    </option>
 	</display>
     </plugin>
 </compiz>
