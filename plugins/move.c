@@ -718,7 +718,7 @@ moveHandleEvent (CompDisplay *d,
 					  outputDeviceForWindow (w),
 					  &workArea);
 
-		    if (BUTTON_IS(DOWN))
+		    if (BUTTON_IS(UP))
 		    {
 			int screen_bottom = workArea.y + workArea.height;
 
@@ -729,7 +729,7 @@ moveHandleEvent (CompDisplay *d,
 				dy = screen_bottom - bottom;
 			}
 		    }
-		    else if (BUTTON_IS(UP))
+		    else if (BUTTON_IS(DOWN))
 		    {
 			if (top < workArea.y)
 			{
@@ -738,7 +738,7 @@ moveHandleEvent (CompDisplay *d,
 				dy = workArea.y - top;
 			}
 		    }
-		    else if (BUTTON_IS(RIGHT))
+		    else if (BUTTON_IS(LEFT))
 		    {
 			int screen_right = workArea.x + workArea.width;
 
@@ -749,7 +749,7 @@ moveHandleEvent (CompDisplay *d,
 				dx = screen_right - right;
 			}
 		    }
-		    else if (BUTTON_IS(LEFT))
+		    else if (BUTTON_IS(RIGHT))
 		    {
 			if (left < workArea.x)
 			{
