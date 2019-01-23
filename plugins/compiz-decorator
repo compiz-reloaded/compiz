@@ -27,10 +27,10 @@ verbose() {
 }
 
 # Create env variables if empty.
-if [ ! -z "$XDG_CONFIG_DIRS" ]; then
+if [ -z "$XDG_CONFIG_DIRS" ]; then
     XDG_CONFIG_DIRS="/etc/xdg"
 fi
-if [ ! -z "$XDG_CONFIG_HOME" ]; then
+if [ -z "$XDG_CONFIG_HOME" ]; then
     XDG_CONFIG_HOME="$HOME/.config"
 fi
 
