@@ -1471,7 +1471,7 @@ translateXI2State (const XIDeviceEvent *event)
 }
 
 static void
-translateXiEvent (XEvent *event, XIDeviceEvent *xiDevEv)
+translateXiEvent (CompDisplay *d, XEvent *event, XIDeviceEvent *xiDevEv)
 {
     assert (event->type == GenericEvent);
     assert (xiDevEv == (XIDeviceEvent *) event->xcookie.data);
@@ -1479,6 +1479,7 @@ translateXiEvent (XEvent *event, XIDeviceEvent *xiDevEv)
 #define CONVERT_EVENT(member, t, customCode)				\
     do {								\
 	XEvent fakeEvent;						\
+	CompWindow *w;							\
 	fakeEvent.member.type = (t);					\
 	fakeEvent.member.serial = event->xcookie.serial;		\
 	fakeEvent.member.send_event = event->xcookie.send_event;	\
@@ -1495,6 +1496,12 @@ translateXiEvent (XEvent *event, XIDeviceEvent *xiDevEv)
 	fakeEvent.member.time = xiDevEv->time;				\
 	fakeEvent.member.x = (int) xiDevEv->event_x;			\
 	fakeEvent.member.y = (int) xiDevEv->event_y;			\
+	w = findWindowAtDisplay (d, fakeEvent.member.window);		\
+	if (w) {							\
+	    /* x/y are relative to the window, not to the root */	\
+	    fakeEvent.member.x -= w->serverX + w->serverBorderWidth;	\
+	    fakeEvent.member.y -= w->serverY + w->serverBorderWidth;	\
+	}								\
 	fakeEvent.member.x_root = (int) xiDevEv->root_x;		\
 	fakeEvent.member.y_root = (int) xiDevEv->root_y;		\
 	fakeEvent.member.state = translateXI2State (xiDevEv);		\
@@ -1600,7 +1607,7 @@ eventLoop (void)
 			case XI_KeyPress:
 			case XI_KeyRelease:
 			case XI_Motion: /* TODO: mousepoll is probably useless with XI2.  */
-			    translateXiEvent (&event, xiDevEv);
+			    translateXiEvent (d, &event, xiDevEv);
 			    break;
 
 			default:
