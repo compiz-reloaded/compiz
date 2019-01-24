@@ -1567,6 +1567,9 @@ eventLoop (void)
 		    /* Using XI2 events, ignore any duplicate core events */
 		    switch (event.type) {
 		    case ButtonPress:
+			/* We ignore for our purpose, but we have to release
+			   ButtonPresses like events.c's handleEvent would have done */
+			XAllowEvents (d->display, ReplayPointer, event.xbutton.time);
 		    case ButtonRelease:
 		    case KeyPress:
 		    case KeyRelease:
