@@ -1003,8 +1003,10 @@ movePaintWindow (CompWindow		 *w,
 	int screen_left = workArea.x;
 	int screen_right = screen_left + workArea.width;
 
-	if ( top < screen_top || bottom > screen_bottom ||
-	    left < screen_left || right > screen_right)
+	if (!(bottom < screen_top || top > screen_bottom ||
+	      right < screen_left || left > screen_right) &&
+	     (top < screen_top || bottom > screen_bottom ||
+	      left < screen_left || right > screen_right))
 	{
 	    glPushMatrix ();
 	    glLoadMatrixf (sTransform.m);
