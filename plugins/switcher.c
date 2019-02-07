@@ -762,7 +762,16 @@ switchTerminate (CompDisplay     *d,
 	    }
 
 	    if (state && ss->selectedWindow && !ss->selectedWindow->destroyed)
+	    {
+		/* Move input focus to the selected window to prevent the
+		 * previously active window from getting the focus back for a
+		 * short time before the request below gets processed.  This
+		 * is useful to prevent some applications from spamming the
+		 * Accessibility layer and leading to confusing situations. */
+		moveInputFocusToWindow (ss->selectedWindow);
+
 		sendWindowActivationRequest (s, ss->selectedWindow->id);
+	    }
 
 	    removeScreenGrab (s, ss->grabIndex, 0);
 	    ss->grabIndex = 0;
