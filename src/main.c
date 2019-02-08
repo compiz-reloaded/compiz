@@ -163,10 +163,11 @@ void
 launchFallbackWM (void)
 {
     char *fallback = NULL;
+    char *desktop = getenv ("XDG_CURRENT_DESKTOP");
 
-    if (strcmp (getenv ("XDG_CURRENT_DESKTOP"), "MATE") == 0)
+    if (desktop && strcmp (desktop, "MATE") == 0)
 	fallback = "marco";
-    else if (strcmp (getenv ("XDG_CURRENT_DESKTOP"), "GNOME") == 0 || strcmp (getenv ("XDG_CURRENT_DESKTOP"), "GNOME") == 0)
+    else if (desktop && strcmp (desktop, "GNOME") == 0)
 	fallback = "metacity";
     else if (access ("/usr/bin/xfwm4", F_OK) == 0)
 	fallback = "xfwm4";
