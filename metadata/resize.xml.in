@@ -1,69 +1,69 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="resize">
-	<_short>Resize Window</_short>
-	<_long>Resize window</_long>
+	<short>Resize Window</short>
+	<long>Resize window</long>
 	<category>Window Management</category>
 	<display>
 	    <group>
-		<_short>Bindings</_short>
+		<short>Bindings</short>
 		<option name="initiate_normal_key" type="key">
-		    <_short>Initiate Normal Window Resize</_short>
-		    <_long>Start resizing window normally</_long>
+		    <short>Initiate Normal Window Resize</short>
+		    <long>Start resizing window normally</long>
 		    <default/>
 		</option>
 		<option name="initiate_outline_key" type="key">
-		    <_short>Initiate Outline Window Resize</_short>
-		    <_long>Start resizing window with outline</_long>
+		    <short>Initiate Outline Window Resize</short>
+		    <long>Start resizing window with outline</long>
 		    <default/>
 		</option>
 		<option name="initiate_rectangle_key" type="key">
-		    <_short>Initiate Rectangle Window Resize</_short>
-		    <_long>Start resizing window with rectangle</_long>
+		    <short>Initiate Rectangle Window Resize</short>
+		    <long>Start resizing window with rectangle</long>
 		    <default/>
 		</option>
 		<option name="initiate_stretch_key" type="key">
-		    <_short>Initiate Stretch Window Resize</_short>
-		    <_long>Start resizing window by stretching it</_long>
+		    <short>Initiate Stretch Window Resize</short>
+		    <long>Start resizing window by stretching it</long>
 		    <default/>
 		</option>
 		<option name="initiate_button" type="button">
-		    <_short>Initiate Window Resize</_short>
-		    <_long>Start resizing window</_long>
+		    <short>Initiate Window Resize</short>
+		    <long>Start resizing window</long>
 		    <default>&lt;Alt&gt;Button2</default>
 		</option>
 		<option name="initiate_key" type="key">
-		    <_short>Initiate Window Resize</_short>
-		    <_long>Start resizing window</_long>
+		    <short>Initiate Window Resize</short>
+		    <long>Start resizing window</long>
 		    <default>&lt;Alt&gt;F8</default>
 		</option>
 	    </group>
 	    <option name="mode" type="int">
-		<_short>Default Resize Mode</_short>
-		<_long>Default mode used for window resizing</_long>
+		<short>Default Resize Mode</short>
+		<long>Default mode used for window resizing</long>
 		<default>0</default>
 		<min>0</min>
 		<max>3</max>
 		<desc>
 		    <value>0</value>
-		    <_name>Normal</_name>
+		    <name>Normal</name>
 		</desc>
 		<desc>
 		    <value>1</value>
-		    <_name>Outline</_name>
+		    <name>Outline</name>
 		</desc>
 		<desc>
 		    <value>2</value>
-		    <_name>Rectangle</_name>
+		    <name>Rectangle</name>
 		</desc>
 		<desc>
 		    <value>3</value>
-		    <_name>Stretch</_name>
+		    <name>Stretch</name>
 		</desc>
 	    </option>
 	    <option name="border_color" type="color">
-		<_short>Border Color</_short>
-		<_long>Border color used for outline and rectangle resize modes</_long>
+		<short>Border Color</short>
+		<long>Border color used for outline and rectangle resize modes</long>
 		<default>
 		    <red>0x2f2f</red>
 		    <green>0x2f2f</green>
@@ -72,8 +72,8 @@
 		</default>
 	    </option>
 	    <option name="fill_color" type="color">
-		<_short>Fill Color</_short>
-		<_long>Fill color used for rectangle resize mode</_long>
+		<short>Fill Color</short>
+		<long>Fill color used for rectangle resize mode</long>
 		<default>
 		    <red>0x2f2f</red>
 		    <green>0x2f2f</green>
@@ -82,23 +82,23 @@
 		</default>
 	    </option>
 	    <option name="normal_match" type="match">
-		<_short>Normal Resize Windows</_short>
-		<_long>Windows that normal resize should be used for</_long>
+		<short>Normal Resize Windows</short>
+		<long>Windows that normal resize should be used for</long>
 		<default/>
 	    </option>
 	    <option name="outline_match" type="match">
-		<_short>Outline Resize Windows</_short>
-		<_long>Windows that outline resize should be used for</_long>
+		<short>Outline Resize Windows</short>
+		<long>Windows that outline resize should be used for</long>
 		<default/>
 	    </option>
 	    <option name="rectangle_match" type="match">
-		<_short>Rectangle Resize Windows</_short>
-		<_long>Windows that rectangle resize should be used for</_long>
+		<short>Rectangle Resize Windows</short>
+		<long>Windows that rectangle resize should be used for</long>
 		<default/>
 	    </option>
 	    <option name="stretch_match" type="match">
-		<_short>Stretch Resize Windows</_short>
-		<_long>Windows that stretch resize should be used for</_long>
+		<short>Stretch Resize Windows</short>
+		<long>Windows that stretch resize should be used for</long>
 		<default/>
 	    </option>
 	</display>

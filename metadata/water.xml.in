@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="water">
-	<_short>Water Effect</_short>
-	<_long>Adds water effects to different desktop actions</_long>
+	<short>Water Effect</short>
+	<long>Adds water effects to different desktop actions</long>
 	<category>Effects</category>
 	<deps>
 	    <relation type="before">
@@ -12,47 +12,47 @@
 	</deps>
 	<display>
 	    <option name="initiate_key" type="key">
-		<_short>Initiate</_short>
-		<_long>Enable pointer water effects</_long>
+		<short>Initiate</short>
+		<long>Enable pointer water effects</long>
 		<default>&lt;Primary&gt;&lt;Super&gt;</default>
 	    </option>
 	    <option name="toggle_rain_key" type="key">
-		<_short>Toggle rain</_short>
-		<_long>Toggle rain effect</_long>
+		<short>Toggle rain</short>
+		<long>Toggle rain effect</long>
 		<default>&lt;Shift&gt;F9</default>
 	    </option>
 	    <option name="toggle_wiper_key" type="key">
-		<_short>Toggle wiper</_short>
-		<_long>Toggle wiper effect</_long>
+		<short>Toggle wiper</short>
+		<long>Toggle wiper effect</long>
 		<default>&lt;Shift&gt;F8</default>
 	    </option>
 	    <option name="offset_scale" type="float">
-		<_short>Offset Scale</_short>
-		<_long>Water offset scale</_long>
+		<short>Offset Scale</short>
+		<long>Water offset scale</long>
 		<default>1</default>
 		<min>0</min>
 		<max>10</max>
 		<precision>0.1</precision>
 	    </option>
 	    <option name="rain_delay" type="int">
-		<_short>Rain Delay</_short>
-		<_long>Delay (in ms) between each rain-drop</_long>
+		<short>Rain Delay</short>
+		<long>Delay (in ms) between each rain-drop</long>
 		<default>250</default>
 		<min>1</min>
 		<max>3600000</max>
 	    </option>
 	    <option name="title_wave" type="bell">
-		<_short>Title wave</_short>
-		<_long>Wave effect from window title</_long>
+		<short>Title wave</short>
+		<long>Wave effect from window title</long>
 		<default>false</default>
 	    </option>
 	    <option name="point" type="action">
-		<_short>Point</_short>
-		<_long>Add point</_long>
+		<short>Point</short>
+		<long>Add point</long>
 	    </option>
 	    <option name="line" type="action">
-		<_short>Line</_short>
-		<_long>Add line</_long>
+		<short>Line</short>
+		<long>Add line</long>
 	    </option>
 	</display>
     </plugin>

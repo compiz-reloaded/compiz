@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="fade">
-	<_short>Fading Windows</_short>
-	<_long>Fade in windows when mapped and fade out windows when unmapped</_long>
+	<short>Fading Windows</short>
+	<long>Fade in windows when mapped and fade out windows when unmapped</long>
 	<category>Effects</category>
 	<deps>
 	    <requirement>
@@ -20,70 +20,70 @@
 	</deps>
 	<screen>
 	    <option name="fade_mode" type="int">
-		<_short>Fade Mode</_short>
-		<_long>Window fade mode</_long>
+		<short>Fade Mode</short>
+		<long>Window fade mode</long>
 		<min>0</min>
 		<max>1</max>
 		<default>0</default>
 		<desc>
 		    <value>0</value>
-		    <_name>Constant speed</_name>
+		    <name>Constant speed</name>
 		</desc>
 		<desc>
 		    <value>1</value>
-		    <_name>Constant time</_name>
+		    <name>Constant time</name>
 		</desc>
 	    </option>
 	    <option name="fade_speed" type="float">
-		<_short>Fade Speed</_short>
-		<_long>Window fade speed in "Constant speed" mode</_long>
+		<short>Fade Speed</short>
+		<long>Window fade speed in "Constant speed" mode</long>
 		<default>5.0</default>
 		<min>0.1</min>
 		<max>25.0</max>
 		<precision>0.1</precision>
 	    </option>
 	    <option name="fade_time" type="int">
-		<_short>Fade Time</_short>
-		<_long>Window fade time (in ms) in "Constant time" mode</_long>
+		<short>Fade Time</short>
+		<long>Window fade time (in ms) in "Constant time" mode</long>
 		<default>100</default>
 		<min>1</min>
 		<max>5000</max>
 	    </option>
 	    <option name="window_match" type="match">
-		<_short>Fade windows</_short>
-		<_long>Windows that should be fading</_long>
+		<short>Fade windows</short>
+		<long>Windows that should be fading</long>
 		<default>any</default>
 	    </option>
 	    <option name="visual_bell" type="bool">
-		<_short>Visual Bell</_short>
-		<_long>Fade effect on system beep</_long>
+		<short>Visual Bell</short>
+		<long>Fade effect on system beep</long>
 		<default>false</default>
 	    </option>
 	    <option name="fullscreen_visual_bell" type="bool">
-		<_short>Fullscreen Visual Bell</_short>
-		<_long>Fullscreen fade effect on system beep</_long>
+		<short>Fullscreen Visual Bell</short>
+		<long>Fullscreen fade effect on system beep</long>
 		<default>false</default>
 	    </option>
 	    <option name="minimize_open_close" type="bool">
-		<_short>Fade On Minimize/Open/Close</_short>
-		<_long>Fade effect on minimize/open/close window events</_long>
+		<short>Fade On Minimize/Open/Close</short>
+		<long>Fade effect on minimize/open/close window events</long>
 		<default>true</default>
 	    </option>
 	    <option name="dim_unresponsive" type="bool">
-		<_short>Dim Unresponsive Windows</_short>
-		<_long>Dim windows that are not responding to window manager requests</_long>
+		<short>Dim Unresponsive Windows</short>
+		<long>Dim windows that are not responding to window manager requests</long>
 		<default>true</default>
 	    </option>
 	    <option name="unresponsive_brightness" type="int">
-		<_short>Unresponsive Window Brightness</_short>
-		<_long>Brightness (in %) of unresponsive windows</_long>
+		<short>Unresponsive Window Brightness</short>
+		<long>Brightness (in %) of unresponsive windows</long>
 		<min>0</min>
 		<max>100</max>
 		<default>65</default>
 	    </option>
 	    <option name="unresponsive_saturation" type="int">
-		<_short>Unresponsive Window Saturation</_short>
-		<_long>Saturation (in %) of unresponsive windows</_long>
+		<short>Unresponsive Window Saturation</short>
+		<long>Saturation (in %) of unresponsive windows</long>
 		<min>0</min>
 		<max>100</max>
 		<default>0</default>

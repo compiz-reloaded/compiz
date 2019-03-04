@@ -101,9 +101,23 @@ AC_C_BIGENDIAN
 plugindir=$libdir/compiz
 AC_SUBST(plugindir)
 
-AC_ARG_WITH(default-plugins, [  --with-default-plugins=PLUGINS ],
-		       [default_plugins="$withval"],
-		       [default_plugins=""])
+AC_MSG_CHECKING([which plugins to use by default])
+AC_ARG_WITH([default-plugins],
+  [AS_HELP_STRING([--with-default-plugins=PLUGINS], [Plugins to use by default, comma-separated [default=core]])],
+  [
+   case "$withval" in
+   yes|no)
+     default_plugins=core ;;
+   *)
+     if expr "x$withval" : "x[[[:alnum:]]][[[:alnum:]]]*\(,[[[:alnum:]]][[[:alnum:]]]*\)*$" 1> /dev/null; then
+       default_plugins="$withval"
+     else
+       AC_MSG_ERROR([["]$withval["] is not a comma-separated list of plugins])
+     fi ;;
+   esac
+  ],
+  [default_plugins=core])
+AC_MSG_RESULT($default_plugins)
 AC_SUBST(default_plugins)
 
 imagedir=$datadir/compiz
@@ -128,31 +142,33 @@ PKG_CHECK_MODULES(DECORATION, [$DECORATION_REQUIRES])
 AC_SUBST([DECORATION_REQUIRES])
 
 PKG_CHECK_EXISTS(xrender >= 0.9.3,
-		 [have_xrender_0_9_3=yes], [have_xrender_0_9_3=no])
+  [have_xrender_0_9_3=yes], [have_xrender_0_9_3=no])
 
 if test "$have_xrender_0_9_3" = yes; then
   AC_DEFINE(HAVE_XRENDER_0_9_3, 1,
-	    [Define to 1 if xrender version >= 0.9.3])
+    [Define to 1 if xrender version >= 0.9.3])
 fi
 
 AC_CHECK_HEADER([X11/extensions/XInput2.h],
-		 [have_xinput2=yes], [have_xinput2=no])
+  [have_xinput2=yes], [have_xinput2=no])
 
 if test "$have_xinput2" = yes; then
   AC_DEFINE(HAVE_XINPUT2, 1,
-	    [Define to 1 if xinput2 is available])
+    [Define to 1 if xinput2 is available])
 fi
 
 AC_MSG_CHECKING(for GL_CFLAGS)
-AC_ARG_WITH(gl-cflags, [  --with-gl-cflags=CFLAGS ],
-		       [GL_CFLAGS="$withval"],
-		       [GL_CFLAGS=""])
-
+AC_ARG_WITH(gl-cflags,
+  [  --with-gl-cflags=CFLAGS ],
+  [GL_CFLAGS="$withval"],
+  [GL_CFLAGS=""])
 AC_MSG_RESULT($GL_CFLAGS)
+
 AC_MSG_CHECKING(for GL_LIBS)
-AC_ARG_WITH(gl-libs, [  --with-gl-libs=LIBS ],
-		     [GL_LIBS="$withval"],
-		     [GL_LIBS="-lGL"])
+AC_ARG_WITH(gl-libs,
+  [  --with-gl-libs=LIBS ],
+  [GL_LIBS="$withval"],
+  [GL_LIBS="-lGL"])
 AC_MSG_RESULT($GL_LIBS)
 
 AC_SUBST(GL_CFLAGS)
@@ -287,12 +303,12 @@ AC_ARG_ENABLE(gtk,
 
 AC_MSG_CHECKING([which gtk+ version to compile against])
 AC_ARG_WITH([gtk],
-  [AS_HELP_STRING([--with-gtk=2.0|3.0|auto], [Which gtk+ version to compile against (default: auto)])],
+  [AS_HELP_STRING([--with-gtk=2.0|3.0|auto], [Which gtk+ version to compile against [default=auto]])],
   [
-      case "$with_gtk" in
-          2.0|3.0|auto) ;;
-          *) AC_MSG_ERROR([invalid gtk+ version specified]) ;;
-      esac
+   case "$with_gtk" in
+     2.0|3.0|auto) ;;
+     *) AC_MSG_ERROR([invalid gtk+ version specified]) ;;
+   esac
   ],
   [with_gtk=auto])
 AC_MSG_RESULT([$with_gtk])
@@ -417,40 +433,38 @@ AC_PATH_PROG(UPDATE_ICON_CACHE, gtk-update-icon-cache)
 
 AC_CONFIG_COMMANDS([include/compiz-common.h],
 [
-	commonfile=include/compiz-common.h
-	outfile=$commonfile.tmp
-	AC_MSG_NOTICE([creating $commonfile])
-	cat > $outfile <<_EOF
-#ifndef COMPIZ_COMMON_H
-#define COMPIZ_COMMON_H
-
-#ifdef  __cplusplus
-# define COMPIZ_BEGIN_DECLS  extern "C" {
-# define COMPIZ_END_DECLS    }
-#else
-# define COMPIZ_BEGIN_DECLS
-# define COMPIZ_END_DECLS
-#endif
-
-#define COMPIZ_VERSION_MAJOR $COMPIZ_VERSION_MAJOR
-#define COMPIZ_VERSION_MINOR $COMPIZ_VERSION_MINOR
-#define COMPIZ_VERSION_MICRO $COMPIZ_VERSION_MICRO
-
-#define COMPIZ_VERSION_STRING "$COMPIZ_VERSION_MAJOR.$COMPIZ_VERSION_MINOR.$COMPIZ_VERSION_MICRO"
-
+  commonfile=include/compiz-common.h
+  outfile=$commonfile.tmp
+  AC_MSG_NOTICE([creating $commonfile])
+  cat >$outfile <<-_EOF
+	#ifndef COMPIZ_COMMON_H
+	#  define COMPIZ_COMMON_H
+	
+	#  ifdef  __cplusplus
+	#    define COMPIZ_BEGIN_DECLS  extern "C" {
+	#    define COMPIZ_END_DECLS    }
+	#  else
+	#    define COMPIZ_BEGIN_DECLS
+	#    define COMPIZ_END_DECLS
+	#  endif
+	
+	#  define COMPIZ_VERSION_MAJOR $COMPIZ_VERSION_MAJOR
+	#  define COMPIZ_VERSION_MINOR $COMPIZ_VERSION_MINOR
+	#  define COMPIZ_VERSION_MICRO $COMPIZ_VERSION_MICRO
+	
+	#  define COMPIZ_VERSION_STRING "$COMPIZ_VERSION_MAJOR.$COMPIZ_VERSION_MINOR.$COMPIZ_VERSION_MICRO"
+	#endif
 _EOF
-	echo '#endif' >> $outfile
-
-	if cmp -s $outfile $commonfile; then
-	  AC_MSG_NOTICE([$commonfile is unchanged])
-	  rm -f $outfile
-	else
-	  mv $outfile $commonfile
-	fi
+  if cmp -s $outfile $commonfile; then
+    AC_MSG_NOTICE([$commonfile is unchanged])
+    rm -f $outfile
+  else
+    mv $outfile $commonfile
+  fi
 ],[
-	COMPIZ_VERSION_MAJOR=$COMPIZ_VERSION_MAJOR
-	COMPIZ_VERSION_MINOR=$COMPIZ_VERSION_MINOR
-	COMPIZ_VERSION_MICRO=$COMPIZ_VERSION_MICRO
+  COMPIZ_VERSION_MAJOR=$COMPIZ_VERSION_MAJOR
+  COMPIZ_VERSION_MINOR=$COMPIZ_VERSION_MINOR
+  COMPIZ_VERSION_MICRO=$COMPIZ_VERSION_MICRO
 ])
 
 AC_OUTPUT([

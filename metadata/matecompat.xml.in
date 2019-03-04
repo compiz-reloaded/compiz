@@ -1,51 +1,51 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="matecompat">
-	<_short>MATE Compatibility</_short>
-	<_long>Options that keep Compiz compatible to the MATE desktop environment</_long>
+	<short>MATE Compatibility</short>
+	<long>Options that keep Compiz compatible to the MATE desktop environment</long>
 	<category>General</category>
 	<display>
 	    <option name="main_menu_key" type="key">
-		<_short>Show Main Menu</_short>
-		<_long>Show the main menu</_long>
+		<short>Show Main Menu</short>
+		<long>Show the main menu</long>
 		<default>&lt;Alt&gt;F1</default>
 	    </option>
 	    <option name="run_key" type="key">
-		<_short>Run Dialog</_short>
-		<_long>Show Run Application dialog</_long>
+		<short>Run Dialog</short>
+		<long>Show Run Application dialog</long>
 		<default>&lt;Alt&gt;F2</default>
 	    </option>
 	    <group>
-		<_short>Commands</_short>
+		<short>Commands</short>
 		<option name="command_screenshot" type="string">
-		    <_short>Screenshot command line</_short>
-		    <_long>Screenshot command line</_long>
+		    <short>Screenshot command line</short>
+		    <long>Screenshot command line</long>
 		    <default>mate-screenshot</default>
 		</option>
 		<option name="run_command_screenshot_key" type="key">
-		    <_short>Take a screenshot</_short>
-		    <_long>Take a screenshot</_long>
+		    <short>Take a screenshot</short>
+		    <long>Take a screenshot</long>
 		    <default>Print</default>
 		</option>
 		<option name="command_window_screenshot" type="string">
-		    <_short>Window screenshot command line</_short>
-		    <_long>Window screenshot command line</_long>
+		    <short>Window screenshot command line</short>
+		    <long>Window screenshot command line</long>
 		    <default>mate-screenshot --window</default>
 		</option>
 		<option name="run_command_window_screenshot_key" type="key">
-		    <_short>Take a screenshot of a window</_short>
-		    <_long>Take a screenshot of a window</_long>
+		    <short>Take a screenshot of a window</short>
+		    <long>Take a screenshot of a window</long>
 		    <default>&lt;Alt&gt;Print</default>
 		</option>
-		<_short>Run terminal command</_short>
+		<short>Run terminal command</short>
 		<option name="command_terminal" type="string">
-		    <_short>Terminal command line</_short>
-		    <_long>Terminal command line</_long>
+		    <short>Terminal command line</short>
+		    <long>Terminal command line</long>
 		    <default>mate-terminal</default>
 		</option>
 		<option name="run_command_terminal_key" type="key">
-		    <_short>Open a terminal</_short>
-		    <_long>Open a terminal</_long>
+		    <short>Open a terminal</short>
+		    <long>Open a terminal</long>
 		</option>
 	    </group>
 	</display>

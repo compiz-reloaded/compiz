@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<its:rules xmlns:its="http://www.w3.org/2005/11/its"
+           xmlns:gt="https://www.gnu.org/s/gettext/ns/its/extensions/1.0"
+           version="2.0">
+  <its:translateRule selector="/compiz"
+                     translate="no"/>
+  <its:translateRule selector="/compiz//long"
+                     translate="yes"/>
+  <its:translateRule selector="/compiz//name"
+                     translate="yes"/>
+  <its:translateRule selector="/compiz//short"
+                     translate="yes"/>
+  <gt:escapeRule selector="/compiz" escape="yes"/>
+</its:rules>

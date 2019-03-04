@@ -1,82 +1,82 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="move">
-	<_short>Move Window</_short>
-	<_long>Move window</_long>
+	<short>Move Window</short>
+	<long>Move window</long>
 	<category>Window Management</category>
 	<display>
 	    <group>
-		<_short>General</_short>
+		<short>General</short>
 		<option name="initiate_button" type="button">
-		    <_short>Initiate Window Move</_short>
-		    <_long>Start moving window</_long>
+		    <short>Initiate Window Move</short>
+		    <long>Start moving window</long>
 		    <default>&lt;Alt&gt;Button1</default>
 		</option>
 		<option name="initiate_key" type="key">
-		    <_short>Initiate Window Move</_short>
-		    <_long>Start moving window</_long>
+		    <short>Initiate Window Move</short>
+		    <long>Start moving window</long>
 		    <default>&lt;Alt&gt;F7</default>
 		</option>
 		<option name="opacity" type="int">
-		    <_short>Opacity</_short>
-		    <_long>Opacity level of moving windows</_long>
+		    <short>Opacity</short>
+		    <long>Opacity level of moving windows</long>
 		    <default>100</default>
 		    <min>1</min>
 		    <max>100</max>
 		</option>
 		<option name="constrain_y" type="bool">
-		    <_short>Constrain Y</_short>
-		    <_long>Constrain Y coordinate to workspace area</_long>
+		    <short>Constrain Y</short>
+		    <long>Constrain Y coordinate to workspace area</long>
 		    <default>true</default>
 		</option>
 		<option name="snapoff_maximized" type="bool">
-		    <_short>Snapoff maximized windows</_short>
-		    <_long>Snapoff and auto unmaximized maximized windows when dragging</_long>
+		    <short>Snapoff maximized windows</short>
+		    <long>Snapoff and auto unmaximized maximized windows when dragging</long>
 		    <default>true</default>
 		</option>
 		<option name="lazy_positioning" type="bool">
-		    <_short>Lazy Positioning</_short>
-		    <_long>Do not update the server-side position of windows until finished moving</_long>
+		    <short>Lazy Positioning</short>
+		    <long>Do not update the server-side position of windows until finished moving</long>
 		    <default>true</default>
 		</option>
 	    </group>
 	    <group>
-		<_short>Off-screen windows</_short>
+		<short>Off-screen windows</short>
 		<option name="offscreen_scroll" type="bool">
-		    <_short>Enable off-Screen window scrolling</_short>
-		    <_long>Make mouse wheel scroll window if part of it is off-screen</_long>
+		    <short>Enable off-Screen window scrolling</short>
+		    <long>Make mouse wheel scroll window if part of it is off-screen</long>
 		    <default>false</default>
 		</option>
 		<option name="offscreen_scroll_down" type="button">
-		    <_short>Scroll down</_short>
-		    <_long>Scroll window down if part of it is off-screen</_long>
+		    <short>Scroll down</short>
+		    <long>Scroll window down if part of it is off-screen</long>
 		    <default>Button4</default>
 		</option>
 		<option name="offscreen_scroll_up" type="button">
-		    <_short>Scroll up</_short>
-		    <_long>Scroll window up if part of it is off-screen</_long>
+		    <short>Scroll up</short>
+		    <long>Scroll window up if part of it is off-screen</long>
 		    <default>Button5</default>
 		</option>
 		<option name="offscreen_scroll_right" type="button">
-		    <_short>Scroll right</_short>
-		    <_long>Scroll window right if part of it is off-screen</_long>
+		    <short>Scroll right</short>
+		    <long>Scroll window right if part of it is off-screen</long>
 		    <default>&lt;Shift&gt;Button4</default>
 		</option>
 		<option name="offscreen_scroll_left" type="button">
-		    <_short>Scroll left</_short>
-		    <_long>Scroll window left if part of it is off-screen</_long>
+		    <short>Scroll left</short>
+		    <long>Scroll window left if part of it is off-screen</long>
 		    <default>&lt;Shift&gt;Button5</default>
 		</option>
 		<option name="offscreen_scroll_speed" type="int">
-		    <_short>Scrolling speed</_short>
-		    <_long>Speed of off-screen window scrolling</_long>
+		    <short>Scrolling speed</short>
+		    <long>Speed of off-screen window scrolling</long>
 		    <default>10</default>
 		    <min>1</min>
 		    <max>100</max>
 		</option>
 		<option name="offscreen_scroll_color" type="color">
-		    <_short>Shadow color</_short>
-		    <_long>Color of the rectangle showing when one can scroll a window</_long>
+		    <short>Shadow color</short>
+		    <long>Color of the rectangle showing when one can scroll a window</long>
 		    <default>
 			<red>0x0000</red>
 			<green>0x0000</green>
@@ -85,15 +85,15 @@
 		    </default>
 		</option>
 		<option name="offscreen_scroll_width" type="int">
-		    <_short>Shadow width</_short>
-		    <_long>Width of the rectangle showing when one can scroll a window</_long>
+		    <short>Shadow width</short>
+		    <long>Width of the rectangle showing when one can scroll a window</long>
 		    <default>20</default>
 		    <min>0</min>
 		    <max>100</max>
 		</option>
 		<option name="offscreen_scroll_gradient" type="bool">
-		    <_short>Enable shadow gradient</_short>
-		    <_long>Enable gradient of rectangle showing when one can scroll a window</_long>
+		    <short>Enable shadow gradient</short>
+		    <long>Enable gradient of rectangle showing when one can scroll a window</long>
 		    <default>true</default>
 		</option>
 	    </group>

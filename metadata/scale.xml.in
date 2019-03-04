@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="scale">
-	<_short>Scale</_short>
-	<_long>Scale windows</_long>
+	<short>Scale</short>
+	<long>Scale windows</long>
 	<category>Window Management</category>
 	<deps>
 	    <relation type="after">
@@ -14,168 +14,168 @@
 	    <option name="index" type="int" read_only="true"/>
 	    <option name="relayout_slots" type="action" read_only="true"/>
 	    <group>
-		<_short>Bindings</_short>
+		<short>Bindings</short>
 		<option name="key_bindings_toggle" type="bool">
-		    <_short>Key Bindings Toggle Scale Mode</_short>
-		    <_long>Key bindings toggle scale mode instead of enabling it when pressed and disabling it when released.</_long>
+		    <short>Key Bindings Toggle Scale Mode</short>
+		    <long>Key bindings toggle scale mode instead of enabling it when pressed and disabling it when released.</long>
 		    <default>false</default>
 		</option>
 		<option name="button_bindings_toggle" type="bool">
-		    <_short>Button Bindings Toggle Scale Mode</_short>
-		    <_long>Button bindings toggle scale mode instead of enabling it when pressed and disabling it when released.</_long>
+		    <short>Button Bindings Toggle Scale Mode</short>
+		    <long>Button bindings toggle scale mode instead of enabling it when pressed and disabling it when released.</long>
 		    <default>false</default>
 		</option>
 		<option name="initiate_edge" type="edge">
-		    <_short>Initiate Window Picker</_short>
-		    <_long>Layout and start transforming windows</_long>
+		    <short>Initiate Window Picker</short>
+		    <long>Layout and start transforming windows</long>
 		    <default>
 			<edge name="TopRight"/>
 		    </default>
 		    <allowed edgednd="true"/>
 		</option>
 		<option name="initiate_key" type="key">
-		    <_short>Initiate Window Picker</_short>
-		    <_long>Layout and start transforming windows</_long>
+		    <short>Initiate Window Picker</short>
+		    <long>Layout and start transforming windows</long>
 		    <default>&lt;Shift&gt;&lt;Alt&gt;Up</default>
 		</option>
 		<option name="initiate_button" type="button">
-		    <_short>Initiate Window Picker</_short>
-		    <_long>Layout and start transforming windows</_long>
+		    <short>Initiate Window Picker</short>
+		    <long>Layout and start transforming windows</long>
 		</option>
 		<option name="initiate_all_edge" type="edge">
-		    <_short>Initiate Window Picker For All Windows</_short>
-		    <_long>Layout and start transforming all windows</_long>
+		    <short>Initiate Window Picker For All Windows</short>
+		    <long>Layout and start transforming all windows</long>
 		    <allowed edgednd="true"/>
 		</option>
 		<option name="initiate_all_button" type="button">
-		    <_short>Initiate Window Picker For All Windows</_short>
-		    <_long>Layout and start transforming all windows</_long>
+		    <short>Initiate Window Picker For All Windows</short>
+		    <long>Layout and start transforming all windows</long>
 		</option>
 		<option name="initiate_all_key" type="key">
-		    <_short>Initiate Window Picker For All Windows</_short>
-		    <_long>Layout and start transforming all windows</_long>
+		    <short>Initiate Window Picker For All Windows</short>
+		    <long>Layout and start transforming all windows</long>
 		</option>
 		<option name="initiate_group_edge" type="edge">
-		    <_short>Initiate Window Picker For Window Group</_short>
-		    <_long>Layout and start transforming window group</_long>
+		    <short>Initiate Window Picker For Window Group</short>
+		    <long>Layout and start transforming window group</long>
 		    <allowed edgednd="true"/>
 		</option>
 		<option name="initiate_group_button" type="button">
-		    <_short>Initiate Window Picker For Window Group</_short>
-		    <_long>Layout and start transforming window group</_long>
+		    <short>Initiate Window Picker For Window Group</short>
+		    <long>Layout and start transforming window group</long>
 		</option>
 		<option name="initiate_group_key" type="key">
-		    <_short>Initiate Window Picker For Window Group</_short>
-		    <_long>Layout and start transforming window group</_long>
+		    <short>Initiate Window Picker For Window Group</short>
+		    <long>Layout and start transforming window group</long>
 		</option>
 		<option name="initiate_output_edge" type="edge">
-		    <_short>Initiate Window Picker For Windows on Current Output</_short>
-		    <_long>Layout and start transforming windows on current output</_long>
+		    <short>Initiate Window Picker For Windows on Current Output</short>
+		    <long>Layout and start transforming windows on current output</long>
 		    <allowed edgednd="true"/>
 		</option>
 		<option name="initiate_output_button" type="button">
-		    <_short>Initiate Window Picker For Windows on Current Output</_short>
-		    <_long>Layout and start transforming windows on current output</_long>
+		    <short>Initiate Window Picker For Windows on Current Output</short>
+		    <long>Layout and start transforming windows on current output</long>
 		</option>
 		<option name="initiate_output_key" type="key">
-		    <_short>Initiate Window Picker For Windows on Current Output</_short>
-		    <_long>Layout and start transforming windows on current output</_long>
+		    <short>Initiate Window Picker For Windows on Current Output</short>
+		    <long>Layout and start transforming windows on current output</long>
 		</option>
 	    </group>
 	    <group>
-		<_short>Behavior</_short>
+		<short>Behavior</short>
 		<option name="show_desktop" type="bool">
-		    <_short>Click Desktop to Show Desktop</_short>
-		    <_long>Enter Show Desktop mode when Desktop is clicked during Scale</_long>
+		    <short>Click Desktop to Show Desktop</short>
+		    <long>Enter Show Desktop mode when Desktop is clicked during Scale</long>
 		    <default>true</default>
 		</option>
 	    </group>
 	</display>
 	<screen>
 	    <group>
-		<_short>Appearance</_short>
+		<short>Appearance</short>
 		<option name="spacing" type="int">
-		    <_short>Spacing</_short>
-		    <_long>Space between windows</_long>
+		    <short>Spacing</short>
+		    <long>Space between windows</long>
 		    <default>10</default>
 		    <min>0</min>
 		    <max>250</max>
 		</option>
 		<option name="speed" type="float">
-		    <_short>Speed</_short>
-		    <_long>Scale speed</_long>
+		    <short>Speed</short>
+		    <long>Scale speed</long>
 		    <default>1.5</default>
 		    <min>0.1</min>
 		    <max>50</max>
 		    <precision>0.1</precision>
 		</option>
 		<option name="timestep" type="float">
-		    <_short>Timestep</_short>
-		    <_long>Scale timestep</_long>
+		    <short>Timestep</short>
+		    <long>Scale timestep</long>
 		    <default>1.2</default>
 		    <min>0.1</min>
 		    <max>50</max>
 		    <precision>0.1</precision>
 		</option>
 		<option name="darken_back" type="bool">
-		    <_short>Darken Background</_short>
-		    <_long>Darken background when scaling windows</_long>
+		    <short>Darken Background</short>
+		    <long>Darken background when scaling windows</long>
 		    <default>true</default>
 		</option>
 		<option name="opacity" type="int">
-		    <_short>Opacity</_short>
-		    <_long>Amount of opacity in percent</_long>
+		    <short>Opacity</short>
+		    <long>Amount of opacity in percent</long>
 		    <default>75</default>
 		    <min>0</min>
 		    <max>100</max>
 		</option>
 		<option name="overlay_icon" type="int">
-		    <_short>Overlay Icon</_short>
-		    <_long>Overlay an icon on windows once they are scaled</_long>
+		    <short>Overlay Icon</short>
+		    <long>Overlay an icon on windows once they are scaled</long>
 		    <min>0</min>
 		    <max>2</max>
 		    <default>1</default>
 		    <desc>
 			<value>0</value>
-			<_name>None</_name>
+			<name>None</name>
 		    </desc>
 		    <desc>
 			<value>1</value>
-			<_name>Emblem</_name>
+			<name>Emblem</name>
 		    </desc>
 		    <desc>
 			<value>2</value>
-			<_name>Big</_name>
+			<name>Big</name>
 		    </desc>
 		</option>
 	    </group>
 	    <group>
-		<_short>Behavior</_short>
+		<short>Behavior</short>
 		<option name="window_match" type="match">
-		    <_short>Scale Windows</_short>
-		    <_long>Windows that should be scaled in scale mode</_long>
+		    <short>Scale Windows</short>
+		    <long>Windows that should be scaled in scale mode</long>
 		    <default>Toolbar | Utility | Dialog | Normal | Unknown</default>
 		</option>
 		<option name="hover_time" type="int">
-		    <_short>Hover Time</_short>
-		    <_long>Time (in ms) before scale mode is terminated when hovering over a window</_long>
+		    <short>Hover Time</short>
+		    <long>Time (in ms) before scale mode is terminated when hovering over a window</long>
 		    <default>750</default>
 		    <min>50</min>
 		    <max>10000</max>
 		</option>
 		<option name="multioutput_mode" type="int">
-		    <_short>Multi Output Mode</_short>
-		    <_long>Selects where windows are scaled if multiple output devices are used.</_long>
+		    <short>Multi Output Mode</short>
+		    <long>Selects where windows are scaled if multiple output devices are used.</long>
 		    <min>0</min>
 		    <max>1</max>
 		    <default>0</default>
 		    <desc>
 			<value>0</value>
-			<_name>On current output device</_name>
+			<name>On current output device</name>
 		    </desc>
 		    <desc>
 			<value>1</value>
-			<_name>On all output devices</_name>
+			<name>On all output devices</name>
 		    </desc>
 		</option>
 	    </group>

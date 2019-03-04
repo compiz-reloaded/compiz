@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="cube">
-	<_short>Desktop Cube</_short>
-	<_long>Place windows on cube</_long>
+	<short>Desktop Cube</short>
+	<long>Place windows on cube</long>
 	<category>Desktop</category>
 	<feature>largedesktop</feature>
 	<deps>
@@ -20,70 +20,70 @@
 	    <option name="abi" type="int" read_only="true"/>
 	    <option name="index" type="int" read_only="true"/>
 	    <option name="unfold_key" type="key">
-		<_short>Unfold</_short>
-		<_long>Unfold cube</_long>
+		<short>Unfold</short>
+		<long>Unfold cube</long>
 		<default>&lt;Primary&gt;&lt;Alt&gt;Down</default>
 	    </option>
 	    <option name="next_slide_key" type="key">
-		<_short>Next Slide</_short>
-		<_long>Advance to next slide</_long>
+		<short>Next Slide</short>
+		<long>Advance to next slide</long>
 	    </option>
 	    <option name="prev_slide_key" type="key">
-		<_short>Prev Slide</_short>
-		<_long>Go back to previous slide</_long>
+		<short>Prev Slide</short>
+		<long>Go back to previous slide</long>
 	    </option>
 	</display>
 	<screen>
 	    <option name="mipmap" type="bool">
-		<_short>Mipmap</_short>
-		<_long>Generate mipmaps when possible for higher quality scaling</_long>
+		<short>Mipmap</short>
+		<long>Generate mipmaps when possible for higher quality scaling</long>
 		<default>true</default>
 	    </option>
 	    <option name="multioutput_mode" type="int">
-		<_short>Multi Output Mode</_short>
-		<_long>Selects how the cube is displayed if multiple output devices are used.</_long>
+		<short>Multi Output Mode</short>
+		<long>Selects how the cube is displayed if multiple output devices are used.</long>
 		<min>0</min>
 		<max>2</max>
 		<default>0</default>
 		<desc>
 		    <value>0</value>
-		    <_name>Automatic</_name>
+		    <name>Automatic</name>
 		</desc>
 		<desc>
 		    <value>1</value>
-		    <_name>Multiple cubes</_name>
+		    <name>Multiple cubes</name>
 		</desc>
 		<desc>
 		    <value>2</value>
-		    <_name>One big cube</_name>
+		    <name>One big cube</name>
 		</desc>
 	    </option>
 	    <group>
-		<_short>Behavior</_short>
+		<short>Behavior</short>
 		<option name="in" type="bool">
-		    <_short>Inside Cube</_short>
-		    <_long>Inside cube</_long>
+		    <short>Inside Cube</short>
+		    <long>Inside cube</long>
 		    <default>false</default>
 		</option>
 		<option name="acceleration" type="float">
-		    <_short>Acceleration</_short>
-		    <_long>Fold Acceleration</_long>
+		    <short>Acceleration</short>
+		    <long>Fold Acceleration</long>
 		    <default>4.0</default>
 		    <min>1.0</min>
 		    <max>20.0</max>
 		    <precision>0.1</precision>
 		</option>
 		<option name="speed" type="float">
-		    <_short>Speed</_short>
-		    <_long>Fold Speed</_long>
+		    <short>Speed</short>
+		    <long>Fold Speed</long>
 		    <default>1.5</default>
 		    <min>0.1</min>
 		    <max>50.0</max>
 		    <precision>0.1</precision>
 		</option>
 		<option name="timestep" type="float">
-		    <_short>Timestep</_short>
-		    <_long>Fold Timestep</_long>
+		    <short>Timestep</short>
+		    <long>Fold Timestep</long>
 		    <default>1.2</default>
 		    <min>0.1</min>
 		    <max>50.0</max>
@@ -91,10 +91,10 @@
 		</option>
 	    </group>
 	    <group>
-		<_short>Appearance</_short>
+		<short>Appearance</short>
 		<option name="color" type="color">
-		    <_short>Cube Color</_short>
-		    <_long>Color of top and bottom sides of the cube</_long>
+		    <short>Cube Color</short>
+		    <long>Color of top and bottom sides of the cube</long>
 		    <default>
 			<red>0xfefe</red>
 			<green>0xffff</green>
@@ -102,15 +102,15 @@
 		    </default>
 		</option>
 		<subgroup>
-		    <_short>Cube Caps</_short>
+		    <short>Cube Caps</short>
 		    <option name="scale_image" type="bool">
-			<_short>Scale image</_short>
-			<_long>Scale images to cover top face of cube</_long>
+			<short>Scale image</short>
+			<long>Scale images to cover top face of cube</long>
 			<default>false</default>
 		    </option>
 		    <option name="images" type="list">
-			<_short>Image files</_short>
-			<_long>List of PNG and SVG files that should be rendered on top face of cube</_long>
+			<short>Image files</short>
+			<long>List of PNG and SVG files that should be rendered on top face of cube</long>
 			<type>string</type>
 			<hints>file;image;</hints>
 			<default>
@@ -118,31 +118,31 @@
 			</default>
 		    </option>
 		    <option name="adjust_image" type="bool">
-			<_short>Adjust Image</_short>
-			<_long>Adjust top face image to rotation</_long>
+			<short>Adjust Image</short>
+			<long>Adjust top face image to rotation</long>
 			<default>false</default>
 		    </option>
 		</subgroup>
 		<subgroup>
-		    <_short>Skydome</_short>
+		    <short>Skydome</short>
 		    <option name="skydome" type="bool">
-			<_short>Skydome</_short>
-			<_long>Render skydome</_long>
+			<short>Skydome</short>
+			<long>Render skydome</long>
 			<default>false</default>
 		    </option>
 		    <option name="skydome_image" type="string">
-			<_short>Skydome Image</_short>
-			<_long>Image to use as texture for the skydome</_long>
+			<short>Skydome Image</short>
+			<long>Image to use as texture for the skydome</long>
 			<hints>file;image;</hints>
 		    </option>
 		    <option name="skydome_animated" type="bool">
-			<_short>Animate Skydome</_short>
-			<_long>Animate skydome when rotating cube</_long>
+			<short>Animate Skydome</short>
+			<long>Animate skydome when rotating cube</long>
 			<default>false</default>
 		    </option>
 		    <option name="skydome_gradient_start_color" type="color">
-			<_short>Skydome Gradient Start Color</_short>
-			<_long>Color to use for the top color-stop of the skydome-fallback gradient</_long>
+			<short>Skydome Gradient Start Color</short>
+			<long>Color to use for the top color-stop of the skydome-fallback gradient</long>
 			<default>
 			    <red>0x0d0d</red>
 			    <green>0xb1b1</green>
@@ -150,8 +150,8 @@
 			</default>
 		    </option>
 		    <option name="skydome_gradient_end_color" type="color">
-			<_short>Skydome Gradient End Color</_short>
-			<_long>Color to use for the bottom color-stop of the skydome-fallback gradient</_long>
+			<short>Skydome Gradient End Color</short>
+			<long>Color to use for the bottom color-stop of the skydome-fallback gradient</long>
 			<default>
 			    <red>0xfefe</red>
 			    <green>0xffff</green>
@@ -161,26 +161,26 @@
 		</subgroup>
 	    </group>
 	    <group>
-		<_short>Transparent Cube</_short>
+		<short>Transparent Cube</short>
 		<option name="active_opacity" type="float">
-		    <_short>Opacity During Rotation</_short>
-		    <_long>Opacity of desktop window during rotation.</_long>
+		    <short>Opacity During Rotation</short>
+		    <long>Opacity of desktop window during rotation.</long>
 		    <default>70.0</default>
 		    <min>0.0</min>
 		    <max>100.0</max>
 		    <precision>1.0</precision>
 		</option>
 		<option name="inactive_opacity" type="float">
-		    <_short>Opacity When Not Rotating</_short>
-		    <_long>Opacity of desktop window when not rotating.</_long>
+		    <short>Opacity When Not Rotating</short>
+		    <long>Opacity of desktop window when not rotating.</long>
 		    <default>100.0</default>
 		    <min>0.0</min>
 		    <max>100.0</max>
 		    <precision>1.0</precision>
 		</option>
 		<option name="transparent_manual_only" type="bool">
-		    <_short>Transparency Only on Mouse Rotate</_short>
-		    <_long>Initiates Cube transparency only if rotation is mouse driven.</_long>
+		    <short>Transparency Only on Mouse Rotate</short>
+		    <long>Initiates Cube transparency only if rotation is mouse driven.</long>
 		    <default>true</default>
 		</option>
 	    </group>

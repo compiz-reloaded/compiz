@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <compiz>
     <plugin name="wobbly">
-	<_short>Wobbly Windows</_short>
-	<_long>Use spring model for wobbly window effect</_long>
+	<short>Wobbly Windows</short>
+	<long>Use spring model for wobbly window effect</long>
 	<category>Effects</category>
 	<feature>edgeresistance</feature>
 	<deps>
@@ -14,105 +14,105 @@
 	</deps>
 	<display>
 	    <option name="snap_key" type="key">
-		<_short>Snap windows</_short>
-		<_long>Toggle window snapping</_long>
+		<short>Snap windows</short>
+		<long>Toggle window snapping</long>
 		<default>&lt;Shift&gt;</default>
 	    </option>
 	    <option name="snap_inverted" type="bool">
-		<_short>Snap Inverted</_short>
-		<_long>Inverted window snapping</_long>
+		<short>Snap Inverted</short>
+		<long>Inverted window snapping</long>
 		<default>false</default>
 	    </option>
 	    <option name="shiver" type="bell">
-		<_short>Shiver</_short>
-		<_long>Make window shiver</_long>
+		<short>Shiver</short>
+		<long>Make window shiver</long>
 		<default>false</default>
 	    </option>
 	</display>
 	<screen>
 	    <option name="friction" type="float">
-		<_short>Friction</_short>
-		<_long>Spring Friction</_long>
+		<short>Friction</short>
+		<long>Spring Friction</long>
 		<default>3</default>
 		<min>0.1</min>
 		<max>10</max>
 		<precision>0.1</precision>
 	    </option>
 	    <option name="spring_k" type="float">
-		<_short>Spring K</_short>
-		<_long>Spring Konstant</_long>
+		<short>Spring K</short>
+		<long>Spring Konstant</long>
 		<default>8</default>
 		<min>0.1</min>
 		<max>10</max>
 		<precision>0.1</precision>
 	    </option>
 	    <option name="grid_resolution" type="int">
-		<_short>Grid Resolution</_short>
-		<_long>Vertex Grid Resolution</_long>
+		<short>Grid Resolution</short>
+		<long>Vertex Grid Resolution</long>
 		<default>8</default>
 		<min>1</min>
 		<max>64</max>
 	    </option>
 	    <option name="min_grid_size" type="int">
-		<_short>Minimum Grid Size</_short>
-		<_long>Minimum Vertex Grid Size</_long>
+		<short>Minimum Grid Size</short>
+		<long>Minimum Vertex Grid Size</long>
 		<default>8</default>
 		<min>4</min>
 		<max>128</max>
 	    </option>
 	    <option name="map_effect" type="int">
-		<_short>Map Effect</_short>
-		<_long>Map Window Effect</_long>
+		<short>Map Effect</short>
+		<long>Map Window Effect</long>
 		<min>0</min>
 		<max>1</max>
 		<default>0</default>
 		<desc>
 		    <value>0</value>
-		    <_name>None</_name>
+		    <name>None</name>
 		</desc>
 		<desc>
 		    <value>1</value>
-		    <_name>Shiver</_name>
+		    <name>Shiver</name>
 		</desc>
 	    </option>
 	    <option name="focus_effect" type="int">
-		<_short>Focus Effect</_short>
-		<_long>Focus Window Effect</_long>
+		<short>Focus Effect</short>
+		<long>Focus Window Effect</long>
 		<min>0</min>
 		<max>1</max>
 		<default>0</default>
 		<desc>
 		    <value>0</value>
-		    <_name>None</_name>
+		    <name>None</name>
 		</desc>
 		<desc>
 		    <value>1</value>
-		    <_name>Shiver</_name>
+		    <name>Shiver</name>
 		</desc>
 	    </option>
 	    <option name="map_window_match" type="match">
-		<_short>Map Windows</_short>
-		<_long>Windows that should wobble when mapped</_long>
+		<short>Map Windows</short>
+		<long>Windows that should wobble when mapped</long>
 		<default>Splash | DropdownMenu | PopupMenu | Tooltip | Notification | Combo | Dnd | Unknown</default>
 	    </option>
 	    <option name="focus_window_match" type="match">
-		<_short>Focus Windows</_short>
-		<_long>Windows that should wobble when focused</_long>
+		<short>Focus Windows</short>
+		<long>Windows that should wobble when focused</long>
 		<default></default>
 	    </option>
 	    <option name="grab_window_match" type="match">
-		<_short>Grab Windows</_short>
-		<_long>Windows that should wobble when grabbed</_long>
+		<short>Grab Windows</short>
+		<long>Windows that should wobble when grabbed</long>
 		<default></default>
 	    </option>
 	    <option name="move_window_match" type="match">
-		<_short>Move Windows</_short>
-		<_long>Windows that should wobble when moved</_long>
+		<short>Move Windows</short>
+		<long>Windows that should wobble when moved</long>
 		<default>Toolbar | Menu | Utility | Dialog | Normal | Unknown</default>
 	    </option>
 	    <option name="maximize_effect" type="bool">
-		<_short>Maximize Effect</_short>
-		<_long>Wobble effect when maximizing and unmaximizing windows</_long>
+		<short>Maximize Effect</short>
+		<long>Wobble effect when maximizing and unmaximizing windows</long>
 		<default>true</default>
 	    </option>
 	</screen>
