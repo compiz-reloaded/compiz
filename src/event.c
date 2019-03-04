@@ -2242,7 +2242,7 @@ handleEvent (CompDisplay *d,
 	    d->grabbed = TRUE;
 	else if (event->xfocus.mode == NotifyUngrab)
 	    d->grabbed = FALSE;
-    w = findTopLevelWindowAtDisplay (d, event->xfocus.window);
+        w = findTopLevelWindowAtDisplay (d, event->xfocus.window);
 	if (event->xfocus.mode != NotifyGrab)
 	{
 	    if (w && w->managed)
@@ -2270,17 +2270,17 @@ handleEvent (CompDisplay *d,
 		d->activeWindow = None;
 
 		s = findScreenAtDisplay (d, event->xfocus.window);
-        if (s)
-        {
-            if (event->xfocus.detail == NotifyDetailNone ||
-            (event->xfocus.mode == NotifyNormal &&
-             event->xfocus.detail == NotifyInferior))
+                if (s)
                 {
-                /* we don't want the root window to get focus */
-                focusDefaultWindow (s);
+                    if (event->xfocus.detail == NotifyDetailNone ||
+                    (event->xfocus.mode == NotifyNormal &&
+                     event->xfocus.detail == NotifyInferior))
+                    {
+                    /* we don't want the root window to get focus */
+                    focusDefaultWindow (s);
+                    }
                 }
             }
-        }
 	    if (d->nextActiveWindow == event->xfocus.window)
 		d->nextActiveWindow = None;
 	}
