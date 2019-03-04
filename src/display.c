@@ -2333,6 +2333,8 @@ addDisplay (const char *name)
     d->winStateAtom		    = XInternAtom (dpy, "_NET_WM_STATE", 0);
     d->winStateModalAtom	    =
 	XInternAtom (dpy, "_NET_WM_STATE_MODAL", 0);
+    d->winStateFocusedAtom	    =
+	XInternAtom (dpy, "_NET_WM_STATE_FOCUSED", 0);
     d->winStateStickyAtom	    =
 	XInternAtom (dpy, "_NET_WM_STATE_STICKY", 0);
     d->winStateMaximizedVertAtom    =
