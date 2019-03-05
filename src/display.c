@@ -2245,6 +2245,8 @@ addDisplay (const char *name)
     d->autoRaiseHandle = 0;
     d->autoRaiseWindow = None;
 
+    d->focused_window = NULL;
+
     d->display = dpy = XOpenDisplay (name);
     if (!d->display)
     {

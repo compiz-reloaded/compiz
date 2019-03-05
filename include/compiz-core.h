@@ -1048,6 +1048,8 @@ struct _CompDisplay {
     Window activeWindow;
     Window nextActiveWindow;
 
+    CompWindow *focused_window;
+
     Window below;
     char   displayString[256];
 

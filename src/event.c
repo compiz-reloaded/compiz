@@ -2284,25 +2284,14 @@ handleEvent (CompDisplay *d,
 	    if (d->nextActiveWindow == event->xfocus.window)
 		d->nextActiveWindow = None;
 	}
-	if (w)
-	{
-		CompWindow *tmp;
-		for (s = d->screens; s; s = s->next)
-		{
-			if (s)
-			{
-				for (tmp = s->windows; tmp; tmp = tmp->next)
-				{
-					/* Unset focused bit for all windows except type dock and splash */
-					if ((tmp->state & CompWindowStateFocusedMask) && !(tmp->type & APPEAR_FOCUSED_MASK))
-						changeWindowState (tmp, tmp->state & ~CompWindowStateFocusedMask);
-				}
-			}
-		}
-
-		/* Set the focused window state atom */
-		changeWindowState (w, w->state | CompWindowStateFocusedMask);
-	}
+        if (w)
+        {
+            if (d->focused_window)
+                changeWindowState (d->focused_window, d->focused_window->state & ~CompWindowStateFocusedMask);
+            /* Set the focused window state atom */
+            changeWindowState (w, w->state | CompWindowStateFocusedMask);
+            d->focused_window = w;
+        }
 
 	break;
     case FocusOut:
