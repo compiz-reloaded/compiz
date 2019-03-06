@@ -2495,6 +2495,9 @@ removeWindow (CompWindow *w)
 	    showOutputWindow (w->screen);
     }
 
+    if (w->screen->display->focused_window == w)
+        w->screen->display->focused_window = NULL;
+
     (*core.objectRemove) (&w->screen->base, &w->base);
 
     objectFiniPlugins (&w->base);
