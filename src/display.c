@@ -1606,7 +1606,8 @@ eventLoop (void)
 			case XI_ButtonRelease:
 			case XI_KeyPress:
 			case XI_KeyRelease:
-			case XI_Motion: /* TODO: mousepoll is probably useless with XI2.  */
+			/* FIXME: see xi2SelectInput() for why this is disabled */
+			/*case XI_Motion:*/ /* TODO: mousepoll is probably useless with XI2.  */
 			    translateXiEvent (d, &event, xiDevEv);
 			    break;
 
@@ -1956,7 +1957,11 @@ xi2SelectInput (CompDisplay *d, Window id)
     XISetMask (mask, XI_KeyRelease);
     XISetMask (mask, XI_ButtonPress);
     XISetMask (mask, XI_ButtonRelease);
-    XISetMask (mask, XI_Motion);
+    /* FIXME: if we want to have XI2 motion events, we need to also
+     * fix warpPointer() to filter those out in its XCheckMaskEvent()
+     * loop.  It's however fairly tricky, and we don't actually *need*
+     * XI2 motion events for the moment. */
+    /*XISetMask (mask, XI_Motion);*/
 
     XISelectEvents (d->display, id, &eventmask, 1);
 #endif /* USE_XI2_EVENTS */
