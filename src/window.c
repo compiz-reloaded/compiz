@@ -747,6 +747,11 @@ changeWindowState (CompWindow   *w,
     if (w->state == newState)
 	return;
 
+    /* Don't let anything remove
+     * appearance of focus from docks or panels */
+    if (w->type & APPEAR_FOCUSED_MASK)
+         newState |= CompWindowStateFocusedMask;
+
     oldState = w->state;
     w->state = newState;
 
