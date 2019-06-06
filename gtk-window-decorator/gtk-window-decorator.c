@@ -1634,7 +1634,7 @@ meta_get_top_border_region (const MetaFrameGeometry *fgeom,
     xrect.x = 0;
     xrect.y = 0;
     xrect.width = width;
-    xrect.height = fgeom->top_height;
+    xrect.height = fgeom->height;
 
     XUnionRectWithRegion (&xrect, border_xregion, border_xregion);
 
@@ -1672,7 +1672,7 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
 	    w = radius_to_width (bottom_left_radius, i);
 
 	    xrect.x	 = 0;
-	    xrect.y	 = fgeom->bottom_height - i - 1;
+	    xrect.y	 = fgeom->height - i - 1;
 	    xrect.width  = w;
 	    xrect.height = 1;
 
@@ -1687,7 +1687,7 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
 	    w = radius_to_width (bottom_right_radius, i);
 
 	    xrect.x	 = width - w;
-	    xrect.y	 = fgeom->bottom_height - i - 1;
+	    xrect.y	 = fgeom->height - i - 1;
 	    xrect.width  = w;
 	    xrect.height = 1;
 
@@ -1700,7 +1700,7 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
     xrect.x = 0;
     xrect.y = 0;
     xrect.width = width;
-    xrect.height = fgeom->bottom_height;
+    xrect.height = fgeom->height;
 
     XUnionRectWithRegion (&xrect, border_xregion, border_xregion);
 
@@ -1722,8 +1722,8 @@ meta_get_left_border_region (const MetaFrameGeometry *fgeom,
 
     xrect.x	 = 0;
     xrect.y	 = 0;
-    xrect.width  = fgeom->left_width;
-    xrect.height = height - fgeom->top_height - fgeom->bottom_height;
+    xrect.width = fgeom->borders.total.left;
+    xrect.height = fgeom->height - fgeom->borders.total.top - fgeom->borders.total.bottom;
 
     XUnionRectWithRegion (&xrect, border_xregion, border_xregion);
 
@@ -1741,8 +1741,8 @@ meta_get_right_border_region (const MetaFrameGeometry *fgeom,
 
     xrect.x	 = 0;
     xrect.y	 = 0;
-    xrect.width  = fgeom->right_width;
-    xrect.height = height - fgeom->top_height - fgeom->bottom_height;
+    xrect.width = fgeom->borders.total.right;
+    xrect.height = fgeom->height - fgeom->borders.total.top - fgeom->borders.total.bottom;
 
     XUnionRectWithRegion (&xrect, border_xregion, border_xregion);
 
@@ -1858,6 +1858,9 @@ meta_get_decoration_geometry (decor_t		*d,
 			      MetaButtonLayout  *button_layout,
 			      GdkRectangle      *clip)
 {
+/*#ifdef HAVE_MARCO_3_23_0 */
+    MetaFrameBorders borders;
+/*#endif  */
     gint left_width, right_width, top_height, bottom_height;
 
     if (meta_button_layout_set)
@@ -1931,7 +1934,18 @@ meta_get_decoration_geometry (decor_t		*d,
 
     if (d->state & WNCK_WINDOW_STATE_ABOVE)
 	*flags |= META_FRAME_ABOVE;
-
+/*#ifdef HAVE_MARCO_1_22_0*/
+    meta_theme_get_frame_borders (theme,
+                                  META_FRAME_TYPE_NORMAL,
+                                  text_height,
+                                  *flags,
+                                  &borders);
+ 
+    top_height = borders.total.top;
+    bottom_height = borders.total.bottom;
+    left_width = borders.total.left;
+    right_width = borders.total.right;
+/*
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
 				  text_height,
@@ -1940,7 +1954,7 @@ meta_get_decoration_geometry (decor_t		*d,
 				  &bottom_height,
 				  &left_width,
 				  &right_width);
-
+/*#endif*/
     clip->x = d->context->left_space - left_width;
     clip->y = d->context->top_space - top_height;
 
@@ -2097,8 +2111,13 @@ meta_draw_window_decoration (decor_t *d)
 
 	cairo_paint (cr);
 
+/*#ifdef HAVE_MARCO_1_22_0*/
+	meta_theme_draw_frame (theme,
+			       context,
+/*else
 	meta_theme_draw_frame (theme,
 			       style_window,
+ *endif*/
 #if GTK_CHECK_VERSION (3, 0, 0)
 			       cr,
 #else
@@ -2108,8 +2127,8 @@ meta_draw_window_decoration (decor_t *d)
 #endif
 			       META_FRAME_TYPE_NORMAL,
 			       flags,
-			       clip.width - fgeom.left_width - fgeom.right_width,
-			       clip.height - fgeom.top_height - fgeom.bottom_height,
+			       fgeom.width - fgeom.borders.total.left - fgeom.borders.total.right,
+			       fgeom.height - fgeom.borders.total.top - fgeom.borders.total.bottom,
 			       d->layout,
 			       text_height,
 			       &button_layout,
@@ -2117,14 +2136,15 @@ meta_draw_window_decoration (decor_t *d)
 			       d->icon_pixbuf,
 			       NULL);
 
-	if (fgeom.top_height)
+	if (fgeom.borders.visible.top)
 	{
 	    top_region = meta_get_top_border_region (&fgeom, clip.width);
 
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
-					0, 0,
+					fgeom.borders.invisible.left,
+					fgeom.borders.invisible.top,
 					d->picture,
 					&d->border_layout,
 					BORDER_TOP,
@@ -2134,14 +2154,15 @@ meta_draw_window_decoration (decor_t *d)
 					0);
 	}
 
-	if (fgeom.bottom_height)
+	if (fgeom.borders.visible.bottom )
 	{
 	    bottom_region = meta_get_bottom_border_region (&fgeom, clip.width);
 
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
-					0, clip.height - fgeom.bottom_height,
+					fgeom.borders.invisible.left,
+					fgeom.height - fgeom.borders.total.bottom,
 					d->picture,
 					&d->border_layout,
 					BORDER_BOTTOM,
@@ -2151,14 +2172,15 @@ meta_draw_window_decoration (decor_t *d)
 					0);
 	}
 
-	if (fgeom.left_width)
+	if (fgeom.borders.visible.left)
 	{
 	    left_region = meta_get_left_border_region (&fgeom, clip.height);
 
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
-					0, fgeom.top_height,
+					fgeom.borders.invisible.left,
+					fgeom.borders.total.top,
 					d->picture,
 					&d->border_layout,
 					BORDER_LEFT,
@@ -2168,14 +2190,15 @@ meta_draw_window_decoration (decor_t *d)
 					0);
 	}
 
-	if (fgeom.right_width)
+	if (fgeom.borders.visible.right)
 	{
 	    right_region = meta_get_right_border_region (&fgeom, clip.height);
 
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
-					clip.width - fgeom.right_width, fgeom.top_height,
+					fgeom.width  - fgeom.borders.total.right,
+					fgeom.borders.total.top,
 					d->picture,
 					&d->border_layout,
 					BORDER_RIGHT,
@@ -2202,11 +2225,11 @@ meta_draw_window_decoration (decor_t *d)
     {
 	/* translate from frame to client window space */
 	if (top_region)
-	    XOffsetRegion (top_region, -fgeom.left_width, -fgeom.top_height);
+	    XOffsetRegion (top_region, -fgeom.borders.total.left, -fgeom.borders.total.top);
 	if (bottom_region)
-	    XOffsetRegion (bottom_region, -fgeom.left_width, 0);
+	    XOffsetRegion (bottom_region, -fgeom.borders.total.left, 0);
 	if (left_region)
-	    XOffsetRegion (left_region, -fgeom.left_width, 0);
+	    XOffsetRegion (left_region, -fgeom.borders.total.left, 0);
 
 	decor_update_meta_window_property (d, theme, flags,
 					   top_region,
@@ -2957,6 +2980,10 @@ meta_get_event_window_position (decor_t *d,
     MetaButtonLayout  button_layout;
     MetaFrameGeometry fgeom;
     MetaFrameFlags    flags;
+    GtkBorder visible;
+    GtkBorder resize;
+    GtkBorder total;
+    gint top_border;
     MetaTheme	      *theme;
     GdkRectangle      clip;
 
@@ -2965,56 +2992,73 @@ meta_get_event_window_position (decor_t *d,
     meta_get_decoration_geometry (d, theme, &flags, &fgeom, &button_layout,
 				  &clip);
 
-    width  += fgeom.right_width + fgeom.left_width;
-    height += fgeom.top_height  + fgeom.bottom_height;
+    visible = fgeom.borders.visible;
+    resize = fgeom.borders.total;
+
+    /*  When shadow borders are added, we will no longer be able to use
+     * `fgeom->borders.total` border here - it includes also
+     * `shadow` border, but it is not included in frame extents! Create new
+     * `total` border that includes only `visible` border and `resize` border.
+     */
+    total.left = visible.left + resize.left;
+    total.right = visible.right + resize.right;
+    total.top = visible.top + resize.top;
+    total.bottom = visible.bottom + resize.bottom;
+
+
+    /* Taken from compiz 0.9, cannot be used in this function
+     * but not declaring these causes a segfault due to return values
+     */
+    width += total.left + total.right;
+    height += total.top + total.bottom;
+
+    top_border = fgeom.title_rect.y - fgeom.borders.invisible.top;
+
 
     switch (i) {
     case 2: /* bottom */
 	switch (j) {
 	case 2: /* bottom right */
-	    *x = width - fgeom.right_width - RESIZE_EXTENDS;
-	    *y = height - fgeom.bottom_height - RESIZE_EXTENDS;
-	    *w = fgeom.right_width + RESIZE_EXTENDS;
-	    *h = fgeom.bottom_height + RESIZE_EXTENDS;
+	    *x = fgeom.width - resize.right - RESIZE_EXTENDS;
+	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *w = resize.right + RESIZE_EXTENDS;
+	    *h = resize.bottom + RESIZE_EXTENDS;
 	    break;
 	case 1: /* bottom */
-	    *x = fgeom.left_width + RESIZE_EXTENDS;
-	    *y = height - fgeom.bottom_height;
-	    *w = width - fgeom.left_width - fgeom.right_width -
-		 (2 * RESIZE_EXTENDS);
-	    *h = fgeom.bottom_height;
+	    *x = resize.left  + RESIZE_EXTENDS;
+	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *w = fgeom.width - resize.left - resize.right - (2 * RESIZE_EXTENDS);
+	    *h = resize.bottom;
 	    break;
 	case 0: /* bottom left */
 	default:
 	    *x = 0;
-	    *y = height - fgeom.bottom_height - RESIZE_EXTENDS;
-	    *w = fgeom.left_width + RESIZE_EXTENDS;
-	    *h = fgeom.bottom_height + RESIZE_EXTENDS;
+	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *w = resize.left + RESIZE_EXTENDS;
+	    *h = resize.bottom + RESIZE_EXTENDS;
 	    break;
 	}
 	break;
     case 1: /* middle */
 	switch (j) {
 	case 2: /* right */
-	    *x = width - fgeom.right_width;
-	    *y = fgeom.top_height + RESIZE_EXTENDS;
-	    *w = fgeom.right_width;
-	    *h = height - fgeom.top_height - fgeom.bottom_height -
-		 (2 * RESIZE_EXTENDS);
+	    *x = fgeom.width - resize.right - RESIZE_EXTENDS;
+	    *y = resize.top + top_border + RESIZE_EXTENDS;
+	    *w = resize.right + RESIZE_EXTENDS;
+	    *h = fgeom.height - resize.top - top_border - resize.bottom - (2 * RESIZE_EXTENDS);
 	    break;
 	case 1: /* middle */
-	    *x = fgeom.left_width;
+	    *x = total.left;
 	    *y = fgeom.title_rect.y + TOP_RESIZE_HEIGHT;
-	    *w = width - fgeom.left_width - fgeom.right_width;
-	    *h = height - fgeom.top_titlebar_edge - fgeom.bottom_height;
+	    *w = fgeom.width - resize.left - resize.right;
+	    *h = visible.top - top_border - TOP_RESIZE_HEIGHT;
 	    break;
 	case 0: /* left */
 	default:
 	    *x = 0;
-	    *y = fgeom.top_height + RESIZE_EXTENDS;
-	    *w = fgeom.left_width;
-	    *h = height - fgeom.top_height - fgeom.bottom_height -
-		 (2 * RESIZE_EXTENDS);
+	    *y = resize.top + top_border + RESIZE_EXTENDS;
+	    *w = resize.left;
+	    *h = fgeom.height - resize.top - top_border - resize.bottom  - (2 * RESIZE_EXTENDS);
 	    break;
 	}
 	break;
@@ -3022,24 +3066,23 @@ meta_get_event_window_position (decor_t *d,
     default:
 	switch (j) {
 	case 2: /* top right */
-	    *x = width - fgeom.right_width - RESIZE_EXTENDS;
+	    *x = fgeom.width - resize.right - RESIZE_EXTENDS;
 	    *y = 0;
-	    *w = fgeom.right_width + RESIZE_EXTENDS;
-	    *h = fgeom.top_height + RESIZE_EXTENDS;
+	    *w = total.right + RESIZE_EXTENDS;
+	    *h = resize.top + top_border + RESIZE_EXTENDS;
 	    break;
 	case 1: /* top */
-	    *x = fgeom.left_width + RESIZE_EXTENDS;
+	    *x = resize.left + RESIZE_EXTENDS;
 	    *y = 0;
-	    *w = width - fgeom.left_width - fgeom.right_width -
-		 (2 * RESIZE_EXTENDS);
-	    *h = fgeom.title_rect.y + TOP_RESIZE_HEIGHT;
+	    *w = fgeom.width - total.left - total.right - (2 * RESIZE_EXTENDS);
+	    *h = resize.top + top_border + TOP_RESIZE_HEIGHT;
 	    break;
 	case 0: /* top left */
 	default:
 	    *x = 0;
 	    *y = 0;
-	    *w = fgeom.left_width + RESIZE_EXTENDS;
-	    *h = fgeom.top_height + RESIZE_EXTENDS;
+	    *w = total.left + RESIZE_EXTENDS;
+	    *h = resize.top + top_border + RESIZE_EXTENDS;
 	    break;
 	}
     }
@@ -3057,6 +3100,8 @@ meta_get_event_window_position (decor_t *d,
 	if (j == 0 || j == 2)
 	    *w = *h = 0;
     }
+#undef TOP_RESIZE_HEIGHT
+#undef RESIZE_EXTENDS
 }
 
 static gboolean
@@ -6248,10 +6293,28 @@ static void
 meta_update_border_extents (gint text_height)
 {
     MetaTheme *theme;
+/*#ifdef HAVE_MARCO_1_22_0 */
+    MetaFrameBorders borders;
+/*#else
     gint      top_height, bottom_height, left_width, right_width;
-
+  #endif*/
     theme = meta_theme_get_current ();
+/*#ifdef HAVE_MARCO_1_22_0 */
+    meta_theme_get_frame_borders (theme,
+                                  META_FRAME_TYPE_NORMAL,
+                                  text_height,
+                                  0,
+                                  &borders);
 
+    _win_extents.top    = borders.visible.top;
+    _win_extents.bottom = borders.visible.bottom;
+    _win_extents.left   = borders.visible.left;
+    _win_extents.right  = borders.visible.right;
+
+    titlebar_height = borders.visible.top - _win_extents.top;
+
+/*#else*/
+/*
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
 				  text_height,
@@ -6267,7 +6330,22 @@ meta_update_border_extents (gint text_height)
     _win_extents.right  = right_width;
 
     titlebar_height = top_height - _win_extents.top;
+#endif*/
+/*#ifdef HAVE_MARCO_1_22_0 */
+    meta_theme_get_frame_borders (theme,
+                                  META_FRAME_TYPE_NORMAL,
+                                  text_height,
+                                  META_FRAME_MAXIMIZED,
+                                  &borders);
 
+    _max_win_extents.top    = borders.visible.top;
+    _max_win_extents.bottom = borders.visible.bottom;
+    _max_win_extents.left   = borders.visible.left;
+    _max_win_extents.right  = borders.visible.right;
+
+    max_titlebar_height = borders.visible.top - _max_win_extents.top;
+
+/*#else
     meta_theme_get_frame_borders (theme,
 				  META_FRAME_TYPE_NORMAL,
 				  text_height,
@@ -6283,6 +6361,7 @@ meta_update_border_extents (gint text_height)
     _max_win_extents.right  = right_width;
 
     max_titlebar_height = top_height - _max_win_extents.top;
+*/
 }
 #endif
 
