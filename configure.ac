@@ -384,6 +384,14 @@ else
   use_marco="no"
 fi
 
+# Check if we are building against marco 1.23.1 or later
+if test "x$use_marco" = "xyes"; then
+  PKG_CHECK_EXISTS(libmarco-private >= 1.23.1,
+    [have_marco_1_23_1=yes], [have_marco_1_23_1=no])
+else
+  have_marco_1_23_1="no"
+fi
+
 if test "x$use_gtk" = "xyes"; then
   if test "x$use_gsettings" = "xyes"; then
     PKG_CHECK_MODULES(GSETTINGS, [glib-2.0 >= 2.32 gio-2.0 >= 2.25.0])
@@ -408,6 +416,12 @@ fi
 AM_CONDITIONAL(USE_MARCO, test "x$use_marco" = "xyes")
 if test "$use_marco" = yes; then
   AC_DEFINE(USE_MARCO, 1, [Build marco theme support])
+fi
+
+AM_CONDITIONAL(HAVE_MARCO_1_23_1, test "x$have_marco_1_23_1" = "xyes")
+if test "$have_marco_1_23_1" = yes; then
+  AC_DEFINE(HAVE_MARCO_1_23_1, 1,
+      [Build against marco 1.23.1 o later])
 fi
 
 AM_CONDITIONAL(USE_MATE, test "x$use_mate" = "xyes")
@@ -499,6 +513,7 @@ echo "and the following optional features will be used:"
 echo "  XI2 events:                $use_xi2_events"
 echo "  gtk:                       $use_gtk ($with_gtk)"
 echo "  marco:                     $use_marco"
+echo "  marco >=1.23.1 support:    $have_marco_1_23_1"
 echo "  gwd gsettings support:     $use_gsettings"
 echo "  desktop menu entries:      $use_menu_entries"
 echo ""
