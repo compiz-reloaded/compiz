@@ -1619,8 +1619,12 @@ meta_get_top_border_region (const MetaFrameGeometry *fgeom,
 	for (i = 0; i < top_right_radius; i++)
 	{
 	    w = radius_to_width (top_right_radius, i);
-
+#ifdef HAVE_MARCO_1_23_1
+	    xrect.x	 = width - w - fgeom->borders.invisible.left -
+	                            fgeom->borders.invisible.right;
+#else
 	    xrect.x	 = width - w;
+#endif
 	    xrect.y	 = i;
 	    xrect.width  = w;
 	    xrect.height = 1;
