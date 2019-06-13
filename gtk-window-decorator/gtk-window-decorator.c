@@ -1579,9 +1579,15 @@ radius_to_width (int radius,
     return floor (0.5f + r1 - sqrt (r2));
 }
 
+
 static Region
+#ifdef HAVE_MARCO_1_23_1
+meta_get_top_border_region (const MetaFrameGeometry *fgeom)
+#else
 meta_get_top_border_region (const MetaFrameGeometry *fgeom,
 			    int			    width)
+#endif
+
 {
     Region     corners_xregion, border_xregion;
     XRectangle xrect;
@@ -1590,7 +1596,10 @@ meta_get_top_border_region (const MetaFrameGeometry *fgeom,
     int	       bottom_left_radius;
     int	       bottom_right_radius;
     int	       w, i;
-
+#ifdef HAVE_MARCO_1_23_1
+    int	width;
+    int height;
+#endif
     corners_xregion = XCreateRegion ();
 
     meta_get_corner_radius (fgeom,
@@ -1599,6 +1608,11 @@ meta_get_top_border_region (const MetaFrameGeometry *fgeom,
 			    &bottom_left_radius,
 			    &bottom_right_radius);
 
+#ifdef HAVE_MARCO_1_23_1
+	/*We have to define these here with newer marco versions*/
+    width = fgeom->width - fgeom->borders.invisible.left - fgeom->borders.invisible.right;
+    height = fgeom->borders.visible.top;
+#endif
     if (top_left_radius)
     {
 	for (i = 0; i < top_left_radius; i++)
@@ -1619,12 +1633,8 @@ meta_get_top_border_region (const MetaFrameGeometry *fgeom,
 	for (i = 0; i < top_right_radius; i++)
 	{
 	    w = radius_to_width (top_right_radius, i);
-#ifdef HAVE_MARCO_1_23_1
-	    xrect.x	 = width - w - fgeom->borders.invisible.left -
-	                            fgeom->borders.invisible.right;
-#else
+
 	    xrect.x	 = width - w;
-#endif
 	    xrect.y	 = i;
 	    xrect.width  = w;
 	    xrect.height = 1;
@@ -1653,8 +1663,12 @@ meta_get_top_border_region (const MetaFrameGeometry *fgeom,
 }
 
 static Region
+#ifdef HAVE_MARCO_1_23_1
+meta_get_bottom_border_region (const MetaFrameGeometry *fgeom)
+#else
 meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
 			       int		        width)
+#endif
 {
     Region     corners_xregion, border_xregion;
     XRectangle xrect;
@@ -1664,6 +1678,11 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
     int	       bottom_right_radius;
     int	       w, i;
 
+#ifdef HAVE_MARCO_1_23_1
+    int width;
+    int height;
+#endif
+
     corners_xregion = XCreateRegion ();
 
     meta_get_corner_radius (fgeom,
@@ -1671,6 +1690,12 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
 			    &top_right_radius,
 			    &bottom_left_radius,
 			    &bottom_right_radius);
+
+#ifdef HAVE_MARCO_1_23_1
+	/*We have to define these here with newer marco versions*/
+    width = fgeom->width - fgeom->borders.invisible.left - fgeom->borders.invisible.right;
+    height = fgeom->borders.visible.top;
+#endif
 
     if (bottom_left_radius)
     {
@@ -1731,8 +1756,12 @@ meta_get_bottom_border_region (const MetaFrameGeometry *fgeom,
 }
 
 static Region
+#ifdef HAVE_MARCO_1_23_1
+meta_get_left_border_region (const MetaFrameGeometry *fgeom)
+#else
 meta_get_left_border_region (const MetaFrameGeometry *fgeom,
 			     int		     height)
+#endif
 {
     Region     border_xregion;
     XRectangle xrect;
@@ -1742,7 +1771,7 @@ meta_get_left_border_region (const MetaFrameGeometry *fgeom,
     xrect.x	 = 0;
     xrect.y	 = 0;
 #ifdef HAVE_MARCO_1_23_1
-    xrect.width = fgeom->borders.total.left;
+    xrect.width = fgeom->borders.visible.left;
     xrect.height = fgeom->height - fgeom->borders.total.top - fgeom->borders.total.bottom;
 #else
     xrect.width  = fgeom->left_width;
@@ -1754,8 +1783,12 @@ meta_get_left_border_region (const MetaFrameGeometry *fgeom,
 }
 
 static Region
+#ifdef HAVE_MARCO_1_23_1
+meta_get_right_border_region (const MetaFrameGeometry *fgeom)
+#else
 meta_get_right_border_region (const MetaFrameGeometry *fgeom,
 			      int		      height)
+#endif
 {
     Region     border_xregion;
     XRectangle xrect;
@@ -1765,7 +1798,7 @@ meta_get_right_border_region (const MetaFrameGeometry *fgeom,
     xrect.x	 = 0;
     xrect.y	 = 0;
 #ifdef HAVE_MARCO_1_23_1
-    xrect.width = fgeom->borders.total.right;
+    xrect.width = fgeom->borders.visible.right;
     xrect.height = fgeom->height - fgeom->borders.total.top - fgeom->borders.total.bottom;
 #else
     xrect.width  = fgeom->right_width;
@@ -2171,12 +2204,13 @@ meta_draw_window_decoration (decor_t *d)
 			       NULL);
 #ifdef HAVE_MARCO_1_23_1
 	if (fgeom.borders.visible.top)
+	{
+	    top_region = meta_get_top_border_region (&fgeom);
 #else
 	if (fgeom.top_height)
-#endif
 	{
 	    top_region = meta_get_top_border_region (&fgeom, clip.width);
-
+#endif
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
@@ -2196,12 +2230,13 @@ meta_draw_window_decoration (decor_t *d)
 	}
 #ifdef HAVE_MARCO_1_23_1
 	if (fgeom.borders.visible.bottom )
+	{
+	    bottom_region = meta_get_bottom_border_region (&fgeom);
 #else
 	if (fgeom.bottom_height)
-#endif
 	{
 	    bottom_region = meta_get_bottom_border_region (&fgeom, clip.width);
-
+#endif
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
@@ -2221,12 +2256,13 @@ meta_draw_window_decoration (decor_t *d)
 	}
 #ifdef HAVE_MARCO_1_23_1
 	if (fgeom.borders.visible.left)
+	{
+	    left_region = meta_get_left_border_region (&fgeom);
 #else
 	if (fgeom.left_width)
-#endif
 	{
 	    left_region = meta_get_left_border_region (&fgeom, clip.height);
-
+#endif
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
@@ -2246,12 +2282,13 @@ meta_draw_window_decoration (decor_t *d)
 	}
 #ifdef HAVE_MARCO_1_23_1
 	if (fgeom.borders.visible.right)
+	{
+	    right_region = meta_get_right_border_region (&fgeom);
 #else
 	if (fgeom.right_width)
-#endif
 	{
 	    right_region = meta_get_right_border_region (&fgeom, clip.height);
-
+#endif
 	    decor_blend_border_picture (xdisplay,
 					d->context,
 					src,
