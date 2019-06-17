@@ -1469,6 +1469,16 @@ draw_window_decoration (decor_t *d)
 
 #ifdef USE_MARCO
 static void
+#ifdef HAVE_MARCO_1_23_1
+decor_update_meta_window_property (MetaFrameGeometry fgeom,
+				   decor_t	  *d,
+				   MetaTheme	  *theme,
+				   MetaFrameFlags flags,
+				   Region	  top,
+				   Region	  bottom,
+				   Region	  left,
+				   Region	  right)
+#else
 decor_update_meta_window_property (decor_t	  *d,
 				   MetaTheme	  *theme,
 				   MetaFrameFlags flags,
@@ -1476,6 +1486,7 @@ decor_update_meta_window_property (decor_t	  *d,
 				   Region	  bottom,
 				   Region	  left,
 				   Region	  right)
+#endif
 {
     long	    *data = NULL;
     unsigned int    n = 1, frame_type = 0, frame_state = 0, frame_actions = 0;
@@ -1518,7 +1529,15 @@ decor_update_meta_window_property (decor_t	  *d,
 					     top_stretch_offset,
 					     bottom_stretch_offset);
 
+#ifdef HAVE_MARCO_1_23_1
+    /*Add the new invisible borders from marco to frame extents */
+    extents.left = _win_extents.left + fgeom.borders.invisible.left;
+    extents.right = _win_extents.right + fgeom.borders.invisible.right;
+    extents.top = _win_extents.top + fgeom.borders.invisible.top;
+    extents.bottom = _win_extents.bottom + fgeom.borders.invisible.bottom;
+#else
     extents = _win_extents;
+#endif
     max_extents = _max_win_extents;
 
     extents.top += titlebar_height;
@@ -2330,6 +2349,12 @@ meta_draw_window_decoration (decor_t *d)
 	    XOffsetRegion (bottom_region, -fgeom.borders.total.left, 0);
 	if (left_region)
 	    XOffsetRegion (left_region, -fgeom.borders.total.left, 0);
+
+	decor_update_meta_window_property (fgeom, d, theme, flags,
+					   top_region,
+					   bottom_region,
+					   left_region,
+					   right_region);
 #else
 	if (top_region)
 	    XOffsetRegion (top_region, -fgeom.left_width, -fgeom.top_height);
@@ -2337,13 +2362,14 @@ meta_draw_window_decoration (decor_t *d)
 	    XOffsetRegion (bottom_region, -fgeom.left_width, 0);
 	if (left_region)
 	    XOffsetRegion (left_region, -fgeom.left_width, 0);
-#endif
 
 	decor_update_meta_window_property (d, theme, flags,
 					   top_region,
 					   bottom_region,
 					   left_region,
 					   right_region);
+#endif
+
 	d->prop_xid = 0;
     }
 
@@ -3103,7 +3129,7 @@ meta_get_event_window_position (decor_t *d,
 				  &clip);
 #ifdef HAVE_MARCO_1_22_2
     visible = fgeom.borders.visible;
-    resize = fgeom.borders.total;
+    resize = fgeom.borders.invisible;
 
     /*  When shadow borders are added, we will no longer be able to use
      * `fgeom->borders.total` border here - it includes also
@@ -3124,26 +3150,25 @@ meta_get_event_window_position (decor_t *d,
 
     top_border = fgeom.title_rect.y - fgeom.borders.invisible.top;
 
-
     switch (i) {
     case 2: /* bottom */
 	switch (j) {
 	case 2: /* bottom right */
 	    *x = fgeom.width - resize.right - RESIZE_EXTENDS;
-	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *y = fgeom.height - RESIZE_EXTENDS;
 	    *w = resize.right + RESIZE_EXTENDS;
 	    *h = resize.bottom + RESIZE_EXTENDS;
 	    break;
 	case 1: /* bottom */
 	    *x = resize.left  + RESIZE_EXTENDS;
-	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *y = fgeom.height - RESIZE_EXTENDS;
 	    *w = fgeom.width - resize.left - resize.right - (2 * RESIZE_EXTENDS);
-	    *h = resize.bottom;
+	    *h = resize.bottom +  RESIZE_EXTENDS;
 	    break;
 	case 0: /* bottom left */
 	default:
 	    *x = 0;
-	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *y = fgeom.height - RESIZE_EXTENDS;
 	    *w = resize.left + RESIZE_EXTENDS;
 	    *h = resize.bottom + RESIZE_EXTENDS;
 	    break;
