@@ -205,6 +205,9 @@ static gboolean minimal = FALSE;
 static double decoration_alpha = 0.5;
 
 #define SWITCHER_SPACE 40
+#ifdef HAVE_MARCO_1_23_1
+#define RESIZE_SPACE 10
+#endif
 
 static decor_extents_t _shadow_extents      = { 0, 0, 0, 0 };
 static decor_extents_t _win_extents         = { 6, 6, 4, 6 };
@@ -1469,16 +1472,6 @@ draw_window_decoration (decor_t *d)
 
 #ifdef USE_MARCO
 static void
-#ifdef HAVE_MARCO_1_23_1
-decor_update_meta_window_property (MetaFrameGeometry fgeom,
-				   decor_t	  *d,
-				   MetaTheme	  *theme,
-				   MetaFrameFlags flags,
-				   Region	  top,
-				   Region	  bottom,
-				   Region	  left,
-				   Region	  right)
-#else
 decor_update_meta_window_property (decor_t	  *d,
 				   MetaTheme	  *theme,
 				   MetaFrameFlags flags,
@@ -1486,7 +1479,6 @@ decor_update_meta_window_property (decor_t	  *d,
 				   Region	  bottom,
 				   Region	  left,
 				   Region	  right)
-#endif
 {
     long	    *data = NULL;
     unsigned int    n = 1, frame_type = 0, frame_state = 0, frame_actions = 0;
@@ -1531,10 +1523,10 @@ decor_update_meta_window_property (decor_t	  *d,
 
 #ifdef HAVE_MARCO_1_23_1
     /*Add the new invisible borders from marco to frame extents */
-    extents.left = _win_extents.left + fgeom.borders.invisible.left;
-    extents.right = _win_extents.right + fgeom.borders.invisible.right;
-    extents.top = _win_extents.top + fgeom.borders.invisible.top;
-    extents.bottom = _win_extents.bottom + fgeom.borders.invisible.bottom;
+    extents.left = _win_extents.left + RESIZE_SPACE;
+    extents.right = _win_extents.right + RESIZE_SPACE;
+    extents.top = _win_extents.top + RESIZE_SPACE;
+    extents.bottom = _win_extents.bottom + RESIZE_SPACE;
 #else
     extents = _win_extents;
 #endif
@@ -2349,12 +2341,6 @@ meta_draw_window_decoration (decor_t *d)
 	    XOffsetRegion (bottom_region, -fgeom.borders.total.left, 0);
 	if (left_region)
 	    XOffsetRegion (left_region, -fgeom.borders.total.left, 0);
-
-	decor_update_meta_window_property (fgeom, d, theme, flags,
-					   top_region,
-					   bottom_region,
-					   left_region,
-					   right_region);
 #else
 	if (top_region)
 	    XOffsetRegion (top_region, -fgeom.left_width, -fgeom.top_height);
@@ -2363,12 +2349,12 @@ meta_draw_window_decoration (decor_t *d)
 	if (left_region)
 	    XOffsetRegion (left_region, -fgeom.left_width, 0);
 
+#endif
 	decor_update_meta_window_property (d, theme, flags,
 					   top_region,
 					   bottom_region,
 					   left_region,
 					   right_region);
-#endif
 
 	d->prop_xid = 0;
     }
