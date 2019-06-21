@@ -299,7 +299,17 @@ decorDrawWindow (CompWindow	      *w,
 	    }
 	}
     }
-
+	/*Set clientFrame extents for SSD windows. We never have GtkFrameExtents
+     *on SSD windows so we can repurposes clientFrame to handle gtk-window-decorator
+     *resize extents
+     */
+    if (w->mwmDecor)
+    {
+        w->clientFrame.left = 10;
+        w->clientFrame.right = 10;
+        w->clientFrame.top = 10;
+        w->clientFrame.bottom = 10;
+    }
     return status;
 }
 
