@@ -751,7 +751,7 @@ resizeHandleMotionEvent (CompScreen *s,
 	int    w, h;                    /* size of window contents */
 	int    wX, wY, wWidth, wHeight; /* rect. for window contents+borders */
 	int    i;
-	int    workAreaSnapDistance = 15;
+	int    workAreaSnapDistance;
 
 	RESIZE_DISPLAY (s->display);
 
@@ -878,6 +878,15 @@ resizeHandleMotionEvent (CompScreen *s,
 	for (i = 0; i < s->nOutputDev; i++)
 	{
 	    const XRectangle *workArea = &s->outputDev[i].workArea;
+
+	    if (rd->w->mwmDecor) /*SSD windows (need to detect gtk-window-decorator)*/
+	    {
+	        workAreaSnapDistance = 0;
+	    }
+	    else
+	    {
+	        workAreaSnapDistance = 15;
+	    }
 
 	    /* if window and work-area intersect in x axis */
 	    if (wX + wWidth > workArea->x &&
