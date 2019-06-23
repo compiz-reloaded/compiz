@@ -205,10 +205,10 @@ static gboolean minimal = FALSE;
 static double decoration_alpha = 0.5;
 
 #define SWITCHER_SPACE 40
-#ifdef HAVE_MARCO_1_23_1
-#define RESIZE_SPACE 10
-#endif
 
+#ifdef HAVE_MARCO_1_23_1
+static decor_extents_t _resize_extents      = {10, 10, 10, 10};
+#endif
 static decor_extents_t _shadow_extents      = { 0, 0, 0, 0 };
 static decor_extents_t _win_extents         = { 6, 6, 4, 6 };
 static decor_extents_t _max_win_extents     = { 6, 6, 4, 6 };
@@ -1523,10 +1523,10 @@ decor_update_meta_window_property (decor_t	  *d,
 
 #ifdef HAVE_MARCO_1_23_1
     /*Add the new invisible borders from marco to frame extents */
-    extents.left = _win_extents.left + RESIZE_SPACE;
-    extents.right = _win_extents.right + RESIZE_SPACE;
-    extents.top = _win_extents.top + RESIZE_SPACE;
-    extents.bottom = _win_extents.bottom + RESIZE_SPACE;
+    extents.left = _win_extents.left + _resize_extents.left;
+    extents.right = _win_extents.right + _resize_extents.right;
+    extents.top = _win_extents.top + _resize_extents.top;
+    extents.bottom = _win_extents.bottom + _resize_extents.bottom;
 #else
     extents = _win_extents;
 #endif
