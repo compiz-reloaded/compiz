@@ -67,6 +67,7 @@ typedef struct _Decoration {
     CompWindowExtents output;
     CompWindowExtents frame;
     CompWindowExtents border;
+    CompWindowExtents resize;
     CompWindowExtents maxFrame;
     CompWindowExtents maxBorder;
     int		      minWidth;
@@ -484,7 +485,7 @@ decorCreateDecoration (CompScreen   *screen,
     Decoration	    *decoration;
     unsigned int    frameType, frameState, frameActions;
     Pixmap	    pixmap;
-    decor_extents_t frame, border;
+    decor_extents_t frame, border, resize;
     decor_extents_t maxFrame, maxBorder;
     decor_quad_t    *quad;
     int		    nQuad;
@@ -510,6 +511,7 @@ decorCreateDecoration (CompScreen   *screen,
 					    &pixmap,
 					    &frame,
 					    &border,
+					    &resize,
 					    &maxFrame,
 					    &maxBorder,
 					    &minWidth,
@@ -583,6 +585,12 @@ decorCreateDecoration (CompScreen   *screen,
     decoration->border.right  = border.right;
     decoration->border.top    = border.top;
     decoration->border.bottom = border.bottom;
+
+    /* Resize area extents */
+    decoration->resize.left   = resize.left;
+    decoration->resize.right  = resize.right;
+    decoration->resize.top    = resize.top;
+    decoration->resize.bottom = resize.bottom;
 
     /* Extents of actual frame window */
     decoration->maxFrame.left   = maxFrame.left;
