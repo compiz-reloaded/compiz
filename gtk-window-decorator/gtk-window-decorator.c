@@ -3445,9 +3445,13 @@ meta_get_button_position (decor_t *d,
 #ifdef HAVE_MARCO_1_22_2
     /*compensate for offset caused by invisible borders
      *taken straight from compiz 0.9
+     *but exclude left side buttons so resize border isn't blocked
      */
-    *x = *x - fgeom.borders.invisible.left;
-    *y = *y - fgeom.borders.invisible.top;
+    if (*x >= 20)
+    {
+        *x = *x - fgeom.borders.invisible.left;
+        *y = *y - fgeom.borders.invisible.top;
+    }
 #endif
     return TRUE;
 }
