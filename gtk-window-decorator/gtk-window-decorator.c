@@ -3450,7 +3450,7 @@ meta_get_button_position (decor_t *d,
     if (*x >= 20)
     {
         *x = *x - fgeom.borders.invisible.left;
-        *y = *y - fgeom.borders.invisible.top;
+        *y = *y + fgeom.borders.invisible.top;
     }
 #endif
     return TRUE;
