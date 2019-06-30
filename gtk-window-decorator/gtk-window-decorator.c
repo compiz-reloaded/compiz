@@ -3645,7 +3645,6 @@ static void
 update_window_decoration_icon (WnckWindow *win)
 {
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
-    GdkPixbuf *icon_pixbuf;
     int icon_width, icon_height;
 
     if (d->icon)
@@ -3664,12 +3663,11 @@ update_window_decoration_icon (WnckWindow *win)
     {
 	    g_object_unref (G_OBJECT (d->icon_pixbuf));
     }
-    icon_pixbuf = wnck_window_get_mini_icon (win);
-	icon_width = gdk_pixbuf_get_width(icon_pixbuf);
-    icon_height = gdk_pixbuf_get_height(icon_pixbuf);
-    d->icon_pixbuf = gdk_pixbuf_scale_simple (icon_pixbuf, icon_width * scale,
+    d->icon_pixbuf = wnck_window_get_mini_icon (win);
+	icon_width = gdk_pixbuf_get_width(d->icon_pixbuf);
+    icon_height = gdk_pixbuf_get_height(d->icon_pixbuf);
+    d->icon_pixbuf = gdk_pixbuf_scale_simple (d->icon_pixbuf, icon_width * scale,
                                               icon_height * scale, GDK_INTERP_BILINEAR);
-        g_object_unref (G_OBJECT (icon_pixbuf));
 
     if (d->icon_pixbuf)
     {
