@@ -14,7 +14,8 @@ EXTRA_DIST =		   \
 	compiz-scale.pc.in  \
 	intltool-extract.in \
 	intltool-merge.in   \
-	intltool-update.in
+	intltool-update.in  \
+	gettext
 
 DISTCHECK_CONFIGURE_FLAGS = --with-gtk=$(GTK_API_VERSION)
 

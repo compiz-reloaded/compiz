@@ -20,7 +20,7 @@ uninstall-local:
 	if test -w $(desktopfilesdir); then ( \
 	  for file in $(desktopfiles_files); do \
 	    rm -f $(desktopfilesdir)/$$file; \
-	  done; \
+	  done; ) \
 	fi
 
 noinst_DATA =		      \
