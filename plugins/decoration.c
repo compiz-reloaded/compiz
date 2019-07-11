@@ -1887,16 +1887,21 @@ decorWindowStateChangeNotify (CompWindow   *w,
 	    /* since we immediately update the frame extents, we must
 	       also update the stored saved window geometry in order
 	       to prevent the window from shifting back too far once
-	       unmaximized */
-
-	    moveDx = decorWindowShiftX (w) - oldShiftX;
-	    moveDy = decorWindowShiftY (w) - oldShiftY;
+	       unmaximized
+          *Note that this ONLY works for CSD windows (_GTK_FRAME_EXTENTS)
+           as ClientFrame handling for SSD windows (marco) works differently
+         */
+	    if (!w->mwmDecor)
+        {
+	        moveDx = decorWindowShiftX (w) - oldShiftX;
+	        moveDy = decorWindowShiftY (w) - oldShiftY;
 
 	    if (w->saveMask & CWX)
 	        w->saveWc.x += moveDx;
 
 	    if (w->saveMask & CWY)
 	        w->saveWc.y += moveDy;
+        }
 
 	    decorWindowUpdateFrame (w);
 	}
