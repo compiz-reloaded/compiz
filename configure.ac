@@ -188,12 +188,12 @@ dnl Check for GL/glu.h, required for plugin blur
 AC_CHECK_HEADERS([GL/glu.h], [] ,AC_MSG_ERROR(GL/glu.h not found --- aborting))
 
 AC_ARG_ENABLE([xi2-events],
-  [AS_HELP_STRING([--disable-xi2-events], [Disable XInput2 events support])],
+  [AS_HELP_STRING([--enable-xi2-events], [Enable XInput2 events support])],
   [use_xi2_events=$enableval
    AS_IF([test "x$use_xi2_events" = xyes && \
           test "x$have_xinput2" != xyes],
          [AC_MSG_ERROR([XInput2 events support requires XInput2])])],
-  [use_xi2_events=$have_xinput2])
+  [use_xi2_events=no])
 
 AS_IF([test "x$use_xi2_events" = xyes],
   [AC_DEFINE([USE_XI2_EVENTS], [1], [Whether to use XInput2 events])])
