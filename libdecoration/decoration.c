@@ -88,33 +88,29 @@ decor_version (void)
   data[7]  = frame bottom
   data[8]  = border left
   data[9]  = border right
-  data[10] = border top
+  data[10]  = border top
   data[11] = border bottom
-  data[12] = resize left
-  data[13] = resize right
-  data[14] = resize top
-  data[15] = resize bottom
 
-  data[16] = frame left when maximized
-  data[17] = frame right when maximized
-  data[18] = frame top when maximized
-  data[19] = frame bottom when maximized
-  data[20] = border left when maximized
-  data[21] = border right when maximized
-  data[22] = border top when maximized
-  data[23] = border bottom when maximized
+  data[12] = frame left when maximized
+  data[13] = frame right when maximized
+  data[14] = frame top when maximized
+  data[15] = frame bottom when maximized
+  data[16] = border left when maximized
+  data[17] = border right when maximized
+  data[18] = border top when maximized
+  data[19] = border bottom when maximized
 
-  data[24] = min width
-  data[25] = min height
+  data[20] = min width
+  data[21] = min height
 
-  fields 26 to 28 are only used by the default
+  fields 22 to 24 are only used by the default
   decorations on the root window
 
-  data[26] = frame state
-  data[27] = frame type
-  data[28] = frame actions
+  data[22] = frame state
+  data[23] = frame type
+  data[24] = frame actions
 
-  data[29] = num quads
+  data[25] = num quads
 
   flags
 
@@ -163,7 +159,6 @@ decor_quads_to_property (long		 *data,
 			 Pixmap		 pixmap,
 			 decor_extents_t *frame,
 			 decor_extents_t *border,
-			 decor_extents_t *resize,
 			 decor_extents_t *max_frame,
 			 decor_extents_t *max_border,
 			 int		 min_width,
@@ -188,10 +183,6 @@ decor_quads_to_property (long		 *data,
     *data++ = border->right;
     *data++ = border->top;
     *data++ = border->bottom;
-    *data++ = resize->left;
-    *data++ = resize->right;
-    *data++ = resize->top;
-    *data++ = resize->bottom;
 
     *data++ = max_frame->left;
     *data++ = max_frame->right;
@@ -293,7 +284,6 @@ decor_pixmap_property_to_quads (long		*data,
 				Pixmap		*pixmap,
 				decor_extents_t *frame,
 				decor_extents_t *border,
-				decor_extents_t *resize,
 				decor_extents_t *max_frame,
 				decor_extents_t *max_border,
 				int		*min_width,
@@ -328,10 +318,6 @@ decor_pixmap_property_to_quads (long		*data,
     border->right  = *data++;
     border->top    = *data++;
     border->bottom = *data++;
-    resize->left   = *data++;
-    resize->right  = *data++;
-    resize->top    = *data++;
-    resize->bottom = *data++;
 
     max_frame->left    = *data++;
     max_frame->right   = *data++;

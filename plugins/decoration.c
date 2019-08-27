@@ -67,7 +67,6 @@ typedef struct _Decoration {
     CompWindowExtents output;
     CompWindowExtents frame;
     CompWindowExtents border;
-    CompWindowExtents resize;
     CompWindowExtents maxFrame;
     CompWindowExtents maxBorder;
     int		      minWidth;
@@ -474,7 +473,7 @@ decorCreateDecoration (CompScreen   *screen,
     Decoration	    *decoration;
     unsigned int    frameType, frameState, frameActions;
     Pixmap	    pixmap;
-    decor_extents_t frame, border, resize;
+    decor_extents_t frame, border;
     decor_extents_t maxFrame, maxBorder;
     decor_quad_t    *quad;
     int		    nQuad;
@@ -500,7 +499,6 @@ decorCreateDecoration (CompScreen   *screen,
 					    &pixmap,
 					    &frame,
 					    &border,
-					    &resize,
 					    &maxFrame,
 					    &maxBorder,
 					    &minWidth,
@@ -574,12 +572,6 @@ decorCreateDecoration (CompScreen   *screen,
     decoration->border.right  = border.right;
     decoration->border.top    = border.top;
     decoration->border.bottom = border.bottom;
-
-    /* Resize area extents */
-    decoration->resize.left   = resize.left;
-    decoration->resize.right  = resize.right;
-    decoration->resize.top    = resize.top;
-    decoration->resize.bottom = resize.bottom;
 
     /* Extents of actual frame window */
     decoration->maxFrame.left   = maxFrame.left;
@@ -1316,18 +1308,6 @@ decorWindowUpdate (CompWindow *w,
 	    setWindowFrameExtents (w, &decoration->frame);
 	    setWindowBorderExtents (w, &decoration->border);
 	}
-
-	/*Set clientFrame extents for SSD windows. We never have GtkFrameExtents
-     *on SSD windows so we can repurposes clientFrame to handle gtk-window-decorator
-     *resize extents. We need the check so as not to kill GtkFrameExtents on CSD windows
-     */
-    if (w->mwmDecor)
-    {
-        w->clientFrame.left = decoration->resize.left;
-        w->clientFrame.right = decoration->resize.right;
-        w->clientFrame.top = decoration->resize.top;
-        w->clientFrame.bottom = decoration->resize.bottom;
-    }
 
 	decorWindowUpdateFrame (w);
 	updateWindowOutputExtents (w);
