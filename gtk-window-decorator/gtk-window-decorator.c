@@ -218,6 +218,8 @@ static decor_extents_t _switcher_extents    = { 6, 6, 6, 6 + SWITCHER_SPACE };
 static int titlebar_height = 17;
 static int max_titlebar_height = 17;
 
+static gint scale;
+
 static decor_context_t window_context = {
     { 0, 0, 0, 0 },
     6, 6, 4, 6,
@@ -1585,10 +1587,10 @@ meta_get_corner_radius (const MetaFrameGeometry *fgeom,
 			int		        *bottom_left_radius,
 			int			*bottom_right_radius)
 {
-    *top_left_radius     = fgeom->top_left_corner_rounded_radius;
-    *top_right_radius    = fgeom->top_right_corner_rounded_radius;
-    *bottom_left_radius  = fgeom->bottom_left_corner_rounded_radius;
-    *bottom_right_radius = fgeom->bottom_right_corner_rounded_radius;
+    *top_left_radius     = fgeom->top_left_corner_rounded_radius * scale;
+    *top_right_radius    = fgeom->top_right_corner_rounded_radius * scale;
+    *bottom_left_radius  = fgeom->bottom_left_corner_rounded_radius * scale;
+    *bottom_right_radius = fgeom->bottom_right_corner_rounded_radius * scale;
 }
 
 static int
@@ -3674,6 +3676,7 @@ static void
 update_window_decoration_icon (WnckWindow *win)
 {
     decor_t *d = g_object_get_data (G_OBJECT (win), "decor");
+    int icon_width, icon_height;
 
     if (d->icon)
     {
@@ -3688,9 +3691,15 @@ update_window_decoration_icon (WnckWindow *win)
     }
 
     if (d->icon_pixbuf)
-	g_object_unref (G_OBJECT (d->icon_pixbuf));
-
+    {
+	    g_object_unref (G_OBJECT (d->icon_pixbuf));
+    }
     d->icon_pixbuf = wnck_window_get_mini_icon (win);
+	icon_width = gdk_pixbuf_get_width(d->icon_pixbuf);
+    icon_height = gdk_pixbuf_get_height(d->icon_pixbuf);
+    d->icon_pixbuf = gdk_pixbuf_scale_simple (d->icon_pixbuf, icon_width * scale,
+                                              icon_height * scale, GDK_INTERP_BILINEAR);
+
     if (d->icon_pixbuf)
     {
 	cairo_t	*cr;
@@ -7629,7 +7638,10 @@ main (int argc, char *argv[])
 #if GTK_CHECK_VERSION(3, 10, 0)
     /* We need to be able to fully trust that the window and monitor sizes
      * that GDK reports corresponds to the X ones, so we disable the automatic
-     * scale handling */
+     * scale handling
+     * Get the scale factor first though and keep it here
+     */
+    scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
     gdk_x11_display_set_window_scale(gdkdisplay, 1);
 #endif
 
