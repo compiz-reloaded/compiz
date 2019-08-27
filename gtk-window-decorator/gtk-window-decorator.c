@@ -208,6 +208,9 @@ static double decoration_alpha = 0.5;
 
 static decor_extents_t _shadow_extents      = { 0, 0, 0, 0 };
 static decor_extents_t _win_extents         = { 6, 6, 4, 6 };
+#ifdef USE_MARCO
+static decor_extents_t _resize_extents      = { 0, 0, 0, 0 };
+#endif
 static decor_extents_t _max_win_extents     = { 6, 6, 4, 6 };
 static decor_extents_t _default_win_extents = { 6, 6, 4, 6 };
 static decor_extents_t _switcher_extents    = { 6, 6, 6, 6 + SWITCHER_SPACE };
@@ -542,7 +545,7 @@ decor_update_window_property (decor_t *d)
     data = decor_alloc_property(n, WINDOW_DECORATION_TYPE_PIXMAP);
     decor_quads_to_property (data, n - 1,
 			     cairo_xlib_surface_get_drawable (d->surface),
-			     &extents, &extents, &extents, &extents,
+			     &extents, &extents, &extents, &extents, &extents,
 			     ICON_SPACE + d->button_width, 0, quads, nQuad,
 			     frame_type, frame_state, frame_actions);
 
@@ -1469,7 +1472,12 @@ draw_window_decoration (decor_t *d)
 
 #ifdef USE_MARCO
 static void
+#ifdef HAVE_MARCO_1_22_2
+decor_update_meta_window_property (MetaFrameGeometry fgeom,
+				   decor_t	  *d,
+#else
 decor_update_meta_window_property (decor_t	  *d,
+#endif
 				   MetaTheme	  *theme,
 				   MetaFrameFlags flags,
 				   Region	  top,
@@ -1482,7 +1490,7 @@ decor_update_meta_window_property (decor_t	  *d,
     Display	    *xdisplay =
 	GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
     gint	    nQuad;
-    decor_extents_t extents, max_extents;
+    decor_extents_t extents, resize_extents, max_extents;
     decor_quad_t    quads[N_QUADS_MAX];
     gint            w, lh, rh;
     gint	    top_stretch_offset;
@@ -1518,7 +1526,21 @@ decor_update_meta_window_property (decor_t	  *d,
 					     top_stretch_offset,
 					     bottom_stretch_offset);
 
+#ifdef HAVE_MARCO_1_22_2
+    /*Add the new invisible borders from marco to resize extents */
+    _resize_extents.left = fgeom.borders.invisible.left;
+    _resize_extents.right = fgeom.borders.invisible.right;
+    _resize_extents.top = fgeom.borders.invisible.top;
+    _resize_extents.bottom = fgeom.borders.invisible.bottom;
+    /*Add resize to frame extents for resize space around borders*/
+    extents.left = _win_extents.left + _resize_extents.left;
+    extents.right = _win_extents.right + _resize_extents.right;
+    extents.top = _win_extents.top + _resize_extents.top;
+    extents.bottom = _win_extents.bottom + _resize_extents.bottom;
+#else
     extents = _win_extents;
+#endif
+    resize_extents = _resize_extents;
     max_extents = _max_win_extents;
 
     extents.top += titlebar_height;
@@ -1527,7 +1549,7 @@ decor_update_meta_window_property (decor_t	  *d,
     data = decor_alloc_property (n, WINDOW_DECORATION_TYPE_PIXMAP);
     decor_quads_to_property (data, n - 1,
 			     cairo_xlib_surface_get_drawable (d->surface),
-			     &extents, &extents, &max_extents, &max_extents,
+			     &extents, &extents, &resize_extents, &max_extents, &max_extents,
 			     ICON_SPACE + d->button_width, 0, quads, nQuad,
 			     frame_type, frame_state, frame_actions);
 
@@ -2330,6 +2352,11 @@ meta_draw_window_decoration (decor_t *d)
 	    XOffsetRegion (bottom_region, -fgeom.borders.total.left, 0);
 	if (left_region)
 	    XOffsetRegion (left_region, -fgeom.borders.total.left, 0);
+	decor_update_meta_window_property (fgeom, d, theme, flags,
+					   top_region,
+					   bottom_region,
+					   left_region,
+					   right_region);
 #else
 	if (top_region)
 	    XOffsetRegion (top_region, -fgeom.left_width, -fgeom.top_height);
@@ -2337,13 +2364,14 @@ meta_draw_window_decoration (decor_t *d)
 	    XOffsetRegion (bottom_region, -fgeom.left_width, 0);
 	if (left_region)
 	    XOffsetRegion (left_region, -fgeom.left_width, 0);
-#endif
-
 	decor_update_meta_window_property (d, theme, flags,
 					   top_region,
 					   bottom_region,
 					   left_region,
 					   right_region);
+
+#endif
+
 	d->prop_xid = 0;
     }
 
@@ -2388,7 +2416,7 @@ decor_update_switcher_property (decor_t *d)
     decor_quads_to_property (data, n - 1,
 			     cairo_xlib_surface_get_drawable (d->surface),
 			     &_switcher_extents, &_switcher_extents,
-			     &_switcher_extents, &_switcher_extents,
+			     &_switcher_extents, &_switcher_extents,&_switcher_extents,
 			     0, 0, quads, nQuad,
 			     frame_type, frame_state, frame_actions);
 
@@ -2815,7 +2843,7 @@ update_default_decorations (GdkScreen *screen)
 						 &layout);
 
 	decor_quads_to_property (data, n - 1, no_border_shadow->pixmap,
-				 &_shadow_extents, &_shadow_extents,
+				 &_shadow_extents, &_shadow_extents, &_shadow_extents,
 				 &_shadow_extents, &_shadow_extents,
 				 0, 0, quads, nQuad,
 				 frame_type, frame_state, frame_actions);
@@ -2885,7 +2913,7 @@ update_default_decorations (GdkScreen *screen)
 	data = decor_alloc_property (n, WINDOW_DECORATION_TYPE_PIXMAP);
 	decor_quads_to_property (data, n - 1,
 				 cairo_xlib_surface_get_drawable (d.surface),
-				 &extents, &extents, &extents, &extents,
+				 &extents, &extents, &extents, &extents, &extents,
 				 0, 0, quads, nQuad,
 				 frame_type, frame_state, frame_actions);
     }
@@ -2908,7 +2936,7 @@ update_default_decorations (GdkScreen *screen)
 
 	decor_quads_to_property (data, n - 1,
 				 cairo_xlib_surface_get_drawable(d.surface),
-				 &extents, &extents, &extents, &extents,
+				 &extents, &extents, &extents, &extents, &extents,
 				 0, 0, quads, nQuad,
 				 frame_type, frame_state, frame_actions);
 
@@ -3103,7 +3131,7 @@ meta_get_event_window_position (decor_t *d,
 				  &clip);
 #ifdef HAVE_MARCO_1_22_2
     visible = fgeom.borders.visible;
-    resize = fgeom.borders.total;
+    resize = fgeom.borders.invisible;
 
     /*  When shadow borders are added, we will no longer be able to use
      * `fgeom->borders.total` border here - it includes also
@@ -3124,26 +3152,25 @@ meta_get_event_window_position (decor_t *d,
 
     top_border = fgeom.title_rect.y - fgeom.borders.invisible.top;
 
-
     switch (i) {
     case 2: /* bottom */
 	switch (j) {
 	case 2: /* bottom right */
 	    *x = fgeom.width - resize.right - RESIZE_EXTENDS;
-	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *y = fgeom.height - RESIZE_EXTENDS;
 	    *w = resize.right + RESIZE_EXTENDS;
 	    *h = resize.bottom + RESIZE_EXTENDS;
 	    break;
 	case 1: /* bottom */
 	    *x = resize.left  + RESIZE_EXTENDS;
-	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *y = fgeom.height - RESIZE_EXTENDS;
 	    *w = fgeom.width - resize.left - resize.right - (2 * RESIZE_EXTENDS);
-	    *h = resize.bottom;
+	    *h = resize.bottom +  RESIZE_EXTENDS;
 	    break;
 	case 0: /* bottom left */
 	default:
 	    *x = 0;
-	    *y = fgeom.height - resize.bottom - RESIZE_EXTENDS;
+	    *y = fgeom.height - RESIZE_EXTENDS;
 	    *w = resize.left + RESIZE_EXTENDS;
 	    *h = resize.bottom + RESIZE_EXTENDS;
 	    break;
@@ -3418,9 +3445,13 @@ meta_get_button_position (decor_t *d,
 #ifdef HAVE_MARCO_1_22_2
     /*compensate for offset caused by invisible borders
      *taken straight from compiz 0.9
+     *but exclude left side buttons so resize border isn't blocked
      */
-    *x = *x - fgeom.borders.invisible.left;
-    *y = *y - fgeom.borders.invisible.top;
+    if (*x >= 20)
+    {
+        *x = *x - fgeom.borders.invisible.left;
+        *y = *y + fgeom.borders.invisible.top;
+    }
 #endif
     return TRUE;
 }
