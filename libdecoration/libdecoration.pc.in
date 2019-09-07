@@ -8,5 +8,6 @@ Description: Window decoration library
 Version: @VERSION@
 
 Requires: @DECORATION_REQUIRES@
-Libs: @DECORATION_LIBS@ -L${libdir} -ldecoration
+Libs: -L${libdir} -ldecoration
+Libs.private: @DECORATION_LIBS@
 Cflags: @DECORATION_CFLAGS@ -I${includedir}/compiz
