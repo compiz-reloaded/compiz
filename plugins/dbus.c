@@ -783,46 +783,49 @@ dbusHandleActionMessage (DBusConnection *connection,
 
 		    while (!hasValue)
 		    {
-			double tmp;
+			DBusBasicValue v;
 
 			switch (dbus_message_iter_get_arg_type (&iter)) {
 			case DBUS_TYPE_BOOLEAN:
 			    hasValue = TRUE;
 			    type     = CompOptionTypeBool;
 
-			    dbus_message_iter_get_basic (&iter, &value.b);
+			    dbus_message_iter_get_basic (&iter, &v);
+
+			    value.b = v.bool_val;
 			    break;
 			case DBUS_TYPE_INT32:
 			    hasValue = TRUE;
 			    type     = CompOptionTypeInt;
 
-			    dbus_message_iter_get_basic (&iter, &value.i);
+			    dbus_message_iter_get_basic (&iter, &v);
+
+			    value.i = v.i32;
 			    break;
 			case DBUS_TYPE_DOUBLE:
 			    hasValue = TRUE;
 			    type     = CompOptionTypeFloat;
 
-			    dbus_message_iter_get_basic (&iter, &tmp);
+			    dbus_message_iter_get_basic (&iter, &v);
 
-			    value.f = tmp;
+			    value.f = v.dbl;
 			    break;
 			case DBUS_TYPE_STRING:
 			    hasValue = TRUE;
-				char *s;
 				CompOptionType trueOptionType = dbusGuessStringType (path, name);
 				switch(trueOptionType) {
 					case CompOptionTypeMatch:
 						type = CompOptionTypeMatch;
-						dbus_message_iter_get_basic (&iter, &s);
+						dbus_message_iter_get_basic (&iter, &v);
 
 						matchInit (&value.match);
-						matchAddFromString (&value.match, s);
+						matchAddFromString (&value.match, v.str);
 						break;
 					case CompOptionTypeColor:
 						type = CompOptionTypeColor;
-						dbus_message_iter_get_basic (&iter, &s);
+						dbus_message_iter_get_basic (&iter, &v);
 
-						stringToColor (s, value.c);
+						stringToColor (v.str, value.c);
 						break;
 					case CompOptionTypeString:
 					default:
@@ -923,26 +926,33 @@ dbusGetOptionValue (CompObject	    *object,
 		    CompOptionType  type,
 		    CompOptionValue *value)
 {
-    double d;
-    char   *s;
+    DBusBasicValue v;
 
     switch (type) {
     case CompOptionTypeBool:
-	return dbusTryGetValueWithType (iter,
-					DBUS_TYPE_BOOLEAN,
-					&value->b);
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_BOOLEAN,
+				     &v))
+	{
+	    value->b = v.bool_val;
+	    return TRUE;
+	}
 	break;
     case CompOptionTypeInt:
-	return dbusTryGetValueWithType (iter,
-					DBUS_TYPE_INT32,
-					&value->i);
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_INT32,
+				     &v))
+	{
+	    value->i = v.i32;
+	    return TRUE;
+	}
 	break;
     case CompOptionTypeFloat:
 	if (dbusTryGetValueWithType (iter,
 				     DBUS_TYPE_DOUBLE,
-				     &d))
+				     &v))
 	{
-	    value->f = d;
+	    value->f = v.dbl;
 	    return TRUE;
 	}
 	break;
@@ -954,16 +964,16 @@ dbusGetOptionValue (CompObject	    *object,
     case CompOptionTypeColor:
 	if (dbusTryGetValueWithType (iter,
 				     DBUS_TYPE_STRING,
-				     &s))
+				     &v))
 	{
-	    if (stringToColor (s, value->c))
+	    if (stringToColor (v.str, value->c))
 		return TRUE;
 	}
 	break;
     case CompOptionTypeKey:
 	if (dbusTryGetValueWithType (iter,
 				     DBUS_TYPE_STRING,
-				     &s))
+				     &v))
 	{
 	    while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 		object = object->parent;
@@ -971,14 +981,15 @@ dbusGetOptionValue (CompObject	    *object,
 	    if (!object)
 		return FALSE;
 
-	    stringToKeyAction (GET_CORE_DISPLAY (object), s, &value->action);
+	    stringToKeyAction (GET_CORE_DISPLAY (object),
+			       v.str, &value->action);
 	    return TRUE;
 	}
 	break;
     case CompOptionTypeButton:
 	if (dbusTryGetValueWithType (iter,
 				     DBUS_TYPE_STRING,
-				     &s))
+				     &v))
 	{
 	    while (object && object->type != COMP_OBJECT_TYPE_DISPLAY)
 		object = object->parent;
@@ -987,30 +998,34 @@ dbusGetOptionValue (CompObject	    *object,
 		return FALSE;
 
 	    stringToButtonAction (GET_CORE_DISPLAY (object),
-				  s, &value->action);
+				  v.str, &value->action);
 	    return TRUE;
 	}
 	break;
     case CompOptionTypeEdge:
 	if (dbusTryGetValueWithType (iter,
 				     DBUS_TYPE_STRING,
-				     &s))
+				     &v))
 	{
-	    value->action.edgeMask = stringToEdgeMask (s);
+	    value->action.edgeMask = stringToEdgeMask (v.str);
 	    return TRUE;
 	}
 	break;
     case CompOptionTypeBell:
-	return dbusTryGetValueWithType (iter,
-					DBUS_TYPE_BOOLEAN,
-					&value->action.bell);
+	if (dbusTryGetValueWithType (iter,
+				     DBUS_TYPE_BOOLEAN,
+				     &v))
+	{
+	    value->action.bell = v.bool_val;
+	    return TRUE;
+	}
 	break;
     case CompOptionTypeMatch:
 	if (dbusTryGetValueWithType (iter,
 				     DBUS_TYPE_STRING,
-				     &s))
+				     &v))
 	{
-	    matchAddFromString (&value->match, s);
+	    matchAddFromString (&value->match, v.str);
 	    return TRUE;
 	}
 
@@ -1156,25 +1171,26 @@ dbusAppendSimpleOptionValue (CompObject      *object,
 			     CompOptionType  type,
 			     CompOptionValue *value)
 {
-    double d;
-    char   *s;
+    DBusBasicValue v;
 
     switch (type) {
     case CompOptionTypeBool:
+	v.bool_val = value->b;
 	dbus_message_append_args (message,
-				  DBUS_TYPE_BOOLEAN, &value->b,
+				  DBUS_TYPE_BOOLEAN, &v,
 				  DBUS_TYPE_INVALID);
 	break;
     case CompOptionTypeInt:
+	v.i32 = value->i;
 	dbus_message_append_args (message,
-				  DBUS_TYPE_INT32, &value->i,
+				  DBUS_TYPE_INT32, &v,
 				  DBUS_TYPE_INVALID);
 	break;
     case CompOptionTypeFloat:
-	d = value->f;
+	v.dbl = value->f;
 
 	dbus_message_append_args (message,
-				  DBUS_TYPE_DOUBLE, &d,
+				  DBUS_TYPE_DOUBLE, &v,
 				  DBUS_TYPE_INVALID);
 	break;
     case CompOptionTypeString:
@@ -1183,58 +1199,59 @@ dbusAppendSimpleOptionValue (CompObject      *object,
 				  DBUS_TYPE_INVALID);
 	break;
     case CompOptionTypeColor:
-	s = colorToString (value->c);
-	if (s)
+	v.str = colorToString (value->c);
+	if (v.str)
 	{
 	    dbus_message_append_args (message,
-				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_STRING, &v,
 				      DBUS_TYPE_INVALID);
-	    free (s);
+	    free (v.str);
 	}
 	break;
     case CompOptionTypeKey:
-	s = keyActionToString ((CompDisplay *) object, &value->action);
-	if (s)
+	v.str = keyActionToString ((CompDisplay *) object, &value->action);
+	if (v.str)
 	{
 	    dbus_message_append_args (message,
-				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_STRING, &v,
 				      DBUS_TYPE_INVALID);
-	    free (s);
+	    free (v.str);
 	}
 	break;
     case CompOptionTypeButton:
-	s = buttonActionToString ((CompDisplay *) object, &value->action);
-	if (s)
+	v.str = buttonActionToString ((CompDisplay *) object, &value->action);
+	if (v.str)
 	{
 	    dbus_message_append_args (message,
-				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_STRING, &v,
 				      DBUS_TYPE_INVALID);
-	    free (s);
+	    free (v.str);
 	}
 	break;
     case CompOptionTypeEdge:
-	s = edgeMaskToString (value->action.edgeMask);
-	if (s)
+	v.str = edgeMaskToString (value->action.edgeMask);
+	if (v.str)
 	{
 	    dbus_message_append_args (message,
-				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_STRING, &v,
 				      DBUS_TYPE_INVALID);
-	    free (s);
+	    free (v.str);
 	}
 	break;
     case CompOptionTypeBell:
+	v.bool_val = value->action.bell;
 	dbus_message_append_args (message,
-				  DBUS_TYPE_BOOLEAN, &value->action.bell,
+				  DBUS_TYPE_BOOLEAN, &v,
 				  DBUS_TYPE_INVALID);
 	break;
     case CompOptionTypeMatch:
-	s = matchToString (&value->match);
-	if (s)
+	v.str = matchToString (&value->match);
+	if (v.str)
 	{
 	    dbus_message_append_args (message,
-				      DBUS_TYPE_STRING, &s,
+				      DBUS_TYPE_STRING, &v,
 				      DBUS_TYPE_INVALID);
-	    free (s);
+	    free (v.str);
 	}
     default:
 	break;
@@ -1250,7 +1267,6 @@ dbusAppendListOptionValue (CompObject      *object,
     DBusMessageIter iter;
     DBusMessageIter listIter;
     char	    sig[2];
-    char	    *s;
     int		    i;
 
     switch (value->list.type) {
@@ -1278,21 +1294,20 @@ dbusAppendListOptionValue (CompObject      *object,
 
     for (i = 0; i < value->list.nValue; i++)
     {
+	DBusBasicValue v;
+
 	switch (value->list.type) {
 	case CompOptionTypeInt:
-	    dbus_message_iter_append_basic (&listIter,
-					    sig[0],
-					    &value->list.value[i].i);
+	    v.i32 = value->list.value[i].i;
+	    dbus_message_iter_append_basic (&listIter, sig[0], &v);
 	    break;
 	case CompOptionTypeFloat:
-	    dbus_message_iter_append_basic (&listIter,
-					    sig[0],
-					    &value->list.value[i].f);
+	    v.dbl = value->list.value[i].f;
+	    dbus_message_iter_append_basic (&listIter, sig[0], &v);
 	    break;
 	case CompOptionTypeBool:
-	    dbus_message_iter_append_basic (&listIter,
-					    sig[0],
-					    &value->list.value[i].b);
+	    v.bool_val = value->list.value[i].b;
+	    dbus_message_iter_append_basic (&listIter, sig[0], &v);
 	    break;
 	case CompOptionTypeString:
 	    dbus_message_iter_append_basic (&listIter,
@@ -1300,50 +1315,49 @@ dbusAppendListOptionValue (CompObject      *object,
 					    &value->list.value[i].s);
 	    break;
 	case CompOptionTypeKey:
-	    s = keyActionToString ((CompDisplay *) object,
-				   &value->list.value[i].action);
-	    if (s)
+	    v.str = keyActionToString ((CompDisplay *) object,
+				       &value->list.value[i].action);
+	    if (v.str)
 	    {
-		dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		free (s);
+		dbus_message_iter_append_basic (&listIter, sig[0], &v);
+		free (v.str);
 	    }
 	    break;
 	case CompOptionTypeButton:
-	    s = buttonActionToString ((CompDisplay *) object,
-				      &value->list.value[i].action);
-	    if (s)
+	    v.str = buttonActionToString ((CompDisplay *) object,
+					  &value->list.value[i].action);
+	    if (v.str)
 	    {
-		dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		free (s);
+		dbus_message_iter_append_basic (&listIter, sig[0], &v);
+		free (v.str);
 	    }
 	    break;
 	case CompOptionTypeEdge:
-	    s = edgeMaskToString (value->list.value[i].action.edgeMask);
-	    if (s)
+	    v.str = edgeMaskToString (value->list.value[i].action.edgeMask);
+	    if (v.str)
 	    {
-		dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		free (s);
+		dbus_message_iter_append_basic (&listIter, sig[0], &v);
+		free (v.str);
 	    }
 	    break;
 	case CompOptionTypeBell:
-	    dbus_message_iter_append_basic (&listIter,
-					    sig[0],
-					    &value->list.value[i].action.bell);
+	    v.bool_val = value->list.value[i].action.bell;
+	    dbus_message_iter_append_basic (&listIter, sig[0], &v);
 	    break;
 	case CompOptionTypeMatch:
-	    s = matchToString (&value->list.value[i].match);
-	    if (s)
+	    v.str = matchToString (&value->list.value[i].match);
+	    if (v.str)
 	    {
-		dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		free (s);
+		dbus_message_iter_append_basic (&listIter, sig[0], &v);
+		free (v.str);
 	    }
 	    break;
 	case CompOptionTypeColor:
-	    s = colorToString (value->list.value[i].c);
-	    if (s)
+	    v.str = colorToString (value->list.value[i].c);
+	    if (v.str)
 	    {
-		dbus_message_iter_append_basic (&listIter, sig[0], &s);
-		free (s);
+		dbus_message_iter_append_basic (&listIter, sig[0], &v);
+		free (v.str);
 	    }
 	    break;
 	default:
@@ -1548,12 +1562,17 @@ dbusHandleGetMetadataMessage (DBusConnection *connection,
 	    }
 
 	    switch (restrictionType) {
-	    case CompOptionTypeInt:
+	    case CompOptionTypeInt: {
+		dbus_int32_t min, max;
+
+		min = option->rest.i.min;
+		max = option->rest.i.max;
+
 		dbus_message_append_args (reply,
-					  DBUS_TYPE_INT32, &option->rest.i.min,
-					  DBUS_TYPE_INT32, &option->rest.i.max,
+					  DBUS_TYPE_INT32, &min,
+					  DBUS_TYPE_INT32, &max,
 					  DBUS_TYPE_INVALID);
-		break;
+	    } break;
 	    case CompOptionTypeFloat: {
 		double min, max, precision;
 
@@ -1670,7 +1689,7 @@ dbusHandleGetPluginMetadataMessage (DBusConnection *connection,
 
     if (p)
     {
-	Bool	   initializedPlugin = TRUE;
+	dbus_bool_t initializedPlugin = TRUE;
 	char	   *shortDesc = NULL;
 	char	   *longDesc = NULL;
 	const char *blankStr = "";
