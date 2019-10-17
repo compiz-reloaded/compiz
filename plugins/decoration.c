@@ -1309,6 +1309,30 @@ decorWindowUpdate (CompWindow *w,
 	    setWindowBorderExtents (w, &decoration->border);
 	}
 
+#ifdef HAVE_MARCO_1_22_2
+     /*Set clientFrame extents for SSD windows. We never have GtkFrameExtents
+     *on SSD windows so we can repurposes clientFrame to handle gtk-window-decorator
+     *resize extents. We need the checks so as to leave GtkFrameExtents on CSD windows
+     *unchanged and to ensure that ClientFrame extents are set to zero for Emerald
+     */
+    if (w->mwmDecor && decoration->border.left > 10)
+    {
+        /*These were hardcoded in gtk-window-decorator so we can use the same value here*/
+	    w->clientFrame.left = 10;
+	    w->clientFrame.right = 10;
+	    w->clientFrame.top = 10;
+	    w->clientFrame.bottom = 10;
+    }
+    else if (w->mwmDecor)
+    {
+        w->clientFrame.left = 0;
+        w->clientFrame.right = 0;
+        w->clientFrame.top = 0;
+        w->clientFrame.bottom = 0;
+    }
+
+#endif
+
 	decorWindowUpdateFrame (w);
 	updateWindowOutputExtents (w);
 	damageWindowOutputExtents (w);
