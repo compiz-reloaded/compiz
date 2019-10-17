@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
-"PO-Revision-Date: 2018-10-27 19:16+0200\n"
-"Last-Translator: Olivier Humbert <trebmuh@tuxfamily.org>\n"
+"POT-Creation-Date: 2019-10-16 12:03+0200\n"
+"PO-Revision-Date: 2019-10-16 19:14+0200\n"
+"Last-Translator: Colomban Wendling <cwendling@hypra.fr>\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1157,7 +1157,7 @@ msgstr "Meilleur"
 msgid "Focus &amp; Raise Behavior"
 msgstr "Comportement de la prise de focus & de l'augmentation"
 
-msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Cliquer pour obtenir le focus"
 
 msgid "Click on window moves input focus to it"
@@ -1323,7 +1323,7 @@ msgstr "Sorties"
 msgid "List of strings describing output devices"
 msgstr "Liste des chaînes décrivant les périphériques de sortie"
 
-msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Sync vers VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
@@ -1331,7 +1331,7 @@ msgstr ""
 "N'effectuer les mises à jour de l'écran que lors de la période de vidage "
 "vertical"
 
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Niveau de sensibilité du Focus"
 
 # En français, on ne vole pas un focus mais je n'ai pas trouvé mieux.
@@ -1354,11 +1354,11 @@ msgstr "Élevé"
 msgid "Very High"
 msgstr "Très élevé"
 
-msgid "Focus Prevention Windows"
-msgstr "Fenêtres prévenues du Focus"
+msgid "Focus-Stealing Prevention Windows"
+msgstr "Fenêtres prévenues du vol de Focus"
 
-msgid "Focus prevention windows"
-msgstr "fenêtres prévenues du focus"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Ne pas rediriger les fenêtres plein écran"
@@ -1375,19 +1375,18 @@ msgstr "Icône par défaut"
 msgid "Default window icon image"
 msgstr "Image de l'icône de la fenêtre par défaut"
 
-# coloration trouvé plus juste que peinture
-msgid "Force independent output painting."
-msgstr "Forcer le rendement indépendant de coloration"
+msgid "Force independent output painting"
+msgstr "Forcer le rendu indépendant de chaque sortie"
 
 msgid "Paint each output device independly, even if the output devices overlap"
 msgstr ""
-"Peindre chaque sortie de périphérique indépendamment, même si elles se "
+"Peindre chaque périphérique de sortie indépendamment, même si ils se "
 "chevauchent."
 
 msgid "Texture Compression"
 msgstr "Compression de texture"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 "Si elle est disponible, utiliser la compression des textures venant d'images "
 "converties"
@@ -1684,14 +1683,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr "Luminosité d'une fenêtre ne répondant pas"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Luminosité (en %) des fenêtres ne répondant pas"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Saturation d'une fenêtre ne répondant pas"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Saturation (en %) des fenêtres ne répondant pas"
 
@@ -1795,6 +1792,9 @@ msgstr "Déplacer la fenêtre"
 msgid "Move window"
 msgstr "Déplacer la fenêtre"
 
+msgid "General"
+msgstr "Général"
+
 msgid "Initiate Window Move"
 msgstr "Lancer le déplacement de fenêtre"
 
@@ -1828,6 +1828,67 @@ msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Ne pas mettre à jour la position de la fenêtre coté serveur, tant que son "
 "mouvement n'est pas fini"
+
+#, fuzzy
+msgid "Off-screen windows"
+msgstr "Fenêtres en dehors de l'écran"
+
+#, fuzzy
+msgid "Enable off-Screen window scrolling"
+msgstr "Activer le défilement des fenêtres hors-écran"
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll down"
+msgstr "Défiler vers le bas"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr "Défiler vers le haut"
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll right"
+msgstr "Défiler vers la droite"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll left"
+msgstr "Défiler vers la gauge"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+msgid "Scrolling speed"
+msgstr "Vitesse de défilement"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+msgid "Shadow color"
+msgstr "Couleur de l'ombre"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow width"
+msgstr "Ombrer les fenêtres"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Enable shadow gradient"
+msgstr "Rayon de l'ombre des gouttes"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Opacité, luminosité et saturation"
@@ -1889,7 +1950,7 @@ msgstr "Incrément"
 msgid "Opacity Step"
 msgstr "Incrément d'opacité"
 
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Réglages spécifiques des fenêtres"
 
 msgid "Windows"
@@ -2748,13 +2809,12 @@ msgid ""
 "Duration (in s) the switch target preview should remain visible after "
 "switching ends."
 msgstr ""
-"Durée (en s) pendant laquelle l'aperçu de la cible de commutation "
-"doit rester visible après la fin de la commutation."
+"Durée (en s) pendant laquelle l'aperçu de la cible de commutation doit "
+"rester visible après la fin de la commutation."
 
 msgid "Preview Scale"
 msgstr "Échelle de l'aperçu"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr "Taille de l'aperçu en %"
 
@@ -3178,6 +3238,9 @@ msgstr "Utiliser le filtre linéaire pour le zoom avant"
 msgid "Compiz"
 msgstr "Compiz"
 
+msgid "compiz"
+msgstr "compiz"
+
 #, fuzzy
 msgid "Compiz Start"
 msgstr "Compiz"
@@ -3188,6 +3251,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "fenêtres prévenues du focus"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Nombre de bureaux"
