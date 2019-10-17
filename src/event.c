@@ -28,6 +28,7 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/Xresource.h>
 #include <X11/extensions/shape.h>
 #include <X11/extensions/Xrandr.h>
 #include <X11/extensions/Xfixes.h>
@@ -1255,6 +1256,49 @@ handleCompizEvent (CompDisplay *d,
 {
 }
 
+static void
+read_resource_for_cursor_changes (CompDisplay *d,
+				  XEvent *event)
+{
+    if (event->xproperty.window == DefaultRootWindow(event->xproperty.display))
+    {
+	/* reopen display since doc says
+	 * "which was returned when the connection was opened using XOpenDisplay"
+	 */
+	Display *xdisp = XOpenDisplay (DisplayString(event->xproperty.display));
+	if (xdisp)
+	{
+	    char* rms = XResourceManagerString (xdisp);
+	    if (rms)
+	    {
+		XrmDatabase db = XrmGetStringDatabase (rms);
+		if (db)
+		{
+		    XrmValue value;
+		    char* type = NULL;
+
+		    if (XrmGetResource (db, "Xcursor.size", "Xcursor.size", &type, &value))
+		    {
+			CompOptionValue v;
+			compInitOptionValue (&v);
+			v.i = atoi (value.addr);
+			setDisplayOption (NULL, d, "cursor_size", &v);
+		    }
+		    if (XrmGetResource (db, "Xcursor.theme", "Xcursor.theme", &type, &value))
+		    {
+			CompOptionValue v;
+			compInitOptionValue (&v);
+			v.s = value.addr;
+			setDisplayOption (NULL, d, "cursor_theme", &v);
+		    }
+		    XrmDestroyDatabase (db);
+		}
+	    }
+	    XCloseDisplay (xdisp);
+	}
+    }
+}
+
 void
 handleEvent (CompDisplay *d,
 	     XEvent      *event)
@@ -1736,6 +1780,11 @@ handleEvent (CompDisplay *d,
 	    if (w)
 		updateWindowClassHints (w);
 	}
+	else if (event->xproperty.atom == XA_RESOURCE_MANAGER)
+        {
+	    read_resource_for_cursor_changes (d, event);
+        }
+
 	break;
     case MotionNotify:
 	break;

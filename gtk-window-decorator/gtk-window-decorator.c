@@ -5543,6 +5543,49 @@ hide_force_quit_dialog (WnckWindow *win)
     }
 }
 
+static gboolean
+update_cursors (gpointer data)
+{
+    Display *xdisplay = data;
+    GHashTableIter iter;
+    gpointer key, value;
+
+    g_hash_table_iter_init (&iter, frame_table);
+    while (g_hash_table_iter_next (&iter, &key, &value))
+    {
+	WnckWindow *win;
+
+	win = wnck_window_get (GPOINTER_TO_UINT(value));
+	if (win)
+	{
+	    decor_t  *d = g_object_get_data (G_OBJECT (win), "decor");
+	    for (int i = 0; i < 3; i++)
+	    {
+		for (int j = 0; j < 3; j++)
+		{
+		    if (cursor[i][j].shape != GDK_LEFT_PTR)
+		    {
+			gdk_cursor_unref(cursor[i][j].cursor);
+			cursor[i][j].cursor =
+			gdk_cursor_new_for_display (gdk_display_get_default (), cursor[i][j].shape);
+#ifdef HAVE_XINPUT2
+			int client_pointer;
+
+			XIGetClientPointer (xdisplay, None, &client_pointer);
+			XIDefineCursor (xdisplay, client_pointer, d->event_windows[i][j],
+			GDK_CURSOR_XCURSOR(cursor[i][j].cursor));
+#else
+			XDefineCursor (xdisplay, d->event_windows[i][j],
+			GDK_CURSOR_XCURSOR(cursor[i][j].cursor));
+#endif
+		    }
+		}
+	    }
+	}
+    }
+    return FALSE;
+}
+
 static GdkFilterReturn
 event_filter_func (GdkXEvent *gdkxevent,
 		   GdkEvent  *event,
@@ -5637,6 +5680,10 @@ event_filter_func (GdkXEvent *gdkxevent,
 		if (get_window_prop (xid, select_window_atom, &select))
 		    update_switcher_window (win, select);
 	    }
+	}
+	else if (xevent->xproperty.atom == XA_RESOURCE_MANAGER)
+        {
+	    g_timeout_add_seconds (1, update_cursors, xdisplay);
 	}
 	break;
     case DestroyNotify:
