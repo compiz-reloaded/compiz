@@ -28,6 +28,8 @@
 #include <string.h>
 
 #include <X11/cursorfont.h>
+#include <X11/Xresource.h>
+#include <X11/Xatom.h>
 
 #include <compiz-core.h>
 
@@ -97,6 +99,7 @@ typedef struct _MoveScreen {
     int grabIndex;
 
     Cursor moveCursor;
+    CompTimeoutHandle cursorUpdateTimeoutHandle;
 
     unsigned int origState;
     unsigned int savedWidth;
@@ -655,6 +658,20 @@ moveHandleMotionEvent (CompScreen *s,
     }
 }
 
+static CompBool
+updateCursorCB (void *data)
+{
+    CompScreen *s = data;
+
+    MOVE_SCREEN (s);
+
+    if (ms->moveCursor)
+	XFreeCursor (s->display->display, ms->moveCursor);
+    ms->moveCursor = XCreateFontCursor (s->display->display, XC_fleur);
+
+    return FALSE;
+}
+
 static void
 moveHandleEvent (CompDisplay *d,
 		 XEvent      *event)
@@ -926,6 +943,26 @@ moveHandleEvent (CompDisplay *d,
 			   &md->opt[option].value.action,
 			   0, NULL, 0);
 	}
+	break;
+    case PropertyNotify:
+	if (event->xproperty.atom == XA_RESOURCE_MANAGER)
+        {
+	    if (event->xproperty.window == DefaultRootWindow(event->xproperty.display))
+	    {
+		s = findScreenAtDisplay (d, DefaultRootWindow(event->xproperty.display));
+		if (s)
+		{
+		    MOVE_SCREEN (s);
+
+		    /* dedup and update later when propagated everywhere */
+		    if (ms->cursorUpdateTimeoutHandle)
+			compRemoveTimeout(ms->cursorUpdateTimeoutHandle);
+		    ms->cursorUpdateTimeoutHandle = compAddTimeout (500, 500,
+							updateCursorCB, s);
+		}
+	    }
+        }
+	break;
     default:
 	break;
     }
@@ -1188,6 +1225,7 @@ moveInitScreen (CompPlugin *p,
     ms->grabIndex = 0;
 
     ms->moveCursor = XCreateFontCursor (s->display->display, XC_fleur);
+    ms->cursorUpdateTimeoutHandle = 0;
 
     WRAP (ms, s, paintWindow, movePaintWindow);
 
