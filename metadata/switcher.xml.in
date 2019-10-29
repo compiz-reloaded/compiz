@@ -94,6 +94,14 @@
 		<max>50</max>
 		<precision>0.1</precision>
 	    </option>
+	    <option name="size_multiplier" type="float">
+		<short>Size multiplier</short>
+		<long>Adjusts the size of the switcher windows</long>
+		<default>1</default>
+		<min>0.1</min>
+		<max>10</max>
+		<precision>0.1</precision>
+	    </option>
 	    <option name="window_match" type="match">
 		<short>Switcher windows</short>
 		<long>Windows that should be shown in switcher</long>

@@ -73,18 +73,19 @@ typedef struct _SwitchDisplay {
 
 #define SWITCH_SCREEN_OPTION_SPEED	  0
 #define SWITCH_SCREEN_OPTION_TIMESTEP	  1
-#define SWITCH_SCREEN_OPTION_WINDOW_MATCH 2
-#define SWITCH_SCREEN_OPTION_MIPMAP	  3
-#define SWITCH_SCREEN_OPTION_SATURATION	  4
-#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  5
-#define SWITCH_SCREEN_OPTION_OPACITY	  6
-#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 7
-#define SWITCH_SCREEN_OPTION_ZOOM	  8
-#define SWITCH_SCREEN_OPTION_ICON	  9
-#define SWITCH_SCREEN_OPTION_ICON_ONLY	  10
-#define SWITCH_SCREEN_OPTION_MINIMIZED	  11
-#define SWITCH_SCREEN_OPTION_AUTO_ROTATE  12
-#define SWITCH_SCREEN_OPTION_NUM	  13
+#define SWITCH_SCREEN_OPTION_MULTIPLIER	  2
+#define SWITCH_SCREEN_OPTION_WINDOW_MATCH 3
+#define SWITCH_SCREEN_OPTION_MIPMAP	  4
+#define SWITCH_SCREEN_OPTION_SATURATION	  5
+#define SWITCH_SCREEN_OPTION_BRIGHTNESS	  6
+#define SWITCH_SCREEN_OPTION_OPACITY	  7
+#define SWITCH_SCREEN_OPTION_BRINGTOFRONT 8
+#define SWITCH_SCREEN_OPTION_ZOOM	  9
+#define SWITCH_SCREEN_OPTION_ICON	  10
+#define SWITCH_SCREEN_OPTION_ICON_ONLY	  11
+#define SWITCH_SCREEN_OPTION_MINIMIZED	  12
+#define SWITCH_SCREEN_OPTION_AUTO_ROTATE  13
+#define SWITCH_SCREEN_OPTION_NUM	  14
 
 typedef enum {
     CurrentViewport = 0,
@@ -144,8 +145,12 @@ typedef struct {
     unsigned long decorations;
 } MwmHints;
 
-#define WIDTH  212
-#define HEIGHT 192
+static float multiplier = 1.0;
+
+#define BASE_WIDTH  212
+#define WIDTH ((int)(BASE_WIDTH * multiplier))
+#define BASE_HEIGHT 192
+#define HEIGHT ((int)(BASE_HEIGHT * multiplier))
 #define SPACE  10
 
 #define SWITCH_ZOOM 0.1f
@@ -157,25 +162,25 @@ typedef struct {
 
 static float _boxVertices[] =
 {
-    -(WIDTH >> 1), 0,
-    -(WIDTH >> 1), BOX_WIDTH,
-     (WIDTH >> 1), BOX_WIDTH,
-     (WIDTH >> 1), 0,
+    -(BASE_WIDTH >> 1), 0,
+    -(BASE_WIDTH >> 1), BOX_WIDTH,
+     (BASE_WIDTH >> 1), BOX_WIDTH,
+     (BASE_WIDTH >> 1), 0,
 
-    -(WIDTH >> 1),	       BOX_WIDTH,
-    -(WIDTH >> 1),	       HEIGHT - BOX_WIDTH,
-    -(WIDTH >> 1) + BOX_WIDTH, HEIGHT - BOX_WIDTH,
-    -(WIDTH >> 1) + BOX_WIDTH, 0,
+    -(BASE_WIDTH >> 1),	       BOX_WIDTH,
+    -(BASE_WIDTH >> 1),	       BASE_HEIGHT - BOX_WIDTH,
+    -(BASE_WIDTH >> 1) + BOX_WIDTH, BASE_HEIGHT - BOX_WIDTH,
+    -(BASE_WIDTH >> 1) + BOX_WIDTH, 0,
 
-     (WIDTH >> 1) - BOX_WIDTH, BOX_WIDTH,
-     (WIDTH >> 1) - BOX_WIDTH, HEIGHT - BOX_WIDTH,
-     (WIDTH >> 1),	       HEIGHT - BOX_WIDTH,
-     (WIDTH >> 1),	       0,
+     (BASE_WIDTH >> 1) - BOX_WIDTH, BOX_WIDTH,
+     (BASE_WIDTH >> 1) - BOX_WIDTH, BASE_HEIGHT - BOX_WIDTH,
+     (BASE_WIDTH >> 1),	       BASE_HEIGHT - BOX_WIDTH,
+     (BASE_WIDTH >> 1),	       0,
 
-    -(WIDTH >> 1), HEIGHT - BOX_WIDTH,
-    -(WIDTH >> 1), HEIGHT,
-     (WIDTH >> 1), HEIGHT,
-     (WIDTH >> 1), HEIGHT - BOX_WIDTH
+    -(BASE_WIDTH >> 1), BASE_HEIGHT - BOX_WIDTH,
+    -(BASE_WIDTH >> 1), BASE_HEIGHT,
+     (BASE_WIDTH >> 1), BASE_HEIGHT,
+     (BASE_WIDTH >> 1), BASE_HEIGHT - BOX_WIDTH
 };
 
 #define WINDOW_WIDTH(count) (WIDTH * (count) + (SPACE << 1))
@@ -237,6 +242,12 @@ switchSetScreenOption (CompPlugin      *plugin,
 	    }
 
 	    return TRUE;
+	}
+	break;
+    case SWITCH_SCREEN_OPTION_MULTIPLIER:
+	if (compSetFloatOption (o, value))
+	{
+	    multiplier = o->value.f;
 	}
 	break;
     default:
@@ -1732,6 +1743,7 @@ switchPaintWindow (CompWindow		   *w,
 	glColor4usv (color);
 	glPushMatrix ();
 	glTranslatef (cx, y, 0.0f);
+	glScalef (multiplier, multiplier, 0.0f);
 	glVertexPointer (2, GL_FLOAT, 0, _boxVertices);
 	glDrawArrays (GL_QUADS, 0, 16);
 	glPopMatrix ();
@@ -1943,6 +1955,7 @@ switchFiniDisplay (CompPlugin  *p,
 static const CompMetadataOptionInfo switchScreenOptionInfo[] = {
     { "speed", "float", "<min>0.1</min>", 0, 0 },
     { "timestep", "float", "<min>0.1</min>", 0, 0 },
+    { "size_multiplier", "float", "<min>0.1</min>", 0, 0 },
     { "window_match", "match", 0, 0, 0 },
     { "mipmap", "bool", 0, 0, 0 },
     { "saturation", "int", "<min>0</min><max>100</max>", 0, 0 },
