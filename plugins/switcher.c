@@ -81,9 +81,10 @@ typedef struct _SwitchDisplay {
 #define SWITCH_SCREEN_OPTION_BRINGTOFRONT 7
 #define SWITCH_SCREEN_OPTION_ZOOM	  8
 #define SWITCH_SCREEN_OPTION_ICON	  9
-#define SWITCH_SCREEN_OPTION_MINIMIZED	  10
-#define SWITCH_SCREEN_OPTION_AUTO_ROTATE  11
-#define SWITCH_SCREEN_OPTION_NUM	  12
+#define SWITCH_SCREEN_OPTION_ICON_ONLY	  10
+#define SWITCH_SCREEN_OPTION_MINIMIZED	  11
+#define SWITCH_SCREEN_OPTION_AUTO_ROTATE  12
+#define SWITCH_SCREEN_OPTION_NUM	  13
 
 typedef enum {
     CurrentViewport = 0,
@@ -1481,7 +1482,9 @@ switchPaintThumb (CompWindow		  *w,
 	    bindWindow (w);
     }
 
-    if (w->texture->pixmap)
+    SWITCH_SCREEN (w->screen);
+
+    if (w->texture->pixmap && !ss->opt[SWITCH_SCREEN_OPTION_ICON_ONLY].value.b)
     {
 	AddWindowGeometryProc oldAddWindowGeometry;
 	FragmentAttrib	      fragment;
@@ -1489,7 +1492,6 @@ switchPaintThumb (CompWindow		  *w,
 	int		      ww, wh;
 	GLenum                filter;
 
-	SWITCH_SCREEN (w->screen);
 
 	width  = WIDTH  - (SPACE << 1);
 	height = HEIGHT - (SPACE << 1);
@@ -1949,6 +1951,7 @@ static const CompMetadataOptionInfo switchScreenOptionInfo[] = {
     { "bring_to_front", "bool", 0, 0, 0 },
     { "zoom", "float", "<min>0</min>", 0, 0 },
     { "icon", "bool", 0, 0, 0 },
+    { "icon_only", "bool", 0, 0, 0 },
     { "minimized", "bool", 0, 0, 0 },
     { "auto_rotate", "bool", 0, 0, 0 }
 };
