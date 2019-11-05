@@ -94,6 +94,14 @@
 		<max>50</max>
 		<precision>0.1</precision>
 	    </option>
+	    <option name="size_multiplier" type="float">
+		<short>Size multiplier</short>
+		<long>Adjusts the size of the switcher windows</long>
+		<default>1</default>
+		<min>0.1</min>
+		<max>10</max>
+		<precision>0.1</precision>
+	    </option>
 	    <option name="window_match" type="match">
 		<short>Switcher windows</short>
 		<long>Windows that should be shown in switcher</long>
@@ -142,6 +150,11 @@
 		<short>Icon</short>
 		<long>Show icon next to thumbnail</long>
 		<default>true</default>
+	    </option>
+	    <option name="icon_only" type="bool">
+		<short>Only show icon</short>
+		<long>Only show the window icon and do not display a thumbnail at all</long>
+		<default>false</default>
 	    </option>
 	    <option name="minimized" type="bool">
 		<short>Minimized</short>
