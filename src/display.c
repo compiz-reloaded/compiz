@@ -940,6 +940,33 @@ addTimeout (CompTimeout *timeout)
 	core.timeouts = timeout;
 }
 
+static CompTimeoutHandle
+getNextTimeoutHandle (void)
+{
+    CompTimeout *t;
+    int next;
+
+    do
+    {
+	core.lastTimeoutHandle++;
+
+	if (core.lastTimeoutHandle == MAXSHORT)
+	    core.lastTimeoutHandle = 1;
+
+	next = FALSE;
+	for (t = core.timeouts; t; t = t->next)
+	{
+	    if (t->handle == core.lastTimeoutHandle)
+	    {
+		next = TRUE;
+		break;
+	    }
+	}
+    } while (next);
+
+    return core.lastTimeoutHandle;
+}
+
 CompTimeoutHandle
 compAddTimeout (int	     minTime,
 		int	     maxTime,
@@ -956,10 +983,7 @@ compAddTimeout (int	     minTime,
     timeout->maxTime  = (maxTime >= minTime) ? maxTime : minTime;
     timeout->callBack = callBack;
     timeout->closure  = closure;
-    timeout->handle   = core.lastTimeoutHandle++;
-
-    if (core.lastTimeoutHandle == MAXSHORT)
-	core.lastTimeoutHandle = 1;
+    timeout->handle   = getNextTimeoutHandle();
 
     addTimeout (timeout);
 
