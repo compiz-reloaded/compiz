@@ -394,7 +394,10 @@ forEachHeaderOpWithType (CompHeaderOp	    *header,
 	{
 	    if (count)
 	    {
-		dataOp.data = ", ";
+		if (type == CompOpTypeHeaderParam)
+		  dataOp.data = "; PARAM ";
+		else
+		  dataOp.data = ", ";
 		(*callBack) (&dataOp, index, closure);
 	    }
 	    else
@@ -403,11 +406,14 @@ forEachHeaderOpWithType (CompHeaderOp	    *header,
 		(*callBack) (&dataOp, index, closure);
 	    }
 
-	    dataOp.data = functionPrefix;
-	    (*callBack) (&dataOp, index, closure);
+	    if (type != CompOpTypeHeaderParam)
+	    {
+		dataOp.data = functionPrefix;
+		(*callBack) (&dataOp, index, closure);
 
-	    dataOp.data = "_";
-	    (*callBack) (&dataOp, index, closure);
+		dataOp.data = "_";
+		(*callBack) (&dataOp, index, closure);
+	    }
 
 	    dataOp.data = header[i].name;
 	    (*callBack) (&dataOp, index, closure);
