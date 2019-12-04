@@ -29,6 +29,8 @@ static CompMetadata commandsMetadata;
 
 static int displayPrivateIndex;
 
+#define COMMANDS_NUM                                 25
+
 #define COMMANDS_DISPLAY_OPTION_COMMAND0              0
 #define COMMANDS_DISPLAY_OPTION_COMMAND1              1
 #define COMMANDS_DISPLAY_OPTION_COMMAND2              2
@@ -129,7 +131,8 @@ static int displayPrivateIndex;
 #define COMMANDS_DISPLAY_OPTION_RUN_COMMAND22_EDGE   97
 #define COMMANDS_DISPLAY_OPTION_RUN_COMMAND23_EDGE   98
 #define COMMANDS_DISPLAY_OPTION_RUN_COMMAND24_EDGE   99
-#define COMMANDS_DISPLAY_OPTION_NUM                 100
+#define COMMANDS_DISPLAY_OPTION_IGNORE_GRABS        100
+#define COMMANDS_DISPLAY_OPTION_NUM                 101
 
 typedef struct _CommandsDisplay {
     CompOption opt[COMMANDS_DISPLAY_OPTION_NUM];
@@ -267,7 +270,8 @@ static const CompMetadataOptionInfo commandsDisplayOptionInfo[] = {
     { "run_command21_edge", "edge", 0, runCommandDispatch, 0 },
     { "run_command22_edge", "edge", 0, runCommandDispatch, 0 },
     { "run_command23_edge", "edge", 0, runCommandDispatch, 0 },
-    { "run_command24_edge", "edge", 0, runCommandDispatch, 0 }
+    { "run_command24_edge", "edge", 0, runCommandDispatch, 0 },
+    { "ignore_grabs", "bool", 0, 0, 0 }
 };
 
 static CompBool
@@ -294,7 +298,7 @@ commandsInitDisplay (CompPlugin  *p,
 	return FALSE;
     }
 
-    for (i = 0; i < 25; i++)
+    for (i = 0; i < COMMANDS_NUM; i++)
     {
 	int opt;
 	
@@ -340,12 +344,31 @@ commandsSetDisplayOption (CompPlugin      *p,
 			  CompOptionValue *value)
 {
     CompOption *o;
+    int	       index, i;
 
     COMMANDS_DISPLAY (d);
 
-    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, NULL);
+    o = compFindOption (cd->opt, NUM_OPTIONS (cd), name, &index);
     if (!o)
 	return FALSE;
+
+    if (index == COMMANDS_DISPLAY_OPTION_IGNORE_GRABS)
+    {
+	for (i = 0; i < COMMANDS_NUM; i++)
+	{
+	    int opt;
+	    
+	    opt = COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_KEY + i;
+	    cd->opt[opt].value.action.ignoreGrabs = value->b;
+	    compSetDisplayOption (d, &cd->opt[opt], &cd->opt[opt].value);
+	    opt = COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_BUTTON + i;
+	    cd->opt[opt].value.action.ignoreGrabs = value->b;
+	    compSetDisplayOption (d, &cd->opt[opt], &cd->opt[opt].value);
+	    opt = COMMANDS_DISPLAY_OPTION_RUN_COMMAND0_EDGE + i;
+	    cd->opt[opt].value.action.ignoreGrabs = value->b;
+	    compSetDisplayOption (d, &cd->opt[opt], &cd->opt[opt].value);
+	}
+    }
 
     return compSetDisplayOption (d, o, value);
 }

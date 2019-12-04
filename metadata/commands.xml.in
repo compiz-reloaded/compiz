@@ -442,6 +442,14 @@
 		    <long>An edge binding that when invoked, will run the shell command identified by command24</long>
 		</option>
 	    </group>
+	    <group>
+		<short>General Options</short>
+		<option name="ignore_grabs" type="bool">
+		    <short>Work any time (even when screen is locked)</short>
+		    <long>When checked, commands work at any time, even when a menu is open or screen is locked. Could be a security risk.</long>
+		    <default>false</default>
+		</option>
+	    </group>
 	</display>
     </plugin>
 </compiz>
