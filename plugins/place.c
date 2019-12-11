@@ -1348,7 +1348,7 @@ placeDoWindowPlacement (CompWindow *w,
 	    placePointer (w, &workArea, &x, &y);
 	    break;
 	case PLACE_MODE_MAXIMIZE:
-	    placeSendWindowMaximizationRequest (w);
+	    maximizeWindow (w, MAXIMIZE_STATE);
 	    break;
 	case PLACE_MODE_SMART:
 	    placeSmart (w, &workArea, &x, &y);
@@ -1382,7 +1382,7 @@ placeDoWindowPlacement (CompWindow *w,
 	    if (WIN_FULL_W (w) >= workArea.width &&
 		WIN_FULL_H (w) >= workArea.height)
 	    {
-		placeSendWindowMaximizationRequest (w);
+		maximizeWindow (w, MAXIMIZE_STATE);
 	    }
 	}
     }
