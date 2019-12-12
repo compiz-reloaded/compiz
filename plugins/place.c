@@ -307,29 +307,6 @@ placeSetScreenOption (CompPlugin      *plugin,
     return FALSE;
 }
 
-static void
-placeSendWindowMaximizationRequest (CompWindow *w)
-{
-    XEvent      xev;
-    CompDisplay *d = w->screen->display;
-
-    xev.xclient.type    = ClientMessage;
-    xev.xclient.display = d->display;
-    xev.xclient.format  = 32;
-
-    xev.xclient.message_type = d->winStateAtom;
-    xev.xclient.window	     = w->id;
-
-    xev.xclient.data.l[0] = 1;
-    xev.xclient.data.l[1] = d->winStateMaximizedHorzAtom;
-    xev.xclient.data.l[2] = d->winStateMaximizedVertAtom;
-    xev.xclient.data.l[3] = 0;
-    xev.xclient.data.l[4] = 0;
-
-    XSendEvent (d->display, w->screen->root, FALSE,
-		SubstructureRedirectMask | SubstructureNotifyMask, &xev);
-}
-
 static Bool
 placeGetPointerPosition (CompScreen *s,
 			 int        *x,
@@ -1348,7 +1325,7 @@ placeDoWindowPlacement (CompWindow *w,
 	    placePointer (w, &workArea, &x, &y);
 	    break;
 	case PLACE_MODE_MAXIMIZE:
-	    placeSendWindowMaximizationRequest (w);
+	    maximizeWindow (w, MAXIMIZE_STATE);
 	    break;
 	case PLACE_MODE_SMART:
 	    placeSmart (w, &workArea, &x, &y);
@@ -1382,7 +1359,7 @@ placeDoWindowPlacement (CompWindow *w,
 	    if (WIN_FULL_W (w) >= workArea.width &&
 		WIN_FULL_H (w) >= workArea.height)
 	    {
-		placeSendWindowMaximizationRequest (w);
+		maximizeWindow (w, MAXIMIZE_STATE);
 	    }
 	}
     }
@@ -1447,7 +1424,7 @@ placeDoValidateWindowResizeRequest (CompWindow     *w,
 	    (w->mwmDecor & (MwmDecorAll | MwmDecorTitle))   &&
 	    !(w->state & CompWindowStateFullscreenMask))
 	{
-	    placeSendWindowMaximizationRequest (w);
+	    maximizeWindow (w, MAXIMIZE_STATE);
 	}
     }
 
