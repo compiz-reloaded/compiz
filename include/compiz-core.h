@@ -2713,6 +2713,7 @@ struct _CompWindow {
     /* placed here to preserve ABI compat */
     CompWindowExtents clientFrame;
     CompWindowExtents frameInput;
+    unsigned int  syncWaitHandle;
 };
 
 #define GET_CORE_WINDOW(object) ((CompWindow *) (object))
