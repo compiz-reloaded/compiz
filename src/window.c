@@ -1583,6 +1583,9 @@ freeWindow (CompWindow *w)
     if (w->syncAlarm)
 	XSyncDestroyAlarm (w->screen->display->display, w->syncAlarm);
 
+    if (w->syncWaitHandle)
+	compRemoveTimeout (w->syncWaitHandle);
+
     destroyTexture (w->screen, w->texture);
 
     if (w->frame)
@@ -2185,6 +2188,7 @@ addWindow (CompScreen *screen,
 
     w->syncAlarm      = None;
     w->syncCounter    = 0;
+    w->syncWaitHandle = 0;
 
     w->closeRequests	    = 0;
     w->lastCloseRequestTime = 0;
@@ -2585,6 +2589,7 @@ syncWaitTimeout (void *closure)
 {
     CompWindow *w = closure;
 
+    w->syncWaitHandle = 0;
     handleSyncAlarm (w);
 
     return FALSE;
@@ -2648,7 +2653,9 @@ mapWindow (CompWindow *w)
 			  w->attrib.border_width);
     }
 
-    syncWaitTimeout(w);
+    /* handle this right away for better reactivity in some cases, see
+     * https://gitlab.com/compiz/compiz-core/issues/74 */
+    handleSyncAlarm (w);
 }
 
 void
@@ -2956,6 +2963,16 @@ sendSyncRequest (CompWindow *w)
     w->syncWidth       = w->serverWidth;
     w->syncHeight      = w->serverHeight;
     w->syncBorderWidth = w->serverBorderWidth;
+
+    if (w->attrib.override_redirect)
+    {
+	syncWaitTimeout(w);
+    }
+    else
+    {
+	if (!w->syncWaitHandle)
+	    w->syncWaitHandle = compAddTimeout (1000, 1200, syncWaitTimeout, w);
+    }
 }
 
 void
