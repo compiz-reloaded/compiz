@@ -4035,28 +4035,13 @@ addWindowSizeChanges (CompWindow     *w,
 
 	    if (w->state & CompWindowStateMaximizedVertMask)
 	    {
-		if (oldY < y + workArea.y + w->input.top)
+		max = y + workArea.y + workArea.height;
+		if (oldY < y + workArea.y + w->input.top ||
+		    oldY + oldHeight + w->input.bottom > max ||
+		    oldY + height + w->input.bottom > max)
 		{
 		    xwc->y = y + workArea.y + w->input.top;
 		    mask |= CWY;
-		}
-		else
-		{
-		    height = xwc->height + oldBorderWidth * 2;
-
-		    max = y + workArea.y + workArea.height;
-		    if (oldY + oldHeight + w->input.bottom > max)
-		    {
-			xwc->y = max - height - w->input.bottom;
-			mask |= CWY;
-		    }
-		    else if (oldY + height + w->input.bottom > max)
-		    {
-			xwc->y = y + workArea.y +
-			    (workArea.height - w->input.top - height -
-			     w->input.bottom) / 2 + w->input.top;
-			mask |= CWY;
-		    }
 		}
 	    }
 

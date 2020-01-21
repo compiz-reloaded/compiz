@@ -608,10 +608,8 @@ moveHandleMotionEvent (CompScreen *s,
 		min = workArea.y + w->input.top;
 		max = workArea.y + workArea.height - w->input.bottom - wHeight;
 
-		if (wY + dy < min)
+		if (wY + dy < min || wY + dy > max)
 		    dy = min - wY;
-		else if (wY + dy > max)
-		    dy = max - wY;
 	    }
 
 	    if (w->state & CompWindowStateMaximizedHorzMask)
