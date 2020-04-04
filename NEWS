@@ -1,3 +1,56 @@
+Release 0.8.18 (2020-04-04 The Compiz Reloaded Team)
+==================================================================
+COMPIZ-RELOADED
+
+Improve autoconf argument "default-plugins"
+
+Clear metadata/Makefile.am of non-portable code
+
+Drop the dependency on intltool of metadata, src and mate
+
+Making show desktop feature more predictable: when a window is open always show the desktop
+
+Add support for XInput2 input events and for actions to bypass grabs (for accessibility purposes like zoom in/out for visual-impaired)
+
+Xinput2 is not enable by default because it could trigger issues on application like Chromium or electron-based applications
+
+Add a configure option to disable XI2 events support
+
+move: Make an option to let the  mouse wheel scroll windows when they are off-screen
+
+Avoid temporary focus back on the original window when switching windows
+
+Trigger a smooth migration from intltool to gettext
+
+Improve the build system for a better compatibility (the initial ambition was to port it
+to FreeBSD)
+
+Initial support for setting _NET_WM_STATE_FOCUSED so CSD windows can follow focus/backdrop theme differences
+
+Fix build against marco 1.23
+
+French translation update
+
+Update mouse cursor when it gets changed from outside (like Mate Appearance)
+
+Add an option to only display apps icons in the Switcher plugin
+
+Add an option to adjust the switcher size in the Switcher plugin
+
+Add an option to make the commands plugin work even while a grab is in effect (disabled by default)
+
+place: Avoid flickering when maximizing windows
+
+place: Avoid round-trip maximizing windows that don't fit the workspace
+
+Fix placement of vertically maximized windows that are too big to fit
+
+Don't show a start menu entry in MATE since it's already handled by mate-tweak
+
+HiDPI: fix corners and menu icon
+
+Support resizing windows from shadow area with marco >=1.22.2
+
 Release 0.8.16 (2018-11-11 Scott Moreau <oreaus@gmail.com>)
 ==================================================================
 COMPIZ-RELOADED
