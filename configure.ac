@@ -5,7 +5,8 @@ m4_define(compiz_version_major, 0)
 m4_define(compiz_version_minor, 8)
 m4_define(compiz_version_micro, 18)
 
-AC_INIT([compiz], [0.8.18], [chat-to-me@raveit.de])
+AC_INIT([compiz], [0.8.18], [chat-to-me@raveit.de],
+        [compiz], [https://gitlab.com/compiz/compiz-core])
 
 COMPIZ_VERSION_MAJOR=compiz_version_major()
 COMPIZ_VERSION_MINOR=compiz_version_minor()
