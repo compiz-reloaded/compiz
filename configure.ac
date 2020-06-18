@@ -35,6 +35,18 @@ GETTEXT_PACKAGE=compiz
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AC_SUBST(GETTEXT_PACKAGE)
 
+dnl The following case statement works around a bug present in
+dnl gettext-0.20 and gettext-0.20.1 which occurs at 'make dist'
+dnl and 'make distcheck' invocations.
+dnl https://git.savannah.gnu.org/gitweb/?p=gettext.git;a=commitdiff;h=2336451ed68d91ff4b5ae1acbc1eca30e47a86a9
+
+dnl Unless --for-msgfmt is functional, assign the value that
+dnl was default before --for-msgfmt was introduced:
+case `LC_ALL=C $MSGMERGE --version | sed 1q | sed -e 's,^[[^0-9]]*,,'` in
+  0.20|0.20.1)
+    MSGMERGE_FOR_MSGFMT_OPTION='--no-fuzzy-matching --no-location --quiet' ;;
+esac
+
 if test "x$GCC" = "xyes"; then
   case " $CFLAGS " in
   *[[\ \	]]-Wall[[\ \	]]*) ;;
