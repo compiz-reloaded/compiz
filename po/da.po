@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:41+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-03-29 20:35+0200\n"
 "Last-Translator: Marcus Møller <koenmarcus@hotmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -1196,6 +1196,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Generelle muligheder"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Generelle compiz muligheder"
 
@@ -1275,7 +1283,9 @@ msgstr "Bedste"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Klik for at fokusere"
 
 msgid "Click on window moves input focus to it"
@@ -1450,14 +1460,16 @@ msgstr "Udgange"
 msgid "List of strings describing output devices"
 msgstr "Liste over strenge, der beskriver udgangsenheder"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Synkroniser med lodret slukning"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Udfør kun skærmopdatering i den lodrette slukkeperiode"
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Vinduestyper til fokuseffekt"
 
 msgid "Level of focus stealing prevention"
@@ -1479,12 +1491,11 @@ msgid "Very High"
 msgstr ""
 
 #, fuzzy
-msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Vinduestyper til fokuseffekt"
 
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Vinduestyper til fokuseffekt"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Omdiriger ikke fuldskærmsvinduer"
@@ -1501,7 +1512,7 @@ msgstr "Standardikon"
 msgid "Default window icon image"
 msgstr "Standardbillede til vinduesikon"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1511,7 +1522,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Teksturfilter"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 msgid "Desktop Cube"
@@ -1819,14 +1830,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1937,6 +1946,11 @@ msgstr "Flyt vindue"
 msgid "Move window"
 msgstr "Flyt vindue"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Generelle muligheder"
+
 msgid "Initiate Window Move"
 msgstr "Start vinduesflytning"
 
@@ -1966,6 +1980,74 @@ msgid "Lazy Positioning"
 msgstr "Vis minimerede vinduer"
 
 msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Skaler vinduer"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Placer vinduer"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Roter og vend til højre"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Vendingstid"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Skaleringshastighed"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow color"
+msgstr "Fastgør vinduer"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow width"
+msgstr "Fastgør vinduer"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Slagskyggeradius"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
 msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
@@ -2035,7 +2117,7 @@ msgid "Opacity Step"
 msgstr "Uigennemsigtighedstrin"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Vinduesdekorationer"
 
 #
@@ -2924,6 +3006,14 @@ msgstr "Hastighed for programskifter"
 msgid "Switcher timestep"
 msgstr "Tidstrin for programskifter"
 
+msgid "Size multiplier"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Tilpas vinduets størrelse"
+
 #, fuzzy
 msgid "Switcher windows"
 msgstr "Skaler vinduer"
@@ -2952,6 +3042,12 @@ msgstr "Ikon"
 
 msgid "Show icon next to thumbnail"
 msgstr "Vis ikon ud for miniaturebillede"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Minimeret"
@@ -3000,7 +3096,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Forrige dias"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3443,6 +3538,10 @@ msgstr "Start rotation"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Focus prevention windows"
+#~ msgstr "Vinduestyper til fokuseffekt"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Antal skriveborde"

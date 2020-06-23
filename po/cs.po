@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:41+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-02-11 17:23+0100\n"
 "Last-Translator: Tomas Hejatko <hejda.cz@gmail.com>\n"
 "Language-Team: Czech <opensuse-cz@opensuse.org>\n"
@@ -999,6 +999,14 @@ msgstr "Klávesové zkratky, které spustí příkaz určený command2"
 msgid "General Options"
 msgstr "Hlavní nastavení"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Hlavní nastavení compizu"
 
@@ -1075,7 +1083,9 @@ msgstr "Nejlepší"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Kliknutí k zaměření"
 
 msgid "Click on window moves input focus to it"
@@ -1244,7 +1254,9 @@ msgstr "Výstupy"
 msgid "List of strings describing output devices"
 msgstr "Seznam řetězců, které popisují výstupní zařízení"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Synchronizovat při VBlank "
 
 msgid "Only perform screen updates during vertical blanking period"
@@ -1252,7 +1264,7 @@ msgstr ""
 "Provádět aktualizace obrazovky pouze během intervalu vertikálního zatemnění"
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Typy okna pro efekt při zaměření"
 
 msgid "Level of focus stealing prevention"
@@ -1274,12 +1286,11 @@ msgid "Very High"
 msgstr ""
 
 #, fuzzy
-msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Typy okna pro efekt při zaměření"
 
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Typy okna pro efekt při zaměření"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Unredirect Fullscreen Windows"
@@ -1296,7 +1307,7 @@ msgstr "Výchozí ikona"
 msgid "Default window icon image"
 msgstr "Výchozí ikona okna"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1306,7 +1317,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Filtrování textur"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 msgid "Desktop Cube"
@@ -1597,14 +1608,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1709,6 +1718,11 @@ msgstr "Přesunout okno"
 msgid "Move window"
 msgstr "Přesunout okno"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Hlavní nastavení"
+
 msgid "Initiate Window Move"
 msgstr "Iniciovat přesun okna"
 
@@ -1738,6 +1752,76 @@ msgstr "\"Líné\" přesouvání"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "Aktualizovat pozici okna až při ukončení přesunu"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Škálovat okna"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Rozmístit okna"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Otočit překlopením vpravo"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Doba překlopení"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Rychlost změny velikosti"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Barva stínu"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Stínované okna"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Poloměr vrženého stínu"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1807,7 +1891,7 @@ msgid "Opacity Step"
 msgstr "Krok krytí"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Dekorace oken"
 
 #, fuzzy
@@ -2595,6 +2679,13 @@ msgstr "Rychlost přepínače"
 msgid "Switcher timestep"
 msgstr "Časový krok přepínače"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Obrysová změna velikosti okna"
+
 #, fuzzy
 msgid "Switcher windows"
 msgstr "Škálovat okna"
@@ -2623,6 +2714,12 @@ msgstr "Ikona"
 
 msgid "Show icon next to thumbnail"
 msgstr "Zobrazit ikonu vedle náhledu"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Minimalizované"
@@ -2671,7 +2768,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Předchozí snímek"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3101,6 +3197,10 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Focus prevention windows"
+#~ msgstr "Typy okna pro efekt při zaměření"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Počet ploch"

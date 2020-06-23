@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:41+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2017-12-08 16:24+0100\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan <opensusecatala@gmail.com>\n"
@@ -1020,6 +1020,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Opcions generals"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Opcions generals de compiz"
 
@@ -1100,7 +1108,9 @@ msgstr "Millor"
 msgid "Focus &amp; Raise Behavior"
 msgstr "Comportament del focus i de l'elevació"
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "En fer clic es passa el focus"
 
 msgid "Click on window moves input focus to it"
@@ -1266,14 +1276,18 @@ msgstr "Sortida"
 msgid "List of strings describing output devices"
 msgstr "Llista de les cadenes que descriuen els dispositius de sortida"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Sincronitza amb l'enfosquiment vertical"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Només actualitza la pantalla durant els períodes d'enfosquiment vertical"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Nivell de la prevenció del focus"
 
 msgid "Level of focus stealing prevention"
@@ -1294,11 +1308,13 @@ msgstr "Alt"
 msgid "Very High"
 msgstr "Molt alt"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Finestres de la prevenció del focus"
 
-msgid "Focus prevention windows"
-msgstr "Finestres de la prevenció del focus"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "No redirigeixis les finestres a pantalla completa"
@@ -1315,7 +1331,9 @@ msgstr "Icona predeterminada"
 msgid "Default window icon image"
 msgstr "Imatge de la icona de la finestra predeterminada"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Força el dibuix independentment de la sortida."
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1326,7 +1344,9 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Compressió de la textura"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 "Si estigués disponible, utilitza la compressió per a les textures que es "
 "converteixin des d'imatges"
@@ -1627,14 +1647,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr "Brillantor de les finestres no receptives"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Brillantor (en %) de les finestres no receptives"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Saturació de les finestres no receptives"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Saturació (en %) de les finestres no receptives"
 
@@ -1737,6 +1755,11 @@ msgstr "Moviment de la finestra"
 msgid "Move window"
 msgstr "Mou la finestra"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Opcions generals"
+
 msgid "Initiate Window Move"
 msgstr "Inicia el moviment de la finestra"
 
@@ -1768,6 +1791,79 @@ msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "No actualitzis la posició del costat del servidor de les finestres fins que "
 "acabi el moviment"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Escala les finestres"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Flip down"
+msgid "Scroll down"
+msgstr "Transició cap a baix"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Flip right"
+msgid "Scroll right"
+msgstr "Transició cap a la dreta"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Flip left"
+msgid "Scroll left"
+msgstr "Transició cap a l'esquerra"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Velocitat de l'escalament"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Color de l'ombra"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Finestres amb ombra"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Radi de l'ombra paral·lela"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Opacitat, brillantor i saturació"
@@ -1823,7 +1919,9 @@ msgstr "Gradual"
 msgid "Opacity Step"
 msgstr "Opacitat gradual"
 
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Ajusts específics de la finestra"
 
 msgid "Windows"
@@ -2615,6 +2713,14 @@ msgstr "Velocitat del commutador"
 msgid "Switcher timestep"
 msgstr "Commutador gradual"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+#| msgid "Outline color of the switcher window."
+msgid "Adjusts the size of the switcher windows"
+msgstr "El color del contorn de la finestra del commutador."
+
 msgid "Switcher windows"
 msgstr "Finestres del commutador"
 
@@ -2643,6 +2749,12 @@ msgstr "Icona"
 
 msgid "Show icon next to thumbnail"
 msgstr "Mostra la icona al costat de la miniatura"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Minimitzades"
@@ -2694,7 +2806,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Escalament de la vista prèvia"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr "Mida de la vista prèvia en %"
 
@@ -3103,3 +3214,6 @@ msgstr "Inicia Compiz"
 
 msgid "Start or restart Compiz"
 msgstr "Inicieu o reinicieu Compiz"
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Finestres de la prevenció del focus"

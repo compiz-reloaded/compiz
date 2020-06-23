@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-05-19 19:29+0300\n"
 "Last-Translator: Sergiu Bivol <sbivol87@gmail.com>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1155,6 +1155,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Opțiuni generale"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Opțiuni generale Compiz"
 
@@ -1235,7 +1243,9 @@ msgstr "Cea mai bună"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Clic pentru focalizare"
 
 msgid "Click on window moves input focus to it"
@@ -1401,13 +1411,17 @@ msgstr "Ieșiri"
 msgid "List of strings describing output devices"
 msgstr "Listă de șiruri descriind dispozitivele de ieșire"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Sincronizare la VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Actualizează ecranul numai în timpul golirii verticale"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Nivel de prevenire a focalizării"
 
 msgid "Level of focus stealing prevention"
@@ -1428,11 +1442,13 @@ msgstr "Înaltă"
 msgid "Very High"
 msgstr "Foarte înaltă"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Ferestre pentru prevenire focalizare"
 
-msgid "Focus prevention windows"
-msgstr "Ferestrele pentru care se aplică prevenirea focalizării"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Dezredirecționează  ferestrele în ecran comlpet"
@@ -1449,7 +1465,9 @@ msgstr "Pictogramă implicită"
 msgid "Default window icon image"
 msgstr "Pictograma implicită a ferestrei"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Forțează desenarea independentă a ieșirii."
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1460,7 +1478,9 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Compresie textură"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 "Utilizează compresie pentru texturi convertite din imagini dacă e posibil"
 
@@ -1758,14 +1778,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1869,6 +1887,11 @@ msgstr "Mutare fereastră"
 msgid "Move window"
 msgstr "Mută fereastra"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Opțiuni generale"
+
 msgid "Initiate Window Move"
 msgstr "Inițierea mutării ferestrei"
 
@@ -1901,6 +1924,74 @@ msgstr "Poziționare leneșă"
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Nu actualiza în server poziția ferestrelor pînă cînd nu se încheie mutarea"
+
+#, fuzzy
+msgid "Off-screen windows"
+msgstr "Tipul providerului"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Tipul providerului"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Întoarcere spre dreapta la rotire"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Data compilării:"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scrolling speed"
+msgstr "ora locală"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Culoare umbră"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Ferestre umbră"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Rază pentru umbra lăsată"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1971,7 +2062,7 @@ msgid "Opacity Step"
 msgstr "Pas opacitate"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Decorații fereastră"
 
 #, fuzzy
@@ -2868,6 +2959,13 @@ msgstr "ora locală"
 msgid "Switcher timestep"
 msgstr "ora locală"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Tipul providerului"
+
 #, fuzzy
 msgid "Switcher windows"
 msgstr "Tipul providerului"
@@ -2898,6 +2996,12 @@ msgstr "Acţiune"
 
 msgid "Show icon next to thumbnail"
 msgstr "Afișare pictogramă lîngă miniatură"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 #, fuzzy
 msgid "Minimized"
@@ -2949,7 +3053,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Diapoz. prec."
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3401,6 +3504,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Ferestrele pentru care se aplică prevenirea focalizării"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Număr de birouri"

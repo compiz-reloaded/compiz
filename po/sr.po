@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-04-25 17:17+0200\n"
 "Last-Translator: Dragonny <drax@virus.la>\n"
 "Language-Team: Serbian <opensuse-translation@opensuse.org>\n"
@@ -993,6 +993,14 @@ msgstr ""
 msgid "General Options"
 msgstr ""
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr ""
 
@@ -1078,8 +1086,10 @@ msgstr ""
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
-msgstr ""
+#  default is "/dev/fd0" floppy device (used when floppy detection is skipped as a fallback)
+#, fuzzy
+msgid "Click to Focus"
+msgstr "Disketni uređaj"
 
 msgid "Click on window moves input focus to it"
 msgstr ""
@@ -1271,14 +1281,14 @@ msgstr ""
 msgid "List of strings describing output devices"
 msgstr ""
 
-msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr ""
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Startujem servis"
 
 msgid "Level of focus stealing prevention"
@@ -1299,12 +1309,12 @@ msgstr ""
 msgid "Very High"
 msgstr ""
 
-msgid "Focus Prevention Windows"
-msgstr ""
-
 #, fuzzy
-msgid "Focus prevention windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Startujem servis"
+
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
@@ -1323,7 +1333,7 @@ msgstr "Podrazumevana sekcija"
 msgid "Default window icon image"
 msgstr "Pokretanje podrazumevanog menadžera prozora"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1335,7 +1345,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "&Podesite filter"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 #  Headline for X11 configuration screen:
@@ -1703,14 +1713,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1834,6 +1842,9 @@ msgstr "&Obriši Windowse"
 msgid "Move window"
 msgstr "&Obriši Windowse"
 
+msgid "General"
+msgstr ""
+
 #, fuzzy
 msgid "Initiate Window Move"
 msgstr "XF86RotateWindows"
@@ -1874,6 +1885,78 @@ msgid "Lazy Positioning"
 msgstr "&Smanji Windowse"
 
 msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+
+#  button text
+#, fuzzy
+msgid "Off-screen windows"
+msgstr "&Obriši Windowse"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#  button text
+#, fuzzy
+msgid "Scroll down"
+msgstr "&Obriši Windowse"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "XF86RotateWindows"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "U realnom vremenu"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#  ComboBox entry: hardware clock set to local time
+#, fuzzy
+msgid "Scrolling speed"
+msgstr "lokalno vreme"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#  button text
+#  button text
+#, fuzzy
+msgid "Shadow color"
+msgstr "&Smanji Windowse"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#  button text
+#  button text
+#, fuzzy
+msgid "Shadow width"
+msgstr "&Smanji Windowse"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Enable shadow gradient"
+msgstr "Radius"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
 msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
@@ -1950,7 +2033,7 @@ msgid "Opacity Step"
 msgstr "&Loše stanje"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "ypbind opcije"
 
 #  button text
@@ -2902,6 +2985,14 @@ msgstr "lokalno vreme"
 msgid "Switcher timestep"
 msgstr "lokalno vreme"
 
+msgid "Size multiplier"
+msgstr ""
+
+#  button text
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "&Obriši Windowse"
+
 #  button text
 #, fuzzy
 msgid "Switcher windows"
@@ -2931,6 +3022,12 @@ msgid "Icon"
 msgstr "Ikone"
 
 msgid "Show icon next to thumbnail"
+msgstr ""
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
 msgstr ""
 
 #  button text
@@ -2992,7 +3089,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "&Smanji Windowse"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3830,11 +3926,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Show switcher"
 #~ msgstr "Prikaži &promene"
-
-#  default is "/dev/fd0" floppy device (used when floppy detection is skipped as a fallback)
-#, fuzzy
-#~ msgid "Sloppy Focus"
-#~ msgstr "Disketni uređaj"
 
 #, fuzzy
 #~ msgid "Start moving window using keyboard"

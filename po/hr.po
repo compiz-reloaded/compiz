@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz 0.8.14\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-08-06 15:20+0200\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2017-08-06 20:34+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian\n"
@@ -1043,6 +1043,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Opće mogućnosti"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Opće mogućnosti compiza"
 
@@ -1631,14 +1639,12 @@ msgstr "Zatamni prozore koji ne reagiraju na zahtjev upravitelja prozorima"
 msgid "Unresponsive Window Brightness"
 msgstr "Svjetlina nereagirajućeg prozora"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Svjetlina (u %) prozora koji ne reagiraju"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Zasićenje nereagirajućeg prozora"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Zasićenje (u %) prozora koji ne reagiraju"
 
@@ -1742,6 +1748,11 @@ msgstr "Pomicanje prozora"
 msgid "Move window"
 msgstr "Pomakni prozor"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Opće mogućnosti"
+
 msgid "Initiate Window Move"
 msgstr "Pokreni pomicanje prozora"
 
@@ -1772,6 +1783,79 @@ msgstr "Lijeno pozicioniranje"
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Ne ažuriraj položaj poslužene strane prozora dok se pomicanje ne završi"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Prilagodi veličinu prozora"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Flip down"
+msgid "Scroll down"
+msgstr "Prebaci dolje"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Flip right"
+msgid "Scroll right"
+msgstr "Prebaci desno"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Flip left"
+msgid "Scroll left"
+msgstr "Prebaci lijevo"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Brzina prilagodbe veličine"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Boja sjenke"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Zasjenjeni prozori"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Polumjer padajuće sjenke"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Prozirnost, svjetlina i zasićenje"
@@ -2594,6 +2678,14 @@ msgstr "Brzina mjenjača"
 msgid "Switcher timestep"
 msgstr "Vremenski korak mjenjača"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+#| msgid "Outline color of the switcher window."
+msgid "Adjusts the size of the switcher windows"
+msgstr "Boja obruba prozora mijenjanja"
+
 msgid "Switcher windows"
 msgstr "Prozori mjenjača"
 
@@ -2620,6 +2712,12 @@ msgstr "Ikona"
 
 msgid "Show icon next to thumbnail"
 msgstr "Pokaži ikonu pokraj umanjene sličice"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Smanjeno"
@@ -2667,7 +2765,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Prilagodba veličine pregleda"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr "Veličina pregleda u %"
 

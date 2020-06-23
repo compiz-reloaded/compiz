@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-02-18 19:36+0100\n"
 "Last-Translator: Sebastian Parborg <zedDB@hotmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1134,6 +1134,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Allmänna alternativ"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Generella compiz inställningar"
 
@@ -1208,7 +1216,9 @@ msgstr "Bästa"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Klicka för fokus"
 
 msgid "Click on window moves input focus to it"
@@ -1379,7 +1389,9 @@ msgstr "Utmatningar"
 msgid "List of strings describing output devices"
 msgstr "Lista över strängar som beskriver utmatningsenheter"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Synkronisera till VBlank"
 
 #, fuzzy
@@ -1387,7 +1399,7 @@ msgid "Only perform screen updates during vertical blanking period"
 msgstr "Uför endast skärmuppdateringar under den vertikala blanknings perioden"
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Förhindra fokus"
 
 msgid "Level of focus stealing prevention"
@@ -1409,12 +1421,11 @@ msgid "Very High"
 msgstr ""
 
 #, fuzzy
-msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Förhindra fokus"
 
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "Förhindra fokus"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Omdirigera tillbaka helskärmsfönster"
@@ -1431,7 +1442,7 @@ msgstr "Standardikon"
 msgid "Default window icon image"
 msgstr "Standardikonbild för fönster"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1441,7 +1452,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Texturfiltrering"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 msgid "Desktop Cube"
@@ -1738,14 +1749,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1853,6 +1862,11 @@ msgstr "Flytta fönster"
 msgid "Move window"
 msgstr "Flytta fönster"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Allmänna alternativ"
+
 msgid "Initiate Window Move"
 msgstr "Initiera fönsterflyttning"
 
@@ -1886,6 +1900,76 @@ msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Uppdatera inte positonen på fönsterna till servern förrän de har slutat röra "
 "sig"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Skala fönster"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Plana nedåt"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Flipprotera åt höger"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Vändtid"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Skalningshastighet"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Skuggfärg"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Skuggfönster"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Radie för skuggkastning"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1955,7 +2039,7 @@ msgid "Opacity Step"
 msgstr "Intervall för opacitet"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Fönsterramar"
 
 #, fuzzy
@@ -2748,6 +2832,13 @@ msgstr "Växlingshastighet"
 msgid "Switcher timestep"
 msgstr "Tidsintervall för växlare"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Kontur justera fönster"
+
 #, fuzzy
 msgid "Switcher windows"
 msgstr "Växelfönster"
@@ -2775,6 +2866,12 @@ msgstr "Ikon"
 
 msgid "Show icon next to thumbnail"
 msgstr "Visa ikon bredvid miniatyrbild"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Minimerat"
@@ -2823,7 +2920,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Föregående diabild"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3250,6 +3346,10 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Focus prevention windows"
+#~ msgstr "Förhindra fokus"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Antal skrivbord"

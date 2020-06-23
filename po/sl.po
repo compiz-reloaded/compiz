@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-06-12 01:19+0200\n"
 "Last-Translator: benjamin povirk <benjamin.povirk@gmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -934,6 +934,14 @@ msgstr ""
 msgid "General Options"
 msgstr ""
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr ""
 
@@ -1014,8 +1022,9 @@ msgstr ""
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
-msgstr ""
+#, fuzzy
+msgid "Click to Focus"
+msgstr "Disketa"
 
 msgid "Click on window moves input focus to it"
 msgstr ""
@@ -1193,14 +1202,14 @@ msgstr ""
 msgid "List of strings describing output devices"
 msgstr ""
 
-msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr ""
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Zaganjam prikriti proces (daemon)."
 
 #, fuzzy
@@ -1222,12 +1231,12 @@ msgstr ""
 msgid "Very High"
 msgstr ""
 
-msgid "Focus Prevention Windows"
-msgstr ""
-
 #, fuzzy
-msgid "Focus prevention windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Zaganjam prikriti proces (daemon)."
+
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr ""
@@ -1244,7 +1253,7 @@ msgstr "Privzet odsek"
 msgid "Default window icon image"
 msgstr "Privzeti Datum I&zteka Veljavnosti"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1254,7 +1263,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "&Nastavi filter"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 #, fuzzy
@@ -1591,14 +1600,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1715,6 +1722,9 @@ msgstr "Premakni &Dol"
 msgid "Move window"
 msgstr "Premakni &Dol"
 
+msgid "General"
+msgstr ""
+
 #, fuzzy
 msgid "Initiate Window Move"
 msgstr "Premakni &Dol"
@@ -1750,6 +1760,71 @@ msgid "Lazy Positioning"
 msgstr "Sprememba velikosti je bila neuspešna."
 
 msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+
+#, fuzzy
+msgid "Off-screen windows"
+msgstr "I&zbriši Windows"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "I&zbriši Windows"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "V desno"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Realni čas"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scrolling speed"
+msgstr "lokalni čas"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow color"
+msgstr "&Skrčite Windows"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow width"
+msgstr "&Skrčite Windows"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Enable shadow gradient"
+msgstr "Radius"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
 msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
@@ -1822,7 +1897,7 @@ msgid "Opacity Step"
 msgstr "&Nizek nivo"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "ypbind opcije"
 
 #, fuzzy
@@ -2722,6 +2797,13 @@ msgstr "Skripta za zamenjavo"
 msgid "Switcher timestep"
 msgstr "lokalni čas"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Sprememba velikosti je bila neuspešna."
+
 #, fuzzy
 msgid "Switcher windows"
 msgstr "I&zbriši Windows"
@@ -2750,6 +2832,12 @@ msgid "Icon"
 msgstr "Ikonce"
 
 msgid "Show icon next to thumbnail"
+msgstr ""
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
 msgstr ""
 
 #, fuzzy
@@ -2801,7 +2889,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Prejsne jedro"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3665,10 +3752,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Show switcher"
 #~ msgstr "Pokaži spre&membe"
-
-#, fuzzy
-#~ msgid "Sloppy Focus"
-#~ msgstr "Disketa"
 
 #, fuzzy
 #~ msgid "Start moving window using keyboard"
