@@ -2571,11 +2571,12 @@ addDisplay (const char *name)
     d->xi2Extension = XI2QueryExtension (dpy,
 					 &d->xi2Event,
 					 &d->xi2Error);
-#else
-    d->xi2Extension = FALSE;
-#endif
     if (!d->xi2Extension)
 	compLogMessage ("core", CompLogLevelWarn, "No XI2 extension");
+#else
+    d->xi2Extension = FALSE;
+    compLogMessage ("core", CompLogLevelDebug, "Not using XI2");
+#endif
 
     d->screenInfo  = NULL;
     d->nScreenInfo = 0;
