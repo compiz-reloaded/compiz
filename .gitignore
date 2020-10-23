@@ -11,7 +11,6 @@ Makefile.in
 *.desktop
 *.moc.cpp
 *~
-intltool*
 aclocal.m4
 autom4te.cache
 compile
@@ -39,8 +38,7 @@ gtk/window-decorator/gtk-window-decorator
 include/compiz-common.h
 metadata/core.xml.in
 mkinstalldirs
-po/.intltool-merge-cache
 po/Makefile.in.in
 po/POTFILES
-po/stamp-it
+po/stamp-po
 

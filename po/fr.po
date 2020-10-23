@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2019-10-16 12:03+0200\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2019-10-16 19:14+0200\n"
 "Last-Translator: Colomban Wendling <cwendling@hypra.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -871,12 +871,6 @@ msgstr ""
 "Raccourci qui, lorsqu'il est appelé, exécute la commande du shell identifiée "
 "par command24"
 
-msgid "Work any time (even when screen is locked)"
-msgstr "Fonctionner en permanence (même écran verrouillé)"
-
-msgid "When checked, commands work at any time, even when a menu is open or screen is locked. Could be a security risk."
-msgstr "Lorsque activé, les commandes fonctionnent en permanence, même lorsqu'un menu est ouvert ou l'écran est verrouillé. Cela pourrait présenter un risque de sécurité."
-
 msgid "Edge Bindings"
 msgstr "Assignation des bords"
 
@@ -1083,6 +1077,17 @@ msgstr ""
 msgid "General Options"
 msgstr "Options Générales"
 
+msgid "Work any time (even when screen is locked)"
+msgstr "Fonctionner en permanence (même écran verrouillé)"
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+"Lorsque activé, les commandes fonctionnent en permanence, même lorsqu'un "
+"menu est ouvert ou l'écran est verrouillé. Cela pourrait présenter un risque "
+"de sécurité."
+
 msgid "General compiz options"
 msgstr "Options Générales de Compiz"
 
@@ -1161,7 +1166,7 @@ msgid "Best"
 msgstr "Meilleur"
 
 msgid "Focus &amp; Raise Behavior"
-msgstr "Comportement de la prise de focus & de l'augmentation"
+msgstr "Comportement de la prise de focus &amp; de l'augmentation"
 
 msgid "Click to Focus"
 msgstr "Cliquer pour obtenir le focus"
@@ -2740,6 +2745,12 @@ msgstr "Vitesse du sélecteur"
 msgid "Switcher timestep"
 msgstr "Intervalle du sélecteur"
 
+msgid "Size multiplier"
+msgstr "Facteur d'agrandissement"
+
+msgid "Adjusts the size of the switcher windows"
+msgstr "Ajuste la taille du sélecteur de fenêtre"
+
 msgid "Switcher windows"
 msgstr "Types de fenêtres du sélecteur"
 
@@ -2768,6 +2779,12 @@ msgstr "Icône"
 
 msgid "Show icon next to thumbnail"
 msgstr "Afficher l'icône à côté de la miniature"
+
+msgid "Only show icon"
+msgstr "N'afficher que l'icône"
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr "N'afficher que l'icône de la fenêtre et pas son aperçu"
 
 msgid "Minimized"
 msgstr "Minimisé"
@@ -3238,9 +3255,6 @@ msgstr "Utiliser le filtre linéaire pour le zoom avant"
 msgid "Compiz"
 msgstr "Compiz"
 
-msgid "compiz"
-msgstr "compiz"
-
 #, fuzzy
 msgid "Compiz Start"
 msgstr "Compiz"
@@ -3252,17 +3266,8 @@ msgstr "Compiz"
 msgid "Start or restart Compiz"
 msgstr ""
 
-msgid "Size multiplier"
-msgstr "Facteur d'agrandissement"
-
-msgid "Adjusts the size of the switcher windows"
-msgstr "Ajuste la taille du sélecteur de fenêtre"
-
-msgid "Only show icon"
-msgstr "N'afficher que l'icône"
-
-msgid "Only show the window icon and do not display a thumbnail at all"
-msgstr "N'afficher que l'icône de la fenêtre et pas son aperçu"
+#~ msgid "compiz"
+#~ msgstr "compiz"
 
 #~ msgid "Focus prevention windows"
 #~ msgstr "fenêtres prévenues du focus"

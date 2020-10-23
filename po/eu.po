@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-06-23 15:38+0200\n"
 "Last-Translator: Ander Elortondo <ander.elor@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
@@ -974,6 +974,14 @@ msgstr "Shell command2 komandoa exekutatuko duen laster-tekla"
 msgid "General Options"
 msgstr "Aukera orokorrak"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Compiz aukera orokorrak"
 
@@ -1053,7 +1061,9 @@ msgstr "Onena"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Klik enfokatzeko"
 
 msgid "Click on window moves input focus to it"
@@ -1218,13 +1228,17 @@ msgstr "Irteerak"
 msgid "List of strings describing output devices"
 msgstr "Irteera gailuak deskribatzeko kateen zerrenda"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "VBlank-era sinkronizatu"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Pantaila eguneratzeak zuritze bertikalaren denboran bakarrik baimendu"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Foku Prebentzio maila"
 
 msgid "Level of focus stealing prevention"
@@ -1245,11 +1259,13 @@ msgstr "Altura"
 msgid "Very High"
 msgstr "Oso altua"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Foku Prebentzioa Leihoak"
 
-msgid "Focus prevention windows"
-msgstr "Foku prebentzioa leihoak"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Ez-birbideratu pantaila osoko leihoak"
@@ -1265,7 +1281,9 @@ msgstr "Lehenetsitako ikonoa"
 msgid "Default window icon image"
 msgstr "Lehenetsitako leihoaren ikono irudia"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Behartu irteera independenteko margotzea."
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1275,7 +1293,9 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Testura trinkotzea"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr "Ahal denean erabili trinkotzea irudietatik eratorritako testurentzat"
 
 msgid "Desktop Cube"
@@ -1563,14 +1583,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr "Erantzuten ez duen leiho distira"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Distira (%tan) erantzuten ez duen leihoek"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Erantzuten ez duen leiho saturazioa"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Erantzuten ez duten leihoen saturazioa (%tan)"
 
@@ -1673,6 +1691,11 @@ msgstr "Leiho Mugimendua"
 msgid "Move window"
 msgstr "Leiho mugimendua"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Aukera orokorrak"
+
 msgid "Initiate Window Move"
 msgstr "Hasi leiho mugimendua"
 
@@ -1703,6 +1726,76 @@ msgstr "Kokapen alferra"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "Ez eguneratu kokapena leiho zerbitzarian, mugitzen amaitu arte"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Eskalatu lehioak"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Planoa behera"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Biratu eskumara irauliz"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Iraultze Denbora"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Eskalatze abiadura"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Itzal Kolorea"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Leihoak itzaldu"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Itzalaren erradio salto"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Opakutasuna, distira eta saturazioa"
@@ -1764,7 +1857,9 @@ msgstr "Pausoa"
 msgid "Opacity Step"
 msgstr "Opakotasun pausoa"
 
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Leiho zehatz ezarpenak"
 
 msgid "Windows"
@@ -2529,6 +2624,13 @@ msgstr "Aldatzailearen abiadura"
 msgid "Switcher timestep"
 msgstr "Aldatzailearen denbora-pausoa"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Kanpo-lerroaz Tamaina-aldatu Leihoei"
+
 msgid "Switcher windows"
 msgstr "Leiho aldatzailea"
 
@@ -2555,6 +2657,12 @@ msgstr "Ikonoa"
 
 msgid "Show icon next to thumbnail"
 msgstr "Erakutsi ikonoa koadro txiki ondoan."
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Ikonotua"
@@ -2603,7 +2711,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Aurreko diapositiba"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3032,6 +3139,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Foku prebentzioa leihoak"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Mahaigain kopurua"

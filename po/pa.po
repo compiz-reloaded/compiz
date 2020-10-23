@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2007-12-15 09:26+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-users@llist.sf.net>\n"
@@ -1111,6 +1111,14 @@ msgstr ""
 msgid "General Options"
 msgstr "ਆਮ ਚੋਣਾਂ"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "ਆਮ ਕੰਪਿਜ਼ ਚੋਣਾਂ"
 
@@ -1191,7 +1199,9 @@ msgstr "ਉੱਤਮ"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "ਫੋਕਸ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 
 msgid "Click on window moves input focus to it"
@@ -1371,14 +1381,16 @@ msgstr "ਆਉਟਪੁੱਟ"
 msgid "List of strings describing output devices"
 msgstr " ਆਉਟਪੁੱਟ ਜੰਤਰਾਂ ਬਾਰੇ ਜਾਣਕਾਰੀ ਲਈ ਲਾਈਨਾਂ ਦੀ ਲਿਸਟ"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "VBlank ਨਾਲ ਸੈਕਰੋਨਾਈਜ਼"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "ਵਰਟੀਕਲ ਝਪਕ ਪੀਰੀਅਡ ਦੌਰਾਨ ਹੀ ਸਕਰੀਨ ਅੱਪਡੇਟ ਕਰੋ"
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "ਫੋਕਸ ਤੋਂ ਬਚਾਅ ਵਿੰਡੋ"
 
 #, fuzzy
@@ -1400,12 +1412,13 @@ msgstr ""
 msgid "Very High"
 msgstr ""
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "ਫੋਕਸ ਤੋਂ ਬਚਾਅ ਵਿੰਡੋ"
 
-#, fuzzy
-msgid "Focus prevention windows"
-msgstr "ਡੈਮਨ ਚਲਾ ਰਿਹਾ ਹੈ।"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "ਪੂਰੀ-ਸਕਰੀਨ ਵਿੰਡੋ ਗ਼ੈਰ-ਡਿਰੈਕਸ਼ਨ"
@@ -1422,7 +1435,7 @@ msgstr "ਮੂਲ ਹਿੱਸਾ"
 msgid "Default window icon image"
 msgstr "ਮੂਲ ਡੋਮੇਨ"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1432,7 +1445,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "ਫਿਲਟਰ ਸੈਟ(&S)"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 #, fuzzy
@@ -1757,14 +1770,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1884,6 +1895,11 @@ msgid "Move window"
 msgstr "ਹੇਠਾਂ ਜਾਓ(&D)"
 
 #, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "ਆਮ ਚੋਣਾਂ"
+
+#, fuzzy
 msgid "Initiate Window Move"
 msgstr "XF86RotateWindows"
 
@@ -1919,6 +1935,71 @@ msgstr "ਮੁੜ-ਆਕਾਰ(&s)"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "ਸਰਵਰ ਨਾ ਅੱਪਡੇਟ ਨਾ ਕਰੋ-ਵਿੰਡੋ ਦੀ ਸਾਇਡ ਸਥਿਤੀ, ਜਦੋਂ ਕਿ ਘੁੰਮਾਉਣਾ ਮੁੱਕੇ"
+
+#, fuzzy
+msgid "Off-screen windows"
+msgstr "Win&dows ਹਟਾਓ"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Win&dows ਹਟਾਓ"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "ਸੱਜੇ"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "ਮੌਕੇ ਤੇ"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scrolling speed"
+msgstr "ਸਥਾਨਕ ਸਮਾਂ"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow color"
+msgstr "Window&s ਸਮੇਟੋ"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow width"
+msgstr "Window&s ਸਮੇਟੋ"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Enable shadow gradient"
+msgstr "ਅਰਧ-ਵਿਆਸ"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1990,7 +2071,7 @@ msgid "Opacity Step"
 msgstr "ਧੁੰਦਲਾਪਨ ਸਟੈਪ"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "ypbind ਚੋਣ"
 
 #, fuzzy
@@ -2892,6 +2973,13 @@ msgstr "ਸਥਾਨਕ ਸਮਾਂ"
 msgid "Switcher timestep"
 msgstr "ਸਥਾਨਕ ਸਮਾਂ"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Win&dows ਹਟਾਓ"
+
 #, fuzzy
 msgid "Switcher windows"
 msgstr "Win&dows ਹਟਾਓ"
@@ -2921,6 +3009,12 @@ msgstr "ਆਈਕਾਨ"
 
 msgid "Show icon next to thumbnail"
 msgstr "ਥੰਮਨੇਲ ਲਈ ਅੱਗੇ ਆਈਕਾਨ ਵੇਖੋ"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 #, fuzzy
 msgid "Minimized"
@@ -2972,7 +3066,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "ਪਿਛਲਾ ਕਰਨਲ"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3435,6 +3528,10 @@ msgstr "ਕੰਮਪਿਜ਼"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Focus prevention windows"
+#~ msgstr "ਡੈਮਨ ਚਲਾ ਰਿਹਾ ਹੈ।"
 
 #, fuzzy
 #~ msgid "Number of Desktops"

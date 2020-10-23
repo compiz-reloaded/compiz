@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-03-25 09:09+0100\n"
 "Last-Translator: KAMI <kamihir@freemail.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -952,6 +952,14 @@ msgstr "A command2 parancs futtatására használt szegély"
 msgid "General Options"
 msgstr "Általános beállítások"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "A Compiz általános beállításai"
 
@@ -1032,7 +1040,9 @@ msgstr "Legjobb"
 msgid "Focus &amp; Raise Behavior"
 msgstr "Fókusz és növelés viselkedése"
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Kattintson a fókuszáláshoz"
 
 msgid "Click on window moves input focus to it"
@@ -1198,14 +1208,18 @@ msgstr "Kimenetek"
 msgid "List of strings describing output devices"
 msgstr "Kimeneti eszközöket leíró karakterláncok listája"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Szinkronizálás VBlank jelre"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "A képernyő-frissítések végrehajtása csak a függőleges törlési periódusban"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Fókuszmegelőzés szintje"
 
 msgid "Level of focus stealing prevention"
@@ -1226,11 +1240,13 @@ msgstr "Magas"
 msgid "Very High"
 msgstr "Nagyon magas"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Fókuszmegelőzés"
 
-msgid "Focus prevention windows"
-msgstr "Fókuszmegelőzés"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Teljes méretű ablakok visszairányítása"
@@ -1246,7 +1262,9 @@ msgstr "Alapértelmezett ikon"
 msgid "Default window icon image"
 msgstr "Alapértelmezett ikon képe"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Független kimenethasználat erőltetése"
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1257,7 +1275,9 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Textúratömörítés"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr "Képekből konvertált textúrák tömörítése, amennyiben az lehetséges"
 
 msgid "Desktop Cube"
@@ -1543,14 +1563,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr "Nem válaszoló ablak fényerőssége"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Nem válaszoló ablak fényerőssége (százalékban megadva)"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Nem válaszoló ablak telítettsége"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Nem válaszoló ablak telítettsége (százalékban megadva)"
 
@@ -1654,6 +1672,11 @@ msgstr "Ablak áthelyezése"
 msgid "Move window"
 msgstr "Ablak áthelyezése"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Általános beállítások"
+
 msgid "Initiate Window Move"
 msgstr "Ablakáthelyezés indítása"
 
@@ -1684,6 +1707,76 @@ msgstr "Lusta elhelyezés"
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Csak az ablakáthelyezés befejeztével frissítse az ablakpozíciót a kiszolgálón"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Ablakok áttekintése"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Gördítés le"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Forgatás jobbra"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Forgatási idő"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Áttekintés sebessége"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Árnyék színe"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Ablakok árnyékolása"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Árnyék átmérője"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Átlátszatlanság, fényerő, telítettség"
@@ -1745,7 +1838,9 @@ msgstr "Lépésköz"
 msgid "Opacity Step"
 msgstr "Átlátszatlanság mértéke"
 
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Ablak beállítások"
 
 msgid "Windows"
@@ -2515,6 +2610,13 @@ msgstr "Váltás sebessége"
 msgid "Switcher timestep"
 msgstr "Váltás időköz"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Átméretezés az ablak körvonalával"
+
 msgid "Switcher windows"
 msgstr "Ablakváltó ablak"
 
@@ -2541,6 +2643,12 @@ msgstr "Ikon"
 
 msgid "Show icon next to thumbnail"
 msgstr "Ikon megjelenítése a miniatűr mellett"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Minimalizálva"
@@ -2589,7 +2697,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Előző dia"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3016,6 +3123,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Fókuszmegelőzés"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Munkaasztalok száma"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-10-03 16:47+0200\n"
 "Last-Translator: Shnatsel <shnatsel@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -1129,6 +1129,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Общие настройки"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Общие настройки Compiz"
 
@@ -1214,7 +1222,9 @@ msgstr "Наилучшее"
 msgid "Focus &amp; Raise Behavior"
 msgstr "Поведение при развёртивании"
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Щелкните для выделения"
 
 msgid "Click on window moves input focus to it"
@@ -1380,14 +1390,18 @@ msgstr "Устройства вывода"
 msgid "List of strings describing output devices"
 msgstr "Список строк, описывающих устройства вывода"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Синхронизировать с VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Обновлять экран во время гашения обратного хода луча кадровой развертки"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Уровень упреждающей фокусировки"
 
 msgid "Level of focus stealing prevention"
@@ -1408,11 +1422,13 @@ msgstr "Высокий"
 msgid "Very High"
 msgstr "Очень высокий"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Упреждающая фокусировка окон"
 
-msgid "Focus prevention windows"
-msgstr "Упреждающая фокусировка окон"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Отменить перенаправление окон в полноэкранном режиме"
@@ -1429,7 +1445,9 @@ msgstr "Значок по умолчанию"
 msgid "Default window icon image"
 msgstr "Значок окна по умолчанию"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Принудительная независимая отрисовка вывода."
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1443,7 +1461,9 @@ msgid "Texture Compression"
 msgstr "Компрессия текстур"
 
 # думаю так должно быть верно.
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 "Использовать сжатие для текстур, конвертированных от изображений, если "
 "доступно"
@@ -1743,14 +1763,12 @@ msgstr "Затемнение окна, которое не отвечает на
 msgid "Unresponsive Window Brightness"
 msgstr "Яркость не отвечающего окна"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Яркость (в %) неотвечающих окон"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Насыщенность не отвечающего окна"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Насыщенность (в %) не отвечающего окна"
 
@@ -1854,6 +1872,11 @@ msgstr "Переместить окно"
 msgid "Move window"
 msgstr "Переместить окно"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Общие настройки"
+
 msgid "Initiate Window Move"
 msgstr "Инициировать движение окна"
 
@@ -1887,6 +1910,75 @@ msgstr "\"Ленивое\" позиционирование"
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Не обновлять со стороны сервера положение окон до окончания перемещения"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Масштабирование окон"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll down"
+msgstr ""
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Вращать с отражением вправо"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Время отражения"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Скорость масштабирования"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Цвет тени"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Тень окон"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Радиус отбрасываемой тени"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Прозрачность, яркость и насыщенность"
@@ -1953,7 +2045,9 @@ msgstr "Шаг"
 msgid "Opacity Step"
 msgstr "Шаг прозрачности"
 
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Специфические настройки окна"
 
 msgid "Windows"
@@ -2739,6 +2833,13 @@ msgstr "Скорость переключателя"
 msgid "Switcher timestep"
 msgstr "Квант времени переключателя"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Граница изменение размеров окна"
+
 msgid "Switcher windows"
 msgstr "Переключатель окон"
 
@@ -2766,6 +2867,12 @@ msgstr "Значок"
 
 msgid "Show icon next to thumbnail"
 msgstr "Отображение значка рядом с эскизом"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Свернутые"
@@ -2814,7 +2921,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Предыдущий слайд"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3248,6 +3354,9 @@ msgstr "Запустить Compiz"
 
 msgid "Start or restart Compiz"
 msgstr "Запустить или перезапустить Compiz"
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Упреждающая фокусировка окон"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Число рабочих столов"

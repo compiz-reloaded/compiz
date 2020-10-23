@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-10-08 11:34+0200\n"
 "Last-Translator: Yichih Liu <liueigi@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <opensuse-translation@opensuse.org>\n"
@@ -945,6 +945,14 @@ msgstr "當螢幕外緣啟動(edge)有設定，將會執行第2個shell指令。
 msgid "General Options"
 msgstr "通用選項"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "通用compiz選項"
 
@@ -1017,9 +1025,11 @@ msgid "Best"
 msgstr "最佳"
 
 msgid "Focus &amp; Raise Behavior"
-msgstr "定焦 & 前景視窗"
+msgstr "定焦 &amp; 前景視窗"
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "按一下視窗才選定該視窗"
 
 msgid "Click on window moves input focus to it"
@@ -1186,13 +1196,17 @@ msgstr "輸出"
 msgid "List of strings describing output devices"
 msgstr "描述輸出設備的字串清單"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "同步化到 VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "只在垂直空白期間執行螢幕更新"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "防止定焦程度"
 
 msgid "Level of focus stealing prevention"
@@ -1213,11 +1227,13 @@ msgstr "高"
 msgid "Very High"
 msgstr "非常高"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "防止定焦視窗"
 
-msgid "Focus prevention windows"
-msgstr "防止定焦視窗"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "全螢幕視窗解除重新導向"
@@ -1232,7 +1248,9 @@ msgstr "預設圖示"
 msgid "Default window icon image"
 msgstr "預設的視窗圖示影像"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "強制單獨描繪輸出"
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1241,7 +1259,9 @@ msgstr "繪製每個獨立的輸出裝置，即使是輸出裝置有重複"
 msgid "Texture Compression"
 msgstr "材質壓縮"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr "如果可能，從圖片影像當中取得的紋理材質進行壓縮"
 
 msgid "Desktop Cube"
@@ -1521,14 +1541,12 @@ msgstr "暗淡化對於視窗管理器沒有反應的視窗"
 msgid "Unresponsive Window Brightness"
 msgstr "無反應視窗的亮度"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "未響應視窗亮度(%)"
 
 msgid "Unresponsive Window Saturation"
 msgstr "無反應視窗的飽和度"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "無反應視窗的飽和度(以%來設定)"
 
@@ -1631,6 +1649,11 @@ msgstr "移動視窗"
 msgid "Move window"
 msgstr "移動視窗"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "通用選項"
+
 msgid "Initiate Window Move"
 msgstr "開始視窗移動"
 
@@ -1660,6 +1683,76 @@ msgstr "懶惰定位"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "視窗移動結束之前不更新server端視窗的位置"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "視窗縮放"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "放置視窗"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "往右旋轉翻轉"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "翻轉時間"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "縮放速度"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "陰影顏色"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "陰影視窗"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "陰影半徑"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "不透明、亮度與飽和度"
@@ -1721,7 +1814,9 @@ msgstr "幅度"
 msgid "Opacity Step"
 msgstr "不透明度幅度"
 
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "視窗的具體設定"
 
 msgid "Windows"
@@ -2475,6 +2570,13 @@ msgstr "切換速度"
 msgid "Switcher timestep"
 msgstr "切換時間間隔"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "調整視窗外框"
+
 msgid "Switcher windows"
 msgstr "切換視窗"
 
@@ -2501,6 +2603,12 @@ msgstr "圖示"
 
 msgid "Show icon next to thumbnail"
 msgstr "顯示圖示於縮圖旁"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "最小化"
@@ -2549,7 +2657,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "上一個Slide"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -2978,6 +3085,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "防止定焦視窗"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "桌面數"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-10-28 17:44+0100\n"
 "Last-Translator: Emre KURNAZ <kurnaz@yeacon.com.tr>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -1185,6 +1185,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Genel Seçenekler"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Genel compiz seçenekleri"
 
@@ -1265,7 +1273,9 @@ msgstr "En iyi"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Odaklamak için Tıkla"
 
 msgid "Click on window moves input focus to it"
@@ -1437,13 +1447,17 @@ msgstr "Çıktılar"
 msgid "List of strings describing output devices"
 msgstr "Çıktı aygıtlarını tanımlayan sözcüklerin listesi"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Dikey Boşaltma ile Eşzamanla"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Ekran güncellemeyi sadece dikey boşaltma sürecinde yap"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Odaklanma Önleyici Seviyesi"
 
 msgid "Level of focus stealing prevention"
@@ -1464,12 +1478,13 @@ msgstr "Yüksek"
 msgid "Very High"
 msgstr "Çok Yüksek"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Odaklanma Önleyici Pencereleri"
 
-# include/nis_server/io.ycp:465
-msgid "Focus prevention windows"
-msgstr "Odaklanma önleyici pencereleri"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Tam Ekran Pencerelerin Yönlendirmesini Geri Al"
@@ -1487,7 +1502,9 @@ msgstr "Öntanımlı Simge"
 msgid "Default window icon image"
 msgstr "Öntanımlı pencere simge resmi"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Bağımsız çıkış boyamasına zorla"
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1499,7 +1516,9 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Doku Sıkıştırma"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 "Eğer mümkünse, görüntülerden dönüştürülmüş dokular için sıkıştırma kullan"
 
@@ -1811,14 +1830,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr "Tepki Vermeyen Pencere Parlaklığı"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr "Tepki Vermeyen Pencere Doygunluğu"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Tepki vermeyen pencerelerin doygunluğu (in %)"
 
@@ -1928,6 +1945,11 @@ msgstr "Pencereyi Taşı"
 msgid "Move window"
 msgstr "Pencereyi taşı"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Genel Seçenekler"
+
 msgid "Initiate Window Move"
 msgstr "Pencereleri Taşımaya Başla"
 
@@ -1964,6 +1986,82 @@ msgstr "Tembel Konumlandırma"
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Taşıma işi bitirilene kadar pencerenin konumunu sunucu tarafında güncelleme"
+
+# clients/inst_target_part.ycp:404
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Pencereleri boyutlandır"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+# clients/inst_target_part.ycp:404
+#, fuzzy
+msgid "Scroll down"
+msgstr "Aşağıya Uçur"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Döndürürken Sağa Çevir"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+# clients/online_update.ycp:223
+#, fuzzy
+msgid "Scroll left"
+msgstr "Çevirme Zamanı"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+# clients/inst_environment.ycp:306
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Boyutlandırma hızı"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Gölge Rengi"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+# clients/inst_target_part.ycp:387
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Pencereleri gölgelendir"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Düşen gölge yarıçapı"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -2039,7 +2137,7 @@ msgid "Opacity Step"
 msgstr "Matlık Adımı"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Pencere dekorasyonları"
 
 # clients/inst_resize_ui.ycp:688
@@ -2880,6 +2978,13 @@ msgstr "Değiştirici hızı"
 msgid "Switcher timestep"
 msgstr "Değiştirici zaman aralığı"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Yeniden Boyutlandırmada Taslak Göster"
+
 # clients/inst_target_part.ycp:404
 msgid "Switcher windows"
 msgstr "Pencere değiştirici"
@@ -2906,6 +3011,12 @@ msgid "Icon"
 msgstr "Simge"
 
 msgid "Show icon next to thumbnail"
+msgstr ""
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
 msgstr ""
 
 # clients/inst_target_part.ycp:387
@@ -2958,7 +3069,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Önceki Slayt"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3411,6 +3521,10 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+# include/nis_server/io.ycp:465
+#~ msgid "Focus prevention windows"
+#~ msgstr "Odaklanma önleyici pencereleri"
 
 # clients/inst_sw_single.ycp:146
 #~ msgid "Number of Desktops"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-04-24 02:56+0200\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: Hebrew <opensuse-translation@opensuse.org>\n"
@@ -971,6 +971,14 @@ msgstr "קצה מסך להפעלת פקודת המעטפת המוגדרת על �
 msgid "General Options"
 msgstr "אפשרויות כלליות"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "אפשרויות כלליות של קומפיז"
 
@@ -1047,7 +1055,9 @@ msgstr "מיטבי"
 msgid "Focus &amp; Raise Behavior"
 msgstr "אופן עליה וקבלת מוקד"
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "הקלקה למיקוד"
 
 msgid "Click on window moves input focus to it"
@@ -1217,14 +1227,18 @@ msgstr "פלטים"
 msgid "List of strings describing output devices"
 msgstr "רשימת המחרוזות המתארות התקני פלט"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "סינכרון עם VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "בצע עדכוני מסך רק במשך המחיקות האנכיות"
 
 #  heading text
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "רמת מניעת מיקוד"
 
 msgid "Level of focus stealing prevention"
@@ -1245,12 +1259,13 @@ msgstr "גבוהה"
 msgid "Very High"
 msgstr "גבוהה מאוד"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "חלונות מונעי מיקוד"
 
-#  heading text
-msgid "Focus prevention windows"
-msgstr "חלונות מונעי מיקוד"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "אל תעביר חלונות במסך מלא"
@@ -1265,7 +1280,9 @@ msgstr "צלמית ברירת מחדל"
 msgid "Default window icon image"
 msgstr "תמונת צלמית ברירת המחדל של חלון"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "כפה צביעת פלט עצמאית."
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1274,7 +1291,9 @@ msgstr "צבע כל פלט כשלעצמו, אפילו אם התקני הפלט �
 msgid "Texture Compression"
 msgstr "דחיסת טקסטורות"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr "אם ניתן, השתמש בדחיסה עבור טקסטורות שהומרו מתמונות"
 
 msgid "Desktop Cube"
@@ -1580,14 +1599,12 @@ msgstr "עמעם חלונות שאינם מגיבים להודעות מנהל ה
 msgid "Unresponsive Window Brightness"
 msgstr "בהירות חלונות שאינם מגיבים"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "בהירות חלונות שאינם מגיבים (באחוזים)"
 
 msgid "Unresponsive Window Saturation"
 msgstr "רווית חלונות שאינם מגיבים"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "רווית חלונות שאינם מגיבים (באחוזים)"
 
@@ -1696,6 +1713,11 @@ msgstr "הזזת חלון"
 msgid "Move window"
 msgstr "הזזת חלון"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "אפשרויות כלליות"
+
 #  button text
 msgid "Initiate Window Move"
 msgstr "התחל להזיז חלון"
@@ -1732,6 +1754,83 @@ msgstr "מיקום 'עצל'"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "אל תעדכן את מיקום החלונות בצד השרת עד שסיימו לזוז"
+
+#  button text
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "הצג חלונות במבט על"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#  button text
+#, fuzzy
+msgid "Scroll down"
+msgstr "מישור למטה"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "עלעל בסיבוב ימינה"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "משך עלעול"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#  label text, Clock setting: local time (not UTC)
+#  ComboBox entry: hardware clock set to local time
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "מהירות הפעלת מבט על"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#  button text
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "צבע הצל"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#  button text
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "חלונות צל"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#  Radio button for using an entire (Windows) partition for Linux
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "רדיוס צל חלון"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "אטימות, בהירות ורוויה"
@@ -1795,7 +1894,9 @@ msgid "Opacity Step"
 msgstr "דרגת שינוי אטימות"
 
 #  Label text
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "הגדרות לחלונות מוגדרים"
 
 #  label text 
@@ -2663,6 +2764,14 @@ msgstr "מהירות המעביר"
 msgid "Switcher timestep"
 msgstr "יחידת זמן של המעביר"
 
+msgid "Size multiplier"
+msgstr ""
+
+#  heading text
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "שינוי גודל חלונות במצב קו מתאר"
+
 #  button text
 msgid "Switcher windows"
 msgstr "חלונות המעביר"
@@ -2690,6 +2799,12 @@ msgstr "צלמית"
 
 msgid "Show icon next to thumbnail"
 msgstr "הראה צלמית לצד תמונה מוקטנת"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 #  button text
 msgid "Minimized"
@@ -2742,7 +2857,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "השקופית הקודמת"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3196,6 +3310,10 @@ msgstr "קומפיז"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#  heading text
+#~ msgid "Focus prevention windows"
+#~ msgstr "חלונות מונעי מיקוד"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "מספר שולחנות עבודה"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-03-29 23:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -1151,6 +1151,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Opcións Xerais"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Opcións xerais de compiz"
 
@@ -1229,9 +1237,11 @@ msgid "Best"
 msgstr "Mellor"
 
 msgid "Focus &amp; Raise Behavior"
-msgstr "Enfoque & Xestión de Comportamento"
+msgstr "Enfoque &amp; Xestión de Comportamento"
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Faga Clic para Enfocar"
 
 msgid "Click on window moves input focus to it"
@@ -1396,13 +1406,17 @@ msgstr "Saídas"
 msgid "List of strings describing output devices"
 msgstr "Lista de cadeas que describen os dispositivos de saída"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Sincronizar a VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Só actualizar a pantalla durante o período de limpeza vertical"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Nivel de Prevención de Enfoque"
 
 msgid "Level of focus stealing prevention"
@@ -1423,11 +1437,13 @@ msgstr "Alta"
 msgid "Very High"
 msgstr "Moi Alta"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Prevención do Enfoque nas Fiestras"
 
-msgid "Focus prevention windows"
-msgstr "Prevención do enfoque nas xanelas"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Desredirección das Fiestras en Pantalla Completa"
@@ -1444,7 +1460,9 @@ msgstr "Icona por defecto"
 msgid "Default window icon image"
 msgstr "Imaxe da icona da xanela por defecto"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Forzar debuxado na saída independente"
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1455,7 +1473,9 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Compresión de Texturas"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr "Empregala compresión para as texturas convertidas dende imaxes"
 
 msgid "Desktop Cube"
@@ -1746,14 +1766,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr "Brillo das Fiestras Bloqueadas"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Brillo (en %) das xanelas bloqueadas"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Saturación das Fiestras Bloqueadas"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Saturación das xanelas bloqueadas (en %)"
 
@@ -1857,6 +1875,11 @@ msgstr "Mover Fiestra"
 msgid "Move window"
 msgstr "Atallos de teclado e rato para o movemento máis sinxelo das xanelas"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Opcións Xerais"
+
 msgid "Initiate Window Move"
 msgstr "Iniciar Movemento de Fiestras"
 
@@ -1887,6 +1910,76 @@ msgstr "Posicionamento preguizoso"
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Non actualizar a posición das xanelas no servidor ata acabar o movemento"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Escala de Fiestras"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Plano abaixo"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Xirar á Dereita"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Duración do Xiro"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Velocidade de Escalado"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Cor da sombra"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Fiestras con sombra"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Radio da sombra"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Opacidade, Brillo e Saturación"
@@ -1948,7 +2041,9 @@ msgstr "Salto"
 msgid "Opacity Step"
 msgstr "Etapa de Opacidade"
 
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Opcións especificas para as xanelas"
 
 msgid "Windows"
@@ -2722,6 +2817,13 @@ msgstr "Velocidade do Cambiador"
 msgid "Switcher timestep"
 msgstr "Salto do Cambiador"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Dimensionado de Fiestras co Contorno"
+
 msgid "Switcher windows"
 msgstr "Cambiador de xanelas"
 
@@ -2748,6 +2850,12 @@ msgstr "Icona"
 
 msgid "Show icon next to thumbnail"
 msgstr "Amosar icona ao lado da miniatura"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Minimizado"
@@ -2796,7 +2904,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Cara Anterior"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3227,6 +3334,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Prevención do enfoque nas xanelas"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Número de escritorios"

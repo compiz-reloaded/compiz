@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2007-12-16 01:13+0530\n"
 "Last-Translator: jayashree pujari <sspujari@hotmail.com>\n"
 "Language-Team: gisti <info.gist@cdac.in>\n"
@@ -1048,6 +1048,14 @@ msgstr ""
 msgid "General Options"
 msgstr "ସାଧାରଣ ବିକଳ୍ପଗୁଡିକ"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "ସାଧାରଣ କମ୍ପିଜ ବିକଳ୍ପଗୁଡିକ"
 
@@ -1122,7 +1130,9 @@ msgstr "ଉତ୍ତମ"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "ଲକ୍ଷ୍ଯ କରିବା ପାଇଁ କ୍ଲିକକର"
 
 msgid "Click on window moves input focus to it"
@@ -1289,14 +1299,16 @@ msgstr "ଆଉଟପୁଟଗୁଡିକ"
 msgid "List of strings describing output devices"
 msgstr "ଆଉଟପୁଟ ଉପକରଣଗୁଡିକୁ ବର୍ଣ୍ଣନା କରୁଥିବା ସ୍ଟ୍ରିଙ୍ଗଗୁଡିକର ତାଲିକା"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "ସିଙ୍କ Vଖାଲିକୁ"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "ଦଣ୍ଡରୂପ ଖାଲିକରିବା ଅବଧି ସମଯରେ କେବଳ ସ୍କ୍ରିନ ଅପଡେଟଗୁଡିକୁ କର"
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
 msgid "Level of focus stealing prevention"
@@ -1317,11 +1329,13 @@ msgstr ""
 msgid "Very High"
 msgstr ""
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
-msgid "Focus prevention windows"
-msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "ଅଣ-ପୁନଃନିର୍ଦ୍ଦେଶିତ ପୂର୍ଣ୍ଣ ସ୍କ୍ରିନ ଉଇଣ୍ଡୋ"
@@ -1336,7 +1350,7 @@ msgstr "ଡିଫଲ୍ଟ ଆଇକନ"
 msgid "Default window icon image"
 msgstr "ଡିଫଲ୍ଟ ଉଇଣ୍ଡୋ ଆଇକନ ଚିତ୍ର"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1346,7 +1360,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "ଟେକ୍ସଟର ଫିଲ୍ଟର କରିବା"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 msgid "Desktop Cube"
@@ -1635,14 +1649,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1746,6 +1758,11 @@ msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 msgid "Move window"
 msgstr "ଉଇଣ୍ଡୋକୁ ଘୁଞ୍ଚାଅ"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "ସାଧାରଣ ବିକଳ୍ପଗୁଡିକ"
+
 msgid "Initiate Window Move"
 msgstr "ଉଇଣ୍ଡୋ ଘୁଞ୍ଚାଇବା ଆରମ୍ଭ କର"
 
@@ -1775,6 +1792,76 @@ msgstr "ଆଳସ୍ଯ ସ୍ଥାପନ କରିବା"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "ଉଇଣ୍ଡୋର ସରଭର-ପଟ ସ୍ଥାନକୁ ଅପଡେଟ କର ନାହିଁ ୟେଉଁପର୍ୟ୍ଯନ୍ତ ଘୁଞ୍ଚାଇବା ଶେଷ ହୋଇ ନାହିଁ ।"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "ଉଇଣ୍ଡୋକୁ ମାପ"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "ସମତଳ ତଳକୁ"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "ଫ୍ଲିପ ଡାହାଣକୁ ଘୁରାଅ"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "ସମଯ ବଦଳକର"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "ଗତି ମାପ"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "ଛାଯାରଙ୍ଗ"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "ଛାଯା ଉଇଣ୍ଡୋ"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "ଛାଯା ବ୍ଯାସାର୍ଦ୍ଧ ପକାଅ"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1844,7 +1931,7 @@ msgid "Opacity Step"
 msgstr "ଅସ୍ବଚ୍ଛତା ସୋପାନ"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "ଉଇଣ୍ଡୋ ଅଳଂକରଣଗୁଡିକ"
 
 #, fuzzy
@@ -2620,6 +2707,13 @@ msgstr "ଅଦଳବଦଳକାରୀ ଗତି"
 msgid "Switcher timestep"
 msgstr "ଅଦଳବଦଳକାରୀ ସମଯସୋପାନ"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "ବାହ୍ଯରେଖା ପୁନଃଆକାର ଉଇଣ୍ଡୋ"
+
 msgid "Switcher windows"
 msgstr "ଉଇଣ୍ଡୋ ଅଦଳବଦଳକାରୀ"
 
@@ -2646,6 +2740,12 @@ msgstr "ଆଇକନ"
 
 msgid "Show icon next to thumbnail"
 msgstr "ଥମନେଇଲ ନିକଟରେ ଥିବା ଆଇକନକୁ ଦେଖାଅ"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "ନ୍ଯୁନତମହୋଇଥିବା"
@@ -2694,7 +2794,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "ପୂର୍ବବର୍ତ୍ତୀ ସ୍ଲାଇଡ"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3119,6 +3218,9 @@ msgstr "କମ୍ପିଜ"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "ଲକ୍ଷ୍ଯ ବାଧାଦେବା ଉଇଣ୍ଡୋ"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "ଡେସ୍କଟପଗୁଡିକର ସଂଖ୍ଯା"

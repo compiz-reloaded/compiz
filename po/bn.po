@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:41+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-01-03 03:23+0100\n"
 "Last-Translator: Mahdee Jameel <mahdee.jameel@gmail.com>\n"
 "Language-Team: gist bengali team <info.gist@cdac.in>\n"
@@ -1114,6 +1114,14 @@ msgstr ""
 msgid "General Options"
 msgstr "সাধারণ বিকল্প"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "সাধারণ কমপিজ বিকল্প"
 
@@ -1189,7 +1197,9 @@ msgstr "সর্বোত্তম"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "ফোকাসে ক্লিক করুন"
 
 msgid "Click on window moves input focus to it"
@@ -1364,14 +1374,16 @@ msgstr "আউটপুটগুলি"
 msgid "List of strings describing output devices"
 msgstr "আউটপুট ডিভাইস বর্ণনাকারী স্ট্রিংয়ের তালিকা"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "VBlank এ Sync "
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "উল্লম্ব ফাঁকা পর্যায়ে শুধুমাত্র স্ক্রিন আপডেট সম্পাদন করুন"
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "ফোকাস প্রতিরোধের উইন্ডো"
 
 msgid "Level of focus stealing prevention"
@@ -1392,11 +1404,13 @@ msgstr ""
 msgid "Very High"
 msgstr ""
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "ফোকাস প্রতিরোধের উইন্ডো"
 
-msgid "Focus prevention windows"
-msgstr "ফোকাস প্রতিরোধের উইন্ডো"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "পূর্ণস্ক্রিনের উইন্ডোগুলি পুনর্নির্দেশ না করা"
@@ -1415,7 +1429,7 @@ msgstr "ডিফল্ট (&e)"
 msgid "Default window icon image"
 msgstr "ডিফল্ট উইন্ডো ম্যানেজার আরাম্ভ করা হচ্ছে"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1425,7 +1439,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "টেক্সচার ফিল্টার করা"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 msgid "Desktop Cube"
@@ -1753,14 +1767,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1870,6 +1882,11 @@ msgstr "উইন্ডো সরানো"
 msgid "Move window"
 msgstr "বিস্তারিত দেখাও (&d)"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "সাধারণ বিকল্প"
+
 msgid "Initiate Window Move"
 msgstr "উইন্ডো সরানো আরম্ভ করা"
 
@@ -1903,6 +1920,75 @@ msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "সরানোর কার্যটি সমাপ্ত না হওয়া পর্যন্ত সার্ভারের-দিকে অবস্থিত উইন্ডোগুলি আপডেট করবেন "
 "না"
+
+#, fuzzy
+msgid "Off-screen windows"
+msgstr "বিস্তারিত দেখাও (&d)"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "নিচের তল"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "ফ্লিপকে ডানদিকে ঘোরানো"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#  label text, Clock setting: local time (not UTC)
+#  ComboBox entry: hardware clock set to local time
+#, fuzzy
+msgid "Scroll left"
+msgstr "স্থানীয় সময়"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#  label text, Clock setting: local time (not UTC)
+#  ComboBox entry: hardware clock set to local time
+#, fuzzy
+msgid "Scrolling speed"
+msgstr "স্হানীয় সময়"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow color"
+msgstr "বিস্তারিত দেখাও (&d)"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Shadow width"
+msgstr "বিস্তারিত দেখাও (&d)"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+msgid "Enable shadow gradient"
+msgstr "বিস্তারিত দেখাও (&d)"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1974,7 +2060,7 @@ msgid "Opacity Step"
 msgstr "অস্বচ্ছতার ধাপ"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "উইন্ডো অলঙ্করণ"
 
 #, fuzzy
@@ -2799,6 +2885,13 @@ msgstr "স্হানীয় সময়"
 msgid "Switcher timestep"
 msgstr "স্হানীয় সময়"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "পুনরাকার উইন্ডোর বহির্রেখা"
+
 #, fuzzy
 msgid "Switcher windows"
 msgstr "বিস্তারিত দেখাও (&d)"
@@ -2827,6 +2920,12 @@ msgstr "চিত্রসংকেত"
 
 msgid "Show icon next to thumbnail"
 msgstr "থাম্বনেলের পরবর্তী চিত্রসংকেত প্রদর্শন করা"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "ছোট করা হয়েছে"
@@ -2878,7 +2977,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "পূর্ববর্তী স্লাইড"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3340,6 +3438,9 @@ msgstr "কমপিজ"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "ফোকাস প্রতিরোধের উইন্ডো"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "ডেস্কটপের সংখ্যা"

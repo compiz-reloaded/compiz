@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:42+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-04-18 17:08+0200\n"
 "Last-Translator: Harald van Bree <harald@vanbree.nl.eu.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -1162,6 +1162,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Algemene opties"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Algemene compiz opties"
 
@@ -1238,7 +1246,9 @@ msgstr "Best"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Klik voor focus"
 
 msgid "Click on window moves input focus to it"
@@ -1406,14 +1416,16 @@ msgstr "Uitvoer"
 msgid "List of strings describing output devices"
 msgstr "Lijst met strings die uitvoer apparaten omschrĳven"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Sync naar VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr "Scherm alleen bijwerken tijdens verticale blanking periode"
 
 #, fuzzy
-msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Focus Vensters Voorkomen"
 
 msgid "Level of focus stealing prevention"
@@ -1434,11 +1446,13 @@ msgstr ""
 msgid "Very High"
 msgstr ""
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Focus Vensters Voorkomen"
 
-msgid "Focus prevention windows"
-msgstr "Focus vensters voorkomen"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Niet omleiden van volledig scherm vensters"
@@ -1456,7 +1470,7 @@ msgstr "Standaard pictogram"
 msgid "Default window icon image"
 msgstr "Standaard venster pictogram afbeelding"
 
-msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr ""
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1466,7 +1480,7 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Texturen filteren"
 
-msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 
 msgid "Desktop Cube"
@@ -1780,14 +1794,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1893,6 +1905,11 @@ msgstr "Verplaats venster"
 msgid "Move window"
 msgstr "Verplaats venster"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Algemene opties"
+
 msgid "Initiate Window Move"
 msgstr "Start venster verplaatsing"
 
@@ -1925,6 +1942,78 @@ msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Werk de server-zijde positie niet bij van vensters totdat deze klaar is met "
 "verplaatsen"
+
+# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Schaal vensters"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
+#, fuzzy
+msgid "Scroll down"
+msgstr "Vlak omlaag"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Roteer kantel rechts"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Kantel tĳd"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Schaal snelheid"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Schaduw kleur"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Schaduw vensters"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Schaduw omtrek"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1994,7 +2083,7 @@ msgid "Opacity Step"
 msgstr "Opaciteit stap"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Venster decoraties"
 
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
@@ -2811,6 +2900,13 @@ msgstr "Wisselaar snelheid"
 msgid "Switcher timestep"
 msgstr "Wisselaar tijdstap"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Omtrek grootte aanpassing van vensters"
+
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:770
 msgid "Switcher windows"
 msgstr "Wisselaar vensters"
@@ -2839,6 +2935,12 @@ msgstr "Pictogram"
 
 msgid "Show icon next to thumbnail"
 msgstr "Toon pictogram naast thumbnail"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Geminimaliseerd"
@@ -2888,7 +2990,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Vorige dia"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3327,6 +3428,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Focus vensters voorkomen"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Aantal bureaubladen"

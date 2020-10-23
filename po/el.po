@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:41+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2009-03-30 10:16+0200\n"
 "Last-Translator: Jim Dusis <jimdusis@yahoo.gr>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -1124,6 +1124,14 @@ msgstr ""
 msgid "General Options"
 msgstr "Γενικές Επιλογές"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Γενικές επιλογές του compiz"
 
@@ -1203,9 +1211,11 @@ msgid "Best"
 msgstr "Βέλτιστο"
 
 msgid "Focus &amp; Raise Behavior"
-msgstr "Εστιάση & Συμπεριφορά Ανύψωσης"
+msgstr "Εστιάση &amp; Συμπεριφορά Ανύψωσης"
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Κλικ Για Εστίαση"
 
 msgid "Click on window moves input focus to it"
@@ -1370,7 +1380,9 @@ msgstr "Αποτελέσματα-Εξοδοι"
 msgid "List of strings describing output devices"
 msgstr "Λίστα με προσδιοριστικά στρινγκ για τις συσκευές εξόδου"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Συγχρονισμός Στην Καθετη Ανανέωση"
 
 msgid "Only perform screen updates during vertical blanking period"
@@ -1378,7 +1390,9 @@ msgstr ""
 "Πραγματοποίηση ανανεώσεων οθόνης μόνο κατα τη διάρκεια της κάθετης "
 "περιοδικής ανανέωσης"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Εστίαση Προληπτικού Επιπέδου"
 
 msgid "Level of focus stealing prevention"
@@ -1399,11 +1413,13 @@ msgstr "Υψηλό"
 msgid "Very High"
 msgstr "Πολύ Υψηλό"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Εστίαση Προστατευμένων Παραθύρων"
 
-msgid "Focus prevention windows"
-msgstr "Εστίαση προστατευμένων παραθύρων"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Μη-επανακατεύθυνση Παραθύρων Πλήρους Οθόνης"
@@ -1420,7 +1436,9 @@ msgstr "Προεπιλεγμένο Εικονίδιο"
 msgid "Default window icon image"
 msgstr "Προεπιλεγμένη εικόνα εικονιδίου παραθύρου"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Εξαναγκασμός ανεξάρτητης απεικόνισης."
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1429,7 +1447,9 @@ msgstr "Δούλεψε κάθε οθόνη ανεξάρτητα, ακόμα κ �
 msgid "Texture Compression"
 msgstr "Συμπίεση υφών"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr ""
 "Εαν είναι διαθέσιμο χρήση συμπίεσης για υφές που έχουν προέλθει από εικόνες"
 
@@ -1726,14 +1746,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr "Φωτεινότητα Μη-Ανταποκρινόμενων Παραθύρων"
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr "Φωτεινότητα (σε %) των μη-ανταποκρινόμενων παραθύρων"
 
 msgid "Unresponsive Window Saturation"
 msgstr "Κορεσμός Μή-Ανταποκρινόμενων Παραθύρων"
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr "Κορεσμός (σε %) των μη-ανταποκρινόμενων παραθύρων"
 
@@ -1839,6 +1857,11 @@ msgstr "Μετακίνηση Παραθύρου"
 msgid "Move window"
 msgstr "Μετακίνηση παραθύρου"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Γενικές Επιλογές"
+
 msgid "Initiate Window Move"
 msgstr "Έναρξη Μετακίνησης Παραθύρου"
 
@@ -1871,6 +1894,76 @@ msgid "Do not update the server-side position of windows until finished moving"
 msgstr ""
 "Μην ενημερώνεις την θέση των παραθύρων στoν server μέχρι το τέλος της "
 "μετακίνησης"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Κλιμάκωση παραθύρων"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Μετακίνηση πλάνου κάτω"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Περιστροφή Γύρισμα Δεξιά"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Χρόνος Γυρίσματος"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Ταχύτητα κλιμάκωσης"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Χρώμα Σκιάς"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Παράθυρα με σκιά"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Απόρριψη ακτίνας σκιάς"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 msgid "Opacity, Brightness and Saturation"
 msgstr "Αδιαφάνεια, Φωτεινότητα και Κορεσμός "
@@ -1932,7 +2025,9 @@ msgstr "Βήμα"
 msgid "Opacity Step"
 msgstr "Βήμα Αδιαφάνειας"
 
-msgid "Window specific settings"
+#, fuzzy
+#| msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Συγκεκριμένες ρυθμίσεις παραθύρου"
 
 msgid "Windows"
@@ -2714,6 +2809,13 @@ msgstr "Ταχύτητα επιλογέα"
 msgid "Switcher timestep"
 msgstr "Χρονικό βήμα επιλογέα"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Μορφοποίηση Περίγράμματος"
+
 msgid "Switcher windows"
 msgstr "Επιλογέας παραθύρων"
 
@@ -2742,6 +2844,12 @@ msgstr "Εικονίδιο"
 
 msgid "Show icon next to thumbnail"
 msgstr "Εμφάνιση εικονιδίου δίπλα στη μικρογραφία"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Ελαχιστοποιημένο"
@@ -2790,7 +2898,6 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Προηγούμενο Σλάιντ"
 
-#, no-c-format
 msgid "Size of the preview in %"
 msgstr ""
 
@@ -3221,6 +3328,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Εστίαση προστατευμένων παραθύρων"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Αριθμός Επιφανειών Εργασίας"

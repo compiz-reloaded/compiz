@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: compiz\n"
 "Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
-"POT-Creation-Date: 2017-05-04 19:43+0300\n"
+"POT-Creation-Date: 2020-06-23 03:39+0200\n"
 "PO-Revision-Date: 2008-05-17 10:28+0200\n"
 "Last-Translator: Brusnica P <pepino@pobox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -973,6 +973,14 @@ msgstr "Klávesové skratky, ktoré spustia príkaz identifikovaný ako command2
 msgid "General Options"
 msgstr "Všeobecné nastavenia"
 
+msgid "Work any time (even when screen is locked)"
+msgstr ""
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+
 msgid "General compiz options"
 msgstr "Všeobecné nastavenia Compiz"
 
@@ -1051,7 +1059,9 @@ msgstr "Najlepšie"
 msgid "Focus &amp; Raise Behavior"
 msgstr ""
 
-msgid "Click To Focus"
+#, fuzzy
+#| msgid "Click To Focus"
+msgid "Click to Focus"
 msgstr "Zamerať kliknutím"
 
 msgid "Click on window moves input focus to it"
@@ -1217,14 +1227,18 @@ msgstr "Výstupy"
 msgid "List of strings describing output devices"
 msgstr "Zoznam reťazcov popisujúcich výstupné zariadenia"
 
-msgid "Sync To VBlank"
+#, fuzzy
+#| msgid "Sync To VBlank"
+msgid "Sync to VBlank"
 msgstr "Synchronizovať pri VBlank"
 
 msgid "Only perform screen updates during vertical blanking period"
 msgstr ""
 "Vykonávať aktualizácie obrazovky počas intervalu vertikálneho zatemnenia"
 
-msgid "Focus Prevention Level"
+#, fuzzy
+#| msgid "Focus Prevention Level"
+msgid "Focus-Stealing Prevention Level"
 msgstr "Predchádzať ukradnutiu aktivity"
 
 msgid "Level of focus stealing prevention"
@@ -1245,11 +1259,13 @@ msgstr "Vysoké"
 msgid "Very High"
 msgstr "Veľmi vysoké"
 
-msgid "Focus Prevention Windows"
+#, fuzzy
+#| msgid "Focus Prevention Windows"
+msgid "Focus-Stealing Prevention Windows"
 msgstr "Predchádzať zameraniu okien"
 
-msgid "Focus prevention windows"
-msgstr "Predchádzať zameraniu okien"
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr ""
 
 msgid "Unredirect Fullscreen Windows"
 msgstr "Nepresmerovať okná v celoobrazovkovom režime"
@@ -1266,7 +1282,9 @@ msgstr "Východzia ikona"
 msgid "Default window icon image"
 msgstr "Východzí obrázok ikony okna"
 
-msgid "Force independent output painting."
+#, fuzzy
+#| msgid "Force independent output painting."
+msgid "Force independent output painting"
 msgstr "Vynútenie vykreslenia nezávislého výstupu"
 
 msgid "Paint each output device independly, even if the output devices overlap"
@@ -1277,7 +1295,9 @@ msgstr ""
 msgid "Texture Compression"
 msgstr "Kompersia textúr"
 
-msgid "If available use compression for textures converted from images"
+#, fuzzy
+#| msgid "If available use compression for textures converted from images"
+msgid "If available, use compression for textures converted from images"
 msgstr "Ak sa dá, použiť kompresiu textúr, ktoré boli konvertované z obrázkov."
 
 msgid "Desktop Cube"
@@ -1580,14 +1600,12 @@ msgstr ""
 msgid "Unresponsive Window Brightness"
 msgstr ""
 
-#, no-c-format
 msgid "Brightness (in %) of unresponsive windows"
 msgstr ""
 
 msgid "Unresponsive Window Saturation"
 msgstr ""
 
-#, no-c-format
 msgid "Saturation (in %) of unresponsive windows"
 msgstr ""
 
@@ -1691,6 +1709,11 @@ msgstr "Presunúť okno"
 msgid "Move window"
 msgstr "Presunúť okno"
 
+#, fuzzy
+#| msgid "General Options"
+msgid "General"
+msgstr "Všeobecné nastavenia"
+
 msgid "Initiate Window Move"
 msgstr "Zahájiť presun okna"
 
@@ -1720,6 +1743,76 @@ msgstr "Lenivé presúvanie"
 
 msgid "Do not update the server-side position of windows until finished moving"
 msgstr "Aktualizovať pozíciu okna až po dokončení presunu"
+
+#, fuzzy
+#| msgid "Scale windows"
+msgid "Off-screen windows"
+msgstr "Meniť mierku okien"
+
+msgid "Enable off-Screen window scrolling"
+msgstr ""
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll down"
+msgstr "Rovina dole"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr ""
+
+msgid "Scroll up"
+msgstr ""
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll right"
+msgstr "Otočiť preklopením vpravo"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+msgid "Scroll left"
+msgstr "Doba preklopenia"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Scale speed"
+msgid "Scrolling speed"
+msgstr "Rýchlosť zmeny mierky"
+
+msgid "Speed of off-screen window scrolling"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow Color"
+msgid "Shadow color"
+msgstr "Farba tieňa"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Shadow windows"
+msgid "Shadow width"
+msgstr "Tieňované okná"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr ""
+
+#, fuzzy
+#| msgid "Drop shadow radius"
+msgid "Enable shadow gradient"
+msgstr "Polomer vrhaného tieňa"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
 
 #, fuzzy
 msgid "Opacity, Brightness and Saturation"
@@ -1789,7 +1882,7 @@ msgid "Opacity Step"
 msgstr "Krok nepriehľadnosti"
 
 #, fuzzy
-msgid "Window specific settings"
+msgid "Window-specific settings"
 msgstr "Dekorácie okna"
 
 #, fuzzy
@@ -2573,6 +2666,13 @@ msgstr "Rýchlosť prepínača"
 msgid "Switcher timestep"
 msgstr "Časový krok prepínača"
 
+msgid "Size multiplier"
+msgstr ""
+
+#, fuzzy
+msgid "Adjusts the size of the switcher windows"
+msgstr "Obrysová zmena veľkosti okien"
+
 msgid "Switcher windows"
 msgstr "Okná prepínača"
 
@@ -2600,6 +2700,12 @@ msgstr "Ikona"
 
 msgid "Show icon next to thumbnail"
 msgstr "Ukázať ikonu vedľa náhľadu"
+
+msgid "Only show icon"
+msgstr ""
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
 
 msgid "Minimized"
 msgstr "Minimalizované"
@@ -2648,7 +2754,7 @@ msgstr ""
 msgid "Preview Scale"
 msgstr "Predchádzajúca snímka"
 
-#, fuzzy, no-c-format
+#, fuzzy
 msgid "Size of the preview in %"
 msgstr "Veľkosť kurzora"
 
@@ -3073,6 +3179,9 @@ msgstr "Compiz"
 
 msgid "Start or restart Compiz"
 msgstr ""
+
+#~ msgid "Focus prevention windows"
+#~ msgstr "Predchádzať zameraniu okien"
 
 #~ msgid "Number of Desktops"
 #~ msgstr "Počet Pracovných plôch"
