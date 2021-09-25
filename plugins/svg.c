@@ -32,7 +32,7 @@
 #include <librsvg/rsvg-cairo.h>
 #endif
 #ifndef LIBRSVG_FEATURES_H
-#include <librsvg/librsvg-features.h>
+#include <librsvg/rsvg-features.h>
 #endif
 
 #include <X11/Xatom.h>
