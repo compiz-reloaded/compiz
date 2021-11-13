@@ -28,12 +28,6 @@
 
 #include <cairo/cairo-xlib.h>
 #include <librsvg/rsvg.h>
-#ifndef RSVG_CAIRO_H
-#include <librsvg/rsvg-cairo.h>
-#endif
-#ifndef LIBRSVG_FEATURES_H
-#include <librsvg/rsvg-features.h>
-#endif
 
 #include <X11/Xatom.h>
 #include <X11/extensions/shape.h>
@@ -1018,10 +1012,6 @@ svgInit (CompPlugin *p)
 	return FALSE;
     }
 
-#if !LIBRSVG_CHECK_VERSION (2, 36, 0)
-    rsvg_init ();
-#endif
-
     compAddMetadataFromFile (&svgMetadata, p->vTable->name);
 
     return TRUE;
@@ -1032,10 +1022,6 @@ svgFini (CompPlugin *p)
 {
     freeDisplayPrivateIndex (displayPrivateIndex);
     compFiniMetadata (&svgMetadata);
-
-#if !LIBRSVG_CHECK_VERSION (2, 36, 0)
-    rsvg_term ();
-#endif
 }
 
 static CompMetadata *

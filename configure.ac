@@ -293,7 +293,7 @@ AC_ARG_ENABLE(librsvg,
   [use_librsvg=$enableval], [use_librsvg=yes])
 
 if test "x$use_librsvg" = "xyes"; then
-  PKG_CHECK_MODULES(LIBRSVG, [cairo >= 1.0 librsvg-2.0 >= 2.14.0], [use_librsvg=yes], [use_librsvg=no])
+  PKG_CHECK_MODULES(LIBRSVG, [cairo >= 1.0 librsvg-2.0 >= 2.36.2], [use_librsvg=yes], [use_librsvg=no])
 fi
 
 AM_CONDITIONAL(USE_LIBRSVG, test "x$use_librsvg" = "xyes")
