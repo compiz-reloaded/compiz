@@ -5510,9 +5510,10 @@ getWindowIcon (CompWindow *w,
 	unsigned long n, left;
 	unsigned char *data;
 
+	/* GTK will fill up to 262144 items, so read up to this amount */
 	result = XGetWindowProperty (w->screen->display->display, w->id,
 				     w->screen->display->wmIconAtom,
-				     0L, 65536L,
+				     0L, 262144L,
 				     FALSE, XA_CARDINAL,
 				     &actual, &format, &n,
 				     &left, &data);
