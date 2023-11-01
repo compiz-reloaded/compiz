@@ -1,0 +1,3109 @@
+# Georgian translation for compiz.
+# Copyright (C) 2023 gitlab.com/compiz
+# This file is distributed under the same license as the compiz package.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: compiz 0.8.18\n"
+"Report-Msgid-Bugs-To: https://gitlab.com/compiz/compiz-core/issues\n"
+"POT-Creation-Date: 2023-02-16 10:27+0100\n"
+"PO-Revision-Date: 2023-11-01 14:19+0100\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+msgid "Close Window"
+msgstr "ფანჯრის დახურვა"
+
+msgid "Unmaximize Window"
+msgstr "ფანჯრის გაშლის გაუქმება"
+
+msgid "Maximize Window"
+msgstr "ფანჯრის გადიდება"
+
+msgid "Minimize Window"
+msgstr "ფანჯრის ჩაკეცვა"
+
+msgid "Window Menu"
+msgstr "ფანჯრის მენიუ"
+
+msgid "Shade"
+msgstr "დაჩრდილვა"
+
+msgid "Make Above"
+msgstr "ყველაზე ზემოთ ატანა"
+
+msgid "Stick"
+msgstr "დაწებება"
+
+msgid "Unshade"
+msgstr "განჩრდილვა"
+
+msgid "Unmake Above"
+msgstr "ყველაზე ზემოთ ატანის გაუქმება"
+
+msgid "Unstick"
+msgstr "მოხსნა"
+
+#, c-format
+msgid "The window \"%s\" is not responding."
+msgstr "ფანჯარა \"%s\" არ პასუხობს."
+
+msgid ""
+"Forcing this application to quit will cause you to lose any unsaved changes."
+msgstr ""
+"აპლიკაციიდან იძულებითი გასვლა თქვენი ყველა შეუნახავი ცვლილების დაკარგვას "
+"გამოიწვევს."
+
+msgid "_Cancel"
+msgstr "_შეწყვეტა"
+
+msgid "_Force Quit"
+msgstr "_ძალით გასვლა"
+
+msgid "Annotate"
+msgstr "ანოტაცია"
+
+msgid "Annotate plugin"
+msgstr "ანოტაციის დამატება"
+
+msgid "Initiate Free Draw"
+msgstr "თავისუფალი ხატვის წამოწყება"
+
+msgid "Initiate freehand drawing"
+msgstr "ხელით ხატვის წამოწყება"
+
+msgid "Initiate Line"
+msgstr "ხაზის წამოწყება"
+
+msgid "Initiate line drawing"
+msgstr "ხაზის ხატვის წამოწყება"
+
+msgid "Initiate Rectangle"
+msgstr "მართკუთხედის წამოწყება"
+
+msgid "Initiate rectangle drawing"
+msgstr "მართკუთხედის ხაზვის წამოწყება"
+
+msgid "Initiate Ellipse"
+msgstr "ოვალის წამოწყება"
+
+msgid "Initiate ellipse drawing"
+msgstr "ოვალის ხაზვის წამოწყება"
+
+msgid "Draw"
+msgstr "ხატვა"
+
+msgid "Draw using tool"
+msgstr "ხელსაწყოთი დახატვა"
+
+msgid "Initiate erase"
+msgstr "წაშლის წამოწყება"
+
+msgid "Initiate annotate erasing"
+msgstr "ანოტაციის წაშლის წამოწყება"
+
+msgid "Clear"
+msgstr "სუფთა ცა"
+
+msgid "Toggle center shape"
+msgstr "ცენტრის მოხაზულობის გადართვა"
+
+msgid ""
+"Toggle whether the current shape is drawn using the center of your initial "
+"click"
+msgstr ""
+"გადართვა, მიმდინარე მოხაზულობა დაიხატება თუ არა თქვენი საწყისი წკაპის ცენტრით"
+
+msgid "Annotate Fill Color"
+msgstr "ანოტაციის ფონის ფერი"
+
+msgid "Fill color for annotations"
+msgstr "ფონის ფერი ანოტაციებისთვის"
+
+msgid "Annotate Stroke Color"
+msgstr "ანოტაციის ნაკვთის ფერი"
+
+msgid "Stroke color for annotations"
+msgstr "ნაკვთების ფერი ანოტაციებისთვის"
+
+msgid "Stroke width"
+msgstr "კონტურის სისქე"
+
+msgid "Stroke width for annotations"
+msgstr "ნაკვთის სიგანე ანოტაციებისთვის"
+
+msgid "Blur Windows"
+msgstr "ფანჯრების გაბუნდოვნება"
+
+msgid "Blur windows"
+msgstr "ფანჯრების გაბუნდოვნება"
+
+msgid "Pulse"
+msgstr "პულსი"
+
+msgid "Pulse effect"
+msgstr "პულსის ეფექტი"
+
+msgid "Blur Speed"
+msgstr "ბუნდოვნების სიჩქარე"
+
+msgid "Window blur speed"
+msgstr "ფანჯრის ბუნდოვნების სიჩქარე"
+
+msgid "Focus blur windows"
+msgstr "აქტიური ფანჯრების ბუნდოვნება"
+
+msgid "Windows that should be affected by focus blur"
+msgstr "ფანჯრები, რომელზეც ფოკუსის ბუნდოვნება იმოქმედებს"
+
+msgid "Focus Blur"
+msgstr "აქტიურის ბუნდოვნება"
+
+msgid "Blur windows that doesn't have focus"
+msgstr "ბუნდოვნება ფანჯრებისა, რომლებსაც ფოკუსი არ აქვთ"
+
+msgid "Alpha blur windows"
+msgstr "ფანჯრების ალფა ბუნდოვნება"
+
+msgid "Windows that should be use alpha blur by default"
+msgstr "ფანჯრები, რომლებმაც ალფას ბუნდოვნება ნაგულისხმევად უნდა გამოიყენონ"
+
+msgid "Alpha Blur"
+msgstr "ალფა ბუნდოვნება"
+
+msgid "Blur behind translucent parts of windows"
+msgstr "ბუნდოვნება ფანჯრების ნახევრადგამჭვირვალე ნაწილებს მიღმა"
+
+msgid "Blur Filter"
+msgstr "ბუნდოვნების ფილტრი"
+
+msgid "Filter method used for blurring"
+msgstr "ბუნდოვნებისთვის გამოყენებული ფილტრის მეთოდი"
+
+msgid "4xBilinear"
+msgstr "4xბილინეარული"
+
+msgid "Gaussian"
+msgstr "გაუსის"
+
+msgid "Mipmap"
+msgstr "მიპმეპინგი"
+
+msgid "Gaussian Radius"
+msgstr "გაუსისეული რადიუსი"
+
+msgid "Gaussian radius"
+msgstr "გაუსის რადიუსი"
+
+msgid "Gaussian Strength"
+msgstr "გაუსისეული სიძლიერე"
+
+msgid "Gaussian strength"
+msgstr "გაუსისეული სიძლიერე"
+
+msgid "Mipmap LOD"
+msgstr "მიპმეპინგის დეტალიზაციის დონე"
+
+msgid "Mipmap level-of-detail"
+msgstr "მიპმეპინგის დეტალიზაციის დონე"
+
+msgid "Blur Saturation"
+msgstr "ბუნდოვნების გაჯერება"
+
+msgid "Blur saturation"
+msgstr "ბუნდოვნების გაჯერება"
+
+msgid "Blur Occlusion"
+msgstr "ბუნდოვნების ოკლუზია"
+
+msgid "Disable blurring of screen regions obscured by other windows."
+msgstr "სხვა ფანჯრების მიერ დამალული ეკრანის ადგილების ბუნდოვნების გამორთვა."
+
+msgid "Independent texture fetch"
+msgstr "დამოუკიდებელი ტექსტურის გამოთხოვა"
+
+msgid ""
+"Use the available texture units to do as many as possible independent "
+"texture fetches."
+msgstr ""
+"ხელმისაწვდომი ტექსტურის ერთეულების გამოყენება მაქსიმალური შესაძლო "
+"დამოუკიდებელი ტექსტურის გამოთხოვებისთვის."
+
+msgid "Clone Output"
+msgstr "გამოტანის კლონირება"
+
+msgid "Output clone handler"
+msgstr "გამოტანის კლონირების დამმუშავებელი"
+
+msgid "Initiate"
+msgstr "წამოწყება"
+
+msgid "Initiate clone selection"
+msgstr "კლონის მონიშვნის წამოწყება"
+
+msgid "Commands"
+msgstr "ბრძანებები"
+
+msgid "Assigns bindings to arbitrary commands"
+msgstr "მიბმების მინიჭება ბრძანებების შესასრულებლად"
+
+msgid "Command line 0"
+msgstr "ბრძანების სტრიქონი 0"
+
+msgid "Command line to be executed in shell when run_command0 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command0"
+
+msgid "Command line 1"
+msgstr "ბრძანების სტრიქონი 1"
+
+msgid "Command line to be executed in shell when run_command1 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command1"
+
+msgid "Command line 2"
+msgstr "ბრძანების სტრიქონი 2"
+
+msgid "Command line to be executed in shell when run_command2 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command2"
+
+msgid "Command line 3"
+msgstr "ბრძანების სტრიქონი 3"
+
+msgid "Command line to be executed in shell when run_command3 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command3"
+
+msgid "Command line 4"
+msgstr "ბრძანების სტრიქონი 4"
+
+msgid "Command line to be executed in shell when run_command4 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command4"
+
+msgid "Command line 5"
+msgstr "ბრძანების სტრიქონი 5"
+
+msgid "Command line to be executed in shell when run_command5 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command5"
+
+msgid "Command line 6"
+msgstr "ბრძანების სტრიქონი 6"
+
+msgid "Command line to be executed in shell when run_command6 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command6"
+
+msgid "Command line 7"
+msgstr "ბრძანების სტრიქონი 7"
+
+msgid "Command line to be executed in shell when run_command7 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command7"
+
+msgid "Command line 8"
+msgstr "ბრძანების სტრიქონი 7"
+
+msgid "Command line to be executed in shell when run_command8 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command8"
+
+msgid "Command line 9"
+msgstr "ბრძანების სტრიქონი 9"
+
+msgid "Command line to be executed in shell when run_command9 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command9"
+
+msgid "Command line 10"
+msgstr "ბრძანების სტრიქონი 10"
+
+msgid "Command line to be executed in shell when run_command10 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command10"
+
+msgid "Command line 11"
+msgstr "ბრძანების სტრიქონი 11"
+
+msgid "Command line to be executed in shell when run_command11 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command11"
+
+msgid "Command line 12"
+msgstr "ბრძანების სტრიქონი 12"
+
+msgid "Command line to be executed in shell when run_command12 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command12"
+
+msgid "Command line 13"
+msgstr "ბრძანების სტრიქონი 13"
+
+msgid "Command line to be executed in shell when run_command13 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command13"
+
+msgid "Command line 14"
+msgstr "ბრძანების სტრიქონი 14"
+
+msgid "Command line to be executed in shell when run_command14 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command14"
+
+msgid "Command line 15"
+msgstr "ბრძანების სტრიქონი 15"
+
+msgid "Command line to be executed in shell when run_command15 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command15"
+
+msgid "Command line 16"
+msgstr "ბრძანების სტრიქონი 16"
+
+msgid "Command line to be executed in shell when run_command16 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command16"
+
+msgid "Command line 17"
+msgstr "ბრძანების სტრიქონი 17"
+
+msgid "Command line to be executed in shell when run_command17 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command17"
+
+msgid "Command line 18"
+msgstr "ბრძანების სტრიქონი 18"
+
+msgid "Command line to be executed in shell when run_command18 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command18"
+
+msgid "Command line 19"
+msgstr "ბრძანების სტრიქონი 19"
+
+msgid "Command line to be executed in shell when run_command19 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command19"
+
+msgid "Command line 20"
+msgstr "ბრძანების სტრიქონი 20"
+
+msgid "Command line to be executed in shell when run_command20 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command20"
+
+msgid "Command line 21"
+msgstr "ბრძანების სტრიქონი 21"
+
+msgid "Command line to be executed in shell when run_command21 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command21"
+
+msgid "Command line 22"
+msgstr "ბრძანების სტრიქონი 22"
+
+msgid "Command line to be executed in shell when run_command22 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command22"
+
+msgid "Command line 23"
+msgstr "ბრძანების სტრიქონი 23"
+
+msgid "Command line to be executed in shell when run_command23 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command23"
+
+msgid "Command line 24"
+msgstr "ბრძანების სტრიქონი 24"
+
+msgid "Command line to be executed in shell when run_command24 is invoked"
+msgstr "ბრძანება, რომელიც გაეშვება გარსში, როცა გადაცემულია run_command24"
+
+msgid "Key Bindings"
+msgstr "კლავიატურის ბმები"
+
+msgid "Run command 0"
+msgstr "ბრძანების გაშვება 0"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command0"
+
+msgid "Run command 1"
+msgstr "ბრძანების გაშვება 1"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command1"
+
+msgid "Run command 2"
+msgstr "ბრძანების გაშვება 2"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command2"
+
+msgid "Run command 3"
+msgstr "ბრძანების გაშვება 3"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command3"
+
+msgid "Run command 4"
+msgstr "ბრძანების გაშვება 4"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command4"
+
+msgid "Run command 5"
+msgstr "ბრძანების გაშვება 5"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command5"
+
+msgid "Run command 6"
+msgstr "ბრძანების გაშვება 6"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command6"
+
+msgid "Run command 7"
+msgstr "ბრძანების გაშვება 7"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command7"
+
+msgid "Run command 8"
+msgstr "ბრძანების გაშვება 8"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command8"
+
+msgid "Run command 9"
+msgstr "ბრძანების გაშვება 9"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command9"
+
+msgid "Run command 10"
+msgstr "ბრძანების გაშვება 10"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command10"
+
+msgid "Run command 11"
+msgstr "ბრძანების გაშვება 11"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command11"
+
+msgid "Run command 12"
+msgstr "ბრძანების გაშვება 12"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command12"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command12"
+
+msgid "Run command 13"
+msgstr "ბრძანების გაშვება 13"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command13"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command13"
+
+msgid "Run command 14"
+msgstr "ბრძანების გაშვება 14"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command14"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command14"
+
+msgid "Run command 15"
+msgstr "ბრძანების გაშვება 15"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command15"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command15"
+
+msgid "Run command 16"
+msgstr "ბრძანების გაშვება 16"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command16"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command16"
+
+msgid "Run command 17"
+msgstr "ბრძანების გაშვება 17"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command17"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command17"
+
+msgid "Run command 18"
+msgstr "ბრძანების გაშვება 18"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command18"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command18"
+
+msgid "Run command 19"
+msgstr "ბრძანების გაშვება 19"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command19"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command19"
+
+msgid "Run command 20"
+msgstr "ბრძანების გაშვება 20"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command20"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command20"
+
+msgid "Run command 21"
+msgstr "ბრძანების გაშვება 21"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command21"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command21"
+
+msgid "Run command 22"
+msgstr "ბრძანების გაშვება 22"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command22"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command22"
+
+msgid "Run command 23"
+msgstr "ბრძანების გაშვება 23"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command23"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command23"
+
+msgid "Run command 24"
+msgstr "ბრძანების გაშვება 24"
+
+msgid ""
+"A keybinding that when invoked, will run the shell command identified by "
+"command24"
+msgstr ""
+"ღილაკების კომბინაცია, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია "
+"სტრიქონით command24"
+
+msgid "Button Bindings"
+msgstr "ღილაკის მიბმები"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command0"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command1"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command2"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command3"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command4"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command5"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command6"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command7"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command8"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command9"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command10"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command11"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command12"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command12"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command13"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command13"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command14"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command14"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command15"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command15"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command16"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command16"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command17"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command17"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command18"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command18"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command19"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command19"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command20"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command20"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command21"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command21"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command22"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command22"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command23"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command23"
+
+msgid ""
+"A button binding that when invoked, will run the shell command identified by "
+"command24"
+msgstr ""
+"ღილაკი, რომელიც გარსში გაუშვებს ბრძანებას, რომელიც მითითებულია სტრიქონით "
+"command24"
+
+msgid "Edge Bindings"
+msgstr "წიბოს მიბმები"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command0"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command0"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command1"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command1"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command2"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command2"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command3"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command3"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command4"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command4"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command5"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command5"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command6"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command6"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command7"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command7"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command8"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command8"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command9"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command9"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command10"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command10"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command11"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command11"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command12"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command12"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command13"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command13"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command14"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command14"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command15"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command15"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command16"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command16"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command17"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command17"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command18"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command18"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command19"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command19"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command20"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command20"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command21"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command21"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command22"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command22"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command23"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command23"
+
+msgid ""
+"An edge binding that when invoked, will run the shell command identified by "
+"command24"
+msgstr ""
+"წიბოს მიმაგრება, რომელიც, როცა ჩაწოდებულია, გაუშვებს გარსის ბრძანება, "
+"რომელიც იდენტიფიცირდება ბრძანებით command24"
+
+msgid "General Options"
+msgstr "ზოგადი პარამეტრები"
+
+msgid "Work any time (even when screen is locked)"
+msgstr "ყოველთვის მუშაობა (მაშინაც კი, როცა ეკრანი დაბლოკილია)"
+
+msgid ""
+"When checked, commands work at any time, even when a menu is open or screen "
+"is locked. Could be a security risk."
+msgstr ""
+"თუ ჩართულია, ბრძანებები ყოველთვის იმუშავებს, მაშინაც კი, როცა მენიუ ღიაა, ან "
+"ეკრანი დაბლოკილია. შეიძლება, უსაფრთხოებას პრობლემები შეუქმნას."
+
+msgid "General compiz options"
+msgstr "Compiz-ის ზოგადი პარამეტრები"
+
+msgid "Active Plugins"
+msgstr "აქტიური დამატებები"
+
+msgid "List of currently active plugins"
+msgstr "ამჟამად აქტიური დამატებების სია"
+
+msgid "Audible Bell"
+msgstr "გასაგონი ზარი"
+
+msgid "Audible system beep"
+msgstr "სისტემური ზარი გასაგონია"
+
+msgid "Ignore Hints When Maximized"
+msgstr "მინიშნებების გამოტოვება მთელ ეკრანზე გაშლისას"
+
+msgid "Ignore size increment and aspect hints when window is maximized"
+msgstr ""
+"ფანჯრის მთელ ეკრანზე გადიდებისას ზომის გადიდებისა და ზომების ფარდობის გნორი"
+
+msgid "Hide Skip Taskbar Windows"
+msgstr "ყველას დამალვა ამოცანების პანელის ფანჯრების გარდა"
+
+msgid "Hide windows not in taskbar when entering show desktop mode"
+msgstr ""
+"სამუშაო მაგიდის ჩვენების რეჟიმზე გადასვლისას დაიმალება ფანჯრები, მაგრამ არა "
+"ამოცანების პანელი"
+
+msgid "Edge Trigger Delay"
+msgstr "წიბის ტრიგერის დაყოვნება"
+
+msgid ""
+"Duration the pointer must rest in a screen edge before an edge action is "
+"taken."
+msgstr ""
+"ხანგრძლივობა, რამდენიც კურსორი ეკრანის წიბოსთან უნდა გაჩერდეს, რათა წიბოს "
+"ქმედება გააქტიურდეს."
+
+msgid "Cursor theme"
+msgstr "კურსორის თემა"
+
+msgid "Cursor theme name"
+msgstr "კურსორის თემის სახელი"
+
+msgid "Cursor size"
+msgstr "კურსორის ზომა"
+
+msgid "Size of the cursor"
+msgstr "კურსორის ზომა"
+
+msgid "Ping Delay"
+msgstr "პასუხის დაყოვნება"
+
+msgid "Interval between ping messages"
+msgstr "დრო პასუხის შეტყობინებებს შორის"
+
+msgid "Display Settings"
+msgstr "ეკრანის მორგება"
+
+msgid "Texture Filter"
+msgstr "ტექსტურის ფილტრი"
+
+msgid "Texture filtering"
+msgstr "ტექსტურის გაფილტვრა"
+
+msgid "Fast"
+msgstr "სწრაფი"
+
+msgid "Good"
+msgstr "კარგი"
+
+msgid "Best"
+msgstr "საუკეთესო"
+
+msgid "Focus & Raise Behavior"
+msgstr "ფოკუსი და ამოწევის ქცევა"
+
+msgid "Click to Focus"
+msgstr "წკაპი ფოკუსისთვის"
+
+msgid "Click on window moves input focus to it"
+msgstr "ფანჯარაზე დაწკაპუნება ფოკუსს მასზე გადაიტანს"
+
+msgid "Raise On Click"
+msgstr "ამოწევა დაწკაპუნებისას"
+
+msgid "Raise windows when clicked"
+msgstr "ფანჯრის ამოწევა მასზე დაწკაპუნებისას"
+
+msgid "Auto-Raise"
+msgstr "ავტომატური ამოწევა"
+
+msgid "Raise selected windows after interval"
+msgstr "მონიშნული ფაილის ამოწევა ინტერვალის შემდეგ"
+
+msgid "Auto-Raise Delay"
+msgstr "ავტომატური ამოწევის დაყოვნება"
+
+msgid "Interval before raising selected windows"
+msgstr "ინტერვალი მონიშნული ფანჯრების აწევამდე"
+
+msgid "Key bindings"
+msgstr "კლავიატურის ბმები"
+
+msgid "Close active window"
+msgstr "აქტიური ფანჯრის დახურვა"
+
+msgid "Raise Window"
+msgstr "ფანჯრის ამოწევა"
+
+msgid "Raise window above other windows"
+msgstr "ფანჯრის სხვა ფანჯრებზე ზემოთ აწევა"
+
+msgid "Lower Window"
+msgstr "ფანჯრის ჩაწევა"
+
+msgid "Lower window beneath other windows"
+msgstr "ფანჯრის დაწევა სხვა ფანჯრებს მიღმა"
+
+msgid "Unmaximize active window"
+msgstr "აქტიური ფანჯრის გაშლის გაუქმება"
+
+msgid "Minimize active window"
+msgstr "აქტიური ფანჯრის ჩაკეცვა"
+
+msgid "Maximize active window"
+msgstr "აქტიური ფანჯრის გადიდება"
+
+msgid "Maximize Window Horizontally"
+msgstr "ფანჯრის გადიდება ჰორიზონტალურად"
+
+msgid "Maximize active window horizontally"
+msgstr "აქტიურად ფანჯრის ჰორიზონტალურად გაშლა"
+
+msgid "Maximize Window Vertically"
+msgstr "ფანჯრის გადიდება ვერტიკალურად"
+
+msgid "Maximize active window vertically"
+msgstr "აქტიური ფანჯრის ვერტიკალური გაშლა"
+
+msgid "Window menu button binding"
+msgstr "ფანჯრის მენიუს კლავიატურის მალსახმობი"
+
+msgid "Window menu key binding"
+msgstr "ფანჯრის მენიუს ღილაკის მიბმა"
+
+msgid "Show Desktop"
+msgstr "სამუშაო მაგიდის ჩვენება"
+
+msgid "Hide all windows and focus desktop"
+msgstr "ყველა ფანჯრის დამალვა და ფოკუსი სამუშაო მაგიდაზე"
+
+msgid "Toggle Window Maximized"
+msgstr "ფანჯრის მთელ ეკრანზე გაშლის გადართვა"
+
+msgid "Toggle active window maximized"
+msgstr "აქტიური ფანჯრის მთელ ეკრანზე გაშლის გადართვა"
+
+msgid "Toggle Window Maximized Horizontally"
+msgstr "ფანჯრის ჰორიზონტალურად მთელ ეკრანზე გაშლის გადართვა"
+
+msgid "Toggle active window maximized horizontally"
+msgstr "აქტიურ ფანჯრის ჰორიზონტალურად მთელ ეკრანზე გაშლის გადართვა"
+
+msgid "Toggle Window Maximized Vertically"
+msgstr "ფანჯრის ვერტიკალურად მთელ ეკრანზე გაშლის გადართვა"
+
+msgid "Toggle active window maximized vertically"
+msgstr "აქტიური ფანჯრის ვერტიკალურად მთელ ეკრანზე გაშლის გადართვა"
+
+msgid "Toggle Window Shaded"
+msgstr "ფანჯრის დაჩრდილვის გადართვა"
+
+msgid "Toggle active window shaded"
+msgstr "აქტიური ფანჯრის დაჩრდილვის გადართვა"
+
+msgid "Slow Animations"
+msgstr "ნელი ანიმაციები"
+
+msgid "Toggle use of slow animations"
+msgstr "ნელი ანიმაციების გამოყენების გადართვა"
+
+msgid "Desktop Size"
+msgstr "სამუშაო მაგიდის ზომა"
+
+msgid "Horizontal Virtual Size"
+msgstr "ჰორიზონტალური ვირტუალური ზომა"
+
+msgid "Screen size multiplier for horizontal virtual size"
+msgstr "ეკრანის ზომის მამრავლი ჰორიზონტალური ვირტუალური ზომისთვის"
+
+msgid "Vertical Virtual Size"
+msgstr "ვერტიკალური ვირტუალური ზომა"
+
+msgid "Screen size multiplier for vertical virtual size"
+msgstr "ეკრანის ზომის მამრავლი ვერტიკალური ვირტუალური ზომისთვის"
+
+msgid "Lighting"
+msgstr "გამოკვეთა"
+
+msgid "Use diffuse light when screen is transformed"
+msgstr "ეკრანის გარდაქმნისას სინათლის დიფუზიის გამოყენება"
+
+msgid "Detect Refresh Rate"
+msgstr "განახლების სიხშირის დადგენა"
+
+msgid "Automatic detection of refresh rate"
+msgstr "განახლების სიხშირის ავტომატური დადგენა"
+
+msgid "Refresh Rate"
+msgstr "განახლების სიხშირე"
+
+msgid "The rate at which the screen is redrawn (times/second)"
+msgstr "სიხშირე, რომლითაც ეკრანის გადახატვა ხდება (რამდენჯერ/წამში)"
+
+msgid "Detect Outputs"
+msgstr "გამოტანების აღმოჩენა"
+
+msgid "Automatic detection of output devices"
+msgstr "გამოსატანი მოწყობილობების ავტომატური აღმოჩენა"
+
+msgid "Overlapping Output Handling"
+msgstr "გამოტანის ურთიერთგადამფარავი დამმუშავებლები"
+
+msgid "Which one of overlapping output devices should be preferred"
+msgstr "რომელი გადაფარვადი გამოტანის მოწყობილობა იქნება გამოყენებული"
+
+msgid "Smart mode"
+msgstr "ჭკვიანი რეჟიმი"
+
+msgid "Prefer larger output"
+msgstr "მირჩევნია უფრო დიდი გამოტანა"
+
+msgid "Prefer smaller output"
+msgstr "მირჩევნია უფრო პატარა გამოტანა"
+
+msgid "Outputs"
+msgstr "გამოტანა"
+
+msgid "List of strings describing output devices"
+msgstr "გამოტანის მოწყობილობების აღწერის სტრიქონების სია"
+
+msgid "Sync to VBlank"
+msgstr "სინქრონიზაცია VBlank-ზე"
+
+msgid "Only perform screen updates during vertical blanking period"
+msgstr "ეკრანის, მხოლოდ, ვერტიკალური გასუფთავების დროს განახლება"
+
+msgid "Focus-Stealing Prevention Level"
+msgstr "ფოკუსის მოპარვის თავიდან აცილების დონე"
+
+msgid "Level of focus stealing prevention"
+msgstr "ფოკუსის მოპარვის თავიდან აცილების დონე"
+
+msgid "Off"
+msgstr "გამორთულია"
+
+msgid "Low"
+msgstr "დაბალი"
+
+msgid "Normal"
+msgstr "ჩვეულებრივი"
+
+msgid "High"
+msgstr "მაღალი"
+
+msgid "Very High"
+msgstr "ძალიან მაღალი"
+
+msgid "Focus-Stealing Prevention Windows"
+msgstr "ფოკუსის მოპარვის აცილება"
+
+msgid "Windows to prevent grabbing keyboard focus"
+msgstr "ფანჯრები, რომლებსაც კლავიატურის ფოკუსის მოპარვა არ შეეძლებათ"
+
+msgid "Unredirect Fullscreen Windows"
+msgstr "ფანჯრების გადამისამართების გაუქმება სრული ეკრანის ფანჯრებზე"
+
+msgid ""
+"Allow drawing of fullscreen windows to not be redirected to offscreen pixmaps"
+msgstr ""
+"სრულ ეკრანზე გაშლილი ფანჯრების დახატვის ეკრანსგარე პიქსელის რუკებზე "
+"გადამისამართების აკრძალვის დაშვება"
+
+msgid "Default Icon"
+msgstr "ნაგულისხმები ხატულა"
+
+msgid "Default window icon image"
+msgstr "ნაგულისხმევი ფანჯრის ხატულის გამოსახულება"
+
+msgid "Force independent output painting"
+msgstr "ნაძალადევი დამოუკიდებელი გამოტანის დახატვა"
+
+msgid "Paint each output device independly, even if the output devices overlap"
+msgstr ""
+"თითოეული გამოტანის მოწყობილობა ცალ-ცალკე დაიხატება მაშინაც კი, როცა ის სხვა "
+"მოწყობილობას გადაფარავს"
+
+msgid "Texture Compression"
+msgstr "ტექსტურის შეკუმშვა"
+
+msgid "If available, use compression for textures converted from images"
+msgstr ""
+"თუ ხელმისაწვდომია, შეკუმშვის გამოყენება გამოსახულებებიდან გარდაქმნილი "
+"ტექსტურებისთვის"
+
+msgid "Desktop Cube"
+msgstr "სამუშაო მაგიდის კუბი"
+
+msgid "Place windows on cube"
+msgstr "ფანჯრების მოთავსება კუბზე"
+
+msgid "Unfold"
+msgstr "გაკეცვის გაუქმება"
+
+msgid "Unfold cube"
+msgstr "კუბის გაშლა"
+
+msgid "Next Slide"
+msgstr "შემდეგი სლაიდი"
+
+msgid "Advance to next slide"
+msgstr "შემდეგ სლაიდზე გადასვლა"
+
+msgid "Prev Slide"
+msgstr "წინა სლაიდი"
+
+msgid "Go back to previous slide"
+msgstr "წინა სლაიდზე დაბრუნება"
+
+msgid "Generate mipmaps when possible for higher quality scaling"
+msgstr ""
+"მიპმაპების შექმნა, როცა შესაძლებელია, უფრო მაღალი ხარისხის გადიდებისთვის"
+
+msgid "Multi Output Mode"
+msgstr "მრავალგამოტანიანი რეჟიმი"
+
+msgid "Selects how the cube is displayed if multiple output devices are used."
+msgstr ""
+"აირჩიეთ, როგორ გამოჩნდება კუბი, თუ გამოიყენება ერთზე მეტი გამოტანის "
+"მოწყობილობა."
+
+msgid "Automatic"
+msgstr "ავტომატური"
+
+msgid "Multiple cubes"
+msgstr "ბევრი კუბი"
+
+msgid "One big cube"
+msgstr "ერთი დიდი კუბი"
+
+msgid "Behavior"
+msgstr "ქცევა"
+
+msgid "Inside Cube"
+msgstr "კუბის შიგნით"
+
+msgid "Inside cube"
+msgstr "კუბის შიგნით"
+
+msgid "Acceleration"
+msgstr "აპარატურული აჩქარება"
+
+msgid "Fold Acceleration"
+msgstr "მოკეცვის აჩქარება"
+
+msgid "Speed"
+msgstr "სიჩქარე"
+
+msgid "Fold Speed"
+msgstr "მოკეცვის სიჩქარე"
+
+msgid "Timestep"
+msgstr "დროის ნაბიჯი"
+
+msgid "Fold Timestep"
+msgstr "მოკეცვის დროის ნაბიჯი"
+
+msgid "Appearance"
+msgstr "გარემოს იერსახე"
+
+msgid "Cube Color"
+msgstr "კუბის ფერი"
+
+msgid "Color of top and bottom sides of the cube"
+msgstr "კუბის ზედა და ქვედა მხრების ფერი"
+
+msgid "Cube Caps"
+msgstr "კუბის ქუდი"
+
+msgid "Scale image"
+msgstr "გამოსახულების მასშტაბირება"
+
+msgid "Scale images to cover top face of cube"
+msgstr "გამოსახულებების მასშტაბირება, რათა მათ კუბის ზედა მხარე დაფარონ"
+
+msgid "Image files"
+msgstr "ასლის ფალები"
+
+msgid "List of PNG and SVG files that should be rendered on top face of cube"
+msgstr ""
+"PNG და SVG ფაილების ჩამონათვალი, რომლებიც კუბის ზედა მხარეს დარენდერდება"
+
+msgid "Adjust Image"
+msgstr "გამოსახულების მორგება"
+
+msgid "Adjust top face image to rotation"
+msgstr "ზედა ზედაპირის გამოსახულების სწორება ტრალთან"
+
+msgid "Skydome"
+msgstr "ფონი"
+
+msgid "Render skydome"
+msgstr "ფონის რენდერი"
+
+msgid "Skydome Image"
+msgstr "ფონის სურათი"
+
+msgid "Image to use as texture for the skydome"
+msgstr "გამოსახულება, რომელიც ფონის ტექსტურად გამოიყენება"
+
+msgid "Animate Skydome"
+msgstr "ფონის ანიმაცია"
+
+msgid "Animate skydome when rotating cube"
+msgstr "ფონის ანიმაცია კუბის ბრუნვისას"
+
+msgid "Skydome Gradient Start Color"
+msgstr "ფონის გრადიენტის საწყისი ფერი"
+
+msgid "Color to use for the top color-stop of the skydome-fallback gradient"
+msgstr ""
+"ფერი, რომელიც გამოიყენება ფონის გადართვის გრადიენტის ზედა ფერის-შეჩერებისთვის"
+
+msgid "Skydome Gradient End Color"
+msgstr "ფონის გრადიენტის საბოლოო ფერი"
+
+msgid "Color to use for the bottom color-stop of the skydome-fallback gradient"
+msgstr ""
+"ფერი, რომელიც გამოიყენება ფონის გადართვის გრადიენტის ქვედა ფერის-"
+"შეჩერებისთვის"
+
+msgid "Transparent Cube"
+msgstr "გამჭვირვალე კუბი"
+
+msgid "Opacity During Rotation"
+msgstr "გაუმჭვირვალობა ბრუნვისას"
+
+msgid "Opacity of desktop window during rotation."
+msgstr "სამუშაო მაგიდის ფანჯრის გაუმჭვირვალობა მისი ბრუნვისას."
+
+msgid "Opacity When Not Rotating"
+msgstr "გაუმჭვირვალობა, როცა ბრუნვა არ ხდება"
+
+msgid "Opacity of desktop window when not rotating."
+msgstr "სამუშაო მაგიდის ფანჯრის გაუმჭვირვალობა, როცა ის არ ბრუნავს."
+
+msgid "Transparency Only on Mouse Rotate"
+msgstr "გამჭვირვალობა, მხოლოდ, თაგუნათი მობრუნებისას"
+
+msgid "Initiates Cube transparency only if rotation is mouse driven."
+msgstr "კუბის გამჭვირვალობა, მხოლოდ, თუ ბრუნვა თაგუნათი ხდება."
+
+msgid "D-Bus"
+msgstr "D-Bus"
+
+msgid "D-Bus Control Backend"
+msgstr "D-Bus-ის კონტროლის უკანაბოლო"
+
+msgid "Window Decoration"
+msgstr "ფანჯრის დეკორაცია"
+
+msgid "Window decorations"
+msgstr "ფანჯრის დეკორაციები"
+
+msgid "Shadow Radius"
+msgstr "ჩრდილის რადიუსი"
+
+msgid "Drop shadow radius"
+msgstr "ჩრდილის დაცემის რადიუსი"
+
+msgid "Shadow Opacity"
+msgstr "ჩრდილის გაუმჭვირვალობა"
+
+msgid "Drop shadow opacity"
+msgstr "ჩრდილის დაცემის გაუმჭვირვალობა"
+
+msgid "Shadow Color"
+msgstr "ჩრდილის ფერი"
+
+msgid "Drop shadow color"
+msgstr "ჩრდილის დაცემის ფერი"
+
+msgid "Shadow Offset X"
+msgstr "ჩრდილის წანაცვლების X"
+
+msgid "Drop shadow X offset"
+msgstr "ჩრდილის დაცემის წანაცვლების X"
+
+msgid "Shadow Offset Y"
+msgstr "ჩრდილის წანაცვლების Y"
+
+msgid "Drop shadow Y offset"
+msgstr "ჩრდილის დაცემის წანაცვლების Y"
+
+msgid "Command"
+msgstr "ბრძანება"
+
+msgid ""
+"Decorator command line that is executed if no decorator is already running"
+msgstr ""
+"დეკორატორის ბრძანების სტრიქონი, მხოლოდ, მაშინ შესრულდება, თუ დეკორატორი "
+"გაშვებული არაა"
+
+msgid "Allow mipmaps to be generated for decoration textures"
+msgstr "დეკორაციის ტექსტურებისთვის მიპმეპების გენერირების დაშვება"
+
+msgid "Decoration windows"
+msgstr "ფანჯრების დეკორაცია"
+
+msgid "Windows that should be decorated"
+msgstr "ფანჯრებს დეკორაციები ექნებათ"
+
+msgid "Shadow windows"
+msgstr "ფანჯრის ჩრდილი"
+
+msgid "Windows that should have a shadow"
+msgstr "ფანჯრებს ჩრდილები ექნებათ"
+
+msgid "Fading Windows"
+msgstr "მინავლებადი ფანჯრები"
+
+msgid "Fade in windows when mapped and fade out windows when unmapped"
+msgstr ""
+"ფანჯრების მინავლება, როცა მიმაგრებულია და პირიქით, როცა მიმაგრებას მოხსნით"
+
+msgid "Fade Mode"
+msgstr "მინავლების რეჟიმი"
+
+msgid "Window fade mode"
+msgstr "ფანჯრის მინავლების რეჟიმი"
+
+msgid "Constant speed"
+msgstr "მუდმივი სიჩქარე"
+
+msgid "Constant time"
+msgstr "მუდმივი დრო"
+
+msgid "Fade Speed"
+msgstr "მინავლების სიჩქარე"
+
+msgid "Window fade speed in \"Constant speed\" mode"
+msgstr "ფანჯრის მინავლების სიჩქარე \"მუდმივი სიჩქარის\" რეჟიმში"
+
+msgid "Fade Time"
+msgstr "მინავლების დრო"
+
+msgid "Window fade time (in ms) in \"Constant time\" mode"
+msgstr "ფანჯრის მინავლების დრო (მწმ-ში) \"მუდმივი დროის\" რეჟიმში"
+
+msgid "Fade windows"
+msgstr "ფანჯრების მნავლება"
+
+msgid "Windows that should be fading"
+msgstr "ფანჯრები, რომლების მინავლებაც მოხდება"
+
+msgid "Visual Bell"
+msgstr "ვიზუალური ზარი"
+
+msgid "Fade effect on system beep"
+msgstr "მინავლების ეფექტი სისტემურ პიპინზე"
+
+msgid "Fullscreen Visual Bell"
+msgstr "სრულ ეკრანის ვიზუალური ზარი"
+
+msgid "Fullscreen fade effect on system beep"
+msgstr "სრული ეკრანის მინავლების ეფექტი სისტემურ პიპინზე"
+
+msgid "Fade On Minimize/Open/Close"
+msgstr "მინავლება ჩაკეცვა/გახსნა/დახურვისას"
+
+msgid "Fade effect on minimize/open/close window events"
+msgstr "მინავლების ეფექტი ფანჯრის ჩაკეცვა/გახსნა/დახურვის მოვლენებზე"
+
+msgid "Dim Unresponsive Windows"
+msgstr "ურეაქციო ფანჯრების გაუფერულება"
+
+msgid "Dim windows that are not responding to window manager requests"
+msgstr ""
+"ფანჯრების, რომლების ფანჯრის მმართველის მოთხოვნებს არ პასუხობენ, გაუფერულება"
+
+msgid "Unresponsive Window Brightness"
+msgstr "ურეაქციო ფანჯრის სიკაშკაშე"
+
+msgid "Brightness (in %) of unresponsive windows"
+msgstr "სიკაშკაშე (%-ში) ურეაქციო ფანჯრებისთვის"
+
+msgid "Unresponsive Window Saturation"
+msgstr "ურეაქციო ფანჯრის გაჯერებულობა"
+
+msgid "Saturation (in %) of unresponsive windows"
+msgstr "გაჯერებულობა (%-ში) ურეაქციო ფანჯრებისთვის"
+
+msgid "Userspace File System"
+msgstr "მომხმარებლის ფაილური სისტემა"
+
+msgid "Userspace file system"
+msgstr "მომხმარებლის ფაილური სისტემა"
+
+msgid "Mount Point"
+msgstr "მიმაგრების წერტილი"
+
+msgid "Mount point"
+msgstr "მიმაგრების წერტილი"
+
+msgid "GLib"
+msgstr "GLib"
+
+msgid "GLib main loop support"
+msgstr "GLib-ის მთავარი მარყუჟის მხარდაჭერა"
+
+msgid "MATE Compatibility"
+msgstr "MATE-სთან თავსებადობა"
+
+msgid "Options that keep Compiz compatible to the MATE desktop environment"
+msgstr "პარამეტრები, რომლებიც Compiz-ს MATE სამუშაო მაგიდასთან თავსებადს ხდის"
+
+msgid "Show Main Menu"
+msgstr "მთავარი მენიუს ჩვენება"
+
+msgid "Show the main menu"
+msgstr "მთავარი მენიუს გახსნა"
+
+msgid "Run Dialog"
+msgstr "გაშვების დიალოგი"
+
+msgid "Show Run Application dialog"
+msgstr "აპლიკაციის გაშვების დიალოგის ჩვენება"
+
+msgid "Screenshot command line"
+msgstr "ეკრანის ანაბეჭდის ბრძანების სტრიქონი"
+
+msgid "Take a screenshot"
+msgstr "ეკრანის ანაბეჭდის გადაღება"
+
+msgid "Window screenshot command line"
+msgstr "ფანჯრის ეკრანის ანაბეჭდის ბრძანების სტრიქონი"
+
+msgid "Take a screenshot of a window"
+msgstr "ფანჯრის ანაბეჭდის გადაღება"
+
+msgid "Run terminal command"
+msgstr "ტერმინალის ბრძანების გაშვება"
+
+msgid "Terminal command line"
+msgstr "ტერმინალის ბრძანების სტრიქონი"
+
+msgid "Open a terminal"
+msgstr "ტერმინალის გახსნა"
+
+msgid "Ini"
+msgstr "Ini"
+
+msgid "Ini Flat File Backend"
+msgstr "Ini უბრალო ფაილის უკანაბოლო"
+
+msgid "Inotify"
+msgstr "Inotify"
+
+msgid "File change notification plugin"
+msgstr "ფალის ცვლილების გაფრთხილების დამატება"
+
+msgid "Minimize Effect"
+msgstr "ჩაკეცვის ეფექტი"
+
+msgid "Transform windows when they are minimized and unminimized"
+msgstr "ფანჯრების გარდაქმნა, როცა მათი ჩაკეცვა ან აღდგენა ხდება"
+
+msgid "Minimize speed"
+msgstr "ჩაკეცვის სიჩქარე"
+
+msgid "Minimize timestep"
+msgstr "ჩაკეცვის დროის ბიჯი"
+
+msgid "Minimize Windows"
+msgstr "ფანჯრების ჩაკეცვა"
+
+msgid "Windows that should be transformed when minimized"
+msgstr "ფანჯრები, რომლებიც გარდაიქმნება, როცა ჩაკეცავთ"
+
+msgid "Shade Resistance"
+msgstr "ჩრდლის გამძლეობა"
+
+msgid "Shade resistance"
+msgstr "ჩრდლის გამძლეობა"
+
+msgid "Move Window"
+msgstr "ფანჯრის გადაადგილება"
+
+msgid "Move window"
+msgstr "ფანჯრის გადაადგილება"
+
+msgid "General"
+msgstr "საერთო"
+
+msgid "Initiate Window Move"
+msgstr "ფანჯრის გადაადგილების დაწყება"
+
+msgid "Start moving window"
+msgstr "ფანჯრის გადაადგილების გაშვება"
+
+msgid "Opacity"
+msgstr "გაუმჭირვალობა"
+
+msgid "Opacity level of moving windows"
+msgstr "გადაადგილებადი ფანჯრების გაუმჭვირვალობის დონე"
+
+msgid "Constrain Y"
+msgstr "Y-ის შეზღუდვა"
+
+msgid "Constrain Y coordinate to workspace area"
+msgstr "სამუშაო ადგილის Y კოორდინატის შეზღუდვა"
+
+msgid "Snapoff maximized windows"
+msgstr "მთელ ეკრანზე გაშლილი ფანჯრების მიმაგრების მოხსნა"
+
+msgid "Snapoff and auto unmaximized maximized windows when dragging"
+msgstr ""
+"გადათრევისას მიმაგრებული და მთელ ეკრანზე გაშლილი ფანჯრების ზომის აღდგენა"
+
+msgid "Lazy Positioning"
+msgstr "ზარმაცი განლაგება"
+
+msgid "Do not update the server-side position of windows until finished moving"
+msgstr ""
+"არ განაახლო ფანჯრის სერვერის-მხარეს მდებარეობა, სანამ გადატანა არ დასრულდება"
+
+msgid "Off-screen windows"
+msgstr "ეკრანგარე ფანჯრები"
+
+msgid "Enable off-Screen window scrolling"
+msgstr "ეკრანგარე ფანჯრის გადახვევის ჩართვა"
+
+msgid "Make mouse wheel scroll window if part of it is off-screen"
+msgstr "თაგუნას ბორბლით ფანჯრის გადახვევა, თუ მისი ნაწილი ეკრანგარეა"
+
+msgid "Scroll down"
+msgstr "დაბლა ჩამოქაჩვა"
+
+msgid "Scroll window down if part of it is off-screen"
+msgstr "ფანჯარა, თუ ის ეკრანგარეა, ქვემოთ გადაიხვევა"
+
+msgid "Scroll up"
+msgstr "მაღლა აწევა"
+
+msgid "Scroll window up if part of it is off-screen"
+msgstr "ფანჯარა, თუ ის ეკრანგარეა, ზემოთ გადაიხვევა"
+
+msgid "Scroll right"
+msgstr "მარჯვნივ გაწევა"
+
+msgid "Scroll window right if part of it is off-screen"
+msgstr "ფანჯარა, თუ ის ეკრანგარეა, მარჯვნივ გადაიხვევა"
+
+msgid "Scroll left"
+msgstr "მარცხნივ გაწევა"
+
+msgid "Scroll window left if part of it is off-screen"
+msgstr "ფანჯარა, თუ ის ეკრანგარეა, მარცხნივ გადაიხვევა"
+
+msgid "Scrolling speed"
+msgstr "აწევ-ჩამოწევის სიჩქარე"
+
+msgid "Speed of off-screen window scrolling"
+msgstr "ეკრანგარე ფანჯრის გადახვევის სიჩქარე"
+
+msgid "Shadow color"
+msgstr "ჩრდილის ფერი"
+
+msgid "Color of the rectangle showing when one can scroll a window"
+msgstr "ოთხკუთხედის ფერი, რომელიც აღნიშნავს, რომ ფანჯარა გადახვევადია"
+
+msgid "Shadow width"
+msgstr "ჩრდილის სიგანე"
+
+msgid "Width of the rectangle showing when one can scroll a window"
+msgstr "ოთხკუთხედის სიგანე, რომელიც აღნიშნავს, რომ ფანჯარა გადახვევადია"
+
+msgid "Enable shadow gradient"
+msgstr "ჩრდილის გრადიენტის ჩართვა"
+
+msgid "Enable gradient of rectangle showing when one can scroll a window"
+msgstr ""
+"ოთხკუთხედის, რომელიც აღნიშნავს, რომ ფანჯარა გადახვევადია, გრადიენტის ჩართვა"
+
+msgid "Opacity, Brightness and Saturation"
+msgstr "გაუმჭვირვალობა, სიკაშკაშე და გაჯერებულობა"
+
+msgid "Opacity, Brightness and Saturation adjustments"
+msgstr "გაუმჭვირვალობის, სიკაშკაშის და გაჯერებულობის მორგება"
+
+msgid "Increase Opacity"
+msgstr "გაუმჭვირვალობის აწევა"
+
+msgid "Opacity Increase"
+msgstr "გაუმჭვირვალობის გაზრდა"
+
+msgid "Decrease Opacity"
+msgstr "გაუმჭვირვალობის დაწევა"
+
+msgid "Opacity Decrease"
+msgstr "გაუმჭვირვალობის შემცირება"
+
+msgid "Brightness"
+msgstr "სიკაშკაშე"
+
+msgid "Increase Brightness"
+msgstr "სიკაშკაშის გაზრდა"
+
+msgid "Brightness Increase"
+msgstr "სიკაშკაშის გაზრდა"
+
+msgid "Decrease Brightness"
+msgstr "სიკაშკაშის შემცირება"
+
+msgid "Brightness Decrease"
+msgstr "სიკაშკაშის შემცირება"
+
+msgid "Saturation"
+msgstr "გაჯერებულობა"
+
+msgid "Increase Saturation"
+msgstr "გაჯერებულობის გაზრდა"
+
+msgid "Saturation Increase"
+msgstr "გაჯერებულობის გაზრდა"
+
+msgid "Decrease Saturation"
+msgstr "გაჯერებულობის შემცირება"
+
+msgid "Saturation Decrease"
+msgstr "გაჯერებულობის შემცირება"
+
+msgid "Step"
+msgstr "ბიჯი"
+
+msgid "Opacity Step"
+msgstr "გაუმჭვირვალობის ბიჯი"
+
+msgid "Window-specific settings"
+msgstr "ფანჯარაზე-დამოკიდებული პარამეტრები"
+
+msgid "Windows"
+msgstr "Windows"
+
+msgid "Windows that should have a different opacity by default"
+msgstr ""
+"ფანჯრები, რომლებსაც ნაგულისხმევად განსხვავებული გაუმჭვირვალობა უნდა ჰქონდეთ"
+
+msgid "Window values"
+msgstr "ფანჯრის მნიშვნელობები"
+
+msgid "Opacity values for windows"
+msgstr "გაუმჭვირვალობის მნიშვნელობები ფანჯრებისთვის"
+
+msgid "Brightness Step"
+msgstr "სიკაშკაშის ბიჯი"
+
+msgid "Windows that should have a different brightness by default"
+msgstr "ფანჯრები, რომლებსაც ნაგულისხმევად განსხვავებული სიკაშკაშე უნდა ჰქონდეთ"
+
+msgid "Brightness values for windows"
+msgstr "სიკაშკაშის მნიშვნელობები ფანჯრებისთვის"
+
+msgid "Saturation Step"
+msgstr "გაჯერებულობის ბიჯი"
+
+msgid "Windows that should have a different saturation by default"
+msgstr ""
+"ფანჯრები, რომლებსაც ნაგულისხმევად განსხვავებული გაჯერებულობა უნდა ჰქონდეთ"
+
+msgid "Saturation values for windows"
+msgstr "გაჯერებულობის მნიშვნელობები ფანჯრებისთვის"
+
+msgid "Place Windows"
+msgstr "ფანჯრების მოთავსება"
+
+msgid "Place windows at appropriate positions when mapped"
+msgstr "მიმაგრებისას ფანჯრების შესაბამის ადგილას მოთავსება"
+
+msgid "Workarounds"
+msgstr "შემოვლები"
+
+msgid "Window placement workarounds"
+msgstr "ფანჯრის მდებარეობის შემოვლით გზებ"
+
+msgid "Placement Mode"
+msgstr "განლაგების რეჟიმი"
+
+msgid "Algorithm to use for window placement"
+msgstr "ფანჯრის მოთავსების ალგორითმი"
+
+msgid "Cascade"
+msgstr "კასკადი"
+
+msgid "Centered"
+msgstr "შუაზე გასწორებული"
+
+msgid "Smart"
+msgstr "ჭკვიანი"
+
+msgid "Maximize"
+msgstr "გადიდება"
+
+msgid "Random"
+msgstr "შემთხვევითი"
+
+msgid "Under pointer"
+msgstr "მაჩვენებლის ქვეშ"
+
+msgid ""
+"Selects how window placement should behave if multiple outputs are selected"
+msgstr ""
+"აირჩევს, როგორ ხდება ფანჯრების განლაგება, თუ არჩეულია ერთზე მეტი გამოტანა"
+
+msgid "Use active output device"
+msgstr "აქტიური გამოტანის მოწყობილობის გამოყენება"
+
+msgid "Use output device with pointer"
+msgstr "გამოტანის მოწყობილობის გამოყენება, რომელზეც კურსორია"
+
+msgid "Use output device of focused window"
+msgstr "გამოტანის მოწყობილობის გამოყენება, რომელზეც ფოკუსის მქონე ფანჯარაა"
+
+msgid "Place across all outputs"
+msgstr "ყველა გამოტანაზე მოთავსება"
+
+msgid "Force Placement Windows"
+msgstr "ფანჯრების ნაძალადევი განლაგება"
+
+msgid ""
+"Windows that should forcedly be placed, even if they indicate the window "
+"manager should avoid placing them."
+msgstr ""
+"ფანჯრები, რომლების განლაგებაც ნაძალადევად მოხდება, მაშინაც კი, თუ მათ "
+"გაწერილი აქვთ, რომ მათი ფანჯრები არ უნდა იმართებოდეს."
+
+msgid "Fixed Window Placement"
+msgstr "ფანჯრების ფიქსირებული განლაგება"
+
+msgid "Windows with fixed positions"
+msgstr "ფანჯრები ფიქსირებული მდებარეობებით"
+
+msgid "Positioned windows"
+msgstr "განთავსებული ფანჯრები"
+
+msgid "Windows that should be positioned by default"
+msgstr "ფანჯრები, რომლებიც ნაგულისხმევად განლაგდება"
+
+msgid "X Positions"
+msgstr "X მდებარეობები"
+
+msgid "X position values"
+msgstr "X მდებარეობის მნიშვნელობები"
+
+msgid "Y Positions"
+msgstr "Y მდებარეობები"
+
+msgid "Y position values"
+msgstr "Y მდებარეობის მნიშვნელობები"
+
+msgid "Keep In Workarea"
+msgstr "სამუშაო ფართბზე დატოვება"
+
+msgid ""
+"Keep placed window in work area, even if that means that the position might "
+"differ from the specified position"
+msgstr ""
+"მოთავსებული ფანჯრის სამუშაო ადგილას გაჩერება, მაშინაც კი, თუ ეს ნიშნავს, რომ "
+"მისი მდებარეობა მითითებული ადგილისგან, შეიძლება, განსხვავდებოდეს"
+
+msgid "Windows with fixed placement mode"
+msgstr "ფანჯარა ფიქსირებული განლაგების რეჟიმით"
+
+msgid "Windows that should have a certain positioning mode"
+msgstr "ფანჯარა, რომელსაც განსაზღვრული მდებარეობის რეჟიმი უნდა ჰქონდეს"
+
+msgid "Mode"
+msgstr "რეჟიმი"
+
+msgid "Positioning modes"
+msgstr "განლაგების რეჟიმები"
+
+msgid "Windows with fixed viewport"
+msgstr "ფანჯრები ფიქსირებული ხედის წერტილით"
+
+msgid "Viewport positioned windows"
+msgstr "ხედის წერტილით განლაგებული ფანჯრები"
+
+msgid "Windows that should be positioned in specific viewports by default"
+msgstr ""
+"ფანჯრები, რომლებიც ნაგულისხმევად მითითებულ ხედვს წერტილებში უნდა განლაგდეს"
+
+msgid "X Viewport Positions"
+msgstr "X ხედის წერტილის მდებარეობები"
+
+msgid "Horizontal viewport positions"
+msgstr "ჰორიზონტალური ხედვის წერტილის მდებარეობები"
+
+msgid "Y Viewport Positions"
+msgstr "Y ხედის წერტილის მდებარეობები"
+
+msgid "Vertical viewport positions"
+msgstr "ვერტიკალური ხედვის წერტილის მდებარეობები"
+
+msgid "Png"
+msgstr "Png"
+
+msgid "Png image loader"
+msgstr "Png გამოსახულების ჩამტვირთავი"
+
+msgid "Regex Matching"
+msgstr "რეგგამოსის დამთხვევა"
+
+msgid "Regex window matching"
+msgstr "რეგგამოსის ფანჯრის დამთხვევა"
+
+msgid "Resize Window"
+msgstr "ფანჯრის ზომის შეცვლა"
+
+msgid "Resize window"
+msgstr "ფანჯრის ზომის შეცვლა"
+
+msgid "Bindings"
+msgstr "ბმები"
+
+msgid "Initiate Normal Window Resize"
+msgstr "ფანჯრის ზომის ნორმალური ცვლილების დაწყება"
+
+msgid "Start resizing window normally"
+msgstr "ფანჯრის ზომის შეცვლის ნორმალური დაწყება"
+
+msgid "Initiate Outline Window Resize"
+msgstr "საზღვრის ფანჯრის ზომის შეცვლის დაწყება"
+
+msgid "Start resizing window with outline"
+msgstr "საზღვრის მქონე ფანჯრის ზომის შეცვლის დაწყება"
+
+msgid "Initiate Rectangle Window Resize"
+msgstr "ფანჯრის ოთხკუთხედით ზომის შეცვლის დაწყება"
+
+msgid "Start resizing window with rectangle"
+msgstr "დაიწყეთ ფანჯრის ზომების შეცვლა მართკუთხედით"
+
+msgid "Initiate Stretch Window Resize"
+msgstr "ფანჯრის ზომის გაწელვით შეცვლის დაწყება"
+
+msgid "Start resizing window by stretching it"
+msgstr "დაიწყეთ ფანჯრის ზომების შეცვლა მისი გაწელვით"
+
+msgid "Initiate Window Resize"
+msgstr "ფანჯრის ზომის შეცვლის დაწყება"
+
+msgid "Start resizing window"
+msgstr "ფანჯრის ზომის შეცვლის დაწყება"
+
+msgid "Default Resize Mode"
+msgstr "ნაგულისხმევი ზომის შეცვლის რეჟიმი"
+
+msgid "Default mode used for window resizing"
+msgstr "ფანჯრის ზომის შეცვლისთვის გამოყენებული ნაგულისხმევი რეჟიმი"
+
+msgid "Outline"
+msgstr "კონტური"
+
+msgid "Rectangle"
+msgstr "მართკუთხედი"
+
+msgid "Stretch"
+msgstr "გაწელვა"
+
+msgid "Border Color"
+msgstr "საზღვრის ფერი"
+
+msgid "Border color used for outline and rectangle resize modes"
+msgstr ""
+"საზღვრის ფერი, რომელიც საზღვრით ან ოთხკუთხედით ზომის შეცვლის რეჟიმებისთვის "
+"გამოიყენება"
+
+msgid "Fill Color"
+msgstr "შემვსები ფერი"
+
+msgid "Fill color used for rectangle resize mode"
+msgstr "შევსებით ფერი ოთხკუთხედით ზომის შეცვლის რეჟიმისთვის"
+
+msgid "Normal Resize Windows"
+msgstr "ფანჯრების ზომის ნორმალური შეცვლა"
+
+msgid "Windows that normal resize should be used for"
+msgstr "ფანჯრები, რომლებისთვისაც ზომები ნორმალურად შეიცვლება"
+
+msgid "Outline Resize Windows"
+msgstr "ფანჯრების ზომის საზღვრით შეცვლა"
+
+msgid "Windows that outline resize should be used for"
+msgstr "ფანჯრები, რომლებისათვისაც ზომა საზღვრით შეიცვლება"
+
+msgid "Rectangle Resize Windows"
+msgstr "ფანჯრების ზომის ოთხკუთხედით შეცვლა"
+
+msgid "Windows that rectangle resize should be used for"
+msgstr "ფანჯრები, რომლებისათვისაც ზომა ოთხკუთხედით შეიცვლება"
+
+msgid "Stretch Resize Windows"
+msgstr "ფანჯრის ზომის გაწელვით შეცვლა"
+
+msgid "Windows that stretch resize should be used for"
+msgstr "ფანჯრები, რომლის ზომებიც გაწელვით შეიცვლება"
+
+msgid "Rotate Cube"
+msgstr "კუბის მობრუნება"
+
+msgid "Rotate desktop cube"
+msgstr "სამუშაო მაგიდის კუბის მობრუნება"
+
+msgid "Edge Flip Pointer"
+msgstr "კურსორის არეკვლა წიბოდან"
+
+msgid "Flip to next viewport when moving pointer to screen edge"
+msgstr ""
+"არეკვლა შემდეგი ხედის წერტილისკენ, როცა კურსორი ეკრანის წიბოსკენ მოძრაობს"
+
+msgid "Edge Flip Move"
+msgstr "არეკვლა კურსორის წიბოსკენ გადაადგილებსას"
+
+msgid "Flip to next viewport when moving window to screen edge"
+msgstr ""
+"არეკვლა შემდეგი ხედის წერტილისკენ, როცა ფანჯარა ეკრანის წიბოსკენ მოძრაობს"
+
+msgid "Edge Flip DnD"
+msgstr "არეკვლა წიბოსკენ გადათრევისას"
+
+msgid "Flip to next viewport when dragging object to screen edge"
+msgstr ""
+"არეკვლა შემდეგი ხედის წერტილისკენ, როცა მიმდინარეობს ობიექტის ეკრანის "
+"წიბოსკენ გადათრევა"
+
+msgid "Flip Time"
+msgstr "არეკვლის დრო"
+
+msgid "Timeout before flipping viewport"
+msgstr "მოლოდინის ვადა ხედის წერტილის არეკვლამდე"
+
+msgid "Raise on rotate"
+msgstr "აწევა მობრუნებისას"
+
+msgid "Raise window when rotating"
+msgstr "ფანჯრის აწევა შემობრუნებისას"
+
+msgid "Rotate cube"
+msgstr "კუბის მობრუნება"
+
+msgid "Start Rotation"
+msgstr "მობრუნების დაწყება"
+
+msgid "Rotate Left"
+msgstr "მარცხნივ შებრუნება"
+
+msgid "Rotate left"
+msgstr "მარცხნივ მოტრიალება"
+
+msgid "Rotate Right"
+msgstr "მარჯვნივ შებრუნება"
+
+msgid "Rotate right"
+msgstr "მარჯვნივ მოტრიალება"
+
+msgid "Rotate Left with Window"
+msgstr "მარცხნივ შებრუნება ფანჯარასთან ერთად"
+
+msgid "Rotate left and bring active window along"
+msgstr "მარცხნივ შებრუნება და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate Right with Window"
+msgstr "მარჯვნივ შებრუნება ფანჯარასთან ერთად"
+
+msgid "Rotate right and bring active window along"
+msgstr "მარჯვნივ შებრუნება და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To"
+msgstr "შებრუნების მიმართულება"
+
+msgid "Rotate to viewport"
+msgstr "შებრუნება ხედის წერტილისკენ"
+
+msgid "Rotate window"
+msgstr "ფანჯრის შებრუნება"
+
+msgid "Rotate with window"
+msgstr "შებრუნება ფანჯარასთან ერთად"
+
+msgid "Rotate Flip Left"
+msgstr "შებრუნება მარცხნივ არეკვლით"
+
+msgid "Flip to left viewport and warp pointer"
+msgstr "არეკვლა მარცხენა ხედის წერტილისკენ და კურსორის გადატანა"
+
+msgid "Rotate Flip Right"
+msgstr "შებრუნება მარჯვნივ არეკვლით"
+
+msgid "Flip to right viewport and warp pointer"
+msgstr "არეკვლა მარჯვენა ხედის წერტილისკენ და კურსორის გადატანა"
+
+msgid "Rotate to cube face"
+msgstr "ბრუნვა კუბის ზედაპირისკენ"
+
+msgid "Rotate To Face 1"
+msgstr "ბრუნვა ზედაპირისკენ 1"
+
+msgid "Rotate to face 1"
+msgstr "ბრუნვა ზედაპირისკენ 1"
+
+msgid "Rotate To Face 2"
+msgstr "ბრუნვა ზედაპირისკენ 2"
+
+msgid "Rotate to face 2"
+msgstr "ბრუნვა ზედაპირისკენ 2"
+
+msgid "Rotate To Face 3"
+msgstr "ბრუნვა ზედაპირისკენ 3"
+
+msgid "Rotate to face 3"
+msgstr "ბრუნვა ზედაპირისკენ 3"
+
+msgid "Rotate To Face 4"
+msgstr "ბრუნვა ზედაპირისკენ 4"
+
+msgid "Rotate to face 4"
+msgstr "ბრუნვა ზედაპირისკენ 4"
+
+msgid "Rotate To Face 5"
+msgstr "ბრუნვა ზედაპირისკენ 5"
+
+msgid "Rotate to face 5"
+msgstr "ბრუნვა ზედაპირისკენ 5"
+
+msgid "Rotate To Face 6"
+msgstr "ბრუნვა ზედაპირისკენ 6"
+
+msgid "Rotate to face 6"
+msgstr "ბრუნვა ზედაპირისკენ 6"
+
+msgid "Rotate To Face 7"
+msgstr "ბრუნვა ზედაპირისკენ 7"
+
+msgid "Rotate to face 7"
+msgstr "ბრუნვა ზედაპირისკენ 7"
+
+msgid "Rotate To Face 8"
+msgstr "ბრუნვა ზედაპირისკენ 8"
+
+msgid "Rotate to face 8"
+msgstr "ბრუნვა ზედაპირისკენ 8"
+
+msgid "Rotate To Face 9"
+msgstr "ბრუნვა ზედაპირისკენ 9"
+
+msgid "Rotate to face 9"
+msgstr "ბრუნვა ზედაპირისკენ 9"
+
+msgid "Rotate To Face 10"
+msgstr "ბრუნვა ზედაპირისკენ 10"
+
+msgid "Rotate to face 10"
+msgstr "ბრუნვა ზედაპირისკენ 10"
+
+msgid "Rotate To Face 11"
+msgstr "ბრუნვა ზედაპირისკენ 11"
+
+msgid "Rotate to face 11"
+msgstr "ბრუნვა ზედაპირისკენ 11"
+
+msgid "Rotate To Face 12"
+msgstr "ბრუნვა ზედაპირისკენ 12"
+
+msgid "Rotate to face 12"
+msgstr "ბრუნვა ზედაპირისკენ 12"
+
+msgid "Rotate to cube face with window"
+msgstr "ბრუნვა კუბის ზედაპირისკენ ფანჯარასთან ერთად"
+
+msgid "Rotate To Face 1 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 1 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 1 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 1 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 2 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 2 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 2 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 2 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 3 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 3 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 3 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 3 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 4 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 4 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 4 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 4 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 5 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 5 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 5 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 5 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 6 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 6 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 6 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 6 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 7 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 7 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 7 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 7 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 8 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 8 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 8 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 8 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 9 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 9 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 9 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 9 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 10 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 10 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 10 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 10 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 11 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 11 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 11 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 11 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Rotate To Face 12 with Window"
+msgstr "ბრუნვა ზედაპირისკენ 12 ფანჯარასთან ერთად"
+
+msgid "Rotate to face 12 and bring active window along"
+msgstr "ბრუნვა ზედაპირისკენ 12 და აქტიური ფანჯრის თან წაღება"
+
+msgid "Pointer Invert Y"
+msgstr "კურსორის Y ღერძის ინვერსია"
+
+msgid "Invert Y axis for pointer movement"
+msgstr "Y ღერძის ინვერსია კურსორის გადაადგილებისთვის"
+
+msgid "Pointer Invert X"
+msgstr "კურსორის X ღერძის ინვერსია"
+
+msgid "Invert X axis for pointer movement"
+msgstr "X ღერძის ინვერსია კურსორის გადაადგილებისთვის"
+
+msgid "Pointer Sensitivity"
+msgstr "კურსორის მგრძნობიარობა"
+
+msgid "Sensitivity of pointer movement"
+msgstr "კურსორის მოძრაობის მგრძნობიარობა"
+
+msgid "Rotation Acceleration"
+msgstr "ბრუნვის აჩქარება"
+
+msgid "Snap To Top Face"
+msgstr "ზედა ზედაპირზე მიმაგრება"
+
+msgid "Snap Cube Rotation to Top Face"
+msgstr ""
+
+msgid "Snap To Bottom Face"
+msgstr "ქვედა ზედაპირზე მიმაგრება"
+
+msgid "Snap Cube Rotation to Bottom Face"
+msgstr ""
+
+msgid "Rotation Speed"
+msgstr "ბრუნვის სიჩქარე"
+
+msgid "Rotation Timestep"
+msgstr "ბრუნვის ბიჯი"
+
+msgid "Zoom"
+msgstr "გადიდება"
+
+msgid "Rotation Zoom"
+msgstr "ბრუნვის გადიდება"
+
+msgid "Scale"
+msgstr "გადიდება"
+
+msgid "Scale windows"
+msgstr "ფანჯრების მასშტაბი"
+
+msgid "Key Bindings Toggle Scale Mode"
+msgstr ""
+
+msgid ""
+"Key bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+msgid "Button Bindings Toggle Scale Mode"
+msgstr ""
+
+msgid ""
+"Button bindings toggle scale mode instead of enabling it when pressed and "
+"disabling it when released."
+msgstr ""
+
+msgid "Initiate Window Picker"
+msgstr "ფანჯრის ამრჩევის დაწყება"
+
+msgid "Layout and start transforming windows"
+msgstr "განლაგება და ფანჯრების გარდაქმნის დაწყება"
+
+msgid "Initiate Window Picker For All Windows"
+msgstr "ფანჯრის ამრჩევის დაწყება ყველა ფანჯრისთვის"
+
+msgid "Layout and start transforming all windows"
+msgstr "განლაგება და ყველა ფანჯრის გარდაქმნის დაწყება"
+
+msgid "Initiate Window Picker For Window Group"
+msgstr "ფანჯრის ამრჩევის დაწყება ფანჯრები ჯგუფისთვის"
+
+msgid "Layout and start transforming window group"
+msgstr "განლაგება და ფანჯრების ჯგუფის გარდაქმნის დაწყება"
+
+msgid "Initiate Window Picker For Windows on Current Output"
+msgstr ""
+
+msgid "Layout and start transforming windows on current output"
+msgstr ""
+
+msgid "Click Desktop to Show Desktop"
+msgstr "დააწკაპუნეთ სამუშაო მაგიდაზე სამუშაო მაგიდის საჩვენებლად"
+
+msgid "Enter Show Desktop mode when Desktop is clicked during Scale"
+msgstr ""
+
+msgid "Spacing"
+msgstr "დაშორება"
+
+msgid "Space between windows"
+msgstr "ადგილი ფანჯრებს შორის"
+
+msgid "Scale speed"
+msgstr "მასშტაბის სიჩქარე"
+
+msgid "Scale timestep"
+msgstr "მასშტაბის დროის ბიჯი"
+
+msgid "Darken Background"
+msgstr "ფონის დაბნელება"
+
+msgid "Darken background when scaling windows"
+msgstr "ფონის დაბნელება ფანჯრების მასშტაბირებისას"
+
+msgid "Amount of opacity in percent"
+msgstr "სიმღვრიის რაოდენობა, პროცენტებში"
+
+msgid "Overlay Icon"
+msgstr "ხატულის გადადება"
+
+msgid "Overlay an icon on windows once they are scaled"
+msgstr ""
+
+msgid "None"
+msgstr "არაფერი"
+
+msgid "Emblem"
+msgstr "ემბლემა"
+
+msgid "Big"
+msgstr "დიდი"
+
+msgid "Scale Windows"
+msgstr "ფანჯრების მასშტაბი"
+
+msgid "Windows that should be scaled in scale mode"
+msgstr ""
+
+msgid "Hover Time"
+msgstr "გაჩერების დრო"
+
+msgid ""
+"Time (in ms) before scale mode is terminated when hovering over a window"
+msgstr ""
+
+msgid "Selects where windows are scaled if multiple output devices are used."
+msgstr ""
+
+msgid "On current output device"
+msgstr "მიმდინარე გამოტანის მოწყობილობაზე"
+
+msgid "On all output devices"
+msgstr "ყველა გამოტანის მოწყობილობაზე"
+
+msgid "Screenshot"
+msgstr "ეკრანის ანაბეჭდი"
+
+msgid "Screenshot plugin"
+msgstr "აკრანის ანაბეჭდის დამატება"
+
+msgid "Initiate rectangle screenshot"
+msgstr "მართკუთხედი ეკრანის ანაბეჭდის აღება"
+
+msgid "Directory"
+msgstr "საქაღალდე"
+
+msgid ""
+"Put screenshot images in this directory. If empty, the desktop directory "
+"will be used."
+msgstr ""
+"ეკრანის ანაბეჭდების დამახსოვრება ამ საქაღალდეში. თუ ცარიელია გამოყენებული "
+"იქნება სამუშაო მაგიდის საქაღალდე."
+
+msgid "Launch Application"
+msgstr "აპლიკაციის გაშვება"
+
+msgid "Automatically open screenshot in this application"
+msgstr ""
+
+msgid "Svg"
+msgstr "Svg"
+
+msgid "Svg image loader"
+msgstr "Svg გამოსახულების ჩამტვირთავი"
+
+msgid "Application Switcher"
+msgstr "აპლიკაციის გადამრთველი"
+
+msgid "Next window"
+msgstr "შემდეგი ფანჯარა"
+
+msgid "Popup switcher if not visible and select next window"
+msgstr ""
+
+msgid "Prev window"
+msgstr "წინა ფანჯარა"
+
+msgid "Popup switcher if not visible and select previous window"
+msgstr ""
+
+msgid "Next window (All windows)"
+msgstr "შემდეგი ფანჯარა (ყველა ფანჯარა)"
+
+msgid "Popup switcher if not visible and select next window out of all windows"
+msgstr ""
+
+msgid "Prev window (All windows)"
+msgstr "წინა ფანჯარა (ყველა ფანჯარა)"
+
+msgid ""
+"Popup switcher if not visible and select previous window out of all windows"
+msgstr ""
+
+msgid "Next window (No popup)"
+msgstr "შემდეგი ფანჯარა (მხტუნარას გარეშე)"
+
+msgid "Select next window without showing the popup window."
+msgstr ""
+
+msgid "Prev window (No popup)"
+msgstr "წინა ფანჯარა (მხტუნარას გარეშე)"
+
+msgid "Select previous window without showing the popup window."
+msgstr ""
+
+msgid "Next Panel"
+msgstr "შემდეგი პანელი"
+
+msgid "Select next panel type window."
+msgstr "შემდეგი პანელის ტიპის ფანჯრის არჩევა."
+
+msgid "Prev Panel"
+msgstr "წინა პანელი"
+
+msgid "Select previous panel type window."
+msgstr "წინა პანელის ტიპის ფანჯრის არჩევა."
+
+msgid "Switcher speed"
+msgstr "გადამრთველის სიჩქარე"
+
+msgid "Switcher timestep"
+msgstr "გადამრთველის დროის ბიჯი"
+
+msgid "Size multiplier"
+msgstr "ზომის მამრავლი"
+
+msgid "Adjusts the size of the switcher windows"
+msgstr "ასწორებს გადამრთველი ფანჯრების ზომას"
+
+msgid "Switcher windows"
+msgstr "ფანჯრების გადამრთველი"
+
+msgid "Windows that should be shown in switcher"
+msgstr "ფანჯრები, რომლებიც გადამრთველში უნდა გამოჩნდეს"
+
+msgid "Amount of saturation in percent"
+msgstr "გაჯერებულობის რაოდენობა, პროცენტებში"
+
+msgid "Amount of brightness in percent"
+msgstr "სიკაშკაშის რაოდენობა, პროცენტებში"
+
+msgid "Bring To Front"
+msgstr "წინა პლანზე გამოტანა"
+
+msgid "Bring selected window to front"
+msgstr "მონიშნული ფანჯრის წინ გამოტანა"
+
+msgid "Distance desktop should be zoom out while switching windows"
+msgstr ""
+
+msgid "Icon"
+msgstr "ხატულა"
+
+msgid "Show icon next to thumbnail"
+msgstr "ხატულის მინიატურასთან ჩვენება"
+
+msgid "Only show icon"
+msgstr "მხოლოდ ხატულის ჩვენება"
+
+msgid "Only show the window icon and do not display a thumbnail at all"
+msgstr ""
+
+msgid "Minimized"
+msgstr "ჩაკეცვა"
+
+msgid "Show minimized windows"
+msgstr "ჩაკეცილი ფანჯრების ჩვენება"
+
+msgid "Auto Rotate"
+msgstr "ავტომატური მობრუნება"
+
+msgid "Rotate to the selected window while switching"
+msgstr ""
+
+msgid "Desktop Wall"
+msgstr "სამუშაო მაგიდის ფონი"
+
+msgid "Desktop Wall Plugin"
+msgstr "სამუშაო მაგიდის ფონის დამატება"
+
+msgid "Viewport Switch Preview"
+msgstr ""
+
+msgid "Show Viewport Switcher Preview"
+msgstr ""
+
+msgid "Show switcher window while switching viewports"
+msgstr ""
+
+msgid "Show Live Viewport Previews"
+msgstr ""
+
+msgid "Show live viewport previews in switcher window"
+msgstr ""
+
+msgid "Switch Target Preview Visibility Time"
+msgstr "სამიზნის მინიატურის ხილვადობის დროის გადართვა"
+
+msgid ""
+"Duration (in s) the switch target preview should remain visible after "
+"switching ends."
+msgstr ""
+
+msgid "Preview Scale"
+msgstr "მინიატურის მასშტაბი"
+
+msgid "Size of the preview in %"
+msgstr "მინიატურის ზომა, %"
+
+msgid "Edge Radius"
+msgstr "წიბოს რადიუსი"
+
+msgid "Radius of the rounded edge"
+msgstr "მომრგვალებული წიბოს რადიუსი"
+
+msgid "Border Width"
+msgstr "საზღვრის სიგანე"
+
+msgid "Width of the border between the previews"
+msgstr "საზღვრების სიგანე მინიატურებს შორის"
+
+msgid "Outline Color"
+msgstr "კიდის ფერი"
+
+msgid "Outline color of the switcher window."
+msgstr "გადამრთველი ფანჯრის გარე საზღვრის ფერი."
+
+msgid "Background Gradient"
+msgstr "ფონის გრადიენტი"
+
+msgid "Base Color"
+msgstr "ძირითადი ფერი"
+
+msgid "First color for the background gradient of the switcher window."
+msgstr ""
+
+msgid "Highlight Color"
+msgstr "გამოკვეთის ფერი"
+
+msgid "Second color for the background gradient of the switcher window."
+msgstr ""
+
+msgid "Third color for the background gradient of the switcher window."
+msgstr ""
+
+msgid "Thumb Gradient"
+msgstr "მინიატურის გრადიენტი"
+
+msgid "First color for the thumb gradient of the switcher window."
+msgstr ""
+
+msgid "Second color for the thumb gradient of the switcher window."
+msgstr ""
+
+msgid "Highlight Gradient"
+msgstr "გრადიენტის გამოკვეთა"
+
+msgid "First color for the thumb highlight gradient of the switcher window."
+msgstr ""
+
+msgid "Second color for the thumb highlight gradient of the switcher window."
+msgstr ""
+
+msgid "Arrow Colors"
+msgstr "ისრის ფერები"
+
+msgid "First color of the arrow of the switcher window."
+msgstr ""
+
+msgid "Second color of the arrow of the switcher window."
+msgstr ""
+
+msgid "Viewport Switching"
+msgstr "მხედველობის წერტილის გადართვა"
+
+msgid "Allow Wrap-Around"
+msgstr "გადატანის ჩართვა"
+
+msgid "Allow wrap-around when moving the wall up/down/left/right"
+msgstr ""
+
+msgid "Wall Sliding Duration"
+msgstr ""
+
+msgid "Duration (in s) for wall sliding viewport switching animation"
+msgstr ""
+
+msgid "Non Sliding Windows"
+msgstr ""
+
+msgid "Windows that should not slide during the slide animation"
+msgstr ""
+
+msgid "Move within wall"
+msgstr "გადატანა კედლის შიგნით"
+
+msgid "Move Left"
+msgstr "მარცხნივ გაწევა"
+
+msgid "Move along the wall to the left"
+msgstr "გადატანა კედლის გასწვრივ, მარცხნივ"
+
+msgid "Move Right"
+msgstr "მარჯვნივ გაწევა"
+
+msgid "Move along the wall to the right"
+msgstr "გადატანა კედლის გასწვრივ, მარჯვნივ"
+
+msgid "Move Up"
+msgstr "აწევა"
+
+msgid "Move along the wall up"
+msgstr "გადატანა კედლის გასწვრივ, მაღლა"
+
+msgid "Move Down"
+msgstr "ჩამოწევა"
+
+msgid "Move along the wall down"
+msgstr "გადატანა კედლის გასწვრივ, დაბლა"
+
+msgid "Move Next"
+msgstr "შემდეგზე გადასვლა"
+
+msgid "Move along the wall to the next viewport"
+msgstr "კედლის გასწვრივ, შემდეგ ხედის წერტილზე გადასვლა"
+
+msgid "Move Prev"
+msgstr "წინაზე გადასვლა"
+
+msgid "Move along the wall to the previous viewport"
+msgstr "კედლის გასწვრივ, წინა ხედის წერტილზე გადასვლა"
+
+msgid "Move with window within wall"
+msgstr "ფანჯარასთან ერთად, კედლის შიგნით გადატანა"
+
+msgid "Move Left With Window"
+msgstr "მარცხნივ გადატანა ფანჯარასთან ერთად"
+
+msgid "Move with window along the wall to the left"
+msgstr "გადატანა ფანჯარასთან ერთად, კედლის გასწვრივ, მარცხნივ"
+
+msgid "Move Right With Window"
+msgstr "მარჯვნივ გადატანა ფანჯარასთან ერთად"
+
+msgid "Move with window along the wall to the right"
+msgstr "გადატანა ფანჯარასთან ერთად, კედლის გასწვრივ, მარჯვნივ"
+
+msgid "Move Up With Window"
+msgstr "მაღლა ატანა, ფანჯარასთან ერთად"
+
+msgid "Move with window along the wall up"
+msgstr "გადატანა ფანჯარასთან ერთად, კედლის გასწვრივ, მაღლა"
+
+msgid "Move Down With Window"
+msgstr "დაბლა ჩატანა, ფანჯარასთან ერთად"
+
+msgid "Move with window along the wall down"
+msgstr "გადატანა ფანჯარასთან ერთად, კედლის გასწვრივ, დაბლა"
+
+msgid "Edge flipping"
+msgstr "წიბოს არეკვლა"
+
+msgid "Flip Left"
+msgstr "მარცხნივ გადახრა"
+
+msgid "Flip left"
+msgstr "მარცხნივ გადახრა"
+
+msgid "Flip Right"
+msgstr "მარჯვნივ გადახრა"
+
+msgid "Flip right"
+msgstr "მარჯვნივ გადახრა"
+
+msgid "Flip Up"
+msgstr "მაღლა გადახრა"
+
+msgid "Flip up"
+msgstr "მაღლა გადახრა"
+
+msgid "Flip Down"
+msgstr "დაბლა გადახრა"
+
+msgid "Flip down"
+msgstr "დაბლა გადახრა"
+
+msgid "Multimonitor behavior"
+msgstr "მრავალმონიტორიანის ქცევა"
+
+msgid "How should a multimonitor configuration be handled"
+msgstr "როგორ უნდა მოვექცეთ მრავალმონიტორიან კონფიგურაციას"
+
+msgid "Switch all"
+msgstr "ყველას გადართვა"
+
+msgid "Switch separately"
+msgstr "ცალ-ცალკე გადართვა"
+
+msgid "Edge Flipping"
+msgstr "წიბოს გადახრა"
+
+msgid "Flip viewport when moving the pointer to a screen edge"
+msgstr "ხედის წერტილის არეკვლა კურსორის ეკრანის წიბოსკენ გადაადგილებისას"
+
+msgid "Flip viewport when moving a window to a screen edge"
+msgstr "ხედის წერტილის არეკვლა ფანჯრის ეკრანის წიბოსკენ გადაადგილებისას"
+
+msgid "Flip viewport when dragging an object to a screen edge"
+msgstr "ხედის წერტილის არეკვლა ობიექტის ეკრანის წიბოსკენ გადათრევისას"
+
+msgid "Water Effect"
+msgstr "წყლის ეფექტი"
+
+msgid "Adds water effects to different desktop actions"
+msgstr "წყლის ეფექტის დამატება სხვადასხვა სამუშაო მაგიდის ქმედებებისთვის"
+
+msgid "Enable pointer water effects"
+msgstr "კურსორის წყლის ეფექტების ჩართვა"
+
+msgid "Toggle rain"
+msgstr "წვიმის გადართვა"
+
+msgid "Toggle rain effect"
+msgstr "წვიმის ეფექტის გადართვა"
+
+msgid "Toggle wiper"
+msgstr "საშლელის გადართვა"
+
+msgid "Toggle wiper effect"
+msgstr "საშლელის ეფექტის გადართვა"
+
+msgid "Offset Scale"
+msgstr "წანაცვლების მასშტაბი"
+
+msgid "Water offset scale"
+msgstr "წყლის წანაცვლების მასშტაბი"
+
+msgid "Rain Delay"
+msgstr "წვიმის დაყოვნება"
+
+msgid "Delay (in ms) between each rain-drop"
+msgstr "დაყოვნება (მწმ) თითოეულ წვეთს შორის"
+
+msgid "Title wave"
+msgstr "სათაურის ტალღები"
+
+msgid "Wave effect from window title"
+msgstr "ტალღის ეფექტი ფანჯრის სათაურიდან"
+
+msgid "Point"
+msgstr "წერტილი"
+
+msgid "Add point"
+msgstr "წერტილის დამატება"
+
+msgid "Line"
+msgstr "Line"
+
+msgid "Add line"
+msgstr "ხაზის დამატება"
+
+msgid "Wobbly Windows"
+msgstr "მოკანკალე ფანჯრები"
+
+msgid "Use spring model for wobbly window effect"
+msgstr "ზამბარის მოდელის გამოყენება მერყევი ფანჯრის ეფექტისთვის"
+
+msgid "Snap windows"
+msgstr "ფანჯრების მიმაგრება"
+
+msgid "Toggle window snapping"
+msgstr "ფანჯრების მიმაგრების გადართვა"
+
+msgid "Snap Inverted"
+msgstr "ამობრუნებულის მიბრუნება"
+
+msgid "Inverted window snapping"
+msgstr "ამობრუნებული ფანჯრის მიმაგრება"
+
+msgid "Shiver"
+msgstr "კანკალი"
+
+msgid "Make window shiver"
+msgstr "ფანჯრის კანკალი"
+
+msgid "Friction"
+msgstr "ხახუნი"
+
+msgid "Spring Friction"
+msgstr "ზამბარის ხახუნი"
+
+msgid "Spring K"
+msgstr "სამბარის K"
+
+msgid "Spring Konstant"
+msgstr "სამბარის კონსტანტა"
+
+msgid "Grid Resolution"
+msgstr "ბადის გარჩევადობა"
+
+msgid "Vertex Grid Resolution"
+msgstr "წვეროს ბადის გარჩევადობა"
+
+msgid "Minimum Grid Size"
+msgstr "მინიმალური ბადის ზომა"
+
+msgid "Minimum Vertex Grid Size"
+msgstr "მინიმალური წვეროს ბადის ზომა"
+
+msgid "Map Effect"
+msgstr "ასახვის ეფექტი"
+
+msgid "Map Window Effect"
+msgstr "ფანჯრის ასახვის ეფექტი"
+
+msgid "Focus Effect"
+msgstr "ფოკუსის ეფექტი"
+
+msgid "Focus Window Effect"
+msgstr "ფანჯრის ფოკუსის ეფექტი"
+
+msgid "Map Windows"
+msgstr "ფანჯრების ასახვა"
+
+msgid "Windows that should wobble when mapped"
+msgstr "ფანჯრები, რომლებსაც გააკანკალებთ, როცა მიამაგრებთ"
+
+msgid "Focus Windows"
+msgstr "ფანჯრების ფოკუსი"
+
+msgid "Windows that should wobble when focused"
+msgstr "ფანჯრები, რომლებსაც გააკანკალებთ, როცა ფოკუსს აიღებენ"
+
+msgid "Grab Windows"
+msgstr "ფანჯრების ჩაჭერა"
+
+msgid "Windows that should wobble when grabbed"
+msgstr "ფანჯრები, რომლებსაც გააკანკალებთ, როცა დაითრევენ"
+
+msgid "Move Windows"
+msgstr "ფანჯრების გადატანა"
+
+msgid "Windows that should wobble when moved"
+msgstr "ფანჯრები, რომლებსაც გააკანკალებთ, როცა გადაათრევენ"
+
+msgid "Maximize Effect"
+msgstr "გადიდების ეფექტი"
+
+msgid "Wobble effect when maximizing and unmaximizing windows"
+msgstr "კანკალის ეფექტი ფანჯრების მთელ ეკრანზე გაშლისა და ზომის დაბრუნებსიას"
+
+msgid "Zoom Desktop"
+msgstr "სამუშაო მაგიდის_გადიდება"
+
+msgid "Zoom and pan desktop cube"
+msgstr "სამუშაო მაგიდის კუბის გადიდება და პანინგი"
+
+msgid "Zoom In"
+msgstr "გადიდება"
+
+msgid "Zoom Out"
+msgstr "დაპატარავება"
+
+msgid "Zoom Pan"
+msgstr "პანორამირება"
+
+msgid "Zoom pan"
+msgstr "მასშტაბის პანორამირება"
+
+msgid "Zoom Speed"
+msgstr "გადიდების სიჩქარე"
+
+msgid "Zoom Timestep"
+msgstr "გადიდების დროის ნაბიჯი"
+
+msgid "Zoom factor"
+msgstr "გადიდების კოეფიციენტი"
+
+msgid "Filter Linear"
+msgstr "წრფივი ფილტრი"
+
+msgid "Use linear filter when zoomed in"
+msgstr "როცა გადიდებულია, წრფივი ფილტრის გამოყენება"
+
+msgid "Compiz"
+msgstr "Compiz"
+
+msgid "Compiz Start"
+msgstr "Compiz-ის გაშვება"
+
+msgid "Start Compiz"
+msgstr "Compiz-ის გაშვება"
+
+msgid "Start or restart Compiz"
+msgstr "Compiz-ის გაშვება ან გადატვირთვა"
