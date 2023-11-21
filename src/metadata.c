@@ -30,6 +30,7 @@
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
 #include <locale.h>
+#include <stdlib.h>
 
 #include <compiz-core.h>
 
@@ -285,8 +286,10 @@ readPluginXmlCallback (void *context,
     i += compReadXmlChunk ("</plugin></compiz>", &offset, buffer + i,
 			   length - i);
 
-    if (!offset && length > i)
-	buffer[i++] = '\0';
+    if (!offset && length > i) {
+	    // buffer[i] = '\0';
+        ctx->offset += 1;
+    }
 
     ctx->offset += i;
 
