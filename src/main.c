@@ -271,8 +271,10 @@ readCoreXmlCallback (void *context,
     i += compReadXmlChunk ("</screen></core></compiz>", &offset, buffer + i,
 			   length - i);
 
-    if (!offset && length > i)
-	buffer[i++] = '\0';
+    if (!offset && length > i) {
+	    // buffer[i] = '\0';
+        ctx->offset += 1;
+    }
 
     ctx->offset += i;
 
