@@ -23,6 +23,7 @@
  * Author: Danny Baumann <dannybaumann@web.de>
  */
 
+#include <stdlib.h>
 #include <compiz-core.h>
 
 static CompMetadata mateMetadata;

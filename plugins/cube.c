@@ -24,6 +24,7 @@
  *         Mirco Müller <macslow@bangang.de> (Skydome support)
  */
 
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
