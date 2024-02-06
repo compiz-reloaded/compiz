@@ -25,6 +25,7 @@
  *          David Reveman <davidr@novell.com>
  */
 
+#include <stdlib.h>
 #include <string.h>
 #include <libxml/tree.h>
 #include <libxml/xpath.h>
