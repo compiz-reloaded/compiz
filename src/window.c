@@ -3875,8 +3875,8 @@ addWindowSizeChanges (CompWindow     *w,
     y = (vy - w->screen->y) * w->screen->height;
 
     output = outputDeviceForGeometry (w->screen,
-				      oldX,
-				      oldY,
+				      oldX - x,
+				      oldY - y,
 				      oldWidth,
 				      oldHeight,
 				      oldBorderWidth);
