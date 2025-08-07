@@ -7,7 +7,7 @@ cd "$srcdir"
 
 PKG_NAME="compiz"
 
-if [ ! -f "$srcdir/configure.ac" ]; then
+if [ ! -f "configure.ac" ]; then
     echo -n "**Error**: Directory "\`"$srcdir"\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1
